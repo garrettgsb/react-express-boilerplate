@@ -1,18 +1,30 @@
+// ENV data
+require('dotenv').config();
+
+//Web Server
+const PORT = process.env.PORT || 8080;
 const Express = require('express');
 const App = Express();
+const router = require ('./routes/users')
 const BodyParser = require('body-parser');
-const PORT = 8080;
+const cookieParser = require('cookie-session');
+const morgan = require('morgan');
+
+// PG database 
+const { Pool } = require('pg')
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(Express.static('public'));
+App.use(morgan('dev'));
+App.use(cookieParser({
+  name: 'travelly',
+  keys: ['/^ab/W7N*V@-)G>vl."X`!*S43@Rxg0Wcd25?H1{t.z(l']
+}))
 
-// Sample GET route
-App.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+
+App.use('/', router);
 
 App.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
