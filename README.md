@@ -1,5 +1,7 @@
 # React + Express No-Fluff Boilerplate
 test
+test2
+
 A boilerplate project for anyone interested in making a project that uses React and Express.
 
 This repository is a bootleg of @NimaBoscarino's [React Rails Boilerplate](https://github.com/NimaBoscarino/react-rails-boilerplate). It uses the same React app, but replaces the Rails server with an Express server.
