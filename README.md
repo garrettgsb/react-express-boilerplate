@@ -1,6 +1,4 @@
 # React + Express No-Fluff Boilerplate
-test
-test2
 
 A boilerplate project for anyone interested in making a project that uses React and Express.
 
