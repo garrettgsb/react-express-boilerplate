@@ -13,7 +13,7 @@ CREATE TABLE attractions (
   id SERIAL PRIMARY KEY NOT NULL, 
   name VARCHAR(100),
   description TEXT,
-  review TEXT,
+  review INTEGER,
   latitude FLOAT,
   longitude FLOAT,
   open_time DATETIME,
@@ -38,11 +38,6 @@ CREATE TABLE timeslots (
   itinerary_id INTEGER REFERENCES itineraries(id) ON DELETE CASCADE,
   attraction_id INTEGER REFERENCES attractions(id) ON DELETE CASCADE,
   travel_mode VARCHAR(50)
-);
-
-CREATE TABLE transportations (
-  id SERIAL PRIMARY KEY NOT NULL,
-  mode VARCHAR(50)
 );
 
 CREATE TABLE user_itinerary (
