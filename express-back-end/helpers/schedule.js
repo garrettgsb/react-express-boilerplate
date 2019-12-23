@@ -34,9 +34,7 @@ const data = [
 
 const days = [1, 2];
 
-// const transitTime =  {
-//   duration: 
-// }
+const transitTime =  [[23, 34, 40, 15], [15]]; //total transit time between attractions as in minutes (will fetch from google direction API)
 let itineraries = [];
 let vectors = new Array();
 for (let i = 0 ; i < data.length ; i++) {
@@ -62,10 +60,8 @@ cluster.groups.forEach(element => {
 });
 console.log(itineraries)
 
-// //API request for transit time
 
 // for (let itinerary of itineraries) {
 //   for (let attraction of itinerary) {
-//     axios
 //   }
 // }
