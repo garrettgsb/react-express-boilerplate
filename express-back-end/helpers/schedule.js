@@ -58,10 +58,43 @@ cluster.groups.forEach(element => {
   }
   itineraries.push(element.clusterInd);
 });
-console.log(itineraries)
-
+// console.log('itineraries', itineraries)
 
 // for (let itinerary of itineraries) {
 //   for (let attraction of itinerary) {
 //   }
 // }
+
+// calculate distance from point x to point y  - used for findNextDestination to compare distances
+const getDistance = (x, y) => {
+  let latDiff = x.lat - y.lat;
+  let longDiff = x.long - y.long;
+  return Math.sqrt(Math.pow(latDiff, 2) + Math.pow(longDiff, 2));
+};
+
+// find next closest destination - from "start" point, loop through all points available, and go to the nearest location point
+const findNextDestination = (start, options) => {
+  let distances = [];
+  for (let i = 0; i < options.length; i++) {
+    distances.push(getDistance(start, options[i]));
+  }
+  return options[distances.indexOf(Math.min(...distances))];
+};
+
+// get schedule for day (the order/sequence of destinations from morning to night) by picking one random "start point" and always going to closest attraction point
+const getSchedule = (day) => {
+  let schedule = [];
+  schedule.push(day[0]);
+  day.splice(0, 1);
+  
+  while (day.length > 0) {
+    let nextDestination = findNextDestination(schedule[schedule.length-1], day);
+    schedule.push(nextDestination)
+    day.splice(day.indexOf(nextDestination), 1)
+  }
+  
+  return schedule;
+}
+
+console.log('FIRST DAY', getSchedule(itineraries[0]))
+console.log('SECOND DAY', getSchedule(itineraries[1]))
