@@ -58,12 +58,7 @@ cluster.groups.forEach(element => {
   }
   itineraries.push(element.clusterInd);
 });
-// console.log('itineraries', itineraries)
 
-// for (let itinerary of itineraries) {
-//   for (let attraction of itinerary) {
-//   }
-// }
 
 // calculate distance from point x to point y  - used for findNextDestination to compare distances
 const getDistance = (x, y) => {
