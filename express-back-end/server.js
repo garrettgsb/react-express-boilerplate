@@ -5,13 +5,12 @@ require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 const Express = require('express');
 const App = Express();
-const routes = require('./routes')
+
 const BodyParser = require('body-parser');
 const cookieParser = require('cookie-session');
 const morgan = require('morgan');
 
-// PG database 
-const { Pool } = require('pg')
+const routes = require('./routes');
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
