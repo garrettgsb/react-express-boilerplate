@@ -1,11 +1,11 @@
-DROP TABLE IF EXISTS users, attractions, itineraries, timeslots, transportation CASCADE;
+DROP TABLE IF EXISTS users, attractions, itineraries, timeslots, transportation, user_itinerary CASCADE;
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  fist_name VARCHAR(50),
-  last_name VARCHAR(50),
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
   email VARCHAR(50) NOT NULL,
   password VARCHAR(50) NOT NULL,
-  facebook VARCHAR(50) NOT NULL,
+  facebook VARCHAR(50)
   /*created_at TIMESTAMP*/
 );
 
@@ -16,8 +16,8 @@ CREATE TABLE attractions (
   review INTEGER,
   latitude FLOAT,
   longitude FLOAT,
-  open_time DATETIME,
-  close_time DATETIME,
+  open_time TIME,
+  close_time TIME,
   visit_duration INTEGER,
   photo varchar(255),
   location varchar(255)
