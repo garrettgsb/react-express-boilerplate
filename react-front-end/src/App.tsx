@@ -75,7 +75,7 @@ export default function App() {
           </Route>
 
           <Route path='/trips'>
-            <CityList city="Vancouver"/>
+            <CityList city="city" />
           </Route>
         </Switch>
       </Router>
