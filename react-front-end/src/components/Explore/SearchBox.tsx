@@ -10,7 +10,7 @@ const Input = styled.input`
 
 type SearchProps = { message: string };
 
-export class Search extends React.Component<SearchProps, {}> {
+export default class Search extends React.Component<SearchProps, {}> {
   
   render() {
     return (
