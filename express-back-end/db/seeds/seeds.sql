@@ -28,7 +28,9 @@ INSERT INTO attractions (
 INSERT INTO itineraries (
   city, city_img, start_time, end_time
 ) VALUES (
-  'Vancouver', 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwj_oZOV6NbmAhXBo54KHQxgBsEQjRx6BAgBEAQ&url=https%3A%2F%2Fwww.vancouverisawesome.com%2F2016%2F04%2F06%2Fvancouverites-share-their-opinions-on-living-in-our-city%2F&psig=AOvVaw0ruu7K42REfI4jILOfmMQ-&ust=1577569947922636', '2019-12-27 09:00:00', '2019-12-27 21:00:00'
+  'Vancouver', 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg', '2019-12-27 09:00:00', '2019-12-27 21:00:00'
+), (
+  'Seattle', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg', '2019-12-27 09:00:00', '2019-12-27 21:00:00'
 );
 
 INSERT INTO timeslots (
