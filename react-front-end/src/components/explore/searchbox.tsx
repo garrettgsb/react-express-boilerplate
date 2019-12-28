@@ -1,13 +1,31 @@
 import React from "react";
 import styled from 'styled-components';
-// export interface HelloProps { compiler: string; framework: string; }
 
+const Input = styled.input`
+  border-radius: 5px
+  height: 20px
+  weight: auto
+  color: red
+`;
 
-type HelloProps = { compiler: string; framework: string; message: string}
+type SearchProps = { message: string };
 
-export class Hello extends React.Component<HelloProps, {}> {
+export class Search extends React.Component<SearchProps, {}> {
   
   render() {
-      return <h1>Hello from {this.props.compiler} and {this.props.framework} and {this.props.message}!</h1>;
+      return (
+        
+        <div className="SearchBar">
+            <label className="search-label" htmlFor="search-input">
+          <Input
+                type="text"
+                value=""
+                id="search-input"
+                placeholder="Please enter your destination"
+              />
+            </label>
+
+          </div>
+      )
   }
 }

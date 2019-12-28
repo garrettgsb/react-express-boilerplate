@@ -5,7 +5,7 @@ import './App.css';
 import { CityList } from './components/mytrips/CityList';
 
 
-import { Hello } from "./components/explore/searchbox";
+import { Search } from "./components/explore/searchbox";
 
 export default function App() {
 // class App extends Component <{}, {message: string}> {
@@ -40,6 +40,7 @@ export default function App() {
     // );
     return (
       <Router>
+      <Search message="testing searchbar"/>
         <nav>
           <ul>
             <li><Link to='/'>Explore</Link></li>
