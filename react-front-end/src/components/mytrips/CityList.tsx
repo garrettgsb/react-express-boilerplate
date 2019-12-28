@@ -4,9 +4,10 @@ import City from './City';
 export default function CityList({cities}) {
   return (
     <ul>
-      {cities.map(city => 
+      {/* {cities.map(city => 
         <City name={city.city} />
-      )}
+      )} */}
+      <City name="Vancouver" />
     </ul>
   )
 }
