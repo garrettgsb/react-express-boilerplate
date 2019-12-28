@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import './App.css';
+import CityList from './components/mytrips/CityList';
 
 
 import { Hello } from "./components/explore/searchbox";
@@ -28,14 +30,35 @@ class App extends Component <{}, {message: string}> {
   }
 
   render() {
+    // return (
+    //   <div className="App">
+    //     <h1>{ this.state.message }</h1>
+    //     <button onClick={this.fetchData} >
+    //       Fetch Data
+    //     </button>        
+    //   </div>
+    // );
     return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>        
-      </div>
-    );
+      <Router>
+        <nav>
+          <ul>
+            <li><Link to='/'>Explore</Link></li>
+            <li><Link to='/trips'>My Trips</Link></li>
+            <li><Link to='/'>Profile</Link></li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path='/login'>
+            log in from App.js
+          </Route>
+
+          <Route path='/trips'>
+            <CityList />
+          </Route>
+        </Switch>
+      </Router>
+    )
   }
 }
 
