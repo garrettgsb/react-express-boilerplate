@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import './App.css';
-import City from './components/mytrips/city';
+import CityList from './components/mytrips/CityList';
 
 class App extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class App extends Component {
           </Route>
 
           <Route path='/trips'>
-            <City />
+            <CityList />
           </Route>
         </Switch>
       </Router>

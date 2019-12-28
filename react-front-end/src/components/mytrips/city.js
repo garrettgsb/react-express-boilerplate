@@ -1,9 +1,11 @@
 import React from 'react';
 
-export default function City({city, city_img, start_time, end_time}) {
+export default function City({name, img, start, end}) {
   return (
     <div>
-      <h3>{city}</h3>
+      <h3>{name}</h3>
+      <p>{start}</p>
+      <p>{end}</p>
     </div>
   )
 }
