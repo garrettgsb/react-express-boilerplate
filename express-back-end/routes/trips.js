@@ -7,8 +7,8 @@ module.exports = (db) => {
       SELECT * FROM itineraries;
       `
     )
-    .then((rows) => {
-      res.json(rows);
+    .then((response) => {
+      res.json(response.rows);
     })
   })
   return router;

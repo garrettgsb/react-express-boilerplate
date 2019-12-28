@@ -12,8 +12,7 @@ const cookieParser = require('cookie-session');
 const morgan = require('morgan');
 const db = require('./db/connect')
 
-// PG database 
-const { Pool } = require('pg')
+const routes = require('./routes');
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
