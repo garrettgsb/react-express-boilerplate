@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import './App.css';
 
@@ -40,6 +35,14 @@ class App extends Component {
     // );
     return (
       <Router>
+        <nav>
+          <ul>
+            <li><Link to='/'>Explore</Link></li>
+            <li><Link to='/trips'>My Trips</Link></li>
+            <li><Link to='/'>Profile</Link></li>
+          </ul>
+        </nav>
+
         <Switch>
           <Route path='/login'>
             log in from App.js
