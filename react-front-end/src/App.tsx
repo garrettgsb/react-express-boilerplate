@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+
 import axios from 'axios';
 import './App.css';
 import { CityList } from './components/mytrips/CityList';
+import styled from 'styled-components';
 
+const NavList = styled.ul`
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-left: 0px;
+`;
 
-import { Hello } from "./components/explore/searchbox";
+const NavItem = styled(NavLink)`
+  text-decoration: none;
+  color: #000;
+`;
+
+const NavDiv = styled.nav`
+  position: fixed;
+  bottom: 0px;
+  width: 99%;
+  z-index: 999;
+  border: 1px solid #000;
+  margin: 1px;
+`;
 
 export default function App() {
 // class App extends Component <{}, {message: string}> {
@@ -40,13 +61,13 @@ export default function App() {
     // );
     return (
       <Router>
-        <nav>
-          <ul>
-            <li><Link to='/'>Explore</Link></li>
-            <li><Link to='/trips'>My Trips</Link></li>
-            <li><Link to='/'>Profile</Link></li>
-          </ul>
-        </nav>
+        <NavDiv>
+          <NavList>
+            <li><NavItem to='/explore' activeStyle={{fontWeight: 'bold'}}>Explore</NavItem></li>
+            <li><NavItem to='/trips' activeStyle={{fontWeight: 'bold'}}>My Trips</NavItem></li>
+            <li><NavItem to='/profile' activeStyle={{fontWeight: 'bold'}}>Profile</NavItem></li>
+          </NavList>
+        </NavDiv>
 
         <Switch>
           <Route path='/login'>
