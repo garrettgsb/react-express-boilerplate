@@ -1,13 +1,11 @@
-import React from 'react';
-import City from './City';
+import React, { FunctionComponent } from 'react';
+import { City } from './City';
 
-export default function CityList({cities}) {
-  return (
+type CityListProps = { city: string }
+export const CityList = ({city}: CityListProps) =>
     <ul>
       {/* {cities.map(city => 
         <City name={city.city} />
       )} */}
-      <City name="Vancouver" />
+      <City name="Vancouver" img="test.png" start="test1" end="test2"/>
     </ul>
-  )
-}
