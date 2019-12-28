@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import './App.css';
+import CityList from './components/mytrips/CityList';
 
 class App extends Component {
   constructor(props) {
@@ -46,6 +47,10 @@ class App extends Component {
         <Switch>
           <Route path='/login'>
             log in from App.js
+          </Route>
+
+          <Route path='/trips'>
+            <CityList />
           </Route>
         </Switch>
       </Router>

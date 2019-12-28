@@ -5,13 +5,12 @@ require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 const Express = require('express');
 const App = Express();
-const routes = require('./routes')
-const trips = require('./routes/trips')
 const BodyParser = require('body-parser');
 const cookieParser = require('cookie-session');
 const morgan = require('morgan');
 const db = require('./db/connect')
 
+const trips = require('./routes/trips')
 const routes = require('./routes');
 
 // Express Configuration
