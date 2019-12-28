@@ -4,8 +4,12 @@ import axios from 'axios';
 import './App.css';
 import CityList from './components/mytrips/CityList';
 
-class App extends Component {
-  constructor(props) {
+
+import { Hello } from "./components/explore/searchbox";
+
+
+class App extends Component <{}, {message: string}> {
+  constructor(props: Hello) {
     super(props)
     this.state = {
       message: 'Click the button to load data!'
@@ -57,5 +61,6 @@ class App extends Component {
     )
   }
 }
+
 
 export default App;
