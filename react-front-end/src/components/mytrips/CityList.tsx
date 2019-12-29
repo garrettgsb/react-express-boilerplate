@@ -1,9 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { City } from './City';
 
-type PropTypes = { city: string }
+type PropTypes = { cities: string }
 
 const Cities = styled.ul`
   padding-left: 0px;
@@ -17,7 +18,17 @@ const Title = styled.h1`
   text-align: center;  
 `
 
-export const CityList = ({city}: PropTypes) => {
+export const CityList = ({cities}: PropTypes) => {
+
+  useEffect(() => {
+    Promise.all([
+      Promise.resolve(axios.get('/api/trips'))
+    ])
+    .then((res) => {
+      console.log(res)
+    })
+  })
+
   return (
     <>
     <Title>My Trips</Title>

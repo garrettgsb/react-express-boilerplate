@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
-
-import axios from 'axios';
 import './App.css';
 import { CityList } from './components/mytrips/CityList';
 import styled from 'styled-components';
@@ -70,12 +68,11 @@ export default function App() {
         </NavDiv>
 
         <Switch>
-          <Route path='/login'>
-            log in from App.js
+          <Route path='/explore'>
+            Explore
           </Route>
-
           <Route path='/trips'>
-            <CityList city="city" />
+            <CityList cities="['one', 'two']" />
           </Route>
         </Switch>
       </Router>
