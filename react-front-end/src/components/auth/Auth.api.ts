@@ -2,7 +2,7 @@ import Axios, { AxiosRequestConfig } from "axios";
 // const bcrypt = require('bcrypt');
 
 export interface Credentials {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -14,9 +14,8 @@ export const onLogin = async (data: Credentials) => {
   }
   try {
     const { data: response } = await Axios.request(requestConfig);
-    console.log(response);
+    return response.data;
   } catch (err) {
-    console.error(err);
     return { error: err.response.data.message }
   }
 }

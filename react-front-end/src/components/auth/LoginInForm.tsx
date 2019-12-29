@@ -5,18 +5,18 @@ import { onLogin } from "./Auth.api";
 export const LoginInForm = () => {
 
   // user input state
-  const [{ username, password }, setCredntials] = useState({
-    username: "",
-    password: ""
+  const [{ email, password }, setCredntials] = useState({
+    email: '',
+    password: ''
   });
 
   // error state
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const login = async (e: React.FormEvent) => {
     e.preventDefault();
     const response = await onLogin({
-      username,
+      email,
       password
     })
 
@@ -27,14 +27,14 @@ export const LoginInForm = () => {
 
   return (
     <AuthForm onSubmit={login}>
-      <label htmlFor="username">Username</label>
-      <input placeholder="Username" value={username} onChange={e => setCredntials({
-        username: e.target.value,
+      <label htmlFor="email">Email</label>
+      <input placeholder="Email" value={email} onChange={e => setCredntials({
+        email: e.target.value,
         password
       })} />
       <label htmlFor="password">Password</label>
       <input placeholder="Password" type="password" value={password} onChange={e => setCredntials({
-        username,
+        email,
         password: e.target.value
       })} />
       <button type="submit">Login In</button>
