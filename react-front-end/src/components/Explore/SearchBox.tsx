@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import axios from "axios";
 
 const Input = styled.input`
   border-radius: 5px
@@ -8,10 +9,21 @@ const Input = styled.input`
   color: red
 `;
 
-type SearchProps = { message: string };
+type SearchProps = { cities: string };
 
 export default class Search extends React.Component<SearchProps, {}> {
   
+  //fetch data from api from destinations
+
+  // const initialState = {
+  //   loading: true,
+  //   cities: []
+  // };
+
+  // useEffect(() => {
+  //   axios.get(``)
+  // });
+
   render() {
     return (
       <div className="SearchBar">
@@ -26,4 +38,7 @@ export default class Search extends React.Component<SearchProps, {}> {
       </div>
     )
   }
+
 }
+
+

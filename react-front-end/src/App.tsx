@@ -7,7 +7,6 @@ import { CityList } from './components/mytrips/CityList';
 
 import Explore from "./components/Explore";
 
-
 export default function App() {
 // class App extends Component <{}, {message: string}> {
 //   constructor(props: CityList) {
@@ -41,7 +40,7 @@ export default function App() {
     // );
     return (
       <Router>
-      <Explore message="testing searchbar" date="2019-12-27"/>
+      <Explore cities='cities' selected='2019-12-28' date='2019-12-30' topRecommended="Vancouver"/>
         <nav>
           <ul>
             <li><Link to='/'>Explore</Link></li>

@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
+import moment from 'moment';
+import DatePicker from "react-datepicker";
+import PropTypes from "prop-types";
 
-const Input = styled.input`
-  border-radius: 5px
-  height: 30px
-  weight: auto
-  color: red
-`;
-
-type DatePickProps = { date: string };
+type DatePickProps = { selected: string, date: string };
 
 export default class DatePick extends React.Component<DatePickProps, {}> {
   
   render() {
+    const [startDate, setStartDate] = useState(new Date());
     return (
-      <h3>Check {this.props.date}</h3>
-    )
-  }
+      <DatePicker
+        selected={startDate}
+        onChange={date => setStartDate(date)}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={15}
+        timeCaption="time"
+        dateFormat="MMMM d, yyyy h:mm aa"
+      />
+    );
+  };
 }
+
