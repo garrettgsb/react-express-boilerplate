@@ -23,7 +23,7 @@ App.use(cookieParser({
 }))
 
 // Connect all our routes to our application
-App.use('/', trips(db));
+App.use('/api/trips', trips(db));
 // App.use('/', routes);
 
 App.listen(PORT, () => {
