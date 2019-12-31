@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 
 
-type DestRecProps = { topRecommended: string };
+type DestRecProps = { city: string, topRecommended: string };
 
 export default class DestRec extends React.Component<DestRecProps, {}> {
   

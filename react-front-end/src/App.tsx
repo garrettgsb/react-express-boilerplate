@@ -5,7 +5,7 @@ import './App.css';
 import { CityList } from './components/mytrips/CityList';
 
 
-import Explore from "./components/Explore";
+import { Explore } from "./components/Explore";
 
 export default function App() {
 // class App extends Component <{}, {message: string}> {
@@ -40,7 +40,11 @@ export default function App() {
     // );
     return (
       <Router>
-      <Explore cities='cities' selected='2019-12-28' date='2019-12-30' topRecommended="Vancouver"/>
+      <Explore 
+        city='Van'
+        topRecommended="Vancouver"
+        // handleChange={e => e.target.value}
+      />
         <nav>
           <ul>
             <li><Link to='/'>Explore</Link></li>
