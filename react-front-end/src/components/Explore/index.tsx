@@ -6,8 +6,7 @@ import { DatePick } from "./DatePick";
 import DestRecommended from "./DestRecommended";
 type ExploreProps = {
   city: string,
-  // selected: string,
-  // date: string,
+  selected?: string | null,
   topRecommended: string
   // e: string
   // onChangeText?: Function;
@@ -20,6 +19,7 @@ export const Explore: React.FC<ExploreProps> = () => {
     return (
       <Fragment>
         <SearchBar />
+        <DatePick/>
         <DestRecommended city="Van" topRecommended="Vancouver"/>
       </Fragment>
     )

@@ -43,6 +43,7 @@ export default function App() {
       <Explore 
         city='Van'
         topRecommended="Vancouver"
+        selected=''
         // handleChange={e => e.target.value}
       />
         <nav>

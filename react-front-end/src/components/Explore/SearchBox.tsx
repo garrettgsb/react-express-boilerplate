@@ -7,7 +7,7 @@ const Input = styled.input`
   border-radius: 5px
   height: 30px
   weight: auto
-  color: red
+  color: black
 `;
 
 interface SearchProps {

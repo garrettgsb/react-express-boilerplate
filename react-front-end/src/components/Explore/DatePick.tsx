@@ -1,38 +1,43 @@
-import React, { useState } from "react";
+import React, { FC, useState, Fragment } from "react";
 import styled from 'styled-components';
 import moment from 'moment';
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
 
-// type DatePickProps = {
-//   // selected: string,
-//   // date: string | null
-//   state: string
-//   onChange: 
-// };
+type DatePickerProps = {
+  selected?: string | null,
+  date?: Date | null
+};
 
 
 // export default class DatePick extends React.Component<DatePickProps, {}> {
-export const DatePick = () => {
-  // DatePick.propTypes = {
-  //   value: PropTypes.number,
-  //   onChange: PropTypes.func.isRequired
-  // };
-  // render() {
+export const DatePick: FC<DatePickerProps> = () => {
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
 
-    // console.log(selected);
-  //   const [startDate, setStartDate] = useState(new Date());
-  //   return (
-  //     <DatePicker
-  //       selected={startDate}
-  //       onChange={date => setStartDate(date)}
-  //       showTimeSelect
-  //       timeFormat="HH:mm"
-  //       timeIntervals={15}
-  //       timeCaption="time"
-  //       dateFormat="MMMM d, yyyy h:mm aa"
-  //     />
-  //   );
-  // // };
+  return (
+    <Fragment>
+      <DatePicker
+        selected={startDate}
+        onChange={date => setStartDate(date)}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={15}
+        timeCaption="time"
+        dateFormat="MMMM d, yyyy h:mm aa"
+      />
+      <DatePicker
+        selected={startDate}
+        onChange={date => setStartDate(date)}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={15}
+        timeCaption="time"
+        dateFormat="MMMM d, yyyy h:mm aa"
+      />
+    </Fragment>
+  );
+// };
 }
+
 
