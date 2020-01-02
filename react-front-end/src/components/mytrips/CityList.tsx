@@ -34,11 +34,8 @@ export const CityList = ({cities}: PropTypes) => {
     <>
     <Title>My Trips</Title>
     <Cities>
-      {/* {cities.map(city => 
-        <City name={city.city} />
-      )} */}
-      <CityItem to='/vancouver'><City name="Vancouver" img="https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg" start="start" end="end"/></CityItem>
-      <CityItem to='/seattle'><City name="Seattle" img="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg" start="start" end="end"/></CityItem>
+        <CityItem to='/vancouver'><City name="Vancouver" img="https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg" start="start" end="end"/></CityItem>
+        <CityItem to='/seattle'><City name="Seattle" img="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg" start="start" end="end"/></CityItem>
     </Cities>
     </>
   )

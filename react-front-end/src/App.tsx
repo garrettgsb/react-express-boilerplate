@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import './App.css';
-import { CityList } from './components/mytrips/CityList';
+import { TripsIndex } from './components/mytrips/index';
 import styled from 'styled-components';
 
 const NavList = styled.ul`
@@ -72,7 +72,7 @@ export default function App() {
             Explore
           </Route>
           <Route path='/trips'>
-            <CityList cities="['one', 'two']" />
+            <TripsIndex />
           </Route>
         </Switch>
       </Router>
