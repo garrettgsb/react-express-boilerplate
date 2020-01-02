@@ -71,7 +71,7 @@ export default function App() {
           <Route path='/explore'>
             Explore
           </Route>
-          <Route path='/trips'>
+          <Route exact path='/trips'>
             <TripsIndex />
           </Route>
         </Switch>

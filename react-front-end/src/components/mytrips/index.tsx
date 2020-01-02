@@ -10,10 +10,8 @@ export const TripsIndex = () => {
     <>
     <Router>
       <Switch>
-        <Route path='/trips'><CityList cities="cities" /></Route>
-      </Switch>
-      <Switch>
-        <Route path='/trips/vancouver'><AttractionList city="city" attractions="attractions" /></Route>
+        <Route exact path='/trips'><CityList cities="cities" /></Route>
+        <Route exact path='/trips/vancouver'><AttractionList city="Vancouver" attractions="attractions" /></Route>
       </Switch>
     </Router>
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Attraction } from './Attraction';
+import add from '../../images/add-contact.svg';
 
 type PropTypes = { city: string, attractions: string }
 
@@ -16,8 +17,20 @@ const AttractionItem = styled(Link)`
 `;
 
 const Title = styled.h1`
-  text-align: center;  
-`
+  text-align: left;
+`;
+
+const Add = styled.img`
+  width: 40px;
+`;
+
+const Header = styled.header`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 10%;
+  padding-left: 10%;
+`;
 
 export const AttractionList = ({city, attractions}: PropTypes) => {
 
@@ -32,11 +45,12 @@ export const AttractionList = ({city, attractions}: PropTypes) => {
 
   return (
     <>
-    <Title>{city}</Title>
+    <Header>
+      <Title>{city}</Title>
+      <Add src={add} />
+    </Header>
+
     <Attractions>
-      {/* {cities.map(city => 
-        <City name={city.city} />
-      )} */}
       <AttractionItem to='/vancouver'><Attraction name="Coal Harbour" img="https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg" /></AttractionItem>
       <AttractionItem to='/seattle'><Attraction name="Stanley Park" img="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg" /></AttractionItem>
     </Attractions>
