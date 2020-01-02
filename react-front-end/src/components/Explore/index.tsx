@@ -2,26 +2,24 @@ import React, { Fragment } from "react";
 import styled from 'styled-components';
 
 import { SearchBar } from "./SearchBox";
-import { DatePick } from "./DatePick";
-import DestRecommended from "./DestRecommended";
+import { DatePick } from "./DatePicker";
+import { DestRec } from "./DestRecommended";
+import { Button } from "./Button"
 type ExploreProps = {
   city: string,
   selected?: string | null,
   topRecommended: string
-  // e: string
-  // onChangeText?: Function;
+  // onClick: (e:React.MouseEvent) => void
   // handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-// export default class Explore extends React.Component<ExploreProps, {}> {
 export const Explore: React.FC<ExploreProps> = () => {
-  // render() {
     return (
       <Fragment>
-        <SearchBar />
+        <SearchBar/>
         <DatePick/>
-        <DestRecommended city="Van" topRecommended="Vancouver"/>
+        <Button />
+        <DestRec city="Van" topRecommended="Vancouver"/>
       </Fragment>
     )
-  // }
 }

@@ -1,15 +1,21 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from 'styled-components';
 
 
 type DestRecProps = { city: string, topRecommended: string };
 
-export default class DestRec extends React.Component<DestRecProps, {}> {
-  
-  render() {
+const Destination = styled.h3`
+  display: flex
+`;
+const Image = styled.img`
+  width: 360px;
+  height: 180px;
+`;
+export const DestRec: React.FC<DestRecProps> = () => {  
     return (
-      <h3>Check {this.props.topRecommended}</h3>
+      <Fragment>
+        <Destination>Vancouver<Image src="https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg"/></Destination>
+        <Destination>Seattle<Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg"/></Destination>
+      </Fragment>
     )
-  }
-
 }

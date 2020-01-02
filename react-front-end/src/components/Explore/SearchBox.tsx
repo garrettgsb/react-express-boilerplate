@@ -11,11 +11,17 @@ const Input = styled.input`
 `;
 
 interface SearchProps {
+  handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-
-export const SearchBar: FC<SearchProps> = () => {
+export const SearchBar: FC<SearchProps> = ({handleInputChange}) => {
+  
   const [search, setSearch] = useState('');
+  handleInputChange = (e) => {
+    setSearch(e.target.value)
+  }
+  console.log(search);
+  axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${search}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAZYMLE44Nb9OiKx8ZSOn8ULBuni72yNL8`)
   return (
     <div className="SearchBar">
       <label className="search-label" htmlFor="search-input">
@@ -23,11 +29,12 @@ export const SearchBar: FC<SearchProps> = () => {
             type="text"
             id="search-input"
             placeholder="Please enter your destination"
-            onChange ={e => setSearch(e.target.value)}
+            onChange ={handleInputChange}
             value = {search}
         />
       </label>
     </div>
   );
+  
 };
 
