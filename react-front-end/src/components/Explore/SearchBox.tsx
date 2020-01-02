@@ -20,8 +20,11 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange}) => {
   handleInputChange = (e) => {
     setSearch(e.target.value)
   }
-  console.log(search);
-  axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${search}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAZYMLE44Nb9OiKx8ZSOn8ULBuni72yNL8`)
+  axios.defaults.baseURL = 'https://maps.googleapis.com'
+  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+  axios.get(`/maps/api/place/findplacefromtext/json?input=${search}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${process.env.GOOGLE_API_KEY}`)
+  .then(results => console.log(results))
+
   return (
     <div className="SearchBar">
       <label className="search-label" htmlFor="search-input">

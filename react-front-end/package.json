@@ -1,4 +1,5 @@
 {
+  "proxy": "maps.googleapis.com",
   "name": "react-front-end",
   "version": "0.1.0",
   "private": true,
@@ -32,7 +33,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8080",
   "devDependencies": {
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
