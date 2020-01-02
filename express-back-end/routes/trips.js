@@ -11,5 +11,17 @@ module.exports = (db) => {
       res.json(response.rows);
     })
   })
+
+  router.get('/:id', (req, res) => {
+    db.query(
+      `
+      SELECT * FROM attractions;
+      `
+    )
+    .then((response) => {
+      res.json(response.rows);
+    })
+  })
+
   return router;
 }
