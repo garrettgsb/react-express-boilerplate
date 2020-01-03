@@ -5,7 +5,7 @@ import styled from 'styled-components';
 type DestRecProps = { city: string, topRecommended: string };
 
 const Destination = styled.h3`
-  display: flex
+  display: flex;
 `;
 const Image = styled.img`
   width: 360px;

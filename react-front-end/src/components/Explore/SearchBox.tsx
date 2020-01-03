@@ -4,6 +4,7 @@ import axios from "axios";
 import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 const Input = styled.input`
   border-radius: 5px
@@ -34,16 +35,20 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
 
   handleSubmit = (e) => {
     console.log(search);
-    console.log(startDate);
+    console.log(JSON.stringify(startDate));
+    console.log(moment(JSON.stringify(startDate)).unix());
     console.log(endDate);
   };
 
   //API call for city
-
-  axios.defaults.baseURL = 'https://maps.googleapis.com';
-  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-  axios.get(`/maps/api/place/findplacefromtext/json?input=${search}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${process.env.GOOGLE_API_KEY}`)
-  .then(results => console.log(results));
+  axios.defaults.baseURL = 'http://localhost:8081';
+  // axios.defaults.baseURL = 'https://maps.googleapis.com';
+  // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+  // axios.get(`http://localhost:8080/api`)
+  axios.get(`/api/cities`)
+    .then((res) => {
+      console.log(res)
+    });
 
   return (
     <Fragment>
