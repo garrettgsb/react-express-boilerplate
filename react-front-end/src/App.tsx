@@ -63,12 +63,7 @@ export default function App() {
 
   return (
     <Router>
-      <Explore
-        city='Van'
-        topRecommended="Vancouver"
-        selected=''
-      // handleChange={e => e.target.value}
-      />
+
       <NavDiv>
         <NavList>
           <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold' }}>Explore</NavItem></li>
@@ -82,7 +77,12 @@ export default function App() {
           <LoginInForm />
         </Route>
         <Route path='/explore'>
-          Explore
+          <Explore
+            city='Van'
+            topRecommended="Vancouver"
+            selected=''
+          // handleChange={e => e.target.value}
+          />
         </Route>
         <Route exact path='/trips'>
           <TripsIndex />
