@@ -1,11 +1,31 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import './App.css';
-import { CityList } from './components/mytrips/CityList';
+import { TripsIndex } from './components/mytrips/index';
+import styled from 'styled-components';
 import { LoginInForm } from './components/auth/LoginInForm';
 
-import { Hello } from "./components/explore/searchbox";
+const NavList = styled.ul`
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-left: 0px;
+`;
+
+const NavItem = styled(NavLink)`
+  text-decoration: none;
+  color: #000;
+`;
+
+const NavDiv = styled.nav`
+  position: fixed;
+  bottom: 0px;
+  width: 99%;
+  z-index: 999;
+  border: 1px solid #000;
+  margin: 1px;
+`;
 
 export default function App() {
   // class App extends Component <{}, {message: string}> {
@@ -30,36 +50,41 @@ export default function App() {
   //   }
 
   // render() {
-  // return (
-  //   <div className="App">
-  //     <h1>{ this.state.message }</h1>
-  //     <button onClick={this.fetchData} >
-  //       Fetch Data
-  //     </button>        
-  //   </div>
-  // );
+    // return (
+    //   <div className="App">
+    //     <h1>{ this.state.message }</h1>
+    //     <button onClick={this.fetchData} >
+    //       Fetch Data
+    //     </button>        
+    //   </div>
+    // );
   return (
     <Router>
-      <nav>
-        <ul>
-          <li><Link to='/'>Explore</Link></li>
-          <li><Link to='/trips'>My Trips</Link></li>
-          <li><Link to='/'>Profile</Link></li>
-        </ul>
-      </nav>
+      <NavDiv>
+        <NavList>
+          <li><NavItem to='/explore' activeStyle={{fontWeight: 'bold'}}>Explore</NavItem></li>
+          <li><NavItem to='/trips' activeStyle={{fontWeight: 'bold'}}>My Trips</NavItem></li>
+          <li><NavItem to='/profile' activeStyle={{fontWeight: 'bold'}}>Profile</NavItem></li>
+        </NavList>
+      </NavDiv>
 
       <Switch>
         <Route path='/login'>
           <LoginInForm />
         </Route>
-
-        <Route path='/trips'>
-          <CityList city="Vancouver" />
+        <Route path='/explore'>
+          Explore
+        </Route>
+        <Route exact path='/trips'>
+          <TripsIndex />
         </Route>
       </Switch>
     </Router>
   )
 }
+
+
+
   // }
 
 
