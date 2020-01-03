@@ -8,10 +8,26 @@ import moment from 'moment';
 const GOOGLE_KEY = process.env.GOOGLE_API_KEY;
 
 const Input = styled.input`
-  border-radius: 5px
-  height: 30px
-  weight: auto
-  color: black
+  margin: 0px auto;
+  margin-top: 30px;
+  display: grid;
+  border-color: #D1D0CC
+  border-radius: 5px;
+  border-width: thin;
+  padding: 0px 10px;
+  height: 40px;
+  width: 300px;
+  color: black;
+`;
+
+const DatePick = styled.div`
+  margin: 5px auto;
+  // width: 100px;
+`;
+
+const Button = styled.button`
+  margin: 5px auto;
+  // width: 100px;
 `;
 
 interface SearchProps {
@@ -33,12 +49,12 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
   handleInputChange = (e) => {
     setSearch(e.target.value)
     console.log(e.target.value)
-    // axios.defaults.baseURL = 'http://localhost:8081';
-    // axios.get(`api/cities`, {
-    //   params: {
-    //     city: e.target.value
-    //   }
-    // })
+    axios.defaults.baseURL = 'http://localhost:8081';
+    axios.get(`api/cities`, {
+      params: {
+        city: e.target.value
+      }
+    })
   };
 
 
@@ -47,17 +63,7 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
     console.log(JSON.stringify(startDate));
     console.log(endDate);
     axios.defaults.baseURL = 'http://localhost:8081';
-    axios.post(`/explore/city/${search},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`
-    // axios.post(`/explore/city`, {
-    //   params: {
-
-    //     city: search,
-    //     city_img: "123.com",
-    //     start_time: JSON.stringify(startDate),
-    //     end_time: JSON.stringify(endDate)
-    //   }
-    // }
-    )
+    axios.post(`/explore/city/${search},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`)
     .then((res) => {
       console.log(res);
     })
@@ -84,27 +90,35 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
           />
         </label>
       </div>
-      <div className="DatePicker">
-        <DatePicker
-          selected={startDate}
-          onChange={date => setStartDate(date)}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          timeCaption="time"
-          dateFormat="MMMM d, yyyy h:mm aa"
-        />
-        <DatePicker
-          selected={endDate}
-          onChange={date => setEndDate(date)}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          timeCaption="time"
-          dateFormat="MMMM d, yyyy h:mm aa"
-        />
-      </div>
-      <button onClick={handleSubmit}>Search</button>
+      <DatePick>
+        <div>
+          <h4>Start Date</h4>
+          <DatePicker 
+            selected={startDate}
+            onChange={date => setStartDate(date)}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={30}
+            timeCaption="time"
+            dateFormat="yyyy/MM/dd"
+          />
+        </div>
+      </DatePick>
+      <DatePick>
+        <div>
+        <h4>End Date</h4>
+          <DatePicker
+            selected={endDate}
+            onChange={date => setEndDate(date)}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            timeCaption="time"
+            dateFormat="yyyy/MM/dd"
+          />
+        </div>  
+      </DatePick>
+      <Button onClick={handleSubmit}>Search</Button>
     </Fragment>
   );
 };
