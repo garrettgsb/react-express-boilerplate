@@ -6,8 +6,6 @@ import { Attraction } from './Attraction';
 import add from '../../images/add-contact.svg';
 import { Button } from './Button';
 
-type PropTypes = { city: string, attractions: string }
-
 const Attractions = styled.ul`
   padding-left: 0px;
 `;
@@ -33,11 +31,11 @@ const Header = styled.header`
   padding-left: 10%;
 `;
 
-export const AttractionList = ({city, attractions}: PropTypes) => {
+export const AttractionList = () => {
 
   useEffect(() => {
     Promise.all([
-      Promise.resolve(axios.get('/api/trips/:id'))
+      axios.get('/api/trips/1')
     ])
     .then((res) => {
       console.log(res)
@@ -47,7 +45,7 @@ export const AttractionList = ({city, attractions}: PropTypes) => {
   return (
     <>
     <Header>
-      <Title>{city}</Title>
+      <Title>City</Title>
       <Add src={add} />
     </Header>
 

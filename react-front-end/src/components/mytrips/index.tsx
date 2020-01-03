@@ -16,13 +16,12 @@ export const TripsIndex = () => {
     })
   }, [])
 
-  console.log('TRIPS', trips)
   return (
     <>
     <Router>
       <Switch>
         <Route exact path='/trips'><CityList cities={trips} /></Route>
-        <Route exact path='/trips/vancouver'><AttractionList city="Vancouver" attractions="attractions" /></Route>
+        <Route exact path='/trips/:id'><AttractionList /></Route>
       </Switch>
     </Router>
 
