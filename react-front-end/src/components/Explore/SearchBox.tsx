@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
+const GOOGLE_KEY = process.env.GOOGLE_API_KEY;
 
 const Input = styled.input`
   border-radius: 5px
@@ -31,24 +32,44 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
 
   handleInputChange = (e) => {
     setSearch(e.target.value)
+    console.log(e.target.value)
+    // axios.defaults.baseURL = 'http://localhost:8081';
+    // axios.get(`api/cities`, {
+    //   params: {
+    //     city: e.target.value
+    //   }
+    // })
   };
 
-  handleSubmit = (e) => {
+
+  handleSubmit = () => {
     console.log(search);
     console.log(JSON.stringify(startDate));
-    console.log(moment(JSON.stringify(startDate)).unix());
     console.log(endDate);
+    axios.defaults.baseURL = 'http://localhost:8081';
+    axios.post(`/explore/city/${search},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`
+    // axios.post(`/explore/city`, {
+    //   params: {
+
+    //     city: search,
+    //     city_img: "123.com",
+    //     start_time: JSON.stringify(startDate),
+    //     end_time: JSON.stringify(endDate)
+    //   }
+    // }
+    )
+    .then((res) => {
+      console.log(res);
+    })
   };
 
   //API call for city
-  axios.defaults.baseURL = 'http://localhost:8081';
-  // axios.defaults.baseURL = 'https://maps.googleapis.com';
-  // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-  // axios.get(`http://localhost:8080/api`)
-  axios.get(`/api/cities`)
-    .then((res) => {
-      console.log(res)
-    });
+  // axios.defaults.baseURL = 'http://localhost:8081';
+  // axios.get(`api/cities/${e.target.value}`)
+  // .then((res) => {
+  //   console.log(res)
+  // });
+  
 
   return (
     <Fragment>
