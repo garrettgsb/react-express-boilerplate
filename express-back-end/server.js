@@ -11,11 +11,12 @@ const morgan = require('morgan');
 const db = require('./db/connect')
 const cors = require('cors')
 
-const trips = require('./routes/trips')
 const cities = require('./routes/cities');
 
 
 App.use(cors());
+const trips = require('./routes/trips');
+const user = require('./routes/user');
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -27,8 +28,9 @@ App.use(cookieParser({
 }))
 
 // Connect all our routes to our application
-App.use('/', trips(db));
 App.use('/', cities(db));
+App.use('/api/trips', trips(db));
+App.use('/', user(db));
 
 App.listen(PORT, () => {
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);

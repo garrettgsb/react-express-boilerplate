@@ -1,33 +1,54 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import './App.css';
-import { CityList } from './components/mytrips/CityList';
+import { TripsIndex } from './components/mytrips/index';
+import styled from 'styled-components';
+import { LoginInForm } from './components/auth/LoginInForm';
 
+const NavList = styled.ul`
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-left: 0px;
+`;
 
 import { Explore } from "./components/Explore";
+const NavItem = styled(NavLink)`
+  text-decoration: none;
+  color: #000;
+`;
+
+const NavDiv = styled.nav`
+  position: fixed;
+  bottom: 0px;
+  width: 99%;
+  z-index: 999;
+  border: 1px solid #000;
+  margin: 1px;
+`;
 
 export default function App() {
-// class App extends Component <{}, {message: string}> {
-//   constructor(props: CityList) {
-//     super(props)
-//     this.state = {
-//       message: 'Click the button to load data!'
-//     }
-//   }
+  // class App extends Component <{}, {message: string}> {
+  //   constructor(props: CityList) {
+  //     super(props)
+  //     this.state = {
+  //       message: 'Click the button to load data!'
+  //     }
+  //   }
 
-//   fetchData = () => {
-//     axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-//     .then((response) => {
-//       // handle success
-//       console.log(response.data) // The entire response from the Rails API
+  //   fetchData = () => {
+  //     axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
+  //     .then((response) => {
+  //       // handle success
+  //       console.log(response.data) // The entire response from the Rails API
 
-//       console.log(response.data.message) // Just the message
-//       this.setState({
-//         message: response.data.message
-//       });
-//     }) 
-//   }
+  //       console.log(response.data.message) // Just the message
+  //       this.setState({
+  //         message: response.data.message
+  //       });
+  //     }) 
+  //   }
 
   // render() {
     // return (
@@ -38,35 +59,41 @@ export default function App() {
     //     </button>        
     //   </div>
     // );
-    return (
-      <Router>
-      <Explore 
+
+  return (
+    <Router>
+    <Explore 
         city='Van'
         topRecommended="Vancouver"
         selected=''
         // handleChange={e => e.target.value}
       />
-        <nav>
-          <ul>
-            <li><Link to='/'>Explore</Link></li>
-            <li><Link to='/trips'>My Trips</Link></li>
-            <li><Link to='/'>Profile</Link></li>
-          </ul>
-        </nav>
+      <NavDiv>
+        <NavList>
+          <li><NavItem to='/explore' activeStyle={{fontWeight: 'bold'}}>Explore</NavItem></li>
+          <li><NavItem to='/trips' activeStyle={{fontWeight: 'bold'}}>My Trips</NavItem></li>
+          <li><NavItem to='/profile' activeStyle={{fontWeight: 'bold'}}>Profile</NavItem></li>
+        </NavList>
+      </NavDiv>
 
-        <Switch>
-          <Route path='/login'>
-            log in from App.js
-          </Route>
+      <Switch>
+        <Route path='/login'>
+          <LoginInForm />
+        </Route>
+        <Route path='/explore'>
+          Explore
+        </Route>
+        <Route exact path='/trips'>
+          <TripsIndex />
+        </Route>
+      </Switch>
+    </Router>
+  )
+}
 
-          <Route path='/trips'>
-            <CityList city="Vancouver"/>
-          </Route>
-        </Switch>
-      </Router>
-    )
-  }
-// }
 
 
-// export default App;
+  // }
+
+
+  // export default App;
