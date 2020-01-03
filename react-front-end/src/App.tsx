@@ -13,6 +13,7 @@ const NavList = styled.ul`
   padding-left: 0px;
 `;
 
+import { Explore } from "./components/Explore";
 const NavItem = styled(NavLink)`
   text-decoration: none;
   color: #000;
@@ -58,8 +59,15 @@ export default function App() {
     //     </button>        
     //   </div>
     // );
+
   return (
     <Router>
+    <Explore 
+        city='Van'
+        topRecommended="Vancouver"
+        selected=''
+        // handleChange={e => e.target.value}
+      />
       <NavDiv>
         <NavList>
           <li><NavItem to='/explore' activeStyle={{fontWeight: 'bold'}}>Explore</NavItem></li>

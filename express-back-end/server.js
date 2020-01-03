@@ -9,7 +9,12 @@ const BodyParser = require('body-parser');
 const cookieParser = require('cookie-session');
 const morgan = require('morgan');
 const db = require('./db/connect')
+const cors = require('cors')
 
+const cities = require('./routes/cities');
+
+
+App.use(cors());
 const trips = require('./routes/trips');
 const user = require('./routes/user');
 
@@ -23,6 +28,7 @@ App.use(cookieParser({
 }))
 
 // Connect all our routes to our application
+App.use('/', cities(db));
 App.use('/api/trips', trips(db));
 App.use('/', user(db));
 
