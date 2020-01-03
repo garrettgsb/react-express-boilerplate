@@ -2,14 +2,19 @@
 require('dotenv').config();
 
 //Web Server
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
 const cookieParser = require('cookie-session');
 const morgan = require('morgan');
 const db = require('./db/connect')
+const cors = require('cors')
 
+const cities = require('./routes/cities');
+
+
+App.use(cors());
 const trips = require('./routes/trips');
 const user = require('./routes/user');
 
@@ -23,7 +28,8 @@ App.use(cookieParser({
 }))
 
 // Connect all our routes to our application
-App.use('/', trips(db));
+App.use('/', cities(db));
+App.use('/api/trips', trips(db));
 App.use('/', user(db));
 
 App.listen(PORT, () => {
