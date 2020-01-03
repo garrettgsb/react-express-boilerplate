@@ -2,16 +2,20 @@
 require('dotenv').config();
 
 //Web Server
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
 const cookieParser = require('cookie-session');
 const morgan = require('morgan');
 const db = require('./db/connect')
+const cors = require('cors')
 
 const trips = require('./routes/trips')
-const routes = require('./routes');
+const cities = require('./routes/cities');
+
+
+App.use(cors());
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -24,7 +28,7 @@ App.use(cookieParser({
 
 // Connect all our routes to our application
 App.use('/', trips(db));
-// App.use('/', routes);
+App.use('/', cities(db));
 
 App.listen(PORT, () => {
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
