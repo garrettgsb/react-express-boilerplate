@@ -5,11 +5,16 @@ import styled from 'styled-components';
 type DestRecProps = { city: string, topRecommended: string };
 
 const Destination = styled.h3`
-  display: flex;
+  display: block;
+  text-align: center;
+  // color: #ffffff;
 `;
 const Image = styled.img`
-  width: 360px;
-  height: 180px;
+  width: 90%;
+  height: 150px;
+  background-size: 100%;
+  display: grid;
+  margin: 0px auto;
 `;
 export const DestRec: React.FC<DestRecProps> = () => {  
     return (
