@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Attraction } from './Attraction';
 import add from '../../images/add-contact.svg';
+import { Button } from './Button';
 
 type PropTypes = { city: string, attractions: string }
 
@@ -54,6 +55,8 @@ export const AttractionList = ({city, attractions}: PropTypes) => {
       <AttractionItem to='/vancouver'><Attraction name="Coal Harbour" img="https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg" /></AttractionItem>
       <AttractionItem to='/seattle'><Attraction name="Stanley Park" img="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg" /></AttractionItem>
     </Attractions>
+
+    <Button text="Generate" />
     </>
   )
 }
