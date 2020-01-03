@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AuthForm } from "./Auth.components";
+import { AuthForm, Input, Button } from "./Auth.components";
 import { onLogin } from "./Auth.api";
 
 export const LoginInForm = () => {
@@ -27,17 +27,16 @@ export const LoginInForm = () => {
 
   return (
     <AuthForm onSubmit={login}>
-      <label htmlFor="email">Email</label>
-      <input placeholder="Email" value={email} onChange={e => setCredntials({
+      <h1>Login In</h1>
+      <Input placeholder="Enter Email" value={email} onChange={e => setCredntials({
         email: e.target.value,
         password
       })} />
-      <label htmlFor="password">Password</label>
-      <input placeholder="Password" type="password" value={password} onChange={e => setCredntials({
+      <Input placeholder="Password" type="password" value={password} onChange={e => setCredntials({
         email,
         password: e.target.value
       })} />
-      <button type="submit">Login In</button>
+      <Button type="submit">Login In</Button>
       {error.length > 0 && <p>{error}</p>}
     </AuthForm>
   );
