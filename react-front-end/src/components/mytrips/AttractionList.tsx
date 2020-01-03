@@ -45,11 +45,10 @@ export const AttractionList = () => {
     })
   }, [])
 
-  console.log(attractions)
   return (
     <>
     <Header>
-      <Title>City</Title>
+      <Title>{attractions.length === 0 ? "Itinerary" : attractions[0].city}</Title>
       <Add src={add} />
     </Header>
 
