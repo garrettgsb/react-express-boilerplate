@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -21,14 +21,17 @@ const Title = styled.h1`
 
 export const CityList = ({cities}: PropTypes) => {
 
+  const [trips, setTrips] = useState([]);
+
   useEffect(() => {
-    Promise.all([
-      Promise.resolve(axios.get('/api/trips'))
-    ])
+    axios.get('/api/trips')
     .then((res) => {
-      console.log(res)
+      setTrips(res.data)
     })
-  })
+    .then(() => {
+      console.log(trips)
+    })
+  }, [])
 
   return (
     <>
