@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-do
 import './App.css';
 import { TripsIndex } from './components/mytrips/index';
 import styled from 'styled-components';
+import { LoginInForm } from './components/auth/LoginInForm';
 
 const NavList = styled.ul`
   list-style-type: none;
@@ -27,26 +28,26 @@ const NavDiv = styled.nav`
 `;
 
 export default function App() {
-// class App extends Component <{}, {message: string}> {
-//   constructor(props: CityList) {
-//     super(props)
-//     this.state = {
-//       message: 'Click the button to load data!'
-//     }
-//   }
+  // class App extends Component <{}, {message: string}> {
+  //   constructor(props: CityList) {
+  //     super(props)
+  //     this.state = {
+  //       message: 'Click the button to load data!'
+  //     }
+  //   }
 
-//   fetchData = () => {
-//     axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-//     .then((response) => {
-//       // handle success
-//       console.log(response.data) // The entire response from the Rails API
+  //   fetchData = () => {
+  //     axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
+  //     .then((response) => {
+  //       // handle success
+  //       console.log(response.data) // The entire response from the Rails API
 
-//       console.log(response.data.message) // Just the message
-//       this.setState({
-//         message: response.data.message
-//       });
-//     }) 
-//   }
+  //       console.log(response.data.message) // Just the message
+  //       this.setState({
+  //         message: response.data.message
+  //       });
+  //     }) 
+  //   }
 
   // render() {
     // return (
@@ -57,28 +58,34 @@ export default function App() {
     //     </button>        
     //   </div>
     // );
-    return (
-      <Router>
-        <NavDiv>
-          <NavList>
-            <li><NavItem to='/explore' activeStyle={{fontWeight: 'bold'}}>Explore</NavItem></li>
-            <li><NavItem to='/trips' activeStyle={{fontWeight: 'bold'}}>My Trips</NavItem></li>
-            <li><NavItem to='/profile' activeStyle={{fontWeight: 'bold'}}>Profile</NavItem></li>
-          </NavList>
-        </NavDiv>
+  return (
+    <Router>
+      <NavDiv>
+        <NavList>
+          <li><NavItem to='/explore' activeStyle={{fontWeight: 'bold'}}>Explore</NavItem></li>
+          <li><NavItem to='/trips' activeStyle={{fontWeight: 'bold'}}>My Trips</NavItem></li>
+          <li><NavItem to='/profile' activeStyle={{fontWeight: 'bold'}}>Profile</NavItem></li>
+        </NavList>
+      </NavDiv>
 
-        <Switch>
-          <Route path='/explore'>
-            Explore
-          </Route>
-          <Route exact path='/trips'>
-            <TripsIndex />
-          </Route>
-        </Switch>
-      </Router>
-    )
-  }
-// }
+      <Switch>
+        <Route path='/login'>
+          <LoginInForm />
+        </Route>
+        <Route path='/explore'>
+          Explore
+        </Route>
+        <Route exact path='/trips'>
+          <TripsIndex />
+        </Route>
+      </Switch>
+    </Router>
+  )
+}
 
 
-// export default App;
+
+  // }
+
+
+  // export default App;
