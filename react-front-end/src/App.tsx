@@ -4,6 +4,7 @@ import axios from 'axios';
 import './App.css';
 import { CityList } from './components/mytrips/CityList';
 import { LoginInForm } from './components/auth/LoginInForm';
+import { Profile } from './components/profile/profile';
 
 import { Hello } from "./components/explore/searchbox";
 
@@ -44,7 +45,7 @@ export default function App() {
         <ul>
           <li><Link to='/'>Explore</Link></li>
           <li><Link to='/trips'>My Trips</Link></li>
-          <li><Link to='/'>Profile</Link></li>
+          <li><Link to='/profile'>Profile</Link></li>
         </ul>
       </nav>
 
@@ -55,6 +56,10 @@ export default function App() {
 
         <Route path='/trips'>
           <CityList city="Vancouver" />
+        </Route>
+
+        <Route path='/profile'>
+          <Profile />
         </Route>
       </Switch>
     </Router>
