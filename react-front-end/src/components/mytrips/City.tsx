@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
-type CityProps = { name: string, img: string, start: string, end: string }
+type CityProps = { key: number, name: string, img: string, start: string, end: string }
 
 const Name = styled.h2`
   text-align: center;

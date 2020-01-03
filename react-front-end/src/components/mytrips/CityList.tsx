@@ -22,7 +22,7 @@ export const CityList = ({cities}: PropTypes) => {
     <Title>My Trips</Title>
     {cities.map(city =>
       <CityItem to={`/trips/${city.id}`}>
-        <City name={city.city} img={city.city_img} start={moment(city.start_time).format('MMM DD, YYYY')} end={moment(city.end_time).format('MMM DD, YYYY')} />
+        <City key={city.id} name={city.city} img={city.city_img} start={moment(city.start_time).format('MMM DD, YYYY')} end={moment(city.end_time).format('MMM DD, YYYY')} />
       </CityItem>
       )}
     </>
