@@ -41,5 +41,15 @@ module.exports = (db) => {
       .catch(err => console.log(err));
   })
 
+  router.get("/profile", (req, res) => {
+    db.query(`
+      SELECT * FROM users WHERE id = $1;
+    `, [req.params.id])
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err));
+  });
+
   return router;
 }

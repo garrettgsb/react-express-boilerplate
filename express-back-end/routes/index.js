@@ -12,10 +12,6 @@ routes.get("/signup", (req, res) => {
   res.send("SignUp Page");
 });
 
-routes.get("/profile", (req, res) => {
-  res.send("Profile Page");
-});
-
 routes.get("/explore", (req, res) => {
   res.send("Explore Page");
 });
