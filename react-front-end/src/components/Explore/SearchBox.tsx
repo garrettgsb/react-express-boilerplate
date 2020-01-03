@@ -14,16 +14,17 @@ const Input = styled.input`
   border-color: #D1D0CC
   border-radius: 5px;
   border-width: thin;
-  height: 30px;
+  padding: 0px 10px;
+  height: 40px;
   width: 300px;
   color: black;
 `;
 
 const DatePick = styled.div`
-  display: grid;
-  margin: 0px auto;
-  grid-template-columns: 100%;
+  margin: 5px auto;
+  width: 300px;
 `;
+
 
 interface SearchProps {
   handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -87,19 +88,21 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
       </div>
       <DatePick>
         <div>
-          <DatePicker
+          <h4>Start Date</h4>
+          <DatePicker 
             selected={startDate}
             onChange={date => setStartDate(date)}
             showTimeSelect
             timeFormat="HH:mm"
             timeIntervals={15}
             timeCaption="time"
-            dateFormat="MMMM d, yyyy h:mm aa"
+            dateFormat="mm/dd/yyyy"
           />
         </div>
       </DatePick>
       <DatePick>
         <div>
+        <h4>End Date</h4>
           <DatePicker
             selected={endDate}
             onChange={date => setEndDate(date)}
@@ -107,7 +110,7 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
             timeFormat="HH:mm"
             timeIntervals={15}
             timeCaption="time"
-            dateFormat="MMMM d, yyyy h:mm aa"
+            dateFormat="mm/dd/yyyy"
           />
         </div>  
       </DatePick>
