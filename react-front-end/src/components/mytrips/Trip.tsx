@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from 'axios';
 import { AttractionList } from './AttractionList';
+import { Itinerary } from './Itinerary';
 
 export const Trip = () => {
   const id:string = location.pathname.slice(location.pathname.lastIndexOf('/') + 1);
@@ -13,7 +13,7 @@ export const Trip = () => {
         return <AttractionList attractions={attractions} />;
       }
     }
-    return <Itinerary id={id} />;
+    return <Itinerary id={id} attractions={attractions} />;
   };
 
   useEffect(() => {
