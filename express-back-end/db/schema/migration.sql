@@ -26,14 +26,14 @@ CREATE TABLE itineraries (
   id SERIAL PRIMARY KEY NOT NULL,
   city VARCHAR(50),
   city_img varchar(400),
-  start_time TIMESTAMPTZ,
-  end_time TIMESTAMPTZ
+  trip_start BIGINT,
+  trip_end BIGINT
 );
 
 CREATE TABLE timeslots (
   id SERIAL PRIMARY KEY NOT NULL,
-  start_time TIMESTAMPTZ,
-  end_time TIMESTAMPTZ,
+  start_time BIGINT,
+  end_time BIGINT,
   itinerary_id INTEGER REFERENCES itineraries(id) ON DELETE CASCADE,
   attraction_id INTEGER REFERENCES attractions(id) ON DELETE CASCADE,
   travel_mode VARCHAR(50)

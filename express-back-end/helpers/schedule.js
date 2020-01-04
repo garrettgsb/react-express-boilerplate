@@ -32,7 +32,10 @@ const data = [
   }
 ];
 
-const days = [1, 2];
+// calculate number of days for the trip
+const getDays = (start, end) => {
+  return Math.round((end - start)/86400)
+};
 
 const transitTime =  [[23, 34, 40, 15], [15]]; //total transit time between attractions as in minutes (will fetch from google direction API)
 let itineraries = [];
@@ -42,7 +45,7 @@ for (let i = 0 ; i < data.length ; i++) {
 }
 
 // K refers to number of days
-const cluster = kmeans.clusterize(vectors, {k: days.length}, (err,res) => {
+const cluster = kmeans.clusterize(vectors, {k: getDays(1577404800, 1577577540)}, (err,res) => {
   if (err) console.error(err);
   else {
     // console.log('%o',res);
@@ -90,6 +93,5 @@ const getSchedule = (day) => {
   
   return schedule;
 }
-
 console.log('FIRST DAY', getSchedule(itineraries[0]))
 console.log('SECOND DAY', getSchedule(itineraries[1]))
