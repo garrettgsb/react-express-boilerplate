@@ -7,6 +7,15 @@ export const Trip = () => {
   const id:string = location.pathname.slice(location.pathname.lastIndexOf('/') + 1);
   const [attractions, setAttractions] = useState<Array<any>>([]);
 
+  const checkItineraryExists = (attr:Array<any>) => {
+    for (let i = 0; i < attr.length; i++) {
+      if (attr[i].start_time === null || attr[i].end_time === null) {
+        return <AttractionList attractions={attractions} />;
+      }
+    }
+    return <Itinerary id={id} />;
+  };
+
   useEffect(() => {
     Promise.all([
       axios.get(`/api/trips/${id}`)
@@ -16,7 +25,7 @@ export const Trip = () => {
     })
   }, [])
 
-  return(
-    <AttractionList attractions={attractions} />
+  return (
+    <div>{checkItineraryExists(attractions)}</div>
   )
 }
