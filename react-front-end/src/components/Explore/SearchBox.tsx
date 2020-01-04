@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
-const GOOGLE_KEY = process.env.GOOGLE_API_KEY;
 
 const Input = styled.input`
   margin: 0px auto;
@@ -67,6 +66,7 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
     .then((res) => {
       console.log(res);
     })
+
   };
 
   //API call for city
