@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import { CityList } from './CityList';
-import { AttractionList } from './AttractionList';
+import { Trip } from './Trip';
 import axios from 'axios';
 
 export const TripsIndex = () => {
@@ -21,7 +21,7 @@ export const TripsIndex = () => {
     <Router>
       <Switch>
         <Route exact path='/trips'><CityList cities={trips} /></Route>
-        <Route exact path='/trips/:id'><AttractionList /></Route>
+        <Route exact path='/trips/:id'><Trip /></Route>
       </Switch>
     </Router>
 
