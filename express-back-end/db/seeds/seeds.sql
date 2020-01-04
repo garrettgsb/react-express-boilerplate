@@ -28,7 +28,7 @@ INSERT INTO attractions (
 INSERT INTO itineraries (
   city, city_img, trip_start, trip_end
 ) VALUES (
-  'Vancouver', 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg', 1577404800, 1577491200
+  'Vancouver', 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg', 1577404800, 1577577540
 ), (
   'Seattle', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Seattle_Kerry_Park_Skyline.jpg/1200px-Seattle_Kerry_Park_Skyline.jpg', 1585958400, 1586476800
 );
