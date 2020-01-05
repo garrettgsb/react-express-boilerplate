@@ -48,7 +48,7 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
 
   handleInputChange = (e) => {
     setSearch(e.target.value)
-    console.log(e.target.value)
+    // console.log(e.target.value)
     axios.defaults.baseURL = 'http://localhost:8081';
     axios.get(`api/cities`, {
       params: {
@@ -67,6 +67,8 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
     .then((res) => {
       console.log(res);
     })
+
+    
 
   };
 

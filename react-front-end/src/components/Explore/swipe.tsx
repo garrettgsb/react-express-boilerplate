@@ -1,7 +1,8 @@
-import React, { useState, FC, Fragment } from 'react'
+import React, { useState, FC, Fragment, useEffect } from 'react'
 import { useSprings, useSpring, animated, interpolate } from 'react-spring'
 import { useGesture, useScroll } from 'react-use-gesture'
 import styled from 'styled-components';
+import Axios from 'axios';
 // import './styles.css'
 
 
@@ -106,6 +107,13 @@ export const Swipe: FC<SwipeProps> = () => {
     'https://upload.wikimedia.org/wikipedia/en/d/de/RWS_Tarot_01_Magician.jpg'
   ]
   
+
+  useEffect(() => {
+  
+    // Axios.get()
+  },[]);
+  
+
   const bind = useScroll(event => {
     set({
       transform: `perspective(500px) rotateY(${
@@ -130,7 +138,6 @@ export const Swipe: FC<SwipeProps> = () => {
                   backgroundImage: `url(${card})`
                 }}
               />
-
             </Card>
           ))}
         </div>
