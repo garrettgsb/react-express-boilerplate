@@ -21,6 +21,7 @@ const Input = styled.input`
 
 const DatePick = styled.div`
   margin: 5px auto;
+  display: inline-block;
   // width: 100px;
 `;
 
@@ -58,9 +59,9 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
 
 
   handleSubmit = () => {
-    console.log(search);
-    console.log(JSON.stringify(startDate));
-    console.log(endDate);
+    // console.log(search);
+    // console.log(JSON.stringify(startDate));
+    // console.log(endDate);
     axios.defaults.baseURL = 'http://localhost:8081';
     axios.post(`/explore/city/${search},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`)
     .then((res) => {
@@ -68,14 +69,6 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
     })
 
   };
-
-  //API call for city
-  // axios.defaults.baseURL = 'http://localhost:8081';
-  // axios.get(`api/cities/${e.target.value}`)
-  // .then((res) => {
-  //   console.log(res)
-  // });
-  
 
   return (
     <Fragment>

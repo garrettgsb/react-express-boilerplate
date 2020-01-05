@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const GOOGLE_KEY = process.env.GOOGLE_API_KEY;
+const FOURSQUARE_KEY = process.env.FOURSQUARE_API_KEY;
+const FOURSQUARE_SECRET = process.env.FOURSQUARE_SECRET_KEY;
 const axios = require('axios');
 
 module.exports = (db) => {
@@ -36,6 +38,15 @@ module.exports = (db) => {
       `,[city, cityImg, startTime, endTime]
     )
   });
+
+  router.get('explore/attractions', async (req,res) => {
+
+    await axios.get(`https://api.foursquare.com/v2/venues/explore?near=sydney?&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+    .then(results => {
+      // console.log(results)
+      return results;
+    })
+  })
   return router;
 }
 
