@@ -1,20 +1,11 @@
 const router = require("express").Router();
-const bcrypt = require('bcrypt');
 
 module.exports = (db) => {
 
   router.post("/login/:emailpassword", (req, res) => {
 
-    console.log('server received post req:', req.params);
     const email = req.params.emailpassword.split(',')[0];
-    console.log('server res for email:', email);
     const password = req.params.emailpassword.split(',')[1];
-    console.log('server res for password:', password);
-
-    // let data = [];
-    // Reflect.ownKeys(req.body).forEach(key => {
-    //   data = JSON.parse(key);
-    // })
 
     // check if use exist with given username and password
     const login = function (email, password) {
@@ -23,7 +14,6 @@ module.exports = (db) => {
         WHERE email = $1 AND password = $2;
       `, [email, password])
         .then(res => {
-          console.log('Check if user existed in database with correct password:', res.rows[0])
           const user = res.rows[0];
           if (user) {
             return user;
@@ -36,12 +26,9 @@ module.exports = (db) => {
     // login(data.email, data.password)
     login(email, password)
       .then(user => {
-        console.log('test1:', user)
         if (user === null) {
-          console.log('test2:', user)
           res.send({ error: "Access Denied! Double check your email or passport" })
         } else {
-          console.log('test3:', user.id)
           req.session.userId = user.id;
           res.send({
             user: {
@@ -52,8 +39,6 @@ module.exports = (db) => {
               facebook: user.facebook
             }
           })
-          // res.json(user.id);
-          // return res.redirect('/explore')
         }
       })
       .catch(err => console.log(err));
