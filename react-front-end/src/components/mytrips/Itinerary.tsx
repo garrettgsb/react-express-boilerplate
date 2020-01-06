@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { ItineraryHeader } from './ItineraryHeader';
 
 type PropTypes = { id: string, attractions: Array<any> }

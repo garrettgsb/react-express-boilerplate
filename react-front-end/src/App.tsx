@@ -24,7 +24,7 @@ const NavDiv = styled.nav`
   bottom: 0px;
   width: 99%;
   z-index: 999;
-  background: #fff;
+  background: #F4F4F9;
   border: 1px solid #000;
   margin: 1px 1px 0px 1px;
 `;

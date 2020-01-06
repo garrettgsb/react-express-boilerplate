@@ -1,21 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
+import add from '../../images/add-contact.svg';
+import edit from '../../images/edit.png';
+import {Day} from './Day';
+
+const Days = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 60%;
+`
 
 const Header = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 70px;
-  width: 100%;
+  padding: 10px;
+  margin: 0px;
+`
+
+const Action = styled.img`
+  width: 40px;
+  margin-right: 5px;
+  margin-left: 5px;
 `
 
 export const ItineraryHeader = () => {
   return (
     <Header>
-      <p>1</p>
-      <p>2</p>
+      <Days>
+        <Day number={1} />
+        <Day number={2} />
+        <Day number={3} />
+      </Days>
 
-      <p>3</p>
+      <div>
+        <Action src={add} />
+        <Action src={edit} />
+      </div>
 
     </Header>
   )
