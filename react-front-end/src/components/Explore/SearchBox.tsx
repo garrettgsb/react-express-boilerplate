@@ -19,7 +19,9 @@ const Input = styled.input`
   width: 300px;
   color: black;
 `;
-
+const Suggestion = styled.p`
+  color: red;
+`
 const DatePick = styled.div`
   margin: 5px auto;
   display: inline-block;
@@ -44,6 +46,9 @@ interface SearchObj {
   results: Array<any>
 };
 
+interface SearchData {
+  prediction: any
+}
 export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) => {
   
   //user city input
@@ -53,7 +58,7 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const history = useHistory()
-
+  
   handleInputChange = (e) => {
     const city = e.target.value
     axios.defaults.baseURL = 'http://localhost:8081';
@@ -63,39 +68,43 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
       }
     })
     .then(res => {
-      console.log(res)
-      console.log(city);
-      setSearch({ query: city, results: res.data.predictions.description })
+      console.log(res.data.predictions)
+      let result: Array<any>
+      let suggestion: Array<any>
+      result = res.data.predictions
+      suggestion =[];
+      result.map(each => {
+        suggestion.push(each.description.split(',')[0])
+        console.log(suggestion)
+      })
+      setSearch({ query: city, results: suggestion })
     }) 
   };
 
 
   handleSubmit = () => {
     console.log(search);
-    // console.log(JSON.stringify(startDate));
-    // console.log(endDate);
     axios.defaults.baseURL = 'http://localhost:8081';
     axios.post(`/explore/city/${search.query},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`)
     .then(() => {
       history.push(`/explore/:${search.query}`);
     })
 
-
-
   };
 
   return (
     <Fragment>
       <div className="SearchBar">
-        <label className="search-label" htmlFor="search-input">
-          <Input
-              type="text"
-              id="search-input"
-              placeholder="Please enter your destination"
-              onChange ={handleInputChange}
-              value = {search.query}
-          />
-        </label>
+          <form>
+            <Input
+                type="text"
+                id="search-input"
+                placeholder="Please enter your destination"
+                onChange ={handleInputChange}
+                value = {search.query}
+            />
+            <Suggestion>{search.results}</Suggestion>
+          </form>
       </div>
       <DatePick>
         <div>
@@ -126,6 +135,7 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
         </div>  
       </DatePick>
       <Button onClick={handleSubmit}>Search</Button>
+
     </Fragment>
   );
 };
