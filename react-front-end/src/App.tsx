@@ -4,6 +4,7 @@ import './App.css';
 import { TripsIndex } from './components/mytrips/index';
 import styled from 'styled-components';
 import { LoginInForm } from './components/auth/LoginInForm';
+import { Profile } from './components/profile/profile';
 
 const NavList = styled.ul`
   list-style-type: none;
@@ -13,7 +14,7 @@ const NavList = styled.ul`
   padding-left: 0px;
 `;
 
-import { Explore } from "./components/Explore";
+import { Explore } from "./components/explore";
 const NavItem = styled(NavLink)`
   text-decoration: none;
   color: #000;
@@ -52,40 +53,44 @@ export default function App() {
   //   }
 
   // render() {
-    // return (
-    //   <div className="App">
-    //     <h1>{ this.state.message }</h1>
-    //     <button onClick={this.fetchData} >
-    //       Fetch Data
-    //     </button>        
-    //   </div>
-    // );
+  // return (
+  //   <div className="App">
+  //     <h1>{ this.state.message }</h1>
+  //     <button onClick={this.fetchData} >
+  //       Fetch Data
+  //     </button>        
+  //   </div>
+  // );
 
   return (
     <Router>
-    
+
       <NavDiv>
         <NavList>
-          <li><NavItem to='/explore' activeStyle={{fontWeight: 'bold'}}>Explore</NavItem></li>
-          <li><NavItem to='/trips' activeStyle={{fontWeight: 'bold'}}>My Trips</NavItem></li>
-          <li><NavItem to='/profile' activeStyle={{fontWeight: 'bold'}}>Profile</NavItem></li>
+          <li><NavItem to='/explore' activeStyle={{ fontWeight: 'bold' }}>Explore</NavItem></li>
+          <li><NavItem to='/trips' activeStyle={{ fontWeight: 'bold' }}>My Trips</NavItem></li>
+          <li><NavItem to='/profile' activeStyle={{ fontWeight: 'bold' }}>Profile</NavItem></li>
         </NavList>
       </NavDiv>
 
       <Switch>
-        <Route path='/login'>
+        <Route exact path='/'>
           <LoginInForm />
         </Route>
         <Route path='/explore'>
-          <Explore 
-          city='Van'
-          topRecommended="Vancouver"
-          selected=''
+          <Explore
+            city='Van'
+            topRecommended="Vancouver"
+            selected=''
           // handleChange={e => e.target.value}
-        />
+          />
         </Route>
         <Route exact path='/trips'>
           <TripsIndex />
+        </Route>
+
+        <Route path='/profile'>
+          <Profile />
         </Route>
       </Switch>
     </Router>
