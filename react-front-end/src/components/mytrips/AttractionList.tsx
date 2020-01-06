@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Attraction } from './Attraction';
 import add from '../../images/add-contact.svg';
@@ -13,6 +12,7 @@ const Attractions = styled.ul`
 const AttractionItem = styled.li`
   text-decoration: none;
   list-style-type: none;
+  padding: 25px;
 `;
 
 const Title = styled.h1`
@@ -31,19 +31,9 @@ const Header = styled.header`
   padding-left: 10%;
 `;
 
+type PropTypes = { attractions: Array<any> }
 
-export const AttractionList = () => {
-  const id = location.pathname.slice(location.pathname.lastIndexOf('/') + 1);
-  const [attractions, setAttractions] = useState<Array<any>>([]);
-
-  useEffect(() => {
-    Promise.all([
-      axios.get(`/api/trips/${id}`)
-    ])
-    .then((res) => {
-      setAttractions(res[0].data);
-    })
-  }, [])
+export const AttractionList = ({attractions}: PropTypes) => {
 
   return (
     <>
