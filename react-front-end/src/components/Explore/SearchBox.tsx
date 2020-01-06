@@ -1,11 +1,11 @@
 import React, {FC, useState, Fragment} from "react";
+import { Redirect, useHistory} from "react-router-dom";
 import styled from 'styled-components';
 import axios from "axios";
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
-const GOOGLE_KEY = process.env.GOOGLE_API_KEY;
 
 const Input = styled.input`
   margin: 0px auto;
@@ -19,9 +19,12 @@ const Input = styled.input`
   width: 300px;
   color: black;
 `;
-
+const Suggestion = styled.p`
+  color: red;
+`
 const DatePick = styled.div`
   margin: 5px auto;
+  display: inline-block;
   // width: 100px;
 `;
 
@@ -35,60 +38,73 @@ interface SearchProps {
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selected?: string | null,
   date?: Date | null
+  // value?: string | number | string[] | undefined
 };
 
+interface SearchObj {
+  query: string | number | string[] | undefined,
+  results: Array<any>
+};
+
+interface SearchData {
+  prediction: any
+}
 export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) => {
   
   //user city input
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState<SearchObj>({ query: '', results: [] });
 
   //user date input
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-
+  const history = useHistory()
+  
   handleInputChange = (e) => {
-    setSearch(e.target.value)
-    console.log(e.target.value)
+    const city = e.target.value
     axios.defaults.baseURL = 'http://localhost:8081';
     axios.get(`api/cities`, {
       params: {
         city: e.target.value
       }
     })
+    .then(res => {
+      console.log(res.data.predictions)
+      let result: Array<any>
+      let suggestion: Array<any>
+      result = res.data.predictions
+      suggestion =[];
+      result.map(each => {
+        suggestion.push(each.description.split(',')[0])
+        console.log(suggestion)
+      })
+      setSearch({ query: city, results: suggestion })
+    }) 
   };
 
 
   handleSubmit = () => {
     console.log(search);
-    console.log(JSON.stringify(startDate));
-    console.log(endDate);
     axios.defaults.baseURL = 'http://localhost:8081';
-    axios.post(`/explore/city/${search},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`)
-    .then((res) => {
-      console.log(res);
+    axios.post(`/explore/city/${search.query},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`)
+    .then(() => {
+      history.push(`/explore/:${search.query}`);
     })
-  };
 
-  //API call for city
-  // axios.defaults.baseURL = 'http://localhost:8081';
-  // axios.get(`api/cities/${e.target.value}`)
-  // .then((res) => {
-  //   console.log(res)
-  // });
-  
+  };
 
   return (
     <Fragment>
       <div className="SearchBar">
-        <label className="search-label" htmlFor="search-input">
-          <Input
-              type="text"
-              id="search-input"
-              placeholder="Please enter your destination"
-              onChange ={handleInputChange}
-              value = {search}
-          />
-        </label>
+          <form>
+            <Input
+                type="text"
+                id="search-input"
+                placeholder="Please enter your destination"
+                onChange ={handleInputChange}
+                value = {search.query}
+            />
+            <Suggestion>{search.results}</Suggestion>
+          </form>
       </div>
       <DatePick>
         <div>
@@ -119,6 +135,7 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
         </div>  
       </DatePick>
       <Button onClick={handleSubmit}>Search</Button>
+
     </Fragment>
   );
 };
