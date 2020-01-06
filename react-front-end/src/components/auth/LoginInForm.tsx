@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { AuthForm, Input, Button } from "./Auth.components";
-// import { localAuthenticate } from "./Auth.api";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
 
@@ -31,31 +30,13 @@ export const LoginInForm = (data: Credentials) => {
 
   const login = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // try {
-    // await localAuthenticate({ email, password })
-    // console.log('>>>', await localAuthenticate({ email, password }))
-    // } catch (err) {
-    //   return err
-    // }
-    // await Axios({
-    //   method: "post",
-    //   url: "/login",
-    //   params: {
-    //     email: JSON.stringify(email),
-    //     password: JSON.stringify(password)
-    // }
+
     Axios.post(`/login/${email},${password}`)
       .then(res => {
-        console.log('res after axios req:', res.data)
         if (res.data.error) {
-          console.log('Login Error:', res.data.error);
           return setError(res.data.error);
         } else {
-          console.log('Login User:', res.data.user);
-
           setUser(res.data.user)
-          // const user = new Router(data as BrowserRouterProps)
-          // console.log(window.history)
         }
       }).catch(err => console.log(err))
   };
