@@ -10,9 +10,21 @@ import moment from 'moment';
 const Timeslot = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin-bottom: 5px;
-  line-height: 100%;
+  align-items: center;
+`
+
+const ContentDiv = styled.div`
+  width: 75%;
+  text-align: center;
+`
+
+const IconDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  align-items: center;
 `
 
 const Icon = styled.img`
@@ -38,11 +50,11 @@ export const ItineraryBody = ({timeslots}: PropTypes) => {
     const end = moment.unix(slot.end_time);
 
     if (slot.attraction_id === null && slot.travel_mode == 'WALK') {
-      return <Timeslot key={slot.id}>{getIcon('walk')}{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('walk')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</ContentDiv></Timeslot>
     } else if (slot.attraction_id === null && slot.travel_mode == 'BUS') {
-      return <Timeslot key={slot.id}>{getIcon('bus')}{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('bus')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</ContentDiv></Timeslot>
     } else {
-      return <Timeslot key={slot.id}>{getIcon('attraction')}{moment.unix(slot.start_time).utc().format('hh:mm a')}<Attraction key={slot.id} name={slot.name} img={slot.photo} /></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}{moment.unix(slot.start_time).utc().format('hh:mm a')}</IconDiv><ContentDiv><Attraction key={slot.id} name={slot.name} img={slot.photo} /></ContentDiv></Timeslot>
     }
   };
 
