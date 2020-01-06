@@ -46,9 +46,6 @@ interface SearchObj {
   results: Array<any>
 };
 
-interface SearchData {
-  prediction: any
-}
 export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) => {
   
   //user city input

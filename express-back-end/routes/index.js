@@ -16,9 +16,9 @@ routes.get("/explore", (req, res) => {
   res.send("Explore Page");
 });
 
-routes.get("/explore/:city", (req, res) => {
-  res.send(`${req.params.city} Page`);
-});
+// routes.get("/explore/:city", (req, res) => {
+//   res.send(`${req.params.city} Page`);
+// });
 
 routes.get("/trips", (req, res) => {
   res.send("Trips Page");
