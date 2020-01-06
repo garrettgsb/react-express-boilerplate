@@ -15,10 +15,10 @@ module.exports = (db) => {
   router.get('/:id', (req, res) => {
     db.query(
       `
-      SELECT * FROM attractions
-      JOIN timeslots ON attractions.id = timeslots.attraction_id
-      JOIN itineraries ON timeslots.itinerary_id = itineraries.id
+      SELECT *, timeslots.id AS id FROM timeslots
+      FULL OUTER JOIN attractions ON attraction_id = attractions.id
       WHERE itinerary_id = $1
+      ORDER BY start_time
       ;
       `, [req.params.id]
     )
