@@ -17,7 +17,7 @@ export const Explore: React.FC<ExploreProps> = () => {
         <Switch>
           <Route exact path='/explore'><SearchBar/></Route>
           <DestRec city="Van" topRecommended="Vancouver"/>
-          <Route exact path='/explore/:city' component={Swipe}><Swipe/></Route>
+          {/* <Route exact path='/explore/:city' component={Swipe}><Swipe/></Route> */}
         </Switch>
 
       </Router>
