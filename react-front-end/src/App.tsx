@@ -73,7 +73,7 @@ export default function App() {
       </NavDiv>
 
       <Switch>
-        <Route path='/login'>
+        <Route exact path='/'>
           <LoginInForm />
         </Route>
         <Route path='/explore'>
