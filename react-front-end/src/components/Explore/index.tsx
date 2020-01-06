@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import styled from 'styled-components';
 
 import { SearchBar } from "./SearchBox";
@@ -12,10 +13,13 @@ type ExploreProps = {
 
 export const Explore: React.FC<ExploreProps> = () => {
     return (
-      <Fragment>
-        <SearchBar/>
-        <DestRec city="Van" topRecommended="Vancouver"/>
-        <Swipe/>
-      </Fragment>
+      <Router>
+        <Switch>
+          <Route exact path='/explore'><SearchBar/></Route>
+          <DestRec city="Van" topRecommended="Vancouver"/>
+          <Route exact path='/explore/:city' component={Swipe}><Swipe/></Route>
+        </Switch>
+
+      </Router>
     )
 }
