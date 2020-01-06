@@ -12,6 +12,7 @@ const Attractions = styled.ul`
 const AttractionItem = styled.li`
   text-decoration: none;
   list-style-type: none;
+  padding: 25px;
 `;
 
 const Title = styled.h1`
