@@ -11,7 +11,6 @@ const Name = styled.h2`
 export const Attraction = ({name, img}: PropTypes) => {
   const Container = styled.div`
     padding: 10px;
-    margin: 25px;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${img});
     background-size: 100%;
   `;

@@ -17,6 +17,7 @@ module.exports = (db) => {
       `
       SELECT *, timeslots.id AS id FROM timeslots
       FULL OUTER JOIN attractions ON attraction_id = attractions.id
+      FULL OUTER JOIN itineraries ON itinerary_id = itineraries.id
       WHERE itinerary_id = $1
       ORDER BY start_time
       ;
