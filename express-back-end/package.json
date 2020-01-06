@@ -20,9 +20,10 @@
     "express": "^4.16.4",
     "morgan": "^1.9.1",
     "node-kmeans": "^1.1.9",
-    "nodemon": "^1.18.7",
+    "nodemon": "^1.19.4",
     "pg": "^7.15.1",
     "pg-native": "3.0.0",
-    "proxy-addr": "^2.0.5"
+    "proxy-addr": "^2.0.5",
+    "request-promise-native": "^1.0.8"
   }
 }
