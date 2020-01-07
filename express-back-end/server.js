@@ -19,7 +19,8 @@ const trips = require('./routes/trips');
 const user = require('./routes/user');
 
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
+App.use(BodyParser.urlencoded({ extended: true }));
+App.use(BodyParser.json())
 App.use(Express.static('public'));
 App.use(morgan('dev'));
 App.use(cookieParser({
