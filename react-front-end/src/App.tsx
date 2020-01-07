@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-do
 import './App.css';
 import { TripsIndex } from './components/mytrips/index';
 import styled from 'styled-components';
+import useVisualMode from "./hooks/useVisualMode";
 import { LoginInForm } from './components/auth/LoginInForm';
+import { SignUpForm } from './components/auth/SignUpForm';
 import { Profile } from './components/profile/profile';
 
 const NavList = styled.ul`
@@ -28,6 +30,18 @@ const NavDiv = styled.nav`
   background: #fff;
   border: 1px solid #000;
   margin: 1px 1px 0px 1px;
+`;
+
+const Wrapper = styled.div`
+  text-align: center;
+`;
+
+const Button = styled.button`
+  margin: 20px;
+  padding: 10px 40px
+  border: none;
+  background-color: white;
+  border-bottom: 2px solid #00C3AB;
 `;
 
 export default function App() {
@@ -61,6 +75,14 @@ export default function App() {
   //     </button>        
   //   </div>
   // );
+  // const INITIALIZE = 'INITIALIZE';
+  const LOGIN = 'LOGIN';
+  const SIGNUP = 'SIGNUP';
+
+  const { mode, transition } = useVisualMode(
+    LOGIN
+    // INITIALIZE
+  );
 
   return (
     <Router>
@@ -75,7 +97,13 @@ export default function App() {
 
       <Switch>
         <Route exact path='/'>
-          <LoginInForm />
+          <Wrapper>
+            <Button onClick={() => transition(LOGIN)}>Login In</Button>
+            <Button onClick={() => transition(SIGNUP)}>Sign Up</Button>
+          </Wrapper>
+          {mode === LOGIN && <LoginInForm />}
+          {mode === SIGNUP && <SignUpForm />}
+
         </Route>
         <Route path='/explore'>
           <Explore
