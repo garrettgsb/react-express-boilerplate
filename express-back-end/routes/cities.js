@@ -50,15 +50,15 @@ module.exports = (db) => {
       // res.json(attractionList);
       console.log('first api');
       console.log(attractionList)
-      // attractionList.map(attraction => {
-      //   // console.log('attraction >>>',attraction)
-      //   axios.get(`https://api.foursquare.com/v2/venues/${attraction.venue.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
-      //   .then(results => {
-      //     console.log('second api');
-      //     photoList.push(results.data.response.photos.items[0]);
-      //     console.log(photoList)
-      //   })
-      // })
+      attractionList.map(attraction => {
+        // console.log('attraction >>>',attraction)
+        axios.get(`https://api.foursquare.com/v2/venues/${attraction.venue.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+        .then(results => {
+          console.log('second api');
+          photoList.push(results.data.response.photos.items[0]);
+          console.log(photoList)
+        })
+      })
       res.json(attractionList);
     })
   });
