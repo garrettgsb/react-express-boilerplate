@@ -5,7 +5,7 @@ import axios from "axios";
 import PropTypes, { string } from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from 'moment';
+
 
 const Input = styled.input`
   margin: 0px auto;
@@ -19,9 +19,10 @@ const Input = styled.input`
   width: 300px;
   color: black;
 `;
+
 const Suggestion = styled.p`
   color: red;
-`
+`;
 const DatePick = styled.div`
   margin: 5px auto;
   display: inline-block;
@@ -37,8 +38,7 @@ interface SearchProps {
   handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selected?: string | null,
-  date?: Date | null
-  // value?: string | number | string[] | undefined
+  date?: Date | null,
 };
 
 interface SearchObj {
@@ -65,22 +65,18 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
       }
     })
     .then(res => {
-      console.log(res.data.predictions)
-      let result: Array<any>
-      let suggestion: Array<any>
+      let result: Array<any>;
+      let suggestion: Array<any>;
       result = res.data.predictions
       suggestion =[];
       result.map(each => {
         suggestion.push(each.description.split(',')[0])
-        console.log(suggestion)
       })
       setSearch({ query: city, results: suggestion })
     }) 
   };
 
-
   handleSubmit = () => {
-    console.log(search);
     axios.defaults.baseURL = 'http://localhost:8081';
     axios.post(`/explore/city/${search.query},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`)
     .then(() => {

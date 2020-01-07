@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
+    "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "node-kmeans": "^1.1.9",
     "nodemon": "^1.19.4",
