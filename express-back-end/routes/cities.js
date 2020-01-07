@@ -3,6 +3,7 @@ const GOOGLE_KEY = process.env.GOOGLE_API_KEY;
 const FOURSQUARE_KEY = process.env.FOURSQUARE_API_KEY;
 const FOURSQUARE_SECRET = process.env.FOURSQUARE_SECRET_KEY;
 const axios = require('axios');
+const moment = require('moment');
 // const request = require('requestn-promise-native');
 
 module.exports = (db) => {
@@ -68,6 +69,7 @@ module.exports = (db) => {
         return results;
       })
     })
+    res.send(200);
   })
   return router;
 }

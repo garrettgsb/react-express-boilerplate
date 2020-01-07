@@ -5,7 +5,7 @@ import axios from "axios";
 import PropTypes, { string } from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from 'moment';
+
 
 const Input = styled.input`
   margin: 0px auto;
@@ -19,9 +19,10 @@ const Input = styled.input`
   width: 300px;
   color: black;
 `;
+
 const Suggestion = styled.p`
   color: red;
-`
+`;
 const DatePick = styled.div`
   margin: 5px auto;
   display: inline-block;
@@ -37,8 +38,8 @@ interface SearchProps {
   handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selected?: string | null,
-  date?: Date | null
-  // value?: string | number | string[] | undefined
+  date?: Date | null,
+  // sendData: (data: string | number | string[] | undefined) => void
 };
 
 interface SearchObj {
@@ -78,9 +79,10 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
     }) 
   };
 
-
   handleSubmit = () => {
     console.log(search);
+    // sendData(search.query)
+    // console.log('check sendData >>>>',sendData(search.query));
     axios.defaults.baseURL = 'http://localhost:8081';
     axios.post(`/explore/city/${search.query},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`)
     .then(() => {
