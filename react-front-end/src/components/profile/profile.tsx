@@ -28,6 +28,12 @@ export const Profile = () => {
   }, [])
 
   const logout = () => {
+    Axios.post(`/logout`)
+      .then((res) => {
+        console.log(res.data)
+        setUser(res.data)
+      })
+      .catch(err => console.log(err));
   }
 
   return (
