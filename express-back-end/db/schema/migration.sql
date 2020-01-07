@@ -19,7 +19,8 @@ CREATE TABLE attractions (
   close_time TIME,
   visit_duration INTEGER,
   photo varchar(255),
-  location varchar(255)
+  location varchar(255),
+  submitted_by INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE itineraries (
