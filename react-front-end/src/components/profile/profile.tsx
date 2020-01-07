@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from 'axios';
 import { UserInfo, MainInfo, Button } from "./profile.components";
 import { Redirect } from "react-router-dom";
+import Avatar from 'avataaars';
 
 interface User {
   id?: number;
@@ -33,6 +34,18 @@ export const Profile = () => {
     !user ? <Redirect to='/' /> :
       <UserInfo onSubmit={logout}>
         <MainInfo>
+          <Avatar
+            avatarStyle='Circle'
+            topType='LongHairFrida'
+            accessoriesType='Wayfarers'
+            facialHairType='Blank'
+            clotheType='Overall'
+            clotheColor='White'
+            eyeType='Surprised'
+            eyebrowType='UpDown'
+            mouthType='Smile'
+            skinColor='Pale'
+          />
           <p>Hello! {user.first_name}</p>
           <p>{user.email}</p>
           <p>{user.facebook}</p>
