@@ -59,7 +59,7 @@ module.exports = (db) => {
       //     console.log(photoList)
       //   })
       // })
-      res.json([attractionList, photoList]);
+      res.json(attractionList);
     })
   });
 

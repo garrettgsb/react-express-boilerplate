@@ -11,6 +11,16 @@ interface SwipeProps {
   // i?:number
   // useGesture: (e: React.SyntheticEvent) => void,
   // useSprings: (e: React.SyntheticEvent<EventTarget>) => void
+};
+interface AttractionsObject {
+  reasons: string,
+  venue: VenueObject,
+};
+
+interface VenueObject {
+  id: string,
+  name: string,
+  location: object
 }
 
 const Swiping = styled.div`
@@ -30,49 +40,41 @@ const Card =styled.div`
   background-position: center center;
 `;
 export const Swipe: FC<SwipeProps> = () => {
-
-  let result: Array<any>;
+  
+  // let result: Array<any>;
   // let result1: Array<any>;
-  let attractions: Array<any>;
+  // let attractions: AObject[];
   // let photos: Array<any>;
-  attractions = [];
-  result = [];
+  // attractions = [];
+  // result = [];
   // result1 = [];
 
+  const [attractions, setAttractitions] = useState<AttractionsObject[]>([]);
   const [style, set] = useSpring(() => ({
     transform: "perspective(500px) rotateY(0deg)"
   }));
   
-  // const cards = [
-  //   'https://upload.wikimedia.org/wikipedia/en/f/f5/RWS_Tarot_08_Strength.jpg',
-  //   'https://upload.wikimedia.org/wikipedia/en/5/53/RWS_Tarot_16_Tower.jpg',
-  //   'https://upload.wikimedia.org/wikipedia/en/9/9b/RWS_Tarot_07_Chariot.jpg',
-  //   'https://upload.wikimedia.org/wikipedia/en/d/db/RWS_Tarot_06_Lovers.jpg',
-  //   'https://upload.wikimedia.org/wikipedia/en/thumb/8/88/RWS_Tarot_02_High_Priestess.jpg/690px-RWS_Tarot_02_High_Priestess.jpg',
-  //   'https://upload.wikimedia.org/wikipedia/en/d/de/RWS_Tarot_01_Magician.jpg'
-  // ]
   useEffect(() => {
 
     axios.defaults.baseURL = 'http://localhost:8081';
     axios.get(`api/attractions`)
     .then(res => {
-      console.log('check res received', res)
-      result = res.data[0]
-      result.map(data => {
-        attractions.push({
-          id: data.venue.id,
-          name: data.venue.name,
-        })
-      });
+      console.log('check res received', res.data)
+      setAttractitions(res.data)
+      // result.map(data => {
+      //   attractions.push({
+      //     id: data.venue.id,
+      //     name: data.venue.name,
+      //   })
+      //   // console.log(attractions)
+      // });
       // result1 = res.data[1]
       // console.log('attraction >>>',result);
       // console.log('photo >>>', result1)
     });
   },[])
-
-  console.log('test',result)
-  
-
+  console.log('list', attractions)
+  // Object.keys(attractions).map(data => console.log(data.venue));
   const bind = useScroll(event => {
     set({
       transform: `perspective(500px) rotateY(${
@@ -80,23 +82,22 @@ export const Swipe: FC<SwipeProps> = () => {
       }deg)`
     });
   });
-  
+
   return (
     <Fragment>
-      <h2>check</h2>
       <Swiping>
-
         <div className="container" {...bind()}>
           {attractions.map(attraction => (
             <Card>
+              {/* <p>{attraction.venue.name}</p> */}
               <animated.div
-                key={attraction}
+                key={attraction.venue.name}
                 className="card"
                 style={{
                   ...style,
                   backgroundImage: ``
                 }}
-              />
+              >{attraction.venue.name}</animated.div>
             </Card>
           ))}
         </div>

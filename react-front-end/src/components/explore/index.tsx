@@ -9,14 +9,11 @@ type ExploreProps = {
   city: string,
   selected?: string | null,
   topRecommended: string,
-  // sendData: (data: string | null) => void
 };
 
 export const Explore: React.FC<ExploreProps> = () => {
   const [city,setCity] = useState<string | null>('');
-  // const getCity = (data: string | number | string[] | undefined) => {
-  //   setCity(data);
-  // };
+
 
   console.log('check data received >>', city);
     return (
