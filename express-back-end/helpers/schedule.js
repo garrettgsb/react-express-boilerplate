@@ -32,10 +32,6 @@ const data = [
   }
 ];
 
-// calculate number of days for the trip
-const getDays = (start, end) => {
-  return Math.round((end - start)/86400)
-};
 
 const transitTime =  [[23, 34, 40, 15], [15]]; //total transit time between attractions as in minutes (will fetch from google direction API)
 let itineraries = [];
