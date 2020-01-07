@@ -91,16 +91,26 @@ module.exports = (db) => {
       .catch(err => console.log(err));
   })
 
-  // router.get("/profile", (req, res) => {
-  //   res.send('profile page')
+  // router.get("/profile/:userID", (req, res) => {
+  // console.log(req.params)
   // db.query(`
   //   SELECT * FROM users WHERE id = $1;
-  // `, [req.params.id])
-  //   .then(res => {
-  //     console.log(res)
-  //   })
-  //   .catch(err => console.log(err));
-  // });
+  // `, [req.params.userID])
+  router.get("/profile", (req, res) => {
+    db.query(`
+      SELECT * FROM users WHERE id = $1;
+    `, [req.session.userId])
+      .then(result => {
+        // console.log(result.rows[0])
+        res.send(result.rows[0])
+      })
+      .catch(err => console.log(err));
+  });
+
+  router.post("/logout", (req, res) => {
+    req.session.userId = null;
+    res.send({})
+  })
 
   return router;
 }

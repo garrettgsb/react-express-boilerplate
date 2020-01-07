@@ -36,6 +36,7 @@ export const LoginInForm = (data: Credentials) => {
         if (res.data.error) {
           return setError(res.data.error);
         } else {
+          localStorage.setItem('userID', res.data.user.id);
           setUser(res.data.user)
         }
       }).catch(err => console.log(err))
