@@ -23,7 +23,7 @@ INSERT INTO attractions (
   'Earnest Ice Cream', 3.7, 49.26896525441082, -123.10261255924644
 ), (
   'David Lam Park', 4.2, 49.2724665529135, -123.12386556302295
-);
+), ('Space Needle', 5, 47.620422, -122.349358);
 
 INSERT INTO itineraries (
   city, city_img, trip_start, trip_end
@@ -48,7 +48,7 @@ INSERT INTO timeslots (
 ), (
   1577523600, 1577527200, 1, 4, NULL
 ), (
-  1577527200, 1577529900, 1, 4, 'BUS'
+  1577527200, 1577529900, 1, NULL, 'BUS'
 ),(
   1577529900, 1577533500, 1, 5, NULL
 ), (
@@ -59,6 +59,8 @@ INSERT INTO timeslots (
   1577539500, 1577543460, 1, NULL, 'BUS'
 ), (
   1577543460, 1577547060, 1, 7, NULL
+), (
+  NULL, NULL, 2, 8, NULL
 );
 
 INSERT INTO user_itinerary (

@@ -15,6 +15,8 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.1.2",
     "react-scripts": "2.1.8",
+    "react-spring": "^9.0.0-beta.34",
+    "react-use-gesture": "^6.0.14",
     "styled-components": "^4.4.1"
   },
   "scripts": {
