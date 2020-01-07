@@ -16,11 +16,11 @@ const DayNum = styled.div`
   color: #ffffff;
 `
 
-type PropTypes = { number: number}
+type PropTypes = { number:string, selectDay:any, key:number, id:string }
 
-export const Day = ({number}: PropTypes) => {
+export const Day = ({number, selectDay}: PropTypes) => {
   return (
-    <ItineraryDay>
+    <ItineraryDay onClick={selectDay}>
       <div>Day</div>
       <DayNum>{number}</DayNum>
     </ItineraryDay>

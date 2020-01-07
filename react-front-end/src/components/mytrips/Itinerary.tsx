@@ -8,20 +8,38 @@ const getDays = (start:number, end:number) => {
   return Math.round((end - start)/86400)
 };
 
-type PropTypes = { id: string, timeslots: Array<{trip_start:number, trip_end:number}> }
+type PropTypes = { id: string, timeslots: Array<{start_time:number, trip_start:number, trip_end:number}> }
 
 export const Itinerary = ({id, timeslots}: PropTypes) => {
+
+  const [selectedDay, setSelectedDay] = useState<string>('1');
+
+  let schedule:any = {};
   
-  useEffect(() => {
-    if (timeslots.length > 0) {
-      console.log('length', getDays(timeslots[0].trip_start, timeslots[0].trip_end))
+  const getSchedule = (sched:any, slots:Array<{start_time:number}>) => {
+    for (let i = 0; i < slots.length; i++) {
+      let date = moment.unix(slots[i].start_time).utc().format('MM-DD');
+      if (sched[date]) {
+        sched[date].push(slots[i])
+      } else {
+        sched[date] = [slots[i]]
+      }
     }
-  })
+
+    let counter = 1;
+    for (let day in sched) {
+      sched[counter] = sched[day];
+      delete sched[day];
+      counter += 1;
+    }
+  }
+  
+  getSchedule(schedule, timeslots)
 
   return (
     <>
-    <ItineraryHeader length={length} />
-    <ItineraryBody timeslots={timeslots} />
+    {Object.keys(schedule).length > 0 && <ItineraryHeader length={Object.keys(schedule)} onClick={setSelectedDay} />}
+    {Object.keys(schedule).length > 0 && <ItineraryBody timeslots={schedule[selectedDay]} />}
     </>
   )
 }

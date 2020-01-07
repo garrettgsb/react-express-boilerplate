@@ -25,15 +25,16 @@ const Action = styled.img`
   margin-right: 5px;
   margin-left: 5px;
 `
-type PropTypes = { length: number }
 
-export const ItineraryHeader = ({length}: PropTypes) => {
+type PropTypes = { length: Array<string>, onClick:any }
+
+export const ItineraryHeader = ({length, onClick}: PropTypes) => {
   return (
     <Header>
       <Days>
-        <Day number={1} />
-        <Day number={2} />
-        <Day number={3} />
+        {length.map(num =>
+          <Day key={Number(num)} id={num} number={num} selectDay={() => onClick(num)} />
+        )}
       </Days>
 
       <div>
