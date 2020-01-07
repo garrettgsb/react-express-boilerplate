@@ -38,7 +38,7 @@ export const Itinerary = ({id, timeslots}: PropTypes) => {
 
   return (
     <>
-    {Object.keys(schedule).length > 0 && <ItineraryHeader length={Object.keys(schedule)} onClick={setSelectedDay} />}
+    {Object.keys(schedule).length > 0 && <ItineraryHeader length={Object.keys(schedule)} onClick={setSelectedDay} selected={selectedDay} />}
     {Object.keys(schedule).length > 0 && <ItineraryBody timeslots={schedule[selectedDay]} />}
     </>
   )
