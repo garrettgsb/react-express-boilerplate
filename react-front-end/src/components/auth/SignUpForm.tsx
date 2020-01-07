@@ -35,7 +35,7 @@ export const SignUpForm = (data: Credentials) => {
 
   const [user, setUser] = useState({} as User);
 
-  const login = (e: React.FormEvent<HTMLFormElement>) => {
+  const signup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     Axios.post(`/signup`, {
@@ -56,7 +56,7 @@ export const SignUpForm = (data: Credentials) => {
 
   return (
     !!user.id ? <Redirect to='/explore' /> :
-      <AuthForm onSubmit={login}>
+      <AuthForm onSubmit={signup}>
         <h1>Sign Up</h1>
         <Input
           placeholder="First Name"
