@@ -4,8 +4,10 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     db.query(
       `
-      SELECT * FROM itineraries;
-      `
+      SELECT * FROM itineraries
+      JOIN user_itinerary on itineraries.id = user_itinerary.itinerary_id
+      WHERE user_itinerary.user_id = $1;
+      `, [req.session.userId]
     )
     .then((response) => {
       res.json(response.rows);
