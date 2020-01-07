@@ -25,8 +25,9 @@ const Action = styled.img`
   margin-right: 5px;
   margin-left: 5px;
 `
+type PropTypes = { length: number }
 
-export const ItineraryHeader = () => {
+export const ItineraryHeader = ({length}: PropTypes) => {
   return (
     <Header>
       <Days>

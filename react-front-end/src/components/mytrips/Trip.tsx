@@ -6,6 +6,7 @@ import { Itinerary } from './Itinerary';
 export const Trip = () => {
   const id:string = location.pathname.slice(location.pathname.lastIndexOf('/') + 1);
   const [timeslots, setTimeslots] = useState<Array<any>>([]);
+  const [schedule, setSchedule] = useState({});
 
   const checkItineraryExists = (attr:Array<any>) => {
     for (let i = 0; i < attr.length; i++) {
@@ -26,6 +27,6 @@ export const Trip = () => {
   }, [])
 
   return (
-    <div>{checkItineraryExists(timeslots)}</div>
+    <>{checkItineraryExists(timeslots)}</>
   )
 }
