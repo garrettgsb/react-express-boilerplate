@@ -45,7 +45,7 @@ export const AttractionList = ({attractions}: PropTypes) => {
     <Attractions>
       {attractions.map(attraction =>
         <AttractionItem>
-          <Attraction name={attraction.name} img={attraction.city_img} />
+          <Attraction name={attraction.name} img={attraction.photo} />
         </AttractionItem>
         )}
     </Attractions>
