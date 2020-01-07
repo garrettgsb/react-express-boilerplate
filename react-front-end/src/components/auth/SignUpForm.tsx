@@ -49,6 +49,7 @@ export const SignUpForm = (data: Credentials) => {
         if (res.data.error) {
           return setError(res.data.error);
         } else {
+          localStorage.setItem('userID', res.data.user);
           setUser(res.data.user)
         }
       }).catch(err => console.log(err))
