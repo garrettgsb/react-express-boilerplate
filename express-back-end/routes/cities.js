@@ -12,29 +12,19 @@ module.exports = (db) => {
 
   let city;
   router.get('/api/cities', async (req, res) => {
-    console.log('check', req.query.city)
     console.log('Getting city name')
     // axios.defaults.baseURL = 'https://maps.googleapis.com';
     
-    axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${req.query.city}&types=geocode&language=fr&key=${GOOGLE_KEY}`, {
-      CancelToken: source.token
-    })
-    .catch(function(thrown) {
-      if (axios.isCancel(thrown)) {
-          console.log('Request canceled', thrown.message);
-      }
-    })
+    axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${req.query.city}&types=geocode&language=fr&key=${GOOGLE_KEY}`)
     .then(results => {
-      // return results;
-      console.log(results.data);
+      // console.log(results.data);
       res.json(results.data);
     });
   });
   
   router.post(`/explore/:${city}/:data`, (req, res) => {
-    console.log('post itinerary successfully');
+    console.log('Post itinerary successfully');
     const data = req.params.data.split(',');
-    console.log(data);
     city = data[0];
     const cityImg = data[1];
     const startTime = data[2];
@@ -50,27 +40,29 @@ module.exports = (db) => {
     res.send(200);
   });
 
-  router.get(`/explore/:${city}`, (req,res) => {
-    console.log('check get to city')
-    db.query(
-      `
-      SELECT * FROM itineraries
-      JOIN timeslots ON attractions.id = timeslots.attraction_id
-      JOIN itineraries ON timeslots.itinerary_id = itineraries.id
-      WHERE itinerary_id = $1
-      ;
-      `, [req.params.id]
-    )
-    .then((response) => {
-      res.json(response.rows);
-      axios.get(`https://api.foursquare.com/v2/venues/explore?near=sydney?&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
-      .then(results => {
-        console.log(results)
-        return results;
-      })
+  router.get(`/api/attractions`, (req,res) => {
+    console.log('>>>>Check get to city')
+    console.log(city);
+    axios.get(`https://api.foursquare.com/v2/venues/explore?near=${city}?&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+    .then(results => {
+      let photoList = [];
+      const attractionList = results.data.response.groups[0].items;
+      // res.json(attractionList);
+      console.log('first api');
+      console.log(attractionList)
+      // attractionList.map(attraction => {
+      //   // console.log('attraction >>>',attraction)
+      //   axios.get(`https://api.foursquare.com/v2/venues/${attraction.venue.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+      //   .then(results => {
+      //     console.log('second api');
+      //     photoList.push(results.data.response.photos.items[0]);
+      //     console.log(photoList)
+      //   })
+      // })
+      res.json([attractionList, photoList]);
     })
-    res.send(200);
-  })
+  });
+
   return router;
 }
 

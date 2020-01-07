@@ -39,7 +39,6 @@ interface SearchProps {
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selected?: string | null,
   date?: Date | null,
-  // sendData: (data: string | number | string[] | undefined) => void
 };
 
 interface SearchObj {
@@ -66,23 +65,18 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
       }
     })
     .then(res => {
-      console.log(res.data.predictions)
-      let result: Array<any>
-      let suggestion: Array<any>
+      let result: Array<any>;
+      let suggestion: Array<any>;
       result = res.data.predictions
       suggestion =[];
       result.map(each => {
         suggestion.push(each.description.split(',')[0])
-        console.log(suggestion)
       })
       setSearch({ query: city, results: suggestion })
     }) 
   };
 
   handleSubmit = () => {
-    console.log(search);
-    // sendData(search.query)
-    // console.log('check sendData >>>>',sendData(search.query));
     axios.defaults.baseURL = 'http://localhost:8081';
     axios.post(`/explore/city/${search.query},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`)
     .then(() => {
