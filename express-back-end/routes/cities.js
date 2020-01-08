@@ -50,27 +50,33 @@ module.exports = (db) => {
       )
       `,[city, cityImg, startTime, endTime]
     )
-    res.send(200);
+    res.sendStatus(200);
   });
 
   router.get(`/api/attractions`, (req,res) => {
     console.log('>>>>Check get to city')
-    console.log(city);
-    axios.get(`https://api.foursquare.com/v2/venues/explore?near=${city}?&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+    axios.get(`https://api.foursquare.com/v2/venues/explore?near=${city}?&limit=2&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
     .then(results => {
       const attractionList = results.data.response.groups[0].items;
       // res.json(attractionList);
-      console.log('first api');
-      for (let i=0; i < 5; i++) {
-        console.log('attraction >>>',attractionList[i].venue.id)
-          axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].venue.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
-          .then(results => {
-          console.log('second api');
-          photoList.push(results.data.response.photos.items[0]);
-          console.log(photoList)
-        })
+      console.log('First api successfully');
+      // console.log(attractionList);
+      photoList = ['https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg'];
+
+      for (let i=0; i <= attractionList.length - 1; i++) {
+        // console.log('attraction >>>',attractionList[i].venue.id)
+          // axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].venue.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+          // .then(results => {
+          // console.log('Second api successfully');
+          // photoList.push(results.data.response.photos.items[0].suffix);
+          // attractionList[i].venue["photo"] = results.data.response.photos.items[0].suffix
+          attractionList[i].venue["photolink"] = photoList[0];
+          // })
       }
-    res.json(attractionList);
+      // return photoList;
+      console.log('test>>>', attractionList)
+      res.send(attractionList);
+      // console.log(res.json([attractionList, photoList]))
     })
   });
 
