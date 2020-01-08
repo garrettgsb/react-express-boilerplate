@@ -14,16 +14,25 @@ interface SwipeProps {
   // useSprings: (e: React.SyntheticEvent<EventTarget>) => void
 };
 interface AttractionsObject {
-  reasons: string,
-  venue: VenueObject,
-};
-
-interface VenueObject {
   id: string,
   name: string,
-  location: object,
-  photolink: string
-}
+  description: string,
+  review: number | null,
+  lat: number,
+  long: number,
+  open_time: number | null,
+  close_time: number | null,
+  visit_duration: number | null,
+  photo: string
+  location: string,
+};
+
+// interface VenueObject {
+//   id: string,
+//   name: string,
+//   location: object,
+//   photolink: string
+// }
 
 const Swiping = styled.div`
   display: flex;
@@ -95,13 +104,13 @@ export const Swipe: FC<SwipeProps> = () => {
             <Card>
               {/* <p>{attraction.venue.name}</p> */}
               <animated.div
-                key={attraction.venue.name}
+                key={attraction.name}
                 className="card"
                 style={{
                   ...style,
-                  backgroundImage: `url(${attraction.venue.photolink})`
+                  backgroundImage: `url(${attraction.photo})`
                 }}
-              >{attraction.venue.name}</animated.div>
+              >{attraction.name}</animated.div>
             </Card>
           ))}
         </div>
