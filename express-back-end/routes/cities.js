@@ -16,8 +16,10 @@ module.exports = (db) => {
     // axios.defaults.baseURL = 'https://maps.googleapis.com';
     
     axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${req.query.city}&types=geocode&language=fr&key=${GOOGLE_KEY}`)
+    //need another axios to google place api to get long & lat to send to
+    //another api for events
     .then(results => {
-      // console.log(results.data);
+      console.log(results.data);
       res.json(results.data);
     });
   });
@@ -45,21 +47,19 @@ module.exports = (db) => {
     console.log(city);
     axios.get(`https://api.foursquare.com/v2/venues/explore?near=${city}?&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
     .then(results => {
-      let photoList = [];
       const attractionList = results.data.response.groups[0].items;
       // res.json(attractionList);
       console.log('first api');
-      console.log(attractionList)
-      attractionList.map(attraction => {
-        // console.log('attraction >>>',attraction)
-        axios.get(`https://api.foursquare.com/v2/venues/${attraction.venue.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
-        .then(results => {
+      for (let i=0; i < 5; i++) {
+        console.log('attraction >>>',attractionList[i].venue.id)
+          axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].venue.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+          .then(results => {
           console.log('second api');
           photoList.push(results.data.response.photos.items[0]);
           console.log(photoList)
         })
-      })
-      res.json(attractionList);
+      }
+    res.json(attractionList);
     })
   });
 
