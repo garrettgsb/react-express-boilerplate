@@ -6,7 +6,6 @@ import PropTypes, { string } from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-
 const Input = styled.input`
   margin: 0px auto;
   margin-top: 30px;
@@ -78,7 +77,10 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
 
   handleSubmit = () => {
     axios.defaults.baseURL = 'http://localhost:8081';
-    axios.post(`/explore/city/${search.query},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`)
+    Promise.all([
+      axios.post(`/explore/city/${search.query},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`),
+      axios.post(`/api/latlong/${search.query}`)
+    ])
     .then(() => {
       history.push(`/explore/:${search.query}`);
     })
