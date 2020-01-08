@@ -1,5 +1,6 @@
 import React from 'react';
 import { Attraction } from './Attraction';
+import { Map } from './Map';
 import location from '../../images/location.svg';
 import walk from '../../images/walk.svg';
 import bus from '../../images/bus.svg';
@@ -45,7 +46,7 @@ type PropTypes = { timeslots: Array<any> }
 
 export const ItineraryBody = ({timeslots}: PropTypes) => {
 
-  const categorizeTimeslot = (slot: {id:number, attraction_id:number, name:string, photo:string, travel_mode:string, start_time:number, end_time:number}) => {
+  const categorizeTimeslot = (slot: {id:number, attraction_id:number, name:string, photo:string, travel_mode:string, start_time:number, end_time:number, lat:number, lng:number}) => {
     const start = moment.unix(slot.start_time);
     const end = moment.unix(slot.end_time);
 
@@ -54,7 +55,7 @@ export const ItineraryBody = ({timeslots}: PropTypes) => {
     } else if (slot.attraction_id === null && slot.travel_mode == 'BUS') {
       return <Timeslot key={slot.id}><IconDiv>{getIcon('bus')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</ContentDiv></Timeslot>
     } else {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}{moment.unix(slot.start_time).utc().format('hh:mm a')}</IconDiv><ContentDiv><Attraction key={slot.id} name={slot.name} img={slot.photo} /></ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}{moment.unix(slot.start_time).utc().format('hh:mm a')}</IconDiv><ContentDiv><Attraction key={slot.id} name={slot.name} img={slot.photo} lat={slot.lat} lng={slot.lng} /></ContentDiv></Timeslot>
     }
   };
 
@@ -63,6 +64,7 @@ export const ItineraryBody = ({timeslots}: PropTypes) => {
     {timeslots.map(slot =>
       categorizeTimeslot(slot)
     )}
+    <Map places={timeslots} />
     </>
   )
 }
