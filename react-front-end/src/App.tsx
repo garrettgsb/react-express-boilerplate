@@ -113,7 +113,7 @@ export default function App() {
           // handleChange={e => e.target.value}
           />
         </Route>
-        <Route exact path='/trips'>
+        <Route path='/trips'>
           <TripsIndex />
         </Route>
 

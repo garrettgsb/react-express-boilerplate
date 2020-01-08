@@ -16,7 +16,6 @@ const Title = styled.h1`
 `
 
 export const CityList = ({cities}: PropTypes) => {
-
   return (
     <>
     <Title>My Trips</Title>
