@@ -50,7 +50,7 @@ export const AttractionList = ({attractions}: PropTypes) => {
         )}
     </Attractions>
 
-    <Button text="Generate" />
+    <Button text="Generate" click={() => console.log('click')} />
     </>
   )
 }

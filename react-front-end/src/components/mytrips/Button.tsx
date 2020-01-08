@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type PropTypes = { text: string }
+type PropTypes = { text: string, click:any }
 
 const Btn = styled.div`
   background: #ffc0cb;
@@ -16,10 +16,10 @@ const Btn = styled.div`
   right: 20px;
 `;
 
-export const Button = ({text}: PropTypes) => {
+export const Button = ({text, click}: PropTypes) => {
 
   return (
-    <Btn>
+    <Btn onClick={click}>
       {text}
     </Btn>
   )
