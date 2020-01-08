@@ -9,6 +9,8 @@ const moment = require('moment');
 module.exports = (db) => {
   const CancelToken = axios.CancelToken;
   const source = CancelToken.source();
+  let lat = null;
+  let long = null;
 
   let city;
   router.get('/api/cities', async (req, res) => {
@@ -23,6 +25,15 @@ module.exports = (db) => {
       res.json(results.data);
     });
   });
+
+  router.post('/api/latlong/:city', (req, res) => {
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.params.city}&key=${GOOGLE_KEY}`)
+    .then(result => {
+      lat = result.data.results[0].geometry.location.lat;
+      long = result.data.results[0].geometry.location.lng;
+    })
+    .then(() => res.send(200))
+  })
   
   router.post(`/explore/:${city}/:data`, (req, res) => {
     console.log('Post itinerary successfully');
