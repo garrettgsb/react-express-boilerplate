@@ -18,13 +18,10 @@ export const TripsIndex = () => {
 
   return (
     <>
-    <Router>
-      <Switch>
-        <Route exact path='/trips'><CityList cities={trips} /></Route>
-        <Route exact path='/trips/:id'><Trip /></Route>
-      </Switch>
-    </Router>
-
+    <Switch>
+      <Route exact path='/trips'><CityList cities={trips} /></Route>
+      <Route exact path='/trips/:id'><Trip /></Route>
+    </Switch>
     </>
   )
 }

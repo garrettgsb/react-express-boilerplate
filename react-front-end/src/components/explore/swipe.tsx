@@ -4,6 +4,7 @@ import { useSprings, useSpring, animated, interpolate } from 'react-spring'
 import { useGesture, useScroll } from 'react-use-gesture'
 import styled from 'styled-components';
 import axios from 'axios';
+import { url } from 'inspector';
 // import './styles.css'
 
 
@@ -13,15 +14,25 @@ interface SwipeProps {
   // useSprings: (e: React.SyntheticEvent<EventTarget>) => void
 };
 interface AttractionsObject {
-  reasons: string,
-  venue: VenueObject,
-};
-
-interface VenueObject {
   id: string,
   name: string,
-  location: object
-}
+  description: string,
+  review: number | null,
+  lat: number,
+  long: number,
+  open_time: number | null,
+  close_time: number | null,
+  visit_duration: number | null,
+  photo: string
+  location: string,
+};
+
+// interface VenueObject {
+//   id: string,
+//   name: string,
+//   location: object,
+//   photolink: string
+// }
 
 const Swiping = styled.div`
   display: flex;
@@ -30,12 +41,13 @@ const Swiping = styled.div`
   padding: 20px 0;
 `;
 const Card =styled.div`
-  flex-shrink: 0;
+  background-color: red;
+  flex-shrink: 5;
   width: 300px;
-  height: 200px;
+  height: 300px;
   border-radius: 10px;
   margin-left: 10px;
-  background-size: cover;
+  background-size: 100%;
   background-repeat: no-repeat;
   background-position: center center;
 `;
@@ -60,6 +72,9 @@ export const Swipe: FC<SwipeProps> = () => {
     axios.get(`api/attractions`)
     .then(res => {
       console.log('check res received', res.data)
+      // res.data[0].map(resData => {
+      //   resData["photo"] = res.data[1][resData]
+      // })
       setAttractitions(res.data)
       // result.map(data => {
       //   attractions.push({
@@ -73,11 +88,9 @@ export const Swipe: FC<SwipeProps> = () => {
       // console.log('photo >>>', result1)
     });
   },[])
-  console.log('list', attractions)
-  // Object.keys(attractions).map(data => console.log(data.venue));
   const bind = useScroll(event => {
     set({
-      transform: `perspective(500px) rotateY(${
+      transform: `perspective(500px) rotateX(${
         event.scrolling ? event.delta[0] : 0
       }deg)`
     });
@@ -91,13 +104,13 @@ export const Swipe: FC<SwipeProps> = () => {
             <Card>
               {/* <p>{attraction.venue.name}</p> */}
               <animated.div
-                key={attraction.venue.name}
+                key={attraction.name}
                 className="card"
                 style={{
                   ...style,
-                  backgroundImage: ``
+                  backgroundImage: `url(${attraction.photo})`
                 }}
-              >{attraction.venue.name}</animated.div>
+              >{attraction.name}</animated.div>
             </Card>
           ))}
         </div>
