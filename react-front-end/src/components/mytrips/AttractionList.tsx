@@ -45,12 +45,12 @@ export const AttractionList = ({attractions}: PropTypes) => {
     <Attractions>
       {attractions.map(attraction =>
         <AttractionItem key={attraction.id}>
-          <Attraction name={attraction.name} img={attraction.photo} />
+          <Attraction name={attraction.name} img={attraction.photo} lat={attraction.lat} lng={attraction.long} />
         </AttractionItem>
         )}
     </Attractions>
 
-    <Button text="Generate" />
+    <Button text="Generate" click={() => console.log('click')} />
     </>
   )
 }
