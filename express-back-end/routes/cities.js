@@ -20,8 +20,6 @@ module.exports = (db) => {
     // axios.defaults.baseURL = 'https://maps.googleapis.com';
     
     axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${req.query.city}&types=geocode&language=fr&key=${GOOGLE_KEY}`)
-    //need another axios to google place api to get long & lat to send to
-    //another api for events
     .then(results => {
       console.log(results.data);
       res.json(results.data);
@@ -34,7 +32,7 @@ module.exports = (db) => {
       lat = result.data.results[0].geometry.location.lat;
       long = result.data.results[0].geometry.location.lng;
     })
-    .then(() => res.send(200))
+    .then(() => res.sendStatus(200))
   })
   
   router.post(`/explore/:${city}/:data`, (req, res) => {

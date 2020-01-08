@@ -9,6 +9,7 @@ type ExploreProps = {
   city: string,
   selected?: string | null,
   topRecommended: string,
+  style?: React.CSSProperties | undefined
 };
 
 export const Explore: React.FC<ExploreProps> = () => {
