@@ -4,7 +4,7 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     db.query(
       `
-      SELECT * FROM itineraries
+      SELECT *, itineraries.id AS id FROM itineraries
       JOIN user_itinerary on itineraries.id = user_itinerary.itinerary_id
       WHERE user_itinerary.user_id = $1;
       `, [req.session.userId]
