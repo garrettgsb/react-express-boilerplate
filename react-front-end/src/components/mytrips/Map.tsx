@@ -12,9 +12,7 @@ export const Map = ({places}: PropTypes) => {
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_KEY }}
         center={{lat: places[0].latitude, lng: places[0].longitude}}
-        defaultZoom={10}
-        // yesIWantToUseGoogleMapApiInternals
-        // onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps, places)}
+        defaultZoom={11}
       >
         {places.map(place =>
           <Marker
