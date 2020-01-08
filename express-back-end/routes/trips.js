@@ -9,9 +9,9 @@ module.exports = (db) => {
       WHERE user_itinerary.user_id = $1;
       `, [req.session.userId]
     )
-    .then((response) => {
-      res.json(response.rows);
-    })
+      .then((response) => {
+        res.json(response.rows);
+      })
   })
 
   router.get('/:id', (req, res) => {
@@ -25,9 +25,17 @@ module.exports = (db) => {
       ;
       `, [req.params.id]
     )
-    .then((response) => {
-      res.json(response.rows);
-    })
+      .then((response) => {
+        res.json(response.rows);
+      })
+  })
+
+  router.get('/api/direction', (req, res) => {
+    console.log('req data', req)
+
+    axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=${GOOGLE_KEY}`)
+      .then(res => console.log('res after google api direction call', res))
+      .catch(err => console.log('res after google api direction call', err))
   })
 
   return router;
