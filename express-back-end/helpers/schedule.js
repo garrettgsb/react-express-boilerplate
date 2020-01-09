@@ -229,13 +229,11 @@ const getDays = (start, end) => {
 const cluster = kmeans.clusterize(vectors, { k: getDays(data[0].trip_start, data[0].trip_end) }, (err, res) => {
   if (err) console.error(err);
   else {
-    // console.log('%o',res);
     return res;
   }
 });
 
 //Loop through the result from kmeans function to get the array of attractions
-
 cluster.groups.forEach(element => {
   for (let i in element.clusterInd) {
     element.clusterInd[i] = data[element.clusterInd[i]]
@@ -274,51 +272,41 @@ const getSchedule = (day) => {
 
   return schedule;
 }
-// console.log('FIRST DAY', getSchedule(itineraries[0]))
-// console.log('SECOND DAY', getSchedule(itineraries[1]))
-// console.log('THIRD DAY', getSchedule(itineraries[2]))
-// console.log('FOURTH DAY', getSchedule(itineraries[3]))
-// console.log('FIFTH DAY', getSchedule(itineraries[4]))
 
-// formate the dataset 
-// loop internary array
-// getSchedule(iternary[i])
+// group clustered attractions in days
 const getTimeForSchedule = (array) => {
   let dataset = []
   for (let i = 0; i < array.length; i++) {
-    // console.log(`Day${i + 1}`, getSchedule(array[i]))
     dataset.push(getSchedule(array[i]))
   }
   return dataset
 }
-
-// console.log(getTimeForSchedule(itineraries))
 const trip = getTimeForSchedule(itineraries);
 
-// axios callback function for google direction api
+// axios callback function for google direction api with travel_mode=driving
+const axiosCallbackForCar = (origin, destination) => {
+  return axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
+    .then(response => {
+      console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'CAR' })
+      return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'CAR' }
+    })
+    .catch(err => console.log(err));
+}
+
+// axios callback function for google direction api with travel_mode=transit
 const axiosCallback = (origin, destination) => {
   return axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=transit&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
     .then(response => {
-      // console.log(`get direction from ${origin} to ${destination}`)
+      // check if api mode=transit not work
       if (response.data.routes[0] === undefined) {
-        // console.log('api calling error:', response.data)
-        // console.log('available travel mode:', response.data.available_travel_modes[0])
-        return axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=${response.data.available_travel_modes[0]}&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
-          .then(response => {
-            // console.log('total travel duration', response.data.routes[0].legs[0].duration.value + 'sec' + 'by CAR')
-            console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'CAR' })
-            return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'CAR' }
-          })
-          .catch(err => console.log(err));
+        // remove mode, switch to default mode=driving api call instead
+        axiosCallbackForCar(origin, destination)
       } else {
-        // console.log('travel method:', response.data.routes[0].legs[0].steps.length)
+        // check if there is more than one travel method for direction (Eg: walking -> bus -> walking)
         if (response.data.routes[0].legs[0].steps.length > 1) {
-          // console.log('total travel duration', response.data.routes[0].legs[0].duration.value + 'sec' + 'by TRANSIT')
           console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'TRANSIT' })
           return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'TRANSIT' }
         } else {
-          // console.log('steps length:', response.data.routes[0].legs[0].steps.length)
-          // console.log('total travel duration', response.data.routes[0].legs[0].duration.value + 'sec' + 'by WALKING')
           console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'WALKING' })
           return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'WALKING' }
         }
@@ -332,7 +320,6 @@ const getTravelTime = async (array, axiosCallback) => {
   for (let i = 0; i < array.length; i++) {
     console.log('NEW DAY')
     for (let j = 0; j < array[i].length; j++) {
-      // console.log(typeof array[i][j])
       if (array[i][j + 1]) {
         if (array[i][j].travel_mode === null && array[i][j + 1].travel_mode === null) {
           const origin = `${array[i][j].latitude},${array[i][j].longitude}`
