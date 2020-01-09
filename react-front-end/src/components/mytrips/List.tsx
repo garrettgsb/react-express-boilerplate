@@ -39,9 +39,9 @@ const getIcon = (type:string) => {
   }
 }
 
-type PropTypes = { timeslots: Array<any> }
+type PropTypes = { timeslots: Array<any>, deleteAttraction: any }
 
-export const List = ({timeslots}: PropTypes) => {
+export const List = ({timeslots, deleteAttraction}: PropTypes) => {
   const categorizeTimeslot = (slot: {id:number, attraction_id:number, name:string, photo:string, travel_mode:string, start_time:number, end_time:number, lat:number, lng:number}) => {
     const start = moment.unix(slot.start_time);
     const end = moment.unix(slot.end_time);
@@ -51,7 +51,7 @@ export const List = ({timeslots}: PropTypes) => {
     } else if (slot.attraction_id === null && slot.travel_mode == 'BUS') {
       return <Timeslot key={slot.id}><IconDiv>{getIcon('bus')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</ContentDiv></Timeslot>
     } else {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}{moment.unix(slot.start_time).utc().format('hh:mm a')}</IconDiv><ContentDiv><Attraction key={slot.id} name={slot.name} img={slot.photo} lat={slot.lat} lng={slot.lng} /></ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}{moment.unix(slot.start_time).utc().format('hh:mm a')}</IconDiv><ContentDiv><Attraction key={slot.id} id={slot.id} name={slot.name} img={slot.photo} editable={false} deleteAttraction={deleteAttraction} /></ContentDiv></Timeslot>
     }
   };
 

@@ -10,11 +10,15 @@ export const Trip = () => {
   const checkItineraryExists = (attr:Array<any>) => {
     for (let i = 0; i < attr.length; i++) {
       if (attr[i].start_time === null || attr[i].end_time === null) {
-        return <AttractionList attractions={timeslots} />;
+        return <AttractionList attractions={timeslots} deleteAttraction={deleteAttraction} />;
       }
     }
-    return <Itinerary id={id} timeslots={timeslots} editAction={editAction} />;
+    return <Itinerary id={id} timeslots={timeslots} editAction={editAction} deleteAttraction={deleteAttraction} />;
   };
+
+  const deleteAttraction = (id:number) => {
+    console.log(id);
+  }
 
   const loadData = () => {
     axios.get(`/api/trips/${id}`)
