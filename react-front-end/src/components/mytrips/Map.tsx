@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 // import GoogleMapReact from 'google-map-react';
 // const GOOGLE_KEY = process.env.REACT_APP_GOOGLE_API_KEY || '';
 const MAP_KEY = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN || '';
-import ReactMapGL, {Marker} from 'react-map-gl';
+import ReactMapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import {Pin} from './Pin';
 
 
 type PropTypes = { places: Array<any> }
@@ -31,27 +32,8 @@ export const Map = ({places}: PropTypes) => {
   return (
     <ReactMapGL {...viewport} mapStyle="mapbox://styles/mapbox/dark-v9" onViewportChange={setViewport}>
       {filterAttractions(places).map(place =>
-        <Marker key={place.id} latitude={place.latitude} longitude={place.longitude}>
-          <div>{place.name}</div>
-        </Marker>
+        <Pin key={place.id} name={place.name} latitude={place.latitude} longitude={place.longitude} />
       )}
     </ReactMapGL>
-    // <div style={{ height: '100vh', width: '100%' }}>
-    //   <GoogleMapReact
-    //     bootstrapURLKeys={{ key: GOOGLE_KEY }}
-    //     center={{lat: places[0].latitude, lng: places[0].longitude}}
-    //     defaultZoom={11}
-    //   >
-    //     {places.map(place =>
-    //       <Marker
-    //         key={place.id}
-    //         name={place.name}
-    //         lat={place.latitude}
-    //         lng={place.longitude}
-    //       />
-    //     )}
-
-    //   </GoogleMapReact>
-    // </div>
   )
 }
