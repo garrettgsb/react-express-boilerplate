@@ -2,16 +2,10 @@ import React, {useState, useEffect} from 'react';
 import { ItineraryHeader } from './ItineraryHeader';
 import { ItineraryBody } from './ItineraryBody';
 import moment from 'moment';
-import axios from 'axios';
 
-// calculate number of days for the trip
-const getDays = (start:number, end:number) => {
-  return Math.round((end - start)/86400)
-};
+type PropTypes = { editAction: any, id: string, timeslots: Array<{start_time:number, trip_start:number, trip_end:number}> }
 
-type PropTypes = { id: string, timeslots: Array<{start_time:number, trip_start:number, trip_end:number}> }
-
-export const Itinerary = ({id, timeslots}: PropTypes) => {
+export const Itinerary = ({id, timeslots, editAction}: PropTypes) => {
 
   const [selectedDay, setSelectedDay] = useState<string>('1');
 
@@ -33,11 +27,6 @@ export const Itinerary = ({id, timeslots}: PropTypes) => {
       delete sched[day];
       counter += 1;
     }
-  }
-
-  const editAction = () => {
-    axios.post(`/api/trips/${id}/edit`)
-    .then((res) => console.log(schedule))
   }
   
   getSchedule(schedule, timeslots)

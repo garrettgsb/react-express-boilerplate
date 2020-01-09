@@ -13,16 +13,23 @@ export const Trip = () => {
         return <AttractionList attractions={timeslots} />;
       }
     }
-    return <Itinerary id={id} timeslots={timeslots} />;
+    return <Itinerary id={id} timeslots={timeslots} editAction={editAction} />;
   };
 
-  useEffect(() => {
-    Promise.all([
-      axios.get(`/api/trips/${id}`)
-    ])
+  const loadData = () => {
+    axios.get(`/api/trips/${id}`)
     .then((res) => {
-      setTimeslots(res[0].data);
+      setTimeslots(res.data);
     })
+  }
+
+  const editAction = () => {
+    axios.post(`/api/trips/${id}/edit`)
+    .then(() => loadData())
+  }
+
+  useEffect(() => {
+    loadData();
   }, [])
 
   return (
