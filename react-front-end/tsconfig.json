@@ -4,7 +4,7 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "module": "esnext",
     "target": "es6",
     "jsx": "preserve",
@@ -16,6 +16,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "strictNullChecks": false,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -23,6 +24,7 @@
     "noEmit": true
   },
   "include": [
-    "src"
+    "src",
+    "alltypes.d.ts"
   ]
 }

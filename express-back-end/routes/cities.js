@@ -45,7 +45,7 @@ module.exports = (db) => {
     const userId = req.session.userId;
     db.query(
       `INSERT INTO itineraries (
-        city, city_img, start_time, end_time
+        city, city_img, trip_start, trip_end
       ) VALUES (
         $1, $2, $3, $4
       )
@@ -141,7 +141,7 @@ module.exports = (db) => {
       })
   });
 
-  router.post(`/explore/attractions/:data`, (req, res) => {
+  router.post(`/explore/${city}/attractions/:data`, (req, res) => {
     console.log("Adding attraction to database");
     console.log(req.params)
   })
