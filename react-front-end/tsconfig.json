@@ -4,7 +4,7 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "module": "esnext",
     "target": "es6",
     "jsx": "preserve",
