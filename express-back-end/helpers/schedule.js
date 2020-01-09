@@ -1,4 +1,5 @@
 const kmeans = require('node-kmeans');
+const axios = require('axios');
 
 // sample data
 const data = [
@@ -295,7 +296,30 @@ const getTimeForSchedule = (array) => {
 const trip = getTimeForSchedule(itineraries);
 
 // axios callback function for google direction api
-
+const axiosCallback = (origin, destination) => {
+  axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=transit&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
+    .then(response => {
+      if (response.data.routes[0] === undefined) {
+        // console.log('api calling error:', response.data)
+        // console.log('available travel mode:', response.data.available_travel_modes[0])
+        axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=${response.data.available_travel_modes[0]}&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
+          .then(response => {
+            console.log('total travel duration', response.data.routes[0].legs[0].duration.value + 'sec')
+            console.log('travel_mode: Opps! GET CAR, GOOGLE TELL USE NO TRANSIT WHEN WE GIVING LAT AND LONG!?')
+          })
+      } else {
+        console.log('total travel duration', response.data.routes[0].legs[0].duration.value + 'sec')
+        // console.log('travel method:', response.data.routes[0].legs[0].steps.length)
+        if (response.data.routes[0].legs[0].steps.length > 1) {
+          console.log('travel_mode: transit/bus')
+        } else {
+          // console.log('steps length:', response.data.routes[0].legs[0].steps.length)
+          console.log('travel_mode: walking')
+        }
+      }
+    })
+    .catch(err => console.log('Error for google direction api', err))
+}
 
 // nest loop to conditional making google api direction axios request call
 const getTravelTime = (array, axiosCallback) => {
@@ -315,4 +339,4 @@ const getTravelTime = (array, axiosCallback) => {
     }
   }
 }
-getTravelTime(trip)
+getTravelTime(trip, axiosCallback)
