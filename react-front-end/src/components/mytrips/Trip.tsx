@@ -6,7 +6,6 @@ import { Itinerary } from './Itinerary';
 export const Trip = () => {
   const id:string = location.pathname.slice(location.pathname.lastIndexOf('/') + 1);
   const [timeslots, setTimeslots] = useState<Array<any>>([]);
-  const [schedule, setSchedule] = useState({});
 
   const checkItineraryExists = (attr:Array<any>) => {
     for (let i = 0; i < attr.length; i++) {
@@ -14,16 +13,23 @@ export const Trip = () => {
         return <AttractionList attractions={timeslots} />;
       }
     }
-    return <Itinerary id={id} timeslots={timeslots} />;
+    return <Itinerary id={id} timeslots={timeslots} editAction={editAction} />;
   };
 
-  useEffect(() => {
-    Promise.all([
-      axios.get(`/api/trips/${id}`)
-    ])
+  const loadData = () => {
+    axios.get(`/api/trips/${id}`)
     .then((res) => {
-      setTimeslots(res[0].data);
+      setTimeslots(res.data);
     })
+  }
+
+  const editAction = () => {
+    axios.post(`/api/trips/${id}/edit`)
+    .then(() => loadData())
+  }
+
+  useEffect(() => {
+    loadData();
   }, [])
 
   return (

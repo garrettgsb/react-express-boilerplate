@@ -20,15 +20,16 @@ const Header = styled.div`
   margin: 0px;
 `
 
-const Action = styled.img`
+const ActionIcon = styled.img`
   width: 40px;
   margin-right: 5px;
   margin-left: 5px;
 `
 
-type PropTypes = { length: Array<string>, selected:string, onClick:any }
+type PropTypes = { editAction: any, length: Array<string>, selected:string, onClick:any }
 
-export const ItineraryHeader = ({length, onClick, selected}: PropTypes) => {
+export const ItineraryHeader = ({editAction, length, onClick, selected}: PropTypes) => {
+
   return (
     <Header>
       <Days>
@@ -38,8 +39,8 @@ export const ItineraryHeader = ({length, onClick, selected}: PropTypes) => {
       </Days>
 
       <div>
-        <Action src={add} />
-        <Action src={edit} />
+        <ActionIcon src={add} />
+        <ActionIcon src={edit} onClick={editAction} />
       </div>
 
     </Header>

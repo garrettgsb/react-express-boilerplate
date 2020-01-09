@@ -30,5 +30,19 @@ module.exports = (db) => {
     })
   })
 
+  router.post('/:id/edit', (req, res) => {
+    db.query(
+      `
+      UPDATE timeslots
+      SET start_time = null, end_time = null
+      FROM itineraries
+      WHERE itinerary_id = itineraries.id AND itinerary_id = $1;
+      `, [req.params.id]
+    )
+    .then((response) => {
+      res.send(200)
+    })
+  })
+
   return router;
 }
