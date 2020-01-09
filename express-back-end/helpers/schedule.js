@@ -297,42 +297,47 @@ const trip = getTimeForSchedule(itineraries);
 
 // axios callback function for google direction api
 const axiosCallback = (origin, destination) => {
-  axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=transit&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
+  return axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=transit&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
     .then(response => {
+      // console.log(`get direction from ${origin} to ${destination}`)
       if (response.data.routes[0] === undefined) {
         // console.log('api calling error:', response.data)
         // console.log('available travel mode:', response.data.available_travel_modes[0])
-        axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=${response.data.available_travel_modes[0]}&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
+        return axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=${response.data.available_travel_modes[0]}&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
           .then(response => {
-            console.log('total travel duration', response.data.routes[0].legs[0].duration.value + 'sec')
-            console.log('travel_mode: Opps! GET CAR, GOOGLE TELL USE NO TRANSIT WHEN WE GIVING LAT AND LONG!?')
+            // console.log('total travel duration', response.data.routes[0].legs[0].duration.value + 'sec' + 'by CAR')
+            console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'CAR' })
+            return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'CAR' }
           })
+          .catch(err => console.log(err));
       } else {
-        console.log('total travel duration', response.data.routes[0].legs[0].duration.value + 'sec')
         // console.log('travel method:', response.data.routes[0].legs[0].steps.length)
         if (response.data.routes[0].legs[0].steps.length > 1) {
-          console.log('travel_mode: transit/bus')
+          // console.log('total travel duration', response.data.routes[0].legs[0].duration.value + 'sec' + 'by TRANSIT')
+          console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'TRANSIT' })
+          return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'TRANSIT' }
         } else {
           // console.log('steps length:', response.data.routes[0].legs[0].steps.length)
-          console.log('travel_mode: walking')
+          // console.log('total travel duration', response.data.routes[0].legs[0].duration.value + 'sec' + 'by WALKING')
+          console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'WALKING' })
+          return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'WALKING' }
         }
       }
     })
-    .catch(err => console.log('Error for google direction api', err))
+    .catch(err => console.log('Error for google direction api', err));
 }
 
 // nest loop to conditional making google api direction axios request call
-const getTravelTime = (array, axiosCallback) => {
+const getTravelTime = async (array, axiosCallback) => {
   for (let i = 0; i < array.length; i++) {
     console.log('NEW DAY')
     for (let j = 0; j < array[i].length; j++) {
       // console.log(typeof array[i][j])
       if (array[i][j + 1]) {
-        if (typeof array[i][j] === 'object' && typeof array[i][j + 1] === 'object') {
-          // console.log('GET DIRECTIONS FROM', array[i][j].name, 'TO', array[i][j + 1].name)
+        if (array[i][j].travel_mode === null && array[i][j + 1].travel_mode === null) {
           const origin = `${array[i][j].latitude},${array[i][j].longitude}`
           const destination = `${array[i][j + 1].latitude},${array[i][j + 1].longitude}`
-          // console.log(`get direction from ${origin} to ${destination}`)
+          console.log(`DIRECTION FOR: ${array[i][j].name}(${origin}) => ${array[i][j + 1].name}(${destination})`)
           axiosCallback(origin, destination)
         }
       }

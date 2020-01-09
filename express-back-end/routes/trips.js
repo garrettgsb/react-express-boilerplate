@@ -46,7 +46,7 @@ module.exports = (db) => {
       .catch(err => console.log('res after google api direction call', err))
     // or else, skip go to the next item
 
-    // SO end_data we received will be [[obj, number, obj, number, obj...],[obj, number, obj, number, obj...], ...] 
+    // SO end_data we received will be [[obj, obj(transit), obj...],[obj, obj, obj(transit), obj...], ...] 
 
     // Default start_time for each day will be 12am
     // Default start_time for first location in timeslot will be 12am + 9hour (9am in the morning)
