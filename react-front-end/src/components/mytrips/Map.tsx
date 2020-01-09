@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-// import GoogleMapReact from 'google-map-react';
-// const GOOGLE_KEY = process.env.REACT_APP_GOOGLE_API_KEY || '';
 const MAP_KEY = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN || '';
 import ReactMapGL, {Popup} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {Pin} from './Pin';
+import styled from 'styled-components';
 
+const CityInfo = styled.p`
+  font-size: 0.85em;
+`
 
 type PropTypes = { places: Array<any> }
 export const Map = ({places}: PropTypes) => {
@@ -16,7 +18,7 @@ export const Map = ({places}: PropTypes) => {
     height: '100vh',
     latitude: places[0].latitude,
     longitude: places[0].longitude,
-    zoom: 8,
+    zoom: 9,
   })
 
   const filterAttractions = (list:Array<any>) => {
@@ -35,8 +37,8 @@ export const Map = ({places}: PropTypes) => {
 
   return (
     <>
-    <ReactMapGL {...viewport} mapStyle="mapbox://styles/mapbox/dark-v9" onViewportChange={setViewport}>
-      {cityPopup && <Popup tipSize={5} anchor="top" latitude={cityPopup.latitude} longitude={cityPopup.longitude} closeOnClick={false} onClose={() => setCityPopup({name: null, latitude: 0, longitude: 0})}><p>{cityPopup.name}</p></Popup>}
+    <ReactMapGL {...viewport} mapStyle="mapbox://styles/mapbox/streets-v11" onViewportChange={setViewport}>
+      {cityPopup && <Popup tipSize={5} anchor="top" latitude={cityPopup.latitude} longitude={cityPopup.longitude} closeOnClick={false} onClose={() => setCityPopup({name: null, latitude: 0, longitude: 0})}><CityInfo>{cityPopup.name}</CityInfo></Popup>}
       {filterAttractions(places).map(place =>
         <Pin key={place.id} name={place.name} latitude={place.latitude} longitude={place.longitude} onClick={setCityPopup} />
       )}
