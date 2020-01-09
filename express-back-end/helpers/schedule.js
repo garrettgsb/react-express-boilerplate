@@ -273,8 +273,46 @@ const getSchedule = (day) => {
 
   return schedule;
 }
-console.log('FIRST DAY', getSchedule(itineraries[0]))
-console.log('SECOND DAY', getSchedule(itineraries[1]))
-console.log('THIRD DAY', getSchedule(itineraries[2]))
-console.log('FOURTH DAY', getSchedule(itineraries[3]))
-console.log('FIFTH DAY', getSchedule(itineraries[4]))
+// console.log('FIRST DAY', getSchedule(itineraries[0]))
+// console.log('SECOND DAY', getSchedule(itineraries[1]))
+// console.log('THIRD DAY', getSchedule(itineraries[2]))
+// console.log('FOURTH DAY', getSchedule(itineraries[3]))
+// console.log('FIFTH DAY', getSchedule(itineraries[4]))
+
+// formate the dataset 
+// loop internary array
+// getSchedule(iternary[i])
+const getTimeForSchedule = (array) => {
+  let dataset = []
+  for (let i = 0; i < array.length; i++) {
+    // console.log(`Day${i + 1}`, getSchedule(array[i]))
+    dataset.push(getSchedule(array[i]))
+  }
+  return dataset
+}
+
+// console.log(getTimeForSchedule(itineraries))
+const trip = getTimeForSchedule(itineraries);
+
+// axios callback function for google direction api
+
+
+// nest loop to conditional making google api direction axios request call
+const getTravelTime = (array, axiosCallback) => {
+  for (let i = 0; i < array.length; i++) {
+    console.log('NEW DAY')
+    for (let j = 0; j < array[i].length; j++) {
+      // console.log(typeof array[i][j])
+      if (array[i][j + 1]) {
+        if (typeof array[i][j] === 'object' && typeof array[i][j + 1] === 'object') {
+          // console.log('GET DIRECTIONS FROM', array[i][j].name, 'TO', array[i][j + 1].name)
+          const origin = `${array[i][j].latitude},${array[i][j].longitude}`
+          const destination = `${array[i][j + 1].latitude},${array[i][j + 1].longitude}`
+          // console.log(`get direction from ${origin} to ${destination}`)
+          axiosCallback(origin, destination)
+        }
+      }
+    }
+  }
+}
+getTravelTime(trip)
