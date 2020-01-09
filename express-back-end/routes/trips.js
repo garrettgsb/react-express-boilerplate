@@ -40,8 +40,8 @@ module.exports = (db) => {
     // check if current and next element is object,
     // if so, take the first two location objects in cluster array to call google direction api to get travel duration between these two location, then shift/remove the first item in array
     axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=Stanley+Park&destination=David+Lam+Park&mode=transit&key=${GOOGLE_KEY}`)
-      // traval_duration = response.routes[0].legs[0].duration.text, total travel_duration bewteen locations
-      // direction_steps = response.routes[0].legs[0].steps, if direction_steps contain more than one object, set travel mode to bus, or else it will be walking
+      // traval_duration = response.data.routes[0].legs[0].duration, total travel_duration bewteen locations
+      // direction_steps = response.data.routes[0].legs[0].steps, if direction_steps contain more than one object, set travel mode to bus, or else it will be walking
       .then(response => console.log('res after google api direction call', response))
       .catch(err => console.log('res after google api direction call', err))
     // or else, skip go to the next item
