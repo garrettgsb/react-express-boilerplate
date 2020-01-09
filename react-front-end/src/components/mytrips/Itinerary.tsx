@@ -3,14 +3,9 @@ import { ItineraryHeader } from './ItineraryHeader';
 import { ItineraryBody } from './ItineraryBody';
 import moment from 'moment';
 
-// calculate number of days for the trip
-const getDays = (start:number, end:number) => {
-  return Math.round((end - start)/86400)
-};
+type PropTypes = { editAction: any, id: string, timeslots: Array<{start_time:number, trip_start:number, trip_end:number}> }
 
-type PropTypes = { id: string, timeslots: Array<{start_time:number, trip_start:number, trip_end:number}> }
-
-export const Itinerary = ({id, timeslots}: PropTypes) => {
+export const Itinerary = ({id, timeslots, editAction}: PropTypes) => {
 
   const [selectedDay, setSelectedDay] = useState<string>('1');
 
@@ -38,7 +33,7 @@ export const Itinerary = ({id, timeslots}: PropTypes) => {
 
   return (
     <>
-    {Object.keys(schedule).length > 0 && <ItineraryHeader length={Object.keys(schedule)} onClick={setSelectedDay} selected={selectedDay} />}
+    {Object.keys(schedule).length > 0 && <ItineraryHeader editAction={editAction} length={Object.keys(schedule)} onClick={setSelectedDay} selected={selectedDay} />}
     {Object.keys(schedule).length > 0 && <ItineraryBody timeslots={schedule[selectedDay]} />}
     </>
   )
