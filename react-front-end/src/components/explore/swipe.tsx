@@ -36,8 +36,21 @@ interface StyleProps {
 
 const Swiping = styled.div`
   // height: 100%;
+  // position: absolute;
+  width: 100%;
+`;
+
+const Container = styled.div`
   position: absolute;
   width: 100%;
+  height: 200px;
+  // transform: translate3d(100%,0,0);
+`;
+
+const Attraction = styled.div`
+  padding: 10px;
+  background-size: 100%;
+  background-position: center;
 `;
 
 
@@ -102,27 +115,44 @@ export const Swipe: FC<SwipeProps> = ({handleSubmit}) => {
   const attractionsShuffle = shuffleAttractions(attractions)
   
   pages =  animateAttractions(attractionsShuffle)
-  
+
   //animation part using react-spring
 
-  const [index, set] = useState(0);
-  const onClick = useCallback(() => set(state => (state + 1)), []);
+  // const [index, set] = useState(0);
+  // const onClick = useCallback(() => set(state => (state + 1)), []);
 
-  const transitions = useTransition(index, p => p, {
-    from: { opacity: 0, transform: 'translate3d(100%,0,0)', height: '300px' },
-    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-    leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
-  });
+  // const transitions = useTransition(index, p => p, {
+  //   from: { opacity: 0, transform: 'translate3d(100%,0,0)', height: '300px' },
+  //   enter: { opacity: 1, transform: 'translate3d(0%,0,0)', height: '300px' },
+  //   leave: { opacity: 0, transform: 'translate3d(-50%,0,0)', height: '300px'},
+  // });
+  
+  // return (
+  //   <Fragment>
+  //     <h4>Attractions</h4>
+  //     <div className="container" onClick={onClick}>
+  //       {pages.length && transitions.map(({ item, props, key }) => {
+  //         const Page = pages[item]
+  //         return <Page key={key} style={props}/>
+  //       })}
+  //     </div>
+  //   </Fragment>
+  // );
   
   return (
     <Fragment>
-      <div className="container" onClick={onClick}>
-        {pages.length && transitions.map(({ item, props, key }) => {
-          const Page = pages[item]
-          return <Page key={key} style={props}/>
+      <h4>Attractions</h4>
+      <Container>
+        {attractionsShuffle.length && attractionsShuffle.map(attraction => {
+          return (
+            <Attraction style={{ backgroundImage: `url(${attraction.photo})`}}>
+              <p>{attraction.name}</p>
+              <p>{attraction.description}</p>
+              <p>{attraction.review}</p>
+            </Attraction>
+          )
         })}
-      </div>
+      </Container>
     </Fragment>
   );
-  
 };
