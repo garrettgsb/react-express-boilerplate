@@ -8,7 +8,13 @@ import axios from 'axios';
 
 interface SwipeProps {
   // style?: React.CSSProperties | undefined
+  handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  
 };
+
+// interface FormProps {
+//   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+// }
 interface AttractionsObject {
   id: string,
   name: string,
@@ -23,21 +29,24 @@ interface AttractionsObject {
   location: string,
 };
 
-
-
 interface StyleProps {
   opacity: string | SpringValue<number>,
   transform: string | SpringValue<string>
 };
 
+const Swiping = styled.div`
+  // height: 100%;
+  position: absolute;
+  width: 100%;
+`;
 
-export const Swipe: FC<SwipeProps> = () => {
-  
-  const [attractions, setAttractions] = useState<AttractionsObject[]>([]);
-  // const [attractionsShuffle, setAttractionsShuffle] = useState<AttractionsObject[]>([]);
+
+export const Swipe: FC<SwipeProps> = ({handleSubmit}) => {
+  const [attractions, setAttractions] = useState<Array<AttractionsObject>>([]);
   let pages: Array<any>;
   pages = [];
-
+  // const [value, setValue] = useState<AttractionsObject | {}>({});
+  let value: string | null;
   useEffect(() => {
 
     axios.defaults.baseURL = 'http://localhost:8081';
@@ -50,6 +59,18 @@ export const Swipe: FC<SwipeProps> = () => {
 
   //helper functions
 
+  //submit the attractions to database
+  handleSubmit = () => {
+    // e.preventDefault();
+    console.log('check');
+    console.log(value)
+    axios.defaults.baseURL = 'http://localhost:8081';
+    axios.post(`/explore/attractions/:${value}`)
+    .then(() => {
+      // history.push(`/explore/:${search.query}`);
+    })
+  };
+  //to shuffle all attractions in a random way
   function shuffleAttractions(array: Array<any>) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i - 1));
@@ -58,141 +79,50 @@ export const Swipe: FC<SwipeProps> = () => {
     return array;
   };
 
+  //to create animation effect for the component
   function animateAttractions(array: Array<any>) {
     let swiping: Array<any>;
     swiping = []
     for (let i of array) {
-      swiping.push(({ style } : {style: StyleProps}) => <animated.div style={{ ...style, background: 'lightpink' }}>${i}</animated.div>)
+      swiping.push(
+        ({ style } : {style: StyleProps}) => 
+          <Swiping>
+            <form onSubmit={handleSubmit}>
+              <animated.div style={{ ...style, background: `url(${i.photo})` }}>
+                ${i.name}
+              </animated.div>
+            </form>
+            <button type="submit">Submit</button>
+          </Swiping>
+      )
     }
     return swiping;
   };
+
   const attractionsShuffle = shuffleAttractions(attractions)
   
-  pages = animateAttractions(attractionsShuffle)
+  pages =  animateAttractions(attractionsShuffle)
+  
+  //animation part using react-spring
 
-  const [index, set] = useState(0)
-  const onClick = useCallback(() => set(state => (state + 1) % 3), [])
+  const [index, set] = useState(0);
+  const onClick = useCallback(() => set(state => (state + 1)), []);
+
   const transitions = useTransition(index, p => p, {
-    from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
+    from: { opacity: 0, transform: 'translate3d(100%,0,0)', height: '300px' },
     enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
     leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
-  })
-  console.log('transitions', transitions);
-  console.log('pages', pages);
-
+  });
+  
   return (
-    pages != [] ?
     <Fragment>
       <div className="container" onClick={onClick}>
-        
-        {/* {transitions.map(({ item, props, key }) => {
-          const Swipe = pages[item]
-          return (<Swipe key={key} style={props}/>)
-        })} */}
+        {pages.length && transitions.map(({ item, props, key }) => {
+          const Page = pages[item]
+          return <Page key={key} style={props}/>
+        })}
       </div>
     </Fragment>
-    : 
-    <Fragment>
-
-    </Fragment>
   );
-
-  
   
 };
-
-// return (
-  //   <Fragment>
-  //     <Swiping>
-  //       <div className="container" {...bind()} >
-  //         {attractions.map(attraction => (
-  //           <Card>
-  //             <animated.div
-  //               key={attraction.name}
-  //               className="card"
-  //               style={{
-  //                 ...style,
-  //                 backgroundImage: `url(${attraction.photo})`
-  //               }}
-  //             >{attraction.name}</animated.div>
-  //           </Card>
-  //         ))}
-  //       </div>
-  //     </Swiping>
-  //   </Fragment>
-  // );
-// const pages = [
-//   ({ style } : {style: StyleProps}) => <animated.div style={{ ...style, background: 'lightpink' }}>A</animated.div>,
-//   ({ style } : {style: StyleProps}) => <animated.div style={{ ...style, background: 'lightblue' }}>B</animated.div>,
-//   ({ style } : {style: StyleProps}) => <animated.div style={{ ...style, background: 'lightgreen' }}>C</animated.div>,
-// ]
-
-
-// const [swipeRight, setSwipeRight] = useState(() => new Set());
-  // const [swipeLeft, setSwipeLeft] = useState(() => new Set());
-
-  // const bind = useScroll(event => {
-  //   set({
-  //     transform: `perspective(500px) rotateX(${
-  //       event.scrolling ? event.delta[0] : 0
-  //     }deg)`
-  //   });
-  // });
-
-
-  //TESTING SLIDING ANIMATION
-  
-  // const [style, setStyle] = useState<StyleProps>();
-  
-  // const pages = [
-  //   ({ opacity, transform}: {opacity: string | SpringValue<number>, transform: string | SpringValue<string>}) => <animated.div style={{ opacity, transform, background: 'lightpink' }}>A</animated.div>,
-  //   ({ opacity, transform}: {opacity: string | SpringValue<number>, transform: string | SpringValue<string>}) => <animated.div style={{ opacity, transform, background: 'lightblue' }}>B</animated.div>,
-  //   ({ opacity, transform}: {opacity: string | SpringValue<number>, transform: string | SpringValue<string>}) => <animated.div style={{ opacity, transform, background: 'lightgreen' }}>C</animated.div>,
-  // ]
-  // const [index, set] = useState(0)
-  // const onClick = useCallback(() => set(state => (state + 1) % 3), [])
-  // const transitions = useTransition(index, p => p, {
-  //   from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
-  //   enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-  //   leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
-  // })
-  // return (
-  //   <div className="simple-trans-main" onClick={onClick}>
-  //     {transitions.map(({ item, props, key}) => {
-  //       const Page = pages[item]
-  //       return <Page key={key} opacity={props.opacity} transform={props.transform} />
-  //     })}
-  //   </div>
-  // )
-
-  // return (
-  //   <Fragment>
-  //     <Swiping>
-  //       <div className="container" {...bind()} >
-  //         {attractions.map(attraction => (
-  //           <Card>
-  //             <animated.div
-  //               key={attraction.name}
-  //               className="card"
-  //               style={{
-  //                 ...style,
-  //                 backgroundImage: `url(${attraction.photo})`
-  //               }}
-  //             >{attraction.name}</animated.div>
-  //           </Card>
-  //         ))}
-  //       </div>
-  //     </Swiping>
-  //   </Fragment>
-  // );
-
-  // interface SwipingEffect {
-//   args: Array<any>,
-//   down: any,
-//   delta: Array<any>,
-//   distance: any,
-//   direction: Array<any>,
-//   velocity: any
-// };
-
-//TESTING

@@ -38,6 +38,7 @@ interface SearchProps {
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selected?: string | null,
   date?: Date | null,
+  city?: string | null
 };
 
 interface SearchObj {
@@ -45,7 +46,7 @@ interface SearchObj {
   results: Array<any>
 };
 
-export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) => {
+export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmit}) => {
   
   //user city input
   const [search, setSearch] = useState<SearchObj>({ query: '', results: [] });

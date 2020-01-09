@@ -2,7 +2,13 @@ import React, { Fragment } from "react";
 import styled from 'styled-components';
 
 
-type DestRecProps = { city: string, topRecommended: string };
+type DestRecProps = { 
+  cityName: string,
+  topRecommended: string ,
+  selected?: string | null,
+  search?: any
+  // children: ReactNode
+};
 
 const Destination = styled.h3`
   display: block;

@@ -42,14 +42,24 @@ module.exports = (db) => {
     const cityImg = data[1];
     const startTime = data[2];
     const endTime = data[3];
+    const userId = req.session.userId;
     db.query(
       `INSERT INTO itineraries (
         city, city_img, start_time, end_time
       ) VALUES (
         $1, $2, $3, $4
       )
-      `,[city, cityImg, startTime, endTime]
-    )
+      RETURNING id;
+      `, [city, cityImg, startTime, endTime])
+        .then(query => {
+          const itinerariesId = query.rows[0].id;
+          `INSERT INTO user_itinerary (
+            user_id, itinerary_id
+          ) VALUES (
+            $1, $2
+          )
+          `,[userId, itinerariesId]
+        })
     res.sendStatus(200);
   });
 
@@ -62,10 +72,6 @@ module.exports = (db) => {
     ])
       .then(results => {
         
-        // console.log('check foursqaure api', results[0].data.response.groups[0].items)
-        // console.log('check hiking api',results[1].data)
-        // console.log('check tix api', results[2].data._embedded.events)
-
         console.log('First api successfully');
 
         //static photo for testing rendering
@@ -131,19 +137,14 @@ module.exports = (db) => {
         }
       })
       .then(() => {
-        console.log('test>>>', attractionList)
         res.send(attractionList);
       })
-
-        // }
-        // res.json(attractionList);
-      // return photoList;
-      // console.log('test>>>', attractionList)
-      // res.send(attractionList);
-      // console.log(res.json([attractionList, photoList]))
-    // })
   });
 
+  router.post(`/explore/attractions/:data`, (req, res) => {
+    console.log("Adding attraction to database");
+    console.log(req.params)
+  })
   return router;
 }
 
