@@ -22,7 +22,6 @@ export const CityList = () => {
   useEffect(() => {
     axios.get('/api/trips')
     .then((res) => {
-      console.log("got data", res.data)
       setTrips(res.data)
     })
   }, [])

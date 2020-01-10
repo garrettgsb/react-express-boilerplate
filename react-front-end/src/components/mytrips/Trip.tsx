@@ -18,7 +18,6 @@ export const Trip = () => {
   });
   const checkItineraryExists = (attr:Array<any>) => {
     if (count === 0) {
-      console.log("redirecting...", id);
       return <Redirect to='/trips' />;
     }
     for (let i = 0; i < attr.length; i++) {
