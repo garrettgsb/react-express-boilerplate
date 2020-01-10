@@ -6,32 +6,8 @@ import PropTypes, { string } from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Input = styled.input`
-  margin: 0px auto;
-  margin-top: 30px;
-  display: grid;
-  border-color: #D1D0CC
-  border-radius: 5px;
-  border-width: thin;
-  padding: 0px 10px;
-  height: 40px;
-  width: 300px;
-  color: black;
-`;
+import { Input, Suggestion, DatePick, Button } from "./SearchBox.component"
 
-const Suggestion = styled.p`
-  color: red;
-`;
-const DatePick = styled.div`
-  margin: 5px auto;
-  display: inline-block;
-  // width: 100px;
-`;
-
-const Button = styled.button`
-  margin: 5px auto;
-  // width: 100px;
-`;
 
 interface SearchProps {
   handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
