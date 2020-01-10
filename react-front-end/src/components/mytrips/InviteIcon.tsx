@@ -12,10 +12,9 @@ type PropTypes = {id:string}
 export const InviteIcon = ({id}:PropTypes) => {
   const [invite, setInvite] = useState<boolean>(false);
   
-  console.log('ID', id)
   return (
     <>
-    {invite && <Redirect to=`/trips/${id}/invite` />}
+    {invite && <Redirect to={`/trips/${id}/invite`} />}
     <ActionIcon src= {add} onClick={() => setInvite(true)} />
     </>
   )
