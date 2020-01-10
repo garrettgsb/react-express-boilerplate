@@ -10,6 +10,7 @@ type ExploreProps = {
   selected?: string | null,
   topRecommended: string,
   search?: any
+  
   // style?: React.CSSProperties | undefined
 };
 
@@ -22,9 +23,11 @@ export const Explore: React.FC<ExploreProps> = () => {
             <SearchBar />
             <DestRec cityName="Van" topRecommended="Vancouver"/>
           </Route>
-          <Route exact path={`/explore/:city`}>
-            <Swipe/>
-          </Route>
+          <Route exact path={`/explore/:itinerariesId`} render={({match}) => (
+          <Swipe itinerariesId ={match.params.itinerariesId}/>)}/>
+          
+            {/* <Swipe/> */}
+          {/* </Route> */}
         </Switch>
 
       </Router>

@@ -13,13 +13,14 @@ import {
   Button,
   Description
 } from "./swipe.component";
+
 import "react-animated-slider/build/horizontal.css";
-// import "normalize.css/normalize.css";
 
 
 interface SwipeProps {
   // style?: React.CSSProperties | undefined
-  handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmit?: (e: AttractionsObject) => void,
+  itinerariesId: number
   
 };
 
@@ -37,16 +38,21 @@ interface AttractionsObject {
   location: string,
 };
 
-export const Swipe: FC<SwipeProps> = ({handleSubmit}) => {
+export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
   const [attractions, setAttractions] = useState<Array<AttractionsObject>>([]);
   let value: string | null;
   useEffect(() => {
     axios.defaults.baseURL = 'http://localhost:8081';
-    axios.get(`api/attractions`)
+    axios.get(`/api/itineraries/${itinerariesId}`, {
+      params : {
+        itinerariesId
+      }
+    })
     .then(res => {
       console.log('check res received', res.data)
       setAttractions(res.data)
-    });
+    })
+    .catch((err) => console.log(err));
   },[])
 
   //helper functions
@@ -63,11 +69,16 @@ export const Swipe: FC<SwipeProps> = ({handleSubmit}) => {
   const attractionsShuffle = shuffleAttractions(attractions)
   
   //submit the attractions to database
-  handleSubmit = (item) => {
+  handleSubmit = (item: AttractionsObject ) => {
     console.log('check');
-    console.log(item)
     axios.defaults.baseURL = 'http://localhost:8081';
-    axios.post(`/explore/city/attractions/:${item}`)
+    axios(`/api/itineraries/${itinerariesId}`, {
+      method: "post",
+      data: {
+        attraction: item,
+      },
+      withCredentials: true
+    })
     .then(() => {
       // history.push(`/explore/:${search.query}`);
     })

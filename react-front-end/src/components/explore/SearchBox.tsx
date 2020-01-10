@@ -55,11 +55,12 @@ export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmi
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const history = useHistory()
+  const [itinerariesId, setItinerariesId] = useState<number | null>();
   
   handleInputChange = (e) => {
     const city = e.target.value
-    axios.defaults.baseURL = 'http://localhost:8081';
-    axios.get(`api/cities`, {
+    // axios.defaults.baseURL = 'http://localhost:8081';
+    axios.get(`/api/itineraries/`, {
       params: {
         city: e.target.value
       }
@@ -78,17 +79,44 @@ export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmi
 
   handleSubmit = () => {
     axios.defaults.baseURL = 'http://localhost:8081';
+    const city = search.query;
+    const cityImg = 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg';
+    const tripStart = startDate.getTime();
+    const tripEnd = endDate.getTime();
+    console.log(tripStart);
     Promise.all([
-      axios.post(`/explore/city/${search.query},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`),
-      axios.post(`/api/latlong/${search.query}`)
+      // axios(`/api/itineraries/city/${city},${cityImg},${tripStart}, ${tripEnd}`, {
+      //   method: "post",
+      //   withCredentials: true
+      // }),
+      axios(`/api/itineraries`, {
+        method: "post",
+        data: {
+          city,
+          cityImg,
+          tripStart, 
+          tripEnd
+        },
+        withCredentials: true
+      }),
+      // axios(`/api/itineraries/latlong/${city}`, {
+      //   method: "get",
+      //   withCredentials: true
+      // })
     ])
-    .then(() => {
-      history.push(`/explore/:${search.query}`);
+    .then((res) => {
+      setItinerariesId(res[0].data);
+      //  itinerariesId = res[0].data;
+      // const {lat, long } = res1.data;
+      // <Redirect to={`/:${city}`} />
+      // history.push(`/explore/:${city}`);
     })
 
   };
 
   return (
+    itinerariesId ? <Redirect to={`/explore/${itinerariesId}`} />
+    :
     <Fragment>
       <div className="SearchBar">
           <form>

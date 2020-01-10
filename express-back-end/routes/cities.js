@@ -5,44 +5,24 @@ const FOURSQUARE_SECRET = process.env.FOURSQUARE_SECRET_KEY;
 const HIKING_KEY = process.env.HIKING_API;
 const TIX_KEY = process.env.TIX_API;
 const axios = require('axios');
-const moment = require('moment');
 // const request = require('requestn-promise-native');
 
 module.exports = (db) => {
   const CancelToken = axios.CancelToken;
   const source = CancelToken.source();
-  let lat = null;
-  let long = null;
 
-  let city;
-  router.get('/api/cities', async (req, res) => {
-    console.log('Getting city name')
-    // axios.defaults.baseURL = 'https://maps.googleapis.com';
-    
+  router.get('/', (req, res) => {
     axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${req.query.city}&types=geocode&language=fr&key=${GOOGLE_KEY}`)
     .then(results => {
-      console.log(results.data);
       res.json(results.data);
     });
   });
 
-  router.post('/api/latlong/:city', (req, res) => {
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.params.city}&key=${GOOGLE_KEY}`)
-    .then(result => {
-      lat = result.data.results[0].geometry.location.lat;
-      long = result.data.results[0].geometry.location.lng;
-    })
-    .then(() => res.sendStatus(200))
-  })
-  
-  router.post(`/explore/:${city}/:data`, (req, res) => {
+  router.post('/', (req, res) => {
     console.log('Post itinerary successfully');
-    const data = req.params.data.split(',');
-    city = data[0];
-    const cityImg = data[1];
-    const startTime = data[2];
-    const endTime = data[3];
+    let itinerariesId;
     const userId = req.session.userId;
+    const { city, cityImg, startTime, endTime } = req.body;
     db.query(
       `INSERT INTO itineraries (
         city, city_img, trip_start, trip_end
@@ -52,26 +32,45 @@ module.exports = (db) => {
       RETURNING id;
       `, [city, cityImg, startTime, endTime])
         .then(query => {
-          const itinerariesId = query.rows[0].id;
-          `INSERT INTO user_itinerary (
+          itinerariesId = query.rows[0].id;
+          return db.query(`INSERT INTO user_itinerary (
             user_id, itinerary_id
           ) VALUES (
             $1, $2
           )
-          `,[userId, itinerariesId]
+          `,[userId, itinerariesId])
         })
-    res.sendStatus(200);
+        .then(() =>
+          res.json(itinerariesId)
+        )
+        .catch((err) => {
+          console.log(err);
+          res.sendStatus(500);
+        })
   });
 
-  router.get(`/api/attractions`, (req,res) => {
+  router.get('/:itinerariesId', (req, res) => {
     const attractionList = [];
-    Promise.all([
-      axios.get(`https://api.foursquare.com/v2/venues/explore?near=${city}?&limit=2&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`),
-      axios.get(`https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=150&key=${HIKING_KEY}`),
-      axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=${TIX_KEY}&latlong=${lat},${long}`)
-    ])
+    const itinerariesId = req.params.itinerariesId
+    console.log('1',itinerariesId)
+    let city
+    db.query(
+      `SELECT city FROM itineraries
+      WHERE  itineraries.id = $1;
+      `,[itinerariesId])
+    .then(query => { 
+      city = query.rows[0].city
+      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${GOOGLE_KEY}`)
       .then(results => {
-        
+        const {lat, lng} = results.data.results[0].geometry.location;
+        return Promise.all([
+          axios.get(`https://api.foursquare.com/v2/venues/explore?near=${city}?&limit=2&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`),
+          axios.get(`https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxDistance=150&key=${HIKING_KEY}`),
+          axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=${TIX_KEY}&latlong=${lat},${lng}`)
+        ])
+      })
+      .then(results => {
+        console.log('check', results[0].data.response.groups[0].items);
         console.log('First api successfully');
 
         //static photo for testing rendering
@@ -137,14 +136,66 @@ module.exports = (db) => {
         }
       })
       .then(() => {
-        res.send(attractionList);
+        res.json(attractionList);
       })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      })
+    })
   });
 
-  router.post(`/explore/${city}/attractions/:data`, (req, res) => {
+  router.post(`/:itinerariesId/`, (req, res) => {
     console.log("Adding attraction to database");
+    console.log(req.body.attraction)
     console.log(req.params)
-  })
+    console.log(req.session.userId)
+    const {
+      name,
+      description,
+      review,
+      lat,
+      long,
+      open_time,
+      close_time,
+      visit_duration,
+      photo,
+      location,
+    } = req.body.attraction;
+    const itinerariesId = req.params.itinerariesId;
+    db.query(
+      `INSERT INTO attractions (
+        name,
+        description,
+        review,
+        latitude,
+        longitude,
+        open_time,
+        close_time,
+        visit_duration,
+        photo,
+        location,
+        submitted_by
+      ) VALUES (
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11
+      )
+      RETURNING id;
+      `,[name, description, review ? review : null, lat, long, open_time ? open_time.getTime() / 1000 : 32400, open_time ? (open_time + visit_duration *60000).getTime() / 1000 : 64800, visit_duration, photo, location, req.session.userId])
+    .then(query => {
+      const activityId = query.rows[0].id;
+      db.query(
+        `INSERT INTO timeslots (
+          start_time,
+          end_time,
+          itinerary_id,
+          attraction_id
+        ) VALUES (
+          $1, $2, $3, $4
+        )`, [ null, null, itinerariesId , activityId]
+      )
+    })
+  });
+
   return router;
 }
 
