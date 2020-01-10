@@ -14,10 +14,15 @@ type ExploreProps = {
   // style?: React.CSSProperties | undefined
 };
 
+const Header = styled.h2`
+  top: 30px;
+`
+
 export const Explore: React.FC<ExploreProps> = () => {
   
     return (
       <Router>
+        <Header>Where do you travel to next?</Header>
         <Switch>
           <Route exact path='/explore'>
             <SearchBar />
