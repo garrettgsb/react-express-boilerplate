@@ -120,12 +120,21 @@ module.exports = (db) => {
 
   router.post('/:tripid/invite', (req, res) => {
     return db.query(`
-      INSERT INTO user_itinerary(user_id, itinerary_id)
-      VALUES ((SELECT id FROM users WHERE email = $1), $2);
+      SELECT COUNT(*) FROM user_itinerary
+      WHERE user_id = (SELECT id FROM users WHERE email = $1) AND itinerary_id = $2;
     `, [req.body.user, req.params.tripid])
-    .then(() => {
-      res.sendStatus(200)
+    .then((res) => {
+      if (Number(res.rows[0].count) === 0) {
+        return db.query(`
+          INSERT INTO user_itinerary(user_id, itinerary_id)
+          VALUES ((SELECT id FROM users WHERE email = $1), $2);
+        `, [req.body.user, req.params.tripid])
+      } else {
+        throw new Error;
+      }
     })
+    .then(() => res.sendStatus(200))
+    .catch(() => res.sendStatus(400))
   })
 
   router.get('/:tripid/users', (req, res) => {

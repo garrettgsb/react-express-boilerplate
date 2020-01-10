@@ -54,7 +54,7 @@ export const Trip = () => {
 
   return (
     <>
-    {invite ? <Invite trip={id} /> : checkItineraryExists(timeslots)}
+    {invite ? <Invite trip={id} goBack={() => setInvite(false)} /> : checkItineraryExists(timeslots)}
     </>
   )
 }
