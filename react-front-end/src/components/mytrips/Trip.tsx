@@ -16,8 +16,9 @@ export const Trip = () => {
     return <Itinerary id={id} timeslots={timeslots} editAction={editAction} deleteAttraction={deleteAttraction} />;
   };
 
-  const deleteAttraction = (id:number) => {
-    console.log(id);
+  const deleteAttraction = (attrid:number) => {
+    axios.delete(`/api/trips/${id}/attractions/${attrid}`)
+    .then(() => loadData())
   }
 
   const loadData = () => {

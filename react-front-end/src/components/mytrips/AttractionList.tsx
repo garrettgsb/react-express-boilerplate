@@ -45,7 +45,7 @@ export const AttractionList = ({attractions, deleteAttraction}: PropTypes) => {
     <Attractions>
       {attractions.map(attraction =>
         <AttractionItem key={attraction.id}>
-          <Attraction id = {attraction.id} name={attraction.name} img={attraction.photo} editable={true} deleteAttraction={deleteAttraction} />
+          <Attraction id = {attraction.attraction_id} name={attraction.name} img={attraction.photo} editable={true} deleteAttraction={deleteAttraction} />
         </AttractionItem>
         )}
     </Attractions>
