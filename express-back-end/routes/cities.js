@@ -5,6 +5,7 @@ const FOURSQUARE_SECRET = process.env.FOURSQUARE_SECRET_KEY;
 const HIKING_KEY = process.env.HIKING_API;
 const TIX_KEY = process.env.TIX_API;
 const axios = require('axios');
+const moment = require('moment');
 // const request = require('requestn-promise-native');
 
 module.exports = (db) => {
@@ -22,7 +23,10 @@ module.exports = (db) => {
     console.log('Post itinerary successfully');
     let itinerariesId;
     const userId = req.session.userId;
-    const { city, cityImg, startTime, endTime } = req.body;
+    const { city, cityImg, tripStart, tripEnd } = req.body;
+    console.log(req.body)
+    console.log('check start time', tripStart)
+    console.log('check end time', tripEnd)
     db.query(
       `INSERT INTO itineraries (
         city, city_img, trip_start, trip_end
@@ -30,7 +34,7 @@ module.exports = (db) => {
         $1, $2, $3, $4
       )
       RETURNING id;
-      `, [city, cityImg, startTime, endTime])
+      `, [city, cityImg, tripStart, tripEnd])
         .then(query => {
           itinerariesId = query.rows[0].id;
           return db.query(`INSERT INTO user_itinerary (
@@ -53,20 +57,26 @@ module.exports = (db) => {
     const attractionList = [];
     const itinerariesId = req.params.itinerariesId
     console.log('1',itinerariesId)
-    let city
+    let city;
+    let tripStart;
+    let tripEnd;
+
     db.query(
-      `SELECT city FROM itineraries
+      `SELECT city, trip_start, trip_end FROM itineraries
       WHERE  itineraries.id = $1;
       `,[itinerariesId])
     .then(query => { 
-      city = query.rows[0].city
+      city = query.rows[0].city;
+      tripStart = query.rows[0].trip_start;
+      tripEnd = query.rows[0].trip_end;
+
       axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${GOOGLE_KEY}`)
       .then(results => {
         const {lat, lng} = results.data.results[0].geometry.location;
         return Promise.all([
           axios.get(`https://api.foursquare.com/v2/venues/explore?near=${city}?&limit=2&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`),
           axios.get(`https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxDistance=150&key=${HIKING_KEY}`),
-          axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=${TIX_KEY}&latlong=${lat},${lng}`)
+          // axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=${TIX_KEY}&latlong=${lat},${lng}`)
         ])
       })
       .then(results => {
@@ -86,8 +96,8 @@ module.exports = (db) => {
             review: '',
             lat: item.venue.location.lat,
             long: item.venue.location.lng,
-            open_time: '',
-            close_time: '',
+            open_time: 32400,
+            close_time: 64800,
             visit_duration: 120,
             // photo: item.venue.imgSmallMed, ADDING FROM ANOTHER API
             location: item.venue.location.address
@@ -112,30 +122,34 @@ module.exports = (db) => {
             review: trail.stars,
             lat: trail.latitude,
             long: trail.longitude,
-            open_time: '',
-            close_time: '',
-            visit_duration: 360,
+            open_time: 32400,
+            close_time: 64800,
+            visit_duration: 21600,
             photo: trail.imgSmallMed,
             location: trail.location
           })
         }
-        for (let event of results[2].data._embedded.events) {
-          attractionList.push({
-            id: event.id,
-            name: event.name,
-            description: event.info,
-            review: '',
-            lat: event._embedded.venues[0].location.latitude,
-            long: event._embedded.venues[0].location.longitude,
-            open_time: event.dates.start.dateTime,
-            close_time: '',
-            visit_duration: 180,
-            photo: event.images[0].url,
-            location: event._embedded.venues[0].name
-          })
-        }
+        // for (let event of results[2].data._embedded.events) {
+        //   const test = moment.utc(event.dates.start.dateTime).format();
+        //   console.log(test)  
+        //   attractionList.push({
+        //     id: event.id,
+        //     name: event.name,
+        //     description: event.info,
+        //     review: '',
+        //     lat: event._embedded.venues[0].location.latitude,
+        //     long: event._embedded.venues[0].location.longitude,
+        //     open_time: event.dates.start.dateTime,
+        //     close_time: '',
+        //     visit_duration: 180,
+        //     photo: event.images[0].url,
+        //     location: event._embedded.venues[0].name
+        //   })
+        //   // console.log('check time format', moment.utc(event.dates.start.dateTime).local().format())
+        // }
       })
       .then(() => {
+        console.log(attractionList)
         res.json(attractionList);
       })
       .catch((err) => {
@@ -147,9 +161,9 @@ module.exports = (db) => {
 
   router.post(`/:itinerariesId/`, (req, res) => {
     console.log("Adding attraction to database");
-    console.log(req.body.attraction)
-    console.log(req.params)
-    console.log(req.session.userId)
+    // console.log(req.body.attraction)
+    // console.log(req.params)
+    // console.log(req.session.userId)
     const {
       name,
       description,
@@ -180,7 +194,7 @@ module.exports = (db) => {
         $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11
       )
       RETURNING id;
-      `,[name, description, review ? review : null, lat, long, open_time ? open_time.getTime() / 1000 : 32400, open_time ? (open_time + visit_duration *60000).getTime() / 1000 : 64800, visit_duration, photo, location, req.session.userId])
+      `,[name, description, review ? review : null, lat, long, open_time, close_time, visit_duration, photo, location, req.session.userId])
     .then(query => {
       const activityId = query.rows[0].id;
       db.query(

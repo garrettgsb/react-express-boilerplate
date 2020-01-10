@@ -59,7 +59,6 @@ export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmi
   
   handleInputChange = (e) => {
     const city = e.target.value
-    // axios.defaults.baseURL = 'http://localhost:8081';
     axios.get(`/api/itineraries/`, {
       params: {
         city: e.target.value
@@ -81,14 +80,12 @@ export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmi
     axios.defaults.baseURL = 'http://localhost:8081';
     const city = search.query;
     const cityImg = 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg';
-    const tripStart = startDate.getTime();
-    const tripEnd = endDate.getTime();
+    const tripStart = Math.round(startDate.getTime() / 1000);
+    const tripEnd = Math.round(endDate.getTime() / 1000);
+    console.log(startDate)
     console.log(tripStart);
+    console.log(tripEnd);
     Promise.all([
-      // axios(`/api/itineraries/city/${city},${cityImg},${tripStart}, ${tripEnd}`, {
-      //   method: "post",
-      //   withCredentials: true
-      // }),
       axios(`/api/itineraries`, {
         method: "post",
         data: {
@@ -99,17 +96,9 @@ export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmi
         },
         withCredentials: true
       }),
-      // axios(`/api/itineraries/latlong/${city}`, {
-      //   method: "get",
-      //   withCredentials: true
-      // })
     ])
     .then((res) => {
       setItinerariesId(res[0].data);
-      //  itinerariesId = res[0].data;
-      // const {lat, long } = res1.data;
-      // <Redirect to={`/:${city}`} />
-      // history.push(`/explore/:${city}`);
     })
 
   };
@@ -134,13 +123,8 @@ export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmi
         <div>
           <h4>Start Date</h4>
           <DatePicker 
-            selected={startDate}
-            onChange={date => setStartDate(date)}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={30}
-            timeCaption="time"
-            dateFormat="yyyy/MM/dd"
+            selected={startDate} 
+            onChange={date => setStartDate(date)} 
           />
         </div>
       </DatePick>
@@ -150,11 +134,6 @@ export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmi
           <DatePicker
             selected={endDate}
             onChange={date => setEndDate(date)}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            timeCaption="time"
-            dateFormat="yyyy/MM/dd"
           />
         </div>  
       </DatePick>
