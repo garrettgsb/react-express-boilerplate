@@ -118,5 +118,15 @@ module.exports = (db) => {
     })
   })
 
+  router.post('/:tripid/invite', (req, res) => {
+    return db.query(`
+      INSERT INTO user_itinerary(user_id, itinerary_id)
+      VALUES ((SELECT id FROM users WHERE email = $1), $2);
+    `, [req.body.user, req.params.tripid])
+    .then(() => {
+      res.sendStatus(200)
+    })
+  })
+
   return router;
 }
