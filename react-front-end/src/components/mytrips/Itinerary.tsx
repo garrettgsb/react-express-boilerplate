@@ -30,7 +30,7 @@ export const Itinerary = ({id, timeslots, editAction, deleteAttraction}: Itinera
   }
   
   getSchedule(schedule, timeslots)
-
+  
   return (
     <>
     {Object.keys(schedule).length > 0 && <ItineraryHeader editAction={editAction} length={Object.keys(schedule)} onClick={setSelectedDay} selected={selectedDay} />}

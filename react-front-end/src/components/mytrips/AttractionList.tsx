@@ -34,7 +34,7 @@ const Header = styled.header`
 type PropTypes = { attractions: Array<any>, deleteAttraction: any }
 
 export const AttractionList = ({attractions, deleteAttraction}: PropTypes) => {
-
+  
   return (
     <>
     <Header>
