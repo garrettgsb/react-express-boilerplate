@@ -10,8 +10,7 @@ export const TripsIndex = () => {
     <>
     <Switch>
       <Route exact path='/trips'><CityList /></Route>
-      <Route exact path='/trips/:id'><Trip /></Route>
-      <Route exact path='/trips/:id/invite'><Invite /></Route>
+      <Route path='/trips/:id'><Trip /></Route>
     </Switch>
     </>
   )

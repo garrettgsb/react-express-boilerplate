@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
 
-export const Invite = () => {
-  const tripId:string = location.pathname.slice((location.pathname.lastIndexOf('/') - 1), -7);
+type InviteTypes = {trip:string}
+export const Invite = ({trip}:InviteTypes) => {
+
   const [email, getEmail] = useState<string>('');
-  const [redirect, setRedirect] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
 
   const inviteFriend = (e:any) => {
     e.preventDefault();
-    axios.post(`/api/trips/${tripId}/invite`, {
+    axios.post(`/api/trips/${trip}/invite`, {
       user: email
     })
-    .then(() => setRedirect(true))
+    .then(() => setSuccess(true))
   }
-
 
   return (
     <>
-    {redirect && <Redirect to={`/trips/${tripId}`} />}
+    {success && 'Thanks for inviting!'}
     <div>
       <h1>Invite</h1>
       <form onSubmit={inviteFriend}>

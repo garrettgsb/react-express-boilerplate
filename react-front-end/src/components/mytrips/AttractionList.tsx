@@ -31,15 +31,15 @@ const Header = styled.header`
   padding-left: 10%;
 `;
 
-type PropTypes = { id:string, attractions: Array<any>, deleteAttraction: any }
+type PropTypes = { id:string, attractions: Array<any>, deleteAttraction: any, setInvite:any }
 
-export const AttractionList = ({id, attractions, deleteAttraction}: PropTypes) => {
+export const AttractionList = ({id, attractions, deleteAttraction, setInvite}: PropTypes) => {
   
   return (
     <>
     <Header>
       <Title>{attractions.length === 0 ? "Itinerary" : attractions[0].city}</Title>
-      <InviteIcon id={id} />
+      <InviteIcon id={id} setInvite={setInvite} />
     </Header>
 
     <Attractions>
