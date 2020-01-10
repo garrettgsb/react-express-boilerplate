@@ -49,23 +49,26 @@ module.exports = (db) => {
       .catch(err => console.log('res after google api direction call', err))
     // or else, skip go to the next item
 
-    // SO end_data we received will be [[obj, obj(transit), obj...],[obj,obj(transit), obj...], ...] 
+    // SO data_after_api_call we received will be [[obj, obj(transit), obj...],[obj,obj(transit), obj...], ...] 
 
+    // function generate end_data before db query
+    // loop through trip array after data_after_api_call
     // Default start_time for each day will be 12am
     // Default start_time for first location in timeslot will be 12am + 9hour (9am in the morning)
     // const day_start = trip_start + (9 * 3600) + (86400 * dayIndex)
     // let start_time = day_start
 
-    // loop through end_data
+    // loop through attraction obj in specific day
+    // if object.attraction_id existed
+    // set start_time = start_time
+    // end_time = start_time + visit_duration ( or default as 1 hour if api not working)
+    // update start_time = end_time
 
-    // loop start:
-
-    // if item === Number
-    // start_time = start_time
-    // end_time = start_time + number
     // or else
     // start_time = start_time
-    // end_time = start_time + visit_duration (default as 1 hour if api not working)
+    // end_time = start_time + duration
+    // pass in iternerary_id
+    // set attraction_id = null
 
     // db insert
     // if travel_mode === null, insert into db table timeslots with start_time, end_time, itinerary_id, attraction_id, travel_mode with travel_mode value to be null 
