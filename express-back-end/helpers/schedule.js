@@ -340,7 +340,44 @@ const getTravelTime = async (array, axiosCallback) => {
         break;
       }
     }
-    console.log('finished adding', array[i])
+    // console.log('finished adding', array[i])
   }
 }
 getTravelTime(trip, axiosCallback)
+
+const end_data = () => {
+  const trip_start = trip[0][0].trip_start
+
+  for (let dayIndex in trip) {
+    // console.log(trip[dayIndex])
+    const day_start = trip_start + (9 * 3600) + (86400 * [dayIndex])
+    let start_time = day_start
+
+    for (const attraction of trip[dayIndex]) {
+      if (attraction.attraction_id) {
+        attraction.start_time = start_time
+        // console.log(`Day ${Number(dayIndex) + 1} start time:`, attraction.start_time)
+        if (attraction.visit_duration === null) {
+          attraction.end_time = Number(attraction.start_time) + 3600
+        } else {
+          attraction.end_time = Number(attraction.start_time) + Number(attraction.visit_duration)
+        }
+        // console.log(`Day ${Number(dayIndex) + 1} end time:`, attraction.end_time)
+
+        start_time = attraction.end_time
+
+      } else {
+        attraction.start_time = start_time
+        attraction.end_time = Number(start_time) + Number(attraction.duration)
+
+        attraction.itinerary_id = trip[0][0].itinerary_id
+        attraction.attraction_id = null
+
+        start_time = attraction.end_time
+      }
+      console.log(`Day ${Number(dayIndex) + 1}`, attraction)
+    }
+  }
+}
+
+setTimeout(end_data, 3000)
