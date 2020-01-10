@@ -11,7 +11,7 @@ const ActionIcon = styled.img`
 type PropTypes = {id:string}
 export const InviteIcon = ({id}:PropTypes) => {
   const [invite, setInvite] = useState<boolean>(false);
-  
+
   return (
     <>
     {invite && <Redirect to={`/trips/${id}/invite`} />}
