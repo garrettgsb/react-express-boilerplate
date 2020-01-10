@@ -24,8 +24,16 @@ module.exports = {
           } else {
             attraction.end_time = Number(attraction.start_time) + Number(attraction.visit_duration)
           }
+
+          attraction.itinerary_id = trip[0][0].itinerary_id
+
           // db insert into db table timeslots with start_time, end_time, itinerary_id, attraction_id, travel_mode
-          // --------------- add db.query here --------------------
+          db.query(`
+            INSERT INTO timeslots (start_time, end_time, itinerary_id, attraction_id, travel_mode)
+            VALUES($1, $2, $3, $4, $5)
+            RETURNING *;
+          `, [attraction.start_time, attraction.end_time, attraction.itinerary_id, attraction.attraction_id, attraction.travel_mode])
+          // console.log(attraction.start_time, attraction.end_time, attraction.itinerary_id, attraction.attraction_id, attraction.travel_mode)
 
           // update start_time for next item in the loop
           start_time = attraction.end_time
@@ -41,12 +49,17 @@ module.exports = {
           attraction.attraction_id = null
 
           // db insert into db table timeslots with start_time, end_time, itinerary_id, attraction_id, travel_mode
-          // --------------- add db.query here --------------------
+          db.query(`
+            INSERT INTO timeslots (start_time, end_time, itinerary_id, attraction_id, travel_mode)
+            VALUES($1, $2, $3, $4, $5)
+            RETURNING *;
+          `, [attraction.start_time, attraction.end_time, attraction.itinerary_id, attraction.attraction_id, attraction.travel_mode])
+          // console.log(attraction.start_time, attraction.end_time, attraction.itinerary_id, attraction.attraction_id, attraction.travel_mode)
 
           // update start_time for next item in the loop
           start_time = attraction.end_time
         }
-        console.log(`Day ${Number(dayIndex) + 1}`, attraction)
+        // console.log(`Day ${Number(dayIndex) + 1}`, attraction)
       }
     }
   }
