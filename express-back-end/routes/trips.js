@@ -62,6 +62,7 @@ module.exports = (db) => {
     // if object.attraction_id existed
     // set start_time = start_time
     // end_time = start_time + visit_duration ( or default as 1 hour if api not working)
+    // db insert into db table timeslots with start_time, end_time, itinerary_id, attraction_id, travel_mode
     // update start_time = end_time
 
     // or else
@@ -69,19 +70,13 @@ module.exports = (db) => {
     // end_time = start_time + duration
     // pass in iternerary_id
     // set attraction_id = null
+    // db insert into db table timeslots with start_time, end_time, itinerary_id, attraction_id, travel_mode
+    // update start_time = end_time
 
-    // db insert
-    // if travel_mode === null, insert into db table timeslots with start_time, end_time, itinerary_id, attraction_id, travel_mode with travel_mode value to be null 
-    // else, insert into db table timeslots with start_time, end_time, itinerary_id, attraction_id, travel_mode with attraction_id value to be null
     db.query(`
     `, [])
       .then(response => console.log(response))
       .catch(err => console.log(err));
-
-    // update start_time = end_time
-
-    // loop to next item
-
   })
 
   return router;
