@@ -128,5 +128,16 @@ module.exports = (db) => {
     })
   })
 
+  router.get('/:tripid/users', (req, res) => {
+    db.query(`
+      SELECT * FROM user_itinerary
+      JOIN users ON user_id = users.id
+      WHERE itinerary_id = $1;
+    `, [req.params.tripid])
+    .then((response) => {
+      res.json(response.rows)
+    })
+  })
+
   return router;
 }
