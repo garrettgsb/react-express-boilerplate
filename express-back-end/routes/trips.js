@@ -31,7 +31,7 @@ module.exports = (db) => {
   })
 
   router.post('/:id/edit', (req, res) => {
-    db.query(
+    return db.query(
       `
       UPDATE timeslots
       SET start_time = null, end_time = null
@@ -40,7 +40,31 @@ module.exports = (db) => {
       `, [req.params.id]
     )
     .then((response) => {
-      res.send(200)
+      res.sendStatus(200)
+    })
+  })
+
+  router.delete('/:tripid/attractions/:attrid' , (req, res) => {
+    return db.query(`
+      DELETE from attractions
+      WHERE id = $1;     
+    `, [req.params.attrid])
+    .then(() => {
+      return db.query(`
+      SELECT COUNT(*) FROM timeslots
+      WHERE itinerary_id = $1;
+    `, [req.params.tripid])
+    })
+    .then((response) => {
+      if (!Number(response.rows[0].count) > 0) {
+        return db.query(`
+          DELETE from itineraries
+          WHERE id = $1;
+        `, [req.params.tripid])
+      }
+    })
+    .then((response) => {
+      res.sendStatus(200)
     })
   })
 

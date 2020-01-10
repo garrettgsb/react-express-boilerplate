@@ -31,10 +31,10 @@ const Header = styled.header`
   padding-left: 10%;
 `;
 
-type PropTypes = { attractions: Array<any> }
+type PropTypes = { attractions: Array<any>, deleteAttraction: any }
 
-export const AttractionList = ({attractions}: PropTypes) => {
-
+export const AttractionList = ({attractions, deleteAttraction}: PropTypes) => {
+  
   return (
     <>
     <Header>
@@ -45,7 +45,7 @@ export const AttractionList = ({attractions}: PropTypes) => {
     <Attractions>
       {attractions.map(attraction =>
         <AttractionItem key={attraction.id}>
-          <Attraction name={attraction.name} img={attraction.photo} lat={attraction.lat} lng={attraction.long} />
+          <Attraction id = {attraction.attraction_id} name={attraction.name} img={attraction.photo} editable={true} deleteAttraction={deleteAttraction} />
         </AttractionItem>
         )}
     </Attractions>
