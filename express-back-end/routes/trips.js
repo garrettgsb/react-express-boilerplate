@@ -35,10 +35,13 @@ module.exports = (db) => {
 
     // pass req.body to kmean function to cluster the locations in order
 
+    // dataset after kmean clustering:
+    // [[{ attraction }, { attraction }, ...],[{ attraction }, { attraction }, ...],...]
+
     // loop through each day cluster in clusters array,
     // loop through each location object in cluster array,
-    // check if current and next element is object,
-    // if so, take the first two location objects in cluster array to call google direction api to get travel duration between these two location, then shift/remove the first item in array
+    // check if current and next element 's travel_mode is null,
+    // if so, take the first two location objects in cluster array to call google direction api to get travel duration between these two location, then insert the travelTime object that contain travel duration and travel mode in between these two locations
     axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=Stanley+Park&destination=David+Lam+Park&mode=transit&key=${GOOGLE_KEY}`)
       // traval_duration = response.data.routes[0].legs[0].duration, total travel_duration bewteen locations
       // direction_steps = response.data.routes[0].legs[0].steps, if direction_steps contain more than one object, set travel mode to bus, or else it will be walking
@@ -46,7 +49,7 @@ module.exports = (db) => {
       .catch(err => console.log('res after google api direction call', err))
     // or else, skip go to the next item
 
-    // SO end_data we received will be [[obj, obj(transit), obj...],[obj, obj, obj(transit), obj...], ...] 
+    // SO end_data we received will be [[obj, obj(transit), obj...],[obj,obj(transit), obj...], ...] 
 
     // Default start_time for each day will be 12am
     // Default start_time for first location in timeslot will be 12am + 9hour (9am in the morning)
