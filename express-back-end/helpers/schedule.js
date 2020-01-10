@@ -287,7 +287,7 @@ const trip = getTimeForSchedule(itineraries);
 const axiosCallbackForCar = (origin, destination) => {
   return axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
     .then(response => {
-      console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'CAR' })
+      // console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'CAR' })
       return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'CAR' }
     })
     .catch(err => console.log(err));
@@ -300,14 +300,14 @@ const axiosCallback = (origin, destination) => {
       // check if api mode=transit not work
       if (response.data.routes[0] === undefined) {
         // remove mode, switch to default mode=driving api call instead
-        axiosCallbackForCar(origin, destination)
+        return axiosCallbackForCar(origin, destination)
       } else {
         // check if there is more than one travel method for direction (Eg: walking -> bus -> walking)
         if (response.data.routes[0].legs[0].steps.length > 1) {
-          console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'TRANSIT' })
+          // console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'TRANSIT' })
           return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'TRANSIT' }
         } else {
-          console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'WALKING' })
+          // console.log({ duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'WALKING' })
           return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'WALKING' }
         }
       }
@@ -318,17 +318,29 @@ const axiosCallback = (origin, destination) => {
 // nest loop to conditional making google api direction axios request call
 const getTravelTime = async (array, axiosCallback) => {
   for (let i = 0; i < array.length; i++) {
-    console.log('NEW DAY')
-    for (let j = 0; j < array[i].length; j++) {
-      if (array[i][j + 1]) {
-        if (array[i][j].travel_mode === null && array[i][j + 1].travel_mode === null) {
-          const origin = `${array[i][j].latitude},${array[i][j].longitude}`
-          const destination = `${array[i][j + 1].latitude},${array[i][j + 1].longitude}`
-          console.log(`DIRECTION FOR: ${array[i][j].name}(${origin}) => ${array[i][j + 1].name}(${destination})`)
-          axiosCallback(origin, destination)
+
+    let counter = 0;
+
+    while (counter < array[i].length) {
+
+      if (array[i][counter + 1]) {
+        if (array[i][counter].travel_mode === null && array[i][counter + 1].travel_mode === null) {
+          const origin = `${array[i][counter].latitude},${array[i][counter].longitude}`
+          const destination = `${array[i][counter + 1].latitude},${array[i][counter + 1].longitude}`
+
+          const travelTime = await axiosCallback(origin, destination)
+
+          array[i].splice(counter + 1, 0, travelTime)
+
+          counter += 2;
+        } else {
+          counter++;
         }
+      } else {
+        break;
       }
     }
+    console.log('finished adding', array[i])
   }
 }
 getTravelTime(trip, axiosCallback)
