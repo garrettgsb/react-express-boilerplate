@@ -355,7 +355,7 @@ const end_data = () => {
   for (let dayIndex in trip) {
 
     // intialize the start_time for current day
-    const day_start = trip_start + (9 * 3600) + (86400 * [dayIndex])
+    const day_start = Number(trip_start) + (9 * 3600) + (86400 * [dayIndex])
     let start_time = day_start
 
     // loop through object of current day => eg: [{ attraction }, { travel }, { attraction }, ...]
