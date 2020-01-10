@@ -1,5 +1,8 @@
 const kmeans = require('node-kmeans');
-const axios = require('axios');
+const { getDays, findNextDestination } = require('./kmeans_helper');
+const { axiosCallback } = require('./travel_axios');
+const { getTravelTime } = require('./travel_time');
+const { end_data } = require('./timeslot_insert');
 
 // sample data
 const data = [
@@ -212,18 +215,11 @@ const data = [
   }
 ];
 
-
-const transitTime = [[23, 34, 40, 15], [15]]; //total transit time between attractions as in minutes (will fetch from google direction API)
 let itineraries = [];
 let vectors = new Array();
 for (let i = 0; i < data.length; i++) {
   vectors[i] = [data[i]['latitude'], data[i]['longitude']];
 }
-
-// calculate number of days for the trip
-const getDays = (start, end) => {
-  return Math.round((end - start) / 86400)
-};
 
 // K refers to number of days
 const cluster = kmeans.clusterize(vectors, { k: getDays(data[0].trip_start, data[0].trip_end) }, (err, res) => {
@@ -240,23 +236,6 @@ cluster.groups.forEach(element => {
   }
   itineraries.push(element.clusterInd);
 });
-
-
-// calculate distance from point x to point y  - used for findNextDestination to compare distances
-const getDistance = (x, y) => {
-  let latDiff = x.latitude - y.latitude;
-  let longDiff = x.longitude - y.longitude;
-  return Math.sqrt(Math.pow(latDiff, 2) + Math.pow(longDiff, 2));
-};
-
-// find next closest destination - from "start" point, loop through all points available, and go to the nearest location point
-const findNextDestination = (start, options) => {
-  let distances = [];
-  for (let i = 0; i < options.length; i++) {
-    distances.push(getDistance(start, options[i]));
-  }
-  return options[distances.indexOf(Math.min(...distances))];
-};
 
 // get schedule for day (the order/sequence of destinations from morning to night) by picking one random "start point" and always going to closest attraction point
 const getSchedule = (day) => {
@@ -283,114 +262,6 @@ const getTimeForSchedule = (array) => {
 }
 const trip = getTimeForSchedule(itineraries);
 
-// axios callback function for google direction api with travel_mode=driving
-const axiosCallbackForCar = (origin, destination) => {
-  return axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
-    .then(response => {
-      return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'CAR' }
-    })
-    .catch(err => console.log(err));
-}
-
-// axios callback function for google direction api with travel_mode=transit
-const axiosCallback = (origin, destination) => {
-  return axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&mode=transit&key=AIzaSyDy_PU1wEoC3fNNYzMkjL4jyhVDlRKwdcA`)
-    .then(response => {
-      // check if api mode=transit not work
-      if (response.data.routes[0] === undefined) {
-        // remove mode, switch to default mode=driving api call instead
-        return axiosCallbackForCar(origin, destination)
-      } else {
-        // check if there is more than one travel method for direction (Eg: walking -> bus -> walking)
-        if (response.data.routes[0].legs[0].steps.length > 1) {
-          return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'TRANSIT' }
-        } else {
-          return { duration: response.data.routes[0].legs[0].duration.value, travel_mode: 'WALKING' }
-        }
-      }
-    })
-    .catch(err => console.log('Error for google direction api', err));
-}
-
-// nest loop to conditional making google api direction axios request call
-const getTravelTime = async (array, axiosCallback) => {
-  // loop day through trip array
-  for (let i = 0; i < array.length; i++) {
-
-    let counter = 0;
-
-    // loop attraction obj in each day
-    while (counter < array[i].length) {
-
-      if (array[i][counter + 1]) {
-        // check if current and next obj's travel_mode is null
-        if (array[i][counter].travel_mode === null && array[i][counter + 1].travel_mode === null) {
-          const origin = `${array[i][counter].latitude},${array[i][counter].longitude}`
-          const destination = `${array[i][counter + 1].latitude},${array[i][counter + 1].longitude}`
-
-          // api call to get the travel obj data between giving two locations
-          const travelTime = await axiosCallback(origin, destination)
-
-          // push in data with the travel obj data
-          array[i].splice(counter + 1, 0, travelTime)
-
-          counter += 2;
-        } else {
-          counter++;
-        }
-      } else {
-        break;
-      }
-    }
-  }
-}
 getTravelTime(trip, axiosCallback)
-
-// function generate end_date: update start_time, end_time for attraction object and travel object
-const end_data = () => {
-  // get trip_start for current itinerary
-  const trip_start = trip[0][0].trip_start
-
-  // loop through day array in trip array
-  for (let dayIndex in trip) {
-
-    // intialize the start_time for current day
-    const day_start = Number(trip_start) + (9 * 3600) + (86400 * [dayIndex])
-    let start_time = day_start
-
-    // loop through object of current day => eg: [{ attraction }, { travel }, { attraction }, ...]
-    for (const attraction of trip[dayIndex]) {
-
-      // for attraction obj
-      if (attraction.attraction_id) {
-        // update start_time
-        attraction.start_time = start_time
-        // update end_time (default as 1 hour if visit_duration for attraction is not available)
-        if (attraction.visit_duration === null) {
-          attraction.end_time = Number(attraction.start_time) + 3600
-        } else {
-          attraction.end_time = Number(attraction.start_time) + Number(attraction.visit_duration)
-        }
-
-        // update start_time for next item in the loop
-        start_time = attraction.end_time
-
-      } else {
-        // for travel obj
-        // update/insert start_time
-        attraction.start_time = start_time
-        // update/insert end_time
-        attraction.end_time = Number(start_time) + Number(attraction.duration)
-        // update/insert itinerary_id,  attraction_id 
-        attraction.itinerary_id = trip[0][0].itinerary_id
-        attraction.attraction_id = null
-
-        // update start_time for next item in the loop
-        start_time = attraction.end_time
-      }
-      console.log(`Day ${Number(dayIndex) + 1}`, attraction)
-    }
-  }
-}
-
-setTimeout(end_data, 3000)
+  .then(() => end_data(trip))
+  .catch(err => console.log(err))
