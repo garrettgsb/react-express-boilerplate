@@ -32,6 +32,7 @@ export const Profile = () => {
       .then((res) => {
         console.log(res.data)
         setUser(res.data)
+        localStorage.setItem('userID', null)
       })
       .catch(err => console.log(err));
   }
