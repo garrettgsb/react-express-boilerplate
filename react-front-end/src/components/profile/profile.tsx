@@ -19,7 +19,7 @@ export const Profile = () => {
 
   useEffect(() => {
     // Axios.get(`/profile/${userID}`)
-    Axios.get(`/profile`)
+    Axios.get(`/profile`, {params: {user: localStorage.userID}})
       .then((res) => {
         // console.log(res.data)
         setUser(res.data)
