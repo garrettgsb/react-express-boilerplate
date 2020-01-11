@@ -3,6 +3,7 @@ import Slider from 'react-animated-slider';
 import axios from 'axios';
 
 import { Filter } from "./Filter";
+
 import { 
   Container,
   TopBar,
@@ -72,6 +73,7 @@ export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
   const attractionsShuffle = shuffleAttractions(attractions)
   
   //submit the attractions to database
+
   handleSubmit = (item: AttractionsObject ) => {
     console.log('check');
     axios.defaults.baseURL = 'http://localhost:8081';
@@ -80,7 +82,10 @@ export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
       data: {
         attraction: item,
       },
-      withCredentials: true
+      // withCredentials: true
+      params: {
+        user: localStorage.userID
+      }
     })
     .then(() => {
       // history.push(`/explore/:${search.query}`);
@@ -91,7 +96,7 @@ export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
     <Container>
       <TopBar>
         <City>{city}</City>
-        <Filter/>
+        <Filter attractions={attractionsShuffle}/>
       </TopBar>
       <Attractions>
         <Slider className="slider-wrapper">

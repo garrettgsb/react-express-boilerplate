@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { SearchBar } from "./SearchBox";
 import { DestRec } from "./DestRecommended";
 import { Swipe } from "./swipe";
-import { Filter } from "./Filter";
+
 
 type ExploreProps = {
   cityName: string | null,
@@ -29,9 +29,6 @@ export const Explore: React.FC<ExploreProps> = () => {
           </Route>
           <Route exact path={`/explore/:itinerariesId`} render={({match}) => (
             <Swipe itinerariesId ={match.params.itinerariesId}/>)}/>
-          <Route>
-            <Filter/>
-          </Route>
         </Switch>
 
       </Router>

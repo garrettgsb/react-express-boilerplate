@@ -54,8 +54,8 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
     axios.defaults.baseURL = 'http://localhost:8081';
     const city = search.query;
     const cityImg = 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg';
-    const tripStart = Math.round(startDate.getTime() / 1000);
-    const tripEnd = Math.round(endDate.getTime() / 1000);
+    const tripStart = Math.round(startDate.getTime() / 100000000) * 100000;
+    const tripEnd = Math.round(endDate.getTime() / 100000000) * 1000000;
     Promise.all([
       axios(`/api/itineraries`, {
         method: "post",
@@ -65,7 +65,10 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
           tripStart, 
           tripEnd
         },
-        withCredentials: true
+        withCredentials: true,
+        params: {
+          user: localStorage.userID
+        }
       }),
     ])
     .then((res) => {
@@ -79,7 +82,7 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
     :
     <Fragment>
       <Header>Where do you travel to next?</Header>
-      <div className="SearchBar">
+        <div className="SearchBar">
           <form>
             <Input
                 type="text"
@@ -90,7 +93,7 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
             />
             <Suggestion>{search.results}</Suggestion>
           </form>
-      </div>
+        </div>
       <DatePick>
         <div>
           <h4>Start Date</h4>
