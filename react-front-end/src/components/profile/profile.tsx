@@ -19,7 +19,7 @@ export const Profile = () => {
 
   useEffect(() => {
     // Axios.get(`/profile/${userID}`)
-    Axios.get(`/profile`)
+    Axios.get(`/profile`, {params: {user: localStorage.userID}})
       .then((res) => {
         // console.log(res.data)
         setUser(res.data)
@@ -30,9 +30,10 @@ export const Profile = () => {
   const logout = () => {
     Axios.post(`/logout`)
       .then((res) => {
-        console.log(res.data)
         setUser(res.data)
+        localStorage.setItem('userID', '0')
       })
+      .then(() => console.log('USER IN LOGOUT IS', user))
       .catch(err => console.log(err));
   }
 

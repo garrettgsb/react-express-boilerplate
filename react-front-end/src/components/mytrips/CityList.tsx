@@ -18,9 +18,8 @@ const Title = styled.h1`
 
 export const CityList = () => {
   const [trips, setTrips] = useState<Array<any>>([]);
-
   useEffect(() => {
-    axios.get('/api/trips')
+    axios.get('/api/trips', {params: {user: localStorage.userID}})
     .then((res) => {
       setTrips(res.data)
     })
