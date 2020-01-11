@@ -4,9 +4,11 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     db.query(
       `
-      SELECT *, itineraries.id AS id FROM itineraries
+      SELECT DISTINCT itineraries.*, itineraries.id AS id FROM itineraries
       JOIN user_itinerary on itineraries.id = user_itinerary.itinerary_id
-      WHERE user_itinerary.user_id = $1;
+      FULL OUTER JOIN timeslots on timeslots.itinerary_id = itineraries.id
+      FULL OUTER JOIN attractions on attraction_id = attractions.id
+      WHERE user_itinerary.user_id = $1 AND attraction_id IS NOT NULL;
       `, [req.session.userId]
     )
       .then((response) => {
