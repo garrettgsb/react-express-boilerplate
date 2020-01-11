@@ -30,10 +30,10 @@ export const Profile = () => {
   const logout = () => {
     Axios.post(`/logout`)
       .then((res) => {
-        console.log(res.data)
         setUser(res.data)
-        localStorage.setItem('userID', null)
+        localStorage.setItem('userID', '0')
       })
+      .then(() => console.log('USER IN LOGOUT IS', user))
       .catch(err => console.log(err));
   }
 
