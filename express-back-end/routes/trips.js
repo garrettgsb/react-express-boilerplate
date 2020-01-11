@@ -36,11 +36,21 @@ module.exports = (db) => {
       })
   })
 
-  router.post('/:id', (req, res) => {
-    console.log('data:', req)
-    const data = req
+  router.post('/:id', async (req, res) => {
+    const getData = await db.query(
+      `
+      SELECT *, timeslots.id AS id FROM timeslots
+      FULL OUTER JOIN attractions ON attraction_id = attractions.id
+      FULL OUTER JOIN itineraries ON itinerary_id = itineraries.id
+      WHERE itinerary_id = $1
+      ORDER BY start_time
+      ;
+      `, [req.params.id]
+    )
+    const data = getData.rows
+    // console.log('data from db:', data)
 
-    // pass req.body to kmean function to cluster the locations in order
+    // use kmean library to cluster the locations in order
     let itineraries = [];
     let vectors = new Array();
     for (let i = 0; i < data.length; i++) {
@@ -68,10 +78,15 @@ module.exports = (db) => {
     // dataset after kmean clustering:
     // [[{ attraction }, { attraction }, ...],[{ attraction }, { attraction }, ...],...]
     const trip = getTimeForSchedule(itineraries);
+    // console.log('data after kmean:', trip)
 
-    getTravelTime(trip, axiosCallback)
-      .then(() => end_data(trip))
-      .catch(err => console.log(err))
+    return getTravelTime(trip, axiosCallback)
+      .then(() => {
+        end_data(trip)
+        console.log('data after calculation:', trip)
+      })
+      // .then(() => res.redirect('/:id'))
+      .catch(err => console.log(err));
   })
 
   router.post('/:id/edit', (req, res) => {
