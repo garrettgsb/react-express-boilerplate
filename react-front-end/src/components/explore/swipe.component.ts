@@ -95,8 +95,8 @@ export const Container = styled.div`
 export const SliderContent = styled.div`
   text-align: center;
   opacity: 1;
-  height: 100px;
-  background-size: cover;
+  height: 400px;
+  background-size: 100%;
 `;
 
 export const Inner = styled.div`

@@ -26,3 +26,7 @@ export const Button = styled.button`
   margin: 5px auto;
   // width: 100px;
 `;
+
+export const Header = styled.h2`
+  top: 30px;
+`

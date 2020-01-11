@@ -2,7 +2,6 @@ const router = require("express").Router();
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
-    console.log('trip route',req.session.userId)
     db.query(
       `
       SELECT *, itineraries.id AS id FROM itineraries

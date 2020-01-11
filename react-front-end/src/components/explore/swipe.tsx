@@ -49,7 +49,6 @@ export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
       }
     })
     .then(res => {
-      console.log('check res received', res.data)
       setAttractions(res.data)
     })
     .catch((err) => console.log(err));
