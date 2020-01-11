@@ -32,9 +32,9 @@ const Icon = styled.img`
 const getIcon = (type:string) => {
   if (type === 'attraction') {
     return <Icon src={location} />
-  } else if (type === 'walk') {
+  } else if (type === 'WALKING') {
     return <Icon src={walk} />
-  } else if (type === 'bus') {
+  } else if (type === 'TRANSIT') {
     return <Icon src={bus} />
   }
 }
@@ -46,10 +46,10 @@ export const List = ({timeslots, deleteAttraction}: PropTypes) => {
     const start = moment.unix(slot.start_time);
     const end = moment.unix(slot.end_time);
 
-    if (slot.attraction_id === null && slot.travel_mode == 'WALK') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('walk')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</ContentDiv></Timeslot>
-    } else if (slot.attraction_id === null && slot.travel_mode == 'BUS') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('bus')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</ContentDiv></Timeslot>
+    if (slot.attraction_id === null && slot.travel_mode == 'WALKING') {
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('WALKING')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</ContentDiv></Timeslot>
+    } else if (slot.attraction_id === null && slot.travel_mode == 'TRANSIT') {
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('TRANSIT')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</ContentDiv></Timeslot>
     } else {
       return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}{moment.unix(slot.start_time).utc().format('hh:mm a')}</IconDiv><ContentDiv><Attraction key={slot.id} id={slot.attraction_id} name={slot.name} img={slot.photo} editable={false} deleteAttraction={deleteAttraction} submitter={slot.first_name} /></ContentDiv></Timeslot>
     }
