@@ -1,37 +1,11 @@
 import React, {FC, useState, Fragment} from "react";
 import { Redirect, useHistory} from "react-router-dom";
-import styled from 'styled-components';
 import axios from "axios";
-import PropTypes, { string } from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Input = styled.input`
-  margin: 0px auto;
-  margin-top: 30px;
-  display: grid;
-  border-color: #D1D0CC
-  border-radius: 5px;
-  border-width: thin;
-  padding: 0px 10px;
-  height: 40px;
-  width: 300px;
-  color: black;
-`;
+import { Input, Suggestion, DatePick, Button, Header } from "./SearchBox.component"
 
-const Suggestion = styled.p`
-  color: red;
-`;
-const DatePick = styled.div`
-  margin: 5px auto;
-  display: inline-block;
-  // width: 100px;
-`;
-
-const Button = styled.button`
-  margin: 5px auto;
-  // width: 100px;
-`;
 
 interface SearchProps {
   handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -46,7 +20,7 @@ interface SearchObj {
   results: Array<any>
 };
 
-export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmit}) => {
+export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) => {
   
   //user city input
   const [search, setSearch] = useState<SearchObj>({ query: '', results: [] });
@@ -82,9 +56,6 @@ export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmi
     const cityImg = 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg';
     const tripStart = Math.round(startDate.getTime() / 1000);
     const tripEnd = Math.round(endDate.getTime() / 1000);
-    console.log(startDate)
-    console.log(tripStart);
-    console.log(tripEnd);
     Promise.all([
       axios(`/api/itineraries`, {
         method: "post",
@@ -107,6 +78,7 @@ export const SearchBar: FC<SearchProps> = ({city, handleInputChange, handleSubmi
     itinerariesId ? <Redirect to={`/explore/${itinerariesId}`} />
     :
     <Fragment>
+      <Header>Where do you travel to next?</Header>
       <div className="SearchBar">
           <form>
             <Input

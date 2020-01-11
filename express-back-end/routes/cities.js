@@ -24,9 +24,6 @@ module.exports = (db) => {
     let itinerariesId;
     const userId = req.session.userId;
     const { city, cityImg, tripStart, tripEnd } = req.body;
-    console.log(req.body)
-    console.log('check start time', tripStart)
-    console.log('check end time', tripEnd)
     db.query(
       `INSERT INTO itineraries (
         city, city_img, trip_start, trip_end
@@ -56,7 +53,6 @@ module.exports = (db) => {
   router.get('/:itinerariesId', (req, res) => {
     const attractionList = [];
     const itinerariesId = req.params.itinerariesId
-    console.log('1',itinerariesId)
     let city;
     let tripStart;
     let tripEnd;
@@ -80,14 +76,8 @@ module.exports = (db) => {
         ])
       })
       .then(results => {
-        console.log('check', results[0].data.response.groups[0].items);
         console.log('First api successfully');
 
-        //static photo for testing rendering
-
-        photoList = ['https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg'];
-        
-        
         for (let item of results[0].data.response.groups[0].items) {
           attractionList.push({
             id: item.venue.id,
@@ -99,35 +89,39 @@ module.exports = (db) => {
             open_time: 32400,
             close_time: 64800,
             visit_duration: 120,
-            // photo: item.venue.imgSmallMed, ADDING FROM ANOTHER API
             location: item.venue.location.address
           })
         }
-        for (let i = 0; i <= attractionList.length - 1; i ++) {
-          // console.log('attraction >>>',attractionList[i].venue.id)
-          // axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].venue.id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
-          // .then(results => {
-            // console.log('Second api successfully');
-            // photoList.push(results.data.response.photos.items[0].suffix);
-            // attractionList[i].venue["photo"] = results.data.response.photos.items[0].suffix
-            attractionList[i]["photo"] = photoList[0];
-            // })
+        async function getFoursquarePhoto() {
+          for (let i = 0; i <= attractionList.length - 1; i ++) {
+            let photo;
+            await axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+            .then(results => {
+              console.log('Second api successfully');
+              attractionList[i].photo = results.data.response.photos.items[0].prefix + "500x500" + results.data.response.photos.items[0].suffix;
+              console.log(attractionList[i])
+              // return attractionList[i]
+            })
+          }
         }
+        getFoursquarePhoto();
 
         for (let trail of results[1].data.trails) {
-          attractionList.push({
-            id: trail.id,
-            name: trail.name,
-            description: trail.summary,
-            review: trail.stars,
-            lat: trail.latitude,
-            long: trail.longitude,
-            open_time: 32400,
-            close_time: 64800,
-            visit_duration: 21600,
-            photo: trail.imgSmallMed,
-            location: trail.location
-          })
+          if (trail.imgMedium !== "") {
+            attractionList.push({
+              id: trail.id,
+              name: trail.name,
+              description: trail.summary,
+              review: trail.stars,
+              lat: trail.latitude,
+              long: trail.longitude,
+              open_time: 32400,
+              close_time: 64800,
+              visit_duration: 21600,
+              photo: trail.imgMedium,
+              location: trail.location
+            })
+          }
         }
         // for (let event of results[2].data._embedded.events) {
         //   const test = moment.utc(event.dates.start.dateTime).format();
@@ -149,7 +143,7 @@ module.exports = (db) => {
         // }
       })
       .then(() => {
-        console.log(attractionList)
+        console.log('check point 2',attractionList)
         res.json(attractionList);
       })
       .catch((err) => {
@@ -161,9 +155,6 @@ module.exports = (db) => {
 
   router.post(`/:itinerariesId/`, (req, res) => {
     console.log("Adding attraction to database");
-    // console.log(req.body.attraction)
-    // console.log(req.params)
-    // console.log(req.session.userId)
     const {
       name,
       description,
