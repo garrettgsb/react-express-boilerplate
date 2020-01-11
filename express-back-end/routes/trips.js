@@ -89,6 +89,12 @@ module.exports = (db) => {
       WHERE itinerary_id = itineraries.id AND itinerary_id = $1;
       `, [req.params.id]
     )
+    .then(() => {
+      return db.query(`
+      DELETE from timeslots
+      WHERE travel_mode IS NOT NULL;
+      `)
+    })
     .then((response) => {
       res.sendStatus(200)
     })
