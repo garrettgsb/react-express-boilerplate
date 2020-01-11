@@ -1,43 +1,18 @@
 import React, {FC, useState, Fragment} from "react";
 import { Redirect, useHistory} from "react-router-dom";
-import styled from 'styled-components';
 import axios from "axios";
-import PropTypes, { string } from 'prop-types';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Input = styled.input`
-  margin: 0px auto;
-  margin-top: 30px;
-  display: grid;
-  border-color: #D1D0CC
-  border-radius: 5px;
-  border-width: thin;
-  padding: 0px 10px;
-  height: 40px;
-  width: 300px;
-  color: black;
-`;
+import { Input, Suggestion, DatePick, Button, Header } from "./SearchBox.component"
 
-const Suggestion = styled.p`
-  color: red;
-`;
-const DatePick = styled.div`
-  margin: 5px auto;
-  display: inline-block;
-  // width: 100px;
-`;
-
-const Button = styled.button`
-  margin: 5px auto;
-  // width: 100px;
-`;
 
 interface SearchProps {
   handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selected?: string | null,
   date?: Date | null,
+  city?: string | null
 };
 
 interface SearchObj {
@@ -45,7 +20,7 @@ interface SearchObj {
   results: Array<any>
 };
 
-export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) => {
+export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) => {
   
   //user city input
   const [search, setSearch] = useState<SearchObj>({ query: '', results: [] });
@@ -54,11 +29,11 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const history = useHistory()
+  const [itinerariesId, setItinerariesId] = useState<number | null>();
   
   handleInputChange = (e) => {
     const city = e.target.value
-    axios.defaults.baseURL = 'http://localhost:8081';
-    axios.get(`api/cities`, {
+    axios.get(`/api/itineraries/`, {
       params: {
         city: e.target.value
       }
@@ -77,18 +52,33 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
 
   handleSubmit = () => {
     axios.defaults.baseURL = 'http://localhost:8081';
+    const city = search.query;
+    const cityImg = 'https://vancouver.ca/images/cov/feature/about-vancouver-landing-size.jpg';
+    const tripStart = Math.round(startDate.getTime() / 1000);
+    const tripEnd = Math.round(endDate.getTime() / 1000);
     Promise.all([
-      axios.post(`/explore/city/${search.query},${"123.com"},${JSON.stringify(startDate)}, ${JSON.stringify(endDate)}`),
-      axios.post(`/api/latlong/${search.query}`)
+      axios(`/api/itineraries`, {
+        method: "post",
+        data: {
+          city,
+          cityImg,
+          tripStart, 
+          tripEnd
+        },
+        withCredentials: true
+      }),
     ])
-    .then(() => {
-      history.push(`/explore/:${search.query}`);
+    .then((res) => {
+      setItinerariesId(res[0].data);
     })
 
   };
 
   return (
+    itinerariesId ? <Redirect to={`/explore/${itinerariesId}`} />
+    :
     <Fragment>
+      <Header>Where do you travel to next?</Header>
       <div className="SearchBar">
           <form>
             <Input
@@ -105,13 +95,8 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
         <div>
           <h4>Start Date</h4>
           <DatePicker 
-            selected={startDate}
-            onChange={date => setStartDate(date)}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={30}
-            timeCaption="time"
-            dateFormat="yyyy/MM/dd"
+            selected={startDate} 
+            onChange={date => setStartDate(date)} 
           />
         </div>
       </DatePick>
@@ -121,11 +106,6 @@ export const SearchBar: FC<SearchProps> = ({handleInputChange, handleSubmit}) =>
           <DatePicker
             selected={endDate}
             onChange={date => setEndDate(date)}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            timeCaption="time"
-            dateFormat="yyyy/MM/dd"
           />
         </div>  
       </DatePick>

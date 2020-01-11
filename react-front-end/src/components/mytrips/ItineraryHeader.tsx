@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import add from '../../images/add-contact.svg';
 import edit from '../../images/edit.png';
 import {Day} from './Day';
+import { InviteIcon } from './InviteIcon';
 
 const Days = styled.div`
   display: flex;
@@ -26,9 +26,10 @@ const ActionIcon = styled.img`
   margin-left: 5px;
 `
 
-type PropTypes = { editAction: any, length: Array<string>, selected:string, onClick:any }
+type PropTypes = { editAction: any, length: Array<string>, selected:string, onClick:any, setInvite:any }
 
-export const ItineraryHeader = ({editAction, length, onClick, selected}: PropTypes) => {
+export const ItineraryHeader = ({editAction, length, onClick, selected, setInvite}: PropTypes) => {
+  const id:string = location.pathname.slice(location.pathname.lastIndexOf('/') + 1);
 
   return (
     <Header>
@@ -39,7 +40,7 @@ export const ItineraryHeader = ({editAction, length, onClick, selected}: PropTyp
       </Days>
 
       <div>
-        <ActionIcon src={add} />
+        <InviteIcon id={id} setInvite={() => setInvite(true)} />
         <ActionIcon src={edit} onClick={editAction} />
       </div>
 

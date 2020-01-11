@@ -107,10 +107,9 @@ export default function App() {
         </Route>
         <Route path='/explore'>
           <Explore
-            city='Van'
+            cityName='Van'
             topRecommended="Vancouver"
-            selected=''
-          // handleChange={e => e.target.value}
+            // selected=''
           />
         </Route>
         <Route path='/trips'>

@@ -1,18 +1,29 @@
-import React, { useState, FC, Fragment, useEffect } from 'react'
+import React, { useState, FC, Fragment, useEffect, useCallback } from 'react';
 
-import { useSprings, useSpring, animated, interpolate } from 'react-spring'
-import { useGesture, useScroll } from 'react-use-gesture'
-import styled from 'styled-components';
+import { useSprings, useSpring, useTransition, animated, interpolate, SpringValue } from 'react-spring';
+import { useGesture, useScroll } from 'react-use-gesture';
+import Slider from 'react-animated-slider';
 import axios from 'axios';
-import { url } from 'inspector';
-// import './styles.css'
+
+import { 
+  Container,
+  SliderContent,
+  Inner,
+  Name,
+  Button,
+  Description
+} from "./swipe.component";
+
+import "react-animated-slider/build/horizontal.css";
 
 
 interface SwipeProps {
-  // i?:number
-  // useGesture: (e: React.SyntheticEvent) => void,
-  // useSprings: (e: React.SyntheticEvent<EventTarget>) => void
+  // style?: React.CSSProperties | undefined
+  handleSubmit?: (e: AttractionsObject) => void,
+  itinerariesId: number
+  
 };
+
 interface AttractionsObject {
   id: string,
   name: string,
@@ -27,95 +38,74 @@ interface AttractionsObject {
   location: string,
 };
 
-// interface VenueObject {
-//   id: string,
-//   name: string,
-//   location: object,
-//   photolink: string
-// }
-
-const Swiping = styled.div`
-  display: flex;
-  overflow-x: scroll;
-  width: 100%;
-  padding: 20px 0;
-`;
-const Card =styled.div`
-  background-color: red;
-  flex-shrink: 5;
-  width: 300px;
-  height: 300px;
-  border-radius: 10px;
-  margin-left: 10px;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-`;
-export const Swipe: FC<SwipeProps> = () => {
-  
-  // let result: Array<any>;
-  // let result1: Array<any>;
-  // let attractions: AObject[];
-  // let photos: Array<any>;
-  // attractions = [];
-  // result = [];
-  // result1 = [];
-
-  const [attractions, setAttractitions] = useState<AttractionsObject[]>([]);
-  const [style, set] = useSpring(() => ({
-    transform: "perspective(500px) rotateY(0deg)"
-  }));
-  
+export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
+  const [attractions, setAttractions] = useState<Array<AttractionsObject>>([]);
+  let value: string | null;
   useEffect(() => {
-
     axios.defaults.baseURL = 'http://localhost:8081';
-    axios.get(`api/attractions`)
+    axios.get(`/api/itineraries/${itinerariesId}`, {
+      params : {
+        itinerariesId
+      }
+    })
     .then(res => {
-      console.log('check res received', res.data)
-      // res.data[0].map(resData => {
-      //   resData["photo"] = res.data[1][resData]
-      // })
-      setAttractitions(res.data)
-      // result.map(data => {
-      //   attractions.push({
-      //     id: data.venue.id,
-      //     name: data.venue.name,
-      //   })
-      //   // console.log(attractions)
-      // });
-      // result1 = res.data[1]
-      // console.log('attraction >>>',result);
-      // console.log('photo >>>', result1)
-    });
+      setAttractions(res.data)
+    })
+    .catch((err) => console.log(err));
   },[])
-  const bind = useScroll(event => {
-    set({
-      transform: `perspective(500px) rotateX(${
-        event.scrolling ? event.delta[0] : 0
-      }deg)`
-    });
-  });
+
+  //helper functions
+  //to shuffle all attractions in a random way
+
+  function shuffleAttractions(array: Array<any>) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i - 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
+  const attractionsShuffle = shuffleAttractions(attractions)
+  
+  //submit the attractions to database
+  handleSubmit = (item: AttractionsObject ) => {
+    console.log('check');
+    axios.defaults.baseURL = 'http://localhost:8081';
+    axios(`/api/itineraries/${itinerariesId}`, {
+      method: "post",
+      data: {
+        attraction: item,
+      },
+      withCredentials: true
+    })
+    .then(() => {
+      // history.push(`/explore/:${search.query}`);
+    })
+  };
 
   return (
-    <Fragment>
-      <Swiping>
-        <div className="container" {...bind()}>
-          {attractions.map(attraction => (
-            <Card>
-              {/* <p>{attraction.venue.name}</p> */}
-              <animated.div
-                key={attraction.name}
-                className="card"
-                style={{
-                  ...style,
-                  backgroundImage: `url(${attraction.photo})`
-                }}
-              >{attraction.name}</animated.div>
-            </Card>
+    <Container>
+      <Slider className="slider-wrapper">
+          {attractionsShuffle.map((item, index) => (
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit(item)
+            }
+            }>
+              <SliderContent
+                key={index}
+                className="slider-content"
+                style={{ background: `url('${item.photo}') no-repeat center center` }}
+              >
+                <Inner className="inner">
+                  <Name>{item.name}</Name>
+                  <Description>{item.location}</Description>
+                  <Button type="submit" value={item}>Select</Button>
+                </Inner>
+              </SliderContent>
+            </form>
           ))}
-        </div>
-      </Swiping>
-    </Fragment>
+    </Slider>
+    </Container>
   );
 };
-

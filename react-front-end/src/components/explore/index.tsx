@@ -5,26 +5,32 @@ import styled from 'styled-components';
 import { SearchBar } from "./SearchBox";
 import { DestRec } from "./DestRecommended";
 import { Swipe } from "./swipe";
+import { Filter } from "./Filter";
+
 type ExploreProps = {
-  city: string,
+  cityName: string | null,
   selected?: string | null,
   topRecommended: string,
+  search?: any
+  
+  // style?: React.CSSProperties | undefined
 };
 
+
+
 export const Explore: React.FC<ExploreProps> = () => {
-  const [city,setCity] = useState<string | null>('');
-
-
-  console.log('check data received >>', city);
+  
     return (
       <Router>
         <Switch>
           <Route exact path='/explore'>
             <SearchBar />
-            <DestRec city="Van" topRecommended="Vancouver"/>
+            <DestRec cityName="Van" topRecommended="Vancouver"/>
           </Route>
-          <Route exact path={`/explore/:city`}>
-            <Swipe/>
+          <Route exact path={`/explore/:itinerariesId`} render={({match}) => (
+            <Swipe itinerariesId ={match.params.itinerariesId}/>)}/>
+          <Route>
+            <Filter/>
           </Route>
         </Switch>
 

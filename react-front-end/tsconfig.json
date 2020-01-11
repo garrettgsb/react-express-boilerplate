@@ -16,6 +16,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "strictNullChecks": false,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -23,6 +24,7 @@
     "noEmit": true
   },
   "include": [
-    "src"
+    "src",
+    "alltypes.d.ts"
   ]
 }

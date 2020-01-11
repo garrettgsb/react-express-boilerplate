@@ -3,10 +3,13 @@ import axios from 'axios';
 import { AttractionList } from './AttractionList';
 import { Itinerary } from './Itinerary';
 import { Redirect } from 'react-router';
+import {Invite} from './Invite';
+
 export const Trip = () => {
   const id:string = location.pathname.slice(location.pathname.lastIndexOf('/') + 1);
   const [timeslots, setTimeslots] = useState<Array<any>>([]);
   const [count, setCount] = useState(1);
+  const [invite, setInvite] = useState<boolean>(false);
   const firstUpdate = useRef(true);
 
   useLayoutEffect(() => {
@@ -22,10 +25,10 @@ export const Trip = () => {
     }
     for (let i = 0; i < attr.length; i++) {
       if (attr[i].start_time === null || attr[i].end_time === null) {
-        return <AttractionList attractions={timeslots} deleteAttraction={deleteAttraction} />;
+        return <AttractionList id={id} attractions={timeslots} deleteAttraction={deleteAttraction} setInvite={() => setInvite(true)} />;
       }
     }
-    return <Itinerary id={id} timeslots={timeslots} editAction={editAction} deleteAttraction={deleteAttraction} />;
+    return <Itinerary id={id} timeslots={timeslots} editAction={editAction} deleteAttraction={deleteAttraction} setInvite={() => setInvite(true)} />;
   };
 
   const deleteAttraction = (attrid:number) => {
@@ -50,6 +53,8 @@ export const Trip = () => {
   }, [])
 
   return (
-    <>{checkItineraryExists(timeslots)}</>
+    <>
+    {invite ? <Invite trip={id} goBack={() => setInvite(false)} /> : checkItineraryExists(timeslots)}
+    </>
   )
 }

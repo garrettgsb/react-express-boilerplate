@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React from 'react';
 import styled from 'styled-components';
 import { Attraction } from './Attraction';
-import add from '../../images/add-contact.svg';
 import { Button } from './Button';
+import { InviteIcon } from './InviteIcon';
 
 const Attractions = styled.ul`
   padding-left: 0px;
@@ -31,21 +30,21 @@ const Header = styled.header`
   padding-left: 10%;
 `;
 
-type PropTypes = { attractions: Array<any>, deleteAttraction: any }
+type PropTypes = { id:string, attractions: Array<any>, deleteAttraction: any, setInvite:any }
 
-export const AttractionList = ({attractions, deleteAttraction}: PropTypes) => {
+export const AttractionList = ({id, attractions, deleteAttraction, setInvite}: PropTypes) => {
   
   return (
     <>
     <Header>
       <Title>{attractions.length === 0 ? "Itinerary" : attractions[0].city}</Title>
-      <Add src={add} />
+      <InviteIcon id={id} setInvite={setInvite} />
     </Header>
 
     <Attractions>
       {attractions.map(attraction =>
         <AttractionItem key={attraction.id}>
-          <Attraction id = {attraction.attraction_id} name={attraction.name} img={attraction.photo} editable={true} deleteAttraction={deleteAttraction} />
+          <Attraction id = {attraction.attraction_id} name={attraction.name} img={attraction.photo} editable={true} deleteAttraction={deleteAttraction} submitter={attraction.first_name} />
         </AttractionItem>
         )}
     </Attractions>
