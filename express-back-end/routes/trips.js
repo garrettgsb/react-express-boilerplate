@@ -84,11 +84,8 @@ module.exports = (db) => {
     // console.log('data after kmean:', trip)
 
     return getTravelTime(trip, axiosCallback)
-      .then(() => {
-        end_data(trip)
-        console.log('data after calculation:', trip)
-      })
-      // .then(() => res.redirect('/:id'))
+      .then(() => end_data(trip))
+      .then(() => res.sendStatus(200))
       .catch(err => console.log(err));
   })
 

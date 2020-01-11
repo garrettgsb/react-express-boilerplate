@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Attraction } from './Attraction';
 import { Button } from './Button';
 import { InviteIcon } from './InviteIcon';
+import Axios from 'axios';
 
 const Attractions = styled.ul`
   padding-left: 0px;
@@ -30,26 +31,39 @@ const Header = styled.header`
   padding-left: 10%;
 `;
 
-type PropTypes = { id:string, attractions: Array<any>, deleteAttraction: any, setInvite:any }
+type PropTypes = {
+  id: string,
+  attractions: Array<any>,
+  deleteAttraction: any,
+  setInvite: any,
+  generate: any
+}
 
-export const AttractionList = ({id, attractions, deleteAttraction, setInvite}: PropTypes) => {
-  
+export const AttractionList = ({ id, attractions, deleteAttraction, setInvite, generate }: PropTypes) => {
+
   return (
     <>
-    <Header>
-      <Title>{attractions.length === 0 ? "Itinerary" : attractions[0].city}</Title>
-      <InviteIcon id={id} setInvite={setInvite} />
-    </Header>
+      <Header>
+        <Title>{attractions.length === 0 ? "Itinerary" : attractions[0].city}</Title>
+        <InviteIcon id={id} setInvite={setInvite} />
+      </Header>
 
-    <Attractions>
-      {attractions.map(attraction =>
-        <AttractionItem key={attraction.id}>
-          <Attraction id = {attraction.attraction_id} name={attraction.name} img={attraction.photo} editable={true} deleteAttraction={deleteAttraction} submitter={attraction.first_name} />
-        </AttractionItem>
+      <Attractions>
+        {attractions.map(attraction =>
+          <AttractionItem key={attraction.id}>
+            <Attraction
+              id={attraction.attraction_id}
+              name={attraction.name}
+              img={attraction.photo}
+              editable={true}
+              deleteAttraction={deleteAttraction}
+              submitter={attraction.first_name}
+            />
+          </AttractionItem>
         )}
-    </Attractions>
+      </Attractions>
 
-    <Button text="Generate" click={() => console.log('click')} />
+      <Button text="Generate" click={generate} />
     </>
   )
 }
