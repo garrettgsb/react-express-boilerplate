@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React from 'react';
 import styled from 'styled-components';
 import { Attraction } from './Attraction';
 import { Button } from './Button';
@@ -45,7 +44,7 @@ export const AttractionList = ({id, attractions, deleteAttraction, setInvite}: P
     <Attractions>
       {attractions.map(attraction =>
         <AttractionItem key={attraction.id}>
-          <Attraction id = {attraction.attraction_id} name={attraction.name} img={attraction.photo} editable={true} deleteAttraction={deleteAttraction} />
+          <Attraction id = {attraction.attraction_id} name={attraction.name} img={attraction.photo} editable={true} deleteAttraction={deleteAttraction} submitter={attraction.first_name} />
         </AttractionItem>
         )}
     </Attractions>

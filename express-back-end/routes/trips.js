@@ -18,10 +18,11 @@ module.exports = (db) => {
   router.get('/:id', (req, res) => {
     db.query(
       `
-      SELECT *, timeslots.id AS id FROM timeslots
+      SELECT timeslots.*, attractions.*, itineraries.*, first_name, timeslots.id AS id FROM timeslots
       FULL OUTER JOIN attractions ON attraction_id = attractions.id
       FULL OUTER JOIN itineraries ON itinerary_id = itineraries.id
-      WHERE itinerary_id = $1
+      FULL OUTER JOIN users ON submitted_by = users.id
+      WHERE itinerary_id = $1 
       ORDER BY start_time
       ;
       `, [req.params.id]
