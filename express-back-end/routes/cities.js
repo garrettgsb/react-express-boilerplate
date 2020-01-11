@@ -92,10 +92,10 @@ module.exports = (db) => {
             location: item.venue.location.address
           })
         }
-        async function getFoursquarePhoto() {
+        // async function getFoursquarePhoto() {
           for (let i = 0; i <= attractionList.length - 1; i ++) {
-            let photo;
-            await axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
+            console.log(attractionList[i].id)
+            axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
             .then(results => {
               console.log('Second api successfully');
               attractionList[i].photo = results.data.response.photos.items[0].prefix + "500x500" + results.data.response.photos.items[0].suffix;
@@ -103,8 +103,8 @@ module.exports = (db) => {
               // return attractionList[i]
             })
           }
-        }
-        getFoursquarePhoto();
+        // }
+        // getFoursquarePhoto();
 
         for (let trail of results[1].data.trails) {
           if (trail.imgMedium !== "") {
