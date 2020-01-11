@@ -99,7 +99,7 @@ module.exports = (db) => {
   router.get("/profile", (req, res) => {
     db.query(`
       SELECT * FROM users WHERE id = $1;
-    `, [req.session.userId])
+    `, [req.query.user])
       .then(result => {
         // console.log(result.rows[0])
         res.send(result.rows[0])

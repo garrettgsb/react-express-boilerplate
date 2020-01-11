@@ -3,6 +3,7 @@ import { Attraction } from './Attraction';
 import location from '../../images/location.svg';
 import walk from '../../images/walk.svg';
 import bus from '../../images/bus.svg';
+import car from '../../images/car.svg';
 import styled from 'styled-components';
 import moment from 'moment';
 
@@ -36,6 +37,8 @@ const getIcon = (type:string) => {
     return <Icon src={walk} />
   } else if (type === 'TRANSIT') {
     return <Icon src={bus} />
+  } else if (type === 'CAR') {
+    return <Icon src={car} />
   }
 }
 
@@ -47,9 +50,11 @@ export const List = ({timeslots, deleteAttraction}: PropTypes) => {
     const end = moment.unix(slot.end_time);
 
     if (slot.attraction_id === null && slot.travel_mode == 'WALKING') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('WALKING')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('WALKING')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</ContentDiv></Timeslot>
     } else if (slot.attraction_id === null && slot.travel_mode == 'TRANSIT') {
-      return <Timeslot key={slot.id}><IconDiv>{getIcon('TRANSIT')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES {slot.travel_mode}</ContentDiv></Timeslot>
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('TRANSIT')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</ContentDiv></Timeslot>
+    } else if (slot.attraction_id === null && slot.travel_mode == 'CAR') {
+      return <Timeslot key={slot.id}><IconDiv>{getIcon('CAR')}</IconDiv><ContentDiv>{end.diff(start, 'minutes')} MINUTES BY {slot.travel_mode}</ContentDiv></Timeslot>
     } else {
       return <Timeslot key={slot.id}><IconDiv>{getIcon('attraction')}{moment.unix(slot.start_time).utc().format('hh:mm a')}</IconDiv><ContentDiv><Attraction key={slot.id} id={slot.attraction_id} name={slot.name} img={slot.photo} editable={false} deleteAttraction={deleteAttraction} submitter={slot.first_name} /></ContentDiv></Timeslot>
     }

@@ -12,6 +12,14 @@ const DeleteButton = styled.button`
   background: #fff;
 `
 
+const Submitter = styled.p`
+  color: #fff;
+`
+
+const Actions = styled.div`
+  text-align: right;
+`
+
 export const Attraction = ({id, name, img, editable, deleteAttraction, submitter}: PropTypes) => {
   const Container = styled.div`
     padding: 10px;
@@ -23,8 +31,11 @@ export const Attraction = ({id, name, img, editable, deleteAttraction, submitter
   return (
     <Container>
       <Name>{name}</Name>
-      {editable && <DeleteButton onClick={() => deleteAttraction(id)}>Remove</DeleteButton>}
-      {submitter && <p>{submitter}</p>}
+      
+      <Actions>
+        {editable && <DeleteButton onClick={() => deleteAttraction(id)}>Remove</DeleteButton>}
+        {submitter && <Submitter>Added by: {submitter}</Submitter>}
+      </Actions>
     </Container>
   )
 }

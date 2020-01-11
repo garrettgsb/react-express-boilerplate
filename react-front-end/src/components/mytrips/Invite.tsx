@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 70%;
+  margin: 0 auto;
+`
 
 type InviteTypes = {trip:string, goBack:any}
 export const Invite = ({trip, goBack}:InviteTypes) => {
@@ -29,7 +35,7 @@ export const Invite = ({trip, goBack}:InviteTypes) => {
 
   const inviteMessage = (state:boolean) => {
     if (state === true) {
-      return 'Thanks for inviting!'
+      return 'User added!'
     } else if (state === false) {
       return 'User is already on this itinerary'
     }
@@ -38,17 +44,22 @@ export const Invite = ({trip, goBack}:InviteTypes) => {
   return (
     <>
     <button onClick={goBack}>Go back</button>
-    {inviteMessage(success)}
-    {users.map(user =>
-      <p>{user.first_name}</p>
-      )}
-    <div>
+
+    <Container>
       <h1>Invite</h1>
+      {inviteMessage(success)}
       <form onSubmit={inviteFriend}>
         <input type="text" value={email} onChange={(e) => getEmail(e.target.value)} placeholder="Email" />
         <button type="submit">Submit</button>
       </form>
-    </div>
+
+      <p>On this trip:</p>
+      <ul>
+      {users.map(user =>
+        <li key={user.user_id}>{user.first_name}</li>
+      )}
+      </ul>
+    </Container>
     </>
   )
 }
