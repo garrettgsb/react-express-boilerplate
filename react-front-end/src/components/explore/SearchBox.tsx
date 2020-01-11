@@ -114,4 +114,3 @@ export const SearchBar: FC<SearchProps> = ({ handleInputChange, handleSubmit }) 
     </Fragment>
   );
 };
-

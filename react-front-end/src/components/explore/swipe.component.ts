@@ -26,11 +26,23 @@ export const animation1 = keyframes`
 
 
 export const Container = styled.div`
+  display: grid;
+  grid-template-rows: 15% 85%;
+  margin-top: 10px;
+`;
+
+export const TopBar = styled.div`
+  display: grid;
+  grid-template-columns: 70% 30%;
+`
+
+export const Attractions = styled.div`
   position: relative;
-  height: 50vh;
+  height: 60vh;
   weight: auto;
   border: solid;
-  margin: 1px 1px;
+  border-radius: 15px;
+  margin: 10px 10px;
   overflow: hidden;
   &.slide::before {
       content: '';
@@ -153,4 +165,11 @@ export const Description = styled.p`
   margin: 20px auto 30px;
   max-width: 640px;
   animation: ${animation};
+`;
+
+export const City = styled.h2`
+  margin-left: 10px;
+  text-transform: uppercase;
+  text-align: left;
+  display: center;
 `;

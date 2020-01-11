@@ -70,7 +70,7 @@ module.exports = (db) => {
       .then(results => {
         const {lat, lng} = results.data.results[0].geometry.location;
         return Promise.all([
-          axios.get(`https://api.foursquare.com/v2/venues/explore?near=${city}?&limit=2&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`),
+          axios.get(`https://api.foursquare.com/v2/venues/explore?near=${city}?&limit=50&client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`),
           axios.get(`https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxDistance=150&key=${HIKING_KEY}`),
           // axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=${TIX_KEY}&latlong=${lat},${lng}`)
         ])
@@ -79,22 +79,70 @@ module.exports = (db) => {
         console.log('First api successfully');
 
         for (let item of results[0].data.response.groups[0].items) {
-          attractionList.push({
-            id: item.venue.id,
-            name: item.venue.name,
-            description: '',
-            review: '',
-            lat: item.venue.location.lat,
-            long: item.venue.location.lng,
-            open_time: 32400,
-            close_time: 64800,
-            visit_duration: 120,
-            location: item.venue.location.address
-          })
+            // console.log(attractionList[i].id)
+          const category = item.venue.categories[0].shortName;
+          
+          if (category.includes("Park") || category.includes("Beach") || category.includes("Trail") || category.includes("Garden"))  {
+            attractionList.push({
+              id: item.venue.id,
+              name: item.venue.name,
+              description: '',
+              review: '',
+              lat: item.venue.location.lat,
+              long: item.venue.location.lng,
+              open_time: 32400,
+              close_time: 64800,
+              visit_duration: 120,
+              location: item.venue.location.address,
+              category: "SCENERY"
+            })
+          } else if (category.includes("Store") || category.includes("Shop") || category.includes("Market") | category.includes("Supermarket") | category.includes("Mall")) {
+            attractionList.push({
+              id: item.venue.id,
+              name: item.venue.name,
+              description: '',
+              review: '',
+              lat: item.venue.location.lat,
+              long: item.venue.location.lng,
+              open_time: 32400,
+              close_time: 64800,
+              visit_duration: 120,
+              location: item.venue.location.address,
+              category: "SHOPPING"
+            })
+          } else if (category.includes("Museum")) {
+            attractionList.push({
+              id: item.venue.id,
+              name: item.venue.name,
+              description: '',
+              review: '',
+              lat: item.venue.location.lat,
+              long: item.venue.location.lng,
+              open_time: 32400,
+              close_time: 64800,
+              visit_duration: 120,
+              location: item.venue.location.address,
+              category: "SHOPPING"
+            })
+          } else if (category.includes("Restaurant") || category.includes("Coffee Shop") || category.includes("Eatery")) {
+            attractionList.push({
+              id: item.venue.id,
+              name: item.venue.name,
+              description: '',
+              review: '',
+              lat: item.venue.location.lat,
+              long: item.venue.location.lng,
+              open_time: 32400,
+              close_time: 64800,
+              visit_duration: 120,
+              location: item.venue.location.address,
+              category: "RESTAURANTS/COFFEE SHOPS"
+            })
+          }
+
         }
         // async function getFoursquarePhoto() {
           for (let i = 0; i <= attractionList.length - 1; i ++) {
-            console.log(attractionList[i].id)
             axios.get(`https://api.foursquare.com/v2/venues/${attractionList[i].id}/photos?client_id=${FOURSQUARE_KEY}&client_secret=${FOURSQUARE_SECRET}`)
             .then(results => {
               console.log('Second api successfully');
@@ -119,7 +167,8 @@ module.exports = (db) => {
               close_time: 64800,
               visit_duration: 21600,
               photo: trail.imgMedium,
-              location: trail.location
+              location: trail.location,
+              category: 'TRAILS'
             })
           }
         }
@@ -143,8 +192,8 @@ module.exports = (db) => {
         // }
       })
       .then(() => {
-        console.log('check point 2',attractionList)
-        res.json(attractionList);
+        // console.log('check point 2',attractionList)
+        res.json([attractionList, city]);
       })
       .catch((err) => {
         console.log(err);
