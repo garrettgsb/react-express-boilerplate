@@ -18,10 +18,11 @@ module.exports = (db) => {
   router.get('/:id', (req, res) => {
     db.query(
       `
-      SELECT *, timeslots.id AS id FROM timeslots
+      SELECT timeslots.*, attractions.*, itineraries.*, first_name, timeslots.id AS id FROM timeslots
       FULL OUTER JOIN attractions ON attraction_id = attractions.id
       FULL OUTER JOIN itineraries ON itinerary_id = itineraries.id
-      WHERE itinerary_id = $1
+      FULL OUTER JOIN users ON submitted_by = users.id
+      WHERE itinerary_id = $1 
       ORDER BY start_time
       ;
       `, [req.params.id]
@@ -120,11 +121,31 @@ module.exports = (db) => {
 
   router.post('/:tripid/invite', (req, res) => {
     return db.query(`
-      INSERT INTO user_itinerary(user_id, itinerary_id)
-      VALUES ((SELECT id FROM users WHERE email = $1), $2);
+      SELECT COUNT(*) FROM user_itinerary
+      WHERE user_id = (SELECT id FROM users WHERE email = $1) AND itinerary_id = $2;
     `, [req.body.user, req.params.tripid])
-    .then(() => {
-      res.sendStatus(200)
+    .then((res) => {
+      if (Number(res.rows[0].count) === 0) {
+        return db.query(`
+          INSERT INTO user_itinerary(user_id, itinerary_id)
+          VALUES ((SELECT id FROM users WHERE email = $1), $2);
+        `, [req.body.user, req.params.tripid])
+      } else {
+        throw new Error;
+      }
+    })
+    .then(() => res.sendStatus(200))
+    .catch(() => res.sendStatus(400))
+  })
+
+  router.get('/:tripid/users', (req, res) => {
+    db.query(`
+      SELECT * FROM user_itinerary
+      JOIN users ON user_id = users.id
+      WHERE itinerary_id = $1;
+    `, [req.params.tripid])
+    .then((response) => {
+      res.json(response.rows)
     })
   })
 
