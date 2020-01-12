@@ -1,17 +1,19 @@
 import React, { useState, FC, Fragment, useEffect, useCallback } from 'react';
-
-import { useSprings, useSpring, useTransition, animated, interpolate, SpringValue } from 'react-spring';
-import { useGesture, useScroll } from 'react-use-gesture';
 import Slider from 'react-animated-slider';
 import axios from 'axios';
 
+import { Filter } from "./Filter";
+
 import { 
   Container,
+  TopBar,
+  Attractions,
   SliderContent,
   Inner,
   Name,
   Button,
-  Description
+  Description,
+  City
 } from "./swipe.component";
 
 import "react-animated-slider/build/horizontal.css";
@@ -40,6 +42,7 @@ interface AttractionsObject {
 
 export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
   const [attractions, setAttractions] = useState<Array<AttractionsObject>>([]);
+  const [city, setCity] = useState<string>('');
   let value: string | null;
   useEffect(() => {
     axios.defaults.baseURL = 'http://localhost:8081';
@@ -49,7 +52,9 @@ export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
       }
     })
     .then(res => {
-      setAttractions(res.data)
+      console.log(res);
+      setAttractions(res.data[0]);
+      setCity(res.data[1]);
     })
     .catch((err) => console.log(err));
   },[])
@@ -68,6 +73,7 @@ export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
   const attractionsShuffle = shuffleAttractions(attractions)
   
   //submit the attractions to database
+
   handleSubmit = (item: AttractionsObject ) => {
     console.log('check');
     axios.defaults.baseURL = 'http://localhost:8081';
@@ -76,7 +82,10 @@ export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
       data: {
         attraction: item,
       },
-      withCredentials: true
+      // withCredentials: true
+      params: {
+        user: localStorage.userID
+      }
     })
     .then(() => {
       // history.push(`/explore/:${search.query}`);
@@ -85,27 +94,33 @@ export const Swipe: FC<SwipeProps> = ({handleSubmit, itinerariesId}) => {
 
   return (
     <Container>
-      <Slider className="slider-wrapper">
-          {attractionsShuffle.map((item, index) => (
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit(item)
-            }
-            }>
-              <SliderContent
-                key={index}
-                className="slider-content"
-                style={{ background: `url('${item.photo}') no-repeat center center` }}
-              >
-                <Inner className="inner">
-                  <Name>{item.name}</Name>
-                  <Description>{item.location}</Description>
-                  <Button type="submit" value={item}>Select</Button>
-                </Inner>
-              </SliderContent>
-            </form>
-          ))}
-    </Slider>
+      <TopBar>
+        <City>{city}</City>
+        <Filter attractions={attractionsShuffle}/>
+      </TopBar>
+      <Attractions>
+        <Slider className="slider-wrapper">
+            {attractionsShuffle.map((item, index) => (
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit(item)
+              }
+              }>
+                <SliderContent
+                  key={index}
+                  className="slider-content"
+                  style={{ background: `url('${item.photo}') no-repeat center center` }}
+                >
+                  <Inner className="inner">
+                    <Name>{item.name}</Name>
+                    <Description>{item.location}</Description>
+                    <Button type="submit" value={item}>Select</Button>
+                  </Inner>
+                </SliderContent>
+              </form>
+            ))}
+      </Slider>
+    </Attractions>
     </Container>
   );
 };
