@@ -63,20 +63,31 @@ module.exports = (db) => {
     const getDays = (start, end) => {
       return Math.round((end - start) / 86400)
     }
-    // K refers to number of days
-    const cluster = kmeans.clusterize(vectors, { k: getDays(data[0].trip_start, data[0].trip_end) }, (err, res) => {
-      if (err) console.error(err);
-      else {
-        return res;
+
+    // console.log('number of attractions', data.length)
+    // console.log('planned days length', getDays(data[0].trip_start, data[0].trip_end))
+    if (data.length >= getDays(data[0].trip_start, data[0].trip_end)) {
+      // K refers to number of days
+      const cluster = kmeans.clusterize(vectors, { k: getDays(data[0].trip_start, data[0].trip_end) }, (err, res) => {
+        if (err) console.error(err);
+        else {
+          return res;
+        }
+      });
+      //Loop through the result from kmeans function to get the array of attractions
+      cluster.groups.forEach(element => {
+        for (let i in element.clusterInd) {
+          element.clusterInd[i] = data[element.clusterInd[i]]
+        }
+        itineraries.push(element.clusterInd);
+      });
+    } else {
+      // console.log('attractions data for the trip', data)
+      for (const attraction of data) {
+        itineraries.push([attraction]);
       }
-    });
-    //Loop through the result from kmeans function to get the array of attractions
-    cluster.groups.forEach(element => {
-      for (let i in element.clusterInd) {
-        element.clusterInd[i] = data[element.clusterInd[i]]
-      }
-      itineraries.push(element.clusterInd);
-    });
+
+    }
 
     // dataset after kmean clustering:
     // [[{ attraction }, { attraction }, ...],[{ attraction }, { attraction }, ...],...]
