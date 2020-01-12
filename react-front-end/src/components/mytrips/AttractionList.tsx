@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Attraction } from './Attraction';
 import { Button } from './Button';
 import { InviteIcon } from './InviteIcon';
-import Axios from 'axios';
+import addattr from '../../images/addpin.svg';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 const Attractions = styled.ul`
   padding-left: 0px;
@@ -19,7 +21,7 @@ const Title = styled.h1`
   text-align: left;
 `;
 
-const Add = styled.img`
+const AddAttr = styled.img`
   width: 40px;
 `;
 
@@ -41,11 +43,29 @@ type PropTypes = {
 
 export const AttractionList = ({ id, attractions, deleteAttraction, setInvite, generate }: PropTypes) => {
 
+  const [edit, setEdit] = useState<boolean>(false);
+
+  const updateItinerary = () => {
+    axios.get(`/api/itineraries/${id}`, {
+      params: {
+        user: localStorage.userID
+      }
+    })
+    .then(() => {
+      setEdit(true);
+    })
+  };
+
+
   return (
     <>
+      {edit && <Redirect to={`/explore/${id}`} />}
       <Header>
         <Title>{attractions.length === 0 ? "Itinerary" : attractions[0].city}</Title>
-        <InviteIcon id={id} setInvite={setInvite} />
+        <div>
+          <AddAttr src={addattr} onClick={updateItinerary} />
+          <InviteIcon id={id} setInvite={setInvite} />
+        </div>
       </Header>
 
       <Attractions>
