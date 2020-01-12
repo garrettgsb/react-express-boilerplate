@@ -30,9 +30,9 @@ module.exports = (db) => {
       WHERE city = $1 AND trip_start = $2 AND trip_end = $3;
       `, [city, tripStart, tripEnd])
       .then(query => {
-        const existedItinerariesId = query.rows[0].id;
-        console.log('get itinerary from database', existedItinerariesId)
-        if (!existedItinerariesId) {
+        const data = query.rows[0];
+        console.log('get itinerary from database', data)
+        if (!data) {
           db.query(
             `INSERT INTO itineraries (
               city, city_img, trip_start, trip_end
@@ -58,7 +58,7 @@ module.exports = (db) => {
                 res.sendStatus(500);
               })              
         } else {
-          res.json(existedItinerariesId);
+          res.json(data.id);
         }
       })
   });
