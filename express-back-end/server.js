@@ -2,11 +2,12 @@ const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
 const PORT = 9001;
+require('dotenv').config();
 
 //Database setup
-const { Pool } = require('pg');
-const dbParams = require('./lib/db.js');
-const db = new Pool(dbParams);
+const pg = require('pg');
+const db = new pg.Client(process.env.DATABASE_URL);
+
 db.connect();
 
 // Middleware
