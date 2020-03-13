@@ -1,13 +1,22 @@
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
-const PORT = 8080;
+const PORT = 9001;
 
-// Express Configuration
+//Database setup
+const { Pool } = require('pg');
+const dbParams = require('./lib/db.js');
+const db = new Pool(dbParams);
+db.connect();
+
+// Middleware
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(Express.static('public'));
+//Api Routes
+const userRoutes = require('./routes/users')
+App.use('/api/users', userRoutes(db));
 
-// Sample GET route
+// GET Routes
 App.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
 }));
