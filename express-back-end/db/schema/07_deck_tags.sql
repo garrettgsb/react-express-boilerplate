@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS deck_tags CASCADE;
+CREATE TABLE deck_tags (
+  id SERIAL PRIMARY KEY,
+  deck_id INTEGER REFERENCES decks(id) NOT NULL,
+  tag_id INTEGER REFERENCES tags(id) NOT NULL
+);

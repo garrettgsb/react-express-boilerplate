@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS testquestions CASCADE;
+CREATE TABLE testquestions (
+  id SERIAL PRIMARY KEY,
+  card_id INTEGER REFERENCES cards(id) NOT NULL,
+  test_id INTEGER REFERENCES tests(id) NOT NULL,
+  correct BOOLEAN NOT NULL
+);
