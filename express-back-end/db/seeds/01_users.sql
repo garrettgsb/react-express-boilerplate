@@ -1,3 +1,4 @@
-INSERT INTO users (name, email) VALUES (
-  
-)
+INSERT INTO users (name, email) VALUES
+('Hoang', 'hoho@gmail.com'),
+('Lian', 'lee@gmail.com'),
+('Bob Loblaw', 'Bobloblawslawblog@blogspot.com')

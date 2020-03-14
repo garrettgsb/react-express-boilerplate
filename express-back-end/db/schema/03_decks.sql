@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS decks CASCADE;
+CREATE TABLE decks (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) NOT NULL,
+  name VARCHAR (255) NOT NULL,
+  description TEXT NOT NULL,
+  image_url VARCHAR (255),
+)
