@@ -16,15 +16,19 @@ App.use(Express.static('public'));
 
 
 //Api Routes
-const userRoutes = require('./routes/users')
-App.use('/api/users', userRoutes(db));
-App.use('/api/cards', userRoutes(db));
-App.use('/api/decks', userRoutes(db));
-App.use('/api/ratings', userRoutes(db));
-App.use('/api/testquestions', userRoutes(db));
-App.use('/api/tests', userRoutes(db));
+const cardsRoutes = require('./routes/cards')
+const decksRoutes = require('./routes/decks')
+const ratingsRoutes = require('./routes/ratings')
+const testquestionsRoutes = require('./routes/testquestions')
+const testsRoutes = require('./routes/tests')
+const usersRoutes = require('./routes/users')
 
-
+App.use('/api/cards', cardsRoutes(db));
+App.use('/api/decks', decksRoutes(db));
+App.use('/api/ratings', ratingsRoutes(db));
+App.use('/api/testquestions', testquestionsRoutes(db));
+App.use('/api/tests', testsRoutes(db));
+App.use('/api/users', usersRoutes(db));
 
 // GET Routes
 App.get('/users/:id', (req, res) =>
