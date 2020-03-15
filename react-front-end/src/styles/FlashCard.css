@@ -35,7 +35,8 @@ body,
   border-radius: 15px;
   border-style: solid;
   border-width: .5em;
-  border-color: lightskyblue;
+  border-color: black;
+  padding: .5em;
 }
 
 .front {
@@ -43,15 +44,6 @@ body,
 
 }
 
-.question {
-  align-self: center;
-  justify-content: center;
-}
-
 .back {
   background-color: lightgreen;
-}
-
-.answer {
-  align-self: center;
 }
