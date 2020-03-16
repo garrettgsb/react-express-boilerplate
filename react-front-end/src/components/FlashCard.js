@@ -11,7 +11,6 @@ import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 
@@ -49,12 +48,12 @@ export default function FlashCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = (event: React.ChangeEvent<HTMLElement>) => {
+  const handleExpandClick = (event) => {
     event.stopPropagation();
     setExpanded(!expanded);
   };
 
-  const handleFlip = (event: React.MouseEvent<HTMLElement>) => {
+  const handleFlip = (event) => {
     set(state => !state)
   }
 
@@ -69,77 +68,71 @@ export default function FlashCard(props) {
 
 
   return (
-    <Card className={classes.root} 
-      onClick={handleFlip}
-      >
+    <Card className={classes.root} onClick={handleFlip}>
+      <a.div className="c front" style={{ opacity: opacity.interpolate(o => 1 - o), transform }}>
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            QUESTION?!
+          </Typography>
+        </CardContent>
 
+        <CardActions disableSpacing>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            Hint
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
 
-        <a.div className="c front" style={{ opacity: opacity.interpolate(o => 1 - o), transform }}>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              QUESTION?!
+            <Typography paragraph>Hint:</Typography>
+            <Typography paragraph>
+              HERE IS YOUR BLOODY HINT!!!
+              Hopefully it helped, don't worry about the yelling!
             </Typography>
           </CardContent>
+        </Collapse>
+      </a.div>
 
-          <CardActions disableSpacing>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              Hint
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
+      <a.div className="c back" style={{ opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`) }}>
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            ANSWER!
+          </Typography>
+        </CardContent>
 
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Typography paragraph>Hint:</Typography>
-              <Typography paragraph>
-                HERE IS YOUR BLOODY HINT!!!
-                Hopefully it helped, don't worry about the yelling!
-              </Typography>
-            </CardContent>
-          </Collapse>
+        <CardActions disableSpacing>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
 
-        </a.div>
+        Resource:
 
-        <a.div className="c back" style={{ opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`) }}>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              ANSWER!
+            <Typography paragraph>Resource:</Typography>
+            <Typography paragraph>
+              HERE IS A RESOURCE FOR THIS ANSWER!!!
+              www.somethinghelpful.com
             </Typography>
           </CardContent>
-
-          <CardActions disableSpacing>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              Resource
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Typography paragraph>Resource:</Typography>
-              <Typography paragraph>
-                HERE IS A RESOURCE FOR THIS ANSWER!!!
-                www.somethinghelpful.com
-              </Typography>
-            </CardContent>
-          </Collapse>
-
-        </a.div>
-
+        </Collapse>
+      </a.div>
     </Card>
   )
 }
