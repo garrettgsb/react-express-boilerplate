@@ -1,16 +1,20 @@
 
 # Project Description
+
 Title: Tour In My Back Yard
 
 Description: TIMBY helps tourists connect with local guides for a more _____ travel experience
 Experience a city as a local through a local's eyes
 Change how you experience the world
 
+Helping travellers find events hosted by locals
+
 Target Audience: tourists, locals who want to earn money and share hidden gems with others
 
 Team Members: Jason, Allen, Dexter
 
 # User Stories
+
 ## Tourist
 
 * As a tourist, I want to be able to book a tour today ***
@@ -42,8 +46,56 @@ Team Members: Jason, Allen, Dexter
 
 https://www.figma.com/file/YcuYMwA4NINcYZOniI6i76/LHL-Final-Project?node-id=0%3A1
 
+
 # ERD
 
+https://drive.google.com/file/d/1Yf89QAsafMJEplSTYHngTLAlZkHVN7wy/view?usp=sharing
+
+
+# Stack Choice
+
+## Back End
+
+* Node
+* Express
+* Socket.io
+* PostgreSQL (ElephantSQL)
+
+## Front End
+
+* React - Material UI
+* Material Design
+* SASS
+* PWA
+
+## Testing
+
+* Jest
+* Cypress
+* (Storybook)
+
+
+# Project Communication
+
+Daily standup at 10am every day (30 mins max)
+Take turns sharing progress and next steps (8-10 mins each)
+
+# Project Workflow
+
+## Project Milestones
+May 8 - Meet with Hafiz and implement feedback to planning
+May 9 - Setup database and seed data
+May 10 - Finish back-end, basic front-end structure
+May 12 - Google maps api features (search feature)
+May 15 - Finished bulk of coding
+May 18 - Polished styling and PWA config
+May 19 - Finished implementing testing
+May 20 - Practiced presentation, recorded backup video
+May 21 - Demo Day
+
+## Git Workflow
+For every feature create a new branch and submit pull request when finished
+Don't forget to pull regularly to ensure that you have the latest version
 
 
 
