@@ -83,15 +83,15 @@ Take turns sharing progress and next steps (8-10 mins each)
 # Project Workflow
 
 ## Project Milestones
-May 8 - Meet with Hafiz and implement feedback to planning
-May 9 - Setup database and seed data
-May 10 - Finish back-end, basic front-end structure
-May 12 - Google maps api features (search feature)
-May 15 - Finished bulk of coding
-May 18 - Polished styling and PWA config
-May 19 - Finished implementing testing
-May 20 - Practiced presentation, recorded backup video
-May 21 - Demo Day
+* May 8 - Meet with Hafiz and implement feedback to planning
+* May 9 - Setup database and seed data
+* May 10 - Finish back-end, basic front-end structure
+* May 12 - Google maps api features (search feature)
+* May 15 - Finished bulk of coding
+* May 18 - Polished styling and PWA config
+* May 19 - Finished implementing testing
+* May 20 - Practiced presentation, recorded backup video
+* May 21 - Demo Day
 
 ## Git Workflow
 For every feature create a new branch and submit pull request when finished
