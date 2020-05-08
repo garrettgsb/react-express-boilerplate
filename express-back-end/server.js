@@ -11,6 +11,13 @@ const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
 
+// Queries
+const userQueries = require('./lib/userQueries');
+const tourQueries = require('./lib/tourQueries');
+const bookingQueries = require('./lib/bookingQueries');
+const notificationQueries = require('./lib/notificationQueries');
+const mediaQueries = require('./lib/mediaQueries.');
+
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(Express.static('public'));
