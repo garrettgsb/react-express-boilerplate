@@ -31,3 +31,14 @@
     transform: rotate(360deg);
   }
 }
+
+div.MuiBottomNavigation-root {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.MuiBottomNavigationAction-root.Mui-selected {
+  background-color: #DDD;
+}
