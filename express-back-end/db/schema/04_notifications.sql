@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS notifcations CASCADE;
+DROP TABLE IF EXISTS notifications CASCADE;
 
-CREATE TABLE notifcations (
+CREATE TABLE notifications (
   id serial PRIMARY KEY NOT NULL,
   user_id integer NOT NULL REFERENCES users (id) ON DELETE CASCADE,
   message text NOT NULL,
