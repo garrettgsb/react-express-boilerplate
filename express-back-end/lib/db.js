@@ -17,3 +17,16 @@ if (process.env.DATABASE_URL) {
 const { Pool } = require('pg');
 const pool = new Pool(dbParams);
 pool.connect();
+
+// Export Pool for use in queries with query logging attached
+module.exports = {
+  query: (text, params) => {
+    const start = Date.now();
+    return pool.query(text, params)
+      .then(res => {
+        const duration = Date.now() - start;
+        console.log('executed query', { text, duration, rows: res.rowCount });
+        return res;
+      });
+  }
+};
