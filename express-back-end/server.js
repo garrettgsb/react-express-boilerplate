@@ -16,7 +16,7 @@ const userQueries = require('./lib/userQueries');
 const tourQueries = require('./lib/tourQueries');
 const bookingQueries = require('./lib/bookingQueries');
 const notificationQueries = require('./lib/notificationQueries');
-const mediaQueries = require('./lib/mediaQueries.');
+const mediaQueries = require('./lib/mediaQueries');
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
