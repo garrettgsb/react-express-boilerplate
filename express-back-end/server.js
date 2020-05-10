@@ -5,6 +5,7 @@ const PORT = 8080;
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
+App.use(BodyParser.json());
 App.use(Express.static('public'));
 
 // Sample GET route
