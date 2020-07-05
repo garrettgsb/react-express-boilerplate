@@ -1,0 +1,1 @@
+INSERT INTO items (user_id, name, category, description) VALUES (1 , 'iphone 12', 'cellphone', 'A 24 months contract on iphone 12 with a monthly rate of 90');
