@@ -6,7 +6,13 @@ import Tab from "./Tab";
 
 export default function Application(props) {
   // Destructing custom hook
-  const { state, setTab, setState, setCurrentItem } = useApplicationData();
+  const {
+    state,
+    setTab,
+    setState,
+    setCurrentItem,
+    setWarranties,
+  } = useApplicationData();
 
   return (
     <main className="layout">
@@ -23,7 +29,12 @@ export default function Application(props) {
         </nav>
       </section>
       <section className="schedule">
-        <Tab name={state.tab} state={state} setCurrentItem={setCurrentItem} />
+        <Tab
+          name={state.tab}
+          state={state}
+          setCurrentItem={setCurrentItem}
+          setWarranties={setWarranties}
+        />
       </section>
     </main>
   );

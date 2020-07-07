@@ -40,6 +40,23 @@ App.get("/api/users/:id", (req, res) => {
   });
 });
 
+App.get("/api/warranties/search", (req, res) => {
+  // let term = "";
+  console.log(req.query);
+  // req.params.term ? (term = `%${req.params.term}%`) : (term = "");
+  let term = `%${req.query["term"]}%`;
+
+  let queryParams = [term];
+  console.log(term);
+  let query = `SELECT entries.*, items.name as item_name, items.category as item_category
+                FROM entries
+                JOIN items ON items.id = entries.item_id
+                WHERE type='warranty' AND items.name LIKE $1`;
+  db.query(query, queryParams).then((data) => {
+    res.json(data.rows);
+  });
+});
+
 App.get("/api/warranties", (req, res) => {
   let query = getAllWarrantiesQuery;
   db.query(query).then((data) => {

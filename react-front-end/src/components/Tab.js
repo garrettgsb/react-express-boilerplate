@@ -24,6 +24,7 @@ export default function Tab(props) {
           <Warranties
             warranties={props.state.warranties}
             setCurrentItem={props.setCurrentItem}
+            setWarranties={props.setWarranties}
           />
         );
       case "Monthly Payments":

@@ -1,6 +1,7 @@
 import React from "react";
 import WarrantyList from "./WarrantyList";
 import WarrantyListItem from "./WarrantyListItem";
+import Search from "./Search";
 
 export default function Warranties(props) {
   // const warrantyItems = props.warranties.map((warranty) => {
@@ -8,6 +9,7 @@ export default function Warranties(props) {
   // });
   return (
     <div>
+      <Search setWarranties={props.setWarranties} />
       {/* <WarrantyDashboard /> */}
       <WarrantyList
         warranties={props.warranties}
