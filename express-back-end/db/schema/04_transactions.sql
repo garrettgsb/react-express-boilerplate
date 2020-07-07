@@ -5,5 +5,5 @@ CREATE TABLE transactions (
   entry_id INTEGER REFERENCES entries(id),
   name VARCHAR(255) NOT NULL,
   amount INT NOT NULL,
-  date INT NOT NULL
+  date BIGINT NOT NULL
 );
