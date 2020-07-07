@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-
-import useDebounce from "../hooks/useDebounce";
-
-// import Loading from "components/Loading";
+import React, { useState, useEffect } from "react";
 
 export default function SearchBar(props) {
   const [value, setValue] = useState("");
 
-  useDebounce(() => props.onSearch(value), 400);
+  useEffect(() => {
+    props.onSearch(value);
+  }, [value]);
 
   return (
     <section className="search">
@@ -25,7 +23,6 @@ export default function SearchBar(props) {
           onChange={(event) => setValue(event.target.value)}
         />
       </form>
-      {/* <Loading show={props.loading} /> */}
     </section>
   );
 }
