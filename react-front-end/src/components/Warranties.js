@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import WarrantyList from "./WarrantyList";
 import CategoryFilter from "./CategoryFilter";
 import Search from "./Search";
+import OrderBy from "./OrderBy";
 
 export default function Warranties(props) {
   // const warrantyItems = props.warranties.map((warranty) => {
@@ -19,7 +20,7 @@ export default function Warranties(props) {
   const [state, setState] = useState({
     term: "",
     categoryFilter: "All",
-    orderBy: "",
+    orderBy: "Newest",
     displayedWarranties: [],
     warranties: [],
     searchResult: [],
@@ -41,7 +42,7 @@ export default function Warranties(props) {
       <Search state={state} setState={setState} />
       <CategoryFilter state={state} setState={setState} />
       {/* setCategoryFilter={setCategoryFilter} */}
-      {/* <OrderBy /> */}
+      <OrderBy state={state} setState={setState} />
       {/* <WarrantyDashboard /> */}
       <WarrantyList
         warranties={state.displayedWarranties}

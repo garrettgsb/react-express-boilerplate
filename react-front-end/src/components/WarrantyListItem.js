@@ -11,7 +11,7 @@ export default function WarrantyListItem(props) {
   } = props.warranty;
   // refactor
   let day1 = new Date(parseInt(start_date, 10));
-  let day2 = new Date(Date.now() + 20000000000);
+  let day2 = new Date(Date.now());
   function monthDiff(d1, d2) {
     var months;
     months = (d2.getFullYear() - d1.getFullYear()) * 12;
@@ -54,7 +54,7 @@ export default function WarrantyListItem(props) {
         <i class={icon} aria-hidden="true"></i>
       </td>
       <td>{item_name}</td>
-      <td style={{ width: "300px" }}>
+      <td style={{ width: "600px" }}>
         {" "}
         <Progress
           value={monthDiff(day1, day2)}

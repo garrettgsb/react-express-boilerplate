@@ -16,7 +16,7 @@ export default function Warranties(props) {
       <tr>
         <th>Category</th>
         <th>Warranty name</th>
-        <th>Days prior</th>
+        <th>Progress</th>
       </tr>
       {warrantyItems}
     </table>
