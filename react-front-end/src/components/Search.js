@@ -37,7 +37,6 @@ export default function Search(props) {
   return (
     <Fragment>
       <SearchBar onSearch={(term) => setState({ ...state, term })} />
-      <CategoryFilter state={state} setState={setState} />
     </Fragment>
   );
 }

@@ -33,17 +33,13 @@ export default function Warranties(props) {
       warranties: props.warranties,
       searchResult: props.warranties,
     }));
-    console.log(state.displayedWarranties);
+    // console.log(state.displayedWarranties);
   }, [props.warranties]);
-  console.log("Warranties.js rerender");
+  // console.log("Warranties.js rerender");
   return (
     <div>
-      <Search
-        state={state}
-        setState={setState}
-        // categoryFilter={categoryFilter}
-      />
-      {/* <CategoryFilter state={state} setState={setState} /> */}
+      <Search state={state} setState={setState} />
+      <CategoryFilter state={state} setState={setState} />
       {/* setCategoryFilter={setCategoryFilter} */}
       {/* <OrderBy /> */}
       {/* <WarrantyDashboard /> */}
