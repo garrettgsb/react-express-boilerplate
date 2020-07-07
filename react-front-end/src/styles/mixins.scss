@@ -1,0 +1,23 @@
+@mixin fade {
+  transition: opacity 0.2s ease-out;
+}
+
+@mixin button-active {
+  cursor: pointer;
+}
+
+@mixin button-inactive--opacity {
+  @include fade;
+  opacity: 0.7;
+}
+
+@mixin button-active--opacity {
+  @include button-active;
+  opacity: 1;
+}
+
+@mixin border-card($color) {
+  background-color: rgba($color, $inactive-opacity);
+  color: $color;
+  border: 2px solid $color;
+}

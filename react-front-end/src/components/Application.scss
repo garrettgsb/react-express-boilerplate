@@ -1,0 +1,38 @@
+@import "../styles/variables.scss";
+
+.sidebar {
+  background-color: $dark-background;
+  box-shadow: 0px 4px 8px rgba($dark-background, 0.5);
+  display: flex;
+  flex-direction: column;
+  min-width: 18rem;
+  padding: $spacing 0;
+
+  &--centered {
+    align-self: center;
+  }
+
+  &__separator {
+    width: 90%;
+    margin: $spacing 0;
+    border: solid 1px;
+    color: darken($white, 5%);
+  }
+
+  &__menu {
+    flex: 1;
+  }
+
+  &__lhl {
+    margin-top: 0rem;
+  }
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 2rem 0;
+  padding: 0 $spacing;
+  width: 100%;
+}
