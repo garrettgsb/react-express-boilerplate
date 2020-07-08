@@ -1,23 +1,14 @@
 import React from "react";
 import UserProfile from "./UserProfile";
 import Warranties from "./Warranties";
+import Form from "./Form";
 
 export default function Tab(props) {
-  // if (props.name === "User Profile") {
-  //   return <UserProfile userData={props.state.userData[0]} />;
-  // } else if (props.name === "Warranties") {
-  //   return <Warranties warranties={props.state.warranties} />;
-  //   // return <p>{props.name}</p>;
-  // } else if (props.name === "Monthly Payments") {
-  //   // return <Payments />;
-  //   return <p>{props.name}</p>;
-  // } else if (props.name === "Transactions") {
-  //   // return <Transactions />;
-  //   return <p>{props.name}</p>;
-  // }
   if (props.state.currentItem === null) {
     if (props.state.renderForm) {
-      return <p>FORM</p>;
+      return (
+        <Form setRenderForm={props.setRenderForm} addItem={props.addItem} />
+      );
     }
     switch (props.name) {
       case "User Profile":

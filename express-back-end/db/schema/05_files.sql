@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS files CASCADE;
 
 CREATE TABLE files (
   id SERIAL PRIMARY KEY NOT NULL,
-  entry_id INTEGER REFERENCES entries(id),
+  item_id INTEGER REFERENCES items(id),
   name VARCHAR(255) NOT NULL,
   url VARCHAR(255) NOT NULL
 );

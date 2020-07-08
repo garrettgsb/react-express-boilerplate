@@ -20,6 +20,14 @@ export default function useApplicationData() {
   const setWarranties = (warranties) => setState({ ...state, warranties });
   const setRenderForm = (renderForm) => setState({ ...state, renderForm });
 
+  function addItem() {
+    console.log("Item added!");
+    // return axios.put(`/api/appointments/${id}`, {interview: interview}).then((response)=>{ // Insert new entry of appointment to the database
+    //   const days = updateSpots({...state, appointments}); // Calculate remaining spots of updated appointments
+    //   setState({...state, appointments, days}); // Update state with new days and appointments locally if api request resolves
+    // })
+  }
+
   // // Insert a new interview to local state and remote database
   // function bookInterview(id, interview) {
   //   const appointment = {
@@ -86,5 +94,6 @@ export default function useApplicationData() {
     setState,
     setWarranties,
     setRenderForm,
+    addItem,
   };
 }

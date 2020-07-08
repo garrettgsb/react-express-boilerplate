@@ -1,1 +1,1 @@
-INSERT INTO files (entry_id, name, url) VALUES (1, 'iphone warranty', '123');
+INSERT INTO files (item_id, name, url) VALUES (1, 'iphone warranty', '123');
