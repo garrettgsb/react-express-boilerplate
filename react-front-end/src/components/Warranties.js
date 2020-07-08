@@ -3,6 +3,7 @@ import WarrantyList from "./WarrantyList";
 import CategoryFilter from "./CategoryFilter";
 import Search from "./Search";
 import OrderBy from "./OrderBy";
+import WarrantyDashboard from "./WarrantyDashboard";
 
 export default function Warranties(props) {
   // const warrantyItems = props.warranties.map((warranty) => {
@@ -39,11 +40,15 @@ export default function Warranties(props) {
   // console.log("Warranties.js rerender");
   return (
     <div>
+      <WarrantyDashboard warranties={state.warranties} />
       <Search state={state} setState={setState} />
       <CategoryFilter state={state} setState={setState} />
       {/* setCategoryFilter={setCategoryFilter} */}
       <OrderBy state={state} setState={setState} />
-      {/* <WarrantyDashboard /> */}
+
+      <button onClick={(e) => props.setRenderForm(true)}>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </button>
       <WarrantyList
         warranties={state.displayedWarranties}
         setCurrentItem={props.setCurrentItem}

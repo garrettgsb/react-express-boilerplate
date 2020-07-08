@@ -12,6 +12,7 @@ export default function Application(props) {
     setState,
     setCurrentItem,
     setWarranties,
+    setRenderForm,
   } = useApplicationData();
 
   return (
@@ -34,6 +35,7 @@ export default function Application(props) {
           state={state}
           setCurrentItem={setCurrentItem}
           setWarranties={setWarranties}
+          setRenderForm={setRenderForm}
         />
       </section>
     </main>

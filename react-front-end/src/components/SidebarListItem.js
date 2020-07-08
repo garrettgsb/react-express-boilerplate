@@ -12,7 +12,12 @@ export default function SidebarListItem(props) {
   return (
     <li
       onClick={() => {
-        props.setState({ ...props.state, currentItem: null, tab: props.name });
+        props.setState({
+          ...props.state,
+          currentItem: null,
+          tab: props.name,
+          renderForm: false,
+        });
       }}
       className={dayClass}
       data-testid="day"

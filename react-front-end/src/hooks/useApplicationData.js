@@ -12,11 +12,13 @@ export default function useApplicationData() {
     payments: [],
     transactions: [],
     currentItem: null,
+    renderForm: false,
   });
 
   const setTab = (tab) => setState({ ...state, tab }); // Set tab with a tab string
   const setCurrentItem = (currentItem) => setState({ ...state, currentItem });
   const setWarranties = (warranties) => setState({ ...state, warranties });
+  const setRenderForm = (renderForm) => setState({ ...state, renderForm });
 
   // // Insert a new interview to local state and remote database
   // function bookInterview(id, interview) {
@@ -77,5 +79,12 @@ export default function useApplicationData() {
     });
   }, []);
 
-  return { state, setTab, setCurrentItem, setState, setWarranties };
+  return {
+    state,
+    setTab,
+    setCurrentItem,
+    setState,
+    setWarranties,
+    setRenderForm,
+  };
 }
