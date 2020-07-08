@@ -16,6 +16,9 @@ export default function Tab(props) {
   //   return <p>{props.name}</p>;
   // }
   if (props.state.currentItem === null) {
+    if (props.state.renderForm) {
+      return <p>FORM</p>;
+    }
     switch (props.name) {
       case "User Profile":
         return <UserProfile userData={props.state.userData[0]} />;
@@ -25,6 +28,7 @@ export default function Tab(props) {
             warranties={props.state.warranties}
             setCurrentItem={props.setCurrentItem}
             setWarranties={props.setWarranties}
+            setRenderForm={props.setRenderForm}
           />
         );
       case "Monthly Payments":
