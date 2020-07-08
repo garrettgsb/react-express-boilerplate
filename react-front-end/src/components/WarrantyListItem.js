@@ -21,7 +21,15 @@ export default function WarrantyListItem(props) {
   }
   // console.log(monthDiff(day1, day2));
   // console.log(day2);
-
+  let passedMonths = monthDiff(day1, day2);
+  let status = [false, false, false];
+  if (passedMonths / duration_in_months > 0.75) {
+    status[0] = true;
+  } else if (passedMonths / duration_in_months > 0.25) {
+    status[1] = true;
+  } else {
+    status[2] = true;
+  }
   let icon;
   switch (item_category) {
     case "Groceries":
@@ -57,9 +65,12 @@ export default function WarrantyListItem(props) {
       <td style={{ width: "600px" }}>
         {" "}
         <Progress
-          value={monthDiff(day1, day2)}
+          value={passedMonths}
           total={duration_in_months}
           progress="ratio"
+          error={status[0]}
+          warning={status[1]}
+          success={status[2]}
         />
       </td>
       <td>
