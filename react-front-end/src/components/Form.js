@@ -26,7 +26,8 @@ export default function Form(props) {
     paymentSmsNotification: props.warrantySmsNotification || false,
     paymentEmailNotification: props.warrantyEmailNotification || false,
     paymentNotifyDaysPrior: props.warrantyNotifyDaysPrior || "",
-
+    //File
+    files: null,
     error: "",
   });
 
@@ -67,25 +68,27 @@ export default function Form(props) {
   const setPaymentNotifyDaysPrior = (paymentNotifyDaysPrior) =>
     setState({ ...state, paymentNotifyDaysPrior });
 
+  const setFiles = (files) => setState({ ...state, files });
   const setError = (error) => setState({ ...state, error });
 
   const {
     itemName,
     itemCategory,
     itemDescription,
+    warrantySectionActive,
     warrantyStartDate,
     warrantyDuration,
     warrantySmsNotification,
     warrantyEmailNotification,
     warrantyNotifyDaysPrior,
-    warrantySectionActive,
+    paymentSectionActive,
     paymentStartDate,
     paymentDuration,
     paymentSmsNotification,
     paymentEmailNotification,
-    paymentSectionActive,
     paymentNotifyDaysPrior,
     paymentMonthly,
+    files,
     error,
   } = state;
 
@@ -113,9 +116,25 @@ export default function Form(props) {
       setError("Item name cannot be blank");
       return;
     }
-
     setError("");
-    addItem();
+
+    addItem({
+      itemName,
+      itemCategory,
+      itemDescription,
+      warrantyStartDate,
+      warrantyDuration,
+      warrantySmsNotification,
+      warrantyEmailNotification,
+      warrantyNotifyDaysPrior,
+      paymentStartDate,
+      paymentDuration,
+      paymentSmsNotification,
+      paymentEmailNotification,
+      paymentNotifyDaysPrior,
+      paymentMonthly,
+      files,
+    });
   }
 
   return (
@@ -254,9 +273,93 @@ export default function Form(props) {
             onChange={(event) => setPaymentNotifyDaysPrior(event.target.value)}
           ></input>
         </fieldset>
-        <input type="checkbox" name="paymentCheckBox"></input>
+        <input
+          type="file"
+          files={files}
+          multiple
+          onChange={(event) => setFiles(event.target.files)}
+        ></input>
       </form>
+
       <button onClick={validate}>Save</button>
     </div>
   );
 }
+
+// import axios from "axios";
+
+// import React, { Component } from "react";
+
+// class App extends Component {
+//   state = {
+//     // Initially, no file is selected
+//     selectedFile: null,
+//   };
+
+//   // On file select (from the pop up)
+//   onFileChange = (event) => {
+//     // Update the state
+//     this.setState({ selectedFile: event.target.files[0] });
+//   };
+
+//   // On file upload (click the upload button)
+//   onFileUpload = () => {
+//     // Create an object of formData
+//     const formData = new FormData();
+
+//     // Update the formData object
+//     formData.append(
+//       "myFile",
+//       this.state.selectedFile,
+//       this.state.selectedFile.name
+//     );
+
+//     // Details of the uploaded file
+//     console.log(this.state.selectedFile);
+
+//     // Request made to the backend api
+//     // Send formData object
+//     axios.post("api/uploadfile", formData);
+//   };
+
+//   // File content to be displayed after
+//   // file upload is complete
+//   fileData = () => {
+//     if (this.state.selectedFile) {
+//       return (
+//         <div>
+//           <h2>File Details:</h2>
+//           <p>File Name: {this.state.selectedFile.name}</p>
+//           <p>File Type: {this.state.selectedFile.type}</p>
+//           <p>
+//             Last Modified:{" "}
+//             {this.state.selectedFile.lastModifiedDate.toDateString()}
+//           </p>
+//         </div>
+//       );
+//     } else {
+//       return (
+//         <div>
+//           <br />
+//           <h4>Choose before Pressing the Upload button</h4>
+//         </div>
+//       );
+//     }
+//   };
+
+//   render() {
+//     return (
+//       <div>
+//         <h1>GeeksforGeeks</h1>
+//         <h3>File Upload using React!</h3>
+//         <div>
+//           <input type="file" name="file" onChange={this.onFileChange} />
+//           <button onClick={this.onFileUpload}>Upload!</button>
+//         </div>
+//         {this.fileData()}
+//       </div>
+//     );
+//   }
+// }
+
+// export default App;

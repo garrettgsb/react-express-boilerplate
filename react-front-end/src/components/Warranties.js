@@ -47,7 +47,7 @@ export default function Warranties(props) {
       <OrderBy state={state} setState={setState} />
 
       <button onClick={(e) => props.setRenderForm(true)}>
-        <i class="fa fa-plus" aria-hidden="true"></i>
+        <i className="fa fa-plus" aria-hidden="true"></i>
       </button>
       <WarrantyList
         warranties={state.displayedWarranties}

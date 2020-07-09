@@ -20,12 +20,38 @@ export default function useApplicationData() {
   const setWarranties = (warranties) => setState({ ...state, warranties });
   const setRenderForm = (renderForm) => setState({ ...state, renderForm });
 
-  function addItem() {
-    console.log("Item added!");
-    // return axios.put(`/api/appointments/${id}`, {interview: interview}).then((response)=>{ // Insert new entry of appointment to the database
-    //   const days = updateSpots({...state, appointments}); // Calculate remaining spots of updated appointments
-    //   setState({...state, appointments, days}); // Update state with new days and appointments locally if api request resolves
-    // })
+  const onFileUpload = (fileObj, itemId) => {
+    // Create an object of formData
+    const formData = new FormData();
+
+    // Update the formData object
+    formData.append("file", fileObj);
+
+    // Details of the uploaded file
+    console.log("in upload", fileObj);
+
+    // Request made to the backend api
+    // Send formData object
+    axios.post(`api/uploadfile/${itemId}`, formData);
+  };
+
+  function addItem(inputObj) {
+    console.log(inputObj);
+
+    return axios.post(`/api/items`, inputObj).then((response) => {
+      console.log(inputObj.files);
+      for (let key in inputObj.files) {
+        if (inputObj.files[key] instanceof File) {
+          onFileUpload(inputObj.files[key], response.data);
+        }
+      }
+      // inputObj.files.forEach((file) => {
+      //   onFileUpload(file, response.data);
+      // });
+      // Insert new entry of appointment to the database
+      // const days = updateSpots({ ...state, appointments }); // Calculate remaining spots of updated appointments
+      // setState({ ...state, appointments, days }); // Update state with new days and appointments locally if api request resolves
+    });
   }
 
   // // Insert a new interview to local state and remote database

@@ -59,7 +59,7 @@ export default function WarrantyListItem(props) {
   return (
     <tr>
       <td>
-        <i class={icon} aria-hidden="true"></i>
+        <i className={icon} aria-hidden="true"></i>
       </td>
       <td>{item_name}</td>
       <td style={{ width: "600px" }}>
@@ -75,7 +75,7 @@ export default function WarrantyListItem(props) {
       </td>
       <td>
         <button onClick={(e) => props.setCurrentItem({ name: item_name })}>
-          <i class="fa fa-info-circle" aria-hidden="true"></i>
+          <i className="fa fa-info-circle" aria-hidden="true"></i>
         </button>
       </td>
     </tr>

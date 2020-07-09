@@ -13,12 +13,14 @@ export default function Warranties(props) {
   });
   return (
     <table>
-      <tr>
-        <th>Category</th>
-        <th>Warranty name</th>
-        <th>Progress</th>
-      </tr>
-      {warrantyItems}
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Warranty name</th>
+          <th>Progress</th>
+        </tr>
+      </thead>
+      <tbody>{warrantyItems}</tbody>
     </table>
   );
 }
