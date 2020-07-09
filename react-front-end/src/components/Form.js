@@ -27,8 +27,8 @@ export default function Form(props) {
     paymentEmailNotification: props.warrantyEmailNotification || false,
     paymentNotifyDaysPrior: props.warrantyNotifyDaysPrior || "",
     //File
-    files: null,
-    error: "",
+    files: null || props.files,
+    //error: "",
   });
 
   // Item section
@@ -39,8 +39,8 @@ export default function Form(props) {
     setState({ ...state, itemDescription });
 
   // Warranty section
-  const setWarrantySectionActive = (warrantySectionActive) =>
-    setState({ ...state, warrantySectionActive });
+  // const setWarrantySectionActive = (warrantySectionActive) =>
+  //   setState({ ...state, warrantySectionActive });
   const setWarrantyStartDate = (warrantyStartDate) =>
     setState({ ...state, warrantyStartDate });
   const setWarrantyDuration = (warrantyDuration) =>
@@ -53,8 +53,8 @@ export default function Form(props) {
     setState({ ...state, warrantyNotifyDaysPrior });
 
   // Payment section
-  const setPaymentSectionActive = (paymentSectionActive) =>
-    setState({ ...state, paymentSectionActive });
+  // const setPaymentSectionActive = (paymentSectionActive) =>
+  //   setState({ ...state, paymentSectionActive });
   const setPaymentMonthly = (paymentMonthly) =>
     setState({ ...state, paymentMonthly });
   const setPaymentStartDate = (paymentStartDate) =>
@@ -69,7 +69,7 @@ export default function Form(props) {
     setState({ ...state, paymentNotifyDaysPrior });
 
   const setFiles = (files) => setState({ ...state, files });
-  const setError = (error) => setState({ ...state, error });
+  //const setError = (error) => setState({ ...state, error });
 
   const {
     itemName,
@@ -89,7 +89,7 @@ export default function Form(props) {
     paymentNotifyDaysPrior,
     paymentMonthly,
     files,
-    error,
+    //error,
   } = state;
 
   const categoryOptions = [
@@ -107,16 +107,50 @@ export default function Form(props) {
     "Camera",
     "Musical Instruments",
     "Audio",
-  ].map((category) => {
-    return <option>{category}</option>;
+  ].map((category, index) => {
+    return <option key={index}>{category}</option>;
   });
+
+  const fileList = [];
+  for (let key in files) {
+    if (files[key] instanceof File) {
+      fileList.push(<p>{files[key].name}</p>);
+    }
+  }
 
   function validate() {
     if (itemName === "") {
-      setError("Item name cannot be blank");
+      //setError("Item name cannot be blank");
       return;
     }
-    setError("");
+    if (warrantySectionActive) {
+      if (!warrantyStartDate) {
+        return;
+      }
+      if (!warrantyDuration) {
+        return;
+      }
+      if (warrantySmsNotification || warrantyEmailNotification) {
+        if (!warrantyNotifyDaysPrior) {
+          return;
+        }
+      }
+    }
+    if (paymentSectionActive)
+      if (!paymentStartDate) {
+        return;
+      }
+    if (paymentMonthly) {
+      if (!paymentDuration) {
+        return;
+      }
+    }
+
+    if (paymentSmsNotification || paymentEmailNotification) {
+      if (!paymentNotifyDaysPrior) {
+        return;
+      }
+    }
 
     addItem({
       itemName,
@@ -137,10 +171,51 @@ export default function Form(props) {
     });
   }
 
+  function onSectionActiveChange(isActive, type) {
+    setState({
+      ...state,
+      [`${type}StartDate`]: "",
+      [`${type}Duration`]: "",
+      [`${type}SectionActive`]: isActive,
+      [`${type}EmailNotification`]: false,
+      [`${type}SmsNotification`]: false,
+      [`${type}NotifyDaysPrior`]: "",
+      paymentMonthly: type === "payment" ? false : paymentMonthly,
+    });
+  }
+
+  function onNotificationChange(isActive, isOtherActive, setNotif, type) {
+    if (!isActive && !isOtherActive) {
+      setState({
+        ...state,
+        [`${type}SmsNotification`]: false,
+        [`${type}EmailNotification`]: false,
+        [`${type}NotifyDaysPrior`]: "",
+      });
+    } else {
+      setNotif(isActive);
+    }
+  }
+
+  function onPaymentMonthlyChange(isActive) {
+    if (!isActive) {
+      setState({
+        ...state,
+        paymentDuration: "",
+        paymentEmailNotification: false,
+        paymentSmsNotification: false,
+        paymentMonthly: false,
+        paymentNotifyDaysPrior: "",
+      });
+    } else {
+      setPaymentMonthly(isActive);
+    }
+  }
+
   return (
     <div>
       <button onClick={(e) => props.setRenderForm(false)}>
-        <i class="fa fa-times" aria-hidden="true"></i>
+        <i className="fa fa-times" aria-hidden="true"></i>
       </button>
       <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
         {/* Item section */}
@@ -150,8 +225,8 @@ export default function Form(props) {
           value={itemName}
           onChange={(event) => setItemName(event.target.value)}
           placeholder="Enter Item Name"
+          required
         ></input>
-        <p>{error}</p>
         <label>Category: </label>
         <select
           value={itemCategory}
@@ -172,7 +247,9 @@ export default function Form(props) {
           type="checkbox"
           name="warrantyCheckBox"
           checked={warrantySectionActive}
-          onChange={(event) => setWarrantySectionActive(event.target.checked)}
+          onChange={(event) =>
+            onSectionActiveChange(event.target.checked, "warranty")
+          }
         ></input>
         <fieldset disabled={!warrantySectionActive}>
           <h3>Warranty</h3>
@@ -181,13 +258,15 @@ export default function Form(props) {
             type="date"
             value={warrantyStartDate}
             onChange={(event) => setWarrantyStartDate(event.target.value)}
-          ></input>
+            required={warrantySectionActive}
+          />
           <label>Duration in months:</label>
           <input
             type="number"
             value={warrantyDuration}
             onChange={(event) => setWarrantyDuration(event.target.value)}
-          ></input>
+            required={warrantySectionActive}
+          />
           <label>Notifications</label>
           <label>SMS: </label>
           <input
@@ -195,23 +274,35 @@ export default function Form(props) {
             name="smsCheckBox"
             checked={warrantySmsNotification}
             onChange={(event) =>
-              setWarrantySmsNotification(event.target.checked)
+              onNotificationChange(
+                event.target.checked,
+                warrantyEmailNotification,
+                setWarrantySmsNotification,
+                "warranty"
+              )
             }
-          ></input>
+          />
           <label>E-mail: </label>
           <input
             type="checkbox"
             name="emailCheckBox"
             checked={warrantyEmailNotification}
             onChange={(event) =>
-              setWarrantyEmailNotification(event.target.checked)
+              onNotificationChange(
+                event.target.checked,
+                warrantySmsNotification,
+                setWarrantyEmailNotification,
+                "warranty"
+              )
             }
-          ></input>
+          />
           <input
             type="number"
             value={warrantyNotifyDaysPrior}
             onChange={(event) => setWarrantyNotifyDaysPrior(event.target.value)}
-          ></input>
+            disabled={!warrantySmsNotification && !warrantyEmailNotification}
+            required={warrantySmsNotification || warrantyEmailNotification}
+          />
         </fieldset>
 
         {/* Payment section */}
@@ -219,21 +310,23 @@ export default function Form(props) {
           type="checkbox"
           name="paymentCheckBox"
           checked={paymentSectionActive}
-          onChange={(event) => setPaymentSectionActive(event.target.checked)}
-        ></input>
+          onChange={(event) =>
+            onSectionActiveChange(event.target.checked, "payment")
+          }
+        />
         <fieldset disabled={!paymentSectionActive}>
           <h3>Payment</h3>
           <input
             type="radio"
             checked={!paymentMonthly}
-            onChange={(event) => setPaymentMonthly(!event.target.checked)}
-          ></input>
+            onChange={(event) => onPaymentMonthlyChange(!event.target.checked)}
+          />
           <label>One-time</label>
           <input
             type="radio"
             checked={paymentMonthly}
-            onChange={(event) => setPaymentMonthly(event.target.checked)}
-          ></input>
+            onChange={(event) => onPaymentMonthlyChange(event.target.checked)}
+          />
           <label>Monthly</label>
 
           <label>{paymentMonthly ? "Start Date" : "Date"}</label>
@@ -241,13 +334,16 @@ export default function Form(props) {
             type="date"
             value={paymentStartDate}
             onChange={(event) => setPaymentStartDate(event.target.value)}
-          ></input>
+            required={paymentSectionActive}
+          />
           <label>Duration in months:</label>
           <input
             type="number"
             value={paymentDuration}
             onChange={(event) => setPaymentDuration(event.target.value)}
-          ></input>
+            required={paymentMonthly}
+            disabled={!paymentMonthly}
+          />
           <label>Notifications</label>
           <label>SMS: </label>
           <input
@@ -255,33 +351,47 @@ export default function Form(props) {
             name="smsCheckBox"
             checked={paymentSmsNotification}
             onChange={(event) =>
-              setPaymentSmsNotification(event.target.checked)
+              onNotificationChange(
+                event.target.checked,
+                paymentEmailNotification,
+                setPaymentSmsNotification,
+                "payment"
+              )
             }
-          ></input>
+            disabled={!paymentMonthly}
+          />
           <label>E-mail: </label>
           <input
             type="checkbox"
             name="emailCheckBox"
             checked={paymentEmailNotification}
             onChange={(event) =>
-              setPaymentEmailNotification(event.target.checked)
+              onNotificationChange(
+                event.target.checked,
+                paymentSmsNotification,
+                setPaymentEmailNotification,
+                "payment"
+              )
             }
-          ></input>
+            disabled={!paymentMonthly}
+          />
           <input
             type="number"
             value={paymentNotifyDaysPrior}
             onChange={(event) => setPaymentNotifyDaysPrior(event.target.value)}
-          ></input>
+            disabled={!paymentSmsNotification && !paymentEmailNotification}
+            required={paymentSmsNotification || paymentEmailNotification}
+          />
         </fieldset>
+        {fileList}
         <input
           type="file"
           files={files}
           multiple
           onChange={(event) => setFiles(event.target.files)}
-        ></input>
+        />
+        <input type="submit" onClick={validate} value="Save" />
       </form>
-
-      <button onClick={validate}>Save</button>
     </div>
   );
 }

@@ -28,6 +28,8 @@ export default function Tab(props) {
       case "Transactions":
         // return <Transactions />;
         return <p>{props.name}</p>;
+      default:
+        return;
     }
   } else {
     // return <ItemDetails />;

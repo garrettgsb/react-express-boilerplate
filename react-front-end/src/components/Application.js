@@ -8,7 +8,6 @@ export default function Application(props) {
   // Destructing custom hook
   const {
     state,
-    setTab,
     setState,
     setCurrentItem,
     setWarranties,

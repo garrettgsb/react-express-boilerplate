@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 export default function CategoryFilter(props) {
   const { state, setState } = props;

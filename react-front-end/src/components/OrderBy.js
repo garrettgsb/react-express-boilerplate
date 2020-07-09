@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 export default function OrderBy(props) {
   const { state, setState } = props;
@@ -62,6 +62,7 @@ export default function OrderBy(props) {
       case `Months left ↓`:
         sorted = state.displayedWarranties.sort(compareMonthsLeftLargest);
         break;
+      default:
     }
 
     setState((state) => ({

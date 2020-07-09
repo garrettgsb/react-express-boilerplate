@@ -1,5 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef } from "react";
-import CategoryFilter from "./CategoryFilter";
+import React, { Fragment, useEffect, useRef } from "react";
 
 import SearchBar from "./SearchBar";
 

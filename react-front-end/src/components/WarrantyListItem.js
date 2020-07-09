@@ -4,7 +4,6 @@ import { Progress } from "semantic-ui-react";
 export default function WarrantyListItem(props) {
   const {
     item_name,
-    days_prior,
     item_category,
     duration_in_months,
     start_date,
