@@ -25,7 +25,7 @@ export default function useApplicationData() {
   }
 
   const setUser = (event) => {
-    setState({user: event.target.value
+    setState({...state,user: event.target.value
     });
     console.log(state.user)
   }
