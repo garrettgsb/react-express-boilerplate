@@ -4,7 +4,7 @@ import './App.css';
 
 export default function Application(props) {
 
-  const { setUser, setURL, fetchData, state } = useApplicationData();
+  const { setUser, setURL, state } = useApplicationData();
   
 
     return (
@@ -18,11 +18,6 @@ export default function Application(props) {
         </form>
 
 
-          
-      
-        <button onClick={fetchData} >
-          Fetch Data
-        </button>        
       </div>
     );
 }
