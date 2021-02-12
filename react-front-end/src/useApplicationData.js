@@ -16,7 +16,7 @@ export default function useApplicationData() {
       setState(prev => ({
         ...prev, avatar: response.data.avatar_url
       }));
-    }) 
+    })
 
 }, [state.url])
 
