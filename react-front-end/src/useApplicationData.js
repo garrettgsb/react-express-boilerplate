@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     avatar: "https://cdn.pixabay.com/photo/2017/02/01/00/26/cranium-2028555_960_720.png",
-    url: "",
+    url: "https://cdn.pixabay.com/photo/2017/02/01/00/26/cranium-2028555_960_720.png",
     user: ""
   });
 
