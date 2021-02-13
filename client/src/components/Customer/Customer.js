@@ -1,8 +1,9 @@
+import UserInfo from './UserInfo'
 
 function Customer() {
 
   return(
-    <h1>I am a customer</h1>
+    <UserInfo />
   )
 }
 
