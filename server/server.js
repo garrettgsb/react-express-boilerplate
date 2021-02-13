@@ -1,7 +1,7 @@
-// const menu =require('./src/routes/menu');
-// const order = require('./src/routes/order');
-// const stores = require('./src/routes/stores');
-// const users = require('./src/routes/users');
+const menu =require('./src/routes/menu');
+const order = require('./src/routes/order');
+const stores = require('./src/routes/stores');
+const users = require('./src/routes/users');
 
 const express = require("express");
 const BodyParser = require("body-parser");
@@ -10,7 +10,7 @@ const db = require('./src/db/config')
 
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 
 
 // Express Configuration
@@ -27,10 +27,10 @@ app.get("/", (req, response) => {
   .catch((err) => {console.log("error", err)})
 });
 
-// app.use("/api", menu(db));
-// app.use("/api", order(db));
-// app.use("/api", stores(db));
-// app.use("/api", users(db));
+app.use("/api", menu(db));
+app.use("/api", order(db));
+app.use("/api", stores(db));
+app.use("/api", users(db));
 
 
 // app.get("/api/data", (req, res) =>
