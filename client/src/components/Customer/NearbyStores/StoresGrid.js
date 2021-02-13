@@ -1,3 +1,5 @@
+import { useHistory } from 'react-router-dom'
+
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -5,6 +7,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 
 function StoresGrid() {
+  const history = useHistory();
 
   const tileData = [
     {
@@ -64,7 +67,7 @@ function StoresGrid() {
   ]
 
   const onClick = (id) => {
-    console.log(id)
+    history.push(`/stores/${id}/menu`)
   }
 
   return(
