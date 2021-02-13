@@ -2,6 +2,7 @@ const menu =require('./src/routes/menu');
 const order = require('./src/routes/order');
 const stores = require('./src/routes/stores');
 const users = require('./src/routes/users');
+const reset = require('./src/db/reset');
 
 const express = require("express");
 const BodyParser = require("body-parser");
@@ -31,6 +32,7 @@ app.use("/api", menu(db));
 app.use("/api", order(db));
 app.use("/api", stores(db));
 app.use("/api", users(db));
+app.use("/api/debug", reset(db))
 
 
 // app.get("/api/data", (req, res) =>
