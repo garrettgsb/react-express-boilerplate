@@ -1,7 +1,7 @@
-require('dotenv').config({ debug: process.env.DEBUG });
+const ENV = require("../environment");
 
 const {Pool} = require("pg");
-const isProduction = process.env.NODE_ENV === 'production'
+const isProduction = ENV === 'production'
 const connectionString = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`
 /*
   Using pool is a better option than a single client for apps that have many users who make
