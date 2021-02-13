@@ -1,3 +1,4 @@
+import NearbyStores from './NearbyStores'
 import UserInfo from './UserInfo'
 import UserNav from './UserNav'
 
@@ -7,6 +8,7 @@ function Customer() {
     <>
     <UserInfo />
     <UserNav />
+    <NearbyStores />
     </>
 
   )
