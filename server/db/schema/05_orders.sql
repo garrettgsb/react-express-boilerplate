@@ -8,6 +8,7 @@ CREATE TABLE orders
   id SERIAL PRIMARY KEY NOT NULL,
   time_created TIMESTAMP NOT NULL,
   total_price FLOAT DEFAULT 0,
+  completed BOOLEAN DEFAULT FALSE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
