@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './App.css';
+import './App.scss';
 
 import Customer from './Customer/Customer'
 

@@ -1,6 +1,6 @@
 function Logo() {
   return(
-    <h3>Beanli Logo</h3>
+    <h3>Logo</h3>
   )
 }
 
