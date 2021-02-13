@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ debug: process.env.DEBUG });
+}
+
 const menu =require('./src/routes/menu');
 const order = require('./src/routes/order');
 const stores = require('./src/routes/stores');
@@ -11,7 +15,7 @@ const db = require('./src/db/config')
 
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 
 // Express Configuration
@@ -44,7 +48,7 @@ app.use("/api/debug", reset(db))
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(
-    `Server is listening on port ${PORT}`
+    `Server is listening on port ${PORT} in mode.`
   );
 });
 
