@@ -1,0 +1,9 @@
+INSERT INTO stores
+  (name, latitude, longitude, image, address, user_id)
+VALUES
+  ('BREKA', 49.285764, -123.127274, 'https://images.unsplash.com/photo-1493857671505-72967e2e2760?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', '818 Bute Street, Vancouver, BC V6E 1B0, Canada', 1),
+  ('PappaRoti', 49.28897831975059, -123.13114582827282, 'https://images.unsplash.com/photo-1463797221720-6b07e6426c24?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80', '787 Nicola Street, Vancouver, BC, Canada', 2),
+  ('Berry Good', 49.183342923748526, -123.12560035997672, 'https://images.unsplash.com/photo-1494346480775-936a9f0d0877?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1303&q=80', '8766 McKim Way, Richmond, BC V6X 3Z8, Canada', 3),
+  ('Tiger Sugar', 49.170551459330326, -123.13260825862473, 'https://images.unsplash.com/photo-1533630757306-cbadb934bcb1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', '8271 Westminster Highway, Richmond, BC V6X 3K5, Canada', 4),
+  ('Cafe Delta', 49.14700552985569, -122.89117268206913, 'https://images.unsplash.com/photo-1464979681340-bdd28a61699e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', '7907 Scott Road, Delta, BC V3W 3N2, Canada', 5),
+  ('IHOP', 49.15199892579976, -122.88989825243101, 'https://images.unsplash.com/photo-1525610553991-2bede1a236e2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', '82 Avenue, Surrey, BC V4C 6R1, Canada', 6);
