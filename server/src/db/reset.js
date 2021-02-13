@@ -1,6 +1,8 @@
   const router = require("express").Router();
   const fs = require("fs");
   const path = require("path");
+  const ENV = require("../environment")
+
 
   module.exports = (db) => {
 
@@ -14,7 +16,7 @@
 
   Promise.all([
     read(path.resolve(__dirname, `../../db/create.sql`)),
-    read(path.resolve(__dirname, `../../db/development.sql`))
+    read(path.resolve(__dirname, `../../db/${ENV}.sql`))
   ])
     .then(([create, seed]) => {
       router.get("/reset", (req, res) => {
