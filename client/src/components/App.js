@@ -2,13 +2,16 @@ import { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
+import Customer from './Customer/Customer'
+
 // test
 
 function App() {
 
   // get the user using selector function here:
   const user = {
-    type: 'store owner'
+    username: 'test user',
+    type: 'customer'
   }
 
   const customer = user.type === 'customer';
@@ -16,15 +19,16 @@ function App() {
 
   return(
     <div className="App">
-      { customer && 
-      // customer components go here
-      <p>I am a customer</p> 
-      }    
+      { customer && (
+      // customer components go here (make a customer component?)
+      <Customer />
+      )}    
 
-      { storeOwner && 
-      // store owner components go here
+      { storeOwner && (
+      // store owner components go here (make a store owner component?)
       <p>I am a store owner</p>
-      }   
+      // <StoreOwner />
+      )}   
     </div>
   ); 
 
