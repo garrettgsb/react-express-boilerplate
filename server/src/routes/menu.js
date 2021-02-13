@@ -1,13 +1,18 @@
 const router = require("express").Router();
 
-// READ GET /menu/:id  "Get Menu"
-
 module.exports = (db) => {
-router.get("", (req, res) => {
-  db.query(``)
-  .then()
-  .catch()
-})
-return router;
-}
-
+  // READ GET /menu/:id  "Get Menu"
+  router.get("/menu/:id", (req, res) => {
+    const queryParams = [req.params.id];
+    db.query(`SELECT * FROM menu_items WHERE store_id = $1`, queryParams)
+      .then((result) => {
+        result.rows.length
+          ? res.json(result.rows)
+          : res.json({
+              message: `no store found with id: ${req.params.id}`,
+            });
+      })
+      .catch((err) => res.status(401).json({ error: err.message }));
+  });
+  return router;
+};
