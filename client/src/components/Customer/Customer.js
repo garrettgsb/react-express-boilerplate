@@ -4,6 +4,7 @@ import NearbyStores from './NearbyStores'
 import UserInfo from './UserInfo'
 import UserNav from './UserNav'
 import YourCartButton from './YourCartButton'
+import StoreInfo from './StoreInfo'
 
 function Customer() {
 
@@ -11,6 +12,7 @@ function Customer() {
     <Router>
       <Switch>
         <Route path="/stores/:storeId/menu">
+          <StoreInfo />
           <YourCartButton />
         </Route>
 
