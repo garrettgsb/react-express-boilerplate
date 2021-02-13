@@ -1,9 +1,9 @@
 require('dotenv').config({ debug: process.env.DEBUG });
 
 const {Pool} = require("pg");
-const isProduction = process.env.NODE_ENV === 'production'
-// const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`
-const connectionString = `${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`
+// const isProduction = process.env.NODE_ENV === 'production'
+// // const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`
+// const connectionString = `${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`
 /*
   Using pool is a better option than a single client for apps that have many users who make
   frequent queries to the DB.
