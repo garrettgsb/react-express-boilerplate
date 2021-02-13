@@ -3,7 +3,6 @@ import axios from 'axios';
 import './App.scss';
 
 import Customer from './Customer/Customer'
-
 // test
 
 function App() {
