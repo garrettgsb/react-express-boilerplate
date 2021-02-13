@@ -26,7 +26,7 @@ app.get("/api/data", (req, res) =>
 app.get("/", (req, response) => {
   db.query('SELECT * FROM users;')
   .then((res)=>{response.send(res.rows)})
-  .catch(console.log("error"))
+  .catch((err) => {console.log("error", err)})
 });
 
 //PORT setup
