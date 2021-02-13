@@ -1,6 +1,7 @@
 const express = require("express");
 const BodyParser = require("body-parser");
 const morgan = require("morgan")
+const db = require('./src/db/config')
 
 
 const app = express();
@@ -22,6 +23,12 @@ app.get("/api/data", (req, res) =>
   })
 );
 
+app.get("/", (req, response) => {
+  db.query('SELECT * FROM users;')
+  .then((res)=>{response.send(res.rows)})
+  .catch(console.log("error"))
+});
+
 //PORT setup
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
@@ -29,3 +36,7 @@ app.listen(PORT, () => {
     `Server is listening on port ${PORT}`
   );
 });
+
+app.close = () => {
+  return db.end();
+}
