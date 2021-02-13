@@ -1,3 +1,14 @@
+.nearby-stores-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.nearby-stores-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+
 .gridList {
   width: 500;
   height: 450;
