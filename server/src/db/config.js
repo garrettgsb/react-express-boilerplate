@@ -27,13 +27,14 @@ pool.on('error', (err, client) => {
 
 // The query function below also logs to the server
 module.exports = {
-  query: (text, params) => {
+  query: (input, params) => {
     const start = Date.now();
     return new Promise((resolve, reject) => {
-      pool.query(text, params)
+      pool.query(input, params)
       .then((res) => {
         const duration = Date.now() - start;
-        console.log('query:', {text, duration, rows: res.rowCount})
+        console.log('query:', {command_received: res.command, input, duration, rows_output: res.rowCount})
+        console.table(res.rows)
         return resolve(res)
       })
       .catch((err)=> {
