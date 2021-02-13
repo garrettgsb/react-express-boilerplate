@@ -1,6 +1,7 @@
 import NearbyStores from './NearbyStores'
 import UserInfo from './UserInfo'
 import UserNav from './UserNav'
+import YourCartButton from './YourCartButton'
 
 function Customer() {
 
@@ -9,6 +10,7 @@ function Customer() {
     <UserInfo />
     <UserNav />
     <NearbyStores />
+    <YourCartButton />
     </>
 
   )
