@@ -3,9 +3,16 @@ import axios from 'axios';
 import './App.scss';
 
 import Customer from './Customer/Customer'
+import applicationData from '../hooks/useApplicationData';
+
 // test
 
-function App() {
+export default function App() {
+  const {
+    state
+  } = applicationData();
+
+  console.log(state)
 
   // get the user using selector function here:
   const user = {
@@ -52,5 +59,3 @@ function App() {
   //   );
   
 }
-
-export default App;
