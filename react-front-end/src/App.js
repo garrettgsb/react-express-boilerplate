@@ -3,7 +3,7 @@ import useApplicationData from './useApplicationData';
 import './App.css';
 import Search from './components/search.js'
 import Filter from "./components/Filter"
-
+import NavBar from "./components/AppBar.js"
 
 export default function Application(props) {
 
@@ -47,9 +47,7 @@ export default function Application(props) {
 
     return (
       <main className="App">
-        <nav>
-          <h1>NavBar</h1>
-          </nav>
+        <NavBar />
         <div>
         <Search onSubmit={fetchData} value={state.user || ""} onChange={(e) => setUser(e)} onClick={fetchData}/>
         </div>
