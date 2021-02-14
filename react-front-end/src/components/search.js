@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 // import SearchBar from "material-ui-search-bar";
 
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -21,7 +23,9 @@ export default function Search(props) {
             
             <label ><SearchIcon onClick={props.onClick} id="search-icon" /></label>
             {/* <button type="button" onClick={props.onClick}>Submit</button> */}
+            
       </form>
+      
     );
 }
 
