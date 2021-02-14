@@ -2,8 +2,12 @@ import React  from 'react';
 import useApplicationData from './useApplicationData';
 import './App.css';
 import Search from './components/search.js'
+import Repository from './components/repository.js'
+
 import Filter from "./components/Filter"
 import NavBar from "./components/AppBar.js"
+
+
 
 export default function Application(props) {
 
@@ -28,18 +32,16 @@ export default function Application(props) {
   //   );
   // })
 
+
     const repositoryArray = state.repositories
     const repositoriesObject = repositoryArray.map(repository => {
 
-      // const languages = fetchLanguages(repository.name)
       return (
-      <div>
-        <p>{repository.name}</p>
-        <p>{repository.description}</p>
-        <p>{repository["created_at"]}</p>
-        <p>{repository.contributors}</p>
-        {/* <p>{languages[0]}</p> */}
-      </div>
+        <Repository 
+          name={repository.name}
+          description={repository.description}
+          created_at={repository["created_at"]}
+        />
       )
     })
     
