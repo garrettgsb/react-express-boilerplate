@@ -3,8 +3,6 @@ const distance = function (origin, array) {
   const originLat = origin.latitude;
   const originLong = origin.longitude;
 
-  console.log('origin', originLat, originLong)
-
   array.forEach((store) => {
     const storeLat = store.latitude;
     const storeLong = store.longitude;
@@ -25,7 +23,6 @@ const distance = function (origin, array) {
     dist = (dist * 180) / Math.PI;
     dist = dist * 60 * 1.1515 * 1.609344;
 
-    console.log('distance', dist)
     store.distance = Math.round(dist);
   });
   return array;

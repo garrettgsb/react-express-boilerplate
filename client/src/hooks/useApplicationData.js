@@ -4,10 +4,10 @@ import {distance} from "../helpers/data"
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    users: "",
-    stores: "",
-    menus: "",
-    orders: "",
+    users: [],
+    stores: [],
+    menus: [],
+    orders: [],
   });
   
   const myCoords = {latitude: 49.281338241296815, longitude: -123.11492992211487}
