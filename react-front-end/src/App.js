@@ -3,8 +3,8 @@ import useApplicationData from './useApplicationData';
 import './App.css';
 import Search from './components/search.js'
 import Repository from './components/repository.js'
-import BasicTimeline from './components/test.js'
 
+import Filter from "./components/Filter"
 
 
 export default function Application(props) {
@@ -53,7 +53,9 @@ export default function Application(props) {
         <div>
         <Search onSubmit={fetchData} value={state.user || ""} onChange={(e) => setUser(e)} onClick={fetchData}/>
         </div>
-        <div>FILTER</div>
+        <div>
+          <Filter></Filter>
+        </div>
         <div>
           <h1>show</h1>
           <h4>Github User: <a href={`https://github.com/${state.loginUser}`}>
@@ -63,7 +65,6 @@ export default function Application(props) {
           <img src={ state.avatar } alt="nothing"></img>
           {repositoriesObject}
         </div>
-        <BasicTimeline />
       </main>
     );
 }
