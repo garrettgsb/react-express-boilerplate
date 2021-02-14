@@ -3,7 +3,7 @@ import useApplicationData from './useApplicationData';
 import './App.css';
 import Search from './components/search.js'
 import Repository from './components/repository.js'
-
+import OppositeTimeline from './components/OppositeTimeline.js'
 import Filter from "./components/Filter"
 import NavBar from "./components/AppBar.js"
 
@@ -32,40 +32,31 @@ export default function Application(props) {
   //   );
   // })
 
-
-    const repositoryArray = state.repositories
-    const repositoriesObject = repositoryArray.map(repository => {
-
-      return (
-        <Repository 
-          name={repository.name}
-          description={repository.description}
-          created_at={repository["created_at"]}
-        />
-      )
-    })
     
      
 
     return (
       <main className="App">
         <NavBar />
+        <section class="main-container">
+          <div id="search-and-filter">
+            <Search onSubmit={fetchData} value={state.user || ""} onChange={(e) => setUser(e)} onClick={fetchData}/>
+            <Filter></Filter>
+          </div>
+        
+          <div id="show">
+            <h4>Github User: <a href={`https://github.com/${state.loginUser}`}>
+              <h4>{state.loginUser}</h4>
+            </a></h4>
+            <h4>Name: {state.name}</h4>
+            <img src={ state.avatar } alt="nothing"></img>
+          </div>
+        </section>
+        
         <div>
-        <Search onSubmit={fetchData} value={state.user || ""} onChange={(e) => setUser(e)} onClick={fetchData}/>
-        </div>
-        <div>
-          <Filter></Filter>
-        </div>
-        <div>
-          <h1>show</h1>
-          <h4>Github User: <a href={`https://github.com/${state.loginUser}`}>
-            <h4>{state.loginUser}</h4>
-          </a></h4>
-          <h4>Name: {state.name}</h4>
-          <img src={ state.avatar } alt="nothing"></img>
-          {repositoriesObject}
-        </div>
+          <OppositeTimeline repositories={state.repositories} />
+        </div>        
       </main>
-    );
+);
 }
             
