@@ -1,5 +1,6 @@
 import React from 'react';
 import useApplicationData from '../useApplicationData';
+import RepoDisplay from './RepoDisplay.js';
 
 export default function OppositeTimeline(props) {
 
@@ -47,8 +48,7 @@ export default function OppositeTimeline(props) {
           <div class="timeline-dot fb-bg"></div>
           <div class="timeline-content">
             <i class="fa fa-map-marker"></i>
-            <h4>{repository.name}</h4>
-            <p>{repository.description}</p>
+            <RepoDisplay name={repository.name} description={repository.description} />
           </div>
         </div>
         )

@@ -2,10 +2,12 @@ import React  from 'react';
 import useApplicationData from './useApplicationData';
 import './App.css';
 import Search from './components/search.js'
-import Repository from './components/repository.js'
 import OppositeTimeline from './components/OppositeTimeline.js'
+import {userData, repoData} from "./backupData"
 import Filter from "./components/Filter"
 import NavBar from "./components/AppBar.js"
+import RepoDisplay from "./components/RepoDisplay"
+
 
 
 
@@ -32,6 +34,19 @@ export default function Application(props) {
   //   );
   // })
 
+    const repoBoxes = repoData.map(item=>{
+      return(
+      <RepoDisplay
+      key={item.id}
+      name={item.name}
+      description={item.description}
+      created_at={item.created_at}
+      language={item.language}
+      languages_url={item.languages_url}
+      collaborators_url={item.collaborators_url}
+      />
+      )
+    })
     
      
 
@@ -55,7 +70,9 @@ export default function Application(props) {
         
         <div>
           <OppositeTimeline repositories={state.repositories} />
+          {repoBoxes}
         </div>        
+        
       </main>
 );
 }
