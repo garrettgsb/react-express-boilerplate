@@ -1,21 +1,11 @@
 import React from "react";
 import useApplicationData from "../useApplicationData";
-import RepoDisplay from "./repoDisplay/RepoDisplay.js";
 import "./OppositeTimeline.css";
 
-import {useState} from "react"
-import "./RepoDisplay.css";
-import Button from "@material-ui/core/Button";
-import LanguageIcon from "@material-ui/icons/Language";
-import DescriptionIcon from "@material-ui/icons/Description";
-import BorderColorIcon from "@material-ui/icons/BorderColor";
-import FavoriteIcon from '@material-ui/icons/Favorite';
+
+import RepoDisplay from "./repoDisplay/RepoDisplay.js"
 
 export default function OppositeTimeline(props) {
-  const [state,setState] = useState({color:"black"})
-  const like = () =>{
-    state.color ==="red" ? setState(prev=>({color:"black"})) : setState(prev=>({color:"red"}))
-  }
 
 
   const repositoryArray = props.repositories;
@@ -102,29 +92,7 @@ export default function OppositeTimeline(props) {
 
 
 
-            <div className="box">
-              <FavoriteIcon className={"like_btn"} style={{color:state.color}} onClick={()=>like()}/>
-              <h3>{repository.name}</h3>
-              <section class="repo-content">
-                <div className="info">
-                  <DescriptionIcon />
-                  {repository.description}
-                </div>
-                <div id="created-at">
-                {repository.created_at && <div className="info">
-                  <BorderColorIcon />
-                  {repository.created_at.split("T")[0]}
-                </div>}
-                </div>
-                <div className="info">
-                  <LanguageIcon />
-                  <p>{repository.language}</p>
-                  <Button variant="text" color="primary" onClick={()=>console.log(repository.languages_url)}>overview</Button>
-                </div>
-                <Button variant="text" color="primary" onClick={()=>console.log(repository.collaborators_url)}>Show collaborators</Button>
-              </section>
-            
-            </div>
+            <RepoDisplay name={repository.name} description={repository.description} created_at={repository["created_at"]} language={repository.language} languages_url={repository["languages_url"]}/>
 
 
 
