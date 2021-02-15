@@ -1,6 +1,6 @@
 import React from "react";
 import useApplicationData from "../useApplicationData";
-import RepoDisplay from "./RepoDisplay.js";
+import RepoDisplay from "./repoDisplay/RepoDisplay.js";
 import "./OppositeTimeline.css";
 
 export default function OppositeTimeline(props) {

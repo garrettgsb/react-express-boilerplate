@@ -6,7 +6,7 @@ import OppositeTimeline from './components/OppositeTimeline.js'
 import {userData, repoData} from "./backupData"
 import Filter from "./components/Filter"
 import NavBar from "./components/AppBar.js"
-import RepoDisplay from "./components/RepoDisplay"
+
 
 
 
@@ -46,7 +46,7 @@ export default function Application(props) {
             <Search onSubmit={fetchData} value={state.user || ""} onChange={(e) => setUser(e)} onClick={fetchData}/>
             <Filter></Filter>
           </div>
-        
+          
           <div id="show">
             <h4>Github User: <a href={`https://github.com/${state.loginUser}`}>
               <h4>{state.loginUser}</h4>
