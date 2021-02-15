@@ -46,6 +46,9 @@ function PreviousOrders() {
   }
 ]
 
+const reorder = (orderId) => {
+  console.log(`I will order ${orderId}`)
+}
 
 const previous = prevOrders.map((order) => {
   return(
@@ -72,8 +75,10 @@ const previous = prevOrders.map((order) => {
         )
       })}
 
+      <div className='reorder-container'>
       <p>Total ${order.totalPrice}</p>
-      <Button variant="contained">Reorder</Button>
+      <Button variant="contained" onClick={() => reorder(order.id)}>Reorder</Button>
+      </div>
     </div>
 )
 })

@@ -12,12 +12,15 @@
   justify-content: space-between;
 }
 
-
-
 .content {
   flex: 1 0 auto;
 }
 
 .cover {
   width: 151px;
+}
+
+.reorder-container {
+  display: flex;
+  justify-content: space-around;
 }
