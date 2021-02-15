@@ -12,8 +12,6 @@ export default function App() {
     state
   } = applicationData();
 
-  console.log(state)
-
   // get the user using selector function here:
   const user = {
     username: 'test user',
