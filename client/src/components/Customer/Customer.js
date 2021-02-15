@@ -13,6 +13,7 @@ import Cart from './Cart'
 
 function Customer() {
 
+  //
   const [showCart, setShowCart] = useState(false)
 
   const handleOpen = () => {

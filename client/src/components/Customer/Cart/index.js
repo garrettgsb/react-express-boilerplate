@@ -1,11 +1,11 @@
-import { useState } from 'react'
 
 import { Modal } from '@material-ui/core'
+import './styles.scss'
 
 function Cart(props) {
 
   const cartData = (
-    <div>
+    <div className='cart-data'>
       <h2>I am the cart data</h2>
     </div>
   )
