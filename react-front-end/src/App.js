@@ -34,19 +34,7 @@ export default function Application(props) {
   //   );
   // })
 
-    const repoBoxes = repoData.map(item=>{
-      return(
-      <RepoDisplay
-      key={item.id}
-      name={item.name}
-      description={item.description}
-      created_at={item.created_at}
-      language={item.language}
-      languages_url={item.languages_url}
-      collaborators_url={item.collaborators_url}
-      />
-      )
-    })
+    
     
      
 
@@ -65,13 +53,13 @@ export default function Application(props) {
             </a></h4>
             <h4>Name: {state.name}</h4>
             <img src={ state.avatar } alt="nothing"></img>
+            <div id="opposite-timeline">
+              <OppositeTimeline repositories={repoData} />
+            </div> 
           </div>
         </section>
         
-        <div>
-          <OppositeTimeline repositories={state.repositories} />
-          {repoBoxes}
-        </div>        
+               
         
       </main>
 );
