@@ -20,7 +20,7 @@ export default function RepoDisplay(props) {
 
   return (
     <div>
-      {state.show === "summary" && <RepoSummary {...props} showLanguages={showLanguages} />}
+      {state.show === "summary" && <RepoSummary {...props} showLanguages={showLanguages}  />}
       {state.show === "language" && <RepoLanguage languageData={state.languageData} />}
     </div>
   );

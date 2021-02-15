@@ -53,12 +53,13 @@ export default function Application(props) {
             </a></h4>
             <h4>Name: {state.name}</h4>
             <img src={ state.avatar } alt="nothing"></img>
+            <div id="opposite-timeline">
+              <OppositeTimeline repositories={repoData} />
+            </div> 
           </div>
         </section>
         
-        <div>
-          <OppositeTimeline repositories={repoData} />
-        </div>        
+               
         
       </main>
 );

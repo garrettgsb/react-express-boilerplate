@@ -16,22 +16,28 @@ export default function RepoSummary(props) {
 
   return (
     <div className="box">
-      <FavoriteIcon className={"like_btn"} style={{color:state.color}} onClick={()=>like()}/>
-      <h3>{props.name}</h3>
-      <div className="info">
-        <DescriptionIcon />
-        {props.description}
-      </div>
-      {props.created_at && <div className="info">
-        <BorderColorIcon />
-        {props.created_at.split("T")[0]}
-      </div>}
-      <div className="info">
-        <LanguageIcon />
-        <p>{props.language}</p>
-        <Button variant="text" color="primary" onClick={()=>props.showLanguages(props.languages_url)}>overview</Button>
-      </div>
-      <Button variant="text" color="primary" onClick={()=>console.log(props.collaborators_url)}>Show collaborators</Button>
-    </div>
+              <FavoriteIcon className={"like_btn"} style={{color:state.color}} onClick={()=>like()}/>
+              <h3>{props.name}</h3>
+              <section class="repo-content">
+                <div className="info">
+                  <DescriptionIcon />
+                  {props.description}
+                </div>
+                <div id="created-at">
+                {props.created_at && <div className="info">
+                  <BorderColorIcon />
+                  {props.created_at.split("T")[0]}
+                </div>}
+                </div>
+                <div className="info">
+                  <LanguageIcon />
+                  <p>{props.language}</p>
+                  <Button variant="text" color="primary" onClick={()=>props.showLanguages(props.languages_url)}>overview</Button>
+                </div>
+                <Button variant="text" color="primary" onClick={()=>console.log(props.collaborators_url)}>Show collaborators</Button>
+              </section>
+            
+            </div>
+
   );
 }

@@ -39,7 +39,7 @@
 .main-container {
   display: flex;
   padding-top: 50px;
-
+  margin-top: 60px;
 }
 
 .main-container img{
@@ -47,18 +47,42 @@
 }
 
 #search-and-filter {
-  width: 50%
+  width: 40%;
+  position: fixed;
+  top: 110px;
+  left: 45px;
+  z-index: 500;
 }
+
+#show {
+  width: 60%;
+  position: absolute;
+  top: 100px;
+  right: 30px;
+}
+
 
 .makeStyles-container-9 {
   margin-left: 30px;
 }
 
+
 .makeStyles-root-4 {
-  width: 70%;
+  width: 65%;
+  font-size: 14px;
 }
 
+.makeStyles-root-1 {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
+#opposite-timeline {
+  margin-top: 20px;
+}
 
 
 

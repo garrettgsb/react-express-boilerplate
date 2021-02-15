@@ -1,9 +1,13 @@
 import React from "react";
 import useApplicationData from "../useApplicationData";
-import RepoDisplay from "./repoDisplay/RepoDisplay.js";
 import "./OppositeTimeline.css";
 
+
+import RepoDisplay from "./repoDisplay/RepoDisplay.js"
+
 export default function OppositeTimeline(props) {
+
+
   const repositoryArray = props.repositories;
   const repositoriesObject = repositoryArray.map((repository) => {
     const monthConversion = () => {
@@ -76,16 +80,27 @@ export default function OppositeTimeline(props) {
         </div>
         <div class="timeline-dot fb-bg"></div>
         <div class="timeline-content">
-          <i class="fa fa-map-marker"></i>
-          <RepoDisplay
+          {/* <RepoDisplay
             key={repository.id}
             name={repository.name}
             description={repository.description}
             created_at={repository.created_at}
             language={repository.language}
             languages_url={repository.languages_url}
-            collaborators_url={repository.collaborators_url}
-          />
+            collaborators_url={repository.collaborators_url}/> */}
+
+
+
+
+            <RepoDisplay name={repository.name} description={repository.description} created_at={repository["created_at"]} language={repository.language} languages_url={repository["languages_url"]}/>
+
+
+
+
+
+
+
+          
         </div>
       </div>
     );
@@ -105,3 +120,5 @@ export default function OppositeTimeline(props) {
     </div>
   );
 }
+
+
