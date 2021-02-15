@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
+
 function OrderHistory(props) {
-  const route = props.route
 
   return (
-    <a href={route}>order history</a>
+    <Link to='/history'>order history</Link>
+    
   )
 }
 
