@@ -5,14 +5,27 @@ import UserInfo from './UserInfo'
 import UserNav from './UserNav'
 import YourCartButton from './YourCartButton'
 import StoreInfo from './StoreInfo'
+import Menu from './Menu'
+import HomeButton from './HomeButton';
+import PreviousOrders from './PreviousOrders'
 
 function Customer() {
 
   return(
     <Router>
       <Switch>
+        <Route path="/history">
+          <UserInfo />
+          <UserNav />
+          <PreviousOrders />
+          <HomeButton />
+          <YourCartButton />
+        </Route>
+
         <Route path="/stores/:storeId/menu">
           <StoreInfo />
+          <Menu />
+          <HomeButton />
           <YourCartButton />
         </Route>
 
