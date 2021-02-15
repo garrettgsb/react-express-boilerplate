@@ -12,13 +12,12 @@ export default function useApplicationData() {
   
   const myCoords = {latitude: 49.281338241296815, longitude: -123.11492992211487}
 
-  // fix orders
   useEffect(() => {
     Promise.all([
-      axios.get("/api/users/1"),
+      axios.get("/api/users/7"),
       axios.get("/api/stores"),
       axios.get("/api/menu/1"),
-      axios.get("/api/users/1"),
+      axios.get("/api/order/7"),
     ])
       .then((all) => {
         setState((prev) => ({
