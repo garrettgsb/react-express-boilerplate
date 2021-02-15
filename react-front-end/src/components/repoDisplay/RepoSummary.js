@@ -7,11 +7,12 @@ import DescriptionIcon from "@material-ui/icons/Description";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-export default function RepoDisplay(props) {
+export default function RepoSummary(props) {
   const [state,setState] = useState({color:"black"})
   const like = () =>{
     state.color ==="red" ? setState(prev=>({color:"black"})) : setState(prev=>({color:"red"}))
   }
+  
 
   return (
     <div className="box">
@@ -28,7 +29,7 @@ export default function RepoDisplay(props) {
       <div className="info">
         <LanguageIcon />
         <p>{props.language}</p>
-        <Button variant="text" color="primary" onClick={()=>console.log(props.languages_url)}>overview</Button>
+        <Button variant="text" color="primary" onClick={()=>props.showLanguages(props.languages_url)}>overview</Button>
       </div>
       <Button variant="text" color="primary" onClick={()=>console.log(props.collaborators_url)}>Show collaborators</Button>
     </div>
