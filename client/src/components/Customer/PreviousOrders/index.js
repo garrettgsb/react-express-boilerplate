@@ -3,6 +3,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
+import './styles.scss'
+
 
 function PreviousOrders() {
 
@@ -51,21 +53,25 @@ const previous = prevOrders.map((order) => {
       {order.orderItems.map((item) => {
         return(
         <div>
-          <Card>
-          <div>
-            <CardContent>
-              {item.name}
-              ${item.price * item.quantity}
+          <Card className='root'>
+            <CardContent className='content'>
+            <div className='order-item-details'>
+              <p>{item.name}</p>
+            </div>
+            <div className='price-quantity-container'>
+              <p>Qty: {item.quantity}</p>
+              <p>${item.price * item.quantity}</p>
+            </div>
             </CardContent>
-          </div>
-          <CardMedia
+          <CardMedia className='cover'
             image={item.image}
             title={item.name}
-          />
-      </Card>
+          />   
+          </Card>
         </div>
         )
       })}
+
       <p>Total ${order.totalPrice}</p>
       <Button variant="contained">Reorder</Button>
     </div>
