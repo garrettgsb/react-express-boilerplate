@@ -4,28 +4,29 @@ import {distance} from "../helpers/data"
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    users: [],
+    user: {
+      username: "Guest"
+    },
+    currentUser: 0,
+    currentStore: 1,
     stores: [],
-    menus: [],
+    menuItems: [],
     orders: [],
+    myCoords: {latitude: 49.281338241296815, longitude: -123.11492992211487}
   });
   
-  const myCoords = {latitude: 49.281338241296815, longitude: -123.11492992211487}
+  //get location fn
 
   useEffect(() => {
+    console.log('Running App Start effect')
     Promise.all([
-      axios.get("/api/users/7"),
+      // getLocation(),
       axios.get("/api/stores"),
-      axios.get("/api/menu/1"),
-      axios.get("/api/order/7"),
     ])
       .then((all) => {
         setState((prev) => ({
           ...prev,
-          users: all[0].data,
-          stores: distance(myCoords, all[1].data),
-          menus: all[2].data,
-          orders: all[3].data,
+          stores: distance(state.myCoords, all[0].data),
         }));
       })
       .catch((err) =>
@@ -34,5 +35,43 @@ export default function useApplicationData() {
         )
       );
   }, []);
+
+  useEffect(() => {
+    console.log('Running user effect')
+    Promise.all([
+      axios.get(`/api/users/${state.currentUser}`),
+      axios.get(`/api/orders/${state.currentUser}`),
+    ])
+      .then((all) => {
+        setState((prev) => ({
+          ...prev,
+          user: all[0].data,
+          orders: all[1].data
+        }));
+      })
+      .catch((err) =>
+        console.log(
+          `Error:\nStatus: ${err.response.status}\n${err.response.data}`
+        )
+      );
+  }, [state.currentUser]);
+
+
+  useEffect(() => {
+    console.log('Running menu effect')
+      axios.get(`/api/menu/${state.currentStore}`)
+      .then((result) => {
+        setState((prev) => ({
+          ...prev,
+          menuItems: result.data,
+        }));
+      })
+      .catch((err) =>
+        console.log(
+          `Error:\nStatus: ${err.response.status}\n${err.response.data}`
+        )
+      );
+  }, [state.currentStore]);
+
   return { state };
 }
