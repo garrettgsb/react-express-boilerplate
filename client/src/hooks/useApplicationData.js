@@ -1,14 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {distance} from "../helpers/data"
-import { filterStoresByDistance } from "../helpers/selectors";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     user: {
       username: "Guest"
     },
-    currentUser: 6,
+    currentUser: 7,
     currentStore: 1,
     stores: [],
     menuItems: [],
