@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Modal } from '@material-ui/core'
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
@@ -32,7 +32,6 @@ function Cart(props) {
   
 
   const total = cartState.reduce((a, b) => {
-    console.log(cartState)
     return a + (b.price * b.quantity)
   }, 0)
 
@@ -41,7 +40,10 @@ function Cart(props) {
       <h2>Your cart</h2>
       <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
       {cartData.map((item, index) => {
+        console.log(cartState)
         return (
+          <>
+          { cartState[index].quantity > 0 &&
           <>
           <p>{cartState[index].itemName}</p>
           <RemoveIcon onClick={(event) => setCartSate((prev) => {
@@ -53,7 +55,9 @@ function Cart(props) {
           <input 
             value={cartState[index].quantity}
             onChange={(event) => setCartSate((prev) => {
-              return [...prev, prev[index].quantity = event.target.value] 
+              const cartCopy = [...prev]
+            cartCopy[index].quantity = event.target.value
+            return cartCopy 
             }
              )}
           />
@@ -64,6 +68,9 @@ function Cart(props) {
             }
              )} />
           <p>${item.price * cartState[index].quantity}</p>
+      
+          </>
+          }
           </>
           )
 
