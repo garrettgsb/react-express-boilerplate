@@ -34,7 +34,19 @@ export default function Application(props) {
   //   );
   // })
 
-    
+    const Show = () => {
+      return (<div id="show">
+            <img src={ state.avatar } alt="nothing"></img>
+            <h4>@<a href={`https://github.com/${state.loginUser}`}>
+              {state.loginUser}
+            </a></h4>
+            <h4>{state.name}'s Timeline</h4>
+            <div id="opposite-timeline">
+              <OppositeTimeline repositories={repoData} />
+            </div> 
+      </div>
+      )
+    }
     
      
 
@@ -47,16 +59,7 @@ export default function Application(props) {
             <Filter></Filter>
           </div>
           
-          <div id="show">
-            <h4>Github User: <a href={`https://github.com/${state.loginUser}`}>
-              <h4>{state.loginUser}</h4>
-            </a></h4>
-            <h4>Name: {state.name}</h4>
-            <img src={ state.avatar } alt="nothing"></img>
-            <div id="opposite-timeline">
-              <OppositeTimeline repositories={repoData} />
-            </div> 
-          </div>
+          { state.name ? <Show /> : <div id="show-question-mark"><img src={ state.avatar } alt="nothing"></img></div>}
         </section>
         
                
