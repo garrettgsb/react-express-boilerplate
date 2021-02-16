@@ -4,7 +4,7 @@ module.exports = (db) => {
   // BROWSE GET /orders/:user_id  "Show all user Orders"
   router.get("/orders/:id", (req, res) => {
     const queryParams = [req.params.id];
-    db.query(`SELECT * FROM orders WHERE user_id = $1`, queryParams)
+    db.query(`SELECT * FROM orders JOIN order_items ON (orders.id = order_items.order_id) JOIN menu_items ON (order_items.menu_item_id=menu_items.id) WHERE user_id=$1`, queryParams)
       .then((result) => {
         result.rows.length
           ? res.json(result.rows)
