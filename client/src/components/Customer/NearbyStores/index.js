@@ -1,17 +1,20 @@
 import './styles.scss'
 import Distance from "./Distance"
 import StoresGrid from "./StoresGrid"
+import { useState } from 'react'
 
-function NearbyStores(props) {
-  return(
+export default function NearbyStores() {
+
+  //distance state for getting nearby stores
+  const [distance, setDistance] = useState(10)
+
+ return(
     <div className='nearby-stores-container'>
       <div className='nearby-stores-header'>
     <h3>Nearby Stores</h3>
-    <Distance />
+    <Distance setDistance={setDistance}/>
       </div>
-    <StoresGrid stores={props.stores} setStore={props.setStore} />
+    <StoresGrid distance={distance}/>
     </div>
   )
 }
-
-export default NearbyStores

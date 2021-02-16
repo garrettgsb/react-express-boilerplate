@@ -8,12 +8,9 @@ import StoreInfo from './StoreInfo'
 import Menu from './Menu'
 import HomeButton from './HomeButton';
 import PreviousOrders from './PreviousOrders'
-import { filterStoresByDistance } from '../../helpers/selectors';
 
-function Customer(props) {
-
-  // need to use the filerStores fn
- 
+export default function Customer() {
+   
   return(
     <Router>
       <Switch>
@@ -27,7 +24,7 @@ function Customer(props) {
 
         <Route path="/stores/:storeId/menu">
           <StoreInfo />
-          <Menu menuItems={props.state.menuItems}/>
+          <Menu />
           <HomeButton />
           <YourCartButton />
         </Route>
@@ -36,12 +33,10 @@ function Customer(props) {
         <Route path="/">
           <UserInfo />
           <UserNav />
-          <NearbyStores stores={props.state.stores} setStore={props.setStore}/>
+          <NearbyStores />
           <YourCartButton />
         </Route>
       </Switch>
     </Router>
   )
 }
-
-export default Customer;

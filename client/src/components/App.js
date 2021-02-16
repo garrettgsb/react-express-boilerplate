@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import './App.scss';
 
 import Customer from './Customer/Customer'
 import applicationData from '../hooks/useApplicationData';
+import { appContext } from './appContext';
 
 // test
 
 export default function App() {
+  
   const {
     state, setStore
   } = applicationData();
-   
+    
    // get the user using selector function here:
   const user = {
     username: 'test user',
@@ -23,8 +25,9 @@ export default function App() {
   return(
     <div className="App">
       { customer && (
-      // customer components go here (make a customer component?)
-      <Customer state={state} setStore={setStore}/>
+      <appContext.Provider value={{state, setStore}} >
+        <Customer/>
+      </appContext.Provider>
       )}    
 
       { storeOwner && (

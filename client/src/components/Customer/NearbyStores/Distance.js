@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { Select, MenuItem } from '@material-ui/core';
 
-function Distance() {
+export default function Distance(props) {
   const [distance, setDistance] = useState(10)
 
   const handleChange = (event) => {
-    // needs to trigger the fn that sorts the stores by distance
+    //this is the setDistance() for getting nearby stores
+    props.setDistance(event.target.value)
     setDistance(event.target.value)
   }
 
@@ -18,11 +19,8 @@ function Distance() {
     <MenuItem value={10}>10 km</MenuItem>
     <MenuItem value={20}>20 km</MenuItem>
     <MenuItem value={30}>30 km</MenuItem>
-    <MenuItem value={50}>50 km</MenuItem>
-    <MenuItem value={100}>100 km</MenuItem>
-
+    {/* <MenuItem value={50}>50 km</MenuItem>
+    <MenuItem value={100}>100 km</MenuItem> */}
     </Select>
   )
 }
-
-export default Distance
