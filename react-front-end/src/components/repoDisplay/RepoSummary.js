@@ -21,7 +21,7 @@ export default function RepoSummary(props) {
               <section class="repo-content">
                 <div className="info">
                   <DescriptionIcon />
-                  {props.description}
+                  {props.description || "Description"}
                 </div>
                 <div id="created-at">
                 {props.created_at && <div className="info">
@@ -31,7 +31,7 @@ export default function RepoSummary(props) {
                 </div>
                 <div className="info">
                   <LanguageIcon />
-                  <p>{props.language}</p>
+                  <p>{props.language || "Language"}</p>
                   <Button variant="text" color="primary" onClick={()=>props.showLanguages(props.languages_url)}>overview</Button>
                 </div>
                 <Button variant="text" color="primary" onClick={()=>console.log(props.collaborators_url)}>Show collaborators</Button>

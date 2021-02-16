@@ -9,11 +9,20 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
 
+// PG database client/connection setup
+const { Pool } = require('pg');
+const dbParams = require('./lib/db.js');
+const db = new Pool(dbParams);
+db.connect();
+
 // cookies
 app.use(cookieSession({
   name: "session",
   keys: ["user_id"]
 }))
+
+// seperated routes
+const favourites = require("./routes/favourites");
 
 // Resource route for favourites:
 app.use("/favourites", favourites(db));

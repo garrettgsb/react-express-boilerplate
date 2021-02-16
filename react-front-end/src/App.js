@@ -6,14 +6,14 @@ import OppositeTimeline from './components/OppositeTimeline.js'
 import {userData, repoData} from "./backupData"
 import Filter from "./components/Filter"
 import NavBar from "./components/AppBar.js"
-
+import { useState } from 'react'
 
 
 
 
 export default function Application(props) {
 
-  const { setUser, fetchData, state } = useApplicationData();
+  const { setUser, fetchData, state} = useApplicationData();
   
 
   // const appointmentsObject = dailyAppointments.map(appointment => {
@@ -33,8 +33,10 @@ export default function Application(props) {
   //   />
   //   );
   // })
-
-    
+    const [filterParam, setParam] = useState();
+    const setFilter = (param) =>{
+      setParam(prev=>(param))
+    }
     
      
 
@@ -44,7 +46,7 @@ export default function Application(props) {
         <section class="main-container">
           <div id="search-and-filter">
             <Search onSubmit={fetchData} value={state.user || ""} onChange={(e) => setUser(e)} onClick={fetchData}/>
-            <Filter></Filter>
+            <Filter setFilter={setFilter}></Filter>
           </div>
           
           <div id="show">
@@ -54,7 +56,7 @@ export default function Application(props) {
             <h4>Name: {state.name}</h4>
             <img src={ state.avatar } alt="nothing"></img>
             <div id="opposite-timeline">
-              <OppositeTimeline repositories={repoData} />
+              <OppositeTimeline filterParam={filterParam} repositories={state.repositories} />
             </div> 
           </div>
         </section>
