@@ -1,4 +1,8 @@
 .cart-data {
   position: absolute;
-  background-color: blue;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color:#707070;
+  padding: 20px;
 }
