@@ -48,6 +48,11 @@
 
 /* timeline css */
 
+#date-size {
+    font-size: 20px;
+}
+
+
 body{margin-top:20px;
   background:#eee;
   }
