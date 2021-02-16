@@ -41,5 +41,16 @@ module.exports = (db) => {
       .catch((err) => res.status(401).json({ error: err.message }));
   });
 
+  //EDIT PUT /order/:id  "Update Order Status"
+  router.put("/order/:id", (req, res) => {
+    const queryParams = [req.params.id];
+    db.query(
+      `UPDATE orders SET completed = not completed WHERE id = $1;`,
+      queryParams
+    )
+      .then(() => res.json({ message: "order updated!" }))
+      .catch((err) => res.status(401).json({ error: err.message }));
+  });
+
   return router;
 };
