@@ -13,10 +13,12 @@ export default function RepoContributors(props){
 function createData(contributor, contributions) {
   return { contributor, contributions};
 }
-
+let total = 0
 const rows = props.data.map(contributor=>{
+  total += contributor.contributions
   return createData(contributor.login, contributor.contributions)
 })
+rows.push(createData("Total", total))
 
 
 
@@ -50,7 +52,7 @@ function BasicTable() {
 
   
   return(
-    <div>
+    <div onClick={()=>props.back()}>
       <BasicTable></BasicTable>
     </div>
   

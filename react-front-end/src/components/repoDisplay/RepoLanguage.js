@@ -5,7 +5,7 @@ export default function RepoLanguage(props){
   console.log (data)
   
   return(
-    <div>
+    <div onClick={()=>props.back()}>
       <PieChart data={data}></PieChart>
     </div>
   )

@@ -33,6 +33,12 @@ export default function RepoDisplay(props) {
     });
     console.log(url)
   }
+  const back=()=>{
+    setState(prev=>({
+      ...prev,
+      show: "summary"
+    }))
+  }
 
   return (
     <div>
@@ -40,10 +46,10 @@ export default function RepoDisplay(props) {
         <RepoSummary {...props} showContributors={showContributors} showLanguages={showLanguages} />
       )}
       {state.show === "language" && (
-        <RepoLanguage languageData={state.languageData} />
+        <RepoLanguage languageData={state.languageData} back={back}/>
       )}
       {state.show === "contributor" && (
-        <RepoContributors data = {state.contributorData}/>
+        <RepoContributors data = {state.contributorData} back={back}/>
       )}
     </div>
   );
