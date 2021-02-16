@@ -9,8 +9,8 @@ import Menu from './Menu'
 import HomeButton from './HomeButton';
 import PreviousOrders from './PreviousOrders'
 
-function Customer() {
-
+function Customer(props) {
+   
   return(
     <Router>
       <Switch>
@@ -33,7 +33,7 @@ function Customer() {
         <Route path="/">
           <UserInfo />
           <UserNav />
-          <NearbyStores />
+          <NearbyStores stores={props.state.stores} setStore={props.setStore}/>
           <YourCartButton />
         </Route>
       </Switch>

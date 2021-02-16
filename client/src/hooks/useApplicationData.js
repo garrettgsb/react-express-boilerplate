@@ -36,25 +36,25 @@ export default function useApplicationData() {
       );
   }, []);
 
-  useEffect(() => {
-    console.log('Running user effect')
-    Promise.all([
-      axios.get(`/api/users/${state.currentUser}`),
-      axios.get(`/api/orders/${state.currentUser}`),
-    ])
-      .then((all) => {
-        setState((prev) => ({
-          ...prev,
-          user: all[0].data,
-          orders: all[1].data
-        }));
-      })
-      .catch((err) =>
-        console.log(
-          `Error:\nStatus: ${err.response.status}\n${err.response.data}`
-        )
-      );
-  }, [state.currentUser]);
+  // useEffect(() => {
+  //   console.log('Running user effect')
+  //   Promise.all([
+  //     axios.get(`/api/users/${state.currentUser}`),
+  //     axios.get(`/api/orders/${state.currentUser}`),
+  //   ])
+  //     .then((all) => {
+  //       setState((prev) => ({
+  //         ...prev,
+  //         user: all[0].data,
+  //         orders: all[1].data
+  //       }));
+  //     })
+  //     .catch((err) =>
+  //       console.log(
+  //         `Error:\nStatus: ${err.response.status}\n${err.response.data}`
+  //       )
+  //     );
+  // }, [state.currentUser]);
 
 
   useEffect(() => {
@@ -73,5 +73,15 @@ export default function useApplicationData() {
       );
   }, [state.currentStore]);
 
-  return { state };
+  
+  const setStore = (storeId) => {
+    console.log('run set store')
+    
+   return setState((prev) => ({
+      ...prev,
+      currentStore: storeId
+    }))
+  }
+
+  return { state, setStore };
 }

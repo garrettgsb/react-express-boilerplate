@@ -4,11 +4,9 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
-
-
-function StoresGrid() {
+function StoresGrid(props) {
   const history = useHistory();
-
+    
   const tileData = [
     {
       id: 1,
@@ -67,18 +65,19 @@ function StoresGrid() {
   ]
 
   const onClick = (id) => {
-    history.push(`/stores/${id}/menu`)
+    props.setStore(id)
+     history.push(`/stores/${id}/menu`)
   }
 
   return(
     <div>
     <GridList cellHeight={180} className='gridList'>
-      {tileData.map((tile) => (
-        <GridListTile key={tile.id} onClick={() => onClick(tile.id)}>
-          <img src={tile.img} alt={tile.title} />
+      {props.stores.map((store) => (
+        <GridListTile key={store.id} onClick={() => onClick(store.id)}>
+          <img src={store.image} alt={store.name} />
           <GridListTileBar
-            title={tile.title}
-            subtitle={<span>{tile.author}</span>}
+            title={store.name}
+            subtitle={<span>"Description goes here"</span>}
           />
         </GridListTile>
       ))}

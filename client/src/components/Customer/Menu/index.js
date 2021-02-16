@@ -6,7 +6,8 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 import './styles.scss'
 
-function Menu() {
+export default function Menu() {
+
   // selector function to get menu data
 
   // mock data
@@ -117,8 +118,4 @@ function Menu() {
     })  
 
   )
-
-  
 }
-
-export default Menu
