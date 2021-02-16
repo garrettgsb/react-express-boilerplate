@@ -46,9 +46,6 @@ export default function Filter(props) {
     const value = event.target.value;
     setState((prev) => ({ ...prev, repoName: value }));
   };
-  const filter = () =>{
-    console.log(state)
-  };
 
   return (
     <div className={classes.container}>
@@ -67,7 +64,7 @@ export default function Filter(props) {
       <div>
         <TextField
           onChange={setBegin}
-          label="Created After"
+          label="Last Updated After"
           type="date"
           defaultValue={state.dateBegin}
           className={classes.textField}
@@ -77,7 +74,7 @@ export default function Filter(props) {
         />
         <TextField
           onChange={setEnd}
-          label="Created Before"
+          label="Last Updated Before"
           type="date"
           defaultValue={state.dateEnd}
           className={classes.textField}
@@ -99,7 +96,7 @@ export default function Filter(props) {
         />
       </div>
       <div>
-        <Button variant="contained" color="primary" className={classes.button} onClick={filter}>
+        <Button variant="contained" color="primary" className={classes.button} onClick={()=>{props.setFilter(state)}}>
           Filter
         </Button>
       </div>

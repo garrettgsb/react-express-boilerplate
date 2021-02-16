@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import Badge from '@material-ui/core/Badge';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,7 +36,12 @@ export default function NavBar() {
           <Typography variant="h6" className={classes.title}>
             GitGood
           </Typography>
-          <Button color="inherit">Login</Button>
+          <IconButton aria-label="show 4 new favorites" color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <FavoriteBorderIcon />
+              </Badge>
+            </IconButton>
+          <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
     </div>

@@ -13,7 +13,7 @@ export default function useApplicationData() {
     url: "",
     repoUrl: "",
     user: "",
-    repositories: [{ "name": "hello", "created_at": "2020-04-12T21:56:45Z"}]
+    repositories: []
   });
   useEffect(()=>{
     setState( prev =>( {...prev, url: `https://api.github.com/users/${state.user}`, repoUrl: `https://api.github.com/users/${state.user}/repos`}))
