@@ -33,6 +33,20 @@ export default function Application(props) {
   //   />
   //   );
   // })
+
+    const Show = () => {
+      return (<div id="show">
+                <h4>Github User: <a href={`https://github.com/${state.loginUser}`}>
+                  <h4>{state.loginUser}</h4>
+                </a></h4>
+                <h4>Name: {state.name}</h4>
+                <img src={ state.avatar } alt="nothing"></img>
+                <div id="opposite-timeline">
+                  <OppositeTimeline filterParam={filterParam} repositories={state.repositories} />
+                </div> 
+              </div>
+      )
+    }
     const [filterParam, setParam] = useState();
     const setFilter = (param) =>{
       setParam(prev=>(param))
@@ -49,16 +63,8 @@ export default function Application(props) {
             <Filter setFilter={setFilter}></Filter>
           </div>
           
-          <div id="show">
-            <h4>Github User: <a href={`https://github.com/${state.loginUser}`}>
-              <h4>{state.loginUser}</h4>
-            </a></h4>
-            <h4>Name: {state.name}</h4>
-            <img src={ state.avatar } alt="nothing"></img>
-            <div id="opposite-timeline">
-              <OppositeTimeline filterParam={filterParam} repositories={state.repositories} />
-            </div> 
-          </div>
+          { state.name ? <Show /> : <div id="show-question-mark"><img src={ state.avatar } alt="nothing"></img></div>}
+          
         </section>
         
                

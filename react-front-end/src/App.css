@@ -61,6 +61,17 @@
   right: 30px;
 }
 
+#show-question-mark {
+  width: 60%;
+  position: absolute;
+  top: 150px;
+  right: 30px;
+}
+
+#show img {
+  border-radius: 50%;
+}
+
 
 .makeStyles-container-9 {
   margin-left: 30px;

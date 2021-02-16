@@ -1,6 +1,8 @@
 import React from "react";
 import useApplicationData from "../useApplicationData";
 import "./OppositeTimeline.css";
+
+
 import RepoDisplay from "./repoDisplay/RepoDisplay.js"
 
 const toStamp = (string) => {
@@ -34,7 +36,6 @@ export default function OppositeTimeline(props) {
     
     return true
   })
-  
   
   const repositoriesObject = repositoryArray.sort((a, b) => new Date(b["updated_at"]) - new Date(a["updated_at"])).map((repository) => {
     const monthConversion = () => {
@@ -86,10 +87,10 @@ export default function OppositeTimeline(props) {
         return "December";
       }
     };
+
     const day = repository["updated_at"].split("T")[0].split("-")[2];
     const year = repository["updated_at"].split("T")[0].split("-")[0];
     const month = monthConversion();
-
 
     // const time = repository["updated_at"]
     //   .split("T")[1]
@@ -120,7 +121,7 @@ export default function OppositeTimeline(props) {
 
 
 
-            <RepoDisplay {...repository}/>
+            <RepoDisplay name={repository.name} description={repository.description} created_at={repository["created_at"]} language={repository.language} languages_url={repository["languages_url"]}  />
 
 
 
