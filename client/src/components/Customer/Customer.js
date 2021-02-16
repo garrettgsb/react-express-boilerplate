@@ -10,6 +10,8 @@ import HomeButton from './HomeButton';
 import PreviousOrders from './PreviousOrders'
 
 function Customer(props) {
+
+  console.log('customer', props)
    
   return(
     <Router>
@@ -24,7 +26,7 @@ function Customer(props) {
 
         <Route path="/stores/:storeId/menu">
           <StoreInfo />
-          <Menu />
+          <Menu menuItems={props.state.menuItems}/>
           <HomeButton />
           <YourCartButton />
         </Route>

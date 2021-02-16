@@ -3,13 +3,14 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { filterMenuItems } from '../../../helpers/selectors';
+
 
 import './styles.scss'
 
-export default function Menu() {
-
-  // selector function to get menu data
-
+export default function Menu(props) {
+   
+  
   // mock data
   const menu = {
     coffee: [
@@ -90,7 +91,8 @@ export default function Menu() {
   }
 
   return(
-    Object.entries(menu).map(([key, value]) => {
+    Object.entries(filterMenuItems(props.menuItems)
+    ).map(([key, value]) => {
       return(
         <>
         <div>
