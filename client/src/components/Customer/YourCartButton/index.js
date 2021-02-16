@@ -1,14 +1,14 @@
 import './styles.scss'
 import { Button } from '@material-ui/core'
 
-function YourCartButton() {
+function YourCartButton(props) {
 
-  const onClick = () => {
-    console.log('going to cart')
-  }
+  // const onClick = () => {
+  //   console.log('going to cart')
+  // }
 
   return(
-    <Button variant='contained' onClick={onClick}>Your cart (2) total: $10.15</Button>
+    <Button variant='contained' onClick={props.handleOpen}>Your cart (2) total: $10.15</Button>
   )
 }
 
