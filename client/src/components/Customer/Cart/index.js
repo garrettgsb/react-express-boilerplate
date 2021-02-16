@@ -13,19 +13,19 @@ function Cart(props) {
     {
       menuItemId: 1,
       itemName: 'latte',
-      price: 2.50,
+      price: 250,
       quantity: 1
     },
     {
       menuItemId: 2,
       itemName: 'hot chocolate',
-      price: 2.00,
+      price: 200,
       quantity: 2
     },
     {
       menuItemId: 1,
       itemName: 'latte',
-      price: 2.50,
+      price: 250,
       quantity: 1
     }
   ]
@@ -41,6 +41,13 @@ function Cart(props) {
 
   const [total, setTotal] = useState(getTotal(cartState))
 
+  const removeFromTotal = (beans) => {
+    setTotal(total - beans) 
+  }
+  const addToTotal = (beans) => {
+    setTotal(total + beans) 
+  }
+
   // useEffect((getTotal) => {
   //   setTotal(getTotal())
   // }, [])
@@ -51,7 +58,6 @@ function Cart(props) {
       <h2>Your cart</h2>
       <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
       {cartData.map((item, index) => {
-        console.log(cartState)
         return (
           <>
           { cartState[index].quantity > 0 &&
@@ -91,7 +97,7 @@ function Cart(props) {
       })}
       <p>TOTAL: ${total}</p>
       <p>Grind some beans?</p>
-      <BeanSlider />
+      <BeanSlider removeFromTotal={removeFromTotal} addToTotal={addToTotal}/>
       </form>
 
     </div>
