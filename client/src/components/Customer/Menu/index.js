@@ -9,9 +9,10 @@ import { filterMenuItems } from '../../../helpers/selectors';
 import './styles.scss'
 
 export default function Menu(props) {
-   
+
+  console.log('menu is from store:', props.menuItems[0].store_id)
   
-  // mock data
+    // mock data
   const menu = {
     coffee: [
       {

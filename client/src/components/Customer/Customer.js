@@ -8,11 +8,12 @@ import StoreInfo from './StoreInfo'
 import Menu from './Menu'
 import HomeButton from './HomeButton';
 import PreviousOrders from './PreviousOrders'
+import { filterStoresByDistance } from '../../helpers/selectors';
 
 function Customer(props) {
 
-  console.log('customer', props)
-   
+  // need to use the filerStores fn
+ 
   return(
     <Router>
       <Switch>

@@ -5,9 +5,9 @@ function Distance() {
   const [distance, setDistance] = useState(10)
 
   const handleChange = (event) => {
+    // needs to trigger the fn that sorts the stores by distance
     setDistance(event.target.value)
   }
-
 
   return(
     <Select
