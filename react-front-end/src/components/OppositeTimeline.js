@@ -1,13 +1,41 @@
 import React from "react";
 import useApplicationData from "../useApplicationData";
 import "./OppositeTimeline.css";
-
-
+//{dateBegin: "2021-02-04", dateEnd: "2021-02-20", language: "asdf", repoName: "123"}
 import RepoDisplay from "./repoDisplay/RepoDisplay.js"
 
+const toStamp = (string) => {
+  const date = string.split("-")
+  const stamp = new Date (date[0],date[1]-1,date[2])
+  return stamp.getTime()
+}
+
 export default function OppositeTimeline(props) {
-
-
+  const param = props.filterParam
+  const repositoryArray = props.repositories.filter(repo=>{
+    if(param){
+      if(param.repoName.trim() && !repo.name.includes(param.repoName.trim())){
+        return false
+      }
+      if(param.language.trim()){
+        if(!repo.language){
+          return false
+        }
+        if(!repo.language.toLowerCase().includes(param.language.trim().toLowerCase())){
+          return false
+        }
+      }
+      if(param.dateBegin && toStamp(param.dateBegin) > toStamp(repo.updated_at.split("T")[0])){
+        return false
+      }
+      if(param.dateEnd && toStamp(param.dateEnd) < toStamp(repo.updated_at.split("T")[0])){
+        return false
+      }
+    }
+    
+    return true
+  })
+  
   const repositoryArray = props.repositories;
   
   const repositoriesObject = repositoryArray.sort((a, b) => new Date(b["updated_at"]) - new Date(a["updated_at"])).map((repository) => {
@@ -94,7 +122,7 @@ export default function OppositeTimeline(props) {
 
 
 
-            <RepoDisplay name={repository.name} description={repository.description} created_at={repository["created_at"]} language={repository.language} languages_url={repository["languages_url"]}/>
+            <RepoDisplay {...repository}/>
 
 
 
