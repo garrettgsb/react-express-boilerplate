@@ -1,18 +1,19 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState, createContext } from 'react';
 import './App.scss';
 
 import Customer from './Customer/Customer'
 import applicationData from '../hooks/useApplicationData';
+import { appContext } from './appContext';
 
 // test
 
 export default function App() {
+  
   const {
-    state
+    state, setStore
   } = applicationData();
-
-  // get the user using selector function here:
+    
+   // get the user using selector function here:
   const user = {
     username: 'test user',
     type: 'customer'
@@ -24,8 +25,9 @@ export default function App() {
   return(
     <div className="App">
       { customer && (
-      // customer components go here (make a customer component?)
-      <Customer />
+      <appContext.Provider value={{state, setStore}} >
+        <Customer/>
+      </appContext.Provider>
       )}    
 
       { storeOwner && (

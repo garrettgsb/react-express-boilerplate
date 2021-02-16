@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {distance} from "../helpers/data"
+import { filterStoresByDistance } from "../helpers/selectors";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     user: {
       username: "Guest"
     },
-    currentUser: 0,
+    currentUser: 6,
     currentStore: 1,
     stores: [],
     menuItems: [],
@@ -27,6 +28,7 @@ export default function useApplicationData() {
         setState((prev) => ({
           ...prev,
           stores: distance(state.myCoords, all[0].data),
+          // nearbyStores: getNearbyStores(state.stores)
         }));
       })
       .catch((err) =>
@@ -73,5 +75,15 @@ export default function useApplicationData() {
       );
   }, [state.currentStore]);
 
-  return { state };
+  
+  const setStore = (storeId) => {
+    console.log('run setStore')
+    
+   setState((prev) => ({
+      ...prev,
+      currentStore: storeId
+    }))
+  }
+
+  return { state, setStore };
 }

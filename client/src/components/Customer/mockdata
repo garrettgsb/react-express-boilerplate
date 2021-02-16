@@ -1,0 +1,146 @@
+
+/customer/nearbyStores/storesGrid:
+
+const tileData = [
+    {
+      id: 1,
+      img: "https://images.unsplash.com/photo-1446226760091-cc85becf39b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+      title: 'Think Coffee',
+      author: 'Come on think about coffee',
+    },
+    {
+      id: 2,
+      img: "https://images.unsplash.com/photo-1446226760091-cc85becf39b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+      title: 'Think Coffee',
+      author: 'Come on think about coffee',
+    },
+    {
+      id: 3,
+      img: "https://images.unsplash.com/photo-1446226760091-cc85becf39b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+      title: 'Think Coffee',
+      author: 'Come on think about coffee',
+    },
+    {
+      id: 4,
+      img: "https://images.unsplash.com/photo-1446226760091-cc85becf39b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+      title: 'Think Coffee',
+      author: 'Come on think about coffee',
+    },
+    {
+      id: 5,
+      img: "https://images.unsplash.com/photo-1446226760091-cc85becf39b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+      title: 'Think Coffee',
+      author: 'Come on think about coffee',
+    },
+    {
+      id: 6,
+      img: "https://images.unsplash.com/photo-1446226760091-cc85becf39b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+      title: 'Think Coffee',
+      author: 'Come on think about coffee',
+    },
+    {
+      id: 7,
+      img: "https://images.unsplash.com/photo-1446226760091-cc85becf39b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+      title: 'Think Coffee',
+      author: 'Come on think about coffee',
+    },
+    {
+      id: 8,
+      img: "https://images.unsplash.com/photo-1446226760091-cc85becf39b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+      title: 'Think Coffee',
+      author: 'Come on think about coffee',
+    },
+    {
+      id: 9,
+      img: "https://images.unsplash.com/photo-1446226760091-cc85becf39b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+      title: 'Think Coffee',
+      author: 'Come on think about coffee',
+    }
+  ]
+
+/customer/menu/index:
+  const menu = {
+    coffee: [
+      {
+        id: 1,
+        name: 'latte',
+        description: 'with milk',
+        price: '$2:30',
+        image: 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80'
+      },
+      {
+        id: 2,
+        name: 'latte',
+        description: 'with milk',
+        price: '$2:30',
+        image: 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80'
+      },
+      {
+        id: 3,
+        name: 'latte',
+        description: 'with milk',
+        price: '$2:30',
+        image: 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80'
+      },
+      {
+        id: 4,
+        name: 'latte',
+        description: 'with milk',
+        price: '$2:30',
+        image: 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80'
+      },
+      {
+        id: 5,
+        name: 'latte',
+        description: 'with milk',
+        price: '$2:30',
+        image: 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80'
+      }
+    ],
+    tea: [
+      {
+        id: 6,
+        name: 'london fog',
+        description: 'LDN',
+        price: '$2.15',
+        image: 'https://images.unsplash.com/photo-1560106426-c90ed1729664?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80'
+      },
+      {
+        id: 7,
+        name: 'london fog',
+        description: 'LDN',
+        price: '$2.15',
+        image: 'https://images.unsplash.com/photo-1560106426-c90ed1729664?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80'
+      },
+      {
+        id: 8,
+        name: 'london fog',
+        description: 'LDN',
+        price: '$2.15',
+        image: 'https://images.unsplash.com/photo-1560106426-c90ed1729664?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80'
+      },
+      {
+        id: 9,
+        name: 'london fog',
+        description: 'LDN',
+        price: '$2.15',
+        image: 'https://images.unsplash.com/photo-1560106426-c90ed1729664?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80'
+      },
+      {
+        id: 10,
+        name: 'london fog',
+        description: 'LDN',
+        price: '$2.15',
+        image: 'https://images.unsplash.com/photo-1560106426-c90ed1729664?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80'
+      }
+     
+    ]
+  }
+
+  /Customer/storeInfo/index:
+  const store = {
+    id: 1,
+    img: "https://images.unsplash.com/photo-1446226760091-cc85becf39b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+    name: 'Think Coffee',
+    description: 'Come on think about coffee',
+  }

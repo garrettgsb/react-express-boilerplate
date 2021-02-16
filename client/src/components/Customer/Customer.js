@@ -11,8 +11,7 @@ import HomeButton from './HomeButton';
 import PreviousOrders from './PreviousOrders'
 import Cart from './Cart'
 
-function Customer() {
-
+export default function Customer() {
   //
   const [showCart, setShowCart] = useState(false)
 
@@ -23,7 +22,6 @@ function Customer() {
   const handleClose = () => {
     setShowCart(false)
   }
-
 
   return(
     <Router>
@@ -57,5 +55,3 @@ function Customer() {
     </Router>
   )
 }
-
-export default Customer;
