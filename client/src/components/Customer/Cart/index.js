@@ -24,7 +24,7 @@ function Cart(props) {
     },
     {
       menuItemId: 1,
-      itemName: 'latte',
+      itemName: 'london fog',
       price: 250,
       quantity: 1
     }
@@ -48,6 +48,12 @@ function Cart(props) {
     setTotal(total + beans) 
   }
 
+  const handleSubmit = (event) => {
+    console.log('cart', cartState)
+    console.log('total', total)
+    event.preventDefault()
+  }
+
   // useEffect((getTotal) => {
   //   setTotal(getTotal())
   // }, [])
@@ -56,7 +62,7 @@ function Cart(props) {
   const cart = (
     <div className='cart-data'>
       <h2>Your cart</h2>
-      <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
+      <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
       {cartData.map((item, index) => {
         return (
           <>
@@ -88,7 +94,7 @@ function Cart(props) {
             }
              )} />
           <p>${item.price * cartState[index].quantity}</p>
-      
+            
           </>
           }
           </>
@@ -98,6 +104,7 @@ function Cart(props) {
       <p>TOTAL: ${total}</p>
       <p>Grind some beans?</p>
       <BeanSlider removeFromTotal={removeFromTotal} addToTotal={addToTotal}/>
+      <input type='submit' value='Bean me up Scottie!' />
       </form>
 
     </div>
