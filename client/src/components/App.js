@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import './App.scss';
 
 import Customer from './Customer/Customer'
@@ -9,10 +8,10 @@ import applicationData from '../hooks/useApplicationData';
 
 export default function App() {
   const {
-    state
+    state, setStore
   } = applicationData();
-
-  // get the user using selector function here:
+   
+   // get the user using selector function here:
   const user = {
     username: 'test user',
     type: 'customer'
@@ -25,7 +24,7 @@ export default function App() {
     <div className="App">
       { customer && (
       // customer components go here (make a customer component?)
-      <Customer />
+      <Customer state={state} setStore={setStore}/>
       )}    
 
       { storeOwner && (
