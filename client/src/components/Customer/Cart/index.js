@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Modal } from '@material-ui/core'
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
+
+import BeanSlider from './BeanSlider'
 
 import './styles.scss'
 
@@ -11,36 +13,51 @@ function Cart(props) {
     {
       menuItemId: 1,
       itemName: 'latte',
-      price: 2.50,
+      price: 250,
       quantity: 1
     },
     {
       menuItemId: 2,
       itemName: 'hot chocolate',
-      price: 2.00,
+      price: 200,
       quantity: 2
     },
     {
       menuItemId: 1,
       itemName: 'latte',
-      price: 2.50,
+      price: 250,
       quantity: 1
     }
   ]
 
   const [cartState, setCartSate] = useState(cartData)
-  
 
-  const total = cartState.reduce((a, b) => {
-    return a + (b.price * b.quantity)
-  }, 0)
+  
+  const getTotal = (curState) => {
+    return curState.reduce((a, b) => {
+      return a + (b.price * b.quantity)
+    }, 0)
+  } 
+
+  const [total, setTotal] = useState(getTotal(cartState))
+
+  const removeFromTotal = (beans) => {
+    setTotal(total - beans) 
+  }
+  const addToTotal = (beans) => {
+    setTotal(total + beans) 
+  }
+
+  // useEffect((getTotal) => {
+  //   setTotal(getTotal())
+  // }, [])
+
 
   const cart = (
     <div className='cart-data'>
       <h2>Your cart</h2>
       <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
       {cartData.map((item, index) => {
-        console.log(cartState)
         return (
           <>
           { cartState[index].quantity > 0 &&
@@ -49,6 +66,7 @@ function Cart(props) {
           <RemoveIcon onClick={(event) => setCartSate((prev) => {
             const cartCopy = [...prev]
             cartCopy[index].quantity -= 1
+            setTotal(getTotal(cartCopy))
             return cartCopy 
             }
              )} />
@@ -57,6 +75,7 @@ function Cart(props) {
             onChange={(event) => setCartSate((prev) => {
               const cartCopy = [...prev]
             cartCopy[index].quantity = event.target.value
+            setTotal(getTotal(cartCopy))
             return cartCopy 
             }
              )}
@@ -64,6 +83,7 @@ function Cart(props) {
           <AddIcon onClick={(event) => setCartSate((prev) => {
                const cartCopy = [...prev]
                cartCopy[index].quantity += 1
+               setTotal(getTotal(cartCopy))
                return cartCopy  
             }
              )} />
@@ -76,6 +96,8 @@ function Cart(props) {
 
       })}
       <p>TOTAL: ${total}</p>
+      <p>Grind some beans?</p>
+      <BeanSlider removeFromTotal={removeFromTotal} addToTotal={addToTotal}/>
       </form>
 
     </div>
