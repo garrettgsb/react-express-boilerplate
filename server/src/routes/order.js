@@ -18,7 +18,10 @@ module.exports = (db) => {
   // READ GET /order/:order_id  "Show a Specific Order"
   router.get("/order/:id", (req, res) => {
     const queryParams = [req.params.id];
-    db.query(`SELECT * FROM orders WHERE id = $1`, queryParams)
+    db.query(
+      `SELECT orders.id, time_created, total_price, completed, user_id, order_items.id as order_items_id, menu_item_id FROM orders JOIN order_items ON orders.id = order_items.order_id WHERE orders.id = $1;`,
+      queryParams
+    )
       .then((result) => {
         result.rows.length
           ? res.json(result.rows)
