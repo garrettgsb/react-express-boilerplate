@@ -6,7 +6,10 @@ module.exports = (db) => {
   // Get a specific user with id and type customer by default
   router.get("/users/:id", (req, res) => {
     const queryParams = [req.params.id];
-    db.query(`SELECT * FROM users WHERE id = $1`, queryParams)
+    db.query(
+      `SELECT * FROM users JOIN customer_information on users.id = customer_information.user_id WHERE users.id = $1`,
+      queryParams
+    )
       .then((result) => {
         result.rows.length
           ? res.json(result.rows)
