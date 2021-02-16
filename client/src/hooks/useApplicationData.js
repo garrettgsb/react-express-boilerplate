@@ -4,9 +4,16 @@ import {distance} from "../helpers/data"
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    user: {
-      username: "Guest"
-    },
+    user: [{
+      id: 0,
+      username: "Guest",
+      current_beans: 0,
+      lifetime_beans: 0,
+      phone_number: null,
+      tier: 'Basic',
+      type: 'c'
+    }
+    ],
     currentUser: 7,
     currentStore: 1,
     stores: [],
