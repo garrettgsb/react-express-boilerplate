@@ -12,8 +12,7 @@ function PreviousOrders() {
   const { state } = useContext(appContext);
 
   const prevOrders = getOrdersInfo(state.orders);
-  console.log(prevOrders)
-
+  
   const reorder = (orderId) => {
     console.log(`I will order ${orderId}`);
   };
