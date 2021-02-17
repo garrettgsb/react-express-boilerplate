@@ -4,7 +4,10 @@ module.exports = (db) => {
   // BROWSE GET /orders/:user_id  "Show all user Orders"
   router.get("/orders/:id", (req, res) => {
     const queryParams = [req.params.id];
-    db.query(`SELECT * FROM orders JOIN order_items ON (orders.id = order_items.order_id) JOIN menu_items ON (order_items.menu_item_id=menu_items.id) WHERE user_id=$1`, queryParams)
+    db.query(
+      `SELECT * FROM orders JOIN order_items ON (orders.id = order_items.order_id) JOIN menu_items ON (order_items.menu_item_id=menu_items.id) WHERE user_id=$1 AND completed='t';`,
+      queryParams
+    )
       .then((result) => {
         result.rows.length
           ? res.json(result.rows)
@@ -33,14 +36,41 @@ module.exports = (db) => {
   });
 
   // ADD POST /order/  "Add New Order"
-  router.post("/order/:id", (req, res) => {
+  router.post("/order", (req, res) => {
     // Getting order values as a JSON file
-    const queryParams = [req.params.id];
+    // order_items is an array of objects [{menu_id: #}, ...]
+    const {
+      time_created,
+      total_price,
+      completed,
+      user_id,
+      order_items,
+    } = req.body;
+    queryParamsOrder = [time_created, total_price, completed, user_id];
+
     db.query(
-      `INSERT INTO orders (time_created, total_price, completed, user_id) VALUES (date_trunc('second', current_timestamp), 0, false, $1);`,
-      queryParams
+      `INSERT INTO orders (time_created, total_price, completed, user_id) VALUES ($1, $2, $3, $4) RETURNING id;`,
+      queryParamsOrder
     )
-      .then(() => res.json({ message: "order added!" }))
+      .then((result) => {
+        const orderId = result.rows[0].id;
+        const queryParamsItems = [];
+        let queryString = `INSERT INTO order_items (order_id, menu_item_id) VALUES `;
+        let counter = 1;
+        order_items.forEach((e, i) => {
+          queryParamsItems.push(orderId, e.menu_id);
+          let value = `($${counter++}, $${counter++})`;
+          queryString +=
+            i === 0
+              ? `${value}`
+              : i !== order_items.length - 1
+              ? `,${value}`
+              : `,${value};`;
+        });
+        db.query(queryString, queryParamsItems)
+          .then(() => res.json({ message: "order added!" }))
+          .catch((err) => res.status(401).json({ error: err.message }));
+      })
       .catch((err) => res.status(401).json({ error: err.message }));
   });
 
