@@ -1,0 +1,34 @@
+// const orders = [
+//   {
+//     id: "1",
+//     customer_name: "Customer One",
+//     orders: [{ item1: "qty1" }, { item2: "qty2" }],
+//   },
+//   {
+//     id: "2",
+//     customer_name: "Customer Two",
+//     orders: [{ item1: "qty1" }, { item2: "qty2" }],
+//   },
+//   {
+//     id: "3",
+//     customer_name: "Customer Three",
+//     orders: [{ item1: "qty1" }, { item2: "qty2" }],
+//   },
+//   {
+//     id: "4",
+//     customer_name: "Customer Four",
+//     orders: [{ item1: "qty1" }, { item2: "qty2" }],
+//   },
+//   {
+//     id: "5",
+//     customer_name: "Customer Five",
+//     orders: [{ item1: "qty1" }, { item2: "qty2" }],
+//   },
+// ];
+
+//Organize data from database to use in dnd as this format:
+// {
+//   id: "1",
+//   customer_name: "Customer One",
+//   orders: [{ item1: "qty1" }, { item2: "qty2" }],
+// }

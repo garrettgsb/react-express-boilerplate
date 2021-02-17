@@ -127,15 +127,22 @@ VALUES
   (0, 0, 'Basic', 1, 8);
 
 INSERT INTO orders
-  (time_created, total_price, completed, user_id)
+  (time_created, total_price, completed, store_id, user_id)
 VALUES
-  ('2021-01-01 19:10:25', 7.25, TRUE, 7),
-  ('2021-02-02 10:10:25', 7.75, FALSE, 8);
+  ('2021-01-01 19:10:25', 11.25, FALSE, 1, 7),
+  ('2021-01-01 19:11:25', 7.75, FALSE, 1, 8),
+  ('2021-01-01 19:12:25', 7.50, FALSE, 2, 7),
+  ('2021-02-02 10:13:25', 7.10, FALSE, 2, 8);
 
 INSERT INTO order_items
   (order_id, menu_item_id)
 VALUES
   (1, 1),
+  (1, 1),
   (1, 2),
   (2, 3),
-  (2, 4);
+  (2, 4),
+  (3, 5),
+  (3, 6),
+  (4, 7),
+  (4, 8);
