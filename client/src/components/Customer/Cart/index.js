@@ -15,6 +15,8 @@ function Cart(props) {
     setCartSate(props.cart)
     setTotal(props.getTotal(props.cart))
   }, [props])
+
+
   
 
   const removeFromTotal = (beans) => {
@@ -43,6 +45,10 @@ function Cart(props) {
           <RemoveIcon onClick={(event) => props.setCart((prev) => {
             const cartCopy = [...prev]
             cartCopy[index].quantity -= 1
+            
+            if (cartCopy[index].quantity === 0) {
+              cartCopy.splice(index, 1)
+            }
             return cartCopy 
             }
              )} />

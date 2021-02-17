@@ -10,7 +10,7 @@ import './styles.scss'
 
 export default function Menu(props) {
 
-  console.log(props)
+
 
   const {state} = useContext(appContext) 
 

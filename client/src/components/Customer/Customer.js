@@ -14,10 +14,7 @@ import Cart from './Cart'
 export default function Customer() {
 
   const [showCart, setShowCart] = useState(false)
-  const [cart, setCart] = useState([{itemName: "Caramel Frappe",
-  menuItemId: 14,
-  price: 3.25,
-  quantity: 1}])
+  const [cart, setCart] = useState([])
 
   const updateCart = (id, name, price) => {
     for(let i = 0; i < cart.length; i++) {
@@ -51,7 +48,6 @@ export default function Customer() {
     setTotal(getTotal(cart))
   }, [cart])
 
-  console.log('customer cart state: ', cart)
 
   const handleOpen = () => {
     setShowCart(true)
@@ -69,11 +65,13 @@ export default function Customer() {
           <UserNav />
           <PreviousOrders />
           <HomeButton />
-          <YourCartButton 
-            total={total} 
-            cart={cart} 
-            handleOpen={event => handleOpen()}
-          />
+          {cart.length > 0 && 
+            <YourCartButton 
+              total={total} 
+              cart={cart} 
+              handleOpen={event => handleOpen()}
+            />
+          }
           <Cart 
             getTotal={getTotal} 
             cart={cart} 
@@ -87,11 +85,13 @@ export default function Customer() {
           <StoreInfo />
           <Menu updateCart={updateCart}/>
           <HomeButton />
-          <YourCartButton 
-            total={total} 
-            cart={cart} 
-            handleOpen={event => handleOpen()}
-          />
+          {cart.length > 0 && 
+            <YourCartButton 
+              total={total} 
+              cart={cart} 
+              handleOpen={event => handleOpen()}
+            />
+          }
           <Cart 
             getTotal={getTotal} 
             cart={cart} 
@@ -106,11 +106,13 @@ export default function Customer() {
           <UserInfo />
           <UserNav />
           <NearbyStores />
-          <YourCartButton 
-            total={total} 
-            cart={cart} 
-            handleOpen={event => handleOpen()}
-          />
+          {cart.length > 0 && 
+            <YourCartButton 
+              total={total} 
+              cart={cart} 
+              handleOpen={event => handleOpen()}
+            />
+          }
           <Cart 
             getTotal={getTotal} 
             cart={cart} 
