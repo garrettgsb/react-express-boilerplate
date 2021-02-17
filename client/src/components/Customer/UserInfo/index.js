@@ -10,7 +10,6 @@ import {appContext} from '../../appContext'
 function UserInfo() {
 
   const {state} = useContext(appContext) 
-  console.log(state)
   const userData = state.user[0]
 
   return(

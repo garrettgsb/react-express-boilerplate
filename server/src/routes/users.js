@@ -22,7 +22,7 @@ module.exports = (db) => {
 
   // Create a new user
   router.post("/users/", (req, res) => {
-    // Getting user credintials as a JSON file
+    // Getting user credentials as a JSON file
     const { username, password, phoneNumber, type } = req.body;
     if (username && password && phoneNumber && type) {
       const queryParams = [username, password, phoneNumber, type];
@@ -37,6 +37,31 @@ module.exports = (db) => {
       res.json({ error: "Invalid Input!!" });
     }
   });
+
+    //Update an existing user
+  router.put("/users/:id", (req, res) => {
+    // Getting user info as a JSON file
+    const { current_beans, lifetime_beans, tier, accelerator } = req.body;
+    const queryParams = [
+      current_beans,
+      lifetime_beans,
+      tier,
+      accelerator,
+      req.params.id,
+    ];
+    db.query(
+      `UPDATE customer_information SET current_beans = $1,  lifetime_beans = $2,  tier = $3,  accelerator = $4 WHERE user_id = $5 RETURNING *;`,
+      queryParams
+    )
+      .then((result) => { 
+        if(result.rowCount < 1) {
+          throw Error("user not found!")
+        }
+        res.json({ message: `user${req.params.id} updated!` })
+    })
+      .catch((err) => res.status(404).json({ error: err.message }));
+  });
+
 
   return router;
 };

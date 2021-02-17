@@ -1,74 +1,70 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Modal } from '@material-ui/core'
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 
+import BeanSlider from './BeanSlider'
+
 import './styles.scss'
 
 function Cart(props) {
-
-  const cartData = [
-    {
-      menuItemId: 1,
-      itemName: 'latte',
-      price: 2.50,
-      quantity: 1
-    },
-    {
-      menuItemId: 2,
-      itemName: 'hot chocolate',
-      price: 2.00,
-      quantity: 2
-    },
-    {
-      menuItemId: 1,
-      itemName: 'latte',
-      price: 2.50,
-      quantity: 1
-    }
-  ]
-
-  const [cartState, setCartSate] = useState(cartData)
+  const [cartState, setCartSate] = useState(props.cart)
+  const [total, setTotal] = useState(props.getTotal(cartState))
   
+  useEffect(() => {
+    setCartSate(props.cart)
+    setTotal(props.getTotal(props.cart))
+  }, [props])
 
-  const total = cartState.reduce((a, b) => {
-    return a + (b.price * b.quantity)
-  }, 0)
+  
+  const removeFromTotal = (beans) => {
+    setTotal(total - beans) 
+  }
+  const addToTotal = (beans) => {
+    setTotal(total + beans) 
+  }
+
+  const handleSubmit = (event) => {
+    console.log('cart', cartState)
+    console.log('total', total)
+    event.preventDefault()
+  }
 
   const cart = (
     <div className='cart-data'>
       <h2>Your cart</h2>
-      <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
-      {cartData.map((item, index) => {
-        console.log(cartState)
+      <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
+      {cartState.map((item, index) => {
         return (
           <>
           { cartState[index].quantity > 0 &&
           <>
           <p>{cartState[index].itemName}</p>
-          <RemoveIcon onClick={(event) => setCartSate((prev) => {
+          <RemoveIcon onClick={(event) => props.setCart((prev) => {
             const cartCopy = [...prev]
             cartCopy[index].quantity -= 1
+            // remove item from cart 
+            cartCopy[index].quantity === 0 && cartCopy.splice(index, 1)
             return cartCopy 
             }
              )} />
           <input 
             value={cartState[index].quantity}
-            onChange={(event) => setCartSate((prev) => {
+            onChange={(event) => props.setCart((prev) => {
               const cartCopy = [...prev]
             cartCopy[index].quantity = event.target.value
             return cartCopy 
             }
              )}
           />
-          <AddIcon onClick={(event) => setCartSate((prev) => {
+          <AddIcon onClick={(event) => props.setCart((prev) => {
                const cartCopy = [...prev]
                cartCopy[index].quantity += 1
                return cartCopy  
             }
              )} />
           <p>${item.price * cartState[index].quantity}</p>
-      
+            
           </>
           }
           </>
@@ -76,6 +72,9 @@ function Cart(props) {
 
       })}
       <p>TOTAL: ${total}</p>
+      <p>Grind some beans?</p>
+      <BeanSlider removeFromTotal={removeFromTotal} addToTotal={addToTotal}/>
+      <input type='submit' value='Bean me up Scottie!' />
       </form>
 
     </div>
