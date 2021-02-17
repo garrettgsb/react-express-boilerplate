@@ -1,3 +1,6 @@
+// load .env data into process.env
+require('dotenv').config();
+
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
