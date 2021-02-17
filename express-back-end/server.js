@@ -15,22 +15,24 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
-// cookies
-app.use(cookieSession({
+//cookies
+App.use(cookieSession({
   name: "session",
   keys: ["user_id"]
-}))
+}));
+
+
 
 // seperated routes
-const favourites = require("./routes/favourites");
+// const favourites = require("./routes/favourites");
+const loginRoutes = require("./routes/login");
 
 // Resource route for favourites:
-app.use("/favourites", favourites(db));
+// App.use("/favourites", favourites(db));
+App.use("/", loginRoutes(db));
 
 // Sample GET route
-App.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+App.get('/', (req, res) => res.json({message: "Seems to work!"}));
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
