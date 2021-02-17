@@ -36,6 +36,7 @@ export const orderOrganizer = (array) => {
     }
   }
   return organizedData;
+};
 
 export const getOrdersInfo = function (orders) {
   const userOrders = [];
