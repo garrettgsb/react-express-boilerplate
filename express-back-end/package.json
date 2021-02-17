@@ -11,8 +11,12 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "morgan": "^1.10.0",
-    "nodemon": "^1.18.7"
+    "nodemon": "^1.18.7",
+    "pg": "^7.18.2",
+    "pg-native": "^3.0.0"
   }
 }

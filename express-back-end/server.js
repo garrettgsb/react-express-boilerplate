@@ -1,8 +1,9 @@
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
-const PORT = 8080;
+const PORT = 8081;
 const cookieSession = require("cookie-session");
+const cors = require("cors");
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -13,8 +14,11 @@ App.use(Express.static('public'));
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
-db.connect();
+db.connect()
+  .then(() => console.log("connected"))
+  .catch((error) => console.log("error db connect",error));
 
+App.use(cors());
 // cookies
 App.use(cookieSession({
   name: "session",
@@ -29,8 +33,8 @@ const loginRoutes = require("./routes/login");
 
 // Resource route for favourites:
 // App.use("/favourites", favourites(db));
+App.use("/", favourites(db));
 App.use("/", loginRoutes(db));
-App.use("/favourites", favourites(db));
 
 // Sample GET route
 App.get('/', (req, res) => res.json({message: "Seems to work!"}));
