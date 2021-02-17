@@ -3,39 +3,13 @@ import "./styles.scss";
 import React, { useState, useEffect, useRef } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import OrderColumns from "./OrdersDashboard/OrderColumns";
+import axios from "axios";
+import { orderOrganizer } from "../../helpers/selectors";
 
-const orders = [
-  {
-    id: "1",
-    customer_name: "Customer One",
-    orders: [{ item1: "qty1" }, { item2: "qty2" }],
-  },
-  {
-    id: "2",
-    customer_name: "Customer Two",
-    orders: [{ item1: "qty1" }, { item2: "qty2" }],
-  },
-  {
-    id: "3",
-    customer_name: "Customer Three",
-    orders: [{ item1: "qty1" }, { item2: "qty2" }],
-  },
-  {
-    id: "4",
-    customer_name: "Customer Four",
-    orders: [{ item1: "qty1" }, { item2: "qty2" }],
-  },
-  {
-    id: "5",
-    customer_name: "Customer Five",
-    orders: [{ item1: "qty1" }, { item2: "qty2" }],
-  },
-];
-
-const columnsFromBackend = {
+const dndColumns = {
   1: {
     name: "Orders",
-    items: orders,
+    items: [],
   },
   2: {
     name: "Completed",
@@ -83,7 +57,21 @@ const onDragEnd = ({ source, destination }, columns, setColumns) => {
 };
 
 const StoreOwner = () => {
-  const [columns, setColumns] = useState(columnsFromBackend);
+  const [columns, setColumns] = useState(dndColumns);
+
+  useEffect(() => {
+    // Store id is hard coded here
+    axios.get(`/api/stores/orders/2`).then((result) => {
+      const data = orderOrganizer(result.data);
+      setColumns((prev) => ({
+        ...prev,
+        1: {
+          ...prev["1"],
+          items: data,
+        },
+      }));
+    });
+  }, []);
 
   // To send SMS when order is completed
   const completedOrder = columns["2"].items.length;
