@@ -5,7 +5,7 @@ if (process.env.DATABASE_URL) {
   dbParams = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    user: process.env.DB_USER,
+    user: process.env.DB_USER2,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME
   };
