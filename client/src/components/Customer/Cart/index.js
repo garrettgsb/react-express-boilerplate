@@ -8,38 +8,22 @@ import BeanSlider from './BeanSlider'
 import './styles.scss'
 
 function Cart(props) {
-
-  const cartData = [
-    {
-      menuItemId: 1,
-      itemName: 'latte',
-      price: 250,
-      quantity: 1
-    },
-    {
-      menuItemId: 2,
-      itemName: 'hot chocolate',
-      price: 200,
-      quantity: 2
-    },
-    {
-      menuItemId: 1,
-      itemName: 'london fog',
-      price: 250,
-      quantity: 1
-    }
-  ]
-
-  const [cartState, setCartSate] = useState(cartData)
-
+  const [cartState, setCartSate] = useState(props.cart)
+  
   
   const getTotal = (curState) => {
     return curState.reduce((a, b) => {
       return a + (b.price * b.quantity)
     }, 0)
   } 
-
+  
   const [total, setTotal] = useState(getTotal(cartState))
+  
+  useEffect(() => {
+    setCartSate(props.cart)
+    setTotal(getTotal(props.cart))
+  }, [props.cart])
+  
 
   const removeFromTotal = (beans) => {
     setTotal(total - beans) 
@@ -63,7 +47,7 @@ function Cart(props) {
     <div className='cart-data'>
       <h2>Your cart</h2>
       <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
-      {cartData.map((item, index) => {
+      {cartState.map((item, index) => {
         return (
           <>
           { cartState[index].quantity > 0 &&

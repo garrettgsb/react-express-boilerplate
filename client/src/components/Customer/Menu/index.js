@@ -8,11 +8,16 @@ import { filterMenuItems } from '../../../helpers/selectors';
 import { appContext } from '../../appContext';
 import './styles.scss'
 
-export default function Menu() {
+export default function Menu(props) {
+
+  console.log(props)
 
   const {state} = useContext(appContext) 
 
-  console.log('menu is from store:', state.menuItems[0].store_id)
+
+  const handleClick = (id, name, price) => {
+    props.updateCart(id, name, price)
+  }
   
   return(
     Object.entries(filterMenuItems(state.menuItems)
@@ -25,7 +30,7 @@ export default function Menu() {
         <div className='category-container'>
         <GridList style={{flexWrap: 'nowrap'}} className='menuList' cols={2.5}>
           {value.map((tile) => (
-            <GridListTile key={tile.id}>
+            <GridListTile key={tile.id} onClick={() => handleClick(tile.id, tile.name, tile.price)}>
               <img src={tile.image} alt={tile.name} />
               <GridListTileBar className='titleBar'
                 title={tile.name}
