@@ -69,16 +69,36 @@ export default function Customer() {
           <UserNav />
           <PreviousOrders />
           <HomeButton />
-          <YourCartButton total={total} cart={cart} handleOpen={event => handleOpen()}/>
-          <Cart getTotal={getTotal} cart={cart} showCart={showCart} handleClose={event => handleClose()}/>
+          <YourCartButton 
+            total={total} 
+            cart={cart} 
+            handleOpen={event => handleOpen()}
+          />
+          <Cart 
+            getTotal={getTotal} 
+            cart={cart} 
+            showCart={showCart} 
+            handleClose={event => handleClose()}
+            setCart={setCart}
+          />
         </Route>
 
         <Route path="/stores/:storeId/menu">
           <StoreInfo />
           <Menu updateCart={updateCart}/>
           <HomeButton />
-          <YourCartButton total={total} cart={cart} handleOpen={event => handleOpen()}/>
-          <Cart getTotal={getTotal} cart={cart} showCart={showCart} handleClose={event => handleClose()}/>
+          <YourCartButton 
+            total={total} 
+            cart={cart} 
+            handleOpen={event => handleOpen()}
+          />
+          <Cart 
+            getTotal={getTotal} 
+            cart={cart} 
+            showCart={showCart} 
+            handleClose={event => handleClose()}
+            setCart={setCart}
+          />
         </Route>
 
 
@@ -86,8 +106,18 @@ export default function Customer() {
           <UserInfo />
           <UserNav />
           <NearbyStores />
-          <YourCartButton total={total} cart={cart} handleOpen={event => handleOpen()}/>
-          <Cart getTotal={getTotal} cart={cart} showCart={showCart} handleClose={event => handleClose()}/>
+          <YourCartButton 
+            total={total} 
+            cart={cart} 
+            handleOpen={event => handleOpen()}
+          />
+          <Cart 
+            getTotal={getTotal} 
+            cart={cart} 
+            showCart={showCart} 
+            handleClose={event => handleClose()}
+            setCart={setCart}
+          />
         </Route>
       </Switch>
     </Router>

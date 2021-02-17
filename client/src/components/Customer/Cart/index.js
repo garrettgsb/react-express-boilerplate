@@ -9,20 +9,12 @@ import './styles.scss'
 
 function Cart(props) {
   const [cartState, setCartSate] = useState(props.cart)
-  
-  
-  const getTotal = (curState) => {
-    return curState.reduce((a, b) => {
-      return a + (b.price * b.quantity)
-    }, 0)
-  } 
-  
-  const [total, setTotal] = useState(getTotal(cartState))
+  const [total, setTotal] = useState(props.getTotal(cartState))
   
   useEffect(() => {
     setCartSate(props.cart)
-    setTotal(getTotal(props.cart))
-  }, [props.cart])
+    setTotal(props.getTotal(props.cart))
+  }, [props])
   
 
   const removeFromTotal = (beans) => {
@@ -38,11 +30,6 @@ function Cart(props) {
     event.preventDefault()
   }
 
-  // useEffect((getTotal) => {
-  //   setTotal(getTotal())
-  // }, [])
-
-
   const cart = (
     <div className='cart-data'>
       <h2>Your cart</h2>
@@ -53,27 +40,24 @@ function Cart(props) {
           { cartState[index].quantity > 0 &&
           <>
           <p>{cartState[index].itemName}</p>
-          <RemoveIcon onClick={(event) => setCartSate((prev) => {
+          <RemoveIcon onClick={(event) => props.setCart((prev) => {
             const cartCopy = [...prev]
             cartCopy[index].quantity -= 1
-            setTotal(getTotal(cartCopy))
             return cartCopy 
             }
              )} />
           <input 
             value={cartState[index].quantity}
-            onChange={(event) => setCartSate((prev) => {
+            onChange={(event) => props.setCart((prev) => {
               const cartCopy = [...prev]
             cartCopy[index].quantity = event.target.value
-            setTotal(getTotal(cartCopy))
             return cartCopy 
             }
              )}
           />
-          <AddIcon onClick={(event) => setCartSate((prev) => {
+          <AddIcon onClick={(event) => props.setCart((prev) => {
                const cartCopy = [...prev]
                cartCopy[index].quantity += 1
-               setTotal(getTotal(cartCopy))
                return cartCopy  
             }
              )} />
