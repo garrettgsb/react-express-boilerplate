@@ -4,7 +4,7 @@ import './styles.scss'
 
 const StoreMap = (props) => {
   return(
-  <MapContainer center={[props.lat, props.lon]} zoom={13} scrollWheelZoom={false}>
+  <MapContainer center={[props.lat, props.lon]} zoom={17} scrollWheelZoom={false}>
     <TileLayer
       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
