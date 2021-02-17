@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import { Switch } from '@material-ui/core';
 import Slider from '@material-ui/core/Slider';
 
 
