@@ -19,22 +19,25 @@ db.connect();
 App.use(cookieSession({
   name: "session",
   keys: ["user_id"]
-}))
+}));
+
+
 
 // seperated routes
 const favourites = require("./routes/favourites");
+const loginRoutes = require("./routes/login");
 
 // Resource route for favourites:
+// App.use("/favourites", favourites(db));
+App.use("/", loginRoutes(db));
 App.use("/favourites", favourites(db));
 
 // Sample GET route
-App.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+App.get('/', (req, res) => res.json({message: "Seems to work!"}));
 
 // An api endpoint that returns a short list of items
 App.get('/api/getList', (req,res) => {
-  var list = ["item1", "item2", "item3"];
+  const list = ["item1", "item2", "item3"];
   res.json(list);
   console.log('Sent list of items');
 });
