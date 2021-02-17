@@ -12,6 +12,6 @@ CREATE TABLE favourites (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   repoName VARCHAR(255) NOT NULL,
   repoLanguage VARCHAR(255) NOT NULL,
-  repoDescription VARCHAR(255) NOT NULL,
+  repoDescription VARCHAR(255),
   gitAvatar VARCHAR(255) NOT NULL
 );
