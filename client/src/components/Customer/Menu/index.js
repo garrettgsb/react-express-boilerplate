@@ -10,10 +10,7 @@ import './styles.scss'
 
 export default function Menu(props) {
 
-
-
   const {state} = useContext(appContext) 
-
 
   const handleClick = (id, name, price) => {
     props.updateCart(id, name, price)

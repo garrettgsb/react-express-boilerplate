@@ -11,10 +11,13 @@ import HomeButton from './HomeButton';
 import PreviousOrders from './PreviousOrders'
 import Cart from './Cart'
 
+import { getTotal } from '../../helpers/getTotal'
+
 export default function Customer() {
 
   const [showCart, setShowCart] = useState(false)
   const [cart, setCart] = useState([])
+  const [total, setTotal] = useState(getTotal(cart))
 
   const updateCart = (id, name, price) => {
     for(let i = 0; i < cart.length; i++) {
@@ -36,13 +39,6 @@ export default function Customer() {
     })
   }
 
-  const getTotal = (curState) => {
-    return curState.reduce((a, b) => {
-      return a + (b.price * b.quantity)
-    }, 0)
-  } 
-
-  const [total, setTotal] = useState(getTotal(cart))
 
   useEffect(() => {
     setTotal(getTotal(cart))

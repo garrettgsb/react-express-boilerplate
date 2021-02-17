@@ -8,6 +8,8 @@ function YourCartButton(props) {
   const [cart, setCart] = useState(props.cart)
   const [total, setTotal] = useState(props.total)
 
+  
+
   useEffect(() => {
     setCart(props.cart)
     setTotal(props.total)
