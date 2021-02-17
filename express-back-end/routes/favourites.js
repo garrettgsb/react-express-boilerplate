@@ -39,7 +39,9 @@ module.exports = (db) => {
       `INSERT INTO favourites (user_id, repoName, repoLanguage, repoDescription, gitAvatar)
        VALUES ($1, $2, $3, $4, $5 )
       ;`,
+
       [1, repoName, repoLanguage, repoDescription, gitAvatar]
+
     )
       .then(response => {
         console.log("success");
