@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import NearbyStores from './NearbyStores'
 import UserInfo from './UserInfo'
@@ -39,6 +39,18 @@ export default function Customer() {
     })
   }
 
+  const getTotal = (curState) => {
+    return curState.reduce((a, b) => {
+      return a + (b.price * b.quantity)
+    }, 0)
+  } 
+
+  const [total, setTotal] = useState(getTotal(cart))
+
+  useEffect(() => {
+    setTotal(getTotal(cart))
+  }, [cart])
+
   console.log('customer cart state: ', cart)
 
   const handleOpen = () => {
@@ -57,16 +69,16 @@ export default function Customer() {
           <UserNav />
           <PreviousOrders />
           <HomeButton />
-          <YourCartButton cart={cart} handleOpen={event => handleOpen()}/>
-          <Cart cart={cart} showCart={showCart} handleClose={event => handleClose()}/>
+          <YourCartButton total={total} cart={cart} handleOpen={event => handleOpen()}/>
+          <Cart getTotal={getTotal} cart={cart} showCart={showCart} handleClose={event => handleClose()}/>
         </Route>
 
         <Route path="/stores/:storeId/menu">
           <StoreInfo />
           <Menu updateCart={updateCart}/>
           <HomeButton />
-          <YourCartButton cart={cart} handleOpen={event => handleOpen()}/>
-          <Cart cart={cart} showCart={showCart} handleClose={event => handleClose()}/>
+          <YourCartButton total={total} cart={cart} handleOpen={event => handleOpen()}/>
+          <Cart getTotal={getTotal} cart={cart} showCart={showCart} handleClose={event => handleClose()}/>
         </Route>
 
 
@@ -74,8 +86,8 @@ export default function Customer() {
           <UserInfo />
           <UserNav />
           <NearbyStores />
-          <YourCartButton cart={cart} handleOpen={event => handleOpen()}/>
-          <Cart cart={cart} showCart={showCart} handleClose={event => handleClose()}/>
+          <YourCartButton total={total} cart={cart} handleOpen={event => handleOpen()}/>
+          <Cart getTotal={getTotal} cart={cart} showCart={showCart} handleClose={event => handleClose()}/>
         </Route>
       </Switch>
     </Router>
