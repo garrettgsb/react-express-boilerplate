@@ -16,9 +16,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     width: 200,
   },
-  button:{
+  button: {
     marginTop: theme.spacing(1),
-  }
+    marginLeft: theme.spacing(3),
+  },
+  buttons: {
+    display: "flex",
+  },
 }));
 
 export default function Filter(props) {
@@ -29,6 +33,15 @@ export default function Filter(props) {
     language: "",
     repoName: "",
   });
+
+  const clear = () => {
+    setState((prev) => ({
+      dateBegin: "",
+      dateEnd: "",
+      language: "",
+      repoName: "",
+    }));
+  };
 
   const setBegin = (event) => {
     const value = event.target.value;
@@ -66,7 +79,7 @@ export default function Filter(props) {
           onChange={setBegin}
           label="Last Updated After"
           type="date"
-          defaultValue={state.dateBegin}
+          value={state.dateBegin}
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
@@ -76,7 +89,7 @@ export default function Filter(props) {
           onChange={setEnd}
           label="Last Updated Before"
           type="date"
-          defaultValue={state.dateEnd}
+          value={state.dateEnd}
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
@@ -95,9 +108,32 @@ export default function Filter(props) {
           }}
         />
       </div>
-      <div>
-        <Button variant="contained" color="primary" className={classes.button} onClick={()=>{props.setFilter(state)}}>
+      <div className={classes.buttons}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={() => {
+            props.setFilter(state);
+          }}
+        >
           Filter
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          onClick={() => {
+            clear();
+            props.setFilter({
+              dateBegin: "",
+              dateEnd: "",
+              language: "",
+              repoName: "",
+            });
+          }}
+        >
+          Clear
         </Button>
       </div>
     </div>

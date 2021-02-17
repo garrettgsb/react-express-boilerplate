@@ -16,7 +16,7 @@ const db = new Pool(dbParams);
 db.connect();
 
 // cookies
-app.use(cookieSession({
+App.use(cookieSession({
   name: "session",
   keys: ["user_id"]
 }))
@@ -25,12 +25,20 @@ app.use(cookieSession({
 const favourites = require("./routes/favourites");
 
 // Resource route for favourites:
-app.use("/favourites", favourites(db));
+App.use("/favourites", favourites(db));
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
 }));
+
+// An api endpoint that returns a short list of items
+App.get('/api/getList', (req,res) => {
+  var list = ["item1", "item2", "item3"];
+  res.json(list);
+  console.log('Sent list of items');
+});
+
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
