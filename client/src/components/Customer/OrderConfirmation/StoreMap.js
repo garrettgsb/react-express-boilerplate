@@ -2,11 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import './styles.scss'
 
 
-
-
-
 const StoreMap = (props) => {
-
   return(
   <MapContainer center={[props.lat, props.lon]} zoom={13} scrollWheelZoom={false}>
     <TileLayer
