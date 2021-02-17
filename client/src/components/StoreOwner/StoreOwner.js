@@ -5,6 +5,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import OrderColumns from "./OrdersDashboard/OrderColumns";
 import axios from "axios";
 import { orderOrganizer } from "../../helpers/selectors";
+import { useInterval } from "../../helpers/useInterval";
 
 const dndColumns = {
   1: {
@@ -58,20 +59,27 @@ const onDragEnd = ({ source, destination }, columns, setColumns) => {
 
 const StoreOwner = () => {
   const [columns, setColumns] = useState(dndColumns);
+  // Store id is hard coded here
+  const [storeId, setStoreId] = useState(1);
 
-  useEffect(() => {
-    // Store id is hard coded here
-    axios.get(`/api/stores/orders/2`).then((result) => {
-      const data = orderOrganizer(result.data);
-      setColumns((prev) => ({
-        ...prev,
-        1: {
-          ...prev["1"],
-          items: data,
-        },
-      }));
-    });
-  }, []);
+  // useInterval(() => {
+    axios
+      .get(`/api/stores/orders/${storeId}`)
+      .then((result) => {
+        console.log(result);
+        if (!result.data.message) {
+          const data = orderOrganizer(result.data);
+          setColumns((prev) => ({
+            ...prev,
+            1: {
+              ...prev["1"],
+              items: data,
+            },
+          }));
+        }
+      })
+      .catch((err) => console.error({ error: err.message }));
+  }, 4000);
 
   // To send SMS when order is completed
   const completedOrder = columns["2"].items.length;
@@ -81,7 +89,14 @@ const StoreOwner = () => {
       isFirstRun.current = false;
       return;
     }
-    console.log(columns["2"].items[completedOrder - 1]);
+    const orderUpdatePramas = {
+      store_id: storeId,
+      username: columns["2"].items[completedOrder - 1].username,
+    };
+
+    axios.put("/api/order", orderUpdatePramas).then(() => {
+      console.log("order updated!!");
+    });
   }, [completedOrder]);
 
   return (
