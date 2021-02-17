@@ -32,13 +32,14 @@ module.exports = (db) => {
     //   return;
     // }
 
+    const { repoName, repoLanguage, repoDescription, gitAvatar} = request.body;
     
-    console.log("hello");
+    console.log(request.session);
     db.query(
       `INSERT INTO favourites (user_id, repoName, repoLanguage, repoDescription, gitAvatar)
        VALUES ($1, $2, $3, $4, $5 )
       ;`,
-      [1, 'Exercise', 'Javascript','This is a calculator I created to calculate your 1 repetition maximum', 'https://avatars.githubusercontent.com/u/62811480?s=460&u=7fe7a26890fca097c2797c905da718d83c16a48d&v=4']
+      [1, repoName, repoLanguage, repoDescription, gitAvatar]
     )
       .then(response => {
         console.log("success");
