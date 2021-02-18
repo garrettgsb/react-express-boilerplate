@@ -1,4 +1,5 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useHistory } from 'react-router-dom'
 import { useContext, useState } from "react";
 import { appContext } from "../../appContext";
 import "./style.scss";
@@ -9,6 +10,8 @@ export default function PaymentForm(props) {
   const { state, postOrder } = useContext(appContext);
   const stripe = useStripe();
   const elements = useElements();
+
+  const history = useHistory();
 
   const orderData = (order) => {
 
@@ -59,10 +62,17 @@ const order = orderData(props.order)
   };
 
   if (formState === "submitted") {
-
+    console.log('user ID', state.currentUser)
+    console.log('user accelerator', state.user[0].accelerator)
+    console.log('user tier', state.user[0].tier)
+    console.log('user current beans', state.user[0].current_beans)
+    console.log('user lifetime beans', state.user[0].lifetime_beans)
+    
+    console.log('beans used', props.order)
+    console.log('total', props.order.total)
     postOrder(order)
     // redirect to the order summary page
-    return <div>Charge succeeded!</div>
+    history.push('/orderconfirmed')
     
   }
 
