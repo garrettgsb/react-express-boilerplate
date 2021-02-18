@@ -134,7 +134,7 @@ export default function OppositeTimeline(props) {
               language={repository.language}
               languages_url={repository["languages_url"]}
               contributors_url={repository.contributors_url}
-              avatar={props.avatar}
+              avatar_url={repository.owner.avatar_url}
             />
           </div>
         </div>
