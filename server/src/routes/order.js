@@ -44,12 +44,19 @@ module.exports = (db) => {
       total_price,
       completed,
       user_id,
+      store_id,
       order_items,
     } = req.body;
-    queryParamsOrder = [time_created, total_price, completed, user_id];
+    queryParamsOrder = [
+      time_created,
+      total_price,
+      completed,
+      store_id,
+      user_id,
+    ];
 
     db.query(
-      `INSERT INTO orders (time_created, total_price, completed, user_id) VALUES ($1, $2, $3, $4) RETURNING id;`,
+      `INSERT INTO orders (time_created, total_price, completed, store_id, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING id;`,
       queryParamsOrder
     )
       .then((result) => {
@@ -83,7 +90,7 @@ module.exports = (db) => {
       queryParams
     )
       .then(() => res.json({ message: "order updated!" }))
-      .catch( );
+      .catch();
   });
 
   return router;
