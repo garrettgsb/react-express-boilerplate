@@ -12,7 +12,7 @@ export default function Stripe(props) {
 
   return (
     <Elements stripe={stripePromise}>
-     <PaymentForm order={props}/>
+     <PaymentForm order={props.order} beansSpent={props.beansSpent}/>
     </Elements>
   );
 }

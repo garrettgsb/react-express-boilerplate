@@ -2,6 +2,8 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useHistory } from 'react-router-dom'
 import { useContext, useState } from "react";
 import { appContext } from "../../appContext";
+
+
 import "./style.scss";
 
 export default function PaymentForm(props) {
@@ -37,7 +39,7 @@ export default function PaymentForm(props) {
     return completeOrder;
 }
 
-const order = orderData(props.order)
+const order = orderData(props)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -70,7 +72,13 @@ const order = orderData(props.order)
     
     console.log('beans used', props.order)
     console.log('total', props.order.total)
+
+    const beansSpent = props.beansSpent
+
+    console.log(beansSpent)
+  
     postOrder(order)
+
     // redirect to the order summary page
     history.push('/orderconfirmed')
     
