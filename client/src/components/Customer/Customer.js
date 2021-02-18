@@ -102,6 +102,7 @@ export default function Customer() {
           <OrderConfirmation 
             cart={cart}
             total={total}
+            setTotal={setTotal}
           />
           <HomeButton />
         </Route>
