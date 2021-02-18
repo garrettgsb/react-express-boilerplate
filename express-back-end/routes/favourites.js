@@ -27,11 +27,11 @@ module.exports = (db) => {
   // });
 
   router.get("/favourites", (request, response) => {
-    // const { repoName, repoLanguage, repoDescription, gitAvatar} = request.body;
     db.query(
       `SELECT * FROM favourites
       ORDER BY favourites.id;`
-    );
+    )
+      .then(res => console.log(res.rows));
   });
 
   router.put("/favourites", (request, response) => {
@@ -40,15 +40,15 @@ module.exports = (db) => {
     //   return;
     // }
 
-    const { repoName, repoLanguage, repoDescription, gitAvatar} = request.body;
+    const { username, repoName, repoLanguage, repoDescription, gitAvatar} = request.body;
     
-    console.log(request.session);
+    console.log(username);
     db.query(
       `INSERT INTO favourites (user_id, repoName, repoLanguage, repoDescription, gitAvatar)
        VALUES ($1, $2, $3, $4, $5 )
       ;`,
 
-      [1, repoName, repoLanguage, repoDescription, gitAvatar]
+      [username, repoName, repoLanguage, repoDescription, gitAvatar]
 
     )
       .then(response => {
