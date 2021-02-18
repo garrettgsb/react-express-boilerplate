@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+
 import { Modal } from '@material-ui/core'
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
@@ -8,6 +10,8 @@ import BeanSlider from './BeanSlider'
 import './styles.scss'
 
 function Cart(props) {
+
+  const history = useHistory()
 
   const cartData = [
     {
@@ -51,6 +55,7 @@ function Cart(props) {
   const handleSubmit = (event) => {
     console.log('cart', cartState)
     console.log('total', total)
+    history.push('/checkout')
     event.preventDefault()
   }
 

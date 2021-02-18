@@ -27,8 +27,7 @@ export default function App() {
     <div className="App">
       { customer && (
       <appContext.Provider value={{state, setStore, postOrder}} >
-        {/* <Customer/> */}
-        <Stripe />
+        <Customer/>
       </appContext.Provider>
       )}    
 

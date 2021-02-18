@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { appContext } from "../../appContext";
 import "./style.scss";
 
-export default function PaymentForm() {
+export default function PaymentForm(props) {
   const [formState, setFormState] = useState("idle");
   const [error, setError] = useState(null);
   const { state, postOrder } = useContext(appContext);
@@ -11,17 +11,7 @@ export default function PaymentForm() {
   console.log('state from payment', state)
 
   // This will be the order obj handed off from cart
-  const order = {
-    time_created: "2021-01-01 19:10:25",
-    total_price: 1000,
-    completed: true,
-    user_id: 7,
-    order_items: [
-      {menu_item_id: 1},
-      {menu_item_id: 2},
-      {menu_item_id: 3}
-    ]
-  }
+  const order = props.order
 
   const stripe = useStripe();
   const elements = useElements();
