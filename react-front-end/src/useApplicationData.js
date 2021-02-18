@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    avatar: "https://cdn.pixabay.com/photo/2017/02/01/00/26/cranium-2028555_960_720.png",
+    avatar: "https://github.githubassets.com/images/modules/logos_page/Octocat.png",
     loginUser:"",
     name:"",
     url: "",
