@@ -5,7 +5,7 @@ import StoreMap from './StoreMap'
 import OrderSummary from './OrderSummary'
  
 export default function OrderConfirmation(props) {
-  const collectionTime = Math.floor(Math.random() * 20) + 1
+  const collectionTime = Math.floor(Math.random() * 20) + 2
   const context = useContext(appContext)
   const store = context.state.stores[context.state.currentStore - 1]
 
