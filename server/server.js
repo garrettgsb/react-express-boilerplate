@@ -12,10 +12,10 @@ const db = require("./src/db/config");
 const express = require("express");
 const BodyParser = require("body-parser");
 const morgan = require("morgan");
-const client = require("twilio")(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-);
+// const client = require("twilio")(
+//   process.env.TWILIO_ACCOUNT_SID,
+//   process.env.TWILIO_AUTH_TOKEN
+// );
 
 // Express Configuration
 const app = express();
