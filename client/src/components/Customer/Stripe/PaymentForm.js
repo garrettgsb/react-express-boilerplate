@@ -1,10 +1,12 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { appContext } from "../../appContext";
 import "./style.scss";
 
 export default function PaymentForm() {
   const [formState, setFormState] = useState("idle");
   const [error, setError] = useState(null);
+  const { state, postOrder } = useContext(appContext);
 
   const totalFromCart = 1000;
 
@@ -34,9 +36,8 @@ export default function PaymentForm() {
     }
   };
 
-  console.log("formState", formState);
-
   if (formState === "submitted") {
+    postOrder();
     return <div>Charge succeeded!</div>;
   }
 

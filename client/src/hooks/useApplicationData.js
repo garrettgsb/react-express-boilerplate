@@ -91,5 +91,27 @@ export default function useApplicationData() {
     }))
   }
 
-  return { state, setStore };
+  const postOrder = () => {
+    const order = {
+      time_created: "2021-01-01 19:10:25",
+      total_price: 1000,
+      completed: true,
+      user_id: 1,
+      order_items: [
+        {menu_id: 1},
+        {menu_id: 2},
+        {menu_id: 3}
+      ]
+    }
+    return axios
+    ({
+      method: 'post',
+      url: '/api/order',
+      data: order
+    })
+    .then((result)=>console.log(result))
+    .catch((err)=>console.log(err.message))
+  };
+
+  return { state, setStore, postOrder };
 }

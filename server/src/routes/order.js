@@ -37,6 +37,7 @@ module.exports = (db) => {
 
   // ADD POST /order/  "Add New Order"
   router.post("/order", (req, res) => {
+    console.log(req.body)
     // Getting order values as a JSON file
     // order_items is an array of objects [{menu_id: #}, ...]
     const {
