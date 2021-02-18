@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function NavBar() {
+export default function NavBar(props) {
   const classes = useStyles();
 
   return (
@@ -41,7 +41,7 @@ export default function NavBar() {
                 <FavoriteBorderIcon />
               </Badge>
             </IconButton>
-          <Button color="inherit">Logout</Button>
+          <Button color="inherit" onClick={ props.setStorage }>Login</Button>
         </Toolbar>
       </AppBar>
     </div>
