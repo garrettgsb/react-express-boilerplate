@@ -104,6 +104,21 @@ export default function useApplicationData() {
     .catch((err)=>console.log(err.message))
   };
 
+  const updateBeans = (id, newCurrentBeans, newLifetimeBeans, tier, accelerator) => {
+    return axios.put(`/api/users/${id}`, {
+      current_beans: newCurrentBeans,
+      lifetime_beans: newLifetimeBeans, 
+      tier: tier,
+      accelerator: accelerator
+    })
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
 
-  return { state, setStore, postOrder };
+
+  return { state, setStore, postOrder, updateBeans };
 }

@@ -41,6 +41,7 @@ module.exports = (db) => {
     //Update an existing user
   router.put("/users/:id", (req, res) => {
     // Getting user info as a JSON file
+    console.log('REQ BODY', req.body)
     const { current_beans, lifetime_beans, tier, accelerator } = req.body;
     const queryParams = [
       current_beans,

@@ -12,24 +12,23 @@ import './styles.scss'
 function Cart(props) {
   const history = useHistory()
   const [cartState, setCartSate] = useState(props.cart)
-  const [total, setTotal] = useState(props.getTotal(cartState))
 
-  useEffect(() => {
-    setCartSate(props.cart)
-    setTotal(props.getTotal(props.cart))
-  }, [props])
+  // useEffect(() => {
+  //   setCartSate(props.cart)
+  //   setTotal(props.getTotal(props.cart))
+  // }, [props])
 
   
   const removeFromTotal = (beans) => {
-    setTotal(total - beans) 
+    props.setTotal(props.total - beans) 
   }
   const addToTotal = (beans) => {
-    setTotal(total + beans) 
+    props.setTotal(props.total + beans) 
   }
 
   const handleSubmit = (event) => {
-    console.log('cart', cartState)
-    console.log('total', total)
+    console.log('cart', props.cart)
+    console.log('total', props.total)
     history.push('/checkout')
     event.preventDefault()
   }
@@ -38,12 +37,12 @@ function Cart(props) {
     <div className='cart-data'>
       <h2>Your cart</h2>
       <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
-      {cartState.map((item, index) => {
+      {props.cart.map((item, index) => {
         return (
           <>
-          { cartState[index].quantity > 0 &&
+          { props.cart[index].quantity > 0 &&
           <>
-          <p>{cartState[index].itemName}</p>
+          <p>{props.cart[index].itemName}</p>
           <RemoveIcon onClick={(event) => props.setCart((prev) => {
             const cartCopy = [...prev]
             cartCopy[index].quantity -= 1
@@ -53,7 +52,7 @@ function Cart(props) {
             }
              )} />
           <input 
-            value={cartState[index].quantity}
+            value={props.cart[index].quantity}
             onChange={(event) => props.setCart((prev) => {
               const cartCopy = [...prev]
             cartCopy[index].quantity = event.target.value
@@ -67,7 +66,7 @@ function Cart(props) {
                return cartCopy  
             }
              )} />
-          <p>${item.price * cartState[index].quantity}</p>
+          <p>${item.price * props.cart[index].quantity}</p>
             
           </>
           }
@@ -75,9 +74,14 @@ function Cart(props) {
           )
 
       })}
-      <p>TOTAL: ${total}</p>
+      <p>TOTAL: ${props.total}</p>
       <p>Grind some beans?</p>
-      <BeanSlider removeFromTotal={removeFromTotal} addToTotal={addToTotal}/>
+      <BeanSlider 
+        removeFromTotal={removeFromTotal} 
+        addToTotal={addToTotal}
+        beansSpent={props.beansSpent}
+        setBeansSpent={props.setBeansSpent}
+      />
       <input type='submit' value='Bean me up Scottie!' />
       </form>
 

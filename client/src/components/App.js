@@ -11,7 +11,7 @@ import Stripe from './Customer/Stripe'
 export default function App() {
   
   const {
-    state, setStore, postOrder
+    state, setStore, postOrder, updateBeans
   } = applicationData();
   
    // get the user using selector function here:
@@ -26,7 +26,7 @@ export default function App() {
   return(
     <div className="App">
       { customer && (
-      <appContext.Provider value={{state, setStore, postOrder}} >
+      <appContext.Provider value={{state, setStore, postOrder, updateBeans}} >
         <Customer/>
       </appContext.Provider>
       )}    
