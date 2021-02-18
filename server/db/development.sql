@@ -129,7 +129,7 @@ VALUES
 INSERT INTO orders
   (time_created, total_price, completed, store_id, user_id)
 VALUES
-  ('2021-01-01 19:10:25', 1125, FALSE, 1, 7),
+  ('2021-01-01 19:10:25', 1125, TRUE, 1, 7),
   ('2021-01-01 19:11:25', 775, FALSE, 1, 8),
   ('2021-01-01 19:12:25', 750, FALSE, 2, 7),
   ('2021-02-02 10:13:25', 710, FALSE, 2, 8);
