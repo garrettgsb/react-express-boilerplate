@@ -13,7 +13,7 @@ import { useState } from 'react'
 
 export default function Application(props) {
 
-  const { setUser, fetchData, state} = useApplicationData();
+  const { setStorage, setUser, fetchData, state} = useApplicationData();
   
 
   // const appointmentsObject = dailyAppointments.map(appointment => {
@@ -52,11 +52,12 @@ export default function Application(props) {
       setParam(prev=>(param))
     }
     
+    
      
 
     return (
       <main className="App">
-        <NavBar />
+        <NavBar setStorage={ setStorage }/>
         <section class="main-container">
           <div id="search-and-filter">
             <Search onSubmit={fetchData} value={state.user || ""} onChange={(e) => setUser(e)} onClick={fetchData}/>

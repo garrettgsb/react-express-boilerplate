@@ -12,7 +12,8 @@ export default function RepoSummary(props) {
   const [state,setState] = useState({color:"black"})
   const like = () =>{
     state.color ==="red" ? setState(prev=>({color:"black"})) : setState(prev=>({color:"red"}));
-    return axios.put('http://localhost:8081/favourites', { repoName: props.name, repoLanguage: props.language, repoDescription: props.description,  gitAvatar: props.avatar});
+    return axios.put('http://localhost:8081/favourites', { username: localStorage.getItem('username'), repoName: props.name, repoLanguage: props.language, repoDescription: props.description,  gitAvatar: props.avatar});
+
   }
 
   return (
