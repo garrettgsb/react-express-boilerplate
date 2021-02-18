@@ -5,7 +5,8 @@ module.exports = (db) => {
   router.get("/orders/:id", (req, res) => {
     const queryParams = [req.params.id];
     db.query(
-      `SELECT * FROM orders JOIN order_items ON (orders.id = order_items.order_id) JOIN menu_items ON (order_items.menu_item_id=menu_items.id) WHERE user_id=$1 AND completed=TRUE;`,
+      `SELECT order_id, price, name, image, total_price FROM orders JOIN order_items ON (orders.id = order_items.order_id) JOIN menu_items ON (order_items.menu_item_id=menu_items.id) WHERE user_id=$1 AND completed=TRUE;`,
+
       queryParams
     )
       .then((result) => {
@@ -37,6 +38,7 @@ module.exports = (db) => {
 
   // ADD POST /order/  "Add New Order"
   router.post("/order", (req, res) => {
+    console.log(req.body)
     // Getting order values as a JSON file
     // order_items is an array of objects [{menu_id: #}, ...]
     const {
@@ -58,7 +60,7 @@ module.exports = (db) => {
         let queryString = `INSERT INTO order_items (order_id, menu_item_id) VALUES `;
         let counter = 1;
         order_items.forEach((e, i) => {
-          queryParamsItems.push(orderId, e.menu_id);
+          queryParamsItems.push(orderId, e.menu_item_id);
           let value = `($${counter++}, $${counter++})`;
           queryString +=
             i === 0

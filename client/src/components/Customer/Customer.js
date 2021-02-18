@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useState, useEffect } from 'react'
+import Stripe from './Stripe'
 
 import NearbyStores from './NearbyStores'
 import UserInfo from './UserInfo'
@@ -13,6 +14,7 @@ import Cart from './Cart'
 import OrderConfirmation from './OrderConfirmation';
 
 import { getTotal } from '../../helpers/getTotal'
+
 
 export default function Customer() {
 
@@ -54,6 +56,20 @@ export default function Customer() {
     setShowCart(false)
   }
 
+
+  // mockdata
+  const order = {
+    time_created: "2021-01-01 19:10:25",
+    total_price: 1000,
+    completed: true,
+    user_id: 7,
+    order_items: [
+      {menu_item_id: 1},
+      {menu_item_id: 2},
+      {menu_item_id: 3}
+    ]
+  }
+
   return(
     <Router>
       <Switch>
@@ -77,6 +93,12 @@ export default function Customer() {
             setCart={setCart}
           />
         </Route>
+
+        <Route path="/checkout">
+            <h3>I am STRIPE</h3>
+            <Stripe order={order}/>
+        </Route>
+
 
         <Route path="/stores/:storeId/menu">
           <StoreInfo />
