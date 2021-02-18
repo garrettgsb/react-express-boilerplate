@@ -3,17 +3,20 @@ import { useHistory } from 'react-router-dom'
 import { useContext, useState } from "react";
 import { appContext } from "../../appContext";
 
+import {newCurrentBeans, newLifetimeBeans} from '../../../helpers/updateBeans'
+
 
 import "./style.scss";
 
 export default function PaymentForm(props) {
   const [formState, setFormState] = useState("idle");
   const [error, setError] = useState(null);
-  const { state, postOrder } = useContext(appContext);
+  const { state, postOrder, updateBeans } = useContext(appContext);
   const stripe = useStripe();
   const elements = useElements();
-
   const history = useHistory();
+
+  console.log(props);
 
   const orderData = (order) => {
 
@@ -39,7 +42,7 @@ export default function PaymentForm(props) {
     return completeOrder;
 }
 
-const order = orderData(props)
+const order = orderData(props.order)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,19 +67,16 @@ const order = orderData(props)
   };
 
   if (formState === "submitted") {
-    console.log('user ID', state.currentUser)
-    console.log('user accelerator', state.user[0].accelerator)
-    console.log('user tier', state.user[0].tier)
-    console.log('user current beans', state.user[0].current_beans)
-    console.log('user lifetime beans', state.user[0].lifetime_beans)
-    
-    console.log('beans used', props.order)
-    console.log('total', props.order.total)
+    const userId =  state.currentUser;
+    const accelerator = state.user[0].accelerator;
+    const tier = state.user[0].tier
 
-    const beansSpent = props.beansSpent
+    const currentBeans = state.user[0].current_beans;
+    const currentLifetimeBeans = state.user[0].lifetime_beans;
+    const newCurrent = newCurrentBeans(currentBeans, props.beansSpent)
+    const newLifetime  = newLifetimeBeans(currentLifetimeBeans, props.order.total)
 
-    console.log(beansSpent)
-  
+    updateBeans(userId, newCurrent, newLifetime, tier, accelerator)
     postOrder(order)
 
     // redirect to the order summary page
