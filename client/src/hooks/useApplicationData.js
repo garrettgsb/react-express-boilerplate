@@ -91,18 +91,18 @@ export default function useApplicationData() {
     }))
   }
 
-  const postOrder = () => {
-    const order = {
-      time_created: "2021-01-01 19:10:25",
-      total_price: 1000,
-      completed: true,
-      user_id: 7,
-      order_items: [
-        {menu_id: 1},
-        {menu_id: 2},
-        {menu_id: 3}
-      ]
-    }
+  const postOrder = (order) => {
+    // const order = {
+    //   time_created: "2021-01-01 19:10:25",
+    //   total_price: 1000,
+    //   completed: true,
+    //   user_id: 7,
+    //   order_items: [
+    //     {menu_id: 1},
+    //     {menu_id: 2},
+    //     {menu_id: 3}
+    //   ]
+    // }
     return axios
     ({
       method: 'post',

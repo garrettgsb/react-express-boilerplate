@@ -10,7 +10,18 @@ export default function PaymentForm() {
 
   console.log('state from payment', state)
 
-  const totalFromCart = 1000;
+  // This will be the order obj handed off from cart
+  const order = {
+    time_created: "2021-01-01 19:10:25",
+    total_price: 1000,
+    completed: true,
+    user_id: 7,
+    order_items: [
+      {menu_id: 1},
+      {menu_id: 2},
+      {menu_id: 3}
+    ]
+  }
 
   const stripe = useStripe();
   const elements = useElements();
@@ -39,7 +50,7 @@ export default function PaymentForm() {
   };
 
   if (formState === "submitted") {
-    postOrder();
+    postOrder(order);
     return <div>Charge succeeded!</div>;
   }
 
@@ -73,7 +84,7 @@ export default function PaymentForm() {
           disabled={formState === "submitting"}
           type="submit"
         >
-          Pay ${totalFromCart / 100}
+          Pay ${order.total_price / 100}
         </button>
       </div>
     </form>

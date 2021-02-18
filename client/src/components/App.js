@@ -4,13 +4,14 @@ import './App.scss';
 import Customer from './Customer/Customer'
 import applicationData from '../hooks/useApplicationData';
 import { appContext } from './appContext';
+import Stripe from './Customer/Stripe'
 
 // test
 
 export default function App() {
   
   const {
-    state, setStore
+    state, setStore, postOrder
   } = applicationData();
     
    // get the user using selector function here:
@@ -25,8 +26,9 @@ export default function App() {
   return(
     <div className="App">
       { customer && (
-      <appContext.Provider value={{state, setStore}} >
-        <Customer/>
+      <appContext.Provider value={{state, setStore, postOrder}} >
+        {/* <Customer/> */}
+        <Stripe />
       </appContext.Provider>
       )}    
 
