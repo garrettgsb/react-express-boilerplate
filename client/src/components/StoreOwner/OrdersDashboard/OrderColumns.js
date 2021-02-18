@@ -14,7 +14,7 @@ const OrderColumns = ({ column, columnId }) => {
               style={{
                 background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
                 padding: 4,
-                width: 450, 
+                width: 450,
                 minHeight: 500,
               }}
             >

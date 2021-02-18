@@ -3,7 +3,7 @@ import React from "react";
 
 const OrderItems = ({ item, index }) => {
   return (
-    <Draggable key={item.id} draggableId={item.id} index={index}>
+    <Draggable key={item.id} draggableId={String(item.id)} index={index}>
       {(provided, snapshot) => {
         return (
           <div
@@ -21,7 +21,7 @@ const OrderItems = ({ item, index }) => {
               ...provided.draggableProps.style,
             }}
           >
-            <div>{item.customer_name}</div>
+            <div>{item.username}</div>
             <div>
               {item.orders.map((order, index) => {
                 return (

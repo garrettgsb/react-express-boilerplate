@@ -59,6 +59,7 @@ CREATE TABLE orders
   time_created TIMESTAMP NOT NULL,
   total_price FLOAT DEFAULT 0,
   completed BOOLEAN DEFAULT FALSE,
+  store_id INTEGER REFERENCES stores(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 

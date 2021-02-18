@@ -13,7 +13,7 @@ export default function App() {
   const {
     state, setStore, postOrder
   } = applicationData();
-    
+  
    // get the user using selector function here:
   const user = {
     username: 'test user',

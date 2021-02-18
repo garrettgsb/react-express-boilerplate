@@ -3,39 +3,14 @@ import "./styles.scss";
 import React, { useState, useEffect, useRef } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import OrderColumns from "./OrdersDashboard/OrderColumns";
+import axios from "axios";
+import { orderOrganizer } from "../../helpers/selectors";
+import { useInterval } from "../../helpers/useInterval";
 
-const orders = [
-  {
-    id: "1",
-    customer_name: "Customer One",
-    orders: [{ item1: "qty1" }, { item2: "qty2" }],
-  },
-  {
-    id: "2",
-    customer_name: "Customer Two",
-    orders: [{ item1: "qty1" }, { item2: "qty2" }],
-  },
-  {
-    id: "3",
-    customer_name: "Customer Three",
-    orders: [{ item1: "qty1" }, { item2: "qty2" }],
-  },
-  {
-    id: "4",
-    customer_name: "Customer Four",
-    orders: [{ item1: "qty1" }, { item2: "qty2" }],
-  },
-  {
-    id: "5",
-    customer_name: "Customer Five",
-    orders: [{ item1: "qty1" }, { item2: "qty2" }],
-  },
-];
-
-const columnsFromBackend = {
+const dndColumns = {
   1: {
     name: "Orders",
-    items: orders,
+    items: [],
   },
   2: {
     name: "Completed",
@@ -83,18 +58,52 @@ const onDragEnd = ({ source, destination }, columns, setColumns) => {
 };
 
 const StoreOwner = () => {
-  const [columns, setColumns] = useState(columnsFromBackend);
+  const [columns, setColumns] = useState(dndColumns);
+  // Store id is hard coded here
+  const [storeId, setStoreId] = useState(1);
+
+  useInterval(() => {
+    axios
+      .get(`/api/stores/orders/${storeId}`)
+      .then((result) => {
+        if (!result.data.message) {
+          const data = orderOrganizer(result.data);
+          setColumns((prev) => ({
+            ...prev,
+            1: {
+              ...prev["1"],
+              items: data,
+            },
+          }));
+        }
+      })
+      .catch((err) => console.error({ error: err.message }));
+  }, 4000);
 
   // To send SMS when order is completed
-  const completedOrder = columns["2"].items.length;
+  const completedOrderLength = columns["2"].items.length;
   const isFirstRun = useRef(true);
   useEffect(() => {
     if (isFirstRun.current) {
       isFirstRun.current = false;
       return;
     }
-    console.log(columns["2"].items[completedOrder - 1]);
-  }, [completedOrder]);
+    const username = columns["2"].items[completedOrderLength - 1].username;
+    const orderUpdatePramas = {
+      store_id: storeId,
+      username: username,
+    };
+
+    axios.put("/api/order", orderUpdatePramas).then(() => {
+      const confirmMessage = {
+        message: {
+          to: "+16044404033",
+          body: `Dear ${username}, Your order is Ready!! Enjoy!!`,
+        },
+      };
+      axios.post("/api/messages", confirmMessage);
+    });
+  }, [completedOrderLength]);
 
   return (
     <div>

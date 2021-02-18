@@ -5,7 +5,8 @@ module.exports = (db) => {
   router.get("/orders/:id", (req, res) => {
     const queryParams = [req.params.id];
     db.query(
-      `SELECT order_id, price, name, image, total_price FROM orders JOIN order_items ON (orders.id = order_items.order_id) JOIN menu_items ON (order_items.menu_item_id=menu_items.id) WHERE user_id=$1 AND completed='t';`,
+      `SELECT order_id, price, name, image, total_price FROM orders JOIN order_items ON (orders.id = order_items.order_id) JOIN menu_items ON (order_items.menu_item_id=menu_items.id) WHERE user_id=$1 AND completed=TRUE;`,
+
       queryParams
     )
       .then((result) => {
@@ -75,15 +76,16 @@ module.exports = (db) => {
       .catch((err) => res.status(401).json({ error: err.message }));
   });
 
-  //EDIT PUT /order/:id  "Update Order Status"
-  router.put("/order/:id", (req, res) => {
-    const queryParams = [req.params.id];
+  //EDIT PUT /order  "Update Order Status"
+  router.put("/order", (req, res) => {
+    const { store_id, username } = req.body;
+    const queryParams = [store_id, `%${username}%`];
     db.query(
-      `UPDATE orders SET completed = not completed WHERE id = $1;`,
+      `UPDATE orders SET completed = not completed WHERE store_id = $1 AND user_id = (SELECT id from users WHERE username iLike $2);`,
       queryParams
     )
       .then(() => res.json({ message: "order updated!" }))
-      .catch((err) => res.status(401).json({ error: err.message }));
+      .catch( );
   });
 
   return router;
