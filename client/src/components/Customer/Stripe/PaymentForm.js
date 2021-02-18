@@ -40,7 +40,6 @@ export default function PaymentForm() {
 
   if (formState === "submitted") {
     postOrder();
-    console.log("state from paymentForm", state)
     return <div>Charge succeeded!</div>;
   }
 
