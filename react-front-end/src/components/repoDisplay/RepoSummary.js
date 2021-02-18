@@ -16,7 +16,8 @@ export default function RepoSummary(props) {
       repoName:props.name,
       repoLanguage:props.language,
       repoDescription:props.description,
-      gitAvatar:props.avatar_url
+      gitAvatar:props.avatar_url,
+      repoOwner:props.owner,
     })
     .then((res)=>{
       console.log(res)
