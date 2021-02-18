@@ -8,6 +8,8 @@ export default function PaymentForm() {
   const [error, setError] = useState(null);
   const { state, postOrder } = useContext(appContext);
 
+  console.log('state from payment', state)
+
   const totalFromCart = 1000;
 
   const stripe = useStripe();

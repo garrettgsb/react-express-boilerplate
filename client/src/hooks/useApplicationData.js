@@ -96,7 +96,7 @@ export default function useApplicationData() {
       time_created: "2021-01-01 19:10:25",
       total_price: 1000,
       completed: true,
-      user_id: 1,
+      user_id: 7,
       order_items: [
         {menu_id: 1},
         {menu_id: 2},
@@ -109,7 +109,8 @@ export default function useApplicationData() {
       url: '/api/order',
       data: order
     })
-    .then((result)=>console.log(result))
+    .then((result)=>{
+      console.log(result)})
     .catch((err)=>console.log(err.message))
   };
 
