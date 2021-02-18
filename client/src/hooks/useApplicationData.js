@@ -1,31 +1,32 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {distance} from "../helpers/data"
+import { distance } from "../helpers/data";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    user: [{
-      id: 0,
-      username: "Guest",
-      current_beans: 0,
-      lifetime_beans: 0,
-      phone_number: null,
-      tier: 'Basic',
-      type: 'c'
-    }
+    user: [
+      {
+        id: 0,
+        username: "Guest",
+        current_beans: 0,
+        lifetime_beans: 0,
+        phone_number: null,
+        tier: "Basic",
+        type: "c",
+      },
     ],
     currentUser: 7,
     currentStore: 1,
     stores: [],
     menuItems: [],
     orders: [],
-    myCoords: {latitude: 49.281338241296815, longitude: -123.11492992211487}
+    myCoords: { latitude: 49.281338241296815, longitude: -123.11492992211487 },
   });
-  
+
   //get location fn
 
   useEffect(() => {
-    console.log('Running App Start effect')
+    console.log("Running App Start effect");
     Promise.all([
       // getLocation(),
       axios.get("/api/stores"),
@@ -45,7 +46,7 @@ export default function useApplicationData() {
   }, []);
 
   useEffect(() => {
-    console.log('Running user effect')
+    console.log("Running user effect");
     Promise.all([
       axios.get(`/api/users/${state.currentUser}`),
       axios.get(`/api/orders/${state.currentUser}`),
@@ -54,7 +55,7 @@ export default function useApplicationData() {
         setState((prev) => ({
           ...prev,
           user: all[0].data,
-          orders: all[1].data
+          orders: all[1].data,
         }));
       })
       .catch((err) =>
@@ -64,10 +65,10 @@ export default function useApplicationData() {
       );
   }, [state.currentUser]);
 
-
   useEffect(() => {
-    console.log('Running menu effect')
-      axios.get(`/api/menu/${state.currentStore}`)
+    console.log("Running menu effect");
+    axios
+      .get(`/api/menu/${state.currentStore}`)
       .then((result) => {
         setState((prev) => ({
           ...prev,
@@ -81,29 +82,28 @@ export default function useApplicationData() {
       );
   }, [state.currentStore]);
 
-  
   const setStore = (storeId) => {
-    console.log('run setStore')
-    
-   setState((prev) => ({
-      ...prev,
-      currentStore: storeId
-    }))
-  }
+    console.log("run setStore");
 
-  const postOrder = (order) => {
-    return axios
-    ({
-      method: 'post',
-      url: '/api/order',
-      data: order
-    })
-    .then((result)=>{
-      console.log(result)
-  })      
-    .catch((err)=>console.log(err.message))
+    setState((prev) => ({
+      ...prev,
+      currentStore: storeId,
+    }));
   };
 
+  const postOrder = (order) => {
+    return axios({
+      method: "post",
+      url: "/api/order",
+      data: order,
+    })
+      .then(() => {
+        axios.get(`/api/orders/${state.currentUser}`).then((result) => {
+          setState((prev) => ({ ...prev, orders: result.data }));
+        });
+      })
+      .catch((err) => console.log(err.message));
+  };
 
   return { state, setStore, postOrder };
 }

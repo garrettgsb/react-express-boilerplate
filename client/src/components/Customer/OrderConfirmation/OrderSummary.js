@@ -4,12 +4,14 @@ import { appContext } from '../../appContext'
 import {orderSummarySorter, getMostRecent} from '../../../helpers/orderSummary'
 
 export default function StoreSummary(props) {
+  
+    const context = useContext(appContext)
+    const orderInfo = context.state.orders
 
-  console.log(props.cart, props.total)
-
-  const context = useContext(appContext)
-  const orderInfo = context.state.orders
-
+  console.log('order summary:', props.cart, props.total)
+  console.log('state in order summary:', orderInfo)
+  
+  
   const customerOrderHistory = orderSummarySorter(orderInfo)
   const mostRecentOrder = getMostRecent(customerOrderHistory)
   const mostRecentTotal = mostRecentOrder[0].totalPrice
