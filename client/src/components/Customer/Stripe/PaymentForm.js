@@ -7,14 +7,34 @@ export default function PaymentForm(props) {
   const [formState, setFormState] = useState("idle");
   const [error, setError] = useState(null);
   const { state, postOrder } = useContext(appContext);
-
-  console.log('state from payment', state)
-
-  // This will be the order obj handed off from cart
-  const order = props.order
-
   const stripe = useStripe();
   const elements = useElements();
+
+  const orderData = (order) => {
+
+    const d = new Date(Date.now())
+    let dateString = `${d.getFullYear()}-${d.getMonth()}-${d.getDay()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+
+    const completeOrder = {
+        time_created: dateString,
+        total_price: order.total,
+        completed: true,
+        user_id: state.currentUser,
+        store_id: state.currentStore,
+        order_items: []
+    }
+    order.cart.forEach((e)=>{
+            const order = {menu_item_id: e.menuItemId}
+            let quantityCounter = e.quantity
+            while(quantityCounter > 0) {
+                completeOrder.order_items.push(order)
+                quantityCounter--
+        }
+    })
+    return completeOrder;
+}
+
+const order = orderData(props.order)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,7 +49,6 @@ export default function PaymentForm(props) {
     const { error, token } = await stripe.createToken(
       elements.getElement(CardElement)
     );
-    console.log("token", token);
     if (token) {
       setError(null);
       setFormState("submitted");
@@ -66,7 +85,11 @@ export default function PaymentForm(props) {
   return (
     <form className="payment-form" onSubmit={handleSubmit}>
       <div id="input">
-        <input name="mobile" type="tel" placeholder="mobile" />
+        <input 
+        name="mobile" 
+        type="tel" 
+        placeholder="mobile"
+        value={state.user[0].phone_number} />
         <CardElement options={CardElementOptions} />
       </div>
       <div></div>
@@ -77,7 +100,7 @@ export default function PaymentForm(props) {
           disabled={formState === "submitting"}
           type="submit"
         >
-          Pay ${order.total_price / 100}
+          Pay ${props.order.total / 100}
         </button>
       </div>
     </form>
