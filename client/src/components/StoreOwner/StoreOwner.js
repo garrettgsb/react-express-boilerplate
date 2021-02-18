@@ -62,11 +62,10 @@ const StoreOwner = () => {
   // Store id is hard coded here
   const [storeId, setStoreId] = useState(1);
 
-  // useInterval(() => {
+  useInterval(() => {
     axios
       .get(`/api/stores/orders/${storeId}`)
       .then((result) => {
-        console.log(result);
         if (!result.data.message) {
           const data = orderOrganizer(result.data);
           setColumns((prev) => ({
@@ -82,22 +81,29 @@ const StoreOwner = () => {
   }, 4000);
 
   // To send SMS when order is completed
-  const completedOrder = columns["2"].items.length;
+  const completedOrderLength = columns["2"].items.length;
   const isFirstRun = useRef(true);
   useEffect(() => {
     if (isFirstRun.current) {
       isFirstRun.current = false;
       return;
     }
+    const username = columns["2"].items[completedOrderLength - 1].username;
     const orderUpdatePramas = {
       store_id: storeId,
-      username: columns["2"].items[completedOrder - 1].username,
+      username: username,
     };
 
     axios.put("/api/order", orderUpdatePramas).then(() => {
-      console.log("order updated!!");
+      const confirmMessage = {
+        message: {
+          to: "+16044404033",
+          body: `Dear ${username}, Your order is Ready!! Enjoy!!`,
+        },
+      };
+      axios.post("/api/messages", confirmMessage);
     });
-  }, [completedOrder]);
+  }, [completedOrderLength]);
 
   return (
     <div>
