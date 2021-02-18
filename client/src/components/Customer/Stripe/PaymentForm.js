@@ -28,8 +28,8 @@ export default function PaymentForm() {
     );
     console.log("token", token);
     if (token) {
-      setFormState("submitted");
       setError(null);
+      setFormState("submitted");
     } else {
       setError(error);
       setFormState("error");
@@ -38,6 +38,7 @@ export default function PaymentForm() {
 
   if (formState === "submitted") {
     postOrder();
+    console.log("state from paymentForm", state)
     return <div>Charge succeeded!</div>;
   }
 
