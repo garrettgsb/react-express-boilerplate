@@ -59,7 +59,7 @@ module.exports = (db) => {
         let queryString = `INSERT INTO order_items (order_id, menu_item_id) VALUES `;
         let counter = 1;
         order_items.forEach((e, i) => {
-          queryParamsItems.push(orderId, e.menu_id);
+          queryParamsItems.push(orderId, e.menu_item_id);
           let value = `($${counter++}, $${counter++})`;
           queryString +=
             i === 0

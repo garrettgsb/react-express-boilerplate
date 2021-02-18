@@ -17,9 +17,9 @@ export default function PaymentForm() {
     completed: true,
     user_id: 7,
     order_items: [
-      {menu_id: 1},
-      {menu_id: 2},
-      {menu_id: 3}
+      {menu_item_id: 1},
+      {menu_item_id: 2},
+      {menu_item_id: 3}
     ]
   }
 
@@ -50,8 +50,11 @@ export default function PaymentForm() {
   };
 
   if (formState === "submitted") {
-    postOrder(order);
-    return <div>Charge succeeded!</div>;
+
+    postOrder(order)
+    // redirect to the order summary page
+    return <div>Charge succeeded!</div>
+    
   }
 
   const CardElementOptions = {
