@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {useState} from "react"
 import "./RepoDisplay.css";
 import Button from "@material-ui/core/Button";
@@ -10,9 +11,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 export default function RepoSummary(props) {
   const [state,setState] = useState({color:"black"})
   const like = () =>{
-    state.color ==="red" ? setState(prev=>({color:"black"})) : setState(prev=>({color:"red"}))
+    state.color ==="red" ? setState(prev=>({color:"black"})) : setState(prev=>({color:"red"}));
+    return axios.put('http://localhost:8081/favourites', { repoName: props.name, repoLanguage: props.language, repoDescription: props.description,  gitAvatar: props.avatar});
   }
-  
 
   return (
     <div className="box">

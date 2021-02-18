@@ -26,6 +26,14 @@ module.exports = (db) => {
   //   });
   // });
 
+  router.get("/favourites", (request, response) => {
+    // const { repoName, repoLanguage, repoDescription, gitAvatar} = request.body;
+    db.query(
+      `SELECT * FROM favourites
+      ORDER BY favourites.id;`
+    );
+  });
+
   router.put("/favourites", (request, response) => {
     // if (process.env.TEST_ERROR) {
     //   setTimeout(() => response.status(500).json({}), 1000);
