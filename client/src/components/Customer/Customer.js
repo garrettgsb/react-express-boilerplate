@@ -10,6 +10,7 @@ import Menu from './Menu'
 import HomeButton from './HomeButton';
 import PreviousOrders from './PreviousOrders'
 import Cart from './Cart'
+import OrderConfirmation from './OrderConfirmation';
 
 import { getTotal } from '../../helpers/getTotal'
 
@@ -95,6 +96,14 @@ export default function Customer() {
             handleClose={event => handleClose()}
             setCart={setCart}
           />
+        </Route>
+
+        <Route path="/orderconfirmed">
+          <OrderConfirmation 
+            cart={cart}
+            total={total}
+          />
+          <HomeButton />
         </Route>
 
 
