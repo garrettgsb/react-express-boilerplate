@@ -10,8 +10,10 @@ import "./styles.scss";
 
 function PreviousOrders() {
   const { state } = useContext(appContext);
+  console.log('state orders ', state.orders)
 
   const prevOrders = getOrdersInfo(state.orders);
+
   
   const reorder = (orderId) => {
     console.log(`I will order ${orderId}`);
