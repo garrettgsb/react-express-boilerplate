@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./RepoDisplay.css";
 import Button from "@material-ui/core/Button";
 import LanguageIcon from "@material-ui/icons/Language";
@@ -9,31 +9,44 @@ import BorderColorIcon from "@material-ui/icons/BorderColor";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 export default function RepoSummary(props) {
-  console.log("hello")
-  const [state, setState] = useState({ color: "black" });
-  const like = () => {
-    axios.put("http://localhost:8081/favourites",{
-      username:localStorage.getItem('username'),
-      repoName:props.name,
-      repoLanguage:props.language,
-      repoDescription:props.description,
-      gitAvatar:props.avatar_url,
-      repoOwner:props.owner,
-    })
-    .then((res)=>{
-      console.log(res)
-      state.color === "red"
-        ? setState((prev) => ({ color: "black" }))
-        : setState((prev) => ({ color: "red" }));
-    })
+  const [likeBool, setLikeBool] = useState(false);
+  useEffect(() => {
+    if (props.userLiked) {
+      setLikeBool(true);
+    }
+  });
+  const handleLikeClick = () => {
+    axios
+      .put("http://localhost:8081/favourites", {
+        username: localStorage.getItem("username"),
+        repoName: props.name,
+        repoLanguage: props.language || "language",
+        repoDescription: props.description,
+        gitAvatar: props.avatar_url,
+        repoOwner: props.owner,
+      })
+      .then((res) => {
+        setLikeBool(true);
+      });
+  };
+  const handleUnlikeClick = () => {
+    axios
+      .delete(
+        `http://localhost:8081/favourites/${props.owner}/${
+          props.name
+        }/${localStorage.getItem("username")}`
+      )
+      .then(() => {
+        setLikeBool(false);
+      });
   };
 
   return (
     <div className="box">
       <FavoriteIcon
         className={"like_btn"}
-        style={{ color: state.color }}
-        onClick={() => like()}
+        style={likeBool ? { color: "red" } : { color: "white" }}
+        onClick={likeBool ? handleUnlikeClick : handleLikeClick}
       />
       <h3>{props.name}</h3>
       <section class="repo-content">

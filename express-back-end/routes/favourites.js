@@ -65,5 +65,15 @@ module.exports = (db) => {
       .catch(error => console.log(error));
   });
 
+  router.delete("/favourites/:owner/:name/:user_id", (request, response) => {
+    const param = [request.params.owner, request.params.name, request.params.user_id]
+    db.query(`DELETE FROM favourites
+    WHERE repoOwner = $1
+    AND repoName = $2
+    AND user_id = $3`,param).then(() => {
+      response.status(204).json({});
+    });
+  });
+
   return router;
 };

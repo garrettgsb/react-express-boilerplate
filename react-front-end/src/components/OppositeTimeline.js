@@ -1,6 +1,8 @@
 import React from "react";
+import axios from "axios";
 import useApplicationData from "../useApplicationData";
 import "./OppositeTimeline.css";
+import { useState, useEffect } from "react";
 
 import RepoDisplay from "./repoDisplay/RepoDisplay.js";
 
@@ -11,8 +13,23 @@ const toStamp = (string) => {
 };
 
 export default function OppositeTimeline(props) {
-  console.log(props)
+
+  console.log("hello")
+  const [userLiked, setUserLiked] = useState();
+  useEffect(() => {
+    if (localStorage.getItem("username")) {
+      axios.get("http://localhost:8081/favourites", {
+        params: {
+          userId: localStorage.getItem("username"),
+        },
+      }).then((res) => {
+        setUserLiked((prev) => res.data);
+      });
+    }
+  }, []);
+
   const param = props.filterParam;
+
   const repositoryArray = props.repositories.filter((repo) => {
     if (param) {
       if (param.repoName.trim() && !repo.name.includes(param.repoName.trim())) {
@@ -109,7 +126,18 @@ export default function OppositeTimeline(props) {
       //   .split("Z")[0]
       //   .split("")
       //   .slice(0, 5);
-
+      let liked = "";
+      if (userLiked) {
+        liked = userLiked.filter((repo) => {
+          if (
+            repo.repoowner === repository.owner.login &&
+            repo.reponame === repository.name
+          ) {
+            return true;
+          }
+          return false;
+        });
+      }
       return (
         <div class="timeline-row">
           <div class="timeline-time">
@@ -137,6 +165,7 @@ export default function OppositeTimeline(props) {
               contributors_url={repository.contributors_url}
               avatar_url={repository.owner.avatar_url}
               owner={repository.owner.login}
+              userLiked={liked.length > 0}
             />
           </div>
         </div>
