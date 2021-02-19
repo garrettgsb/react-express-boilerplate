@@ -11,6 +11,7 @@ const toStamp = (string) => {
 };
 
 export default function OppositeTimeline(props) {
+  console.log(props)
   const param = props.filterParam;
   const repositoryArray = props.repositories.filter((repo) => {
     if (param) {
@@ -135,6 +136,7 @@ export default function OppositeTimeline(props) {
               languages_url={repository["languages_url"]}
               contributors_url={repository.contributors_url}
               avatar_url={repository.owner.avatar_url}
+              owner={repository.owner.login}
             />
           </div>
         </div>
