@@ -3,10 +3,6 @@ import { useHistory } from "react-router-dom";
 import { useContext, useState } from "react";
 import { appContext } from "../../appContext";
 
-import {newCurrentBeans, newLifetimeBeans} from '../../../helpers/updateBeans'
-
-
-
 import "./style.scss";
 import { beansEarned, convertCentsToDollars } from "../../../helpers/math";
 
@@ -27,7 +23,7 @@ export default function PaymentForm(props) {
     const completeOrder = {
       time_created: dateString,
       total_price: order.total,
-      completed: true,
+      completed: false,
       user_id: state.currentUser,
       store_id: state.currentStore,
       order_items: [],

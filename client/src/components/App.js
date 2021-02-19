@@ -1,13 +1,11 @@
-import { useState, createContext } from "react";
-import "./App.scss";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { appContext } from "./appContext";
 
 import Customer from "./Customer/Customer";
+import StoreOwner from "./StoreOwner/StoreOwner";
 import applicationData from "../hooks/useApplicationData";
-import { appContext } from "./appContext";
-import Stripe from "./Customer/Stripe";
-// import StoreOwner from "./StoreOwner/StoreOwner";
 
-// test
+import "./App.scss";
 
 export default function App() {
   const { state, setStore, postOrder, updateBeans } = applicationData();
@@ -22,21 +20,35 @@ export default function App() {
   const storeOwner = user.type === "store owner";
 
   return (
-    <div className="App">
-      {customer && (
-        <appContext.Provider
-          value={{ state, setStore, postOrder, updateBeans }}
-        >
-          <Customer />
-        </appContext.Provider>
-      )}
-      {/* {storeOwner && (
-        <appContext.Provider value={{ state }}>
-          <StoreOwner />
-        </appContext.Provider>
-      )} */}
-    </div>
+    <appContext.Provider value={{ state, setStore, postOrder, updateBeans }}>
+      <Router>
+        <Switch>
+          <Route path="/customer">
+            <Customer />
+          </Route>
+          <Route path="/storeowner">
+            <StoreOwner />
+          </Route>
+        </Switch>
+      </Router>
+    </appContext.Provider>
   );
+
+  //   <div className="App">
+  //     {customer && (
+  //       <appContext.Provider
+  //         value={{ state, setStore, postOrder, updateBeans }}
+  //       >
+  //         <Customer />
+  //       </appContext.Provider>
+  //     )}
+  //     {/* {storeOwner && (
+  //       <appContext.Provider value={{ state }}>
+  //         <StoreOwner />
+  //       </appContext.Provider>
+  //     )} */}
+  //   </div>
+  // );
 
   // const [message, setMessage] =  useState('Click the button to load data!')
   // const fetchData = () => {

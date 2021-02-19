@@ -88,21 +88,27 @@ const StoreOwner = () => {
       isFirstRun.current = false;
       return;
     }
+ 
+    const orderId = columns["2"].items[completedOrderLength - 1].id
     const username = columns["2"].items[completedOrderLength - 1].username;
-    const orderUpdatePramas = {
+    const orderUpdateParams = {
+      
+      order_id: orderId,
       store_id: storeId,
       username: username,
     };
 
-    axios.put("/api/order", orderUpdatePramas).then(() => {
-      const confirmMessage = {
-        message: {
-          to: "+16044404033",
-          body: `Dear ${username}, Your order is Ready!! Enjoy!!`,
-        },
-      };
-      axios.post("/api/messages", confirmMessage);
-    });
+    axios.put("/api/order", orderUpdateParams)
+    .then(() => {
+    //   const confirmMessage = {
+    //     message: {
+    //       to: "+16044404033",
+    //       body: `Dear ${username}, Your order is Ready!! Enjoy!!`,
+    //     },
+    //   };
+    //   axios.post("/api/messages", confirmMessage);
+     })
+    .catch((err) => console.error({ error: err.message }))
   }, [completedOrderLength]);
 
   return (
