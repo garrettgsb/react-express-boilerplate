@@ -2,6 +2,10 @@ INSERT INTO users (username)
 VALUES ('Admin')
 ;
 
+INSERT INTO users (username) 
+VALUES ('Andy')
+;
+
 INSERT INTO favourites (user_id, repoName, repoLanguage, repoDescription, gitAvatar)
 VALUES (1, '1RMCalculator', 'HTML', 
 'This is a calculator I created to calculate your 1 repetition maximum for any exercise, that is based on the weight and number of repetitions you can complete. Epley"s equation is used for the calculation.', 

@@ -7,6 +7,7 @@ import {userData, repoData} from "./backupData"
 import Filter from "./components/Filter"
 import NavBar from "./components/AppBar.js"
 import { useState } from 'react'
+import ShowLiked from './components/showLiked';
 
 
 
@@ -51,21 +52,26 @@ export default function Application(props) {
     const setFilter = (param) =>{
       setParam(prev=>(param))
     }
-    
-    
+    const [show,setShow] = useState("main")
+    const toLiked = () => {
+      setShow("liked")
+    }
+    const toMain = () => {
+      setShow("main")
+    }
      
 
     return (
       <main className="App">
-        <NavBar setStorage={ setStorage }/>
+        <NavBar toLiked={toLiked} setStorage={ setStorage }/>
         <section class="main-container">
           <div id="search-and-filter">
             <Search onSubmit={fetchData} value={state.user || ""} onChange={(e) => setUser(e)} onClick={fetchData}/>
             <Filter setFilter={setFilter}></Filter>
           </div>
           
-          { state.name ? <Show /> : <div id="show-question-mark"><img src={ state.avatar } alt="nothing"></img></div>}
-          
+          { show==="main" && (state.name ? <Show /> : <div id="show-question-mark"><img src={ state.avatar } alt="nothing"></img></div>)}
+          { show==="liked" && <ShowLiked toMain={toMain}/>}
         </section>
         
                

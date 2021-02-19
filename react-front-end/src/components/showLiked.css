@@ -1,0 +1,19 @@
+.liked{
+  position: absolute;
+  top: 15vh;
+  left:35vw;
+  border:solid;
+  width:60vw ;
+  display: flex;
+  justify-content: center;
+}
+
+.close-btn{
+  position: absolute;
+  border:none;
+  top:0;
+  right: 0;
+}
+.close-btn:focus{
+  outline: transparent;
+}
