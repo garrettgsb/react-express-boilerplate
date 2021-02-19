@@ -21,6 +21,7 @@ export default function Customer() {
   const [showCart, setShowCart] = useState(false)
   const [cart, setCart] = useState([])
   const [total, setTotal] = useState(getTotal(cart))
+  const [beansSpent, setBeansSpent] = useState(0)
 
   const updateCart = (id, name, price) => {
     for(let i = 0; i < cart.length; i++) {
@@ -77,6 +78,10 @@ export default function Customer() {
             showCart={showCart} 
             handleClose={event => handleClose()}
             setCart={setCart}
+            beansSpent={beansSpent}
+            setBeansSpent={setBeansSpent}
+            total={total}
+            setTotal={setTotal}
           />
         </Route>
 
@@ -84,6 +89,7 @@ export default function Customer() {
             <Stripe 
             total={total} 
             cart={cart} 
+            beansSpent={beansSpent}
             />
         </Route>
 
@@ -105,6 +111,10 @@ export default function Customer() {
             showCart={showCart} 
             handleClose={event => handleClose()}
             setCart={setCart}
+            beansSpent={beansSpent}
+            setBeansSpent={setBeansSpent}
+            total={total}
+            setTotal={setTotal}
           />
         </Route>
 
@@ -135,6 +145,10 @@ export default function Customer() {
             showCart={showCart} 
             handleClose={event => handleClose()}
             setCart={setCart}
+            beansSpent={beansSpent}
+            setBeansSpent={setBeansSpent}
+            total={total}
+            setTotal={setTotal}
           />
         </Route>
       </Switch>

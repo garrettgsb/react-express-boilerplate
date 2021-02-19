@@ -17,11 +17,14 @@ export default function BeanSlider(props) {
 
   const handleChangeCommitted = ((event, newValue) => {
     if (newValue > sliderValue) {
+      console.log('i am ran')
       props.removeFromTotal(newValue - sliderValue)
     } else if (newValue < sliderValue) {
       props.addToTotal(sliderValue - newValue)
     }
+    props.setBeansSpent(newValue)
     setSliderValue(newValue)
+    console.log('does this ever run')
   })
 
  

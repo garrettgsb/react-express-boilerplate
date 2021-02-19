@@ -2,16 +2,21 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useHistory } from "react-router-dom";
 import { useContext, useState } from "react";
 import { appContext } from "../../appContext";
+
+import {newCurrentBeans, newLifetimeBeans} from '../../../helpers/updateBeans'
+
+
 import "./style.scss";
 
 export default function PaymentForm(props) {
   const [formState, setFormState] = useState("idle");
   const [error, setError] = useState(null);
-  const { state, postOrder } = useContext(appContext);
+  const { state, postOrder, updateBeans } = useContext(appContext);
   const stripe = useStripe();
   const elements = useElements();
-
   const history = useHistory();
+
+  console.log(props);
 
   const orderData = (order) => {
     const d = new Date(Date.now());
@@ -54,8 +59,18 @@ export default function PaymentForm(props) {
     if (token) {
       setError(null);
       setFormState("submitted");
-      await postOrder(order);
-      history.push("/orderconfirmed");
+    const userId =  state.currentUser;
+    const accelerator = state.user[0].accelerator;
+    const tier = state.user[0].tier
+    const currentBeans = state.user[0].current_beans;
+    const currentLifetimeBeans = state.user[0].lifetime_beans;
+    const newCurrent = newCurrentBeans(currentBeans, props.beansSpent)
+    const newLifetime  = newLifetimeBeans(currentLifetimeBeans, props.order.total)
+
+    await postOrder(order);
+    await updateBeans(userId, newCurrent, newLifetime, tier, accelerator)
+    
+    history.push("/orderconfirmed");
     } else {
       setError(error);
       setFormState("error");
