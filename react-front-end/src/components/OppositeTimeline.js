@@ -14,18 +14,22 @@ const toStamp = (string) => {
 
 export default function OppositeTimeline(props) {
   const [userLiked, setUserLiked] = useState();
+  const [num, setNum] = useState(0);
+  const renderPage = () => {
+    setNum(prev=>prev+1)
+  }
   useEffect(() => {
+    console.log("request")
     if (localStorage.getItem("username")) {
       axios.get("http://localhost:8081/favourites", {
         params: {
           userId: localStorage.getItem("username"),
         },
       }).then((res) => {
-        setUserLiked((prev) => res.data);
+        setUserLiked(res.data);
       });
     }
-  }, []);
-
+  },[num]);
   const param = props.filterParam;
 
   const repositoryArray = props.repositories.filter((repo) => {
@@ -136,6 +140,7 @@ export default function OppositeTimeline(props) {
           return false;
         });
       }
+      const likedBool = liked.length>0
       return (
         <div class="timeline-row">
           <div class="timeline-time">
@@ -163,7 +168,9 @@ export default function OppositeTimeline(props) {
               contributors_url={repository.contributors_url}
               avatar_url={repository.owner.avatar_url}
               owner={repository.owner.login}
-              userLiked={liked.length > 0}
+              userLiked={likedBool}
+              renderPage={renderPage}
+              
             />
           </div>
         </div>
