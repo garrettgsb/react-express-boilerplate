@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Slider from "@material-ui/core/Slider";
 import { appContext } from "../../appContext";
-import { totalFromCart } from "../../../helpers/math";
+import { maxForSlider, totalFromCart } from "../../../helpers/math";
 
 export default function BeanSlider(props) {
 
@@ -33,7 +33,7 @@ export default function BeanSlider(props) {
     <Slider
       value={sliderView}
       min={0}
-      max={userBeans <= totalInCart ? userBeans : totalInCart }
+      max={maxForSlider(userBeans, totalInCart, 0.5)}
       onChange={handleChange}
       onChangeCommitted={handleChangeCommitted}
       valueLabelDisplay="auto"

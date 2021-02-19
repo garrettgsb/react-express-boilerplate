@@ -11,13 +11,14 @@ import { convertCentsToDollars } from "../../../helpers/math";
 
 function Cart(props) {
   const history = useHistory();
+  
 
   // 1 bean = 50c
   const removeFromTotal = (beans) => {
-    props.setTotal(props.total - beans * 50);
+    props.setTotal(props.total - beans * 0.5);
   };
   const addToTotal = (beans) => {
-    props.setTotal(props.total + beans * 50);
+    props.setTotal(props.total + beans * 0.5);
   };
 
   const handleSubmit = (event) => {

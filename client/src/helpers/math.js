@@ -9,20 +9,27 @@ export const convertCentsToDollars = function (price) {
 };
 
 export const beansEarned = function (accelerator, centsCharged, prev=0) {
+  console.log('centsCharged', centsCharged)
   // user can only earn beans on price charged and not total price
-  return Math.floor((centsCharged / 100) * accelerator) + prev;
+  return Math.ceil((centsCharged / 100 * 0.5) * accelerator) + prev;
 };
 
 export const totalFromCart = function (cart) {
   return cart.reduce((sum, cur) => sum + cur.price * cur.quantity, 0);
 };
 
-export const newCurrentBeans = (currentBeans , beansSpent) => {
-  return currentBeans - beansSpent;
-}
-
-export const newLifetimeBeans = (currentLifetimeBeans, total) => {
-  const beansToAdd = Math.floor(total / 100)
-  return currentLifetimeBeans + beansToAdd;
-}
-
+export const maxForSlider = function (
+  currentBeans,
+  cartTotal,
+  beanDollarRatio
+) {
+  if (cartTotal - currentBeans * beanDollarRatio === 0) {
+    console.log("correct amount of beans");
+    return currentBeans;
+  } else if (cartTotal - currentBeans * beanDollarRatio < 0) {
+    console.log("more beans than cart");
+    return cartTotal * 2;
+  }
+  console.log("more cart than beans");
+  return currentBeans;
+};
