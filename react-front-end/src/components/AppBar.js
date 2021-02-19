@@ -8,6 +8,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Badge from '@material-ui/core/Badge';
+import HomeIcon from '@material-ui/icons/Home';
+import GitGoodLogo from './GitGoodLogo.png'
+import { LeftEmptyCell } from '@material-ui/data-grid';
+
+
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -20,6 +25,10 @@ const useStyles = makeStyles((theme) =>
     title: {
       flexGrow: 1,
     },
+    logo: {
+      maxWidth: 160,
+      float: 'left', 
+    }
   }),
 );
 
@@ -30,12 +39,12 @@ export default function NavBar(props) {
     <div className={classes.root}>
       <AppBar position="static" style={{ background: '#000020' }}>
       <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            GitGood
+          <Typography edge="start" className={classes.title}>
+            <img src={GitGoodLogo} alt="GitGood logo" className={classes.logo}></img>
           </Typography>
+          <IconButton color="inherit" onClick={()=>props.toMain()}>
+                <HomeIcon />
+            </IconButton>
           <IconButton aria-label="show 4 new favorites" color="inherit" onClick={()=>props.toLiked()}>
               <Badge badgeContent={4} color="secondary">
                 <FavoriteBorderIcon />
