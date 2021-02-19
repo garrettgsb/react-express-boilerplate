@@ -3,12 +3,15 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import { useContext } from "react";
+import { convertCentsToDollars } from "../../../helpers/math";
 import { getOrdersInfo } from "../../../helpers/selectors";
 import { appContext } from "../../appContext";
+
 
 import "./styles.scss";
 
 function PreviousOrders() {
+  
   const { state } = useContext(appContext);
   console.log('state orders ', state.orders)
 
@@ -32,7 +35,7 @@ function PreviousOrders() {
                   </div>
                   <div className="price-quantity-container">
                     <p>Qty: {item.quantity}</p>
-                    <p>${item.price * item.quantity}</p>
+                    <p>${convertCentsToDollars(item.price * item.quantity)}</p>
                   </div>
                 </CardContent>
                 <CardMedia
@@ -46,7 +49,7 @@ function PreviousOrders() {
         })}
 
         <div className="reorder-container">
-          <p>Total ${order.totalPrice}</p>
+          <p>Total ${convertCentsToDollars(order.totalPrice)}</p>
           <Button variant="contained" onClick={() => reorder(order.id)}>
             Reorder
           </Button>

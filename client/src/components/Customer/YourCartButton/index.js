@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 import './styles.scss'
 import { Button } from '@material-ui/core'
+import { convertCentsToDollars } from '../../../helpers/math'
 
 function YourCartButton(props) {
 
@@ -12,7 +13,7 @@ function YourCartButton(props) {
 
   useEffect(() => {
     setCart(props.cart)
-    setTotal(props.total)
+    setTotal(convertCentsToDollars(props.total))
   }, [props])
 
 

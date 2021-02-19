@@ -7,6 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import BeanSlider from './BeanSlider'
 
 import './styles.scss'
+import { convertCentsToDollars } from '../../../helpers/math';
 
 function Cart(props) {
   const history = useHistory()
@@ -57,7 +58,7 @@ function Cart(props) {
                return cartCopy  
             }
              )} />
-          <p>${item.price * props.cart[index].quantity}</p>
+          <p>${convertCentsToDollars(item.price * props.cart[index].quantity)}</p>
             
           </>
           }
@@ -65,13 +66,14 @@ function Cart(props) {
           )
 
       })}
-      <p>TOTAL: ${props.total}</p>
+      <p>TOTAL: ${convertCentsToDollars(props.total)}</p>
       <p>Grind some beans?</p>
       <BeanSlider 
         removeFromTotal={removeFromTotal} 
         addToTotal={addToTotal}
         beansSpent={props.beansSpent}
         setBeansSpent={props.setBeansSpent}
+        total={props.cart}
       />
       <input type='submit' value='Bean me up Scottie!' />
       </form>
