@@ -113,7 +113,10 @@ export default function useApplicationData() {
       accelerator: accelerator
     })
     .then((response) => {
-      console.log(response)
+      setState((prev) => ({
+        ...prev,
+        user:[{...prev.user[0], current_beans: newCurrentBeans, lifetime_beans: newLifetimeBeans}]
+      }))
     })
     .catch((error) => {
       console.log(error)
