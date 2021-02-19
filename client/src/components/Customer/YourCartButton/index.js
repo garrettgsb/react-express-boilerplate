@@ -13,12 +13,12 @@ function YourCartButton(props) {
 
   useEffect(() => {
     setCart(props.cart)
-    setTotal(convertCentsToDollars(props.total))
+    setTotal(props.total)
   }, [props])
 
 
   return(
-    <Button variant='contained' onClick={props.handleOpen}>Your cart ({cart.length}) total: ${total}</Button>
+    <Button variant='contained' onClick={props.handleOpen}>Your cart ({cart.length}) total: ${convertCentsToDollars(total)}</Button>
   )
 }
 
