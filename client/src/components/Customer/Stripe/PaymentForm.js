@@ -6,7 +6,9 @@ import { appContext } from "../../appContext";
 import {newCurrentBeans, newLifetimeBeans} from '../../../helpers/updateBeans'
 
 
+
 import "./style.scss";
+import { beansEarned, convertCentsToDollars } from "../../../helpers/math";
 
 export default function PaymentForm(props) {
   const [formState, setFormState] = useState("idle");
@@ -59,14 +61,22 @@ export default function PaymentForm(props) {
     if (token) {
       setError(null);
       setFormState("submitted");
-    const userId =  state.currentUser;
-    const accelerator = state.user[0].accelerator;
-    const tier = state.user[0].tier
-    const currentBeans = state.user[0].current_beans;
-    const currentLifetimeBeans = state.user[0].lifetime_beans;
-    const newCurrent = newCurrentBeans(currentBeans, props.beansSpent)
-    const newLifetime  = newLifetimeBeans(currentLifetimeBeans, props.order.total)
 
+    const userId =  state.currentUser;
+    const {accelerator, tier, current_beans:currentBeans, lifetime_beans:currentLifetimeBeans} = state.user[0]
+    const beansSpent = props.beansSpent
+    const newCurrent = currentBeans - beansSpent + beansEarned(props.order.total, accelerator);
+    const newLifetime  = beansEarned(props.order.total, accelerator, currentLifetimeBeans)
+        
+    console.log('checking values:')
+    console.log('OrderTotal-CashSpent:', props.order.total)
+    console.log('beansSpent:', beansSpent)
+    console.log('UserID:', userId)
+    console.log('newCurrentBeans:', newCurrent)
+    console.log('newLifetimeBeans:', newLifetime)
+    console.log('tier:', tier)
+    console.log('accelerator', accelerator)
+    
     await postOrder(order);
     await updateBeans(userId, newCurrent, newLifetime, tier, accelerator)
     
@@ -112,7 +122,7 @@ export default function PaymentForm(props) {
           disabled={formState === "submitting"}
           type="submit"
         >
-          Pay ${props.order.total / 100}
+          Pay ${convertCentsToDollars(props.order.total)}
         </button>
       </div>
     </form>
