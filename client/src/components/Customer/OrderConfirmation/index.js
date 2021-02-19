@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { appContext } from '../../appContext'
 
 import StoreMap from './StoreMap'
@@ -9,9 +9,14 @@ export default function OrderConfirmation(props) {
   const context = useContext(appContext)
   const store = context.state.stores[context.state.currentStore - 1]
 
-  // reset cart state, currently triggers inifite useEffect loop Customer.js line 46
-  // props.setCart([])
-  // props.setTotal(0)
+  // reset cart state after an order is successful
+  useEffect(() => {
+    props.setCart([])
+    props.setTotal(0)
+    props.setBeansSpent(0)
+  },[])
+
+
  
   return(
     <div>

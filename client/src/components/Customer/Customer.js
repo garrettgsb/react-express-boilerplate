@@ -43,7 +43,7 @@ export default function Customer() {
     })
   }
 
-  // this is triggered when updating cart state 
+  // update cart state if a user changes the quantity in their cart
   useEffect(() => {
     setTotal(getTotal(cart))
   }, [cart])
@@ -124,6 +124,7 @@ export default function Customer() {
             total={total}
             setTotal={setTotal}
             setCart={setCart}
+            setBeansSpent={setBeansSpent}
           />
           <HomeButton />
         </Route>
