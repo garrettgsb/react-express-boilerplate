@@ -78,7 +78,7 @@ const StoreOwner = () => {
         }
       })
       .catch((err) => console.error({ error: err.message }));
-  }, 4000);
+  }, 2000);
 
   // To send SMS when order is completed
   const completedOrderLength = columns["2"].items.length;
@@ -115,7 +115,7 @@ const StoreOwner = () => {
           {Object.entries(columns).map(([columnId, column], index) => {
             return (
               <div className="dnd-column-container" key={columnId}>
-                <h2>{column.name}</h2>
+                <h2 className="column-header">{column.name}</h2>
                 <OrderColumns key={index} column={column} columnId={columnId} />
               </div>
             );

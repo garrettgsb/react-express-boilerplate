@@ -7,25 +7,21 @@ const OrderItems = ({ item, index }) => {
       {(provided, snapshot) => {
         return (
           <div
+            className="order-container"
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             style={{
-              userSelect: "none",
-              padding: 16,
-              margin: "8px",
-              minHeight: "50px",
-              borderRadius: "50%",
-              backgroundColor: snapshot.isDragging ? "#5f9c57" : "#456C86",
-              color: "white",
+              backgroundColor: snapshot.isDragging ? "#c4aa8d" : "#68431b",
+              color: snapshot.isDragging ? "black" : "antiquewhite",
               ...provided.draggableProps.style,
             }}
           >
-            <div>{item.username}</div>
+            <div className="order-item-customer">{item.username}</div>
             <div>
               {item.orders.map((order, index) => {
                 return (
-                  <div key={index}>
+                  <div className="order-items" key={index}>
                     <span>{Object.keys(order)}</span>
                     <span>{Object.values(order)}</span>
                   </div>

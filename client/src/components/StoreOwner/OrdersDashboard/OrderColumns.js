@@ -9,13 +9,11 @@ const OrderColumns = ({ column, columnId }) => {
         {(provided, snapshot) => {
           return (
             <div
+              className="droppable-columns"
               {...provided.droppableProps}
               ref={provided.innerRef}
               style={{
                 background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",
-                padding: 4,
-                width: 450,
-                minHeight: 500,
               }}
             >
               {column.items.map((item, index) => {
