@@ -1,7 +1,49 @@
+// Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,900&display=swap");
+// Font Variables
+$raleway: "Raleway", serif;
+
+// Variables
+$brown-color: #68431b;
+$white-color: antiquewhite;
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+i,
+header,
+nav {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: $raleway;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
+}
+
 .dnd-container {
   display: flex;
   justify-content: center;
   height: 100%;
+  background-image: url(https://images.unsplash.com/photo-1513530176992-0cf39c4cbed4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80);
+  background-size: cover;
+  margin-top: 3.2rem;
 }
 
 .dnd-column-container {
@@ -11,5 +53,41 @@
 }
 
 .droppable-area {
-  margin: 8px;
+  margin: 0.5rem;
+}
+
+.column-header {
+  font-size: 2rem;
+}
+
+.droppable-columns {
+  border-radius: 10%;
+  opacity: 80%;
+  padding: 1rem;
+  width: 30rem;
+  min-height: 35rem;
+}
+
+.order-container {
+  border-radius: 5%;
+  color: $white-color;
+  user-select: none;
+  padding: 1rem;
+  margin: 0.5rem;
+  min-height: 3rem;
+  width: 27rem;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0.3rem 1rem rgb(0, 0, 0);
+  }
+}
+
+.order-items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-item-customer {
+  font-size: larger;
 }

@@ -1,43 +1,42 @@
-import { useState, createContext } from 'react';
-import './App.scss';
+import { useState, createContext } from "react";
+import "./App.scss";
 
-import Customer from './Customer/Customer'
-import applicationData from '../hooks/useApplicationData';
-import { appContext } from './appContext';
-import Stripe from './Customer/Stripe'
+import Customer from "./Customer/Customer";
+import applicationData from "../hooks/useApplicationData";
+import { appContext } from "./appContext";
+import Stripe from "./Customer/Stripe";
+// import StoreOwner from "./StoreOwner/StoreOwner";
 
 // test
 
 export default function App() {
-  
-  const {
-    state, setStore, postOrder, updateBeans
-  } = applicationData();
-  
-   // get the user using selector function here:
+  const { state, setStore, postOrder, updateBeans } = applicationData();
+
+  // get the user using selector function here:
   const user = {
-    username: 'test user',
-    type: 'customer'
-  }
+    username: "test user",
+    type: "customer",
+  };
 
-  const customer = user.type === 'customer';
-  const storeOwner = user.type === 'store owner';
+  const customer = user.type === "customer";
+  const storeOwner = user.type === "store owner";
 
-  return(
+  return (
     <div className="App">
-      { customer && (
-      <appContext.Provider value={{state, setStore, postOrder, updateBeans}} >
-        <Customer/>
-      </appContext.Provider>
-      )}    
-
-      { storeOwner && (
-      // store owner components go here (make a store owner component?)
-      <p>I am a store owner</p>
-      // <StoreOwner />
-      )}   
+      {customer && (
+        <appContext.Provider
+          value={{ state, setStore, postOrder, updateBeans }}
+        >
+          <Customer />
+        </appContext.Provider>
+      )}
+      {/* {storeOwner && (
+        <appContext.Provider value={{ state }}>
+          <StoreOwner />
+        </appContext.Provider>
+      )} */}
     </div>
-  ); 
+  );
 
   // const [message, setMessage] =  useState('Click the button to load data!')
   // const fetchData = () => {
@@ -48,15 +47,14 @@ export default function App() {
 
   //     console.log(response.data.message) // Just the message
   //     setMessage(response.data.message);
-  //   }) 
+  //   })
   // }
   //   return (
   //     <div className="App">
   //       <h1>{ message }</h1>
   //       <button onClick={fetchData} >
   //         Fetch Data
-  //       </button>        
+  //       </button>
   //     </div>
   //   );
-  
 }
