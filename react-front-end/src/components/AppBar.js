@@ -46,9 +46,9 @@ export default function NavBar(props) {
                 <HomeIcon />
             </IconButton>
           <IconButton aria-label="show 4 new favorites" color="inherit" onClick={()=>props.toLiked()}>
-              <Badge badgeContent={4} color="secondary">
+              {/* <Badge badgeContent={4} color="secondary"> */}
                 <FavoriteBorderIcon />
-              </Badge>
+              {/* </Badge> */}
             </IconButton>
           <Button color="inherit" onClick={ props.setStorage }>Login</Button>
         </Toolbar>
