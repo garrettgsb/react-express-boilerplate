@@ -9,7 +9,9 @@ export default function OrderConfirmation(props) {
   const context = useContext(appContext)
   const store = context.state.stores[context.state.currentStore - 1]
 
-  
+  // reset cart state, currently triggers inifite useEffect loop Customer.js line 46
+  // props.setCart([])
+  // props.setTotal(0)
  
   return(
     <div>

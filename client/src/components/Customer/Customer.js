@@ -43,7 +43,7 @@ export default function Customer() {
     })
   }
 
-
+  // this is triggered when updating cart state 
   useEffect(() => {
     setTotal(getTotal(cart))
   }, [cart])
@@ -123,6 +123,7 @@ export default function Customer() {
             cart={cart}
             total={total}
             setTotal={setTotal}
+            setCart={setCart}
           />
           <HomeButton />
         </Route>
