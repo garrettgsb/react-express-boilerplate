@@ -49,14 +49,14 @@ module.exports = (db) => {
   router.put("/favourites", (request, response) => {
     
 
-    const { repoName, repoLanguage, repoDescription, gitAvatar, repoOwner } = request.body;
+    const { username, repoName, repoLanguage, repoDescription, gitAvatar, repoOwner } = request.body;
     
     db.query(
       `INSERT INTO favourites (user_id, repoName, repoLanguage, repoDescription, gitAvatar, repoOwner)
        VALUES ($1, $2, $3, $4, $5, $6 )
       ;`,
 
-      [1, repoName, repoLanguage, repoDescription, gitAvatar, repoOwner]
+      [username, repoName, repoLanguage, repoDescription, gitAvatar, repoOwner]
 
     )
       .then(res => {

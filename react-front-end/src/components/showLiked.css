@@ -6,6 +6,7 @@
   width:60vw ;
   display: flex;
   justify-content: center;
+  height: 600px;
 }
 
 .close-btn{
@@ -16,4 +17,14 @@
 }
 .close-btn:focus{
   outline: transparent;
+}
+
+#data-grid {
+  height: 500px;
+  width: 500px;
+}
+
+#row-image {
+  height: 30px;
+  width: 30px;
 }
