@@ -2,7 +2,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import AddIcon from '@material-ui/icons/Add';
 import { useContext } from 'react';
 import { filterMenuItems } from '../../../helpers/selectors';
 import { appContext } from '../../appContext';
@@ -33,7 +33,7 @@ export default function Menu(props) {
                 title={tile.name}
                 actionIcon={
                   <IconButton aria-label={`star ${tile.title}`}>
-                    <StarBorderIcon className='title' />
+                    <AddIcon className='title' />
                   </IconButton>
                 }
               />
