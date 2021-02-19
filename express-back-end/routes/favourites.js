@@ -1,15 +1,18 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
-  router.get("/favourites", (request, response) => {
-    const { repoName, repoLanguage, repoDescription, gitAvatar} = request.body;
+  router.get("/favourites/", (request, response) => {
+    
+    const { userId } = request.query;
     db.query(
-       `SELECT * FROM favourites
-        ORDER BY favourites.id`
-    ).then((res) => {
-      response.json(res.rows);
-    })
-    });
+      `SELECT * FROM favourites
+      WHERE user_id = $1
+      ;`
+      ,[Number(userId)])
+      .then((res) => {
+        console.log(typeof response.json(res.rows));
+      });
+  });
   // router.get("/appointments", (request, response) => {
   //   db.query(
   //     `
@@ -35,29 +38,25 @@ module.exports = (db) => {
   //   });
   // });
 
-  router.get("/favourites", (request, response) => {
-    // const { repoName, repoLanguage, repoDescription, gitAvatar} = request.body;
-    db.query(
-      `SELECT * FROM favourites
-      ORDER BY favourites.id;`
-    );
-  });
+  // router.get("/favourites", (request, response) => {
+  //   db.query(
+  //     `SELECT * FROM favourites
+  //     ORDER BY favourites.id;`
+  //   )
+  //     .then(res => console.log(res.rows));
+  // });
 
   router.put("/favourites", (request, response) => {
-    // if (process.env.TEST_ERROR) {
-    //   setTimeout(() => response.status(500).json({}), 1000);
-    //   return;
-    // }
-
-    const { repoName, repoLanguage, repoDescription, gitAvatar, repoOwner } = request.body;
     
-    console.log(request.session);
+
+    const { username, repoName, repoLanguage, repoDescription, gitAvatar, repoOwner } = request.body;
+    
     db.query(
       `INSERT INTO favourites (user_id, repoName, repoLanguage, repoDescription, gitAvatar, repoOwner)
        VALUES ($1, $2, $3, $4, $5, $6 )
       ;`,
 
-      [1, repoName, repoLanguage, repoDescription, gitAvatar, repoOwner]
+      [username, repoName, repoLanguage, repoDescription, gitAvatar, repoOwner]
 
     )
       .then(res => {
@@ -65,22 +64,6 @@ module.exports = (db) => {
       })
       .catch(error => console.log(error));
   });
-
-  // router.delete("/appointments/:id", (request, response) => {
-  //   if (process.env.TEST_ERROR) {
-  //     setTimeout(() => response.status(500).json({}), 1000);
-  //     return;
-  //   }
-
-  //   db.query(`DELETE FROM interviews WHERE appointment_id = $1::integer`, [
-  //     request.params.id
-  //   ]).then(() => {
-  //     setTimeout(() => {
-  //       response.status(204).json({});
-  //       updateAppointment(Number(request.params.id), null);
-  //     }, 1000);
-  //   });
-  // });
 
   return router;
 };
