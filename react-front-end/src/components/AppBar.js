@@ -42,13 +42,13 @@ export default function NavBar(props) {
           <Typography edge="start" className={classes.title}>
             <img src={GitGoodLogo} alt="GitGood logo" className={classes.logo}></img>
           </Typography>
-          <IconButton color="inherit" onClick={()=>props.toMain()}>
+          <IconButton color="inherit" onClick={event =>  window.location.href='/'}>
                 <HomeIcon />
             </IconButton>
           <IconButton aria-label="show 4 new favorites" color="inherit" onClick={()=>props.toLiked()}>
-              {/* <Badge badgeContent={4} color="secondary"> */}
+              <Badge badgeContent={4} color="secondary">
                 <FavoriteBorderIcon />
-              {/* </Badge> */}
+              </Badge>
             </IconButton>
           <Button color="inherit" onClick={ props.setStorage }>Login</Button>
         </Toolbar>
