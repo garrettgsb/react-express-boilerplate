@@ -16,24 +16,29 @@ export default function useApplicationData() {
     repositories: []
   });
   useEffect(()=>{
+    console.log("initial render");
+  },[])
+  useEffect(()=>{
     setState( prev =>( {...prev, url: `https://api.github.com/users/${state.user}`, repoUrl: `https://api.github.com/users/${state.user}/repos`}))
   },[state.user])
   
   //------------COMMENT OUT THIS FETCHDATA IF USING BACKUP DATA--------------
-  const fetchData = (e) => {
-    e.preventDefault();
+  const fetchData = (userName) => {
     Promise.all([
-      axios.get(state.url), // You can simply make your requests to “/api/whatever you want”
-      axios.get(state.repoUrl)
+      axios.get(`https://api.github.com/users/${userName}`), // You can simply make your requests to “/api/whatever you want”
+      axios.get(`https://api.github.com/users/${userName}/repos`)
     ])
     .then((all) => {
-      console.log(all[1].data[0].name)
       setState(prev => ({
-        ...prev, avatar: all[0].data.avatar_url, loginUser: all[0].data.login, name: all[0].data.name, repositories: all[1].data 
+        ...prev, user:userName, avatar: all[0].data.avatar_url, loginUser: all[0].data.login, name: all[0].data.name, repositories: all[1].data 
       }));
     })  
   }
-
+  
+  const setUser = (value) => {
+    setState((prev)=>({...prev,user: value
+    }));
+  }
   //--------------UNCOMMENT TO USE FOR BACKUP DATA--------------------------
   // const fetchData = (e) => {
   //   e.preventDefault();
@@ -43,11 +48,6 @@ export default function useApplicationData() {
     
   // }
 
-  const setUser = (event) => {
-    setState({...state,user: event.target.value
-    });
-    console.log(state.user)
-  }
 
   const setStorage = () => {
     localStorage.setItem('username', 2)
