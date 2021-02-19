@@ -16,14 +16,15 @@ const columns = [
   // { field: 'id'},
   // { field: 'user_id'},
 
-  { field: 'reponame', headerName: 'Repository', width: 130 },
-  { field: 'repolanguage', headerName: 'Language', width: 130 },
+
   {
-    field: 'repodescription',
-    headerName: 'Description',
-    type: 'number',
+    field: 'repoowner',
+    headerName: 'Owner',
     width: 130,
   },
+  { field: 'reponame', headerName: 'Repository', width: 130 },
+  { field: 'repolanguage', headerName: 'Language', width: 130 },
+
 ];
 
 
