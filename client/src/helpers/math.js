@@ -11,7 +11,7 @@ export const convertCentsToDollars = function (price) {
 export const beansEarned = function (accelerator, centsCharged, prev=0) {
   console.log('centsCharged', centsCharged)
   // user can only earn beans on price charged and not total price
-  return Math.ceil((centsCharged / 100 * 0.5) * accelerator) + prev;
+  return Math.ceil((centsCharged / 100) * accelerator) + prev;
 };
 
 export const totalFromCart = function (cart) {
