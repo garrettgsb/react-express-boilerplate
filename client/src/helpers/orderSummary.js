@@ -20,6 +20,7 @@ export const orderSummarySorter = (arr) => {
 }
 
 export const getMostRecent = (obj) => {
+  console.log('most recent', obj)
   let mostRecentOrder = 0;
   for(const key in obj) {
     if(key > mostRecentOrder) {

@@ -1,5 +1,5 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { useContext, useState } from "react";
 import { appContext } from "../../appContext";
 
@@ -19,35 +19,34 @@ export default function PaymentForm(props) {
   console.log(props);
 
   const orderData = (order) => {
-
-    const d = new Date(Date.now())
-    let dateString = `${d.getFullYear()}-${d.getMonth()}-${d.getDay()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+    const d = new Date(Date.now());
+    let dateString = `${d.getFullYear()}-${d.getMonth()}-${d.getDay()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
 
     const completeOrder = {
-        time_created: dateString,
-        total_price: order.total,
-        completed: true,
-        user_id: state.currentUser,
-        store_id: state.currentStore,
-        order_items: []
-    }
-    order.cart.forEach((e)=>{
-            const order = {menu_item_id: e.menuItemId}
-            let quantityCounter = e.quantity
-            while(quantityCounter > 0) {
-                completeOrder.order_items.push(order)
-                quantityCounter--
-        }
-    })
+      time_created: dateString,
+      total_price: order.total,
+      completed: true,
+      user_id: state.currentUser,
+      store_id: state.currentStore,
+      order_items: [],
+    };
+    order.cart.forEach((e) => {
+      const order = { menu_item_id: e.menuItemId };
+      let quantityCounter = e.quantity;
+      while (quantityCounter > 0) {
+        completeOrder.order_items.push(order);
+        quantityCounter--;
+      }
+    });
     return completeOrder;
-}
+  };
 
-const order = orderData(props.order)
+  const order = orderData(props.order);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setFormState("submitting");
-   
+
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
       // form submission until Stripe.js has loaded.
@@ -60,29 +59,23 @@ const order = orderData(props.order)
     if (token) {
       setError(null);
       setFormState("submitted");
-    } else {
-      setError(error);
-      setFormState("error");
-    }
-  };
-
-  if (formState === "submitted") {
     const userId =  state.currentUser;
     const accelerator = state.user[0].accelerator;
     const tier = state.user[0].tier
-
     const currentBeans = state.user[0].current_beans;
     const currentLifetimeBeans = state.user[0].lifetime_beans;
     const newCurrent = newCurrentBeans(currentBeans, props.beansSpent)
     const newLifetime  = newLifetimeBeans(currentLifetimeBeans, props.order.total)
 
-    updateBeans(userId, newCurrent, newLifetime, tier, accelerator)
-    postOrder(order)
-
-    // redirect to the order summary page
-    history.push('/orderconfirmed')
+    await postOrder(order);
+    await updateBeans(userId, newCurrent, newLifetime, tier, accelerator)
     
-  }
+    history.push("/orderconfirmed");
+    } else {
+      setError(error);
+      setFormState("error");
+    }
+  };
 
   const CardElementOptions = {
     style: {
@@ -103,11 +96,12 @@ const order = orderData(props.order)
   return (
     <form className="payment-form" onSubmit={handleSubmit}>
       <div id="input">
-        <input 
-        name="mobile" 
-        type="tel" 
-        placeholder="mobile"
-        value={state.user[0].phone_number} />
+        <input
+          name="mobile"
+          type="tel"
+          placeholder="mobile"
+          value={state.user[0].phone_number}
+        />
         <CardElement options={CardElementOptions} />
       </div>
       <div></div>
