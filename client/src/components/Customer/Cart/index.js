@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { Modal } from '@material-ui/core'
@@ -11,14 +10,7 @@ import './styles.scss'
 
 function Cart(props) {
   const history = useHistory()
-  const [cartState, setCartSate] = useState(props.cart)
 
-  // useEffect(() => {
-  //   setCartSate(props.cart)
-  //   setTotal(props.getTotal(props.cart))
-  // }, [props])
-
-  
   const removeFromTotal = (beans) => {
     props.setTotal(props.total - beans) 
   }
@@ -27,8 +19,7 @@ function Cart(props) {
   }
 
   const handleSubmit = (event) => {
-    console.log('cart', props.cart)
-    console.log('total', props.total)
+    props.handleClose()
     history.push('/checkout')
     event.preventDefault()
   }
