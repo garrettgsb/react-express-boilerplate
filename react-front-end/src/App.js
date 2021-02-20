@@ -8,6 +8,7 @@ import Filter from "./components/Filter"
 import NavBar from "./components/AppBar.js"
 import { useState } from 'react'
 import ShowLiked from './components/showLiked';
+import { setPageStateUpdate } from '@material-ui/data-grid';
 
 
 
@@ -59,17 +60,21 @@ export default function Application(props) {
     const toMain = () => {
       setShow("main")
     }
-     
+    const toHome = () => {
+      setShow("home")
+    }
+    
 
     return (
       <main className="App">
-        <NavBar toLiked={toLiked} setStorage={ setStorage } toMain={toMain}/>
+
+        <NavBar toLiked={toLiked} setStorage={ setStorage } toHome={toHome} />
         <section class="main-container">
           <div id="search-and-filter">
-            <Search fetchData={fetchData}/>
+            <Search fetchData={fetchData} toMain={toMain}/>
             <Filter setFilter={setFilter}></Filter>
           </div>
-          
+          { show==="home" && (<div id="show-question-mark"><img src="https://github.githubassets.com/images/modules/logos_page/Octocat.png" alt="nothing"></img></div>)}
           { show==="main" && (state.name ? <Show /> : <div id="show-question-mark"><img src={ state.avatar } alt="nothing"></img></div>)}
           { show==="liked" && <ShowLiked toMain={toMain}/>}
         </section>
