@@ -60,7 +60,7 @@ export default function NavBar(props) {
   const clearStorage = () => {
     localStorage.clear();
     setLogin(false);
-    props.toHome();
+    window.location.href='/';
   }
 
   const LogoutButton = () => {
