@@ -35,15 +35,17 @@ export default function NavBar(props) {
   const classes = useStyles();
 
   const [userLogin, setUserLogin] = useState("");
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(localStorage.getItem('username'));
   const handleLogin =(e) =>{
     setUserLogin(e.target.value);
   }
   const submitLogin = (e) => {
+    if (userLogin.length > 0) {
     e.preventDefault()
     props.setStorage(userLogin);
     setUserLogin("");
     setLogin(true);
+    }
   }
 
   const clearStorage = () => {
