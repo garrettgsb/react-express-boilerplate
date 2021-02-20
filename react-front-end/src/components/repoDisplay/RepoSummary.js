@@ -9,10 +9,13 @@ import BorderColorIcon from "@material-ui/icons/BorderColor";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 export default function RepoSummary(props) {
-  const [likeBool, setLikeBool] = useState(false);
+  
+  const [likeBool, setLikeBool] = useState(props.userLiked);
   useEffect(() => {
     if (props.userLiked) {
       setLikeBool(true);
+    }else{
+      setLikeBool(false)
     }
   });
   const handleLikeClick = () => {
@@ -25,8 +28,9 @@ export default function RepoSummary(props) {
         gitAvatar: props.avatar_url,
         repoOwner: props.owner,
       })
-      .then((res) => {
+      .then(() => {
         setLikeBool(true);
+        props.renderPage();
       });
   };
   const handleUnlikeClick = () => {
@@ -38,6 +42,7 @@ export default function RepoSummary(props) {
       )
       .then(() => {
         setLikeBool(false);
+        props.renderPage();
       });
   };
 

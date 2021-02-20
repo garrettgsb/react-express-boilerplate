@@ -12,6 +12,11 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import "./AppBar.css";
+import HomeIcon from '@material-ui/icons/Home';
+import GitGoodLogo from './GitGoodLogo.png'
+import { LeftEmptyCell } from '@material-ui/data-grid';
+
+
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -26,6 +31,10 @@ const useStyles = makeStyles((theme) =>
     },
     multilineColor:{
       color:'white'
+    },
+    logo: {
+      maxWidth: 160,
+      float: 'left', 
     }
   }),
   
@@ -51,6 +60,7 @@ export default function NavBar(props) {
   const clearStorage = () => {
     localStorage.clear();
     setLogin(false);
+    props.toHome();
   }
 
   const LogoutButton = () => {
@@ -94,16 +104,16 @@ export default function NavBar(props) {
     <div className={classes.root}>
       <AppBar position="static" style={{ background: '#000020' }}>
       <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            GitGood
+          <Typography edge="start" className={classes.title}>
+            <img src={GitGoodLogo} alt="GitGood logo" className={classes.logo}></img>
           </Typography>
+          <IconButton color="inherit" onClick={event =>  window.location.href='/'}>
+                <HomeIcon />
+            </IconButton>
           <IconButton aria-label="show 4 new favorites" color="inherit" onClick={()=>props.toLiked()}>
-              <Badge badgeContent={4} color="secondary">
+              {/* <Badge badgeContent={4} color="secondary"> */}
                 <FavoriteBorderIcon />
-              </Badge>
+              {/* </Badge> */}
             </IconButton>
             { login ? <LogoutButton /> : <LoginForm /> }
           
