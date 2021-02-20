@@ -13,6 +13,8 @@ const toStamp = (string) => {
 };
 
 export default function OppositeTimeline(props) {
+
+  console.log("hello")
   const [userLiked, setUserLiked] = useState();
   const [num, setNum] = useState(0);
   const renderPage = () => {

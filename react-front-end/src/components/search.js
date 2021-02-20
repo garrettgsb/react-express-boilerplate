@@ -26,6 +26,8 @@ export default function Search(props) {
   const handleSubmit = (e) => {
     e.preventDefault()
     props.fetchData(userName);
+    setUserName("");
+    props.toMain();
   }
     return (
       <form autoComplete="off" onSubmit={handleSubmit} className={classes.root}>

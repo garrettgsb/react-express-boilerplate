@@ -71,7 +71,7 @@ module.exports = (db) => {
     WHERE repoOwner = $1
     AND repoName = $2
     AND user_id = $3`,param).then(() => {
-        response.status(204).json({});
+      response.status(204).json({});
     });
   });
 
