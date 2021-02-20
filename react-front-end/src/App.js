@@ -9,46 +9,14 @@ import NavBar from "./components/AppBar.js"
 import { useState } from 'react'
 import ShowLiked from './components/showLiked';
 import { setPageStateUpdate } from '@material-ui/data-grid';
+import Show from "./components/Show"
 
 
 
 
 export default function Application(props) {
-
   const { setStorage, setUser, fetchData, state} = useApplicationData();
-  
 
-  // const appointmentsObject = dailyAppointments.map(appointment => {
-  //   const interview = getInterview(state, appointment.interview);
-  //   const dailyInterviewers = getInterviewersForDay(state, state.day);
-
-  //   return (
-  //     <Appointment
-  //     key={appointment.id}
-  //     id={appointment.id}
-  //     time={appointment.time}
-  //     interview={interview}
-  //     interviewers={dailyInterviewers}
-  //     bookInterview={bookInterview}
-  //     cancelInterview={cancelInterview}
-  //     canInt={canInt}
-  //   />
-  //   );
-  // })
-
-    const Show = () => {
-      return (<div id="show">
-                <img src={ state.avatar } alt="nothing"></img>
-                <a href={`https://github.com/${state.loginUser}`}>
-                  <h4>@{state.loginUser}</h4>
-                </a>
-                <h4>{state.name}'s Timeline</h4>
-                <div id="opposite-timeline">
-                  <OppositeTimeline filterParam={filterParam} repositories={state.repositories} avatar={state.avatar}/>
-                </div> 
-              </div>
-      )
-    }
     const [filterParam, setParam] = useState();
     const setFilter = (param) =>{
       setParam(prev=>(param))
@@ -60,8 +28,7 @@ export default function Application(props) {
     const toMain = () => {
       setShow("main")
     }
-    
-
+    console.log(state)
     return (
       <main className="App">
 
@@ -71,7 +38,7 @@ export default function Application(props) {
             <Search fetchData={fetchData} toMain={toMain}/>
             <Filter setFilter={setFilter}></Filter>
           </div>
-          { show==="main" && (state.name ? <Show /> : <div id="show-question-mark"><img src={ state.avatar } alt="nothing"></img></div>)}
+          { show==="main" && (state.loginUser ? <Show avatar={state.avatar} loginUser={state.loginUser} name={state.name} filterParam={filterParam} repositories={state.repositories} /> : <div id="show-question-mark"><img src={ state.avatar } alt="nothing"></img></div>)}
           { show==="liked" && <ShowLiked toMain={toMain}/>}
         </section>
         

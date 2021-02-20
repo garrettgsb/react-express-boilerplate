@@ -12,9 +12,8 @@ const toStamp = (string) => {
   return stamp.getTime();
 };
 
-export default function OppositeTimeline(props) {
 
-  console.log("hello")
+export default function OppositeTimeline(props) {
   const [userLiked, setUserLiked] = useState();
   const [num, setNum] = useState(0);
   const renderPage = () => {
@@ -64,72 +63,15 @@ export default function OppositeTimeline(props) {
         return false;
       }
     }
-
     return true;
   });
-
+  const monthObject = {"01":"January","02":"February","03":"March","04":"April","05":"May","06":"June","07":"July","08":"August","09":"September","10":"October","11":"November","12":"December"}
   const repositoriesObject = repositoryArray
     .sort((a, b) => new Date(b["updated_at"]) - new Date(a["updated_at"]))
     .map((repository) => {
-      const monthConversion = () => {
-        if (repository["updated_at"].split("T")[0].split("-")[1] === "01") {
-          return "January";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "02"
-        ) {
-          return "February";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "03"
-        ) {
-          return "March";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "04"
-        ) {
-          return "April";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "05"
-        ) {
-          return "May";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "06"
-        ) {
-          return "June";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "07"
-        ) {
-          return "July";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "08"
-        ) {
-          return "August";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "09"
-        ) {
-          return "September";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "10"
-        ) {
-          return "October";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "11"
-        ) {
-          return "November";
-        } else if (
-          repository["updated_at"].split("T")[0].split("-")[1] === "12"
-        ) {
-          return "December";
-        }
-      };
-
       const day = repository["updated_at"].split("T")[0].split("-")[2];
       const year = repository["updated_at"].split("T")[0].split("-")[0];
-      const month = monthConversion();
-
-      // const time = repository["updated_at"]
-      //   .split("T")[1]
-      //   .split("Z")[0]
-      //   .split("")
-      //   .slice(0, 5);
+      const month = monthObject[repository["updated_at"].split("T")[0].split("-")[1]];
       let liked = "";
       if (userLiked) {
         liked = userLiked.filter((repo) => {

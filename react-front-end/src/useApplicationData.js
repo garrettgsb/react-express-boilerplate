@@ -35,6 +35,7 @@ export default function useApplicationData() {
     })  
   }
   
+  
   const setUser = (value) => {
     setState((prev)=>({...prev,user: value
     }));
@@ -52,7 +53,6 @@ export default function useApplicationData() {
   const setStorage = (login) => {
     localStorage.setItem('username', login)
   }
-
   
 
   return { setStorage, setUser, fetchData, state};
