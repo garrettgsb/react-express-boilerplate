@@ -60,20 +60,17 @@ export default function Application(props) {
     const toMain = () => {
       setShow("main")
     }
-    const toHome = () => {
-      setShow("home")
-    }
     
 
     return (
       <main className="App">
-        <NavBar toLiked={toLiked} setStorage={ setStorage } toHome={toHome} />
+
+        <NavBar toLiked={toLiked} setStorage={ setStorage }/>
         <section class="main-container">
           <div id="search-and-filter">
             <Search fetchData={fetchData} toMain={toMain}/>
             <Filter setFilter={setFilter}></Filter>
           </div>
-          { show==="home" && (<div id="show-question-mark"><img src="https://github.githubassets.com/images/modules/logos_page/Octocat.png" alt="nothing"></img></div>)}
           { show==="main" && (state.name ? <Show /> : <div id="show-question-mark"><img src={ state.avatar } alt="nothing"></img></div>)}
           { show==="liked" && <ShowLiked toMain={toMain}/>}
         </section>

@@ -5,16 +5,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import Badge from '@material-ui/core/Badge';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import "./AppBar.css";
 import HomeIcon from '@material-ui/icons/Home';
 import GitGoodLogo from './GitGoodLogo.png'
-import { LeftEmptyCell } from '@material-ui/data-grid';
 
 
 
@@ -30,12 +24,14 @@ const useStyles = makeStyles((theme) =>
       flexGrow: 1,
     },
     multilineColor:{
-      color:'white'
+      color:'white',
+      border:'1px solid white'
     },
     logo: {
       maxWidth: 160,
       float: 'left', 
-    }
+    },
+    
   }),
   
 );
@@ -60,7 +56,7 @@ export default function NavBar(props) {
   const clearStorage = () => {
     localStorage.clear();
     setLogin(false);
-    props.toHome();
+    window.location.href='/';
   }
 
   const LogoutButton = () => {
@@ -74,25 +70,10 @@ export default function NavBar(props) {
     return (
         <>
           <form onSubmit={submitLogin} >
-            <div class="login-form">
-            <TextField
-                    className={classes.margin}
-                    class="text-field"
-                    id="input-with-icon-textfield"
-                    label="TextField"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <AccountCircle />
-                        </InputAdornment>
-                      ),
-                    className: classes.multilineColor
-                    }}
-                    value={userLogin} 
-                    onChange={handleLogin}
-                  />
+                  <input type="text" class="form-control-plaintext" value={userLogin} 
+                    onChange={handleLogin} placeholder="username"></input>
+
                   <Button color="inherit" onClick={ submitLogin }>Login</Button>
-            </div>
           </form>
         </>
     )
