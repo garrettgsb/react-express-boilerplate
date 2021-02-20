@@ -67,6 +67,7 @@ export default function Application(props) {
 
     return (
       <main className="App">
+
         <NavBar toLiked={toLiked} setStorage={ setStorage } toHome={toHome} />
         <section class="main-container">
           <div id="search-and-filter">
