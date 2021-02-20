@@ -49,9 +49,11 @@ export default function useApplicationData() {
   // }
 
 
-  const setStorage = () => {
-    localStorage.setItem('username', 2)
+  const setStorage = (login) => {
+    localStorage.setItem('username', login)
   }
+
+  
 
   return { setStorage, setUser, fetchData, state};
 }
