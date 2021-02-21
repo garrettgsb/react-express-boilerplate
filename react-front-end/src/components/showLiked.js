@@ -9,6 +9,7 @@ const columns = [
   {
     field: 'gitavatar',
     headerName: 'Avatar',
+    width: 160,
     renderCell: (params) => (
       <img id="row-image" src={`${params.value}`} alt="nothing"></img>
     )
@@ -19,17 +20,17 @@ const columns = [
   {
     field: 'repoowner',
     headerName: 'Owner',
-    width: 130,
+    width: 160,
   },
-  { field: 'reponame', headerName: 'Repository', width: 130 },
-  { field: 'repolanguage', headerName: 'Language', width: 130 },
+  { field: 'reponame', headerName: 'Repository', width: 160 },
+  { field: 'repolanguage', headerName: 'Language', width: 160 },
 ];
 
 
 export default function ShowLiked(props) {
   console.log(localStorage.getItem('username'))
 
-  const [state, setState] = useState({favouritesData:[{"id": 1, "user_id": 1, "reponame": "hi", "repolanguage": "hi", "repodescription": "hi", "gitavatar":"hi"}]});
+  const [state, setState] = useState({favouritesData:[]});
   
   useEffect(() => {
     Axios.get('http://localhost:8081/favourites', {params: {

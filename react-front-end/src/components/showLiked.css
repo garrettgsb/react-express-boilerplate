@@ -28,3 +28,101 @@
   height: 30px;
   width: 30px;
 }
+
+
+
+@media (min-width: 1366px) {
+  .liked{
+    position: absolute;
+    top: 15vh;
+    left:35vw;
+    border:solid;
+    width:60vw ;
+    display: flex;
+    justify-content: center;
+    height: 600px;
+  }
+  
+  .close-btn{
+    position: absolute;
+    border:none;
+    top:0;
+    right: 0;
+  }
+  .close-btn:focus{
+    outline: transparent;
+  }
+  
+  #data-grid {
+    height: 500px;
+    width: 90%;
+  }
+  
+  #row-image {
+    height: 30px;
+    width: 30px;
+  }
+
+  .MuiDataGrid-main {
+    font-size: 20px;
+  }
+
+  .MuiDataGrid-footer p {
+    font-size: 20px;
+  }
+
+  .MuiDataGrid-footer div {
+    font-size: 20px;
+  }
+}
+
+
+
+
+
+
+
+@media (min-width: 1920px) {
+  .liked{
+    position: absolute;
+    top: 15vh;
+    left:35vw;
+    border:solid;
+    width:60vw ;
+    display: flex;
+    justify-content: center;
+    height: 600px;
+  }
+  
+  .close-btn{
+    position: absolute;
+    border:none;
+    top:0;
+    right: 0;
+  }
+  .close-btn:focus{
+    outline: transparent;
+  }
+  
+  #data-grid {
+    height: 500px;
+    width: 90%;
+  }
+  
+  #row-image {
+    height: 30px;
+    width: 30px;
+  }
+
+  .MuiDataGrid-main {
+    font-size: 20px;
+  }
+
+  .MuiDataGrid-footer p {
+    font-size: 20px;
+  }
+
+  .MuiDataGrid-footer div {
+    font-size: 20px;
+  }
+}
