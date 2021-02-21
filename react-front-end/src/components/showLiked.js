@@ -30,7 +30,7 @@ const columns = [
 export default function ShowLiked(props) {
   console.log(localStorage.getItem('username'))
 
-  const [state, setState] = useState({favouritesData:[{"id": 1, "user_id": 1, "reponame": "hi", "repolanguage": "hi", "repodescription": "hi", "gitavatar":"hi"}]});
+  const [state, setState] = useState({favouritesData:[]});
   
   useEffect(() => {
     Axios.get('http://localhost:8081/favourites', {params: {
