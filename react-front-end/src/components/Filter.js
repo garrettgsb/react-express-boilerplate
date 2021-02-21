@@ -6,7 +6,7 @@ import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: "25%",
+    width: "50%",
     display: "flex",
     flexDirection: "column",
   },
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     marginTop: theme.spacing(1),
-    width: 200,
+    width: "100%",
   },
   button: {
     marginTop: theme.spacing(1),
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   buttons: {
     display: "flex",
   },
+  
 }));
 
 export default function Filter(props) {

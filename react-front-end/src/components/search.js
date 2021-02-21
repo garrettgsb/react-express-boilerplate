@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
+  textfield: {
+    width: "50%"
+  }
 }));
 export default function Search(props) {
   // const { setUser, fetchData} = useApplicationData();
@@ -30,8 +33,8 @@ export default function Search(props) {
     props.toMain();
   }
     return (
-      <form autoComplete="off" onSubmit={handleSubmit} className={classes.root}>
-            <TextField id="outlined-basic" label="Enter Github User" variant="outlined" value={userName} onChange={handleSearchInput} />
+      <form autoComplete="off" onSubmit={handleSubmit} className={classes.root} class="searchbar-with-icon">
+            <TextField id="outlined-basic" label="Enter Github User" variant="outlined" value={userName} onChange={handleSearchInput} className={classes.textfield}/>
             {/* <SearchBar value={props.value} onChange={props.onChange} onRequestSearch={props.onClick}/> */}
             
             <label ><SearchIcon onClick={handleSubmit} id="search-icon" /></label>

@@ -9,6 +9,7 @@ const columns = [
   {
     field: 'gitavatar',
     headerName: 'Avatar',
+    width: 160,
     renderCell: (params) => (
       <img id="row-image" src={`${params.value}`} alt="nothing"></img>
     )
@@ -19,10 +20,10 @@ const columns = [
   {
     field: 'repoowner',
     headerName: 'Owner',
-    width: 130,
+    width: 160,
   },
-  { field: 'reponame', headerName: 'Repository', width: 130 },
-  { field: 'repolanguage', headerName: 'Language', width: 130 },
+  { field: 'reponame', headerName: 'Repository', width: 160 },
+  { field: 'repolanguage', headerName: 'Language', width: 160 },
 ];
 
 
