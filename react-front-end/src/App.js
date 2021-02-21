@@ -10,6 +10,7 @@ import { useState } from 'react'
 import ShowLiked from './components/showLiked';
 import { setPageStateUpdate } from '@material-ui/data-grid';
 import Show from "./components/Show"
+import Scroll from './components/scroll.js'
 
 
 
@@ -38,6 +39,7 @@ export default function Application(props) {
             <Search fetchData={fetchData} toMain={toMain}/>
             <Filter setFilter={setFilter}></Filter>
           </div>
+          <Scroll showBelow={250} />
           { show==="main" && (state.loginUser ? <Show avatar={state.avatar} loginUser={state.loginUser} name={state.name} filterParam={filterParam} repositories={state.repositories} /> : <div id="show-question-mark"><img src={ state.avatar } alt="nothing"></img></div>)}
           { show==="liked" && <ShowLiked toMain={toMain}/>}
         </section>
