@@ -72,6 +72,9 @@ export default function Filter(props) {
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
+            style: {
+              fontSize: 20
+            }
           }}
         />
       </div>
@@ -84,6 +87,9 @@ export default function Filter(props) {
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
+            style: {
+              fontSize: 20
+            }
           }}
         />
         <TextField
@@ -94,6 +100,9 @@ export default function Filter(props) {
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
+            style: {
+              fontSize: 20
+            }
           }}
         />
       </div>
@@ -106,6 +115,9 @@ export default function Filter(props) {
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
+            style: {
+              fontSize: 20
+            }
           }}
         />
       </div>
