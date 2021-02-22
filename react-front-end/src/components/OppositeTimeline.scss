@@ -46,25 +46,25 @@ body{margin-top:20px;
       color: #8796af;
     }
     &:nth-child(even) .timeline-content {
-        background-color: #ff5000;
+        background-color: #663399;
         /* Fallback Color */
         background-image: -webkit-gradient(linear, left top, left bottom, from(#fc6d4c), to(#ff5000));
         /* Saf4+, Chrome */
-        background-image: -webkit-linear-gradient(top, #fc6d4c, #ff5000);
+        background-image: -webkit-linear-gradient(top, #663399, #6633FF);
         /* Chrome 10+, Saf5.1+, iOS 5+ */
-        background-image: -moz-linear-gradient(top, #fc6d4c, #ff5000);
+        background-image: -moz-linear-gradient(top, #663399, #6633FF);
         /* FF3.6 */
-        background-image: -ms-linear-gradient(top, #fc6d4c, #ff5000);
+        background-image: -ms-linear-gradient(top, #663399, #6633FF);
         /* IE10 */
-        background-image: -o-linear-gradient(top, #fc6d4c, #ff5000);
+        background-image: -o-linear-gradient(top, #663399, #6633FF);
         /* Opera 11.10+ */
-        background-image: linear-gradient(top, #fc6d4c, #ff5000);
+        background-image: linear-gradient(top, #663399, #6633FF);
         margin-left: 40px;
         text-align: left;
     }
     &:nth-child(even) .timeline-content:after {
         left: -39px;
-        border-right: 18px solid #ff5000;
+        border-right: 18px solid #6633FF;
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
     }

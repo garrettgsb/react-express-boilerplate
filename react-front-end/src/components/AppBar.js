@@ -29,6 +29,11 @@ const useStyles = makeStyles((theme) =>
       maxWidth: 160,
       float: "left",
     },
+    homeicon: {
+      '&:hover': {
+        transform: "translateY(-3px) scale(1.06)"
+      }
+    }
   })
 );
 
@@ -97,19 +102,20 @@ export default function NavBar(props) {
             color="inherit"
             onClick={(event) => (window.location.href = "/")}
           >
-            <HomeIcon />
+            <HomeIcon className={classes.homeicon}/>
           </IconButton>
           <IconButton
             aria-label="show 4 new favorites"
             color="inherit"
             onClick={() => props.toLiked()}
+            className={classes.homeicon}
           >
             {/* <Badge badgeContent={4} color="secondary"> */}
             <FavoriteBorderIcon />
             {/* </Badge> */}
           </IconButton>
           {login ? (
-            <Button color="inherit" onClick={clearStorage}>
+            <Button color="inherit" onClick={clearStorage} className={classes.homeicon}>
               Logout
             </Button>
           ) : (
@@ -117,6 +123,7 @@ export default function NavBar(props) {
               userLogin={userLogin}
               handleLogin={handleLogin}
               submitLogin={submitLogin}
+              className={classes.homeicon}
             />
           )}
         </Toolbar>

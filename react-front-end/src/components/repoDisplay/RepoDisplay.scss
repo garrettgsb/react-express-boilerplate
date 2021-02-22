@@ -24,6 +24,10 @@
   position: absolute;
   top: 5px;
   right: 5px;
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-3px) scale(1.06);
+  }
 }
 
 .box h3 {
