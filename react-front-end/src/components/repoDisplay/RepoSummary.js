@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import "./RepoDisplay.css";
+import "./RepoDisplay.scss";
 import Button from "@material-ui/core/Button";
 import LanguageIcon from "@material-ui/icons/Language";
 import DescriptionIcon from "@material-ui/icons/Description";

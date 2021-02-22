@@ -12,11 +12,11 @@
   align-items: center;
   margin-top: 0.5em;
   padding-top: 10px;
-}
 
-.info p {
-  padding-top: 20px;
-  padding-left: 5px;
+  p{
+    padding-top: 20px;
+    padding-left: 5px;
+  }
 }
 
 
@@ -59,12 +59,12 @@
     align-items: center;
     margin-top: 25px;
     padding-top: 10px;
+    p {
+      padding-top: 20px;
+      padding-left: 5px;
+    }
   }
   
-  .info p {
-    padding-top: 20px;
-    padding-left: 5px;
-  }
   
   
   .like_btn{
@@ -99,11 +99,13 @@
     font-size: 30px;
   }
 
-  .MuiTableContainer-root th  {
-    font-size: 20px;
+  .MuiTableContainer-root  {
+    th {
+      font-size: 20px;
+    }
+    td  {
+      font-size: 20px;
+    }
   }
 
-  .MuiTableContainer-root td  {
-    font-size: 20px;
-  }
 }

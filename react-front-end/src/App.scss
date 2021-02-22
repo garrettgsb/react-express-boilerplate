@@ -41,11 +41,11 @@
   display: flex;
   padding-top: 50px;
   margin-top: 60px;
+  img{
+    height: 200px;
+  }
 }
 
-.main-container img{
-  height: 200px;
-}
 
 #search-and-filter {
   width: 23%;
@@ -60,23 +60,22 @@
   position: absolute;
   top: 100px;
   right: 30px;
-}
-
-#show-question-mark {
-  width: 60%;
-  position: absolute;
-  top: 150px;
-  right: 30px;
+  img {
+    border-radius: 50%;
+  }
 }
 
 #show-question-mark {
   width: 70%;
-  height: auto
+  position: absolute;
+  top: 150px;
+  right: 30px;
+  img{
+    width: 70%;
+    height: auto
+  }
 }
 
-#show img {
-  border-radius: 50%;
-}
 
 
 .makeStyles-container-9 {
@@ -166,11 +165,11 @@
     display: flex;
     padding-top: 50px;
     margin-top: 60px;
+    img{
+      height: 200px;
+    }
   }
   
-  .main-container img{
-    height: 200px;
-  }
   
   #search-and-filter {
     width: 35%;
@@ -185,6 +184,11 @@
     position: absolute;
     top: 100px;
     right: 30px;
+    img {
+      border-radius: 50%;
+      width: 30%;
+      height: auto;
+    }
   }
   
   #show-question-mark {
@@ -192,20 +196,12 @@
     position: absolute;
     top: 150px;
     right: 30px;
-  }
-  
-  #show-question-mark img {
-    width: 70%;
-    height: auto
+    img {
+      width: 70%;
+      height: auto
+    }
   }
 
-  #show img {
-    border-radius: 50%;
-    width: 30%;
-    height: auto;
-  }
-  
-  
   .makeStyles-container-9 {
     margin-left: 30px;
   }
@@ -234,15 +230,7 @@
     padding-left: 8px;
     padding-bottom: 20px
   }
-
-
 }
-
-
-
-
-
-
 
 
 
@@ -290,11 +278,11 @@
     display: flex;
     padding-top: 50px;
     margin-top: 60px;
+    img{
+      height: 200px;
+    }
   }
   
-  .main-container img{
-    height: 200px;
-  }
   
   #search-and-filter {
     width: 35%;
@@ -309,6 +297,14 @@
     position: absolute;
     top: 100px;
     right: 30px;
+    img {
+      border-radius: 50%;
+      width: 30%;
+      height: auto;
+    }
+    h4 {
+      font-size: 20px;
+    }
   }
   
   #show-question-mark {
@@ -316,23 +312,11 @@
     position: absolute;
     top: 150px;
     right: 30px;
+    img {
+      width: 60%;
+      height: auto
+    }
   }
-  
-  #show-question-mark img {
-    width: 60%;
-    height: auto
-  }
-  
-  #show img {
-    border-radius: 50%;
-    width: 30%;
-    height: auto;
-  }
-
-  #show h4 {
-    font-size: 20px;
-  }
-  
   
   .makeStyles-container-9 {
     margin-left: 30px;

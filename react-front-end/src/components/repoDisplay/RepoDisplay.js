@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "./RepoDisplay.css";
+import "./RepoDisplay.scss";
 import RepoSummary from "./RepoSummary";
 import RepoLanguage from "./RepoLanguage";
 import axios from "axios";

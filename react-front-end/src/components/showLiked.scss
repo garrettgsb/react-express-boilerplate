@@ -14,9 +14,9 @@
   border:none;
   top:0;
   right: 0;
-}
-.close-btn:focus{
-  outline: transparent;
+  &:focus{
+    outline: transparent;
+  }
 }
 
 #data-grid {
@@ -48,9 +48,9 @@
     border:none;
     top:0;
     right: 0;
-  }
-  .close-btn:focus{
-    outline: transparent;
+    &:focus{
+      outline: transparent;
+    }
   }
   
   #data-grid {
@@ -67,18 +67,16 @@
     font-size: 20px;
   }
 
-  .MuiDataGrid-footer p {
+  .MuiDataGrid-footer {
+    p {
     font-size: 20px;
+    }
+    div {
+      font-size: 20px;
+    }
   }
 
-  .MuiDataGrid-footer div {
-    font-size: 20px;
-  }
 }
-
-
-
-
 
 
 
@@ -99,9 +97,9 @@
     border:none;
     top:0;
     right: 0;
-  }
-  .close-btn:focus{
-    outline: transparent;
+    &:focus{
+      outline: transparent;
+    }
   }
   
   #data-grid {
@@ -118,11 +116,13 @@
     font-size: 20px;
   }
 
-  .MuiDataGrid-footer p {
+  .MuiDataGrid-footer {
+    p {
     font-size: 20px;
+    }
+    div {
+      font-size: 20px;
+    }
   }
 
-  .MuiDataGrid-footer div {
-    font-size: 20px;
-  }
 }

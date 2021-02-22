@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import "./AppBar.css";
 import HomeIcon from "@material-ui/icons/Home";
 import GitGoodLogo from "./GitGoodLogo.png";
 import LoginForm from "./LoginForm";

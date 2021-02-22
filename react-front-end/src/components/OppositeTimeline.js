@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import useApplicationData from "../useApplicationData";
-import "./OppositeTimeline.css";
+import "./OppositeTimeline.scss";
 import { useState, useEffect } from "react";
 
 import RepoDisplay from "./repoDisplay/RepoDisplay.js";

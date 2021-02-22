@@ -10,6 +10,7 @@
     "canvasjs": "^1.8.3",
     "cookie-session": "^1.4.0",
     "material-ui-search-bar": "^1.0.0",
+    "node-sass": "^4.14.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",

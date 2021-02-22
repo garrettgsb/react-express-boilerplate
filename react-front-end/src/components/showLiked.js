@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./showLiked.css";
+import "./showLiked.scss";
 import { useState, Component } from "react"; 
 import ClearIcon from '@material-ui/icons/Clear';
 import { DataGrid } from '@material-ui/data-grid';

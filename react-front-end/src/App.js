@@ -1,6 +1,6 @@
 import React  from 'react';
 import useApplicationData from './useApplicationData';
-import './App.css';
+import './App.scss';
 import Search from './components/search.js'
 import OppositeTimeline from './components/OppositeTimeline.js'
 import {userData, repoData} from "./backupData"
