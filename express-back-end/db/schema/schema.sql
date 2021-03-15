@@ -7,9 +7,10 @@ DROP TABLE IF EXISTS tasks CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  username VARCHAR(255) NOT NULL,
-  email VARCHAR(100) NOT NULL,
-  password VARCHAR(100) NOT NULL,
+  first_name VARCHAR(255),
+  last_name VARCHAR(255),
+  email VARCHAR(100),
+  password VARCHAR(100),
   authID VARCHAR(255),
 );
 
