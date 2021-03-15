@@ -37,5 +37,19 @@ INSERT INTO species (common_name, scientific_name, photo_url, description, water
 VALUES ('African Violet', 'Saintpaulia Ionantha', 'https://brownsflorist.com/wp-content/uploads/2020/04/browns-10-scaled-e1590596735884.jpg', 'Plant description here', 5, 2, 4, '15-24 C', 'Every 2 weeks', false);
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
-VALUES ('Haworthia', 'Haworthia', 'https://cdn.shopify.com/s/files/1/2097/3287/products/4.00-ozSucculent.ZebraPlant-Haworthiafasciata-count32_2048x@2x.jpg?v=1589641850', 'Plant description here', 1, 4, 2, '21-30 C', 'Twice per year', False);
+VALUES ('Haworthia', 'Haworthia', 'https://cdn.shopify.com/s/files/1/2097/3287/products/4.00-ozSucculent.ZebraPlant-Haworthiafasciata-count32_2048x@2x.jpg?v=1589641850', 'Plant description here', 1, 5, 2, '21-30 C', 'Twice per year', False);
 
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Pothos', 'Epipremnum aureum', 'https://s7d1.scene7.com/is/image/terrain/58120890_000_a?$zoom2$', 'Plant description here', 2, 1, 1, '18-24 C', 'Optional, can be done twice per month', true);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Fiddle Leaf Fig', 'Ficus lyrata', 'https://cb2.scene7.com/is/image/CB2/PottedFiddleLeafFigSHF17', 'Plant description here', 2, 3, 5, '15-30 C', 'Every 2 weeks', true);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Monstera', 'Monstera Deliciosa', 'https://hips.hearstapps.com/hmg-prod/images/gettyimages-1205923822-612x612-1597694031.jpg', 'Plant description here', 2, 4, 4, '18-30 C', 'Option, can be done twice per month', true);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Chinese Money Plant', 'Pilea peperomioides', 'https://cdn.shopify.com/s/files/1/0174/7796/products/8D2A1989_2048x2048.jpg?v=1595286173', 'Plant description here', 3, 4, 2, '13-30 C', 'Once per month', false);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Echeveria', 'Pilea peperomioides', 'https://cdn.shopify.com/s/files/1/0174/7796/products/8D2A1989_2048x2048.jpg?v=1595286173', 'Plant description here', 1, 5, 2, '15-27 C', 'Once per year in the spring', false);
