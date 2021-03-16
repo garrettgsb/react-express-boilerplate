@@ -83,6 +83,12 @@ module.exports = (pool) => {
     }));
   };
 
+  const deletePlantFromGarden = function(userID, listingID) {
+    return pool.query(`
+    DELETE FROM listings WHERE seller_id = $1 AND id = $2;
+    `, [userID, listingID])
+  };
+
 
   return {
     getUserPlants,
@@ -90,7 +96,9 @@ module.exports = (pool) => {
     getWishlistForUser,
     addPlantToWishlist,
     removePlantFromWishlist,
-    isPlantOnWishlist
+    isPlantOnWishlist,
+    getUserTasks,
+    deletePlantFromGarden,
   };
 }
 
