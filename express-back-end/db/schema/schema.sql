@@ -41,6 +41,7 @@ CREATE TABLE plant (
   species_id INTEGER REFERENCES species(id) ON DELETE NULL,
   nickname VARCHAR(100),
   is_dead BOOLEAN NOT NULL DEFAULT FALSE,
+  cause_of_death TEXT,
 );
 
 CREATE TABLE tasks (

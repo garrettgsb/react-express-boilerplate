@@ -69,7 +69,19 @@ module.exports = (pool) => {
     }).catch(err => console.log(err));
   }
 
-
+  const getUserTasks = function(userID) {
+    return pool.query(`
+    SELECT * FROM plants, wishlist
+    JOIN wishlist ON species_id = species.id
+    WHERE user_id = $1;
+    `, [userID])
+    .then(res => {
+      return res.rows;
+    })
+    .catch((error => {
+      console.log("Error message", error)
+    }));
+  };
 
 
   return {
@@ -81,3 +93,8 @@ module.exports = (pool) => {
     isPlantOnWishlist
   };
 }
+
+//To Do: getUserTasks, getPlantTasks
+
+// Possible to Do: getUsersDeadPlants, deletePlant, movePlantToGraveyard
+

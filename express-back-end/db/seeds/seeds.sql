@@ -66,17 +66,17 @@ VALUES ('Echeveria', 'Pilea peperomioides', 'https://cdn.shopify.com/s/files/1/0
 
 -- Plants
 
-INSERT INTO plants (user_id, species_id, nickname, is_dead)
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
 VALUES (1, 5, "Amanda", false);
 
-INSERT INTO plants (user_id, species_id, nickname, is_dead)
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
 VALUES (2, 3, "Ferdinand", false);
 
-INSERT INTO plants (user_id, species_id, nickname, is_dead)
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
 VALUES (3, 6, "Joey", false);
 
-INSERT INTO plants (user_id, species_id, nickname, is_dead)
-VALUES (5, 5, "Alice", true);
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
+VALUES (5, 5, "Alice", true, 'lack of water');
 
 -- Tasks
 INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
