@@ -1,4 +1,4 @@
--- Users 1-5
+-- Users 
 
 INSERT INTO users (first_name, last_name, email, password, authID)
 VALUES ('Scarlett', 'Macaw', 'tropical_bird@gmail.com', 'password1', '12345678');
@@ -15,7 +15,19 @@ VALUES ('Canada', 'Goose', 'scary_bird@gmail.com', 'password4', '22222222');
 INSERT INTO users (first_name, last_name, email, password, authID)
 VALUES ('African', 'Grey', 'smart_bird@gmail.com', 'password5', '33333333');
 
--- Species
+-- Wishlist
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (1, 1);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (1, 2);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (1, 3);
+
+
+
 
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
@@ -53,3 +65,29 @@ VALUES ('Chinese Money Plant', 'Pilea peperomioides', 'https://cdn.shopify.com/s
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
 VALUES ('Echeveria', 'Pilea peperomioides', 'https://cdn.shopify.com/s/files/1/0174/7796/products/8D2A1989_2048x2048.jpg?v=1595286173', 'Plant description here', 1, 5, 2, '15-27 C', 'Once per year in the spring', false);
+
+-- Plants
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (1, 5, "Amanda", false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (2, 3, "Ferdinand", false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (3, 6, "Joey", false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (5, 5, "Alice", true);
+
+-- Tasks
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ("Water plant", 1, 1, 2021-03-27, false)
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ("Fertilize plant", 2, 2, 2021-03-28, false)
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ("Water plant", 3, 3, 2021-03-30, false)
+
+
