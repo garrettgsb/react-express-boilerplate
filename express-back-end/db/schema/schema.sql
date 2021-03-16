@@ -26,6 +26,7 @@ CREATE TABLE species (
   scientific_name VARCHAR(255) NOT NULL,
   photo_url VARCHAR(255),
   description TEXT,
+  watering_instructions VARCHAR(255) NOT NULL,
   watering_requirement_rating INTEGER NOT NULL,
   sunlight_requirement_rating INTEGER NOT NULL,
   difficulty_rating INTEGER NOT NULL,
