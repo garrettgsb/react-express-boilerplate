@@ -69,7 +69,25 @@ module.exports = (pool) => {
     }).catch(err => console.log(err));
   }
 
+  const getUserTasks = function(userID) {
+    return pool.query(`
+    SELECT * FROM plants, wishlist
+    JOIN wishlist ON species_id = species.id
+    WHERE user_id = $1;
+    `, [userID])
+    .then(res => {
+      return res.rows;
+    })
+    .catch((error => {
+      console.log("Error message", error)
+    }));
+  };
 
+  const deletePlantFromGarden = function(userID, listingID) {
+    return pool.query(`
+    DELETE FROM listings WHERE seller_id = $1 AND id = $2;
+    `, [userID, listingID])
+  };
 
 
   return {
@@ -78,6 +96,13 @@ module.exports = (pool) => {
     getWishlistForUser,
     addPlantToWishlist,
     removePlantFromWishlist,
-    isPlantOnWishlist
+    isPlantOnWishlist,
+    getUserTasks,
+    deletePlantFromGarden,
   };
 }
+
+//To Do: getUserTasks, getPlantTasks
+
+// Possible to Do: getUsersDeadPlants, deletePlant, movePlantToGraveyard
+
