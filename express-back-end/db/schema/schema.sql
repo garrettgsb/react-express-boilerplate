@@ -4,6 +4,10 @@ DROP TABLE IF EXISTS wishlist CASCADE;
 DROP TABLE IF EXISTS tasks CASCADE;
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0a3a7bfa5e4f0847eb389c14ac81de9171710eeb
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   first_name VARCHAR(255),
@@ -25,6 +29,7 @@ CREATE TABLE species (
   scientific_name VARCHAR(255) NOT NULL,
   photo_url VARCHAR(255),
   description TEXT,
+  watering_instructions VARCHAR(255) NOT NULL,
   watering_requirement_rating INTEGER NOT NULL,
   sunlight_requirement_rating INTEGER NOT NULL,
   difficulty_rating INTEGER NOT NULL,
