@@ -8,6 +8,7 @@
     "axios": "^0.18.1",
     "bootstrap": "^5.0.0-beta2",
     "react": "^16.14.0",
+    "react-bootstrap": "^1.5.2",
     "react-dom": "^16.14.0",
     "react-scripts": "^2.1.8"
   },
