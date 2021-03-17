@@ -20,6 +20,7 @@ const Styles = styled.div`
       .btn {
         margin-top: 10px;
         font-size: 0.9em;
+        font-family: "Averia Libre", Helvetica, sans-serif !important;
       }
     }
   }
@@ -63,7 +64,7 @@ export default function NavMenu(){
             </Nav.Item>
             {!isAuthenticated &&
             <Nav.Item>
-              <LoginButton />
+              <LoginButton>Log In</LoginButton>
             </Nav.Item>
             }
               {isAuthenticated && <>

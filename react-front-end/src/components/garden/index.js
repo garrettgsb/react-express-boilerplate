@@ -1,10 +1,19 @@
 import React from "react";
+import {Container} from "react-bootstrap";
 
-export default function Garden() {
+import Hero from "../hero";
+
+export default function Garden(props) {
+
   return (
-    <div>
-      <h2>Garden Page</h2>
-      <p>This is a test of the garden page.</p>
-    </div>
+    <>
+      <Hero
+        header="My Garden"
+        graveyardButton="true"
+      ></Hero>
+      <Container>
+      <h2>My Garden</h2>
+      </Container>
+    </>
   );
-}
+};

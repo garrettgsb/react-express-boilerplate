@@ -4,19 +4,19 @@ import { Button } from "react-bootstrap";
 import styled from "styled-components";
 
 const Styles = styled.div`
-  Button {
-    font-family: "Averia Libre", cursive !important;
+  .btn {
+    font-family: "Montserrat", Helvetica, sans-serif;
   }
 `;
 
-export default function LoginButton() {
+export default function LoginButton(props) {
   // destructure the auth0 hook
   const { loginWithRedirect } = useAuth0();
 
   return(
     <Styles>
       <Button variant="success" onClick={() => loginWithRedirect()} >
-        Log In
+        {props.children}
       </Button>
     </Styles>
   )
