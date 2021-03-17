@@ -1,7 +1,6 @@
 const Express = require('express');
 require('dotenv').config();
 const App = Express();
-const cookieSession = require('cookie-session');
 const path= require('path');
 
 const PORT = 8080;
@@ -22,10 +21,6 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 const { getAllSpecies } = require("./db/dbhelpers.js")(db);
-
-
-
-
 
 
 
