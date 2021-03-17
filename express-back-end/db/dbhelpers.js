@@ -187,8 +187,6 @@ module.exports = (pool) => {
   };
 }
 
-//search by min and max water requirements, search by min and max sunlight requirements
-
 //To Do: getUserTasks, getPlantTasks
 
 // Possible to Do: getUsersDeadPlants, deletePlant, movePlantToGraveyard
