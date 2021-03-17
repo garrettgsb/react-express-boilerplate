@@ -9,6 +9,7 @@ export default function Garden(props) {
     <>
       <Hero
         header="My Garden"
+        text="Your current happy family of plants!"
         graveyardButton="true"
       ></Hero>
       <Container>
