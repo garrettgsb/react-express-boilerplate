@@ -1,11 +1,11 @@
 const Express = require('express');
 const App = Express();
-const BodyParser = require('body-parser');
+// const BodyParser = require('body-parser');
 const PORT = 8080;
 
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
+App.use(Express.urlencoded({ extended: false }));
+App.use(Express.json());
 App.use(Express.static('public'));
 
 // Sample GET route

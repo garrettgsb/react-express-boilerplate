@@ -45,7 +45,7 @@ module.exports = (pool) => {
     INSERT INTO wishlist (user_id, species_id)
     VALUES ($1, $2)
     RETURNING *;
-    `, [userID, listingID])
+    `, [userID, speciesID])
   };
 
   const removePlantFromWishlist = function(userID, speciesID) {
@@ -89,6 +89,84 @@ module.exports = (pool) => {
     `, [userID, listingID])
   };
 
+  //Search functions
+  const searchByName = function(commonName, orderBy) {
+    let queryString = `SELECT * FROM species WHERE common_name LIKE $1 ORDER BY `
+    queryString += orderBy
+    const values = [`%${commonName}%`]
+    return pool.query(queryString, values)
+    .then(res => {
+      return res.rows;
+    })
+    .catch(err => console.error('query error', err.stack));
+  };
+
+  const searchByMinDifficulty = function(difficultyRating, orderBy) {
+    let queryString = `SELECT * FROM species WHERE difficulty_rating >= $1 ORDER BY difficulty_rating`
+    queryString += orderBy
+    const values = [difficultyRating]
+    return pool.query(queryString, values)
+    .then(res => {
+      return res.rows;
+    })
+    .catch(err => console.error('query error', err.stack));
+  };
+
+  const searchByMaxDifficulty = function(difficultyRating, orderBy) {
+    let queryString = `SELECT * FROM species WHERE difficulty_rating <= $1 ORDER BY difficulty_rating DESC `
+    queryString += orderBy
+    const values = [difficultyRating]
+    return pool.query(queryString, values)
+    .then(res => {
+      return res.rows;
+    })
+    .catch(err => console.error('query error', err.stack));
+  };
+
+  const searchByMinSunlight = function(sunlightRequirements, orderBy) {
+    let queryString = `SELECT * FROM species WHERE sunlight_requirement_rating >= $1 ORDER BY sunlight_requirement_rating`
+    queryString += orderBy
+    const values = [sunlightRequirements]
+    return pool.query(queryString, values)
+    .then(res => {
+      return res.rows;
+    })
+    .catch(err => console.error('query error', err.stack));
+  };
+
+  const searchByMaxSunlight = function(sunlightRequirements, orderBy) {
+    let queryString = `SELECT * FROM species WHERE sunlight_requirement_rating <= $1 ORDER BY sunlight_requirement_rating DESC`
+    queryString += orderBy
+    const values = [sunlightRequirements]
+    return pool.query(queryString, values)
+    .then(res => {
+      return res.rows;
+    })
+    .catch(err => console.error('query error', err.stack));
+  };
+
+  const searchByMinWater = function(waterRequirements, orderBy) {
+    let queryString = `SELECT * FROM species WHERE water_requirement_rating >= $1 ORDER BY water_requirement_rating`
+    queryString += orderBy
+    const values = [waterRequirements]
+    return pool.query(queryString, values)
+    .then(res => {
+      return res.rows;
+    })
+    .catch(err => console.error('query error', err.stack));
+  };
+
+  const searchByMaxWater = function(waterRequirements, orderBy) {
+    let queryString = `SELECT * FROM species WHERE water_requirement_rating <= $1 ORDER BY water_requirement_rating DESC`
+    queryString += orderBy
+    const values = [waterRequirements]
+    return pool.query(queryString, values)
+    .then(res => {
+      return res.rows;
+    })
+    .catch(err => console.error('query error', err.stack));
+  };
+  
 
   return {
     getUserPlants,
@@ -99,8 +177,17 @@ module.exports = (pool) => {
     isPlantOnWishlist,
     getUserTasks,
     deletePlantFromGarden,
+    searchByName,
+    searchByMinDifficulty,
+    searchByMaxDifficulty,
+    searchByMinSunlight,
+    searchByMaxSunlight,
+    searchByMinWater,
+    searchByMaxWater,
   };
 }
+
+//search by min and max water requirements, search by min and max sunlight requirements
 
 //To Do: getUserTasks, getPlantTasks
 
