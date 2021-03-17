@@ -30,6 +30,10 @@ import styled from 'styled-components';
 const Styles = styled.div`
   .navbar {
     background-color: #FBF6EE;
+    font-size: 1.3em;
+  }
+  .navbar-brand {
+    font-size: 125%;
   }
   a, .navbar-brand, .navbar-nav .nav-link {
     color: #3B715A;
