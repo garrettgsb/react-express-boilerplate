@@ -1,36 +1,27 @@
-// import React from "react";
-// import {Navbar, Nav, Button} from "react-bootstrap";
-
-// export default function NavMenu(props) {
-
-//   return (
-//     <Navbar bg="light" expand="lg">
-//       <Navbar.Brand href="#home">Leaf It To Me</Navbar.Brand>
-//       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-//       <Navbar.Collapse id="basic-navbar-nav">
-//         <Nav className="justify-content-end" style={{ width: "100%" }}>
-//         {/* <Nav className="ml-auto"> */}
-//           <Nav.Link href="#home">About</Nav.Link>
-//           <Nav.Link href="#link">Find a Plant</Nav.Link>
-//         </Nav>
-//           <Button variant="outline-success">Log In</Button>
-//       </Navbar.Collapse>
-//     </Navbar>
-//   );
-// };
-
-
-
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, Navbar, Button } from 'react-bootstrap';
+import { Nav, Navbar, Image } from 'react-bootstrap';
 import styled from 'styled-components';
+import { useAuth0 } from "@auth0/auth0-react";
+
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
 
 const Styles = styled.div`
   .navbar {
     background-color: #FBF6EE;
-    font-size: 1.3em;
+    height: 120px;
+    font-size: 1.5em;
+    align-items: center;
+
+    .nav-item {
+      line-height: 80px;
+
+      .btn {
+        margin-top: 10px;
+        font-size: 0.9em;
+      }
+    }
   }
   .navbar-brand {
     font-size: 125%;
@@ -46,33 +37,44 @@ const Styles = styled.div`
 `;
 
 export default function NavMenu(){
+  const { user, isAuthenticated } = useAuth0();
+
   return (
     <Styles>
       <Navbar expand="lg">
         <Navbar.Brand href="/">Leaf It To Me</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
+          <Nav className="ml-auto flex-row">
             <Nav.Item>
               <Nav.Link>
-                <Link to="/">Home</Link>
+                <Link to="/" class="pr-4">Home</Link>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
-                <Link to="/garden">Garden</Link>
+                <Link to="/garden" class="pr-4">Garden</Link>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
-                <Link to="/search">Search</Link>
+                <Link to="/search" class="pr-4">Search</Link>
               </Nav.Link>
             </Nav.Item>
+            {!isAuthenticated &&
             <Nav.Item>
-              <Nav.Link>
-                <Link to="/login"><Button variant="outline-primary">Log In</Button></Link>
-              </Nav.Link>
+              <LoginButton />
             </Nav.Item>
+            }
+              {isAuthenticated && <>
+            <Nav.Item>
+              <LogoutButton />
+            </Nav.Item>
+            <p class="pr-4"></p>
+            <Nav.Item class="pr-4">
+                <Image class="pr-4" src={user.picture} alt={user.name} roundedCircle fluid />
+            </Nav.Item>
+            </>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
