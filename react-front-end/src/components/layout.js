@@ -8,10 +8,9 @@ export default function Layout(props) {
 
   return (
     <>
-      <NavMenu />
-      <Container>
+      {/* <Container> */}
         {props.children}
-      </Container>
+      {/* </Container> */}
     </>
   );
 };
