@@ -13,6 +13,7 @@ import Garden from "./components/garden/index";
 import Login from "./components/login/index";
 import NoMatch from "./components/NoMatch";
 import Layout from "./components/layout";
+import NavMenu from './components/navbar';
 
 class App extends Component {
   constructor(props) {
@@ -51,8 +52,9 @@ class App extends Component {
 
     return (
       <>
-        <Layout>
-          <Router>
+        <Router>
+          <NavMenu />
+          <Layout>
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route path="/garden" component={Garden} />
@@ -61,8 +63,8 @@ class App extends Component {
               {/* 404 */}
               <Route component={NoMatch} />
             </Switch>
-          </Router>
-        </Layout>
+          </Layout>
+        </Router>
       </>
     );
   }
