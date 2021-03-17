@@ -6,10 +6,6 @@ import './App.css';
 // import bootstrap from "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// import Button from "react-bootstrap/Button";
-
-
-// import NavMenu from "./components/navbar/index";
 
 import HomePage from "./components/home/index";
 import Search from "./components/search/index";
@@ -46,7 +42,6 @@ class App extends Component {
     //     <button onClick={this.fetchData} >
     //       Fetch Data
     //     </button>
-    //     <Button>Bootstrap Button</Button> */}
     //     <NavMenu />
     //   </div>
     // );
@@ -70,15 +65,6 @@ class App extends Component {
         </Layout>
       </>
     );
-
-
-    // return (
-    //   <>
-    //     <HomePage />
-    //   </>
-    // );
-
-
   }
 }
 
