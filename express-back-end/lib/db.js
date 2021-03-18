@@ -14,7 +14,5 @@ if (process.env.DATABASE_URL) {
 }
 
 
-module.exports = dbParams;
+module.exports = new Pool (dbParams);
 
-
-const pool = new Pool(dbParams);

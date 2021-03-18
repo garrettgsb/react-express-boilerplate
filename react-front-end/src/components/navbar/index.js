@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
+import Profile from "../Profile"
 
 const Styles = styled.div`
   .navbar {
@@ -67,13 +68,18 @@ export default function NavMenu(){
               <LoginButton>Log In</LoginButton>
             </Nav.Item>
             }
+            {/* {!isAuthenticated &&
+            <Nav.Item>
+              <Profile>User</Profile>
+            </Nav.Item>
+            } */}
               {isAuthenticated && <>
             <Nav.Item>
               <LogoutButton />
             </Nav.Item>
             <p class="pr-4"></p>
             <Nav.Item class="pr-4">
-                <Image class="pr-4" src={user.picture} alt={user.name} roundedCircle fluid />
+                <Image class="pr-4" src={user.picture} alt={user.email}roundedCircle fluid />
             </Nav.Item>
             </>}
           </Nav>
