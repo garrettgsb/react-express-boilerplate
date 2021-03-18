@@ -17,6 +17,10 @@ export default function LoginButton(props) {
     
     loginWithRedirect().then((token) => {
       console.log("button was clicked")
+      // Axios.get ('http://localhost:8080/api/garden').then((res) =>
+      // console.log(res)).catch((err) => {
+      //   console.log("something went wrong", err)
+      // })
       Axios.post ('http://localhost:8080/login', {
         name : "",
         email: ""
