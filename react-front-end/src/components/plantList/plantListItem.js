@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import aloeVeraImage from "../../assets/aloe-vera-cropped.png";
 import styled from "styled-components";
 
