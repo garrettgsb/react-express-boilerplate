@@ -77,7 +77,7 @@ app.post("/plants/:plant_id/delete", (req, res) => {
     .then(() => {
       res.redirect("/api/users/garden");
     });
-});
+  });
 
 
   return app;
