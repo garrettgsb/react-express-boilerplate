@@ -1,13 +1,13 @@
 -- Users 
 
-INSERT INTO users (first_name, last_name, email, password, authID)
-VALUES ('Scarlett', 'Macaw', 'tropical_bird@gmail.com', 'password1', '12345678');
+INSERT INTO users (first_name, last_name, email)
+VALUES ('Jacqueline', 'Smith', 'jacquelinesmith190@gmail.com');
 
-INSERT INTO users (first_name, last_name, email, password, authID)
-VALUES ('Sulpher-Crested', 'Cockatoo', 'cheeky_bird@gmail.com', 'password2', '87654321');
+INSERT INTO users (first_name, last_name, email)
+VALUES ('Jerrica', 'Joe', 'jerrica.mj@gmail.com');
 
-INSERT INTO users (first_name, last_name, email, password, authID)
-VALUES ('Rainbow', 'Lorikeet', 'australian_bird@gmail.com', 'password3', '11111111');
+INSERT INTO users (first_name, last_name, email)
+VALUES ('Leaf', 'Ittome', 'leafittomeapp@gmail.com');
 
 INSERT INTO users (first_name, last_name, email, password, authID)
 VALUES ('Canada', 'Goose', 'scary_bird@gmail.com', 'password4', '22222222');

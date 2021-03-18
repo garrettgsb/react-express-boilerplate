@@ -22,10 +22,20 @@ const db = new Pool(dbParams);
 db.connect();
 const { getAllSpecies } = require("./db/dbhelpers.js")(db);
 
+App.post('/login,', (req, res) =>  res.json({
+  message: "User has logged in"
+}));
 
+App.get('/login', (req, res) => res.json({
+  message: "Seems to work!",
+}));
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
+  message: "Seems to work!",
+}));
+
+App.get('/api/garden', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
