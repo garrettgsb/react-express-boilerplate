@@ -2,6 +2,7 @@ import React from "react";
 import {Container} from "react-bootstrap";
 
 import Hero from "../hero";
+import PlantListItem from "../plantList/plantListItem";
 
 export default function Garden(props) {
 
@@ -14,6 +15,9 @@ export default function Garden(props) {
       ></Hero>
       <Container>
       <h2>My Garden</h2>
+
+      <PlantListItem />
+
       </Container>
     </>
   );
