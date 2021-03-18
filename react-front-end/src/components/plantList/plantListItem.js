@@ -25,16 +25,7 @@ export default function PlantListItem() {
         <Card.Body class="mx-auto">
           <Card.Title>Ferdinand</Card.Title>
           <Card.Subtitle class="text-center">Aloe Vera</Card.Subtitle>
-          {/* <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of
-            the card's content.
-          </Card.Text> */}
         </Card.Body>
-        {/* <ListGroup className="list-group-flush">
-          <ListGroupItem>Cras justo odio</ListGroupItem>
-          <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-          <ListGroupItem>Vestibulum at eros</ListGroupItem>
-        </ListGroup> */}
 
         <Card.Body>
           <div class="row px-2 no-gutters">
