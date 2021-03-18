@@ -2,7 +2,7 @@ import React from "react";
 import {Container} from "react-bootstrap";
 
 import Hero from "../hero";
-import PlantListItem from "../plantList/plantListItem";
+import PlantList from "../plantList/plantList";
 
 export default function Garden(props) {
 
@@ -14,10 +14,7 @@ export default function Garden(props) {
         graveyardButton="true"
       ></Hero>
       <Container>
-      <h2>My Garden</h2>
-
-      <PlantListItem />
-
+        <PlantList />
       </Container>
     </>
   );
