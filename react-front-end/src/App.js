@@ -12,7 +12,7 @@ import Search from "./components/search/index";
 import Garden from "./components/garden/index";
 import Graveyard from "./components/graveyard/index";
 import Login from "./components/login/index";
-import NoMatch from "./components/NoMatch";
+// import NoMatch from "./components/NoMatch";
 import Layout from "./components/layout";
 import NavMenu from './components/navbar';
 
@@ -50,7 +50,7 @@ class App extends Component {
               <Route path="/search" component={Search} />
               <Route path="/login" component={Login} />
               {/* 404 */}
-              <Route component={NoMatch} />
+              {/* <Route component={NoMatch} /> */}
             </Switch>
           </Layout>
         </Router>
