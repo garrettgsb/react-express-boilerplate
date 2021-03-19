@@ -18,6 +18,20 @@ module.exports = (pool) => {
     }));
   };
 
+  const getDeadPlants = function(userID) {
+    return pool.query(`
+    SELECT * FROM plants
+    JOIN species ON species_id = species.id
+    WHERE user_id = $1 AND is_dead = true`, [userID]
+    )
+    .then(res => {
+      return res.rows;
+    })
+    .catch((error => {
+      console.log("Error message", error)
+    }));
+  };
+
   const getAllSpecies = function () {
     return pool.query (`
     SELECT * FROM species`)
@@ -190,7 +204,8 @@ module.exports = (pool) => {
     searchByMaxSunlight,
     searchByMinWater,
     searchByMaxWater,
-    randomUserID
+    randomUserID,
+    getDeadPlants,
   };
 }
 

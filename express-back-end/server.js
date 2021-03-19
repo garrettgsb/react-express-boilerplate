@@ -36,9 +36,9 @@ app.use(cookieSession({
   // Cookie Options   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
-app.get('/login', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+// app.get('/login', (req, res) => res.json({
+//   message: "Seems to work!",
+// }));
 
 // app.post('/login/new,', (req, res) =>  {
 
@@ -46,16 +46,16 @@ app.get('/login', (req, res) => res.json({
 //   message: "User has logged in"
 // })});
 
-app.post("/login", (req, res) => {
-  const userID = dbHelpers(db).randomUserID();
+app.get("/login/:id", (req, res) => {
+  const userID = req.params.id
   console.log("Logging in with userID:", userID);
   req.session.user_id = userID;
-  res.send("Success",);
+  res.json({id: userID, username: 'test', email: 'email@test.com'});
 });
 
 
-app.get("/garden", (req, res) => {
-  getAllSpecies().then((rows) => {
+app.get("/search", (req, res) => {
+  dbHelpers(db).getAllSpecies().then((rows) => {
     console.log(rows);
     res.status(200).json(rows);
   })
@@ -70,23 +70,30 @@ app.get('/api/garden', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
-app.get("/garden/:id", (req, res) => {
-  dbHelpers(db).getUserPlants(req.params.id).then((rows) => {
+app.get("/garden", (req, res) => {
+  dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
     console.log(rows);
     res.status(200).json(rows);
   })
 });
 
-app.get("/wishlist/:id", (req, res) => {
-  dbHelpers(db).getWishlistForUser(req.params.id).then((rows) => {
+app.get("/graveyard", (req, res) => {
+  dbHelpers(db).getDeadPlants(req.session.user_id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
+app.get("/wishlist", (req, res) => {
+  dbHelpers(db).getWishlistForUser(req.session.user_id).then((rows) => {
 
     console.log(rows);
     res.status(200).json(rows);
   })
 })
 
-app.get("/tasks/:id", (req, res) => {
-  dbHelpers(db).getUserTasks(req.params.id).then((rows) => {
+app.get("/tasks", (req, res) => {
+  dbHelpers(db).getUserTasks(req.session.user_id).then((rows) => {
     console.log(rows);
     res.status(200).json(rows);
   })
