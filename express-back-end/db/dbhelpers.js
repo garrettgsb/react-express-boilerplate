@@ -31,10 +31,9 @@ module.exports = (pool) => {
 
   const getWishlistForUser = function(userID) {
     return pool.query(`
-    SELECT * FROM species 
-    JOIN wishlist ON species_id = species.id
-    JOIN users ON user_id = users.id
-    HAVING user_id = $1;
+    SELECT * FROM wishlist
+    JOIN species ON species_id = species.id 
+    WHERE user_id = $1;
     `, [userID])
     .then(res => {
       return res.rows;
