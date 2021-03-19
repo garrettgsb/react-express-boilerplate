@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import aloeVeraImage from "../../assets/aloe-vera-cropped.png";
+// import aloeVeraImage from "../../assets/aloe-vera-cropped.png";
 
 
 export default function PlantListItem(props) {
@@ -9,9 +9,9 @@ export default function PlantListItem(props) {
 
       <div class="col-12 col-sm-11 col-md-6 col-lg-4 col-xl-3 my-3">
         <Card>
-          <Card.Img variant="top" src={aloeVeraImage} />
+          <Card.Img variant="top" src={props.photo} />
           <Card.Body class="mx-auto">
-            <Card.Title>{props.nickname || props.name}</Card.Title>
+            <Card.Title class="text-center"><h5>{props.nickname || props.name}</h5></Card.Title>
             <Card.Subtitle class="text-center">{props.nickname && props.name}</Card.Subtitle>
             {!props.nickname && <br/>}
           </Card.Body>
