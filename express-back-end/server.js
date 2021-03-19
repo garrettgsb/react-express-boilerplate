@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 const dbHelpers = require('./db/dbhelpers');
 const searchRoutes = require('./routes/searchRoutes')
-
+const cookieSession = require('cookie-session');
 
 // const router = express.Router()
 
@@ -20,6 +20,7 @@ app.use(cors());
 
 
 
+
 // app.use(Express.static("public"));
 
 
@@ -27,19 +28,30 @@ const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
-const { getAllSpecies } = require("./db/dbhelpers.js")(db);
 
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ["secret"],
+  // Cookie Options   maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
 app.get('/login', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
-app.post('/login/new,', (req, res) =>  {
-  console.log("/login posted");
-  res.json({
-  message: "User has logged in"
-})});
+// app.post('/login/new,', (req, res) =>  {
+  
+//   res.json({
+//   message: "User has logged in"
+// })});
+
+app.post("/login", (req, res) => {
+  const userID = dbHelpers(db).randomUserID();
+  req.session.user_id = userID;
+  res.send("Success",);
+});
+
 
 app.get("/garden", (req, res) => {
   getAllSpecies().then((rows) => {
@@ -81,9 +93,9 @@ app.get("/tasks/:id", (req, res) => {
 })
 
 console.log("search routes", searchRoutes);
+
 app.use('/test', searchRoutes(db));
-
-
+app.use("/api/search", searchRoutes(db));
 // app.use("*", (req, res) => {console.log("unhandle path", req.url);
 //   res.status(200).end()});
 
