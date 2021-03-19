@@ -1,19 +1,70 @@
--- Users
+-- Users 1-10
 
-INSERT INTO users (first_name, last_name, email)
-VALUES ('Jacqueline', 'Smith', 'jacquelinesmith190@gmail.com');
+INSERT INTO users (username, email)
+VALUES ('Jacqueline Smith', 'jacquelinesmith190@gmail.com');
 
-INSERT INTO users (first_name, last_name, email)
-VALUES ('Jerrica', 'Joe', 'jerrica.mj@gmail.com');
+INSERT INTO users (username, email)
+VALUES ('Jerrica Joe', 'jerrica.mj@gmail.com');
 
-INSERT INTO users (first_name, last_name, email)
-VALUES ('Leaf', 'Ittome', 'leafittomeapp@gmail.com');
+INSERT INTO users (username, email)
+VALUES ('Leaf Ittome', 'leafittomeapp@gmail.com');
 
-INSERT INTO users (first_name, last_name, email, password, authID)
-VALUES ('Canada', 'Goose', 'scary_bird@gmail.com', 'password4', '22222222');
+INSERT INTO users (username, email)
+VALUES ('michaelscarn', 'threatlevelmidnight@hotmail.com');
 
-INSERT INTO users (first_name, last_name, email, password, authID)
-VALUES ('African', 'Grey', 'smart_bird@gmail.com', 'password5', '33333333');
+INSERT INTO users (username, email)
+VALUES ('iLoveToRead', 'gimmedabooks@gmail.com');
+
+INSERT INTO users (username, email)
+VALUES ('randycordray', 'salesman101@hotmail.com');
+
+INSERT INTO users (username, email)
+VALUES ('burtmacklin', 'detectivemacklin@gmai.com');
+
+INSERT INTO users (username, email)
+VALUES ('arthurread', 'readingisfun@email.com');
+
+INSERT INTO users (username, email)
+VALUES ('lavarburton', 'readingrainbow@hotmail.com');
+
+INSERT INTO users (username, email)
+VALUES ('kclegg', 'kcg@hotmail.com');
+
+INSERT INTO users (username, email)
+VALUES ('mandrews', 'mandrews@email.ca');
+
+INSERT INTO users (username, email)
+VALUES ('asmith', 'smith.a@hotmail.com');
+
+INSERT INTO users (username, email)
+VALUES ('wshakespeare', 'willyshakes@hotmail.com');
+
+INSERT INTO users (username, email)
+VALUES ('jackjones', 'jj@hotmail.com');
+
+INSERT INTO users (username, email)
+VALUES ('malcomj', 'asdnpq@yahoo.com');
+
+INSERT INTO users (username, email)
+VALUES ('tammya', 'tammy@ymail.com');
+
+INSERT INTO users (username, email)
+VALUES ('jbrown', 'jjbrown@email.com');
+
+INSERT INTO users (username, email)
+VALUES ('calvinklein', 'ck@gmail.com');
+
+INSERT INTO users (username, email)
+VALUES ('jeremywinters', 'jpw@hotmail.com');
+
+INSERT INTO users (username, email)
+VALUES ('natashaj', 'natj@gmail.com');
+
+
+
+
+
+
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
 VALUES ('Aloe Vera', 'Aloe Barbadensis', 'https://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/aloe-vera-white-pot_sunwand24-ss_edit.jpg?itok=Y7HnaYk3', 'Aloe vera is commonly grown as a houseplant and gained favor because the gel from its leaves makes a soothing skin salve (although some people are actually irritated by the gel). It has thick, succulent leaves that are plumped up with a watery gel. The leaves grow from the base of the plant, in a rosette, and have jagged edges with flexible spines.', 'Every 14-21 days', 1, 4, 2, '15-24 C', 'Once per year', true);
