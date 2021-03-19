@@ -1,4 +1,4 @@
--- Users 
+-- Users
 
 INSERT INTO users (first_name, last_name, email)
 VALUES ('Jacqueline', 'Smith', 'jacquelinesmith190@gmail.com');
@@ -16,7 +16,7 @@ INSERT INTO users (first_name, last_name, email, password, authID)
 VALUES ('African', 'Grey', 'smart_bird@gmail.com', 'password5', '33333333');
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
-VALUES ('Alo Vera', 'Aloe Barbadensis', 'https://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/aloe-vera-white-pot_sunwand24-ss_edit.jpg?itok=Y7HnaYk3', 'Aloe vera is commonly grown as a houseplant and gained favor because the gel from its leaves makes a soothing skin salve (although some people are actually irritated by the gel). It has thick, succulent leaves that are plumped up with a watery gel. The leaves grow from the base of the plant, in a rosette, and have jagged edges with flexible spines.', 'Every 14-21 days', 1, 4, 2, '15-24 C', 'Once per year', true);
+VALUES ('Aloe Vera', 'Aloe Barbadensis', 'https://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/aloe-vera-white-pot_sunwand24-ss_edit.jpg?itok=Y7HnaYk3', 'Aloe vera is commonly grown as a houseplant and gained favor because the gel from its leaves makes a soothing skin salve (although some people are actually irritated by the gel). It has thick, succulent leaves that are plumped up with a watery gel. The leaves grow from the base of the plant, in a rosette, and have jagged edges with flexible spines.', 'Every 14-21 days', 1, 4, 2, '15-24 C', 'Once per year', true);
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
 VALUES ('ZZ Plant', 'Zamioculcas Zamiifolia ', 'http://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_zz-plant_variant_medium_grant_terracotta_1200x.jpg?v=1613670666', 'Looking for a low-maintenance houseplant to spruce up your space without a big commitment? Look no further than the infamous ZZ plant, also known as the zanzibar gem! Characterized by their shiny, oval-shaped deep green leaves, ZZ plants make excellent additions to any home or office.', 'Every 3-7 days', 4, 3, 2, '18-24 C', 'None', true);
@@ -63,7 +63,7 @@ VALUES (1, 2);
 INSERT INTO wishlist (user_id, species_id)
 VALUES (1, 3);
 
--- Species 
+-- Species
 -- *The description section is from thespruce.com- remember to credit them in the ReadMe file
 
 
