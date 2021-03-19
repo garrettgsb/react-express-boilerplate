@@ -9,11 +9,21 @@ module.exports = (pool) => {
 const db = DBHELPER(pool);
 
   app.get("/garden", (req, res) => {
+    console.log("garden test");
     getAllSpecies().then((rows) => {
       console.log(rows);
       res.status(200).json(rows);
     })
   });
+
+  app.post("/garden", (req, res) => {
+    console.log("garden test");
+    getAllSpecies().then((rows) => {
+      console.log(rows);
+      res.status(200).json(rows);
+    })
+  });
+
 
   app.get("/garden/:id", (req, res) => {
     getUserPlants(id).then((rows) => {
@@ -35,6 +45,8 @@ const db = DBHELPER(pool);
       res.status(200).json(rows);
     })
   })
+
+  return app;
 }
 
   
