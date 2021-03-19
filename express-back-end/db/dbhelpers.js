@@ -6,7 +6,7 @@ module.exports = (pool) => {
 
   const getUserPlants = function(userID) {
     return pool.query(`
-    SELECT * FROM plants, species
+    SELECT * FROM plants
     JOIN species ON species_id = species.id
     WHERE user_id = $1;`, [userID]
     )
