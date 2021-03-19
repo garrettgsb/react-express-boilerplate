@@ -170,6 +170,9 @@ module.exports = (pool) => {
     .catch(err => console.error('query error', err.stack));
   };
   
+  const randomUserID = () => {
+    return Math.floor(Math.random() * 20) + 1;
+  };
 
   return {
     getUserPlants,
@@ -187,6 +190,7 @@ module.exports = (pool) => {
     searchByMaxSunlight,
     searchByMinWater,
     searchByMaxWater,
+    randomUserID
   };
 }
 

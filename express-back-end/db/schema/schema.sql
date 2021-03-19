@@ -8,11 +8,9 @@ DROP TABLE IF EXISTS tasks CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  first_name VARCHAR(255),
-  last_name VARCHAR(255),
+  name VARCHAR(255),
   email VARCHAR(100),
-  password VARCHAR(100),
-  authID VARCHAR(255)
+  
 );
 
 CREATE TABLE species (
