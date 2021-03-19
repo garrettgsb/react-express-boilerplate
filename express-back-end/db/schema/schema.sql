@@ -8,8 +8,8 @@ DROP TABLE IF EXISTS tasks CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255),
-  email VARCHAR(100),
+  username VARCHAR(255),
+  email VARCHAR(100)
   
 );
 

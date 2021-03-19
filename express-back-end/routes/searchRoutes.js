@@ -7,13 +7,23 @@ const router = express.Router()
 
 const db = DBHELPER(pool);
 
-  router.get("/garden", (req, res) => {
+  router.get("/search", (req, res) => {
     getAllSpecies().then((rows) => {
       console.log(rows);
       res.status(200).json(rows);
     })
   });
 
+  router.get("/garden/:id", (req, res) => {
+    getUserPlants().then((rows) => {
+      console.log(rows);
+      res.status(200).json(rows);
+    })
+  });
+
+  
+
+  
   // router.get("/main/search", (req, res) => {
   //   const searchText = req.query.searchText;
   //   const searchType = req.query.searchType;
