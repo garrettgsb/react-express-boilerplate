@@ -32,7 +32,7 @@ module.exports = (pool) => {
   const getWishlistForUser = function(userID) {
     return pool.query(`
     SELECT * FROM wishlist
-    JOIN species ON species_id = species.id 
+    JOIN species ON species_id = species.id
     WHERE user_id = $1;
     `, [userID])
     .then(res => {
@@ -169,9 +169,9 @@ module.exports = (pool) => {
     })
     .catch(err => console.error('query error', err.stack));
   };
-  
+
   const randomUserID = () => {
-    return Math.floor(Math.random() * 20) + 1;
+    return Math.floor(Math.random() * 5) + 1;
   };
 
   return {

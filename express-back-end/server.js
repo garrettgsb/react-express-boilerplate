@@ -41,13 +41,14 @@ app.get('/login', (req, res) => res.json({
 }));
 
 // app.post('/login/new,', (req, res) =>  {
-  
+
 //   res.json({
 //   message: "User has logged in"
 // })});
 
 app.post("/login", (req, res) => {
   const userID = dbHelpers(db).randomUserID();
+  console.log("Logging in with userID:", userID);
   req.session.user_id = userID;
   res.send("Success",);
 });
@@ -79,7 +80,7 @@ app.get("/garden/:id", (req, res) => {
 app.get("/wishlist/:id", (req, res) => {
   console.log("dbHelpers;", dbHelpers());
   dbHelpers(db).getWishlistForUser(req.params.id).then((rows) => {
-    
+
     console.log(rows);
     res.status(200).json(rows);
   })
