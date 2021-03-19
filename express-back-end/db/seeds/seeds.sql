@@ -61,10 +61,8 @@ INSERT INTO users (username, email)
 VALUES ('natashaj', 'natj@gmail.com');
 
 
-
-
-
-
+-- Species
+-- *The description section is from thespruce.com- remember to credit them in the ReadMe file
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
 VALUES ('Aloe Vera', 'Aloe Barbadensis', 'https://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/aloe-vera-white-pot_sunwand24-ss_edit.jpg?itok=Y7HnaYk3', 'Aloe vera is commonly grown as a houseplant and gained favor because the gel from its leaves makes a soothing skin salve (although some people are actually irritated by the gel). It has thick, succulent leaves that are plumped up with a watery gel. The leaves grow from the base of the plant, in a rosette, and have jagged edges with flexible spines.', 'Every 14-21 days', 1, 4, 2, '15-24 C', 'Once per year', true);
@@ -114,31 +112,196 @@ VALUES (1, 2);
 INSERT INTO wishlist (user_id, species_id)
 VALUES (1, 3);
 
--- Species
--- *The description section is from thespruce.com- remember to credit them in the ReadMe file
+INSERT INTO wishlist (user_id, species_id)
+VALUES (2, 4);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (2, 5);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (2, 6);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (3, 3);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (3, 4);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (3, 5);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (4, 6);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (4, 7);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (5, 1);
+
+INSERT INTO wishlist (user_id, species_id)
+VALUES (5, 2);
+
+
+
+
 
 
 -- Plants
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
+VALUES (1, 4, 'Alice', true, 'lack of water');
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
+VALUES (1, 11, 'Carter', true, 'neglect');
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
+VALUES (1, 12, 'Avery', true, 'drowning');
 
 INSERT INTO plants (user_id, species_id, nickname, is_dead)
 VALUES (1, 5, 'Amanda', false);
 
 INSERT INTO plants (user_id, species_id, nickname, is_dead)
-VALUES (2, 3, 'Ferdinand', false);
+VALUES (1, 7, 'Ferdinand', false);
 
 INSERT INTO plants (user_id, species_id, nickname, is_dead)
-VALUES (3, 6, 'Joey', false);
+VALUES (1, 6, 'Joey', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (1, 8, 'Courtney', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (1, 9, 'Adam', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (1, 10, 'Liz', false);
+
+
+
+
 
 INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
-VALUES (1, 4, 'Alice', true, 'lack of water');
+VALUES (2, 7, 'Max', true, 'froze to death');
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
+VALUES (2, 8, 'Monica', true, 'lack of sunlight');
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
+VALUES (2, 9, 'Bob', true, 'dehydration');
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (2, 3, 'Bruce', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (2, 1, 'Fiona', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (2, 2, 'Owen', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (2, 10, 'Ross', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (2, 11, 'Rachel', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (2, 12, 'Janet', false);
+
+
+
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
+VALUES (3, 1, 'Khloe', true, 'too much water');
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
+VALUES (3, 2, 'Chandler', true, 'attacked by a cat');
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead, cause_of_death)
+VALUES (3, 3, 'Archie', true, 'dehydration due to neglect');
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (3, 4, 'Jordan', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (3, 5, 'Betty', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (3, 6, 'Veronica', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (3, 10, 'Scotty', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (3, 11, 'Reggie', false);
+
+INSERT INTO plants (user_id, species_id, nickname, is_dead)
+VALUES (3, 12, 'Kylie', false);
+
+
+
+
 
 -- Tasks
 INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
-VALUES ('Water plant', 1, 1, '2021-03-27', false);
+VALUES ('Water plant', 4, 1, '2021-03-27', false);
 
 INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
-VALUES ('Fertilize plant', 2, 2, '2021-03-28', false);
+VALUES ('Fertilize plant', 5, 1, '2021-03-28', false);
 
 INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
-VALUES ('Water plant', 3, 3, '2021-03-30', false);
+VALUES ('Water plant', 6, 1, '2021-03-30', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Water plant', 7, 1, '2021-03-30', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Fertilize plant', 8, 1, '2021-04-01', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Water plant', 9, 1, '2021-03-30', false);
+
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Water plant', 13, 2, '2021-03-27', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Fertilize plant', 14, 2, '2021-03-28', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Water plant', 15, 2, '2021-03-30', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Water plant', 16, 2, '2021-03-30', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Fertilize plant', 17, 2, '2021-04-01', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Water plant', 18, 2, '2021-03-30', false);
+
+
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Water plant', 22, 3, '2021-03-27', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Fertilize plant', 23, 3, '2021-03-28', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Water plant', 24, 3, '2021-03-30', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Water plant', 25, 3, '2021-03-30', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Fertilize plant', 26, 3, '2021-04-01', false);
+
+INSERT INTO tasks (task, plant_id, user_id, task_date, task_complete)
+VALUES ('Water plant', 27, 3, '2021-03-30', false);
+
+
+
+
+
+
+
 

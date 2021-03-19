@@ -71,14 +71,13 @@ app.get('/api/garden', (req, res) => res.json({
 }));
 
 app.get("/garden/:id", (req, res) => {
-  getUserPlants(id).then((rows) => {
+  dbHelpers(db).getUserPlants(req.params.id).then((rows) => {
     console.log(rows);
     res.status(200).json(rows);
   })
 });
 
 app.get("/wishlist/:id", (req, res) => {
-  console.log("dbHelpers;", dbHelpers());
   dbHelpers(db).getWishlistForUser(req.params.id).then((rows) => {
 
     console.log(rows);
@@ -87,7 +86,7 @@ app.get("/wishlist/:id", (req, res) => {
 })
 
 app.get("/tasks/:id", (req, res) => {
-  getUserTasks(id).then((rows) => {
+  dbHelpers(db).getUserTasks(req.params.id).then((rows) => {
     console.log(rows);
     res.status(200).json(rows);
   })
