@@ -21,18 +21,44 @@ const Styles = styled.div`
   }
 `;
 
-export default function plantList(props) {
+export default function PlantList(props) {
+  // create all plant list items from JSON
+  // filteredSpecies.map((species, index)=> {
+  //   return <p key={index}>
+  //     {species.common_name}
+  //   </p>
+  // })
+
+  const plantListItems = props.list.map((species, index) => {
+    return (
+      <PlantListItem
+        key={index}
+        nickname={species.nickname}
+        name={species.common_name}
+        photo={species.photo_url}
+        difficulty={species.difficulty_rating}
+        waterRating={species.watering_requirement_rating}
+        water={species.watering_instructions}
+        sun={species.sunlight_requirement_rating}
+        temp={species.temperature_requirements}
+      />
+    )
+  });
+
   return (
     <Styles>
       <div class="row my-4 mx-4 justify-content-center">
-        <PlantListItem
+        {/* <PlantListItem
           nickname="Fernando"
           name="Aloe Vera"
           difficulty="easy"
           water="10-14"
           sun="full sun"
           temp="18-24"
-        ></PlantListItem>
+        ></PlantListItem> */}
+
+        {plantListItems}
+
       </div>
     </Styles>
   );
