@@ -2,7 +2,7 @@ import React from "react";
 // import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "react-bootstrap";
 import styled from "styled-components";
-// import Axios from "axios";
+import Axios from "axios";
 
 const Styles = styled.div`
   .btn {
@@ -16,12 +16,19 @@ export default function LoginButton(props) {
   const login = function () {
     // test message
     console.log("Login button clicked");
-    console.log(props.children);
+    // console.log(props.children);
 
 
     // Set random user --> back-end cookie session
     // const userInfo = (Math.ceil(Math.random() * 5));
     // console.log(userInfo);
+
+    // axios request to set cookie for user
+    Axios.post("http://localhost:8080/login").then(() => {
+      console.log("Server responded!");
+    }).catch((err) => {
+      console.log("There was an error with login", err);
+    });
 
     // Axios.post("http://localhost:8080/login",{
     //   userId : userInfo
