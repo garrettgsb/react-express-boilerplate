@@ -4,6 +4,7 @@ const App = Express();
 const path= require('path');
 const cors = require('cors');
 const searchRoutes = require('./routes/searchRoutes')
+console.log(searchRoutes)
 
 const PORT = 8080;
 
@@ -19,11 +20,11 @@ App.use(cors());
 App.use(Express.static("public"));
 
 
-// const { Pool } = require('pg');
-// const dbParams = require('./lib/db.js');
-// const db = new Pool(dbParams);
-// db.connect();
-// const { getAllSpecies } = require("./db/dbhelpers.js")(db);
+const { Pool } = require('pg');
+const dbParams = require('./lib/db.js');
+const db = new Pool(dbParams);
+db.connect();
+const { getAllSpecies } = require("./db/dbhelpers.js")(db);
 
 App.post('/login,', (req, res) =>  {console.log("/login posted");
 res.json({
@@ -34,6 +35,13 @@ App.get('/login', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
+App.get("/garden", (req, res) => {
+  getAllSpecies().then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
@@ -42,9 +50,32 @@ App.get('/api/data', (req, res) => res.json({
 App.get('/api/garden', (req, res) => res.json({
   message: "Seems to work!",
 }));
+
+App.get("/garden/:id", (req, res) => {
+  getUserPlants(id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
+App.get("/wishlist/:id", (req, res) => {
+  getWishlistForUser(id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+})
+
+App.get("/tasks/:id", (req, res) => {
+  getUserTasks(id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+})
+
 App.use('/test', searchRoutes);
 App.use("*", (req, res) => {console.log("unhandle path", req.url);
   res.status(200).end()});
+
 
 App.listen(PORT, () => {
 

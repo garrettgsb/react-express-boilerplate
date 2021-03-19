@@ -5,21 +5,37 @@ const DBHELPER = require('../db/dbhelpers');
 const {getAllSpecies} = DBHELPER(pool);
 const router = express.Router()
 
+module.exports = (pool) => {
 const db = DBHELPER(pool);
 
-  router.get("/search", (req, res) => {
+  app.get("/garden", (req, res) => {
     getAllSpecies().then((rows) => {
       console.log(rows);
       res.status(200).json(rows);
     })
   });
 
-  router.get("/garden/:id", (req, res) => {
-    getUserPlants().then((rows) => {
+  app.get("/garden/:id", (req, res) => {
+    getUserPlants(id).then((rows) => {
       console.log(rows);
       res.status(200).json(rows);
     })
   });
+
+  app.get("/wishlist/:id", (req, res) => {
+    getWishlistForUser(id).then((rows) => {
+      console.log(rows);
+      res.status(200).json(rows);
+    })
+  })
+
+  app.get("/tasks/:id", (req, res) => {
+    getUserTasks(id).then((rows) => {
+      console.log(rows);
+      res.status(200).json(rows);
+    })
+  })
+}
 
   
 
@@ -124,7 +140,7 @@ const db = DBHELPER(pool);
   //     });
 
 
-module.exports = router;
+
 
     
 //Ideas:
