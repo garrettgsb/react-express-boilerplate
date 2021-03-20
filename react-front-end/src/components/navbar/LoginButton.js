@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "react-bootstrap";
 import styled from "styled-components";
-import axios from "axios";
+// import axios from "axios";
 
 const Styles = styled.div`
   .btn {
@@ -18,19 +18,19 @@ export default function LoginButton(props) {
     // loginWithRedirect()
     // .then()
 
-    axios.get('http://localhost:8080/login/1', {
-      withCredentials: true
-    })
-    .then((res) => {
-      console.log("server responded");
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log("server did not respond", err.message)
-      // setTimeout(() => {
-        //   console.log("server did not respond", err.message)
-        // }, 8000);
-      });
+    // axios.get('http://localhost:8080/login/1', {
+    //   withCredentials: true
+    // })
+    // .then((res) => {
+    //   console.log("server responded");
+    //   console.log(res.data);
+    // })
+    // .catch((err) => {
+    //   console.log("server did not respond", err.message)
+    //   // setTimeout(() => {
+    //     //   console.log("server did not respond", err.message)
+    //     // }, 8000);
+    //   });
 
       loginWithRedirect();
 
