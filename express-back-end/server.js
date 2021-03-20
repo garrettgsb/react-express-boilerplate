@@ -66,6 +66,13 @@ app.get("/login/:id", cors(corsOptions), (req, res) => {
 });
 
 
+app.get("/logout", cors(corsOptions), (req, res) => {
+  req.session = null;
+  // console.log("Logging out user", req.session.user_id);
+  res.send("successfully logged out");
+});
+
+
 app.get("/search", (req, res) => {
   console.log("Current User ID", req.session.user_id)
   dbHelpers(db).getAllSpecies().then((rows) => {
