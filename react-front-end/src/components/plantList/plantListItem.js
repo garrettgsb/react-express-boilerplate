@@ -4,6 +4,11 @@ import { Card } from "react-bootstrap";
 
 
 export default function PlantListItem(props) {
+  const addToWishlist = () => {
+    console.log("Adding to wishlist plant id:", props.speciesId);
+  };
+
+
   return (
     <>
 
@@ -40,7 +45,7 @@ export default function PlantListItem(props) {
           </Card.Body>
 
           <Card.Body className="mx-auto mb-2">
-            <Card.Link href="#" className="btn btn-outline-success">See More</Card.Link>
+            <Card.Link href="#" className="btn btn-success" onClick={addToWishlist}><i className="fas fa-plus-circle"></i> Garden</Card.Link>
           </Card.Body>
         </Card>
       </div>
