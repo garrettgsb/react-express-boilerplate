@@ -88,9 +88,10 @@ module.exports = (pool) => {
 
   const getUserTasks = function(userID) {
     return pool.query(`
-    SELECT * FROM plants, wishlist
-    JOIN wishlist ON species_id = species.id
-    WHERE user_id = $1;
+    SELECT * FROM tasks
+    JOIN plants ON plant_id = plants.id
+    JOIN species ON species_id = species.id
+    WHERE tasks.user_id = $1;
     `, [userID])
     .then(res => {
       return res.rows;
@@ -99,6 +100,9 @@ module.exports = (pool) => {
       console.log("Error message", error)
     }));
   };
+  
+ 
+
 
   const deletePlantFromGarden = function(userID, listingID) {
     return pool.query(`
