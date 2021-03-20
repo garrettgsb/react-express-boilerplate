@@ -41,6 +41,7 @@ export default function Hero(props) {
         <p>
           {props.text}
         </p>
+        {props.children}
         <div>
           {!isAuthenticated &&
             <LoginButton>Get Started</LoginButton>

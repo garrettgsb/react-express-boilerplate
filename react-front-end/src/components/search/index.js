@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Container, Button, Form, Row, Col } from "react-bootstrap";
 
 import PlantList from "../plantList/plantList";
+import Hero from "../hero";
 
 
 const Styles = styled.div`
@@ -37,44 +38,24 @@ export default function Search() {
 
   return (
     <Styles>
+        <Hero
+          header="Find a Plant"
+          text="Find you next plant here"
+        >
+          <Form  onSubmit={submitHandler}>
+            <Row>
+              <Col sm={11} className="mb-3">
+                <Form.Control type="searchTerm" placeholder="Search plants by name..." value={searchTerm} onChange={(event) => {setSearchTerm(event.target.value)}} />
+              </Col>
+              <Col>
+                <Button variant="success" type="submit">
+                  <i className="fas fa-search"></i>
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </Hero>
       <Container>
-        <h2>Search Page</h2>
-        <p>This is a test of the search page.</p>
-
-        <Form  onSubmit={submitHandler}>
-          <Row>
-            <Col sm={11} className="mb-3">
-              <Form.Control type="searchTerm" placeholder="Search plants by name..." value={searchTerm} onChange={(event) => {setSearchTerm(event.target.value)}} />
-            </Col>
-            <Col>
-              <Button variant="success" type="submit">
-                <i className="fas fa-search"></i>
-              </Button>
-            </Col>
-          </Row>
-          {/* <Row>
-            <Form.Group controlId="sortBy">
-              <Col sm={2}>
-                <Form.Check type="checkbox" label="A-Z" />
-              </Col>
-              <Col sm={2}>
-                <Form.Check type="checkbox" label="Z-A" />
-              </Col>
-            </Form.Group>
-          </Row> */}
-
-        </Form>
-
-        {/* <form onSubmit={submitHandler}>
-          <input value={searchTerm} onChange={(event) => {setSearchTerm(event.target.value)}} />
-          <Button type="submit" variant="success">Search</Button>
-        </form> */}
-
-        {/* {filteredSpecies.map((species, index)=> {
-          return <p key={index}>
-            {species.common_name}
-          </p>
-        })} */}
 
         <PlantList
           list={filteredSpecies}
