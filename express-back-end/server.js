@@ -93,6 +93,14 @@ app.get('/api/garden', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
+
+app.get("/garden", (req, res) => {
+  dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
 app.get("/graveyard", (req, res) => {
   dbHelpers(db).getDeadPlants(req.session.user_id).then((rows) => {
     console.log(rows);
@@ -127,3 +135,5 @@ app.listen(PORT, () => {
 
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
+
+//To do: logout route, post routes, delete route
