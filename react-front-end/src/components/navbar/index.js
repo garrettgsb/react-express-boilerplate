@@ -1,13 +1,14 @@
 import React from 'react';
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
-// import { Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import styled from 'styled-components';
-// import { useAuth0 } from "@auth0/auth0-react";
 
-// import LoginButton from "./LoginButton";
-import LoginButton from "../login/SimpleLogin";
-// import LogoutButton from "./LogoutButton";
+import LoginButton from "./LoginButton";
+// import LoginButton from "../login/SimpleLogin";
+import LogoutButton from "./LogoutButton";
 // import Profile from "../Profile"
 
 const Styles = styled.div`
@@ -43,6 +44,48 @@ const Styles = styled.div`
 export default function NavMenu(){
   // const { user, isAuthenticated } = useAuth0();
 
+  const { isAuthenticated, isLoading, user } = useAuth0();
+
+  // useEffect(() => {
+  //   console.log("THIS TEST WORKED FOR CHANGE IN THE NAV BAR");
+
+  // }, [isAuthenticated]);
+
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     console.log("authenticated?", isAuthenticated);
+  //     axios.get("https://localhost:8080/login/1", {withCredentials: true})
+  //     .then((res) => {
+  //       console.log("login response", res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log("Login Error:", err);
+  //     });
+  //   } else {
+  //     console.log("Not yet logged in");
+  //   }
+  // }, [isAuthenticated]);
+
+
+  if (!isLoading) {
+
+    console.log("in profile:", isAuthenticated? user.name: "not logged in")
+
+    if (isAuthenticated) {
+      axios.get('http://localhost:8080/login/1', {
+        withCredentials: true
+        })
+        .then((res) => {
+          console.log("server responded");
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log("server did not respond", err.message)
+          });
+    }
+  }
+
+
   return (
     <Styles>
       <Navbar expand="lg">
@@ -65,25 +108,26 @@ export default function NavMenu(){
                 <Link to="/search" className="pr-4">Search</Link>
               {/* </Nav.Link> */}
             </Nav.Item>
-            {/* {!isAuthenticated && */}
+            {!isAuthenticated && <>
             <Nav.Item>
               <LoginButton>Log In</LoginButton>
             </Nav.Item>
-            {/* } */}
+            </> }
             {/* {!isAuthenticated &&
             <Nav.Item>
               <Profile>User</Profile>
             </Nav.Item>
             } */}
-              {/* {isAuthenticated && <>
+              {isAuthenticated && <>
             <Nav.Item>
               <LogoutButton />
             </Nav.Item>
-            <p class="pr-4"></p>
-            <Nav.Item class="pr-4">
-                <Image class="pr-4" src={user.picture} alt={user.email}roundedCircle fluid />
+            {/* The following 3 all had class="pr-4", which was meant to be className */}
+            <p className="pr-4"></p>
+            <Nav.Item>
+                <Image src={user.picture} alt={user.email}roundedCircle fluid />
             </Nav.Item>
-            </>} */}
+            </>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

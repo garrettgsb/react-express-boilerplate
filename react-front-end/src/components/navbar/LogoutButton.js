@@ -15,15 +15,28 @@ export default function LogoutButton() {
   const { logout } = useAuth0();
 
   const appLogout = () => {
+    axios.get('http://localhost:8080/logout', {
+      withCredentials: true
+    })
+    .then((res) => {
+      console.log("server responded to logout request");
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log("server did not respond to logout request", err.message)
+      });
     logout()
     // .then(() =>{
-    //   axios.get("http://localhost:8080/logout")
+    //   axios.get("http://localhost:8080/logout", {
+    //         withCredentials: true
+    //         })
     //   .then(() => {
-    //     console.log("Loging out of the server...");
+    //     console.log("Logging out of the server...");
     //   }).catch((err) => {
     //     console.log(err);
     //   })
     // });
+
   }
 
   return(
