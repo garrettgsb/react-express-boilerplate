@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, Navbar, Image } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
+// import { Image } from "react-bootstrap";
 import styled from 'styled-components';
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+// import LoginButton from "./LoginButton";
+import LoginButton from "../login/SimpleLogin";
+// import LogoutButton from "./LogoutButton";
+// import Profile from "../Profile"
 
 const Styles = styled.div`
   .navbar {
@@ -38,7 +41,7 @@ const Styles = styled.div`
 `;
 
 export default function NavMenu(){
-  const { user, isAuthenticated } = useAuth0();
+  // const { user, isAuthenticated } = useAuth0();
 
   return (
     <Styles>
@@ -62,20 +65,25 @@ export default function NavMenu(){
                 <Link to="/search" class="pr-4">Search</Link>
               </Nav.Link>
             </Nav.Item>
-            {!isAuthenticated &&
+            {/* {!isAuthenticated && */}
             <Nav.Item>
               <LoginButton>Log In</LoginButton>
             </Nav.Item>
-            }
-              {isAuthenticated && <>
+            {/* } */}
+            {/* {!isAuthenticated &&
+            <Nav.Item>
+              <Profile>User</Profile>
+            </Nav.Item>
+            } */}
+              {/* {isAuthenticated && <>
             <Nav.Item>
               <LogoutButton />
             </Nav.Item>
             <p class="pr-4"></p>
             <Nav.Item class="pr-4">
-                <Image class="pr-4" src={user.picture} alt={user.name} roundedCircle fluid />
+                <Image class="pr-4" src={user.picture} alt={user.email}roundedCircle fluid />
             </Nav.Item>
-            </>}
+            </>} */}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

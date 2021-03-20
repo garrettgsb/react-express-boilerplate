@@ -1,35 +1,113 @@
 const Express = require('express');
 require('dotenv').config();
-const App = Express();
+const app = Express();
 const path= require('path');
+const bodyParser = require("body-parser");
+const cors = require('cors');
+const dbHelpers = require('./db/dbhelpers');
+const searchRoutes = require('./routes/searchRoutes')
+const cookieSession = require('cookie-session');
+
+// const router = express.Router()
 
 const PORT = 8080;
 
-// Express Configuration
-App.use(Express.urlencoded({ extended: false }));
-App.use(Express.json());
-App.use(Express.static('public'));
+
+app.use(Express.urlencoded({ extended: false }));
+app.use(Express.json());
+app.use(Express.static('public'));
+app.use(cors());
 
 
 
 
-App.use(Express.static("public"));
+// app.use(Express.static("public"));
 
 
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
-const { getAllSpecies } = require("./db/dbhelpers.js")(db);
 
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ["secret"],
+  // Cookie Options   maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
+
+// app.get('/login', (req, res) => res.json({
+//   message: "Seems to work!",
+// }));
+
+// app.post('/login/new,', (req, res) =>  {
+
+//   res.json({
+//   message: "User has logged in"
+// })});
+
+app.get("/login/:id", (req, res) => {
+  const userID = req.params.id
+  console.log("Logging in with userID:", userID);
+  req.session.user_id = userID;
+  res.json({id: userID, username: 'test', email: 'email@test.com'});
+});
+
+
+app.get("/search", (req, res) => {
+  dbHelpers(db).getAllSpecies().then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
 
 // Sample GET route
-App.get('/api/data', (req, res) => res.json({
+app.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
-App.listen(PORT, () => {
+app.get('/api/garden', (req, res) => res.json({
+  message: "Seems to work!",
+}));
+
+app.get("/garden", (req, res) => {
+  dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
+app.get("/graveyard", (req, res) => {
+  dbHelpers(db).getDeadPlants(req.session.user_id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
+app.get("/wishlist", (req, res) => {
+  dbHelpers(db).getWishlistForUser(req.session.user_id).then((rows) => {
+
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+})
+
+app.get("/tasks", (req, res) => {
+  dbHelpers(db).getUserTasks(req.session.user_id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+})
+
+console.log("search routes", searchRoutes);
+
+app.use('/test', searchRoutes(db));
+app.use("/api/search", searchRoutes(db));
+// app.use("*", (req, res) => {console.log("unhandle path", req.url);
+//   res.status(200).end()});
+
+
+app.listen(PORT, () => {
 
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });

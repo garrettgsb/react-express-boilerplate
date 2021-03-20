@@ -6,9 +6,23 @@ module.exports = (pool) => {
 
   const getUserPlants = function(userID) {
     return pool.query(`
-    SELECT * FROM plants, species
+    SELECT * FROM plants
     JOIN species ON species_id = species.id
     WHERE user_id = $1;`, [userID]
+    )
+    .then(res => {
+      return res.rows;
+    })
+    .catch((error => {
+      console.log("Error message", error)
+    }));
+  };
+
+  const getDeadPlants = function(userID) {
+    return pool.query(`
+    SELECT * FROM plants
+    JOIN species ON species_id = species.id
+    WHERE user_id = $1 AND is_dead = true`, [userID]
     )
     .then(res => {
       return res.rows;
@@ -31,8 +45,8 @@ module.exports = (pool) => {
 
   const getWishlistForUser = function(userID) {
     return pool.query(`
-    SELECT * FROM species, wishlist
-    JOIN wishlist ON species_id = species.id
+    SELECT * FROM wishlist
+    JOIN species ON species_id = species.id
     WHERE user_id = $1;
     `, [userID])
     .then(res => {
@@ -169,7 +183,10 @@ module.exports = (pool) => {
     })
     .catch(err => console.error('query error', err.stack));
   };
-  
+
+  const randomUserID = () => {
+    return Math.floor(Math.random() * 3) + 1;
+  };
 
   return {
     getUserPlants,
@@ -187,6 +204,8 @@ module.exports = (pool) => {
     searchByMaxSunlight,
     searchByMinWater,
     searchByMaxWater,
+    randomUserID,
+    getDeadPlants,
   };
 }
 
