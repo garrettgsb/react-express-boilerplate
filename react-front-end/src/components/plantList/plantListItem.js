@@ -7,40 +7,40 @@ export default function PlantListItem(props) {
   return (
     <>
 
-      <div class="col-12 col-sm-11 col-md-6 col-lg-4 col-xl-3 my-3">
+      <div className="col-12 col-sm-11 col-md-6 col-lg-4 col-xl-3 my-3">
         <Card>
           <Card.Img variant="top" src={props.photo} />
-          <Card.Body class="mx-auto">
-            <Card.Title class="text-center"><h5>{props.nickname || props.name}</h5></Card.Title>
-            <Card.Subtitle class="text-center">{props.nickname && props.name}</Card.Subtitle>
+          <Card.Body className="mx-auto">
+            <Card.Title className="text-center"><h5>{props.nickname || props.name}</h5></Card.Title>
+            <Card.Subtitle className="text-center">{props.nickname && props.name}</Card.Subtitle>
             {!props.nickname && <br/>}
           </Card.Body>
 
           <Card.Body>
-            <div class="row px-2 no-gutters">
-              <div class="col-6">
-                  <h3 class="card card-block border-0 text-center"><i class="fas fa-seedling"></i></h3>
-                  <p class="text-center">{props.difficulty}</p>
+            <div className="row px-2 no-gutters">
+              <div className="col-6">
+                  <h3 className="card card-block border-0 text-center"><i className="fas fa-seedling"></i></h3>
+                  <p className="text-center">{props.difficulty}</p>
               </div>
-              <div class="col-6">
-                  <h3 class="card card-block border-0 text-center"><i class="fas fa-tint"></i></h3>
-                  <p class="text-center">{props.water} days</p>
+              <div className="col-6">
+                  <h3 className="card card-block border-0 text-center"><i className="fas fa-tint"></i></h3>
+                  <p className="text-center">{props.water} days</p>
               </div>
             </div>
-            <div class="row px-2 no-gutters">
-              <div class="col-6">
-                  <h3 class="card card-block border-0 text-center"><i class="fas fa-sun"></i></h3>
-                  <p class="text-center">{props.sun}</p>
+            <div className="row px-2 no-gutters">
+              <div className="col-6">
+                  <h3 className="card card-block border-0 text-center"><i className="fas fa-sun"></i></h3>
+                  <p className="text-center">{props.sun}</p>
               </div>
-              <div class="col-6">
-                  <h3 class="card card-block border-0 text-center"><i class="fas fa-thermometer-half"></i></h3>
-                  <p class="text-center">{props.temp}°C</p>
+              <div className="col-6">
+                  <h3 className="card card-block border-0 text-center"><i className="fas fa-thermometer-half"></i></h3>
+                  <p className="text-center">{props.temp}°C</p>
               </div>
             </div>
           </Card.Body>
 
-          <Card.Body class="mx-auto mb-2">
-            <Card.Link href="#" class="btn btn-outline-success">See More</Card.Link>
+          <Card.Body className="mx-auto mb-2">
+            <Card.Link href="#" className="btn btn-outline-success">See More</Card.Link>
           </Card.Body>
         </Card>
       </div>

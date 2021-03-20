@@ -52,17 +52,17 @@ export default function NavMenu(){
           <Nav className="ml-auto flex-row">
             <Nav.Item>
               <Nav.Link>
-                <Link to="/" class="pr-4">Home</Link>
+                <Link to="/" className="pr-4">Home</Link>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
-                <Link to="/garden" class="pr-4">Garden</Link>
+                <Link to="/garden" className="pr-4">Garden</Link>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
-                <Link to="/search" class="pr-4">Search</Link>
+                <Link to="/search" className="pr-4">Search</Link>
               </Nav.Link>
             </Nav.Item>
             {/* {!isAuthenticated && */}
