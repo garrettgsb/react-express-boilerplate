@@ -88,9 +88,10 @@ module.exports = (pool) => {
 
   const getUserTasks = function(userID) {
     return pool.query(`
-    SELECT * FROM plants
-    JOIN tasks ON tasks.plants_id = plants.id
-    WHERE plant_id = $1;
+    SELECT * FROM tasks
+    JOIN plants ON plant_id = plants.id
+    JOIN species ON species_id = species.id
+    WHERE tasks.user_id = $1;
     `, [userID])
     .then(res => {
       return res.rows;
