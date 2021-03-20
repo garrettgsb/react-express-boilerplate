@@ -19,6 +19,16 @@ app.use(Express.static('public'));
 app.use(cors());
 
 
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000/garden"); // update to match the domain you will make the request from
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+// var corsOptions = {
+//   origin: 'http://localhost:3000',
+//   credentials: true,
+//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }
 
 
 // app.use(Express.static("public"));
@@ -32,8 +42,9 @@ db.connect();
 
 app.use(cookieSession({
   name: 'session',
-  keys: ["secret"],
-  // Cookie Options   maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  keys: ["user_id"],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
 // app.get('/login', (req, res) => res.json({
@@ -48,14 +59,26 @@ app.use(cookieSession({
 
 app.get("/login/:id", (req, res) => {
   const userID = req.params.id
-  console.log("Logging in with userID:", userID);
   req.session.user_id = userID;
+  console.log("Logging in with userID:", req.session.user_id);
   res.json({id: userID, username: 'test', email: 'email@test.com'});
 });
 
 
 app.get("/search", (req, res) => {
+  console.log("Current User ID", req.session.user_id)
   dbHelpers(db).getAllSpecies().then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
+// app.get("/garden", cors(corsOptions), (req, res) => {
+app.get("/garden", (req, res) => {
+  console.log("================================");
+  console.log("Current user id:", req.session.user_id);
+  dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
+    console.log("++++++++++++++++++++++++++++++++");
     console.log(rows);
     res.status(200).json(rows);
   })
@@ -69,13 +92,6 @@ app.get('/api/data', (req, res) => res.json({
 app.get('/api/garden', (req, res) => res.json({
   message: "Seems to work!",
 }));
-
-app.get("/garden", (req, res) => {
-  dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
-    console.log(rows);
-    res.status(200).json(rows);
-  })
-});
 
 app.get("/graveyard", (req, res) => {
   dbHelpers(db).getDeadPlants(req.session.user_id).then((rows) => {
