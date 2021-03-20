@@ -63,6 +63,7 @@ app.get("/search", (req, res) => {
 
 // Sample GET route
 app.get('/api/data', (req, res) => res.json({
+<<<<<<< HEAD
   message: "Seems to work!",
 }));
 
@@ -70,6 +71,15 @@ app.get('/api/garden', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
+=======
+  message: "Seems to work!",
+}));
+
+app.get('/api/garden', (req, res) => res.json({
+  message: "Seems to work!",
+}));
+
+>>>>>>> 0daa0cced673c4633c81ed6ac17396effbc658cc
 app.get("/garden", (req, res) => {
   dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
     console.log(rows);
