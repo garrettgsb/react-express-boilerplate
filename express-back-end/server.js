@@ -24,11 +24,11 @@ app.use(cors());
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 //   next();
 // });
-// var corsOptions = {
-//   origin: 'http://localhost:3000',
-//   credentials: true,
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
+var corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 
 // app.use(Express.static("public"));
@@ -73,8 +73,8 @@ app.get("/search", (req, res) => {
   })
 });
 
-// app.get("/garden", cors(corsOptions), (req, res) => {
-app.get("/garden", (req, res) => {
+app.get("/garden", cors(corsOptions), (req, res) => {
+// app.get("/garden", (req, res) => {
   console.log("================================");
   console.log("Current user id:", req.session.user_id);
   dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
