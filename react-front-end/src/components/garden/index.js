@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {Container} from "react-bootstrap";
 
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 
 import Hero from "../hero";
 import PlantList from "../plantList/plantList";
@@ -10,7 +10,7 @@ import PlantList from "../plantList/plantList";
 
 
 export default function Garden(props) {
-  const { isAuthenticated, user } = useAuth0();
+  // const { isAuthenticated, user } = useAuth0();
   const [myGarden, setMyGarden] = useState([]);
 
   useEffect(() => {
