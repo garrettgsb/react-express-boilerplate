@@ -100,6 +100,15 @@ app.get("/wishlist", cors(corsOptions), (req, res) => {
   })
 });
 
+app.post("/wishlist/plant/:id", cors(corsOptions), (req, res) => {
+  console.log("Add plant to wishlist :", req.session.user_id);
+  dbHelpers(db).addPlantToWishlist(req.session.user_id, req.params.id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
+
 
 // Sample GET route
 app.get('/api/data', (req, res) => res.json({
