@@ -17,8 +17,13 @@ export default function Garden(props) {
     axios.get("http://localhost:8080/garden", {withCredentials: true})
     .then((res) => {
       console.log("Request for garden data received by the server");
-      console.log(res.data);
-      setMyGarden(res.data);
+      // console.log(res.data);
+
+      const filtered = res.data.filter((myPlant)=> {
+        return myPlant.is_dead === false;
+      })
+      console.log(filtered);
+      setMyGarden(filtered);
     })
     .catch((err) => {
       console.log(err);
