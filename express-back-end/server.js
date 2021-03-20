@@ -92,6 +92,15 @@ app.get("/garden", cors(corsOptions), (req, res) => {
   })
 });
 
+app.get("/wishlist", cors(corsOptions), (req, res) => {
+  console.log("Fetching the wishlist for user:", req.session.user_id);
+  dbHelpers(db).getWishlistForUser(req.session.user_id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
+
 // Sample GET route
 app.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
@@ -109,20 +118,14 @@ app.get("/garden", (req, res) => {
   })
 });
 
+// -----------------------------------------
+// Unused Routes -- may be used later
 app.get("/graveyard", (req, res) => {
   dbHelpers(db).getDeadPlants(req.session.user_id).then((rows) => {
     console.log(rows);
     res.status(200).json(rows);
   })
 });
-
-app.get("/wishlist", (req, res) => {
-  dbHelpers(db).getWishlistForUser(req.session.user_id).then((rows) => {
-
-    console.log(rows);
-    res.status(200).json(rows);
-  })
-})
 
 app.get("/tasks", (req, res) => {
   dbHelpers(db).getUserTasks(req.session.user_id).then((rows) => {

@@ -104,6 +104,9 @@ export default function NavMenu(){
               {/* </Nav.Link> */}
             </Nav.Item>
             <Nav.Item>
+                <Link to="/wishlist" className="pr-4">Wishlist</Link>
+            </Nav.Item>
+            <Nav.Item>
               {/* <Nav.Link> */}
                 <Link to="/search" className="pr-4">Search</Link>
               {/* </Nav.Link> */}
