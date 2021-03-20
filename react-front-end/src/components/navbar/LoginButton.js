@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "react-bootstrap";
 import styled from "styled-components";
-import Axios from "axios";
+import axios from "axios";
 
 const Styles = styled.div`
   .btn {
@@ -12,31 +12,52 @@ const Styles = styled.div`
 
 export default function LoginButton(props) {
   // destructure the auth0 hook
-  const { loginWithRedirect, user } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
   const login = function () {
-    
-    loginWithRedirect().then((token) => {
-      console.log("button was clicked")
-      // Axios.get ('http://localhost:8080/api/garden').then((res) =>
-      // console.log(res)).catch((err) => {
-      //   console.log("something went wrong", err)
-      // })
-      Axios.post ('http://localhost:8080/login', {
-        name : "",
-        email: ""
-      }).then(() => {
-        console.log("server responded")
-      }).catch((err) => {
-        console.log("server did not respond", err.message)
-        setTimeout(() => {
-          console.log("server did not respond", err.message)
-        }, 8000);
-      })
-    }).catch(() => {
-      console.log("error with loginWithRedirect")
-      
+
+    // loginWithRedirect()
+    // .then()
+
+    axios.get('http://localhost:8080/login/1', {
+      withCredentials: true
     })
-    
+    .then((res) => {
+      console.log("server responded");
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log("server did not respond", err.message)
+      // setTimeout(() => {
+        //   console.log("server did not respond", err.message)
+        // }, 8000);
+      });
+
+      loginWithRedirect();
+
+    // loginWithPopup().then((token) => {
+    //   console.log("Login button was clicked");})
+    //   .then(() => {
+    //   // console.log(user.name)
+    //   // Axios.get ('http://localhost:8080/api/garden').then((res) =>
+    //   // console.log(res)).catch((err) => {
+    //   //   console.log("something went wrong", err)
+    //   // })
+
+    //   // setTimeout(() => {
+    //   //   axios.get('http://localhost:8080/login/1').then((res) => {
+    //   //     console.log("server responded");
+    //   //     console.log(res.data);
+    //   //   }).catch((err) => {
+    //   //     console.log("server did not respond", err.message)
+    //   //     // setTimeout(() => {
+    //   //     //   console.log("server did not respond", err.message)
+    //   //     // }, 8000);
+    //   //   })
+    //   // }, 2000);
+    // }).catch(() => {
+    //   console.log("error with loginWithRedirect")
+    // })
+
   }
   return(
     <Styles>

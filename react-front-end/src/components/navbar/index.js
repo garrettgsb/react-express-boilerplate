@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 // import { Image } from "react-bootstrap";
@@ -42,6 +44,29 @@ const Styles = styled.div`
 
 export default function NavMenu(){
   // const { user, isAuthenticated } = useAuth0();
+
+  const { isAuthenticated } = useAuth0();
+
+  // useEffect(() => {
+  //   console.log("THIS TEST WORKED FOR CHANGE IN THE NAV BAR");
+
+  // }, [isAuthenticated]);
+
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     console.log("authenticated?", isAuthenticated);
+  //     axios.get("https://localhost:8080/login/1", {withCredentials: true})
+  //     .then((res) => {
+  //       console.log("login response", res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log("Login Error:", err);
+  //     });
+  //   } else {
+  //     console.log("Not yet logged in");
+  //   }
+  // }, [isAuthenticated]);
+
 
   return (
     <Styles>
