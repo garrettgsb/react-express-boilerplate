@@ -27,6 +27,7 @@ app.use(cors());
 var corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
+  methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
@@ -57,7 +58,7 @@ app.use(cookieSession({
 //   message: "User has logged in"
 // })});
 
-app.get("/login/:id", (req, res) => {
+app.get("/login/:id", cors(corsOptions), (req, res) => {
   const userID = req.params.id
   req.session.user_id = userID;
   console.log("Logging in with userID:", req.session.user_id);
