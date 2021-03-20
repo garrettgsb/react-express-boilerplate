@@ -15,6 +15,7 @@ import Login from "./components/login/index";
 // import NoMatch from "./components/NoMatch";
 import Layout from "./components/layout";
 import NavMenu from './components/navbar';
+import Wishlist from "./components/wishlist/index";
 
 
 class App extends Component {
@@ -48,6 +49,7 @@ class App extends Component {
               <Route exact path="/" component={HomePage} />
               <Route path="/garden" component={Garden} />
               <Route path="/graveyard" component={Graveyard} />
+              <Route path="/wishlist" component={Wishlist} />
               <Route path="/search" component={Search} />
               <Route path="/login" component={Login} />
               {/* 404 */}
