@@ -51,19 +51,19 @@ export default function NavMenu(){
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto flex-row">
             <Nav.Item>
-              <Nav.Link>
+              {/* <Nav.Link> */}
                 <Link to="/" className="pr-4">Home</Link>
-              </Nav.Link>
+              {/* </Nav.Link> */}
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link>
+              {/* <Nav.Link> */}
                 <Link to="/garden" className="pr-4">Garden</Link>
-              </Nav.Link>
+              {/* </Nav.Link> */}
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link>
+              {/* <Nav.Link> */}
                 <Link to="/search" className="pr-4">Search</Link>
-              </Nav.Link>
+              {/* </Nav.Link> */}
             </Nav.Item>
             {/* {!isAuthenticated && */}
             <Nav.Item>

@@ -41,7 +41,7 @@ export default function Hero(props) {
         <p>
           {props.text}
         </p>
-        <p>
+        <div>
           {!isAuthenticated &&
             <LoginButton>Get Started</LoginButton>
           }
@@ -55,7 +55,7 @@ export default function Hero(props) {
               <Button variant="secondary">See Plant Graveyard</Button>
             </Link>
           }
-        </p>
+        </div>
         </Container>
       </Jumbotron>
     </Styles>
