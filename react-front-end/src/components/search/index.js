@@ -48,7 +48,7 @@ export default function Search() {
             </Col>
             <Col>
               <Button variant="success" type="submit">
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
               </Button>
             </Col>
           </Row>

@@ -47,7 +47,7 @@ export default function PlantList(props) {
 
   return (
     <Styles>
-      <div class="row my-4 mx-4 justify-content-center">
+      <div className="row my-4 mx-4 justify-content-center">
         {/* <PlantListItem
           nickname="Fernando"
           name="Aloe Vera"
