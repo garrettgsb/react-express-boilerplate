@@ -29,19 +29,23 @@ export default function PlantList(props) {
   //   </p>
   // })
 
-  const plantListItems = props.list.map((species, index) => {
+  const plantListItems = props.list.map((item, index) => {
     return (
       <PlantListItem
         key={index}
-        nickname={species.nickname}
-        name={species.common_name}
-        photo={species.photo_url}
-        difficulty={species.difficulty_rating}
-        waterRating={species.watering_requirement_rating}
-        water={species.watering_instructions}
-        sun={species.sunlight_requirement_rating}
-        temp={species.temperature_requirements}
-        speciesId={species.species_id || species.id}
+        nickname={item.nickname}
+        name={item.common_name}
+        photo={item.photo_url}
+        difficulty={item.difficulty_rating}
+        waterRating={item.watering_requirement_rating}
+        water={item.watering_instructions}
+        sun={item.sunlight_requirement_rating}
+        temp={item.temperature_requirements}
+        speciesId={item.species_id || item.id}
+        plantId={item.id}
+        hook={props.hook}
+        gardenButton={props.gardenButton}
+        wishlistButton={props.wishlistButton}
       />
     )
   });

@@ -59,6 +59,8 @@ export default function Search() {
 
         <PlantList
           list={filteredSpecies}
+          gardenButton
+          wishlistButton
         />
 
       </Container>
