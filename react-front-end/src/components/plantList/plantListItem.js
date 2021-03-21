@@ -29,6 +29,27 @@ export default function PlantListItem(props) {
     });
   };
 
+  const moveToGraveyard = () => {
+    console.log("Moving to graveyard plant id:", props.plantId);
+
+    axios.get(`http://localhost:8080/graveyard/plant/${props.plantId}`, {withCredentials: true})
+    .then((res) => {
+      console.log("Server responded to graveyard move request");
+      console.log(res.data);
+
+
+      props.hook && props.hook((prev) => {
+        const updated = prev.filter((element) => {
+          return element.id !== props.plantId;
+        });
+        return updated;
+      });
+
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
   return (
     <>
 
@@ -65,8 +86,15 @@ export default function PlantListItem(props) {
           </Card.Body>
 
           <Card.Body className="mx-auto mb-2">
-            <Card.Link className="btn btn-success" onClick={addToGarden}><i className="fas fa-plus-circle"></i> Garden</Card.Link>
-            <Card.Link className="btn btn-outline-success" onClick={addToWishlist}><i class="far fa-heart"></i> Wishlist</Card.Link>
+            {props.gardenButton &&
+              <Card.Link className="btn btn-success" onClick={addToGarden}><i className="fas fa-plus-circle"></i> Garden</Card.Link>
+            }
+            {props.wishlistButton &&
+              <Card.Link className="btn btn-outline-success" onClick={addToWishlist}><i className="far fa-heart"></i> Wishlist</Card.Link>
+            }
+            {props.hook &&
+              <Card.Link className="btn btn-outline-danger" onClick={moveToGraveyard}><i className="fas fa-skull-crossbones"></i> Graveyard</Card.Link>
+            }
           </Card.Body>
         </Card>
       </div>
