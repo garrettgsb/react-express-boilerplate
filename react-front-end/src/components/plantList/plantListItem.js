@@ -1,13 +1,33 @@
 import React from "react";
+import axios from "axios";
 import { Card } from "react-bootstrap";
 // import aloeVeraImage from "../../assets/aloe-vera-cropped.png";
 
 
 export default function PlantListItem(props) {
-  const addToWishlist = () => {
-    console.log("Adding to wishlist plant id:", props.speciesId);
+  const addToGarden = () => {
+    console.log("Adding to garden plant id:", props.speciesId);
+
+    axios.get(`http://localhost:8080/garden/plant/${props.speciesId}`, {withCredentials: true})
+    .then((res) => {
+      console.log("Server responded to garden add request");
+      console.log(res.data);
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
+  const addToWishlist = () => {
+    console.log("Adding to wishlist plant id:", props.speciesId);
+
+    axios.get(`http://localhost:8080/wishlist/plant/${props.speciesId}`, {withCredentials: true})
+    .then((res) => {
+      console.log("Server responded to wishlist add request");
+      console.log(res.data);
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
 
   return (
     <>
@@ -45,7 +65,8 @@ export default function PlantListItem(props) {
           </Card.Body>
 
           <Card.Body className="mx-auto mb-2">
-            <Card.Link href="#" className="btn btn-success" onClick={addToWishlist}><i className="fas fa-plus-circle"></i> Garden</Card.Link>
+            <Card.Link className="btn btn-success" onClick={addToGarden}><i className="fas fa-plus-circle"></i> Garden</Card.Link>
+            <Card.Link className="btn btn-outline-success" onClick={addToWishlist}><i class="far fa-heart"></i> Wishlist</Card.Link>
           </Card.Body>
         </Card>
       </div>

@@ -41,6 +41,7 @@ export default function PlantList(props) {
         water={species.watering_instructions}
         sun={species.sunlight_requirement_rating}
         temp={species.temperature_requirements}
+        speciesId={species.species_id || species.id}
       />
     )
   });
