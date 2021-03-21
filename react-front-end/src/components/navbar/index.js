@@ -14,7 +14,7 @@ import LogoutButton from "./LogoutButton";
 const Styles = styled.div`
   .navbar {
     background-color: #FBF6EE;
-    height: 120px;
+
     font-size: 1.5em;
     align-items: center;
 
@@ -121,8 +121,8 @@ export default function NavMenu(){
               <Profile>User</Profile>
             </Nav.Item>
             } */}
-              {isAuthenticated && <>
-            <Nav.Item>
+          {isAuthenticated && <>
+            <Nav.Item className="ml-auto">
               <LogoutButton />
             </Nav.Item>
             {/* The following 3 all had class="pr-4", which was meant to be className */}
@@ -130,7 +130,7 @@ export default function NavMenu(){
             <Nav.Item>
                 <Image src={user.picture} alt={user.email}roundedCircle fluid />
             </Nav.Item>
-            </>}
+          </>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
