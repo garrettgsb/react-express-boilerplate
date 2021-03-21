@@ -121,21 +121,21 @@ export default function PlantListItem(props) {
           <Card.Body className="mb-0 pb-0">
             <div className="row px-2 no-gutters">
               <div className="col-6">
-                  <h3 className="card card-block border-0 text-center"><i className="fas fa-leaf"></i></h3>
+                  <h3 className="card card-block border-0 text-center"><i className="fas fa-leaf icon"></i></h3>
                   <p className="text-center">{difficulty()}</p>
               </div>
               <div className="col-6">
-                  <h3 className="card card-block border-0 text-center"><i className="fas fa-tint"></i></h3>
+                  <h3 className="card card-block border-0 text-center"><i className="fas fa-tint icon"></i></h3>
                   <p className="text-center">{props.water} days</p>
               </div>
             </div>
             <div className="row px-2 no-gutters">
               <div className="col-6">
-                  <h3 className="card card-block border-0 text-center"><i className="fas fa-sun"></i></h3>
+                  <h3 className="card card-block border-0 text-center"><i className="fas fa-sun icon"></i></h3>
                   <p className="text-center">{sun()}</p>
               </div>
               <div className="col-6">
-                  <h3 className="card card-block border-0 text-center"><i className="fas fa-thermometer-half"></i></h3>
+                  <h3 className="card card-block border-0 text-center"><i className="fas fa-thermometer-half icon"></i></h3>
                   <p className="text-center">{props.temp}°C</p>
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function PlantListItem(props) {
 
               {props.hook &&
               <Row className="justify-content-center">
-                    <Card.Link className="btn btn-outline-danger" onClick={moveToGraveyard}><i className="fas fa-skull-crossbones"></i> Graveyard</Card.Link>
+                    <Card.Link className="btn btn-outline-secondary" onClick={moveToGraveyard}><i className="fas fa-skull-crossbones"></i> Graveyard</Card.Link>
               </Row>
               }
             </Container>

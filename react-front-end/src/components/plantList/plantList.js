@@ -15,7 +15,7 @@ const Styles = styled.div`
       margin: 15px auto 5px auto;
     }
 
-    i {
+    i.icon {
       color: #3B715A;
     }
   }
