@@ -55,6 +55,7 @@ export default function Garden(props) {
       <Container>
         <PlantList
           list={myGarden}
+          hook={setMyGarden}
         />
       </Container>
     </>
