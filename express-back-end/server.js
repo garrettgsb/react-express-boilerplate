@@ -100,6 +100,14 @@ app.get("/garden", cors(corsOptions), (req, res) => {
   })
 });
 
+app.get("/graveyard/plant/:id", cors(corsOptions), (req, res) => {
+  console.log("Move plant id", req.params.id, "to graveyard for user :", req.session.user_id);
+  dbHelpers(db).movePlantToGraveyard(req.session.user_id, req.params.id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
 app.get("/wishlist/plant/:id", cors(corsOptions), (req, res) => {
   console.log("Add plant species id", req.params.id, "to wishlist for user :", req.session.user_id);
   dbHelpers(db).addPlantToWishlist(req.session.user_id, req.params.id).then((rows) => {

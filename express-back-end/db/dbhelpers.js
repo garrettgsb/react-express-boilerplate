@@ -109,6 +109,14 @@ module.exports = (pool) => {
     `, [userID, speciesID])
   };
 
+  const movePlantToGraveyard = function(userID, plantID) {
+    return pool.query(`
+      UPDATE plant
+      SET is_dead = true
+      WHERE id = $2
+    `, [userID, plantID])
+  };
+
 
   const deletePlantFromGarden = function(userID, listingID) {
     return pool.query(`
@@ -207,6 +215,7 @@ module.exports = (pool) => {
     isPlantOnWishlist,
     getUserTasks,
     addPlantToGarden,
+    movePlantToGraveyard,
     deletePlantFromGarden,
     searchByName,
     searchByMinDifficulty,
