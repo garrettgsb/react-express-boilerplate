@@ -76,6 +76,13 @@ app.get("/garden", (req, res) => {
   })
 });
 
+app.get("/garden/plant/:id", (req, res) => {
+  dbHelpers(db).addPlantToGarden(req.session.user_id, req.params.id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
 
 
 app.get("/graveyard/plant/:id", cors(corsOptions), (req, res) => {
