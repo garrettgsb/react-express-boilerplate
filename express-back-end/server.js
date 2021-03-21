@@ -16,14 +16,8 @@ const PORT = 8080;
 app.use(Express.urlencoded({ extended: false }));
 app.use(Express.json());
 app.use(Express.static('public'));
-app.use(cors());
 
 
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000/garden"); // update to match the domain you will make the request from
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
 var corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
@@ -31,8 +25,8 @@ var corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
+app.use(cors(corsOptions));
 
-// app.use(Express.static("public"));
 
 
 const { Pool } = require('pg');
@@ -48,15 +42,7 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
-// app.get('/login', (req, res) => res.json({
-//   message: "Seems to work!",
-// }));
 
-// app.post('/login/new,', (req, res) =>  {
-
-//   res.json({
-//   message: "User has logged in"
-// })});
 
 app.get("/login/:id", cors(corsOptions), (req, res) => {
   const userID = req.params.id
@@ -81,24 +67,16 @@ app.get("/search", (req, res) => {
   })
 });
 
-app.get("/garden/plant/:id", cors(corsOptions), (req, res) => {
-  console.log("Add plant species id", req.params.id, "to garden for user :", req.session.user_id);
-  dbHelpers(db).addPlantToGarden(req.session.user_id, req.params.id).then((rows) => {
+
+
+app.get("/garden", (req, res) => {
+  dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
     console.log(rows);
     res.status(200).json(rows);
   })
 });
 
-app.get("/garden", cors(corsOptions), (req, res) => {
-// app.get("/garden", (req, res) => {
-  console.log("================================");
-  console.log("Current user id:", req.session.user_id);
-  dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
-    console.log("++++++++++++++++++++++++++++++++");
-    console.log(rows);
-    res.status(200).json(rows);
-  })
-});
+
 
 app.get("/graveyard/plant/:id", cors(corsOptions), (req, res) => {
   console.log("Move plant id", req.params.id, "to graveyard for user :", req.session.user_id);
@@ -108,7 +86,7 @@ app.get("/graveyard/plant/:id", cors(corsOptions), (req, res) => {
   })
 });
 
-app.get("/wishlist/plant/:id", cors(corsOptions), (req, res) => {
+app.post("/wishlist/plant/:id", cors(corsOptions), (req, res) => {
   console.log("Add plant species id", req.params.id, "to wishlist for user :", req.session.user_id);
   dbHelpers(db).addPlantToWishlist(req.session.user_id, req.params.id).then((rows) => {
     console.log(rows);
@@ -124,23 +102,20 @@ app.get("/wishlist", cors(corsOptions), (req, res) => {
   })
 });
 
-
-// Sample GET route
-app.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
-
-app.get('/api/garden', (req, res) => res.json({
-  message: "Seems to work!",
-}));
-
-
-app.get("/garden", (req, res) => {
-  dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
-    console.log(rows);
-    res.status(200).json(rows);
-  })
+app.delete("/wishlist", cors(corsOptions), (req, res) => {
+  const userID = req.session.user_id;
+  const wishlistID = req.params.listing_id;
+    if(!userID) {
+      res.redirect("/");
+    }
+  db.removePlantFromWishlist(userID, wishlistID)
+    .then(() => {
+      res.status(200).json(rows);
+    });
 });
+
+
+
 
 // -----------------------------------------
 // Unused Routes -- may be used later
@@ -160,10 +135,6 @@ app.get("/tasks", (req, res) => {
 
 console.log("search routes", searchRoutes);
 
-app.use('/test', searchRoutes(db));
-app.use("/api/search", searchRoutes(db));
-// app.use("*", (req, res) => {console.log("unhandle path", req.url);
-//   res.status(200).end()});
 
 
 app.listen(PORT, () => {

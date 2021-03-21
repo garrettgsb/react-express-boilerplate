@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { Card } from "react-bootstrap";
+axios.defaults.withCredentials = true
+
 // import aloeVeraImage from "../../assets/aloe-vera-cropped.png";
 
 
@@ -20,7 +22,8 @@ export default function PlantListItem(props) {
   const addToWishlist = () => {
     console.log("Adding to wishlist plant id:", props.speciesId);
 
-    axios.get(`http://localhost:8080/wishlist/plant/${props.speciesId}`, {withCredentials: true})
+    axios.post(`http://localhost:8080/wishlist/plant/${props.speciesId}`, {withCredentials: true, headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'
+  }})
     .then((res) => {
       console.log("Server responded to wishlist add request");
       console.log(res.data);
