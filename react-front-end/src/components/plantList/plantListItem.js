@@ -1,12 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
+import { Card, Button, Row, Col, Container } from "react-bootstrap";
+import PlantModal from "./modal";
 import axios from "axios";
-import { Card } from "react-bootstrap";
 axios.defaults.withCredentials = true
 
 // import aloeVeraImage from "../../assets/aloe-vera-cropped.png";
 
 
 export default function PlantListItem(props) {
+  const [modalShow, setModalShow] = useState(false);
+
+  const difficulty = () => {
+    let msg = "";
+    switch (props.difficulty) {
+      case 1:
+        msg = "beginner";
+        break;
+      case 2:
+        msg = "easy";
+        break;
+      case 3:
+        msg = "moderate";
+        break;
+      case 4:
+        msg = "difficult";
+        break;
+      case 5:
+        msg = "expert";
+        break;
+      default:
+        console.log(`difficulty level ${props.difficulty} not found`);
+    };
+    return msg;
+  };
+
+  const sun = () => {
+    let msg = "";
+    switch (props.sun) {
+      case 1:
+        msg = "very low";
+        break;
+      case 2:
+        msg = "low";
+        break;
+      case 3:
+        msg = "moderate";
+        break;
+      case 4:
+        msg = "high";
+        break;
+      case 5:
+        msg = "very high";
+        break;
+      default:
+        console.log(`difficulty level ${props.difficulty} not found`);
+    };
+    return msg;
+  };
+
+
   const addToGarden = () => {
     console.log("Adding to garden plant id:", props.speciesId);
 
@@ -53,6 +105,7 @@ export default function PlantListItem(props) {
     });
   };
 
+
   return (
     <>
 
@@ -65,11 +118,11 @@ export default function PlantListItem(props) {
             {!props.nickname && <br/>}
           </Card.Body>
 
-          <Card.Body>
+          <Card.Body className="mb-0 pb-0">
             <div className="row px-2 no-gutters">
               <div className="col-6">
-                  <h3 className="card card-block border-0 text-center"><i className="fas fa-seedling"></i></h3>
-                  <p className="text-center">{props.difficulty}</p>
+                  <h3 className="card card-block border-0 text-center"><i className="fas fa-leaf"></i></h3>
+                  <p className="text-center">{difficulty()}</p>
               </div>
               <div className="col-6">
                   <h3 className="card card-block border-0 text-center"><i className="fas fa-tint"></i></h3>
@@ -79,7 +132,7 @@ export default function PlantListItem(props) {
             <div className="row px-2 no-gutters">
               <div className="col-6">
                   <h3 className="card card-block border-0 text-center"><i className="fas fa-sun"></i></h3>
-                  <p className="text-center">{props.sun}</p>
+                  <p className="text-center">{sun()}</p>
               </div>
               <div className="col-6">
                   <h3 className="card card-block border-0 text-center"><i className="fas fa-thermometer-half"></i></h3>
@@ -88,16 +141,53 @@ export default function PlantListItem(props) {
             </div>
           </Card.Body>
 
-          <Card.Body className="mx-auto mb-2">
-            {props.gardenButton &&
-              <Card.Link className="btn btn-success" onClick={addToGarden}><i className="fas fa-plus-circle"></i> Garden</Card.Link>
-            }
-            {props.wishlistButton &&
-              <Card.Link className="btn btn-outline-success" onClick={addToWishlist}><i className="far fa-heart"></i> Wishlist</Card.Link>
-            }
-            {props.hook &&
-              <Card.Link className="btn btn-outline-danger" onClick={moveToGraveyard}><i className="fas fa-skull-crossbones"></i> Graveyard</Card.Link>
-            }
+          <Card.Body className="mx-auto mb-1 text-center">
+            <Container fluid className="align-items-center">
+              <Row className="mb-3">
+                <Col>
+                  {props.gardenButton &&
+                    <Card.Link className="btn btn-outline-success" onClick={addToGarden}><i className="fas fa-plus-circle"></i><br />Garden</Card.Link>
+                  }
+                </Col>
+                <Col>
+                  {props.wishlistButton &&
+                    <Card.Link className="btn btn-outline-success" onClick={addToWishlist}><i className="far fa-heart"></i> Wishlist</Card.Link>
+                  }
+                </Col>
+                {/* <Col>
+                  <Card.Link className="btn btn-success" onClick={() => setModalShow(true)}>
+                        See More
+                    </Card.Link>
+                </Col> */}
+              </Row>
+
+              <Row className="mb-3 justify-content-md-center">
+                <Card.Link className="btn btn-success" onClick={() => setModalShow(true)}>
+                        See More
+                </Card.Link>
+              </Row>
+
+              {props.hook &&
+              <Row className="justify-content-center">
+                    <Card.Link className="btn btn-outline-danger" onClick={moveToGraveyard}><i className="fas fa-skull-crossbones"></i> Graveyard</Card.Link>
+              </Row>
+              }
+            </Container>
+
+            <PlantModal
+              name={props.name}
+              scientificName={props.scientificName}
+              description={props.description}
+              difficulty={difficulty()}
+              waterRating={props.waterRating}
+              waterDesc={props.water}
+              sun={sun()}
+              temp={props.temp}
+              fertilizer={props.fertilizer}
+              toxic={props.toxic}
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+            />
           </Card.Body>
         </Card>
       </div>

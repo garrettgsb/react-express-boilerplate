@@ -35,12 +35,16 @@ export default function PlantList(props) {
         key={index}
         nickname={item.nickname}
         name={item.common_name}
+        scientificName={item.scientific_name}
+        description={item.description}
         photo={item.photo_url}
         difficulty={item.difficulty_rating}
         waterRating={item.watering_requirement_rating}
         water={item.watering_instructions}
         sun={item.sunlight_requirement_rating}
         temp={item.temperature_requirements}
+        fertilizer={item.fertilizer_requirements}
+        toxic={item.poison_for_pets}
         speciesId={item.species_id || item.id}
         plantId={item.id}
         hook={props.hook}
