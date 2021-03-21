@@ -100,8 +100,14 @@ module.exports = (pool) => {
       console.log("Error message", error)
     }));
   };
-  
- 
+
+  const addPlantToGarden = function(userID, speciesID) {
+    return pool.query(`
+    INSERT INTO plants (user_id, species_id)
+    VALUES ($1, $2)
+    RETURNING *;
+    `, [userID, speciesID])
+  };
 
 
   const deletePlantFromGarden = function(userID, listingID) {
@@ -200,6 +206,7 @@ module.exports = (pool) => {
     removePlantFromWishlist,
     isPlantOnWishlist,
     getUserTasks,
+    addPlantToGarden,
     deletePlantFromGarden,
     searchByName,
     searchByMinDifficulty,

@@ -81,12 +81,28 @@ app.get("/search", (req, res) => {
   })
 });
 
+app.get("/garden/plant/:id", cors(corsOptions), (req, res) => {
+  console.log("Add plant species id", req.params.id, "to garden for user :", req.session.user_id);
+  dbHelpers(db).addPlantToGarden(req.session.user_id, req.params.id).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
 app.get("/garden", cors(corsOptions), (req, res) => {
 // app.get("/garden", (req, res) => {
   console.log("================================");
   console.log("Current user id:", req.session.user_id);
   dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
     console.log("++++++++++++++++++++++++++++++++");
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
+app.get("/wishlist/plant/:id", cors(corsOptions), (req, res) => {
+  console.log("Add plant species id", req.params.id, "to wishlist for user :", req.session.user_id);
+  dbHelpers(db).addPlantToWishlist(req.session.user_id, req.params.id).then((rows) => {
     console.log(rows);
     res.status(200).json(rows);
   })
@@ -99,15 +115,6 @@ app.get("/wishlist", cors(corsOptions), (req, res) => {
     res.status(200).json(rows);
   })
 });
-
-app.post("/wishlist/plant/:id", cors(corsOptions), (req, res) => {
-  console.log("Add plant to wishlist :", req.session.user_id);
-  dbHelpers(db).addPlantToWishlist(req.session.user_id, req.params.id).then((rows) => {
-    console.log(rows);
-    res.status(200).json(rows);
-  })
-});
-
 
 
 // Sample GET route
