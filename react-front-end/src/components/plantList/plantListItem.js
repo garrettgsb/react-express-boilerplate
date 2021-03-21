@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button, Row, Col, Container } from "react-bootstrap";
+import { Card, Row, Col, Container } from "react-bootstrap";
 import PlantModal from "./modal";
 import axios from "axios";
 axios.defaults.withCredentials = true

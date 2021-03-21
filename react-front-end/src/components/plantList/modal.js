@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 
 const greenText = {
