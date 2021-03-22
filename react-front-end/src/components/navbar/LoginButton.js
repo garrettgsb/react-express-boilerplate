@@ -61,7 +61,7 @@ export default function LoginButton(props) {
   }
   return(
     <Styles>
-      <Button variant="success" onClick={login} >
+      <Button variant="success" className="mt-0" onClick={login} >
         {props.children}
       </Button>
     </Styles>
