@@ -62,7 +62,7 @@ VALUES ('natashaj', 'natj@gmail.com');
 
 
 -- Species
--- *The description section is from thespruce.com- remember to credit them in the ReadMe file
+-- *The description section is from thespruce.com and plantssparkjoy.com remember to credit them in the ReadMe file
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
 VALUES ('Aloe Vera', 'Aloe Barbadensis', 'https://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/aloe-vera-white-pot_sunwand24-ss_edit.jpg?itok=Y7HnaYk3', 'Aloe vera is commonly grown as a houseplant and gained favor because the gel from its leaves makes a soothing skin salve (although some people are actually irritated by the gel). It has thick, succulent leaves that are plumped up with a watery gel. The leaves grow from the base of the plant, in a rosette, and have jagged edges with flexible spines.', '14-21', 1, 4, 2, '15-24', 'Once per year', true);
@@ -100,19 +100,13 @@ VALUES ('Chinese Money Plant', 'Pilea peperomioides', 'https://cdn.shopify.com/s
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
 VALUES ('Echeveria', 'Pilea peperomioides', 'http://www.llifle.com/photos/Echeveria_agavoides_5212_l.jpg', 'Echeverias are one of the most popular types of succulents and are frequently featured in succulent gardens, floral arrangements, terrariums, artwork, and even wedding cakes. Their stunning rosette shape, plump leaves, and large variety of colors give them a striking resemblance to flowers which makes them easy to decorate with. Their unique appearance and low maintenance needs have made Echeverias widely popular.', '14-21', 1, 5, 2, '15-27', 'Once per year in the spring', false);
 
-
-
-
-
-
-
 -- New plants
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
 VALUES ('Peace Lily', 'Spathiphyllum wallisii', 'https://www.mydomaine.com/thmb/9aB79USSkhiCVgGyXh1TBSvM7v8=/900x900/filters:fill(auto,1)/1566417254329_20190821-1566417255317-b9314f1d9f7a4668a466c5ffb1913a8f.jpg', 'The graceful white spathes of the peace lily have long been rendered in silk plants, but there''s no reason to go fake when the living specimens of Spathiphyllum wallisii are so easy to grow. Peace lilies do well in low light, but need regular moisture.', '7', 3, 1, 1, '18-27', '6 weeks in spring and summer', true);
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
-VALUES ('Air Plant', 'Tillandsia genus', 'https://cdn.shopify.com/s/files/1/0662/5489/products/tillansdsia_Xerographica_air_plant-large.jpg?v=1609198614', 'The Tillandsia genus has breathed new life into the terrarium hobby. Although these plants do grow without any soil, they still need bright light and weekly watering, which you can achieve with a heavy spritz from a spray bottle or by dunking the whole plant in water.', '7', 3, 5, 2, '10-32', 'None', false);
+VALUES ('Air Plant', 'Tillandsia genus', 'https://cdn.shopify.com/s/files/1/0662/5489/products/tillansdsia_Xerographica_air_plant-large.jpg?v=1609198614', 'The Tillandsia genus has breathed new life into the terrarium hobby. Although these plants do grow without any soil, they still need bright light and weekly watering, which you can achieve with a heavy spritz from a spray bottle or by dunking the whole plant in water.', '7', 3, 5, 3, '10-32', 'None', false);
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
 VALUES ('Jade Plant', 'Crassula ovata', 'https://www.almanac.com/sites/default/files/image_nodes/jade-planting-growing.jpg', 'You can''t go wrong with a Crassula ovata in a bright room: It''s every bit as pretty as those trendy faux plants you see at the hobby store, only fake plants don''t continue to grow and become more stately over time like real jade plants do. Water sparingly and add supplemental lighting if leaf drop occurs.', '14-21', 1, 5, 2, '18-24', '6 months', true);
@@ -136,13 +130,35 @@ INSERT INTO species (common_name, scientific_name, photo_url, description, water
 VALUES ('Umbrella Plant', 'Schefflera arboricola', 'https://images.saymedia-content.com/.image/t_share/MTc0MzM2MzI4NDM4MjYxMzgy/how-to-grow-an-umbrella-plant-indoors-or-outdoors.jpg','If you have a yen for tropical plants, check out the Schefflera arboricola, which can grow up to ten feet tall in the jungles of Taiwan. You can check this growth in containers, especially with slow growing variegated cultivars like Gold Capella or Sunburst.', '14', 2, 5, 2, '12-24', 'None', true);
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
-VALUES ('Croton', 'Codiaeum', 'https://i.pinimg.com/originals/79/e4/fd/79e4fd21f110772c89f913c0ba9d12ba.jpg', 'Codiaeum plants offer that colorful pow that neutral gray or taupe rooms need. Bright light is essential for good leaf coloration and plant health. Leaf form varies from paddle-like to grassy and narrow, but all have stripes or splotches of yellow, red, orange, or pink.', '7', 3, 5, 2, '16-21', '2-3 weeks', true);
+VALUES ('Croton', 'Codiaeum', 'https://i.pinimg.com/originals/79/e4/fd/79e4fd21f110772c89f913c0ba9d12ba.jpg', 'Codiaeum plants offer that colorful pow that neutral gray or taupe rooms need. Bright light is essential for good leaf coloration and plant health. Leaf form varies from paddle-like to grassy and narrow, but all have stripes or splotches of yellow, red, orange, or pink.', '7', 3, 5, 4, '16-21', '2-3 weeks', true);
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
 VALUES ('Dumb Cane Plant', 'Dieffenbachia', 'https://cdn.shopify.com/s/files/1/0062/8532/8445/products/BB_TROPIC_RAIN_MAIN_132471be-de9d-4fb3-9700-d56bf9d11611_1024x1024.jpg?v=1566938525', 'The common name "dumb cane" doesn''t do much to describe the elegant Dieffenbachia, which exhibits large speckled and splotched leaves in humid areas with bright light. Provide moderate moisture, and keep the toxic leaves away from kids and pets.', '7', 3, 4, 2, '13-30', 'Once per month', true);
 
 INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
 VALUES ('Majesty Palm', 'Ravenea rivularis', 'https://odiepetinsurance.com/wp-content/uploads/2020/01/iStock-988625944.jpg', 'Most people love large plants that make a statement in a room, and majesty palms are a natural fit. However, the majesty palm has a reputation for being somewhat temperamental and difficult to grow, and it''s best for people who want the experience of growing an unusual palm species and are willing to put forth the effort.', '4-7', 4, 4, 5, '21-29', '2-3 months', false);
+
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Minature Roses', 'Rosa spp.', 'https://i.pinimg.com/originals/c4/1e/d5/c41ed5cf06260487617fd704742968c4.jpg', 'Miniature roses (Rosa spp.) have increased in popularity in recent years as a longer-lasting alternative to cut roses as gift flowers. Their petite stature, even down to teacup-sized, gives them appeal on small desktops or narrow ledges. All roses, large or small, need a full day of direct sun to flourish.', '1-7', 4, 5, 5, '15-24', '2 weeks', false);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Gardenias', 'Gardenia jasminoides', 'https://i.pinimg.com/originals/43/63/17/4363171a18197b086ccdf3a332608edf.jpg', 'Gardenias (Gardenia jasminoides) are tropical broadleaf evergreens, usually grown as large indoor potted specimens for the sake of their spectacular scented white flowers. The gardenia is a beloved plant for a very simple reason: Few natural scents are as remarkable, evocative, and memorable. However, high-maintenance gardenias are vulnerable to insects and diseases.', '7', 3, 4, 5, '13-18', '3 weeks', true);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Bonsai Tree', 'Juniperus', 'https://florgeous.com/wp-content/uploads/2020/05/juniper-bonsai-tree-1024x683.jpg', 'Bonsai is a Japanese word that literally means "planted in a container". It refers to the practice of keeping large plant specimens, usually trees, from reaching their natural size by a process referred to as artificial dwarfing. Bonsai trees have a reputation for being extremely delicate and difficult to maintain. While these specimens do require special attention, once you learn the principles of bonsai care, it''s fairly straightforward.', '2-3', 5, 5, 5, '18-24', '1-3 weeks', true);
+
+-- More new plants
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Birds''s Nest Fern', 'Asplenium nidus', 'https://www.naturescolours.com.au/wp-content/uploads/2012/05/Birds-Nest-Fern-White-Ceramic-Pot-Set-150mm-2.jpg', 'Bird''s nest ferns (Asplenium nidus) are naturally epiphytic, meaning they grow on the surface of other plants. In their rainforest homes, they can be found growing high in the crooks of trees. They form a series of erect, spoon-shaped, bright green fronds that rise from a central rosette. Healthy plants can have fronds up to 5 feet long, but bird''s nest ferns grown as houseplants typically have fronds that grow only about 2 feet long.', '7-14', 2, 2, 3, '21-27', '2-3 times per year', false);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Yucca', 'Yucca spp.', 'https://cdn.shopify.com/s/files/1/0025/4309/1770/files/yucca-plant_large.jpg?v=1567782930', 'Yucca is a genus of more than 40 perennial plants, shrubs, and trees, but only a few are grown as houseplants under the label "yucca plant." Sometimes confused with the similar-looking Dracaena genus, yuccas are interesting and slow-growing houseplants that have the added benefit of being extremely drought tolerant.', '10-14', 2, 4, 3, '13-27', '1-3 times per year', true);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Dragon Tree', 'Dracaena marginata', 'https://plantingman.com/wp-content/uploads/2017/12/Dragon-Tree-Indoor-House-Plants.jpg', 'The dragon tree plant is usually sold as a small, statement tree with bursts of thin leaves at the top of the straight trunk. It needs a spot where it can have moderate light but not direct summer sun, as well as regular watering. This plant is easy-care, but hard to maintan as a perfect specimen.', '7', 3, 3, 3, '21-27', '2-3 times per month', true);
+
 
 
 -- Wishlist

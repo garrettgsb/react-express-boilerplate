@@ -1,8 +1,5 @@
 
-
 module.exports = (pool) => {
-
-
 
   const getUserPlants = function(userID) {
     return pool.query(`
@@ -10,20 +7,6 @@ module.exports = (pool) => {
     FROM plants
     JOIN species ON species_id = species.id
     WHERE user_id = $1;`, [userID]
-    )
-    .then(res => {
-      return res.rows;
-    })
-    .catch((error => {
-      console.log("Error message", error)
-    }));
-  };
-
-  const getDeadPlants = function(userID) {
-    return pool.query(`
-    SELECT * FROM plants
-    JOIN species ON species_id = species.id
-    WHERE user_id = $1 AND is_dead = true`, [userID]
     )
     .then(res => {
       return res.rows;
@@ -118,89 +101,10 @@ module.exports = (pool) => {
     `, [plantID])
   };
 
-
   const deletePlantFromGarden = function(userID, listingID) {
     return pool.query(`
     DELETE FROM listings WHERE seller_id = $1 AND id = $2;
     `, [userID, listingID])
-  };
-
-  //Search functions
-  const searchByName = function(commonName, orderBy) {
-    let queryString = `SELECT * FROM species WHERE common_name LIKE $1 ORDER BY `
-    queryString += orderBy
-    const values = [`%${commonName}%`]
-    return pool.query(queryString, values)
-    .then(res => {
-      return res.rows;
-    })
-    .catch(err => console.error('query error', err.stack));
-  };
-
-  const searchByMinDifficulty = function(difficultyRating, orderBy) {
-    let queryString = `SELECT * FROM species WHERE difficulty_rating >= $1 ORDER BY difficulty_rating`
-    queryString += orderBy
-    const values = [difficultyRating]
-    return pool.query(queryString, values)
-    .then(res => {
-      return res.rows;
-    })
-    .catch(err => console.error('query error', err.stack));
-  };
-
-  const searchByMaxDifficulty = function(difficultyRating, orderBy) {
-    let queryString = `SELECT * FROM species WHERE difficulty_rating <= $1 ORDER BY difficulty_rating DESC `
-    queryString += orderBy
-    const values = [difficultyRating]
-    return pool.query(queryString, values)
-    .then(res => {
-      return res.rows;
-    })
-    .catch(err => console.error('query error', err.stack));
-  };
-
-  const searchByMinSunlight = function(sunlightRequirements, orderBy) {
-    let queryString = `SELECT * FROM species WHERE sunlight_requirement_rating >= $1 ORDER BY sunlight_requirement_rating`
-    queryString += orderBy
-    const values = [sunlightRequirements]
-    return pool.query(queryString, values)
-    .then(res => {
-      return res.rows;
-    })
-    .catch(err => console.error('query error', err.stack));
-  };
-
-  const searchByMaxSunlight = function(sunlightRequirements, orderBy) {
-    let queryString = `SELECT * FROM species WHERE sunlight_requirement_rating <= $1 ORDER BY sunlight_requirement_rating DESC`
-    queryString += orderBy
-    const values = [sunlightRequirements]
-    return pool.query(queryString, values)
-    .then(res => {
-      return res.rows;
-    })
-    .catch(err => console.error('query error', err.stack));
-  };
-
-  const searchByMinWater = function(waterRequirements, orderBy) {
-    let queryString = `SELECT * FROM species WHERE water_requirement_rating >= $1 ORDER BY water_requirement_rating`
-    queryString += orderBy
-    const values = [waterRequirements]
-    return pool.query(queryString, values)
-    .then(res => {
-      return res.rows;
-    })
-    .catch(err => console.error('query error', err.stack));
-  };
-
-  const searchByMaxWater = function(waterRequirements, orderBy) {
-    let queryString = `SELECT * FROM species WHERE water_requirement_rating <= $1 ORDER BY water_requirement_rating DESC`
-    queryString += orderBy
-    const values = [waterRequirements]
-    return pool.query(queryString, values)
-    .then(res => {
-      return res.rows;
-    })
-    .catch(err => console.error('query error', err.stack));
   };
 
   const randomUserID = () => {
@@ -218,19 +122,9 @@ module.exports = (pool) => {
     addPlantToGarden,
     movePlantToGraveyard,
     deletePlantFromGarden,
-    searchByName,
-    searchByMinDifficulty,
-    searchByMaxDifficulty,
-    searchByMinSunlight,
-    searchByMaxSunlight,
-    searchByMinWater,
-    searchByMaxWater,
     randomUserID,
-    getDeadPlants,
   };
 }
 
-//To Do: getUserTasks, getPlantTasks
 
-// Possible to Do: getUsersDeadPlants, deletePlant, movePlantToGraveyard
 
