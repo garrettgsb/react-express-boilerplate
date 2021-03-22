@@ -50,6 +50,7 @@ export default function PlantList(props) {
         hook={props.hook}
         gardenButton={props.gardenButton}
         wishlistButton={props.wishlistButton}
+        noBreak={props.noBreak}
       />
     )
   });
