@@ -5,6 +5,7 @@ import { Container, Button, Form, Row, Col } from "react-bootstrap";
 
 import PlantList from "../plantList/plantList";
 import Hero from "../hero";
+import SearchOptions from "./searchOptions";
 
 
 const Styles = styled.div`
@@ -18,6 +19,49 @@ export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [species, setSpecies] = useState([]);
   const [filteredSpecies, setFilteredSpecies] = useState([]);
+  const [searchOptions, setSearchOptions] = useState({
+    "A-Z": false,
+    "Z-A": false
+  });
+
+  const sortPlants = (list, sortOptions=searchOptions) => {
+    // let sortValue, sortExp;
+    // find the searchOption key that is checked/true
+    const sortBy = Object.keys(sortOptions).find(key => sortOptions[key] === true);
+    console.log("sort by:", sortBy);
+    // define sort params, then sort accordingly
+    switch(sortBy) {
+      case "A-Z":
+        list.sort(function(a, b) {
+          var nameA = a.common_name.toUpperCase();
+          var nameB = b.common_name.toUpperCase();
+          if (nameA < nameB) {return -1;}
+          if (nameA > nameB) {return 1;}
+          return 0;
+        });
+        break;
+      case "Z-A":
+        list.sort(function(a, b) {
+          var nameA = a.common_name.toUpperCase();
+          var nameB = b.common_name.toUpperCase();
+          if (nameA > nameB) {return -1;}
+          if (nameA < nameB) {return 1;}
+          return 0;
+        });
+        break;
+      case "Sunlight ⬆":
+        console.log("filter by sunlight ascending");
+        // numbers.sort((a, b) => a - b);
+        // const sorted = list.sort((a,b) => sortExp);
+        // const sorted = list.sort((a,b) => a.common_name - b.common_name);
+        break;
+      default:
+        console.log("no sort option selected");
+    }
+    // console.log("sorted:", list);
+    return list;
+  };
+
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -25,6 +69,7 @@ export default function Search() {
     const filtered= species.filter((mySpecies)=> {
       return mySpecies.common_name.toLowerCase().includes(searchTerm.toLowerCase());
     })
+    sortPlants(filtered);
     setFilteredSpecies(filtered);
   };
 
@@ -42,6 +87,7 @@ export default function Search() {
         });
         return plant;
       });
+      sortPlants(plantsWithWishlisted);
       setSpecies(plantsWithWishlisted);
       setFilteredSpecies(plantsWithWishlisted);
     }));
@@ -57,19 +103,31 @@ export default function Search() {
     <Styles>
         <Hero
           header="Find a Plant"
-          text="Find you next plant here"
+          text="Find your next plant here"
         >
           <Form  onSubmit={submitHandler}>
-            <Row>
-              <Col sm={11} className="mb-3">
-                <Form.Control type="searchTerm" placeholder="Search plants by name..." value={searchTerm} onChange={(event) => {setSearchTerm(event.target.value)}} />
+            <Row className="justify-content-md-center">
+              <Col sm={10} className="mb-3">
+                <Form.Control type="searchTerm" placeholder="Search plants by name..." value={searchTerm} onChange={(event) => {setSearchTerm(event.target.value)}} size="lg" />
               </Col>
               <Col sm={1}>
-                <Button variant="success" type="submit">
+                <Button variant="success" type="submit" size="lg">
                   <i className="fas fa-search"></i>
                 </Button>
               </Col>
             </Row>
+            <SearchOptions
+              options={searchOptions}
+              name="searchOptions"
+              setOption={(searchOption, value) => {
+                const truthyKey = Object.keys(searchOptions).find(key => searchOptions[key] === true);
+                if (truthyKey) {
+                  setSearchOptions({ ...searchOptions, [truthyKey]: false, [searchOption]: value });
+                } else {
+                  setSearchOptions({ ...searchOptions, [searchOption]: value });
+                }
+              }}
+            />
           </Form>
         </Hero>
       <Container>
