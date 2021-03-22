@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Row, Col, Container } from "react-bootstrap";
+import { Card, Row, Col, Container, Button } from "react-bootstrap";
 import PlantModal from "./modal";
 import ConfirmForm from "./confirmForm";
 import axios from "axios";
@@ -160,7 +160,8 @@ export default function PlantListItem(props) {
                 }
                 {props.wishlistButton &&
                   <Col className="text-right">
-                    <Card.Link className="btn btn-outline-success w-100" onClick={addToWishlist}><i className="far fa-heart"></i><br/>Wishlist</Card.Link>
+                    <Button variant="outline-success" block onClick={addToWishlist}><i className="far fa-heart"/><br/>Wishlist</Button>
+                    {/* <Card.Link className="btn btn-outline-success w-100" onClick={addToWishlist}><i className="far fa-heart"></i><br/>Wishlist</Card.Link> */}
                   </Col>
                 }
               </Row>
