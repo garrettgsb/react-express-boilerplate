@@ -11,6 +11,7 @@ axios.defaults.withCredentials = true
 export default function PlantListItem(props) {
   const [modalShow, setModalShow] = useState(false);
   const [confirmShow, setConfirmShow] = useState(false);
+  const [onWishlist, setOnWishlist] = useState(props.wishlisted);
 
   const difficulty = () => {
     let msg = "";
@@ -83,6 +84,7 @@ export default function PlantListItem(props) {
     .then((res) => {
       console.log("Server responded to wishlist add request");
       console.log(res.data);
+      setOnWishlist(true);
     }).catch((err) => {
       console.log(err);
     });
@@ -160,7 +162,12 @@ export default function PlantListItem(props) {
                 }
                 {props.wishlistButton &&
                   <Col className="text-right">
-                    <Button variant="outline-success" block onClick={addToWishlist}><i className="far fa-heart"/><br/>Wishlist</Button>
+                    {!onWishlist &&
+                      <Button variant="outline-success" block onClick={addToWishlist}><i className="far fa-heart"/><br/>Wishlist</Button>
+                    }
+                    {onWishlist &&
+                      <Button variant="outline-success" block disabled onClick={addToWishlist}><i className="fas fa-heart"/><br/>Wishlist</Button>
+                    }
                     {/* <Card.Link className="btn btn-outline-success w-100" onClick={addToWishlist}><i className="far fa-heart"></i><br/>Wishlist</Card.Link> */}
                   </Col>
                 }

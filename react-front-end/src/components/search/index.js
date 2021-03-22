@@ -29,11 +29,28 @@ export default function Search() {
   };
 
   useEffect(()=> {
-    axios.get("http://localhost:8080/search")
-    .then((res)=>{
-      setSpecies(res.data);
-      setFilteredSpecies(res.data);
-    })
+    axios.all([
+      axios.get("http://localhost:8080/search"),
+      axios.get("http://localhost:8080/wishlist", {withCredentials: true})
+    ]).then(axios.spread((allPlants, wishlist) => {
+      // check for matches between plants and wishlist
+      const plantsWithWishlisted = allPlants.data.map(plant => {
+        wishlist.data.forEach(e => {
+          if (e.species_id === plant.id) {
+            plant.wishlisted = true;
+          }
+        });
+        return plant;
+      });
+      setSpecies(plantsWithWishlisted);
+      setFilteredSpecies(plantsWithWishlisted);
+    }));
+
+    // axios.get("http://localhost:8080/search")
+    // .then((res)=>{
+    //   setSpecies(res.data);
+    //   setFilteredSpecies(res.data);
+    // })
   }, []);
 
   return (
