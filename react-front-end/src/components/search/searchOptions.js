@@ -18,7 +18,9 @@ export default function SearchOptions(props) {
         name={props.name}
         id={option}
         checked={props.options[option]}
-        onChange={event => props.setOption(option, event.target.checked)}
+        onChange={event => {
+          props.setOption(option, event.target.checked);
+        }}
       />
       <label className="options__label align-top" htmlFor={option}> {option}</label>
     </Col>

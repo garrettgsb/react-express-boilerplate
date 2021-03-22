@@ -24,12 +24,52 @@ export default function Search() {
     "Z-A": false
   });
 
+  const sortPlants = (list, sortOptions=searchOptions) => {
+    // let sortValue, sortExp;
+    // find the searchOption key that is checked/true
+    const sortBy = Object.keys(sortOptions).find(key => sortOptions[key] === true);
+    console.log("sort by:", sortBy);
+    // define sort params, then sort accordingly
+    switch(sortBy) {
+      case "A-Z":
+        list.sort(function(a, b) {
+          var nameA = a.common_name.toUpperCase();
+          var nameB = b.common_name.toUpperCase();
+          if (nameA < nameB) {return -1;}
+          if (nameA > nameB) {return 1;}
+          return 0;
+        });
+        break;
+      case "Z-A":
+        list.sort(function(a, b) {
+          var nameA = a.common_name.toUpperCase();
+          var nameB = b.common_name.toUpperCase();
+          if (nameA > nameB) {return -1;}
+          if (nameA < nameB) {return 1;}
+          return 0;
+        });
+        break;
+      case "Sunlight ⬆":
+        console.log("filter by sunlight ascending");
+        // numbers.sort((a, b) => a - b);
+        // const sorted = list.sort((a,b) => sortExp);
+        // const sorted = list.sort((a,b) => a.common_name - b.common_name);
+        break;
+      default:
+        console.log("no sort option selected");
+    }
+    // console.log("sorted:", list);
+    return list;
+  };
+
+
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("form submit");
     const filtered= species.filter((mySpecies)=> {
       return mySpecies.common_name.toLowerCase().includes(searchTerm.toLowerCase());
     })
+    sortPlants(filtered);
     setFilteredSpecies(filtered);
   };
 
@@ -47,6 +87,7 @@ export default function Search() {
         });
         return plant;
       });
+      sortPlants(plantsWithWishlisted);
       setSpecies(plantsWithWishlisted);
       setFilteredSpecies(plantsWithWishlisted);
     }));
@@ -78,9 +119,14 @@ export default function Search() {
             <SearchOptions
               options={searchOptions}
               name="searchOptions"
-              setOption={(searchOption, value) =>
-                setSearchOptions({ ...searchOptions, [searchOption]: value })
-              }
+              setOption={(searchOption, value) => {
+                const truthyKey = Object.keys(searchOptions).find(key => searchOptions[key] === true);
+                if (truthyKey) {
+                  setSearchOptions({ ...searchOptions, [truthyKey]: false, [searchOption]: value });
+                } else {
+                  setSearchOptions({ ...searchOptions, [searchOption]: value });
+                }
+              }}
             />
           </Form>
         </Hero>
