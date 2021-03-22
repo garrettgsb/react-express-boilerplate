@@ -21,7 +21,9 @@ export default function Search() {
   const [filteredSpecies, setFilteredSpecies] = useState([]);
   const [searchOptions, setSearchOptions] = useState({
     "A-Z": false,
-    "Z-A": false
+    "Z-A": false,
+    "Difficulty ⬆": false,
+    "Difficulty ⬇": false
   });
 
   const sortPlants = (list, sortOptions=searchOptions) => {
@@ -49,12 +51,12 @@ export default function Search() {
           return 0;
         });
         break;
-      case "Sunlight ⬆":
-        console.log("filter by sunlight ascending");
-        // numbers.sort((a, b) => a - b);
-        // const sorted = list.sort((a,b) => sortExp);
-        // const sorted = list.sort((a,b) => a.common_name - b.common_name);
+      case "Difficulty ⬆":
+        list.sort((a,b) => a.difficulty_rating - b.difficulty_rating);
         break;
+        case "Difficulty ⬇":
+          list.sort((a,b) => b.difficulty_rating - a.difficulty_rating);
+          break;
       default:
         console.log("no sort option selected");
     }

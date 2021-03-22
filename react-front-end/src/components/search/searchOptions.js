@@ -10,9 +10,9 @@ const checkboxStyle = {
 
 export default function SearchOptions(props) {
   const optionItems = Object.keys(props.options).map(option => (
-    <Col key={option} className="options__form-group" lg={2}>
+    <Col key={option} className="options__form-group" lg={3}>
       <input
-        className="options__checkbox mr-2"
+        className="options__checkbox mr-1"
         type="radio"
         style={checkboxStyle}
         name={props.name}
@@ -27,7 +27,7 @@ export default function SearchOptions(props) {
   ));
 
   return (
-    <Row className="px-5">
+    <Row className="text-left pl-5">
       {optionItems}
     </Row>
   );
