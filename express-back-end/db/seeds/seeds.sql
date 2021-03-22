@@ -101,6 +101,51 @@ INSERT INTO species (common_name, scientific_name, photo_url, description, water
 VALUES ('Echeveria', 'Pilea peperomioides', 'http://www.llifle.com/photos/Echeveria_agavoides_5212_l.jpg', 'Echeverias are one of the most popular types of succulents and are frequently featured in succulent gardens, floral arrangements, terrariums, artwork, and even wedding cakes. Their stunning rosette shape, plump leaves, and large variety of colors give them a striking resemblance to flowers which makes them easy to decorate with. Their unique appearance and low maintenance needs have made Echeverias widely popular.', '14-21', 1, 5, 2, '15-27', 'Once per year in the spring', false);
 
 
+
+
+
+
+
+-- New plants
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Peace Lily', 'Spathiphyllum wallisii', 'https://www.mydomaine.com/thmb/9aB79USSkhiCVgGyXh1TBSvM7v8=/900x900/filters:fill(auto,1)/1566417254329_20190821-1566417255317-b9314f1d9f7a4668a466c5ffb1913a8f.jpg', 'The graceful white spathes of the peace lily have long been rendered in silk plants, but there''s no reason to go fake when the living specimens of Spathiphyllum wallisii are so easy to grow. Peace lilies do well in low light, but need regular moisture.', '7', 3, 1, 1, '18-27', '6 weeks in spring and summer', true);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Air Plant', 'Tillandsia genus', 'https://cdn.shopify.com/s/files/1/0662/5489/products/tillansdsia_Xerographica_air_plant-large.jpg?v=1609198614', 'The Tillandsia genus has breathed new life into the terrarium hobby. Although these plants do grow without any soil, they still need bright light and weekly watering, which you can achieve with a heavy spritz from a spray bottle or by dunking the whole plant in water.', '7', 3, 5, 2, '10-32', 'None', false);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Jade Plant', 'Crassula ovata', 'https://www.almanac.com/sites/default/files/image_nodes/jade-planting-growing.jpg', 'You can''t go wrong with a Crassula ovata in a bright room: It''s every bit as pretty as those trendy faux plants you see at the hobby store, only fake plants don''t continue to grow and become more stately over time like real jade plants do. Water sparingly and add supplemental lighting if leaf drop occurs.', '14-21', 1, 5, 2, '18-24', '6 months', true);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Bromeliad', 'Bromeliaceae', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWZDh8CEL4KAUKRV5I180B8iavHqnqwNbr6Q&usqp=CAU', 'In their native habitat, plants in the Bromeliaceae family grow as epiphytes nestled in trees. That means two things for their care: they like filtered light, and good aeration around their roots. Orchid potting medium works well. Fill their stiff leaves with distilled water to further mimic nature''s way.', '7', 3, 3, 3, '13-27', '3-4 months', false);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Lucky Bamboo', 'Dracaena sanderiana', 'https://assets.eflorist.com/assets/products/PHR_/T100-2A.jpg', 'The ability to grow in water and the pliable stems that you can weave into grids or braids make Dracaena sanderiana a handsome statement in any small space. Lucky bamboo ceases to grow when you clip the top, making it easy to manage, unlike the bamboo that grows outdoors. Grow in low light or artificial light.', '7-10', 3, 1, 2, '18-35', 'once per month', false);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Orchid', 'Phalaenopsis genus', 'https://www.gardeningknowhow.com/wp-content/uploads/2021/03/orchid-houseplant.jpg', 'To grow an orchid, you have to think like an orchid. The golden rule for orchid success is to duplicate the plant''s natural conditions as closely as possible. In nature, most orchids are epiphytes, meaning they grow on other objects, clinging to rough bark or even stone. The showy orchids favored by most people are usually either phalaenopsis hybrids (so-called moth orchids) or dendrobium hybrids.', '5-7', 3, 5, 4, '18-27', 'once per week', false);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Basil', 'Ocimum basilicum', 'https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,w_730/gen-workflow%2Fproduct-listing%2Fbasilplanthd', 'Your favorite herb just became your favorite houseplant. Basil loves warm temperatures and lots of light. Trim off flowers to keep those fragrant leaves coming. Try cinnamon basil or purple basil for something different.', '1-5',  5, 4, 3, '21-30', 'Twice per year', False);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Ivy', 'Hedera helix','https://cdn1.1800flowers.com/wcsstore/Flowers/images/catalog/157985sx.jpg', 'A container of trailing Hedera helix is an instant upgrade for your kitchen, bathroom, or anywhere you have bright light and some humidity. Cooler rooms that remain at or below 70 degrees Fahrenheit will also extend the life of these Northern European natives.', '5-7', 3, 2, 2, '10-21', 'Once per month', true);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Umbrella Plant', 'Schefflera arboricola', 'https://images.saymedia-content.com/.image/t_share/MTc0MzM2MzI4NDM4MjYxMzgy/how-to-grow-an-umbrella-plant-indoors-or-outdoors.jpg','If you have a yen for tropical plants, check out the Schefflera arboricola, which can grow up to ten feet tall in the jungles of Taiwan. You can check this growth in containers, especially with slow growing variegated cultivars like Gold Capella or Sunburst.', '14', 2, 5, 2, '12-24', 'None', true);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Croton', 'Monstera Deliciosa', 'https://hips.hearstapps.com/hmg-prod/images/gettyimages-1205923822-612x612-1597694031.jpg', 'Native to the rainforests of Central America, the Monstera deliciosa plant is also known as the tropical split-leaf philodendron. Indoors, the plant grows about two feet high, its leathery, glossy, characteristic split and heart-shaped leaves coming from intricate aerial roots, which can be used for ropes and basket making.', '14', 2, 4, 3, '18-30', 'Optional, can be done twice per month', true);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Dumb Cane Plant', 'Pilea peperomioides', 'https://cdn.shopify.com/s/files/1/0174/7796/products/8D2A1989_2048x2048.jpg?v=1595286173', 'The Pilea peperomioides is a popular houseplant thanks to its attractive coin-shaped foliage and ease of care. This flowering perennial in the nettle family (Urticaceae) is native to southern China, growing naturally along the base of the Himalayan mountains.', '7', 3, 4, 2, '13-30', 'Once per month', false);
+
+INSERT INTO species (common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets)
+VALUES ('Majesty Palm', 'Pilea peperomioides', 'http://www.llifle.com/photos/Echeveria_agavoides_5212_l.jpg', 'Echeverias are one of the most popular types of succulents and are frequently featured in succulent gardens, floral arrangements, terrariums, artwork, and even wedding cakes. Their stunning rosette shape, plump leaves, and large variety of colors give them a striking resemblance to flowers which makes them easy to decorate with. Their unique appearance and low maintenance needs have made Echeverias widely popular.', '14-21', 1, 5, 2, '15-27', 'Once per year in the spring', false);
+
+
+
 -- Wishlist
 
 INSERT INTO wishlist (user_id, species_id)
