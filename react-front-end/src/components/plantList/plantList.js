@@ -47,6 +47,7 @@ export default function PlantList(props) {
         toxic={item.poison_for_pets}
         speciesId={item.species_id || item.id}
         plantId={item.id}
+        wishlisted={item.wishlisted}
         hook={props.hook}
         gardenButton={props.gardenButton}
         wishlistButton={props.wishlistButton}
