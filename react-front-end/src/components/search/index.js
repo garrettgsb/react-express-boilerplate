@@ -47,7 +47,7 @@ export default function Search() {
               <Col sm={11} className="mb-3">
                 <Form.Control type="searchTerm" placeholder="Search plants by name..." value={searchTerm} onChange={(event) => {setSearchTerm(event.target.value)}} />
               </Col>
-              <Col>
+              <Col sm={1}>
                 <Button variant="success" type="submit">
                   <i className="fas fa-search"></i>
                 </Button>
@@ -61,6 +61,7 @@ export default function Search() {
           list={filteredSpecies}
           gardenButton
           wishlistButton
+          noBreak
         />
 
       </Container>
