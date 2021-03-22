@@ -76,8 +76,11 @@ app.get("/garden", (req, res) => {
   })
 });
 
-app.get("/garden/plant/:id", (req, res) => {
-  dbHelpers(db).addPlantToGarden(req.session.user_id, req.params.id).then((rows) => {
+app.post("/garden/plant/:id", (req, res) => {
+  // console.log("-------------------------------");
+  // console.log(req.body.data.nickname);
+  const nickname = req.body.data.nickname;
+  dbHelpers(db).addPlantToGarden(req.session.user_id, req.params.id, nickname).then((rows) => {
     console.log(rows);
     res.status(200).json(rows);
   })

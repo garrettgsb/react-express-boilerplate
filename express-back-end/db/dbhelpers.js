@@ -102,12 +102,12 @@ module.exports = (pool) => {
     }));
   };
 
-  const addPlantToGarden = function(userID, speciesID) {
+  const addPlantToGarden = function(userID, speciesID, nickname) {
     return pool.query(`
-    INSERT INTO plants (user_id, species_id)
-    VALUES ($1, $2)
+    INSERT INTO plants (user_id, species_id, nickname)
+    VALUES ($1, $2, $3)
     RETURNING *;
-    `, [userID, speciesID])
+    `, [userID, speciesID, nickname])
   };
 
   const movePlantToGraveyard = function(plantID) {
