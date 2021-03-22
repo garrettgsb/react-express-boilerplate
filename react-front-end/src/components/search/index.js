@@ -5,6 +5,7 @@ import { Container, Button, Form, Row, Col } from "react-bootstrap";
 
 import PlantList from "../plantList/plantList";
 import Hero from "../hero";
+import SearchOptions from "./searchOptions";
 
 
 const Styles = styled.div`
@@ -18,6 +19,10 @@ export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [species, setSpecies] = useState([]);
   const [filteredSpecies, setFilteredSpecies] = useState([]);
+  const [searchOptions, setSearchOptions] = useState({
+    "A-Z": false,
+    "Z-A": false
+  });
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -57,19 +62,25 @@ export default function Search() {
     <Styles>
         <Hero
           header="Find a Plant"
-          text="Find you next plant here"
+          text="Find your next plant here"
         >
           <Form  onSubmit={submitHandler}>
-            <Row>
-              <Col sm={11} className="mb-3">
-                <Form.Control type="searchTerm" placeholder="Search plants by name..." value={searchTerm} onChange={(event) => {setSearchTerm(event.target.value)}} />
+            <Row className="justify-content-md-center">
+              <Col sm={10} className="mb-3">
+                <Form.Control type="searchTerm" placeholder="Search plants by name..." value={searchTerm} onChange={(event) => {setSearchTerm(event.target.value)}} size="lg" />
               </Col>
               <Col sm={1}>
-                <Button variant="success" type="submit">
+                <Button variant="success" type="submit" size="lg">
                   <i className="fas fa-search"></i>
                 </Button>
               </Col>
             </Row>
+            <SearchOptions
+              options={searchOptions}
+              setOption={(searchOption, value) =>
+                setSearchOptions({ ...searchOptions, [searchOption]: value })
+              }
+            />
           </Form>
         </Hero>
       <Container>
