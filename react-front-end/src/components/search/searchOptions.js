@@ -13,9 +13,9 @@ export default function SearchOptions(props) {
     <Col key={option} className="options__form-group" lg={2}>
       <input
         className="options__checkbox mr-2"
-        type="checkbox"
+        type="radio"
         style={checkboxStyle}
-        name={option}
+        name={props.name}
         id={option}
         checked={props.options[option]}
         onChange={event => props.setOption(option, event.target.checked)}
@@ -25,8 +25,7 @@ export default function SearchOptions(props) {
   ));
 
   return (
-    <Row>
-      {/* <Col lg={1}></Col> */}
+    <Row className="px-5">
       {optionItems}
     </Row>
   );

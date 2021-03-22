@@ -77,6 +77,7 @@ export default function Search() {
             </Row>
             <SearchOptions
               options={searchOptions}
+              name="searchOptions"
               setOption={(searchOption, value) =>
                 setSearchOptions({ ...searchOptions, [searchOption]: value })
               }
