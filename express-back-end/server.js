@@ -8,10 +8,7 @@ const dbHelpers = require('./db/dbhelpers');
 const searchRoutes = require('./routes/searchRoutes')
 const cookieSession = require('cookie-session');
 
-// const router = express.Router()
-
 const PORT = 8080;
-
 
 app.use(Express.urlencoded({ extended: false }));
 app.use(Express.json());
@@ -22,11 +19,10 @@ var corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
   methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200 
 }
 
 app.use(cors(corsOptions));
-
 
 
 const { Pool } = require('pg');
@@ -43,7 +39,6 @@ app.use(cookieSession({
 }));
 
 
-
 app.get("/login/:id", cors(corsOptions), (req, res) => {
   const userID = req.params.id
   req.session.user_id = userID;
@@ -54,7 +49,6 @@ app.get("/login/:id", cors(corsOptions), (req, res) => {
 
 app.get("/logout", cors(corsOptions), (req, res) => {
   req.session = null;
-  // console.log("Logging out user", req.session.user_id);
   res.send("successfully logged out");
 });
 
@@ -68,7 +62,6 @@ app.get("/search", (req, res) => {
 });
 
 
-
 app.get("/garden", (req, res) => {
   dbHelpers(db).getUserPlants(req.session.user_id).then((rows) => {
     console.log(rows);
@@ -77,8 +70,6 @@ app.get("/garden", (req, res) => {
 });
 
 app.post("/garden/plant/:id", (req, res) => {
-  // console.log("-------------------------------");
-  // console.log(req.body.data.nickname);
   const nickname = req.body.data.nickname;
   dbHelpers(db).addPlantToGarden(req.session.user_id, req.params.id, nickname).then((rows) => {
     console.log(rows);
@@ -125,31 +116,8 @@ app.delete("/wishlist", cors(corsOptions), (req, res) => {
 });
 
 
-
-
-// -----------------------------------------
-// Unused Routes -- may be used later
-app.get("/graveyard", (req, res) => {
-  dbHelpers(db).getDeadPlants(req.session.user_id).then((rows) => {
-    console.log(rows);
-    res.status(200).json(rows);
-  })
-});
-
-app.get("/tasks", (req, res) => {
-  dbHelpers(db).getUserTasks(req.session.user_id).then((rows) => {
-    console.log(rows);
-    res.status(200).json(rows);
-  })
-})
-
-console.log("search routes", searchRoutes);
-
-
-
 app.listen(PORT, () => {
 
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
 
-//To do: logout route, post routes, delete route
