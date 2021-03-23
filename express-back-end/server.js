@@ -23,12 +23,10 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
-
 
 app.use(cookieSession({
   name: 'session',
@@ -37,7 +35,6 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
-
 app.get("/login/:id", cors(corsOptions), (req, res) => {
   const userID = req.params.id
   req.session.user_id = userID;
@@ -45,12 +42,10 @@ app.get("/login/:id", cors(corsOptions), (req, res) => {
   res.json({id: userID, username: 'test', email: 'email@test.com'});
 });
 
-
 app.get("/logout", cors(corsOptions), (req, res) => {
   req.session = null;
   res.send("successfully logged out");
 });
-
 
 app.get("/search", (req, res) => {
   console.log("Current User ID", req.session.user_id)
@@ -75,8 +70,6 @@ app.post("/garden/plant/:id", (req, res) => {
     res.status(200).json(rows);
   })
 });
-
-
 
 app.get("/graveyard/plant/:id", cors(corsOptions), (req, res) => {
   console.log("Move plant id", req.params.id, "to graveyard for user :", req.session.user_id);
@@ -114,6 +107,17 @@ app.delete("/wishlist", cors(corsOptions), (req, res) => {
     })
 });
 
+app.delete("/wishlist", cors(corsOptions), (req, res) => {
+  const userID = req.session.user_id;
+  const wishlistID = req.params.listing_id;
+    if(!userID) {
+      res.redirect("/");
+    }
+    dbHelpers(db).removePlantFromWishlist(userID, wishlistID)
+    .then(() => {
+      res.status(200);
+    })
+});
 
 app.listen(PORT, () => {
 
