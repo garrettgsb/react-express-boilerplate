@@ -21,8 +21,8 @@ CREATE TABLE photographers (
 -- photographer_id here is the *one endorsing another photographer* --
 CREATE TABLE endorsements (
   id SERIAL PRIMARY KEY NOT NULL,
-  photographer_id INTEGER REFERENCES photographers(id),
-  text VARCHAR(255) NOT NULL
+  description VARCHAR(255),
+  photographer_id INTEGER REFERENCES photographers(id)
 );
 
 -- photographer_id here is the *one being endorsed* --
@@ -47,10 +47,10 @@ CREATE TABLE albums (
 
 CREATE TABLE locations (
   id SERIAL PRIMARY KEY NOT NULL,
-  average_rating INTEGER,
-  aurora_id INTEGER REFERENCES auroras(id) ON DELETE CASCADE,
   location_name VARCHAR(255) NOT NULL,
-  coordinates VARCHAR(255) NOT NULL
+  coordinates VARCHAR(255) NOT NULL,
+  aurora_id INTEGER REFERENCES auroras(id) ON DELETE CASCADE,
+  average_rating INTEGER
 );
 
 CREATE TABLE meetups (
