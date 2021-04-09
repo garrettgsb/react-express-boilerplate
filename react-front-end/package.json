@@ -4,9 +4,21 @@
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "node-sass": "^4.14.1",
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "contentful": "^8.2.1",
+    "material-icons": "^0.6.0",
+    "normalize.css": "^8.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hover-image": "^2.0.1",
+    "react-scripts": "4.0.3",
+    "sass": "^1.32.8",
+    "web-vitals": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

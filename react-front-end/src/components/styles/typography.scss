@@ -1,0 +1,13 @@
+$weights: (
+  light: 300,
+  regular: 400,
+  semi-bold: 600,
+  bold: 700,
+  black: 900,
+);
+
+@each $weight, $value in $weights {
+  .text--#{$weight} {
+    font-weight: $value;
+  }
+}
