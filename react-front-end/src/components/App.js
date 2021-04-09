@@ -1,38 +1,46 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
-import './App.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: 'Click the button to load data!'
-    }
-  }
+import Buttons from './buttons'
+import CustomizedSwitches from './switches'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Header from './header'
+import LeftSearch from './leftsearch'
+import RightTweets from './righttweets'
+import CenterMap from './centermap'
+import Paper from '@material-ui/core/Paper';
+// import DeleteIcon from '@material-ui/icons/Delete';
 
-  fetchData = () => {
-    axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
+import './App.scss';
 
-      console.log(response.data.message) // Just the message
-      this.setState({
-        message: response.data.message
-      });
-    }) 
-  }
 
-  render() {
-    return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>        
-      </div>
-    );
-  }
+
+
+
+
+export default function App() {
+
+
+  return (
+    <body className="App">
+      <Header />
+      <LeftSearch />
+      <CenterMap />
+      <RightTweets />
+    </body>
+  );
+
+  // return (
+  //   <div>
+  //     <Paper variant="outlined" square />
+  //     <Buttons />
+  //     <CustomizedSwitches />
+  //     <CircularProgress />
+  //     <CircularProgress color="secondary" />
+  //     <LinearProgress />
+  //     <LinearProgress color="secondary" />
+  //   </div>
+
+  // );
 }
-
-export default App;

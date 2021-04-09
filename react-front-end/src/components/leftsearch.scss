@@ -1,0 +1,19 @@
+@import "styles/variables.scss";
+
+
+.leftsearch {
+  background-color: $black;
+  opacity: .6;
+  width: 21vw;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  margin-top: 8vh;
+  margin-left: 1vh;
+  position:absolute;
+  color: white;
+  border-radius: 15px;
+}
