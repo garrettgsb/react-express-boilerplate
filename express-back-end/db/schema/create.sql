@@ -13,16 +13,9 @@ CREATE TABLE users (
   created_at TIMESTAMP
 );
 
-CREATE TABLE reviews (
+CREATE TABLE areas (
   id SERIAL PRIMARY KEY NOT NULL,
-  building_id INTEGER REFERENCES buildings(id) ON DELETE CASCADE,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  title VARCHAR(255) NOT NULL,
-  building_rating INTEGER NOT NULL,
-  area_rating INTEGER NOT NULL,
-  comment TEXT,
-  landlord_rating BOOLEAN,
-  recommend_to_friend BOOLEAN
+  name VARCHAR(255)
 );
 
 CREATE TABLE buildings (
@@ -35,11 +28,18 @@ CREATE TABLE buildings (
   longitude FLOAT NOT NULL
 );
 
-
-CREATE TABLE areas (
+CREATE TABLE reviews (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255)
+  building_id INTEGER REFERENCES buildings(id) ON DELETE CASCADE,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  title VARCHAR(255) NOT NULL,
+  building_rating INTEGER NOT NULL,
+  area_rating INTEGER NOT NULL,
+  comment TEXT,
+  landlord_rating BOOLEAN,
+  recommend_to_friend BOOLEAN
 );
+
 
 CREATE TABLE favourites (
   id SERIAL PRIMARY KEY NOT NULL,
