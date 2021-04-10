@@ -3,8 +3,11 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./App.css";
 import { Icon } from "leaflet";
 import useSwr from "swr";
+import axios from "axios";
 
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+// const fetcher = (...args) => fetch(...args).then((response) => response.json());
+
+const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 export const icon = new Icon({
   iconUrl: "/building.png",
@@ -12,7 +15,6 @@ export const icon = new Icon({
 });
 
 function App() {
-  const [activeBuilding, setActiveBuilding] = React.useState(null);
   const url = "https://data.sfgov.org/resource/ramy-di5m.json";
   const { data, error } = useSwr(url, { fetcher });
   const buildings = data && !error ? data.slice(0, 100) : [];
@@ -27,26 +29,15 @@ function App() {
         <Marker
           key={building.eas_fullid}
           position={[building.latitude, building.longitude]}
-          onClick={() => {
-            setActiveBuilding(building);
-          }}
           icon={icon}
-        />
-      ))}
-
-      {activeBuilding && (
-        <Popup
-          position={[activeBuilding.latitude, activeBuilding.longitude]}
-          onClose={() => {
-            setActiveBuilding(null);
-          }}
         >
-          <div>
-            <h2>{activeBuilding.address}</h2>
-            <p>{activeBuilding.zip_code}</p>
-          </div>
-        </Popup>
-      )}
+          <Popup>
+            <div>
+              <h2>{building.address}</h2>
+            </div>
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
   );
 }
