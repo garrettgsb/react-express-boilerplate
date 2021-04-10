@@ -1,7 +1,7 @@
 import React from 'react';
 import HoverImage from "react-hover-image";
 
-import './header.scss';
+import './Header.scss';
 
 export default function Header () {
 

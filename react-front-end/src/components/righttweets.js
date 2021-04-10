@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './righttweets.scss';
+import './RightTweets.scss';
 
 export default function RightTweets () {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './leftsearch.scss';
+import './LeftSearch.scss';
 
 export default function Leftsearch () {
 
