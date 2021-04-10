@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "leaflet": "^1.7.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-leaflet": "^3.1.0",
+    "react-scripts": "2.1.8",
+    "swr": "^0.5.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,5 +26,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "@types/leaflet": "^1.7.0"
+  }
 }
