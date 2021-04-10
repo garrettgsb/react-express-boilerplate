@@ -12,6 +12,9 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "morgan": "^1.10.0",
-    "nodemon": "^1.18.7"
+    "needle": "^2.6.0",
+    "nodemon": "^1.18.7",
+    "sentiment": "^5.0.2",
+    "twit": "^2.2.11"
   }
 }
