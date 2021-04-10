@@ -1,0 +1,38 @@
+
+@import "styles/variables.scss";
+// @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
+// @import "styles/reset.scss";
+
+nav {
+  // background-color: $dark-background;
+  background-color: $dark-grey-background;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 15vh;
+  min-height: 30px;
+  margin: 1.5vh 1vh 3vh 1vh;
+  width: 90vw;
+  opacity: .75;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-radius: 5px;
+  .userAvatar {
+    display: flex;
+    width: 1.8vw;
+    min-width: 25px;
+    margin-right: 1.5vw;
+    margin-top: 1vw;
+    align-self: center;
+  }
+  .logo {
+    display: flex;
+    margin: .5vw .2vw 0vw 1.5vw;
+    // align-self: center;
+    min-width: 100px;
+    max-width: 120px;
+  }
+}
