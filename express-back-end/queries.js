@@ -1,7 +1,5 @@
-const { default: axios } = require('axios');
 const Twit = require('twit');
 const Sentiment = require('sentiment');
-const testData = require('./example-data');
 require('dotenv').config()
 
 const T = new Twit({
@@ -28,6 +26,19 @@ const streamCanadaBorderBox = function() {
   });
 }
 
+const streamUSBorderBox = function() {
+  const USA = ['-171.791110603', '18.91619', '-66.96466', '71.3577635769'];
+  const stream = T.stream('statuses/filter', {
+    locations: canada,
+    track: '#RemoveThePM',
+    language: 'en'
+  });
+  stream.on('tweet', async tweet => {
+      console.log(tweet);
+  });
+}
+
+
 const getTweetsFromPointRadius = function(pointRadius) {
   T.get('search/tweets', { q:`#RemoveThePM geocode:${pointRadius} -filter:RT`, count: 10 }, function(err, data, response) {
     console.log(data)
@@ -39,4 +50,5 @@ const getTweetsFromPointRadius = function(pointRadius) {
   })
 }
 
-getTweetsFromPointRadius(calgaryPointRadius);
+// getTweetsFromPointRadius(calgaryPointRadius);
+streamCanadaBorderBox()
