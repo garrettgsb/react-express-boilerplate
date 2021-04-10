@@ -1,29 +1,52 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./App.css";
+import { Icon } from "leaflet";
 import useSwr from "swr";
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
-function App() {
-  const url =
-    "https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592&date=2019-10";
-  const { data, error } = useSwr(url, { fetcher });
+export const icon = new Icon({
+  iconUrl: "/building.png",
+  iconSize: [25, 25],
+});
 
-  const crimes = data && !error ? data.slice(0, 100) : [];
+function App() {
+  const [activeBuilding, setActiveBuilding] = React.useState(null);
+  const url = "https://data.sfgov.org/resource/ramy-di5m.json";
+  const { data, error } = useSwr(url, { fetcher });
+  const buildings = data && !error ? data.slice(0, 100) : [];
 
   return (
-    <MapContainer center={[52.6376, -1.135171]} zoom={12}>
+    <MapContainer center={[37.70820204901914, -122.45808060394913]} zoom={12}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      {crimes.map((crime) => (
+      {buildings.map((building) => (
         <Marker
-          key={crime.id}
-          position={[crime.location.latitude, crime.location.longitude]}
+          key={building.eas_fullid}
+          position={[building.latitude, building.longitude]}
+          onClick={() => {
+            setActiveBuilding(building);
+          }}
+          icon={icon}
         />
       ))}
+
+      {activeBuilding && (
+        <Popup
+          position={[activeBuilding.latitude, activeBuilding.longitude]}
+          onClose={() => {
+            setActiveBuilding(null);
+          }}
+        >
+          <div>
+            <h2>{activeBuilding.address}</h2>
+            <p>{activeBuilding.zip_code}</p>
+          </div>
+        </Popup>
+      )}
     </MapContainer>
   );
 }
