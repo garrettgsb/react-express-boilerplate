@@ -16,41 +16,93 @@ const T = new Twit({
   strictSSL: true,     // optional - requires SSL certificates to be valid.
 });
 
-const calgaryPointRadius = '51.0447,-114.0719,100mi'
+let tweetsData = []
 
-
-// This works, basic search for word
-const streamKeyword = function(searchWord) {
-  const stream = T.stream('statuses/filter', {
-    track: searchWord,
-    language: 'en'
-  });
-  stream.on('tweet', async tweet => {
-      console.log(tweet);
-  });
+const pushToTweetsData = function(tweet) {
+  let sentiment = new Sentiment();
+      let sentimentResult = sentiment.analyze(tweet.text);
+      try {
+        let tweetData = {
+          created_at: tweet.created_at,
+          id: tweet.id,
+          text: tweet.text,
+          user: tweet.user || {},
+          geo: tweet.geo,
+          coordinates: tweet.coordinates,
+          extended_tweet: tweet.extended_tweet.full_text,
+          place: tweet.place,
+          sentiment: {
+            score: sentimentResult.score,
+            positive: util.inspect(sentimentResult.positive),
+            negative: util.inspect(sentimentResult.negative)
+          }
+        }
+        tweetsData.push(tweetData);
+      } catch (error) {
+        console.log('no extended tweet');
+        let tweetData = {
+          created_at: tweet.created_at,
+          id: tweet.id,
+          text: tweet.text,
+          user: tweet.user || {},
+          geo: tweet.geo,
+          coordinates: tweet.coordinates,
+          extended_tweet: null,
+          place: tweet.place,
+          sentiment: {
+            score: sentimentResult.score,
+            positive: util.inspect(sentimentResult.positive),
+            negative: util.inspect(sentimentResult.negative)
+          }
+        }
+        tweetsData.push(tweetData);
+      }
+      
+      console.log("Match Count", tweetCount);
+      tweetCount++;
+      
 }
 
 const streamCanadaBorderBox = function(searchWord) {
   const canada = ['-140.99778', '41.6751050889', '-52.6480987209', '83.23324'];
-  
+  // const regexpression = /(?i)#RemoveThePM(?-i).*/gi
   const regexpression = searchWord
   const regex = new RegExp(regexpression, "gi");
   
+
   const stream = T.stream('statuses/filter', {
     track: searchWord,
-    locations: canada,
+    // locations: canada,
     language: 'en'
   });
 
+  let count = 0;
   stream.on('tweet', async tweet => {
-    if(tweet.text.match(regex)){
-      console.log(tweet);
+    if (tweet.text.match(regex)) {
+      pushToTweetsData(tweet);
+    } else {
+      try {
+        if (tweet.extended_tweet.full_text.match(regex)) {
+          pushToTweetsData(tweet);
+        }
+      } catch (error) {
+        console.log('No extended tweet');
+      }   
     }
-    console.log(tweetCount);
-      tweetCount++;
+
+    if (tweetsData.length === 50) {
+      const data = util.inspect(tweetsData)
+      fs.writeFile('./seedData.js', data, function(err, result) {
+        if(err) console.log('error', err);
+        stream.stop()
+        console.log('Finished writing')
+      })
+    }
+    console.log(tweet);
+    console.log("Total Count: ", count);
+    count++;
   });
 }
-
 
 const streamUSBorderBox = function(searchWord) {
   const USA = ['-171.791110603', '18.91619', '-66.96466', '71.3577635769'];
@@ -72,7 +124,6 @@ const streamUSBorderBox = function(searchWord) {
   });
 }
 
-
 const getTweetsFromPointRadius = function(pointRadius) {
   T.get('search/tweets', { q:`#RemoveThePM geocode:${pointRadius}`, count: 10 }, function(err, data, response) {
     console.log(data)
@@ -83,37 +134,6 @@ const getTweetsFromPointRadius = function(pointRadius) {
     })
   })
 }
-
-// const canada = ['-140.99778', '41.6751050889', '-52.6480987209', '83.23324'];
-// let stream = T.stream('statuses/filter', {
-//   track: '#RemoveThePM',
-//   language: 'en'
-// });
-// stream.on('tweet', async tweet => {
-//   console.log('########################### NEW TWEET ###########################');
-//     console.log(tweet.text);
-//     if (tweet.user){
-//       console.log('User location: ', tweet.user.location);
-//     }
-//     if (tweet.place) {
-//       console.log('_______________Place data__________________');
-//       console.log(tweet.place)
-//     }
-//     console.log('######################################################################');
-// });
-
-// streamCanadaBorderBox('#RemoveThePM');
-// streamUSBorderBox('#Obama');
-
-// const runSingleQuery = function() {
-//   const headers = {
-//     Authorization: `Bearer ${process.env.BEARER_TOKEN}`
-//   }
-//   needle.get('https://api.twitter.com/1.1/search/tweets.json?q=%23RemoveThePM%20-filter%3Aretweets%20AND%20-filter%3Areplies&geocode=48.428421,-123.365646,30km',{headers: headers}, function(error, response) {
-//     if (!error && response.statusCode == 200)
-//     console.log(response.body);
-//   });
-// }
 
 const senti = new Sentiment();
 
