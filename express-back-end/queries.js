@@ -116,11 +116,11 @@ const getTweetsFromPointRadius = function(pointRadius) {
 
 const senti = new Sentiment();
 
-const runSingleQuery = function() {
+const runSingleQuery = function(hashtag) {
   const headers = {
     Authorization: `Bearer ${process.env.BEARER_TOKEN}`
   }
-  needle.get(`https://api.twitter.com/1.1/search/tweets.json?q=%23RemoveThePM%20-filter%3Aretweets%20AND%20-filter%3Areplies&geocode=${calgaryPointRadius}`,{headers: headers}, function(error, response) {
+  needle.get(`https://api.twitter.com/1.1/search/tweets.json?q=%23${hashtag}%20-filter%3Aretweets%20AND%20-filter%3Areplies&geocode=${calgaryPointRadius}`,{headers: headers}, function(error, response) {
     if (!error && response.statusCode == 200)
     console.log(response.body);
     console.log('##############################################################################')
@@ -132,4 +132,4 @@ const runSingleQuery = function() {
 }
 
 
-runSingleQuery();
+runSingleQuery('FalconAndWinterSoldier');
