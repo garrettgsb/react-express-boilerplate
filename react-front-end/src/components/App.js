@@ -1,16 +1,15 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
-import Buttons from './buttons'
-import CustomizedSwitches from './switches'
-import CircularProgress from '@material-ui/core/CircularProgress';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Header from './header'
-import LeftSearch from './leftsearch'
-import RightTweets from './righttweets'
-// import CenterMap from './centermap'
+// import Buttons from './Buttons'
+// import CustomizedSwitches from './Switches'
+// import CircularProgress from '@material-ui/core/CircularProgress';
+// import LinearProgress from '@material-ui/core/LinearProgress';
+import Header from './Header.js'
+import LeftSearch from './LeftSearch'
+import RightTweets from './RightTweets'
 import MapContainer from './Map/Map.js'
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 // import DeleteIcon from '@material-ui/icons/Delete';
 
 import './App.scss';
@@ -25,9 +24,9 @@ export default function App() {
 
   return (
     <body className="App">
-      <Header />
       {/* {Map} */}
       <MapContainer />
+      <Header />
       <LeftSearch />
       <RightTweets />
     </body>
