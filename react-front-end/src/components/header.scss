@@ -10,12 +10,14 @@ nav {
   background-color: $dark-grey-background;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height: 5vh;
+  align-items: flex-start;
+  height: 15vh;
   min-height: 30px;
-  margin: 1vh 1vh 3vh 1vh;
-  width: 99vw;
+  margin: 1.5vh 1vh 3vh 1vh;
+  width: 90vw;
+  opacity: .75;
   position: fixed;
+  left: 0;
   top: 0;
   border-radius: 5px;
   .userAvatar {
@@ -23,12 +25,13 @@ nav {
     width: 1.8vw;
     min-width: 25px;
     margin-right: 1.5vw;
+    margin-top: 1vw;
     align-self: center;
   }
   .logo {
     display: flex;
-    margin: .3vw .2vw 0vw 1.5vw;
-    align-self: center;
+    margin: .5vw .2vw 0vw 1.5vw;
+    // align-self: center;
     min-width: 100px;
     max-width: 120px;
   }

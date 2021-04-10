@@ -24,10 +24,10 @@ export default function App() {
 
 
   return (
-    <body className="App">
+    <body className="app">
+      <MapContainer />
       <Header />
       {/* {Map} */}
-      <MapContainer />
       <LeftSearch />
       <RightTweets />
     </body>

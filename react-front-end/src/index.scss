@@ -13,11 +13,13 @@
 
 body {
   font-family: $font-family;
-  background-color: $black;
+  // background-color: $black;
 }
 
 .layout {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-height: 100vh;
 }
 

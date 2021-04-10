@@ -4,7 +4,6 @@ import './Map.scss';
 import mapStyle from './mapStyle';
 
 require('dotenv').config()
- 
 export class MapContainer extends Component {
   _mapLoaded(mapProps, map) {
     map.setOptions({

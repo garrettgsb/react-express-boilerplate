@@ -2,6 +2,8 @@
 
 html, body {
   margin: 0 auto;
-  width:100vw;
+  width:0vw;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }

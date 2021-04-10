@@ -4,16 +4,18 @@
 .leftsearch {
   background-color: $black;
   opacity: .6;
-  width: 21vw;
-  min-width: 250px;
+  width: 30vw;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 90vh;
-  margin-top: 8vh;
+  margin-top: 20vh;
+  // margin-bottom: 1vh;
   margin-left: 1vh;
   position:absolute;
+  left: 0;
   color: white;
   border-radius: 15px;
 }
