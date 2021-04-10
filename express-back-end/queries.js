@@ -46,8 +46,6 @@ const streamCanadaBorderBox = function(searchWord) {
     if(tweet.text.match(regex)){
       console.log(tweet);
     }
-    console.log(tweetCount);
-      tweetCount++;
   });
 }
 
