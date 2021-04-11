@@ -5,6 +5,8 @@ import { Icon } from "leaflet";
 import useSwr from "swr";
 import axios from "axios";
 import { features } from "./SFNeighborhoods.json"
+// import { features } from "./SSFZoning.json"
+// import { features } from "./bayareacounties.json"
 
 
 // const fetcher = (...args) => fetch(...args).then((response) => response.json());
@@ -21,9 +23,11 @@ function App() {
   const { data, error } = useSwr(url, { fetcher });
   const buildings = data && !error ? data.slice(0, 100) : [];
 
-  const hoodData = features
-    console.log("MEOWWW")
-    console.log(hoodData)
+  const SFHoodData = features
+
+  const countyData = features
+
+  const SSFZoningData = features
 
   const testJSON = {
     "type": "FeatureCollection", //refers to features
@@ -200,7 +204,7 @@ function App() {
       ))}
 
       <GeoJSON
-        data={hoodData}
+        data={SSFZoningData, SFHoodData}
         style={mapStyle}
       />
     </MapContainer>
