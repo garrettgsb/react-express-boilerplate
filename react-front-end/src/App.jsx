@@ -7,9 +7,11 @@ import './App.scss';
 import './components/Button.scss';
 import Header from './components/Header.jsx';
 import Events from './components/Meetups/Events.jsx'
+import AddEvent from './components/Meetups/AddEvent.jsx'
 
 function App() {
 
+  const [ showAddEvent, setShowAddEvent ] = useState(false)
   const [events, setEvents] = useState([
     {
       id: 1,
@@ -51,10 +53,27 @@ function App() {
   //   }) 
   // }
 
+    // delete event
+    const deleteEvent = (id) => {
+      setEvents(events.filter((event) => event.id !== id))
+    }
+
+    // add event
+    const addEvent = (event) => {
+      // temporary code; will want to write function to add next available meetup id
+      // generate random number for id
+      const id = Math.floor(Math.random() * 10000) + 1
+      // add id to provided event info
+      const newEvent = { id, ...event }
+      // display existing events, and add new event to displayed data
+      setEvents([...events, newEvent])
+    }
+
     return (
       <div className="container">
-        <Header />        
-        <Events events={events} />
+        <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
+        {showAddEvent && <AddEvent onAdd={addEvent}/>}
+        {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
       </div>
     );
 }
