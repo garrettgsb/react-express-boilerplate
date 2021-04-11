@@ -1,8 +1,21 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
-  //Access login page
-  router.get("/users", (req, res) => {});
+  //Access users favourites
+  router.get("/users/:id/favourites", (req, res) => {
+    const userID = req.params.id;
+    db.query(
+      `
+      SELECT * FROM favourites
+      WHERE user_id = $1
+      `,
+      [userID]
+    )
+      .then((favourites) => res.json(favourites))
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
 
   //Favourite a building
   router.post("/users/:id/favourites", (req, res) => {
@@ -22,7 +35,7 @@ module.exports = (db) => {
   });
 
   //Delete a favourite
-  router.put("/users/:id/favourites/:id", (req, res) => {
+  router.delete("/users/:id/favourites/:id", (req, res) => {
     const favouriteID = req.params.id;
     db.query(
       `
