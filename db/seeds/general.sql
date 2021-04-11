@@ -29,10 +29,10 @@ VALUES
 
 INSERT INTO meetups (location_id, date, time)
 VALUES
-(1, 2021-04-27, 22:30:00),
-(3, 2021-05-21, 22:00:00),
-(2, 2021-04-15, 01:20:00),
-(4, 2021-03-14, 23:35:00);
+(1, '2021-04-27', '22:30:00'),
+(3, '2021-05-21', '22:00:00'),
+(2, '2021-04-15', '01:20:00'),
+(4, '2021-03-14', '23:35:00');
 
 INSERT INTO meetup_photographers (meetup_id, photographer_id)
 VALUES
@@ -47,44 +47,9 @@ VALUES
 
 INSERT INTO messages (photographer_id, meetup_id, message, timestamp)
 VALUES
-(1, 3, 'I hope the coditions are great!', 2021-04-13 12:02:25),
-(2, 1, 'Woooo! I love the northern lights', 2021-04-01 09:25:20),
-(2, 2, 'I can hardly wait to try out my new lens!', 2021-04-12 17:20:20),
-(3, 1, 'Should be a nice shoot!', 2021-04-26 20:01:00),
-(4, 2, 'Too bad it got cloudy! :(', 2021-04-16 09:20:00),
-(5, 4, 'This was a great shoot, thank you for coming!', 2021-03-15 14:25:00);
-
--- STRETCH SEEDS
-
--- INSERT INTO equipment (photographer_id, camera_body, lens1, lens2)
--- VALUES
--- (1, 'Canon T3i', 'Canon 14mm', 'Canon 35mm'),
--- (2, 'Canon Mark III', 'Canon 24-105mm', 'Canon 50mm'),
--- (3, 'Panasonic G7', 'Lumix 20mm', 'Lumix 14-150mm'),
--- (4, 'Nikon Z6', 'Nikon 35mm', 'Nikon 18-140mm'),
--- (5, 'Sony Alpha 33', 'Tamron 28-200mm', 'Sony 18-35mm');
-
--- INSERT INTO endorsements (description, photographer_id)
--- VALUES
--- ('So glad I met Betty, she was so fun to photograph with!', 4),
--- ('I learned so much working with Dave', 1),
--- ('Cannot wait to meet up with Ellie again', 3),
--- ('Charlie is a fantastic photography partner', 2),
--- ('Alice is so talented', 5);
-
--- INSERT INTO photographers_endorsements (photographer_id, endorsement_id)
--- VALUES
--- (2, 1),
--- (4, 2),
--- (5, 3),
--- (3, 4),
--- (1, 5);
-
--- INSERT INTO location_ratings (location_id, number_stars) 
--- VALUES
--- (1, 4),
--- (2, 5),
--- (3, 3),
--- (1, 5),
--- (2, 5),
--- (3, 4);
+(1, 3, 'I hope the conditions are great!', '2021-04-13 12:02:25'),
+(2, 1, 'Woooo! I love the northern lights', '2021-04-01 09:25:20'),
+(2, 2, 'I can hardly wait to try out my new lens!', '2021-04-12 17:20:20'),
+(3, 1, 'Should be a nice shoot!', '2021-04-26 20:01:00'),
+(4, 2, 'Too bad it got cloudy! :(', '2021-04-16 09:20:00'),
+(5, 4, 'This was a great shoot, thank you for coming!', '2021-03-15 14:25:00');
