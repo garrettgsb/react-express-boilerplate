@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import MaterialUIPickers from './dateTimePicker.jsx'
 
 const AddEvent = ({ onAdd }) => {
 
@@ -38,6 +39,7 @@ const AddEvent = ({ onAdd }) => {
 
       <div className='form-control'>
         <label>Date</label>
+        <MaterialUIPickers />
         <input 
         type='text' 
         placeholder='Add Date: yyyy-mm-dd'
