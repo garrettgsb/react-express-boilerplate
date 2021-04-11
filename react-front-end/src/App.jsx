@@ -1,38 +1,15 @@
 import React from 'react';
-import { useState } from 'react';
+// import { useState } from 'react';
 // import axios from 'axios';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import Forecast from './components/Forecast.jsx';
+import Meetups from './components/Meetups/index.jsx'
 import './App.scss';
 import './components/Button.scss';
-import Header from './components/Header.jsx';
-import Events from './components/Meetups/Events.jsx'
-import AddEvent from './components/Meetups/AddEvent.jsx'
 
 function App() {
 
-  const [ showAddEvent, setShowAddEvent ] = useState(false)
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      location_id: 1,
-      date: '2021-04-27',
-      time: '22:30:00'
-    },
-    {
-      id: 2,
-      location_id: 3,
-      date: '2021-05-21',
-      time: '22:00:00'
-    },
-    {
-      id: 3,
-      location_id: 2,
-      date: '2021-04-15',
-      time:'01:20:00'
-    }
-  ])
-
+  
   // const constructor = (props) => {
   //   super(props)
   //   this.state = {
@@ -53,27 +30,9 @@ function App() {
   //   }) 
   // }
 
-    // delete event
-    const deleteEvent = (id) => {
-      setEvents(events.filter((event) => event.id !== id))
-    }
-
-    // add event
-    const addEvent = (event) => {
-      // temporary code; will want to write function to add next available meetup id
-      // generate random number for id
-      const id = Math.floor(Math.random() * 10000) + 1
-      // add id to provided event info
-      const newEvent = { id, ...event }
-      // display existing events, and add new event to displayed data
-      setEvents([...events, newEvent])
-    }
-
     return (
-      <div className="container">
-        <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
-        {showAddEvent && <AddEvent onAdd={addEvent}/>}
-        {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
+      <div className="app">
+        <Meetups />
       </div>
     );
 }

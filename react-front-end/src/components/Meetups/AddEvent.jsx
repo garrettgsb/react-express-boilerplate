@@ -24,10 +24,10 @@ const AddEvent = ({ onAdd }) => {
     setTime('')
   }
   
-  //May want to change Location input label to 'coordinates' or something else 
   return (
     <form className='add-form' onSubmit={onSubmit} >
       <div className='form-control'>
+      {/* May want to change Location input label to 'coordinates' or something else  */}
         <label>Location</label>
         <input 
         type='text' 
