@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Forecast from 'components/Forecast';
 import './App.css';
 
-class App extends Component {
-  constructor(props) {
+function App() {
+
+  const constructor = (props) => {
     super(props)
     this.state = {
       message: 'Click the button to load data!'
@@ -23,7 +26,6 @@ class App extends Component {
     }) 
   }
 
-  render() {
     return (
       <div className="App">
         <h1>{ this.state.message }</h1>
@@ -32,7 +34,6 @@ class App extends Component {
         </button>        
       </div>
     );
-  }
 }
 
 export default App;
