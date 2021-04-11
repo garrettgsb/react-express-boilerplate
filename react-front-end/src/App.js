@@ -4,6 +4,8 @@ import "./App.css";
 import { Icon } from "leaflet";
 import useSwr from "swr";
 import axios from "axios";
+import { features } from "./SFNeighborhoods.json"
+
 
 // const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
@@ -18,6 +20,10 @@ function App() {
   const url = "https://data.sfgov.org/resource/ramy-di5m.json";
   const { data, error } = useSwr(url, { fetcher });
   const buildings = data && !error ? data.slice(0, 100) : [];
+
+  const hoodData = features
+    console.log("MEOWWW")
+    console.log(hoodData)
 
   const testJSON = {
     "type": "FeatureCollection", //refers to features
@@ -171,6 +177,7 @@ function App() {
     color: "black",
   };
 
+
   return (
     
     <MapContainer center={[37.70820204901914, -122.45808060394913]} zoom={12}>
@@ -193,10 +200,11 @@ function App() {
       ))}
 
       <GeoJSON
-        data={testJSON}
+        data={hoodData}
         style={mapStyle}
       />
     </MapContainer>
+
   );
 }
 // constructor(props) {
