@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from './Button.jsx'
 
+
 const Header = () => {
 
   const onClick = () => {
@@ -8,9 +9,10 @@ const Header = () => {
   }
 
   return (
-    <header>
-    <h1>Aurora Junkies Header</h1>
-    <Button color='black' text='Add' onClick={onClick} />
+
+    <header className='header'>
+    <h1>Create Meetup</h1>
+    <Button className='btn' color='black' text='Add' onClick={onClick} />
     </header>
   )
 }
