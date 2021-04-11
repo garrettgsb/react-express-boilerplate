@@ -5,7 +5,7 @@ import React from 'react';
 // import CustomizedSwitches from './Switches'
 // import CircularProgress from '@material-ui/core/CircularProgress';
 // import LinearProgress from '@material-ui/core/LinearProgress';
-import Header from './Header.js'
+// import Header from './Header.js'
 import LeftSearch from './LeftSearch'
 import RightTweets from './RightTweets'
 import MapContainer from './Map/Map.js'
@@ -23,13 +23,13 @@ export default function App() {
 
 
   return (
-    <body className="App">
+    <div className="App">
       {/* {Map} */}
       <MapContainer />
-      <Header />
+      {/* <Header /> */}
       <LeftSearch />
       <RightTweets />
-    </body>
+    </div>
   );
 
   // return (

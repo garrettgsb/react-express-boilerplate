@@ -1,0 +1,55 @@
+
+@import "../styles/variables.scss";
+// @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
+// @import "styles/reset.scss";
+
+nav {
+  background-color: $dark-grey-background-opacity;
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  min-height: 300px;
+  margin: 10px auto;
+  width: 50vw;
+position: relative;
+  border-radius: 15px;
+  z-index: 1;
+  .headerParent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .logo {
+      display: flex;
+      // margin: 0 .2vw 0vw .2vw;
+      // align-self: center;
+      min-width: 120px;
+      max-width: 140px;
+      // opacity: 1;
+    }
+    .userAvatar {
+      display: flex;
+      min-width: 20px;
+      max-width: 40px;
+      margin: .8vw 3.5vw 0vw 0vw;
+      align-self: center;
+      // opacity: 1;
+    }
+  }
+  .chooseCountry{
+    display: flex;
+    justify-content: center;
+    margin-top: 1vw;
+        // opacity: 1;
+  }
+  .canada{
+    width: 150px;
+    margin-right: 1vw;
+  }
+  .usa{
+    width: 150px;
+    margin-left: 1vw;
+  }
+}

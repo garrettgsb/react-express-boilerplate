@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import './Map.scss';
 import mapStyle from './mapStyle';
+import Header from '../Header/Header'
 
 require('dotenv').config()
 export class MapContainer extends Component {
@@ -24,6 +25,7 @@ export class MapContainer extends Component {
         onReady={(mapProps, map) => this._mapLoaded(mapProps, map)}
       >
         <Marker position={coords} />
+        <Header />
       </Map>
     );
   }
