@@ -43,7 +43,7 @@
 
 ### GUIDELINES & 
 * work on branches at all times
-* feature/blah
+* branch name format: feature/blah
 * request to merge to master (no merges without group approval)
 * commit regularly, approx1+ times / hour
 * group checkins: first thing in morning, midday, evening
