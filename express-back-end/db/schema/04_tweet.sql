@@ -7,7 +7,7 @@ CREATE TABLE tweets (
   created_at_date TIMESTAMP NOT NULL,
   text TEXT,
   tweeter_id INT REFERENCES tweeters(id) ON DELETE CASCADE,
-  place_id VARCHAR(255) REFERENCES placces(id) ON DELETE CASCADE,
+  place_id INT REFERENCES places(id) ON DELETE CASCADE,
   hashtag VARCHAR(255) NOT NULL,
   map_id INT NOT NULL REFERENCES maps(id) ON DELETE CASCADE
 );
