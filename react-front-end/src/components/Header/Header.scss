@@ -38,7 +38,7 @@ position: relative;
       // opacity: 1;
     }
   }
-  .chooseCountry{
+  .chooseCountry {
     display: flex;
     justify-content: center;
     margin-top: 1vw;
@@ -51,5 +51,8 @@ position: relative;
   .usa{
     width: 150px;
     margin-left: 1vw;
+  }
+  .chooseHashtags {
+    color: $white;
   }
 }
