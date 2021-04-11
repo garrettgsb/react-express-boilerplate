@@ -1,18 +1,35 @@
 const router = require("express").Router();
 
-//get all buildings in an area
 module.exports = (db) => {
+  //Get all buildings in an area
   router.get("/buildings", (req, res) => {
     const areaID = req.params.area_id;
     db.query(
       `
       SELECT *
-      FROM points
+      FROM buildings
       WHERE area_id = $1
       `,
       [areaID]
     )
       .then((buildings) => res.json(buildings))
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  //Get a specific building
+  router.get("/buildings/:id", (req, res) => {
+    const buildingID = req.params.id;
+    db.query(
+      `
+      SELECT * 
+      FROM buildings
+      WHERE id = $1
+      `,
+      [buildingID]
+    )
+      .then((building) => res.json(building))
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
