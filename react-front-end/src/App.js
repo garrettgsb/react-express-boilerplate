@@ -18,18 +18,22 @@ function App() {
   const url = "https://data.sfgov.org/resource/ramy-di5m.json";
   const { data, error } = useSwr(url, { fetcher });
   const buildings = data && !error ? data.slice(0, 100) : [];
-  const borderJSON = "https://data.sfgov.org/resource/6ia5-2f8k.json"
+
   const testJSON = {
-    "type": "FeatureCollection",
-    "crs": {
+    "type": "FeatureCollection", //refers to features
+    "crs": { 
       "type": "name",
       "properties": {
-        "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        "name": "urn:ogc:def:crs:OGC:1.3:CRS84" //crs is some coordinates reference system. maybe won't need this?
       }
     },
-    "features": [{
+    "features": [{ //JSON array of the feature collection defined above
       "type": "Feature",
       "properties": {
+        "name": "Coors Field",
+        "amenity": "Baseball Stadium",
+        "popupContent": "This is where the Rockies play!",
+        "show_on_map": true
   
       },
       "geometry": {
@@ -168,6 +172,7 @@ function App() {
   };
 
   return (
+    
     <MapContainer center={[37.70820204901914, -122.45808060394913]} zoom={12}>
       <TileLayer
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
