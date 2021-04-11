@@ -13,3 +13,4 @@
 * I want to see what others have said about a person before we agree to meet up
 * I want to see a map of locations where other photographers are going and see what that location looks like (geotag photos)
 * I want to be able to see what setting others are using when they photograph the northern lights
+* I want to set event as private so only people I invite can see event details

@@ -17,12 +17,14 @@
 ## meetups
 [ ] create form for meetups
 [ ] edit / delete meetups
-[ ] set meetups to public/private
 [ ] send meetup details as invite to friends (email invite? / twilio invite?)
+[ ] separate meetups into 3 lists: public, user created, attending
 [ ] adding yourself to a public event
 [ ] show meetups on a calendar
 [ ] show /filter public meetups on a map
 [ ] group chats / personal chats: https://www.youtube.com/watch?v=tBr-PybP_9c https://guide.meteor.com/methods.html
+[ ] (stetch) set meetups to public/private
+[ ] (stretch) show list of past events
 ## profile
 [ ] add a profile pic
 [ ] add name
