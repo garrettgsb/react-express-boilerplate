@@ -19,10 +19,13 @@ Team members - Dylan Rogers, Gavin Swan, Samantha Knoop
 * (stretch) Prove identity when joining app (add photo and video of yourself)
 * (stretch) Rate photography locations
 
+## Andy's recommendation's
+* leaflet / mapbox for map API
+* search nmpm "react" and look for leaflet
+
 ## Stack Choices
 Front end: 
   * React
-  * Twilio
   * Axios
 Back end: 
   * Express
