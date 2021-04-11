@@ -15,9 +15,7 @@ Team members - Dylan Rogers, Gavin Swan, Samantha Knoop
 * how people have endorsed them(like in airBnB customer & property owner ratings / linked in)
 * geotag photos?
 * Photographers communicate with each other via Twilio
-* (stretch) Discover other photographers on app
-* (stretch) Prove identity when joining app (add photo and video of yourself)
-* (stretch) Rate photography locations
+
 
 ## Andy's recommendation's
 * leaflet / mapbox for map API
