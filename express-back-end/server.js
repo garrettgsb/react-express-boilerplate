@@ -1,7 +1,7 @@
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
-const PORT = 9000;
+const PORT = 8080;
 
 // PG database client/connection setup
 // const { Pool } = require('pg');
@@ -15,7 +15,8 @@ const db = new Pool ({
   user: 'monke',
   password: 'monke',
   host: 'localhost',
-  database: 'trendi'
+  database: 'trendi',
+  port: 5432
 });
 
 db.connect();
