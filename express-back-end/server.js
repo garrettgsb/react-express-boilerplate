@@ -12,13 +12,6 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static("public"));
 
-// Sample GET route
-App.get("/api/data", (req, res) =>
-  res.json({
-    message: "Seems to work!",
-  })
-);
-
 App.use("/api", buildings(db));
 
 App.listen(PORT, () => {

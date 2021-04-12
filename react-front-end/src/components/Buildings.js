@@ -1,20 +1,30 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { Component } from "react";
 
-export default function Buildings() {
-  const [intialState, setInitialState] = useState([]);
+//component to render all buildings in an area
+class Buildings extends Component {
+  state = { buildings: [] };
 
-  useEffect(() => {
-    fetch("/api/")
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((jsonResponse) => setInitialState(jsonResponse));
-  }, []);
+  componentDidMount() {
+    fetch("/api/buildings")
+      .then((res) => res.json())
+      .then((buildings) => this.setState({ buildings }));
+  }
 
-  return (
-    <div>{intialState.length > 0 && intialState.map((e) => <li>{e}</li>)}</div>
-  );
+  render() {
+    return (
+      <div className="Buildings">
+        <h1>Buildings</h1>
+        <ul>
+          {this.state.buildings.map((building) => (
+            <li key={building.id}>
+              <h2>{building.name}</h2>
+              <p>{building.address}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }
+
+export default Buildings;
