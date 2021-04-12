@@ -1,4 +1,4 @@
-module.exports = [ 
+[ 
   { created_at: 'Sat Apr 10 21:19:23 +0000 2021',
     id: 1380993839280885800,
     text:
