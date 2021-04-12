@@ -10,7 +10,7 @@ import {
 
 export default function MaterialUIPickers() {
   // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -19,13 +19,11 @@ export default function MaterialUIPickers() {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify="space-around">
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
+      <KeyboardDatePicker
           margin="normal"
-          id="date-picker-inline"
-          label="Date picker inline"
+          id="date-picker-dialog"
+          label="Date"
+          format="MM/dd/yyyy"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
@@ -36,7 +34,7 @@ export default function MaterialUIPickers() {
         <KeyboardTimePicker
           margin="normal"
           id="time-picker"
-          label="Time picker"
+          label="Time"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{

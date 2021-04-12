@@ -18,7 +18,7 @@ const AddEvent = ({ onAdd }) => {
     }
 
     // 
-    onAdd({ text: locationName, date, time })
+    onAdd({ name: locationName, date, time })
 
     setLocationName('')
     setDate('')
@@ -38,22 +38,9 @@ const AddEvent = ({ onAdd }) => {
       </div>
 
       <div className='form-control'>
-        <label>Date</label>
-        <MaterialUIPickers />
-        <input 
-        type='text' 
-        placeholder='Add Date: yyyy-mm-dd'
-        value={date}
-        onChange = {(e) => setDate(e.target.value)} />
-      </div>
-
-      <div className='form-control'>
-        <label>Time</label>
-        <input 
-        type='text' 
-        placeholder='Add Time: 00:00:00'
-        value={time}
-        onChange = {(e) => setTime(e.target.value)} />
+        <label>Date & Time</label>
+        <MaterialUIPickers onChange = {(e) => setDate({})} />
+        
       </div>
 
       <input type='submit' value='Save Meetup' className='btn btn-block'/>
