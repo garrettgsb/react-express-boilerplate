@@ -13,7 +13,7 @@ nav {
   margin: 10px auto;
   width: 60vw;
   position: relative;
-  border-radius: 15px;
+  border-radius: 35px;
   z-index: 1;
 
   .headerParent {
@@ -32,7 +32,7 @@ nav {
       display: flex;
       min-width: 20px;
       max-width: 40px;
-      margin: .8vw 3.5vw 0vw 0vw;
+      margin: .8vw 3vw .5vw 0vw;
       align-self: center;
     }
   }

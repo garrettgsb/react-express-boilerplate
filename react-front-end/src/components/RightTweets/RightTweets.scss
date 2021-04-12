@@ -14,12 +14,12 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  
-  color: white;
-  border-radius: 15px 0px 0px 15px;
   overflow: scroll;
   overflow-x: hidden;
-
+  padding: 2px;
+  color: white;
+  border-radius: 15px 0px 0px 15px;
+  
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -40,15 +40,15 @@
   article {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 88%;
     justify-content: center;
     align-content: flex-start;
     overflow: visible;
     background-color: $white-inactive;
     color: $black-inactive;
-    border-radius: 15px;
+    border-radius: 20px;
     box-shadow: 13px 15px 15px -3px rgba(0, 0, 0, 0.404);
-    margin: 1.5vh auto;
+    margin: 1.5vh 0 .4vh 0;
     transition: 0.3s;
 
 
