@@ -5,6 +5,7 @@ const _ = require('lodash');
 const { identity } = require('lodash');
 const fs = require('fs');
 const util = require('util');
+const { response } = require('express');
 require('dotenv').config()
 
 const T = new Twit({
@@ -15,6 +16,10 @@ const T = new Twit({
   timeout_ms: 60*1000,  // optional HTTP request timeout to apply to all requests.
   strictSSL: true,     // optional - requires SSL certificates to be valid.
 });
+
+const headers = {
+  Authorization: `Bearer ${process.env.BEARER_TOKEN}`
+}
 
 const calgaryPointRadius = '51.0447,-114.0719,100mi'
 
@@ -82,6 +87,28 @@ const getTweetsFromPointRadius = function(pointRadius) {
   })
 }
 
+
+// Canada: 23424775 United States: 23424977 
+const getCurrentCanadaTrends = function() {
+  //https://api.twitter.com/1.1/trends/place.json
+  needle.get('https://api.twitter.com/1.1/trends/place.json?id=23424775', {headers: headers}, function(error, response) {
+    if(error) console.log(error)
+    if(!error && response.statusCode === 200){
+      console.log(response.body[0].trends);
+    }
+  });
+}
+
+const getCurrentUSATrends = function() {
+  //https://api.twitter.com/1.1/trends/place.json
+  needle.get('https://api.twitter.com/1.1/trends/place.json?id=23424977', {headers: headers}, function(error, response) {
+    if(error) console.log(error)
+    if(!error && response.statusCode === 200){
+      console.log(response.body[0].trends);
+    }
+  });
+}
+
 // const canada = ['-140.99778', '41.6751050889', '-52.6480987209', '83.23324'];
 // let stream = T.stream('statuses/filter', {
 //   track: '#RemoveThePM',
@@ -132,4 +159,5 @@ const runSingleQuery = function(hashtag) {
 
 
 // runSingleQuery('NDPConvention2021');
-streamCanadaBorderBox('#NDPConvention2021');
+// streamCanadaBorderBox('#NDPConvention2021');
+getCurrentUSATrends()
