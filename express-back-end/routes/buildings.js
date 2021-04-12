@@ -3,8 +3,9 @@ const router = require("express").Router();
 module.exports = (db) => {
   //Get all buildings in an area
   router.get("/buildings", (req, res) => {
-    res.send("API is working");
-    const areaID = req.params.area_id;
+    // const areaID = req.params.area_id;
+    const areaID = 1;
+
     db.query(
       `
       SELECT *
@@ -13,7 +14,7 @@ module.exports = (db) => {
       `,
       [areaID]
     )
-      .then((buildings) => res.json(buildings))
+      .then(({ rows: buildings }) => res.json(buildings))
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
@@ -21,7 +22,9 @@ module.exports = (db) => {
 
   //Get a specific building
   router.get("/buildings/:id", (req, res) => {
-    const buildingID = req.params.id;
+    // const buildingID = req.params.id;
+    const buildingID = 16;
+
     db.query(
       `
       SELECT * 
@@ -30,7 +33,7 @@ module.exports = (db) => {
       `,
       [buildingID]
     )
-      .then((building) => res.json(building))
+      .then(({ rows: building }) => res.json(building))
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
