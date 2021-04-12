@@ -1,0 +1,127 @@
+@import "../styles/variables.scss";
+
+
+.righttweets {
+  background-color: $dark-grey-background-opacity;
+  width: 30vw;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 90vh;
+  margin-top: 35vh;
+  margin-right: 2vh;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: white;
+  border-radius: 15px;
+
+  article {
+    display: flex;
+    flex-direction: column;
+    min-height: 7em;
+    width: 90%;
+    justify-content: center;
+    align-content: flex-start;
+    overflow: auto;
+    background-color: $white-inactive;
+    color: $black-inactive;
+    border-radius: 15px;
+    box-shadow: 13px 15px 15px -3px rgba(0, 0, 0, 0.404);
+    margin: 3vh auto;
+    transition: 0.3s;
+
+    &:hover {
+      box-shadow: 20px 20px 10px -2px rgba(0, 0, 0, 0.74);
+      background-color: $white-active;
+      color: $black-active;
+      
+      .profile {
+        font-weight: 700;
+        color: #183e72c7;
+      }
+      .handle {
+        font-weight: 500;
+        color: #7EA4A9;
+        margin-right: 1.4em;
+      }
+      .tweeter img {
+        height: 3rem;
+        margin-left: .7em;
+      }
+    }
+
+    .tweeter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .profile {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      color: #183e7278;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+    
+    
+    .handle {
+      margin-right: 1em;
+      color: #7EA4A9;
+      font-weight: 500;
+      font-size: .9rem;
+      transition: 0.3s;
+    }
+    
+    
+    .tweeter img {
+      width: 2.8rem;
+      margin: .5em;
+      transition: 0.3s;
+    }
+    
+    
+    .tweet {
+      justify-content: flex-start;
+      align-self: center;
+      width: 90%;
+      font-size: 1.1rem;
+      font-weight: 200;
+      color: #2f2f2f;
+      word-wrap: anywhere;
+      margin-bottom: 1em;
+    }
+    
+    // article footer {
+      //   display: flex;
+      //   flex-direction: row;
+      //   justify-content: space-between;
+      //   align-self: center;
+      //   width: 90%;
+      //   margin-top: 0.2em;
+      // }
+      
+      // .timestamp {
+        //   display: flex;
+        //   font-size: .8rem;
+        //   font-weight: 400;
+        //   color: #2f2f2f;
+        // }
+        
+        // .interact {
+          //   display: flex;
+          //   justify-content: space-between;
+          //   align-items: center;
+          //   font-size: 1.2rem;
+          //   color: #7EA4A9;
+          // }
+          
+          // article:hover .interact {
+            //   color: #7EA4A9;
+            // }
+          }
+        }
