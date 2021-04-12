@@ -26,6 +26,7 @@ nav {
       min-width: 120px;
       max-width: 140px;
     }
+
     .userAvatar {
       display: flex;
       min-width: 20px;
@@ -35,6 +36,15 @@ nav {
     }
   }
 
+  .choose {
+    display:flex;
+    color: $white-active;
+    font-weight: 500;
+    font-size: 1.5rem;
+    align-self: center;
+    margin: 10px auto;
+  }
+
   .chooseCountry {
     display: flex;
     justify-content: center;
@@ -42,14 +52,17 @@ nav {
     padding-top: .5vh;
     padding-bottom: 1vh;
   }
+
   .canada{
     width: 150px;
     margin-right: 3vw;
   }
+
   .usa{
     width: 150px;
     margin-left: 3vw;
   }
+
   .chooseHashtags {
     color: $white;
   }

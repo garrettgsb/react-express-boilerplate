@@ -51,8 +51,13 @@ export default function TrendingHash() {
   })
 
   return (
-    <div className={classes.root}>
-      {trendingList}
-    </div>
+    <>
+      <div className='choose'>
+        Choose a hashtag to activate trendi
+      </div>
+      <div className={classes.root}>
+        {trendingList}
+      </div>
+    </>
   );
 }
