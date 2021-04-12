@@ -4,7 +4,7 @@ import Chip from '@material-ui/core/Chip';
 
 
 
-const trendingHashtags = ['#joshua', '#isamu', '#sori', '#freebritney', '#awesomeweatherthisweek', 'devil.inc', 'trendiistrendy', 'testingchips', 'blahblahblah', 'hellotoptenhashtags']
+const trendingHashtags = ['#joshua', '#isamu', '#sori', '#freebritney', '#awesomeweatherthisweek', 'devil.inc', 'trendiistrendy', 'testingchips', 'blahblahblah', 'hellotoptenhashtags', '#joshua', '#isamu', '#sori', '#freebritney', '#awesomeweatherthisweek', 'devil.inc', 'trendiistrendy', 'testingchips', 'blahblahblah', 'hellotoptenhashtags']
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,10 +28,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       opacity: 1,
       borderColor: 'transparent',
-      background: 'linear-gradient(145deg, #49759D 20%, #35B696 80%)'
+      background: 'linear-gradient(145deg, #0B8692 20%, #00AD82 80%)'
     }
   }
-
 }));
 
 

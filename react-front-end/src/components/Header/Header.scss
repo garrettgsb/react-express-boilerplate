@@ -9,11 +9,11 @@ nav {
   background-color: $dark-grey-background-opacity;
   display: flex;
   flex-direction: column;
-  height: 20vh;
-  min-height: 300px;
+  overflow: auto;
   margin: 10px auto;
-  width: 50vw;
-position: relative;
+  padding-bottom: 1vh;
+  width: 60vw;
+  position: relative;
   border-radius: 15px;
   z-index: 1;
   .headerParent {
@@ -23,11 +23,8 @@ position: relative;
 
     .logo {
       display: flex;
-      // margin: 0 .2vw 0vw .2vw;
-      // align-self: center;
       min-width: 120px;
       max-width: 140px;
-      // opacity: 1;
     }
     .userAvatar {
       display: flex;
@@ -35,22 +32,20 @@ position: relative;
       max-width: 40px;
       margin: .8vw 3.5vw 0vw 0vw;
       align-self: center;
-      // opacity: 1;
     }
   }
   .chooseCountry {
     display: flex;
     justify-content: center;
-    margin-top: 1vw;
-        // opacity: 1;
+    margin: 20px auto;
   }
   .canada{
     width: 150px;
-    margin-right: 1vw;
+    margin-right: 3vw;
   }
   .usa{
     width: 150px;
-    margin-left: 1vw;
+    margin-left: 3vw;
   }
   .chooseHashtags {
     color: $white;
