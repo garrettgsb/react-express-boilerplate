@@ -3,6 +3,7 @@ const router = require("express").Router();
 module.exports = (db) => {
   //Get all buildings in an area
   router.get("/buildings", (req, res) => {
+    res.send("API is working");
     const areaID = req.params.area_id;
     db.query(
       `
@@ -34,4 +35,5 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+  return router;
 };

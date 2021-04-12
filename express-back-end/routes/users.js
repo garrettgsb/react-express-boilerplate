@@ -1,6 +1,9 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
+  //   Read => GET => ‘/api/users’					Gets all users
+  //   Read => GET => ‘api/users/:id’				Gets a user
+
   //Access users favourites
   router.get("/users/:id/favourites", (req, res) => {
     const userID = req.params.id;
@@ -46,7 +49,7 @@ module.exports = (db) => {
     )
       .then(() => res.send("Deleted from favourites"))
       .catch((err) => {
-        res.status(500).json({ error: err.message });
+        res.status(204).json({ error: err.message });
       });
   });
 };
