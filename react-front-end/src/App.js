@@ -34,24 +34,16 @@ function App() {
     layer.bindPopup(feature.properties.name) //How to add more content to the popup?!? Add component here?
   }
 
-  // const onEachFeature = function(feature, layer) {
-  //   if (feature.properties && feature.properties.name)
-  //   layer.bindPopup(
-  //     <Content>
-  //       <Label>Flower Name</Label>
-  //       <Input type="text" placeholder="Flower Name"/>
-  //       <Label>Flower Index</Label>
-  //       <Input type="number" placeholder="Flower Index"/>
-  //       <Label>Flower Radius</Label>
-  //       <Input type="number" placeholder="Flower Radius"/>
-  //       <Button color="isSuccess" >Add Flower</Button>
-  //     </Content>
-  //   ) 
-  // }
+  const getColor = (r) => {
+    return r === 1 ? '#800020' : '#008080'
+  }
 
-  const mapStyle = {
-    weight: 1,
-    color: "black",
+  const mapStyle = (feature) => {
+    return {
+      fillColor: getColor(feature.properties.rating),
+      weight: 1,
+      color: "black",
+    }
   };
 
 
