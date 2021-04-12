@@ -5,6 +5,7 @@ const _ = require('lodash');
 const { identity } = require('lodash');
 const fs = require('fs');
 const util = require('util');
+const { response } = require('express');
 require('dotenv').config()
 
 const T = new Twit({
@@ -16,7 +17,12 @@ const T = new Twit({
   strictSSL: true,     // optional - requires SSL certificates to be valid.
 });
 
-const calgaryPointRadius = '51.0447,-114.0719,100mi'
+const headers = {
+  Authorization: `Bearer ${process.env.BEARER_TOKEN}`
+}
+
+const calgaryPointRadius = '51.0447,-114.0719,100mi';
+const torontoPointRadius = '43.6532,-79.3832,50mi';
 
 
 // This works, basic search for word
@@ -82,6 +88,28 @@ const getTweetsFromPointRadius = function(pointRadius) {
   })
 }
 
+
+// Canada: 23424775 United States: 23424977 
+const getCurrentCanadaTrends = function() {
+  //https://api.twitter.com/1.1/trends/place.json
+  needle.get('https://api.twitter.com/1.1/trends/place.json?id=23424775', {headers: headers}, function(error, response) {
+    if(error) console.log(error)
+    if(!error && response.statusCode === 200){
+      console.log(response.body[0].trends);
+    }
+  });
+}
+
+const getCurrentUSATrends = function() {
+  //https://api.twitter.com/1.1/trends/place.json
+  needle.get('https://api.twitter.com/1.1/trends/place.json?id=23424977', {headers: headers}, function(error, response) {
+    if(error) console.log(error)
+    if(!error && response.statusCode === 200){
+      console.log(response.body[0].trends);
+    }
+  });
+}
+
 // const canada = ['-140.99778', '41.6751050889', '-52.6480987209', '83.23324'];
 // let stream = T.stream('statuses/filter', {
 //   track: '#RemoveThePM',
@@ -119,12 +147,14 @@ const runSingleQuery = function(hashtag) {
   const headers = {
     Authorization: `Bearer ${process.env.BEARER_TOKEN}`
   }
-  needle.get(`https://api.twitter.com/1.1/search/tweets.json?q=%23${hashtag}%20-filter%3Aretweets%20AND%20-filter%3Areplies&geocode=${calgaryPointRadius}`,{headers: headers}, function(error, response) {
+  needle.get(`https://api.twitter.com/1.1/search/tweets.json?q=%23${hashtag}%20-filter%3Aretweets%20AND%20-filter%3Areplies&geocode=${torontoPointRadius}`,{headers: headers}, function(error, response) {
     if (!error && response.statusCode == 200)
     console.log(response.body);
+    console.log(response.body.user);
     console.log('##############################################################################')
     response.body.statuses.forEach(status => {
       // console.log(status.user);
+      console.log(status.user);
       console.log(senti.analyze(status.text));
     })
   });
@@ -132,4 +162,6 @@ const runSingleQuery = function(hashtag) {
 
 
 // runSingleQuery('NDPConvention2021');
-streamCanadaBorderBox('#NDPConvention2021');
+// streamCanadaBorderBox('#NDPConvention2021');
+// getCurrentUSATrends()
+runSingleQuery('NYTimesPropaganda');
