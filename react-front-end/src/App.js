@@ -19,6 +19,26 @@ export const icon = new Icon({
 });
 
 function App() {
+
+  // constructor(){
+  //   super();
+
+  //   this.getColor = (r) => {
+  //     return r === 1 ? '#800020' : '#008080'
+  //   }
+
+  //   this.getColor = this.getColor.bind(this);
+  //   this.mapStyle = (feature) => {
+  //     return {
+  //       fillColor: getColor(feature.properties.rating),
+  //       weight: 1,
+  //       color: "black",
+  //     }
+  //   };
+  //   this.mapStyle = this.mapStyle.bind(this);
+  // }
+
+  
   const url = "https://data.sfgov.org/resource/ramy-di5m.json";
   const { data, error } = useSwr(url, { fetcher });
   const buildings = data && !error ? data.slice(0, 100) : [];
@@ -35,17 +55,23 @@ function App() {
   }
 
   const getColor = (r) => {
-    return r === 1 ? '#800020' : '#008080'
+    return r === "1" ? 'red' : 
+    r === "2" ? 'yellow' :
+    r === "3" ? 'blue' :
+    r === "4" ? 'green' :
+    r === "5" ? 'orange' :
+                'gray';
   }
 
   const mapStyle = (feature) => {
     return {
       fillColor: getColor(feature.properties.rating),
-      weight: 1,
+      weight: 0.5,
       color: "black",
     }
   };
 
+  
 
   return (
     
