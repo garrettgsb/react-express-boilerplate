@@ -1,9 +1,67 @@
 @import "styles/variables.scss";
 
+@font-face {
+  font-family: 'UniNeue';
+  font-style: regular;
+  font-weight: thin;
+  src:
+    url(./styles/fonts/UniNeueThin.otf) format('opentype');
+}
+@font-face {
+  font-family: 'UniNeue';
+  font-style: italic;
+  font-weight: thin;
+  src:
+    url(./styles/fonts/UniNeueThin-Italic.otf) format('opentype');
+}
+@font-face {
+  font-family: 'UniNeue';
+  font-style: regular;
+  font-weight: heavy;
+  src:
+    url(./styles/fonts/UniNeueHeavy.otf) format('opentype');
+}
+@font-face {
+  font-family: 'UniNeue';
+  font-style: italic;
+  font-weight: heavy;
+  src:
+    url(./styles/fonts/UniNeueHeavy-Italic.otf) format('opentype');
+}
+@font-face {
+  font-family: 'UniNeue';
+  font-style: regular;
+  font-weight: bold;
+  src:
+    url(./styles/fonts/UniNeueBold.otf) format('opentype');
+}
+@font-face {
+  font-family: 'UniNeue';
+  font-style: italic;
+  font-weight: bold;
+  src:
+    url(./styles/fonts/UniNeueBold-Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'UniNeue';
+  font-style: regular;
+  font-weight: book;
+  src:
+    url(./styles/fonts/UniNeueBook.otf) format('opentype');
+}
+@font-face {
+  font-family: 'UniNeue';
+  font-style: italic;
+  font-weight: book;
+  src:
+    url(./styles/fonts/UniNeueBook-Italic.otf) format('opentype');
+}
+
+
 html, body {
   margin: 0 auto;
-  width:0vw;
+  font-family: 'UniNeue', Fallback, 'Source Sans Pro';
   overflow: hidden;
-  display: flex;
-  justify-content: center;
+
 }

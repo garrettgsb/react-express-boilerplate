@@ -1,14 +1,19 @@
-$font-family: "Source Sans Pro", sans-serif;
+$font-family: "UniNeue", sans-serif;
 
 $active-opacity: 1;
 $inactive-opacity: 0.15;
 
 $white: #fff;
+$white-inactive: #ffffffb4;
+$white-active: #ffffffe3;
 $black: #000;
+$black-active: rgba(0, 0, 0, 0.938);
+$black-inactive: rgba(0, 0, 0, 0.787);
 
 $dark-background: #0c1824;
 $dark-grey-background: #0e0f0f;
-$accent: #3DED9D;
+$dark-grey-background-opacity: #0e0f0fe5;
+$accent: #1DE9B6;
 $accent-red: #BA3B61;
 
 $weeks-colors: #54a0ff, #48dbfb, #1dd1a1, #5f27cd;

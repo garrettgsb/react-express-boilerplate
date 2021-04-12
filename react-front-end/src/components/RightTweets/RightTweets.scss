@@ -1,0 +1,142 @@
+@import "../styles/variables.scss";
+
+
+.righttweets {
+  background-color: $dark-grey-background-opacity;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 65%;
+  margin-bottom: 1.2%;
+  margin-right: 2vh;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  overflow: scroll;
+  overflow-x: hidden;
+  padding: 2px;
+  color: white;
+  border-radius: 15px 0px 0px 15px;
+  
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+ &::-webkit-scrollbar-track {
+    background: $dark-grey-background-opacity;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: $accent;   
+    border-radius: 5px;
+  }
+  & {
+    scrollbar-width: thin;
+    scrollbar-color: $dark-grey-background-opacity $white-inactive;
+  }
+
+  article {
+    display: flex;
+    flex-direction: column;
+    width: 88%;
+    justify-content: center;
+    align-content: flex-start;
+    overflow: visible;
+    background-color: $white-inactive;
+    color: $black-inactive;
+    border-radius: 20px;
+    box-shadow: 13px 15px 15px -3px rgba(0, 0, 0, 0.404);
+    margin: 1.5vh 0 .4vh 0;
+    transition: 0.3s;
+
+
+    &:hover {
+      box-shadow: 20px 20px 10px -2px rgba(0, 0, 0, 0.74);
+      background-color: $white-active;
+      color: $black-active;
+      
+      .profile {
+        font-weight: bold;
+        color: #183e72c7;
+      }
+      .handle {
+        font-weight: bold;
+        color: #7EA4A9;
+      }
+
+    }
+
+    .tweeter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .profile {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      color: #183e7278;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+    
+    
+    .handle {
+      margin-right: 1em;
+      color: #7EA4A9;
+      font-weight: 700;
+      font-size: .9rem;
+      transition: 0.3s;
+    }
+    
+    
+    .tweeter img {
+      width: 2.8rem;
+      margin: .5em;
+      transition: 0.3s;
+    }
+    
+    
+    .tweet {
+      justify-content: flex-start;
+      align-self: center;
+      width: 90%;
+      font-size: 1.1rem;
+      font-weight: thin;
+      color: #2f2f2f;
+      word-wrap: anywhere;
+      margin-bottom: 1em;
+    }
+    
+    // article footer {
+      //   display: flex;
+      //   flex-direction: row;
+      //   justify-content: space-between;
+      //   align-self: center;
+      //   width: 90%;
+      //   margin-top: 0.2em;
+      // }
+      
+      // .timestamp {
+        //   display: flex;
+        //   font-size: .8rem;
+        //   font-weight: 400;
+        //   color: #2f2f2f;
+        // }
+        
+        // .interact {
+          //   display: flex;
+          //   justify-content: space-between;
+          //   align-items: center;
+          //   font-size: 1.2rem;
+          //   color: #7EA4A9;
+          // }
+          
+          // article:hover .interact {
+            //   color: #7EA4A9;
+            // }
+          }
+        }

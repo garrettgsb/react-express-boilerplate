@@ -1,0 +1,78 @@
+
+@import "../styles/variables.scss";
+// @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
+// @import "styles/reset.scss";
+
+nav {
+  background-color: $dark-grey-background-opacity;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  margin: 10px auto;
+  width: 60vw;
+  position: relative;
+  border-radius: 35px;
+  z-index: 1;
+
+  .headerParent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .logo {
+      display: flex;
+      min-width: 120px;
+      max-width: 140px;
+      margin-left: 1.2vw;
+    }
+
+    .userAvatar {
+      display: flex;
+      min-width: 20px;
+      max-width: 40px;
+      margin: .8vw 3vw .5vw 0vw;
+      align-self: center;
+    }
+  }
+
+  .choose {
+    display:flex;
+    color: $white-active;
+    font-weight: 500;
+    font-size: 1.5rem;
+    align-self: center;
+    margin: 10px auto;
+
+    .redText {
+      color: $accent-red;
+    }
+    .greenText{
+      font-weight: 500;
+      text-shadow: 0 0 2px $accent, 0 0 7px $accent, 1px -3px 5px rgba(29,233,182,0);    }
+  }
+
+  .chooseCountry {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    padding-top: .5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .canada{
+    width: 150px;
+    margin-right: 3vw;
+  }
+
+  .usa{
+    width: 150px;
+    margin-left: 3vw;
+  }
+
+  .chooseHashtags {
+    color: $white;
+  }
+
+}
