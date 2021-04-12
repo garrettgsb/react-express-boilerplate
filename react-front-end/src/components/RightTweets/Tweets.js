@@ -1,16 +1,12 @@
 import React from 'react';
 
-const tempProps = {
-  name: 'Sori',
-  handle: '@hansoridev',
-  text: 'apecave apecave apecave mailchimpapecave apecave apecave mailchimpapecave apecave apecave mailchimpapecave apecave apecave mailchimpapecave apecave apecave mailchimpapecave apecave apecave mailchimpapecave apecave apecave mailchimp',
-  img: './images/user.png',
-  date: '10s ago'
-}
-export default function Tweets() {
+
+export default function Tweets(props) {
 
   //replace this with when connected to tweet streams
-  const { name, handle, text, image, date } = tempProps
+  const { name, handle, text, image, date } = props
+
+  console.log('props', props)
   return (
     <article>
       <header>

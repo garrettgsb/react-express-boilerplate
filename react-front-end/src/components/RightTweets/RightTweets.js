@@ -1,12 +1,26 @@
 import React from 'react';
 
 import Tweets from './Tweets'
-import './RightTweets.scss';
-export default function RightTweets () {
+import tempProps from './tempTweets'
 
-return (
-  <section className="righttweets">
-    <Tweets />
-  </section>
+import './RightTweets.scss';
+
+const loadTweets = tempProps.map((tweet, i) =>
+  <Tweets
+    key={i}
+    name={tweet.name}
+    handle={tweet.handle}
+    text={tweet.text}
+    img={tweet.img}
+    date={tweet.date}
+  />
 );
+
+export default function RightTweets() {
+
+  return (
+    <section className="righttweets">
+      {loadTweets}
+    </section>
+  );
 }
