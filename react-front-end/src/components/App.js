@@ -8,6 +8,7 @@ import Map from "./Map";
 import Home from "./Home";
 import About from "./About";
 import Buildings from "./Buildings";
+import Building from "./Building";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/about" component={About} />
           <Route path="/map" component={Map} />
           <Route path="/buildings" component={Buildings} />
+          <Route path="/building/:id" component={Building} />
         </Switch>
       </div>
     </Router>
