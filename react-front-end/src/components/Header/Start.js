@@ -7,7 +7,7 @@ export default function ChooseCountry() {
   return (
     <>
       <div className='choose'>
-        Choose a location to see the trends
+        Choose a <span className='redText'>&nbsp;location&nbsp;</span> to see <span className='redText'>&nbsp;trends&nbsp;</span>
       </div>
       <div className='chooseCountry'>
         <HoverImage src="./images/canada.png" hoverSrc="./images/canadahover.png" className="canada" />

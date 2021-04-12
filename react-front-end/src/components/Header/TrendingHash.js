@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(.7),
       marginTop: theme.spacing(1.5),
     },
-    marginTop: theme.spacing(1),
+    margin: theme.spacing(.7),
     marginBottom: theme.spacing(3),
   },
   chip: {
@@ -53,7 +53,7 @@ export default function TrendingHash() {
   return (
     <>
       <div className='choose'>
-        Choose a hashtag to activate trendi
+        Choose a <span className='redText'>&nbsp;hashtag&nbsp;</span> to activate <span className='greenText'>&nbsp;trendi&nbsp;</span>
       </div>
       <div className={classes.root}>
         {trendingList}

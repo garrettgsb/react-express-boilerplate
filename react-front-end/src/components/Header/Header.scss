@@ -25,6 +25,7 @@ nav {
       display: flex;
       min-width: 120px;
       max-width: 140px;
+      margin-left: 1.2vw;
     }
 
     .userAvatar {
@@ -43,6 +44,13 @@ nav {
     font-size: 1.5rem;
     align-self: center;
     margin: 10px auto;
+
+    .redText {
+      color: $accent-red;
+    }
+    .greenText{
+      font-weight: 500;
+      text-shadow: 0 0 2px $accent, 0 0 7px $accent, 1px -3px 5px rgba(29,233,182,0);    }
   }
 
   .chooseCountry {
@@ -50,7 +58,7 @@ nav {
     justify-content: center;
     margin: 20px auto;
     padding-top: .5vh;
-    padding-bottom: 1vh;
+    padding-bottom: 1.5vh;
   }
 
   .canada{
