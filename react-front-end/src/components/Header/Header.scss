@@ -11,11 +11,11 @@ nav {
   flex-direction: column;
   overflow: auto;
   margin: 10px auto;
-  padding-bottom: 1vh;
   width: 60vw;
   position: relative;
   border-radius: 15px;
   z-index: 1;
+
   .headerParent {
     display: flex;
     flex-direction: row;
@@ -34,10 +34,13 @@ nav {
       align-self: center;
     }
   }
+
   .chooseCountry {
     display: flex;
     justify-content: center;
     margin: 20px auto;
+    padding-top: .5vh;
+    padding-bottom: 1vh;
   }
   .canada{
     width: 150px;
@@ -50,4 +53,5 @@ nav {
   .chooseHashtags {
     color: $white;
   }
+
 }
