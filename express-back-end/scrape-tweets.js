@@ -16,6 +16,7 @@ const T = new Twit({
   strictSSL: true,     // optional - requires SSL certificates to be valid.
 });
 
+let tweetCount = 0;
 let tweetsData = []
 
 const pushToTweetsData = function(tweet) {
@@ -57,7 +58,7 @@ const pushToTweetsData = function(tweet) {
         }
         tweetsData.push(tweetData);
       }
-      
+      console.log(tweet);
       console.log("Match Count", tweetCount);
       tweetCount++;
       
@@ -112,15 +113,33 @@ const streamUSBorderBox = function(searchWord) {
 
   const stream = T.stream('statuses/filter', {
     locations: USA,
-    track: '#Trump',
     language: 'en'
   });
+
+  let count = 0;
   stream.on('tweet', async tweet => {
-    if(tweet.text.match(regex)){
-      console.log(tweet);
+    if (tweet.text.match(regex)) {
+      pushToTweetsData(tweet);
+    } else {
+      try {
+        if (tweet.extended_tweet.full_text.match(regex)) {
+          pushToTweetsData(tweet);
+        }
+      } catch (error) {
+        console.log('No extended tweet');
+      }   
     }
-    console.log(tweetCount);
-      tweetCount++;
+
+    if (tweetsData.length === 50) {
+      const data = util.inspect(tweetsData)
+      fs.writeFile('./seedDataUSA-with-locations.js', data, function(err, result) {
+        if(err) console.log('error', err);
+        stream.stop()
+        console.log('Finished writing')
+      })
+    }
+    console.log("Total Count: ", count);
+    count++;
   });
 }
 
@@ -136,7 +155,7 @@ const getTweetsFromPointRadius = function(pointRadius) {
 }
 
 const senti = new Sentiment();
-
+const calgaryPointRadius = '51.0447,-114.0719,100mi'
 const runSingleQuery = function(hashtag) {
   const headers = {
     Authorization: `Bearer ${process.env.BEARER_TOKEN}`
@@ -153,5 +172,7 @@ const runSingleQuery = function(hashtag) {
 }
 
 
-// runSingleQuery('NDPConvention2021');
-streamCanadaBorderBox('#NDPConvention2021');
+runSingleQuery('NDPConvention2021');
+// streamCanadaBorderBox('#NDPConvention2021');
+// streamUSBorderBox('Stallone');
+
