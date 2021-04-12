@@ -21,7 +21,8 @@ const headers = {
   Authorization: `Bearer ${process.env.BEARER_TOKEN}`
 }
 
-const calgaryPointRadius = '51.0447,-114.0719,100mi'
+const calgaryPointRadius = '51.0447,-114.0719,100mi';
+const torontoPointRadius = '43.6532,-79.3832,50mi';
 
 
 // This works, basic search for word
@@ -146,12 +147,14 @@ const runSingleQuery = function(hashtag) {
   const headers = {
     Authorization: `Bearer ${process.env.BEARER_TOKEN}`
   }
-  needle.get(`https://api.twitter.com/1.1/search/tweets.json?q=%23${hashtag}%20-filter%3Aretweets%20AND%20-filter%3Areplies&geocode=${calgaryPointRadius}`,{headers: headers}, function(error, response) {
+  needle.get(`https://api.twitter.com/1.1/search/tweets.json?q=%23${hashtag}%20-filter%3Aretweets%20AND%20-filter%3Areplies&geocode=${torontoPointRadius}`,{headers: headers}, function(error, response) {
     if (!error && response.statusCode == 200)
     console.log(response.body);
+    console.log(response.body.user);
     console.log('##############################################################################')
     response.body.statuses.forEach(status => {
       // console.log(status.user);
+      console.log(status.user);
       console.log(senti.analyze(status.text));
     })
   });
@@ -160,4 +163,5 @@ const runSingleQuery = function(hashtag) {
 
 // runSingleQuery('NDPConvention2021');
 // streamCanadaBorderBox('#NDPConvention2021');
-getCurrentUSATrends()
+// getCurrentUSATrends()
+runSingleQuery('NYTimesPropaganda');
