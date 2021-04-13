@@ -8,9 +8,9 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 65%;
+  height: 73%;
   margin-bottom: 1.2%;
-  margin-right: 2vh;
+  margin-right: 1%;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -40,7 +40,7 @@
   article {
     display: flex;
     flex-direction: column;
-    width: 83%;
+    width: 80%;
     justify-content: center;
     align-content: flex-start;
     overflow: visible;
@@ -48,7 +48,7 @@
     color: $black-inactive;
     border-radius: 20px;
     box-shadow: 13px 15px 15px -3px rgba(0, 0, 0, 0.404);
-    margin: 1.5vh 0 .4vh 0;
+    margin: 1.5vh 9vh .4vh 1vh;
     transition: 0.3s;
 
 

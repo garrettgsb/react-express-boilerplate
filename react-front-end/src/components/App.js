@@ -21,6 +21,7 @@ import EqualizerOutlinedIcon from '@material-ui/icons/EqualizerOutlined';
 // import DeleteIcon from '@material-ui/icons/Delete';
 
 import './App.scss';
+import { Animated } from "react-animated-css";
 
 
 
@@ -29,28 +30,52 @@ import './App.scss';
 
 export default function App() {
 
-  //keep track of state of left and right containers
+  // keep track of state of left and right containers
   const [state, setState] = useState({
     left: false,
     right: false
   })
 
-  // const showData = 
+  // const toggleLeft = () => setState({ ...state, left: !state.left });
+  const toggleRight = () => {
+    console.log('1st', state)
+    setState(prev => ({...prev, left: !state.left}))
+    console.log(state)
+}
 
-  return (
-    <div className="App">
-      <MapContainer />
-      <Fab className='data-icon'>
-        <EqualizerOutlinedIcon  className='icon'/>
-      </Fab>
-      <Fab className='tweet-icon'>
-        <ChatOutlinedIcon className='icon' />
-      </Fab>
-      {/* <Drawer  */}
-      <LeftSearch />
+
+return (
+  <div className="App">
+    <MapContainer />
+
+    <Fab className='data-icon' >
+      <EqualizerOutlinedIcon className='icon' />
+    </Fab>
+    {/* <LeftSearch /> */}
+
+
+
+    {/* failed attempt at working with drawer.. may revisit if needed  */}
+    {/* <Drawer
+        anchor='left'
+        open={state.left}
+        onClose={toggleLeft}
+      >
+        <LeftSearch />
+      </Drawer> */}
+
+    <Fab className='tweet-icon' onClick={toggleRight}>
+      <ChatOutlinedIcon className='icon' />
+    </Fab>
+    <Animated
+    animationInDuration={400}
+    animationOutDuration={400}
+      isVisible={state.left}>
       <RightTweets />
-    </div>
-  );
+    </Animated>
+    {/* <RightTweets /> */}
+  </div>
+);
 
   // return (
   //   <div>
