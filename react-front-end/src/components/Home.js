@@ -1,9 +1,12 @@
 import React from 'react'
+import ReviewsList from './ReviewsList'
 
-export default function Home() {
+
+export default function About() {
   return (
-    <div className="Home">
-      <h1>This is the homepage</h1>
+    <div className="About">
+      <h1>This is the Homepage</h1>
+      <ReviewsList />
     </div>
   )
 }
