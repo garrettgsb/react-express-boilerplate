@@ -1,10 +1,10 @@
 import React from 'react';
-import './LeftSearch.scss';
+import './LeftData.scss';
 
-export default function Leftsearch() {
+export default function LeftData() {
 
   return (
-    <section className="leftsearch">
+    <section className="leftData">
       <div> show data here - graph / charts/ word cloud</div>
     </section>
   );
