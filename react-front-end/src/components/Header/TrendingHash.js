@@ -53,7 +53,7 @@ export default function TrendingHash() {
   return (
     <>
       <div className='choose'>
-        Choose a <span className='redText'>&nbsp;hashtag&nbsp;</span> to activate <span className='greenText'>&nbsp;trendi&nbsp;</span>
+        Choose a <span className='redText'>&nbsp;trend&nbsp;</span> to activate <span className='greenText'>&nbsp;trendi&nbsp;</span>
       </div>
       <div className={classes.root}>
         {trendingList}
