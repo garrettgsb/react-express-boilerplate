@@ -76,9 +76,10 @@ html, body {
     position: fixed;
     left: 0;
     bottom: 0;
-    margin: 2.5% 2.5% 2.5% 2.5%;
+    margin: 2% 2% 2% 2%;
     height: 80px;
     width: 80px;
+    z-index: 1;
     &:hover {
       background-color: $accent;
       color: $black-active;
@@ -90,9 +91,10 @@ html, body {
     position: fixed;
     right: 0;
     bottom: 0;
-    margin: 2.5% 2.5% 2.5% 2.5%;
+    margin: 2% 2% 2% 2%;
     height: 80px;
     width: 80px;
+    z-index: 1;
     &:hover {
       background-color: $accent;
       color: $black-active;

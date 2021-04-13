@@ -21,7 +21,7 @@
   border-radius: 15px 0px 0px 15px;
   
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 6px;
   }
   
  &::-webkit-scrollbar-track {
@@ -40,7 +40,7 @@
   article {
     display: flex;
     flex-direction: column;
-    width: 88%;
+    width: 83%;
     justify-content: center;
     align-content: flex-start;
     overflow: visible;

@@ -48,7 +48,7 @@ export default function App() {
       </Fab>
       {/* <Drawer  */}
       <LeftSearch />
-      {/* <RightTweets /> */}
+      <RightTweets />
     </div>
   );
 

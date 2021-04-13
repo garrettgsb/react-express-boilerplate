@@ -2,9 +2,6 @@ import React from 'react';
 
 import Tweets from './Tweets'
 import tempProps from './tempTweets'
-import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
-import DoubleArrowOutlinedIcon from '@material-ui/icons/DoubleArrowOutlined';
-
 import './RightTweets.scss';
 
 const loadTweets = tempProps.map((tweet, i) =>
@@ -22,8 +19,6 @@ export default function RightTweets() {
 
   return (
     <section className="righttweets">
-      <ChatOutlinedIcon />
-      <DoubleArrowOutlinedIcon />
       {loadTweets}
     </section>
   );
