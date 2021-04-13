@@ -40,17 +40,15 @@ export default function App() {
   return (
     <div className="App">
       <MapContainer />
-      <Fab color="primary" aria-label="AddIcon" variant='extended'>
-        <EqualizerOutlinedIcon />
-        &nbsp;Data
+      <Fab className='data-icon'>
+        <EqualizerOutlinedIcon  className='icon'/>
       </Fab>
-      <Fab color="primary" aria-label="AddIcon" variant='extended'>
-        <ChatOutlinedIcon />
-        &nbsp;Tweets
+      <Fab className='tweet-icon'>
+        <ChatOutlinedIcon className='icon' />
       </Fab>
       {/* <Drawer  */}
       <LeftSearch />
-      <RightTweets />
+      {/* <RightTweets /> */}
     </div>
   );
 

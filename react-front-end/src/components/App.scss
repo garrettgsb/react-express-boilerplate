@@ -63,5 +63,40 @@ html, body {
   margin: 0 auto;
   font-family: 'UniNeue', Fallback, 'Source Sans Pro';
   overflow: hidden;
+}
+
+.App {
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+  .data-icon {
+    background-color: $accent-red;
+    color: $white-active;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    margin: 2.5% 2.5% 2.5% 2.5%;
+    height: 80px;
+    width: 80px;
+    &:hover {
+      background-color: $accent;
+      color: $black-active;
+    }
+  }
+  .tweet-icon {
+    background-color: $accent-red;
+    color: $white-active;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 2.5% 2.5% 2.5% 2.5%;
+    height: 80px;
+    width: 80px;
+    &:hover {
+      background-color: $accent;
+      color: $black-active;
+    }
+  }
 
 }
