@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import axios from 'axios';
+
+import LeftSearch from './LeftSearch'
+import RightTweets from './RightTweets/RightTweets'
+
+import MapContainer from './Map/Map.js'
+import Fab from "@material-ui/core/Fab";
+import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
+import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
+import EqualizerOutlinedIcon from '@material-ui/icons/EqualizerOutlined';
+
 
 // import Buttons from './Buttons'
 // import CustomizedSwitches from './Switches'
 // import CircularProgress from '@material-ui/core/CircularProgress';
 // import LinearProgress from '@material-ui/core/LinearProgress';
 // import Header from './Header.js'
-import LeftSearch from './LeftSearch'
-import RightTweets from './RightTweets/RightTweets'
-import MapContainer from './Map/Map.js'
 // import Paper from '@material-ui/core/Paper';
 // import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -21,12 +29,26 @@ import './App.scss';
 
 export default function App() {
 
+  //keep track of state of left and right containers
+  const [state, setState] = useState({
+    left: false,
+    right: false
+  })
+
+  // const showData = 
 
   return (
     <div className="App">
-      {/* {Map} */}
       <MapContainer />
-      {/* <Header /> */}
+      <Fab color="primary" aria-label="AddIcon" variant='extended'>
+        <EqualizerOutlinedIcon />
+        &nbsp;Data
+      </Fab>
+      <Fab color="primary" aria-label="AddIcon" variant='extended'>
+        <ChatOutlinedIcon />
+        &nbsp;Tweets
+      </Fab>
+      {/* <Drawer  */}
       <LeftSearch />
       <RightTweets />
     </div>
