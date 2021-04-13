@@ -20,7 +20,7 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
+    align-items: flex-start; //default is stretch - this is why safari elements were stretched and ugly 🥲
     .logo {
       display: flex;
       min-width: 120px;

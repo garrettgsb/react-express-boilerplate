@@ -1,4 +1,5 @@
-[ { created_at: 'Sat Apr 10 21:19:23 +0000 2021',
+[ 
+  { created_at: 'Sat Apr 10 21:19:23 +0000 2021',
     id: 1380993839280885800,
     text:
      'RT @vickitabhatt: Proud of #NDPConvention2021 for voting to remove increased investments into policing. Black, Indigenous and Racialized co…',

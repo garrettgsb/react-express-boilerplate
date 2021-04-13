@@ -3,6 +3,24 @@ const App = Express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
 
+// PG database client/connection setup
+// const { Pool } = require('pg');
+// const dbParams = require('./db/db.js');
+// const db = new Pool(dbParams);
+// db.connect();
+
+const { Pool }= require('pg');
+
+const db = new Pool ({
+  user: 'monke',
+  password: 'monke',
+  host: 'localhost',
+  database: 'trendi',
+  port: 5432
+});
+
+db.connect();
+
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
