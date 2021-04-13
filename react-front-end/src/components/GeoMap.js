@@ -1,6 +1,6 @@
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
-import "./App.css";
+// import "./App.css";
 import { Icon } from "leaflet";
 import useSwr from "swr";
 import axios from "axios";
@@ -23,7 +23,7 @@ export const groceriesIcon = new Icon({
   iconSize: [25, 25],
 });
 
-function App() {
+function Map() {
   
   const url = "https://data.sfgov.org/resource/ramy-di5m.json";
   const { data, error } = useSwr(url, { fetcher });
@@ -91,47 +91,49 @@ function App() {
 
   return (
 
-    <MapContainer center={[37.70820204901914, -122.45808060394913]} zoom={12}>
-      <TileLayer
-        url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
-      {buildings.map((building) => (
-        <Marker
-          key={building.eas_fullid}
-          position={[building.latitude, building.longitude]}
-          icon={icon}
-        >
-          <Popup>
-            <div>
-              <h2>{building.address}</h2>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
+    <h1>Map component works</h1>
+    
+  //   <MapContainer center={[37.70820204901914, -122.45808060394913]} zoom={12}>
+  //     <TileLayer
+  //       url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+  //       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  //     />
+  //     {buildings.map((building) => (
+  //       <Marker
+  //         key={building.eas_fullid}
+  //         position={[building.latitude, building.longitude]}
+  //         icon={icon}
+  //       >
+  //         <Popup>
+  //           <div>
+  //             <h2>{building.address}</h2>
+  //           </div>
+  //         </Popup>
+  //       </Marker>
+  //     ))}
       
-      {amenities.map((amenity) => (
-        <Marker
-          key={amenity.id}
-          position={[amenity.latitude, amenity.longitude]}
-          icon={groceriesIcon}
-        >
-          <Popup>
-            <div>
-              <h2>{amenity.name}</h2>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
+  //     {amenities.map((amenity) => (
+  //       <Marker
+  //         key={amenity.id}
+  //         position={[amenity.latitude, amenity.longitude]}
+  //         icon={groceriesIcon}
+  //       >
+  //         <Popup>
+  //           <div>
+  //             <h2>{amenity.name}</h2>
+  //           </div>
+  //         </Popup>
+  //       </Marker>
+  //     ))}
 
-      <GeoJSON
-        data={SFHoodData}
-        style={mapStyle}
-        onEachFeature={onEachFeature}
-      />
-    </MapContainer>
+  //     <GeoJSON
+  //       data={SFHoodData}
+  //       style={mapStyle}
+  //       onEachFeature={onEachFeature}
+  //     />
+  //   </MapContainer>
 
   );
 }
 
-export default App;
+export default GeoMap;
