@@ -32,6 +32,7 @@ CREATE TABLE reviews (
   id SERIAL PRIMARY KEY NOT NULL,
   building_id INTEGER REFERENCES buildings(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  area_id INTEGER REFERENCES areas(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL,
   building_rating INTEGER NOT NULL,
   area_rating INTEGER NOT NULL,
