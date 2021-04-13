@@ -13,14 +13,14 @@ nav {
   margin: 10px auto;
   width: 60vw;
   position: relative;
-  border-radius: 35px;
+  border-radius: 45px;
   z-index: 1;
 
   .headerParent {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
+    align-items: flex-start; //default is stretch - this is why safari elements were stretched and ugly 🥲
     .logo {
       display: flex;
       min-width: 120px;
