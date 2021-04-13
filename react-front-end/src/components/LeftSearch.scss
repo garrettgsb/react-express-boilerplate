@@ -19,4 +19,21 @@
   overflow-x: hidden;
   color: white;
   border-radius: 0px 15px 15px 0px;
+direction: rtl;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+ &::-webkit-scrollbar-track {
+    background: $dark-grey-background-opacity;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: $accent;   
+    border-radius: 5px;
+  }
+  & {
+    scrollbar-width: thin;
+    scrollbar-color: $dark-grey-background-opacity $white-inactive;
+  }
 }

@@ -14,7 +14,7 @@ export default function Header() {
         <HoverImage src="./images/logo.png" hoverSrc="./images/logohover.png" className="logo" />
         <img src='./images/user.png' alt='' className="userAvatar"></img>
       </div>
-      <ChooseCountry />
+      {/* <ChooseCountry /> */}
       {/* <TrendingHash /> */}
     </nav>
 
