@@ -1,11 +1,26 @@
 import React, { useState } from 'react'
-import MaterialUIPickers from './dateTimePicker.jsx'
+import 'date-fns';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import moment from 'moment';
 
 const AddEvent = ({ onAdd }) => {
 
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedTime, setSelectedTime] = React.useState(new Date());
+
+
   const [locationName, setLocationName] = useState('')
-  const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setSelectedTime(date);
+  };
 
   const onSubmit = (e) => {
     // don't want the form to submit to a page
@@ -18,13 +33,13 @@ const AddEvent = ({ onAdd }) => {
     }
 
     // 
-    onAdd({ name: locationName, date, time })
+    onAdd({ name: locationName, date: moment(selectedDate).format("YYYY-MM-DD"), time: moment(selectedTime).format("HH:MM:SS")})
 
     setLocationName('')
-    setDate('')
-    setTime('')
   }
   
+
+
   return (
     <form className='add-form' onSubmit={onSubmit} >
       <div className='form-control'>
@@ -39,8 +54,35 @@ const AddEvent = ({ onAdd }) => {
 
       <div className='form-control'>
         <label>Date & Time</label>
-        <MaterialUIPickers onChange = {(e) => setDate({})} />
+          <MuiPickersUtilsProvider 
+            utils={DateFnsUtils}
+            onSubmit={handleDateChange}
+            >
+            <Grid container justify="space-around">
+              <KeyboardDatePicker
+                margin="normal"
+                id="date-picker-dialog"
+                label="Date"
+                format="MM/dd/yyyy"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
         
+              <KeyboardTimePicker
+                margin="normal"
+                id="time-picker"
+                label="Time"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change time',
+                }}
+              />
+            </Grid>
+          </MuiPickersUtilsProvider>
       </div>
 
       <input type='submit' value='Save Meetup' className='btn btn-block'/>
