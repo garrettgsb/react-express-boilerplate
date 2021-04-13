@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 
 import LeftSearch from './LeftSearch'
@@ -10,7 +10,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import EqualizerOutlinedIcon from '@material-ui/icons/EqualizerOutlined';
-
+import io from "socket.io-client";
 
 // import Buttons from './Buttons'
 // import CustomizedSwitches from './Switches'
@@ -32,9 +32,21 @@ export default function App() {
 
   // keep track of state of left and right containers
   const [state, setState] = useState({
-    left: false,
+    left: false,//is container open or closed
     right: false
   })
+
+  const [response, setResponse] = useState([]);
+
+  // const socket = io("http://localhost:8080/");
+  useEffect(() => {
+    console.log('use effect is running')
+    const socket = io('http://localhost:8080/');
+    // socket.on("FromAPI", data => {
+    //   setResponse(data);
+    // });
+    // return () => socket.disconnect();
+  }, []);
 
   // const toggleLeft = () => setState({ ...state, left: !state.left });
   const toggleLeft = () => {
