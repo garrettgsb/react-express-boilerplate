@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
 
-import LeftData from './LeftData'
+import LeftData from './LeftDatas/LeftData'
 import RightTweets from './RightTweets/RightTweets'
 
 import MapContainer from './Map/Map.js'

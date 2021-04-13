@@ -1,4 +1,4 @@
-@import "styles/variables.scss";
+@import "../styles/variables.scss";
 
 
 .leftData {
@@ -35,5 +35,14 @@ direction: rtl;
   & {
     scrollbar-width: thin;
     scrollbar-color: $dark-grey-background-opacity $white-inactive;
+  }
+
+  .wordCloud {
+    background: $white-opacity;
+    width: 80%;
+    border-radius: 20px;
+    box-shadow: 13px 15px 15px -3px rgba(0, 0, 0, 0.404);
+    overflow: visible;
+
   }
 }
