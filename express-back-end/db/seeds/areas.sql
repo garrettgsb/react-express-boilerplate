@@ -1,2 +1,2 @@
-INSERT INTO areas (name)
-      VALUES ('West End');
+INSERT INTO areas (name) 
+      VALUES ('Seacliff'),('Lake Street'),('Presidio National Park'),('Presidio Terrace'),('Inner Richmond');
