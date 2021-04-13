@@ -2,14 +2,13 @@
 
 
 .leftsearch {
-  background-color: $black;
-  opacity: .6;
-  width: 30%;
+  background-color: $dark-grey-background-opacity;
+  width: 35%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 65%;
+  height: 75%;
   margin-bottom: 1.2%;
   margin-left: 2vh;
   position:absolute;

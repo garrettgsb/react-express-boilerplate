@@ -15,7 +15,7 @@ export default function Header() {
         <img src='./images/user.png' alt='' className="userAvatar"></img>
       </div>
       {/* <ChooseCountry /> */}
-      <TrendingHash />
+      {/* <TrendingHash /> */}
     </nav>
 
   );
