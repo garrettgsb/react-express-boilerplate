@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReviewsList from "./ReviewsList";
 
 //component to render a building
 class Building extends Component {
@@ -13,15 +14,15 @@ class Building extends Component {
   render() {
     return (
       <div className="Building">
-        <h1>Building</h1>
         <ul>
           {this.state.buildings.map((building) => (
             <li key={building.id}>
-              <h2>{building.name}</h2>
+              <h1>{building.name}</h1>
               <p>{building.address}</p>
             </li>
           ))}
         </ul>
+        <ReviewsList />
       </div>
     );
   }
