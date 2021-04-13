@@ -37,9 +37,14 @@ export default function App() {
   })
 
   // const toggleLeft = () => setState({ ...state, left: !state.left });
-  const toggleRight = () => {
+  const toggleLeft = () => {
     console.log('1st', state)
     setState(prev => ({...prev, left: !state.left}))
+    console.log(state)
+}
+  const toggleRight = () => {
+    console.log('1st', state)
+    setState(prev => ({...prev, right: !state.right}))
     console.log(state)
 }
 
@@ -49,9 +54,15 @@ return (
     <MapContainer />
 
     <Fab className='data-icon' >
-      <EqualizerOutlinedIcon className='icon' />
+      <EqualizerOutlinedIcon className='icon' onClick={toggleLeft}/>
     </Fab>
-    {/* <LeftSearch /> */}
+    <Animated
+    animationInDuration={400}
+    animationOutDuration={400}
+      isVisible={state.left}>
+    <LeftSearch />
+    </Animated>
+
 
 
 
@@ -70,7 +81,7 @@ return (
     <Animated
     animationInDuration={400}
     animationOutDuration={400}
-      isVisible={state.left}>
+      isVisible={state.right}>
       <RightTweets />
     </Animated>
     {/* <RightTweets /> */}

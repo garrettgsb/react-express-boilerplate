@@ -2,5 +2,7 @@
   // color: white;   
   // margin-top: 7vh;
   width: 99vw;
+  .gm-style > div:not(:first-child) { display: none; }
   
 }
+
