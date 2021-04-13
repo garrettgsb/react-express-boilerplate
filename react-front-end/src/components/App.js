@@ -53,8 +53,8 @@ return (
   <div className="App">
     <MapContainer />
 
-    <Fab className='data-icon' >
-      <EqualizerOutlinedIcon className='icon' onClick={toggleLeft}/>
+    <Fab className='data-icon' onClick={toggleLeft}>
+      <EqualizerOutlinedIcon className='icon' />
     </Fab>
     <Animated
     animationInDuration={400}
