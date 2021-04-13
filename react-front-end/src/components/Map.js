@@ -23,7 +23,7 @@ export const groceriesIcon = new Icon({
   iconSize: [25, 25],
 });
 
-function App() {
+function Mapp() {
   
   const url = "https://data.sfgov.org/resource/ramy-di5m.json";
   const { data, error } = useSwr(url, { fetcher });
@@ -134,4 +134,4 @@ function App() {
   );
 }
 
-export default App;
+export default Mapp;
