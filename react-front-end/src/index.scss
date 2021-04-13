@@ -36,6 +36,20 @@ body {
   border-radius: 5px;
 }
 
+.container-meetups {
+  display: flex;
+  justify-content:space-evenly;
+}
+
+.meetups {
+  display: flex;
+  flex-direction: column;
+}
+.meetups-hidden {
+  display: flex;
+  visibility: hidden;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
