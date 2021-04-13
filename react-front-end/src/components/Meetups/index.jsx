@@ -47,7 +47,10 @@ export default function Meetups() {
 
   const value = useMemo(() => ({meetup, setMeetup}), [meetup, setMeetup])
   const valueCheck = useMemo(() => ({checked, setChecked}), [checked, setChecked])
+<<<<<<< HEAD
 
+=======
+>>>>>>> 90022df6667654362a49c3725bb10fab26e15896
   // const constructor = (props) => {
   //   super(props)
   //   this.state = {
@@ -88,6 +91,7 @@ export default function Meetups() {
     return (
       <>
           <MeetupsContext.Provider value={value}>
+<<<<<<< HEAD
         <CheckedContext.Provider value={valueCheck}>
             <div className="container-meetups">
               <div className="container">
@@ -95,6 +99,15 @@ export default function Meetups() {
                 {showAddEvent && <AddEvent onAdd={addEvent}/>}
                 {/* {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'} */}
                 <Events events={events} onDelete={deleteEvent} />
+=======
+        <CheckedContext.Provider valueCheck={valueCheck}>
+            <div className="container-meetups">
+              <div className="container">
+                <p>{moment("00 UTC").format("LT")}</p>
+                <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
+                {showAddEvent && <AddEvent onAdd={addEvent}/>}
+                {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
+>>>>>>> 90022df6667654362a49c3725bb10fab26e15896
               </div>
               <div>
                 <MeetupPanel />
