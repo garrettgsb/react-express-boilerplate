@@ -10,10 +10,10 @@ nav {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  margin: 10px auto;
+  margin: 15px auto;
   width: 60vw;
   position: relative;
-  border-radius: 45px;
+  border-radius: 55px;
   z-index: 1;
 
   .headerParent {
@@ -43,10 +43,10 @@ nav {
     font-weight: 500;
     font-size: 1.5rem;
     align-self: center;
-    margin: 10px auto;
+    margin: 12px auto;
 
     .redText {
-      color: $accent-red;
+      color: $accent-red; 
     }
     .greenText{
       font-weight: 500;
@@ -56,9 +56,9 @@ nav {
   .chooseCountry {
     display: flex;
     justify-content: center;
-    margin: 20px auto;
+    margin: 25px auto;
     padding-top: .5vh;
-    padding-bottom: 1.5vh;
+    padding-bottom: 1.8vh;
   }
 
   .canada{

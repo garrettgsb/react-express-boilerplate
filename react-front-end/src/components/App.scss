@@ -63,5 +63,46 @@ html, body {
   margin: 0 auto;
   font-family: 'UniNeue', Fallback, 'Source Sans Pro';
   overflow: hidden;
+}
+
+.App {
+  .icon {
+    width: 38px;
+    height: 38px;
+  }
+  .data-icon {
+    background-color: $accent-red;
+    color: $white-active;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    margin: 2% 1.8% 2% 2%;
+    height: 75px;
+    width: 75px;
+    z-index: 1;
+    box-shadow: 0px 0px 10px -3px #BA3B61;
+    &:hover {
+      background-color: $accent;
+      color: $black-active;
+      box-shadow: 0px 0px 22px -7px #1DE9B6;
+    }
+  }
+  .tweet-icon {
+    background-color: $accent-red;
+    color: $white-active;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 2% 1.8% 2% 2%;
+    height: 75px;
+    width: 75px;
+    z-index: 1;
+    box-shadow: 0px 0px 10px -3px #BA3B61;
+    &:hover {
+      background-color: $accent;
+      color: $black-active;
+      box-shadow: 0px 0px 22px -7px #1DE9B6;
+    }
+  }
 
 }

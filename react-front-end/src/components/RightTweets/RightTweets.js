@@ -2,7 +2,6 @@ import React from 'react';
 
 import Tweets from './Tweets'
 import tempProps from './tempTweets'
-
 import './RightTweets.scss';
 
 const loadTweets = tempProps.map((tweet, i) =>
