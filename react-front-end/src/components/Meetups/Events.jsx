@@ -8,7 +8,7 @@ const Events = ({ events, onDelete }) => {
     <>
      {events.map((event) => (
        <Event key={event.id} event={event} onDelete={onDelete} />
-     ))} 
+     ))}
     </>
   )
 }

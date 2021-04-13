@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import Header from './Header.jsx';
 import Events from './Events.jsx'
@@ -7,6 +7,9 @@ import AddEvent from './AddEvent.jsx'
 
 import '../Button.scss';
 import '../../App.scss';
+
+import { MeetupsContext } from './MeetupsContext.jsx';
+import MeetupPanel from './MeetupPanel.jsx';
 // import axios from 'axios';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -36,6 +39,10 @@ export default function Meetups() {
       time:'01:20:00'
     }
   ])
+
+  const [meetup, setMeetup] = useState('');
+
+  const value = useMemo(() => ({meetup, setMeetup}), [meetup, setMeetup])
 
   // const constructor = (props) => {
   //   super(props)
@@ -75,10 +82,19 @@ export default function Meetups() {
     }
 
     return (
-      <div className="container">
-        <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
-        {showAddEvent && <AddEvent onAdd={addEvent}/>}
-        {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
-      </div>
+      <>
+        <MeetupsContext.Provider value={value}>
+          <div className="container-meetups">
+            <div className="container">
+              <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
+              {showAddEvent && <AddEvent onAdd={addEvent}/>}
+              {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
+            </div>
+            <div>
+              <MeetupPanel />
+            </div>
+          </div>
+        </MeetupsContext.Provider>
+      </>
     );
 }
