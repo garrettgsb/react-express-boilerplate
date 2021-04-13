@@ -2,7 +2,6 @@ import React from 'react';
 
 import ReactWordcloud from 'react-wordcloud';
 import words from './tempWords';
-import Paper from '@material-ui/core/Paper';
 
 import './LeftData.scss';
 
@@ -17,21 +16,32 @@ const options = {
   fontFamily: 'UniNeue'
 
 };
-const size = [200, 500];
+const size = [500, 200];
 
 
 export default function LeftData() {
 
   return (
     <section className="leftData">
-      <Paper elevation={10} className='wordCloud' variant='outlined'>
+      <div className='dataContainer'>
+        more data
+        </ div>
+      <div className='dataContainer'>
+        more data
+        </ div>
+
+      <div className='dataContainer'>
+        more data
+        </ div>
+      <div className='dataContainer'>
         <ReactWordcloud
           callbacks={callbacks}
           options={options}
           size={size}
           words={words}
+          className='wordCloud'
         />
-      </Paper>
+      </ div>
     </section>
   );
 }
