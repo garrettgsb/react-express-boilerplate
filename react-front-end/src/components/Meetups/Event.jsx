@@ -7,9 +7,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 const Event = ({ event, onDelete }) => {
   
-  // const { checked, setChecked } = useContext(CheckedContext);
+  const { checked, setChecked } = useContext(CheckedContext);
   const { meetup, setMeetup } = useContext(MeetupsContext);
-
+  // const checked = true;
   // const contextCheck = useContext(CheckedContext)
 
   function setMeetupToEvent() {
@@ -17,17 +17,21 @@ const Event = ({ event, onDelete }) => {
   }
 
   function handleChange() {
-    // setChecked((prev) => !prev);
+    setChecked((prev) => !prev);
   }
 
   return (
     <div className='event'>
       <h3>
-        <FormControlLabel 
-        control={<p checked={''} onChange={handleChange}>{event.name}</p>}
+        {/* <FormControlLabel 
+        // control={<p checked={checked} onChange={handleChange}>{event.name}</p>}
         onClick={() => 
-          setMeetupToEvent()}
-          />
+          handlchange();
+          setMeetupToEvent();}
+          /> */}
+          <p onClick={() => {
+          handleChange();
+          setMeetupToEvent();}}>{event.name}</p>
         <FaTimes style={{color: 'red', cursor: 'pointer'}} onClick={() => {onDelete(event.id); setMeetup('');}}/>
       </h3>
       <p>{event.date} at {event.time}</p>
