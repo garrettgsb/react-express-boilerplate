@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useMemo } from 'react';
-import moment from 'moment'
 
 import Header from './Header.jsx';
 import Events from './Events.jsx'

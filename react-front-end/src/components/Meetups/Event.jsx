@@ -5,10 +5,6 @@ import { FaTimes } from 'react-icons/fa'
 import { MeetupsContext } from './MeetupsContext.jsx'
 import { FaTimes } from 'react-icons/fa'
 
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-
 const Event = ({ event, onDelete }) => {
   
   const { checked, setChecked } = useContext(CheckedContext);
