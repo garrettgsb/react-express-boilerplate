@@ -17,18 +17,21 @@ export default function Meetups() {
     {
       id: 1,
       location_id: 1,
+      name: "Banff",
       date: '2021-04-27',
       time: '22:30:00'
     },
     {
       id: 2,
       location_id: 3,
+      name: "Yellowknife",
       date: '2021-05-21',
       time: '22:00:00'
     },
     {
       id: 3,
       location_id: 2,
+      name: "Jasper",
       date: '2021-04-15',
       time:'01:20:00'
     }
@@ -66,6 +69,7 @@ export default function Meetups() {
       const id = Math.floor(Math.random() * 10000) + 1
       // add id to provided event info
       const newEvent = { id, ...event }
+
       // display existing events, and add new event to displayed data
       setEvents([...events, newEvent])
     }
