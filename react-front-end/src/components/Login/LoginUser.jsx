@@ -21,8 +21,4 @@ const LoginUser = () => {
     </div>
   )
 }
-<<<<<<< bb1511c74770290892fdb7e91eaf9f94362300ba
-export default RegisterUser;
-=======
 export default LoginUser; 
->>>>>>> Make changes for user authentication
