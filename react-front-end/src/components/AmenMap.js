@@ -8,8 +8,13 @@ let getIcon = (type) => {
   return type === "Park" ? "/park.png" : "/groceries.png";
 }
 
-export const groceriesIcon = new Icon({
-  iconUrl: getIcon("/groceries2.png"),
+export const cafeIcon = new Icon({
+  iconUrl: "/cafe.png",
+  iconSize: [30, 30],
+});
+
+export const parkIcon = new Icon({
+  iconUrl: "/park.png",
   iconSize: [30, 30],
 });
 
@@ -19,6 +24,10 @@ export const icon = new Icon({
 });
 
 function AmenMap() {
+
+  selectIcon = (type) => {
+    return type === "Cafe" ? cafeIcon : icon
+  }
 
   const amenities = [
     {
@@ -115,7 +124,7 @@ function AmenMap() {
       id: 11,
       area_id: 1,
       name: "Embarcadero Ferry Plaza",
-      type: "Cafe ",
+      type: "test ",
       image_url: "url",
       latitude: 37.79315824,
       longitude: -122.3915536
@@ -218,7 +227,7 @@ function AmenMap() {
 
   return (
 
-    <MapContainer center={[building[0].latitude, building[0].longitude]} zoom={17}>
+    <MapContainer center={[building[0].latitude, building[0].longitude]} zoom={15}>
       <TileLayer
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -240,7 +249,7 @@ function AmenMap() {
         <Marker
           key={amenity.id}
           position={[amenity.latitude, amenity.longitude]}
-          icon={groceriesIcon}
+          icon={cafeIcon}
         >
           <Popup>
             <div>

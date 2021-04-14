@@ -8,7 +8,10 @@
   pointer-events: none;
 }
 
-.leaflet-container {  width: 100vw;  height: 100vh; }
+.leaflet-container {
+  width: 100vw;
+  height: 100vh;
+}
 
 .App-header {
   background-color: #282c34;
@@ -53,4 +56,37 @@ nav {
   display: flex;
   justify-content: space-around;
   list-style: none;
+}
+
+.building_amenities-image {
+  width: 100px;
+  height: 80px;
+  margin: 0.5rem;
+  border: 1px solid rgb(65, 65, 65);
+}
+
+.amenities-box {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: stretch;
+  padding: 0;
+}
+
+.BuildingAmenities {
+  border: 1px solid rgb(65, 65, 65);
+}
+
+.building-details {
+  display: flex;
+  flex-flow: row;
+  flex-direction: row;
+}
+
+.building-header {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
 }

@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS buildings CASCADE;
 DROP TABLE IF EXISTS areas CASCADE;
 DROP TABLE IF EXISTS favourites CASCADE;
 DROP TABLE IF EXISTS amenities CASCADE;
+DROP TABLE IF EXISTS buildings_amenities CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -28,6 +29,13 @@ CREATE TABLE buildings (
   longitude FLOAT NOT NULL
 );
 
+CREATE TABLE building_amenities (
+  id SERIAL PRIMARY KEY NOT NULL,
+  building_id INTEGER REFERENCES buildings(id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL,
+  image_url VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE reviews (
   id SERIAL PRIMARY KEY NOT NULL,
   building_id INTEGER REFERENCES buildings(id) ON DELETE CASCADE,
@@ -45,8 +53,7 @@ CREATE TABLE reviews (
 CREATE TABLE favourites (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  building_id INTEGER REFERENCES buildings(id) ON DELETE CASCADE,
-  is_active BOOLEAN
+  building_id INTEGER REFERENCES buildings(id) ON DELETE CASCADE
 );
 
 CREATE TABLE amenities (
