@@ -12,21 +12,8 @@ import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import EqualizerOutlinedIcon from '@material-ui/icons/EqualizerOutlined';
 import io from "socket.io-client";
 
-// import Buttons from './Buttons'
-// import CustomizedSwitches from './Switches'
-// import CircularProgress from '@material-ui/core/CircularProgress';
-// import LinearProgress from '@material-ui/core/LinearProgress';
-// import Header from './Header.js'
-// import Paper from '@material-ui/core/Paper';
-// import DeleteIcon from '@material-ui/icons/Delete';
-
 import './App.scss';
 import { Animated } from "react-animated-css";
-
-
-
-
-
 
 export default function App() {
 
@@ -37,16 +24,23 @@ export default function App() {
   })
 
   const [response, setResponse] = useState([]);
-
+  const [tweets, setTweets] = useState([]);
+  const [hashtag, setHashtag] = useState('');
   // const socket = io("http://localhost:8080/");
+
+//at the start of launching app, we want to run socket.io
+// within that socket function we update setTweets
+
   useEffect(() => {
-    console.log('use effect is running')
+    console.log('useEffect....running')
     const socket = io('http://localhost:8080/');
-    // socket.on("FromAPI", data => {
-    //   setResponse(data);
-    // });
-    // return () => socket.disconnect();
-  }, []);
+    socket.emit('start', '#apecave');
+    socket.on('tweet', (tweet) => {
+      setTweets([...tweets, tweet]);
+    })
+
+    return () => socket.disconnect();
+  }, [tweets]);
 
   // const toggleLeft = () => setState({ ...state, left: !state.left });
   const toggleLeft = () => {
@@ -65,6 +59,7 @@ return (
   <div className="App">
     <MapContainer />
 
+//left container
     <Fab className='data-icon' onClick={toggleLeft}>
       <EqualizerOutlinedIcon className='icon' />
     </Fab>
@@ -75,18 +70,7 @@ return (
     <LeftSearch />
     </Animated>
 
-
-
-
-    {/* failed attempt at working with drawer.. may revisit if needed  */}
-    {/* <Drawer
-        anchor='left'
-        open={state.left}
-        onClose={toggleLeft}
-      >
-        <LeftSearch />
-      </Drawer> */}
-
+//right container
     <Fab className='tweet-icon' onClick={toggleRight}>
       <ChatOutlinedIcon className='icon' />
     </Fab>
@@ -94,22 +78,8 @@ return (
     animationInDuration={400}
     animationOutDuration={400}
       isVisible={state.right}>
-      <RightTweets />
+      <RightTweets tweets={tweets}/>
     </Animated>
-    {/* <RightTweets /> */}
   </div>
 );
-
-  // return (
-  //   <div>
-  //     <Paper variant="outlined" square />
-  //     <Buttons />
-  //     <CustomizedSwitches />
-  //     <CircularProgress />
-  //     <CircularProgress color="secondary" />
-  //     <LinearProgress />
-  //     <LinearProgress color="secondary" />
-  //   </div>
-
-  // );
 }
