@@ -55,13 +55,9 @@ CREATE TABLE amenities (
   name VARCHAR(255),
   type VARCHAR(255),
   image_url VARCHAR(255),
-  longitude FLOAT NOT NULL,
-  latitude FLOAT NOT NULL
+  latitude FLOAT NOT NULL,
+  longitude FLOAT NOT NULL
 );
 
-\COPY amenities
-FROM 'seeds/amenities-data.csv'
-DELIMITER ','
-CSV HEADER;
 
-\COPY amenities(area_id, name, type, image_url, latitude, longitude) FROM 'seeds/amenities-data.csv' DELIMITER ',' CSV HEADER;
+
