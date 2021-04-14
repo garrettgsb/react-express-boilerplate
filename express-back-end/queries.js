@@ -84,22 +84,26 @@ const getTweetsFromPointRadius = function(pointRadius) {
 // Canada: 23424775 United States: 23424977 
 const getCurrentCanadaTrends = function() {
   //https://api.twitter.com/1.1/trends/place.json
-  needle.get('https://api.twitter.com/1.1/trends/place.json?id=23424775', {headers: headers}, function(error, response) {
-    if(error) console.log(error)
-    if(!error && response.statusCode === 200){
-      console.log(response.body[0].trends);
-    }
-  });
+  return new Promise((resolve, reject) => {
+    needle.get('https://api.twitter.com/1.1/trends/place.json?id=23424775', {headers: headers}, function(error, response) {
+      if(error) reject(error);
+      if(!error && response.statusCode === 200){
+        resolve(response.body[0].trends);
+      }
+    });
+  })
 }
 
 const getCurrentUSATrends = function() {
   //https://api.twitter.com/1.1/trends/place.json
-  needle.get('https://api.twitter.com/1.1/trends/place.json?id=23424977', {headers: headers}, function(error, response) {
-    if(error) console.log(error)
-    if(!error && response.statusCode === 200){
-      console.log(response.body[0].trends);
-    }
-  });
+  return new Promise((resolve, reject) => {
+    needle.get('https://api.twitter.com/1.1/trends/place.json?id=23424977', {headers: headers}, function(error, response) {
+      if (error) reject(error);
+      if (!error && response.statusCode === 200) {
+        resolve(response.body[0].trends);
+      }
+    });
+  })
 }
 
 // const canada = ['-140.99778', '41.6751050889', '-52.6480987209', '83.23324'];
@@ -155,7 +159,7 @@ const runSingleQuery = function(hashtag) {
 
 // runSingleQuery('NDPConvention2021');
 // streamCanadaBorderBox('#NDPConvention2021');
-// getCurrentUSATrends()
+getCurrentUSATrends()
 // runSingleQuery('NYTimesPropaganda');
 
-module.exports = { streamCanadaBorderBox }
+module.exports = { streamCanadaBorderBox, getCurrentCanadaTrends, getCurrentUSATrends }
