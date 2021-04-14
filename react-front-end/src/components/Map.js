@@ -8,8 +8,6 @@ import { features } from "../SFNeighborhoods-copy.json"
 // import { features } from "./bayareacounties.json"
 
 
-// const fetcher = (...args) => fetch(...args).then((response) => response.json());
-
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 export const icon = new Icon({
@@ -37,8 +35,6 @@ function Mapp() {
   //   })
   // }
 
-
-  
   const url = "https://data.sfgov.org/resource/ramy-di5m.json";
   const { data, error } = useSwr(url, { fetcher });
   const buildings = data && !error ? data.slice(0, 100) : [];
@@ -73,7 +69,6 @@ function Mapp() {
     }
   };
 
-
   return (
 
     <MapContainer center={[37.760955, -122.441475]} zoom={13}>
@@ -101,7 +96,6 @@ function Mapp() {
         onEachFeature={onEachFeature}
       />
     </MapContainer>
-
   );
 }
 
