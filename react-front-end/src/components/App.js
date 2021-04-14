@@ -10,6 +10,7 @@ import About from "./About";
 import Buildings from "./Buildings";
 import Building from "./Building";
 import BuildingAmenities from "./BuildingAmenities";
+import Favourites from "./Favourites";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/buildings" component={Buildings} />
           <Route path="/building/:id" component={Building} />
           <Route path="/:id/building_amenities" component={BuildingAmenities} />
+          <Route path="/:id/favourites" component={Favourites} />
         </Switch>
       </div>
     </Router>
