@@ -9,6 +9,9 @@ import Home from "./Home";
 import About from "./About";
 import Buildings from "./Buildings";
 import Building from "./Building";
+import BuildingAmenities from "./BuildingAmenities";
+import Favourites from "./Favourites/Favourites";
+import FavouriteButton from "./Favourites/FavouriteButton";
 
 export default function App() {
   return (
@@ -19,8 +22,11 @@ export default function App() {
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/map" component={Map} />
+          <Route path="/buildings/:buildingId" component={Building} />
           <Route path="/buildings" component={Buildings} />
-          <Route path="/building/:id" component={Building} />
+          <Route path="/:id/building_amenities" component={BuildingAmenities} />
+          <Route path="/:id/favourites" component={Favourites} />
+          <Route path="/favouriteButton" component={FavouriteButton} />
         </Switch>
       </div>
     </Router>

@@ -21,9 +21,13 @@ db.connect();
 
 const reviewsRoutes = require("./routes/reviews");
 const buildings = require("./routes/buildings");
+const buildingAmenities = require("./routes/building_amenities");
+const users = require("./routes/users");
 
 App.use("/", reviewsRoutes(db));
 App.use("/api", buildings(db));
+App.use("/api", buildingAmenities(db));
+App.use("/api/users", users(db));
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console

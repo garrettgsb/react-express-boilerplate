@@ -1,12 +1,28 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
-  //   Read => GET => ‘/api/users’					Gets all users
-  //   Read => GET => ‘api/users/:id’				Gets a user
+  // Access user profile
+  router.get("/:id", (req, res) => {
+    // const userID = req.params.id;
+    const userID = 4;
+    db.query(
+      `
+      SELECT *
+      FROM users
+      WHERE id = $1
+      `,
+      [userID]
+    )
+      .then(({ rows: user }) => res.json(user))
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
 
   //Access users favourites
-  router.get("/users/:id/favourites", (req, res) => {
-    const userID = req.params.id;
+  router.get("/:id/favourites", (req, res) => {
+    // const userID = req.params.id;
+    const userID = 4;
     db.query(
       `
       SELECT * FROM favourites
@@ -14,14 +30,14 @@ module.exports = (db) => {
       `,
       [userID]
     )
-      .then((favourites) => res.json(favourites))
+      .then(({ rows: favourites }) => res.json(favourites))
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
 
   //Favourite a building
-  router.post("/users/:id/favourites", (req, res) => {
+  router.post("/:id/favourites", (req, res) => {
     const userID = req.params.id;
     const buildingID = req.body.id;
     db.query(
@@ -38,7 +54,7 @@ module.exports = (db) => {
   });
 
   //Delete a favourite
-  router.delete("/users/:id/favourites/:id", (req, res) => {
+  router.delete("/:id/favourites/:id", (req, res) => {
     const favouriteID = req.params.id;
     db.query(
       `
@@ -52,4 +68,5 @@ module.exports = (db) => {
         res.status(204).json({ error: err.message });
       });
   });
+  return router;
 };
