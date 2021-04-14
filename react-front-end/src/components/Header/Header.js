@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import HoverImage from "react-hover-image";
 
 import './Header.scss';
@@ -7,7 +7,7 @@ import TrendingHash from './TrendingHash';
 
 
 export default function Header() {
-
+  const [country, setCountry] = useState('');
   return (
     <nav>
       <div className='headerParent'>
@@ -15,7 +15,7 @@ export default function Header() {
         <img src='./images/user.png' alt='' className="userAvatar"></img>
       </div>
       {/* <ChooseCountry /> */}
-      {/* <TrendingHash /> */}
+      <TrendingHash />
     </nav>
 
   );
