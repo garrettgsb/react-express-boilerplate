@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
+import axios from 'axios';
 
 
 
-const trendingHashtags = ['#joshua', '#isamu', '#sori', '#freebritney', '#awesomeweatherthisweek', 'devil.inc', 'trendiistrendy', 'testingchips', 'blahblahblah', 'hellotoptenhashtags', '#joshua', '#isamu', '#sori', '#freebritney', '#awesomeweatherthisweek', 'devil.inc', 'trendiistrendy', 'testingchips', 'blahblahblah', 'hellotoptenhashtags']
+// const trendingHashtags = ['#joshua', '#isamu', '#sori', '#freebritney', '#awesomeweatherthisweek', 'devil.inc', 'trendiistrendy', 'testingchips', 'blahblahblah', 'hellotoptenhashtags', '#joshua', '#isamu', '#sori', '#freebritney', '#awesomeweatherthisweek', 'devil.inc', 'trendiistrendy', 'testingchips', 'blahblahblah', 'hellotoptenhashtags']
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,13 +38,25 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function TrendingHash() {
+
+  const [trendingHashtags, setTrendingHashtags] = useState([]);
+
+  useEffect(() => {
+    const getTrending = async () =>{
+      const trending = await axios.get('http://localhost:8080/api/trending-canada')
+      setTrendingHashtags(trending.data)
+    }
+
+    getTrending();
+  }, []);
+
   const classes = useStyles();
   const trendingList = trendingHashtags.map((hashtag, i) => {
     return (
       <Chip
         variant='outlined'
         size='large'
-        label={hashtag}
+        label={hashtag.name}
         key={i}
         className={classes.chip}
       />
