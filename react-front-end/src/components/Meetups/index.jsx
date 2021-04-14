@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import moment from 'moment'
 
 import Header from './Header.jsx';
 import Events from './Events.jsx'
@@ -7,12 +8,17 @@ import AddEvent from './AddEvent.jsx'
 
 import '../Button.scss';
 import '../../App.scss';
+
+import { MeetupsContext } from './MeetupsContext.jsx';
+import { CheckedContext } from './CheckedContext.jsx'
+import MeetupPanel from './MeetupPanel.jsx';
 // import axios from 'axios';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export default function Meetups() {
-
+  const [meetup, setMeetup] = useState('');
   const [ showAddEvent, setShowAddEvent ] = useState(false)
+  const [checked, setChecked] = useState(false);
   const [events, setEvents] = useState([
     {
       id: 1,
@@ -37,6 +43,8 @@ export default function Meetups() {
     }
   ])
 
+  const value = useMemo(() => ({meetup, setMeetup}), [meetup, setMeetup])
+  const valueCheck = useMemo(() => ({checked, setChecked}), [checked, setChecked])
   // const constructor = (props) => {
   //   super(props)
   //   this.state = {
@@ -75,10 +83,21 @@ export default function Meetups() {
     }
 
     return (
-      <div className="container">
-        <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
-        {showAddEvent && <AddEvent onAdd={addEvent}/>}
-        {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
-      </div>
+      <>
+          <MeetupsContext.Provider value={value}>
+        <CheckedContext.Provider value={valueCheck}>
+            <div className="container-meetups">
+              <div className="container">
+                <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
+                {showAddEvent && <AddEvent onAdd={addEvent}/>}
+                {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
+              </div>
+              <div>
+                <MeetupPanel />
+              </div>
+            </div>
+        </CheckedContext.Provider>
+          </MeetupsContext.Provider>
+      </>
     );
 }
