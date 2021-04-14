@@ -3,6 +3,7 @@ const app = express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
 const cors = require('cors')
+const {streamCanadaBorderBox} = require('./queries');
 
 const http = require("http");
 const socketIo = require("socket.io");
@@ -27,6 +28,19 @@ const io = socketIo(server,
 
 io.on('connection', (socket) => {
   console.log('client connected');
+  socket.on('start', (hashtag) => {
+    console.log('starting stream ', hashtag);
+    const regexpression = hashtag
+    const regex = new RegExp(regexpression, "gi");
+    const tweetStream = streamCanadaBorderBox(hashtag);
+    tweetStream.on('tweet', async tweet => {
+      console.log('Streaming')
+      console.log(tweet.user);
+      if(tweet.text.match(regex)){
+        io.emit('tweet', tweet)
+      }
+    });
+  })
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
