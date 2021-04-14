@@ -3,7 +3,7 @@ const app = express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
 const cors = require('cors')
-const {streamCanadaBorderBox} = require('./queries');
+const { streamCanadaBorderBox, getCurrentCanadaTrends, getCurrentUSATrends } = require('./queries');
 
 const http = require("http");
 const socketIo = require("socket.io");
@@ -50,6 +50,20 @@ io.on('connection', (socket) => {
 app.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
 }));
+
+app.get('/api/trending-canada', (req,res) => {
+  getCurrentCanadaTrends().then(trends => {
+    res.json(trends)
+  })
+  .catch((error)=>{console.log('Something went wrong', error)})
+})
+
+app.get('/api/trending-USA', (req,res) => {
+  getCurrentUSATrends().then(trends => {
+    res.json(trends)
+  })
+  .catch((error)=>{console.log('Something went wrong', error)})
+})
 
 server.listen(PORT, () => {
   console.log("Listen on port: ", PORT);
