@@ -1,7 +1,7 @@
 import React from 'react';
 import './LoginUser.scss';
 
-const RegisterUser = () => {
+const LoginUser = () => {
   return (
     <div className="login-wrapper">
       <h1>Please Log In</h1>
@@ -21,4 +21,8 @@ const RegisterUser = () => {
     </div>
   )
 }
+<<<<<<< bb1511c74770290892fdb7e91eaf9f94362300ba
 export default RegisterUser;
+=======
+export default LoginUser; 
+>>>>>>> Make changes for user authentication
