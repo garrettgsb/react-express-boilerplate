@@ -19,6 +19,7 @@ export default function FavouritesButton() {
           color="primary"
         >
           <FavoriteBorderIcon></FavoriteBorderIcon>
+          <h4> Favourite this property! </h4>
         </IconButton>
       )}
       {!fav && (
@@ -30,6 +31,7 @@ export default function FavouritesButton() {
           color="primary"
         >
           <Favorite></Favorite>
+          <h4> Remove from favourites </h4>
         </IconButton>
       )}
     </div>
