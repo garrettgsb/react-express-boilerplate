@@ -26,6 +26,7 @@ module.exports = (db) => {
     db.query(
       `
       SELECT * FROM favourites
+      JOIN buildings ON building_id = buildings.id
       WHERE user_id = $1
       `,
       [userID]
