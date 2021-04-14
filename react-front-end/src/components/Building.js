@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReviewsList from "./ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
+import FavouriteButton from "./Favourites/FavouriteButton";
 
 //component to render a building
 class Building extends Component {
@@ -25,6 +26,7 @@ class Building extends Component {
         </div>
         <div className="building-details">
           <div className="review-list">
+            <FavouriteButton />
             <ReviewsList />
           </div>
           <div className="amenities-and-map">

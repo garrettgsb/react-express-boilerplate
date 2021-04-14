@@ -1,3 +1,4 @@
+// Create
 export function createFav(url, uid) {
   return firestore
     .collection("favs")
@@ -13,6 +14,7 @@ export function createFav(url, uid) {
     });
 }
 
+// Delete
 export function deleteFav(website, user) {
   var dt = firestore
     .collection("favs")

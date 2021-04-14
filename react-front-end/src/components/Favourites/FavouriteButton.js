@@ -9,7 +9,7 @@ export default function FavouritesButton() {
   const [fav, setFav] = React.useState(false);
 
   return (
-    <div>
+    <div className="favourite-button">
       {fav && (
         <IconButton
           onClick={() => {
