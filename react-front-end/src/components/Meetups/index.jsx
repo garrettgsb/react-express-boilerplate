@@ -90,8 +90,7 @@ export default function Meetups() {
               <div className="container">
                 <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
                 {showAddEvent && <AddEvent onAdd={addEvent}/>}
-                {/* {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'} */}
-                <Events events={events} onDelete={deleteEvent} />
+                {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
               </div>
               <div>
                 <MeetupPanel />

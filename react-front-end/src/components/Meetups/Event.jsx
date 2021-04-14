@@ -27,11 +27,9 @@ const Event = ({ event, onDelete }) => {
   return (
     <div className='event'>
       <h3>
-        <FormControlLabel 
-        control={<p checked={''} onChange={handleChange}>{event.name}</p>}
-        onClick={() => 
-          setMeetupToEvent()}
-          />
+          <p onClick={() => {
+          handleChange();
+          setMeetupToEvent();}}>{event.name}</p>
         <FaTimes style={{color: 'red', cursor: 'pointer'}} onClick={() => {onDelete(event.id); setMeetup('');}}/>
       </h3>
       <p>{event.date} at {event.time}</p>
