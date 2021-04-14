@@ -26,21 +26,40 @@ export default function App() {
   const [response, setResponse] = useState([]);
   const [tweets, setTweets] = useState([]);
   const [hashtag, setHashtag] = useState('');
+  const [socket, setSocket] = useState();
   // const socket = io("http://localhost:8080/");
 
 //at the start of launching app, we want to run socket.io
 // within that socket function we update setTweets
 
-  useEffect(() => {
-    console.log('useEffect....running')
-    const socket = io('http://localhost:8080/');
-    socket.emit('start', '#apecave');
-    socket.on('tweet', (tweet) => {
-      setTweets([tweet, ...tweets]);
-    })
+  const appendTweets = async (tweet) => {
+    console.log("before tweets length ", tweets.length);
+    console.log(tweet.text);
+    setTweets((prevTweets) => [tweet, ...prevTweets]);
+    console.log("New tweets length ", tweets.length);
+  }
 
-    return () => socket.disconnect();
-  }, [tweets]);
+  useEffect(() => {
+    // setSocket();
+    let socket = io('http://localhost:8080/')
+    setSocket(socket);
+    socket.emit('start', '#apecave');
+    socket.on('tweet', async (tweet) => {
+      console.log("Inside Asynce useEffect2");
+      console.log("Tweet length from useEffect2", tweets.length);
+      await appendTweets(tweet)
+    })
+    return () => {
+      console.log('Disconnecting from socket');
+      socket.disconnect()
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   console.log('Rerendering');
+  //   console.log("tweet array size from useEffect2, ", tweets.length);
+  //   // setTweets(tweets);
+  // }, [tweets])
 
   // const toggleLeft = () => setState({ ...state, left: !state.left });
   const toggleLeft = () => {

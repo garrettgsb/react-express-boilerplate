@@ -7,7 +7,6 @@ export default function Tweets(props) {
   //replace this with when connected to tweet streams
   const { name, handle, text, img, created_at } = props
 
-  console.log('props', props)
   return (
     <article>
       <header>

@@ -28,11 +28,12 @@ const io = socketIo(server,
 
 io.on('connection', (socket) => {
   console.log('client connected');
+  let tweetStream;
   socket.on('start', (hashtag) => {
     console.log('starting stream ', hashtag);
     const regexpression = hashtag
     const regex = new RegExp(regexpression, "gi");
-    const tweetStream = streamCanadaBorderBox(hashtag);
+    tweetStream = streamCanadaBorderBox(hashtag);
     tweetStream.on('tweet', async tweet => {
       console.log('Streaming')
       console.log(tweet.user);
@@ -43,6 +44,7 @@ io.on('connection', (socket) => {
   })
   socket.on('disconnect', () => {
     console.log('user disconnected');
+    tweetStream.stop()
   });
 })
 

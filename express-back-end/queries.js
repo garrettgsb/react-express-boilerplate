@@ -159,7 +159,8 @@ const runSingleQuery = function(hashtag) {
 
 // runSingleQuery('NDPConvention2021');
 // streamCanadaBorderBox('#NDPConvention2021');
-getCurrentUSATrends()
+// getCurrentUSATrends()
 // runSingleQuery('NYTimesPropaganda');
+// streamKeyword('#TRUANON');
 
 module.exports = { streamCanadaBorderBox, getCurrentCanadaTrends, getCurrentUSATrends }
