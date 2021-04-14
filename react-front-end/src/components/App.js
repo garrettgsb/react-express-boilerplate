@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
 
-import LeftSearch from './LeftSearch'
+import LeftData from './LeftDatas/LeftData'
 import RightTweets from './RightTweets/RightTweets'
 
 import MapContainer from './Map/Map.js'
@@ -60,7 +60,7 @@ return (
     animationInDuration={400}
     animationOutDuration={400}
       isVisible={state.left}>
-    <LeftSearch />
+    <LeftData />
     </Animated>
 
 
@@ -72,7 +72,7 @@ return (
         open={state.left}
         onClose={toggleLeft}
       >
-        <LeftSearch />
+        <LeftData />
       </Drawer> */}
 
     <Fab className='tweet-icon' onClick={toggleRight}>
