@@ -1,33 +1,37 @@
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import "./App.css";
-import { Icon } from "leaflet";
+import { Icon, L } from "leaflet";
 import axios from "axios";
 
-let getIcon = (type) => {
-  return type === "Park" ? "/park.png" : "/groceries.png";
-}
+// export const cafeIcon = new Icon({
+//   iconUrl: "/cafe.png",
+//   iconSize: [30, 30],
+// });
 
-export const cafeIcon = new Icon({
-  iconUrl: "/cafe.png",
-  iconSize: [30, 30],
-});
-
-export const parkIcon = new Icon({
-  iconUrl: "/park.png",
-  iconSize: [30, 30],
-});
+// export const parkIcon = new Icon({
+//   iconUrl: "/park.png",
+//   iconSize: [30, 30],
+// });
 
 export const icon = new Icon({
   iconUrl: "/building.png",
   iconSize: [30, 30],
 });
 
-function AmenMap() {
+const iconStyle = (amenity) => {
+  return new Icon ({
+    iconUrl: getIcon(amenity.type), 
+    iconSize: [30, 30]
+  })
+}
 
-  selectIcon = (type) => {
-    return type === "Cafe" ? cafeIcon : icon
-  }
+const getIcon = (type) => {
+  return type === "Cafe" ? "/cafe.png" : "/building.png"
+}
+
+
+function AmenMap() {
 
   const amenities = [
     {
@@ -249,7 +253,7 @@ function AmenMap() {
         <Marker
           key={amenity.id}
           position={[amenity.latitude, amenity.longitude]}
-          icon={cafeIcon}
+          icon={iconStyle}
         >
           <Popup>
             <div>
