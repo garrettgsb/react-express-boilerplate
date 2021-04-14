@@ -1,7 +1,7 @@
-@import "styles/variables.scss";
+@import "../styles/variables.scss";
 
 
-.leftsearch {
+.leftData {
   background-color: $dark-grey-background-opacity;
   width: 33%;
   display: flex;
@@ -35,5 +35,29 @@ direction: rtl;
   & {
     scrollbar-width: thin;
     scrollbar-color: $dark-grey-background-opacity $white-inactive;
+  }
+
+  .dataContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+    background: $accent-opacity-dark;
+    width: 80%;
+    height: 300px;
+    border-radius: 20px;
+    box-shadow: 13px 15px 15px -3px rgba(0, 0, 0, 0.404);
+    margin: 1vh .4vh 1vh 9vh;
+    transition: 0.3s;
+
+    &:hover {
+      box-shadow: 20px 20px 10px -2px rgba(0, 0, 0, 0.74);
+      background-color: $accent-opacity;
+      color: $black-active;
+    }
+
+    .wordCloud {
+      // display:flex;
+    }
   }
 }
