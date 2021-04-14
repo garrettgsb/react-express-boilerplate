@@ -9,10 +9,10 @@ import axios from "axios";
 //   iconSize: [30, 30],
 // });
 
-// export const parkIcon = new Icon({
-//   iconUrl: "/park.png",
-//   iconSize: [30, 30],
-// });
+export const parkIcon = new Icon({
+  iconUrl: "/park.png",
+  iconSize: [30, 30],
+});
 
 export const icon = new Icon({
   iconUrl: "/building.png",
@@ -253,7 +253,7 @@ function AmenMap() {
         <Marker
           key={amenity.id}
           position={[amenity.latitude, amenity.longitude]}
-          icon={iconStyle}
+          icon={parkIcon}
         >
           <Popup>
             <div>

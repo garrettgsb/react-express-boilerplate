@@ -21,7 +21,7 @@ export default function App() {
         <Nav />
         <Switch>
           <Route path="/about" component={AmenMap} />
-          <Route path="/map" component={Map} />
+          <Route path="/map" component={About} />
           <Route path="/buildings/:buildingId" component={Building} />
           <Route path="/buildings" component={Buildings} />
           <Route path="/:id/building_amenities" component={BuildingAmenities} />
