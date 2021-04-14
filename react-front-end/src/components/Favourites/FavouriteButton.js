@@ -5,7 +5,7 @@ import Favorite from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
 
 //component to render user favourites
-export default function FavouritesButton() {
+export default function FavouriteButton() {
   const [fav, setFav] = React.useState(false);
 
   return (
