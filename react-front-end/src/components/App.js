@@ -22,8 +22,8 @@ export default function App() {
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/map" component={Map} />
+          <Route path="/buildings/:buildingId" component={Building} />
           <Route path="/buildings" component={Buildings} />
-          <Route path="/building/:id" component={Building} />
           <Route path="/:id/building_amenities" component={BuildingAmenities} />
           <Route path="/:id/favourites" component={Favourites} />
           <Route path="/favouriteButton" component={FavouriteButton} />

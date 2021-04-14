@@ -17,14 +17,14 @@ class BuildingAmenities extends Component {
         <h2>Amenities</h2>
         <div className="amenities-box">
           {this.state.buildingAmenities.map((amenity) => (
-            <p key={amenity.id}>
+            <div key={amenity.id}>
               <h4>{amenity.name}</h4>
               <img
                 className="building_amenities-image"
                 src={amenity.image_url}
                 alt={amenity.name}
               />
-            </p>
+            </div>
           ))}
         </div>
       </div>

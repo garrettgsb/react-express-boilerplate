@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import Buildings from "./Buildings";
+// import Buildings from "./../Buildings";
 
 //component to render user favourites
 class Favourites extends Component {
