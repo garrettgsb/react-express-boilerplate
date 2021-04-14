@@ -1,7 +1,7 @@
 import React from 'react';
 import './LoginUser.scss';
 
-const RegisterUser = () => {
+const LoginUser = () => {
   return (
     <div className="login-wrapper">
       <h1>Please Log In</h1>
@@ -21,4 +21,4 @@ const RegisterUser = () => {
     </div>
   )
 }
-export default RegisterUser; 
+export default LoginUser; 
