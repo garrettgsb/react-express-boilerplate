@@ -17,25 +17,30 @@ const Profile = () => {
     });
   }, [userId]);
 
-  const handleClick = () => {
-    history.push("/map");
+  const handleClick = (id) => {
+    history.push(`/buildings/${id}`);
   };
 
   return (
     <div className="profile-container">
+      <h1>Favourites</h1>
       <div className="profile-header">
         {profile.map((user) => (
           <div key={user.id}>
-            <h1>{user.name}</h1>
+            <h2>{user.name}</h2>
             <p>{user.address}</p>
             <img
               className="building_amenities-image"
               src={user.image_url}
               alt={user.name}
             />
+            <div>
+              <button onClick={() => handleClick(user.id)}>
+                Building Details
+              </button>
+            </div>
           </div>
         ))}
-        <button onClick={handleClick}>Go to the Map page</button>
       </div>
     </div>
   );

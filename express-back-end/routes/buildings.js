@@ -23,8 +23,7 @@ module.exports = (db) => {
 
   //Get a specific building
   router.get("/buildings/:id", (req, res) => {
-    // const buildingID = req.params.id;
-    const buildingID = 6;
+    const buildingID = req.params.id;
 
     db.query(
       `

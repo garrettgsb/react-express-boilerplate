@@ -90,3 +90,9 @@ nav {
   flex-direction: row;
   justify-content: center;
 }
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
