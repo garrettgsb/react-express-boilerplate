@@ -30,7 +30,7 @@ CREATE TABLE buildings (
 
 CREATE TABLE building_amenities (
   id SERIAL PRIMARY KEY NOT NULL,
-  building_id INTEGER REFERENCES areas(id) ON DELETE CASCADE,
+  building_id INTEGER REFERENCES buildings(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
   image_url VARCHAR(255) NOT NULL
 );
