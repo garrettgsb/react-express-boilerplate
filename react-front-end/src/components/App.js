@@ -36,7 +36,7 @@ export default function App() {
     const socket = io('http://localhost:8080/');
     socket.emit('start', '#apecave');
     socket.on('tweet', (tweet) => {
-      setTweets([...tweets, tweet]);
+      setTweets([tweet, ...tweets]);
     })
 
     return () => socket.disconnect();
