@@ -11,31 +11,6 @@ export const groceriesIcon = new Icon({
 
 function AmenMap() {
 
-  // const countyData = features
-
-  const onEachFeature = function(feature, layer) {
-    if (feature.properties && feature.properties.name)
-    layer.bindPopup(feature.properties.name) //How to add more content to the popup?!? Add component here?
-  }
-
-  // r = rating 
-  const getColor = (r) => {
-    return r === "1" ? 'red' : 
-    r === "2" ? 'yellow' :
-    r === "3" ? 'blue' :
-    r === "4" ? 'green' :
-    r === "5" ? 'orange' :
-                'gray';
-  }
-
-  const mapStyle = (feature) => {
-    return {
-      fillColor: getColor(feature.properties.rating),
-      weight: 0.5,
-      color: "black",
-    }
-  };
-
   const amenities = [
     {
       id: 1,
