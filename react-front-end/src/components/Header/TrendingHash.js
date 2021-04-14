@@ -37,18 +37,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function TrendingHash() {
+export default function TrendingHash(props) {
 
   const [trendingHashtags, setTrendingHashtags] = useState([]);
 
   useEffect(() => {
     const getTrending = async () =>{
-      const trending = await axios.get('http://localhost:8080/api/trending-canada')
+      const trending = await axios.get(`http://localhost:8080/api/trending-${props.country}`)
       setTrendingHashtags(trending.data)
     }
 
     getTrending();
-  }, []);
+  }, [props.country]);
 
   const classes = useStyles();
   const trendingList = trendingHashtags.map((hashtag, i) => {
