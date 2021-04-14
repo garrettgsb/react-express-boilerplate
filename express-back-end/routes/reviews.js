@@ -35,5 +35,25 @@ module.exports = (db) => {
     });
   })
 
+  // Gets average area rating by area name
+  router.get("/api/reviews/area_ratings", (req, res) => {
+    const queryString = `
+      SELECT areas.name AS area_name, ROUND(AVG(area_rating),0) AS average_area_rating
+      FROM reviews
+      JOIN areas ON area_id = areas.id
+      GROUP BY areas.name
+      ORDER BY average_area_rating DESC;
+    `
+    db.query(queryString) 
+    .then(({ rows: reviews }) => {
+      res.json(reviews);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  })
+
   return router;
 };
