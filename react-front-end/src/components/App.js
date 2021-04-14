@@ -16,11 +16,11 @@ export default function App() {
       <div className="App">
         <Nav />
         <Switch>
-          <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
           <Route path="/map" component={Map} />
           <Route path="/buildings" component={Buildings} />
           <Route path="/building/:id" component={Building} />
+          <Route path="/" exact component={Home} />
         </Switch>
       </div>
     </Router>

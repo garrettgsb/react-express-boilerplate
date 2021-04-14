@@ -10,6 +10,8 @@ import Rating from '@material-ui/lab/Rating';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+import axios from "axios";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -30,7 +32,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function ReviewsForm() {
+  const initialFormData = Object.freeze({
+    title: "",
+    area_rating: "",
+    comment: "",
+    recommend_to_friend: "",
+    landlord_rating: false,
+    building_rating: false,
+  });
+
+  const [formData, updateFormData] = React.useState(initialFormData);
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+
+      // Trimming any whitespace
+      [e.target.name]: e.target.value.trim()
+    });
+  };
+
+  const handlePost = (e) => {
+    e.preventDefault()
+    console.log(formData);
+    
+    axios("/", {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      data: formData,
+    })
+      .then(response => response.data)
+      .then(window.location.reload())
+      .catch(error => {
+        throw error;
+      });
+  }
+
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="sm">
@@ -39,7 +80,7 @@ export default function ReviewsForm() {
         <Typography component="h1" variant="h5">
           Write a review!
         </Typography>
-        <form method="POST" className={classes.form} noValidate>
+        <form method="POST" action="/" onSubmit={handlePost} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -60,6 +101,7 @@ export default function ReviewsForm() {
                 label="Approve the landlord?"
                 labelPlacement="end"
                 name="landord_rating"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -69,6 +111,7 @@ export default function ReviewsForm() {
                 label="Recommend to friend"
                 labelPlacement="end"
                 name="recommend_to_friend"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -77,7 +120,8 @@ export default function ReviewsForm() {
                 type="number"
                 name="building_rating"
                 defaultValue={3}
-                precision={1} 
+                precision={1}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -86,7 +130,8 @@ export default function ReviewsForm() {
                 type="number"
                 name="area_rating"
                 defaultValue={3}
-                precision={1} 
+                precision={1}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -97,6 +142,7 @@ export default function ReviewsForm() {
                 name="title"
                 label="Title of review"
                 id="title"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -109,6 +155,7 @@ export default function ReviewsForm() {
                 rowsMax={10}
                 label="Write a review"
                 name="comment"
+                onChange={handleChange}
               />
             </Grid>
           </Grid>

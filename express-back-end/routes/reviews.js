@@ -12,6 +12,11 @@ module.exports = (db) => {
       })
   });
 
+  router.delete("/api/reviews/:id", (req, res) => {
+    db.query(`DELETE FROM reviews WHERE reviews.id = $1`,[req.params.id])
+      .then(({ rows: review }) => res.json(review))
+  })
+
   router.post("/", (req, res) => {
     const title = req.body.title;
     const comment = req.body.comment;
@@ -25,8 +30,10 @@ module.exports = (db) => {
     VALUES ($1, $2, $3, $4 ,$5, $6) RETURNING *;`
 
     db.query(queryString, queryParams)
-    .then(res => {
-      return res.rows;
+    .then(result => {
+      res
+        .status(200)
+        .json(result.rows)
     })
     .catch(err => {
       res
