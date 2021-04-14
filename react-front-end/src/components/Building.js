@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReviewsList from "./ReviewsList";
+import BuildingAmenities from "./BuildingAmenities";
 
 //component to render a building
 class Building extends Component {
@@ -13,16 +14,23 @@ class Building extends Component {
 
   render() {
     return (
-      <div className="Building">
-        <ul>
+      <div className="building-container">
+        <div className="building-header">
           {this.state.buildings.map((building) => (
-            <li key={building.id}>
+            <p key={building.id}>
               <h1>{building.name}</h1>
               <p>{building.address}</p>
-            </li>
+            </p>
           ))}
-        </ul>
-        <ReviewsList />
+        </div>
+        <div className="building-details">
+          <div className="review-list">
+            <ReviewsList />
+          </div>
+          <div className="amenities-and-map">
+            <BuildingAmenities />
+          </div>
+        </div>
       </div>
     );
   }

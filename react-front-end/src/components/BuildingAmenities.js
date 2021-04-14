@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./App.css";
 
 //component to render amenities for a building
 class BuildingAmenities extends Component {
@@ -13,18 +14,19 @@ class BuildingAmenities extends Component {
   render() {
     return (
       <div className="BuildingAmenities">
-        <ul>
+        <h2>Amenities</h2>
+        <div className="amenities-box">
           {this.state.buildingAmenities.map((amenity) => (
-            <li key={amenity.id}>
-              <h1>{amenity.name}</h1>
+            <p key={amenity.id}>
+              <h4>{amenity.name}</h4>
               <img
                 className="building_amenities-image"
                 src={amenity.image_url}
                 alt={amenity.name}
               />
-            </li>
+            </p>
           ))}
-        </ul>
+        </div>
       </div>
     );
   }
