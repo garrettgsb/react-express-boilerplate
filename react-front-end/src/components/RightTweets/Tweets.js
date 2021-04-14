@@ -1,10 +1,11 @@
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 
 export default function Tweets(props) {
 
   //replace this with when connected to tweet streams
-  const { name, handle, text, image, date } = props
+  const { name, handle, text, img, created_at } = props
 
   console.log('props', props)
   return (
@@ -12,10 +13,10 @@ export default function Tweets(props) {
       <header>
         <div className="tweeter">
           <span className="profile">
-            <img src={'./images/user.png'} alt=''/>
+            <img src={img} alt='profile picture'/>
             {name}
           </span>
-          <span className="handle">{handle}</span>
+          <a className="handle" href={`https://twitter.com/${handle}`} target="_blank">{handle}</a>
         </div>
       </header>
       <div className="tweet">{text}

@@ -1,37 +1,57 @@
-const Express = require('express');
-const App = Express();
+const express = require('express');
+const app = express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
+const cors = require('cors')
+const {streamCanadaBorderBox} = require('./queries');
 
-// PG database client/connection setup
-// const { Pool } = require('pg');
-// const dbParams = require('./db/db.js');
-// const db = new Pool(dbParams);
-// db.connect();
-
-const { Pool }= require('pg');
-
-const db = new Pool ({
-  user: 'monke',
-  password: 'monke',
-  host: 'localhost',
-  database: 'trendi',
-  port: 5432
-});
-
-db.connect();
+const http = require("http");
+const socketIo = require("socket.io");
+// const index = require("./routes/index");
 
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static('public'));
+app.use(BodyParser.urlencoded({ extended: false }));
+app.use(BodyParser.json());
+app.use(express.static('public'));
+app.use(cors())
+
+
+const server = http.createServer(app);
+const io = socketIo(server,
+  {
+    cors: {
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST"]
+    }
+  }
+);
+
+io.on('connection', (socket) => {
+  console.log('client connected');
+  socket.on('start', (hashtag) => {
+    console.log('starting stream ', hashtag);
+    const regexpression = hashtag
+    const regex = new RegExp(regexpression, "gi");
+    const tweetStream = streamCanadaBorderBox(hashtag);
+    tweetStream.on('tweet', async tweet => {
+      console.log('Streaming')
+      console.log(tweet.user);
+      if(tweet.text.match(regex)){
+        io.emit('tweet', tweet)
+      }
+    });
+  })
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+})
 
 // Sample GET route
-App.get('/api/data', (req, res) => res.json({
+app.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
-App.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
-});
+server.listen(PORT, () => {
+  console.log("Listen on port: ", PORT);
+})
+
