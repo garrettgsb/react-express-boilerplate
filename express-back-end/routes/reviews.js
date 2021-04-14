@@ -57,3 +57,8 @@ module.exports = (db) => {
 
   return router;
 };
+
+
+const ratingsUrl = 'http://localhost:8080/api/reviews/area_ratings'
+const { datas, errors } = useSwr(ratingsUrl, { fetcher });
+const ratings = data && !errors ? datas.slice(0, 100) : [];
