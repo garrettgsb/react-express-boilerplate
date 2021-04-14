@@ -54,6 +54,7 @@ const Attendees = ({ attendees }) => {
       photographer_id: 2
     }
   ]
+  
   return (
     <>
       {attendees.map((attendee) => (
