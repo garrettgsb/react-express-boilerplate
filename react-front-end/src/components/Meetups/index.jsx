@@ -43,11 +43,8 @@ export default function Meetups() {
     }
   ])
 
-
-
   const value = useMemo(() => ({meetup, setMeetup}), [meetup, setMeetup])
   const valueCheck = useMemo(() => ({checked, setChecked}), [checked, setChecked])
-
   // const constructor = (props) => {
   //   super(props)
   //   this.state = {

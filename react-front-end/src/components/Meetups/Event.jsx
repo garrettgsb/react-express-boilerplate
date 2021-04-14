@@ -3,6 +3,9 @@ import { CheckedContext }from './CheckedContext.jsx'
 import { MeetupsContext } from './MeetupsContext.jsx'
 import { FaTimes } from 'react-icons/fa'
 import { MeetupsContext } from './MeetupsContext.jsx'
+import { FaTimes } from 'react-icons/fa'
+
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
@@ -24,12 +27,11 @@ const Event = ({ event, onDelete }) => {
   return (
     <div className='event'>
       <h3>
-        <p onClick={() => {
-          setMeetupToEvent();
-          revealMeetupPanel();
-        }}>
-          {event.name}
-        </p> 
+        <FormControlLabel 
+        control={<p checked={''} onChange={handleChange}>{event.name}</p>}
+        onClick={() => 
+          setMeetupToEvent()}
+          />
         <FaTimes style={{color: 'red', cursor: 'pointer'}} onClick={() => {onDelete(event.id); setMeetup('');}}/>
       </h3>
       <p>{event.date} at {event.time}</p>
