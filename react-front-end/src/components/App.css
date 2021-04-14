@@ -83,3 +83,10 @@ nav {
   flex-flow: row;
   flex-direction: row;
 }
+
+.building-header {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
+}

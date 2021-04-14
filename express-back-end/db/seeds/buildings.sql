@@ -1,6 +1,6 @@
 INSERT INTO buildings (area_id, name, address, image_url, latitude, longitude) 
-      VALUES (1, 'Grace Court', '1601 Comox St', 'https://unsplash.com/photos/RFDP7_80v5A', -123.1366519, 49.2866785),
-      (1, 'Sanpiper condos', '1740 Comox St', 'https://unsplash.com/photos/dqXiw7nCb9Q', -123.1413247, 49.2879175),
-      (1, 'Beach Towers', '1600 Beach Ave', 'https://unsplash.com/photos/J5eEiP-DJYk', -123.1431126, 49.2854959),
-      (1, 'The Lauren', '1051 Broughton Street', 'https://unsplash.com/photos/UHyrjKPsshk', -123.1394801, 49.2849037),
-      (1, 'The Marquis Rental Apartments', '1355 Pendrell Street', 'https://unsplash.com/photos/0_e-H1eGf_A', -123.1330021, 49.2831175);
+      VALUES (1, 'Grace Court', '1601 Comox St', 'https://images.unsplash.com/photo-1451976426598-a7593bd6d0b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80', -123.1366519, 49.2866785),
+      (1, 'Sanpiper condos', '1740 Comox St', 'https://images.unsplash.com/photo-1469022563428-aa04fef9f5a2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80', -123.1413247, 49.2879175),
+      (1, 'Beach Towers', '1600 Beach Ave', 'https://images.unsplash.com/photo-1549499090-c9203d2b20ad?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80', -123.1431126, 49.2854959),
+      (1, 'The Lauren', '1051 Broughton Street', 'https://images.unsplash.com/photo-1569167419644-26705408a98f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80', -123.1394801, 49.2849037),
+      (1, 'The Marquis Rental Apartments', '1355 Pendrell Street', 'https://images.unsplash.com/photo-1571264781039-6e8ebc5bb92d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80', -123.1330021, 49.2831175);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import ReviewsList from "./ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
@@ -8,15 +8,10 @@ import FavouriteButton from "./Favourites/FavouriteButton";
 //component to render a building
 const Building = () => {
   const [building, setBuilding] = useState([]);
-  // state = { buildings: [] };
-
-  // componentDidMount() {
-  //   fetch("/api/buildings/:id")
-  //     .then((res) => res.json())
-  //     .then((buildings) => this.setState({ buildings }));
-  // }
 
   const { buildingId } = useParams();
+
+  const history = useHistory();
 
   useEffect(() => {
     axios.get(`/api/buildings/${buildingId}`).then((res) => {
@@ -24,12 +19,17 @@ const Building = () => {
     });
   }, [buildingId]);
 
+  const handleClick = () => {
+    history.push("/map");
+  };
+
   return (
     <div className="building-container">
       <div className="building-header">
         {building.map((property) => (
           <div key={property.id}>
             <h1>{property.name}</h1>
+            <p>⭐ ⭐ ⭐ ⭐ ⭐ </p>
             <p>{property.address}</p>
             <img
               className="building_amenities-image"
@@ -43,6 +43,7 @@ const Building = () => {
         <div className="review-list">
           <FavouriteButton />
           <ReviewsList />
+          <button onClick={handleClick}>Go to the Map page</button>
         </div>
         <div className="amenities-and-map">
           <BuildingAmenities />
