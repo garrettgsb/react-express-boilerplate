@@ -87,7 +87,15 @@ nav {
   justify-content: center;
 }
 
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .amenities-map { 
   width: 500px;
   height: 100px;
 }
+

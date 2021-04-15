@@ -1,11 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Nav() {
-
   const navStyle = {
-    color: 'white'
-  }
+    color: "white",
+  };
 
   return (
     <nav>
@@ -17,10 +16,10 @@ export default function Nav() {
         <Link style={navStyle} to="/map">
           <li>Map</li>
         </Link>
-        <Link style={navStyle} to="/about">
-          <li>About</li>
+        <Link style={navStyle} to="/profile/:userId">
+          <li>Favourites</li>
         </Link>
       </ul>
     </nav>
-  )
+  );
 }

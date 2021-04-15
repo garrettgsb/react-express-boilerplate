@@ -7,7 +7,7 @@ import Nav from "./Nav";
 import Map from "./Map";
 import AmenMap from "./AmenMap";
 import Home from "./Home";
-import About from "./About";
+import Profile from "./Profile";
 import Buildings from "./Buildings";
 import Building from "./Building";
 import BuildingAmenities from "./BuildingAmenities";
@@ -20,7 +20,8 @@ export default function App() {
       <div className="App">
         <Nav />
         <Switch>
-          <Route path="/about" component={About} />
+          <Route path="/" exact component={Home} />
+          <Route path="/profile/:userId" component={Profile} />
           <Route path="/map" component={Map} />
           <Route path="/buildings/:buildingId" component={Building} />
           <Route path="/buildings" component={Buildings} />
