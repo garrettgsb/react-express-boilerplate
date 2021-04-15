@@ -4,11 +4,6 @@ import "./App.css";
 import { Icon} from "leaflet";
 import axios from "axios";
 
-// export const cafeIcon = new Icon({
-//   iconUrl: "/cafe.png",
-//   iconSize: [30, 30],
-// });
-
 
 function AmenMap() {
 
@@ -262,7 +257,6 @@ function AmenMap() {
   } 
 
 
-  // ***** REMEMBER TO CHANGE BUILDING LAT LONG IN DB ***** //
   const building = [
     {
       id: 1,
