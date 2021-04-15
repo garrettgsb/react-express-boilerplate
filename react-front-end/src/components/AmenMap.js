@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import "./App.css";
 import { Icon, L } from "leaflet";
@@ -9,26 +9,8 @@ import axios from "axios";
 //   iconSize: [30, 30],
 // });
 
-export const parkIcon = new Icon({
-  iconUrl: "/park.png",
-  iconSize: [30, 30],
-});
 
-export const icon = new Icon({
-  iconUrl: "/building.png",
-  iconSize: [30, 30],
-});
 
-const iconStyle = (amenity) => {
-  return new Icon ({
-    iconUrl: getIcon(amenity.type), 
-    iconSize: [30, 30]
-  })
-}
-
-const getIcon = (type) => {
-  return type === "Cafe" ? "/cafe.png" : "/building.png"
-}
 
 
 function AmenMap() {
@@ -216,6 +198,21 @@ function AmenMap() {
       },
       
   ]
+
+  const buildingIcon = new Icon({
+    iconUrl: "/building.png",
+    iconSize: [30, 30],
+  });
+  
+  // this works. 
+  const getIcon = (type) => {
+    return type === "Cafe" ? "/cafe.png" : "/building.png"
+  }
+
+  const amenIcon = new Icon({
+    iconUrl: getIcon(amenities.type),
+    iconSize: [30, 30]
+  })
   // ***** REMEMBER TO CHANGE BUILDING LAT LONG IN DB ***** //
   const building = [
     {
@@ -240,7 +237,7 @@ function AmenMap() {
       <Marker
           key={building[0].id}
           position={[building[0].latitude, building[0].longitude]}
-          icon={icon}
+          icon={buildingIcon}
         >
           <Popup>
             <div>
@@ -253,7 +250,7 @@ function AmenMap() {
         <Marker
           key={amenity.id}
           position={[amenity.latitude, amenity.longitude]}
-          icon={parkIcon}
+          icon={amenIcon}
         >
           <Popup>
             <div>

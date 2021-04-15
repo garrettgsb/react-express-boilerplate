@@ -20,8 +20,8 @@ export default function App() {
       <div className="App">
         <Nav />
         <Switch>
-          <Route path="/about" component={AmenMap} />
-          <Route path="/map" component={About} />
+          <Route path="/about" component={About} />
+          <Route path="/map" component={Map} />
           <Route path="/buildings/:buildingId" component={Building} />
           <Route path="/buildings" component={Buildings} />
           <Route path="/:id/building_amenities" component={BuildingAmenities} />
