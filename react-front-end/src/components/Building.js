@@ -27,20 +27,9 @@ const Building = () => {
   return (
     <div className="building-container">
       <div className="building-header">
-        {/* {building.map((property) => (
-          <div key={property.id}>
-            <h1>{property.name}</h1>
-            <p>{property.address}</p>
-            <img
-              className="building_amenities-image"
-              src={property.image_url}
-              alt={property.name}
-            />
-            <FavouriteButton />
-          </div>
-        ))} */}
         <div key={building.id}>
           <h1>{building.name}</h1>
+          <h3>{building.neighbourhood} Neighbourhood</h3>
           <p>{building.address}</p>
           <img
             className="building_amenities-image"
