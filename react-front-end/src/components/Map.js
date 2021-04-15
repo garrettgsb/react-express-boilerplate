@@ -23,15 +23,10 @@ export const groceriesIcon = new Icon({
 });
 
 function Mapp() {
-  // const url = "https://data.sfgov.org/resource/ramy-di5m.json";
-  // const { data, error } = useSwr(url, { fetcher });
-  // const buildings = data && !error ? data.slice(0, 100) : [];
 
   const SFHoodData = features;
 
   // const countyData = features
-
-  // const SSFZoningData = features
 
   const onEachFeature = function (feature, layer) {
     if (feature.properties && feature.properties.name)
@@ -1086,7 +1081,6 @@ function Mapp() {
             longitude: -122.4419423
             },
   ]
-
 
   return (
     <MapContainer center={[37.75220204901914, -122.45808060394913]} zoom={13}>
