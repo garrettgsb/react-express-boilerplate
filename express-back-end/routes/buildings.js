@@ -12,6 +12,7 @@ module.exports = (db) => {
       SELECT *
       FROM buildings
       WHERE area_id = $1
+      LIMIT 100
       `,
       [areaID]
     )

@@ -29,7 +29,6 @@ const Buildings = () => {
 
   return (
     <div className="Buildings">
-      <h1>Buildings</h1>
       {buildings.map((building) => (
         <Marker
           key={building.id}

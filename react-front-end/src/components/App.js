@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // imports
 import Nav from "./Nav";
 import Map from "./Map";
-import AmenMap from "./AmenMap";
 import Home from "./Home";
 import Profile from "./Profile";
 import Buildings from "./Buildings";
