@@ -45,10 +45,8 @@ const Building = () => {
           <ReviewsList />
           <button onClick={handleClick}>Go to the Map page</button>
         </div>
-        <div className="amenities-and-map">
-          <BuildingAmenities />
-        </div>
         <div className="amenities-map">
+          <BuildingAmenities />
           <AmenMap />
         </div>
       </div>

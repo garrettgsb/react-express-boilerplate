@@ -41,7 +41,7 @@ module.exports = (db) => {
 
   //Favourite a building
   router.post("/:id/favourites", (req, res) => {
-    const userID = req.params.id;
+    const userID = 1;
     const buildingID = req.body.id;
     db.query(
       `
