@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -32,24 +32,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initialFormData = {
+  title: "",
+  area_rating: "",
+  comment: "",
+  recommend_to_friend: "",
+  landlord_rating: false,
+  building_rating: false,
+};
 
-export default function ReviewsForm() {
-  const initialFormData = Object.freeze({
-    title: "",
-    area_rating: "",
-    comment: "",
-    recommend_to_friend: "",
-    landlord_rating: false,
-    building_rating: false,
-  });
-
-  const [formData, updateFormData] = React.useState(initialFormData);
-
+export default function ReviewsForm(props) {
+  const { recordForEdit } = props
+  
+  const [formData, updateFormData] = useState(initialFormData);
   const handleChange = (e) => {
     updateFormData({
       ...formData,
-
-      // Trimming any whitespace
       [e.target.name]: e.target.value.trim()
     });
   };
@@ -65,7 +63,7 @@ export default function ReviewsForm() {
       },
       data: formData,
     })
-      .then(response => response.data)
+      .then(res => res.data)
       .then(window.location.reload())
       .catch(error => {
         throw error;
@@ -82,7 +80,7 @@ export default function ReviewsForm() {
         </Typography>
         <form method="POST" action="/" onSubmit={handlePost} className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 autoComplete="username"
                 name="username"
@@ -93,10 +91,10 @@ export default function ReviewsForm() {
                 label="Username"
                 autoFocus
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6}>
               <FormControlLabel
-                value="false"
+                value={false}
                 control={<Checkbox color="primary" />}
                 label="Approve the landlord?"
                 labelPlacement="end"
@@ -106,7 +104,7 @@ export default function ReviewsForm() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControlLabel
-                value="false"
+                value={false}
                 control={<Checkbox color="primary" />}
                 label="Recommend to friend"
                 labelPlacement="end"

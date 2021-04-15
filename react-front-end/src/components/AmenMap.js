@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import "./App.css";
 import { Icon, L } from "leaflet";
-import axios from "axios";
+// import axios from "axios";
 
 // export const cafeIcon = new Icon({
 //   iconUrl: "/cafe.png",

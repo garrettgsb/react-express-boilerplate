@@ -3,10 +3,13 @@ import axios from "axios";
 import ReviewsForm from './ReviewsForm';
 import Button from '@material-ui/core/Button';
 import Popup from './controls/Popup';
+import './Reviews.css';
+
 
 export default function ReviewsList() {
   const [review, setReview] = useState([])
   const [openPopup, setOpenPopup] = useState(false)
+  const [recordForEdit, setRecordForEdit] = useState(null)
 
   useEffect(() => {
     axios.get('/api/reviews')
@@ -27,8 +30,10 @@ export default function ReviewsList() {
     })
   }
 
-  const handleEdit = (id) => {
-    console.log(id)
+  const handleEdit = (item) => {
+    console.log("item: ", item)
+    setRecordForEdit(item)
+    setOpenPopup(true)
   }
 
   return (
@@ -45,10 +50,12 @@ export default function ReviewsList() {
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
       >
-      <ReviewsForm />
+      <ReviewsForm
+        recordForEdit={recordForEdit}
+      />
       </Popup>
 
-      <h1>Reviews List</h1>
+      <h1>List of reviews</h1>
         {review.map(item => 
           <div className="review-item" key={item.id}>
             <h3>{item.title}</h3>
@@ -64,9 +71,9 @@ export default function ReviewsList() {
             </Button>
             <Button
               type="button"
-              onClick={(e) => handleEdit(item.id, e)}
               variant="contained"
               color="primary"
+              onClick={(e) => {handleEdit(item)}}
             >Edit
             </Button>
           </div>
