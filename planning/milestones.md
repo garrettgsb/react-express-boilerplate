@@ -1,29 +1,29 @@
 ## setup basic pages (titles, divs etc)
-[ ] home page
-[ ] maps
-[ ] meetups
-[ ] profile
-[ ] settings
-[ ] messages (group or personal)
-[ ] navbar
+[✔] home page
+[✔] maps
+[✔] meetups
+[✔] profile
+[✔] settings
+[✔] messages (group or personal)
+[✔] navbar
 
 ## add twilio api data to pages
 [ ] safety messages to phone number
 [ ] messaging to other meetup members
 ## northern lights api - major key
+[✔] KP index strength
 [ ] (stretch) weather forecast (separate api?)
-[ ] KP index strength
-[ ] general locations
+[ ] (stretch) location specific forecast
 ## meetups
-[ ] create form for meetups
+[✔] create form for meetups
 [ ] edit / delete meetups
-[ ] send meetup details as invite to friends (email invite? / twilio invite?)
-[ ] separate meetups into 3 lists: public, user created, attending
 [ ] adding yourself to a public event
 [ ] show meetups on a calendar
-[ ] show /filter public meetups on a map
-[ ] group chats / personal chats: https://www.youtube.com/watch?v=tBr-PybP_9c https://guide.meteor.com/methods.html
-[ ] (stetch) set meetups to public/private
+[ ] send meetup details as invite to friends (email invite? / twilio invite?)
+[ ] separate meetups into 3 lists: public, user created, attending
+[✔] group chats / personal chats: https://www.youtube.com/watch?v=tBr-PybP_9c https://guide.meteor.com/methods.html
+[ ] (stretch) show /filter public meetups on a map
+[ ] (stretch) set meetups to public/private
 [ ] (stretch) show list of past events
 ## profile
 [ ] add a profile pic
