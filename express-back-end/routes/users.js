@@ -40,15 +40,15 @@ module.exports = (db) => {
   });
 
   //Favourite a building
-  router.post("/:id/favourites", (req, res) => {
-    const userID = 1;
-    const buildingID = req.body.id;
+  router.post("/:id/favourites/:buildingId", (req, res) => {
+    const userId = 1;
+    const buildingId = req.body.id;
     db.query(
       `
       INSERT into favourites (user_id, building_id) VALUES ($1, $2)
       RETURNING *
       `,
-      [userID, buildingID]
+      [userId, buildingId]
     )
       .then((favourite) => res.json(favourite))
       .catch((err) => {
@@ -57,15 +57,15 @@ module.exports = (db) => {
   });
 
   //Delete a favourite
-  router.delete("/:id/favourites/:id", (req, res) => {
-    const favouriteID = req.params.id;
+  router.delete("/:id/favourites/:favouriteId", (req, res) => {
+    const favouriteId = req.params.id;
 
     db.query(
       `
       DELETE FROM favourites
       WHERE id = $1
       `,
-      [favouriteID]
+      [favouriteId]
     )
       .then(() => res.send("Deleted from favourites"))
       .catch((err) => {

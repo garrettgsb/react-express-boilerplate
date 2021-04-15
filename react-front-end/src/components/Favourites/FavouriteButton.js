@@ -8,15 +8,17 @@ import axios from "axios";
 
 //component to render user favourites
 export default function FavouriteButton() {
-  const [favourite, setFavourite] = useState();
+  const [favourite, setFavourite] = useState([]);
+  console.log("favourite:", favourite);
 
   const { userId } = useParams();
   console.log("userID:", userId);
 
   // Create a favourite
-  const createFav = () => {
-    axios.post(`/api/users/1/favourites`).then((res) => {
-      setFavourite(res.data);
+  const createFav = (buildingId) => {
+    axios.post(`/api/users/${userId}/favourites/${buildingId}`).then((res) => {
+      console.log(res);
+      setFavourite(favourite);
     });
   };
 
@@ -25,25 +27,24 @@ export default function FavouriteButton() {
     axios
       .delete(`/api/users/${userId}/favourites/${favouriteId}`)
       .then((res) => {
-        setFavourite(res.data);
+        setFavourite(!favourite);
       });
   };
 
-  function handleFav(favouriteId) {
-    setFavourite(!favourite);
-    if (favourite === true) {
-      createFav();
-    } else {
-      deleteFav(favouriteId);
-    }
-  }
+  // const handleFav = () => {
+  //   if (favourite === true) {
+  //     deleteFav(favourite.id);
+  //   } else {
+  //     createFav();
+  //   }
+  // };
 
   return (
     <div className="favourite-button">
-      {favourite && (
+      {!favourite && (
         <IconButton
           onClick={() => {
-            setFavourite(!favourite);
+            createFav(favourite.building_id);
           }}
           aria-label="delete"
           color="primary"
@@ -52,10 +53,10 @@ export default function FavouriteButton() {
           <h4> Favourite this property! </h4>
         </IconButton>
       )}
-      {!favourite && (
+      {favourite && (
         <IconButton
           onClick={() => {
-            setFavourite(!favourite);
+            deleteFav(favourite.id);
           }}
           aria-label="delete"
           color="primary"
