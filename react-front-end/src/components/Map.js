@@ -38,6 +38,17 @@ function Mapp() {
       layer.bindPopup(feature.properties.name); //How to add more content to the popup?!? Add component here?
   };
 
+  const rating = [
+    {
+      area_name: "Lake Street",
+      average_area_rating: "4"
+    },
+    {
+      area_name: "Seacliff",
+      average_area_rating: "3"
+    }
+  ]
+
   // r = rating
   const getColor = (r) => {
     return r === "1"

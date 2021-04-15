@@ -4,6 +4,8 @@ import axios from "axios";
 import ReviewsList from "./ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
 import FavouriteButton from "./Favourites/FavouriteButton";
+import AmenMap from "./AmenMap";
+
 
 //component to render a building
 const Building = () => {
@@ -47,6 +49,9 @@ const Building = () => {
         </div>
         <div className="amenities-and-map">
           <BuildingAmenities />
+        </div>
+        <div className="amenities-map">
+          <AmenMap />
         </div>
       </div>
     </div>
