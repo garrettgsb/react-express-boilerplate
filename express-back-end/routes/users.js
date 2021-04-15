@@ -1,17 +1,17 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
+  const userId = 1;
   // Access user profile
   router.get("/:id", (req, res) => {
     // const userID = req.params.id;
-    const userID = 1;
     db.query(
       `
       SELECT *
       FROM users
       WHERE id = $1
       `,
-      [userID]
+      [userId]
     )
       .then(({ rows: user }) => res.json(user))
       .catch((err) => {
@@ -41,7 +41,6 @@ module.exports = (db) => {
 
   //Favourite a building
   router.post("/:id/favourites/:buildingId", (req, res) => {
-    const userId = 1;
     const buildingId = req.body.id;
     db.query(
       `

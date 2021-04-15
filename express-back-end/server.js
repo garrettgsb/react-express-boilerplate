@@ -27,7 +27,7 @@ const buildingAmenities = require("./routes/building_amenities");
 const users = require("./routes/users");
 
 App.use("/", reviewsRoutes(db));
-App.use("/api", buildings(db));
+App.use("/api/buildings", buildings(db));
 App.use("/api", areas(db));
 App.use("/api", amenities(db));
 App.use("/api", buildingAmenities(db));
