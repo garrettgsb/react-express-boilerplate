@@ -22,9 +22,10 @@ CREATE TABLE areas (
 CREATE TABLE buildings (
   id SERIAL PRIMARY KEY NOT NULL,
   area_id INTEGER REFERENCES areas(id) ON DELETE CASCADE,
-  name VARCHAR(255) NOT NULL,
+  name VARCHAR(255),
   address VARCHAR(255) NOT NULL,
-  image_url VARCHAR(255) NOT NULL,
+  neighbourhood VARCHAR(255),
+  image_url VARCHAR(255),
   latitude FLOAT NOT NULL,
   longitude FLOAT NOT NULL
 );
