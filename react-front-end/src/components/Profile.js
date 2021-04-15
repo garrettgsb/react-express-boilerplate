@@ -17,8 +17,16 @@ const Profile = () => {
     });
   }, [userId]);
 
-  const handleClick = (id) => {
-    history.push(`/buildings/${id}`);
+  const deleteFavourite = (favouriteId) => {
+    axios.delete(`/api/users/${userId}/favourites/${favouriteId}`).then(() => {
+      axios.get(`/api/users/${userId}/favourites`).then((res) => {
+        setProfile(res.data);
+      });
+    });
+  };
+
+  const handleClick = (favouriteId) => {
+    history.push(`/buildings/${favouriteId}`);
   };
 
   return (
@@ -37,6 +45,9 @@ const Profile = () => {
             <div>
               <button onClick={() => handleClick(user.id)}>
                 Building Details
+              </button>
+              <button onClick={() => deleteFavourite(user.id)}>
+                Remove Favourite
               </button>
             </div>
           </div>

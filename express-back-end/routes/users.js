@@ -25,13 +25,16 @@ module.exports = (db) => {
     const userID = 4;
     db.query(
       `
-      SELECT * FROM favourites
-      JOIN buildings ON building_id = buildings.id
+      SELECT f.id, f.building_id, f.user_id, b.name, b.image_url, b.address FROM favourites f 
+JOIN buildings b ON f.building_id = b.id 
       WHERE user_id = $1
       `,
       [userID]
     )
-      .then(({ rows: favourites }) => res.json(favourites))
+      .then((favourites) => {
+        console.log("favourites:", favourites.rows);
+        res.json(favourites.rows);
+      })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
@@ -57,6 +60,7 @@ module.exports = (db) => {
   //Delete a favourite
   router.delete("/:id/favourites/:id", (req, res) => {
     const favouriteID = req.params.id;
+
     db.query(
       `
       DELETE FROM favourites
