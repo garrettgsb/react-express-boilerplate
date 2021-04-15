@@ -6,7 +6,6 @@ import BuildingAmenities from "./BuildingAmenities";
 import FavouriteButton from "./Favourites/FavouriteButton";
 import AmenMap from "./AmenMap";
 
-
 //component to render a building
 const Building = () => {
   const [building, setBuilding] = useState([]);
@@ -31,7 +30,6 @@ const Building = () => {
         {building.map((property) => (
           <div key={property.id}>
             <h1>{property.name}</h1>
-            <p>⭐ ⭐ ⭐ ⭐ ⭐ </p>
             <p>{property.address}</p>
             <img
               className="building_amenities-image"

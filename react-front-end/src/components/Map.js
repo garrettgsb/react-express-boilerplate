@@ -4,7 +4,7 @@ import "./App.css";
 import { Icon } from "leaflet";
 import useSwr from "swr";
 import axios from "axios";
-import { features } from "../SFNeighborhoods-copy.json"
+import { features } from "../SFNeighborhoods-copy.json";
 // import { features } from "./SSFZoning.json"
 // import { features } from "./bayareacounties.json"
 
@@ -38,16 +38,16 @@ function Mapp() {
       layer.bindPopup(feature.properties.name); //How to add more content to the popup?!? Add component here?
   };
 
-  const rating = [
-    {
-      area_name: "Lake Street",
-      average_area_rating: "4"
-    },
-    {
-      area_name: "Seacliff",
-      average_area_rating: "3"
-    }
-  ]
+  // const rating = [
+  //   {
+  //     area_name: "Lake Street",
+  //     average_area_rating: "4"
+  //   },
+  //   {
+  //     area_name: "Seacliff",
+  //     average_area_rating: "3"
+  //   }
+  // ]
 
   // r = rating
   const getColor = (r) => {

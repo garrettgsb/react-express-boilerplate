@@ -4,7 +4,7 @@ module.exports = (db) => {
   // Access user profile
   router.get("/:id", (req, res) => {
     // const userID = req.params.id;
-    const userID = 4;
+    const userID = 1;
     db.query(
       `
       SELECT *
@@ -22,7 +22,7 @@ module.exports = (db) => {
   //Access users favourites
   router.get("/:id/favourites", (req, res) => {
     // const userID = req.params.id;
-    const userID = 4;
+    const userID = 1;
     db.query(
       `
       SELECT f.id, f.building_id, f.user_id, b.name, b.image_url, b.address FROM favourites f 
