@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
-//component to render a profile
+//component to render favourites
 const Profile = () => {
   const [profile, setProfile] = useState([]);
 
@@ -17,6 +17,11 @@ const Profile = () => {
     });
   }, [userId]);
 
+  const handleClick = (favouriteId) => {
+    history.push(`/buildings/${favouriteId}`);
+  };
+
+  // Delete a favourite
   const deleteFavourite = (favouriteId) => {
     axios.delete(`/api/users/${userId}/favourites/${favouriteId}`).then(() => {
       axios.get(`/api/users/${userId}/favourites`).then((res) => {
@@ -25,28 +30,24 @@ const Profile = () => {
     });
   };
 
-  const handleClick = (favouriteId) => {
-    history.push(`/buildings/${favouriteId}`);
-  };
-
   return (
     <div className="profile-container">
       <h1>Favourites</h1>
       <div className="profile-header">
-        {profile.map((user) => (
-          <div key={user.id}>
-            <h2>{user.name}</h2>
-            <p>{user.address}</p>
+        {profile.map((favourite) => (
+          <div key={favourite.id}>
+            <h2>{favourite.name}</h2>
+            <p>{favourite.address}</p>
             <img
               className="building_amenities-image"
-              src={user.image_url}
-              alt={user.name}
+              src={favourite.image_url}
+              alt={favourite.name}
             />
             <div>
-              <button onClick={() => handleClick(user.id)}>
+              <button onClick={() => handleClick(favourite.building_id)}>
                 Building Details
               </button>
-              <button onClick={() => deleteFavourite(user.id)}>
+              <button onClick={() => deleteFavourite(favourite.id)}>
                 Remove Favourite
               </button>
             </div>

@@ -26,13 +26,12 @@ module.exports = (db) => {
     db.query(
       `
       SELECT f.id, f.building_id, f.user_id, b.name, b.image_url, b.address FROM favourites f 
-JOIN buildings b ON f.building_id = b.id 
+      JOIN buildings b ON f.building_id = b.id 
       WHERE user_id = $1
       `,
       [userID]
     )
       .then((favourites) => {
-        console.log("favourites:", favourites.rows);
         res.json(favourites.rows);
       })
       .catch((err) => {
