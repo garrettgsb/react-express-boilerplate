@@ -1,27 +1,31 @@
-const Express = require('express');
+const express = require('express');
 const cors = require('cors')
-const App = Express();
+const app = express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
 const http = require('https');
 const LineByLineReader = require('line-by-line')
+const twilio = require('twilio');
 
+// Twilio requirements; texting api
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = (accountSid, authToken);
 
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static('public'));
+app.use(BodyParser.urlencoded({ extended: false }));
+app.use(BodyParser.json());
+app.use(express.static('public'));
 
-// cors configuration
+// Cors configuration: blocks browser from restricting data
 const corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200 // For legacy browser support
 }
+app.use(cors(corsOptions));
 
-App.use(cors(corsOptions));
-
-// Sample GET route
-App.get('/api/data', (req, res) => {
+// GET route for Aurora Data
+app.get('/api/data', (req, res) => {
   
   const options = {
     host: 'services.swpc.noaa.gov',
@@ -81,6 +85,7 @@ App.get('/api/data', (req, res) => {
             '18:00:00Z', 
             '21:00:00Z'
           ]
+          // Populate data object with scraped data
           data.day1[timeArr[counter-3]] = {kpi: filtArr[1]}
           data.day2[timeArr[counter-3]] = {kpi: filtArr[2]}
           data.day3[timeArr[counter-3]] = {kpi: filtArr[3]}
@@ -101,12 +106,23 @@ App.get('/api/data', (req, res) => {
     request.end();
   }
   readKpiData();
-
-  // res.json({result: "this is returning back"});
-
 });
 
-App.listen(PORT, () => {
+// Route to send texts via twilio. 
+// Will try to see if possible to reconfigure this to front end react router dom
+app.get('/text', (req, res) => {
+  // GET variables passed via query string
+  const { recipient, textmessage } = req.query
+  
+  // Send text
+  client.messages.create({
+    body: textmessage,
+    to: recipient,
+    from: '+15873284954'
+  }).then((message) => console.log(message.body));
+})
+
+app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
