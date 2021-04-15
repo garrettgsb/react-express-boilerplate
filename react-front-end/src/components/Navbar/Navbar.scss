@@ -1,5 +1,5 @@
 .NavbarItems {
-  background: linear-gradient(90deg, rgb(110, 94, 254) 0%, rgba(73,63,252,1) 100%);
+  background: linear-gradient(90deg, #60AEBF 0%, #10192A 100%);
   height: 80px;
   display: flex;
   justify-content: center;
@@ -34,7 +34,7 @@
 }
 
 .nav-links:hover {
-  background-color: #6d76f7;
+  background-color: #60AEBF;
   border-radius: 4px;
   transition: all 0.2s ease-out;
 }
@@ -69,7 +69,7 @@
   }
 
   .nav-menu.active {
-    background: #6668f4;
+    background: #10192A;
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
@@ -84,7 +84,7 @@
   }
 
   .nav-links:hover {
-    background-color: #7577fa;
+    background-color: #10192A;
     border-radius: 0;
   }
 
