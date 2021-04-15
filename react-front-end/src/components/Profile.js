@@ -4,7 +4,7 @@ import axios from "axios";
 
 //component to render favourites
 const Profile = () => {
-  const [profile, setProfile] = useState([]);
+  const [fav, setFavourite] = useState([]);
 
   const { userId } = useParams();
 
@@ -12,8 +12,7 @@ const Profile = () => {
 
   useEffect(() => {
     axios.get(`/api/users/${userId}/favourites`).then((res) => {
-      console.log(res.data);
-      setProfile(res.data);
+      setFavourite(res.data);
     });
   }, [userId]);
 
@@ -25,7 +24,7 @@ const Profile = () => {
   const deleteFavourite = (favouriteId) => {
     axios.delete(`/api/users/${userId}/favourites/${favouriteId}`).then(() => {
       axios.get(`/api/users/${userId}/favourites`).then((res) => {
-        setProfile(res.data);
+        setFavourite(res.data);
       });
     });
   };
@@ -34,7 +33,7 @@ const Profile = () => {
     <div className="profile-container">
       <h1>Favourites</h1>
       <div className="profile-header">
-        {profile.map((favourite) => (
+        {fav.map((favourite) => (
           <div key={favourite.id}>
             <h2>{favourite.name}</h2>
             <p>{favourite.address}</p>

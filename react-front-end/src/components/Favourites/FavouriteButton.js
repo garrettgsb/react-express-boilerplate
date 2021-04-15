@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 // import FavoriteIcon from "@material-ui/icons/Favorite";
 import Favorite from "@material-ui/icons/Favorite";
@@ -8,31 +8,31 @@ import axios from "axios";
 
 //component to render user favourites
 export default function FavouriteButton() {
-  const [fav, setFav] = React.useState(false);
+  const [favourite, setFavourite] = useState();
 
-  const { userId } = useParams;
+  const { userId } = useParams();
+  console.log("userID:", userId);
 
   // Create a favourite
-  const createFav = (favouriteId) => {
-    axios.post(`/api/users/${userId}/favourites`).then((res) => {
-      setFav(res.data);
+  const createFav = () => {
+    axios.post(`/api/users/1/favourites`).then((res) => {
+      setFavourite(res.data);
     });
   };
 
   // Delete a favourite
   const deleteFav = (favouriteId) => {
-    axios.delete(`/api/users/${userId}/favourites/${favouriteId}`).then(() => {
-      axios.get(`/api/users/${userId}/favourites`).then((res) => {
-        setFav(res.data);
+    axios
+      .delete(`/api/users/${userId}/favourites/${favouriteId}`)
+      .then((res) => {
+        setFavourite(res.data);
       });
-    });
   };
 
-  // determine fav status
   function handleFav(favouriteId) {
-    setFav(!fav);
-    if (fav == true) {
-      createFav(favouriteId);
+    setFavourite(!favourite);
+    if (favourite === true) {
+      createFav();
     } else {
       deleteFav(favouriteId);
     }
@@ -40,10 +40,10 @@ export default function FavouriteButton() {
 
   return (
     <div className="favourite-button">
-      {fav && (
+      {favourite && (
         <IconButton
           onClick={() => {
-            setFav(!fav);
+            setFavourite(!favourite);
           }}
           aria-label="delete"
           color="primary"
@@ -52,10 +52,10 @@ export default function FavouriteButton() {
           <h4> Favourite this property! </h4>
         </IconButton>
       )}
-      {!fav && (
+      {!favourite && (
         <IconButton
           onClick={() => {
-            setFav(!fav);
+            setFavourite(!favourite);
           }}
           aria-label="delete"
           color="primary"
