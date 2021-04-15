@@ -1,5 +1,5 @@
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 
 module.exports = (db) => {
   //Get all buildings in an area
@@ -24,7 +24,7 @@ module.exports = (db) => {
   //Get a specific building
   router.get("/buildings/:id", (req, res) => {
     // const buildingID = req.params.id;
-    const buildingID = 16;
+    const buildingID = 6;
 
     db.query(
       `

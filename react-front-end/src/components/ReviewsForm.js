@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from "react";
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Rating from '@material-ui/lab/Rating';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Rating from "@material-ui/lab/Rating";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -56,9 +56,9 @@ export default function ReviewsForm() {
 
   const handlePost = (e) => {
     e.preventDefault()
-    console.log(formData);
+    console.log("formData: ", formData);
     
-    axios("/", {
+    axios(`/`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -126,7 +126,7 @@ export default function ReviewsForm() {
             </Grid>
             <Grid item xs={12} sm={6}>
               Area Rating
-              <Rating 
+              <Rating
                 type="number"
                 name="area_rating"
                 defaultValue={3}
@@ -159,7 +159,9 @@ export default function ReviewsForm() {
               />
             </Grid>
           </Grid>
-          <Button item xs={12}
+          <Button
+            item
+            xs={12}
             type="submit"
             variant="contained"
             color="default"
@@ -170,5 +172,5 @@ export default function ReviewsForm() {
         </form>
       </div>
     </Container>
-  )
+  );
 }
