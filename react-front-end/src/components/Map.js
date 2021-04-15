@@ -1,16 +1,15 @@
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
+import { SearchControl, OpenStreetMapProvider } from 'react-leaflet-geosearch'
 import "./App.css";
+import "./Geosearch.css";
 import { Icon } from "leaflet";
 import useSwr from "swr";
 import axios from "axios";
 import { features } from "../SFNeighborhoods-copy.json"
+// import './example/react-leaflet-geosearch.css';
 // import { features } from "./SSFZoning.json"
 // import { features } from "./bayareacounties.json"
-
-// const fetcher = (...args) => fetch(...args).then((response) => response.json());
-
-const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 export const icon = new Icon({
   iconUrl: "/building.png",
@@ -23,15 +22,10 @@ export const groceriesIcon = new Icon({
 });
 
 function Mapp() {
-  // const url = "https://data.sfgov.org/resource/ramy-di5m.json";
-  // const { data, error } = useSwr(url, { fetcher });
-  // const buildings = data && !error ? data.slice(0, 100) : [];
 
   const SFHoodData = features;
 
   // const countyData = features
-
-  // const SSFZoningData = features
 
   const onEachFeature = function (feature, layer) {
     if (feature.properties && feature.properties.name)
@@ -1087,6 +1081,9 @@ function Mapp() {
             },
   ]
 
+  const prov = OpenStreetMapProvider();
+  const GeoSearchControlElement = SearchControl;
+
 
   return (
     <MapContainer center={[37.75220204901914, -122.45808060394913]} zoom={13}>
@@ -1113,6 +1110,19 @@ function Mapp() {
         style={mapStyle}
         onEachFeature={onEachFeature}
       />
+
+      {/* <GeoSearchControlElement
+          provider={prov}
+          showMarker={true}
+          showPopup={false}
+          popupFormat={({ query, result }) => result.label}
+          maxMarkers={3}
+          retainZoomLevel={false}
+          animateZoom={true}
+          autoClose={false}
+          searchLabel={"Enter address, please"}
+          keepResult={true}
+      /> */}
     </MapContainer>
   );
 }
