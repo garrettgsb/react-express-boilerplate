@@ -4,7 +4,7 @@ import "./App.css";
 import { Icon } from "leaflet";
 import useSwr from "swr";
 import axios from "axios";
-import { features } from "../SFNeighborhoods-copy.json";
+import { features } from "../SFNeighborhoods-copy.json"
 // import { features } from "./SSFZoning.json"
 // import { features } from "./bayareacounties.json"
 
