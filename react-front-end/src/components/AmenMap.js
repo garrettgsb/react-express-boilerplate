@@ -10,9 +10,6 @@ import axios from "axios";
 // });
 
 
-
-
-
 function AmenMap() {
 
   const amenities = [
@@ -204,13 +201,16 @@ function AmenMap() {
     iconSize: [30, 30],
   });
   
-  // this works. 
-  const getIcon = (type) => {
-    return type === "Cafe" ? "/cafe.png" : "/building.png"
-  }
+  const iconUrl = amenities.map((amenity) => {
+    return amenity.type === "Cafe" ? "/cafe.png" : 
+    amenity.type === "Groceries" ? "/groceries.png" :
+    amenity.type === "Park" ? "/park.png" :
+    amenity.type === "Restaurant" ? "/restaurant.png" :
+    "bank.png";
+  })
 
-  const amenIcon = new Icon({
-    iconUrl: getIcon(amenities.type),
+  const getIcon = new Icon({
+    iconUrl: iconUrl,
     iconSize: [30, 30]
   })
   // ***** REMEMBER TO CHANGE BUILDING LAT LONG IN DB ***** //
@@ -250,7 +250,7 @@ function AmenMap() {
         <Marker
           key={amenity.id}
           position={[amenity.latitude, amenity.longitude]}
-          icon={amenIcon}
+          icon={getIcon}
         >
           <Popup>
             <div>
