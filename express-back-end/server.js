@@ -1,16 +1,12 @@
 const express = require('express');
-const cors = require('cors')
+const dotenv = require('dotenv').config();
+const cors = require('cors');
 const app = express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
 const http = require('https');
 const LineByLineReader = require('line-by-line')
-const twilio = require('twilio');
-
-// Twilio requirements; texting api
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = (accountSid, authToken);
+const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 // Express Configuration
 app.use(BodyParser.urlencoded({ extended: false }));
@@ -114,8 +110,8 @@ app.get('/text', (req, res) => {
   // Send text
   client.messages.create({
     body: textmessage,
-    to: recipient,
-    from: '+15873284954'
+    to: `+1${recipient}`,
+    from: '+15873271815'
   }).then((message) => console.log(message.body));
 })
 

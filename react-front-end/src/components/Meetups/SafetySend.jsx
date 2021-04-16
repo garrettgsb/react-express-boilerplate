@@ -1,47 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
+import './SafetySend.scss';
 
-const SafetySend = () => {
+// const SafetySend
+function SafetySend () {
 
-  state = {
-    text: {
+  const [text, setText] = useState({
       recipient: '',
       textmessage: ''
-    }
-  }
-
-  sendText = () => {
-    const { text } = this.state
-
+    })
+  
+  function sendText () {
     // pass variables in query string
     fetch(`http://localhost:8080/text?recipient=${text.recipient}&textmessage=${text.textmessage}`)
+    .then(() => console.log('successfully sent text'))
     .catch(err => console.log(err))
   }
 
-  const { text } = this.state;
-  
-  const spacer = {
-    margin: 8
-  }
-  const textArea = {
-    borderRadius: 4
-  }
-
   return (
-    <div className='textArea' style={{marginTop:10 }}>
+    <div className='safety-send' >
       <h2> Send Text Message </h2>
       <label> Your Phone Number </label>
       <br />
       <input value = {text.recipient} 
-        onChange={e => this.setState({ text: { ...text, recipient: e.target.value} })} />
-      <div style={spacer} />
+      // set state as user types in phone number
+      onChange={e => setText({ ...text, recipient: e.target.value})} />
+      <div className='spacer' />
       <label> Message </label>
       <br />
-      <textarea rows={3} value={text.textmessage} style={textArea} 
-        onChange={e => this.setState({ text: { ...text, textmessage: e.target.value } })}/>
-      <div style={spacer} />
-      <button onClick={this.sendText}> Send Text </button>
+      <textarea rows={3} value={text.textmessage} className='text-area' 
+      // set state as user types in message
+        onChange={e => setText({ ...text, textmessage: e.target.value })}/>
+      <div className='spacer' />
+      <button onClick={sendText}> Send Text </button>
     </div>
   )
 }
 
-export default SafetySend
+export default SafetySend;
