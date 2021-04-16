@@ -10,6 +10,12 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^8.2.0",
+    "line-by-line": "^0.1.6",
+    "nodemon": "^1.18.7",
+    "pg": "^8.6.0"
+  },
+  "devDependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",

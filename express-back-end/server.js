@@ -5,13 +5,49 @@ const app = express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
 const http = require('https');
-const LineByLineReader = require('line-by-line')
+const LineByLineReader = require('line-by-line');
+const { getMaxListeners } = require('process');
+const db = require('./db');
+const { user } = require('./config');
+require('dotenv').config();
+
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
+
+
+
 // Express Configuration
-app.use(BodyParser.urlencoded({ extended: false }));
-app.use(BodyParser.json());
-app.use(express.static('public'));
+App.use(BodyParser.urlencoded({ extended: false }));
+App.use(BodyParser.json());
+App.use(Express.static('public'));
+App.use(cors());
+
+//get user from db for login
+App.post('/login', (req, res) => {
+  const credentials = JSON.parse(req.body.credentials);
+	const email = credentials.email;
+	const password = credentials.password;
+	if (email && password) {
+    const query = `SELECT * FROM photographers WHERE email = $1 AND password = $2`
+    db.query(query, [email, password]).then((data) => {
+      res.send(data.rows[0])
+    }).catch((err) => {
+    });
+	}
+});
+
+//get user for profile page
+App.get('/profile/:id', (req,res) => {
+  console.log('req.params.id: ', req.params.id)
+  const query = `SELECT * FROM photographers WHERE id = $1`
+  console.log(req.body);
+    db.query(query, [req.params.id]).then((data) => {
+      res.send(data.rows[0])
+      console.log(data.rows[0])
+    }).catch((err) => {
+  });
+})
+
 
 // Cors configuration: blocks browser from restricting data
 const corsOptions = {
