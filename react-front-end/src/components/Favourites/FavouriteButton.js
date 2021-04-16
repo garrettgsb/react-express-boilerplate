@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-// import FavoriteIcon from "@material-ui/icons/Favorite";
 import Favorite from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
+import axios from "axios";
 
 //component to render user favourites
-export default function FavouriteButton() {
-  const [fav, setFav] = React.useState(false);
+export default function FavouriteButton(props) {
+  const [favourite, setFavourite] = useState([]);
+
+  // Add or delete favourite
+  const handleFav = (buildingId) => {
+    const body = { buildingId, user_id: 1 };
+    axios.post(`/api/buildings/favourite/${buildingId}`, body).then((res) => {
+      if (res.length > 0) {
+        setFavourite(favourite);
+      } else {
+        setFavourite(!favourite);
+      }
+    });
+  };
 
   return (
     <div className="favourite-button">
-      {fav && (
+      {!favourite && (
         <IconButton
           onClick={() => {
-            setFav(!fav);
+            handleFav(props.buildingId);
           }}
           aria-label="delete"
           color="primary"
@@ -22,10 +34,10 @@ export default function FavouriteButton() {
           <h4> Favourite this property! </h4>
         </IconButton>
       )}
-      {!fav && (
+      {favourite && (
         <IconButton
           onClick={() => {
-            setFav(!fav);
+            handleFav(props.buildingId);
           }}
           aria-label="delete"
           color="primary"
