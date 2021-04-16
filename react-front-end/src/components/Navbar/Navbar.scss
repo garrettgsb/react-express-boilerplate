@@ -1,6 +1,8 @@
 .NavbarItems {
-  background: linear-gradient(90deg, #60AEBF 0%, #10192A 100%);
-  height: 80px;
+
+  background-image: url(https://ze-robot.com/dl/no/northern-lights-digital-painting-by-aenami-1080p-768%C3%971024.jpg);
+  height: 120px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +10,7 @@
 }
 
 .navbar-logo {
-  color: #fff;
+  color: rgb(247, 199, 199);
   justify-self: start;
   margin-left: 20px;
   // cursor: pointer;
@@ -27,20 +29,21 @@
 }
 
 .nav-links {
-  color: white;
+  color: rgb(247, 199, 199);
   text-decoration: none;
   padding: 0.5rem 0.5rem;
   font-size: medium;
 }
 
 .nav-links:hover {
-  background-color: #60AEBF;
+  background-color: #93e593;
+  color: black;
   border-radius: 4px;
   transition: all 0.2s ease-out;
 }
 
 .fa-bars {
-  color: #fff;
+  color: rgb(247, 199, 199);
 }
 
 .nav-links-mobile {
@@ -62,14 +65,14 @@
     width: 100%;
     height: 500px;
     position: absolute;
-    top: 80px;
+    top: 120px;
     left: -100%;
     opacity: 1;
     transition: all 0.5s ease;
   }
 
   .nav-menu.active {
-    background: #10192A;
+    background-image: url(https://ze-robot.com/dl/no/northern-lights-digital-painting-by-aenami-1080p-768%C3%971024.jpg);
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
@@ -84,7 +87,7 @@
   }
 
   .nav-links:hover {
-    background-color: #10192A;
+    background-color: #93e593;
     border-radius: 0;
   }
 
@@ -106,7 +109,7 @@
   }
 
   .fa-times {
-    color: #fff;
+    color: rgb(247, 199, 199);
     font-size: 2rem;
   }
 
