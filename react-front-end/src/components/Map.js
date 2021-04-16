@@ -1,6 +1,17 @@
 import React from "react";
-import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
-import { SearchControl, OpenStreetMapProvider } from 'react-leaflet-geosearch'
+import {
+  MapContainer,
+  TileLayer,
+  GeoJSON,
+  LayersControl,
+  LayerGroup,
+  Circle,
+  Marker,
+  FeatureGroup,
+  Popup,
+  Rectangle,
+} from "react-leaflet";
+// import { SearchControl, OpenStreetMapProvider } from 'react-leaflet-geosearch'
 import "./App.css";
 import "./Geosearch.css";
 import { Icon } from "leaflet";
@@ -19,18 +30,15 @@ import Buildings from "./Buildings";
 //   iconSize: [25, 25],
 // });
 
-
 export const groceriesIcon = new Icon({
   iconUrl: "/groceries.png",
   iconSize: [25, 25],
 });
 
-
 function MainMap() {
   // const url = "https://data.sfgov.org/resource/ramy-di5m.json";
   // const { data, error } = useSwr(url, { fetcher });
   // const buildings = data && !error ? data.slice(0, 100) : [];
-
 
   const SFHoodData = features;
 
@@ -87,22 +95,69 @@ function MainMap() {
     };
   };
 
+  const center = [51.505, -0.09];
+  const rectangle = [
+    [51.49, -0.08],
+    [51.5, -0.06],
+  ];
 
   return (
     <MapContainer center={[37.75220204901914, -122.45808060394913]} zoom={12}>
-      <TileLayer
-        url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
-      <Buildings />
+      <LayersControl position="topright">
+        <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.BaseLayer name="OpenStreetMap.BlackAndWhite">
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.Overlay name="Marker with popup">
+          <Marker position={center}>
+            <Buildings />
+          </Marker>
+        </LayersControl.Overlay>
+        <LayersControl.Overlay checked name="Layer group with circles">
+          <LayerGroup>
+            <Circle
+              center={center}
+              pathOptions={{ fillColor: "blue" }}
+              radius={200}
+            />
+            <Circle
+              center={center}
+              pathOptions={{ fillColor: "red" }}
+              radius={100}
+              stroke={false}
+            />
+            <LayerGroup>
+              <Circle
+                center={[51.51, -0.08]}
+                pathOptions={{ color: "green", fillColor: "green" }}
+                radius={100}
+              />
+            </LayerGroup>
+          </LayerGroup>
+        </LayersControl.Overlay>
+        <LayersControl.Overlay name="Feature group">
+          <FeatureGroup pathOptions={{ color: "purple" }}>
+            <Popup>Popup in FeatureGroup</Popup>
+            <Circle center={[51.51, -0.06]} radius={200} />
+            <Rectangle bounds={rectangle} />
+          </FeatureGroup>
+        </LayersControl.Overlay>
 
-      <GeoJSON
-        data={SFHoodData}
-        style={mapStyle}
-        onEachFeature={onEachFeature}
-      />
+        <GeoJSON
+          data={SFHoodData}
+          style={mapStyle}
+          onEachFeature={onEachFeature}
+        />
 
-      {/* <GeoSearchControlElement
+        {/* <GeoSearchControlElement
           provider={prov}
           showMarker={true}
           showPopup={false}
@@ -114,9 +169,9 @@ function MainMap() {
           searchLabel={"Enter address, please"}
           keepResult={true}
       /> */}
+      </LayersControl>
     </MapContainer>
   );
 }
-
 
 export default MainMap;
