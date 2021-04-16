@@ -8,11 +8,10 @@ import Forecast from './components/Forecast/index.jsx';
 import Profile from './components/Profile/index.jsx';
 import Login from './components/Login/index.jsx';
 import Settings from './components/Settings/index.jsx';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar/Navbar'
 import './App.scss';
 import './components/Button.scss';
 import {BrowserRouter,Link,Route,Switch} from 'react-router-dom';
-
 
 function App() {
   //use token to set login state and add conditional to display login if token is falsey

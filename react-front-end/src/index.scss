@@ -27,13 +27,27 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 800px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  border: 1px solid #10192A;
   padding: 30px;
   border-radius: 5px;
+}
+
+.container-meetups {
+  display: flex;
+  justify-content:space-evenly;
+}
+
+.meetups {
+  display: flex;
+  flex-direction: column;
+}
+.meetups-hidden {
+  display: flex;
+  visibility: hidden;
 }
 
 .header {
@@ -78,7 +92,7 @@ body {
 }
 
 .event.reminder {
-  border-left: 5px solid green;
+  border-left: 5px solid #60AEBF;
 }
 
 .event h3 {
