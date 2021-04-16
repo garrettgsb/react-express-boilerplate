@@ -52,86 +52,36 @@ module.exports = (db) => {
       WHERE building_id = $1 AND user_id = $2
       `,
       [buildingId, userId]
-    )
-      .then(({ rows: building }) => {
-        if (building.length > 0) {
-          db.query(
-            `
+    ).then(({ rows: building }) => {
+      //query to delete favourite
+      if (building.length > 0) {
+        db.query(
+          `
             DELETE FROM favourites
             WHERE building_id = $1 AND user_id = $2
             `,
-            [buildingId, userId]
-          )
-            .then(() => res.send("Favourite Removed"))
-            .catch((err) => {
-              return err.message;
-            });
-        } else {
-          db.query(
-            `
+          [buildingId, userId]
+        )
+          .then(() => res.send("Deleted from favourites"))
+          .catch((err) => {
+            res.status(204).json({ error: err.message });
+            return;
+          });
+      } else {
+        //query to add a favourite
+        db.query(
+          `
             INSERT into favourites (user_id, building_id) VALUES ($1, $2)
             RETURNING *
             `,
-            [userId, buildingId]
-          )
-            .then((result) => res.send("Favourite Added"))
-            .catch((err) => {
-              res.status(500).json({ error: err.message });
-            });
-        }
-        return res.send(building);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+          [userId, buildingId]
+        )
+          .then((result) => res.send("Favourite Added"))
+          .catch((err) => {
+            res.status(500).json({ error: err.message });
+          });
+      }
+    });
   });
-
-  // router.delete("/favourite/:buildingId", (req, res) => {
-  //   const buildingId = req.params.buildingId;
-  //   const body = req.body;
-  //   console.log("body:", body);
-
-  //   db.query(
-  //     `
-  //     DELETE FROM favourites
-  //     WHERE building_id = $1 && user_id = $2
-  //     `,
-  //     [buildingId, userId]
-  //   )
-  //     .then(() => res.send("Deleted from favourites"))
-  //     .catch((err) => {
-  //       res.status(204).json({ error: err.message });
-  //     });
-  // });
-
-  // const likeBuilding = async (userId, buildingId) => {
-  //   db.query(
-  //     `
-  //     INSERT into favourites (user_id, building_id) VALUES ($1, $2)
-  //     RETURNING *
-  //     `,
-  //     [userId, buildingId]
-  //   )
-  //     .then((result) => true)
-  //     .catch((err) => {
-  //       res.status(500).json({ error: err.message });
-  //     });
-  // };
-
-  // const unLikeBuilding = (userId, buildingId) => {
-  //   db.query(
-  //     `
-  //     DELETE FROM favourites
-  //     WHERE building_id = $1 && user_id = $2
-  //     `,
-  //     [buildingId, userId]
-  //   )
-  //     .then(() => true)
-  //     .catch((err) => {
-  //       return err.message;
-  //       // res.status(204).json({ error: err.message });
-  //     });
-  // };
-
   return router;
 };

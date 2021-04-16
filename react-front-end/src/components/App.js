@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "./Nav";
 import Map from "./Map";
 import Home from "./Home";
-import Profile from "./Profile";
 import Buildings from "./Buildings";
 import Building from "./Building";
 import BuildingAmenities from "./BuildingAmenities";
@@ -20,12 +19,11 @@ export default function App() {
         <Nav />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/profile/:userId" component={Profile} />
           <Route path="/map" component={Map} />
           <Route path="/buildings/:buildingId" component={Building} />
           <Route path="/buildings" component={Buildings} />
           <Route path="/:id/building_amenities" component={BuildingAmenities} />
-          <Route path="/:id/favourites" component={Favourites} />
+          <Route path="/:userId/favourites" component={Favourites} />
           <Route path="/:id/favourites" component={CreateFav} />
         </Switch>
       </div>
