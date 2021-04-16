@@ -17,10 +17,6 @@ function SafetySend () {
     .catch(err => console.log(err))
   }
 
-  function selectMessage() {
-    console.warn('function called')
-  }
-
   return (
     <div className='safety-send' >
       <h2> Send Text Message </h2>
