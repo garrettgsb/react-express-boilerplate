@@ -44,7 +44,6 @@ function MainMap() {
 
   // const countyData = features
 
-  console.log(features);
   const onEachFeature = function (feature, layer) {
     if (feature.properties && feature.properties.name)
       layer.bindPopup(
@@ -55,9 +54,9 @@ function MainMap() {
           "<br>" +
           "<a href=" +
           feature.properties.link +
-          "<br>" +
-          'target="_blank">Area information</a>'
-      ); //How to add more content to the popup?!? Add component here?
+          " target=" +
+          "_blank>Area information</a>"
+      );
   };
 
   // const rating = [
@@ -98,6 +97,12 @@ function MainMap() {
   //   }
   // ]
 
+  // const Properties = layerGroup(<Buildings />);
+
+  // const OverlayMaps = {
+  //   Properties: Properties,
+  // };
+
   const mapStyle = (feature) => {
     return {
       fillColor: getColor(feature.properties.rating),
@@ -113,9 +118,9 @@ function MainMap() {
   ];
 
   return (
-    <MapContainer center={[37.75220204901914, -122.45808060394913]} zoom={12}>
+    <MapContainer center={[37.76401871, -122.45488821]} zoom={12.5}>
       <LayersControl position="topright">
-        <LayersControl.BaseLayer checked name="Areas">
+        <LayersControl.BaseLayer checked name="Areas Heatmap">
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
@@ -134,30 +139,11 @@ function MainMap() {
           />
         </LayersControl.BaseLayer>
         <LayersControl.Overlay name="Marker with popup">
-          <Marker position={center}>
-            <Buildings />
-          </Marker>
+          <Marker position={center}></Marker>
         </LayersControl.Overlay>
-        <LayersControl.Overlay checked name="Layer group with circles">
+        <LayersControl.Overlay name="Properties">
           <LayerGroup>
-            <Circle
-              center={center}
-              pathOptions={{ fillColor: "blue" }}
-              radius={200}
-            />
-            <Circle
-              center={center}
-              pathOptions={{ fillColor: "red" }}
-              radius={100}
-              stroke={false}
-            />
-            <LayerGroup>
-              <Circle
-                center={[51.51, -0.08]}
-                pathOptions={{ color: "green", fillColor: "green" }}
-                radius={100}
-              />
-            </LayerGroup>
+            <Buildings />
           </LayerGroup>
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Feature group">
