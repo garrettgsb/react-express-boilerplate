@@ -1,4 +1,5 @@
 const Express = require('express');
+const cors = require('cors')
 const App = Express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
@@ -10,6 +11,14 @@ const LineByLineReader = require('line-by-line')
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
+
+// cors configuration
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200 // For legacy browser support
+}
+
+App.use(cors(corsOptions));
 
 // Sample GET route
 App.get('/api/data', (req, res) => {
@@ -54,9 +63,13 @@ App.get('/api/data', (req, res) => {
           counter = 0
         }
         if (line.includes('UT') && !line.includes('UTC')) {
-          const arr = line.split(' ')
-          const filtArr = arr.filter(element => element.length >= 1)
-          // console.log('filtArr', filtArr)
+          let before = line.split(' ')
+          let after = before.reduce((r, v) => {
+            if (v.toString().match(/\(G\d+\)/)) r[r.length - 1] += ' ' + v;
+            else r.push(v);
+            return r;
+        }, []);
+          const filtArr = after.filter(element => element.length >= 1)
           const key = filtArr[0]
           timeArr = [
             '00:00:00Z', 
@@ -68,17 +81,15 @@ App.get('/api/data', (req, res) => {
             '18:00:00Z', 
             '21:00:00Z'
           ]
-          data.day1[key] = { time: timeArr[counter-3], kpi: filtArr[1]}
-          data.day2[key] = { time: timeArr[counter-3], kpi: filtArr[2]}
-          data.day3[key] = { time: timeArr[counter-3], kpi: filtArr[3]}
+          data.day1[timeArr[counter-3]] = {kpi: filtArr[1]}
+          data.day2[timeArr[counter-3]] = {kpi: filtArr[2]}
+          data.day3[timeArr[counter-3]] = {kpi: filtArr[3]}
         }
-        console.log('data: ', data)
       });
       
       lr.on('end', function () {
-        // console.log(data);
-        console.log('end');
-        res.send(data)
+        // need data to come back as json format
+        res.json(data)
       });
       
     });
@@ -90,6 +101,8 @@ App.get('/api/data', (req, res) => {
     request.end();
   }
   readKpiData();
+
+  // res.json({result: "this is returning back"});
 
 });
 
