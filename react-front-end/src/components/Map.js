@@ -11,7 +11,6 @@ import {
   Popup,
   Rectangle,
 } from "react-leaflet";
-// import { SearchControl, OpenStreetMapProvider } from 'react-leaflet-geosearch'
 import "./App.css";
 import "./Geosearch.css";
 import { Icon } from "leaflet";
@@ -21,28 +20,13 @@ import Buildings from "./Buildings";
 // import { features } from "./SSFZoning.json"
 // import { features } from "./bayareacounties.json"
 
-// const fetcher = (...args) => fetch(...args).then((response) => response.json());
-
-// const fetcher = (url) => axios.get(url).then((res) => res.datva);
-
-// export const icon = new Icon({
-//   iconUrl: "/building.png",
-//   iconSize: [25, 25],
-// });
-
-export const groceriesIcon = new Icon({
-  iconUrl: "/groceries.png",
-  iconSize: [25, 25],
-});
 
 function MainMap() {
-  // const url = "https://data.sfgov.org/resource/ramy-di5m.json";
-  // const { data, error } = useSwr(url, { fetcher });
-  // const buildings = data && !error ? data.slice(0, 100) : [];
 
-  const SFHoodData = features;
+  const neighbourhoodData = features;
 
   // const countyData = features
+
   const onEachFeature = function (feature, layer) {
     if (feature.properties && feature.properties.name)
       layer.bindPopup(
@@ -58,18 +42,8 @@ function MainMap() {
           "<br>",
         { autoClose: true, closeOnClick: true }
       );
-  };
+  };  
 
-  // const rating = [
-  //   {
-  //     area_name: "Lake Street",
-  //     average_area_rating: "4"
-  //   },
-  //   {
-  //     area_name: "Seacliff",
-  //     average_area_rating: "3"
-  //   }
-  // ]
 
   // r = rating
   const getColor = (r) => {
@@ -86,27 +60,11 @@ function MainMap() {
       : "gray";
   };
 
-  // Y u no work?
-  // const ratings = [
-  //   {
-  //   area_name: "Lake Street",
-  //   average_area_rating: "4"
-  //   },
-  //   {
-  //   area_name: "Seacliff",
-  //   average_area_rating: "3"
-  //   }
-  // ]
-
-  // const Properties = layerGroup(<Buildings />);
-
-  // const OverlayMaps = {
-  //   Properties: Properties,
-  // };
 
   const mapStyle = (feature) => {
     return {
       fillColor: getColor(feature.properties.rating),
+      fillOpacity: 0.5,
       weight: 0.5,
       color: "black",
     };
@@ -119,7 +77,8 @@ function MainMap() {
   ];
 
   return (
-    <MapContainer center={[37.76401871, -122.45488821]} zoom={12.5}>
+    <MapContainer center={[37.75220204901914, -122.45808060394913]} zoom={13}>
+      {/* Toggle base map */}
       <LayersControl position="topright">
         <LayersControl.BaseLayer checked name="Areas Heatmap">
           <TileLayer
@@ -127,26 +86,39 @@ function MainMap() {
             url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
           />
         </LayersControl.BaseLayer>
+
+        {/* Toggle base map */}
         <LayersControl.BaseLayer name="Black and White">
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
           />
         </LayersControl.BaseLayer>
+
+        {/* Toggle base map */}
         <LayersControl.BaseLayer name="Dark Mode">
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
           />
         </LayersControl.BaseLayer>
-        <LayersControl.Overlay name="Marker with popup">
-          <Marker position={center}></Marker>
+
+        {/* Toggle choropleth map */}
+        <LayersControl.Overlay checked name="Show Choropleth">
+        <GeoJSON
+          data={neighbourhoodData}
+          style={mapStyle}
+          onEachFeature={onEachFeature}
+        />
         </LayersControl.Overlay>
+        
+        {/* Toggle building markers */}
         <LayersControl.Overlay name="Properties">
           <LayerGroup>
             <Buildings />
           </LayerGroup>
         </LayersControl.Overlay>
+        
         <LayersControl.Overlay name="Feature group">
           <FeatureGroup pathOptions={{ color: "purple" }}>
             <Popup>Popup in FeatureGroup</Popup>
@@ -154,12 +126,6 @@ function MainMap() {
             <Rectangle bounds={rectangle} />
           </FeatureGroup>
         </LayersControl.Overlay>
-
-        <GeoJSON
-          data={SFHoodData}
-          style={mapStyle}
-          onEachFeature={onEachFeature}
-        />
 
         {/* <GeoSearchControlElement
           provider={prov}
@@ -178,4 +144,6 @@ function MainMap() {
   );
 }
 
+
 export default MainMap;
+
