@@ -43,7 +43,6 @@ function MainMap() {
   const SFHoodData = features;
 
   // const countyData = features
-
   const onEachFeature = function (feature, layer) {
     if (feature.properties && feature.properties.name)
       layer.bindPopup(
@@ -55,7 +54,9 @@ function MainMap() {
           "<a href=" +
           feature.properties.link +
           " target=" +
-          "_blank>Area information</a>"
+          "_blank>Area information</a>" +
+          "<br>",
+        { autoClose: true, closeOnClick: true }
       );
   };
 

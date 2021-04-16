@@ -22,7 +22,6 @@ const Favourites = () => {
 
   // Delete a favourite
   const deleteFavourite = (favouriteId) => {
-    console.log("watttttttup");
     axios.delete(`/api/users/1/favourites/${favouriteId}`).then(() => {
       axios.get(`/api/users/${userId}/favourites`).then((res) => {
         setFavourite(res.data);
