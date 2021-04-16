@@ -63,15 +63,15 @@ function MainMap() {
   // r = rating
   const getColor = (r) => {
     return r === "1"
-      ? "red"
+      ? "#e76f51"
       : r === "2"
-      ? "yellow"
+      ? "#f4a261"
       : r === "3"
-      ? "blue"
+      ? "#e9c46a"
       : r === "4"
-      ? "green"
+      ? "#2a9d8f"
       : r === "5"
-      ? "orange"
+      ? "#264653"
       : "gray";
   };
 
@@ -95,7 +95,7 @@ function MainMap() {
     };
   };
 
-  const center = [51.505, -0.09];
+  const center = [37.75220204901914, -122.45808060394913];
   const rectangle = [
     [51.49, -0.08],
     [51.5, -0.06],
@@ -104,16 +104,22 @@ function MainMap() {
   return (
     <MapContainer center={[37.75220204901914, -122.45808060394913]} zoom={12}>
       <LayersControl position="topright">
-        <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
+        <LayersControl.BaseLayer checked name="Areas">
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
           />
         </LayersControl.BaseLayer>
-        <LayersControl.BaseLayer name="OpenStreetMap.BlackAndWhite">
+        <LayersControl.BaseLayer name="Black and White">
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.BaseLayer name="Dark Mode">
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
           />
         </LayersControl.BaseLayer>
         <LayersControl.Overlay name="Marker with popup">
