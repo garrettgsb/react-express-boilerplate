@@ -1,11 +1,19 @@
 import React from 'react';
 import { useState, useMemo } from 'react';
+<<<<<<< HEAD
+=======
+// import moment from 'moment'
+>>>>>>> master
 
 import Header from './Header.jsx';
 import Events from './Events.jsx'
 import AddEvent from './AddEvent.jsx'
+<<<<<<< HEAD
 import Chatbox from './Chatbox.jsx'
 import ChatJoin from './ChatJoin.jsx'
+=======
+import SafetySend from './SafetySend'
+>>>>>>> master
 
 import '../Button.scss';
 import '../../App.scss';
@@ -93,16 +101,23 @@ export default function Meetups() {
                 <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
                 {showAddEvent && <AddEvent onAdd={addEvent}/>}
                 {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
+              <br />
               </div>
               <div>
                 <MeetupPanel />
               </div>
+<<<<<<< HEAD
               <div className='container'>
                 <Chatbox />
               </div>
 
 
 
+=======
+              <div>
+                <SafetySend />
+              </div>
+>>>>>>> master
             </div>
         </CheckedContext.Provider>
           </MeetupsContext.Provider>

@@ -1,4 +1,14 @@
 import React from 'react';
+import axios from 'axios';
+
+axios.get('http://localhost:8080/profile/2', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(data => console.log('data from client:', data))
+
 
 const ProfilePic = () => {
   return (

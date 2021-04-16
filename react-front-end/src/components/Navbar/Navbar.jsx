@@ -1,14 +1,17 @@
-import React, { useState, setState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Navbar.scss';
-import {BrowserRouter,Link,Route,Switch} from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import { authContext } from '../../AuthProvider'
 
 const Navbar = () => {
     const [clicked, setClicked] = useState(false)
 
-const handleClick = () => {
-    setClicked(!clicked)
-}
+    const { user } = useContext(authContext);
+    console.log('login', user.name)
+    const handleClick = () => {
+        setClicked(!clicked)
+    }
+
     return(
         <nav className="NavbarItems">
             <h1 className="navbar-logo">Aurora Junkies</h1>
@@ -20,7 +23,7 @@ const handleClick = () => {
                     <li><Link className='nav-links' to="/meetups">Meetups</Link></li>
                     <li><Link className='nav-links' to="/profile">Profile</Link></li>
                     <li><Link className='nav-links' to="/settings">Settings</Link></li>
-                    <li><Link className='nav-links' to="/login">Login</Link></li>
+                    <li><Link className='nav-links' to="/login">{user.name ? 'Logout' : 'Login'}</Link></li>
                 </ul>
         </nav>
     );

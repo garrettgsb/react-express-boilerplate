@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const Express = require('express');
 const https = require('https').createServer(App)
 const App = Express();
@@ -13,18 +14,77 @@ const path = require('path')
 //   }
 // });
 const LineByLineReader = require('line-by-line')
+=======
+const express = require('express');
+const dotenv = require('dotenv').config();
+const cors = require('cors');
+const app = express();
+const BodyParser = require('body-parser');
+const PORT = 8080;
+const http = require('https');
+const LineByLineReader = require('line-by-line');
+const { getMaxListeners } = require('process');
+const db = require('./db');
+const { user } = require('./config');
+require('dotenv').config();
+
+const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+
+
+>>>>>>> master
 
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
+<<<<<<< HEAD
 App.use(require('cors')())
 App.use(router)
 
 //
 // Sample GET route
 App.get('/api/data', (req, res) => {
+=======
+App.use(cors());
+
+//get user from db for login
+App.post('/login', (req, res) => {
+  const credentials = JSON.parse(req.body.credentials);
+	const email = credentials.email;
+	const password = credentials.password;
+	if (email && password) {
+    const query = `SELECT * FROM photographers WHERE email = $1 AND password = $2`
+    db.query(query, [email, password]).then((data) => {
+      res.send(data.rows[0])
+    }).catch((err) => {
+    });
+	}
+});
+
+//get user for profile page
+App.get('/profile/:id', (req,res) => {
+  console.log('req.params.id: ', req.params.id)
+  const query = `SELECT * FROM photographers WHERE id = $1`
+  console.log(req.body);
+    db.query(query, [req.params.id]).then((data) => {
+      res.send(data.rows[0])
+      console.log(data.rows[0])
+    }).catch((err) => {
+  });
+})
+
+
+// Cors configuration: blocks browser from restricting data
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200 // For legacy browser support
+}
+app.use(cors(corsOptions));
+
+// GET route for Aurora Data
+app.get('/api/data', (req, res) => {
+>>>>>>> master
   
   const options = {
     host: 'services.swpc.noaa.gov',
@@ -66,9 +126,13 @@ App.get('/api/data', (req, res) => {
           counter = 0
         }
         if (line.includes('UT') && !line.includes('UTC')) {
-          const arr = line.split(' ')
-          const filtArr = arr.filter(element => element.length >= 1)
-          // console.log('filtArr', filtArr)
+          let before = line.split(' ')
+          let after = before.reduce((r, v) => {
+            if (v.toString().match(/\(G\d+\)/)) r[r.length - 1] += ' ' + v;
+            else r.push(v);
+            return r;
+        }, []);
+          const filtArr = after.filter(element => element.length >= 1)
           const key = filtArr[0]
           timeArr = [
             '00:00:00Z', 
@@ -80,17 +144,16 @@ App.get('/api/data', (req, res) => {
             '18:00:00Z', 
             '21:00:00Z'
           ]
-          data.day1[key] = { time: timeArr[counter-3], kpi: filtArr[1]}
-          data.day2[key] = { time: timeArr[counter-3], kpi: filtArr[2]}
-          data.day3[key] = { time: timeArr[counter-3], kpi: filtArr[3]}
+          // Populate data object with scraped data
+          data.day1[timeArr[counter-3]] = {kpi: filtArr[1]}
+          data.day2[timeArr[counter-3]] = {kpi: filtArr[2]}
+          data.day3[timeArr[counter-3]] = {kpi: filtArr[3]}
         }
-        console.log('data: ', data)
       });
       
       lr.on('end', function () {
-        // console.log(data);
-        console.log('end');
-        res.send(data)
+        // need data to come back as json format
+        res.json(data)
       });
       
     });
@@ -102,9 +165,9 @@ App.get('/api/data', (req, res) => {
     request.end();
   }
   readKpiData();
-
 });
 
+<<<<<<< HEAD
 // set chat static folder
 // App.use(Express.static(path.join(__dirname, '../react-front-end/public/src/components/Meetups/')));
 
@@ -119,6 +182,23 @@ App.get('/api/data', (req, res) => {
 
 // Main Port Listener
 App.listen(PORT, () => {
+=======
+// Route to send texts via twilio. 
+// Will try to see if possible to reconfigure this to front end react router dom
+app.get('/text', (req, res) => {
+  // GET variables passed via query string
+  const { recipient, textmessage } = req.query
+  
+  // Send text
+  client.messages.create({
+    body: textmessage,
+    to: `+1${recipient}`,
+    from: '+15873271815'
+  }).then((message) => console.log(message.body));
+})
+
+app.listen(PORT, () => {
+>>>>>>> master
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
