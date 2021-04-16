@@ -1,16 +1,8 @@
-import React from "react";
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
+import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./App.css";
-import { Icon, L } from "leaflet";
-// import axios from "axios";
-
-// export const cafeIcon = new Icon({
-//   iconUrl: "/cafe.png",
-//   iconSize: [30, 30],
-// });
-
-
-
+import { Icon} from "leaflet";
+import axios from "axios";
 
 
 function AmenMap() {
@@ -110,7 +102,7 @@ function AmenMap() {
       id: 11,
       area_id: 1,
       name: "Embarcadero Ferry Plaza",
-      type: "test ",
+      type: "Cafe ",
       image_url: "url",
       latitude: 37.79315824,
       longitude: -122.3915536
@@ -196,6 +188,51 @@ function AmenMap() {
       latitude: 37.78035199,
       longitude: -122.432282
       },
+      {
+      id: 21,
+      area_id: 1,
+      name: "CCSF Ocean Campus",
+      type: "Cafe ",
+      image_url: "url",
+      latitude: 37.72382699,
+      longitude: -122.449584
+      },
+      {
+      id: 22,
+      area_id: 1,
+      name: "Laguna Honda Hospital",
+      type: "School",
+      image_url: "url",
+      latitude: 37.748793,
+      longitude: -122.455811
+      },
+      {
+      id: 23,
+      area_id: 1,
+      name: "Mission St. sidewalk",
+      type: "Cafe ",
+      image_url: "url",
+      latitude: 37.74421899,
+      longitude: -122.42053
+      },
+      {
+      id: 24,
+      area_id: 1,
+      name: "Valencia Gardens Apartments",
+      type: "School",
+      image_url: "url",
+      latitude: 37.76665001,
+      longitude: -122.42229
+      },
+      {
+      id: 25,
+      area_id: 1,
+      name: "Gene Friend Recreation Center",
+      type: "Park",
+      image_url: "url",
+      latitude: 37.778779,
+      longitude: -122.406191
+      },
       
   ]
 
@@ -204,16 +241,22 @@ function AmenMap() {
     iconSize: [30, 30],
   });
   
-  // this works. 
-  const getIcon = (type) => {
-    return type === "Cafe" ? "/cafe.png" : "/building.png"
-  }
 
-  const amenIcon = new Icon({
-    iconUrl: getIcon(amenities.type),
-    iconSize: [30, 30]
-  })
-  // ***** REMEMBER TO CHANGE BUILDING LAT LONG IN DB ***** //
+  const getIcon = (amenity) => {
+    const image = 
+    amenity.type === "School" ? "/bank.png" : 
+    amenity.type === "Groceries" ? "/groceries.png" :
+    amenity.type === "Park" ? "/park.png" :
+    amenity.type === "Restaurant" ? "/restaurant.png" :
+    "/cafe.png";
+
+    return new Icon({
+      iconUrl: image,
+      iconSize: [20, 20]
+    })
+  } 
+
+
   const building = [
     {
       id: 1,
@@ -250,7 +293,7 @@ function AmenMap() {
         <Marker
           key={amenity.id}
           position={[amenity.latitude, amenity.longitude]}
-          icon={amenIcon}
+          icon={getIcon(amenity)}
         >
           <Popup>
             <div>

@@ -3,6 +3,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 // import FavoriteIcon from "@material-ui/icons/Favorite";
 import Favorite from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
+import Button from '@material-ui/core/Button';
 
 //component to render user favourites
 export default function FavouriteButton() {
@@ -11,28 +12,30 @@ export default function FavouriteButton() {
   return (
     <div className="favourite-button">
       {fav && (
-        <IconButton
+        <Button
           onClick={() => {
             setFav(!fav);
           }}
           aria-label="delete"
           color="primary"
+          variant="outlined"
         >
           <FavoriteBorderIcon></FavoriteBorderIcon>
-          <h4> Favourite this property! </h4>
-        </IconButton>
+          Favourite this property!
+        </Button>
       )}
       {!fav && (
-        <IconButton
+        <Button
           onClick={() => {
             setFav(!fav);
           }}
           aria-label="delete"
           color="primary"
+          variant="outlined"
         >
           <Favorite></Favorite>
-          <h4> Remove from favourites </h4>
-        </IconButton>
+          Remove from favourite
+        </Button>
       )}
     </div>
   );

@@ -4,6 +4,7 @@ import axios from "axios";
 import ReviewsList from "./ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
 import FavouriteButton from "./Favourites/FavouriteButton";
+import AmenMap from "./AmenMap";
 
 //component to render a building
 const Building = () => {
@@ -33,7 +34,7 @@ const Building = () => {
             <p>⭐ ⭐ ⭐ ⭐ ⭐ </p>
             <p>{property.address}</p>
             <img
-              className="building_amenities-image"
+              className="building_header-image"
               src={property.image_url}
               alt={property.name}
             />
@@ -42,12 +43,12 @@ const Building = () => {
       </div>
       <div className="building-details">
         <div className="review-list">
-          <FavouriteButton />
           <ReviewsList />
           <button onClick={handleClick}>Go to the Map page</button>
         </div>
         <div className="amenities-and-map">
           <BuildingAmenities />
+          <AmenMap />
         </div>
       </div>
     </div>
