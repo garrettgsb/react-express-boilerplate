@@ -15,6 +15,20 @@ import {BrowserRouter,Route,Switch} from 'react-router-dom';
 
 
 function App() {
+  //use token to set login state and add conditional to display login if token is falsey
+  // const [token, setToken] = useState();
+
+  // if(!token) {
+  //   return(
+  //     <BrowserRouter>
+  //       <>
+  //         <Navbar />
+  //         <Login setToken={setToken} />
+  //       </>
+  //     </BrowserRouter>
+  //   )
+  // }
+
 
   // We can use this because we even wrapped <App> in our Provider (in index.js)
   const { auth } = useContext(authContext);
