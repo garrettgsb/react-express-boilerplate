@@ -2,8 +2,6 @@ import React, { useContext } from 'react'
 import { CheckedContext }from './CheckedContext.jsx'
 import { MeetupsContext } from './MeetupsContext.jsx'
 import { FaTimes } from 'react-icons/fa'
-import { MeetupsContext } from './MeetupsContext.jsx'
-import { FaTimes } from 'react-icons/fa'
 
 const Event = ({ event, onDelete }) => {
   

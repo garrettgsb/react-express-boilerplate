@@ -1,8 +1,17 @@
 const Express = require('express');
+const https = require('https').createServer(App)
 const App = Express();
-const BodyParser = require('body-parser');
+const BodyParser = require('body-parser')
 const PORT = 8080;
-const http = require('https');
+const path = require('path')
+// // const socket = io.connect('http://example.com:3080');
+// const io = require("socket.io")(https, {
+//   cors: {
+//       origin: "http://localhost:3000",
+//       methods: ["GET", "POST"],
+//       credentials: true
+//   }
+// });
 const LineByLineReader = require('line-by-line')
 
 
@@ -10,7 +19,10 @@ const LineByLineReader = require('line-by-line')
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
+App.use(require('cors')())
+App.use(router)
 
+//
 // Sample GET route
 App.get('/api/data', (req, res) => {
   
@@ -24,7 +36,7 @@ App.get('/api/data', (req, res) => {
   
   const readKpiData = () => {
     
-    const request = http.request(options, (response) => {
+    const request = https.request(options, (response) => {
       response.setEncoding('utf8');
       
       lr = new LineByLineReader(response);
@@ -93,6 +105,19 @@ App.get('/api/data', (req, res) => {
 
 });
 
+// set chat static folder
+// App.use(Express.static(path.join(__dirname, '../react-front-end/public/src/components/Meetups/')));
+
+// const botName = 'Aurora Bot';
+
+// io.on('connection', socket => {
+//   socket.emit('your id', socket.id);
+//   socket.on('message', body => {
+//     io.emit('message', body)
+//   })
+// });
+
+// Main Port Listener
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);

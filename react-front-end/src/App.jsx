@@ -38,8 +38,8 @@ function App() {
   // }
 
     return (
-      <div className="app">
         <BrowserRouter>
+      <div className="app">
           <Navbar />
             <Switch>
               <Route exact path="/" component={Forecast}/>
@@ -48,8 +48,8 @@ function App() {
               <Route exact path="/settings" component={Settings}/>
               <Route exact path="/login" component={Login}/>
             </Switch>
-        </BrowserRouter>
       </div>
+        </BrowserRouter>
     );
 }
 

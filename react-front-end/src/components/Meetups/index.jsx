@@ -4,6 +4,8 @@ import { useState, useMemo } from 'react';
 import Header from './Header.jsx';
 import Events from './Events.jsx'
 import AddEvent from './AddEvent.jsx'
+import Chatbox from './Chatbox.jsx'
+import ChatJoin from './ChatJoin.jsx'
 
 import '../Button.scss';
 import '../../App.scss';
@@ -11,12 +13,13 @@ import '../../App.scss';
 import { MeetupsContext } from './MeetupsContext.jsx';
 import { CheckedContext } from './CheckedContext.jsx'
 import MeetupPanel from './MeetupPanel.jsx';
+
 // import axios from 'axios';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export default function Meetups() {
   const [meetup, setMeetup] = useState('');
-  const [ showAddEvent, setShowAddEvent ] = useState(false)
+  const [showAddEvent, setShowAddEvent] = useState(false)
   const [checked, setChecked] = useState(false);
   const [events, setEvents] = useState([
     {
@@ -94,6 +97,12 @@ export default function Meetups() {
               <div>
                 <MeetupPanel />
               </div>
+              <div className='container'>
+                <Chatbox />
+              </div>
+
+
+
             </div>
         </CheckedContext.Provider>
           </MeetupsContext.Provider>
