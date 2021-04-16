@@ -5,4 +5,4 @@ const RegisterUser = () => {
     <h1>This is where we login :)</h1>
   )
 }
-export default RegisterUser; 
+export default RegisterUser;
