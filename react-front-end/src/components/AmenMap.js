@@ -4,62 +4,30 @@ import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./App.css";
 import { Icon } from "leaflet";
-
+import Amenities from "./Amenities";
 
 
 function AmenMap() {
-  const [amenities, setAmenities] = useState([]);
-  // const [building, setBuilding] = useState([]);
+  const [building, setBuilding] = useState([]);
 
-  //   const { buildingId } = useParams();
-
-  //   useEffect(() => {
-  //     axios.get(`/api/buildings/${buildingId}`).then((res) => {
-  //       setBuilding(res.data[0]);
-  //     });
-  //   }, [buildingId]);
+    const { buildingId } = useParams();
 
     useEffect(() => {
-      axios.get("/api/amenities").then((res) => {
-        setAmenities(res.data)
+      axios.get(`/api/buildings/${buildingId}`).then((res) => {
+        console.log('res', res)
+        setBuilding(res.data);
       });
-    }, [])
-
+    }, [buildingId]);
 
   const buildingIcon = new Icon({
     iconUrl: "/building.png",
     iconSize: [30, 30],
   });
 
-  console.log('YO', building);
-  
-
-  const getIcon = (amenity) => {
-    const image = 
-    amenity.type === "School" ? "/bank.png" : 
-    amenity.type === "Groceries" ? "/groceries.png" :
-    amenity.type === "Park" ? "/park.png" :
-    amenity.type === "Restaurant" ? "/restaurant.png" :
-    "/cafe.png";
-
-    return new Icon({
-      iconUrl: image,
-      iconSize: [20, 20]
-    })
-  } 
-
-
-  const building = [
-    {
-      id: 1,
-      area_id: 1,
-      name: "Grace Court",
-      address: "1601 Comox St",
-      image_url: "https://unsplash.com/photos/RFDP7_80v5A",
-      latitude: 37.7793,
-      longitude: -122.4192,
-    },
-  ];
+  // Allows building useEffect to load
+  if(building.length < 1) {
+    return "";
+  }
 
   return (
     <MapContainer
@@ -72,7 +40,7 @@ function AmenMap() {
       />
 
       <Marker
-        key={building.id}
+        key={building[0].id}
         position={[building[0].latitude, building[0].longitude]}
         icon={buildingIcon}
       >
@@ -82,20 +50,10 @@ function AmenMap() {
           </div>
         </Popup>
       </Marker>
+      
+      {/* Amenity markers */}
+      <Amenities />
 
-      {amenities.map((amenity) => (
-        <Marker
-          key={amenity.id}
-          position={[amenity.latitude, amenity.longitude]}
-          icon={getIcon(amenity)}
-        >
-          <Popup>
-            <div>
-              <h2>{amenity.name}</h2>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
     </MapContainer>
   );
 }

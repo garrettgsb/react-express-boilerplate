@@ -14,7 +14,6 @@ const Amenities = () => {
 
   // Selects icon image
   const getIcon = (amenity) => {
-  
     const image = 
     amenity.type === "School" ? "/bank.png" : 
     amenity.type === "Groceries" ? "/groceries.png" :
@@ -28,23 +27,23 @@ const Amenities = () => {
     })
   }
 
-    return (
-      <div className="Amenities">
-        {amenities.map((amenity) => (
-        <Marker
-          key={amenity.id}
-          position={[amenity.latitude, amenity.longitude]}
-          icon={getIcon(amenity)}
-        >
-          <Popup>
-            <div>
-              <h2>{amenity.name}</h2>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
-      </div>
-    )
+  return (
+    <div className="Amenities">
+      {amenities.map((amenity) => (
+      <Marker
+        key={amenity.id}
+        position={[amenity.latitude, amenity.longitude]}
+        icon={getIcon(amenity)}
+      >
+        <Popup>
+          <div>
+            <h2>{amenity.name}</h2>
+          </div>
+        </Popup>
+      </Marker>
+    ))}
+    </div>
+  )
 }
 
 export default Amenities;
