@@ -37,7 +37,6 @@
   }
 }
 
-
 nav {
   display: flex;
   justify-content: space-around;
@@ -80,15 +79,13 @@ nav {
   justify-content: center;
 } */
 
-
-.profile-container {
+.favourites-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-.amenities-map { 
+.amenities-map {
   width: 500px;
   height: 100px;
 }
-

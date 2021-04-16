@@ -17,7 +17,7 @@ const Building = () => {
   useEffect(() => {
     axios.get(`/api/buildings/${buildingId}`)
     .then((res) => {
-      setBuilding(res.data);
+      setBuilding(res.data[0]);
     });
   }, [buildingId]);
 
@@ -28,18 +28,17 @@ const Building = () => {
   return (
     <div className="building-container">
       <div className="building-header">
-        {building.map((property) => (
-          <div key={property.id}>
-            <h1>{property.name}</h1>
-            <p>⭐ ⭐ ⭐ ⭐ ⭐ </p>
-            <p>{property.address}</p>
-            <img
-              className="building_header-image"
-              src={property.image_url}
-              alt={property.name}
-            />
-          </div>
-        ))}
+        <div key={building.id}>
+          <h1>{building.name}</h1>
+          <h3>{building.neighbourhood} Neighbourhood</h3>
+          <p>{building.address}</p>
+          <img
+            className="building_amenities-image"
+            src={building.image_url}
+            alt={building.name}
+          />
+          <FavouriteButton buildingId={building.id} />
+        </div>
       </div>
       <div className="building-details">
         <div className="review-list">

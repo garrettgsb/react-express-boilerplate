@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function ReviewsList(props) {
   const [review, setReview] = useState([])
   const [openPopup, setOpenPopup] = useState(false)
@@ -27,19 +26,15 @@ export default function ReviewsList(props) {
   const classes = useStyles();
  
   useEffect(() => {
-    axios.get('/api/reviews')
-    .then(res => {
-      console.log(res.data)
-     setReview(res.data)
-    })
-  }, [])
+    axios.get("/api/reviews").then((res) => {
+      setReview(res.data);
+    });
+  }, []);
 
   const handleRemove = (id, e) => {
-    axios.delete(`/api/reviews/${id}`)
-    .then(res => {
-      console.log(res)
-      console.log(res.data)
-
+    axios.delete(`/api/reviews/${id}`).then((res) => {
+      console.log(res);
+      console.log(res.data);
       setTimeout(() => {
         const newReview = review.filter(item => item.id !== id);
         setReview(newReview);
@@ -116,5 +111,5 @@ export default function ReviewsList(props) {
           </Card>
         ).reverse()}
     </div>
-  )
+  );
 }

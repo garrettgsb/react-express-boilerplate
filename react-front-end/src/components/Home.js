@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from "react";
 
 
 export default function About() {
@@ -8,5 +7,5 @@ export default function About() {
     <div className="About">
       <h1>This is the Homepage</h1>
     </div>
-  )
+  );
 }

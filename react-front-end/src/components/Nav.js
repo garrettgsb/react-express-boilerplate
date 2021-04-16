@@ -16,7 +16,7 @@ export default function Nav() {
         <Link style={navStyle} to="/map">
           <li>Map</li>
         </Link>
-        <Link style={navStyle} to="/profile/:userId">
+        <Link style={navStyle} to="/:userId/favourites">
           <li>Favourites</li>
         </Link>
       </ul>
