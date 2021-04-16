@@ -15,7 +15,8 @@ const Building = () => {
   const history = useHistory();
 
   useEffect(() => {
-    axios.get(`/api/buildings/${buildingId}`).then((res) => {
+    axios.get(`/api/buildings/${buildingId}`)
+    .then((res) => {
       setBuilding(res.data[0]);
     });
   }, [buildingId]);
@@ -44,7 +45,7 @@ const Building = () => {
           <ReviewsList />
           <button onClick={handleClick}>Go to the Map page</button>
         </div>
-        <div className="amenities-map">
+        <div className="amenities-and-map">
           <BuildingAmenities />
           <AmenMap />
         </div>

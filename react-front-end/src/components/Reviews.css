@@ -1,0 +1,39 @@
+.building-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.building-details {
+  display: flex;
+  width: 100%;
+}
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 24px);
+  margin: 12px;
+}
+
+.amenities-and-map {
+  width: calc(50% - 24px);
+  margin: 12px;
+}
+
+.review-item {
+  position: relative;
+  margin: 24px;
+  text-align: left;
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.1);
+}
+
+.review-item-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-item-bottom {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import Favorite from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
+import Button from '@material-ui/core/Button';
 import axios from "axios";
+
 
 //component to render user favourites
 export default function FavouriteButton(props) {
@@ -23,28 +25,30 @@ export default function FavouriteButton(props) {
   return (
     <div className="favourite-button">
       {!favourite && (
-        <IconButton
+        <Button
           onClick={() => {
             handleFav(props.buildingId);
           }}
           aria-label="delete"
           color="primary"
+          variant="outlined"
         >
           <FavoriteBorderIcon></FavoriteBorderIcon>
-          <h4> Favourite this property! </h4>
-        </IconButton>
+          Favourite this property!
+        </Button>
       )}
       {favourite && (
-        <IconButton
+        <Button
           onClick={() => {
             handleFav(props.buildingId);
           }}
           aria-label="delete"
           color="primary"
+          variant="outlined"
         >
           <Favorite></Favorite>
-          <h4> Remove from favourites </h4>
-        </IconButton>
+          Remove from favourite
+        </Button>
       )}
     </div>
   );
