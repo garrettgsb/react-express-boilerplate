@@ -44,9 +44,20 @@ function MainMap() {
 
   // const countyData = features
 
+  console.log(features);
   const onEachFeature = function (feature, layer) {
     if (feature.properties && feature.properties.name)
-      layer.bindPopup(feature.properties.name); //How to add more content to the popup?!? Add component here?
+      layer.bindPopup(
+        feature.properties.name +
+          "<br>" +
+          "Area Rating: " +
+          feature.properties.rating +
+          "<br>" +
+          "<a href=" +
+          feature.properties.link +
+          "<br>" +
+          'target="_blank">Area information</a>'
+      ); //How to add more content to the popup?!? Add component here?
   };
 
   // const rating = [
