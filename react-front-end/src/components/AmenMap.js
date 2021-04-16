@@ -9,7 +9,6 @@ import { Icon } from "leaflet";
 //   iconSize: [30, 30],
 // });
 
-
 function AmenMap() {
   const amenities = [
     {
@@ -190,7 +189,6 @@ function AmenMap() {
       type: "Groceries",
       image_url: "url",
       latitude: 37.78035199,
-
       longitude: -122.432282
       },
       {
@@ -246,7 +244,6 @@ function AmenMap() {
     iconUrl: "/building.png",
     iconSize: [30, 30],
   });
-
   
 
   const getIcon = (amenity) => {
@@ -262,7 +259,6 @@ function AmenMap() {
       iconSize: [20, 20]
     })
   } 
-
 
 
   const building = [
