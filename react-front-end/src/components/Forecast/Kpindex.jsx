@@ -24,8 +24,8 @@ const Kpindex = () => {
       <table className='table'>
         <thead>
           <tr>
-            <th> Time (UTC) </th>
-            <th> Time (MST) </th>
+            <th> UTC Time </th>
+            <th> MST Time (UTC-6hrs) </th>
             <th> {aurora.day1.date} </th>
             <th> {aurora.day2.date} </th>
             <th> {aurora.day3.date} </th>

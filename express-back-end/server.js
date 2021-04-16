@@ -63,8 +63,13 @@ App.get('/api/data', (req, res) => {
           counter = 0
         }
         if (line.includes('UT') && !line.includes('UTC')) {
-          const arr = line.split(' ')
-          const filtArr = arr.filter(element => element.length >= 1)
+          let before = line.split(' ')
+          let after = before.reduce((r, v) => {
+            if (v.toString().match(/\(G\d+\)/)) r[r.length - 1] += ' ' + v;
+            else r.push(v);
+            return r;
+        }, []);
+          const filtArr = after.filter(element => element.length >= 1)
           const key = filtArr[0]
           timeArr = [
             '00:00:00Z', 
@@ -76,19 +81,13 @@ App.get('/api/data', (req, res) => {
             '18:00:00Z', 
             '21:00:00Z'
           ]
-          // data.day1[key] = { time: timeArr[counter-3], kpi: filtArr[1]}
-          // data.day2[key] = { time: timeArr[counter-3], kpi: filtArr[2]}
-          // data.day3[key] = { time: timeArr[counter-3], kpi: filtArr[3]}
           data.day1[timeArr[counter-3]] = {kpi: filtArr[1]}
           data.day2[timeArr[counter-3]] = {kpi: filtArr[2]}
           data.day3[timeArr[counter-3]] = {kpi: filtArr[3]}
         }
-        console.log('data: ', data)
       });
       
       lr.on('end', function () {
-        // console.log(data);
-        console.log('end');
         // need data to come back as json format
         res.json(data)
       });
