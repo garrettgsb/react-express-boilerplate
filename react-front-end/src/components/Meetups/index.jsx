@@ -5,6 +5,7 @@ import { useState, useMemo } from 'react';
 import Header from './Header.jsx';
 import Events from './Events.jsx'
 import AddEvent from './AddEvent.jsx'
+import SafetySend from './SafetySend'
 
 import '../Button.scss';
 import '../../App.scss';
@@ -91,9 +92,13 @@ export default function Meetups() {
                 <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
                 {showAddEvent && <AddEvent onAdd={addEvent}/>}
                 {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
+              <br />
               </div>
               <div>
                 <MeetupPanel />
+              </div>
+              <div>
+                <SafetySend />
               </div>
             </div>
         </CheckedContext.Provider>
