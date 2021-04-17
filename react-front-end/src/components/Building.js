@@ -28,6 +28,12 @@ const Building = () => {
     history.push("/map");
   };
 
+  const green_rating = 52;
+  const red_rating = 40;
+
+  const getColour = (r) => {
+    return r > 50 ? "green" : "red"
+  }
   // useEffect(() => {
   //   Promise.all([
   //     axios.get("/api/days"),
@@ -42,6 +48,7 @@ const Building = () => {
   //     }));
   //   });
   // }, []);
+  
 
   return (
     <div className="building-container">
@@ -61,16 +68,29 @@ const Building = () => {
       <div className="building-details">
         <div className="percentage-circles">
         <div className="percentage-circle" style={{width: 80, height: 80}}>
+          <h3>Landlord Approval</h3>
             <CircularProgressbar
-              value={78}
-              text={`${78}%`}
+              value={green_rating}
+              text={`${green_rating}%`}
               strokeWidth={10}
               styles = {buildStyles({
-                textColor: "green",
-                pathColor: "green" 
+                textColor: getColour(green_rating),
+                pathColor: getColour(green_rating)
               }
               )}
             />
+          <h3>Recommend to Friend</h3>
+            <CircularProgressbar
+              value={red_rating}
+              text={`${red_rating}%`}
+              strokeWidth={10}
+              styles = {buildStyles({
+                textColor: getColour(red_rating),
+                pathColor: getColour(red_rating)
+              }
+              )}
+            />
+            
           </div>
         </div>
         <div className="review-list">
