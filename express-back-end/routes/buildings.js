@@ -14,7 +14,7 @@ module.exports = (db) => {
       SELECT *
       FROM buildings
       WHERE area_id = $1
-      LIMIT 100
+      LIMIT 1000
       `,
       [areaID]
     )
@@ -41,6 +41,25 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  // router.get("/rating", (req, res) => {
+  //   const buildingRating = 5;
+
+  //   db.query(
+  //     `
+  //     SELECT *
+  //     FROM buildings
+  //     JOIN areas ON area_id = areas.id
+  //     WHERE building_rating = $1
+  //     LIMIT 100
+  //     `,
+  //     [buildingRating]
+  //   )
+  //     .then(({ rows: buildings }) => res.json(buildings))
+  //     .catch((err) => {
+  //       res.status(500).json({ error: err.message });
+  //     });
+  // });
 
   //add or delete a favourite
   router.post("/favourite/:buildingId", (req, res) => {

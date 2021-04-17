@@ -15,7 +15,7 @@ const Buildings = () => {
 
   const icon = new Icon({
     iconUrl: "/building.png",
-    iconSize: [25, 25],
+    iconSize: [20, 20],
   });
 
   useEffect(() => {
