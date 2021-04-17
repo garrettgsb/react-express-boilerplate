@@ -6,23 +6,17 @@ import {
   LayersControl,
   LayerGroup,
   Circle,
-  Marker,
   FeatureGroup,
   Popup,
-  Rectangle,
 } from "react-leaflet";
 import "./App.css";
 import "./Geosearch.css";
-import { Icon } from "leaflet";
 
 import { features } from "../SFNeighborhoods-copy.json";
 import Buildings from "./Buildings";
-// import { features } from "./SSFZoning.json"
-// import { features } from "./bayareacounties.json"
-
+import MapSearch from "./MapSearch";
 
 function MainMap() {
-
   const neighbourhoodData = features;
 
   // const countyData = features
@@ -42,8 +36,7 @@ function MainMap() {
           "<br>",
         { autoClose: true, closeOnClick: true }
       );
-  };  
-
+  };
 
   // r = rating
   const getColor = (r) => {
@@ -60,7 +53,6 @@ function MainMap() {
       : "gray";
   };
 
-
   const mapStyle = (feature) => {
     return {
       fillColor: getColor(feature.properties.rating),
@@ -69,12 +61,6 @@ function MainMap() {
       color: "black",
     };
   };
-
-  const center = [37.75220204901914, -122.45808060394913];
-  const rectangle = [
-    [51.49, -0.08],
-    [51.5, -0.06],
-  ];
 
   return (
     <MapContainer center={[37.75220204901914, -122.45808060394913]} zoom={13}>
@@ -105,25 +91,24 @@ function MainMap() {
 
         {/* Toggle choropleth map */}
         <LayersControl.Overlay checked name="Show Choropleth">
-        <GeoJSON
-          data={neighbourhoodData}
-          style={mapStyle}
-          onEachFeature={onEachFeature}
-        />
+          <GeoJSON
+            data={neighbourhoodData}
+            style={mapStyle}
+            onEachFeature={onEachFeature}
+          />
         </LayersControl.Overlay>
-        
+
         {/* Toggle building markers */}
         <LayersControl.Overlay name="Properties">
           <LayerGroup>
             <Buildings />
           </LayerGroup>
         </LayersControl.Overlay>
-        
+
         <LayersControl.Overlay name="Feature group">
           <FeatureGroup pathOptions={{ color: "purple" }}>
             <Popup>Popup in FeatureGroup</Popup>
             <Circle center={[51.51, -0.06]} radius={200} />
-            <Rectangle bounds={rectangle} />
           </FeatureGroup>
         </LayersControl.Overlay>
 
@@ -140,10 +125,9 @@ function MainMap() {
           keepResult={true}
       /> */}
       </LayersControl>
+      <MapSearch />
     </MapContainer>
   );
 }
 
-
 export default MainMap;
-

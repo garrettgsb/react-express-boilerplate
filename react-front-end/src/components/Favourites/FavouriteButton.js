@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import Favorite from "@material-ui/icons/Favorite";
-import IconButton from "@material-ui/core/IconButton";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 import axios from "axios";
-
 
 //component to render user favourites
 export default function FavouriteButton(props) {

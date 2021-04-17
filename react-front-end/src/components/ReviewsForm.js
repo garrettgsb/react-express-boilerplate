@@ -42,33 +42,33 @@ const initialFormData = {
 };
 
 export default function ReviewsForm(props) {
-  const { recordForEdit } = props
-  
+  // const { recordForEdit } = props
+
   const [formData, updateFormData] = useState(initialFormData);
   const handleChange = (e) => {
     updateFormData({
       ...formData,
-      [e.target.name]: e.target.value.trim()
+      [e.target.name]: e.target.value.trim(),
     });
   };
 
   const handlePost = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     console.log("formData: ", formData);
-    
+
     axios(`/`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       data: formData,
     })
-      .then(res => res.data)
+      .then((res) => res.data)
       .then(window.location.reload())
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
-  }
+  };
 
   const classes = useStyles();
   return (
@@ -78,7 +78,13 @@ export default function ReviewsForm(props) {
         <Typography component="h1" variant="h5">
           Write a review!
         </Typography>
-        <form method="POST" action="/" onSubmit={handlePost} className={classes.form} noValidate>
+        <form
+          method="POST"
+          action="/"
+          onSubmit={handlePost}
+          className={classes.form}
+          noValidate
+        >
           <Grid container spacing={2}>
             {/* <Grid item xs={12}>
               <TextField
