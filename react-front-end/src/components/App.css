@@ -8,10 +8,23 @@
   pointer-events: none;
 }
 
-.leaflet-container {
-  width: 100%;
+/* css for map page starts here */
+.map-left {
+  flex: 2;
+  display: flex;
+}
+
+.map-container {
+  display: flex;
+  flex-direction: row;
   height: 100vh;
 }
+
+.feature-buildings {
+  flex: 1;
+  overflow-y: scroll;
+}
+/* and ends here */
 
 .App-header {
   background-color: #282c34;

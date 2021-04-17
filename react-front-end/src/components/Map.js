@@ -6,23 +6,18 @@ import {
   LayersControl,
   LayerGroup,
   Circle,
-  Marker,
   FeatureGroup,
   Popup,
-  Rectangle,
 } from "react-leaflet";
 import "./App.css";
 import "./Geosearch.css";
-import { Icon } from "leaflet";
 
 import { features } from "../SFNeighborhoods-copy.json";
 import Buildings from "./Buildings";
-// import { features } from "./SSFZoning.json"
-// import { features } from "./bayareacounties.json"
-
+import MapSearch from "./MapSearch";
+import BuildingsByRating from "./BuildingsByRating";
 
 function MainMap() {
-
   const neighbourhoodData = features;
 
   // const countyData = features
@@ -42,8 +37,7 @@ function MainMap() {
           "<br>",
         { autoClose: true, closeOnClick: true }
       );
-  };  
-
+  };
 
   // r = rating
   const getColor = (r) => {
@@ -60,7 +54,6 @@ function MainMap() {
       : "gray";
   };
 
-
   const mapStyle = (feature) => {
     return {
       fillColor: getColor(feature.properties.rating),
@@ -70,64 +63,65 @@ function MainMap() {
     };
   };
 
-  const center = [37.75220204901914, -122.45808060394913];
-  const rectangle = [
-    [51.49, -0.08],
-    [51.5, -0.06],
-  ];
-
   return (
-    <MapContainer center={[37.75220204901914, -122.45808060394913]} zoom={13}>
-      {/* Toggle base map */}
-      <LayersControl position="topright">
-        <LayersControl.BaseLayer checked name="Areas Heatmap">
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
-          />
-        </LayersControl.BaseLayer>
-
+    <div className="map-container">
+      <div className="feature-buildings">
+        <BuildingsByRating />
+      </div>
+      <MapContainer
+        className="map-left"
+        center={[37.75220204901914, -122.45808060394913]}
+        zoom={13}
+      >
         {/* Toggle base map */}
-        <LayersControl.BaseLayer name="Black and White">
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
-          />
-        </LayersControl.BaseLayer>
+        <LayersControl position="topleft">
+          <LayersControl.BaseLayer checked name="Areas Heatmap">
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+            />
+          </LayersControl.BaseLayer>
 
-        {/* Toggle base map */}
-        <LayersControl.BaseLayer name="Dark Mode">
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
-          />
-        </LayersControl.BaseLayer>
+          {/* Toggle base map */}
+          <LayersControl.BaseLayer name="Black and White">
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+            />
+          </LayersControl.BaseLayer>
 
-        {/* Toggle choropleth map */}
-        <LayersControl.Overlay checked name="Show Choropleth">
-        <GeoJSON
-          data={neighbourhoodData}
-          style={mapStyle}
-          onEachFeature={onEachFeature}
-        />
-        </LayersControl.Overlay>
-        
-        {/* Toggle building markers */}
-        <LayersControl.Overlay name="Properties">
-          <LayerGroup>
-            <Buildings />
-          </LayerGroup>
-        </LayersControl.Overlay>
-        
-        <LayersControl.Overlay name="Feature group">
-          <FeatureGroup pathOptions={{ color: "purple" }}>
-            <Popup>Popup in FeatureGroup</Popup>
-            <Circle center={[51.51, -0.06]} radius={200} />
-            <Rectangle bounds={rectangle} />
-          </FeatureGroup>
-        </LayersControl.Overlay>
+          {/* Toggle base map */}
+          <LayersControl.BaseLayer name="Dark Mode">
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+            />
+          </LayersControl.BaseLayer>
 
-        {/* <GeoSearchControlElement
+          {/* Toggle choropleth map */}
+          <LayersControl.Overlay checked name="Show Choropleth">
+            <GeoJSON
+              data={neighbourhoodData}
+              style={mapStyle}
+              onEachFeature={onEachFeature}
+            />
+          </LayersControl.Overlay>
+
+          {/* Toggle building markers */}
+          <LayersControl.Overlay name="Properties">
+            <LayerGroup>
+              <Buildings />
+            </LayerGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="Feature group">
+            <FeatureGroup pathOptions={{ color: "purple" }}>
+              <Popup>Popup in FeatureGroup</Popup>
+              <Circle center={[51.51, -0.06]} radius={200} />
+            </FeatureGroup>
+          </LayersControl.Overlay>
+
+          {/* <GeoSearchControlElement
           provider={prov}
           showMarker={true}
           showPopup={false}
@@ -139,11 +133,11 @@ function MainMap() {
           searchLabel={"Enter address, please"}
           keepResult={true}
       /> */}
-      </LayersControl>
-    </MapContainer>
+        </LayersControl>
+        <MapSearch />
+      </MapContainer>
+    </div>
   );
 }
 
-
 export default MainMap;
-
