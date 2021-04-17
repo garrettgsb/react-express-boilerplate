@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import io from 'socket.io-client'
 
 import Input from './Input'
@@ -6,15 +6,18 @@ import InfoBar from './InfoBar'
 import Messages from './Messages'
 import TextContainer from './TextContainer'
 import { authContext } from '../../AuthProvider'
-import { MeetupsContext } from '../Meetups/MeetupsContext'
+import { MeetupsContext } from '../../MeetupsContext'
 
 import './Chat.scss'
 
-let socket;
+
 
 const ENDPOINT = 'http://localhost:5000'
 
 const Chatbox = () => {
+
+  let socket = useRef(null)
+
   const [ name, setName ] = useState('')
   const [ room, setRoom ] = useState('')
   const [ message, setMessage ] = useState([])
@@ -23,32 +26,36 @@ const Chatbox = () => {
 
   const { user } = useContext(authContext);
   const { meetup } = useContext(MeetupsContext)
-
+  console.log('outside socket', user.name, 'meetup name', meetup.name)
   useEffect(() => {
+    
+    socket.current = io(ENDPOINT);
+    
+    
+    setName(user.name);
+    setRoom(meetup.name);
+    
+    console.log('pre socket join', user.name, 'meetup name', meetup.name)
 
-    socket = io(ENDPOINT);
-    console.log('inside socket', user.name, 'meetup name', meetup.name)
+    socket.current.emit('join', { name: user.name, room: meetup.name }, () => {
 
-    setName(user.name)
-    setRoom(meetup.name)
-    socket.emit('join', { name, room }, () => {
-      console.log('user', name, 'room', room)
     });
 
 
     return () => {
-      socket.emit('disconnection');
+      socket.current.emit('disconnection');
 
-      socket.off();
+      socket.current.off();
     }
   }, [ ENDPOINT ])
 
   useEffect(() => {
-    socket.on('message', (message) => {
+
+    socket.current.on('message', (message) => {
       setMessages([...messages, message])
     })
 
-    socket.on('roomData', ({ users }) => {
+    socket.current.on('roomData', ({ users }) => {
       setUsers(users);
     })
   }, [ messages ])
@@ -57,7 +64,7 @@ const Chatbox = () => {
     e.preventDefault();
 
     if(message) {
-      socket.emit('sendMessage', message, () => setMessage(''))
+      socket.current.emit('sendMessage', message, () => setMessage(''))
     }
   }
 

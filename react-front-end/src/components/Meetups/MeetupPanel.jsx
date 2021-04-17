@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { MeetupsContext } from './MeetupsContext.jsx'
+import { MeetupsContext } from '../../MeetupsContext.jsx'
 import { CheckedContext }from './CheckedContext.jsx'
 import Attendees from './Attendees.jsx'
 import Chatbox from '../Chat/Chatbox'

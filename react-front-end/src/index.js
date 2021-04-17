@@ -4,13 +4,13 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import AuthProvider from './AuthProvider';
-import { MeetupsContext } from './components/Meetups/MeetupsContext';
+import MeetupsContext from './MeetupsContext';
 
 ReactDOM.render(
   <AuthProvider>
-    <MeetupsContext.Provider>
+    <MeetupsContext>
     <App />
-    </MeetupsContext.Provider>
+    </MeetupsContext>
   </AuthProvider>,
   document.getElementById('root')
   );

@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
 
     const { error, user } = addUser({ id: socket.id, name, room })
-    console.log('user', user)
+
     if(error) return callback(error);
 
     socket.emit('message', { user: 'Aurora Bot', text: `${user.name} welcome to the ${room} chat` })
@@ -40,7 +40,8 @@ io.on('connection', (socket) => {
   })
 
   socket.on('sendMessage', (message, callback) => {
-    const user = getUser(socket.id);
+    const user = getUser(socket.id)
+    console.log('sendmessage', socket.id, 'user', user)
 
     io.emit('message', { user: user.name, text: message })
 

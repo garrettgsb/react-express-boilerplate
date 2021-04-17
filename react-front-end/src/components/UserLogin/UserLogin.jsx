@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { authContext } from '../../AuthProvider';
-import { MeetupsContext } from '../Meetups/MeetupsContext'
+import { MeetupsContext } from '../../MeetupsContext'
 import '../Button.scss';
 import '../../App.scss';
 import './UserLogin.scss';
@@ -55,11 +55,11 @@ const UserLogin = () => {
     if (email)
       login(email, password);
   }
-  setMeetupToEvent();
+
   useEffect(() => {
     setPassword('');
     setEmail('');
-
+    setMeetupToEvent();
   }, [])
 
   return (

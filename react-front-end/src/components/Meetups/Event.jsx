@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { CheckedContext }from './CheckedContext.jsx'
-import { MeetupsContext } from './MeetupsContext.jsx'
+import { MeetupsContext } from '../../MeetupsContext.jsx'
 import { FaTimes } from 'react-icons/fa'
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
