@@ -14,7 +14,7 @@ module.exports = (db) => {
       SELECT *
       FROM buildings
       WHERE area_id = $1
-      LIMIT 100
+      LIMIT 1000
       `,
       [areaID]
     )
@@ -37,6 +37,28 @@ module.exports = (db) => {
       [buildingID]
     )
       .then(({ rows: building }) => res.json(building))
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  //get all properties within a certain star rating
+  router.get("/ratings/:buildingRating", (req, res) => {
+    const buildingRating = req.params.buildingRating;
+
+    db.query(
+      `
+      SELECT b.id, b.name, b.address, b.neighbourhood, b.image_url, COUNT(r.building_id), r.building_rating
+      FROM buildings b
+      JOIN reviews r ON r.building_id = b.id
+      WHERE building_rating = $1
+      GROUP BY b.id, b.name, b.address, b.neighbourhood, b.image_url, r.building_rating
+      HAVING COUNT(r.building_id) = 1
+      LIMIT 50;
+      `,
+      [buildingRating]
+    )
+      .then(({ rows: buildings }) => res.json(buildings))
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });

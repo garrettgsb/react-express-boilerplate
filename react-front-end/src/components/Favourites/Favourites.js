@@ -31,7 +31,6 @@ const Favourites = () => {
 
   return (
     <div className="favourites-container">
-      <h1>Favourites</h1>
       <div className="favourites-header">
         {fav.map((favourite) => (
           <div key={favourite.id}>

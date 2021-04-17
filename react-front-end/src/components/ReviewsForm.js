@@ -42,14 +42,14 @@ const initialFormData = {
 };
 
 export default function ReviewsForm(props) {
-  const { recordForEdit } = props
-  
+  // const { recordForEdit } = props
+
   const [formData, updateFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
     updateFormData({
       ...formData,
-      [e.target.name]: e.target.value.trim()
+      [e.target.name]: e.target.value.trim(),
     });
   };
 
@@ -57,18 +57,18 @@ export default function ReviewsForm(props) {
     e.preventDefault()
     
     axios(`/`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       data: formData,
     })
-      .then(res => res.data)
+      .then((res) => res.data)
       .then(window.location.reload())
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
-  }
+  };
 
   const handlePostEdit = (id, e) => {
     e.preventDefault()

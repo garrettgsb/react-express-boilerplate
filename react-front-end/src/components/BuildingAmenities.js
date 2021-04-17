@@ -1,22 +1,19 @@
-import React, { Component, useEffect, useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
+import React, { useEffect, useState } from "react";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
 import "./App.css";
 import axios from "axios";
-import './Building.css';
+import "./Building.css";
 
 //component to render amenities for a building
 export default function BuildingAmenities() {
-  const [amentities, setAmentities] = useState([])
+  const [amentities, setAmentities] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/:id/building_amenities")
-      .then(res => {
-        setAmentities(res.data)
-      })
-    }, [])
+    axios.get("/api/:id/building_amenities").then((res) => {
+      setAmentities(res.data);
+    });
+  }, []);
 
   return (
     <Card variant="outlined" className="amenities-container">

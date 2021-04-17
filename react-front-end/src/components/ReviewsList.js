@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ReviewsForm from './ReviewsForm';
-import Button from '@material-ui/core/Button';
-import CardContent from '@material-ui/core/CardContent';
-import Card from '@material-ui/core/Card';
-import { makeStyles } from '@material-ui/core/styles';
-import StarIcon from '@material-ui/icons/Star';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import CardActions from '@material-ui/core/CardActions';
-import Typography from '@material-ui/core/Typography';
-import Popup from './controls/Popup';
-import './Reviews.css';
-import FavouriteButton from "./Favourites/FavouriteButton";
+import ReviewsForm from "./ReviewsForm";
+import Button from "@material-ui/core/Button";
+import CardContent from "@material-ui/core/CardContent";
+import Card from "@material-ui/core/Card";
+import { makeStyles } from "@material-ui/core/styles";
+import StarIcon from "@material-ui/icons/Star";
+// import CircularProgress from "@material-ui/core/CircularProgress";
+// import CardActions from "@material-ui/core/CardActions";
+import Typography from "@material-ui/core/Typography";
+import Popup from "./Controls/Popup";
+import "./Reviews.css";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -20,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ReviewsList(props) {
-  const [review, setReview] = useState([])
-  const [openPopup, setOpenPopup] = useState(false)
-  const [recordForEdit, setRecordForEdit] = useState(null)
+  const [review, setReview] = useState([]);
+  const [openPopup, setOpenPopup] = useState(false);
+  const [recordForEdit, setRecordForEdit] = useState(null);
   const classes = useStyles();
- 
+
   useEffect(() => {
     axios.get("/api/reviews").then((res) => {
       setReview(res.data);
@@ -36,17 +35,17 @@ export default function ReviewsList(props) {
       console.log(res);
       console.log(res.data);
       setTimeout(() => {
-        const newReview = review.filter(item => item.id !== id);
+        const newReview = review.filter((item) => item.id !== id);
         setReview(newReview);
-      }, 500)
-    })
-  }
+      }, 500);
+    });
+  };
 
   const handleEdit = (item) => {
-    console.log("item: ", item)
-    setRecordForEdit(item)
-    setOpenPopup(true)
-  }
+    console.log("item: ", item);
+    setRecordForEdit(item);
+    setOpenPopup(true);
+  };
 
   return (
     <div className="reviews-list-container">
@@ -57,19 +56,15 @@ export default function ReviewsList(props) {
           variant="outlined"
           onClick = {() => {setOpenPopup(true); setRecordForEdit(null); }}
         >
-        Add new 
+          Add new review
         </Button>
       </div>
-      <Popup
-        openPopup={openPopup}
-        setOpenPopup={setOpenPopup}
-      >
-      <ReviewsForm
-        recordForEdit={recordForEdit}
-      />
+      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
+        <ReviewsForm recordForEdit={recordForEdit} />
       </Popup>
 
-        {review.map(item => 
+      {review
+        .map((item) => (
           <Card variant="outlined" className="review-item" key={item.id}>
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
@@ -108,7 +103,8 @@ export default function ReviewsList(props) {
             </div>
             </CardContent>
           </Card>
-        ).reverse()}
+        ))
+        .reverse()}
     </div>
   );
 }
