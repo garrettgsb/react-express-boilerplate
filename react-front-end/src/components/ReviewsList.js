@@ -55,11 +55,10 @@ export default function ReviewsList(props) {
           type="Button"
           color="primary"
           variant="outlined"
-          onClick = {() => setOpenPopup(true)}
+          onClick = {() => {setOpenPopup(true); setRecordForEdit(null); }}
         >
         Add new 
         </Button>
-        <FavouriteButton />
       </div>
       <Popup
         openPopup={openPopup}
@@ -80,8 +79,8 @@ export default function ReviewsList(props) {
               <p>{item.title}</p>
               <h4>
                 { item.building_rating ? <> {
-                    [...Array(item.building_rating)].map(stars=>{
-                        return <StarIcon color="yellow" />
+                    [...Array(item.building_rating)].map((stars, index)=>{
+                        return <StarIcon key={index}/>
                       })          
                   } </> : null
                 }
