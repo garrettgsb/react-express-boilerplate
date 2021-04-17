@@ -42,24 +42,25 @@ module.exports = (db) => {
       });
   });
 
-  // router.get("/rating", (req, res) => {
-  //   const buildingRating = 5;
+  router.get("/ratings/:buildingRating", (req, res) => {
+    const buildingRating = req.params.buildingRating;
+    console.log(req);
 
-  //   db.query(
-  //     `
-  //     SELECT *
-  //     FROM buildings
-  //     JOIN areas ON area_id = areas.id
-  //     WHERE building_rating = $1
-  //     LIMIT 100
-  //     `,
-  //     [buildingRating]
-  //   )
-  //     .then(({ rows: buildings }) => res.json(buildings))
-  //     .catch((err) => {
-  //       res.status(500).json({ error: err.message });
-  //     });
-  // });
+    db.query(
+      `
+      SELECT b.id, b.name, b.address, b.neighbourhood, b.image_url, r.building_rating
+      FROM buildings b
+      JOIN reviews r ON r.building_id = b.id
+      WHERE building_rating = $1
+      LIMIT 50
+      `,
+      [buildingRating]
+    )
+      .then(({ rows: buildings }) => res.json(buildings))
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
 
   //add or delete a favourite
   router.post("/favourite/:buildingId", (req, res) => {
