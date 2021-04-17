@@ -29,22 +29,20 @@ const Building = () => {
   };
 
   const green_rating = 52;
-  const red_rating = 40;
+  const red_rating = 70;
 
   const getColour = (r) => {
     return r > 50 ? "green" : "red"
   }
   // useEffect(() => {
   //   Promise.all([
-  //     axios.get("/api/days"),
-  //     axios.get("/api/appointments"),
-  //     axios.get("/api/interviewers"),
+  //     axios.get(`/api/buildings/${buildingId}`),
+  //     axios.get("/api/reviews/landlord_ratio"),
   //   ]).then((all) => {
   //     setState((prev) => ({
   //       ...prev,
-  //       days: all[0].data,
-  //       appointments: all[1].data,
-  //       interviewers: all[2].data,
+  //       building: all[0].data,
+  //       landlord_rating: all[1].data,
   //     }));
   //   });
   // }, []);
