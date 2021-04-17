@@ -1,13 +1,13 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles'
-import Box from '@material-ui/core/Box'
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
-import RateReviewOutlinedIcon from '@material-ui/icons/RateReviewOutlined';
-import MapOutlinedIcon from '@material-ui/icons/MapOutlined';
-import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
+import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
+import MapOutlinedIcon from "@material-ui/icons/MapOutlined";
+import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
 
 const useStyles = makeStyles((theme) => ({
   hero: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "1280px",
     position: "relative",
     justifyContent: "space-around",
-    margin: "45px 0 0"
+    margin: "45px 0 0",
   },
 
   item: {
@@ -44,16 +44,17 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     flexDirection: "column",
     alignSelf: "start",
-    boxShadow: "4px 1px 13px -2px rgba(0,0,0,0.12)"
+    boxShadow: "4px 1px 13px -2px rgba(0,0,0,0.12)",
   },
 
   svg: {
     position: "relative",
-    width:"20%",
-    height:"100%",
-    margin:"45px auto",
-    color: "green"
-  }
+    width: "20%",
+    height: "100%",
+    margin: "45px auto",
+    color: "green",
+  },
+}));
 
 export default function Home() {
   const classes = useStyles();
@@ -63,20 +64,20 @@ export default function Home() {
         <h1>GlassWalls</h1>
       </Box>
       <Container>
-      <Grid className={classes.container} container spacing={3}>
-        <Grid className={classes.item} item xs>
-          <RateReviewOutlinedIcon className={classes.svg}/>
-          <Typography>Reviews</Typography>
+        <Grid className={classes.container} container spacing={3}>
+          <Grid className={classes.item} item xs>
+            <RateReviewOutlinedIcon className={classes.svg} />
+            <Typography>Reviews</Typography>
+          </Grid>
+          <Grid className={classes.item} item xs>
+            <MapOutlinedIcon className={classes.svg} />
+            <Typography>Map</Typography>
+          </Grid>
+          <Grid className={classes.item} item xs>
+            <ExploreOutlinedIcon className={classes.svg} />
+            <Typography>Areas</Typography>
+          </Grid>
         </Grid>
-        <Grid className={classes.item} item xs>
-          <MapOutlinedIcon className={classes.svg}/>
-          <Typography>Map</Typography>
-        </Grid>
-        <Grid className={classes.item} item xs>
-          <ExploreOutlinedIcon className={classes.svg}/>
-          <Typography>Areas</Typography>
-        </Grid>
-      </Grid>
       </Container>
     </div>
   );
