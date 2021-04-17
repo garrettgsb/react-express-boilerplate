@@ -49,11 +49,11 @@ const useStyles = makeStyles((theme) => ({
 
   svg: {
     position: "relative",
-    width: "20%",
-    height: "100%",
-    margin: "45px auto",
-    color: "green",
-  },
+    width:"20%",
+    height:"100%",
+    margin:"45px auto",
+    color: "green"
+  }
 }));
 
 export default function Home() {

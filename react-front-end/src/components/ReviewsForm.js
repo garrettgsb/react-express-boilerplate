@@ -42,7 +42,7 @@ const initialFormData = {
 };
 
 export default function ReviewsForm(props) {
-  const { recordForEdit } = props;
+  const { recordForEdit } = props
 
   const [formData, updateFormData] = useState(initialFormData);
 

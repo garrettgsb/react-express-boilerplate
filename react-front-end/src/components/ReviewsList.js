@@ -9,7 +9,7 @@ import StarIcon from "@material-ui/icons/Star";
 // import CircularProgress from "@material-ui/core/CircularProgress";
 // import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
-import Popup from "./Controls/Popup";
+import Popup from "./controls/Popup";
 import "./Reviews.css";
 
 const useStyles = makeStyles((theme) => ({
