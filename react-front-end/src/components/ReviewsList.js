@@ -21,15 +21,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ReviewsList(props) {
   const [review, setReview] = useState([]);
+  // const [reviews, setReviews] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [recordForEdit, setRecordForEdit] = useState(null);
   const classes = useStyles();
-
-  // useEffect(() => {
-  //   axios.get("/api/reviews").then((res) => {
-  //     setReview(res.data);
-  //   });
-  // }, []);
 
   const { buildingId } = useParams();
 
@@ -38,6 +33,9 @@ export default function ReviewsList(props) {
       setReview(res.data);
     });
   }, []);
+
+  // const username = reviews.username
+  // console.log('do u werk?', username)
 
   const handleRemove = (id, e) => {
     axios.delete(`/api/reviews/${id}`).then((res) => {
@@ -75,7 +73,7 @@ export default function ReviewsList(props) {
           <Card variant="outlined" className="review-item" key={item.id}>
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Reviewed by:
+              Reviewed by: {review.username}
             </Typography>
             <div className="review-item-top">
               <p>{item.title}</p>
