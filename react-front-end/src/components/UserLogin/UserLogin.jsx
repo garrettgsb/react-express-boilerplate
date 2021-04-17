@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { authContext } from '../../AuthProvider';
+import { MeetupsContext } from '../../MeetupsContext'
 import '../Button.scss';
 import '../../App.scss';
 import './UserLogin.scss';
 import axios from 'axios';
+import moment from 'moment'
 
 //request user for login
 async function loginUser(credentials) {
@@ -23,6 +25,8 @@ const UserLogin = () => {
   const [password, setPassword] = useState('');
   const { login } = useContext(authContext);
 
+  const { meetup, setMeetup } = useContext(MeetupsContext);
+
   // const handleSubmit = async e => {
   //   e.preventDefault();
   //   const token = await loginUser({
@@ -32,6 +36,11 @@ const UserLogin = () => {
   //   setToken(token);
   // }
 
+  const startEvent = {id: 900, name: 'Banff', date: moment(Date()).format("YYYY-MM-DD"), time: moment(Date()).format("HH:MM:SS")}
+
+  function setMeetupToEvent() {
+    setMeetup(startEvent)
+  }
 
   const onEmailChange = function(event) {
     setEmail(event.target.value);
@@ -50,6 +59,7 @@ const UserLogin = () => {
   useEffect(() => {
     setPassword('');
     setEmail('');
+    setMeetupToEvent();
   }, [])
 
   return (

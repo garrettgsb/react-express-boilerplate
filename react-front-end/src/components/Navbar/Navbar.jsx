@@ -7,7 +7,7 @@ const Navbar = () => {
     const [clicked, setClicked] = useState(false)
 
     const { user } = useContext(authContext);
-    console.log('login', user.name)
+
     const handleClick = () => {
         setClicked(!clicked)
     }

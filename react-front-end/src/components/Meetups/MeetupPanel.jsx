@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { MeetupsContext } from './MeetupsContext.jsx'
+import { MeetupsContext } from '../../MeetupsContext.jsx'
 import { CheckedContext }from './CheckedContext.jsx'
 import Attendees from './Attendees.jsx'
+import Chatbox from '../Chat/Chatbox'
 import Fade from '@material-ui/core/Fade'
 
 const MeetupPanel = () => {
@@ -34,6 +35,11 @@ const MeetupPanel = () => {
           </div>
           <h3>Attendees</h3>
           {attendees.length > 0 ? <Attendees attendees={attendees} /> : 'No Attendees to this meetup.'}
+        </div>
+      </Fade>
+      <Fade in={contextCheck.checked}>
+        <div className='container'>
+          {context ? <Chatbox /> : 'Choose an Event'}
         </div>
       </Fade>
     </>

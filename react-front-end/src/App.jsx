@@ -54,8 +54,8 @@ function App() {
   // }
 
     return (
-      <div className="app">
         <BrowserRouter>
+      <div className="app">
           <Navbar />
             <Switch>
               <Route exact path="/" component={Forecast}/>
@@ -66,8 +66,8 @@ function App() {
               {!auth && <Route exact path="/login" component={UserLogin}/>}
               {auth && <Route exact path="/login" component={UserInfo}/>}
             </Switch>
-        </BrowserRouter>
       </div>
+        </BrowserRouter>
     );
 }
 
