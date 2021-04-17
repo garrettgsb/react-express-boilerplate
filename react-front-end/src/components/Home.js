@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     margin:"45px auto",
     color: "green"
   }
+}));
 
 export default function Home() {
   const classes = useStyles();
