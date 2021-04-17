@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { authContext } from './AuthProvider';
 // import axios from 'axios';
 import Meetups from './components/Meetups/index.jsx';
+import Maps from './components/Maps/index.jsx';
 import Forecast from './components/Forecast/index.jsx';
 import Profile from './components/Profile/index.jsx';
 import UserLogin from './components/UserLogin/UserLogin.jsx';
@@ -11,7 +12,6 @@ import Navbar from './components/Navbar/Navbar'
 import './App.scss';
 import './components/Button.scss';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
-
 
 
 function App() {
@@ -60,6 +60,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Forecast}/>
               <Route exact path="/meetups" component={Meetups}/>
+              <Route exact path="/maps" component={Maps}/>
               <Route exact path="/profile" component={Profile}/>
               <Route exact path="/settings" component={Settings}/>
               {!auth && <Route exact path="/login" component={UserLogin}/>}
