@@ -131,64 +131,6 @@ module.exports = (db) => {
     });
   })
 
-  // Gets ratio of recommend to friend
-  router.get("/api/reviews/friend_ratio", (req, res) => {
-    const queryString = `SELECT  	
-    (SELECT cast(count(id) as decimal) 
-    FROM reviews WHERE recommend_to_friend = 't') / 
-    (SELECT cast(COUNT(id) as decimal) FROM reviews) 
-    AS recommend_to_friend_percentage;
-  `
-    db.query(queryString) 
-    .then(({ rows: reviews }) => {
-      res.json(reviews);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
-
-  // Gets ratio of landlord approvals
-  router.get("/api/reviews/landlord_ratio", (req, res) => {
-    const queryString = `SELECT  	
-    (SELECT cast(count(id) as decimal) 
-    FROM reviews 
-    WHERE landlord_rating = 't') / 
-    (SELECT cast(COUNT(id) as decimal) FROM reviews) 
-    AS landlord_approval_percentage;
-  `
-    db.query(queryString) 
-    .then(({ rows: reviews }) => {
-      res.json(reviews);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
-
-  // Gets username associated with reviews
-  router.get("/api/reviews/username", (req, res) => {
-    const queryString = `SELECT reviews.id AS review_id, users.username AS username
-    FROM users
-    JOIN reviews ON users.id = reviews.user_id;    
-  `
-    db.query(queryString) 
-    .then(({ rows: reviews }) => {
-      res.json(reviews);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
-
-
-
 
   return router;
 };

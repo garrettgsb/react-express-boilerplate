@@ -26,7 +26,6 @@ const Building = () => {
 
   const landlord_percentage = Number(building.landlord_ratio)*100;
   const recommend_to_friend_percentage = Number(building.recommend_to_friend_ratio)*100;
-  const red_rating = 70;
 
   const getColour = (r) => {
     return r > 50 ? "green" : "red"
@@ -35,7 +34,6 @@ const Building = () => {
   const handleClick = () => {
     history.push("/map");
   };
-
 
 
   return (
