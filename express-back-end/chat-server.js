@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
 
     socket.emit('message', { user: 'Aurora Bot', text: `${user.name} welcome to the ${room} chat` })
 
-    socket.broadcast.to(user.room).emit('message', { user: 'Aurora Bot', text: `${user.name} has join!` })
+    socket.broadcast.to(user.room).emit('message', { user: 'Aurora Bot', text: `${user.name} has joined!` })
     
     socket.join(user.room);
 
