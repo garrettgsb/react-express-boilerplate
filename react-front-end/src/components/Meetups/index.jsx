@@ -1,19 +1,13 @@
 import React from 'react';
 import { useState, useMemo } from 'react';
-<<<<<<< HEAD
-=======
 // import moment from 'moment'
->>>>>>> master
 
 import Header from './Header.jsx';
 import Events from './Events.jsx'
 import AddEvent from './AddEvent.jsx'
-<<<<<<< HEAD
-import Chatbox from './Chatbox.jsx'
-import ChatJoin from './ChatJoin.jsx'
-=======
+import Chatbox from '../Chat/Chatbox'
+import ChatJoin from '../Chat/ChatJoin'
 import SafetySend from './SafetySend'
->>>>>>> master
 
 import '../Button.scss';
 import '../../App.scss';
@@ -106,18 +100,13 @@ export default function Meetups() {
               <div>
                 <MeetupPanel />
               </div>
-<<<<<<< HEAD
-              <div className='container'>
-                <Chatbox />
-              </div>
 
 
 
-=======
+
               <div>
                 <SafetySend />
               </div>
->>>>>>> master
             </div>
         </CheckedContext.Provider>
           </MeetupsContext.Provider>

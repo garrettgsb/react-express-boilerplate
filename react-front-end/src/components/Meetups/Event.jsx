@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react'
 import { CheckedContext }from './CheckedContext.jsx'
 import { MeetupsContext } from './MeetupsContext.jsx'
 import { FaTimes } from 'react-icons/fa'
-<<<<<<< HEAD
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -12,9 +11,6 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import moment from 'moment';
-=======
-import FormControlLabel from '@material-ui/core/FormControlLabel'
->>>>>>> master
 
 const Event = ({ event, onDelete }) => {
   const [ edit, setEdit ] = useState(false);

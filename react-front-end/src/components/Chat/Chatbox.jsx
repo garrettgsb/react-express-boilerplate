@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import queryString from 'query-string'
+import React, { useState, useEffect, useContext } from 'react'
 import io from 'socket.io-client'
 
 import Input from './Input'
 import InfoBar from './InfoBar'
 import Messages from './Messages'
 import TextContainer from './TextContainer'
+import { authContext } from '../../AuthProvider'
+import { MeetupsContext } from '../Meetups/MeetupsContext'
 
 import './Chat.scss'
 
 let socket;
+
 const ENDPOINT = 'http://localhost:5000'
 
 const Chatbox = () => {
@@ -19,27 +21,27 @@ const Chatbox = () => {
   const [ messages, setMessages ] = useState([])
   const [ users, setUsers ] = useState('')
 
-
+  const { user } = useContext(authContext);
+  const { meetup } = useContext(MeetupsContext)
 
   useEffect(() => {
-    const { name, room } = queryString.parse(window.location.search)
 
-    socket = io(ENDPOINT , {transports: ['websocket', 'polling', 'flashsocket']});
+    socket = io(ENDPOINT);
+    console.log('inside socket', user.name, 'meetup name', meetup.name)
 
-    setName(name)
-    setRoom(room)
-
+    setName(user.name)
+    setRoom(meetup.name)
     socket.emit('join', { name, room }, () => {
-
+      console.log('user', name, 'room', room)
     });
 
 
     return () => {
-      socket.emit('disconnect');
+      socket.emit('disconnection');
 
       socket.off();
     }
-  }, [ ENDPOINT, window.location.search ])
+  }, [ ENDPOINT ])
 
   useEffect(() => {
     socket.on('message', (message) => {
@@ -49,7 +51,7 @@ const Chatbox = () => {
     socket.on('roomData', ({ users }) => {
       setUsers(users);
     })
-  }, [messages])
+  }, [ messages ])
 
   const sendMessage = e => {
     e.preventDefault();
@@ -59,9 +61,7 @@ const Chatbox = () => {
     }
   }
 
-  console.log(message, messages);
-
-  return (
+  return (<>{user  ?  (<>
     <div className='outerContainer'>
       <div className='innerContainer'>
         <InfoBar room={room} />
@@ -70,52 +70,8 @@ const Chatbox = () => {
       </div>
       <TextContainer users={users} />
     </div>
-
-  )
+    </>) : (<><p>Hello</p></>)}</>)
+  
 }
 
 export default Chatbox
-
-{/* useEffect(() => {
-
-    socket.on('message', message => {
-
-      setMessages([...messages, message])
-
-    })
-
-    return () => {
-
-      socket.off()
-
-    }
-
-  }, [messages]) */}
-
-{/* <div>
-<form onSubmit={onMessageSubmit}>
- <h1>Messenger</h1>
-  <div>
-    <TextField 
-      name="name" 
-      onChange={e => onTextChange(e)} 
-      value={state.name} 
-      label="Name" 
-     />
-  </div>
-  <div>
-    <TextField 
-      name="message" 
-      onChange={e => onTextChange(e)} 
-      value={state.message} 
-      variant="outlined" 
-      label="Message" 
-     />
-  </div>
-  <button>Send Message</button>
- </form> 
- <div className="render-chat">
-   <h1>Chat Log</h1>
-   {renderChat()}
- </div>
-</div> */}

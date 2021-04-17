@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-const Express = require('express');
-const https = require('https').createServer(App)
-const App = Express();
-const BodyParser = require('body-parser')
-const PORT = 8080;
-const path = require('path')
-// // const socket = io.connect('http://example.com:3080');
-// const io = require("socket.io")(https, {
-//   cors: {
-//       origin: "http://localhost:3000",
-//       methods: ["GET", "POST"],
-//       credentials: true
-//   }
-// });
-const LineByLineReader = require('line-by-line')
-=======
 const express = require('express');
 const dotenv = require('dotenv').config();
 const cors = require('cors');
@@ -31,25 +14,16 @@ require('dotenv').config();
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 
->>>>>>> master
 
 
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static('public'));
-<<<<<<< HEAD
-App.use(require('cors')())
-App.use(router)
-
-//
-// Sample GET route
-App.get('/api/data', (req, res) => {
-=======
-App.use(cors());
+app.use(BodyParser.urlencoded({ extended: false }));
+app.use(BodyParser.json());
+app.use(express.static('public'));
+app.use(cors());
 
 //get user from db for login
-App.post('/login', (req, res) => {
+app.post('/login', (req, res) => {
   const credentials = JSON.parse(req.body.credentials);
 	const email = credentials.email;
 	const password = credentials.password;
@@ -63,7 +37,7 @@ App.post('/login', (req, res) => {
 });
 
 //get user for profile page
-App.get('/profile/:id', (req,res) => {
+app.get('/profile/:id', (req,res) => {
   console.log('req.params.id: ', req.params.id)
   const query = `SELECT * FROM photographers WHERE id = $1`
   console.log(req.body);
@@ -84,7 +58,6 @@ app.use(cors(corsOptions));
 
 // GET route for Aurora Data
 app.get('/api/data', (req, res) => {
->>>>>>> master
   
   const options = {
     host: 'services.swpc.noaa.gov',
@@ -96,7 +69,7 @@ app.get('/api/data', (req, res) => {
   
   const readKpiData = () => {
     
-    const request = https.request(options, (response) => {
+    const request = http.request(options, (response) => {
       response.setEncoding('utf8');
       
       lr = new LineByLineReader(response);
@@ -167,22 +140,6 @@ app.get('/api/data', (req, res) => {
   readKpiData();
 });
 
-<<<<<<< HEAD
-// set chat static folder
-// App.use(Express.static(path.join(__dirname, '../react-front-end/public/src/components/Meetups/')));
-
-// const botName = 'Aurora Bot';
-
-// io.on('connection', socket => {
-//   socket.emit('your id', socket.id);
-//   socket.on('message', body => {
-//     io.emit('message', body)
-//   })
-// });
-
-// Main Port Listener
-App.listen(PORT, () => {
-=======
 // Route to send texts via twilio. 
 // Will try to see if possible to reconfigure this to front end react router dom
 app.get('/text', (req, res) => {
@@ -198,7 +155,6 @@ app.get('/text', (req, res) => {
 })
 
 app.listen(PORT, () => {
->>>>>>> master
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });

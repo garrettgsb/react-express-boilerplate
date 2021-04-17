@@ -1,7 +1,6 @@
 const users = [];
 
 const addUser = ({ id, name, room }) => {
-  console.log('name', name)
   name = name.trim().toLowerCase()
   room = room.trim().toLowerCase()
 
@@ -27,8 +26,6 @@ const removeUser = (id) => {
 
 const getUser = (id) => {
   users.find(user => user.id === id)
-
-
 
 }
 
