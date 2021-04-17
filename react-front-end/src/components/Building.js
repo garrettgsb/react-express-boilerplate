@@ -28,25 +28,15 @@ const Building = () => {
     history.push("/map");
   };
 
-  const green_rating = 52;
+  const landlord_percentage = Number(building.landlord_ratio)*100;
+  console.log('THIS SHIT', (landlord_percentage))
+  console.log('THAT SHIT', typeof(landlord_percentage))
   const red_rating = 70;
 
   const getColour = (r) => {
     return r > 50 ? "green" : "red"
   }
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get(`/api/buildings/${buildingId}`),
-  //     axios.get("/api/reviews/landlord_ratio"),
-  //   ]).then((all) => {
-  //     setState((prev) => ({
-  //       ...prev,
-  //       building: all[0].data,
-  //       landlord_rating: all[1].data,
-  //     }));
-  //   });
-  // }, []);
-  
+
 
   return (
     <div className="building-container">
@@ -68,12 +58,12 @@ const Building = () => {
         <div className="percentage-circle" style={{width: 80, height: 80}}>
           <h3>Landlord Approval</h3>
             <CircularProgressbar
-              value={green_rating}
-              text={`${green_rating}%`}
+              value={landlord_percentage}
+              text={`${landlord_percentage}%`}
               strokeWidth={10}
               styles = {buildStyles({
-                textColor: getColour(green_rating),
-                pathColor: getColour(green_rating)
+                textColor: getColour(red_rating),
+                pathColor: getColour(red_rating)
               }
               )}
             />
