@@ -54,8 +54,8 @@ export default function ReviewsForm(props) {
   };
 
   const handlePost = (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     axios(`/`, {
       method: "POST",
       headers: {
@@ -71,37 +71,37 @@ export default function ReviewsForm(props) {
   };
 
   const handlePostEdit = (id, e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     axios(`/api/reviews/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       data: formData,
     })
-      .then(res => res.data)
+      .then((res) => res.data)
       .then(window.location.reload())
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
-  }
- 
+  };
+
   const handleSubmit = (e) => {
     if (recordForEdit !== null) {
-      handlePostEdit(recordForEdit.id, e)
+      handlePostEdit(recordForEdit.id, e);
     } else {
-      handlePost(e)
+      handlePost(e);
     }
-  }
+  };
 
   useEffect(() => {
     console.log(recordForEdit);
     if (recordForEdit !== null)
       updateFormData({
-          ...recordForEdit
-      })
-  }, [recordForEdit])
+        ...recordForEdit,
+      });
+  }, [recordForEdit]);
 
   const classes = useStyles();
   return (
@@ -111,7 +111,13 @@ export default function ReviewsForm(props) {
         <Typography component="h1" variant="h5">
           Write a review!
         </Typography>
-        <form method="POST" autoComplete="off" action="/" onSubmit={handleSubmit} className={classes.form}>
+        <form
+          method="POST"
+          autoComplete="off"
+          action="/"
+          onSubmit={handleSubmit}
+          className={classes.form}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <FormControlLabel
