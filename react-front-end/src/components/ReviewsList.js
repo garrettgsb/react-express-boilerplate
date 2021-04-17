@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewsForm from "./ReviewsForm";
 import Button from "@material-ui/core/Button";
@@ -24,16 +25,22 @@ export default function ReviewsList(props) {
   const [recordForEdit, setRecordForEdit] = useState(null);
   const classes = useStyles();
 
-  useEffect(() => {
-    axios.get("/api/reviews").then((res) => {
+  // useEffect(() => {
+  //   axios.get("/api/reviews").then((res) => {
+  //     setReview(res.data);
+  //   });
+  // }, []);
+
+  const { buildingId } = useParams();
+
+   useEffect(() => {
+    axios.get(`/api/reviews/${buildingId}`).then((res) => {
       setReview(res.data);
     });
   }, []);
 
   const handleRemove = (id, e) => {
     axios.delete(`/api/reviews/${id}`).then((res) => {
-      console.log(res);
-      console.log(res.data);
       setTimeout(() => {
         const newReview = review.filter((item) => item.id !== id);
         setReview(newReview);

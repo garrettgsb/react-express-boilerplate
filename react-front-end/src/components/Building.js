@@ -24,18 +24,18 @@ const Building = () => {
     });
   }, [buildingId]);
 
-  const handleClick = () => {
-    history.push("/map");
-  };
-
   const landlord_percentage = Number(building.landlord_ratio)*100;
-  console.log('THIS SHIT', (landlord_percentage))
-  console.log('THAT SHIT', typeof(landlord_percentage))
+  const recommend_to_friend_percentage = Number(building.recommend_to_friend_ratio)*100;
   const red_rating = 70;
 
   const getColour = (r) => {
     return r > 50 ? "green" : "red"
   }
+
+  const handleClick = () => {
+    history.push("/map");
+  };
+
 
 
   return (
@@ -62,19 +62,19 @@ const Building = () => {
               text={`${landlord_percentage}%`}
               strokeWidth={10}
               styles = {buildStyles({
-                textColor: getColour(red_rating),
-                pathColor: getColour(red_rating)
+                textColor: getColour(landlord_percentage),
+                pathColor: getColour(landlord_percentage)
               }
               )}
             />
           <h3>Recommend to Friend</h3>
             <CircularProgressbar
-              value={red_rating}
-              text={`${red_rating}%`}
+              value={recommend_to_friend_percentage}
+              text={`${recommend_to_friend_percentage}%`}
               strokeWidth={10}
               styles = {buildStyles({
-                textColor: getColour(red_rating),
-                pathColor: getColour(red_rating)
+                textColor: getColour(recommend_to_friend_percentage),
+                pathColor: getColour(recommend_to_friend_percentage)
               }
               )}
             />
