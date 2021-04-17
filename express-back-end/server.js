@@ -17,13 +17,13 @@ const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWI
 
 
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static('public'));
-App.use(cors());
+app.use(BodyParser.urlencoded({ extended: false }));
+app.use(BodyParser.json());
+app.use(express.static('public'));
+app.use(cors());
 
 //get user from db for login
-App.post('/login', (req, res) => {
+app.post('/login', (req, res) => {
   const credentials = JSON.parse(req.body.credentials);
 	const email = credentials.email;
 	const password = credentials.password;
@@ -37,7 +37,7 @@ App.post('/login', (req, res) => {
 });
 
 //get user for profile page
-App.get('/profile/:id', (req,res) => {
+app.get('/profile/:id', (req,res) => {
   console.log('req.params.id: ', req.params.id)
   const query = `SELECT * FROM photographers WHERE id = $1`
   console.log(req.body);
