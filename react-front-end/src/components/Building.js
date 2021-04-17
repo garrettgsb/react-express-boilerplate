@@ -5,6 +5,9 @@ import ReviewsList from "./ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
 import FavouriteButton from "./Favourites/FavouriteButton";
 import AmenMap from "./AmenMap";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
 
 //component to render a building
 const Building = () => {
@@ -25,6 +28,21 @@ const Building = () => {
     history.push("/map");
   };
 
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get("/api/days"),
+  //     axios.get("/api/appointments"),
+  //     axios.get("/api/interviewers"),
+  //   ]).then((all) => {
+  //     setState((prev) => ({
+  //       ...prev,
+  //       days: all[0].data,
+  //       appointments: all[1].data,
+  //       interviewers: all[2].data,
+  //     }));
+  //   });
+  // }, []);
+
   return (
     <div className="building-container">
       <div className="building-header">
@@ -41,6 +59,20 @@ const Building = () => {
         </div>
       </div>
       <div className="building-details">
+        <div className="percentage-circles">
+        <div className="percentage-circle" style={{width: 80, height: 80}}>
+            <CircularProgressbar
+              value={78}
+              text={`${78}%`}
+              strokeWidth={10}
+              styles = {buildStyles({
+                textColor: "green",
+                pathColor: "green" 
+              }
+              )}
+            />
+          </div>
+        </div>
         <div className="review-list">
           <ReviewsList />
           <button onClick={handleClick}>Go to the Map page</button>

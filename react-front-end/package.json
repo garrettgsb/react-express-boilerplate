@@ -11,6 +11,7 @@
     "leaflet-geosearch": "^3.3.1",
     "node-sass": "^5.0.0",
     "react": "^16.14.0",
+    "react-circular-progressbar": "^2.0.4",
     "react-dom": "^16.14.0",
     "react-leaflet": "^3.1.0",
     "react-leaflet-choropleth": "^2.0.1",
