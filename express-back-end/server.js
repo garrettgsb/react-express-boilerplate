@@ -33,6 +33,17 @@ App.use("/api", buildingAmenities(db));
 App.use("/api/users", users(db));
 App.use("/api/buildings", buildings(db));
 
+App.get('/login/:id', (req, res) => {
+  req.session.user_id = req.params.id;
+  res.redirect('/');
+});
+
+App.post('/logout', (req, res) => {
+  req.session = null;
+  res.redirect('/');
+});
+
+
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(
