@@ -111,26 +111,5 @@ module.exports = (db) => {
     });
   })
 
-  // Gets average building rating by building id
-  router.get("/api/reviews/building_ratings", (req, res) => {
-    const queryString = `
-      SELECT buildings.id AS building_id, buildings.name AS building_name, ROUND(AVG(building_rating),0) AS average_building_rating
-      FROM reviews
-      JOIN buildings ON building_id = buildings.id
-      GROUP BY buildings.id
-      ORDER BY average_building_rating DESC;
-    `
-    db.query(queryString) 
-    .then(({ rows: reviews }) => {
-      res.json(reviews);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
-
-
   return router;
 };

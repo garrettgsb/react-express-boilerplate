@@ -31,6 +31,8 @@ module.exports = (db) => {
     db.query(
       `
       SELECT buildings.id AS building_id, buildings.area_id AS area_id, buildings.name AS name, buildings.address AS building_address, buildings.neighbourhood AS neighbourhood, buildings.image_url AS image_url, buildings.longitude AS longitude, buildings.latitude AS latitude,
+      (SELECT ROUND(AVG(building_rating),0) 
+      AS average_building_rating FROM reviews where building_id = $1),
       (SELECT (SELECT cast(count(id) as decimal) FROM reviews WHERE landlord_rating = 't' and building_id=$1) / (SELECT cast(COUNT(id) as decimal) FROM reviews where building_id = $1)) 
       AS landlord_ratio, 
       (SELECT (SELECT cast(count(id) as decimal) FROM reviews WHERE recommend_to_friend = 't' and building_id=$1) / (SELECT cast(COUNT(id) as decimal) FROM reviews where building_id = $1)) 
