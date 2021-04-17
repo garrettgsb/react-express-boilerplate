@@ -30,8 +30,10 @@ function MapSearch() {
 
     L.Control.geocoder({
       query: "",
+      position: "topright",
+      collapsed: false,
       placeholder: "Search here...",
-      defaultMarkGeocode: false,
+      defaultMarkGeocode: true,
       geocoder,
     })
       .on("markgeocode", function (e) {

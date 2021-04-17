@@ -15,7 +15,7 @@ import "./Geosearch.css";
 import { features } from "../SFNeighborhoods-copy.json";
 import Buildings from "./Buildings";
 import MapSearch from "./MapSearch";
-import Favourites from "./Favourites/Favourites";
+import BuildingsByRating from "./BuildingsByRating";
 
 function MainMap() {
   const neighbourhoodData = features;
@@ -66,7 +66,7 @@ function MainMap() {
   return (
     <div className="map-container">
       <div className="feature-buildings">
-        <Favourites />
+        <BuildingsByRating />
       </div>
       <MapContainer
         className="map-left"
@@ -74,7 +74,7 @@ function MainMap() {
         zoom={13}
       >
         {/* Toggle base map */}
-        <LayersControl position="topright">
+        <LayersControl position="topleft">
           <LayersControl.BaseLayer checked name="Areas Heatmap">
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

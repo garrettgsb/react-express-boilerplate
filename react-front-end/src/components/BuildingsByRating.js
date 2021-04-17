@@ -3,8 +3,8 @@ import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
 //component to render favourites
-const Features = () => {
-  const [feature, setFeature] = useState([]);
+const BuildingsByRating = () => {
+  const [building, setBuilding] = useState([]);
 
   const { buildingId } = useParams();
 
@@ -14,8 +14,7 @@ const Features = () => {
 
   useEffect(() => {
     axios.get(`/api/buildings/ratings/${buildingRating}`).then((res) => {
-      console.log("123123123123123123");
-      setFeature(res.data);
+      setBuilding(res.data);
     });
   }, [buildingId]);
 
@@ -27,19 +26,19 @@ const Features = () => {
     <div className="favourites-container">
       <h1>Top Rated Properties</h1>
       <div className="favourites-header">
-        {feature.map((property) => (
+        {building.map((property) => (
           <div key={property.id}>
             <h2>{property.name}</h2>
+            <p>{property.neighbourhood} Neighbourhood</p>
             <p>{property.address}</p>
-            <p>{property.neighbourhood}</p>
             <img
               className="building_amenities-image"
               src={property.image_url}
               alt={property.name}
             />
             <div>
-              <button onClick={() => handleClick(property.building_id)}>
-                Building Details
+              <button onClick={() => handleClick(property.id)}>
+                Property Details
               </button>
             </div>
           </div>
@@ -49,4 +48,4 @@ const Features = () => {
   );
 };
 
-export default Features;
+export default BuildingsByRating;

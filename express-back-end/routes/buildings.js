@@ -42,17 +42,19 @@ module.exports = (db) => {
       });
   });
 
+  //get all properties within a certain star rating
   router.get("/ratings/:buildingRating", (req, res) => {
     const buildingRating = req.params.buildingRating;
-    console.log(req);
 
     db.query(
       `
-      SELECT b.id, b.name, b.address, b.neighbourhood, b.image_url, r.building_rating
+      SELECT b.id, b.name, b.address, b.neighbourhood, b.image_url, COUNT(r.building_id), r.building_rating
       FROM buildings b
       JOIN reviews r ON r.building_id = b.id
       WHERE building_rating = $1
-      LIMIT 50
+      GROUP BY b.id, b.name, b.address, b.neighbourhood, b.image_url, r.building_rating
+      HAVING COUNT(r.building_id) = 1
+      LIMIT 50;
       `,
       [buildingRating]
     )
