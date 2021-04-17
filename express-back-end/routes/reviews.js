@@ -41,6 +41,31 @@ module.exports = (db) => {
     });
   })
 
+  router.put("/api/reviews/:id", (req, res) => {
+    const id = req.body.id;
+    const title = req.body.title;
+    const comment = req.body.comment;
+    const landlord_rating = req.body.landlord_rating;
+    const recommend_to_friend = req.body.recommend_to_friend;
+    const building_rating = req.body.building_rating;
+    const area_rating = req.body.area_rating;
+    
+    const queryParams = [id, title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating];
+
+    const queryString = `UPDATE reviews SET title = $2, comment = $3, landlord_rating = $4, recommend_to_friend = $5, building_rating = $6, area_rating = $7 WHERE id = $1 RETURNING *;`
+
+    db.query(queryString, queryParams)
+    .then(result => {
+      res
+        .status(200)
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  })
+
   // Gets average area rating by area name
   router.get("/api/reviews/area_ratings", (req, res) => {
     const queryString = `

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -45,6 +45,7 @@ export default function ReviewsForm(props) {
   // const { recordForEdit } = props
 
   const [formData, updateFormData] = useState(initialFormData);
+
   const handleChange = (e) => {
     updateFormData({
       ...formData,
@@ -53,9 +54,8 @@ export default function ReviewsForm(props) {
   };
 
   const handlePost = (e) => {
-    e.preventDefault();
-    console.log("formData: ", formData);
-
+    e.preventDefault()
+    
     axios(`/`, {
       method: "POST",
       headers: {
@@ -70,6 +70,39 @@ export default function ReviewsForm(props) {
       });
   };
 
+  const handlePostEdit = (id, e) => {
+    e.preventDefault()
+    
+    axios(`/api/reviews/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      data: formData,
+    })
+      .then(res => res.data)
+      .then(window.location.reload())
+      .catch(error => {
+        throw error;
+      });
+  }
+ 
+  const handleSubmit = (e) => {
+    if (recordForEdit !== null) {
+      handlePostEdit(recordForEdit.id, e)
+    } else {
+      handlePost(e)
+    }
+  }
+
+  useEffect(() => {
+    console.log(recordForEdit);
+    if (recordForEdit !== null)
+      updateFormData({
+          ...recordForEdit
+      })
+  }, [recordForEdit])
+
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="sm">
@@ -78,29 +111,11 @@ export default function ReviewsForm(props) {
         <Typography component="h1" variant="h5">
           Write a review!
         </Typography>
-        <form
-          method="POST"
-          action="/"
-          onSubmit={handlePost}
-          className={classes.form}
-          noValidate
-        >
+        <form method="POST" autoComplete="off" action="/" onSubmit={handleSubmit} className={classes.form}>
           <Grid container spacing={2}>
-            {/* <Grid item xs={12}>
-              <TextField
-                autoComplete="username"
-                name="username"
-                variant="outlined"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                autoFocus
-              />
-            </Grid> */}
             <Grid item xs={12} sm={6}>
               <FormControlLabel
-                value={false}
+                value={formData.landlord_rating}
                 control={<Checkbox color="primary" />}
                 label="Approve the landlord?"
                 labelPlacement="end"
@@ -110,7 +125,7 @@ export default function ReviewsForm(props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControlLabel
-                value={false}
+                value={formData.recommend_to_friend}
                 control={<Checkbox color="primary" />}
                 label="Recommend to friend"
                 labelPlacement="end"
@@ -122,9 +137,8 @@ export default function ReviewsForm(props) {
               Building Rating
               <Rating
                 type="number"
+                value={formData.building_rating}
                 name="building_rating"
-                defaultValue={3}
-                precision={1}
                 onChange={handleChange}
               />
             </Grid>
@@ -132,6 +146,7 @@ export default function ReviewsForm(props) {
               Area Rating
               <Rating
                 type="number"
+                value={formData.area_rating}
                 name="area_rating"
                 defaultValue={3}
                 precision={1}
@@ -140,7 +155,9 @@ export default function ReviewsForm(props) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                type="text"
                 variant="outlined"
+                value={formData.title}
                 required
                 fullWidth
                 name="title"
@@ -152,7 +169,9 @@ export default function ReviewsForm(props) {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                value={formData.comment}
                 required
+                type="text"
                 fullWidth
                 multiline
                 rows={5}
