@@ -18,22 +18,22 @@ const Building = () => {
 
   const history = useHistory();
 
-  // Converts the ratios to a whole number
-  // TODO: Debug NaN from showing
-  const landlord_percentage = Number(building.landlord_ratio)*100;
-  const recommend_to_friend_percentage = Number(building.recommend_to_friend_ratio)*100;
-  const building_rating = 5
-
   // Determines colour of the percentage circles
   const getColour = (r) => {
     return r > 50 ? "green" : "red"
   }
+
+  const [isBusy, setBusy] = useState(true)
   
   useEffect(() => {
-    axios.get(`/api/buildings/${buildingId}`)
-    .then((res) => {
-      setBuilding(res.data[0]);
-    });
+    setBusy(true);
+    async function fetchData() {
+      axios.get(`/api/buildings/${buildingId}`)
+      .then((res) => {
+        setBuilding(res.data[0]);
+      });
+    }
+    fetchData();
   }, [buildingId]);
 
   const handleClick = () => {
@@ -70,27 +70,26 @@ const Building = () => {
         <div className="percentage-circle" style={{width: 80, height: 80}}>
           <h3>Landlord Approval</h3>
             <CircularProgressbar
-              value={landlord_percentage}
-              text={`${landlord_percentage}%`}
+              value={building.landlord_ratio}
+              text={`${building.landlord_ratio}%`}
               strokeWidth={10}
               styles = {buildStyles({
-                textColor: getColour(landlord_percentage),
-                pathColor: getColour(landlord_percentage)
+                textColor: getColour(building.landlord_ratio),
+                pathColor: getColour(building.landlord_ratio)
               }
               )}
             />
           <h3>Recommend to Friend</h3>
             <CircularProgressbar
-              value={recommend_to_friend_percentage}
-              text={`${recommend_to_friend_percentage}%`}
+              value={building.recommend_to_friend_ratio}
+              text={`${building.recommend_to_friend_ratio}%`}
               strokeWidth={10}
               styles = {buildStyles({
-                textColor: getColour(recommend_to_friend_percentage),
-                pathColor: getColour(recommend_to_friend_percentage)
+                textColor: getColour(building.recommend_to_friend_ratio),
+                pathColor: getColour(building.recommend_to_friend_ratio)
               }
               )}
             />
-            
           </div>
         </div>
         <div className="review-list">

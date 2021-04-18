@@ -50,6 +50,22 @@ export default function ReviewsList(props) {
     setOpenPopup(true);
   };
 
+  // const isLoggedIn = false;
+  // let testButton;
+  // if(isLoggedIn) {
+  //   testButton = 
+  // }
+
+  // const renderButtons = () => {
+  //   if(isLoggedIn) {
+  //     return <button>HELLO</button>
+  //   } else {
+  //     return <button>GOODBYE</button>
+  //   }
+  // }
+
+  const isUser = false;
+
   return (
     <div className="reviews-list-container">
       <div className="reviews-list-buttons">
@@ -85,9 +101,30 @@ export default function ReviewsList(props) {
               </h4>
             </div>
             <p>{item.comment}</p>
-            {/* <p>Area rating: {item.area_rating}</p> */}
-            <div className="review-item-bottom">
-              <Button
+          
+            <div className="review-item-bottom" >
+              {isUser ? 
+              <>
+                <Button
+                  className={classes.button}
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  onClick={(e) => {handleEdit(item)}}
+                  >Edit
+                </Button>
+                <Button
+                className={classes.button}
+                type="button"
+                onClick={(e) => handleRemove(item.id, e)}
+                variant="contained"
+                color="secondary"
+               >Delete
+              </Button> 
+              </>
+              : ""}
+              
+              {/* <Button
                 className={classes.button}
                 type="button"
                 variant="contained"
@@ -102,7 +139,7 @@ export default function ReviewsList(props) {
                 variant="contained"
                 color="secondary"
               >Delete
-              </Button>
+              </Button> */}
             </div>
             </CardContent>
           </Card>
