@@ -1,7 +1,6 @@
 import React from 'react'
 
 import onlineIcon from '../../icons/onlineIcon.png'
-import './Chat.scss'
 
 const TextContainer = ({ users }) => {
   return (

@@ -8,9 +8,6 @@ import TextContainer from './TextContainer'
 import { authContext } from '../../AuthProvider'
 import { MeetupsContext } from '../../MeetupsContext'
 
-import './Chat.scss'
-
-
 
 const ENDPOINT = 'http://localhost:5000'
 

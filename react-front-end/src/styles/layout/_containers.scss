@@ -1,0 +1,22 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  overflow: auto;
+  min-height: 100px;
+  border: 1px solid #0e3147;
+  padding: 30px;
+  border-radius: 5px;
+  &-meetups {
+    display: flex;
+    justify-content:space-evenly;
+  }
+}
+
+.meetups {
+  display: flex;
+  flex-direction: column;
+  &-hidden {
+    display: flex;
+    visibility: hidden;
+}
+}

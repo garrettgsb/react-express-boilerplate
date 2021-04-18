@@ -9,7 +9,7 @@ import Chatbox from '../Chat/Chatbox'
 import ChatJoin from '../Chat/ChatJoin'
 import SafetySend from './SafetySend'
 
-import '../../styles/components/_button.scss'
+// import '../../styles/components/_button.scss'
 import '../../styles/App.scss';
 
 import { MeetupsContext } from '../../MeetupsContext.jsx';
