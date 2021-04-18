@@ -5,9 +5,6 @@ import {
   GeoJSON,
   LayersControl,
   LayerGroup,
-  Circle,
-  FeatureGroup,
-  Popup,
 } from "react-leaflet";
 import "./App.css";
 import "./Geosearch.css";
@@ -99,7 +96,7 @@ function MainMap() {
           </LayersControl.BaseLayer>
 
           {/* Toggle choropleth map */}
-          <LayersControl.Overlay checked name="Show Choropleth">
+          <LayersControl.Overlay checked name="Areas Heatmap">
             <GeoJSON
               data={neighbourhoodData}
               style={mapStyle}
@@ -108,17 +105,40 @@ function MainMap() {
           </LayersControl.Overlay>
 
           {/* Toggle building markers */}
-          <LayersControl.Overlay name="Properties">
+          <LayersControl.Overlay name="5 Star Properties">
             <LayerGroup>
               <Buildings buildingRating={5} />
             </LayerGroup>
           </LayersControl.Overlay>
 
-          <LayersControl.Overlay name="Feature group">
-            <FeatureGroup pathOptions={{ color: "purple" }}>
-              <Popup>Popup in FeatureGroup</Popup>
-              <Circle center={[51.51, -0.06]} radius={200} />
-            </FeatureGroup>
+          <LayersControl.Overlay name="4 Star Properties">
+            <LayerGroup>
+              <Buildings buildingRating={4} />
+            </LayerGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="3 Star Properties">
+            <LayerGroup>
+              <Buildings buildingRating={3} />
+            </LayerGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="2 Star Properties">
+            <LayerGroup>
+              <Buildings buildingRating={2} />
+            </LayerGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="1 Star Properties">
+            <LayerGroup>
+              <Buildings buildingRating={1} />
+            </LayerGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="All Properties">
+            <LayerGroup>
+              <Buildings />
+            </LayerGroup>
           </LayersControl.Overlay>
 
           {/* <GeoSearchControlElement

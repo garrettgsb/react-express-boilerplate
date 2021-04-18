@@ -2,11 +2,25 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  //Get all buildings in an area
+  //Get all buildings
   const userId = 1;
 
+  router.get("/", (req, res) => {
+    db.query(
+      `
+      SELECT *
+      FROM buildings
+      LIMIT 500
+      `
+    )
+      .then(({ rows: buildings }) => res.json(buildings))
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  // Get buildings based off of rating
   router.get("/:ratingId", (req, res) => {
-    // const areaID = req.params.area_id;
     const ratingId = req.params.ratingId;
 
     db.query(
