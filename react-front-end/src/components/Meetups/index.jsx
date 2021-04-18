@@ -83,20 +83,6 @@ export default function Meetups() {
       setEvents([...events, newEvent])
     }
 
-    // edit event
-    const editEvent = (id, events) => {
-      // edit event with updated info
-      const editedEvent = events.map(event => {
-        if (id === event.id) {
-          return {...event}
-        }
-        return event;
-      })
-
-      // display existing events, and add new event to displayed data
-      setEvents([...events, editedEvent])
-    }
-
     return (
       <>
         <CheckedContext.Provider value={valueCheck}>
@@ -104,7 +90,7 @@ export default function Meetups() {
               <div className="container">
                 <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
                 {showAddEvent && <AddEvent onAdd={addEvent} />}
-                {events.length > 0 ? <Events events={events} onEdit={editEvent} onDelete={deleteEvent} /> : 'No events to show'}
+                {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
               <br />
               </div>
               <div>
