@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { authContext } from './AuthProvider';
 // import axios from 'axios';
 import Meetups from './components/Meetups/index.jsx';
