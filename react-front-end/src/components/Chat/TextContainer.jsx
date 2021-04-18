@@ -5,11 +5,6 @@ import onlineIcon from '../../icons/onlineIcon.png'
 const TextContainer = ({ users }) => {
   return (
     <div className="textContainer">
-    <span>
-      <h1><span role="img" aria-label="emoji">💬</span></h1>
-      <h2><span role="img" aria-label="emoji">❤️</span></h2>
-      <h2><span role="img" aria-label="emoji">⬅️</span></h2>
-    </span>
     {
       users
         ? (
