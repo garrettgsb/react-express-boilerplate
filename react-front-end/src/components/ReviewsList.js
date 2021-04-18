@@ -34,8 +34,6 @@ export default function ReviewsList(props) {
     });
   }, []);
 
-  // const username = reviews.username
-  // console.log('do u werk?', username)
 
   const handleRemove = (id, e) => {
     axios.delete(`/api/reviews/${id}`).then((res) => {
