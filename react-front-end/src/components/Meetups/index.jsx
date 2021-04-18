@@ -99,10 +99,10 @@ export default function Meetups() {
               <div>
                 <MeetupPanel />
               </div>
+            </div>
               <div>
                 <SafetySend />
               </div>
-            </div>
         </CheckedContext.Provider>
       </>
     );
