@@ -4,6 +4,7 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import mapImage from "../assets/map-home.png"
 
 import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
 import MapOutlinedIcon from "@material-ui/icons/MapOutlined";
@@ -24,12 +25,29 @@ const useStyles = makeStyles((theme) => ({
   },
 
   container: {
+    padding: "75px 0 125px"
+  },
+
+  itemContainer: {
     width: "100%",
     height: "100%",
     maxWidth: "1280px",
     position: "relative",
     justifyContent: "space-around",
+    margin: "75px 0 0",
+  },
+
+  mapContainer: {
+    display: "flex",
+    width: "100%",
+    backgroundColor: "rgb(22, 28, 36)",
     margin: "45px 0 0",
+    padding: "120px 0px"
+  },
+
+  itemTitle: {
+    fontFamily: 'Be Vietnam',
+    fontWeight: "700"
   },
 
   item: {
@@ -53,6 +71,23 @@ const useStyles = makeStyles((theme) => ({
     height:"100%",
     margin:"45px auto",
     color: "green"
+  },
+
+  mapTitle: {
+    marginBottom: "45px"
+  },
+
+  mapText: {
+    color: "white",
+    alignSelf: "center",
+    textAlign: "start",
+    width: "100%",
+    maxWidth: "250px"
+  },
+
+  mapImage: {
+    position: "relative",
+    width: "65%"
   }
 }));
 
@@ -63,8 +98,11 @@ export default function Home() {
       <Box className={classes.hero}>
         <h1>GlassWalls</h1>
       </Box>
-      <Container>
-        <Grid className={classes.container} container spacing={3}>
+      <Container className={classes.container}>
+        <Grid>
+          <Typography className={classes.itemTitle} variant="h4">How GlassWalls works for you</Typography>
+        </Grid>
+        <Grid className={classes.itemContainer} container spacing={3}>
           <Grid className={classes.item} item xs>
             <RateReviewOutlinedIcon className={classes.svg} />
             <Typography>Reviews</Typography>
@@ -79,6 +117,16 @@ export default function Home() {
           </Grid>
         </Grid>
       </Container>
+      
+      <Grid className={classes.mapContainer} container spacing={2}>
+        <Grid item xs={8}>
+          <img className={classes.mapImage}  src={mapImage}/>
+        </Grid>
+        <Grid className={classes.mapText} item xs={4}m>
+          <Typography variant="h4" className={classes.mapTitle}>Map</Typography>
+          <Typography variant="p">I want to see reviews of nearby apartments so I can get more information</Typography>
+        </Grid>
+      </Grid>
     </div>
   );
 }
