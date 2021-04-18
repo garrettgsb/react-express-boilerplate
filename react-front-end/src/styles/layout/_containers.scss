@@ -1,0 +1,41 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  overflow: auto;
+  min-height: 100px;
+  border: 1px solid #0e3147;
+  padding: 30px;
+  border-radius: 5px;
+  &-allmeets {
+    width: 30%;
+    margin:10px
+  }
+}
+.mpanel {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  justify-content:space-evenly;
+  width: 600px
+}
+
+.meetups {
+  display: flex;
+  flex-direction: column;
+  &-hidden {
+    display: flex;
+    visibility: hidden;
+  }
+}
+
+.cont {
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  max-width: 1200px;
+  margin: auto;
+  overflow: auto;
+  // border: 1px solid #0e3147;
+  padding: 30px;
+  border-radius: 5px;
+}

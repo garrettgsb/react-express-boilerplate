@@ -1,7 +1,5 @@
 import React from 'react'
 
-import './Chat.scss'
-
 const Input = ({ message, setMessage, sendMessage }) => {
   return (
     <form className='form'>

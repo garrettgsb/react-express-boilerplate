@@ -65,10 +65,13 @@ const Event = ({ event, onDelete }) => {
           <p onClick={() => {
           handleChange();
           setMeetupToEvent();}}>{currentEvent.name}</p>
-          <FaTimes style={{color: 'red', cursor: 'pointer'}} onClick={() => {onDelete(event.id); setMeetup('');}}/>
         </h3>
         <p>{currentEvent.date} at {currentEvent.time}</p>
-        <button type="button" onClick={handleEdit} >Edit</button>
+        <button type="button" className='btn' onClick={handleEdit} >Edit</button>
+        <button 
+          type="button" 
+          className='btn-danger' 
+          onClick={() => {onDelete(event.id); setMeetup('');}}>Delete</button>
         </>)
       :
         (<>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import './forecast.scss';
 
 const Kpindex = () => {
   

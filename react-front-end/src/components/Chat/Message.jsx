@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactEmoji from 'react-emoji'
 
-import './Chat.scss'
-
 const Message = ({ message: { user, text }, name }) => {
 
   let isSentByCurrentUser = false;

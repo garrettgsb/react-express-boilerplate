@@ -22,7 +22,8 @@ CREATE TABLE photographers (
 CREATE TABLE locations (
   id SERIAL PRIMARY KEY NOT NULL,
   location_name VARCHAR(255) NOT NULL,
-  coordinates VARCHAR(255) NOT NULL
+  latitude VARCHAR(255) NOT NULL,
+  longitude VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE meetups (

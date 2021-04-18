@@ -1,9 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { authContext } from '../../AuthProvider';
 import { MeetupsContext } from '../../MeetupsContext'
-import '../Button.scss';
-import '../../App.scss';
-import './UserLogin.scss';
 import axios from 'axios';
 import moment from 'moment'
 
