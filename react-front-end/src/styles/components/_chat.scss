@@ -2,20 +2,20 @@
 
 .outerContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  height: 100vh;
-  background-color: #1A1A1D;
+  height: 50vh;
+  background-color: $dark-teal;
 }
 
 .innerContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   background: #FFFFFF;
   border-radius: 8px;
-  height: 60%;
-  width: 35%;
+  height: 80%;
+  width: 60%;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
@@ -146,7 +146,7 @@ button:focus {
 
 .input {
   border: none;
-  border-radius: 0;
+  border-radius: 5px;
   padding: 5%;
   width: 80%;
   font-size: 1.2em;
@@ -160,11 +160,14 @@ input:focus, textarea:focus, select:focus{
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;
-  background: #2979FF;
+  background: $teal;
   padding: 20px;
   display: inline-block;
   border: none;
+  padding: 10px;
   width: 20%;
+  border-radius: 5px;
+  align-items: center;
 }
 
 // messages
@@ -178,9 +181,9 @@ input:focus, textarea:focus, select:focus{
 .textContainer {
   display: flex;
   flex-direction: column;
-  margin-left: 100px;
+  margin-left: 10px;
   color: white;
-  height: 60%;
+  height: 80%;
   justify-content: space-between;
 }
 

@@ -1,23 +1,14 @@
 import React from 'react';
 import { useState, useMemo } from 'react';
-// import moment from 'moment'
-
 import Header from './Header.jsx';
 import Events from './Events.jsx'
 import AddEvent from './AddEvent.jsx'
 import Chatbox from '../Chat/Chatbox'
 import ChatJoin from '../Chat/ChatJoin'
 import SafetySend from './SafetySend'
-
-// import '../../styles/components/_button.scss'
-import '../../styles/App.scss';
-
 import { MeetupsContext } from '../../MeetupsContext.jsx';
 import { CheckedContext } from './CheckedContext.jsx'
 import MeetupPanel from './MeetupPanel.jsx';
-
-// import axios from 'axios';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export default function Meetups() {
 
@@ -89,17 +80,19 @@ export default function Meetups() {
     return (
       <>
         <CheckedContext.Provider value={valueCheck}>
-            <div className="container-meetups">
-              <div className="container">
+          <div className="cont" >
+              <div className="container-allmeets">
                 <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
                 {showAddEvent && <AddEvent onAdd={addEvent}/>}
                 {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
               <br />
               </div>
+            <div className="mpanel">
               <div>
                 <MeetupPanel />
               </div>
             </div>
+              </div>
               <div>
                 <SafetySend />
               </div>
