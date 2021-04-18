@@ -19,6 +19,7 @@ const Building = () => {
   const history = useHistory();
 
   // Converts the ratios to a whole number
+  // TODO: Debug NaN from showing
   const landlord_percentage = Number(building.landlord_ratio)*100;
   const recommend_to_friend_percentage = Number(building.recommend_to_friend_ratio)*100;
 
@@ -26,10 +27,6 @@ const Building = () => {
   const getColour = (r) => {
     return r > 50 ? "green" : "red"
   }
-
-  // TODO: Use this for the average buildng star rating 
-  // const building_rating = building.average_building_rating
-  // console.log(building_rating);
   
   useEffect(() => {
     axios.get(`/api/buildings/${buildingId}`)
@@ -49,6 +46,7 @@ const Building = () => {
         <div key={building.id}>
           <h1>{building.name}</h1>
           <h3>{building.neighbourhood} Neighbourhood</h3>
+          {/* TODO: How to make this render number of stars? */}
           <h4><StarIcon key={building.average_building_rating}/></h4>
           <p>{building.address}</p>
           <img
