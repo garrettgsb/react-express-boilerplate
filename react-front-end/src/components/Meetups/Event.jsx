@@ -12,13 +12,11 @@ import {
 } from '@material-ui/pickers';
 import moment from 'moment';
 
-const Event = ({ event, onDelete }) => {
+const Event = ({ event, onDelete, onEdit }) => {
   const [ edit, setEdit ] = useState(false);
-
+  
   const { checked, setChecked } = useContext(CheckedContext);
   const { meetup, setMeetup } = useContext(MeetupsContext);
-  // const checked = true;
-  // const contextCheck = useContext(CheckedContext)
 
   function setMeetupToEvent() {
     setMeetup(event)
@@ -32,7 +30,6 @@ const Event = ({ event, onDelete }) => {
     setEdit(!edit)
   }
 
-
   const [selectedDate, setSelectedDate] = React.useState();
   const [selectedTime, setSelectedTime] = React.useState();
   const [locationName, setLocationName] = useState('')
@@ -41,14 +38,6 @@ const Event = ({ event, onDelete }) => {
     setSelectedDate(date);
     setSelectedTime(date);
   };
-
-  const onEdit = (event) => {
-
-    const id = event.id
-
-    setEdit({ event })
-    console.log('onEdit', event)
-  }
 
   const onSubmit = (e) => {
     // don't want the form to submit to a page
@@ -62,6 +51,7 @@ const Event = ({ event, onDelete }) => {
 
     // 
     onEdit({ name: locationName, date: moment(selectedDate).format("YYYY-MM-DD"), time: moment(selectedTime).format("HH:MM:SS")})
+    console.log('onSubmit', event)
 
     setLocationName('')
   }
@@ -78,10 +68,10 @@ const Event = ({ event, onDelete }) => {
         <FaTimes style={{color: 'red', cursor: 'pointer'}} onClick={() => {onDelete(event.id); setMeetup('');}}/>
       </h3>
       <p>{event.date} at {event.time}</p>
-      <button onClick={handleEdit} >Edit</button>
+      <button type="button" onClick={handleEdit} >Edit</button>
       </>)
 :
-      (  <>     <form className='add-form' onSubmit={ onSubmit, handleEdit } value={event}>
+      (  <>     <form className='add-form' onSubmit={onSubmit} value={event}>
       <div className='form-control'>
       {/* May want to change Location input label to 'coordinates' or something else  */}
         <label>Location</label>
@@ -89,7 +79,7 @@ const Event = ({ event, onDelete }) => {
         type='text' 
         placeholder='place event here'
         value={locationName}
-        onChange = {(e) => setLocationName(e.target.value)} />
+        onChange={(e) => setLocationName(e.target.value)} />
       </div>
 
       <div className='form-control'>
@@ -104,8 +94,8 @@ const Event = ({ event, onDelete }) => {
                 id="date-picker-dialog"
                 label="Date"
                 format="MM/dd/yyyy"
-                value={selectedDate}
                 onChange={handleDateChange}
+                value={selectedDate}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -115,8 +105,8 @@ const Event = ({ event, onDelete }) => {
                 margin="normal"
                 id="time-picker"
                 label="Time"
-                value={selectedDate}
                 onChange={handleDateChange}
+                value={selectedTime}
                 KeyboardButtonProps={{
                   'aria-label': 'change time',
                 }}
@@ -125,7 +115,7 @@ const Event = ({ event, onDelete }) => {
           </MuiPickersUtilsProvider>
       </div>
 
-      <input type='submit' value='Save Meetup' className='btn btn-block'  />
+      <button type='button' value='Save Meetup' className='btn btn-block'  onClick={handleEdit} />
     </form> </>  )}
     </div>
   )
