@@ -51,13 +51,14 @@ app.get('/profile/:id', (req,res) => {
 
 // get aurora locations
 app.get('/maps', (req,res) => {
-  console.log('maps:', req.body)
   const query = `SELECT * FROM locations`
-  db.query(query).then((data) => {
-      res.send(data.rows[0])
+    db.query(query).then((data) => {
+      res.send(data.rows)
     }).catch((err) => {
   });
 })
+
+
 
 // Cors configuration: blocks browser from restricting data
 const corsOptions = {

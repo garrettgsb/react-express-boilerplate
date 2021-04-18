@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import axios from 'axios'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from "leaflet";
 import '../../styles/App.scss';
 
 export default function MapClass (){
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/maps`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+    .then((response) => {console.log(response.data)});
+  }, []);
 
   L.Icon.Default.imagePath='img/'
   const position = [51.046537674112, -114.06380858447375]
