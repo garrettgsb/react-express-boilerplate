@@ -1,8 +1,6 @@
 .NavbarItems {
-
-  background-image: url(https://ze-robot.com/dl/no/northern-lights-digital-painting-by-aenami-1080p-768%C3%971024.jpg);
+  background-image: url(https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
   height: 120px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,16 +8,14 @@
 }
 
 .navbar-logo {
-  color: rgb(247, 199, 199);
+  color: #fff;
   justify-self: start;
   margin-left: 20px;
-  // cursor: pointer;
-  // font-size: 2rem;
 }
 
 .nav-menu {
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(6, auto);
   grid-gap: 10px;
   list-style: none;
   text-align: center;
@@ -29,25 +25,23 @@
 }
 
 .nav-links {
-  color: rgb(247, 199, 199);
+  color: #fff;
   text-decoration: none;
   padding: 0.5rem 0.5rem;
   font-size: medium;
-}
-
-.nav-links:hover {
-  background-color: #93e593;
-  color: black;
-  border-radius: 4px;
-  transition: all 0.2s ease-out;
+  &:hover {
+    background-color: #092a3c;
+    color: #fff;
+    border-radius: 4px;
+    transition: all 0.2s ease-out;
+  }
+  &-mobile {
+    display: none;
+  }
 }
 
 .fa-bars {
   color: rgb(247, 199, 199);
-}
-
-.nav-links-mobile {
-  display: none;
 }
 
 .menu-icon {
@@ -72,7 +66,7 @@
   }
 
   .nav-menu.active {
-    background-image: url(https://ze-robot.com/dl/no/northern-lights-digital-painting-by-aenami-1080p-768%C3%971024.jpg);
+    background-image: url(https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
@@ -84,11 +78,21 @@
     padding: 2rem;
     width: 100%;
     display: table;
-  }
-
-  .nav-links:hover {
-    background-color: #93e593;
-    border-radius: 0;
+    &:hover {
+      background-color: #93e593;
+      border-radius: 0;
+    };
+    &-mobile {
+      display: block;
+      text-align: center;
+      padding: 1.5rem;
+      margin: 2rem;
+      border-radius: 4px;
+      width: 80%;
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.5rem;
+    }
   }
 
   .navbar-logo {
@@ -109,19 +113,7 @@
   }
 
   .fa-times {
-    color: rgb(247, 199, 199);
-    font-size: 2rem;
-  }
-
-  .nav-links-mobile {
-    display: block;
-    text-align: center;
-    padding: 1.5rem;
-    margin: 2rem;
-    border-radius: 4px;
-    width: 80%;
-    text-decoration: none;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 }

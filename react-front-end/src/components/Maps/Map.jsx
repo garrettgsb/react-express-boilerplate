@@ -25,5 +25,3 @@ export default function MapClass (){
     </div>
   )
 }
-
-git commit -m "variation on map page. Unsuccessful attempt to add pin to map with a click"

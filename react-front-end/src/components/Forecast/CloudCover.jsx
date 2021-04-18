@@ -2,7 +2,7 @@ import React from 'react';
 
 const CloudCover = () => {
   return (
-    <h1>This is the forecast!</h1>
+    <h1></h1>
 
   )
 }
