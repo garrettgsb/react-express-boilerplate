@@ -14,7 +14,7 @@ const Header = ({ onAdd, showAddEvent }) => {
     <Button 
       className='btn' 
       color={showAddEvent ? 'red' : 'green'}
-      text={showAddEvent ? 'Close' : 'Add'} 
+      text={showAddEvent ? 'Cancel' : 'Add'} 
       onClick={onAdd} />
     </header>
   )
