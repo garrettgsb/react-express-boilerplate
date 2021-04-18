@@ -22,6 +22,7 @@ const Building = () => {
   // TODO: Debug NaN from showing
   const landlord_percentage = Number(building.landlord_ratio)*100;
   const recommend_to_friend_percentage = Number(building.recommend_to_friend_ratio)*100;
+  const building_rating = 5
 
   // Determines colour of the percentage circles
   const getColour = (r) => {
@@ -46,8 +47,15 @@ const Building = () => {
         <div key={building.id}>
           <h1>{building.name}</h1>
           <h3>{building.neighbourhood} Neighbourhood</h3>
-          {/* TODO: How to make this render number of stars? */}
-          <h4><StarIcon key={building.average_building_rating}/></h4>
+          <h4>
+                { building.average_building_rating ? <> {
+                    [...Array(building.average_building_rating)].map((stars, index)=>{
+                        return <StarIcon key={index}/>
+                      })          
+                  } </> : null
+                }
+              </h4>
+
           <p>{building.address}</p>
           <img
             className="building_amenities-image"
