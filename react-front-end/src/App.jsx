@@ -9,8 +9,8 @@ import UserLogin from './components/UserLogin/UserLogin.jsx';
 import UserInfo from './components/UserInfo/UserInfo.jsx';
 import Settings from './components/Settings/index.jsx';
 import Navbar from './components/Navbar/Navbar'
-import './App.scss';
-import './components/Button.scss';
+import './styles/App.scss';
+import './styles/components/_button.scss';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
 
 

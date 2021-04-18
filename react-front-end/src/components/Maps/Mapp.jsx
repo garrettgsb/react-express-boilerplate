@@ -1,7 +1,7 @@
 // import React from "react";
 // import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 // import L, { Icon } from "leaflet";
-// import '../../App.scss';
+// import '../../styles/App.scss';
 // import * as parkData from '../../data/skateboard-parks.json';
 
 // // export const icon = new Icon({

@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import './SafetySend.scss';
-// import '../../styles/components/SafetySend.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 

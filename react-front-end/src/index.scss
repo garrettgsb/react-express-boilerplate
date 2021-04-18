@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import './styles/App';
 
 // body {
 //   margin: 0;
@@ -34,20 +35,19 @@ body {
   border: 1px solid #10192A;
   padding: 30px;
   border-radius: 5px;
-}
-
-.container-meetups {
-  display: flex;
-  justify-content:space-evenly;
+  &-meetups {
+    display: flex;
+    justify-content:space-evenly;
+  }
 }
 
 .meetups {
   display: flex;
   flex-direction: column;
+  &-hidden {
+    display: flex;
+    visibility: hidden;
 }
-.meetups-hidden {
-  display: flex;
-  visibility: hidden;
 }
 
 .header {
@@ -57,32 +57,7 @@ body {
   margin-bottom: 20px;
 }
 
-.btn {
-  display: inline-block;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: inherit;
-}
 
-.btn:focus {
-  outline: none;
-}
-
-.btn:active {
-  transform: scale(0.98);
-}
-
-.btn-block {
-  display: block;
-  width: 100%;
-}
 
 .event {
   background: #f4f4f4;
