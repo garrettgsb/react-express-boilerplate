@@ -8,7 +8,7 @@ export default function Maps() {
   return (
     <div id="mapid">
       <Map />
-      <Mapp />
+      {/* <Mapp /> */}
     </div>
   );
 }

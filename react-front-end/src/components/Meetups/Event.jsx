@@ -21,7 +21,8 @@ const Event = ({ event, onDelete }) => {
   const { meetup, setMeetup } = useContext(MeetupsContext);
 
   function setMeetupToEvent() {
-    setMeetup(currentEvent)
+    setMeetup('');
+    setMeetup(currentEvent);
   }
 
   function handleChange() {
@@ -58,13 +59,11 @@ const Event = ({ event, onDelete }) => {
   }
 
   return (
-    <div className='event'>
+    <div className='event' onClick={() => {handleChange(); setMeetupToEvent();}}>
     {!edit ?
       (<>
         <h3>
-          <p onClick={() => {
-          handleChange();
-          setMeetupToEvent();}}>{currentEvent.name}</p>
+          <p>{currentEvent.name}</p>
         </h3>
         <p>{currentEvent.date} at {currentEvent.time}</p>
         <button type="button" className='btn' onClick={handleEdit} >Edit</button>
