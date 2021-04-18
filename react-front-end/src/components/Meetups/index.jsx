@@ -3,10 +3,8 @@ import { useState, useMemo } from 'react';
 import Header from './Header.jsx';
 import Events from './Events.jsx'
 import AddEvent from './AddEvent.jsx'
-import Chatbox from '../Chat/Chatbox'
-import ChatJoin from '../Chat/ChatJoin'
 import SafetySend from './SafetySend'
-import { MeetupsContext } from '../../MeetupsContext.jsx';
+
 import { CheckedContext } from './CheckedContext.jsx'
 import MeetupPanel from './MeetupPanel.jsx';
 
@@ -83,7 +81,7 @@ export default function Meetups() {
           <div className="cont" >
               <div className="container-allmeets">
                 <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
-                {showAddEvent && <AddEvent onAdd={addEvent}/>}
+                {showAddEvent && <AddEvent onAdd={addEvent} />}
                 {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
               <br />
               </div>
