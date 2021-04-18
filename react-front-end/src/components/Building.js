@@ -5,6 +5,7 @@ import ReviewsList from "./ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
 import FavouriteButton from "./Favourites/FavouriteButton";
 import AmenMap from "./AmenMap";
+import StarIcon from "@material-ui/icons/Star";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -17,6 +18,16 @@ const Building = () => {
 
   const history = useHistory();
 
+  // Converts the ratios to a whole number
+  // TODO: Debug NaN from showing
+  const landlord_percentage = Number(building.landlord_ratio)*100;
+  const recommend_to_friend_percentage = Number(building.recommend_to_friend_ratio)*100;
+
+  // Determines colour of the percentage circles
+  const getColour = (r) => {
+    return r > 50 ? "green" : "red"
+  }
+  
   useEffect(() => {
     axios.get(`/api/buildings/${buildingId}`)
     .then((res) => {
@@ -28,25 +39,6 @@ const Building = () => {
     history.push("/map");
   };
 
-  const green_rating = 52;
-  const red_rating = 70;
-
-  const getColour = (r) => {
-    return r > 50 ? "green" : "red"
-  }
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get(`/api/buildings/${buildingId}`),
-  //     axios.get("/api/reviews/landlord_ratio"),
-  //   ]).then((all) => {
-  //     setState((prev) => ({
-  //       ...prev,
-  //       building: all[0].data,
-  //       landlord_rating: all[1].data,
-  //     }));
-  //   });
-  // }, []);
-  
 
   return (
     <div className="building-container">
@@ -54,6 +46,8 @@ const Building = () => {
         <div key={building.id}>
           <h1>{building.name}</h1>
           <h3>{building.neighbourhood} Neighbourhood</h3>
+          {/* TODO: How to make this render number of stars? */}
+          <h4><StarIcon key={building.average_building_rating}/></h4>
           <p>{building.address}</p>
           <img
             className="building_amenities-image"
@@ -68,23 +62,23 @@ const Building = () => {
         <div className="percentage-circle" style={{width: 80, height: 80}}>
           <h3>Landlord Approval</h3>
             <CircularProgressbar
-              value={green_rating}
-              text={`${green_rating}%`}
+              value={landlord_percentage}
+              text={`${landlord_percentage}%`}
               strokeWidth={10}
               styles = {buildStyles({
-                textColor: getColour(green_rating),
-                pathColor: getColour(green_rating)
+                textColor: getColour(landlord_percentage),
+                pathColor: getColour(landlord_percentage)
               }
               )}
             />
           <h3>Recommend to Friend</h3>
             <CircularProgressbar
-              value={red_rating}
-              text={`${red_rating}%`}
+              value={recommend_to_friend_percentage}
+              text={`${recommend_to_friend_percentage}%`}
               strokeWidth={10}
               styles = {buildStyles({
-                textColor: getColour(red_rating),
-                pathColor: getColour(red_rating)
+                textColor: getColour(recommend_to_friend_percentage),
+                pathColor: getColour(recommend_to_friend_percentage)
               }
               )}
             />

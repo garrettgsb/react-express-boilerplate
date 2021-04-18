@@ -1,0 +1,5 @@
+ id | area_id |          name          |         address         | neighbourhood |                                                                           image_url                                                                           |  latitude   |  longitude   
+----+---------+------------------------+-------------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+--------------
+  1 |       1 | Mission Bay Apartments | 718 LONG BRIDGE ST #800 | Mission Bay   | https://images.unsplash.com/photo-1571264781039-6e8ebc5bb92d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80 | 37.77131354 | -122.3944362
+(1 row)
+

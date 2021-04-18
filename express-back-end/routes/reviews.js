@@ -2,6 +2,8 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+
+  // Gets all reviews
   router.get("/api/reviews", (req, res) => {
     db.query(`SELECT * FROM reviews;`)
       .then(({ rows: reviews }) => {
@@ -12,11 +14,26 @@ module.exports = (db) => {
       })
   });
 
-  router.delete("/api/reviews/:id", (req, res) => {
-    db.query(`DELETE FROM reviews WHERE reviews.id = $1`,[req.params.id])
-      .then(({ rows: review }) => res.json(review))
-  })
+  // Gets all reviews for a specific building
+  router.get("/api/reviews/:building_id", (req, res) => {
+    const params = [req.params.building_id]
+    // const query = `SELECT * FROM reviews WHERE building_id = $1`;
+    const query = `SELECT reviews.id AS review_id, reviews.area_id AS area_id, reviews.building_id AS building_id, reviews.title AS title, reviews.building_rating AS building_rating, reviews.comment AS comment, reviews.landlord_rating AS landlord_rating, reviews.recommend_to_friend AS recommend_to_friend, users.username AS username
+    FROM users
+    JOIN reviews ON users.id = reviews.user_id
+    WHERE building_id = $1`
+    db.query(query, params)
+    .then(data => {
+      res.json(data.rows);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
 
+  // Adds a new review
   router.post("/", (req, res) => {
     const title = req.body.title;
     const comment = req.body.comment;
@@ -41,6 +58,7 @@ module.exports = (db) => {
     });
   })
 
+  // Updates a review
   router.put("/api/reviews/:id", (req, res) => {
     const id = req.body.id;
     const title = req.body.title;
@@ -66,6 +84,13 @@ module.exports = (db) => {
     });
   })
 
+  // Deletes a review
+  router.delete("/api/reviews/:id", (req, res) => {
+    db.query(`DELETE FROM reviews WHERE reviews.id = $1`,[req.params.id])
+      .then(({ rows: review }) => res.json(review))
+  })
+
+
   // Gets average area rating by area name
   router.get("/api/reviews/area_ratings", (req, res) => {
     const queryString = `
@@ -85,85 +110,6 @@ module.exports = (db) => {
         .json({ error: err.message });
     });
   })
-
-  // Gets average building rating by building id
-  router.get("/api/reviews/building_ratings", (req, res) => {
-    const queryString = `
-      SELECT buildings.id AS building_id, buildings.name AS building_name, ROUND(AVG(building_rating),0) AS average_building_rating
-      FROM reviews
-      JOIN buildings ON building_id = buildings.id
-      GROUP BY buildings.id
-      ORDER BY average_building_rating DESC;
-    `
-    db.query(queryString) 
-    .then(({ rows: reviews }) => {
-      res.json(reviews);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
-
-  // Gets ratio of recommend to friend
-  router.get("/api/reviews/friend_ratio", (req, res) => {
-    const queryString = `SELECT  	
-    (SELECT cast(count(id) as decimal) 
-    FROM reviews WHERE recommend_to_friend = 't') / 
-    (SELECT cast(COUNT(id) as decimal) FROM reviews) 
-    AS recommend_to_friend_percentage;
-  `
-    db.query(queryString) 
-    .then(({ rows: reviews }) => {
-      res.json(reviews);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
-
-  // Gets ratio of landlord approvals
-  router.get("/api/reviews/landlord_ratio", (req, res) => {
-    const queryString = `SELECT  	
-    (SELECT cast(count(id) as decimal) 
-    FROM reviews 
-    WHERE landlord_rating = 't') / 
-    (SELECT cast(COUNT(id) as decimal) FROM reviews) 
-    AS landlord_approval_percentage;
-  `
-    db.query(queryString) 
-    .then(({ rows: reviews }) => {
-      res.json(reviews);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
-
-  // Gets username associated with reviews
-  router.get("/api/reviews/username", (req, res) => {
-    const queryString = `SELECT reviews.id AS review_id, users.username AS username
-    FROM users
-    JOIN reviews ON users.id = reviews.user_id;    
-  `
-    db.query(queryString) 
-    .then(({ rows: reviews }) => {
-      res.json(reviews);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  })
-
-
-
 
   return router;
 };
