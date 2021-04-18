@@ -13,10 +13,15 @@ CREATE TABLE photographers (
   name VARCHAR(255) NOT NULL, 
   email VARCHAR(255) NOT NULL,
   city VARCHAR(255),
+  bio TEXT NOT NULL,
+  profile_pic VARCHAR(255) NOT NULL,
   phone_number VARCHAR(255) NOT NULL,
   photo1_url VARCHAR(255) NOT NULL,
   photo2_url VARCHAR(255) NOT NULL,
-  photo3_url VARCHAR(255) NOT NULL
+  photo3_url VARCHAR(255) NOT NULL,
+  photo1_url_details VARCHAR(255) NOT NULL,
+  photo2_url_details VARCHAR(255) NOT NULL,
+  photo3_url_details VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE locations (

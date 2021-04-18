@@ -60,7 +60,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Forecast}/>
               <Route exact path="/meetups" component={Meetups}/>
-              <Route exact path="/profile" component={Profile}/>
+              <Route exact path="/profile/2" component={Profile}/>
               <Route exact path="/settings" component={Settings}/>
               {!auth && <Route exact path="/login" component={UserLogin}/>}
               {auth && <Route exact path="/login" component={UserInfo}/>}

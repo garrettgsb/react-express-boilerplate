@@ -21,7 +21,7 @@ const Navbar = () => {
                 <ul className={clicked ? 'nav-menu active' : 'nav-menu'}>
                     <li><Link className='nav-links' to="/">Forecast</Link></li>
                     <li><Link className='nav-links' to="/meetups">Meetups</Link></li>
-                    <li><Link className='nav-links' to="/profile">Profile</Link></li>
+                    <li><Link className='nav-links' to="/profile/2">Profile</Link></li>
                     <li><Link className='nav-links' to="/settings">Settings</Link></li>
                     <li><Link className='nav-links' to="/login">{user.name ? 'Logout' : 'Login'}</Link></li>
                 </ul>

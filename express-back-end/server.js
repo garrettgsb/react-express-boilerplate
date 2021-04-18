@@ -17,13 +17,14 @@ const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWI
 
 
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static('public'));
-App.use(cors());
+app.use(BodyParser.urlencoded({ extended: false }));
+app.use(BodyParser.json());
+app.use(express.static('public'));
+app.use(cors());
 
 //get user from db for login
-App.post('/login', (req, res) => {
+app.post('/login', (req, res) => {
+  console.log('testing:', req.body.credentials)
   const credentials = JSON.parse(req.body.credentials);
 	const email = credentials.email;
 	const password = credentials.password;
@@ -37,13 +38,20 @@ App.post('/login', (req, res) => {
 });
 
 //get user for profile page
-App.get('/profile/:id', (req,res) => {
+app.get('/profile/:id', (req,res) => {
   console.log('req.params.id: ', req.params.id)
   const query = `SELECT * FROM photographers WHERE id = $1`
-  console.log(req.body);
     db.query(query, [req.params.id]).then((data) => {
       res.send(data.rows[0])
-      console.log(data.rows[0])
+    }).catch((err) => {
+  });
+})
+
+app.get('/meetups', (req,res) => {
+  // console.log('meetups...:', req.body.rows[0])
+  const query = `SELECT * FROM meetups`
+  db.query(query).then((data) => {
+      res.send(data.rows[0])
     }).catch((err) => {
   });
 })

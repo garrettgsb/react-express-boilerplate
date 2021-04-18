@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import uuid from 'react-uuid';
+import axios from 'axios';
 
 export default function AuthProvider(props) {
   const [auth, setAuth] = useState(false);
@@ -8,10 +9,28 @@ export default function AuthProvider(props) {
 
   // Perform login process for the user & save authID, etc
   const login = function (email, password) {
-    const id = uuid();
-    setUser({ email, id, name: "Betty Boop" });
-    setAuth(true);
-  };
+    axios.post('http://localhost:8080/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: JSON.stringify({email: email, password: password})
+      // credentials: JSON.stringify(credentials)
+    })
+      .then((data) => { 
+        console.log(data)
+        if(data.data === '') {
+        alert('Sorry, the email or password is not valid')
+      } else {
+        console.log('All good')
+        setUser({ email, id});
+        setAuth(true);
+      }
+    })
+  }
+    // console.log('am i hitting here')
+    // const id = uuid();
+  // };
 
   const logout = function (email, password) {
     setUser({ email: "", name: "" });
