@@ -6,7 +6,7 @@ import { Icon } from "leaflet";
 // import ApartmentIcon from "@material-ui/icons/Apartment";
 
 //component to render all buildings
-const Buildings = () => {
+const Buildings = (props) => {
   const [buildings, setBuildings] = useState([]);
 
   const { buildingId } = useParams();
@@ -18,8 +18,11 @@ const Buildings = () => {
     iconSize: [20, 20],
   });
 
+  const buildingRating = props.buildingRating;
+
   useEffect(() => {
-    axios.get("/api/buildings").then((res) => {
+    const body = { buildingRating };
+    axios.get("/api/buildings", body).then((res) => {
       setBuildings(res.data);
     });
   }, [buildingId]);

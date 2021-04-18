@@ -7,7 +7,8 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     // const areaID = req.params.area_id;
-    const areaID = 1;
+    const buildingId = req.body;
+    console.log(buildingId);
 
     db.query(
       `
