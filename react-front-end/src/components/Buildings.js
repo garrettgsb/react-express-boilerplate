@@ -19,10 +19,10 @@ const Buildings = (props) => {
   });
 
   const buildingRating = props.buildingRating;
+  console.log(buildingRating);
 
   useEffect(() => {
-    const body = { buildingRating };
-    axios.get("/api/buildings", body).then((res) => {
+    axios.get(`/api/buildings/${buildingRating}`).then((res) => {
       setBuildings(res.data);
     });
   }, [buildingId]);

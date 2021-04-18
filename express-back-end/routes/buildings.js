@@ -5,19 +5,18 @@ module.exports = (db) => {
   //Get all buildings in an area
   const userId = 1;
 
-  router.get("/", (req, res) => {
+  router.get("/:ratingId", (req, res) => {
     // const areaID = req.params.area_id;
-    const buildingId = req.body;
-    console.log(buildingId);
+    const ratingId = req.params.ratingId;
 
     db.query(
       `
       SELECT *
       FROM buildings
-      WHERE area_id = $1
-      LIMIT 1000
+      JOIN reviews ON building_id = buildings.id
+      WHERE building_rating = $1
       `,
-      [areaID]
+      [ratingId]
     )
       .then(({ rows: buildings }) => res.json(buildings))
       .catch((err) => {

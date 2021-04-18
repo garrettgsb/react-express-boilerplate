@@ -110,7 +110,7 @@ function MainMap() {
           {/* Toggle building markers */}
           <LayersControl.Overlay name="Properties">
             <LayerGroup>
-              <Buildings buildingRating={4} />
+              <Buildings buildingRating={5} />
             </LayerGroup>
           </LayersControl.Overlay>
 
