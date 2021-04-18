@@ -17,19 +17,19 @@ const Building = () => {
 
   const history = useHistory();
 
-  useEffect(() => {
-    axios.get(`/api/buildings/${buildingId}`)
-    .then((res) => {
-      setBuilding(res.data[0]);
-    });
-  }, [buildingId]);
-
   const landlord_percentage = Number(building.landlord_ratio)*100;
   const recommend_to_friend_percentage = Number(building.recommend_to_friend_ratio)*100;
 
   const getColour = (r) => {
     return r > 50 ? "green" : "red"
   }
+  
+  useEffect(() => {
+    axios.get(`/api/buildings/${buildingId}`)
+    .then((res) => {
+      setBuilding(res.data[0]);
+    });
+  }, [buildingId]);
 
   const handleClick = () => {
     history.push("/map");
