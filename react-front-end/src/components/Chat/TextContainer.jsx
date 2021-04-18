@@ -1,16 +1,15 @@
 import React from 'react'
 
 import onlineIcon from '../../icons/onlineIcon.png'
-import './Chat.scss'
 
 const TextContainer = ({ users }) => {
   return (
     <div className="textContainer">
-    <div>
+    <span>
       <h1><span role="img" aria-label="emoji">💬</span></h1>
       <h2><span role="img" aria-label="emoji">❤️</span></h2>
       <h2><span role="img" aria-label="emoji">⬅️</span></h2>
-    </div>
+    </span>
     {
       users
         ? (

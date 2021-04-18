@@ -1,7 +1,7 @@
 import React from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from "leaflet";
-import '../../App.scss';
+import '../../styles/App.scss';
 
 export default function MapClass (){
 
@@ -25,4 +25,3 @@ export default function MapClass (){
     </div>
   )
 }
-

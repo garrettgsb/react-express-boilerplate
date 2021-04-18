@@ -1,7 +1,7 @@
 import React from 'react';
 
-import '../Button.scss';
-import '../../App.scss';
+import '../../styles/components/_button.scss'
+import '../../styles/App.scss';
 import ProfileSettings from './ProfileSettings';
 // import axios from 'axios';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L, { Icon } from "leaflet";
-import '../../App.scss';
+import '../../styles/App.scss';
 import * as parkData from '../../data/skateboard-parks.json';
 
 export default function MapClass (){

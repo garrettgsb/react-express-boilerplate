@@ -8,9 +8,6 @@ import TextContainer from './TextContainer'
 import { authContext } from '../../AuthProvider'
 import { MeetupsContext } from '../../MeetupsContext'
 
-import './Chat.scss'
-
-
 
 const ENDPOINT = 'http://localhost:5000'
 
@@ -26,7 +23,7 @@ const Chatbox = () => {
 
   const { user } = useContext(authContext);
   const { meetup } = useContext(MeetupsContext)
-  console.log('outside socket', user.name, 'meetup name', meetup.name)
+
   useEffect(() => {
     
     socket.current = io(ENDPOINT);
@@ -35,7 +32,7 @@ const Chatbox = () => {
     setName(user.name);
     setRoom(meetup.name);
     
-    console.log('pre socket join', user.name, 'meetup name', meetup.name)
+
 
     socket.current.emit('join', { name: user.name, room: meetup.name }, () => {
 

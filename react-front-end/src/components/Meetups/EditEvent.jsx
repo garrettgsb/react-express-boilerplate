@@ -86,6 +86,7 @@ const EditEvent = ({ onEdit }) => {
       </div>
 
       <input type='submit' value='Save Meetup' className='btn btn-block' onSubmit={onEdit} />
+      <button className='btn btn-block' > Cancel </button>
     </form>
   )
 }

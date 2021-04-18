@@ -3,8 +3,6 @@ import ScrollToBottom from 'react-scroll-to-bottom'
 
 import Message from './Message'
 
-import './Chat.scss'
-
 const Messages = ({ messages, name }) => {
   return (
     <ScrollToBottom className='messages'>
