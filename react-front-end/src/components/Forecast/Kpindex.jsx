@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import './forecast.scss';
 
 const Kpindex = () => {
   
@@ -8,7 +7,6 @@ const Kpindex = () => {
   const [aurora, setAurora] = useState()
   
   useEffect(() => {
-    console.log("hello")
     axios.get(url)
     .then(response => {
       console.log("test", response.data)

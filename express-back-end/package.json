@@ -6,7 +6,8 @@
   "author": "garrettgsb",
   "license": "MIT",
   "scripts": {
-    "go": "nodemon server.js"
+    "go": "nodemon server.js",
+    "chat": "nodemon chat-server.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -18,7 +19,11 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
-    "nodemon": "^1.18.7",
+    "line-by-line": "^0.1.6",
+    "nodemon": "^1.19.4",
+    "pg": "^8.6.0",
+    "postgres": "^1.0.2",
+    "socket.io": "^4.0.1",
     "twilio": "^3.60.0"
   }
 }

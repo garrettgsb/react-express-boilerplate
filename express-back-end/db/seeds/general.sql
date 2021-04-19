@@ -6,12 +6,24 @@ VALUES
 ('d2066a6a-0adb-4369-9f5b-87b1c6e4bcf3', 'password', 'Dave Diggs', 'davey09@hotmail.com', 'Penticton', 'My name is Dave and I have been into photography for quite a few years. I love to go on photgraphy trips and get outdoors. Not a big fan of going out on late shoots alone so I would love to find other photographers to join me!', 'http://1.bp.blogspot.com/-QPOYKNtZlpg/UTG0Ql2Qc_I/AAAAAAAAAgo/UdnUslWa44A/s1600/darren_heath_german08_005.jpg', 7781111111, 'https://images.unsplash.com/photo-1430132594682-16e1185b17c5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTN8fG5vcnRoZXJuJTIwbGlnaHRzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60', 'https://images.unsplash.com/photo-1472419551702-dc4862cad8f9?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjJ8fG5vcnRoZXJuJTIwbGlnaHRzfGVufDB8fDB8&auto=format&fit=crop&w=500&q=60', 'https://pbs.twimg.com/media/B8Q4YScCEAEL1cL.jpg', 'Camera Settings: f2.8 - 11 sec - ISO3200', 'Camera Settings: f4 - 18 sec - ISO1600', 'Camera Settings: f2.8 - 25 sec - ISO1600'),
 ('923a7685-27ba-4108-a888-32e9c9d26f59', 'password', 'Ellie Eggerton', 'ellie@gmail.com', 'Vancouver', 'My name is Ellie and I am from Vancouver. I am currently enrolled in the photography program at Langara College. I love seeing the northern lights and capturing all of its beauty! Hoping to find other people to meet up with in a safe and friendly environment.', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX4fu7C-Otj6UYvRue64gRJqWjjLFtd_vPYw&usqp=CAU', 6042512569, 'https://images.unsplash.com/photo-1589311836849-4cec35b363cb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2281&q=80', 'https://images.unsplash.com/photo-1612686635542-2244ed9f8ddc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80', 'https://images.unsplash.com/photo-1531366599837-ce0c0e17657c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80', 'Camera Settings: f5.4 - 16 sec - ISO3200', 'Camera Settings: f2.8 - 15 sec - ISO1600', 'Camera Settings: f2.8 - 10 sec - ISO3200');
 
-INSERT INTO locations (location_name, coordinates)
+INSERT INTO locations (location_name, province, latitude, longitude)
 VALUES
-('Banff', '51.1784° N, 115.5708° W'),
-('Moberly Lake', '55.8233° N, 121.7889° W'),
-('Northern Lights Centre','60.2343° N, 128.3215° W'),
-('High Level','58.5071° N, 117.1403° W');
+('Banff', 'Alberta', '51.1784', '-115.5708'),
+('Moberly Lake', 'British Columbia', '55.8233', '-121.7889'),
+('Northern Lights Centre', 'British Columbia', '60.2343', '-128.3215'),
+('High Level', 'Alberta', '58.5071', '-117.1403'),
+('Lake Minnewanka', 'Alberta', '51.245171', '-115.496714'),
+('Vermillion Lakes', 'Alberta', '51.245171', '-115.496714'),
+('McDougall Memorial United Church', 'Alberta', '51.187684', '-114.826393'),
+('Barrier Lake', 'Alberta', '51.033203', '-115.034114'),
+('Old Barn on Hwy 22', 'Alberta', '51.250908', '-114.476620'),
+('Blizzard Lake', 'Alberta', '51.250908', '-114.476620'),
+('Point 41', 'Alberta', '51.250908', '-114.476620'),
+('Canola Valley', 'Alberta', '52.053756', '-113.978676'),
+('Witherby Point', 'British Columbia', '49.484918', '-123.474140'),
+('Quercus Point','British Columbia', '49.646188', '-123.209316'),
+('Muncho Lake Provincial Park','British Columbia', '58.944773', '-125.769553'),
+('Topley Landing','British Columbia', '54.776879', '-126.098222');
 
 INSERT INTO auroras (forecast, location, strength) 
 VALUES

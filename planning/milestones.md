@@ -8,7 +8,7 @@
 [✔] navbar
 
 ## add twilio api data to pages
-[ ] safety messages to phone number
+[✔] safety messages to phone number
 [ ] messaging to other meetup members
 ## northern lights api - major key
 [✔] KP index strength

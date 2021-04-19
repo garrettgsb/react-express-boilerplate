@@ -24,7 +24,6 @@ app.use(cors());
 
 //get user from db for login
 app.post('/login', (req, res) => {
-  console.log('testing:', req.body.credentials)
   const credentials = JSON.parse(req.body.credentials);
 	const email = credentials.email;
 	const password = credentials.password;
@@ -55,6 +54,17 @@ app.get('/meetups', (req,res) => {
     }).catch((err) => {
   });
 })
+
+
+// get aurora locations
+app.get('/maps', (req,res) => {
+  const query = `SELECT * FROM locations`
+    db.query(query).then((data) => {
+      res.send(data.rows)
+    }).catch((err) => {
+  });
+})
+
 
 
 // Cors configuration: blocks browser from restricting data

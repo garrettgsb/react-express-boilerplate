@@ -4,6 +4,8 @@ import ProfilePic from "./ProfilePic";
 import UserDetails from "./UserDetails";
 import FeaturedPhotos from "./FeaturedPhotos";
 import { authContext } from '../../AuthProvider'
+import '../../styles/components/_button.scss'
+import '../../styles/App.scss';
 
 const Profile = () => {
   const photogData = useContext(authContext)
