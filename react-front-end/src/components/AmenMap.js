@@ -6,18 +6,17 @@ import "./App.css";
 import { Icon } from "leaflet";
 import Amenities from "./Amenities";
 
-
 function AmenMap() {
   const [building, setBuilding] = useState([]);
 
-    const { buildingId } = useParams();
+  const { buildingId } = useParams();
 
-    useEffect(() => {
-      axios.get(`/api/buildings/${buildingId}`).then((res) => {
-        console.log('res', res)
-        setBuilding(res.data);
-      });
-    }, [buildingId]);
+  useEffect(() => {
+    axios.get(`/api/buildings/${buildingId}`).then((res) => {
+      console.log("res", res);
+      setBuilding(res.data);
+    });
+  }, [buildingId]);
 
   const buildingIcon = new Icon({
     iconUrl: "/building.png",
@@ -25,7 +24,7 @@ function AmenMap() {
   });
 
   // Allows building useEffect to load
-  if(building.length < 1) {
+  if (building.length < 1) {
     return "";
   }
 
@@ -52,10 +51,9 @@ function AmenMap() {
           </div>
         </Popup>
       </Marker>
-      
+
       {/* Amenity markers */}
       <Amenities />
-
     </MapContainer>
   );
 }

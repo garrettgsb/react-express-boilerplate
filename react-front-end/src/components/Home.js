@@ -4,7 +4,7 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import mapImage from "../assets/map-home.png"
+import mapImage from "../assets/map-home.png";
 
 import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
 import ApartmentOutlinedIcon from '@material-ui/icons/ApartmentOutlined';
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   container: {
-    padding: "75px 0 125px"
+    padding: "75px 0 125px",
   },
 
   itemContainer: {
@@ -42,12 +42,12 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     backgroundColor: "rgb(22, 28, 36)",
     margin: "45px 0 0",
-    padding: "120px 0px"
+    padding: "120px 0px",
   },
 
   itemTitle: {
-    fontFamily: 'Be Vietnam',
-    fontWeight: "700"
+    fontFamily: "Be Vietnam",
+    fontWeight: "700",
   },
 
   item: {
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.75rem",
     lineHeight: "4.5",
     letterSpacing: "1.2px",
-    color: "rgb(145, 158, 171)",
+    color: "rgb(145, 158, 171)"
   },
 
   mapTitle: {
@@ -93,13 +93,13 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center",
     textAlign: "start",
     width: "100%",
-    maxWidth: "250px"
+    maxWidth: "250px",
   },
 
   mapImage: {
     position: "relative",
-    width: "65%"
-  }
+    width: "65%",
+  },
 }));
 
 export default function Home() {
@@ -111,7 +111,9 @@ export default function Home() {
       </Box>
       <Container className={classes.container}>
         <Grid>
-          <Typography className={classes.itemTitle} variant="h4">How GlassWalls works for you</Typography>
+          <Typography className={classes.itemTitle} variant="h4">
+            How GlassWalls works for you
+          </Typography>
         </Grid>
         <Grid className={classes.itemContainer} container spacing={3}>
           <Grid className={classes.item} item xs>
@@ -131,10 +133,14 @@ export default function Home() {
           </Grid>
         </Grid>
       </Container>
-      
+
       <Grid className={classes.mapContainer} container spacing={2}>
         <Grid item xs={8}>
-          <img className={classes.mapImage}  src={mapImage}/>
+          <img
+            className={classes.mapImage}
+            src={mapImage}
+            alt={classes.mapImage}
+          />
         </Grid>
         <Grid className={classes.mapText} item xs={4}m>
           <Typography className={classes.mapSub}>Switch between map styles</Typography>

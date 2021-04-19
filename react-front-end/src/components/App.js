@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // imports
 import Nav from "./Nav";
-import Map from "./Map";
+import Map from "./Map/Map";
 import Home from "./Home";
 import Buildings from "./Buildings";
 import Building from "./Building";

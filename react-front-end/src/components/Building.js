@@ -9,7 +9,6 @@ import StarIcon from "@material-ui/icons/Star";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-
 //component to render a building
 const Building = () => {
   const [building, setBuilding] = useState([]);
@@ -29,8 +28,7 @@ const Building = () => {
   }
   
   useEffect(() => {
-    axios.get(`/api/buildings/${buildingId}`)
-    .then((res) => {
+    axios.get(`/api/buildings/${buildingId}`).then((res) => {
       setBuilding(res.data[0]);
     });
   }, [buildingId]);
@@ -39,11 +37,10 @@ const Building = () => {
     history.push("/map");
   };
 
-
   return (
     <div className="building-container">
       <div className="building-header">
-        <div key={building.id}>
+        <div key={building.name}>
           <h1>{building.name}</h1>
           <h3>{building.neighbourhood} Neighbourhood</h3>
           {/* TODO: How to make this render number of stars? */}
@@ -59,8 +56,8 @@ const Building = () => {
       </div>
       <div className="building-details">
         <div className="percentage-circles">
-        <div className="percentage-circle" style={{width: 80, height: 80}}>
-          <h3>Landlord Approval</h3>
+          <div className="percentage-circle" style={{ width: 80, height: 80 }}>
+            <h3>Landlord Approval</h3>
             <CircularProgressbar
               value={landlord_percentage}
               text={`${landlord_percentage}%`}
@@ -71,7 +68,7 @@ const Building = () => {
               }
               )}
             />
-          <h3>Recommend to Friend</h3>
+            <h3>Recommend to Friend</h3>
             <CircularProgressbar
               value={recommend_to_friend_percentage}
               text={`${recommend_to_friend_percentage}%`}
@@ -82,7 +79,6 @@ const Building = () => {
               }
               )}
             />
-            
           </div>
         </div>
         <div className="review-list">
