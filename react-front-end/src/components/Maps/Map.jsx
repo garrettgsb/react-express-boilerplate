@@ -22,7 +22,7 @@ const Map = () => {
   
   return (
     <div id="mapid">
-      <MapContainer center={position} zoom={10} scrollWheelZoom={false}>
+      <MapContainer center={position} zoom={9} scrollWheelZoom={false}>
       <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -34,27 +34,16 @@ const Map = () => {
             spot.latitude,
             spot.longitude
           ]}
-          onClick={() => {
-            console.log("click");
-            setOneSpot(spot);
-          }}
-        />
-      ))}
-
-      {oneSpot.id && (
-        <Popup
-          position={[
-            oneSpot.latitude,
-            oneSpot.longitude,
-          ]}
-          onClose={() => {
-            setOneSpot(null);
-          }}
+        //   onClick={() => {
+        //     console.log("click");
+        //     setOneSpot(spot);
+        //   }}
         >
-            <h2>{oneSpot.location_name}</h2>
-            <p>coordinates: {oneSpot.latitude}, {oneSpot.longitude}</p>
-        </Popup>
-      )}
+          <Popup>
+            {spot.location_name} <br /> {spot.latitude}, {spot.longitude}.
+          </Popup>
+      </Marker>
+      ))}
       </MapContainer>
     </div>
   )
