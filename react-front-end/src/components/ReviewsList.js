@@ -50,21 +50,12 @@ export default function ReviewsList(props) {
     setOpenPopup(true);
   };
 
-  // const isLoggedIn = false;
-  // let testButton;
-  // if(isLoggedIn) {
-  //   testButton = 
-  // }
-
-  // const renderButtons = () => {
-  //   if(isLoggedIn) {
-  //     return <button>HELLO</button>
-  //   } else {
-  //     return <button>GOODBYE</button>
-  //   }
-  // }
 
   const isUser = false;
+
+  const testUser = review.user_id
+
+  console.log('YOOOO', testUser)
 
   return (
     <div className="reviews-list-container">
