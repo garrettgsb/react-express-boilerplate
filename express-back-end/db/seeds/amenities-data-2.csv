@@ -1,0 +1,1039 @@
+area_id,name,type,image_url,latitude,longitude
+1,Terminal 1,Park,url,37.77131354,-122.3944362
+1,Terminal 1,Groceries,url,37.78280907,-122.4129985
+1,Terminal 1,Restaurant,url,37.72549964,-122.4356074
+1,Guy Place Mini Park,Groceries,url,37.76273903,-122.428641
+1,Terminal 1,Restaurant,url,37.77609727,-122.4196852
+1,Terminal 1,Restaurant,url,37.76330176,-122.3891
+1,Terminal 1,Restaurant,url,37.77266596,-122.4974238
+1,Terminal 1,Park,url,37.73676775,-122.3846219
+1,Terminl 1,Park,url,37.76401123,-122.4032414
+1,Central Subway,Restaurant,url,37.78233678,-122.4029064
+1,Embarcadero Ferry Plaza,Cafe ,url,37.77406466,-122.5061237
+1,San Francisco General Hospital,Cafe ,url,37.72562677,-122.4616313
+1,,Cafe ,url,37.7581683,-122.4449725
+1,Sailor's Union of the Pacific,Restaurant,url,37.78814989,-122.4180418
+1,Terminal 3,Cafe ,url,37.79841571,-122.4159453
+1,Randall Museum,School,url,37.77731261,-122.4979148
+1,Headquarters,Restaurant,url,37.82674668,-122.374657
+1,San Francisco Botanical Garden,School,url,37.78282973,-122.4615996
+1,Hotel,Cafe ,url,37.77680438,-122.4244117
+1,SFPD  Northern Station,Groceries,url,37.78623679,-122.3890662
+1,CCSF Ocean Campus,Cafe ,url,37.7374579,-122.4243194
+1,Laguna Honda Hospital,School,url,37.71229082,-122.4011668
+1,Mission St. sidewalk,Cafe ,url,37.80309775,-122.4448955
+1,Valencia Gardens Apartments,School,url,37.80314453,-122.4203289
+1,Gene Friend Recreation Center,Park,url,37.77354081,-122.3920279
+1,3rd Street Light Rail,Cafe ,url,37.74284629,-122.4097929
+1,Kidpower Park,Cafe ,url,37.77581036,-122.4266889
+1,3rd Street Light Rail,Cafe ,url,37.75192247,-122.3894203
+1,3rd Street Light Rail,Cafe ,url,37.77792272,-122.423346
+1,Golden Gate Park,Park,url,37.76365981,-122.3891339
+1,Coit Tower,Cafe ,url,37.77849361,-122.4229548
+1,Portsmouth Square,Cafe ,url,37.79156941,-122.4252892
+1,International Terminal,Cafe ,url,37.77609727,-122.4196852
+1,3rd Street Light Rail,School,url,37.78661202,-122.4000055
+1,,School,url,37.71449769,-122.4655788
+1,San Francisco General Hospital,Cafe ,url,37.71734702,-122.4796613
+1,Victoria Manalo Draves Park,Park,url,37.71244319,-122.3949113
+1,Octavia Blvd.,Restaurant,url,37.78937597,-122.390972
+1,Ferry Building,School,url,37.77024736,-122.4365055
+1,Junipero Serra Playground,Groceries,url,37.76401871,-122.4548882
+1,Portsmouth Square,School,url,37.78256334,-122.4141911
+1,Chinatown Library,School,url,37.74619771,-122.4098225
+1,Upper Noe Recreation Center,Groceries,url,37.72181807,-122.43741
+1,Mission St. and Steuart St.,Cafe ,url,37.73343882,-122.3804676
+1,Sunnyside Conservatory,Cafe ,url,37.71412212,-122.3986594
+1,CCSF Ocean Campus,Cafe ,url,37.80211731,-122.4200055
+1,Golden Gate Park,School,url,37.78582936,-122.3922757
+1,Sava Pool,Groceries,url,37.78491857,-122.3903273
+1,Terminal 1,School,url,37.7844205,-122.3943806
+1,Office of the Chief Medical Examiner,Restaurant,url,37.78873245,-122.3923138
+1,3rd Street Light Rail,Cafe ,url,37.78133158,-122.3996689
+1,African American Art and Culture Complex,Cafe ,url,37.74232703,-122.4872426
+1,City Hall,Groceries,url,37.76652725,-122.3911117
+1,Chinatown Library,Cafe ,url,37.82845777,-122.3727265
+1,SFPD  Bayview Station,Park,url,37.78937597,-122.390972
+1,SFPD  Richmond Station,Park,url,37.77278319,-122.496363
+1,Sunnyside Conservatory,Groceries,url,37.73650795,-122.3874914
+1,Glen Canyon Park,Cafe ,url,37.75315192,-122.414582
+1,St. Mary's Square,Park,url,37.73026176,-122.4762092
+1,Victoria Manalo Draves Park,Groceries,url,37.78596608,-122.4286755
+1,Lincoln Park,Park,url,37.79802708,-122.4000919
+1,Woh Hei Yuen Park,Restaurant,url,37.77453646,-122.5097951
+1,Terminal 3,Park,url,37.79927027,-122.4284164
+1,Terminal 3,Restaurant,url,37.75517139,-122.4204371
+1,Terminal 3,Restaurant,url,37.74571622,-122.4178413
+1,Joseph Lee Recreation Center,Park,url,37.77687802,-122.461089
+1,San Francisco General Hospital,Groceries,url,37.80282245,-122.4218468
+1,3rd Street Light Rail,Restaurant,url,37.78138004,-122.4231439
+1,Richmond Recreation Center,Groceries,url,37.71206421,-122.3936635
+1,Port of San Francisco Bayview,Cafe ,url,37.78042276,-122.407083
+1,Minnie and Lovie Ward Recreation Center,Restaurant,url,37.76015956,-122.4242426
+1,Embarcadero Plaza,School,url,37.78774065,-122.4223091
+1,Portsmouth Square,Cafe ,url,37.7103656,-122.4254585
+1,Golden Gate Park,Cafe ,url,37.83122666,-122.3741507
+1,San Francisco General Hospital,Restaurant,url,37.79887695,-122.4085555
+1,City Hall,Restaurant,url,37.79925704,-122.4200271
+1,,Restaurant,url,37.74232267,-122.4978445
+1,Sunnyside Conservatory,Groceries,url,37.76083605,-122.4111647
+1,Eureka Valley Recreation Center,Restaurant,url,37.72684239,-122.4328305
+1,San Francisco Public Library Bayview Branch,Cafe ,url,37.74807356,-122.4300623
+1,Civic Center Courthouse,Park,url,37.71756817,-122.3864357
+1,Joseph Lee Recreation Center,Park,url,37.76066045,-122.4483775
+1,Trocadero Clubhouse,School,url,37.73768303,-122.4689238
+1,Laguna Honda Hospital,Restaurant,url,37.75084217,-122.4375153
+1,Eureka Valley Recreation Center,Restaurant,url,37.71291432,-122.4448264
+1,Potrero Del Sol Park,Park,url,37.77131354,-122.3944362
+1,Coit Tower,Park,url,37.78812404,-122.3863637
+1,Terminal 1,Restaurant,url,37.75833532,-122.411227
+1,Marina Green Drive,School,url,37.77593515,-122.4532753
+1,George Christopher Playground,Cafe ,url,37.79050592,-122.4450372
+1,Upper Noe Recreation Center,Park,url,37.74837254,-122.4190379
+1,3rd Street Light Rail,Restaurant,url,37.79616946,-122.439036
+1,International Terminal,School,url,37.7636276,-122.4442507
+1,Maxine Hall Health Center,School,url,37.78280907,-122.4129985
+1,San Francisco General Hospital,School,url,37.77609727,-122.4196852
+1,Trocadero Clubhouse,Restaurant,url,37.76824239,-122.4304588
+1,Civic Center Courthouse,Groceries,url,37.77791963,-122.4127733
+1,Mission Recreation Center,Restaurant,url,37.73808465,-122.3853502
+1,Coit Tower,Cafe ,url,37.76020078,-122.4217485
+1,3rd Street Light Rail,Restaurant,url,37.77675737,-122.4419423
+1,Maritime Museum,Park,url,37.78348073,-122.4333159
+1,Mission St. sidewalk,Park,url,37.78297643,-122.4028294
+1,Martin Luther King Jr. Pool,Restaurant,url,37.78582936,-122.3922757
+1,Ocean View Library,Restaurant,url,37.78046422,-122.4295041
+1,San Francisco General Hospital,Cafe ,url,37.75894027,-122.4472868
+1,International Terminal,Groceries,url,37.77306957,-122.3964634
+1,Laguna Honda Hospital,Park,url,37.73771175,-122.4222319
+1,Sava Pool,Restaurant,url,37.73638948,-122.390474
+1,San Francisco General Hospital,Restaurant,url,37.78752942,-122.4327545
+1,Parque Ninos Unidos,Restaurant,url,37.74914251,-122.4201721
+1,Richmond Recreation Center,Restaurant,url,37.76410499,-122.3979548
+1,Octavia Blvd.,Groceries,url,37.78871761,-122.3914984
+1,San Francisco General Hospital,Groceries,url,37.78091985,-122.5028016
+1,Hotel,School,url,37.73668224,-122.396214
+1,Long Term Parking,Park,url,37.77069192,-122.4005582
+1,Helen Wills Playground,Park,url,37.7651551,-122.4360048
+1,Father Alfred E. Boeddeker Park,Restaurant,url,37.77130872,-122.389154
+1,Terminal 1,School,url,37.78085753,-122.4330568
+1,San Francisco General Hospital,Cafe ,url,37.80372461,-122.4380478
+1,Golden Gate Park,Groceries,url,37.78491857,-122.3903273
+1,International Terminal,Groceries,url,37.76031421,-122.4719167
+1,San Francisco General Hospital,Restaurant,url,37.78703877,-122.390987
+1,Terminal 1,Groceries,url,37.78873245,-122.3923138
+1,Eureka Valley Recreation Center,Park,url,37.78425842,-122.4983226
+1,Civic Center Courthouse,Restaurant,url,37.78237162,-122.4796659
+1,Portsmouth Square,Cafe ,url,37.76409303,-122.4328417
+1,Terminal 3,Groceries,url,37.78810692,-122.4194247
+1,Terminal 2,Cafe ,url,37.76345134,-122.3891141
+1,San Francisco Zoo,School,url,37.77691767,-122.423952
+1,Portsmouth Square,School,url,37.79546078,-122.4310396
+1,Chinatown Library,Restaurant,url,37.76385805,-122.4257083
+1,3rd Street Light Rail,School,url,37.78871761,-122.3914984
+1,Moscone Recreation Center,School,url,37.77460285,-122.4244592
+1,Terminal 2,Groceries,url,37.78118287,-122.4774839
+1,Octavia Blvd.,Groceries,url,37.75732675,-122.4199179
+1,Moscone Recreation Center,Cafe ,url,37.72963581,-122.3922307
+1,Golden Gate Park,Restaurant,url,37.74052737,-122.4220623
+1,International Terminal,School,url,37.76658512,-122.4195773
+1,Laguna Honda Hospital,Cafe ,url,37.71687594,-122.4824095
+1,Portsmouth Square,Cafe ,url,37.73343882,-122.3804676
+1,Trocadero Clubhouse,Groceries,url,37.78832547,-122.391992
+1,Sava Pool,Park,url,37.76330533,-122.4472759
+1,Eureka Valley Recreation Center,Park,url,37.75144351,-122.4282904
+1,Argonne Playground,Park,url,37.78623679,-122.3890662
+1,Golden Gate Park,Restaurant,url,37.80163163,-122.4171934
+1,San Francisco General Hospital,Restaurant,url,37.80159895,-122.4372213
+1,Terminal 1,School,url,37.78659818,-122.3913473
+1,North Beach Garage,Park,url,37.77069192,-122.4005582
+1,Embarcadero Waterfront Park,School,url,37.77750746,-122.4428754
+1,Golden Gate Park,Restaurant,url,37.78138004,-122.4231439
+1,3rd Street Light Rail,Cafe ,url,37.83150206,-122.3744619
+1,City Hall,School,url,37.75942066,-122.4096596
+1,Terminal 1,School,url,37.72887213,-122.3744024
+1,Golden Gate Bridge,Cafe ,url,37.7987381,-122.4052175
+1,San Francisco General Hospital,Cafe ,url,37.77768077,-122.4799302
+1,Sunnyside Conservatory,Groceries,url,37.8048853,-122.4204021
+1,3rd Street Light Rail,School,url,37.76996853,-122.4525034
+1,Tenderloin Recreation Center,Cafe ,url,37.77136942,-122.3881715
+1,Mission Recreation Center,School,url,37.7485203,-122.4085591
+1,International Terminal,Park,url,37.78209601,-122.4381112
+1,Portsmouth Square,Restaurant,url,37.73794102,-122.3850969
+1,Sava Pool,Cafe ,url,37.75634536,-122.4213648
+1,International Terminal,Park,url,37.78491857,-122.3903273
+1,San Francisco Public Library Bayview Branch,School,url,37.8282438,-122.3774391
+1,Helen Wills Playground,Restaurant,url,37.78635575,-122.4003325
+1,3rd Street Light Rail,Restaurant,url,37.76109493,-122.4448189
+1,Terminal 1,Park,url,37.73343882,-122.3804676
+1,Golden Gate Park,Groceries,url,37.76278076,-122.4085486
+1,Terminal 2,Cafe ,url,37.78582936,-122.3922757
+1,Terminal 3,Park,url,37.77137163,-122.3874413
+1,Terminal 3,Cafe ,url,37.77701248,-122.4153092
+1,,School,url,37.78582936,-122.3922757
+1,CCSF Ocean Campus,Groceries,url,37.79024395,-122.4498944
+1,3rd Street Light Rail,Restaurant,url,37.75808732,-122.4693378
+1,,Cafe ,url,37.78832547,-122.391992
+1,San Francisco General Hospital,Groceries,url,37.73343882,-122.3804676
+1,Richmond Recreation Center,Cafe ,url,37.7793676,-122.4704421
+1,Golden Gate Park,Restaurant,url,37.75080124,-122.4135799
+1,CCSF Ocean Campus,School,url,37.78703877,-122.390987
+1,J.P. Murphy Playground Clubhouse,Cafe ,url,37.75824851,-122.4193151
+1,Woh Hei Yuen Park,Restaurant,url,37.77069192,-122.4005582
+1,San Francisco General Hospital,School,url,37.77636723,-122.4098144
+1,Terminal 3,Cafe ,url,37.78297643,-122.4028294
+1,Koret Children's Quarters,Park,url,37.79720531,-122.4308173
+1,Japantown,Cafe ,url,37.78115482,-122.4016514
+1,Sunnyside Conservatory,Restaurant,url,37.78353379,-122.4448501
+1,Public Utilities Commission,Restaurant,url,37.75414845,-122.4643364
+1,San Francisco Public Library Bayview Branch,Park,url,37.78564401,-122.4660149
+1,Terminl 3,Park,url,37.70936019,-122.4255767
+1,Terminal 1,Groceries,url,37.77221041,-122.4976105
+1,Terminal 1,School,url,37.78703877,-122.390987
+1,Terminal 2,Park,url,37.75587063,-122.4175583
+1,Coit Tower,Groceries,url,37.78582936,-122.3922757
+1,Argonne Playground,School,url,37.78046422,-122.4295041
+1,,Cafe ,url,37.75939952,-122.4351466
+1,Terminal 2,Restaurant,url,37.71384696,-122.4448123
+1,Octavia Blvd.,Groceries,url,37.78623679,-122.3890662
+1,Hotel,Park,url,37.79802708,-122.4000919
+1,City Hall,School,url,37.7632782,-122.4946338
+1,Terminal 1,Groceries,url,37.78988414,-122.3948927
+1,International Terminal,School,url,37.77341637,-122.3965766
+1,Civic Center Courthouse,Groceries,url,37.77306957,-122.3964634
+1,Betty Ann Ong Chinese Recreation Center,Cafe ,url,37.76839628,-122.4303244
+1,Terminal 1,Park,url,37.76374302,-122.4697766
+1,Sava Pool,Groceries,url,37.73343882,-122.3804676
+1,Laguna Honda Hospital,Groceries,url,37.78491857,-122.3903273
+1,Sunnyside Conservatory,Cafe ,url,37.78085753,-122.4330568
+1,Maritime Museum,School,url,37.75942066,-122.4096596
+1,St. Mary's Square,Groceries,url,37.79972939,-122.4391318
+1,3rd Street Light Rail,School,url,37.73985791,-122.4119699
+1,Golden Gate Park,School,url,37.77102783,-122.4516645
+1,Coit Tower,Restaurant,url,37.73650795,-122.3874914
+1,San Francisco Public Library Bayview Branch,Groceries,url,37.78871761,-122.3914984
+1,Ingleside,Restaurant,url,37.78582936,-122.3922757
+1,,Cafe ,url,37.78376933,-122.4451399
+1,Terminal 3,Groceries,url,37.75707798,-122.3982541
+1,Golden Gate Park,Park,url,37.78042276,-122.407083
+1,San Francisco General Hospital,Cafe ,url,37.77131354,-122.3944362
+1,Hagiwara Tea Garden,Restaurant,url,37.76090076,-122.4895295
+1,Terminal 3,Groceries,url,37.74284683,-122.4211024
+1,San Francisco Public Library Bayview Branch,Cafe ,url,37.78937597,-122.390972
+1,Tenderloin Recreation Center,Restaurant,url,37.74616974,-122.4198278
+1,3rd Street Light Rail,Restaurant,url,37.7978561,-122.420197
+1,San Francisco General Hospital,School,url,37.7776521,-122.4223882
+1,3rd Street Light Rail,School,url,37.76508439,-122.4314094
+1,Lombard Garage,Restaurant,url,37.73931298,-122.4235641
+1,Silver Avenue Family Health Center #3,Park,url,37.74776176,-122.4300353
+1,San Francisco General Hospital,Groceries,url,37.77901435,-122.4094463
+1,Civic Center United Nations Plaza,Park,url,37.77844933,-122.4123203
+1,Trocadero Clubhouse,Restaurant,url,37.77653205,-122.4153946
+1,Valencia Gardens Apartments,Groceries,url,37.73397458,-122.3920308
+1,Noe Valley Town Square,School,url,37.78582936,-122.3922757
+1,Market and Kearny St.,School,url,37.79768983,-122.443536
+1,Mission St. sidewalk,Cafe ,url,37.75967168,-122.390863
+1,Main Library,Park,url,37.78107116,-122.4581187
+1,International Terminal,Park,url,37.75233027,-122.4142646
+1,Fulton Playground,Cafe ,url,37.77306957,-122.3964634
+1,San Francisco General Hospital,Cafe ,url,37.76447055,-122.4336914
+1,Eureka Valley Recreation Center,Park,url,37.77029013,-122.4028058
+1,Victoria Manalo Draves Park,School,url,37.75260674,-122.4316198
+1,Father Alfred E. Boeddeker Park,School,url,37.76363982,-122.5004476
+1,North Beach Garage,Park,url,37.70936019,-122.4255767
+1,SFPD  Richmond Station,School,url,37.77136942,-122.3881715
+1,Golden Gate Park,Groceries,url,37.78812404,-122.3863637
+1,James Rolph Jr. Playground,Groceries,url,37.72181807,-122.43741
+1,Sunnydale Pump Station,Groceries,url,37.73026176,-122.4762092
+1,North Beach Garage,Restaurant,url,37.72475139,-122.4590516
+1,Coit Tower,Cafe ,url,37.78582936,-122.3922757
+1,Laguna Honda Hospital,Groceries,url,37.7819513,-122.431977
+1,3rd Street Light Rail,Cafe ,url,37.76508439,-122.4314094
+1,Parque Ninos Unidos,School,url,37.78873245,-122.3923138
+1,SFPD  Bayview Station,Groceries,url,37.77341637,-122.3965766
+1,Mission St. sidewalk,School,url,37.76561947,-122.4536061
+1,Eureka Valley Recreation Center,Groceries,url,37.78721884,-122.4340364
+1,Coit Tower,Restaurant,url,37.745664,-122.4117714
+1,Trocadero Clubhouse,Restaurant,url,37.78873245,-122.3923138
+1,3rd Street Light Rail,Groceries,url,37.78805629,-122.4232531
+1,Terminal 2,Park,url,37.76834093,-122.4217429
+1,Portsmouth Square,Groceries,url,37.77069192,-122.4005582
+1,San Francisco General Hospital,Groceries,url,37.78623679,-122.3890662
+1,Potrero Library,Groceries,url,37.80307089,-122.4358124
+1,Terminal 2,Groceries,url,37.77644566,-122.4501391
+1,International Terminal,Groceries,url,37.78898257,-122.3917908
+1,3rd Street Light Rail,School,url,37.78566677,-122.3943029
+1,International Terminal,School,url,37.77957718,-122.4380044
+1,Laguna Honda Hospital,Park,url,37.78297643,-122.4028294
+1,Silver Avenue Family Health Center #3,Cafe ,url,37.79802708,-122.4000919
+1,Eureka Valley Recreation Center,School,url,37.79726671,-122.4392165
+1,,Groceries,url,37.77361037,-122.4387317
+1,CCSF Ocean Campus,Groceries,url,37.78311559,-122.407564
+1,Coit Tower,Park,url,37.76189884,-122.3890807
+1,M-Ocean View Light Rail,Park,url,37.78133158,-122.3996689
+1,Eureka Valley Recreation Center,Restaurant,url,37.78118287,-122.4774839
+1,Washington Square,Park,url,37.78554572,-122.4131387
+1,Coleridge Mini Park,Groceries,url,37.70830103,-122.4434308
+1,San Francisco General Hospital,Park,url,37.76952931,-122.4313346
+1,Laguna Honda Hospital,Park,url,37.77569876,-122.4685204
+1,Chinatown Public Health Center,Park,url,37.77132017,-122.43437
+1,City Hall,Restaurant,url,37.78136241,-122.4855905
+1,Eureka Valley Library,School,url,37.73650795,-122.3874914
+1,Mission Recreation Center,Restaurant,url,37.71523658,-122.4835477
+1,Sunnyside Conservatory,Park,url,37.76299601,-122.4231776
+1,Portsmouth Square,Cafe ,url,37.77351178,-122.450718
+1,San Francisco General Hospital,Restaurant,url,37.78463928,-122.4628475
+1,Coffman Pool,School,url,37.7307652,-122.3857772
+1,African American Art and Culture Complex,Cafe ,url,37.75967592,-122.3908549
+1,Eureka Valley Recreation Center,Groceries,url,37.74837254,-122.4190379
+1,Father Alfred E. Boeddeker Park,Groceries,url,37.77051519,-122.4450661
+1,3rd Street Light Rail,Restaurant,url,37.75229166,-122.4749509
+1,Golden Gate Park,School,url,37.77644566,-122.4501391
+1,Eureka Valley Recreation Center,Groceries,url,37.76319186,-122.4275556
+1,San Francisco Zoo,Park,url,37.77896791,-122.4230836
+1,Coit Tower,Restaurant,url,37.82385898,-122.3749373
+1,San Francisco General Hospital,Restaurant,url,37.78446083,-122.3895042
+1,Mission St. sidewalk,Park,url,37.78340778,-122.4284407
+1,Portsmouth Square,Cafe ,url,37.78048141,-122.4312218
+1,Coit Tower,School,url,37.78133158,-122.3996689
+1,Moscone Center South,Cafe ,url,37.78085753,-122.4330568
+1,3rd Street Light Rail,Groceries,url,37.71867696,-122.4006539
+1,Terminal 1,Cafe ,url,37.77911783,-122.4860722
+1,Portsmouth Square,Park,url,37.76089408,-122.4410959
+1,,Groceries,url,37.78146915,-122.4862722
+1,,School,url,37.79691392,-122.4039006
+1,Civic Center Courthouse,Groceries,url,37.79156941,-122.4252892
+1,Westside Pump Station,Cafe ,url,37.77609727,-122.4196852
+1,Hotel,Park,url,37.80006435,-122.4246803
+1,Hall of Justice,Cafe ,url,37.71011487,-122.4497262
+1,Eureka Valley Recreation Center,Park,url,37.7546819,-122.4211996
+1,Westside Courts,School,url,37.77677474,-122.4663872
+1,San Francisco General Hospital,School,url,37.72746945,-122.3957086
+1,Terminal 1,Park,url,37.71291432,-122.4448264
+1,SFPD  Northern Station,Cafe ,url,37.77306957,-122.3964634
+1,San Francisco General Hospital,Restaurant,url,37.76809057,-122.4512905
+1,Terminal 1,Cafe ,url,37.7641564,-122.477909
+1,Terminal 3 East,Groceries,url,37.73628394,-122.4240575
+1,North Beach Garage,School,url,37.75981325,-122.4450356
+1,International Terminal,School,url,37.76365981,-122.3891339
+1,Coit Tower,Cafe ,url,37.78873245,-122.3923138
+1,3rd Street Light Rail,School,url,37.73650795,-122.3874914
+1,,Cafe ,url,37.74064737,-122.4214452
+1,3rd Street Light Rail,Park,url,37.77132017,-122.43437
+1,Sunnyside Playground,School,url,37.77307071,-122.4472469
+1,Terminal 3,Park,url,37.74971324,-122.4276475
+1,Upper Noe Recreation Center,School,url,37.75029687,-122.4201396
+1,West Portal Playground,Park,url,37.80671658,-122.4113715
+1,Washington Square,Park,url,37.75644095,-122.4659551
+1,Kidpower Park,Cafe ,url,37.78215486,-122.3929676
+1,Terminal 3,Groceries,url,37.76538471,-122.4071645
+1,Moscone Convention Center,School,url,37.77204058,-122.4084227
+1,Eureka Valley Recreation Center,Restaurant,url,37.77431962,-122.4223043
+1,Maritime Plaza,Park,url,37.77361037,-122.4387317
+1,Upper Noe Recreation Center,Cafe ,url,37.78107236,-122.4565216
+1,Coit Tower,Restaurant,url,37.77544857,-122.497715
+1,SFPD  Bayview Station,Restaurant,url,37.77808516,-122.4933646
+1,Bill Graham Civic Center Auditorium,Park,url,37.76631889,-122.4472559
+1,Golden Gate Park,Groceries,url,37.78217673,-122.4027576
+1,Betty Ann Ong Chinese Recreation Center,School,url,37.77069192,-122.4005582
+1,Terminal 2,School,url,37.78348073,-122.4333159
+1,Wo Hei Yuen Park,School,url,37.75483192,-122.4325699
+1,Terminal 1,Restaurant,url,37.77131354,-122.3944362
+1,Fire Chief's Home,Cafe ,url,37.7924013,-122.4222546
+1,City Hall,School,url,37.78424297,-122.4717587
+1,United Nations Plaza,Groceries,url,37.77691767,-122.423952
+1,Laguna Honda Hospital,Restaurant,url,37.72487659,-122.4359776
+1,Public Utilities Commission,Park,url,37.78376814,-122.4088232
+1,Sunnyside Conservatory,School,url,37.72678273,-122.3904261
+1,Market and Bush St.,Cafe ,url,37.76840236,-122.4320621
+1,Hotel,Restaurant,url,37.78104083,-122.4179125
+1,International Terminal,Cafe ,url,37.78719057,-122.4515126
+1,Laguna Honda Hospital,Cafe ,url,37.76852084,-122.4225934
+1,Parque Ninos Unidos,Park,url,37.77156851,-122.4444433
+1,San Francisco General Hospital,Groceries,url,37.76514569,-122.4066942
+1,DeYoung Museum,Restaurant,url,37.78046422,-122.4295041
+1,Portsmouth Square,Restaurant,url,37.78873245,-122.3923138
+1,Hotel,Cafe ,url,37.7849719,-122.4318524
+1,3rd Street Light Rail,Cafe ,url,37.78085753,-122.4330568
+1,Parque Ninos Unidos,Park,url,37.80196904,-122.4382919
+1,Terminal 2,Groceries,url,37.78871761,-122.3914984
+1,Richmond Recreation Center,Cafe ,url,37.76113024,-122.4174552
+1,Palega Recreation Center,Groceries,url,37.75710145,-122.4148121
+1,Laguna Honda Hospital,Groceries,url,37.76069156,-122.4044304
+1,3rd Street Light Rail,Groceries,url,37.76563685,-122.4418663
+1,Portsmouth Square,School,url,37.78937597,-122.390972
+1,Trocadero Clubhouse,School,url,37.78993987,-122.4286861
+1,MUNI terminal,Cafe ,url,37.77518338,-122.4387975
+1,Helen Wills Playground,Groceries,url,37.767836,-122.4228035
+1,City Hall,Cafe ,url,37.78348073,-122.4333159
+1,Hagiwara Tea Garden,School,url,37.77792272,-122.423346
+1,Richmond Public Library,Park,url,37.78133158,-122.3996689
+1,Miraloma Field House,Restaurant,url,37.8009756,-122.4033684
+1,Mission Recreation Center,School,url,37.78446083,-122.3895042
+1,Octavia Blvd.,Restaurant,url,37.71264756,-122.3936887
+1,Sunnyside Conservatory,Park,url,37.78491857,-122.3903273
+1,Laguna Honda Hospital,Restaurant,url,37.75754087,-122.3992754
+1,Golden Gate Park,School,url,37.74224325,-122.4198136
+1,Portola Library,School,url,37.72831214,-122.3688487
+1,,Park,url,37.72967318,-122.3861122
+1,City Hall,Cafe ,url,37.79340597,-122.4215511
+1,Golden Gate Park,Park,url,37.77130872,-122.389154
+1,Koret Children's Quarters,School,url,37.78450323,-122.4102614
+1,Maritime Plaza Park,Groceries,url,37.79972939,-122.4391318
+1,CCSF Ocean Campus,Groceries,url,37.76000959,-122.4307889
+1,Coit Tower,Park,url,37.73957726,-122.435195
+1,3rd Street Light Rail,Restaurant,url,37.76819698,-122.4320424
+1,CCSF Ocean Campus,Cafe ,url,37.76631398,-122.4502371
+1,Gene Friend Recreation Center,Restaurant,url,37.78480496,-122.4147162
+1,Coit Tower,Cafe ,url,37.78263947,-122.4820258
+1,Long Term Parking Garage,Groceries,url,37.78125906,-122.4296962
+1,City Hall,Cafe ,url,37.8041843,-122.412103
+1,3rd Street Light Rail,Cafe ,url,37.73343882,-122.3804676
+1,Jose Coronado Playground,Restaurant,url,37.73802468,-122.4107056
+1,Victoria Manalo Draves Park,Groceries,url,37.78111984,-122.4036695
+1,3rd Street Light Rail,Groceries,url,37.75967168,-122.390863
+1,San Francisco General Hospital,Cafe ,url,37.77397422,-122.4133944
+1,Tenderloin Recreation Center,Cafe ,url,37.77136942,-122.3881715
+1,Main Library,Cafe ,url,37.76641045,-122.4183907
+1,Richmond Recreation Center,Restaurant,url,37.77944864,-122.486511
+1,North Beach Pool,School,url,37.78582936,-122.3922757
+1,Huntington Park,Groceries,url,37.77518267,-122.4426709
+1,North Beach Garage,Groceries,url,37.77361037,-122.4387317
+1,Coit Tower,Groceries,url,37.78082669,-122.4941399
+1,Ocean and Granada Ave.,Cafe ,url,37.79236353,-122.396434
+1,San Francisco General Hospital,Park,url,37.77791963,-122.4127733
+1,Legion of Honor,Restaurant,url,37.74830514,-122.4072528
+1,Mission Dolores Park,Groceries,url,37.79096626,-122.4300525
+1,Hotel,Park,url,37.77029729,-122.4020404
+1,Terminal 2,Cafe ,url,37.7654263,-122.4547388
+1,Sunnyside Conservatory,School,url,37.78812404,-122.3863637
+1,Coit Tower,Restaurant,url,37.77488601,-122.4499114
+1,San Francisco General Hospital,Park,url,37.78623679,-122.3890662
+1,,School,url,37.7808358,-122.4756322
+1,Portsmouth Square,Restaurant,url,37.77209135,-122.4442111
+1,Ellis-O'Farrell Parking Garage,School,url,37.76015956,-122.4242426
+1,3rd Street Light Rail,Cafe ,url,37.78871761,-122.3914984
+1,City Hall,School,url,37.75162775,-122.408699
+1,Coit Tower,Restaurant,url,37.76420556,-122.4435926
+1,McLaren Park,Cafe ,url,37.76957755,-122.4207153
+1,San Francisco General Hospital,School,url,37.78446083,-122.3895042
+1,Trocadero Clubhouse,Groceries,url,37.7600218,-122.3891344
+1,International Terminal,School,url,37.77896791,-122.4230836
+1,Terminal 2,Cafe ,url,37.78937597,-122.390972
+1,Hotel,Restaurant,url,37.78868915,-122.4340529
+1,SFPD Hall of Justice,School,url,37.79609608,-122.426005
+1,Parque Ninos Unidos,Groceries,url,37.79802708,-122.4000919
+1,Laguna Honda Hospital,School,url,37.78873245,-122.3923138
+1,Sava Pool,School,url,37.78118287,-122.4774839
+1,San Francisco Public Library Bayview Branch,Cafe ,url,37.7592001,-122.416131
+1,SFPD  Public Safety Building,Cafe ,url,37.75427758,-122.3900828
+1,,Restaurant,url,37.74215221,-122.4296528
+1,Civic Center Courthouse,School,url,37.78582936,-122.3922757
+1,Junipero Serra Playground,Restaurant,url,37.76189884,-122.3890807
+1,SFSU,Cafe ,url,37.74726121,-122.4302258
+1,Sava Pool,Cafe ,url,37.78241909,-122.4204315
+1,Laguna Honda Hospital,Park,url,37.77253629,-122.4972757
+1,Octavia Blvd.,School,url,37.73836627,-122.475901
+1,Randall Museum,Cafe ,url,37.77532884,-122.4228919
+1,3rd Street Light Rail,Cafe ,url,37.78582936,-122.3922757
+1,Sunnyside Playground,School,url,37.78215486,-122.3929676
+1,Portsmouth Square,Park,url,37.75309307,-122.4368296
+1,San Francisco General Hospital,School,url,37.78001498,-122.4491649
+1,Hotel,Park,url,37.77361037,-122.4387317
+1,Chinatown Library,Cafe ,url,37.75448238,-122.4324806
+1,Rochambeau Playground,Park,url,37.78807978,-122.3991443
+1,Sunnyside Conservatory,Park,url,37.7609498,-122.4493555
+1,Sava Pool,Park,url,37.77394636,-122.4441855
+1,Parque Ninos Unidos,Restaurant,url,37.77306957,-122.3964634
+1,California Academy of Sciences,School,url,37.73343882,-122.3804676
+1,International Terminal,School,url,37.77683091,-122.4214508
+1,Griffith Pump Station,Park,url,37.7634406,-122.4687452
+1,International Terminal,Restaurant,url,37.78807978,-122.3991443
+1,San Francisco General Hospital,Restaurant,url,37.7639978,-122.4724512
+1,Golden Gate Park,Cafe ,url,37.82889631,-122.3742205
+1,3rd Street Light Rail,Cafe ,url,37.76254904,-122.4482242
+1,Terminal 3 East,Groceries,url,37.77844933,-122.4123203
+1,3rd Street Light Rail,Groceries,url,37.77360392,-122.5097271
+1,,Park,url,37.78085753,-122.4330568
+1,Chinatown Library,Restaurant,url,37.79929609,-122.4244446
+1,Terminal 1,Groceries,url,37.77353905,-122.4246372
+1,African American Art and Culture Complex,Restaurant,url,37.74374868,-122.4284571
+1,Office of the Chief Medical Examiner,Groceries,url,37.78871761,-122.3914984
+1,Mission St. sidewalk,Restaurant,url,37.781692,-122.4396394
+1,Sava Pool,Restaurant,url,37.71690271,-122.4765477
+1,San Francisco General Hospital,Restaurant,url,37.71766764,-122.3860208
+1,3rd Street Light Rail,Park,url,37.78909236,-122.4075104
+1,Holly Park,Groceries,url,37.78691743,-122.4377987
+1,Sunnyside Conservatory,Cafe ,url,37.78871761,-122.3914984
+1,City Hall,Cafe ,url,37.73650795,-122.3874914
+1,MUNI terminal,Cafe ,url,37.7924013,-122.4222546
+1,Portsmouth Square,School,url,37.71354836,-122.4695958
+1,North Beach Garage,Park,url,37.77895876,-122.4763859
+1,Golden Gate Park,School,url,37.73914802,-122.4148317
+1,Coit Tower,Park,url,37.781692,-122.4396394
+1,Trocadero Clubhouse,Groceries,url,37.78446083,-122.3895042
+1,Coit Tower,Park,url,37.78703877,-122.390987
+1,Main Library,Cafe ,url,37.78454299,-122.4759239
+1,Golden Gate Park,School,url,37.73728384,-122.3863195
+1,San Francisco General Hospital,Groceries,url,37.77069192,-122.4005582
+1,San Francisco Public Library Bayview Branch,School,url,37.71920134,-122.4838683
+1,Woh Hei Yuen Park,Cafe ,url,37.78307967,-122.4204455
+1,Laguna Honda Hospital,Cafe ,url,37.73844358,-122.4315295
+1,Hamilton Recreation Center,School,url,37.7844205,-122.3943806
+1,Mission Library,School,url,37.78937597,-122.390972
+1,City Hall,Park,url,37.78122196,-122.4166513
+1,Hotel,Cafe ,url,37.77532884,-122.4228919
+1,Terminal 2,Groceries,url,37.77239243,-122.3907955
+1,Gene Friend Recreation Center,School,url,37.76090076,-122.4895295
+1,International Terminal,School,url,37.77606282,-122.4198501
+1,Terminal 1,Park,url,37.79297031,-122.3925761
+1,Eureka Valley Recreation Center,Groceries,url,37.77341637,-122.3965766
+1,Union Square,Park,url,37.78348073,-122.4333159
+1,,Park,url,37.75430727,-122.3906595
+1,Pier 40,Groceries,url,37.76834093,-122.4217429
+1,Parque Ninos Unidos,Park,url,37.7795288,-122.4698712
+1,Kidpower Park,Restaurant,url,37.78085753,-122.4330568
+1,J.P. Murphy Playground Clubhouse,Groceries,url,37.78165075,-122.4780665
+1,Sava Pool,School,url,37.73745638,-122.4088437
+1,3rd Street Light Rail,Restaurant,url,37.82869081,-122.3726138
+1,Chinatown Library,Groceries,url,37.77288471,-122.4522832
+1,Kidpower Park,Park,url,37.78623679,-122.3890662
+1,Embarcadero,Groceries,url,37.7819513,-122.431977
+1,Assessor-Recorder Office,School,url,37.77844933,-122.4123203
+1,3rd Street Light Rail,Park,url,37.77149851,-122.4333787
+1,North Beach Garage,Groceries,url,37.77078018,-122.4242275
+1,Chinatown Portsmouth Square,Restaurant,url,37.78582936,-122.3922757
+1,SFPD  Taraval Station,School,url,37.73701927,-122.3863706
+1,Eureka Valley Recreation Center,Groceries,url,37.73976012,-122.4193
+1,San Francisco General Hospital,Cafe ,url,37.72746945,-122.3957086
+1,Terminal 3,Park,url,37.80201839,-122.4290506
+1,Parque Ninos Unidos,Restaurant,url,37.78173923,-122.4856065
+1,Coit Tower,Cafe ,url,37.7670987,-122.4231996
+1,Sava Pool,Cafe ,url,37.73898403,-122.4289894
+1,Terminal 3,Restaurant,url,37.79595393,-122.4042345
+1,Chinatown Library,Park,url,37.78115482,-122.4016514
+1,,Park,url,37.76679855,-122.4203082
+1,Terminal 3 East,Cafe ,url,37.78582936,-122.3922757
+1,City Hall,Cafe ,url,37.78297676,-122.4079048
+1,Hayes Valley Playground,School,url,37.7250295,-122.4287882
+1,Woh Hei Yuen Park,Restaurant,url,37.78937597,-122.390972
+1,San Francisco Fire Department Fire Station #39,Park,url,37.759499,-122.4409906
+1,California Academy of Sciences,Cafe ,url,37.77844933,-122.4123203
+1,,Cafe ,url,37.75936119,-122.4497173
+1,Islais Creek,Groceries,url,37.78277397,-122.4493176
+1,Sava Pool,School,url,37.78852768,-122.4205328
+1,Octavia Blvd.,Cafe ,url,37.76041606,-122.4183575
+1,San Francisco General Hospital,School,url,37.78491857,-122.3903273
+1,San Francisco General Hospital,School,url,37.73650795,-122.3874914
+1,San Francisco General Hospital,School,url,37.76142772,-122.4864297
+1,San Francisco General Hospital,Cafe ,url,37.75967168,-122.390863
+1,,Restaurant,url,37.78173701,-122.3930964
+1,Secure Connector,Groceries,url,37.76452396,-122.4007765
+1,Terminal 2,Groceries,url,37.79811019,-122.435992
+1,Japantown,Cafe ,url,37.78582936,-122.3922757
+1,Terminal 1,Groceries,url,37.74401371,-122.4180954
+1,,Cafe ,url,37.78110981,-122.4691391
+1,3rd Street Light Rail,School,url,37.76488636,-122.4562624
+1,Terminal 1,Park,url,37.78111984,-122.4036695
+1,San Francisco General Hospital,School,url,37.75935593,-122.3882698
+1,North Beach Garage,Restaurant,url,37.71340534,-122.4493513
+1,International Terminal,Park,url,37.7557643,-122.3933546
+1,Terminal 3,Cafe ,url,37.78075814,-122.4941309
+1,Noe Valley Town Square,Cafe ,url,37.77844933,-122.4123203
+1,Sava Pool,Cafe ,url,37.75547268,-122.4222265
+1,International Terminal,School,url,37.76409303,-122.4328417
+1,Coit Tower,Groceries,url,37.74669193,-122.4263232
+1,MUNI terminal,Cafe ,url,37.73521835,-122.4357549
+1,Parque Ninos Unidos,Park,url,37.79664782,-122.4098645
+1,San Francisco Public Library Bayview Branch,Restaurant,url,37.77641535,-122.4664262
+1,Gene Friend Recreation Center,Groceries,url,37.79292424,-122.4217295
+1,International Terminal,Restaurant,url,37.78623679,-122.3890662
+1,,School,url,37.78873245,-122.3923138
+1,Eureka Valley Recreation Center,Groceries,url,37.78741044,-122.4030332
+1,Terminal 1,Groceries,url,37.7580833,-122.3895318
+1,Parque Ninos Unidos,School,url,37.76295381,-122.4309417
+1,Sava Pool,Park,url,37.78768801,-122.4328863
+1,Franklin Square,Park,url,37.77691767,-122.423952
+1,Terminal 3,Restaurant,url,37.76540432,-122.4108374
+1,Gene Friend Recreation Center,School,url,37.75967168,-122.390863
+1,Eureka Valley Recreation Center,Park,url,37.76103379,-122.411506
+1,Hotel,Restaurant,url,37.78233678,-122.4029064
+1,Ingleside,Groceries,url,37.78197575,-122.4294261
+1,Terminal 3,Park,url,37.73343882,-122.3804676
+1,Ocean Park Health Center,School,url,37.77414726,-122.4312865
+1,Noe Valley Town Square,Restaurant,url,37.78235845,-122.4860959
+1,Terminal 3,School,url,37.71953473,-122.3882041
+1,International Terminal,Cafe ,url,37.78348073,-122.4333159
+1,"Moscone Convention Center, South",Groceries,url,37.77732205,-122.4322889
+1,California Academy of Sciences,Cafe ,url,37.7819513,-122.431977
+1,Sava Pool,Park,url,37.78215486,-122.3929676
+1,Glen Park Library,Groceries,url,37.71187021,-122.4451233
+1,Kidpower Park,Groceries,url,37.79548406,-122.4057807
+1,Embarcadero Plaza,Cafe ,url,37.7390884,-122.4139165
+1,Metro East Vehicles Operation and Maintenance Fac,Cafe ,url,37.78582936,-122.3922757
+1,Coit Tower,Groceries,url,37.78870893,-122.3991542
+1,Terminal 3,Park,url,37.73450797,-122.412899
+1,3rd Street Light Rail,Cafe ,url,37.73770751,-122.4222252
+1,Washington Square,Groceries,url,37.78115482,-122.4016514
+1,3rd Street Light Rail,Cafe ,url,37.78133158,-122.3996689
+1,Terminal 2,Restaurant,url,37.77721804,-122.4414256
+1,San Francisco General Hospital,Restaurant,url,37.77745194,-122.4114292
+1,North Beach Garage,Cafe ,url,37.75305669,-122.3933627
+1,San Francisco Zoo,Groceries,url,37.71953473,-122.3882041
+1,Kidpower Park,Restaurant,url,37.75668872,-122.4400174
+1,3rd Street Light Rail,Cafe ,url,37.78085753,-122.4330568
+1,Coit Tower,Groceries,url,37.77397422,-122.4133944
+1,Visitacion Valley Library,Groceries,url,37.78703877,-122.390987
+1,CCSF Ocean Campus,Restaurant,url,37.78115482,-122.4016514
+1,Mission and 22nd St.,Groceries,url,37.77037996,-122.4357315
+1,Spring Valley Water Co. building,Park,url,37.78085753,-122.4330568
+1,,Park,url,37.71405053,-122.398868
+1,,Restaurant,url,37.73506512,-122.4246054
+1,Sava Pool,Restaurant,url,37.75320467,-122.5050121
+1,City Hall,Park,url,37.75655192,-122.3886976
+1,SFPD  Taraval Station,School,url,37.76402663,-122.4521622
+1,Tenderloin Recreation Center,School,url,37.74159793,-122.4227645
+1,Octavia Blvd.,Cafe ,url,37.75648759,-122.410147
+1,Eureka Valley Recreation Center,Restaurant,url,37.73650785,-122.4338551
+1,San Francisco Botanical Garden,Cafe ,url,37.74188119,-122.425569
+1,Parque Ninos Unidos,Cafe ,url,37.77266102,-122.4168411
+1,Eureka Valley Recreation Center,School,url,37.74771331,-122.4244518
+1,Sunnyside Conservatory,School,url,37.72644415,-122.4240552
+1,,Groceries,url,37.77609877,-122.4002872
+1,Main Library,Park,url,37.75771099,-122.4022052
+1,Civic Center Courthouse,Groceries,url,37.78405902,-122.4733757
+1,Laguna Honda Hospital,Cafe ,url,37.77131354,-122.3944362
+1,Valencia Gardens Apartments,Park,url,37.76360096,-122.481139
+1,Douglass Playground Fieldhouse,Groceries,url,37.78491857,-122.3903273
+1,Sunnyside Conservatory,Park,url,37.71667213,-122.4405068
+1,George Christopher Playground,Cafe ,url,37.77676878,-122.3941155
+1,3rd Street Light Rail,Restaurant,url,37.77578606,-122.409652
+1,,Restaurant,url,37.79654644,-122.4143205
+1,George Christopher Playground,Groceries,url,37.78154242,-122.3946212
+1,Arts Commission,Groceries,url,37.7740943,-122.4351099
+1,Union Square,Cafe ,url,37.78871761,-122.3914984
+1,Sunnyside Conservatory,Groceries,url,37.78703877,-122.390987
+1,Mission Playground,Groceries,url,37.77442825,-122.4518297
+1,SFPD  Youth Guidance Center (Juvenile Hall),School,url,37.77218328,-122.5038394
+1,Sunnyside Playground,School,url,37.76368292,-122.4687968
+1,Hamilton Recreation Center,Cafe ,url,37.73886972,-122.427675
+1,San Francisco General Hospital,Cafe ,url,37.75365113,-122.4194759
+1,Terminal 3 East,Park,url,37.72826883,-122.36835
+1,Hotel,Cafe ,url,37.74977779,-122.4270204
+1,International Terminal,Cafe ,url,37.77844933,-122.4123203
+1,Lincoln Park,Park,url,37.76180367,-122.4697852
+1,3rd Street Light Rail,Cafe ,url,37.79297031,-122.3925761
+1,Moscone Recreation Center,School,url,37.73614963,-122.4241039
+1,Lake Merced,Restaurant,url,37.78133271,-122.4235154
+1,Valencia Gardens Apartments,Restaurant,url,37.7481868,-122.4267828
+1,CCSF Ocean Campus,Park,url,37.78579249,-122.4566402
+1,San Francisco General Hospital,Restaurant,url,37.77985271,-122.4703119
+1,Terminal 2,Restaurant,url,37.7511909,-122.4651213
+1,,School,url,37.78582936,-122.3922757
+1,North Point Wet Weather Facility,Restaurant,url,37.71969859,-122.440839
+1,SFPD  Bayview Station,School,url,37.80053733,-122.4032542
+1,San Francisco General Hospital,Groceries,url,37.80489351,-122.4177627
+1,3rd Street Light Rail,Groceries,url,37.71449769,-122.4655788
+1,San Francisco Zoo,School,url,37.78297643,-122.4028294
+1,Civic Center Courthouse,Cafe ,url,37.76891253,-122.4253367
+1,San Francisco General Hospital,Park,url,37.78937597,-122.390972
+1,MUNI terminal,Park,url,37.79725055,-122.4225554
+1,Tenderloin Recreation Center,Restaurant,url,37.7695985,-122.4383454
+1,Hotel,Park,url,37.78812404,-122.3863637
+1,Ocean View Library,Groceries,url,37.77130872,-122.389154
+1,3rd Street Light Rail,Park,url,37.74616974,-122.4198278
+1,Joseph Lee Recreation Center,Cafe ,url,37.78582936,-122.3922757
+1,Valencia Gardens Apartments,School,url,37.77844933,-122.4123203
+1,CCSF Ocean Campus,School,url,37.77738218,-122.4234611
+1,Eureka Valley Recreation Center,Park,url,37.77531004,-122.4449164
+1,San Francisco Zoo,School,url,37.793279,-122.4269061
+1,City Hall,School,url,37.78328045,-122.4431509
+1,City Hall,Park,url,37.73343882,-122.3804676
+1,Trocadero Clubhouse,Cafe ,url,37.71207363,-122.3943129
+1,International Terminal,Cafe ,url,37.77462526,-122.4396423
+1,Koret Children's Quarters,Restaurant,url,37.73343882,-122.3804676
+1,Maritime Plaza Park,Groceries,url,37.76353694,-122.5008946
+1,Sherriff's Facility,Groceries,url,37.75993615,-122.4207624
+1,Chinatown Library,Park,url,37.79575661,-122.4028843
+1,Octavia Blvd.,Park,url,37.78566677,-122.3943029
+1,Embarcadero Pier 7,Cafe ,url,37.77655556,-122.4636324
+1,Sava Pool,Groceries,url,37.78486194,-122.4832634
+1,Telegraph Hill,Park,url,37.74558019,-122.4278287
+1,SFPD  Mission Station,Cafe ,url,37.7679916,-122.4320227
+1,Octavia Blvd.,Groceries,url,37.75319036,-122.4262103
+1,Golden Gate Park,Park,url,37.76401123,-122.4032414
+1,Gene Friend Recreation Center,Cafe ,url,37.79147718,-122.4414868
+1,Portsmouth Square,Park,url,37.7539923,-122.4081338
+1,Trocadero Clubhouse,School,url,37.77131354,-122.3944362
+1,Alice Chambers Clubhouse,Park,url,37.76117191,-122.4700788
+1,3rd Street Light Rail,Cafe ,url,37.76071183,-122.4039367
+1,Sava Pool,Restaurant,url,37.78937597,-122.390972
+1,Portsmouth Square,School,url,37.73048699,-122.4055407
+1,Embarcadero Pier 7,Park,url,37.77131354,-122.3944362
+1,San Francisco General Hospital,Groceries,url,37.79802708,-122.4000919
+1,City Hall,Park,url,37.74463441,-122.4265335
+1,International Terminal,Restaurant,url,37.78348073,-122.4333159
+1,Cabrillo Playground,Park,url,37.71447315,-122.3998537
+1,Upper Noe Recreation Center,School,url,37.78873245,-122.3923138
+1,Terminal 1,Cafe ,url,37.82492996,-122.376214
+1,Laguna Honda Hospital,Groceries,url,37.78279894,-122.4620838
+1,Chan Kaajal Park,School,url,37.754189,-122.4184737
+1,Woh Hei Yuen Park,Groceries,url,37.77185687,-122.434148
+1,Golden Gate Park,School,url,37.78810692,-122.4194247
+1,,Restaurant,url,37.75983848,-122.4298272
+1,Mission St. sidewalk,Restaurant,url,37.78042276,-122.407083
+1,Valencia Gardens Apartments,Cafe ,url,37.78306983,-122.483133
+1,Golden Gate Park,Cafe ,url,37.79165828,-122.4211199
+1,3rd Street Light Rail,Park,url,37.76407454,-122.4606581
+1,SFPD  Bayview Station,Park,url,37.78812404,-122.3863637
+1,Hamilton Recreation Center,Park,url,37.75312246,-122.5068665
+1,Sunnyside Conservatory,Groceries,url,37.77302631,-122.4147826
+1,Coit Tower,School,url,37.78523227,-122.4419588
+1,3rd Street Light Rail,Groceries,url,37.7164872,-122.4556851
+1,,Groceries,url,37.78280907,-122.4129985
+1,Terminal 1,Groceries,url,37.77136942,-122.3881715
+1,3rd Street Light Rail,Cafe ,url,37.78376814,-122.4088232
+1,Coit Tower,Restaurant,url,37.7924013,-122.4222546
+1,Cayuga Playground,Groceries,url,37.79292424,-122.4217295
+1,Sunnyside Playground,Park,url,37.78118287,-122.4774839
+1,Terminal 1,Cafe ,url,37.76476204,-122.4296539
+1,Helen Wills Playground,Park,url,37.78582936,-122.3922757
+1,San Francisco Zoo,School,url,37.78582936,-122.3922757
+1,Laguna Honda Hospital,Park,url,37.70971126,-122.4696087
+1,Cabrillo Playground,School,url,37.77939322,-122.4621943
+1,Terminal 3,Groceries,url,37.76153303,-122.4489567
+1,San Francisco General Hospital,Restaurant,url,37.77321289,-122.4211174
+1,Coit Tower,Park,url,37.79610279,-122.4029425
+1,Golden Gate Park,Park,url,37.78937597,-122.390972
+1,Upper Noe Recreation Center,School,url,37.77384536,-122.4644439
+1,Ocean and Granada Ave.,School,url,37.78046422,-122.4295041
+1,Terminal 1,School,url,37.79064342,-122.417062
+1,3rd Street Light Rail,School,url,37.76015956,-122.4242426
+1,Tenderloin Recreation Center,School,url,37.77609727,-122.4196852
+1,Polk-Bush Garage,Groceries,url,37.77361037,-122.4387317
+1,San Francisco Zoo,Park,url,37.75960698,-122.4255432
+1,3rd Street Light Rail,Park,url,37.77526913,-122.445402
+1,Gene Friend Recreation Center,Restaurant,url,37.76746157,-122.4495201
+1,Hotel,Cafe ,url,37.80374567,-122.4122736
+1,Sunnyside Conservatory,Park,url,37.72687542,-122.3946418
+1,Mission and 22nd St.,Groceries,url,37.78937597,-122.390972
+1,Laguna Honda Hospital,Groceries,url,37.78424283,-122.4286184
+1,Terminal 3,Groceries,url,37.73688462,-122.3904984
+1,Trocadero Clubhouse,Cafe ,url,37.77615686,-122.4258418
+1,Golden Gate Park,Cafe ,url,37.77609727,-122.4196852
+1,Kidpower Park,School,url,37.73398037,-122.4336263
+1,Rochambeau Playground,Cafe ,url,37.78270503,-122.4895507
+1,Mission Recreation Center,Groceries,url,37.75845505,-122.4367203
+1,Sunnyside Conservatory,Park,url,37.78623679,-122.3890662
+1,Ortega Library,School,url,37.78217673,-122.4027576
+1,Octavia Blvd.,Park,url,37.72440689,-122.390286
+1,Sunnyside Conservatory,Groceries,url,37.75174906,-122.4074589
+1,Hotel,Park,url,37.79880585,-122.4344219
+1,Golden Gate Park,Groceries,url,37.77532412,-122.4121449
+1,Coit Tower,Groceries,url,37.78873245,-122.3923138
+1,Richmond Recreation Center,Park,url,37.80258414,-122.4437454
+1,Golden Gate Park,Restaurant,url,37.78871761,-122.3914984
+1,Victoria Manalo Draves Park,Park,url,37.73550656,-122.4225816
+1,Sunnyside Conservatory,Cafe ,url,37.77649102,-122.4101439
+1,Sunset Recreation Center & Playground,Groceries,url,37.76321346,-122.4520057
+1,Mission Library,Park,url,37.71898736,-122.433361
+1,Eureka Valley Recreation Center,Groceries,url,37.76359483,-122.4203011
+1,North Beach Garage,School,url,37.80279886,-122.4100181
+1,Golden Gate Park,School,url,37.77844933,-122.4123203
+1,Eureka Valley Recreation Center,Groceries,url,37.77833311,-122.4626865
+1,Sava Pool,Park,url,37.77557149,-122.5050556
+1,San Francisco General Hospital,Restaurant,url,37.78912634,-122.4296664
+1,Junipero Serra Playground,School,url,37.76281755,-122.4485789
+1,3rd Street Light Rail,Cafe ,url,37.78582936,-122.3922757
+1,Lincoln Park,School,url,37.72562677,-122.4616313
+1,Lake Merced,Cafe ,url,37.78623679,-122.3890662
+1,,Restaurant,url,37.76332672,-122.42558
+1,San Francisco Zoo,Park,url,37.72577464,-122.4343408
+1,MUNI terminal,Cafe ,url,37.78085753,-122.4330568
+1,Tenderloin Recreation Center,Groceries,url,37.74458116,-122.421083
+1,Parque Ninos Unidos,Restaurant,url,37.79631385,-122.4023835
+1,Mission St. sidewalk,Park,url,37.78898257,-122.3917908
+1,Trocadero Clubhouse,Restaurant,url,37.78871761,-122.3914984
+1,Parque Ninos Unidos,Cafe ,url,37.77294947,-122.4226609
+1,Sava Pool,Restaurant,url,37.78085753,-122.4330568
+1,Trocadero Clubhouse,Cafe ,url,37.79948193,-122.4266387
+1,Terminal 3,Groceries,url,37.78623679,-122.3890662
+1,Valencia Gardens Apartments,Restaurant,url,37.71608041,-122.4802467
+1,Golden Gate Park,Park,url,37.767267,-122.4260254
+1,North Beach Garage,Park,url,37.74527381,-122.405697
+1,Eureka Valley Recreation Center,School,url,37.71306879,-122.3941707
+1,City Hall,School,url,37.73343882,-122.3804676
+1,Kidpower Park,School,url,37.77738218,-122.4234611
+1,Union Square,Cafe ,url,37.78812404,-122.3863637
+1,CCSF Ocean Campus,School,url,37.78297643,-122.4028294
+1,Sherriff's Facility,Groceries,url,37.76424607,-122.4929674
+1,16th & Hoff St. Garage,Restaurant,url,37.7739328,-122.403528
+1,Sunnyside Conservatory,Cafe ,url,37.76376206,-122.4774859
+1,Octavia Blvd.,School,url,37.78871761,-122.3914984
+1,Sava Pool,Cafe ,url,37.73612637,-122.3841795
+1,Eureka Valley Recreation Center,School,url,37.78937597,-122.390972
+1,Woh Hei Yuen Park,Cafe ,url,37.71449503,-122.4659246
+1,Coit Tower,School,url,37.74837254,-122.4190379
+1,Portsmouth Square,Park,url,37.78115482,-122.4016514
+1,Terminal 3,Groceries,url,37.75284168,-122.419296
+1,CCSF Ocean Campus,Park,url,37.78039691,-122.4510562
+1,Trocadero Clubhouse,Groceries,url,37.78133158,-122.3996689
+1,The Embarcadero,Groceries,url,37.77326704,-122.4802702
+1,Hotel,Cafe ,url,37.78548172,-122.4413494
+1,Hotel,Groceries,url,37.80176175,-122.4419888
+1,Trocadero Clubhouse,Groceries,url,37.80550592,-122.431939
+1,Davies Symphony Hall,Cafe ,url,37.73685762,-122.4230592
+1,Ingleside Library,Park,url,37.73170284,-122.4139611
+1,Terminal 3,Park,url,37.77131354,-122.3944362
+1,Tenderloin Recreation Center,Restaurant,url,37.78046422,-122.4295041
+1,North Beach Garage,Cafe ,url,37.78280907,-122.4129985
+1,Sava Pool,Groceries,url,37.80013142,-122.4222569
+1,Civic Center Courthouse,Cafe ,url,37.75821568,-122.4160381
+1,Laguna Honda Hospital,Restaurant,url,37.77816995,-122.4371158
+1,Laguna Honda Hospital,Restaurant,url,37.76339192,-122.4754169
+1,Portsmouth Square,School,url,37.79885278,-122.4387572
+1,Coit Tower,Park,url,37.8000545,-122.4440815
+1,Golden Gate Park,Park,url,37.78873245,-122.3923138
+1,Bayview Gateway,Restaurant,url,37.75942066,-122.4096596
+1,Main Library,Restaurant,url,37.77014638,-122.389871
+1,Portsmouth Square,Restaurant,url,37.78871761,-122.3914984
+1,Coit Tower,Restaurant,url,37.76740897,-122.4247261
+1,Civic Center Courthouse,Cafe ,url,37.76393352,-122.4638724
+1,Mission St. sidewalk,Groceries,url,37.71808024,-122.4362252
+1,Sunnyside Conservatory,Groceries,url,37.77069192,-122.4005582
+1,Muriel Leff Mini Park,Park,url,37.77067726,-122.4313974
+1,International Terminal,Restaurant,url,37.78280907,-122.4129985
+1,San Francisco Zoo,Restaurant,url,37.79950432,-122.4431038
+1,San Francisco Public Library North Beach Library,Groceries,url,37.7488104,-122.5075913
+1,Mission Bay Library,School,url,37.78111984,-122.4036695
+1,Main Library,Cafe ,url,37.71920134,-122.4838683
+1,,Restaurant,url,37.77570622,-122.4440901
+1,,School,url,37.77817943,-122.4364585
+1,City Hall,Restaurant,url,37.7879291,-122.4075018
+1,Tenderloin Recreation Center,Groceries,url,37.78323478,-122.4205619
+1,African American Art and Culture Complex,Cafe ,url,37.79034626,-122.4018502
+1,Chinese Historical Society of America,Groceries,url,37.76120376,-122.4222686
+1,Argonne Playground,Park,url,37.78046422,-122.4295041
+1,Golden Gate Park,Park,url,37.78667777,-122.4450883
+1,International Terminal,Groceries,url,37.77604711,-122.4252455
+1,3rd Street Light Rail,Park,url,37.75566198,-122.409086
+1,Mission Recreation Center,Restaurant,url,37.70855858,-122.4078768
+1,Terminal 1,Park,url,37.78311559,-122.407564
+1,George Christopher Playground,Restaurant,url,37.71976347,-122.4822195
+1,Golden Gate Park,Cafe ,url,37.8016896,-122.4089106
+1,Japantown,Groceries,url,37.73343882,-122.3804676
+1,Trocadero Clubhouse,Park,url,37.78242543,-122.4814113
+1,3rd Street Light Rail,School,url,37.7924013,-122.4222546
+1,Terminal 2,School,url,37.74270463,-122.4189386
+1,Arts Commission,Groceries,url,37.75465162,-122.4225121
+1,Octavia Blvd.,Cafe ,url,37.73343882,-122.3804676
+1,Ocean and Granada Ave.,Restaurant,url,37.79646489,-122.4452442
+1,City Hall,Cafe ,url,37.82841964,-122.3723724
+1,Harvey Milk Center for Rec Arts,Cafe ,url,37.77040982,-122.4501248
+1,Tenderloin Recreation Center,Groceries,url,37.78582936,-122.3922757
+1,3rd Street Light Rail,School,url,37.79263136,-122.412975
+1,Trocadero Clubhouse,School,url,37.7569102,-122.4021717
+1,Laguna Honda Hospital,Groceries,url,37.78046422,-122.4295041
+1,Tenderloin Recreation Center,Cafe ,url,37.77396495,-122.4839632
+1,Department of Homelessness and Supporative Services,Restaurant,url,37.74763872,-122.4239659
+1,Gene Friend Recreation Center,School,url,37.76555934,-122.4027963
+1,Trocadero Clubhouse,Groceries,url,37.78937597,-122.390972
+1,SFPD  Tenderloin Station,Cafe ,url,37.78623679,-122.3890662
+1,Victoria Manalo Draves Park,Park,url,37.79441153,-122.4469728
+1,Mission St. sidewalk,Cafe ,url,37.76401123,-122.4032414
+1,Terminal 3,Cafe ,url,37.78873245,-122.3923138
+1,Golden Gate Park,School,url,37.7819513,-122.431977
+1,Eureka Valley Recreation Center,School,url,37.82649597,-122.3765486
+1,3rd Street Light Rail,Groceries,url,37.79935245,-122.4373676
+1,Sava Pool,Cafe ,url,37.75915738,-122.4322872
+1,Golden Gate Park,Groceries,url,37.71231392,-122.3943324
+1,Coit Tower,Restaurant,url,37.7661732,-122.4411312
+1,3rd Street Light Rail,Groceries,url,37.78937597,-122.390972
+1,Civic Center Courthouse,Groceries,url,37.80557724,-122.4127589
+1,Coit Tower,Cafe ,url,37.75008314,-122.4109918
+1,Sava Pool,Restaurant,url,37.73640783,-122.3802451
+1,Silver Avenue Family Health Center #3,Groceries,url,37.76015956,-122.4242426
+1,Terminal 3 East,Cafe ,url,37.73653777,-122.3797574
+1,Trocadero Clubhouse,School,url,37.79887695,-122.4085555
+1,3rd Street Light Rail,Park,url,37.73343882,-122.3804676
+1,SFPD  Bayview Station,Groceries,url,37.74837254,-122.4190379
+1,Sunnyside Conservatory,Cafe ,url,37.7844205,-122.3943806
+1,Emergency Operations Center,Park,url,37.7595475,-122.4201289
+1,Trocadero Clubhouse,Park,url,37.71608041,-122.4802467
+1,3rd Street Light Rail,Restaurant,url,37.78703877,-122.390987
+1,Huntington Park,Groceries,url,37.73765588,-122.4293417
+1,San Francisco General Hospital,Park,url,37.77599706,-122.4592893
+1,Ocean View Library,Groceries,url,37.77033447,-122.4142706
+1,Laguna Honda Hospital,Groceries,url,37.76089265,-122.4411825
+1,City Hall,School,url,37.78814989,-122.4180418
+1,San Francisco Public Library Bayview Branch,Park,url,37.7692765,-122.4236945
+1,3rd Street Light Rail,Park,url,37.77739617,-122.4658922
+1,CCSF Ocean Campus,Park,url,37.76032389,-122.4255692
+1,Mission Library,Groceries,url,37.76152364,-122.4611673
+1,Koret Children's Quarters,School,url,37.72562677,-122.4616313
+1,California Academy of Sciences,Park,url,37.78362859,-122.4491169
+1,Control Tower,Restaurant,url,37.76235424,-122.3977899
+1,CCSF Ocean Campus,Groceries,url,37.71624532,-122.4558688
+1,Hotel,Cafe ,url,37.7847724,-122.4035598
+1,Kezar Stadium,Groceries,url,37.78703877,-122.390987
+1,San Francisco General Hospital,Restaurant,url,37.78241909,-122.4204315
+1,City Hall,Restaurant,url,37.73343882,-122.3804676
+1,,Restaurant,url,37.76773347,-122.4309311
+1,San Francisco General Hospital,Groceries,url,37.78659818,-122.3913473
+1,Gene Friend Recreation Center,Cafe ,url,37.77608341,-122.4264595
+1,Terminal 1,School,url,37.77659814,-122.4243687
+1,SOMA West McCoppin Hub,Park,url,37.77069192,-122.4005582
+1,Civic Center Courthouse,Cafe ,url,37.78703877,-122.390987
+1,Sava Pool,School,url,37.78280907,-122.4129985
+1,California Academy of Sciences,Restaurant,url,37.75173472,-122.4169962
+1,Mission Recreation Center,School,url,37.76009287,-122.4097401
+1,Golden Gate Park,Park,url,37.78703877,-122.390987
+1,North Beach Garage,Restaurant,url,37.72952353,-122.4795191
+1,Water Supply and Treatment Division,School,url,37.77703517,-122.4272269
+1,Tenderloin Recreation Center,Park,url,37.73650795,-122.3874914
+1,Main Library,Park,url,37.71944958,-122.4774497
+1,CCSF Ocean Campus,Cafe ,url,37.79883387,-122.4380714
+1,Richmond Recreation Center,Park,url,37.7575056,-122.4021855
+1,Union Square,Groceries,url,37.77137163,-122.3874413
+1,Golden Gate Park,Park,url,37.71756449,-122.4290445
+1,Betty Ann Ong Chinese Recreation Center,Groceries,url,37.75642601,-122.414221
+1,Mission Recreation Center,Cafe ,url,37.76401123,-122.4032414
+1,West Portal Playground,Restaurant,url,37.80188089,-122.4227234
+1,Parque Ninos Unidos,Park,url,37.75762171,-122.3899178
+1,Performing Arts Garage,School,url,37.76467856,-122.4786043
+1,Ingleside,Restaurant,url,37.74437185,-122.4308669
+1,Terminal 1,Groceries,url,37.78217673,-122.4027576
+1,Coit Tower,Groceries,url,37.78623679,-122.3890662
+1,Recreation & Park Department : Balboa Pool,School,url,37.75754717,-122.4278009
+1,Human Services,Park,url,37.75834086,-122.4372887
+1,Maritime Plaza,Park,url,37.71944958,-122.4774497
+1,Union Square,Park,url,37.77515398,-122.4380422
+1,Chan Kaajal Park,School,url,37.78914431,-122.4382252
+1,Ocean View Library,Restaurant,url,37.76852084,-122.4225934
+1,3rd Street Light Rail,Park,url,37.78909236,-122.4075104
+1,Betty Ann Ong Chinese Recreation Center,Park,url,37.78873245,-122.3923138
+1,Laguna Honda Hospital,School,url,37.72746945,-122.3957086
+1,Upper Noe Recreation Center,School,url,37.80557724,-122.4127589
+1,San Francisco General Hospital,School,url,37.76726305,-122.4449756
+1,3rd Street Light Rail,School,url,37.78118287,-122.4774839
+1,Trocadero Clubhouse,Restaurant,url,37.78955299,-122.4354369
+1,San Francisco General Hospital,Restaurant,url,37.75577105,-122.4654067
+1,San Francisco General Hospital,School,url,37.79263136,-122.412975
+1,Sunnyside Playground,Restaurant,url,37.76560156,-122.4502137
+1,Terminal 2,School,url,37.77738218,-122.4234611
+1,Terminal 3,Park,url,37.78579249,-122.4566402
+1,Terminal 2,Groceries,url,37.75360897,-122.4188817
+1,Hotel,Park,url,37.77582441,-122.4172549
+1,Valencia Gardens Apartments,Park,url,37.7819513,-122.431977
+1,Parque Ninos Unidos,Restaurant,url,37.76391691,-122.4832691
+1,Eureka Valley Recreation Center,Groceries,url,37.76401123,-122.4032414
+1,Laguna Honda Hospital,Park,url,37.76315495,-122.4266291
+1,Hotel,Groceries,url,37.75596326,-122.4275204
+1,Coit Tower,Restaurant,url,37.79957207,-122.4146196
+1,International Terminal,School,url,37.76286688,-122.4397035
+1,San Francisco General Hospital,Groceries,url,37.71552618,-122.4398118
+1,Tenderloin Recreation Center,Restaurant,url,37.77744796,-122.4632364
+1,Trocadero Clubhouse,Cafe ,url,37.77662606,-122.461488
+1,International Terminal,Park,url,37.79229317,-122.4257269
+1,City Hall,School,url,37.78297643,-122.4028294
+1,Trocadero Clubhouse,Groceries,url,37.75768535,-122.389542
+1,Terminal 3,Cafe ,url,37.78973087,-122.413998
+1,Chinatown Library,Restaurant,url,37.74394269,-122.4743539
+1,Terminal 2,Groceries,url,37.77709316,-122.446134
+1,SFPD Public Safety Building,Cafe ,url,37.78376814,-122.4088232
+1,Laguna Honda Hospital,School,url,37.77361037,-122.4387317
+1,San Francisco General Hospital,School,url,37.75657311,-122.3874398
+1,Terminal 1,Park,url,37.7731019,-122.4765276
+1,Coit Tower,Park,url,37.78937597,-122.390972
+1,North Beach Pool,Cafe ,url,37.72125586,-122.4007257
+1,Civic Center Courthouse,School,url,37.78073732,-122.491559
+1,Terminal 1,Restaurant,url,37.78144346,-122.459656
+1,Ocean and Granada Ave.,Cafe ,url,37.77896791,-122.4230836
+1,City Hall,Groceries,url,37.78673075,-122.4680888
+1,Sunnyside Playground,Park,url,37.78046422,-122.4295041
+1,San Francisco General Hospital,Park,url,37.78649897,-122.4167054
+1,Parque Ninos Unidos,Cafe ,url,37.79834712,-122.4311582
+1,Terminal 3,Groceries,url,37.78376814,-122.4088232
+1,San Francisco General Hospital,Groceries,url,37.73745638,-122.4088437
+1,Sava Pool,Groceries,url,37.7924013,-122.4222546
+1,Betty Ann Ong Chinese Recreation Center,School,url,37.77994597,-122.4479166
+1,West Portal Playground,School,url,37.78582936,-122.3922757
+1,Tenderloin Recreation Center,Park,url,37.75405144,-122.3900734
+1,Laguna Honda Hospital,School,url,37.79929609,-122.4244446
+1,Laguna Honda Hospital,Restaurant,url,37.76164691,-122.4686118
+1,Chinatown Library,Cafe ,url,37.74987518,-122.426896
+1,Gene Friend Recreation Center,Cafe ,url,37.78937597,-122.390972
+1,Coit Tower,School,url,37.78582936,-122.3922757
+1,Laguna Honda Hospital,Restaurant,url,37.74975114,-122.423023
+1,Cabrillo Playground,Restaurant,url,37.77137163,-122.3874413
+1,CCSF Ocean Campus,Groceries,url,37.73521318,-122.3908871
+1,International Terminal,School,url,37.76188728,-122.3987659
+1,Moscone Center West,School,url,37.78046422,-122.4295041
+1,Sunnyside Conservatory,School,url,37.76443834,-122.4191018
+1,City Hall,Cafe ,url,37.78107116,-122.4581187
+1,Terminal 2,Groceries,url,37.76476783,-122.4562293
+1,Golden Gate Park,Groceries,url,37.82912476,-122.3690793
+1,San Francisco General Hospital,School,url,37.75734562,-122.4173843
+1,Golden Gate Park,Cafe ,url,37.73650795,-122.3874914
+1,Koret Children's Quarters,Park,url,37.77356933,-122.452403
+1,Trocadero Clubhouse,Park,url,37.78143008,-122.4355501
+1,Civic Center Courthouse,School,url,37.73932164,-122.4799465
+1,Embarcadero Pier 7,School,url,37.76289114,-122.4524123
+1,San Francisco General Hospital,Park,url,37.74543504,-122.4271529
+1,SFPD Hall of Justice,School,url,37.72232209,-122.4489799
+1,Parque Ninos Unidos,School,url,37.78252511,-122.4791703
+1,Hotel,Groceries,url,37.78873245,-122.3923138
+1,West Portal Playground,Restaurant,url,37.77397422,-122.4133944
+1,3rd Street Light Rail,Restaurant,url,37.75925301,-122.4256132
+1,Terminal 1,School,url,37.77738218,-122.4234611
+1,Terminal 2,Restaurant,url,37.79633257,-122.4430019
+1,Sunnyside Conservatory,Cafe ,url,37.76020078,-122.4217485
+1,San Francisco General Hospital,Groceries,url,37.78937597,-122.390972
+1,3rd Street Light Rail,School,url,37.75520332,-122.5073775
+1,Hotel,School,url,37.82978397,-122.3745396
+1,Terminal 1,Groceries,url,37.78715964,-122.437269
+1,Golden Gate Park,School,url,37.73650795,-122.3874914
+1,San Francisco Public Library Bayview Branch,Cafe ,url,37.77705838,-122.4570399
+1,Sava Pool,Cafe ,url,37.78873245,-122.3923138
+1,3rd Street Light Rail,School,url,37.71581309,-122.4404515
+1,Sunnyside Playground,School,url,37.76239092,-122.4206698
+1,Tenderloin Recreation Center,Cafe ,url,37.75917538,-122.4667168
+1,SFPD  Mission Station,Cafe ,url,37.73128415,-122.440836
+1,Laguna Honda Hospital,Park,url,37.73343882,-122.3804676
+1,Legion of Honor,Cafe ,url,37.76401123,-122.4032414
+1,Carl Larsen Park,Groceries,url,37.77609727,-122.4196852
+1,MUNI terminal,Groceries,url,37.78491857,-122.3903273
+1,Kidpower Park,Restaurant,url,37.75476794,-122.4071959
+1,Parque Ninos Unidos,Park,url,37.78832547,-122.391992
+1,J.P. Murphy Playground Clubhouse,Cafe ,url,37.78348073,-122.4333159
+1,Washington Square,Cafe ,url,37.78241909,-122.4204315
+1,3rd Street Light Rail,Park,url,37.76963501,-122.4475416
+1,International Terminal,Groceries,url,37.77844933,-122.4123203
+1,International Terminal,Cafe ,url,37.78871761,-122.3914984
+1,San Francisco Public Library Bayview Branch,Restaurant,url,37.78874929,-122.4588486
+1,Terminal 3,School,url,37.747244,-122.4377708
+1,Rochambeau Playground,Groceries,url,37.78491857,-122.3903273
+1,Union Square,School,url,37.79404493,-122.4171224
+1,International Terminal,Restaurant,url,37.78233459,-122.4834173
+1,Terminal 3,Cafe ,url,37.77130872,-122.389154
+1,Terminal 2,Cafe ,url,37.78348073,-122.4333159
+1,Daggett Park,School,url,37.7509454,-122.4208479
+1,Coit Tower,Restaurant,url,37.74040747,-122.42846
+1,Father Alfred E. Boeddeker Park,Cafe ,url,37.78162069,-122.4394223
+1,Mission Recreation Center,Groceries,url,37.76251801,-122.4741594
+1,Main Library,Groceries,url,37.78835674,-122.4243941
+1,3rd Street Light Rail,School,url,37.73612637,-122.3841795
+1,Koret Children's Quarters,Park,url,37.71953473,-122.3882041
+1,Hotel,Restaurant,url,37.77606282,-122.4198501
+1,Sava Pool,Park,url,37.73736269,-122.4693148
+1,CCSF Ocean Campus,School,url,37.71736919,-122.4399973
+1,Coit Tower,Cafe ,url,37.73718666,-122.3877027
+1,Laguna Honda Hospital,School,url,37.76315358,-122.4445788
+1,,Restaurant,url,37.71553731,-122.4032578
+1,George Christopher Playground,Groceries,url,37.7584949,-122.4373034
+1,3rd Street Light Rail,Cafe ,url,37.77562492,-122.4158435
+1,SFPD  Richmond Station,Groceries,url,37.77789376,-122.4112521
+1,Portsmouth Square,Restaurant,url,37.77606282,-122.4198501
+1,M-Ocean View Light Rail,Cafe ,url,37.78582936,-122.3922757
+1,Laguna Honda Hospital,Cafe ,url,37.76181999,-122.4837816
+1,Golden Gate Park,School,url,37.78835674,-122.4243941
