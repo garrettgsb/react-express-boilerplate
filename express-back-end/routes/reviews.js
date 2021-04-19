@@ -41,7 +41,10 @@ module.exports = (db) => {
     const recommend_to_friend = req.body.recommend_to_friend;
     const building_rating = req.body.building_rating;
     const area_rating = req.body.area_rating;
-    const queryParams = [title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating];
+    const user_id = req.session.user_id
+    const queryParams = [title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating, user_id];
+
+    console.log('Req from reviews post route', req)
 
     const queryString = `INSERT INTO reviews (title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating)
     VALUES ($1, $2, $3, $4 ,$5, $6) RETURNING *;`

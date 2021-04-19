@@ -5,6 +5,7 @@ import ReviewsList from "./ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
 import FavouriteButton from "./Favourites/FavouriteButton";
 import AmenMap from "./AmenMap";
+import PercentageCircles from "./PercentageCircles";
 import StarIcon from "@material-ui/icons/Star";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -67,31 +68,32 @@ const Building = () => {
       </div>
       <div className="building-details">
         <div className="percentage-circles">
-        <div className="percentage-circle" style={{width: 80, height: 80}}>
-          <h3>Landlord Approval</h3>
-            <CircularProgressbar
-              value={building.landlord_ratio}
-              text={`${building.landlord_ratio}%`}
-              strokeWidth={10}
-              styles = {buildStyles({
-                textColor: getColour(building.landlord_ratio),
-                pathColor: getColour(building.landlord_ratio)
-              }
-              )}
-            />
-          <h3>Recommend to Friend</h3>
-            <CircularProgressbar
-              value={building.recommend_to_friend_ratio}
-              text={`${building.recommend_to_friend_ratio}%`}
-              strokeWidth={10}
-              styles = {buildStyles({
-                textColor: getColour(building.recommend_to_friend_ratio),
-                pathColor: getColour(building.recommend_to_friend_ratio)
-              }
-              )}
-            />
+          <div className="percentage-circle" style={{width: 80, height: 80}}>
+            <h3>Landlord Approval</h3>
+              <CircularProgressbar
+                value={building.landlord_ratio}
+                text={`${building.landlord_ratio}%`}
+                strokeWidth={10}
+                styles = {buildStyles({
+                  textColor: getColour(building.landlord_ratio),
+                  pathColor: getColour(building.landlord_ratio)
+                }
+                )}
+              />
+            <h3>Recommend to Friend</h3>
+              <CircularProgressbar
+                value={building.recommend_to_friend_ratio}
+                text={`${building.recommend_to_friend_ratio}%`}
+                strokeWidth={10}
+                styles = {buildStyles({
+                  textColor: getColour(building.recommend_to_friend_ratio),
+                  pathColor: getColour(building.recommend_to_friend_ratio)
+                }
+                )}
+              />
           </div>
         </div>
+        {/* <PercentageCircles /> */}
         <div className="review-list">
           <ReviewsList />
           <button onClick={handleClick}>Go to the Map page</button>

@@ -51,7 +51,7 @@ export default function ReviewsList(props) {
     setOpenPopup(true);
   };
 
-  const currentUser = 2;
+  const currentUser = 3;
 
 
   return (
@@ -75,7 +75,7 @@ export default function ReviewsList(props) {
           <Card variant="outlined" className="review-item" key={item.id}>
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Reviewed by: {review.username}
+              Reviewed by: {item.username}
             </Typography>
             <div className="review-item-top">
               <p>{item.title}</p>
@@ -102,13 +102,13 @@ export default function ReviewsList(props) {
                   >Edit
                 </Button>
                 <Button
-                className={classes.button}
-                type="button"
-                onClick={(e) => handleRemove(item.id, e)}
-                variant="contained"
-                color="secondary"
-               >Delete
-              </Button> 
+                  className={classes.button}
+                  type="button"
+                  onClick={(e) => handleRemove(item.id, e)}
+                  variant="contained"
+                  color="secondary"
+                  >Delete
+                </Button> 
               </>
               : ""}
               
