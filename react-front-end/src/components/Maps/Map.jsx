@@ -41,7 +41,7 @@ const Map = () => {
         >
           <Popup>
             <h2>
-              {spot.location_name}</h2> <br /> 
+              {spot.location_name}</h2> 
               Coordinates: {spot.latitude}, {spot.longitude} <br />
               Photo Credit: {spot.photo_credit} <br />
               <img alt="" className='popup-image' sizes="(max-height: 100px) 500px, 800px" src={spot.photo_url} />
