@@ -34,6 +34,7 @@ export default function ReviewsList(props) {
 
   useEffect(() => {
     axios.get(`/api/reviews/${buildingId}`).then((res) => {
+      console.log('reviewslist axios', res)
       setReview(res.data);
     });
   }, []);
@@ -52,6 +53,9 @@ export default function ReviewsList(props) {
     setRecordForEdit(item);
     setOpenPopup(true);
   };
+
+  const currentUser = 13;
+
 
   return (
     <div className="reviews-list-container">
@@ -77,7 +81,7 @@ export default function ReviewsList(props) {
           <Card key={item.id} variant="outlined" className="review-item">
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Reviewed by: {review.username}
+              Reviewed by: {item.username}
             </Typography>
             <div className="review-item-top">
               <p>{item.title}</p>
@@ -91,24 +95,26 @@ export default function ReviewsList(props) {
               </h4>
             </div>
             <p>{item.comment}</p>
-            {/* <p>Area rating: {item.area_rating}</p> */}
-            <div className="review-item-bottom">
-              <Button
-                className={classes.button}
-                type="button"
-                variant="contained"
-                color="primary"
-                onClick={(e) => {handleEdit(item)}}
-              >Edit
-              </Button>
-              <Button
-                className={classes.button}
-                type="button"
-                onClick={(e) => handleRemove(item.id, e)}
-                variant="contained"
-                color="secondary"
-              >Delete
-              </Button>
+          
+            <div className="review-item-bottom" >
+              {currentUser === item.user_id ? 
+              <><Button
+                  className={classes.button}
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  onClick={(e) => {handleEdit(item)}}
+                  >Edit
+                </Button>
+                <Button
+                  className={classes.button}
+                  type="button"
+                  onClick={(e) => handleRemove(item.id, e)}
+                  variant="contained"
+                  color="secondary"
+                  >Delete
+                </Button> 
+              </> : ""}
             </div>
             </CardContent>
           </Card>

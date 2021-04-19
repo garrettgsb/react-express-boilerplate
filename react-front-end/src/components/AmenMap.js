@@ -11,12 +11,14 @@ function AmenMap() {
 
   const { buildingId } = useParams();
 
+
   useEffect(() => {
     axios.get(`/api/buildings/${buildingId}`).then((res) => {
       console.log("res", res);
       setBuilding(res.data);
     });
   }, [buildingId]);
+
 
   const buildingIcon = new Icon({
     iconUrl: "/building.png",

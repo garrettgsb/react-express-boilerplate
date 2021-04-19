@@ -12,6 +12,7 @@ module.exports = (db) => {
       SELECT *
       FROM amenities
       WHERE area_id = $1
+      LIMIT 200
       `,
       [areaID]
     )

@@ -7,8 +7,18 @@
 
 
 
-SELECT areas.name AS area_name, ROUND(AVG(area_rating),0) AS average_area_rating
-FROM reviews
-JOIN areas ON area_id = areas.id
-GROUP BY areas.name
-ORDER BY average_area_rating DESC;
+-- SELECT areas.name AS area_name, ROUND(AVG(area_rating),0) AS average_area_rating
+-- FROM reviews
+-- JOIN areas ON area_id = areas.id
+-- GROUP BY areas.name
+-- ORDER BY average_area_rating DESC;
+
+      SELECT buildings.id AS building_id, buildings.area_id AS area_id, buildings.name AS name, buildings.address AS building_address, buildings.neighbourhood AS neighbourhood, buildings.image_url AS image_url, buildings.longitude AS longitude, buildings.latitude AS latitude,
+      (SELECT ROUND(AVG(building_rating),0)::INTEGER 
+      AS average_building_rating FROM reviews where building_id = 111),
+      ROUND((SELECT ((SELECT cast(count(id) as decimal) FROM reviews WHERE landlord_rating = 'true' and building_id=111) / (SELECT cast(COUNT(id) as decimal) FROM reviews where building_id = 111))*100),0)
+      AS landlord_ratio, 
+      ROUND((SELECT ((SELECT cast(count(id) as decimal) FROM reviews WHERE recommend_to_friend = 'true' and building_id=111) / (SELECT cast(COUNT(id) as decimal) FROM reviews where building_id = 111))*100),0)
+      AS recommend_to_friend_ratio
+      FROM buildings
+      WHERE buildings.id = 111;
