@@ -42,7 +42,6 @@ const BuildingsByRating = (props) => {
 
   useEffect(() => {
     axios.get(`/api/buildings/ratings/${buildingRating}`).then((res) => {
-      console.log(res.data);
       setBuilding(res.data);
     });
   }, [buildingId]);
@@ -50,8 +49,6 @@ const BuildingsByRating = (props) => {
   const handleClick = (buildingId) => {
     history.push(`/buildings/${buildingId}`);
   };
-
-  console.log("building:", building.lengths);
 
   const classes = useStyles();
   return (

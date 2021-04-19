@@ -18,13 +18,11 @@ const Buildings = (props) => {
   });
 
   const buildingRating = props.buildingRating;
-  console.log("buildingRating:", buildingRating);
 
   useEffect(() => {
     if (buildingRating != null) {
       axios.get(`/api/buildings/ratings/${buildingRating}`).then((res) => {
         setBuildings(res.data);
-        console.log("res in buildings:", res.data);
       });
     } else {
       axios.get(`/api/buildings`).then((res) => {

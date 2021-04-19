@@ -54,7 +54,7 @@ module.exports = (db) => {
       JOIN reviews r ON r.building_id = b.id
       WHERE r.building_rating = $1
       GROUP BY b.id, b.name, b.address, b.neighbourhood, b.image_url, r.building_rating
-      HAVING COUNT(building_id) = 1
+      HAVING COUNT(building_id) >= 1
       `,
       [ratingId]
     )
