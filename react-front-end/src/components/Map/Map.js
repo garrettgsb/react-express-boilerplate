@@ -1,23 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MapContainer,
   TileLayer,
   GeoJSON,
   LayersControl,
   LayerGroup,
-  Circle,
-  FeatureGroup,
-  Popup,
 } from "react-leaflet";
-import "./App.css";
 import "./Geosearch.css";
+import "./Map.css";
 
-import { features } from "../SFNeighborhoods-copy.json";
-import Buildings from "./Buildings";
+import { features } from "../../SFNeighborhoods-copy.json";
+import Buildings from "../Buildings";
 import MapSearch from "./MapSearch";
-import BuildingsByRating from "./BuildingsByRating";
+import Legend from "./Legend";
+import BuildingsByRating from "../BuildingsByRating";
 
 function MainMap() {
+  const [map, setMap] = useState(null);
   const neighbourhoodData = features;
 
   // const countyData = features
@@ -42,15 +41,15 @@ function MainMap() {
   // r = rating
   const getColor = (r) => {
     return r === "1"
-      ? "#e76f51"
+      ? "#d46c4e"
       : r === "2"
-      ? "#f4a261"
+      ? "#f9ad6a"
       : r === "3"
-      ? "#e9c46a"
+      ? "#f9e07f"
       : r === "4"
-      ? "#2a9d8f"
+      ? "#43978d"
       : r === "5"
-      ? "#264653"
+      ? "#264d59"
       : "gray";
   };
 
@@ -72,9 +71,14 @@ function MainMap() {
         className="map-left"
         center={[37.75220204901914, -122.45808060394913]}
         zoom={13}
+        whenCreated={setMap}
       >
         {/* Toggle base map */}
-        <LayersControl position="topleft">
+        <LayersControl
+          position="topleft"
+          collapsed={false}
+          className="filters-control"
+        >
           <LayersControl.BaseLayer checked name="Areas Heatmap">
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -99,7 +103,7 @@ function MainMap() {
           </LayersControl.BaseLayer>
 
           {/* Toggle choropleth map */}
-          <LayersControl.Overlay checked name="Show Choropleth">
+          <LayersControl.Overlay checked name="Areas Heatmap">
             <GeoJSON
               data={neighbourhoodData}
               style={mapStyle}
@@ -108,33 +112,44 @@ function MainMap() {
           </LayersControl.Overlay>
 
           {/* Toggle building markers */}
-          <LayersControl.Overlay name="Properties">
+          <LayersControl.Overlay name="5 Star Properties">
+            <LayerGroup>
+              <Buildings buildingRating={5} />
+            </LayerGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="4 Star Properties">
+            <LayerGroup>
+              <Buildings buildingRating={4} />
+            </LayerGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="3 Star Properties">
+            <LayerGroup>
+              <Buildings buildingRating={3} />
+            </LayerGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="2 Star Properties">
+            <LayerGroup>
+              <Buildings buildingRating={2} />
+            </LayerGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="1 Star Properties">
+            <LayerGroup>
+              <Buildings buildingRating={1} />
+            </LayerGroup>
+          </LayersControl.Overlay>
+
+          <LayersControl.Overlay name="All Properties">
             <LayerGroup>
               <Buildings />
             </LayerGroup>
           </LayersControl.Overlay>
-
-          <LayersControl.Overlay name="Feature group">
-            <FeatureGroup pathOptions={{ color: "purple" }}>
-              <Popup>Popup in FeatureGroup</Popup>
-              <Circle center={[51.51, -0.06]} radius={200} />
-            </FeatureGroup>
-          </LayersControl.Overlay>
-
-          {/* <GeoSearchControlElement
-          provider={prov}
-          showMarker={true}
-          showPopup={false}
-          popupFormat={({ query, result }) => result.label}
-          maxMarkers={3}
-          retainZoomLevel={false}
-          animateZoom={true}
-          autoClose={false}
-          searchLabel={"Enter address, please"}
-          keepResult={true}
-      /> */}
         </LayersControl>
         <MapSearch />
+        <Legend map={map} />
       </MapContainer>
     </div>
   );

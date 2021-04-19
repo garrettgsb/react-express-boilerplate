@@ -10,13 +10,17 @@ import StarIcon from "@material-ui/icons/Star";
 // import CircularProgress from "@material-ui/core/CircularProgress";
 // import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
-import Popup from "./controls/Popup";
+import Popup from "./Controls/Popup";
 import "./Reviews.css";
 
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
+
+  starRating: {
+    fill: "#61dafb"
+  }
 }));
 
 export default function ReviewsList(props) {
@@ -28,13 +32,12 @@ export default function ReviewsList(props) {
 
   const { buildingId } = useParams();
 
-   useEffect(() => {
+  useEffect(() => {
     axios.get(`/api/reviews/${buildingId}`).then((res) => {
       console.log('reviewslist axios', res)
       setReview(res.data);
     });
   }, []);
-
 
   const handleRemove = (id, e) => {
     axios.delete(`/api/reviews/${id}`).then((res) => {
@@ -61,7 +64,10 @@ export default function ReviewsList(props) {
           type="Button"
           color="primary"
           variant="outlined"
-          onClick = {() => {setOpenPopup(true); setRecordForEdit(null); }}
+          onClick={() => {
+            setOpenPopup(true);
+            setRecordForEdit(null);
+          }}
         >
           Add new review
         </Button>
@@ -72,7 +78,7 @@ export default function ReviewsList(props) {
 
       {review
         .map((item) => (
-          <Card variant="outlined" className="review-item" key={item.id}>
+          <Card key={item.id} variant="outlined" className="review-item">
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               Reviewed by: {item.username}
@@ -82,7 +88,7 @@ export default function ReviewsList(props) {
               <h4>
                 { item.building_rating ? <> {
                     [...Array(item.building_rating)].map((stars, index)=>{
-                        return <StarIcon key={index}/>
+                        return <StarIcon className={classes.starRating} key={index}/>
                       })          
                   } </> : null
                 }

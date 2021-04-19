@@ -3,10 +3,9 @@ import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import { Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
-// import ApartmentIcon from "@material-ui/icons/Apartment";
 
 //component to render all buildings
-const Buildings = () => {
+const Buildings = (props) => {
   const [buildings, setBuildings] = useState([]);
 
   const { buildingId } = useParams();
@@ -18,10 +17,18 @@ const Buildings = () => {
     iconSize: [20, 20],
   });
 
+  const buildingRating = props.buildingRating;
+
   useEffect(() => {
-    axios.get("/api/buildings").then((res) => {
-      setBuildings(res.data);
-    });
+    if (buildingRating != null) {
+      axios.get(`/api/buildings/ratings/${buildingRating}`).then((res) => {
+        setBuildings(res.data);
+      });
+    } else {
+      axios.get(`/api/buildings`).then((res) => {
+        setBuildings(res.data);
+      });
+    }
   }, [buildingId]);
 
   const handleClick = (buildingId) => {

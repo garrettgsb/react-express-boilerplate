@@ -4,10 +4,10 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import mapImage from "../assets/map-home.png"
+import mapImage from "../assets/map-home.png";
 
 import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
-import MapOutlinedIcon from "@material-ui/icons/MapOutlined";
+import ApartmentOutlinedIcon from '@material-ui/icons/ApartmentOutlined';
 import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   container: {
-    padding: "75px 0 125px"
+    padding: "75px 0 125px",
   },
 
   itemContainer: {
@@ -42,12 +42,12 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     backgroundColor: "rgb(22, 28, 36)",
     margin: "45px 0 0",
-    padding: "120px 0px"
+    padding: "120px 0px",
   },
 
   itemTitle: {
-    fontFamily: 'Be Vietnam',
-    fontWeight: "700"
+    fontFamily: "Be Vietnam",
+    fontWeight: "700",
   },
 
   item: {
@@ -70,11 +70,22 @@ const useStyles = makeStyles((theme) => ({
     width:"20%",
     height:"100%",
     margin:"45px auto",
-    color: "green"
+    color: "#61dafb"
+  },
+
+  mapSub: {
+    textTransform: "uppercase",
+    fontWeight: "700",
+    fontSize: "0.75rem",
+    lineHeight: "4.5",
+    letterSpacing: "1.2px",
+    color: "rgb(145, 158, 171)"
   },
 
   mapTitle: {
-    marginBottom: "45px"
+    marginBottom: "45px",
+    fontSize: "2.75rem",
+    fontWeight: "700"
   },
 
   mapText: {
@@ -82,13 +93,13 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center",
     textAlign: "start",
     width: "100%",
-    maxWidth: "250px"
+    maxWidth: "250px",
   },
 
   mapImage: {
     position: "relative",
-    width: "65%"
-  }
+    width: "65%",
+  },
 }));
 
 export default function Home() {
@@ -100,31 +111,41 @@ export default function Home() {
       </Box>
       <Container className={classes.container}>
         <Grid>
-          <Typography className={classes.itemTitle} variant="h4">How GlassWalls works for you</Typography>
+          <Typography className={classes.itemTitle} variant="h4">
+            How GlassWalls works for you
+          </Typography>
         </Grid>
         <Grid className={classes.itemContainer} container spacing={3}>
           <Grid className={classes.item} item xs>
             <RateReviewOutlinedIcon className={classes.svg} />
             <Typography>Reviews</Typography>
+            <Typography>Leave property reviews</Typography>
           </Grid>
           <Grid className={classes.item} item xs>
-            <MapOutlinedIcon className={classes.svg} />
-            <Typography>Map</Typography>
+            <ApartmentOutlinedIcon className={classes.svg} />
+            <Typography>Properties</Typography>
+            <Typography>Search for properties</Typography>
           </Grid>
           <Grid className={classes.item} item xs>
             <ExploreOutlinedIcon className={classes.svg} />
             <Typography>Areas</Typography>
+            <Typography>Explore properties by area</Typography>
           </Grid>
         </Grid>
       </Container>
-      
+
       <Grid className={classes.mapContainer} container spacing={2}>
         <Grid item xs={8}>
-          <img className={classes.mapImage}  src={mapImage}/>
+          <img
+            className={classes.mapImage}
+            src={mapImage}
+            alt={classes.mapImage}
+          />
         </Grid>
         <Grid className={classes.mapText} item xs={4}m>
+          <Typography className={classes.mapSub}>Switch between map styles</Typography>
           <Typography variant="h4" className={classes.mapTitle}>Map</Typography>
-          <Typography variant="p">I want to see reviews of nearby apartments so I can get more information</Typography>
+          <Typography >I want to see reviews of nearby apartments so I can get more information</Typography>
         </Grid>
       </Grid>
     </div>

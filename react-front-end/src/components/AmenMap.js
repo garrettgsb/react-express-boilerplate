@@ -6,17 +6,19 @@ import "./App.css";
 import { Icon } from "leaflet";
 import Amenities from "./Amenities";
 
-
 function AmenMap() {
   const [building, setBuilding] = useState([]);
 
-    const { buildingId } = useParams();
+  const { buildingId } = useParams();
 
-    useEffect(() => {
-      axios.get(`/api/buildings/${buildingId}`).then((res) => {
-        setBuilding(res.data);
-      });
-    }, [buildingId]);
+
+  useEffect(() => {
+    axios.get(`/api/buildings/${buildingId}`).then((res) => {
+      console.log("res", res);
+      setBuilding(res.data);
+    });
+  }, [buildingId]);
+
 
   const buildingIcon = new Icon({
     iconUrl: "/building.png",
@@ -24,14 +26,15 @@ function AmenMap() {
   });
 
   // Allows building useEffect to load
-  if(building.length < 1) {
+  if (building.length < 1) {
     return "";
   }
 
+  console.log("building0: ",building[0])
   return (
     <MapContainer
       center={[building[0].latitude, building[0].longitude]}
-      zoom={15}
+      zoom={16}
     >
       <TileLayer
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
@@ -45,14 +48,14 @@ function AmenMap() {
       >
         <Popup>
           <div>
-            <h2>{building[0].address}</h2>
+            <h2>{building[0].name}</h2>
+            <p>{building[0].building_address}</p>
           </div>
         </Popup>
       </Marker>
-      
+
       {/* Amenity markers */}
       <Amenities />
-
     </MapContainer>
   );
 }
