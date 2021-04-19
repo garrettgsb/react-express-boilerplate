@@ -29,10 +29,11 @@ function AmenMap() {
     return "";
   }
 
+  console.log("building0: ",building[0])
   return (
     <MapContainer
       center={[building[0].latitude, building[0].longitude]}
-      zoom={15}
+      zoom={16}
     >
       <TileLayer
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
@@ -46,7 +47,8 @@ function AmenMap() {
       >
         <Popup>
           <div>
-            <h2>{building[0].address}</h2>
+            <h2>{building[0].name}</h2>
+            <p>{building[0].building_address}</p>
           </div>
         </Popup>
       </Marker>

@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
+
+  starRating: {
+    fill: "#61dafb"
+  }
 }));
 
 export default function ReviewsList(props) {
@@ -68,7 +72,7 @@ export default function ReviewsList(props) {
 
       {review
         .map((item) => (
-          <Card variant="outlined" className="review-item" key={item.id}>
+          <Card key={item.id} variant="outlined" className="review-item">
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               Reviewed by: {review.username}
@@ -78,7 +82,7 @@ export default function ReviewsList(props) {
               <h4>
                 { item.building_rating ? <> {
                     [...Array(item.building_rating)].map((stars, index)=>{
-                        return <StarIcon key={index}/>
+                        return <StarIcon className={classes.starRating} key={index}/>
                       })          
                   } </> : null
                 }
