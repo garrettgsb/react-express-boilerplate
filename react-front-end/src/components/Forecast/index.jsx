@@ -6,12 +6,14 @@ import Info from './Info'
 
 export default function Forecast() {
   return (
-    <div className="container">
+    <div className="cont">
       <div className="cont">
         <Kpindex />
         <Weather />
       </div>
-      <Info />
+      <div className="cont">
+        <Info />
+      </div>
     </div>
   );
 }

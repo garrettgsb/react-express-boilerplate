@@ -40,13 +40,31 @@ app.post('/login', (req, res) => {
 app.get('/profile/:id', (req,res) => {
   console.log('req.params.id: ', req.params.id)
   const query = `SELECT * FROM photographers WHERE id = $1`
-  console.log(req.body);
     db.query(query, [req.params.id]).then((data) => {
       res.send(data.rows[0])
-      console.log(data.rows[0])
     }).catch((err) => {
   });
 })
+
+app.get('/meetups', (req,res) => {
+  // console.log('meetups...:', req.body.rows[0])
+  const query = `SELECT * FROM meetups`
+  db.query(query).then((data) => {
+      res.send(data.rows[0])
+    }).catch((err) => {
+  });
+})
+
+
+// get aurora locations
+app.get('/maps', (req,res) => {
+  const query = `SELECT * FROM locations`
+    db.query(query).then((data) => {
+      res.send(data.rows)
+    }).catch((err) => {
+  });
+})
+
 
 
 // Cors configuration: blocks browser from restricting data

@@ -7,7 +7,6 @@ const Kpindex = () => {
   const [aurora, setAurora] = useState()
   
   useEffect(() => {
-    console.log("hello")
     axios.get(url)
     .then(response => {
       console.log("test", response.data)

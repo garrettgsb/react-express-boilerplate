@@ -65,12 +65,20 @@
 
 .cont {
   display: flex;
-  flex-direction: row;
-  justify-content:center;
-  max-width: 1200px;
+  justify-content: center;
+  // max-width: 800px;
   margin: auto;
-  overflow: auto;
+  // overflow: auto;
+  // min-height: 100px;
   // border: 1px solid #0e3147;
-  padding: 30px;
+  margin: 30px;
   border-radius: 5px;
+  &-allmeets {
+    width: 30%;
+    margin:10px
+  }
+  &-aurora {
+    flex-direction: row;
+    margin-right: 15px;
+  }
 }

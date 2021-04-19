@@ -19,6 +19,10 @@
   padding: 0;
 }
 
+.landing-page {
+  height: 1vh;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -57,3 +61,6 @@ footer {
 //   text-align: center;
 // }
 
+.popup-image {
+  max-width:100%;
+}

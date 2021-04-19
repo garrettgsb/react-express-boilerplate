@@ -1,27 +1,55 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from "leaflet";
-import '../../styles/App.scss';
 
-export default function MapClass (){
+const Map = () => {
 
+  const [photoSpots, setPhotoSpots] = useState([])
+  const [oneSpot, setOneSpot] = useState({})
+  const url = 'http://localhost:8080/maps'
+
+  useEffect(() => {
+    axios.get(url)
+    .then(res => {
+      console.log("test", res.data);
+      setPhotoSpots(res.data);
+    })
+  }, []);
   L.Icon.Default.imagePath='img/'
   const position = [51.046537674112, -114.06380858447375]
 
   
   return (
     <div id="mapid">
-      <MapContainer center={position} zoom={10} scrollWheelZoom={false}>
-        <TileLayer
+      <MapContainer center={position} zoom={9} scrollWheelZoom={false}>
+      <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={position}>
+        {photoSpots.length && photoSpots.map((spot) => (
+        <Marker
+          key={spot.id}
+          position={[
+            spot.latitude,
+            spot.longitude
+          ]}
+        //   onClick={() => {
+        //     console.log("click");
+        //     setOneSpot(spot);
+        //   }}
+        >
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            <h2>
+              {spot.location_name}</h2> 
+              Coordinates: {spot.latitude}, {spot.longitude} <br />
+              Photo Credit: {spot.photo_credit} <br />
+              <img alt="" className='popup-image' sizes="(max-height: 100px) 500px, 800px" src={spot.photo_url} />
           </Popup>
-        </Marker>
+      </Marker>
+      ))}
       </MapContainer>
     </div>
   )
 }
+export default Map;
