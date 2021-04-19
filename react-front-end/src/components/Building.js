@@ -21,13 +21,17 @@ const Building = () => {
 
   // Determines colour of the percentage circles
   const getColour = (r) => {
-    return r > 50 ? "green" : "red"
+    return r > 50 
+    ? "green" 
+    : r < 50 
+    ? "red"
+    : "lightgray"
   }
 
   const [isBusy, setBusy] = useState(true)
   
   useEffect(() => {
-    setBusy(true);
+    // setBusy(true);
     async function fetchData() {
       axios.get(`/api/buildings/${buildingId}`)
       .then((res) => {
@@ -40,6 +44,7 @@ const Building = () => {
   const handleClick = () => {
     history.push("/map");
   };
+
 
 
   return (
@@ -70,16 +75,19 @@ const Building = () => {
         <div className="percentage-circles">
           <div className="percentage-circle" style={{width: 80, height: 80}}>
             <h3>Landlord Approval</h3>
+            {isBusy ? <> {
               <CircularProgressbar
-                value={building.landlord_ratio}
-                text={`${building.landlord_ratio}%`}
-                strokeWidth={10}
-                styles = {buildStyles({
-                  textColor: getColour(building.landlord_ratio),
-                  pathColor: getColour(building.landlord_ratio)
-                }
-                )}
+              value={Number(building.landlord_ratio)}
+              text={`${building.landlord_ratio}%`}
+              strokeWidth={10}
+              styles = {buildStyles({
+                textColor: getColour(Number(building.landlord_ratio)),
+                pathColor: getColour(Number(building.landlord_ratio))
+              }
+              )}
               />
+            }  </> : "Loading"}
+              
             <h3>Recommend to Friend</h3>
               <CircularProgressbar
                 value={building.recommend_to_friend_ratio}

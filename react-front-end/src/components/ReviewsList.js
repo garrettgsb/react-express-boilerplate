@@ -92,8 +92,7 @@ export default function ReviewsList(props) {
           
             <div className="review-item-bottom" >
               {currentUser === item.user_id ? 
-              <>
-                <Button
+              <><Button
                   className={classes.button}
                   type="button"
                   variant="contained"
@@ -109,25 +108,7 @@ export default function ReviewsList(props) {
                   color="secondary"
                   >Delete
                 </Button> 
-              </>
-              : ""}
-              
-              {/* <Button
-                className={classes.button}
-                type="button"
-                variant="contained"
-                color="primary"
-                onClick={(e) => {handleEdit(item)}}
-              >Edit
-              </Button>
-              <Button
-                className={classes.button}
-                type="button"
-                onClick={(e) => handleRemove(item.id, e)}
-                variant="contained"
-                color="secondary"
-              >Delete
-              </Button> */}
+              </> : ""}
             </div>
             </CardContent>
           </Card>
