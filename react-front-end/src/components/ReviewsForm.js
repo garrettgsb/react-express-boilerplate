@@ -126,6 +126,7 @@ export default function ReviewsForm(props) {
                 label="Approve the landlord?"
                 labelPlacement="end"
                 name="landord_rating"
+                type="boolean"
                 onChange={handleChange}
               />
             </Grid>
@@ -136,14 +137,15 @@ export default function ReviewsForm(props) {
                 label="Recommend to friend"
                 labelPlacement="end"
                 name="recommend_to_friend"
+                type="boolean"
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               Building Rating
               <Rating
-                type="number"
                 value={formData.building_rating}
+                type="number"
                 name="building_rating"
                 onChange={handleChange}
               />
@@ -151,8 +153,8 @@ export default function ReviewsForm(props) {
             <Grid item xs={12} sm={6}>
               Area Rating
               <Rating
-                type="number"
                 value={formData.area_rating}
+                type="number"
                 name="area_rating"
                 defaultValue={3}
                 precision={1}
@@ -161,9 +163,9 @@ export default function ReviewsForm(props) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                defaultValue={formData.title}
                 type="text"
                 variant="outlined"
-                value={formData.title}
                 required
                 fullWidth
                 name="title"
@@ -174,8 +176,8 @@ export default function ReviewsForm(props) {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                defaultValue={formData.comment}
                 variant="outlined"
-                value={formData.comment}
                 required
                 type="text"
                 fullWidth

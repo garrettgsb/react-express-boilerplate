@@ -34,6 +34,8 @@ body {
 .feature-buildings {
   flex: 1;
   overflow-y: scroll;
+  width: 100%;
+  max-width: 490px;
 }
 /* and ends here */
 
@@ -61,57 +63,80 @@ body {
   }
 }
 
+.logo {
+  margin-left: 75px;
+}
+
 nav {
   display: flex;
-  justify-content: space-around;
+  background-color: #20232a;
   align-items: center;
-  min-height: 10vh;
-  background: rgb(65, 65, 65);
-  color: white;
 }
 
 .nav-links {
-  width: 50%;
+  width: 100%;
+  margin: 15px auto;
+  max-width: 1280px;
   display: flex;
-  justify-content: space-around;
+  -webkit-justify-content: space-around;
+  justify-content: flex-end;
   list-style: none;
 }
 
-/* .amenities-box {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: stretch;
-  padding: 0;
+.nav-links li {
+  margin: 0px 40px 0px 0px;
 }
-
-.BuildingAmenities {
-  border: 1px solid rgb(65, 65, 65);
-}
-
-.building-details {
-  display: flex;
-  flex-flow: row;
-  flex-direction: row;
-}
-
-.building-header {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: center;
-} */
 
 .favourites-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.favourites-header {
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
+  margin: 0 auto;
+  width: 100%;
+  flex-wrap: wrap;
 }
+
+.favourites-item {
+  width: calc(100% / 3 - 24px);
+  margin: 12px;
+}
+
+.favourites-header h2 {
+  margin: 0;
+}
+
+.favourites-image {
+  width: 100%;
+}
+
+.favourites-content {
+  padding: 20px;
+}
+
+.favourites-content button{
+  margin: 20px;
+} 
 
 .amenities-map {
   width: 500px;
   height: 100px;
+}
+
+.logo {
+  margin-left: 100px;
+  height: 85px;
+  width: 85px;
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
 }
 
 .leaflet-container {

@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import mapImage from "../assets/map-home.png";
 
 import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
-import MapOutlinedIcon from "@material-ui/icons/MapOutlined";
+import ApartmentOutlinedIcon from '@material-ui/icons/ApartmentOutlined';
 import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
 
 const useStyles = makeStyles((theme) => ({
@@ -67,14 +67,25 @@ const useStyles = makeStyles((theme) => ({
 
   svg: {
     position: "relative",
-    width: "20%",
-    height: "100%",
-    margin: "45px auto",
-    color: "green",
+    width:"20%",
+    height:"100%",
+    margin:"45px auto",
+    color: "#61dafb"
+  },
+
+  mapSub: {
+    textTransform: "uppercase",
+    fontWeight: "700",
+    fontSize: "0.75rem",
+    lineHeight: "4.5",
+    letterSpacing: "1.2px",
+    color: "rgb(145, 158, 171)"
   },
 
   mapTitle: {
     marginBottom: "45px",
+    fontSize: "2.75rem",
+    fontWeight: "700"
   },
 
   mapText: {
@@ -108,14 +119,17 @@ export default function Home() {
           <Grid className={classes.item} item xs>
             <RateReviewOutlinedIcon className={classes.svg} />
             <Typography>Reviews</Typography>
+            <Typography>Leave property reviews</Typography>
           </Grid>
           <Grid className={classes.item} item xs>
-            <MapOutlinedIcon className={classes.svg} />
-            <Typography>Map</Typography>
+            <ApartmentOutlinedIcon className={classes.svg} />
+            <Typography>Properties</Typography>
+            <Typography>Search for properties</Typography>
           </Grid>
           <Grid className={classes.item} item xs>
             <ExploreOutlinedIcon className={classes.svg} />
             <Typography>Areas</Typography>
+            <Typography>Explore properties by area</Typography>
           </Grid>
         </Grid>
       </Container>
@@ -128,14 +142,10 @@ export default function Home() {
             alt={classes.mapImage}
           />
         </Grid>
-        <Grid className={classes.mapText} item xs={4} m>
-          <Typography variant="h4" className={classes.mapTitle}>
-            Map
-          </Typography>
-          <Typography variant="p">
-            I want to see reviews of nearby apartments so I can get more
-            information
-          </Typography>
+        <Grid className={classes.mapText} item xs={4}m>
+          <Typography className={classes.mapSub}>Switch between map styles</Typography>
+          <Typography variant="h4" className={classes.mapTitle}>Map</Typography>
+          <Typography >I want to see reviews of nearby apartments so I can get more information</Typography>
         </Grid>
       </Grid>
     </div>
