@@ -1,45 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import ProfilePic from "./ProfilePic";
 import UserDetails from "./UserDetails";
 import FeaturedPhotos from "./FeaturedPhotos";
+import { authContext } from '../../AuthProvider'
 
-const Profile = ({ id = 4 }) => {
+const Profile = () => {
+  const photogData = useContext(authContext)
+  console.log('photogData:', photogData)
   const [profileData, setprofileData] = useState(null);
-
+  
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/profile/${id}`, {
+      .get(`http://localhost:8080/profile/${photogData.user.id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then(setprofileData);
-  }, [id]);
+  }, [photogData.user.id]);
 
-  const login = function (email, password) {
-    axios.post('http://localhost:8080/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: JSON.stringify({email: email, password: password})
-      // credentials: JSON.stringify(credentials)
-    })
-      .then((data) => { 
-        console.log(data)
-        if(data.data === '') {
-        alert('Sorry, the email or password is not valid')
-      } else {
-        console.log('All good')
-        setUser({ email, id});
-        setAuth(true);
-      }
-    })
-  }
-
-  console.log("profileData: ", profileData);
   if (!profileData) return null;
   return (
     <>

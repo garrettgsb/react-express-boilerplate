@@ -3,7 +3,6 @@ import { authContext } from '../../AuthProvider';
 import '../Button.scss';
 import '../../App.scss';
 import './UserLogin.scss';
-import axios from 'axios';
 
 //request user for login
 // async function loginUser(credentials) {
@@ -23,15 +22,6 @@ const UserLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(authContext);
-
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const token = await loginUser({
-  //     email,
-  //     password
-  //   });
-  //   setToken(token);
-  // }
 
 
   const onEmailChange = function(event) {
