@@ -72,7 +72,7 @@ function App() {
               <Route exact path="/" component={Forecast}/>
               <Route exact path="/meetups" component={Meetups}/>
               <Route exact path="/maps" component={Maps}/>
-              <Route exact path="/profile" component={Profile}/>
+              <Route exact path="/profile/:id" component={Profile}/>
               <Route exact path="/settings" component={Settings}/>
               {!auth && <Route exact path="/login" component={UserLogin}/>}
               {auth && <Route exact path="/login" component={UserInfo}/>}
