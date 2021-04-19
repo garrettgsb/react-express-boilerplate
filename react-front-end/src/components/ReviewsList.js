@@ -54,7 +54,7 @@ export default function ReviewsList(props) {
     setOpenPopup(true);
   };
 
-  const currentUser = 13;
+  const currentUser = 11;
 
 
   return (

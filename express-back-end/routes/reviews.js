@@ -34,25 +34,26 @@ module.exports = (db) => {
   });
 
   // Adds a new review
-  router.post("/", (req, res) => {
+  router.post("/api/reviews", (req, res) => {
+    console.log('Req session from reviews post route', req.body)
     const title = req.body.title;
     const comment = req.body.comment;
     const landlord_rating = req.body.landlord_rating;
     const recommend_to_friend = req.body.recommend_to_friend;
     const building_rating = req.body.building_rating;
     const area_rating = req.body.area_rating;
-    const user_id = req.session.user_id
-    const queryParams = [title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating, user_id];
+    const building_id = req.body.building_id
+    const user_id = req.body.user_id
+    const queryParams = [title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating, building_id, user_id];
 
-    console.log('Req from reviews post route', req)
-
-    const queryString = `INSERT INTO reviews (title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating)
-    VALUES ($1, $2, $3, $4 ,$5, $6) RETURNING *;`
+    const queryString = `INSERT INTO reviews (title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating, building_id, user_id)
+    VALUES ($1, $2, $3, $4 ,$5, $6, $7, $8) RETURNING *;`
 
     db.query(queryString, queryParams)
     .then(result => {
       res
         .status(200)
+        .json(result.rows[0]);
     })
     .catch(err => {
       res
