@@ -21,7 +21,7 @@ const Buildings = (props) => {
 
   useEffect(() => {
     if (buildingRating != null) {
-      axios.get(`/api/buildings/${buildingRating}`).then((res) => {
+      axios.get(`/api/buildings/ratings/${buildingRating}`).then((res) => {
         setBuildings(res.data);
       });
     } else {

@@ -48,7 +48,7 @@ const Building = () => {
   return (
     <div className="building-container">
       <div className="building-header">
-        <div key={building.id}>
+        <div key={building.name}>
           <h1>{building.name}</h1>
           <h3>{building.neighbourhood} Neighbourhood</h3>
           <p>{building.address}</p>

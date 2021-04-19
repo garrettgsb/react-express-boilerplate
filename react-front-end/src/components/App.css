@@ -2,12 +2,6 @@
   text-align: center;
 }
 
-.leaflet-touch .leaflet-control-layers-toggle {
-  width: 50px;
-  height: 100px;
-  background-color: black;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -112,33 +106,4 @@ nav {
 .amenities-map {
   width: 500px;
   height: 100px;
-}
-
-/* formatting for map legend */
-.info {
-  padding: 6px 8px;
-  font: 14px/16px Arial, Helvetica, sans-serif;
-  background: white;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-
-.info h4 {
-  margin: 0 0 5px;
-  color: #777;
-}
-
-.legend {
-  text-align: left;
-  line-height: 18px;
-  color: #555;
-}
-
-.legend i {
-  width: 18px;
-  height: 18px;
-  float: left;
-  margin-right: 8px;
-  opacity: 0.7;
 }

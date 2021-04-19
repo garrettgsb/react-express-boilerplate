@@ -7,6 +7,7 @@ import {
   LayerGroup,
 } from "react-leaflet";
 import "./Geosearch.css";
+import "./Map.css";
 
 import { features } from "../../SFNeighborhoods-copy.json";
 import Buildings from "../Buildings";
@@ -73,7 +74,11 @@ function MainMap() {
         whenCreated={setMap}
       >
         {/* Toggle base map */}
-        <LayersControl position="topleft" className="filters-control">
+        <LayersControl
+          position="topleft"
+          collapsed={false}
+          className="filters-control"
+        >
           <LayersControl.BaseLayer checked name="Areas Heatmap">
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

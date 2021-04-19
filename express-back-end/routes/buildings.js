@@ -19,25 +19,6 @@ module.exports = (db) => {
       });
   });
 
-  // Get buildings based off of rating
-  router.get("/:ratingId", (req, res) => {
-    const ratingId = req.params.ratingId;
-
-    db.query(
-      `
-      SELECT *
-      FROM buildings
-      JOIN reviews ON building_id = buildings.id
-      WHERE building_rating = $1
-      `,
-      [ratingId]
-    )
-      .then(({ rows: buildings }) => res.json(buildings))
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
-
   //Get a specific building
   router.get("/:id", (req, res) => {
     const buildingID = req.params.id;
@@ -56,27 +37,46 @@ module.exports = (db) => {
       });
   });
 
-  //get all properties within a certain star rating
-  router.get("/ratings/:buildingRating", (req, res) => {
-    const buildingRating = req.params.buildingRating;
+  // Get buildings based off of rating
+  router.get("/ratings/:ratingId", (req, res) => {
+    const ratingId = req.params.ratingId;
 
     db.query(
       `
-      SELECT b.id, b.name, b.address, b.neighbourhood, b.image_url, COUNT(r.building_id), r.building_rating
-      FROM buildings b
-      JOIN reviews r ON r.building_id = b.id
+      SELECT *
+      FROM buildings
+      JOIN reviews ON building_id = buildings.id
       WHERE building_rating = $1
-      GROUP BY b.id, b.name, b.address, b.neighbourhood, b.image_url, r.building_rating
-      HAVING COUNT(r.building_id) = 1
-      LIMIT 50;
       `,
-      [buildingRating]
+      [ratingId]
     )
       .then(({ rows: buildings }) => res.json(buildings))
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  // //get all properties within a certain star rating
+  // router.get("/ratings/:buildingRating", (req, res) => {
+  //   const buildingRating = req.params.buildingRating;
+
+  //   db.query(
+  //     `
+  //     SELECT b.id, b.name, b.address, b.neighbourhood, b.image_url, COUNT(r.building_id), r.building_rating
+  //     FROM buildings b
+  //     JOIN reviews r ON r.building_id = b.id
+  //     WHERE building_rating = $1
+  //     GROUP BY b.id, b.name, b.address, b.neighbourhood, b.image_url, r.building_rating
+  //     HAVING COUNT(r.building_id) = 1
+  //     LIMIT 50;
+  //     `,
+  //     [buildingRating]
+  //   )
+  //     .then(({ rows: buildings }) => res.json(buildings))
+  //     .catch((err) => {
+  //       res.status(500).json({ error: err.message });
+  //     });
+  // });
 
   //add or delete a favourite
   router.post("/favourite/:buildingId", (req, res) => {

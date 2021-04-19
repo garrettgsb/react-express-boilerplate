@@ -22,7 +22,7 @@ export default function FavouriteButton(props) {
 
   return (
     <div className="favourite-button">
-      {!favourite && (
+      {favourite && (
         <Button
           onClick={() => {
             handleFav(props.buildingId);
@@ -35,7 +35,7 @@ export default function FavouriteButton(props) {
           Favourite this property!
         </Button>
       )}
-      {favourite && (
+      {!favourite && (
         <Button
           onClick={() => {
             handleFav(props.buildingId);
