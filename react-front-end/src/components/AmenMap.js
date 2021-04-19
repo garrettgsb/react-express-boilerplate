@@ -14,7 +14,6 @@ function AmenMap() {
 
     useEffect(() => {
       axios.get(`/api/buildings/${buildingId}`).then((res) => {
-        console.log('res', res)
         setBuilding(res.data);
       });
     }, [buildingId]);

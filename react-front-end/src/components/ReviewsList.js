@@ -30,6 +30,7 @@ export default function ReviewsList(props) {
 
    useEffect(() => {
     axios.get(`/api/reviews/${buildingId}`).then((res) => {
+      console.log('reviewslist axios', res)
       setReview(res.data);
     });
   }, []);
@@ -50,12 +51,8 @@ export default function ReviewsList(props) {
     setOpenPopup(true);
   };
 
+  const currentUser = 2;
 
-  const isUser = false;
-
-  const testUser = review.user_id
-
-  console.log('YOOOO', testUser)
 
   return (
     <div className="reviews-list-container">
@@ -94,7 +91,7 @@ export default function ReviewsList(props) {
             <p>{item.comment}</p>
           
             <div className="review-item-bottom" >
-              {isUser ? 
+              {currentUser === item.user_id ? 
               <>
                 <Button
                   className={classes.button}
