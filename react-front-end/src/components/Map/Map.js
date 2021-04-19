@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -6,15 +6,16 @@ import {
   LayersControl,
   LayerGroup,
 } from "react-leaflet";
-import "./App.css";
 import "./Geosearch.css";
 
-import { features } from "../SFNeighborhoods-copy.json";
-import Buildings from "./Buildings";
+import { features } from "../../SFNeighborhoods-copy.json";
+import Buildings from "../Buildings";
 import MapSearch from "./MapSearch";
-import BuildingsByRating from "./BuildingsByRating";
+import Legend from "./Legend";
+import BuildingsByRating from "../BuildingsByRating";
 
 function MainMap() {
+  const [map, setMap] = useState(null);
   const neighbourhoodData = features;
 
   // const countyData = features
@@ -39,15 +40,15 @@ function MainMap() {
   // r = rating
   const getColor = (r) => {
     return r === "1"
-      ? "#e76f51"
+      ? "#d46c4e"
       : r === "2"
-      ? "#f4a261"
+      ? "#f9ad6a"
       : r === "3"
-      ? "#e9c46a"
+      ? "#f9e07f"
       : r === "4"
-      ? "#2a9d8f"
+      ? "#43978d"
       : r === "5"
-      ? "#264653"
+      ? "#264d59"
       : "gray";
   };
 
@@ -69,9 +70,10 @@ function MainMap() {
         className="map-left"
         center={[37.75220204901914, -122.45808060394913]}
         zoom={13}
+        whenCreated={setMap}
       >
         {/* Toggle base map */}
-        <LayersControl position="topleft">
+        <LayersControl position="topleft" className="filters-control">
           <LayersControl.BaseLayer checked name="Areas Heatmap">
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -140,21 +142,9 @@ function MainMap() {
               <Buildings />
             </LayerGroup>
           </LayersControl.Overlay>
-
-          {/* <GeoSearchControlElement
-          provider={prov}
-          showMarker={true}
-          showPopup={false}
-          popupFormat={({ query, result }) => result.label}
-          maxMarkers={3}
-          retainZoomLevel={false}
-          animateZoom={true}
-          autoClose={false}
-          searchLabel={"Enter address, please"}
-          keepResult={true}
-      /> */}
         </LayersControl>
         <MapSearch />
+        <Legend map={map} />
       </MapContainer>
     </div>
   );
