@@ -14,6 +14,11 @@ body {
   pointer-events: none;
 }
 
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
+
 /* css for map page starts here */
 .map-left {
   flex: 2;
