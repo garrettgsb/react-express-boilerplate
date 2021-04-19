@@ -65,7 +65,7 @@ function MainMap() {
   return (
     <div className="map-container">
       <div className="feature-buildings">
-        <BuildingsByRating />
+        <BuildingsByRating buildingRating={5} />
       </div>
       <MapContainer
         className="map-left"

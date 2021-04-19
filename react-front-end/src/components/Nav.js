@@ -1,20 +1,22 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo_transparent.png"
+import logo from "../assets/logo_transparent.png";
 
 const useStyles = makeStyles((theme) => ({
   navList: {
     color: "white",
-    textDecoration: "none"
-  }
+    textDecoration: "none",
+  },
 }));
 
 export default function Nav() {
   const classes = useStyles();
   return (
     <nav>
-      <div className="logo"><img className="logo-img" src={logo}/></div>
+      <div className="logo">
+        <img className="logo-img" src={logo} alt={logo} />
+      </div>
       <ul className="nav-links">
         <Link className={classes.navList} to="/">
           <li>Home</li>
