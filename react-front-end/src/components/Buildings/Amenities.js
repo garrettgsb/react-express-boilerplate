@@ -16,7 +16,7 @@ const Amenities = () => {
   // Selects icon image
   const getIcon = (amenity) => {
     const image = 
-    amenity.type === "School" ? "/testicon.png" : 
+    amenity.type === "School" ? "https://img.pngio.com/red-circle-png-images-download-424-png-resources-with-transparent-red-dot-png-260_260.png" : 
     amenity.type === "Groceries" ? "/testicon.png" :
     amenity.type === "Park" ? "/testicon.png" :
     amenity.type === "Restaurant" ? "/testicon.png" :
