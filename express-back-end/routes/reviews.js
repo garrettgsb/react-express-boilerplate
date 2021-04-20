@@ -35,7 +35,8 @@ module.exports = (db) => {
 
   // Adds a new review
   router.post("/api/reviews", (req, res) => {
-    console.log('Req session from reviews post route', req.body)
+    // console.log('Req session from reviews post route', req.body)
+    const review_id = req.body.review_id
     const title = req.body.title;
     const comment = req.body.comment;
     const landlord_rating = req.body.landlord_rating;
@@ -44,7 +45,7 @@ module.exports = (db) => {
     const area_rating = req.body.area_rating;
     const building_id = req.body.building_id
     const user_id = req.body.user_id
-    const queryParams = [title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating, building_id, user_id];
+    const queryParams = [review_id, title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating, building_id, user_id];
 
     const queryString = `INSERT INTO reviews (title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating, building_id, user_id)
     VALUES ($1, $2, $3, $4 ,$5, $6, $7, $8) RETURNING *;`
@@ -63,19 +64,22 @@ module.exports = (db) => {
   })
 
   // Updates a review
-  router.put("/api/reviews/:id", (req, res) => {
-    const id = req.body.id;
+  router.put("/api/reviews/:review_id", (req, res) => {
+    console.log('Req session from reviews edit route', req.body)
+    const review_id = req.body.review_id;
     const title = req.body.title;
     const comment = req.body.comment;
     const landlord_rating = req.body.landlord_rating;
     const recommend_to_friend = req.body.recommend_to_friend;
     const building_rating = req.body.building_rating;
     const area_rating = req.body.area_rating;
+    const building_id = req.body.building_id;
+    const user_id = req.body.user_id;
     
-    const queryParams = [id, title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating];
+    const queryParams = [review_id, title, comment, landlord_rating, recommend_to_friend, building_rating, area_rating, building_id, user_id];
 
-    const queryString = `UPDATE reviews SET title = $2, comment = $3, landlord_rating = $4, recommend_to_friend = $5, building_rating = $6, area_rating = $7 WHERE id = $1 RETURNING *;`
-
+    const queryString = `UPDATE reviews SET title = $2, comment = $3, landlord_rating = $4, recommend_to_friend = $5, building_rating = $6, area_rating = $7 building_id = $8, user_id = $9 WHERE id = $1 RETURNING *;`
+    // UPDATE reviews SET title = 'Do you work', comment = 'Hello Wrold', landlord_rating = false, recommend_to_friend = false, building_rating = 5, area_rating = 5, building_id = 6, user_id = 11 WHERE id = 174 RETURNING *;
     db.query(queryString, queryParams)
     .then(result => {
       res
@@ -117,3 +121,4 @@ module.exports = (db) => {
 
   return router;
 };
+

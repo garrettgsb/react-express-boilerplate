@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewsList from "./ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
 import FavouriteButton from "./Favourites/FavouriteButton";
 import AmenMap from "./AmenMap";
-import PercentageCircles from "./PercentageCircles";
 import StarIcon from "@material-ui/icons/Star";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -17,8 +16,6 @@ const Building = () => {
 
   const { buildingId } = useParams();
 
-  const history = useHistory();
-
   // Determines colour of the percentage circles
   const getColour = (r) => {
     return r > 50 
@@ -27,9 +24,8 @@ const Building = () => {
     ? "red"
     : "lightgray"
   }
-
-  const [isBusy, setBusy] = useState(true)
   
+  // Fetches building's data
   useEffect(() => {
     // setBusy(true);
     async function fetchData() {
@@ -41,18 +37,13 @@ const Building = () => {
     fetchData();
   }, [buildingId]);
 
-  const handleClick = () => {
-    history.push("/map");
-  };
-
-
 
   return (
     <div className="building-container">
       <div className="building-header">
         <div key={building.id}>
           <h1>{building.name}</h1>
-          <h3>{building.neighbourhood} Neighbourhood</h3>
+          <h3>{building.building_address}</h3>
           <h4>
                 { building.average_building_rating ? <> {
                     [...Array(building.average_building_rating)].map((stars, index)=>{
@@ -75,7 +66,6 @@ const Building = () => {
         <div className="percentage-circles">
           <div className="percentage-circle" style={{width: 80, height: 80}}>
             <h3>Landlord Approval</h3>
-            {isBusy ? <> {
               <CircularProgressbar
               value={Number(building.landlord_ratio)}
               text={`${building.landlord_ratio}%`}
@@ -86,8 +76,6 @@ const Building = () => {
               }
               )}
               />
-            }  </> : "Loading"}
-              
             <h3>Recommend to Friend</h3>
               <CircularProgressbar
                 value={building.recommend_to_friend_ratio}
@@ -104,7 +92,6 @@ const Building = () => {
         {/* <PercentageCircles /> */}
         <div className="review-list">
           <ReviewsList />
-          <button onClick={handleClick}>Go to the Map page</button>
         </div>
         <div className="amenities-and-map">
           <BuildingAmenities />

@@ -13,8 +13,6 @@ import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
-
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -49,10 +47,8 @@ export default function ReviewsForm(props) {
   const { recordForEdit } = props
 
   const [formData, updateFormData] = useState(initialFormData);
-  // console.log('formData', formData)
 
   const handleChange = (e) => {
-    // console.log('handleChange e', e)
     updateFormData({
       ...formData,
       [e.target.name]: e.target.value.trim(),
@@ -81,56 +77,57 @@ export default function ReviewsForm(props) {
     try {
       const { data } = await axios.post(`/api/reviews`, body)
       console.log('>>data', data)
+      window.location.reload()
     } catch (error) {
       console.log('>>error', error)
     }
   }
 
-  const handlePost2 = (e) => {
+  const handlePostEdit = async (reviewId, e) => { 
     e.preventDefault();
     const body = {
-      title: "test", 
-      comment: "test"
+      review_id: recordForEdit.review_id,
+      title: formData.title, 
+      comment: formData.comment,
+      landlord_rating: formData.landlord_rating,
+      recommend_to_friend: formData.recommend_to_friend,
+      building_rating: parseInt(formData.building_rating),
+      area_rating: parseInt(formData.area_rating),
+      building_id: parseInt(buildingId),
+      user_id: 11
     }
-    axios.POST(`/api/reviews`, body, {
-      headers: {
-        "content-type": "application/json",
-      },
-      data: formData,
-    })
-      .then((res) => res.data)
-      .then(window.location.reload())
-      .catch((error) => {
-        throw error;
-      });
-  };
+    try {
+      const { data } = await axios.put(`/api/reviews/${reviewId}`, body)
+      console.log('>>data', data)
+      window.location.reload()
+    } catch (error) {
+      console.log('>>error', error)
+    }
+  }
 
-  // console.log('From handle post', handlePost)
+  // const handlePostEdit2 = (id, e) => {
+  //   e.preventDefault();
 
-  const handlePostEdit = (id, e) => {
-    e.preventDefault();
-
-    axios(`/api/reviews/${id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      data: formData,
-    })
-      .then((res) => res.data)
-      .then(window.location.reload())
-      .catch((error) => {
-        throw error;
-      });
-  };
+  //   axios(`/api/reviews/${id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     data: formData,
+  //   })
+  //     .then((res) => res.data)
+  //     .then(window.location.reload())
+  //     .catch((error) => {
+  //       throw error;
+  //     });
+  // };
 
   const handleSubmit = (e) => {
     if (recordForEdit !== null) {
       handlePostEdit(recordForEdit.review_id, e);
     } else {
-      // alert("hello...")
+      // alert("hello from form ReviewsForm.js handleSubmit")
       handlePost(e);
-      // console.log('EEEEE', e)
     }
   };
 

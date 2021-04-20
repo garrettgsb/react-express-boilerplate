@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import ReviewsForm from "./ReviewsForm";
 import Button from "@material-ui/core/Button";
@@ -7,8 +7,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
 import StarIcon from "@material-ui/icons/Star";
-// import CircularProgress from "@material-ui/core/CircularProgress";
-// import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import Popup from "./controls/Popup";
 import "./Reviews.css";
@@ -23,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
 export default function ReviewsList(props) {
   const [review, setReview] = useState([]);
   // const [reviews, setReviews] = useState([]);
@@ -30,11 +29,19 @@ export default function ReviewsList(props) {
   const [recordForEdit, setRecordForEdit] = useState(null);
   const classes = useStyles();
 
+  console.log('ReviewsList.js recordForedit:', recordForEdit)
+
+  // Handles 'Back to Map' button
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/map");
+  };
+
   const { buildingId } = useParams();
 
   useEffect(() => {
     axios.get(`/api/reviews/${buildingId}`).then((res) => {
-      console.log('reviewslist axios', res)
+      // console.log('reviewslist GET axios', res)
       setReview(res.data);
     });
   }, []);
@@ -56,10 +63,17 @@ export default function ReviewsList(props) {
 
   const currentUser = 11;
 
-
   return (
     <div className="reviews-list-container">
       <div className="reviews-list-buttons">
+        <Button
+          type="Button"
+          color="primary"
+          variant="outlined"
+          onClick={handleClick}
+        >
+          Back to Map
+        </Button>
         <Button
           type="Button"
           color="primary"
@@ -78,7 +92,7 @@ export default function ReviewsList(props) {
 
       {review
         .map((item) => (
-          <Card key={item.id} variant="outlined" className="review-item">
+          <Card key={item.review_id} variant="outlined" className="review-item">
             <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               Reviewed by: {item.username}
@@ -119,7 +133,7 @@ export default function ReviewsList(props) {
             </CardContent>
           </Card>
         ))
-        .reverse()}
+        }
     </div>
   );
 }
