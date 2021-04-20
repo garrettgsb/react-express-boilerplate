@@ -45,8 +45,6 @@ const Building = () => {
     history.push("/map");
   };
 
-
-
   return (
     <div className="building-container">
       <div className="building-header">
@@ -64,7 +62,7 @@ const Building = () => {
 
           <p>{building.address}</p>
           <img
-            className="building_amenities-image"
+            className="building_header"
             src={building.image_url}
             alt={building.name}
           />
@@ -72,9 +70,10 @@ const Building = () => {
         </div>
       </div>
       <div className="building-details">
-        <div className="percentage-circles">
-          <div className="percentage-circle" style={{width: 80, height: 80}}>
-            <h3>Landlord Approval</h3>
+        
+      <div className="review-list">
+        <div className="percentage-circle">
+          <div className="landord-approval">
             {isBusy ? <> {
               <CircularProgressbar
               value={Number(building.landlord_ratio)}
@@ -87,22 +86,23 @@ const Building = () => {
               )}
               />
             }  </> : "Loading"}
-              
+            <h3>Landlord Approval</h3>
+          </div>
+          <div className="recommend-friend">
+            <CircularProgressbar
+              value={building.recommend_to_friend_ratio}
+              text={`${building.recommend_to_friend_ratio}%`}
+              strokeWidth={10}
+              styles = {buildStyles({
+                textColor: getColour(building.recommend_to_friend_ratio),
+                pathColor: getColour(building.recommend_to_friend_ratio)
+              }
+              )}
+            />
             <h3>Recommend to Friend</h3>
-              <CircularProgressbar
-                value={building.recommend_to_friend_ratio}
-                text={`${building.recommend_to_friend_ratio}%`}
-                strokeWidth={10}
-                styles = {buildStyles({
-                  textColor: getColour(building.recommend_to_friend_ratio),
-                  pathColor: getColour(building.recommend_to_friend_ratio)
-                }
-                )}
-              />
           </div>
         </div>
         {/* <PercentageCircles /> */}
-        <div className="review-list">
           <ReviewsList />
           <button onClick={handleClick}>Go to the Map page</button>
         </div>

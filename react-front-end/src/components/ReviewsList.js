@@ -10,7 +10,7 @@ import StarIcon from "@material-ui/icons/Star";
 // import CircularProgress from "@material-ui/core/CircularProgress";
 // import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
-import Popup from "./Controls/Popup";
+import Popup from "./controls/Popup";
 import "./Reviews.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,10 +39,10 @@ export default function ReviewsList(props) {
     });
   }, []);
 
-  const handleRemove = (id, e) => {
-    axios.delete(`/api/reviews/${id}`).then((res) => {
+  const handleRemove = (review_id, e) => {
+    axios.delete(`/api/reviews/${review_id}`).then((res) => {
       setTimeout(() => {
-        const newReview = review.filter((item) => item.id !== id);
+        const newReview = review.filter((item) => item.review_id !== review_id);
         setReview(newReview);
       }, 500);
     });
@@ -54,7 +54,7 @@ export default function ReviewsList(props) {
     setOpenPopup(true);
   };
 
-  const currentUser = 13;
+  const currentUser = 12;
 
 
   return (
@@ -109,7 +109,7 @@ export default function ReviewsList(props) {
                 <Button
                   className={classes.button}
                   type="button"
-                  onClick={(e) => handleRemove(item.id, e)}
+                  onClick={(e) => handleRemove(item.review_id, e)}
                   variant="contained"
                   color="secondary"
                   >Delete

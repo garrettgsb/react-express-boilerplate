@@ -56,7 +56,7 @@ export default function ReviewsForm(props) {
   const handlePost = (e) => {
     e.preventDefault();
 
-    axios(`/`, {
+    axios(`/api/reviews`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -70,10 +70,10 @@ export default function ReviewsForm(props) {
       });
   };
 
-  const handlePostEdit = (id, e) => {
+  const handlePostEdit = (review_id, e) => {
     e.preventDefault();
 
-    axios(`/api/reviews/${id}`, {
+    axios(`/api/reviews/${review_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -89,11 +89,16 @@ export default function ReviewsForm(props) {
 
   const handleSubmit = (e) => {
     if (recordForEdit !== null) {
-      handlePostEdit(recordForEdit.id, e);
+      handlePostEdit(recordForEdit.review_id, e);
     } else {
       handlePost(e);
     }
   };
+
+  
+  console.log(recordForEdit.review_id)
+
+  console.log("recordforedit: ", recordForEdit)
 
   useEffect(() => {
     console.log(recordForEdit);
@@ -156,14 +161,12 @@ export default function ReviewsForm(props) {
                 value={formData.area_rating}
                 type="number"
                 name="area_rating"
-                defaultValue={3}
-                precision={1}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                defaultValue={formData.title}
+                value={formData.title}
                 type="text"
                 variant="outlined"
                 required

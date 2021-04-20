@@ -14,6 +14,22 @@
   position: relative;
 }
 
+.percentage-circle {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.landord-approval {
+  margin: 12px;
+  width: 90px;
+}
+
+.recommend-friend {
+  margin: 12px;
+  width: 90px;
+}
 
 .reviews-list-buttons {
   display: flex;
@@ -25,4 +41,8 @@
 
 .building-details {
   margin-top: 45px;
+}
+
+.building_amenities-image {
+  width: 100%;
 }

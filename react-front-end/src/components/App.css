@@ -32,10 +32,15 @@ body {
 }
 
 .feature-buildings {
-  flex: 1;
+  flex: 0.7 1;
   overflow-y: scroll;
   width: 100%;
-  max-width: 490px;
+}
+
+.ratings-header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 /* and ends here */
 
