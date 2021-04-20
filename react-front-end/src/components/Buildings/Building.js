@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewsList from "../Reviews/ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
@@ -16,10 +16,9 @@ const Building = () => {
 
   const { buildingId } = useParams();
 
-  const history = useHistory();
-
   // Determines colour of the percentage circles
-  const getColour = (r) => {
+  const getColour = (r) => {  
+
     return r > 50 ? "green" : r < 50 ? "red" : "lightgray";
   };
 
@@ -35,16 +34,13 @@ const Building = () => {
     fetchData();
   }, [buildingId]);
 
-  const handleClick = () => {
-    history.push("/map");
-  };
 
   return (
     <div className="building-container">
       <div className="building-header">
         <div key={building.id}>
           <h1>{building.name}</h1>
-          <h3>{building.neighbourhood} Neighbourhood</h3>
+          <h3>{building.building_address}</h3>
           <h4>
             {building.average_building_rating ? (
               <>
@@ -71,25 +67,16 @@ const Building = () => {
         <div className="percentage-circles">
           <div className="percentage-circle" style={{ width: 80, height: 80 }}>
             <h3>Landlord Approval</h3>
-            {isBusy ? (
-              <>
-                {" "}
-                {
-                  <CircularProgressbar
-                    value={Number(building.landlord_ratio)}
-                    text={`${building.landlord_ratio}%`}
-                    strokeWidth={10}
-                    styles={buildStyles({
-                      textColor: getColour(Number(building.landlord_ratio)),
-                      pathColor: getColour(Number(building.landlord_ratio)),
-                    })}
-                  />
-                }{" "}
-              </>
-            ) : (
-              "Loading"
-            )}
-
+              <CircularProgressbar
+              value={Number(building.landlord_ratio)}
+              text={`${building.landlord_ratio}%`}
+              strokeWidth={10}
+              styles = {buildStyles({
+                textColor: getColour(Number(building.landlord_ratio)),
+                pathColor: getColour(Number(building.landlord_ratio))
+              }
+              )}
+              />
             <h3>Recommend to Friend</h3>
             <CircularProgressbar
               value={building.recommend_to_friend_ratio}
@@ -105,7 +92,6 @@ const Building = () => {
         {/* <PercentageCircles /> */}
         <div className="review-list">
           <ReviewsList />
-          <button onClick={handleClick}>Go to the Map page</button>
         </div>
         <div className="amenities-and-map">
           <BuildingAmenities />
