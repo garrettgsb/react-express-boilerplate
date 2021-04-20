@@ -56,7 +56,7 @@ const Building = () => {
 
           <p>{building.address}</p>
           <img
-            className="building_amenities-image"
+            className="building_header"
             src={building.image_url}
             alt={building.name}
           />
@@ -64,9 +64,11 @@ const Building = () => {
         </div>
       </div>
       <div className="building-details">
-        <div className="percentage-circles">
-          <div className="percentage-circle" style={{ width: 80, height: 80 }}>
-            <h3>Landlord Approval</h3>
+        
+      <div className="review-list">
+        <div className="percentage-circle">
+          <div className="landord-approval">
+            {isBusy ? <> {
               <CircularProgressbar
               value={Number(building.landlord_ratio)}
               text={`${building.landlord_ratio}%`}
@@ -77,20 +79,24 @@ const Building = () => {
               }
               )}
               />
-            <h3>Recommend to Friend</h3>
+            }  </> : "Loading"}
+            <h3>Landlord Approval</h3>
+          </div>
+          <div className="recommend-friend">
             <CircularProgressbar
               value={building.recommend_to_friend_ratio}
               text={`${building.recommend_to_friend_ratio}%`}
               strokeWidth={10}
-              styles={buildStyles({
+              styles = {buildStyles({
                 textColor: getColour(building.recommend_to_friend_ratio),
-                pathColor: getColour(building.recommend_to_friend_ratio),
-              })}
+                pathColor: getColour(building.recommend_to_friend_ratio)
+              }
+              )}
             />
+            <h3>Recommend to Friend</h3>
           </div>
         </div>
         {/* <PercentageCircles /> */}
-        <div className="review-list">
           <ReviewsList />
         </div>
         <div className="amenities-and-map">

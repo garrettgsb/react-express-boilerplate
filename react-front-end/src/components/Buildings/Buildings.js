@@ -54,7 +54,7 @@ const Buildings = (props) => {
               />
               <div>
                 <button onClick={() => handleClick(building.id)}>
-                  Building Details
+                  Property Details
                 </button>
               </div>
             </div>

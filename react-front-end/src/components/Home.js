@@ -1,9 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import TextField from '@material-ui/core/TextField';
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+import Paper from '@material-ui/core/Paper';
 import mapImage from "../assets/map-home.png";
 
 import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
@@ -12,8 +18,8 @@ import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
 
 const useStyles = makeStyles((theme) => ({
   hero: {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1578409760928-91924170cb81?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')`,
-    height: "500px",
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1578409760928-91924170cb81?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')`,
+    height: "750px",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
@@ -100,14 +106,120 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     width: "65%",
   },
+
+  heroContents: {
+    width: "100%",
+    maxWidth: "750px"
+  },
+
+  search: {
+    backgroundColor: "white",
+    borderRadius: "5px"
+  },
+
+  grid: {
+    display: "grid",
+    gridTemplate: "repeat(3, 1fr) / repeat(3, 1fr)",
+    gap: "12px 12px"
+  },
+
+  gridCard: {
+    height: "80px",
+    color: "white",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer"
+  },
+
+  sanFran: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('https://images.unsplash.com/photo-1521464302861-ce943915d1c3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80')`,
+    backgroundSize: "cover"
+  },
+
+  vancouver: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('https://images.unsplash.com/photo-1522108700534-0e3c5dfa233b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')`,
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
+
+  losAngeles: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('https://images.unsplash.com/photo-1515896769750-31548aa180ed?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1434&q=80')`,
+    backgroundSize: "cover"
+  },
+
+  newYork: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('https://images.unsplash.com/photo-1576439564014-f4b336956d59?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1490&q=80')`,
+    backgroundSize: "cover"
+  },
+
+  toronto: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('https://images.unsplash.com/photo-1490623970972-ae8bb3da443e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1349&q=80')`,
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
+
+  seattle: {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('https://images.unsplash.com/photo-1502175353174-a7a70e73b362?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1570&q=80')`,
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  }
 }));
 
 export default function Home() {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push("/map");
+  };
   return (
     <div className="Home">
       <Box className={classes.hero}>
-        <h1>GlassWalls</h1>
+        <Container className={classes.heroContents}>
+          <h1>GlassWalls</h1>
+          <TextField 
+            id="standard-full-width"
+            className={classes.search}
+            label="Search" 
+            fullWidth
+            autoComplete="off"
+            variant="filled"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton>
+                    <SearchIcon onClick={handleClick} />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+          />
+
+          
+        <h2>Popular North American cities</h2>
+          <Grid className={classes.grid} container>
+            <Grid onClick={handleClick} className={`${classes.gridCard} ${classes.sanFran}`} item>
+              <p>San Francisco</p>
+            </Grid>
+            <Grid className={`${classes.gridCard} ${classes.vancouver}`} item>
+              <p>Vancouver</p>
+            </Grid>
+            <Grid className={`${classes.gridCard} ${classes.losAngeles}`} item>
+              <p>Los Angeles</p>
+            </Grid>
+            <Grid className={`${classes.gridCard} ${classes.newYork}`} item>
+              <p>New York</p>
+            </Grid>
+            <Grid className={`${classes.gridCard} ${classes.toronto}`} item>
+              <p>Toronto</p>
+            </Grid>
+            <Grid className={`${classes.gridCard} ${classes.seattle}`} item >
+              <p>Seattle</p>
+            </Grid>
+        
+          </Grid>
+        </Container>
       </Box>
       <Container className={classes.container}>
         <Grid>
