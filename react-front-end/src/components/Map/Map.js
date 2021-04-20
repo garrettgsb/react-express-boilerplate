@@ -10,10 +10,10 @@ import "./Geosearch.css";
 import "./Map.css";
 
 import { features } from "../../SFNeighborhoods-copy.json";
-import Buildings from "../Buildings";
+import Buildings from "../Buildings/Buildings";
 import MapSearch from "./MapSearch";
 import Legend from "./Legend";
-import BuildingsByRating from "../BuildingsByRating";
+import BuildingsByRating from "../Buildings/BuildingsByRating";
 
 function MainMap() {
   const [map, setMap] = useState(null);
@@ -69,7 +69,7 @@ function MainMap() {
       </div>
       <MapContainer
         className="map-left"
-        center={[37.75220204901914, -122.45808060394913]}
+        center={[37.7697833, -122.4548163]}
         zoom={13}
         whenCreated={setMap}
       >
