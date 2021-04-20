@@ -14,7 +14,6 @@ function AmenMap() {
 
   useEffect(() => {
     axios.get(`/api/buildings/${buildingId}`).then((res) => {
-      console.log("res", res);
       setBuilding(res.data);
     });
   }, [buildingId]);
@@ -30,7 +29,6 @@ function AmenMap() {
     return "";
   }
 
-  console.log("building0: ",building[0])
   return (
     <MapContainer
       center={[building[0].latitude, building[0].longitude]}
