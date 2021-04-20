@@ -130,6 +130,11 @@ export default function ReviewsForm(props) {
     }
   };
 
+  
+
+
+  console.log("recordforedit: ", recordForEdit)
+
   useEffect(() => {
     if (recordForEdit !== null)
       updateFormData({
@@ -190,14 +195,12 @@ export default function ReviewsForm(props) {
                 value={formData.area_rating}
                 type="number"
                 name="area_rating"
-                defaultValue={3}
-                precision={1}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                defaultValue={formData.title}
+                value={formData.title}
                 type="text"
                 variant="outlined"
                 required

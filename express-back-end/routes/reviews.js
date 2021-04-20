@@ -37,7 +37,6 @@ module.exports = (db) => {
 
   // Adds a new review
   router.post("/api/reviews", (req, res) => {
-    // console.log('Req session from reviews post route', req.body)
     const title = req.body.title;
     const comment = req.body.comment;
     const landlord_rating = req.body.landlord_rating;

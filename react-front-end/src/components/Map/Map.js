@@ -69,7 +69,7 @@ function MainMap() {
       </div>
       <MapContainer
         className="map-left"
-        center={[37.7697833, -122.4548163]}
+        center={[37.760895, -122.448207]}
         zoom={13}
         whenCreated={setMap}
       >

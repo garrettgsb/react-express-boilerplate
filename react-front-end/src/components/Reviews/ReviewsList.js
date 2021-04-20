@@ -8,7 +8,7 @@ import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
 import StarIcon from "@material-ui/icons/Star";
 import Typography from "@material-ui/core/Typography";
-import Popup from "../Controls/Popup";
+import Popup from "../controls/Popup";
 import "./Reviews.css";
 
 const useStyles = makeStyles((theme) => ({
