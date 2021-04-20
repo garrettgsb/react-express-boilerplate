@@ -1,15 +1,19 @@
 import React from 'react';
 
-import CloudCover from './CloudCover';
 import Kpindex from './Kpindex';
-import MoonCycle from './MoonCycle';
+import Weather from './Weather'
+import Info from './Info'
 
 export default function Forecast() {
   return (
-    <div className="container">
-      <Kpindex />
-      <CloudCover />
-      <MoonCycle />
+    <div className="cont">
+      <div className="cont">
+        <Kpindex />
+        <Weather />
+      </div>
+      <div className="cont">
+        <Info />
+      </div>
     </div>
   );
 }
