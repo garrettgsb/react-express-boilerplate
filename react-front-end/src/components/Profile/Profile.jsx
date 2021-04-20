@@ -49,6 +49,7 @@ const Profile = () => {
         </div>
         <div className='photo-container'>
           <img alt="" src={profileData.data.photo3_url} />
+
           <span>{profileData.data.photo3_url_details}</span>
         </div>
       </div>

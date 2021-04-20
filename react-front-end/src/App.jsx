@@ -4,7 +4,7 @@ import { authContext } from './AuthProvider';
 import Meetups from './components/Meetups/index.jsx';
 import Maps from './components/Maps/index.jsx';
 import Forecast from './components/Forecast/index.jsx';
-import Profile from './components/Profile/index.jsx';
+import Profile from './components/Profile/Profile.jsx';
 import UserLogin from './components/UserLogin/UserLogin.jsx';
 import UserInfo from './components/UserInfo/UserInfo.jsx';
 import Settings from './components/Settings/index.jsx';
