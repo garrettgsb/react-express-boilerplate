@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
@@ -18,20 +19,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Form() {
 
   const classes = useStyles();
-
-  function saveLocation () {
-    fetch(`http://localhost:8080/maps/?location_name=${location.location_name}&province=${location.province}&latitude=${location.latitude}&longitude=${location.longitude}&photo_url=${location.photo_url}&photo_credit=${location.photo_credit}`)
-    .then(() => console.log('test#2 from react side'))
-    .catch(err => console.log(err))
-  }
-
-  // handleSubmit(event){
-  //   event.preventDefault();
-
-  //   alert(event.target.location)
-  // }
-
-
+  
   const [location, setLocation] = useState({
     location_name: "",
     province: "",
@@ -40,6 +28,13 @@ export default function Form() {
     photo_url: "",
     photo_credit: ""
   })
+
+  function saveLocation () {
+    axios.post(`http://localhost:8080/maps`, { location })
+    .then(() => console.log('test#2 from react side'))
+    .catch(err => console.log(err))
+  }
+
 
   return (
     <div className='map-form'>

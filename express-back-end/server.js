@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
 app.post('/maps', async(req, res) => {
   res.setHeader('Content-Type', 'application/json')
   try {
-    const { location_name, province, latitude, longitude, photo_url, photo_credit } = req.body
+    const { location_name, province, latitude, longitude, photo_url, photo_credit } = req.body.location
     const query = `INSERT INTO locations (location_name, province, latitude, longitude, photo_url, photo_credit)
     VALUES ($1, $2, $3, $4, $5, $6)`
     db.query(query, [location_name, province, latitude, longitude, photo_url, photo_credit])
