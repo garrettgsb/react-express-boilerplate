@@ -5,10 +5,10 @@ import ReviewsList from "./ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
 import FavouriteButton from "./Favourites/FavouriteButton";
 import AmenMap from "./AmenMap";
+// import PercentageCircles from "./PercentageCircles";
 import StarIcon from "@material-ui/icons/Star";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-
 
 //component to render a building
 const Building = () => {
@@ -17,20 +17,17 @@ const Building = () => {
   const { buildingId } = useParams();
 
   // Determines colour of the percentage circles
-  const getColour = (r) => {
-    return r > 50 
-    ? "green" 
-    : r < 50 
-    ? "red"
-    : "lightgray"
-  }
-  
-  // Fetches building's data
+  const getColour = (r) => {  
+
+    return r > 50 ? "green" : r < 50 ? "red" : "lightgray";
+  };
+
+  const [isBusy, setBusy] = useState(true);
+
   useEffect(() => {
     // setBusy(true);
     async function fetchData() {
-      axios.get(`/api/buildings/${buildingId}`)
-      .then((res) => {
+      axios.get(`/api/buildings/${buildingId}`).then((res) => {
         setBuilding(res.data[0]);
       });
     }
@@ -45,13 +42,17 @@ const Building = () => {
           <h1>{building.name}</h1>
           <h3>{building.building_address}</h3>
           <h4>
-                { building.average_building_rating ? <> {
-                    [...Array(building.average_building_rating)].map((stars, index)=>{
-                        return <StarIcon key={index}/>
-                      })          
-                  } </> : null
-                }
-              </h4>
+            {building.average_building_rating ? (
+              <>
+                {" "}
+                {[...Array(building.average_building_rating)].map(
+                  (stars, index) => {
+                    return <StarIcon key={index} />;
+                  }
+                )}{" "}
+              </>
+            ) : null}
+          </h4>
 
           <p>{building.address}</p>
           <img
@@ -64,7 +65,7 @@ const Building = () => {
       </div>
       <div className="building-details">
         <div className="percentage-circles">
-          <div className="percentage-circle" style={{width: 80, height: 80}}>
+          <div className="percentage-circle" style={{ width: 80, height: 80 }}>
             <h3>Landlord Approval</h3>
               <CircularProgressbar
               value={Number(building.landlord_ratio)}
@@ -77,16 +78,15 @@ const Building = () => {
               )}
               />
             <h3>Recommend to Friend</h3>
-              <CircularProgressbar
-                value={building.recommend_to_friend_ratio}
-                text={`${building.recommend_to_friend_ratio}%`}
-                strokeWidth={10}
-                styles = {buildStyles({
-                  textColor: getColour(building.recommend_to_friend_ratio),
-                  pathColor: getColour(building.recommend_to_friend_ratio)
-                }
-                )}
-              />
+            <CircularProgressbar
+              value={building.recommend_to_friend_ratio}
+              text={`${building.recommend_to_friend_ratio}%`}
+              strokeWidth={10}
+              styles={buildStyles({
+                textColor: getColour(building.recommend_to_friend_ratio),
+                pathColor: getColour(building.recommend_to_friend_ratio),
+              })}
+            />
           </div>
         </div>
         {/* <PercentageCircles /> */}
