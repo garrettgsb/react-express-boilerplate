@@ -2,22 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "./App.css";
+import "./../App.css";
 import { Icon } from "leaflet";
-import Amenities from "./Amenities";
+import Amenities from "../Buildings/Amenities";
 
 function AmenMap() {
   const [building, setBuilding] = useState([]);
 
   const { buildingId } = useParams();
 
-
   useEffect(() => {
     axios.get(`/api/buildings/${buildingId}`).then((res) => {
       setBuilding(res.data);
     });
   }, [buildingId]);
-
 
   const buildingIcon = new Icon({
     iconUrl: "/building.png",

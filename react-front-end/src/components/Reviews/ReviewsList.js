@@ -10,7 +10,7 @@ import StarIcon from "@material-ui/icons/Star";
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
 import Typography from "@material-ui/core/Typography";
-import Popup from "./controls/Popup";
+import Popup from "../controls/Popup";
 import "./Reviews.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,10 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   starRating: {
-    fill: "#61dafb"
-  }
+    fill: "#61dafb",
+  },
 }));
-
 
 export default function ReviewsList(props) {
   const [review, setReview] = useState([]);
@@ -31,7 +30,7 @@ export default function ReviewsList(props) {
   const [recordForEdit, setRecordForEdit] = useState(null);
   const classes = useStyles();
 
-  console.log('ReviewsList.js recordForedit:', recordForEdit)
+  console.log("ReviewsList.js recordForedit:", recordForEdit);
 
   const { buildingId } = useParams();
 
@@ -97,50 +96,60 @@ export default function ReviewsList(props) {
         <ReviewsForm recordForEdit={recordForEdit} />
       </Popup>
 
-      {review
-        .map((item) => (
-          <Card key={item.review_id} variant="outlined" className="review-item">
-            <CardContent>
-            <Typography gutterBottom variant="h6" component="h2">
+      {review.map((item) => (
+        <Card key={item.review_id} variant="outlined" className="review-item">
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
               Reviewed by: {item.username}
             </Typography>
             <div className="review-item-top">
               <p>{item.title}</p>
               <h4>
-                { item.building_rating ? <> {
-                    [...Array(item.building_rating)].map((stars, index)=>{
-                        return <StarIcon className={classes.starRating} key={index}/>
-                      })          
-                  } </> : null
-                }
+                {item.building_rating ? (
+                  <>
+                    {" "}
+                    {[...Array(item.building_rating)].map((stars, index) => {
+                      return (
+                        <StarIcon className={classes.starRating} key={index} />
+                      );
+                    })}{" "}
+                  </>
+                ) : null}
               </h4>
             </div>
             <p>{item.comment}</p>
-          
-            <div className="review-item-bottom" >
-              {currentUser === item.user_id ? 
-              <><Button
-                  className={classes.button}
-                  type="button"
-                  variant="contained"
-                  color="primary"
-                  onClick={(e) => {handleEdit(item)}}
-                  >Edit
-                </Button>
-                <Button
-                  className={classes.button}
-                  type="button"
-                  onClick={(e) => handleRemove(item.review_id, e)}
-                  variant="contained"
-                  color="secondary"
-                  >Delete
-                </Button> 
-              </> : ""}
+
+            <div className="review-item-bottom">
+              {currentUser === item.user_id ? (
+                <>
+                  <Button
+                    className={classes.button}
+                    type="button"
+                    variant="contained"
+                    color="primary"
+                    onClick={(e) => {
+                      handleEdit(item);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    className={classes.button}
+                    type="button"
+                    onClick={(e) => handleRemove(item.review_id, e)}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    Delete
+                  </Button>
+                </>
+              ) : (
+                ""
+              )}
             </div>
-            </CardContent>
-          </Card>
-        ))
-        }
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }
