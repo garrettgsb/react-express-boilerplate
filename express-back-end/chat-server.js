@@ -28,8 +28,9 @@ io.on('connection', (socket) => {
 
     if(error) return callback(error);
 
-    socket.emit('message', { user: 'Aurora Bot', text: `${user.name} welcome to the ${room} chat` })
-
+    socket.emit('message', { user: 'Aurora Bot', text: `${user.name} welcome to Aurora chat` })
+    socket.emit('message', { user: 'Charlie Chapman', text: `Can't wait for the meetup!` })
+    socket.emit('message', { user: 'Alice Anderson', text: `I love the Northern Lights!` })
     socket.broadcast.to(user.room).emit('message', { user: 'Aurora Bot', text: `${user.name} has joined!` })
     
     socket.join(user.room);
