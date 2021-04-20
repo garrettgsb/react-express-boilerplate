@@ -7,6 +7,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
 import StarIcon from "@material-ui/icons/Star";
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
 import Typography from "@material-ui/core/Typography";
 import Popup from "./controls/Popup";
 import "./Reviews.css";
@@ -74,6 +76,7 @@ export default function ReviewsList(props) {
           variant="outlined"
           onClick={handleClick}
         >
+        <ArrowBackOutlinedIcon></ArrowBackOutlinedIcon>
           Back to Map
         </Button>
         <Button
@@ -85,7 +88,8 @@ export default function ReviewsList(props) {
             setRecordForEdit(null);
           }}
         >
-          Add new review
+        <AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon>
+           Add review
         </Button>
       </div>
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
@@ -96,7 +100,7 @@ export default function ReviewsList(props) {
         .map((item) => (
           <Card key={item.review_id} variant="outlined" className="review-item">
             <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h6" component="h2">
               Reviewed by: {item.username}
             </Typography>
             <div className="review-item-top">
