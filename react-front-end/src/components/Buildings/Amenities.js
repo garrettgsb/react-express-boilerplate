@@ -16,15 +16,15 @@ const Amenities = () => {
   // Selects icon image
   const getIcon = (amenity) => {
     const image = 
-    amenity.type === "School" ? "/bank.png" : 
-    amenity.type === "Groceries" ? "/groceries.png" :
-    amenity.type === "Park" ? "/transit.png" :
-    amenity.type === "Restaurant" ? "https://static.tacdn.com/img2/maps/icons/component_map_pins_v1/restaurant_tertiary_pin_default_2x.png" :
+    amenity.type === "School" ? "/testicon.png" : 
+    amenity.type === "Groceries" ? "/testicon.png" :
+    amenity.type === "Park" ? "/testicon.png" :
+    amenity.type === "Restaurant" ? "/testicon.png" :
     "/bar.png";
 
     return new Icon({
       iconUrl: image,
-      iconSize: [30, 30]
+      iconSize: [30, 40]
     })
   }
 

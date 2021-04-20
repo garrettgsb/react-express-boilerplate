@@ -4,8 +4,28 @@ import axios from "axios";
 import { Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 
+// Imports to style pop up 
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
+import StarIcon from "@material-ui/icons/Star";
+
+// Styles pop up size
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+});
+
+
 //component to render all buildings
 const Buildings = (props) => {
+  const classes = useStyles();
+  
   const [buildings, setBuildings] = useState([]);
 
   const { buildingId } = useParams();
@@ -44,20 +64,36 @@ const Buildings = (props) => {
           icon={icon}
         >
           <Popup>
-            <div>
-              <h2>{building.name}</h2>
-              <p>{building.address}</p>
-              <img
-                className="building_amenities-image"
-                src={building.image_url}
-                alt={building.address}
-              />
-              <div>
-                <button onClick={() => handleClick(building.id)}>
-                  Property Details
-                </button>
-              </div>
-            </div>
+            <Card className={classes.root}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt={building.name}
+                  height="140"
+                  image={building.image_url}
+                  title={building.name}
+                />
+                <CardContent>
+                  <Typography component="h4">
+                  {building.name}
+                  </Typography>
+                  <p>
+                    {buildingRating ? <> {
+                        [...Array(buildingRating)].map((stars, index)=>{
+                            return <StarIcon className={classes.starRating} key={index}/>
+                          })          
+                      } </> : null
+                    }
+                  </p>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                  {building.address}
+                  </Typography>
+                  <Link component="button" variant="body2" color="primary" onClick={() => handleClick(building.id)}>
+                  PROPERTY DETAILS
+                </Link>
+                </CardContent>
+              </CardActionArea>
+            </Card>
           </Popup>
         </Marker>
       ))}

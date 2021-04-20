@@ -15,6 +15,8 @@ import MapSearch from "./MapSearch";
 import Legend from "./Legend";
 import BuildingsByRating from "../Buildings/BuildingsByRating";
 
+import Link from '@material-ui/core/Link';
+
 function MainMap() {
   const [map, setMap] = useState(null);
   const neighbourhoodData = features;
@@ -24,7 +26,7 @@ function MainMap() {
   const onEachFeature = function (feature, layer) {
     if (feature.properties && feature.properties.name)
       layer.bindPopup(
-        feature.properties.name +
+        "<strong>" + feature.properties.name + "</strong>" +
           "<br>" +
           "Area Rating: " +
           feature.properties.rating +
