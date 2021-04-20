@@ -10,7 +10,7 @@ module.exports = (db) => {
       `
       SELECT *
       FROM buildings
-      LIMIT 500
+      LIMIT 400
       `
     )
       .then(({ rows: buildings }) => res.json(buildings))

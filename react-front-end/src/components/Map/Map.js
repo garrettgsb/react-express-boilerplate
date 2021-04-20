@@ -10,10 +10,10 @@ import "./Geosearch.css";
 import "./Map.css";
 
 import { features } from "../../SFNeighborhoods-copy.json";
-import Buildings from "../Buildings";
+import Buildings from "../Buildings/Buildings";
 import MapSearch from "./MapSearch";
 import Legend from "./Legend";
-import BuildingsByRating from "../BuildingsByRating";
+import BuildingsByRating from "../Buildings/BuildingsByRating";
 
 function MainMap() {
   const [map, setMap] = useState(null);

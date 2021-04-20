@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
-import ReviewsList from "./ReviewsList";
+import ReviewsList from "../Reviews/ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
-import FavouriteButton from "./Favourites/FavouriteButton";
-import AmenMap from "./AmenMap";
+import FavouriteButton from "../Favourites/FavouriteButton";
+import AmenMap from "../Map/AmenMap";
 // import PercentageCircles from "./PercentageCircles";
 import StarIcon from "@material-ui/icons/Star";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -64,7 +64,7 @@ const Building = () => {
             src={building.image_url}
             alt={building.name}
           />
-          <FavouriteButton buildingId={building.id} />
+          <FavouriteButton buildingId={building.building_id} />
         </div>
       </div>
       <div className="building-details">
