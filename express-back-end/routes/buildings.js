@@ -55,6 +55,7 @@ module.exports = (db) => {
       WHERE r.building_rating = $1
       GROUP BY b.id, b.name, b.address, b.neighbourhood, b.image_url, r.building_rating
       HAVING COUNT(building_id) >= 1
+      LIMIT 50
       `,
       [ratingId]
     )

@@ -7,12 +7,6 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
-.leaflet-control-layers-toggle {
-  background-image: url(/bank.png);
-  width: 36px;
-  height: 36px;
-}
-
 /* formatting for map legend */
 .info {
   padding: 6px 8px;
