@@ -13,14 +13,45 @@ require('dotenv').config();
 
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-
-
+// Cors configuration: blocks browser from restricting data
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200, // For legacy browser support
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  credentials: true,
+}
+app.use(cors(corsOptions));
 
 // Express Configuration
 app.use(BodyParser.urlencoded({ extended: false }));
 app.use(BodyParser.json());
 app.use(express.static('public'));
-app.use(cors());
+
+// req.body
+app.use(express.json())
+
+app.use(function(req, res, next) {
+  res.setHeader('Content-Type', 'application/json')
+  next();
+});
+
+// create an aurora location
+app.post('/maps', async(req, res) => {
+  res.setHeader('Content-Type', 'application/json')
+  try {
+    const { location_name, province, latitude, longitude, photo_url, photo_credit } = req.body
+    const query = `INSERT INTO locations (location_name, province, latitude, longitude, photo_url, photo_credit)
+    VALUES ($1, $2, $3, $4, $5, $6)`
+    db.query(query, [location_name, province, latitude, longitude, photo_url, photo_credit])
+    .then((data) => {
+      res.send(data.rows)
+      console.log('data.rows: ', data.rows)
+    })
+    } catch(err){
+    console.log(err.message);
+  }
+});
+
 
 //get user from db for login
 app.post('/login', (req, res) => {
@@ -48,7 +79,6 @@ app.get('/profile/:id', (req,res) => {
   });
 })
 
-
 // get aurora locations
 app.get('/maps', (req,res) => {
   const query = `SELECT * FROM locations`
@@ -58,14 +88,6 @@ app.get('/maps', (req,res) => {
   });
 })
 
-
-
-// Cors configuration: blocks browser from restricting data
-const corsOptions = {
-  origin: 'http://localhost:3000',
-  optionsSuccessStatus: 200 // For legacy browser support
-}
-app.use(cors(corsOptions));
 
 // GET route for Aurora Data
 app.get('/api/data', (req, res) => {

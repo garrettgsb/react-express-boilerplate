@@ -11,6 +11,7 @@
     margin:10px
   }
 }
+
 .mpanel {
   display: flex;
   flex-direction: column;
@@ -38,4 +39,14 @@
   // border: 1px solid #0e3147;
   padding: 30px;
   border-radius: 5px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  // border-radius: 5px;
+}
+
+#mapid {
+  width: 80%
 }

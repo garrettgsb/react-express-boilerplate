@@ -52,7 +52,7 @@ footer {
 
 .leaflet-container {
   width: 100%;
-  height: 600px;
+  height: 100vh;
 }
 
 .App {
@@ -61,4 +61,16 @@ footer {
 
 .popup-image {
   max-width:100%;
+}
+
+.popup-header {
+  color: #0e3147;
+}
+
+.popup-subh {
+  color: #59b9ca;
+}
+
+.popup-desc {
+  color:#0e3147
 }
