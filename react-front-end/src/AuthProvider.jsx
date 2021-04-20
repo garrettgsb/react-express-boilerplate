@@ -22,7 +22,7 @@ export default function AuthProvider(props) {
         alert('Sorry, the email or password is not valid')
       } else {
         setId(uuid())
-        setUser({ email, id: data.data.id});
+        setUser({ email, name: data.data.name, id: data.data.id});
         setAuth(true);
       }
     })

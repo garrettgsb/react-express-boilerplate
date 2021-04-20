@@ -3,7 +3,7 @@ import ArcticLandscape from 'arctic-landscape'
 import CustomAuroraBorealisGradient from './CustomAuroraBorealisGradient'
 
 const LandingPage = () => {
-
+  
   return (
     <div className='aurora'>
       <CustomAuroraBorealisGradient />
