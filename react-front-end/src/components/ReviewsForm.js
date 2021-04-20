@@ -126,7 +126,6 @@ export default function ReviewsForm(props) {
     if (recordForEdit !== null) {
       handlePostEdit(recordForEdit.review_id, e);
     } else {
-      // alert("hello from form ReviewsForm.js handleSubmit")
       handlePost(e);
     }
   };

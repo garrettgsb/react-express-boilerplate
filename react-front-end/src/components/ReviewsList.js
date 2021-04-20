@@ -31,12 +31,6 @@ export default function ReviewsList(props) {
 
   console.log('ReviewsList.js recordForedit:', recordForEdit)
 
-  // Handles 'Back to Map' button
-  const history = useHistory();
-  const handleClick = () => {
-    history.push("/map");
-  };
-
   const { buildingId } = useParams();
 
   useEffect(() => {
@@ -46,6 +40,13 @@ export default function ReviewsList(props) {
     });
   }, []);
 
+  // Handles 'Back to Map' button
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/map");
+  };
+
+  // Handles delete button on review
   const handleRemove = (review_id, e) => {
     axios.delete(`/api/reviews/${review_id}`).then((res) => {
       setTimeout(() => {
@@ -55,6 +56,7 @@ export default function ReviewsList(props) {
     });
   };
 
+  // Handles edit button on review
   const handleEdit = (item) => {
     console.log("item: ", item);
     setRecordForEdit(item);
