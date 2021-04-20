@@ -55,6 +55,7 @@ export default function ReviewsList(props) {
         const newReview = review.filter((item) => item.review_id !== review_id);
         setReview(newReview);
       }, 500);
+      window.location.reload();
     });
   };
 

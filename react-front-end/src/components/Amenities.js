@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const Amenities = () => {
   const [amenities, setAmenities] = useState([]);
@@ -18,7 +19,7 @@ const Amenities = () => {
     amenity.type === "School" ? "/bank.png" : 
     amenity.type === "Groceries" ? "/groceries.png" :
     amenity.type === "Park" ? "/transit.png" :
-    amenity.type === "Restaurant" ? "/restaurant2.png" :
+    amenity.type === "Restaurant" ? "https://static.tacdn.com/img2/maps/icons/component_map_pins_v1/restaurant_tertiary_pin_default_2x.png" :
     "/bar.png";
 
     return new Icon({
