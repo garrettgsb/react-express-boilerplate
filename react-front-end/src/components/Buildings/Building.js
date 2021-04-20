@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
-import ReviewsList from "./ReviewsList";
+import ReviewsList from "../Reviews/ReviewsList";
 import BuildingAmenities from "./BuildingAmenities";
-import FavouriteButton from "./Favourites/FavouriteButton";
-import AmenMap from "./AmenMap";
-import PercentageCircles from "./PercentageCircles";
+import FavouriteButton from "../Favourites/FavouriteButton";
+import AmenMap from "../Map/AmenMap";
+// import PercentageCircles from "./PercentageCircles";
 import StarIcon from "@material-ui/icons/Star";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-
 
 //component to render a building
 const Building = () => {
@@ -17,48 +16,43 @@ const Building = () => {
 
   const { buildingId } = useParams();
 
-  const history = useHistory();
-
   // Determines colour of the percentage circles
-  const getColour = (r) => {
-    return r > 50 
-    ? "green" 
-    : r < 50 
-    ? "red"
-    : "lightgray"
-  }
+  const getColour = (r) => {  
 
-  const [isBusy, setBusy] = useState(true)
-  
+    return r > 50 ? "green" : r < 50 ? "red" : "lightgray";
+  };
+
+  const [isBusy, setBusy] = useState(true);
+
   useEffect(() => {
     // setBusy(true);
     async function fetchData() {
-      axios.get(`/api/buildings/${buildingId}`)
-      .then((res) => {
+      axios.get(`/api/buildings/${buildingId}`).then((res) => {
         setBuilding(res.data[0]);
       });
     }
     fetchData();
   }, [buildingId]);
 
-  const handleClick = () => {
-    history.push("/map");
-  };
 
   return (
     <div className="building-container">
       <div className="building-header">
         <div key={building.id}>
           <h1>{building.name}</h1>
-          <h3>{building.neighbourhood} Neighbourhood</h3>
+          <h3>{building.building_address}</h3>
           <h4>
-                { building.average_building_rating ? <> {
-                    [...Array(building.average_building_rating)].map((stars, index)=>{
-                        return <StarIcon key={index}/>
-                      })          
-                  } </> : null
-                }
-              </h4>
+            {building.average_building_rating ? (
+              <>
+                {" "}
+                {[...Array(building.average_building_rating)].map(
+                  (stars, index) => {
+                    return <StarIcon key={index} />;
+                  }
+                )}{" "}
+              </>
+            ) : null}
+          </h4>
 
           <p>{building.address}</p>
           <img
@@ -66,7 +60,7 @@ const Building = () => {
             src={building.image_url}
             alt={building.name}
           />
-          <FavouriteButton buildingId={building.id} />
+          <FavouriteButton buildingId={building.building_id} />
         </div>
       </div>
       <div className="building-details">
@@ -104,7 +98,6 @@ const Building = () => {
         </div>
         {/* <PercentageCircles /> */}
           <ReviewsList />
-          <button onClick={handleClick}>Go to the Map page</button>
         </div>
         <div className="amenities-and-map">
           <BuildingAmenities />

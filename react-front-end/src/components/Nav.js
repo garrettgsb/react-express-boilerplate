@@ -23,7 +23,9 @@ export default function Nav() {
   const classes = useStyles();
   return (
     <nav>
-      <div className="logo"><img className="logo-img" src={logo}/></div>
+      <div className="logo">
+        <img className="logo-img" src={logo} alt={logo} />
+      </div>
       <ul className="nav-links">
         <Link className={classes.navList} to="/">
           <li>Home</li>

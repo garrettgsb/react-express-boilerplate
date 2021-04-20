@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-import "./App.css";
 import axios from "axios";
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import "./Building.css";
-
 
 //component to render amenities for a building
 export default function BuildingAmenities() {

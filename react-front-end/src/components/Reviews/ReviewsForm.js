@@ -9,6 +9,7 @@ import Container from "@material-ui/core/Container";
 import Rating from "@material-ui/lab/Rating";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { useParams } from "react-router-dom";
 
 import axios from "axios";
 
@@ -36,12 +37,13 @@ const initialFormData = {
   title: "",
   area_rating: "",
   comment: "",
-  recommend_to_friend: "",
+  recommend_to_friend: false,
   landlord_rating: false,
-  building_rating: false,
+  building_rating: "",
 };
 
 export default function ReviewsForm(props) {
+  let { buildingId } = useParams();
   const { recordForEdit } = props
 
   const [formData, updateFormData] = useState(initialFormData);
@@ -53,39 +55,72 @@ export default function ReviewsForm(props) {
     });
   };
 
-  const handlePost = (e) => {
-    e.preventDefault();
-
-    axios(`/api/reviews`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      data: formData,
+  const handleCheckbox = (e) => {
+    updateFormData({
+      ...formData, 
+      [e.target.name]: e.target.checked
     })
-      .then((res) => res.data)
-      .then(window.location.reload())
-      .catch((error) => {
-        throw error;
-      });
-  };
+  }
 
-  const handlePostEdit = (review_id, e) => {
+  const handlePost = async (e) => { 
     e.preventDefault();
+    const body = {
+      title: formData.title, 
+      comment: formData.comment,
+      landlord_rating: formData.landlord_rating,
+      recommend_to_friend: formData.recommend_to_friend,
+      building_rating: parseInt(formData.building_rating),
+      area_rating: parseInt(formData.area_rating),
+      building_id: parseInt(buildingId),
+      user_id: 11
+    }
+    try {
+      const { data } = await axios.post(`/api/reviews`, body)
+      console.log('>>data', data)
+      window.location.reload()
+    } catch (error) {
+      console.log('>>error', error)
+    }
+  }
 
-    axios(`/api/reviews/${review_id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      data: formData,
-    })
-      .then((res) => res.data)
-      .then(window.location.reload())
-      .catch((error) => {
-        throw error;
-      });
-  };
+  const handlePostEdit = async (reviewId, e) => { 
+    e.preventDefault();
+    const body = {
+      review_id: recordForEdit.review_id,
+      title: formData.title, 
+      comment: formData.comment,
+      landlord_rating: formData.landlord_rating,
+      recommend_to_friend: formData.recommend_to_friend,
+      building_rating: parseInt(formData.building_rating),
+      area_rating: parseInt(formData.area_rating),
+      building_id: parseInt(buildingId),
+      user_id: 11
+    }
+    try {
+      const { data } = await axios.put(`/api/reviews/${reviewId}`, body)
+      console.log('>>data', data)
+      window.location.reload()
+    } catch (error) {
+      console.log('>>error', error)
+    }
+  }
+
+  // const handlePostEdit2 = (id, e) => {
+  //   e.preventDefault();
+
+  //   axios(`/api/reviews/${id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     data: formData,
+  //   })
+  //     .then((res) => res.data)
+  //     .then(window.location.reload())
+  //     .catch((error) => {
+  //       throw error;
+  //     });
+  // };
 
   const handleSubmit = (e) => {
     if (recordForEdit !== null) {
@@ -96,12 +131,11 @@ export default function ReviewsForm(props) {
   };
 
   
-  console.log(recordForEdit.review_id)
+
 
   console.log("recordforedit: ", recordForEdit)
 
   useEffect(() => {
-    console.log(recordForEdit);
     if (recordForEdit !== null)
       updateFormData({
         ...recordForEdit,
@@ -119,20 +153,20 @@ export default function ReviewsForm(props) {
         <form
           method="POST"
           autoComplete="off"
-          action="/"
+          action="/api/reviews"
           onSubmit={handleSubmit}
           className={classes.form}
         >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <FormControlLabel
+            <FormControlLabel
                 value={formData.landlord_rating}
                 control={<Checkbox color="primary" />}
-                label="Approve the landlord?"
+                label="Approve of landlord?"
                 labelPlacement="end"
-                name="landord_rating"
+                name="landlord_rating"
                 type="boolean"
-                onChange={handleChange}
+                onChange={handleCheckbox}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -143,7 +177,7 @@ export default function ReviewsForm(props) {
                 labelPlacement="end"
                 name="recommend_to_friend"
                 type="boolean"
-                onChange={handleChange}
+                onChange={handleCheckbox}
               />
             </Grid>
             <Grid item xs={12} sm={6}>

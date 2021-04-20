@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam:wght@100;300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam:wght@100;300;400;700&display=swap");
 
 body {
-  font-family: 'Be Vietnam', sans-serif;
+  font-family: "Be Vietnam", sans-serif;
 }
 
 .App {
@@ -124,9 +124,9 @@ nav {
   padding: 20px;
 }
 
-.favourites-content button{
+.favourites-content button {
   margin: 20px;
-} 
+}
 
 .amenities-map {
   width: 500px;

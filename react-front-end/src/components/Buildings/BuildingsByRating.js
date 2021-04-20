@@ -15,7 +15,7 @@ import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   navList: {
     color: "white",
-    textDecoration: "none"
+    textDecoration: "none",
   },
 
   ratingItem: {
@@ -38,18 +38,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //component to render favourites
-const BuildingsByRating = () => {
+const BuildingsByRating = (props) => {
   const [building, setBuilding] = useState([]);
 
   const { buildingId } = useParams();
 
   const history = useHistory();
 
-  const buildingRating = 5;
+  const buildingRating = props.buildingRating;
 
   useEffect(() => {
     axios.get(`/api/buildings/ratings/${buildingRating}`).then((res) => {
-      console.log(res.data)
       setBuilding(res.data);
     });
   }, [buildingId]);
@@ -58,7 +57,6 @@ const BuildingsByRating = () => {
     history.push(`/buildings/${buildingId}`);
   };
 
-  
   const classes = useStyles();
   return (
     <div className="favourites-container">

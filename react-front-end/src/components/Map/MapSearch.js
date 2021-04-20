@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
-import L, { Icon } from "leaflet";
+import L from "leaflet";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet-control-geocoder/dist/Control.Geocoder.js";
+import { Icon } from "leaflet";
 
 //component to show search icon on maps page and allow users to search
 function MapSearch() {
@@ -10,7 +11,7 @@ function MapSearch() {
 
   const icon = new Icon({
     iconUrl: "/building.png",
-    iconSize: [25, 25],
+    iconSize: [20, 20],
   });
 
   useEffect(() => {
