@@ -8,7 +8,7 @@ import Profile from './components/Profile/Profile.jsx';
 import PhotogsProfile from './components/Meetups/PhotogsProfile.jsx';
 import UserLogin from './components/UserLogin/UserLogin.jsx';
 import UserInfo from './components/UserInfo/UserInfo.jsx';
-import Settings from './components/Settings/index.jsx';
+import About from './components/About';
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer'
 import './styles/App.scss';
@@ -42,7 +42,7 @@ function App() {
               <Route exact path="/maps" component={Maps}/>
               <Route exact path="/profile/:id" component={Profile}/>
               <Route exact path="/photogs/:id" component={PhotogsProfile}/>
-              <Route exact path="/settings" component={Settings}/>
+              <Route exact path="/about" component={About}/>
               {!auth && <Route exact path="/login" component={UserLogin}/>}
               {auth && <Route exact path="/login" component={UserInfo}/>}
             </Switch>
