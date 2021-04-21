@@ -2,10 +2,13 @@
 
 .outerContainer {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-  height: 50vh;
-  background-color: $dark-teal;
+  justify-content: center;
+  height: 70vh;
+  width: 70vh;
+  background-image: url(https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  border-radius: 8px;
 }
 
 .innerContainer {
@@ -14,8 +17,8 @@
   justify-content: center;
   background: #FFFFFF;
   border-radius: 8px;
-  height: 80%;
-  width: 60%;
+  height: 85%;
+  width: 85%;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
@@ -31,7 +34,7 @@
 
 @media (min-width: 480px) and (max-width: 1200px) {
   .innerContainer {
-    width: 60%;
+    width: 80%;
   }
 }
 
@@ -51,15 +54,15 @@
   display: flex;
   align-items: center;
   margin-left: 5%;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
-.rightInnerContainer {
-  display: flex;
-  flex: 0.5;
-  justify-content: flex-end;
-  margin-right: 5%;
-}
+// .rightInnerContainer {
+//   display: flex;
+//   flex: 0.5;
+//   justify-content: flex-end;
+//   margin-right: 5%;
+// }
 
 .onlineIcon {
   margin-right: 5%;
@@ -110,7 +113,7 @@ html, body {
     color: #fff !important;
     text-transform: uppercase;
     text-decoration: none;
-    background: #2979FF;
+    background: #26b33e;
     padding: 20px;
     border-radius: 5px;
     display: inline-block;
@@ -148,7 +151,7 @@ button:focus {
   border: none;
   border-radius: 5px;
   padding: 5%;
-  width: 80%;
+  width: 100%;
   font-size: 1.2em;
 }
 
