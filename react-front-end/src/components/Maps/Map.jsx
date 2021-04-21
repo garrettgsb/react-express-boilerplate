@@ -40,10 +40,9 @@ const Map = () => {
         //   }}
         >
           <Popup>
-            <h2>
-              {spot.location_name}</h2> 
-              Coordinates: {spot.latitude}, {spot.longitude} <br />
-              Photo Credit: {spot.photo_credit} <br />
+            <h2 className='popup-header'>{spot.location_name}</h2> 
+              <h3 className='popup-subh'>{spot.latitude}, {spot.longitude}</h3>
+              <p className='popup-desc'>Photo Credit: {spot.photo_credit}</p>
               <img alt="" className='popup-image' sizes="(max-height: 100px) 500px, 800px" src={spot.photo_url} />
           </Popup>
       </Marker>

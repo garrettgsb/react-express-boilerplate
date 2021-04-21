@@ -62,9 +62,7 @@ const Event = ({ event, onDelete }) => {
     <div className='event' onClick={() => {handleChange(); setMeetupToEvent();}}>
     {!edit ?
       (<>
-        <h3>
-          <p>{currentEvent.name}</p>
-        </h3>
+        <h3>{currentEvent.name}</h3>
         <p>{currentEvent.date} at {currentEvent.time}</p>
         <button type="button" className='btn' onClick={handleEdit} >Edit</button>
         <button 
