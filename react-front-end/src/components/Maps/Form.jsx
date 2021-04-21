@@ -40,7 +40,6 @@ export default function Form() {
     <div className='map-form'>
       <div className='map-form-text'>
       <h2> Recommend a Location </h2>
-        <br />
         <p>Share your favourite Northern Lights photography spots with our community.</p>
         <br />
       </div>

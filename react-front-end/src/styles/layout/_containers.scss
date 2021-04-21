@@ -25,26 +25,26 @@
   // margin-right: 15px;
 }
 
-// .spacer {
-//   height: 8px;
-// }  
+.spacer {
+  height: 8px;
+}  
 
-// .items {
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-//   height: 381px;
-//   &-1, &-4 {
-//     @include item;
-//     align-self: center;
-//     background-color: #092a3c;
-//   }  
-//   &-2, &-3 {
-//     @include item;
-//     align-self: center;
-//     background-color: #5abbcc;
-//   }  
-// }  
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 381px;
+  &-1, &-4 {
+    @include item;
+    align-self: center;
+    background-color: #092a3c;
+  }  
+  &-2, &-3 {
+    @include item;
+    align-self: center;
+    background-color: #5abbcc;
+  }  
+}  
 
 .mpanel {
   display: flex;
