@@ -1,0 +1,104 @@
+//Profile card section
+.profile-container{
+  display: flex;
+  width: 100%;
+  // height: 100vh;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.Card{
+  width: 400px;
+  height: 580px;
+  background: white;
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 65px;
+  box-shadow: 0px 1px 10px 1px #094049;
+  overflow: hidden;
+}
+
+.upper-container{
+  height: 140px;
+  background: linear-gradient(to left, #094049, #5ABBCC)
+}
+
+.image-container{
+  background: white;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  padding: 5px;
+  transform: translate(120px, 50px);
+  border: 2px solid  #0c4a53;
+  object-fit: cover;
+}
+
+.lower-container{
+  margin-top: 60px;
+  height: 200px;
+  background: white;
+  text-align: center;
+}
+
+.lower-container h2,h4{
+  margin: 5px;
+  padding: 5px;
+}
+
+.lower-container h2{
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.lower-container p{
+  font-weight: 400;
+  font-size: 1rem;
+  margin: 15px;
+  padding: 15px;
+}
+
+// Photo album section
+.photo-album{
+  width: 400px;
+  height: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 1px 10px 1px #094049;
+  // overflow: hidden;
+  margin: 0px 20px;
+  padding: 0px 25px;
+  margin-top: 65px;
+}
+
+.photo-container{
+  text-align: center;
+}
+
+.photo-container span{
+  z-index: -1;
+}
+
+.photo-container img{
+  width: 350px;
+  height: 150px;
+  &:hover{
+  position: relative;
+  width: auto;
+  height: auto;
+  z-index: 9999;
+  .photo-container{
+    z-index: -1;
+  }
+  .photo-album{
+    z-index: -1;
+    width: 500px;
+  }
+}
+}

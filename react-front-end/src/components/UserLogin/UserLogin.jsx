@@ -1,20 +1,24 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { authContext } from '../../AuthProvider';
+// import '../Button.scss';
+// import '../../App.scss';
+// import './UserLogin.scss';
 import { MeetupsContext } from '../../MeetupsContext'
 import axios from 'axios';
 import moment from 'moment'
 
 //request user for login
-async function loginUser(credentials) {
-  axios.post('http://localhost:8080/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    credentials: JSON.stringify(credentials)
-  })
-    .then(data => console.log('data from client:', data))
-}
+// async function loginUser(credentials) {
+//   console.log('creds: ', credentials)
+//   axios.post('http://localhost:8080/login', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     credentials: JSON.stringify(credentials)
+//   })
+//     .then(data => console.log('data from client:', data))
+// }
 
 const UserLogin = () => {
 
@@ -81,23 +85,4 @@ const UserLogin = () => {
   );
 
 }
-export default UserLogin; 
-
-// return (
-//   <div className="login-wrapper">
-//     <h1>Please Log In</h1>
-//     <form onSubmit={handleSubmit}>
-//       <label>
-//         <p>Email</p>
-//         <input type="text" onChange={e => setEmail(e.target.value)}/>
-//       </label>
-//       <label>
-//         <p>Password</p>
-//         <input type="password" onChange={e => setPassword(e.target.value)}/>
-//       </label>
-//       <div>
-//         <button type="submit">Login</button>
-//       </div>
-//     </form>
-//   </div>
-// )
+export default UserLogin;

@@ -11,7 +11,7 @@ const Navbar = () => {
     const handleClick = () => {
         setClicked(!clicked)
     }
-
+    const profileLink = `/profile/${user.id}`
     return(
         <nav className="NavbarItems">
             <h1 className="navbar-logo">Aurora Junkies</h1>
@@ -21,10 +21,10 @@ const Navbar = () => {
                 <ul className={clicked ? 'nav-menu active' : 'nav-menu'} onClick={handleClick}>
                     <li><Link className='nav-links' to="/">Forecast</Link></li>
                     <li><Link className='nav-links' to="/meetups">Meetups</Link></li>
+                    <li><Link className='nav-links' to={profileLink}>Profile</Link></li>
                     <li><Link className='nav-links' to="/maps">Maps</Link></li>
-                    <li><Link className='nav-links' to="/profile">Profile</Link></li>
                     <li><Link className='nav-links' to="/settings">Settings</Link></li>
-                    <li><Link className='nav-links' to="/login">{user.name ? 'Logout' : 'Login'}</Link></li>
+                    <li><Link className='nav-links' to="/login">{user.email ? 'Logout' : 'Login'}</Link></li>
                 </ul>
         </nav>
     );

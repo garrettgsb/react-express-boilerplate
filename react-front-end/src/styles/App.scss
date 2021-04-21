@@ -1,4 +1,6 @@
 @import './abstracts/variables';
+@import './abstracts/mixins';
+@import './base/typography';
 @import './layout/forms';
 @import './layout/_navbar';
 @import './layout/tables';
@@ -13,12 +15,10 @@
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
+.landing-page {
+  height: 1vh;
 }
 
 .header {
@@ -55,9 +55,9 @@ footer {
   height: 100vh;
 }
 
-.App {
-  text-align: center;
-}
+// .App {
+//   text-align: center;
+// }
 
 .popup-image {
   max-width:100%;
