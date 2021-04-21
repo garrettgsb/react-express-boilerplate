@@ -1,24 +1,34 @@
 import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios'
 import { authContext } from '../../AuthProvider';
-// import '../Button.scss';
-// import '../../App.scss';
-// import './UserLogin.scss';
 import { MeetupsContext } from '../../MeetupsContext'
-import axios from 'axios';
 import moment from 'moment'
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 //request user for login
-// async function loginUser(credentials) {
-//   console.log('creds: ', credentials)
-//   axios.post('http://localhost:8080/login', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     credentials: JSON.stringify(credentials)
-//   })
-//     .then(data => console.log('data from client:', data))
-// }
+async function loginUser(credentials) {
+  axios.post('http://localhost:8080/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: JSON.stringify(credentials)
+  })
+    .then(data => console.log('data from client:', data))
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: '25ch',
+  },
+}));
 
 const UserLogin = () => {
 
@@ -63,26 +73,92 @@ const UserLogin = () => {
     setMeetupToEvent();
   }, [])
 
+  const classes = useStyles();
+
   return (
-    <div className="container">
+    <div className="flex-column">
+      <div className="flex-column">
+        <br />
       <h1>Please Login</h1>
-      <form onSubmit={onSubmit}>
-        <p>
-          <input type="text" name="login"
-            value={email} placeholder="Email Address"
+      </div>
+      <div className="flex-column">
+      <TextField
+          label="Email Address"
+          id="outlined-margin-normal"
+          style={{ margin: 8 }}
+          className={classes.textField}
+          margin="normal"
+          variant="outlined"
+          value={email}
+          onChange={onEmailChange}
+          style = {{width: 300}}
+        />
+      </div>
+      <div className="flex-column">
+        <TextField
+          type="password"
+          label="Password"
+          id="outlined-margin-normal"
+          style={{ margin: 8 }}
+          className={classes.textField}
+          margin="normal"
+          variant="outlined"
+          value={password}
+          onChange={onPasswordChange}
+          style = {{width: 300}}
+        />
+        <button 
+          type="submit" 
+          // name="commit" 
+          value="Login" 
+          className='btn' 
+          onClick={onSubmit}
+          style = {{width: 300}}> 
+          Submit 
+          </button>
+        </div>
+    </div>
+  );
+}
+  export default UserLogin; 
+
+
+/* {<form onSubmit={onSubmit}> }*/
+        /* {<p>
+          <input 
+            type="text" 
+            name="login"
+            value={email} 
+            placeholder="Email Address"
             onChange={onEmailChange} />
         </p>
         <p>
-          <input type="password" name="password"
-            value={password} placeholder="Password"
+          <input 
+            type="password" 
+            name="password"
+            value={password} 
+            placeholder="Password"
             onChange={onPasswordChange} />
         </p>
         <p className="submit">
           <input type="submit" name="commit" value="Login" />
-        </p>
-      </form>
-    </div>
-  );
-
-}
-export default UserLogin;
+        </p> }*/
+      /*{ </form> }*/
+// return (
+//   <div className="login-wrapper">
+//     <h1>Please Log In</h1>
+//     <form onSubmit={handleSubmit}>
+//       <label>
+//         <p>Email</p>
+//         <input type="text" onChange={e => setEmail(e.target.value)}/>
+//       </label>
+//       <label>
+//         <p>Password</p>
+//         <input type="password" onChange={e => setPassword(e.target.value)}/>
+//       </label>
+//       <div>
+//         <button type="submit">Login</button>
+//       </div>
+//     </form>
+//   </div>
+// )

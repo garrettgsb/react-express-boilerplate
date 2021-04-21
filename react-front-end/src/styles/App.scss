@@ -1,16 +1,17 @@
 @import './abstracts/variables';
 @import './abstracts/mixins';
 @import './base/typography';
-@import './layout/forms';
-@import './layout/_navbar';
-@import './layout/tables';
-@import './layout/containers';
 @import './components/button';
 @import './components/chat';
 @import './components/meetups';
 @import './components/loginUser';
 @import './components/_safetySend';
 @import './components/_userLogin';
+@import './layout/forms';
+@import './layout/_navbar';
+@import './layout/tables';
+@import './layout/containers';
+@import './pages/Profile';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
 * {

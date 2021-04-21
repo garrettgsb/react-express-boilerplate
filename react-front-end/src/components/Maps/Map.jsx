@@ -34,10 +34,6 @@ const Map = () => {
             spot.latitude,
             spot.longitude
           ]}
-        //   onClick={() => {
-        //     console.log("click");
-        //     setOneSpot(spot);
-        //   }}
         >
           <Popup>
             <h2 className='popup-header'>{spot.location_name}</h2> 

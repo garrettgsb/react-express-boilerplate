@@ -68,11 +68,10 @@ const Chatbox = () => {
   return (<>{user  ?  (<>
     <div className='outerContainer'>
       <div className='innerContainer'>
-        <InfoBar room={room} />
+        <InfoBar room={meetup.name} />
         <Messages messages={messages} name={name} />
         <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
-      <TextContainer users={users} />
     </div>
     </>) : (<><p>Hello</p></>)}</>)
   
