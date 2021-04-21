@@ -5,6 +5,7 @@ import Meetups from './components/Meetups/index.jsx';
 import Maps from './components/Maps/index.jsx';
 import Forecast from './components/Forecast/index.jsx';
 import Profile from './components/Profile/Profile.jsx';
+import PhotogsProfile from './components/Meetups/PhotogsProfile.jsx';
 import UserLogin from './components/UserLogin/UserLogin.jsx';
 import UserInfo from './components/UserInfo/UserInfo.jsx';
 import Settings from './components/Settings/index.jsx';
@@ -40,6 +41,7 @@ function App() {
               <Route exact path="/meetups" component={Meetups}/>
               <Route exact path="/maps" component={Maps}/>
               <Route exact path="/profile/:id" component={Profile}/>
+              <Route exact path="/photogs/:id" component={PhotogsProfile}/>
               <Route exact path="/settings" component={Settings}/>
               {!auth && <Route exact path="/login" component={UserLogin}/>}
               {auth && <Route exact path="/login" component={UserInfo}/>}
