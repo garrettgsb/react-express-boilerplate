@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/components/_button.scss'
 import '../styles/App.scss';
-import './Profile/Profile.scss'
+import '../styles/pages/Profile.scss'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import LinkedIn from '@material-ui/icons/LinkedIn';
 
@@ -34,7 +34,7 @@ const About = () => {
           <div className='lower-container'>
             <h2> Gavin Swan </h2>
             <h4> City: Calgary, AB </h4>
-            <p> About Gavin </p>
+            <p> Gavin enjoyed the fast paced and immersive program that Lighthouse Labs provided. He loved collaborating and learning from his peers and is excited to build on this foundation! </p>
             <a href='https://github.com/gavinswan'><GitHubIcon style={{ color: "teal" }} /></a>
             <a href='https://www.linkedin.com/in/gavin-swan-aa9192201/'><LinkedIn style={{ color: "teal" }} /></a>
           </div>
