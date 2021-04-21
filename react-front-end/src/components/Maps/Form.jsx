@@ -145,10 +145,3 @@ export default function Form() {
     </div>
   )
 }
-
-// location_name VARCHAR(255) NOT NULL,
-//   province VARCHAR(255) NOT NULL,
-//   latitude VARCHAR(255) NOT NULL,
-//   longitude VARCHAR(255) NOT NULL,
-//   photo_url TEXT,
-//   photo_credit VARCHAR(255)
