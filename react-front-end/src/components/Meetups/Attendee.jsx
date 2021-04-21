@@ -9,7 +9,8 @@ const Attendee = ({ attendee }) => {
   
   return (
     <div>
-      <li><Link to={profileLink}>{attendee.name}</Link></li>
+      <button><Link to={profileLink}>{attendee.name}</Link></button>
+      {/* <button>{attendee.name}</button> */}
     </div>
   )
 }

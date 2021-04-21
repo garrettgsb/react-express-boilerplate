@@ -17,7 +17,7 @@ function SafetySend () {
     },
   }));
 
-  // const classes = useStyles();
+  const classes = useStyles();
 
   const [text, setText] = useState({
       recipient: '',

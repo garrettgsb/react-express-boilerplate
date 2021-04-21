@@ -16,9 +16,9 @@ const Kpindex = () => {
 
 
   return (
-  <div>
+  <div className='container-aurora'>
     {aurora && (<div className='kp-index'>
-      <h3>3 day Aurora Forecast:</h3>
+      <h3>3 day Aurora Forecast</h3>
       <table className='table'>
         <thead>
           <tr>

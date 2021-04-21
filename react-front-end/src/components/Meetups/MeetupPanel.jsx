@@ -25,7 +25,7 @@ const MeetupPanel = () => {
   ])
 
   return (
-    <>
+    <div className="mpanel-outer">
       <Fade in={contextCheck.checked}>
         <div className='mpanel'>
           <div><h1>{context.meetup.name}</h1></div>
@@ -38,11 +38,11 @@ const MeetupPanel = () => {
         </div>
       </Fade>
       <Fade in={contextCheck.checked}>
-        <div className='mpanel'>
+        <div className='mpanel-chat'>
           {context ? <Chatbox /> : 'Choose an Event'}
         </div>
       </Fade>
-    </>
+    </div>
   )
 }
 

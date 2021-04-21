@@ -1,22 +1,69 @@
 .container {
-  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  // max-width: 800px;
   margin: auto;
-  overflow: auto;
-  min-height: 100px;
-  border: 1px solid #0e3147;
-  padding: 30px;
+  // overflow: auto;
+  // min-height: 100px;
+  // border: 1px solid #0e3147;
+  margin: 30px;
   border-radius: 5px;
   &-allmeets {
     width: 30%;
     margin:10px
   }
+  &-aurora {
+    flex-direction: row;
+    margin-right: 15px;
+    text-align: center;
+  }
 }
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  text-align: center;
+}
+
+.spacer {
+  height: 8px;
+}  
+
+#items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 381px;
+  &-1, &-4 {
+    @include item;
+    align-self: center;
+    color: #fff;
+    background-color: #092a3c;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
+     0px 10px 20px rgba(0,0,0,0.05),
+     0px 20px 20px rgba(0,0,0,0.05),
+     0px 30px 20px rgba(0,0,0,0.05);
+  }  
+  &-2, &-3 {
+    @include item;
+    align-self: center;
+    color: #fff;
+    background-color: #5abbcc;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
+     0px 10px 20px rgba(0,0,0,0.05),
+     0px 20px 20px rgba(0,0,0,0.05),
+     0px 30px 20px rgba(0,0,0,0.05);
+  }  
+}  
+
 .mpanel {
   display: flex;
   flex-direction: column;
   margin: 15px;
-  justify-content:space-evenly;
-  width: 600px
+  justify-content:start;
+  max-width: 800px;
+  max-height: auto;
 }
 
 .meetups {
@@ -30,12 +77,36 @@
 
 .cont {
   display: flex;
-  flex-direction: row;
-  justify-content:center;
-  max-width: 1200px;
+  justify-content: center;
   margin: auto;
-  overflow: auto;
-  // border: 1px solid #0e3147;
-  padding: 30px;
+  margin: 30px;
   border-radius: 5px;
+  // &-allmeets {
+  //   width: 30%;
+  //   margin:10px
+  // }
+  // &-aurora {
+  //   flex-direction: row;
+  //   margin-right: 15px;
+  // }
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  // border-radius: 5px;
+  text-align: center;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  margin: auto;
+  align-items: center;
+}
+
+#mapid {
+  width: 80%
 }

@@ -10,12 +10,19 @@ export default function UserInfo() {
 
   // Show user Info if logged in
   return (
-    <div className="UserInfo">
-      <div>You are logged in</div>
-      <div>Email: {user.email}</div>
-      <div>Name: {user.name}</div>
-      <div>UserId: {user.id}</div>
-      <input type="button" value="Logout" onClick={onLogout} />
+    <div className="flex-column">
+      <div className="spacer" ></div>
+      <h4>You are logged in <br />
+      Email: {user.email} <br />
+      Name: {user.name} <br />
+      UserId: {user.id}</h4>
+      <button 
+        value="Logout" 
+        className='btn' 
+        onClick={onLogout} 
+        style = {{width: 300}}> 
+        Logout </button>
+      {/* <input type="button" value="Logout" onClick={onLogout} /> */}
     </div>
   );
 };
