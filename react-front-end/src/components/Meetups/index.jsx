@@ -17,7 +17,7 @@ export default function Meetups() {
       id: 1,
       location_id: 1,
       name: "Banff",
-      date: '2021-04-27',
+      date: '2021-04-22',
       time: '22:30:00'
     },
     {

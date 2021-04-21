@@ -14,7 +14,7 @@ const TextContainer = ({ users }) => {
               <h4>
                 {users.map(({name}) => (
                   <div key={name} className="activeItem">
-                    {name}
+                    {(name).trim()}
                     <img alt="Online Icon" src={onlineIcon}/>
                   </div>
                 ))}
