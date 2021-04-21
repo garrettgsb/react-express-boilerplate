@@ -4,7 +4,6 @@ import { authContext } from '../../AuthProvider';
 // import '../../App.scss';
 // import './UserLogin.scss';
 import { MeetupsContext } from '../../MeetupsContext'
-import axios from 'axios';
 import moment from 'moment'
 
 //request user for login
