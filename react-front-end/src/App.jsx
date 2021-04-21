@@ -7,7 +7,7 @@ import Forecast from './components/Forecast/index.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import UserLogin from './components/UserLogin/UserLogin.jsx';
 import UserInfo from './components/UserInfo/UserInfo.jsx';
-import Settings from './components/Settings/index.jsx';
+import About from './components/About';
 import Navbar from './components/Navbar/Navbar'
 import './styles/App.scss';
 import './styles/components/_button.scss';
@@ -74,7 +74,7 @@ function App() {
               <Route exact path="/meetups" component={Meetups}/>
               <Route exact path="/maps" component={Maps}/>
               <Route exact path="/profile/:id" component={Profile}/>
-              <Route exact path="/settings" component={Settings}/>
+              <Route exact path="/about" component={About}/>
               {!auth && <Route exact path="/login" component={UserLogin}/>}
               {auth && <Route exact path="/login" component={UserInfo}/>}
             </Switch>

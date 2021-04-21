@@ -85,3 +85,13 @@ footer {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.about-page {
+  display: flex;
+  flex-direction: row;
+}
+
+.logo {
+  max-height: 10px;
+  max-width: 10px;
+}
