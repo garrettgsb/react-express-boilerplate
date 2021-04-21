@@ -13,7 +13,7 @@ const Header = ({ onAdd, showAddEvent }) => {
     <h1>Meetups</h1>
     <Button 
       className='btn' 
-      color={showAddEvent ? 'red' : 'green'}
+      color={showAddEvent ? '#59b9ca' : '#0e3147'}
       text={showAddEvent ? 'Cancel' : 'Add'} 
       onClick={onAdd} />
     </header>
