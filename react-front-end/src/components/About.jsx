@@ -17,7 +17,7 @@ const About = () => {
           </div>
           <div className='lower-container'>
             <h2> Sam Knoop </h2>
-            <h4> City: Calgary, AB </h4>
+            <h4> Calgary, AB </h4>
             <p style={{ align: 'left' }}> Sam has enjoyed combining her passions of photography and web development into creating an app for photographers. She looks forward to putting her newfound coding skills to work on other projects! </p>
             <a href='https://github.com/SKnoop2'><GitHubIcon style={{ color: "teal" }} /></a>
             <a href='https://www.linkedin.com/in/samanthaknoop/'><LinkedIn style={{ color: "teal" }} /></a>
@@ -33,7 +33,7 @@ const About = () => {
           </div>
           <div className='lower-container'>
             <h2> Gavin Swan </h2>
-            <h4> City: Calgary, AB </h4>
+            <h4> Calgary, AB </h4>
             <p> Gavin enjoyed the fast paced and immersive program that Lighthouse Labs provided. He loved collaborating and learning from his peers and is excited to build on this foundation! </p>
             <a href='https://github.com/gavinswan'><GitHubIcon style={{ color: "teal" }} /></a>
             <a href='https://www.linkedin.com/in/gavin-swan-aa9192201/'><LinkedIn style={{ color: "teal" }} /></a>
@@ -49,7 +49,7 @@ const About = () => {
           </div>
           <div className='lower-container'>
             <h2> Dylan Rogers </h2>
-            <h4> City: Victoria, BC </h4>
+            <h4> Victoria, BC </h4>
             <p> Dylan enjoyed learning and growing with Lighthouse Labs and is excited to begin his career in web development. </p>
             <a href='https://github.com/cromwellgrim'><GitHubIcon style={{ color: "teal" }} /></a>
             <a href='https://www.linkedin.com/in/dylan-rogers-02aa36115/'><LinkedIn style={{ color: "teal" }} /></a>
