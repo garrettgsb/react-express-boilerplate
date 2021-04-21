@@ -33,6 +33,9 @@
     "socket.io-client": "^4.0.1",
     "styled-components": "^5.2.3"
   },
+  "peerDependencies": {
+    "react": "^16.14.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

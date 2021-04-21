@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { authContext } from '../../AuthProvider'
-import '../../styles/components/_button.scss'
-import '../../styles/App.scss';
-import './Profile.scss';
 
 const Profile = () => {
   const photogData = useContext(authContext)
