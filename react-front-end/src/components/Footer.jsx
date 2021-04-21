@@ -22,11 +22,11 @@ export default function Footer () {
   }
 
   return (
-    <footer className="footer">
+    <div className='footer'>
       <div style={phantom} />
       <div style={style}> 
       Dylan Rogers, Gavin Swan, & Samantha Knoop
       </div>
-    </footer>
+    </div>
   )
 }

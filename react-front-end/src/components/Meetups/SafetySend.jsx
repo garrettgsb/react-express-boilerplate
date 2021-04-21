@@ -1,9 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { MeetupsContext } from '../../MeetupsContext.jsx'
+import { CheckedContext }from './CheckedContext.jsx'
+import { authContext } from '../../AuthProvider'
 
 function SafetySend () {
 
+  const contextCheck = useContext(CheckedContext);
+  const context = useContext(MeetupsContext);
+  const [ name, setName ] = useState('');
+  const { user } = useContext(authContext);
+
+  const [attendees, setAttendees] = useState([
+    {
+      id: 1,
+      name: "Alice Anderson"
+    },
+    {
+      id: 2,
+      name: "Betty Boop"
+    },
+    {
+      id: 3,
+      name: "Charlie Chapman"
+    },
+  ])
+  
+
+  const [text, setText] = useState({
+      recipient: '',
+      textmessage: `From ${user.name}: \n I will be meeting with some new people on: \n ${context.meetup.date} at ${context.meetup.time} \n to take photos of northern lights. I expect to return home around 1am. I am sending this to you as a safety precaution.`
+      // textmessage: `From ${user.name}: \n I will be meeting with ${attendees} (some new people) on: \n ${context.meetup.date} at ${context.meetup.time} \n to take photos of northern lights. I expect to return home around 1am. I am sending this to you as a safety precaution.`
+  });
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,10 +48,7 @@ function SafetySend () {
 
   const classes = useStyles();
 
-  const [text, setText] = useState({
-      recipient: '',
-      textmessage: 'From <name>: \n I will be meeting with new people on: \n <date> at <time> \n to take photos of northern lights. I expect to return home at about <time>. I am sending this to you as a safety precaution.'
-  })
+ 
     
   function sendText () {
     // pass variables in query string

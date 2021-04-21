@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Form() {
+export default function Form({ setPhotoSpots }) {
 
   const classes = useStyles();
   
@@ -31,9 +31,15 @@ export default function Form() {
   })
 
 
-  function saveLocation () {
+  function saveLocation (event, ) {
+    // prevent form from sending the post request & so we can do it with axios instead
+    event.preventDefault();
     axios.post(`http://localhost:8080/maps`, { location })
-    .then(() => console.log('test#2 from react side'))
+    // .then(() => console.log('test#2 from react side'))
+    .then(() => setPhotoSpots(prevState => {
+      // obj.assign would also work
+      return {...prevState, ...updatedValues}
+    }))
     .then(() => setLocation({
       location_name: "",
       province: "",
@@ -48,7 +54,7 @@ export default function Form() {
 
 
   return (
-    <div className='map-form'>
+    <form className='map-form' onSubmit={saveLocation}>
       <div className='map-form-text'>
       <h2> Recommend a Location </h2>
         <p>Share your favourite Northern Lights photography spots with our community.</p>
@@ -150,7 +156,7 @@ export default function Form() {
           onChange={e => setLocation({ ...location, photo_credit: e.target.value})}
 
         />
-        <button type="submit" className='btn' onClick={saveLocation}> Submit </button>
-    </div>
+        <button type="submit" className='btn'> Submit </button>
+    </form>
   )
 }

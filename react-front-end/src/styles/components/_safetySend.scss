@@ -5,5 +5,12 @@
 
 .safety-send{
   display: block;
-  width: 100%;
+  padding:25px;
+  width: 60%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
+     0px 10px 20px rgba(0,0,0,0.05),
+     0px 20px 20px rgba(0,0,0,0.05),
+     0px 30px 20px rgba(0,0,0,0.05);
 }
