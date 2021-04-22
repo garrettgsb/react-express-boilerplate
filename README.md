@@ -22,8 +22,8 @@ In the third terminal, stay in 'express-back-end'. Run 'npm run chat' or 'yarn c
 
 ## Screenshots
 
-![forecast]("https://github.com/SKnoop2/Aurora-Junkies/blob/master/docs/forecast.png")
-![maps]("https://github.com/SKnoop2/Aurora-Junkies/blob/master/docs/maps.png")
-![meetups]("https://github.com/SKnoop2/Aurora-Junkies/blob/master/docs/meetups-chat.png")
-![profile]("https://github.com/SKnoop2/Aurora-Junkies/blob/master/docs/profile.png")
-![safety send]("https://github.com/SKnoop2/Aurora-Junkies/blob/master/docs/meetups-safety.png")
+![forecast](https://github.com/SKnoop2/Aurora-Junkies/blob/master/docs/forecast.png)
+![maps](https://github.com/SKnoop2/Aurora-Junkies/blob/master/docs/maps.png)
+![meetups](https://github.com/SKnoop2/Aurora-Junkies/blob/master/docs/meetups-chat.png)
+![profile](https://github.com/SKnoop2/Aurora-Junkies/blob/master/docs/profile.png)
+![safety send](https://github.com/SKnoop2/Aurora-Junkies/blob/master/docs/meetups-safety.png)
