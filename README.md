@@ -1,46 +1,31 @@
-# React + Express No-Fluff Boilerplate
+# Aurora Junkies
 
-A boilerplate project for anyone interested in making a project that uses React and Express.
+It can be difficult to find a great spot to take photos of the Northern Lights. With Aurora Junkies you can meetup with like-minded photographers and find the best locations to take photos of the dancing lights together. 
 
-This repository is a bootleg of @NimaBoscarino's [React Rails Boilerplate](https://github.com/NimaBoscarino/react-rails-boilerplate). It uses the same React app, but replaces the Rails server with an Express server.
+Photographers can add locations and photos from some of their favourite spots. They can chat with each other before they meet up to plan, or afterwards to talk about how much they enjoyed themselves!
 
-Note! This boilerplate has _no fluff_! That means that there's nothing set up for you to do authentication stuff, there's no Redux stuff, and there's no React Router stuff. On the Express end, there is no session storage or database connection.
+Users can set up their profile page with 3 of their favourite photos and the camera settings they useed to take them.
 
-The main important bit is that the React project has `proxy` set to `localhost:8080` in the `package.json` file, and that the Express app listens to port 8080 in `server.js`. Take a look!
+Since you're heading into the remote locations away from light pollution, it's important to be safe as well. Aurora Junkies will send a message to a safety contact's phone in order to keep them up-to-date on your plans.
 
-You can (and perhaps should) rename the directories `express-back-end` and `react-front-end` if you want-- The name doesn't matter.
+We hope everyone enjoys using the site to connect with like-minded photographers and finding the perfect spot to get that awesome aurora photo!
 
-## Running the projects
+## Running the site
 
-You need **TWO** terminal windows/tabs for this (or some other plan for running two Node processes).
+You need **THREE** terminal windows/tabs for this (or some other plan for running two Node processes).
 
-In one terminal, `cd` into `react-front-end`. Run `npm install` or `yarn` to install the dependencies. Then run `npm start` or `yarn start`, and go to `localhost:3000` in your browser.
+In one terminal, `cd` into `react-front-end`. Run `npm install` or `yarn` to install the dependencies. Then run `npm run start` or `yarn start`, and go to `localhost:3000` in your browser.
 
-In the other terminal, `cd` into `express-back-end`. Run `npm install` or `yarn` to install the dependencies, then `npm start` or `yarn start` to launch the server.
+In the second terminal, `cd` into `express-back-end`. Run `npm install` or `yarn` to install the dependencies, then `npm run start` or `yarn start` to launch the server.
 
-In the browser, you can click on the button and see the data get loaded.
+In the third terminal, stay in 'express-back-end'. Run 'npm run chat' or 'yarn chat' to launch the chat server.
 
-If this doesn't work, please message me!
+## Screenshots
 
-## Next steps
-
-From here, you can start working on your project!
-
-As soon as the dependencies are installed, your Express server can serve JSON and static assets (like images) in response to API calls from the React app. You can get started on developing your React app, routing plan, etc. right away! Any request that isn't handled by React is passed on to the Express server. That means that you can call a route like `/api/users` from React using `fetch`, `axios`, or something else, and Express will receive it as though they originated from the same app. For routing, best practice is to namespace all of your data routes to `/api`, so that they don't clash with other routing schemes, like React Router.
-
-At some point, you'll likely want to install and configure a database driver for Postgres or MongoDB-- Refer to past projects for hints on how to do this.
-
-And don't forget to update the README!
-
-## Example Projects
-
-You might want to look at examples of projects that have used this boilerplate for hints on how to extend it. Here are a few:
-
-* [Later Cart](https://github.com/bonitac/later-cart)
-* [Buddi.io](https://github.com/Danny-Tran/buddi.io)
+[forecast]()
+[maps]()
+[meetups]()
+[profile]()
+[safety send]()
 
 If you'd like your project added to the list, please shoot me a message.
-
-## Contact
-
-Please contact me on Slack (@garrettgsb) or Nima at `nima@lighthouselabs.com` if you have any questions, requests, or feedback, or post an issue to this repo. If you are using the boilerplate, I'd love to hear from you as well!
