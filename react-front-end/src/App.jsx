@@ -37,7 +37,8 @@ function App() {
           <Navbar />
 
             <Switch>
-              <Route exact path="/" component={Forecast}/>
+              <Route exact path="/" component={ArcticLandscape} />
+              <Route exact path="/forecast" component={Forecast}/>
               <Route exact path="/meetups" component={Meetups}/>
               <Route exact path="/maps" component={Maps}/>
               <Route exact path="/profile/:id" component={Profile}/>

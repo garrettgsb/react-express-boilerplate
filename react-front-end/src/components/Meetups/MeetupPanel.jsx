@@ -30,8 +30,10 @@ const MeetupPanel = () => {
         <div className='mpanel'>
           <div><h1>{context.meetup.name}</h1></div>
           <div> 
-            <p>{context.meetup.date}</p>
-            <p>{context.meetup.time}</p>
+            <p>Date: {context.meetup.date}</p>
+            <p>Time: {context.meetup.time}</p>
+            <p>Latitude: {context.meetup.lat}</p>
+            <p>Longitude: {context.meetup.long}</p>
           </div>
           <h3>Attendees</h3>
           {attendees.length > 0 ? <Attendees attendees={attendees} /> : 'No Attendees to this meetup.'}

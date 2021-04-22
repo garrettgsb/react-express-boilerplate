@@ -19,7 +19,7 @@ const PhotogsProfile = () => {
           <h2> Betty Boop </h2>
           <h4> City: Calgary </h4>
           <p> My name is Betty and I am fairly new to photography. I would love to tag along with some more experinced photographers and get some pointers! I would much prefer to meetup in a group of at least 3 people to ensure that we have a safe and enjoyable time. </p>
-          <Link classname='back-link' to="/meetups"> Back </Link>
+          <Link className='back-link' to="/meetups"> Back </Link>
         </div>
       </div>
       <div className='photo-album'>
@@ -28,7 +28,7 @@ const PhotogsProfile = () => {
           <span>Camera Settings: f2.8 - 10 sec - ISO1600</span>
         </div>
         <div className='photo-container'>
-          <img src='https://images.unsplash.com/photo-1579033461380-adb47c3eb938?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8bm9ydGhlcm4lMjBsaWdodHN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' />
+          <img src='https://images.unsplash.com/photo-1529963183134-61a90db47eaf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8bm9ydGhlcm4lMjBsaWdodHN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60' />
           <span>Camera Settings: f4 - 15 sec - ISO1600</span>
         </div>
         <div className='photo-container'>

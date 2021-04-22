@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -8,6 +8,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import moment from 'moment';
+import { AddEventContext } from './AddEventContext.jsx'
 
 const AddEvent = ({ onAdd }) => {
 
@@ -34,11 +35,12 @@ const AddEvent = ({ onAdd }) => {
 
     // 
     onAdd({ name: locationName, date: moment(selectedDate).format("YYYY-MM-DD"), time: moment(selectedTime).format("HH:MM:SS")})
-
+    eventCheck.setShowAddEvent(!eventCheck.showAddEvent)
     setLocationName('')
   }
   
-
+  const eventCheck = useContext(AddEventContext)
+  console.log('eventCheck', eventCheck)
 
   return (
     <form className='add-form' onSubmit={onSubmit} >
@@ -85,7 +87,7 @@ const AddEvent = ({ onAdd }) => {
           </MuiPickersUtilsProvider>
       </div>
 
-      <input type='submit' value='Save Meetup' className='btn btn-block'/>
+      <input type='submit' value='Save Meetup' className='btn btn-block' />
     </form>
   )
 }
