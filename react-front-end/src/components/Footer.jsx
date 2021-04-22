@@ -12,6 +12,7 @@ export default function Footer () {
     height: "60px",
     width: "100%",
     color: "#f8f9fa",
+    zIndex: 10000
   }
 
   var phantom = {

@@ -89,7 +89,7 @@ footer {
 
 .footer {
   background-color: #092a3c;
-    textAlign: center;
+    text-align: center;
     padding: 20px;
     position: fixed;
     left: 0;
@@ -97,4 +97,14 @@ footer {
     height: 60px;
     width: 100%;
     color: #f8f9fa;
+}
+
+.about-page {
+  display: flex;
+  flex-direction: row;
+}
+
+.logo {
+  max-height: 10px;
+  max-width: 10px;
 }

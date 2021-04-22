@@ -5,9 +5,10 @@ import Meetups from './components/Meetups/index.jsx';
 import Maps from './components/Maps/index.jsx';
 import Forecast from './components/Forecast/index.jsx';
 import Profile from './components/Profile/Profile.jsx';
+import PhotogsProfile from './components/Meetups/PhotogsProfile.jsx';
 import UserLogin from './components/UserLogin/UserLogin.jsx';
 import UserInfo from './components/UserInfo/UserInfo.jsx';
-import Settings from './components/Settings/index.jsx';
+import About from './components/About';
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer'
 import './styles/App.scss';
@@ -36,11 +37,13 @@ function App() {
           <Navbar />
 
             <Switch>
-              <Route exact path="/" component={Forecast}/>
+              <Route exact path="/" component={ArcticLandscape} />
+              <Route exact path="/forecast" component={Forecast}/>
               <Route exact path="/meetups" component={Meetups}/>
               <Route exact path="/maps" component={Maps}/>
               <Route exact path="/profile/:id" component={Profile}/>
-              <Route exact path="/settings" component={Settings}/>
+              <Route exact path="/photogs/:id" component={PhotogsProfile}/>
+              <Route exact path="/about" component={About}/>
               {!auth && <Route exact path="/login" component={UserLogin}/>}
               {auth && <Route exact path="/login" component={UserInfo}/>}
             </Switch>

@@ -7,6 +7,7 @@ import SafetySend from './SafetySend'
 
 import { CheckedContext } from './CheckedContext.jsx'
 import MeetupPanel from './MeetupPanel.jsx';
+import { AddEventContext } from './AddEventContext.jsx'
 
 export default function Meetups() {
 
@@ -18,25 +19,31 @@ export default function Meetups() {
       location_id: 1,
       name: "Banff",
       date: '2021-04-22',
-      time: '22:30:00'
+      time: '22:30:00',
+      lat: '51.1784',
+      long: '-115.5708'
     },
     {
       id: 2,
       location_id: 3,
-      name: "Yellowknife",
+      name: "Moberly Lake",
       date: '2021-05-21',
-      time: '22:00:00'
+      time: '22:00:00',
+      lat: '55.8233',
+      long: '-121.7889'
     },
     {
       id: 3,
       location_id: 2,
       name: "Jasper",
       date: '2021-04-15',
-      time:'01:20:00'
+      time:'01:20:00',
+      lat: '53.118766',
+      long: '-118.027272'
     }
   ])
 
-  
+  const eventCheck = useMemo(() => ({showAddEvent, setShowAddEvent}), [showAddEvent, setShowAddEvent])
   const valueCheck = useMemo(() => ({checked, setChecked}), [checked, setChecked])
   // const constructor = (props) => {
   //   super(props)
@@ -79,12 +86,14 @@ export default function Meetups() {
       <>
         <CheckedContext.Provider value={valueCheck}>
           <div className="cont" >
+            <AddEventContext.Provider value={eventCheck}>
               <div className="container-allmeets">
                 <Header onAdd={() => setShowAddEvent(!showAddEvent)} showAddEvent={showAddEvent}/>        
                 {showAddEvent && <AddEvent onAdd={addEvent} />}
                 {events.length > 0 ? <Events events={events} onDelete={deleteEvent} /> : 'No events to show'}
               <br />
               </div>
+            </AddEventContext.Provider>
             <div className="mpanel">
               <div>
                 <MeetupPanel />
