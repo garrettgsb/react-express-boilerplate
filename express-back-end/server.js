@@ -35,23 +35,35 @@ app.use(function(req, res, next) {
   next();
 });
 
+// TODO refactator to move DB queries to new file
 // create an aurora location
 app.post('/maps', async(req, res) => {
   res.setHeader('Content-Type', 'application/json')
   try {
     const { location_name, province, latitude, longitude, photo_url, photo_credit } = req.body.location
+    console.log("req.body.location:", req.body.location)
     const query = `INSERT INTO locations (location_name, province, latitude, longitude, photo_url, photo_credit)
     VALUES ($1, $2, $3, $4, $5, $6)`
-    db.query(query, [location_name, province, latitude, longitude, photo_url, photo_credit])
-    .then((data) => {
+    await db.query(query, [location_name, province, latitude, longitude, photo_url, photo_credit])
+    const query2 = `SELECT * FROM locations`
+    // await is an implicit return; async only works with an await
+    await db.query(query2).then((data) => {
       res.send(data.rows)
-      console.log('data.rows: ', data.rows)
+    }).catch((err) => {
+      console.log(err.message)
     })
-    } catch(err){
-    console.log(err.message);
-  }
+  } catch(err) {console.error(err)}
 });
 
+// get aurora locations
+app.get('/maps', (req,res) => {
+  const query = `SELECT * FROM locations`
+    db.query(query).then((data) => {
+      res.send(data.rows)
+    }).catch((err) => {
+      console.log(err.message)
+  });
+})
 
 //get user from db for login
 app.post('/login', (req, res) => {
@@ -73,7 +85,8 @@ app.get('/profile/:id', (req,res) => {
   const query = `SELECT * FROM photographers WHERE id = $1`
     db.query(query, [req.params.id]).then((data) => {
       res.send(data.rows[0])
-    }).catch((err) => {
+    }).catch((err) => { 
+      console.log(err.message)
   });
 })
 
@@ -83,17 +96,10 @@ app.get('/meetups', (req,res) => {
   db.query(query).then((data) => {
       res.send(data.rows[0])
     }).catch((err) => {
+      console.log(err.message)
   });
 })
 
-// get aurora locations
-app.get('/maps', (req,res) => {
-  const query = `SELECT * FROM locations`
-    db.query(query).then((data) => {
-      res.send(data.rows)
-    }).catch((err) => {
-  });
-})
 
 
 // GET route for Aurora Data

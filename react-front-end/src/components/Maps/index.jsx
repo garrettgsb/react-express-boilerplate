@@ -13,7 +13,7 @@ export default function Maps() {
   useEffect(() => {
     axios.get(url)
     .then(res => {
-      console.log("test", res.data);
+      // console.log("test", res.data);
       setPhotoSpots(res.data);
     })
   }, []);
