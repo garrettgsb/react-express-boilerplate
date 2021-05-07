@@ -8,7 +8,7 @@ class Artwork extends Component {
   render() {
     return (
       <div className="Artwork">
-        You have reached the Artworks route
+        You have reached the artwork route
       </div>
     );
   }

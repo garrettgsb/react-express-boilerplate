@@ -187,9 +187,14 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Inkedin
-          </Typography>
+
+{/* inkedin REACT ROUTER LINK TO INDEX */}
+          <Link to="/index">
+            <Typography className={classes.title} variant="h6" noWrap>
+              Inkedin
+            </Typography>
+          </Link>
+
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -215,22 +220,29 @@ export default function PrimarySearchAppBar() {
               </IconButton>
             </Link>
 
+{/* REACT ROUTER LINK TO SHOWCASE */}
+            <Link to="/art_showcase">
+              <IconButton aria-label="show 17 new notifications" color="inherit">
+                <Badge badgeContent={17} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </Link>
 
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+{/* REACT ROUTER LINK TO PORTFOLIO */}
+            <Link to="/my_portfolio">
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </Link>
+
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

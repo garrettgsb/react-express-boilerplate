@@ -126,14 +126,16 @@ class App extends Component {
         </div>
 {/* REACT ROUTER LINK TO MESSAGES */}
         <Switch>
-          <Route path="/messages" component={Message}>
-            
-          </Route>
+          <Route path="/messages" component={Message}></Route>
+          <Route path="/my_portfolio" component={User}></Route>
+          <Route path="/art_showcase" component={Artwork}></Route>
 
         </Switch>
+
         </Router>
 
       </div>
+      
     );
   }
 }
