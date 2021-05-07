@@ -17,6 +17,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import '@fontsource/roboto';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -135,21 +136,28 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
+
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
+            {/* Mail Icon */}
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
+
+
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
+            {/* Notifications Icon */}
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
+
+
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -157,10 +165,13 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
+          {/* Profile Button */}
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+
+    
     </Menu>
   );
 
@@ -194,11 +205,17 @@ export default function PrimarySearchAppBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
+
+{/* REACT ROUTER LINK TO MESSAGES */}
+            <Link to="/messages">
+              <IconButton aria-label="show 4 new mails" color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <MailIcon />
+                </Badge>
+              </IconButton>
+            </Link>
+
+
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />

@@ -4,6 +4,7 @@ import './App.css';
 import '@fontsource/roboto';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 
 import User from './component/User';
 import Artwork from './component/Artwork';
@@ -72,6 +73,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Router>
         <div>
            {<PrimarySearchAppBar /> }
         </div>
@@ -122,6 +124,15 @@ class App extends Component {
         <div>
           {this.state.flag && <User />}            
         </div>
+{/* REACT ROUTER LINK TO MESSAGES */}
+        <Switch>
+          <Route path="/messages" component={Message}>
+            
+          </Route>
+
+        </Switch>
+        </Router>
+
       </div>
     );
   }
