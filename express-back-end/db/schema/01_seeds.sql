@@ -56,15 +56,15 @@ VALUES (
 
 
 INSERT INTO exercise (
-muscle_group_id, exercise_picture_url, exercise_name, exercise_video_url, exercise_info, exercise_video_url, time_for_one_rep, num_of_recommended_reps, intensity, rating) 
+muscle_group_id, exercise_picture_url, exercise_name, exercise_video_url, exercise_info, time_for_one_rep, num_of_recommended_reps, intensity, rating) 
 VALUES (
 1, 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Falk%2C_Benjamin_J._%281853-1925%29_-_Eugen_Sandow_%281867-1925%29.jpg', 'bicep curls', 'https://media.giphy.com/media/10cylTGU0KcAsE/giphy.gif', 10, 36, 1, 4);
 INSERT INTO exercise (
-exercise_picture_url, exercise_name, exercise_video_url, exercise_info, exercise_video_url, time_for_one_rep, num_of_recommended_reps, intensity, rating) 
+exercise_picture_url, exercise_name, exercise_video_url, exercise_info, time_for_one_rep, num_of_recommended_reps, intensity, rating) 
 VALUES (
 2, 'https://www.elitefts.com/wp/wp-content/uploads/2012/03/IMG_1456-600x300.jpg', 'bench press', 'https://media.giphy.com/media/3o6ZsYzuLyRfSGX4f6/giphy.gif', 10, 36, 3, 5);
 INSERT INTO exercise (
-exercise_picture_url, exercise_name, exercise_video_url, exercise_info, exercise_video_url, time_for_one_rep, num_of_recommended_reps, intensity, rating) 
+exercise_picture_url, exercise_name, exercise_video_url, exercise_info, time_for_one_rep, num_of_recommended_reps, intensity, rating) 
 VALUES (
 3, 'https://ericcooperfitness.com/blog/wp-content/uploads/2017/09/eric_ball-copy-copy2-copy-2.jpg', 'medicine ball wood chopper', 'https://media.giphy.com/media/mnPBQeSZp8XN6/giphy.gif', 10, 50, 4, 3);
 
