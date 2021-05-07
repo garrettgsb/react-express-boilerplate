@@ -1,3 +1,21 @@
+div {
+  border: 2px solid black;
+}
+
+div .body_container {
+  display: flex;
+  flex-direction: row;
+}
+.main_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar_container {
+  display: flex;
+  flex-direction: column;
+}
+
 .App {
   text-align: center;
 }
