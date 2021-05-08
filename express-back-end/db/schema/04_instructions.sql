@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS users CASCADE;
+CREATE TABLE instructions (
+id SERIAL PRIMARY KEY NOT NULL,
+vegetable_id INTEGER REFERENCES vegetables(id) ON DELETE CASCADE,
+sun_required VARCHAR(255) NOT NULL,
+water_time SMALLINT,
+harvest_date TIMESTAMP,
+space SMALLINT,
+);
