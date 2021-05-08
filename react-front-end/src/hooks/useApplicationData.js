@@ -37,6 +37,7 @@ export default function useApplicationData() {
       type: SET_ACTIVE_USER,
       data: { activeUser: paramId },
     });
+    localStorage.setItem("User", paramId);
   };
 
   useEffect(() => {

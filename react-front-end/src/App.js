@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import "@fontsource/roboto";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -24,6 +24,15 @@ export default function App() {
     }
     return [];
   };
+
+  useEffect(() => {
+    const userLogin = localStorage.getItem("User");
+    if (userLogin) {
+      const userFound = JSON.parse(userLogin);
+      setActiveUser(userFound);
+    }
+  }, []);
+
   console.log("login", state);
   const messages = getMessages().map((message) => {
     return (
