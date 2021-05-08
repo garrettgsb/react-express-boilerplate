@@ -11,4 +11,9 @@ INSERT INTO messages
 (message, friends_id, sender_id) 
 VALUES
 ('Hello Friend.', 1, 1),
-('Oh hi there Mark.', 1, 1);
+('Oh hi Mark.', 1, 1),
+('What up?', 1, 1),
+('Im overwhelmed and you cant help me.', 1, 1),
+('You sure?', 1, 1),
+('Yeah, very busy.', 1, 1),
+('Ok sorrrrrry..', 1, 1);
