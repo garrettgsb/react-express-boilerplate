@@ -17,6 +17,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import SettingsIcon from '@material-ui/icons/Settings';
+import InfoIcon from '@material-ui/icons/Info';
+// importing image as a variable below
+import garden from './ecology.png'
 
 const drawerWidth = 240;
 
@@ -80,6 +84,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  // bottom: {
+  //   display: 'flex',
+  //   alignItems: 'center',
+  //   flexDirection: 'column',
+  //   alignItems: 'flex-end',
+  //   marginTop: '450px',
+  //   },
 }));
 
 export default function Sidebar() {
@@ -100,6 +111,7 @@ export default function Sidebar() {
       <CssBaseline />
       <AppBar
         position="fixed"
+        color="primary"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -117,7 +129,7 @@ export default function Sidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Mini variant drawer
+            Bloom
           </Typography>
         </Toolbar>
       </AppBar>
@@ -140,22 +152,44 @@ export default function Sidebar() {
           </IconButton>
         </div>
         <Divider />
+
+      {/* Top list, used as an array. Possible to push new plots into this array to render them? */}
+        
         <List>
-          {['Vegetables', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['My Gardens'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <img src={garden} width="20px"/> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
         <Divider />
+
+      {/* Resources / Static stuff */}
+
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+            <ListItem button key={'Vegetables'}>
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary='Vegetables' />
             </ListItem>
-          ))}
+            <ListItem button key={'Resources'}>
+              <ListItemIcon><MailIcon /></ListItemIcon>
+              <ListItemText primary='Resources' />
+            </ListItem>
+        </List>
+        <Divider />
+
+      {/* Bottom stuff. Possible to make appear at bottom of page laster */}
+
+        <List >
+        <ListItem button key={'About Us'}>
+              <ListItemIcon><InfoIcon /></ListItemIcon>
+              <ListItemText primary='About Us' />
+            </ListItem>
+            <ListItem button key={'Settings'}>
+              <ListItemIcon><SettingsIcon /></ListItemIcon>
+              <ListItemText primary='Settings' />
+            </ListItem>
         </List>
       </Drawer>
     </div>
