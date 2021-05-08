@@ -16,36 +16,36 @@ class SamplePage extends Component {
                 <Row>
                     <Col>
                         <Card title='Beets' isOption>
-                            <Col>
+                            <div class="flex-row">
                             <img className="img-veg" src={beets} alt="Beets"></img>
                             <p>
                                 Beets are a root vegetable, best grown in 10-26 degrees C. They require 4-6 hours of sunlight per day, water every 3 days, and need to be spaced 4 inches apart.
                             </p>
-                            </Col> 
+                            </div> 
                         </Card>
                         <Card title='Carrots' isOption>
-                            <Col>
+                            <div class="flex-row">
                             <img className="img-veg" src={carrots} alt="Carrots"></img>
                             <p>
                                 Carrots are root vegetables, best grown in 10-28 degrees C. They require 7 hours of sunlight per day, water every 3 days, and need to be spaced 2 inches apart.
                             </p>
-                            </Col>
+                            </div>
                         </Card>
                         <Card title='Cucumbers' isOption>
-                            <Col>
+                            <div class="flex-row">
                             <img className="img-veg" src={cucumbers} alt="Cucumbers"></img>
                             <p>
                                 Cucumbers are an easy-care vegetable, best grown in 15-30 degrees C. They require 5 hours of sunlight per day, water once a week, and need to be spaced 2-3 feet apart.
                             </p>
-                            </Col> 
+                            </div> 
                         </Card>
                         <Card title='Radishes' isOption>
-                            <Col>
+                            <div class="flex-row">
                             <img className="img-veg" src={radishes} alt="Radishes"></img>
                             <p>
                                 Radishes are fast growing root vegetables, best grown in 18-30 degrees C. They require 3 hours of sunlight per day, water every 3 days, and need to be spaced 4 feet apart.
                             </p>
-                            </Col>
+                            </div>
                         </Card>
                     </Col>
                 </Row>

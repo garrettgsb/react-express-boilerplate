@@ -216,13 +216,6 @@ p.text-muted {
     .card-block,
     .card-body {
         padding: 30px 25px;
-
-        .img-veg {
-            max-width: 150px;
-            max-height: 150px;
-            width: auto;
-            height: auto;
-        }
     }
 
     &.card-load {
@@ -890,3 +883,20 @@ p.text-muted {
     -webkit-font-smoothing: antialiased;
 }
 /* material icon for material datetime picker */
+
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+
+    .img-veg {
+        padding-left: 10px;
+        max-width: 175px;
+        max-height: 175px;
+        width: auto;
+        height: auto;
+    }
+    p {
+        padding-left : 40px;
+    }
+}
