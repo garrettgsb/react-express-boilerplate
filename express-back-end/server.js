@@ -34,11 +34,28 @@ App.get("/api/friends", (req, res) => {
 });
 
 App.get("/api/jobs", (req, res) => {
-  const data = db.query("SELECT * FROM jobs").then((response) => {
-    res.json({
-      jobs: response.rows,
+  const data = db
+    .query(
+      "SELECT jobs.id AS id, username, title, description, pay FROM jobs JOIN users ON users.id = user_id"
+    )
+    .then((response) => {
+      res.json({
+        jobs: response.rows,
+      });
     });
-  });
+});
+
+App.get("/api/jobs/:id", (req, res) => {
+  const data = db
+    .query(
+      "SELECT jobs.id AS id, username, title, description, pay FROM jobs JOIN users ON users.id = user_id WHERE jobs.id = $1",
+      [req.params.id]
+    )
+    .then((response) => {
+      res.json({
+        job: response.rows,
+      });
+    });
 });
 
 App.get("/api/messages", (req, res) => {

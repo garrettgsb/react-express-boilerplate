@@ -1,4 +1,4 @@
-// import React, { useContext } from "react";
+import { useContext } from "react";
 import { JobsContext } from "../App.js";
 
 // export default function Jobs(props) {
@@ -32,61 +32,64 @@ import * as React from "react";
 import { DataGrid } from "@material-ui/data-grid";
 
 export default function DenseHeightGrid() {
+  const value = useContext(JobsContext);
+  console.log("value = ", value);
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
         rowHeight={25}
-        rows={[
-          {
-            id: 1,
-            name: "Test row",
-            company: "Company Y",
-            description: "this is a subject line.",
-            location: "Vancouver",
-            pay: "$600",
-          },
-          {
-            id: 2,
-            name: "Test row",
-            company: "Company Y",
-            description: "this is a subject line.",
-            location: "Vancouver",
-            pay: "$600",
-          },
-          {
-            id: 3,
-            name: "Test row",
-            company: "Company Y",
-            description: "this is a subject line.",
-            location: "Vancouver",
-            pay: "$600",
-          },
-          {
-            id: 4,
-            name: "Test row",
-            company: "Company Y",
-            description: "this is a subject line.",
-            location: "Vancouver",
-            pay: "$600",
-          },
-          {
-            id: 5,
-            name: "Test row",
-            company: "Company Y",
-            description: "this is a subject line.",
-            location: "Vancouver",
-            pay: "$600",
-          },
-        ]}
+        rows={value}
+        // rows={[
+        //   {
+        //     id: 1,
+        //     name: value[0] && value[0].title,
+        //     posted_by: value[0] && value[0].user_id,
+        //     description: value[0] && value[0].description,
+        //     location: value[0] && value[0].location,
+        //     pay: value[0] && value[0].pay,
+        //   },
+        //   {
+        //     id: 2,
+        //     name: "Test row",
+        //     posted_by: "Company Y",
+        //     description: "this is a subject line.",
+        //     location: "Vancouver",
+        //     pay: "$600",
+        //   },
+        //   {
+        //     id: 3,
+        //     name: "Test row",
+        //     posted_by: "Company Y",
+        //     description: "this is a subject line.",
+        //     location: "Vancouver",
+        //     pay: "$600",
+        //   },
+        //   {
+        //     id: 4,
+        //     name: "Test row",
+        //     posted_by: "Company Y",
+        //     description: "this is a subject line.",
+        //     location: "Vancouver",
+        //     pay: "$600",
+        //   },
+        //   {
+        //     id: 5,
+        //     name: "Test row",
+        //     posted_by: "Company Y",
+        //     description: "this is a subject line.",
+        //     location: "Vancouver",
+        //     pay: "$600",
+        //   },
+        // ]}
         columns={[
           {
-            field: "name",
+            field: "title",
             headerName: "Title",
             width: 100,
           },
           {
-            field: "company",
-            headerName: "Company",
+            field: "username",
+            headerName: "Posted By",
             width: 120,
           },
           {

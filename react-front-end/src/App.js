@@ -8,6 +8,7 @@ import Artwork from "./component/Artwork";
 import Artworks from "./component/Artworks";
 import Friend from "./component/Friend";
 import Jobs from "./component/Jobs";
+import Job from "./component/Job";
 import Message from "./component/Message";
 import PrimarySearchAppBar from "./component/Navbar";
 
@@ -17,7 +18,6 @@ export const JobsContext = React.createContext([]);
 
 export default function App() {
   const { state } = useApplicationData();
-  console.log(state.jobs);
   const getMessages = () => {
     if (state.flag) {
       return state.messages;
@@ -43,6 +43,14 @@ export default function App() {
     <div>
       <JobsContext.Provider value={state.jobs}>
         <Jobs />
+      </JobsContext.Provider>
+    </div>
+  );
+
+  const job = (
+    <div>
+      <JobsContext.Provider value={state.jobs}>
+        <Job />
       </JobsContext.Provider>
     </div>
   );
@@ -92,6 +100,7 @@ export default function App() {
           <Route path="/portfolio/:id" children={<User />}></Route>
           <Route path="/art_showcase" render={() => artworks}></Route>
           <Route path="/job_board" render={() => jobBoard}></Route>
+          <Route path="/jobs/:id" render={() => job}></Route>
         </Switch>
       </Router>
     </div>
