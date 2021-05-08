@@ -1,25 +1,23 @@
 import React from "react";
 import "./App.css";
 import "@fontsource/roboto";
-import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
-import ThreeDRotation from "@material-ui/icons/ThreeDRotation";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import User from "./component/User";
 import Artwork from "./component/Artwork";
 import Artworks from "./component/Artworks";
 import Friend from "./component/Friend";
-import Job from "./component/Job";
+import Jobs from "./component/Jobs";
 import Message from "./component/Message";
 import PrimarySearchAppBar from "./component/Navbar";
 
 import useApplicationData from "./hooks/useApplicationData";
 
-import axios from "axios";
+export const JobsContext = React.createContext([]);
 
 export default function App() {
   const { state } = useApplicationData();
-
+  console.log(state.jobs);
   const getMessages = () => {
     if (state.flag) {
       return state.messages;
@@ -28,10 +26,26 @@ export default function App() {
   };
 
   const messages = getMessages().map((message) => {
-    return <Message message={message.message} />;
+    return (
+      <div>
+        <Message message={message.message} />
+      </div>
+    );
   });
 
-  const artworks = <Artworks art={state.artworks} />;
+  const artworks = (
+    <div>
+      <Artworks art={state.artworks} />
+    </div>
+  );
+
+  const jobBoard = (
+    <div>
+      <JobsContext.Provider value={state.jobs}>
+        <Jobs />
+      </JobsContext.Provider>
+    </div>
+  );
 
   return (
     <div className="App">
@@ -77,6 +91,7 @@ export default function App() {
           <Route path="/messages" render={() => messages}></Route>
           <Route path="/portfolio/:id" children={<User />}></Route>
           <Route path="/art_showcase" render={() => artworks}></Route>
+          <Route path="/job_board" render={() => jobBoard}></Route>
         </Switch>
       </Router>
     </div>
