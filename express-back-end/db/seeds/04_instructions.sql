@@ -1,5 +1,6 @@
 INSERT INTO instructions (vegetable_id, sun_required, water_time, harvest_date, space)
-VALUES (1, 5, 3, 26, 4),
+VALUES
+(1, 5, 3, 26, 4),
 (2, 4, 3, 27, 12),
 (3, 6, 3, 22, 6),
 (4, 5, 7, 36, 6),

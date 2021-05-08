@@ -1,5 +1,6 @@
 INSERT INTO vegetables (name, description, image_url, difficulty, climate)
-VALUES ('Beets', 'Beets are a root vegetable, best grown in 10-26 degrees C. They require 4-6 hours of sunlight per day, water every 3 days, and need to be spaced 4 inches apart.', 'image_url', 2, '10-26 degrees C'),
+VALUES
+('Beets', 'Beets are a root vegetable, best grown in 10-26 degrees C. They require 4-6 hours of sunlight per day, water every 3 days, and need to be spaced 4 inches apart.', 'bloom-client/src/assets/images/vegetables/Beets.jpeg', 2, '10-26 degrees C'),
 ('Cabbage', 'Cabbage is a cole crop, best grown in 13-24 degrees C. They require 3-4 hours of sunlight per day, water every 3 days, and need to be spaced 1 foot apart.', 'image_url', 1, '13-24 degrees C'),
 ('Celery', 'Celery is a marshland plant, best grown in 15-21 degrees C. They require 4-6 hours of sunlight per day, water every 3 days, and need to be spaced 6 inches apart.', 'image_url', 3, '15-21 degrees C'),
 ('Onions', 'Onions are a root vegetable, best grown in 20-25 degrees C. They require 4-6 hours of sunlight per day, water every 7 days, and need to be spaced 6 inches apart.', 'image_url', 2, '20-25 degrees C'),
@@ -9,7 +10,7 @@ VALUES ('Beets', 'Beets are a root vegetable, best grown in 10-26 degrees C. The
 ('Cauliflower', 'Cauliflower is a vegetable of the cabbage family, best grown in 15-18 degrees C. It requires 6 hours of sunlight per day, water every 3 days, and need to be spaced 2 feet apart.', 'image_url', 3, '15-18 degrees C'),
 ('Basil', 'Basil is a herb, best grown in 18-30 degrees C. It requires 7 hours of sunlight per daylight, water once a week, and needs to be spaced 1 foot apart.', 'image_url', 1, '18-30 degrees C' ),
 ('Summer Squash', 'Squash come in both summer and winter varieties, summer squash is best grown in 15-28 degrees C. They 6-8 hours of sunlight per day, water every 3 days, and need to be spaced 4 feet apart.', 'image_url', 1, '15-28 degrees C'),
-('Carrots', 'Carrots are root vegetables, best grown in 10-28 degrees C. They require 7 hours of sunlight per day, water every 3 days, and need to be spaced 2 inches apart.', 'image_url', 2, '10-28 degrees C'),
+('Carrots', 'Carrots are root vegetables, best grown in 10-28 degrees C. They require 7 hours of sunlight per day, water every 3 days, and need to be spaced 2 inches apart.', 'bloom-client/src/assets/images/vegetables/carrots.jpeg', 2, '10-28 degrees C'),
 ('Radishes', 'Radishes are fast growing root vegetables, best grown in 18-30 degrees C. They require 3 hours of sunlight per day, water every 3 days, and need to be spaced 4 feet apart.', 'image_url', 3, 'image_url', 3, '18-30 degrees C'),
 ('Strawberry', 'Strawberries are bright red fruits, best grown in 20-29 degree C. They require 6 hours of sunlight per day, water every day, and need to be spaced 4 feet apart.', 'image_url', 1, '20-29 degrees C'),
 ('Cucumber', 'Cucumbers are an easy-care vegetable, best grown in 15-30 degrees C. They require 5 hours of sunlight per day, water once a week, and need to be spaced 2-3 feet apart.', 'image_url', 2, '15-30 degrees C'),
