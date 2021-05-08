@@ -6,4 +6,8 @@ description TEXT,
 image_url VARCHAR(255) NOT NULL,
 difficulty SMALLINT,
 climate VARCHAR(50) NOT NULL,
+sun_required VARCHAR(255) NOT NULL,
+water_time SMALLINT,
+harvest_date TIMESTAMP,
+space SMALLINT,
 );
