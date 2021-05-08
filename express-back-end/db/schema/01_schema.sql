@@ -30,8 +30,6 @@ CREATE TABLE workout_exercise (
   id SERIAL PRIMARY KEY NOT NULL,
   excercise_id INTEGER REFERENCES excercise(id) ON DELETE CASCADE,
   workout_id INTEGER REFERENCES workout(id) ON DELETE CASCADE,
-  num_of_sets INTEGER NOT NULL,
-  num_of_reps INTEGER NOT NULL
 )
 
 CREATE TABLE exercise (
@@ -41,8 +39,9 @@ CREATE TABLE exercise (
   exercise_name VARCHAR(255) NOT NULL,
   exercise_info VARCHAR(900) NOT NULL,
   exercise_video_url VARCHAR(255) NOT NULL,
-  time_for_one_rep INTEGER NOT NULL,
-  num_of_recommended_reps INTEGER NOT NULL,
+  total_time INTEGER NOT NULL,
+  num_of_reps INTEGER NOT NULL,
+  num_of_sets INTEGER NOT NULL,
   intensity INTEGER NOT NULL,
   rating INTEGER
 );
