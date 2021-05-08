@@ -1,21 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 import NavBar from "./components/NavBar";
-import Button from "./components/Button";
+import CategoryList from "./components/CategoryList";
 import GenerateExercise from "./components/GenerateExercise";
 import ExerciseList from "./components/ExerciseList";
+import categoryData from "./components/testData/categoryData"
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: "Click the button to load data!",
-    };
-  }
+const App = () => {
 
-  fetchData = () => {
+  const [selectedCategories, setCategories] = useState([])
+
+  const fetchData = () => {
     axios
       .get("/api/data") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
@@ -29,18 +26,33 @@ class App extends Component {
       });
   };
 
-  render() {
-    return (
-      <>
-        <NavBar />
-        <div className="App">
-          <h1>{this.state.message}</h1>
-          <button onClick={this.fetchData}>Fetch Data</button>
-        </div>
-        <Button />
-      </>
-    );
+  const handleSelectCategory = (item) => {
+    console.log("This is the item", item)
+    setCategories(prev => ([...prev, item]))
+    // add remove items
   }
+
+  return (
+    <>
+      <NavBar />
+      <div className="App">
+        <button onClick={fetchData}>Fetch Data</button>
+      </div>
+      <Router>
+        <Switch>
+          <Route exact={true} path="/">
+            <CategoryList data={categoryData} onClick={handleSelectCategory} selectedCategories={selectedCategories} />
+            <Link to="/exercises">
+              <GenerateExercise />
+            </Link>
+          </Route>
+          <Route path="/exercises" component={ExerciseList} />
+          <Route path="/workout" component={ExerciseList} />
+        </Switch>
+      </Router>
+    </>
+  );
+
 }
 
 export default App;

@@ -1,4 +1,6 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
@@ -10,6 +12,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import CreateWorkoutButton from "./CreateWorkoutButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +49,7 @@ export default function TransferList() {
   const [checked, setChecked] = React.useState([]);
   const [left, setLeft] = React.useState([0, 1, 2, 3]);
   const [right, setRight] = React.useState([4, 5, 6, 7]);
+  const history = useHistory()
 
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
@@ -84,6 +88,14 @@ export default function TransferList() {
     setRight(not(right, rightChecked));
     setChecked(not(checked, rightChecked));
   };
+
+  const handleCreateWorkout = () => {
+    // history.push("/workout")
+    axios.get("/api/workout")
+      .then((data) => {
+        console.log(data)
+      }).catch((err) => { console.log(err) })
+  }
 
   const customList = (title, items) => (
     <Card>
@@ -139,39 +151,44 @@ export default function TransferList() {
   );
 
   return (
-    <Grid
-      container
-      spacing={2}
-      justify="center"
-      alignItems="center"
-      className={classes.root}
-    >
-      <Grid item>{customList("Choices", left)}</Grid>
-      <Grid item>
-        <Grid container direction="column" alignItems="center">
-          <Button
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleCheckedRight}
-            disabled={leftChecked.length === 0}
-            aria-label="move selected right"
-          >
-            &gt;
+    <>
+      <Grid
+        container
+        spacing={2}
+        justify="center"
+        alignItems="center"
+        className={classes.root}
+      >
+        <Grid item>{customList("Choices", left)}</Grid>
+        <Grid item>
+          <Grid container direction="column" alignItems="center">
+            <Button
+              variant="outlined"
+              size="small"
+              className={classes.button}
+              onClick={handleCheckedRight}
+              disabled={leftChecked.length === 0}
+              aria-label="move selected right"
+            >
+              &gt;
           </Button>
-          <Button
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleCheckedLeft}
-            disabled={rightChecked.length === 0}
-            aria-label="move selected left"
-          >
-            &lt;
+            <Button
+              variant="outlined"
+              size="small"
+              className={classes.button}
+              onClick={handleCheckedLeft}
+              disabled={rightChecked.length === 0}
+              aria-label="move selected left"
+            >
+              &lt;
           </Button>
+          </Grid>
         </Grid>
+        <Grid item>{customList("Chosen", right)}</Grid>
       </Grid>
-      <Grid item>{customList("Chosen", right)}</Grid>
-    </Grid>
+
+      <CreateWorkoutButton onClick={handleCreateWorkout} />
+
+    </>
   );
 }

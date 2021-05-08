@@ -3,51 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 
-const images = [
-  {
-    url:
-      "https://images.pexels.com/photos/3775566/pexels-photo-3775566.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
-    title: "Legs",
-    width: "33%",
-  },
-  {
-    url:
-      "https://images.pexels.com/photos/3076516/pexels-photo-3076516.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    title: "Core",
-    width: "33%",
-  },
-  {
-    url:
-      "https://images.pexels.com/photos/700446/pexels-photo-700446.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    title: "Arms",
-    width: "33%",
-  },
-  {
-    url:
-      "https://images.pexels.com/photos/5067739/pexels-photo-5067739.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    title: "Shoulders",
-    width: "33%",
-  },
-  {
-    url:
-      "https://images.pexels.com/photos/50597/man-male-boy-a-person-50597.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    title: "Back",
-    width: "33%",
-  },
-  {
-    url:
-      "https://images.pexels.com/photos/6009290/pexels-photo-6009290.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    title: "Cardio",
-    width: "33%",
-  },
-  {
-    url:
-      "https://images.pexels.com/photos/4720326/pexels-photo-4720326.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    title: "Chest",
-    width: "33%",
-  },
-];
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -109,9 +64,8 @@ const useStyles = makeStyles((theme) => ({
   },
   imageTitle: {
     position: "relative",
-    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${
-      theme.spacing(1) + 6
-    }px`,
+    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6
+      }px`,
   },
   imageMarked: {
     height: 3,
@@ -124,12 +78,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonBases() {
+export default function CategoryList({ data, onClick }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      {images.map((image) => (
+      {data.map((image) => ( // remove map from the return statement
         <ButtonBase
           focusRipple
           key={image.title}
@@ -139,24 +93,26 @@ export default function ButtonBases() {
             width: image.width,
           }}
         >
-          <span
-            className={classes.imageSrc}
-            style={{
-              backgroundImage: `url(${image.url})`,
-            }}
-          />
-          <span className={classes.imageBackdrop} />
-          <span className={classes.imageButton}>
-            <Typography
-              component="span"
-              variant="subtitle1"
-              color="inherit"
-              className={classes.imageTitle}
-            >
-              {image.title}
-              <span className={classes.imageMarked} />
-            </Typography>
-          </span>
+          <div onClick={() => onClick(image)} >
+            <span
+              className={classes.imageSrc}
+              style={{
+                backgroundImage: `url(${image.url})`,
+              }}
+            />
+            <span className={classes.imageBackdrop} />
+            <span className={classes.imageButton}>
+              <Typography
+                component="span"
+                variant="subtitle1"
+                color="inherit"
+                className={classes.imageTitle}
+              >
+                {image.title}
+                <span className={classes.imageMarked} />
+              </Typography>
+            </span>
+          </div>
         </ButtonBase>
       ))}
     </div>
