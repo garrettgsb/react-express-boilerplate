@@ -10,12 +10,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GenerateExercise() {
+export default function GenerateExercise({ onClick }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Button variant="outlined" color="primary">
+      <Button variant="outlined" color="primary" onClick={onClick}>
         Generate Exercises!
       </Button>
     </div>

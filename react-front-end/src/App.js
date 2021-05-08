@@ -1,15 +1,24 @@
 import React, { Component, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import CategoryList from "./components/CategoryList";
 import GenerateExercise from "./components/GenerateExercise";
 import ExerciseList from "./components/ExerciseList";
-import categoryData from "./components/testData/categoryData"
+import categoryData from "./components/testData/categoryData";
 
-const App = () => {
+const withRouter = (WrappedComponent) => (props) => {
+  return (
+    <Router>
+      <WrappedComponent {...props} />
+    </Router>
+  )
+}
 
+const App = (props) => {
+  const history = useHistory()
+  // console.log({ props });
   const [selectedCategories, setCategories] = useState([])
 
   const fetchData = () => {
@@ -27,32 +36,41 @@ const App = () => {
   };
 
   const handleSelectCategory = (item) => {
-    console.log("This is the item", item)
-    setCategories(prev => ([...prev, item]))
-    // add remove items
+    let newState = [...selectedCategories]
+    if (newState.includes(item)) {
+      const index = newState.indexOf(item)
+      // newState = newState.splice(index, 1);
+      newState = newState.filter((element, position) => position !== index);
+    } else {
+      newState = [...newState, item]
+    }
+    setCategories(newState);
+  }
+  // console.log({ selectedCategories });
+
+  const handleGenerateExercise = () => {
+    // access endpoint/query with the state value
+    //axios.get()
+    history.push("/exercises")
   }
 
   return (
     <>
       <NavBar />
-      <div className="App">
-        <button onClick={fetchData}>Fetch Data</button>
-      </div>
-      <Router>
-        <Switch>
-          <Route exact={true} path="/">
-            <CategoryList data={categoryData} onClick={handleSelectCategory} selectedCategories={selectedCategories} />
-            <Link to="/exercises">
-              <GenerateExercise />
-            </Link>
-          </Route>
-          <Route path="/exercises" component={ExerciseList} />
-          <Route path="/workout" component={ExerciseList} />
-        </Switch>
-      </Router>
+
+      <Switch>
+        <Route exact={true} path="/">
+          <CategoryList data={categoryData} onClick={handleSelectCategory} selectedCategories={selectedCategories} />
+
+          <GenerateExercise onClick={handleGenerateExercise} />
+
+        </Route>
+        <Route path="/exercises" component={ExerciseList} />
+        <Route path="/workout" component={ExerciseList} />
+      </Switch>
     </>
   );
 
 }
 
-export default App;
+export default withRouter(App);

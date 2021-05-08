@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
       "& $imageMarked": {
         opacity: 0,
       },
-      "& $imageTitle": {
-        border: "4px solid currentColor",
-      },
+      // "& $imageTitle": {
+      //   border: "4px solid currentColor",
+      // },
     },
   },
   focusVisible: {},
@@ -78,43 +78,50 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CategoryList({ data, onClick }) {
+
+export default function CategoryList({ data, onClick, selectedCategories }) {
   const classes = useStyles();
+  const categories = data.map((image, index) => {
+    const selected = selectedCategories.find((item) => item.id === index)
+    // console.log("The selected category", selected ? selected.id : null, index);
+    return (// remove map from the return statement
+      <ButtonBase
+        focusRipple
+        key={image.title}
+        className={classes.image}
+        focusVisibleClassName={classes.focusVisible}
+        style={{
+          width: image.width,
+        }}
+      >
+        <div onClick={() => onClick(image)}
+          style={{ border: selected && selected.id === index ? "3px solid red" : "3px solid blue" }} >
+          <span
+            className={classes.imageSrc}
+            style={{
+              backgroundImage: `url(${image.url})`,
+            }}
+          />
+          <span className={classes.imageBackdrop} />
+          <span className={classes.imageButton}>
+            <Typography
+              component="span"
+              variant="subtitle1"
+              color="inherit"
+              className={classes.imageTitle}
+            >
+              {image.title}
+              <span className={classes.imageMarked} />
+            </Typography>
+          </span>
+        </div>
+      </ButtonBase>
+    )
+  })
 
   return (
     <div className={classes.root}>
-      {data.map((image) => ( // remove map from the return statement
-        <ButtonBase
-          focusRipple
-          key={image.title}
-          className={classes.image}
-          focusVisibleClassName={classes.focusVisible}
-          style={{
-            width: image.width,
-          }}
-        >
-          <div onClick={() => onClick(image)} >
-            <span
-              className={classes.imageSrc}
-              style={{
-                backgroundImage: `url(${image.url})`,
-              }}
-            />
-            <span className={classes.imageBackdrop} />
-            <span className={classes.imageButton}>
-              <Typography
-                component="span"
-                variant="subtitle1"
-                color="inherit"
-                className={classes.imageTitle}
-              >
-                {image.title}
-                <span className={classes.imageMarked} />
-              </Typography>
-            </span>
-          </div>
-        </ButtonBase>
-      ))}
+      {categories}
     </div>
   );
 }
