@@ -21,8 +21,6 @@ const BootstrapTable = React.lazy(() => import('./Demo/Tables/BootstrapTable'));
 
 const Nvd3Chart = React.lazy(() => import('./Demo/Charts/Nvd3Chart/index'));
 
-const GoogleMap = React.lazy(() => import('./Demo/Maps/GoogleMap/index'));
-
 const OtherSamplePage = React.lazy(() => import('./Demo/Other/SamplePage'));
 const OtherDocs = React.lazy(() => import('./Demo/Other/Docs'));
 
@@ -37,7 +35,6 @@ const routes = [
     { path: '/forms/form-basic', exact: true, name: 'Forms Elements', component: FormsElements },
     { path: '/tables/bootstrap', exact: true, name: 'Bootstrap Table', component: BootstrapTable },
     { path: '/charts/nvd3', exact: true, name: 'Nvd3 Chart', component: Nvd3Chart },
-    { path: '/maps/google-map', exact: true, name: 'Google Map', component: GoogleMap },
     { path: '/vegetables', exact: true, name: 'Vegetables', component: OtherSamplePage },
     { path: '/docs', exact: true, name: 'Documentation', component: OtherDocs },
 ];
