@@ -26,10 +26,6 @@ export default function useApplicationData() {
     flag: false,
   });
 
-  // const setFlag = () => {
-  //   dispatch({ type: SET_FLAG, data: { flag: true } });
-  // };
-
   useEffect(() => {
     Promise.all([
       axios.get(`/api/users`),

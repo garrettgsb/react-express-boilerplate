@@ -15,6 +15,8 @@ import PrimarySearchAppBar from "./component/Navbar";
 
 import useApplicationData from "./hooks/useApplicationData";
 
+import axios from "axios";
+
 export default function App() {
   const { state } = useApplicationData();
 
@@ -73,7 +75,7 @@ export default function App() {
         {/* REACT ROUTER LINK TO MESSAGES */}
         <Switch>
           <Route path="/messages" render={() => messages}></Route>
-          <Route path="/my_portfolio" render={() => <User />}></Route>
+          <Route path="/portfolio/:id" children={<User />}></Route>
           <Route path="/art_showcase" render={() => artworks}></Route>
         </Switch>
       </Router>
