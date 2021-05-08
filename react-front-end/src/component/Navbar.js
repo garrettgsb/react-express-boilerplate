@@ -16,6 +16,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import "@fontsource/roboto";
 import { Link } from "react-router-dom";
+import BrushTwoToneIcon from "@material-ui/icons/BrushTwoTone";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -117,8 +118,8 @@ export default function PrimarySearchAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
     </Menu>
   );
 
@@ -153,6 +154,16 @@ export default function PrimarySearchAppBar(props) {
         <p>Notifications</p>
       </MenuItem>
 
+      <MenuItem>
+        <IconButton aria-label="show 11 new notifications" color="inherit">
+          <Badge badgeContent={11} color="secondary">
+            {/* Notifications Icon */}
+            <BrushTwoToneIcon />
+          </Badge>
+        </IconButton>
+        <p>Jobs</p>
+      </MenuItem>
+
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -170,7 +181,7 @@ export default function PrimarySearchAppBar(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: "#2E3B55" }}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -182,7 +193,10 @@ export default function PrimarySearchAppBar(props) {
           </IconButton>
 
           {/* inkedin REACT ROUTER LINK TO INDEX */}
-          <Link to="/index">
+          <Link
+            to="/index"
+            style={{ textDecoration: "none", color: "lavender" }}
+          >
             <Typography className={classes.title} variant="h6" noWrap>
               Inkedin
             </Typography>
@@ -210,6 +224,7 @@ export default function PrimarySearchAppBar(props) {
                 onClick={() => {
                   props.onLogin(1);
                 }}
+                style={{ textDecoration: "none", color: "lavender" }}
               >
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   {/* <Badge badgeContent={4} color="secondary">
@@ -226,6 +241,7 @@ export default function PrimarySearchAppBar(props) {
                 onClick={() => {
                   props.onLogin(0);
                 }}
+                style={{ textDecoration: "none", color: "lavender" }}
               >
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   {/* <Badge badgeContent={4} color="secondary">
@@ -237,7 +253,10 @@ export default function PrimarySearchAppBar(props) {
             )}
 
             {/* REACT ROUTER LINK TO MESSAGES */}
-            <Link to="/messages">
+            <Link
+              to="/messages"
+              style={{ textDecoration: "none", color: "lavender" }}
+            >
               <IconButton aria-label="show 4 new mails" color="inherit">
                 <Badge badgeContent={4} color="secondary">
                   <MailIcon />
@@ -246,7 +265,10 @@ export default function PrimarySearchAppBar(props) {
             </Link>
 
             {/* REACT ROUTER LINK TO SHOWCASE */}
-            <Link to="/art_showcase">
+            <Link
+              to="/art_showcase"
+              style={{ textDecoration: "none", color: "lavender" }}
+            >
               <IconButton
                 aria-label="show 17 new notifications"
                 color="inherit"
@@ -257,14 +279,32 @@ export default function PrimarySearchAppBar(props) {
               </IconButton>
             </Link>
 
+            {/* REACT ROUTER LINK TO JOBS */}
+            <Link
+              to="/job_board"
+              style={{ textDecoration: "none", color: "lavender" }}
+            >
+              <IconButton
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={17} color="secondary">
+                  <BrushTwoToneIcon />
+                </Badge>
+              </IconButton>
+            </Link>
+
             {/* REACT ROUTER LINK TO PORTFOLIO */}
-            <Link to="/my_portfolio">
+            <Link
+              to="/my_portfolio"
+              style={{ textDecoration: "none", color: "lavender" }}
+            >
               <IconButton
                 edge="end"
                 aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
+                //aria-controls={menuId}
+                //aria-haspopup="true"
+                //onClick={handleProfileMenuOpen}
                 color="inherit"
               >
                 <AccountCircle />
