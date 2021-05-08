@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
-import DenseAppBar from "./components/testnav";
+import NavBar from "./components/NavBar";
+import Button from "./components/Button";
+import GenerateExercise from "./components/GenerateExercise";
+import ExerciseList from "./components/ExerciseList";
 
 class App extends Component {
   constructor(props) {
@@ -28,11 +32,12 @@ class App extends Component {
   render() {
     return (
       <>
-        <DenseAppBar />
+        <NavBar />
         <div className="App">
           <h1>{this.state.message}</h1>
           <button onClick={this.fetchData}>Fetch Data</button>
         </div>
+        <Button />
       </>
     );
   }
