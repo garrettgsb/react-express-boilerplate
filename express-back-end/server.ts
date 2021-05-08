@@ -1,15 +1,14 @@
-const Express = require('express');
+import Express, { Request, Response } from "express";
 const App = Express();
-const BodyParser = require('body-parser');
 const PORT = 8080;
 
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
+App.use(Express.urlencoded({ extended: false }));
+App.use(Express.json());
 App.use(Express.static('public'));
 
 // Sample GET route
-App.get('/api/data', (req, res) => res.json({
+App.get('/api/data', (req:Request, res:Response) => res.json({
   message: "Seems to work!",
 }));
 

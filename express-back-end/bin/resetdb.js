@@ -1,11 +1,12 @@
 // from template at https://github.com/lighthouse-labs/node-skeleton/blob/master/bin/resetdb.js
 // load .env data into process.env
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 // other dependencies
-const fs = require('fs');
-const chalk = require('chalk');
-const Client = require('pg-native');
+import fs from 'fs';
+import chalk from 'chalk';
+import Client from 'pg-native';
 
 // PG connection setup
 const connectionString = process.env.DATABASE_URL ||
