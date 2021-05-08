@@ -17,14 +17,14 @@ import useApplicationData from "./hooks/useApplicationData";
 export const JobsContext = React.createContext([]);
 
 export default function App() {
-  const { state } = useApplicationData();
+  const { state, setActiveUser } = useApplicationData();
   const getMessages = () => {
     if (state.flag) {
       return state.messages;
     }
     return [];
   };
-
+  console.log("login", state);
   const messages = getMessages().map((message) => {
     return (
       <div>
@@ -58,7 +58,14 @@ export default function App() {
   return (
     <div className="App">
       <Router>
-        <div>{<PrimarySearchAppBar />}</div>
+        <div>
+          {
+            <PrimarySearchAppBar
+              onLogin={setActiveUser}
+              activeUser={state.activeUser}
+            />
+          }
+        </div>
         {/* <button onClick={changeFlag}>Load User</button> */}
         <div className="body_container">
           <div className="sidebar_container">
@@ -97,7 +104,10 @@ export default function App() {
         {/* REACT ROUTER LINK TO MESSAGES */}
         <Switch>
           <Route path="/messages" render={() => messages}></Route>
-          <Route path="/portfolio/:id" children={<User />}></Route>
+          <Route
+            path="/portfolio/:id"
+            children={<User activeUser={state.activeUser} />}
+          ></Route>
           <Route path="/art_showcase" render={() => artworks}></Route>
           <Route path="/job_board" render={() => jobBoard}></Route>
           <Route path="/jobs/:id" render={() => job}></Route>

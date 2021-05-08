@@ -1,114 +1,64 @@
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 import { useContext } from "react";
 import { JobsContext } from "../App.js";
+import { Link } from "react-router-dom";
 
-// export default function Jobs(props) {
-//   const value = useContext(JobsContext);
-//   console.log("value = ", value);
-//   return (
-//     <div className="Jobs">
-//       The answer is {value[0] && value[0].pay}. You have reached the job route.
-//     </div>
-//   );
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
+
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
 // }
 
-// import * as React from "react";
-// import { DataGrid } from "@material-ui/data-grid";
+// const rows = [
+//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+//   createData("Eclair", 262, 16.0, 24, 6.0),
+//   createData("Cupcake", 305, 3.7, 67, 4.3),
+//   createData("Gingerbread", 356, 16.0, 49, 3.9),
+// ];
 
-// export default function Jobs() {
-//   return (
-//     <div style={{ height: 400, width: "100%" }}>
-//       <DataGrid
-//         columns={[{ field: "name", headerName: "Test name" }]}
-//         rows={[
-//           { id: 1, name: "react" },
-//           { id: 2, name: "Material-UI" },
-//         ]}
-//       />
-//     </div>
-//   );
-// }
-
-import * as React from "react";
-import { DataGrid } from "@material-ui/data-grid";
-
-export default function DenseHeightGrid() {
+export default function BasicTable() {
+  const classes = useStyles();
   const value = useContext(JobsContext);
-  console.log("value = ", value);
+
   return (
-    <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
-        rowHeight={25}
-        rows={value}
-        // rows={[
-        //   {
-        //     id: 1,
-        //     name: value[0] && value[0].title,
-        //     posted_by: value[0] && value[0].user_id,
-        //     description: value[0] && value[0].description,
-        //     location: value[0] && value[0].location,
-        //     pay: value[0] && value[0].pay,
-        //   },
-        //   {
-        //     id: 2,
-        //     name: "Test row",
-        //     posted_by: "Company Y",
-        //     description: "this is a subject line.",
-        //     location: "Vancouver",
-        //     pay: "$600",
-        //   },
-        //   {
-        //     id: 3,
-        //     name: "Test row",
-        //     posted_by: "Company Y",
-        //     description: "this is a subject line.",
-        //     location: "Vancouver",
-        //     pay: "$600",
-        //   },
-        //   {
-        //     id: 4,
-        //     name: "Test row",
-        //     posted_by: "Company Y",
-        //     description: "this is a subject line.",
-        //     location: "Vancouver",
-        //     pay: "$600",
-        //   },
-        //   {
-        //     id: 5,
-        //     name: "Test row",
-        //     posted_by: "Company Y",
-        //     description: "this is a subject line.",
-        //     location: "Vancouver",
-        //     pay: "$600",
-        //   },
-        // ]}
-        columns={[
-          {
-            field: "title",
-            headerName: "Title",
-            width: 100,
-          },
-          {
-            field: "username",
-            headerName: "Posted By",
-            width: 120,
-          },
-          {
-            field: "description",
-            headerName: "Details",
-            width: 300,
-          },
-          {
-            field: "location",
-            headerName: "Location",
-            width: 120,
-          },
-          {
-            field: "pay",
-            headerName: "Pay",
-            width: 80,
-          },
-        ]}
-      />
-    </div>
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Title</TableCell>
+            <TableCell align="right">User Name</TableCell>
+            <TableCell align="right">Description</TableCell>
+            <TableCell align="right">Location</TableCell>
+            <TableCell align="right">Pay</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {value.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell component="th" scope="row">
+                <Link to={`/jobs/${row.id}`}>{row.title}</Link>
+              </TableCell>
+              <TableCell align="right">{row.username}</TableCell>
+              <TableCell align="right">{row.description}</TableCell>
+              <TableCell align="right">{row.location}</TableCell>
+              <TableCell align="right">{row.pay}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }

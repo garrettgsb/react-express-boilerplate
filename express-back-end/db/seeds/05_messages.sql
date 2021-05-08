@@ -8,12 +8,12 @@
 
 
 INSERT INTO messages 
-(message, friends_id, sender_id) 
+(message, receiver_id, sender_id) 
 VALUES
-('Hello Friend.', 1, 1),
-('Oh hi Mark.', 1, 1),
-('What up?', 1, 1),
-('Im overwhelmed and you cant help me.', 1, 1),
-('You sure?', 1, 1),
-('Yeah, very busy.', 1, 1),
-('Ok sorrrrrry..', 1, 1);
+('Hello Friend.', 1, 2),
+('Oh hi Mark.', 2, 1),
+('What up?', 1, 2),
+('Im overwhelmed and you cant help me.', 2, 1),
+('You sure?', 1, 2),
+('Yeah, very busy.', 2, 1),
+('Ok sorrrrrry..', 1, 2);
