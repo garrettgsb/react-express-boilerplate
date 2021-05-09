@@ -13,9 +13,7 @@ class App extends Component {
 
     <main className="layout">
 
-      <nav className="sidebar">
-        <Sidebar/>
-      </nav>
+  
 
       <nav className="vegetable__basket">
         <VegetableBasket/>
@@ -25,6 +23,8 @@ class App extends Component {
         <Sidebar />
         <Maintenance />
       </div>
+
+    </main>
     );
   }
 }
