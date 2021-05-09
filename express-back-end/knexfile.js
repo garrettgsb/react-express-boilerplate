@@ -13,12 +13,12 @@ export default {
       port     : process.env.DB_PORT
       // ssl      : process.env.DB_SSL,
     },
-    migrations: {
-      directory: './db/migrations',
-      tableName: 'migrations',
-    },
+    // migrations: {
+    //   directory: './db/migrations',
+    //   tableName: 'migrations',
+    // },
     seeds: {
-      directory: './db/seeds',
+      directory: './db/seeds/knex',
     },
   },
 
