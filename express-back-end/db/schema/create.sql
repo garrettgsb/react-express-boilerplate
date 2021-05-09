@@ -12,7 +12,7 @@ CREATE TABLE fonts (
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   email VARCHAR(255) NOT NULL,
-  name VARCHAR(255) NOT NULL,
+  userName VARCHAR(255) NOT NULL,
   password VARCHAR(500) NOT NULL,
   background_hex VARCHAR(7) DEFAULT '#f2f2f2',
   accent_hex VARCHAR(7) DEFAULT '#3d2200',
@@ -35,9 +35,9 @@ CREATE TABLE entries (
   title VARCHAR(255) NOT NULL,
   content VARCHAR(8000) NOT NULL,
   mood INTEGER,
-  private BOOLEAN DEFAULT TRUE,
+  privacy BOOLEAN DEFAULT TRUE,
   date_created TIMESTAMP DEFAULT NOW(),
   date_updated TIMESTAMP DEFAULT NOW(),
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
-  user_id INTEGER UNIQUE REFERENCES users(id) ON DELETE CASCADE
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
