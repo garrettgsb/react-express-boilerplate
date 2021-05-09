@@ -1,4 +1,5 @@
 import faker from "faker";
+import fs from 'fs';
 const createFakeEntries = (category) => {
     return (`
   ('${faker.lorem.sentence()}',
@@ -9,18 +10,20 @@ const createFakeEntries = (category) => {
   1)`);
 };
 const generateEntries = () => {
-    let fakeEntries = `INSERT INTO entries (title,
-                                            content,
-                                            mood,
-                                            date_created,
-                                            category_id,
-                                            user_id
-                                            ) VALUES `;
+    let fakeEntries = `INSERT INTO entries (
+                    title,
+                    content,
+                    mood,
+                    date_created,
+                    category_id,
+                    user_id
+                    ) VALUES `;
     const desiredFakeEntries = 5;
     for (let i = 0; i < desiredFakeEntries; i++) {
         fakeEntries += createFakeEntries(1);
         (i < desiredFakeEntries - 1) ? fakeEntries += ',' : fakeEntries += ';';
     }
     console.log(fakeEntries);
+    fs.writeFileSync('./db/seeds/01_dev_entries.sql', fakeEntries, { encoding: "utf8" });
 };
 generateEntries();

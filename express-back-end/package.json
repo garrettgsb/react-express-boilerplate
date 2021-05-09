@@ -8,7 +8,8 @@
   "type": "module",
   "scripts": {
     "go": "nodemon dist/server.js",
-    "db:reset": "node dist/bin/resetdb.js"
+    "db:reset": "node dist/bin/resetdb.js",
+    "db:reset-seeds": "node dist/bin/generate-entry-seeds.js " 
   },
   "dependencies": {
     "body-parser": "^1.18.3",
