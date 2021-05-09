@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "esnext",
-    "jsx": "react-jsx",
+    "jsx": "react",
     "outDir": "./dist/",
     "removeComments": true,
     "noEmitOnError": true,
