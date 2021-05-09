@@ -13,6 +13,8 @@ const useStyles = makeStyles({
     marginTop: '7%',
     display: 'flex',
     flexDirection: 'row',
+    maxHeight: '300px',
+    overflow: 'auto',
     // justifyContent: 'space-between'
   },
   bullet: {
@@ -77,6 +79,58 @@ export default function Maintenance() {
               </td>
               <td>
               4 day
+              </td>
+              <td>
+              <CardActions>
+                <Button size="small" variant="contained" color="primary">Complete</Button>
+              </CardActions>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Fertilize
+              </td>
+              <td>
+              5 day
+              </td>
+              <td>
+              <CardActions>
+                <Button size="small" variant="contained" color="primary">Complete</Button>
+              </CardActions>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Fertilize
+              </td>
+              <td>
+              6 day
+              </td>
+              <td>
+              <CardActions>
+                <Button size="small" variant="contained" color="primary">Complete</Button>
+              </CardActions>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Fertilize
+              </td>
+              <td>
+              7 day
+              </td>
+              <td>
+              <CardActions>
+                <Button size="small" variant="contained" color="primary">Complete</Button>
+              </CardActions>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Fertilize
+              </td>
+              <td>
+              8 day
               </td>
               <td>
               <CardActions>

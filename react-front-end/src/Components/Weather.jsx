@@ -11,15 +11,11 @@ const useStyles = makeStyles({
     width: 1000,
     // marginLeft: 'auto',
     marginTop: '7%',
+    height: '200px',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
   },
   title: {
     fontSize: 14,

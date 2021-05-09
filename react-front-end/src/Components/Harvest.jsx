@@ -9,10 +9,12 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     width: 400,
-    marginLeft: '55%',
+    marginLeft: '7%',
     marginTop: '7%',
     display: 'flex',
     flexDirection: 'row',
+    overflow: 'auto',
+
     // justifyContent: 'space-between'
   },
   bullet: {
