@@ -5,7 +5,7 @@ const createFakeEntries= (category: number | null) => {
   return(`
   ('${faker.lorem.sentence()}',
   '${faker.lorem.paragraph()}',
-  ${Math.floor(Math.random() * 5)},
+  ${Math.ceil(Math.random() * 5)},
   NOW() -  interval '${Math.floor(Math.random() * 40000)} hours',
   ${category},
   1)`)
