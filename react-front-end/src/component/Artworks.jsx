@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Artworks(props) {
   const classes = useStyles();
-  console.log(props.art);
+  // console.log(props.art);
   function FormRow() {
     return (
       <React.Fragment>
