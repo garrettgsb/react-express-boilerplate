@@ -9,12 +9,12 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     width: 400,
-    marginLeft: '10%',
+    marginLeft: '7%',
     marginTop: '7%',
     display: 'flex',
     flexDirection: 'row',
-    maxHeight: '300px',
     overflow: 'auto',
+
     // justifyContent: 'space-between'
   },
   bullet: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Maintenance() {
+export default function Harvest() {
   const classes = useStyles();
 
   return (
@@ -48,24 +48,11 @@ export default function Maintenance() {
           </thead>
           <tbody >
             <tr>
-              <td>
-                Water
+            <td>
+                Beans
               </td>
               <td>
-              1 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Water
-              </td>
-              <td>
-              4 day
+                2 weeks
               </td>
               <td>
               <CardActions>
@@ -75,23 +62,10 @@ export default function Maintenance() {
             </tr>
             <tr>
               <td>
-                Fertilize
+                Peas
               </td>
               <td>
-              4 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Fertilize
-              </td>
-              <td>
-              5 day
+              4 weeks
               </td>
               <td>
               <CardActions>
@@ -101,36 +75,10 @@ export default function Maintenance() {
             </tr>
             <tr>
               <td>
-                Fertilize
+                Cauliflower
               </td>
               <td>
-              6 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Fertilize
-              </td>
-              <td>
-              7 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Fertilize
-              </td>
-              <td>
-              8 day
+              12 weeks
               </td>
               <td>
               <CardActions>
