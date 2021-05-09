@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -203,6 +203,39 @@ export default function PrimarySearchAppBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            {/* REACT ROUTER LINK TO LOGIN */}
+            {props.activeUser === 0 && (
+              <Link
+                to="/"
+                onClick={() => {
+                  props.onLogin(1);
+                }}
+              >
+                <IconButton aria-label="show 4 new mails" color="inherit">
+                  {/* <Badge badgeContent={4} color="secondary">
+                  <MailIcon />
+                </Badge> */}
+                  login
+                </IconButton>
+              </Link>
+            )}
+
+            {props.activeUser !== 0 && (
+              <Link
+                to="/"
+                onClick={() => {
+                  props.onLogin(0);
+                }}
+              >
+                <IconButton aria-label="show 4 new mails" color="inherit">
+                  {/* <Badge badgeContent={4} color="secondary">
+                  <MailIcon />
+                </Badge> */}
+                  logout
+                </IconButton>
+              </Link>
+            )}
+
             {/* REACT ROUTER LINK TO MESSAGES */}
             <Link to="/messages">
               <IconButton aria-label="show 4 new mails" color="inherit">

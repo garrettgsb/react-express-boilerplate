@@ -3,10 +3,15 @@ import { useReducer, useEffect } from "react";
 
 export default function useApplicationData() {
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+  const SET_ACTIVE_USER = "SET_ACTIVE_USER";
 
   const reducer = (state, action) => {
     const actions = {
       SET_APPLICATION_DATA: {
+        ...state,
+        ...action.data,
+      },
+      SET_ACTIVE_USER: {
         ...state,
         ...action.data,
       },
@@ -24,7 +29,15 @@ export default function useApplicationData() {
     jobs: [],
     messages: [],
     flag: false,
+    activeUser: 0,
   });
+
+  const setActiveUser = (paramId) => {
+    dispatch({
+      type: SET_ACTIVE_USER,
+      data: { activeUser: paramId },
+    });
+  };
 
   useEffect(() => {
     Promise.all([
@@ -48,5 +61,5 @@ export default function useApplicationData() {
     });
   }, []);
 
-  return { state };
+  return { state, setActiveUser };
 }
