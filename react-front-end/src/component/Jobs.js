@@ -39,48 +39,6 @@ export default function DenseHeightGrid() {
       <DataGrid
         rowHeight={25}
         rows={value}
-        // rows={[
-        //   {
-        //     id: 1,
-        //     name: value[0] && value[0].title,
-        //     posted_by: value[0] && value[0].user_id,
-        //     description: value[0] && value[0].description,
-        //     location: value[0] && value[0].location,
-        //     pay: value[0] && value[0].pay,
-        //   },
-        //   {
-        //     id: 2,
-        //     name: "Test row",
-        //     posted_by: "Company Y",
-        //     description: "this is a subject line.",
-        //     location: "Vancouver",
-        //     pay: "$600",
-        //   },
-        //   {
-        //     id: 3,
-        //     name: "Test row",
-        //     posted_by: "Company Y",
-        //     description: "this is a subject line.",
-        //     location: "Vancouver",
-        //     pay: "$600",
-        //   },
-        //   {
-        //     id: 4,
-        //     name: "Test row",
-        //     posted_by: "Company Y",
-        //     description: "this is a subject line.",
-        //     location: "Vancouver",
-        //     pay: "$600",
-        //   },
-        //   {
-        //     id: 5,
-        //     name: "Test row",
-        //     posted_by: "Company Y",
-        //     description: "this is a subject line.",
-        //     location: "Vancouver",
-        //     pay: "$600",
-        //   },
-        // ]}
         columns={[
           {
             field: "title",
