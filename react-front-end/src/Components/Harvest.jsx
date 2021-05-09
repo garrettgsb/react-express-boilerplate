@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Planting() {
+export default function Harvest() {
   const classes = useStyles();
 
   return (

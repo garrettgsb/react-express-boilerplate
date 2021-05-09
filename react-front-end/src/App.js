@@ -4,6 +4,7 @@ import axios from 'axios';
 import Sidebar from './Components/Sidebar'
 import Maintenance from './Components/Maintenance'
 import Harvest from './Components/Harvest'
+import Weather from './Components/Weather'
 
 
 
@@ -15,6 +16,7 @@ class App extends Component {
         <Sidebar />
         <Maintenance />
         <Harvest />
+        <Weather />
       </div>
     );
   }
