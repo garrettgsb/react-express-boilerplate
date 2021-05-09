@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@material-ui/icons": "^4.11.2"
+    "@material-ui/icons": "^4.11.2",
+    "styled-components": "4.4.1"
   }
 }
