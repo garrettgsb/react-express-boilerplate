@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import axios from 'axios';
 import './App.css';
 
-class App extends Component {
-  constructor(props) {
+class App extends React.Component<any, any> {
+  constructor(props: any) {
     super(props)
     this.state = {
       message: 'Click the button to load data!'
