@@ -44,7 +44,6 @@ export default function useApplicationData() {
     Promise.all([
       axios.get(`/api/users`),
       axios.get(`/api/artworks`),
-      axios.get(`/api/friends`),
       axios.get(`/api/jobs`),
       axios.get(`/api/messages`),
     ]).then((all) => {
@@ -53,9 +52,8 @@ export default function useApplicationData() {
         data: {
           users: all[0].data.users,
           artworks: all[1].data.artworks,
-          friends: all[2].data.friends,
-          jobs: all[3].data.jobs,
-          messages: all[4].data.messages,
+          jobs: all[2].data.jobs,
+          messages: all[3].data.messages,
           flag: true,
         },
       });

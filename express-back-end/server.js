@@ -38,7 +38,7 @@ App.put("/api/artworks", (req, res) => {
   } = req.body;
   const data = db
     .query(
-      `INSERT INTO artworks (author_id, title, img_link, project_link, descrip, for_sale, price) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      `INSERT INTO artworks (author_id, title, img_link, project_link, descrip, for_sale, price) VALUES ($1, $2, $3, $4, $5, $6, $7);`,
       [id, title, imgLink, projectLink, description, forSale, price]
     )
     .then((response) => {
@@ -48,18 +48,36 @@ App.put("/api/artworks", (req, res) => {
     });
 });
 
-App.get("/api/friends", (req, res) => {
-  const data = db.query("SELECT * FROM friends").then((response) => {
-    res.json({
-      friends: response.rows,
+App.get("/api/friends/:id", (req, res) => {
+  // const data = db.query("SELECT * FROM friends WHERE sender_id = $1 OR receiver_id = $1",[req.params.id]).then((response) => {
+  const data = db
+    .query(
+      `SELECT 
+      first_user.username as first_username,
+      first_user.id as first_id,
+      first_user.first_name as first_fname,
+      first_user.last_name as first_lname, 
+      second_user.username as second_username,
+      second_user.id as second_id,
+      second_user.first_name as second_fname,
+      second_user.last_name as second_lname
+      FROM friends
+      JOIN users first_user ON first_user_id = first_user.id
+      JOIN users second_user ON second_user_id = second_user.id
+      WHERE first_user_id = $1 OR second_user_id = $1;`,
+      [req.params.id]
+    )
+    .then((response) => {
+      res.json({
+        friends: response.rows,
+      });
     });
-  });
 });
 
 App.get("/api/jobs", (req, res) => {
   const data = db
     .query(
-      "SELECT jobs.id AS id, username, title, description, pay FROM jobs JOIN users ON users.id = user_id"
+      "SELECT jobs.id AS id, username, title, description, pay FROM jobs JOIN users ON users.id = user_id;"
     )
     .then((response) => {
       res.json({
@@ -71,7 +89,7 @@ App.get("/api/jobs", (req, res) => {
 App.get("/api/jobs/:id", (req, res) => {
   const data = db
     .query(
-      "SELECT jobs.id AS id, username, title, description, pay FROM jobs JOIN users ON users.id = user_id WHERE jobs.id = $1",
+      "SELECT jobs.id AS id, username, title, description, pay FROM jobs JOIN users ON users.id = user_id WHERE jobs.id = $1;",
       [req.params.id]
     )
     .then((response) => {

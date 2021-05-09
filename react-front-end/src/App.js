@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import User from "./component/User";
 import Artwork from "./component/Artwork";
 import Artworks from "./component/Artworks";
-import Friend from "./component/Friend";
+import Friends from "./component/Friends";
 import Jobs from "./component/Jobs";
 import Job from "./component/Job";
 import Message from "./component/Message";
@@ -18,12 +18,6 @@ export const JobsContext = React.createContext([]);
 
 export default function App() {
   const { state, setActiveUser } = useApplicationData();
-  const getMessages = () => {
-    if (state.flag) {
-      return state.messages;
-    }
-    return [];
-  };
 
   useEffect(() => {
     const userLogin = localStorage.getItem("User");
@@ -34,13 +28,6 @@ export default function App() {
   }, []);
 
   // console.log("login", state);
-  const messages = getMessages().map((message) => {
-    return (
-      <div>
-        <Message message={message.message} />
-      </div>
-    );
-  });
 
   const artworks = (
     <div>
@@ -97,11 +84,6 @@ export default function App() {
               <h1>{state.flag && state.artworks[0].price}</h1>
             </div>
 
-            <div className="friends_container">
-              <h1>{state.flag && state.friends[0].first_user_id}</h1>
-              <h1>{state.flag && state.friends[0].second_user_id}</h1>
-            </div>
-
             <div className="jobs_container">
               <h1>{state.flag && state.jobs[0].title}</h1>
               <h1>{state.flag && state.jobs[0].description}</h1>
@@ -112,7 +94,10 @@ export default function App() {
         </div>
         {/* REACT ROUTER LINK TO MESSAGES */}
         <Switch>
-          <Route path="/messages" render={() => messages}></Route>
+          <Route
+            path="/messages/"
+            render={() => <Friends activeUser={state.activeUser} />}
+          ></Route>
           <Route
             path="/portfolio/:id"
             children={<User activeUser={state.activeUser} />}

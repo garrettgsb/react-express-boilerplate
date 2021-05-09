@@ -24,4 +24,4 @@ VALUES
 -- INSERT INTO artworks 
 -- (author_id, title)
 -- VALUES 
--- (1, 'sample');
+-- (1, 'sample');;

@@ -15,4 +15,8 @@ VALUES
 ('Adamski','Adam','Hart',6042347884,'password'),
 ('SeriusLL','James','B',6042555584,'password'),
 ('SunnyD','Sunny','D',6044444484,'password'),
-('TheRock','The','Rock',6049999999,'password');
+('TheRock','The','Rock',6049999999,'password'),
+('DaveChapelle','Dave','Chapelle',6049999999,'password'),
+('CaptainHook','Captain','Hook',6049999999,'password'),
+('JackSparrow','Jack','Sparrow',6049999999,'password'),
+('Chavez','Chavez','Chavez',6049999999,'password');
