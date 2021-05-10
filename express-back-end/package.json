@@ -2,6 +2,7 @@
   "name": "express-back-end",
   "version": "1.0.0",
   "description": "Boilerplate for the Express backend in an Express-React project",
+  "proxy": "http://localhost:8001",
   "main": "server.js",
   "author": "garrettgsb",
   "license": "MIT",
