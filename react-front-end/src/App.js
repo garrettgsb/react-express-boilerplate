@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 // import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import Sidebar from './Components/Sidebar';
 import Content from './Components/VegetableBasket';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Maintenance from './Components/Maintenance'
 import Harvest from './Components/Harvest'
 import Weather from './Components/Weather'
+
 
 const useStyles = makeStyles({
   row: {
@@ -20,21 +27,39 @@ const useStyles = makeStyles({
 export default function App() {
   const classes = useStyles();
 
-  return (
 
-    <main className="layout">
-      <section className="App">
+    return (
+    <Router>
+      <Switch>
+      <main className="layout">
+
+
+
+      <Route path="/tasks">
+        <div className="App">
+          <div className={classes.row}>
+            <Maintenance />
+            <Harvest />
+          </div>
+          <Weather />
+        </div>
+      </Route>
+
+      <Route path='/planning'>
+          <Content />
+      </Route>
+
+      <Route path='/'>
         <Sidebar />
-        <section className={classes.row}>
-          <Maintenance />
-          <Harvest />
-        </section>
-        <Weather />
-      </section>
-      <section >
-        <Content />
-      </section>
-    </main>
-  );
-}
+        <nav className="vegetable__basket">
+          <VegetableBasket/>
+        </nav>
+      </Route>
+      
+      </main>
+      </Switch>
+    </Router>
+    );
+  }
+
 
