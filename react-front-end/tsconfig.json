@@ -3,10 +3,9 @@
     "target": "es6",
     "module": "esnext",
     "jsx": "react-jsx",
-    "outDir": "./dist/",
-    "removeComments": true,
-    "noEmitOnError": true,
     "strict": true,
+    "removeComments": true,
+    "noEmitOnError": false,
     "strictBindCallApply": true,
     "noUnusedLocals": true,
     "moduleResolution": "node",
@@ -18,15 +17,16 @@
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "allowJs": true
   },
   "include": [
-    "src"
+    "./src/**/*",
+    "./src/*"
   ]
 }
