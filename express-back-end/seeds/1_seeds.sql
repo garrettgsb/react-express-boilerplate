@@ -3,8 +3,8 @@ INSERT INTO users (name, password, email)
 
 
 
-INSERT INTO posts (body, time_stamp, isDeleted)
- VALUES ('test post', 050721, false);
+INSERT INTO posts (body, time_stamp, isDeleted, user_id)
+ VALUES ('test post', 050721, false, 1);
 
 
 
