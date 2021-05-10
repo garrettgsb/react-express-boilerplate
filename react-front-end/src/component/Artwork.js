@@ -11,13 +11,14 @@ import styled from "styled-components";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 550,
+    height: "auto",
     "&:hover": {
       opacity: 0.9,
     },
   },
   media: {
-    height: 220,
+    height: 350,
   },
   text: {
     color: "lavender",
