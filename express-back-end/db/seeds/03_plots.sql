@@ -1,3 +1,3 @@
-INSERT INTO plots(user_id, dimensions_length, dimensions_length, location)
+INSERT INTO plots(user_id, dimensions_length, dimensions_width, location)
 VALUES
-(1, 100, 100, "Vancouver");
+(1, 100, 100, 'Vancouver');
