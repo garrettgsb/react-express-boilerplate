@@ -19,12 +19,10 @@ export default function FormJobs() {
   const test = () => {
     console.log("Submit function call");
     const job = {
-      id: 1,
       title,
       description,
       pay,
-      posted_date,
-      user_id,
+      id: 1,
     };
     axios.put(`/api/jobs`, job).then(() => {
       window.location.reload();

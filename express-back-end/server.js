@@ -111,6 +111,22 @@ App.get("/api/jobs/:id", (req, res) => {
     });
 });
 
+App.put("/api/jobs", (req, res) => {
+  console.log(req.body);
+  const { title, description, pay, id } = req.body;
+  const data = db
+    .query(
+      `INSERT INTO jobs (title, description, pay, user_id) VALUES ($1, $2, $3, $4);`,
+      [title, description, pay, id]
+    )
+    .then((response) => {
+      console.log("pirateBooty", response);
+      res.json({
+        jobs: response.rows,
+      });
+    });
+});
+
 App.get("/api/messages/:id", (req, res) => {
   const data = db
     .query("SELECT * FROM messages WHERE sender_id = $1 OR receiver_id = $1", [
