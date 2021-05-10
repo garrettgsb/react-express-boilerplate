@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../lib/db');
 
-// GET route to show logged in user profile (Completed)
+// GET route to show logged in user profile and posts (Completed)
 router.get("/profile/:userID", (req, res) => {
   return db.query(
     `SELECT * FROM users JOIN posts ON users.id = user_id WHERE users.id = $1;`, [req.params.userID])
@@ -16,6 +16,7 @@ router.get("/profile/:userID", (req, res) => {
 
 //    ******* Incomplete ********      POST route to change their name on profile   
 router.post("/profile/:userID", (req, res) => {
+ 
   return db.query(
   `UPDATE users SET name = $1 WHERE users.id = $2`, [req.params.name, req.params.userID]) //req.body.name for the name? since were taking the new form data to replace the name in the databse
   .then(data => {
@@ -26,9 +27,22 @@ router.post("/profile/:userID", (req, res) => {
   })
 });
 
+const getUserByEmail = (email) => {
+  return db.query(`SELECT * FROM users WHERE email = $1;`, [email])
+    .then(data => data.rows[0])
+    .catch(err => err.message);
+};
 // POST route to submit login information to the database (redirect to homepage)
 router.post("/login", (req, res) => {
-  
+  getUserByEmail(req.body.email)
+  .then(user => {
+    const user_id = req.session.user_id;
+    const user_name = req.session.name;
+    res.render('/');
+  })
+  .catch(err => {
+    res.status(500, "Could Not Complete Request")
+  })
 });
 
 

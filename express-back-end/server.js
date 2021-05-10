@@ -4,12 +4,26 @@ const BodyParser = require('body-parser');
 const PORT = 8080;
 const db = require('./lib/db')
 const router = Express.Router();
+// const cookieSession = require('cookie-session');
+const session = require('express-session')
 
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
+// App.use(cookieSession({
+//   name: 'session',
+//   keys: ['guestID', 'userID'],
+//   maxAge: 24 * 60 * 60 * 1000 // 24 hours
+// }));
+App.use(session({
+  secret: 'secret key',
+  resave: false,
+  saveUninitialized: false,
+  // 24 hours
+}));
+
 
 //require routes
 const usersRouter = require('../express-back-end/routes/usersRouter');
