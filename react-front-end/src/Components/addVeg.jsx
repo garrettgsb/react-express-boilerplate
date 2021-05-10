@@ -7,7 +7,6 @@
 // import CardMedia from '@material-ui/core/CardMedia';
 // import Button from '@material-ui/core/Button';
 // import Typography from '@material-ui/core/Typography';
-// import Basil from '../images/vegetables/basil.png';
 
 // const useStyles = makeStyles({
 //   root: {
@@ -30,7 +29,7 @@
 //         <CardMedia />
 //         <img
 //           className={classes.media}
-//           src={Basil}
+//           src={'../images/vegetables/basil.png'}
 //           alt="Basil"
 //         />
 //         <CardContent>
