@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
+import Home from "./components/home";
 
 class App extends Component {
   constructor(props) {
@@ -33,13 +35,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchDataUser1} >
-          Fetch Data
-        </button>        
-      </div>
-    );
+      <Router>
+        <Switch>
+          <Home />
+        </Switch>
+      </Router>
+    )
   }
 }
 
