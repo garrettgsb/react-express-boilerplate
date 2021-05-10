@@ -89,7 +89,7 @@ App.get("/api/friends/:id", (req, res) => {
 App.get("/api/jobs", (req, res) => {
   const data = db
     .query(
-      "SELECT jobs.id AS id, username, title, description, pay FROM jobs JOIN users ON users.id = user_id;"
+      `SELECT jobs.id AS id, username, title, description, pay, company, location FROM jobs JOIN users ON users.id = user_id;`
     )
     .then((response) => {
       res.json({
@@ -101,7 +101,7 @@ App.get("/api/jobs", (req, res) => {
 App.get("/api/jobs/:id", (req, res) => {
   const data = db
     .query(
-      "SELECT jobs.id AS id, username, title, description, pay FROM jobs JOIN users ON users.id = user_id WHERE jobs.id = $1;",
+      `SELECT jobs.id AS id, username, title, description, pay, company, location FROM jobs JOIN users ON users.id = user_id WHERE jobs.id = $1;`,
       [req.params.id]
     )
     .then((response) => {
@@ -113,11 +113,11 @@ App.get("/api/jobs/:id", (req, res) => {
 
 App.put("/api/jobs", (req, res) => {
   console.log(req.body);
-  const { title, description, pay, id } = req.body;
+  const { title, description, pay, company, location, id } = req.body;
   const data = db
     .query(
-      `INSERT INTO jobs (title, description, pay, user_id) VALUES ($1, $2, $3, $4);`,
-      [title, description, pay, id]
+      `INSERT INTO jobs (title, description, pay, company, location, user_id) VALUES ($1, $2, $3, $4, $5, $6);`,
+      [title, description, pay, company, location, id]
     )
     .then((response) => {
       console.log("pirateBooty", response);

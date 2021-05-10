@@ -12,13 +12,15 @@ export default function Job(props) {
       setJob(res.data.job[0]);
     });
   }, []);
-
+  console.log(job);
   return (
     <div className="Job">
       {job.title}
       <div className="Job">{job.username}</div>
       <div className="Job">{job.description}</div>
       <div className="Job">{job.pay}</div>
+      <div className="Job">{job.company}</div>
+      <div className="Job">{job.location}</div>
     </div>
   );
 }

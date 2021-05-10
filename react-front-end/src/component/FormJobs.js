@@ -7,6 +7,8 @@ export default function FormJobs() {
   const [title, setNewTitle] = useState("");
   const [description, setNewDescription] = useState("");
   const [pay, setPay] = useState("");
+  const [company, setCompany] = useState("");
+  const [location, setLocation] = useState("");
 
   // const onSubmit = (event) => {
   //   const value = event.target.value;
@@ -22,6 +24,8 @@ export default function FormJobs() {
       title,
       description,
       pay,
+      company,
+      location,
       id: 1,
     };
     axios.put(`/api/jobs`, job).then(() => {
@@ -55,6 +59,23 @@ export default function FormJobs() {
         placeholder="Wage/salary"
       />
       <br />
+      <input
+        type="text"
+        value={company}
+        onChange={(e) => setCompany(e.target.value)}
+        label="company"
+        placeholder="Company Name"
+      />
+      <br />
+      <input
+        type="text"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+        label="location"
+        placeholder="Location"
+      />
+      <br />
+
       <button type="submit" value="Submit" onClick={test}>
         Submit
       </button>

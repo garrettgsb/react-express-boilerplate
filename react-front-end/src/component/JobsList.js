@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 export default function BasicTable() {
   const classes = useStyles();
   const value = useContext(JobsContext);
-
+  console.log("value", value);
   return (
     <div>
       <div>
@@ -46,8 +46,9 @@ export default function BasicTable() {
               <TableCell>Title</TableCell>
               <TableCell align="right">User Name</TableCell>
               <TableCell align="right">Description</TableCell>
-              <TableCell align="right">Location</TableCell>
               <TableCell align="right">Pay</TableCell>
+              <TableCell align="right">Company</TableCell>
+              <TableCell align="right">Location</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -58,8 +59,9 @@ export default function BasicTable() {
                 </TableCell>
                 <TableCell align="right">{row.username}</TableCell>
                 <TableCell align="right">{row.description}</TableCell>
-                <TableCell align="right">{row.location}</TableCell>
                 <TableCell align="right">{row.pay}</TableCell>
+                <TableCell align="right">{row.company}</TableCell>
+                <TableCell align="right">{row.location}</TableCell>
               </TableRow>
             ))}
           </TableBody>
