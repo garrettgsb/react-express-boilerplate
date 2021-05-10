@@ -1,4 +1,4 @@
-INSERT INTO vegetables (name, description, image_url, difficulty, climate)
+INSERT INTO vegetables (name, description, image_url, difficulty, climate, sun_required, water_time, harvest_date, space)
 VALUES
 ('Beets', 'Beets are a root vegetable, best grown in 10-26 degrees C. They require 4-6 hours of sunlight per day, water every 3 days, and need to be spaced 4 inches apart.', '../images/vegetables/Beets.png', 2, '10-26 degrees C', 5, 3, 26, 4),
 ('Cabbage', 'Cabbage is a cole crop, best grown in 13-24 degrees C. They require 3-4 hours of sunlight per day, water every 3 days, and need to be spaced 1 foot apart.', '../images/vegetables/cabbage.png', 1, '13-24 degrees C', 4, 3, 27, 12),
