@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 // import './App.css';
-
 import Sidebar from './Components/Sidebar';
 import Content from './Components/VegetableBasket';
 import { makeStyles } from '@material-ui/core/styles';
-import VegetableBasket from './Components/VegetableBasket';
+// import VegetableBasket from './Components/VegetableBasket';
 import Maintenance from './Components/Maintenance'
 import Harvest from './Components/Harvest'
 import Weather from './Components/Weather'
-
 
 const useStyles = makeStyles({
   row: {
@@ -19,32 +17,24 @@ const useStyles = makeStyles({
   },
 });
 
-
 export default function App() {
-  
   const classes = useStyles();
 
-    return (
+  return (
 
     <main className="layout">
-
-
-      <nav className="vegetable__basket">
-        <VegetableBasket/>
-      </nav>
-
-      <div className="App">
+      <section className="App">
         <Sidebar />
-        <div className={classes.row}>
+        <section className={classes.row}>
           <Maintenance />
           <Harvest />
-        </div>
+        </section>
         <Weather />
-      </div>
+      </section>
       <section >
-         <Content />
-       </section>
+        <Content />
+      </section>
     </main>
-    );
-  }
+  );
+}
 
