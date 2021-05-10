@@ -10,13 +10,10 @@ import {
 import Sidebar from './Components/Sidebar';
 import Content from './Components/VegetableBasket';
 import { makeStyles } from '@material-ui/core/styles';
-import VegetableBasket from './Components/VegetableBasket';
+// import VegetableBasket from './Components/VegetableBasket';
 import Maintenance from './Components/Maintenance'
 import Harvest from './Components/Harvest'
 import Weather from './Components/Weather'
-
-
-
 
 
 const useStyles = makeStyles({
@@ -27,10 +24,9 @@ const useStyles = makeStyles({
   },
 });
 
-
 export default function App() {
-  
   const classes = useStyles();
+
 
     return (
     <Router>
@@ -65,4 +61,5 @@ export default function App() {
     </Router>
     );
   }
+
 
