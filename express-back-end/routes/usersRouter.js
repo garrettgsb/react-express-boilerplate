@@ -38,7 +38,8 @@ router.post("/login", (req, res) => {
   .then(user => {
     const user_id = req.session.user_id;
     const user_name = req.session.name;
-    res.render('/');
+    // have to check if password matches as well
+
   })
   .catch(err => {
     res.status(500, "Could Not Complete Request")
@@ -48,10 +49,15 @@ router.post("/login", (req, res) => {
 
 
 
-
+//DON'T NEED REGISTER ROUTE RN, UNLESS SHOWING REGISTER IN MVD
 // POST route to submit registration information to the database (redirect to homepage)
 router.post("/register", (req, res) => {
-  
+  //need the email, password, name from field
+    //check if email is taken or not
+      //if not taken, insert query
+        //encrypt password
+          //json web token
+        //write helper function to encrypt password
 });
 
 
