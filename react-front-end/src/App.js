@@ -35,7 +35,15 @@ export default function App() {
   const jobBoard = (
     <div>
       <JobsContext.Provider value={state.jobs}>
-        <JobsList />
+        {/* <JobsList /> */}
+        {state.activeUser === 0 ? (
+          <JobsList />
+        ) : (
+          <>
+            <JobsList />
+            <FormJobs />
+          </>
+        )}
       </JobsContext.Provider>
     </div>
   );

@@ -33,12 +33,10 @@ const useStyles = makeStyles({
 export default function BasicTable() {
   const classes = useStyles();
   const value = useContext(JobsContext);
-  console.log("value", value);
+
   return (
     <div>
-      <div>
-        <FormJobs />
-      </div>
+      <div>{/* <FormJobs /> */}</div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
