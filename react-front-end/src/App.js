@@ -3,12 +3,9 @@ import React, { Component } from 'react';
 // import './App.css';
 
 import Sidebar from './Components/Sidebar';
-import Content from './Components/vegetableBasket';
-// import VegetableBasket from './Components/vegetableBasket';
-
+import Content from './Components/VegetableBasket';
 import { makeStyles } from '@material-ui/core/styles';
-import Sidebar from './Components/Sidebar'
-import VegetableBasket from './Components/VegetableBasket/VegetableBasket';
+import VegetableBasket from './Components/VegetableBasket';
 import Maintenance from './Components/Maintenance'
 import Harvest from './Components/Harvest'
 import Weather from './Components/Weather'
