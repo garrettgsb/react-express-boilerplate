@@ -47,17 +47,25 @@ interface ICategory {
 const getEntryByCategory = (attributes: { categoryId: string | null; userId: string; }) => {
   const { categoryId, userId } = attributes;
   const queryParams = [userId];
-  let query = `SELECT * FROM entries
-  WHERE user_id = $1`;
-  if (categoryId === '0' || categoryId) {
-    query += ' AND category_id ';
+  let queryStart = 'SELECT ';
+  let queryMid = ' FROM entries'
+  let queryEnd = ' WHERE entries.user_id = $1';
+  if (!categoryId || categoryId === '0') {
+    queryStart += '*';
+  }
+  if (categoryId) {
+    queryEnd += ' AND category_id ';
     if (categoryId !== '0') {
-      query += `= $2`;
+      queryStart += 'entries.*, categories.name as category_name';
+      queryMid += ' JOIN categories ON entries.category_id = categories.id';
+      queryEnd += `= $2`;
       queryParams.push(categoryId);
-    } else {
-      query += `IS NULL`
+    } 
+    if (categoryId === '0') {
+      queryEnd += `IS NULL`;
     }
   }
+  let query = queryStart + queryMid + queryEnd;
   return pool.query(query, queryParams);
 };
 
