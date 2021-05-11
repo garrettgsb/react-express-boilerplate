@@ -21,6 +21,12 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import InfoIcon from '@material-ui/icons/Info';
 // importing image as a variable below
 import garden from './ecology.png'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -129,9 +135,15 @@ export default function Sidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Bloom
+            
+          <li>
+          Bloom             |
+          <Link to="/tasks">Maintenance      |     </Link>
+          <Link to="/planning">Planning</Link>
+        </li>
           </Typography>
         </Toolbar>
+
       </AppBar>
       <Drawer
         variant="permanent"

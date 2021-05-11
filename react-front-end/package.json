@@ -9,8 +9,10 @@
     "axios": "^0.18.1",
     "font-awesome": "^4.7.0",
     "react": "^16.8.6",
+    "dotenv": "^2.0.0",
     "react-dom": "^16.8.6",
     "react-pro-sidebar": "^0.6.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
