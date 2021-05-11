@@ -14,8 +14,6 @@ import { makeStyles } from '@material-ui/core/styles';
 // import VegetableBasket from './Components/VegetableBasket';
 import Dashboard from './Components/Dashboard'
 
-
-
 const useStyles = makeStyles({
   row: {
     display: 'flex',
@@ -28,31 +26,30 @@ export default function App() {
   const classes = useStyles();
   const cityId = 6173331;
 
-    return (
+  return (
     <Router>
       <Switch>
-      <main className="layout">
+        <main className="layout">
+          <Route path="/tasks">
+            <div className="App">
+              <div className={classes.row}>
+                <Dashboard />
+              </div>
+            </div>
+          </Route>
+          <Route path='/planning'>
+            <Content />
+          </Route>
 
-      <Route path="/tasks">
-        <div className="App">
-          <div className={classes.row}>
-            <Dashboard />
-            
-      </Route>
+          <Route path='/'>
+            <Sidebar />
+            <nav className="vegetable__basket">
+              <VegetableBasket />
+            </nav>
+          </Route>
 
-      <Route path='/planning'>
-          <Content />
-      </Route>
-
-      <Route path='/'>
-        <Sidebar />
-        <nav className="vegetable__basket">
-          <VegetableBasket/>
-        </nav>
-      </Route>
-      
-      </main>
+        </main>
       </Switch>
     </Router>
-    );
-  }
+  );
+}
