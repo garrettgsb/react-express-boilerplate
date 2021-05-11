@@ -23,17 +23,16 @@ export default function ButtonAppBar() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Mindfull
+        <Toolbar className="NavBar">
+          <Typography variant="h5" className='AppName'>
+            m i n d f u l l
           </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Register</Button>
+          <div className="Buttons">
+          <Button className="LoginRegister" color="inherit">Login</Button>
+          <Button className="LoginRegister" color="inherit">Register</Button>
+          </div>
         </Toolbar>
       </AppBar>
     </div>
