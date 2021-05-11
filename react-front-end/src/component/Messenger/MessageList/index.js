@@ -8,8 +8,6 @@ import axios from "axios";
 
 import "./MessageList.css";
 
-const MY_USER_ID = "apple";
-
 export default function MessageList(props) {
   const [messages, setMessages] = useState([]);
 
@@ -45,7 +43,7 @@ export default function MessageList(props) {
       let previous = messages[i - 1];
       let current = messages[i];
       let next = messages[i + 1];
-      let isMine = current.author === MY_USER_ID;
+      let isMine = current.author === props.activeUser;
       let currentMoment = moment(current.timestamp);
       let prevBySameAuthor = false;
       let nextBySameAuthor = false;
