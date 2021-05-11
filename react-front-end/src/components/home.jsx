@@ -9,8 +9,8 @@ const Home = (props) => {
   return (
     <div className="App">
       <MenuAppBar />
-     <Moods /> 
-      {/* <Login /> */}
+     {/* <Moods />  */}
+      <Login />
       {/* <Register /> */}
       {/* <UserProfile /> */}
       {/* <h1>Hello!</h1>
