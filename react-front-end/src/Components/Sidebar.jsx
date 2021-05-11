@@ -137,7 +137,7 @@ export default function Sidebar() {
           <Typography variant="h6" noWrap>
             
           <li>
-          Bloom             |
+          Bloom          |
           <Link to="/tasks">Maintenance      |     </Link>
           <Link to="/planning">Planning</Link>
         </li>
