@@ -65,9 +65,9 @@ export default function Harvest() {
   const getHarvestDate = function() {
     axios.get(`/api/1`)
     .then(res => {
-      console.log(res.data)
       getHarvest(res.data)
-    }).catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
   }
 
   // getHarvestDate()
