@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Messenger from "./Messenger/Messenger";
 
 export default function Friends(props) {
   const getFriends = () => {
@@ -16,6 +17,7 @@ export default function Friends(props) {
 
   return (
     <div>
+      <Messenger />
       {friends[0] && <p> Friends loaded </p>}
       <div className="Friend">You have reached the friend route</div>
     </div>

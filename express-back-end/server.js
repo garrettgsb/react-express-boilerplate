@@ -1,7 +1,7 @@
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
-const PORT = 8080;
+const PORT = 3003;
 const db = require("./lib/db");
 
 // Express Configuration
@@ -15,6 +15,24 @@ App.get("/api/users", (req, res) => {
       users: response.rows,
     });
   });
+});
+
+App.get("/api/users/:id", (req, res) => {
+  const data = db
+    .query(
+      `
+    SELECT * 
+    FROM users 
+    JOIN artworks ON users.id = author_id
+    WHERE users.id = $1;
+    `,
+      [req.params.id]
+    )
+    .then((response) => {
+      res.json({
+        portfolio: response.rows,
+      });
+    });
 });
 
 App.get("/api/artworks", (req, res) => {
@@ -105,24 +123,6 @@ App.get("/api/messages", (req, res) => {
       messages: response.rows,
     });
   });
-});
-
-App.get("/api/users/:id", (req, res) => {
-  const data = db
-    .query(
-      `
-    SELECT * 
-    FROM users 
-    JOIN artworks ON users.id = author_id
-    WHERE users.id = $1;
-    `,
-      [req.params.id]
-    )
-    .then((response) => {
-      res.json({
-        portfolio: response.rows,
-      });
-    });
 });
 
 App.listen(PORT, () => {

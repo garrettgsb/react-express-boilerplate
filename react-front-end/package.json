@@ -9,13 +9,14 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/x-grid-data-generator": "^4.0.0-alpha.27",
     "axios": "^0.18.1",
+    "moment": "^2.23.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3002 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -29,5 +30,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8080"
+  "devDependencies": {
+    "shave": "^2.5.4"
+  },
+  "proxy": "http://localhost:3003"
 }
