@@ -37,7 +37,8 @@ export default function App() {
         <div className="App">
           <div className={classes.row}>
             <Dashboard />
-            
+            </div>
+          </div>
       </Route>
 
       <Route path='/planning'>
@@ -47,7 +48,7 @@ export default function App() {
       <Route path='/'>
         <Sidebar />
         <nav className="vegetable__basket">
-          <VegetableBasket/>
+          {/* <VegetableBasket/> */}
         </nav>
       </Route>
       
