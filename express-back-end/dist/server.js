@@ -14,9 +14,9 @@ const getEntryByCategory = (attributes) => {
     const queryParams = [userId];
     let query = `SELECT * FROM entries
   WHERE user_id = $1`;
-    if (categoryId !== 'all') {
+    if (categoryId === '0' || categoryId) {
         query += ' AND category_id ';
-        if (categoryId) {
+        if (categoryId !== '0') {
             query += `= $2`;
             queryParams.push(categoryId);
         }
@@ -38,6 +38,26 @@ const getCategories = (userId) => {
   WHERE user_id = $1`;
     const queryParams = [userId];
     return pool.query(query, queryParams);
+};
+const getUserByUserId = (id) => {
+    const query = `SELECT * FROM users
+  WHERE id = $1;`;
+    const queryParams = [id];
+    return pool.query(query, queryParams);
+};
+const getUsers = () => {
+    const query = 'SELECT * FROM users';
+    return pool.query(query);
+};
+const getFontByFontId = (id) => {
+    const query = `SELECT * FROM fonts
+  WHERE id = $1;`;
+    const queryParams = [id];
+    return pool.query(query, queryParams);
+};
+const getFonts = () => {
+    const query = 'SELECT * FROM fonts';
+    return pool.query(query);
 };
 const insertIntoDatabase = (attributes, table) => {
     const queryParams = [];
@@ -97,6 +117,38 @@ App.get('/api/categories', (req, res) => {
 });
 App.get('/api/categories/:id', (req, res) => {
     getEntryByCategory({ categoryId: req.params.id, userId })
+        .then((data) => {
+        res.json({
+            body: data.rows
+        });
+    });
+});
+App.get('/api/users', (req, res) => {
+    getUsers()
+        .then((data) => {
+        res.json({
+            body: data.rows
+        });
+    });
+});
+App.get('/api/users/:id', (req, res) => {
+    getUserByUserId(req.params.id)
+        .then((data) => {
+        res.json({
+            body: data.rows
+        });
+    });
+});
+App.get('/api/fonts', (req, res) => {
+    getFonts()
+        .then((data) => {
+        res.json({
+            body: data.rows
+        });
+    });
+});
+App.get('/api/fonts/:id', (req, res) => {
+    getFontByFontId(req.params.id)
         .then((data) => {
         res.json({
             body: data.rows
