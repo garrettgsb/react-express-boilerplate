@@ -1,7 +1,9 @@
 import React from "react";
 import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
-import moment from "moment";
+// import moment from "moment";
+const moment = require('moment');
+
 
 const useStyles = makeStyles({
   root: {
