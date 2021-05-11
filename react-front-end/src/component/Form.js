@@ -3,7 +3,23 @@ import { PinDropSharp } from "@material-ui/icons";
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function Form() {
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      "& > *": {
+        margin: theme.spacing(1),
+        width: "25ch",
+        size: "small",
+      },
+    },
+  })
+);
+
+export default function BasicTextFields() {
+  const classes = useStyles();
   const [title, setNewTitle] = useState("");
   const [description, setNewDescription] = useState("");
   const [imgLink, setNewImgLink] = useState("");
@@ -34,60 +50,93 @@ export default function Form() {
       window.location.reload();
     });
   };
-
+  const checked = {
+    borderBottom: 0,
+  };
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
-      <input
+    <form
+      className={classes.root}
+      noValidate
+      autoComplete="off"
+      onSubmit={(event) => event.preventDefault()}
+    >
+      <TextField
+        id="standard-basic"
+        multiline={true}
+        rows={1}
         type="text"
         value={title}
         onChange={(e) => setNewTitle(e.target.value)}
         label="title"
         placeholder="Title"
       />
-      <br />
-      <input
+      <TextField
+        id="filled-basic"
+        multiline={true}
+        rows={1}
+        label="Filled"
+        variant="filled"
+        size="small"
         type="textarea"
         value={description}
         onChange={(e) => setNewDescription(e.target.value)}
         label="description"
         placeholder="Description"
       />
-      <br />
-      <input
+      <TextField
+        id="outlined-basic"
+        multiline={true}
+        rows={1}
+        label="Outlined"
+        variant="outlined"
         type="text"
         value={imgLink}
         onChange={(e) => setNewImgLink(e.target.value)}
-        label="img_link"
+        label="img-link"
         placeholder="Image URL"
       />
-      <br />
-      <input
+      <TextField
+        id="outlined-basic"
+        multiline={true}
+        rows={1}
+        label="Outlined"
+        variant="outlined"
         type="text"
         value={projectLink}
         onChange={(e) => setNewProjectLink(e.target.value)}
         label="project_link"
         placeholder="Project URL"
       />
-      <br />
-      <label>
-        {" "}
-        For Sale
-        <input
-          type="checkbox"
-          value={forSale}
-          onChange={(e) => setForSale(e.target.value)}
-          label="for_sale"
-        />
-      </label>
-      <br />
-      <input
+      <TextField
+        style={checked}
+        id="outlined-basic"
+        multiline={true}
+        rows={1}
+        // label="Outlined"
+        // variant="outlined"
+        type="checkbox"
+        value={forSale}
+        onChange={(e) => setForSale(e.target.value)}
+        label="for sale"
+      />
+      <TextField
+        id="outlined-basic"
+        multiline={true}
+        rows={1}
+        label="Outlined"
+        variant="outlined"
         type="number"
         value={price}
         onChange={(e) => setNewPrice(e.target.value)}
         label="price"
         placeholder="Price"
       />
-      <br />
+      {/* <FormControlLabel
+        control={
+          <Checkbox checked={jason} onChange={handleChange} name="jason" />
+        }
+        label="Jason Killian"
+      /> */}
       <button type="submit" value="Submit" onClick={test}>
         Submit
       </button>
@@ -95,6 +144,98 @@ export default function Form() {
   );
 }
 
+// export default function Form() {
+//   const [title, setNewTitle] = useState("");
+//   const [description, setNewDescription] = useState("");
+//   const [imgLink, setNewImgLink] = useState("");
+//   const [projectLink, setNewProjectLink] = useState("");
+//   const [forSale, setForSale] = useState("");
+//   const [price, setNewPrice] = useState("");
+
+//   // const onSubmit = (event) => {
+//   //   const value = event.target.value;
+//   //   setState({
+//   //     ...state,
+//   //     [event.target.title]: value,
+//   //   });
+//   // };
+
+//   const test = () => {
+//     console.log("Submit function call");
+//     const artwork = {
+//       id: 1,
+//       title,
+//       description,
+//       imgLink,
+//       projectLink,
+//       forSale: true,
+//       price,
+//     };
+//     axios.put(`/api/artworks`, artwork).then(() => {
+//       window.location.reload();
+//     });
+//   };
+
+//   return (
+//     <form onSubmit={(event) => event.preventDefault()}>
+//       <input
+//         type="text"
+//         value={title}
+//         onChange={(e) => setNewTitle(e.target.value)}
+//         label="title"
+//         placeholder="Title"
+//       />
+//       <br />
+//       <input
+//         type="textarea"
+//         value={description}
+//         onChange={(e) => setNewDescription(e.target.value)}
+//         label="description"
+//         placeholder="Description"
+//       />
+//       <br />
+//       <input
+//         type="text"
+//         value={imgLink}
+//         onChange={(e) => setNewImgLink(e.target.value)}
+//         label="img_link"
+//         placeholder="Image URL"
+//       />
+//       <br />
+//       <input
+//         type="text"
+//         value={projectLink}
+//         onChange={(e) => setNewProjectLink(e.target.value)}
+//         label="project_link"
+//         placeholder="Project URL"
+//       />
+//       <br />
+//       <label>
+//         {" "}
+//         For Sale
+//         <input
+//           type="checkbox"
+//           value={forSale}
+//           onChange={(e) => setForSale(e.target.value)}
+//           label="for_sale"
+//         />
+//       </label>
+//       <br />
+//       <input
+//         type="number"
+//         value={price}
+//         onChange={(e) => setNewPrice(e.target.value)}
+//         label="price"
+//         placeholder="Price"
+//       />
+//       <br />
+//       <button type="submit" value="Submit" onClick={test}>
+//         Submit
+//       </button>
+//     </form>
+//   );
+// }
+//////////////////////////////////////////////////////////////////////////////////////
 // class NameForm extends React.Component {
 //   constructor(props) {
 //     super(props);
