@@ -7,9 +7,8 @@ import Card from '@material-ui/core/Card';
 // import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 import WeatherItem from './WeatherItem';
-import {
-  useState, useEffect
-} from "react";
+import { useState, useEffect } from "react";
+
 const lat = 49.2497;
 const lon = -123.1193;
 const cityId = 6173331;
@@ -19,14 +18,14 @@ const weatherUrlCF = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}
 
 const useStyles = makeStyles({
   root: {
-    width: 1000,
-    // marginLeft: 'auto',
+    width: '1000px',
+    height: '300px',
+    marginLeft: '9%',
     marginTop: '7%',
-    height: '200px',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   title: {
     fontSize: 14,
@@ -43,21 +42,16 @@ const useStyles = makeStyles({
   row: {
     display: 'flex',
     flexDirection: 'row',
-    // justifyContent: 'space-between'
+    justifyContent: 'space-between'
   },
-  weather: {
-    margin: '100px',
-  }
+  // weather: {
+  //   margin: '100px',
+  // }
 });
-
-
 
 export default function Weather() {
   const classes = useStyles();
   const [weatherData, setWeatherData] = useState([]);
-  // const [weatherLocn, setWeatherLocn] = useState({
-  //   city: 'unknown'
-  // });
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -65,7 +59,6 @@ export default function Weather() {
         .then((response) => {
           console.log(response);
           setWeatherData(response.data.daily);
-          // setWeatherLocn(response.data);
         });
     }
     fetchWeather();
@@ -76,16 +69,16 @@ export default function Weather() {
       <section className={classes.weather}>
         <h2>Vancouver, CA</h2>
         <ul className={classes.row}>
-          {weatherData.map(w => (
-            <WeatherItem
-              key={w.weather[0].id}
-              description={w.weather[0].description}
-              icon={w.weather[0].icon}
-              tempMin={w.temp.min}
-              tempMax={w.temp.max}
-              dte={w.dt}
-            />
-          ))}
+            {weatherData.map(w => (
+              <WeatherItem classname={classes.centerCard}
+                key={w.weather[0].id}
+                description={w.weather[0].description}
+                icon={w.weather[0].icon}
+                tempMin={w.temp.min}
+                tempMax={w.temp.max}
+                dte={w.dt}
+              />
+            ))}
         </ul>
       </section>
     </Card>
