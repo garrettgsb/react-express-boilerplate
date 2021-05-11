@@ -3,10 +3,10 @@ import { PinDropSharp } from "@material-ui/icons";
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function Form() {
+export default function FormJobs() {
   const [title, setNewTitle] = useState("");
   const [description, setNewDescription] = useState("");
-  const [Pay, setPay] = useState("");
+  const [pay, setPay] = useState("");
 
   // const onSubmit = (event) => {
   //   const value = event.target.value;

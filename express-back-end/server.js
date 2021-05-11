@@ -1,8 +1,8 @@
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
-// const PORT = 8080;
-const PORT = 3003;
+const PORT = 8080;
+// const PORT = 3003;
 const db = require("./lib/db");
 
 // Express Configuration
@@ -46,15 +46,8 @@ App.get("/api/artworks", (req, res) => {
 
 App.put("/api/artworks", (req, res) => {
   console.log(req.body);
-  const {
-    id,
-    title,
-    imgLink,
-    projectLink,
-    description,
-    forSale,
-    price,
-  } = req.body;
+  const { id, title, imgLink, projectLink, description, forSale, price } =
+    req.body;
   const data = db
     .query(
       `INSERT INTO artworks (author_id, title, img_link, project_link, descrip, for_sale, price) VALUES ($1, $2, $3, $4, $5, $6, $7);`,

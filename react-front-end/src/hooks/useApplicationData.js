@@ -45,7 +45,7 @@ export default function useApplicationData() {
       axios.get(`/api/users`),
       axios.get(`/api/artworks`),
       axios.get(`/api/jobs`),
-      axios.get(`/api/messages`),
+      // axios.get(`/api/messages`),
     ]).then((all) => {
       dispatch({
         type: SET_APPLICATION_DATA,
@@ -53,7 +53,7 @@ export default function useApplicationData() {
           users: all[0].data.users,
           artworks: all[1].data.artworks,
           jobs: all[2].data.jobs,
-          messages: all[3].data.messages,
+          // messages: all[3].data.messages,
           flag: true,
         },
       });

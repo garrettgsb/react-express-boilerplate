@@ -9,6 +9,7 @@ import Friends from "./component/Friends";
 import Jobs from "./component/JobsList";
 import Job from "./component/JobsListItem";
 import PrimarySearchAppBar from "./component/Navbar";
+import FormJobs from "./FormJobs";
 
 import useApplicationData from "./hooks/useApplicationData";
 
@@ -99,7 +100,7 @@ export default function App() {
             children={<User activeUser={state.activeUser} />}
           ></Route>
           <Route path="/art_showcase" render={() => artworks}></Route>
-          <Route path="/job_board" render={() => jobBoard}></Route>
+          <Route path="/job_board" children={<FormJobs />}></Route>
           <Route path="/jobs/:id" render={() => job}></Route>
         </Switch>
       </Router>
