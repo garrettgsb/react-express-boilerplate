@@ -127,11 +127,12 @@ App.put("/api/jobs", (req, res) => {
     });
 });
 
-App.get("/api/messages/:id", (req, res) => {
+App.get("/api/messages/:first_id/:second_id", (req, res) => {
   const data = db
-    .query("SELECT * FROM messages WHERE sender_id = $1 OR receiver_id = $1", [
-      req.params.id,
-    ])
+    .query(
+      "SELECT * FROM messages WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)",
+      [req.params.first_id, req.params.second_id]
+    )
     .then((response) => {
       res.json({
         messages: response.rows,

@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Compose from "../Compose";
 import Toolbar from "../Toolbar";
 import ToolbarButton from "../ToolbarButton";
 import Message from "../Message";
 import moment from "moment";
+
 import axios from "axios";
 
 import "./MessageList.css";
-
 export default function MessageList(props) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     getMessages();
-  }, []);
+  }, [props.activeConversation]);
 
   const getMessages = () => {
-    axios.get(`/api/messages/${props.activeUser}`).then((response) => {
-      let tempMessages = response.data.messages.map((result) => {
-        return {
-          id: result.id,
-          author: result.sender_id,
-          message: result.message,
-          timestamp: result.date,
-
-          // photo: result.picture.large,
-          // name: `${result.second_username}`,
-          // text:
-          //   "Hello world! This is a long message that needs to be truncated.",
-        };
+    axios
+      .get(
+        `/api/messages/${props.activeConversation[0]}/${props.activeConversation[1]}
+    `
+      )
+      .then((response) => {
+        let tempMessages = response.data.messages.map((result) => {
+          return {
+            id: result.id,
+            author: result.sender_id,
+            message: result.message,
+            timestamp: result.date,
+          };
+        });
+        setMessages([...tempMessages]);
       });
-      setMessages([...messages, ...tempMessages]);
-    });
   };
 
   const renderMessages = () => {

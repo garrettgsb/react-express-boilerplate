@@ -9,7 +9,6 @@ export default function Friends(props) {
     }
     axios.get(`/api/friends/${props.activeUser}`).then((res) => {
       friends = res.data.friends;
-      console.log(friends);
     });
   };
   let friends = [];
