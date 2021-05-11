@@ -91,6 +91,23 @@ a:hover, a:active {
 //Chosen Resource
 .Resources {
 
+.ResourceHeader {
+  display: flex;
+  flex-direction: column;
+  width: 330px;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  height: auto;
+  background-color: #61c3d4;
+  border: 1px solid lightgrey;
+}
+
+h1 {
+  color: white
+}
+
 .ResourceBox {
   display: flex;
   flex-direction: column;
@@ -101,8 +118,9 @@ a:hover, a:active {
   padding-bottom: 20px;
   height: auto;
   background-color: #61c3d4;
-  border: 1px solid grey;
+  border: 1px solid lightgrey;
 }
+
 h4 {
   color: white;
   margin-bottom: -15px;
@@ -115,7 +133,6 @@ h6 {
 
 h5 {
   color: white;
-  opacity: 0.8;
   margin: 1px 1px;
 
 }
@@ -123,7 +140,7 @@ a {
   text-decoration: none;
   color: #61c3d4;
   font-weight: 600;
-  border: 1px solid grey;
+  border: 1px solid rgb(150, 150, 150);
   margin: 10px 70px 0;
   padding: 10px;
   background-color: white;
@@ -131,7 +148,7 @@ a {
 }
 a:hover{
   transform: scale(1.1);
-  box-shadow: 1px 4px 5px rgb(172, 172, 172);
+  box-shadow: 1px 1px 5px rgb(39, 39, 39);
 }
 }
 }
