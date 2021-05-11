@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PersistentDrawerRight() {
+export default function VegetableBasket() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);

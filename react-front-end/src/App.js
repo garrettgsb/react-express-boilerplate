@@ -49,7 +49,6 @@ export default function App() {
       </Route>
 
       <Route path='/planning'>
-          <VegetableCard />
           <Vegetables/>
       </Route>
 
