@@ -3,10 +3,12 @@ import { PinDropSharp } from "@material-ui/icons";
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function Form() {
+export default function FormJobs() {
   const [title, setNewTitle] = useState("");
   const [description, setNewDescription] = useState("");
-  const [Pay, setPay] = useState("");
+  const [pay, setPay] = useState("");
+  const [company, setCompany] = useState("");
+  const [location, setLocation] = useState("");
 
   // const onSubmit = (event) => {
   //   const value = event.target.value;
@@ -19,12 +21,12 @@ export default function Form() {
   const test = () => {
     console.log("Submit function call");
     const job = {
-      id: 1,
       title,
       description,
       pay,
-      posted_date,
-      user_id,
+      company,
+      location,
+      id: 1,
     };
     axios.put(`/api/jobs`, job).then(() => {
       window.location.reload();
@@ -57,6 +59,23 @@ export default function Form() {
         placeholder="Wage/salary"
       />
       <br />
+      <input
+        type="text"
+        value={company}
+        onChange={(e) => setCompany(e.target.value)}
+        label="company"
+        placeholder="Company Name"
+      />
+      <br />
+      <input
+        type="text"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+        label="location"
+        placeholder="Location"
+      />
+      <br />
+
       <button type="submit" value="Submit" onClick={test}>
         Submit
       </button>

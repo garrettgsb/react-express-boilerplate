@@ -43,6 +43,7 @@ export default function useApplicationData() {
       axios.get(`/api/users`),
       axios.get(`/api/artworks`),
       axios.get(`/api/jobs`),
+
     ]).then((all) => {
       dispatch({
         type: SET_APPLICATION_DATA,

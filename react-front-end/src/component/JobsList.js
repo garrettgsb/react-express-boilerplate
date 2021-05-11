@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { useContext } from "react";
 import { JobsContext } from "../App.js";
 import { Link } from "react-router-dom";
+import FormJobs from "./FormJobs";
 
 const useStyles = makeStyles({
   table: {
@@ -34,31 +35,36 @@ export default function BasicTable() {
   const value = useContext(JobsContext);
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell align="right">User Name</TableCell>
-            <TableCell align="right">Description</TableCell>
-            <TableCell align="right">Location</TableCell>
-            <TableCell align="right">Pay</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {value.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                <Link to={`/jobs/${row.id}`}>{row.title}</Link>
-              </TableCell>
-              <TableCell align="right">{row.username}</TableCell>
-              <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.location}</TableCell>
-              <TableCell align="right">{row.pay}</TableCell>
+    <div>
+      <div>{/* <FormJobs /> */}</div>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Title</TableCell>
+              <TableCell align="right">User Name</TableCell>
+              <TableCell align="right">Description</TableCell>
+              <TableCell align="right">Pay</TableCell>
+              <TableCell align="right">Company</TableCell>
+              <TableCell align="right">Location</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {value.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell component="th" scope="row">
+                  <Link to={`/jobs/${row.id}`}>{row.title}</Link>
+                </TableCell>
+                <TableCell align="right">{row.username}</TableCell>
+                <TableCell align="right">{row.description}</TableCell>
+                <TableCell align="right">{row.pay}</TableCell>
+                <TableCell align="right">{row.company}</TableCell>
+                <TableCell align="right">{row.location}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }

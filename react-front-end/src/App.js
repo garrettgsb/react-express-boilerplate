@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, createContext, useState } from "react";
 import "./App.css";
 import "@fontsource/roboto";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -6,16 +6,19 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import User from "./component/User";
 import Artworks from "./component/Artworks";
 import Friends from "./component/Friends";
-import Jobs from "./component/JobsList";
-import Job from "./component/JobsListItem";
+import JobsList from "./component/JobsList";
+import JobsListItem from "./component/JobsListItem";
 import PrimarySearchAppBar from "./component/Navbar";
+import FormJobs from "./component/FormJobs";
+import Empty from "./component/Empty";
 
 import useApplicationData from "./hooks/useApplicationData";
 
-export const JobsContext = React.createContext([]);
+export const JobsContext = createContext([]);
 
 export default function App() {
   const { state, setActiveUser } = useApplicationData();
+  const [show, setShow] = useState(false);
 
   const artworks = (
     <div>
@@ -26,7 +29,21 @@ export default function App() {
   const jobBoard = (
     <div>
       <JobsContext.Provider value={state.jobs}>
-        <Jobs />
+        {state.activeUser === 0 ? (
+          <JobsList />
+        ) : (
+          <>
+            <JobsList />
+            {!show ? (
+              <>
+                <Empty onAdd={onAdd} />
+                <h3>Add Job</h3>
+              </>
+            ) : (
+              <FormJobs />
+            )}
+          </>
+        )}
       </JobsContext.Provider>
     </div>
   );
@@ -34,7 +51,7 @@ export default function App() {
   const job = (
     <div>
       <JobsContext.Provider value={state.jobs}>
-        <Job />
+        <JobsListItem />
       </JobsContext.Provider>
     </div>
   );
@@ -50,7 +67,6 @@ export default function App() {
             />
           }
         </div>
-
         <Switch>
           <Route
             path="/messages/"
@@ -60,9 +76,11 @@ export default function App() {
             path="/portfolio/:id"
             children={<User activeUser={state.activeUser} />}
           ></Route>
-          <Route path="/art_showcase" render={() => artworks}></Route>
+          {/* <Route path="/art_showcase" render={() => artworks}></Route> */}
           <Route path="/job_board" render={() => jobBoard}></Route>
           <Route path="/jobs/:id" render={() => job}></Route>
+          <Route path="/" render={() => artworks}></Route>
+          {/* <Route path="/" redirect={</Route> */}
         </Switch>
       </Router>
     </div>

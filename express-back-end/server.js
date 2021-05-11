@@ -1,8 +1,8 @@
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
-// const PORT = 8080;
-const PORT = 3003;
+const PORT = 8080;
+// const PORT = 3003;
 const db = require("./lib/db");
 
 // Express Configuration
@@ -46,15 +46,8 @@ App.get("/api/artworks", (req, res) => {
 
 App.put("/api/artworks", (req, res) => {
   console.log(req.body);
-  const {
-    id,
-    title,
-    imgLink,
-    projectLink,
-    description,
-    forSale,
-    price,
-  } = req.body;
+  const { id, title, imgLink, projectLink, description, forSale, price } =
+    req.body;
   const data = db
     .query(
       `INSERT INTO artworks (author_id, title, img_link, project_link, descrip, for_sale, price) VALUES ($1, $2, $3, $4, $5, $6, $7);`,
@@ -96,7 +89,7 @@ App.get("/api/friends/:id", (req, res) => {
 App.get("/api/jobs", (req, res) => {
   const data = db
     .query(
-      "SELECT jobs.id AS id, username, title, description, pay FROM jobs JOIN users ON users.id = user_id;"
+      `SELECT jobs.id AS id, username, title, description, pay, company, location FROM jobs JOIN users ON users.id = user_id;`
     )
     .then((response) => {
       res.json({
@@ -108,12 +101,28 @@ App.get("/api/jobs", (req, res) => {
 App.get("/api/jobs/:id", (req, res) => {
   const data = db
     .query(
-      "SELECT jobs.id AS id, username, title, description, pay FROM jobs JOIN users ON users.id = user_id WHERE jobs.id = $1;",
+      `SELECT jobs.id AS id, username, title, description, pay, company, location FROM jobs JOIN users ON users.id = user_id WHERE jobs.id = $1;`,
       [req.params.id]
     )
     .then((response) => {
       res.json({
         job: response.rows,
+      });
+    });
+});
+
+App.put("/api/jobs", (req, res) => {
+  console.log(req.body);
+  const { title, description, pay, company, location, id } = req.body;
+  const data = db
+    .query(
+      `INSERT INTO jobs (title, description, pay, company, location, user_id) VALUES ($1, $2, $3, $4, $5, $6);`,
+      [title, description, pay, company, location, id]
+    )
+    .then((response) => {
+      console.log("pirateBooty", response);
+      res.json({
+        jobs: response.rows,
       });
     });
 });
