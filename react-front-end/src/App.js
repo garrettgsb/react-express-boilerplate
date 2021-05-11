@@ -40,7 +40,7 @@ export default function App() {
           <Route path='/'>
             <Sidebar />
             <nav className="vegetable__basket">
-              <VegetableBasket />
+              {/* <VegetableBasket /> */}
             </nav>
           </Route>
 
