@@ -41,7 +41,6 @@ export default function App() {
   const jobBoard = (
     <div>
       <JobsContext.Provider value={state.jobs}>
-        {/* <JobsList /> */}
         {state.activeUser === 0 ? (
           <JobsList />
         ) : (
@@ -109,7 +108,7 @@ export default function App() {
               <h1>{state.flag && state.jobs[0].pay}</h1> */}
             </div>
           </div>
-          <Artworks art={state.artworks} />
+          {/* <Artworks art={state.artworks} /> */}
         </div>
         {/* REACT ROUTER LINK TO MESSAGES */}
         <Switch>
@@ -121,9 +120,10 @@ export default function App() {
             path="/portfolio/:id"
             children={<User activeUser={state.activeUser} />}
           ></Route>
-          <Route path="/art_showcase" render={() => artworks}></Route>
+          {/* <Route path="/art_showcase" render={() => artworks}></Route> */}
           <Route path="/job_board" render={() => jobBoard}></Route>
           <Route path="/jobs/:id" render={() => job}></Route>
+          <Route path="/" render={() => artworks}></Route>
           {/* <Route path="/" redirect={</Route> */}
         </Switch>
       </Router>

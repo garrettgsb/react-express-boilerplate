@@ -198,10 +198,7 @@ export default function PrimarySearchAppBar(props) {
           </IconButton>
 
           {/* inkedin REACT ROUTER LINK TO INDEX */}
-          <Link
-            to="/art_showcase"
-            style={{ textDecoration: "none", color: "lavender" }}
-          >
+          <Link to="/" style={{ textDecoration: "none", color: "lavender" }}>
             <Typography className={classes.title} variant="h6" noWrap>
               Inkedin
             </Typography>
@@ -270,10 +267,7 @@ export default function PrimarySearchAppBar(props) {
             </Link>
 
             {/* REACT ROUTER LINK TO SHOWCASE */}
-            <Link
-              to="/art_showcase"
-              style={{ textDecoration: "none", color: "lavender" }}
-            >
+            <Link to="/" style={{ textDecoration: "none", color: "lavender" }}>
               <IconButton
                 aria-label="show 17 new notifications"
                 color="inherit"
