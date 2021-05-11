@@ -4,12 +4,14 @@ import Login from './login';
 import Register from './register';
 import UserProfile from './user_profile';
 import Moods from './moods';
+import Resource from './resource';
 
 const Home = (props) => {
   return (
     <div className="App">
       <MenuAppBar />
-     <Moods /> 
+     {/* <Moods />  */}
+     <Resource /> 
       {/* <Login /> */}
       {/* <Register /> */}
       {/* <UserProfile /> */}
