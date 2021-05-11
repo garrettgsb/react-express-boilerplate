@@ -38,54 +38,6 @@ const useStyles = makeStyles({
 });
 
 export default function Artwork(props) {
-  // const Image = styled.img`
-  //   opacity: 1;
-  //   display: block;
-  //   width: 100%;
-  //   height: auto;
-  //   transition: .5s ease;
-  //   backface-visibility: hidden;
-
-  //   "&:hover": {
-  //     background: "#efefef",
-  //     opacity: "0.3",
-  //   },
-  // `;
-  // const Details = styled.div`
-  //   transition: .5s ease;
-  //   opacity: 0;
-  //   position: absolute;
-  //   top: 50%;
-  //   left: 50%;
-  //   transform: translate(-50%, -50%);
-  //   -ms-transform: translate(-50%, -50%);
-  //   text-align: center;
-
-  //   "&:hover": {
-  //     background: "#696969",
-  //     opacity: "1"
-  //   },
-  // `;
-  // const Container = styled.div`
-  //   position: relative;
-  //   width: 50%;
-  // `;
-
-  // const Text = styled.div`
-  //   background-color: #04aa6d;
-  //   color: white;
-  //   font-size: 16px;
-  //   padding: 16px 32px;
-  // `;
-
-  //.container:hover .image {
-  //     opacity: 0.3;
-  //   }
-
-  //   .container:hover .middle {
-  //     opacity: 1;
-  //   }
-
   const classes = useStyles();
 
   return (

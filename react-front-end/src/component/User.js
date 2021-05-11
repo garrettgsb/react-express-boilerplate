@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Artworks from "./Artworks";
 import Form from "./Form";
+import { ArtWorksContext } from "../App.js";
+import styled from "styled-components";
+import ProfilePic from "./ProfilePic";
+import { makeStyles } from "@material-ui/core/styles";
 
 // state = {
 //   title: "",
@@ -29,6 +33,8 @@ import Form from "./Form";
 // })
 
 export default function User(props) {
+  const value = useContext(ArtWorksContext);
+
   let { id } = useParams();
   const [portfolio, setPortfolio] = useState([]);
   // console.log("user", typeof props.activeUser);
@@ -42,6 +48,11 @@ export default function User(props) {
 
   return (
     <div>
+      {portfolio[0] && <ProfilePic userInfo={portfolio[0]} />}
+      <div>{portfolio[0] && portfolio[0].username}</div>
+      <div>{portfolio[0] && portfolio[0].first_name}</div>
+      <div>{portfolio[0] && portfolio[0].last_name}</div>
+      <div>{portfolio[0] && portfolio[0].cool_fact}</div>
       <div>
         <Form />
       </div>
