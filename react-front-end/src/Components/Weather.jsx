@@ -1,10 +1,21 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+// import CardActions from '@material-ui/core/CardActions';
+// import CardContent from '@material-ui/core/CardContent';
+// import Button from '@material-ui/core/Button';
+// import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
+import WeatherItem from './WeatherItem';
+import {
+  useState, useEffect
+} from "react";
+const lat = 49.2497;
+const lon = -123.1193;
+const cityId = 6173331;
+const apiKey = 'f2970ccf10fb5df7afd096a5f96ab733';
+const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKey}`;
+const weatherUrlCF = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={hourly}&appid=${apiKey}`
 
 const useStyles = makeStyles({
   root: {
@@ -22,44 +33,61 @@ const useStyles = makeStyles({
   },
   heads: {
     display: 'flex',
-    // flexDirection: 'row',
+    flexDirection: 'row',
     justifyContent: 'space-around',
   },
   centerCard: {
     display: 'flex',
     justifyContent: 'center',
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    // justifyContent: 'space-between'
+  },
+  weather: {
+    margin: '100px',
   }
 });
 
+
+
 export default function Weather() {
   const classes = useStyles();
+  const [weatherData, setWeatherData] = useState([]);
+  // const [weatherLocn, setWeatherLocn] = useState({
+  //   city: 'unknown'
+  // });
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      await axios.get(weatherUrlCF)
+        .then((response) => {
+          console.log(response);
+          setWeatherData(response.data.daily);
+          // setWeatherLocn(response.data);
+        });
+    }
+    fetchWeather();
+  }, [])
 
   return (
-    <div className={classes.centerCard}>
     <Card className={classes.root}>
-      <CardContent>
-        <table >
-          <thead >
-            <tr >
-              <th>Weather</th>
-            </tr>
-          </thead>
-          <tbody >
-            <tr>
-            <td>
-                Hot   |
-                Real Hot   |
-                Warmish    |
-                Cool   |
-                Warm Again   
-              </td>
-  
-            </tr>
-          </tbody>
-          
-        </table>
-      </CardContent>
+      <section className={classes.weather}>
+        <h2>Vancouver, CA</h2>
+        <ul className={classes.row}>
+          {weatherData.map(w => (
+            <WeatherItem
+              key={w.weather[0].id}
+              description={w.weather[0].description}
+              icon={w.weather[0].icon}
+              tempMin={w.temp.min}
+              tempMax={w.temp.max}
+              dte={w.dt}
+            />
+          ))}
+        </ul>
+      </section>
     </Card>
-    </div>
-  );
+  )
 }

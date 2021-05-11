@@ -5,9 +5,7 @@ import Sidebar from './Components/Sidebar';
 import Content from './Components/VegetableBasket';
 import { makeStyles } from '@material-ui/core/styles';
 // import VegetableBasket from './Components/VegetableBasket';
-import Maintenance from './Components/Maintenance'
-import Harvest from './Components/Harvest'
-import Weather from './Components/Weather'
+import Dashboard from './Components/Dashboard'
 
 const useStyles = makeStyles({
   row: {
@@ -19,22 +17,19 @@ const useStyles = makeStyles({
 
 export default function App() {
   const classes = useStyles();
+  const cityId = 6173331;
 
   return (
-
-    <main className="layout">
+    <main>
       <section className="App">
         <Sidebar />
-        <section className={classes.row}>
-          <Maintenance />
-          <Harvest />
         </section>
-        <Weather />
-      </section>
-      <section >
-        <Content />
-      </section>
+        <section>
+          <Dashboard />
+        </section>
+        <section >
+          <Content />
+        </section>
     </main>
   );
 }
-

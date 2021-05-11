@@ -177,7 +177,7 @@ export default function PersistentDrawerRight() {
                 <ListItemText primary={text} />
                 <Avatar
                   alt="Carrot"
-                  src="/home/joel/lighthouse/Bloom/Bloom_Garden_App/react-front-end/public/carrot_avatar.jpg"
+                  src="images/vegetables/carrots.png"
                 />
               </ListItem>
             )
