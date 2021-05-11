@@ -11,9 +11,9 @@ import { useState, useEffect } from "react";
 
 const lat = 49.2497;
 const lon = -123.1193;
-const cityId = 6173331;
+// const cityId = 6173331;
 const apiKey = 'f2970ccf10fb5df7afd096a5f96ab733';
-const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKey}`;
+// const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKey}`;
 const weatherUrlCF = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={hourly}&appid=${apiKey}`
 
 
@@ -21,8 +21,8 @@ const useStyles = makeStyles({
   root: {
     width: '1000px',
     height: '300px',
-    marginLeft: '9%',
-    marginTop: '7%',
+    marginLeft: '100px',
+    marginTop: '50px',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -69,7 +69,7 @@ export default function Weather() {
     <Card className={classes.root}>
       <section className={classes.weather}>
         <h2>Vancouver, CA</h2>
-        <ul className={classes.row}>
+        <div className={classes.row}>
             {weatherData.map(w => (
               <WeatherItem classname={classes.centerCard}
                 key={w.weather[0].id}
@@ -80,7 +80,7 @@ export default function Weather() {
                 dte={w.dt}
               />
             ))}
-        </ul>
+        </div>
       </section>
     </Card>
   )
