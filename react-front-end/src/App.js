@@ -14,8 +14,6 @@ import PrimarySearchAppBar from "./component/Navbar";
 
 import useApplicationData from "./hooks/useApplicationData";
 
-import axios from "axios";
-
 export const JobsContext = React.createContext([]);
 
 export default function App() {
