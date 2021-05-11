@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard(props) {
+export default function VegCard(props) {
   const classes = useStyles();
 
   return (
@@ -47,6 +47,5 @@ export default function MediaCard(props) {
         </Button>
       </CardActions>
     </Card>
-    
   );
 }

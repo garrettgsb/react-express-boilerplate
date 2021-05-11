@@ -1,24 +1,16 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
-// import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Sidebar from './Components/Sidebar';
-import Content from './Components/VegetableBasket';
+import Content from './Components/Vegetable/VegetableBasket';
 import { makeStyles } from '@material-ui/core/styles';
-import VegetablesAbout from './Components/VegetablesAbout';
-import VegetableBasket from './Components/VegetableBasket';
+import VegetableAbout from './Components/Vegetable/VegetableAbout';
+import VegetableBasket from './Components/Vegetable/VegetableBasket';
 import Dashboard from './Components/Dashboard'
 
 const useStyles = makeStyles({
   row: {
     display: 'flex',
     flexDirection: 'row',
-    // justifyContent: 'space-between'
   },
 });
 
@@ -40,8 +32,9 @@ export default function App() {
           <Route path='/planning'>
             <Content />
           </Route>
+
           <Route path='/vegetables'>
-            <VegetablesAbout />
+            <VegetableAbout />
           </Route>
 
           <Route path='/'>

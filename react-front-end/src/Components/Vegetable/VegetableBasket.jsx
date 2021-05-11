@@ -19,7 +19,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import ButtonBases from "./addVeg";
+import VegCard from "./VegetableAdd";
 
 const drawerWidth = 240;
 
@@ -66,8 +66,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 15,
     justifyContent: "space-between"
   },
-  ShoppingBasketIcon:{
-    padding:1,
+  ShoppingBasketIcon: {
+    padding: 1,
   },
   buildGardenButton: {
     marginTop: 500,
@@ -130,19 +130,8 @@ export default function PersistentDrawerRight() {
         })}
       >
         <div className={classes.drawerHeader} />
-    
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="end"
-          className={clsx(open && classes.hide)}
-          onClick={handleDrawerOpen}
-          style={{
-            width: '100%',
-          }}
-        >
-          <ButtonBases />
-        </IconButton>
+
+        <VegCard onClick={handleDrawerOpen} />
       </main>
       <Drawer
         className={classes.drawer}
@@ -162,7 +151,7 @@ export default function PersistentDrawerRight() {
             )}
           </IconButton>
         </div>
-        <h1 className={classes.drawerHeaderTitle}> Vegetable Basket 
+        <h1 className={classes.drawerHeaderTitle}> Vegetable Basket
         <ShoppingBasketIcon>color="primary"</ShoppingBasketIcon>
         </h1>
         <Divider />
@@ -184,7 +173,7 @@ export default function PersistentDrawerRight() {
           )}
         </List>
         <Divider />
-        <Button variant="contained" color="primary" className ={classes.buildGardenButton}>
+        <Button variant="contained" color="primary" className={classes.buildGardenButton}>
           Build My Garden
         </Button>
       </Drawer>
