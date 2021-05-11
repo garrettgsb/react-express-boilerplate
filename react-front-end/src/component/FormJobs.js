@@ -6,10 +6,7 @@ import axios from "axios";
 export default function Form() {
   const [title, setNewTitle] = useState("");
   const [description, setNewDescription] = useState("");
-  const [imgLink, setNewImgLink] = useState("");
-  const [projectLink, setNewProjectLink] = useState("");
-  const [forSale, setForSale] = useState("");
-  const [price, setNewPrice] = useState("");
+  const [Pay, setPay] = useState("");
 
   // const onSubmit = (event) => {
   //   const value = event.target.value;
@@ -55,7 +52,7 @@ export default function Form() {
       <input
         type="number"
         value={pay}
-        onChange={(e) => setNewImgLink(e.target.value)}
+        onChange={(e) => setPay(e.target.value)}
         label="pay"
         placeholder="Wage/salary"
       />
