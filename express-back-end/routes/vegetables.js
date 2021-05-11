@@ -15,6 +15,12 @@ const db = require('../db/lib/db');
     })
   }); 
 
+  router.get('/api/:plotId', (req, res) => {
+    getPlantedVeg().then(data =>{
+      res.json(data)
+    })
+  }); 
+
   //helper to select all veg
   const getVeg = () => db.query(`SELECT * FROM vegetables`)
   .then(res => {
@@ -26,5 +32,15 @@ const db = require('../db/lib/db');
   .then(res => {
     return res.rows
   }).catch(err => console.log(err));
+
+// get planted veggies per plot.
+const getPlantedVeg = function() {
+  return db.query(`SELECT * FROM vegetables JOIN plots_vegs ON vegetables.id=plots_vegs.vegetable_id`)
+  .then(res => {
+    return res.rows
+  })
+  .catch(err => console.log(err));
+}
+  
 
 module.exports = router;
