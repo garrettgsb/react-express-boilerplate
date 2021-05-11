@@ -17,6 +17,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import "@fontsource/roboto";
 import { Link } from "react-router-dom";
 import BrushTwoToneIcon from "@material-ui/icons/BrushTwoTone";
+import User from "./User";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -178,7 +179,11 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem>
     </Menu>
   );
-
+  const user = (
+    <div>
+      <User />
+    </div>
+  );
   return (
     <div className={classes.grow}>
       <AppBar position="static" style={{ background: "#2E3B55" }}>
@@ -194,7 +199,7 @@ export default function PrimarySearchAppBar(props) {
 
           {/* inkedin REACT ROUTER LINK TO INDEX */}
           <Link
-            to="/index"
+            to="/art_showcase"
             style={{ textDecoration: "none", color: "lavender" }}
           >
             <Typography className={classes.title} variant="h6" noWrap>
@@ -273,7 +278,7 @@ export default function PrimarySearchAppBar(props) {
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
-                <Badge badgeContent={17} color="secondary">
+                <Badge color="secondary">
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
@@ -288,7 +293,7 @@ export default function PrimarySearchAppBar(props) {
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
-                <Badge badgeContent={17} color="secondary">
+                <Badge color="secondary">
                   <BrushTwoToneIcon />
                 </Badge>
               </IconButton>
@@ -296,7 +301,7 @@ export default function PrimarySearchAppBar(props) {
 
             {/* REACT ROUTER LINK TO PORTFOLIO */}
             <Link
-              to="/my_portfolio"
+              to={`/portfolio/${props.activeUser}`}
               style={{ textDecoration: "none", color: "lavender" }}
             >
               <IconButton

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, createContext, useState } from "react";
 import "./App.css";
 import "@fontsource/roboto";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -10,13 +10,15 @@ import JobsList from "./component/JobsList";
 import JobsListItem from "./component/JobsListItem";
 import PrimarySearchAppBar from "./component/Navbar";
 import FormJobs from "./component/FormJobs";
+import Empty from "./component/Empty";
 
 import useApplicationData from "./hooks/useApplicationData";
 
-export const JobsContext = React.createContext([]);
+export const JobsContext = createContext([]);
 
 export default function App() {
   const { state, setActiveUser } = useApplicationData();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const userLogin = localStorage.getItem("User");
@@ -25,6 +27,10 @@ export default function App() {
       setActiveUser(userFound);
     }
   }, []);
+
+  const onAdd = () => {
+    setShow(true);
+  };
 
   const artworks = (
     <div>
@@ -41,7 +47,14 @@ export default function App() {
         ) : (
           <>
             <JobsList />
-            <FormJobs />
+            {!show ? (
+              <>
+                <Empty onAdd={onAdd} />
+                <h3>Add Job</h3>
+              </>
+            ) : (
+              <FormJobs />
+            )}
           </>
         )}
       </JobsContext.Provider>
@@ -96,6 +109,7 @@ export default function App() {
               <h1>{state.flag && state.jobs[0].pay}</h1> */}
             </div>
           </div>
+          <Artworks art={state.artworks} />
         </div>
         {/* REACT ROUTER LINK TO MESSAGES */}
         <Switch>
@@ -110,6 +124,7 @@ export default function App() {
           <Route path="/art_showcase" render={() => artworks}></Route>
           <Route path="/job_board" render={() => jobBoard}></Route>
           <Route path="/jobs/:id" render={() => job}></Route>
+          {/* <Route path="/" redirect={</Route> */}
         </Switch>
       </Router>
     </div>
