@@ -115,17 +115,22 @@ App.use(Express.static('public'));
 // Hardcoded userId for development
 const userId = '1';
 
-// Sample GET route
-// App.get('/api/data', (req:Request, res:Response) => res.json({
-//   message: "Seems to work!",
-// }));
-App.get('/api/entries', (req: Request, res: Response) => res.json({
-  entries: getEntryByCategory({categoryId: null, userId}),
-}));
-App.get('/api/entries/:id', (req: Request, res: Response) => res.json({
-  entry: getEntryByEntryId({entryId: req.params.id, userId}),
-  entryId: req.params.id
-}));
+App.get('/api/entries', (req: Request, res: Response) => {
+  getEntryByCategory({categoryId: null, userId})
+  .then((data) => {
+    res.json({
+      body: data.rows
+    })
+  })
+});
+App.get('/api/entries/:id', (req: Request, res: Response) => {
+  getEntryByEntryId({entryId: req.params.id, userId})
+  .then((data) => {
+    res.json({
+      body: data.rows
+    })
+  })
+});
 App.get('/api/categories', (req: Request, res: Response) => {
 
   getCategories(userId)
