@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+// import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -20,24 +21,30 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard() {
+
+export default function VegetableCard(props) {
+console.log('test',props)
+
   const classes = useStyles();
 
+
+  
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia />
+        <div> </div>
         <img
           className={classes.media}
-          src={'../images/vegetables/basil.png'}
+          src={props.image_url}
           alt="Basil"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Basil
+            {props.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          Basil is a herb, best grown in 18-30 degrees C. It requires 7 hours of sunlight per day, water once a week, and needs to be spaced 1 foot apart.
+         {props.description}
           </Typography>
         </CardContent>
       </CardActionArea>

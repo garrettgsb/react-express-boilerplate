@@ -3,7 +3,6 @@ const Express = require('express');
 const app = Express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
-// import moment from 'moment';
 const moment = require('moment');
 const db = require('./db/lib/db')
 const maintenenceRoutes = require('./routes/maintenance')
@@ -105,3 +104,5 @@ const getPlots = function() {
 // })
 
 // console.log(test)
+
+

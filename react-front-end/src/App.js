@@ -14,6 +14,8 @@ import VegetableBasket from './Components/VegetableBasket';
 import Maintenance from './Components/Maintenance'
 import Harvest from './Components/Harvest'
 import Weather from './Components/Weather'
+import VegetableCard from './Components/VegetableCard';
+import Vegetables from './Components/Vegetables';
 
 
 const useStyles = makeStyles({
@@ -34,11 +36,10 @@ export default function App() {
       <main 
       className="layout">
 
-
+     
 
       <Route path="/tasks">
         <div className="App">
-          <div>test</div>
           <div className={classes.row}>
             <Maintenance />
             <Harvest />
@@ -48,7 +49,8 @@ export default function App() {
       </Route>
 
       <Route path='/planning'>
-          <Content />
+          <VegetableCard />
+          <Vegetables/>
       </Route>
 
       <Route path='/'>

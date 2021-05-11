@@ -19,7 +19,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import ButtonBases from "./addVeg";
+import ButtonBases from "./VegetableCard";
 
 const drawerWidth = 240;
 
@@ -177,7 +177,7 @@ export default function PersistentDrawerRight() {
                 <ListItemText primary={text} />
                 <Avatar
                   alt="Carrot"
-                  src="/home/joel/lighthouse/Bloom/Bloom_Garden_App/react-front-end/public/carrot_avatar.jpg"
+                  src="images/vegetables/carrots.png"
                 />
               </ListItem>
             )
