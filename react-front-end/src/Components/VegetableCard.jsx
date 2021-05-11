@@ -37,6 +37,7 @@ console.log('test',props)
         <img
           className={classes.media}
           src={props.image_url}
+          alt="COLESTINKS"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

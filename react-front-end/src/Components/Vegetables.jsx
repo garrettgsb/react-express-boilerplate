@@ -1,12 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import VegetableCard from './VegetableCard'
+import VegetableCard from './VegetableCard';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from "@material-ui/core/Grid";
+
 
 export default function Vegetables() {
   const[veg, setVeg] = useState([]);
 
   const url = '/api/vegetables'
+  
+  const useStyles = makeStyles({
+    row: {
+     display: "flex"
+    },
+  
+  });
 
+  const classes = useStyles();
   useEffect(() => {
     getAllVeg();
   }, []);
@@ -14,9 +25,11 @@ export default function Vegetables() {
   const renderVegetableCard = (veg) =>{
     const data = veg.map(element => {
       return (
+        <Grid item md={4}>
         <VegetableCard
-        {...element}
-        /> 
+         {...element}
+        />
+        </Grid>
       )
     }) 
     return data
@@ -36,7 +49,8 @@ export default function Vegetables() {
 
   return (
     
-    <div>{renderVegetableCard(veg)}</div>
+    <Grid container spacing={24}>{renderVegetableCard(veg)}
+    </Grid>
     
   )
-}
+};

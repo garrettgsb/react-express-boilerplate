@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function VegetableBasket() {
+export default function vegBasket() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -184,6 +184,17 @@ export default function VegetableBasket() {
           )}
         </List>
         <Divider />
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "rtl" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+          <h2>slide bb</h2>
+        </div>
+         <Divider />
         <Button variant="contained" color="primary" className ={classes.buildGardenButton}>
           Build My Garden
         </Button>

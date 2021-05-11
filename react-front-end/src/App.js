@@ -14,7 +14,7 @@ import VegetableBasket from './Components/VegetableBasket';
 import Maintenance from './Components/Maintenance'
 import Harvest from './Components/Harvest'
 import Weather from './Components/Weather'
-import VegetableCard from './Components/VegetableCard';
+// import VegetableCard from './Components/VegetableCard';
 import Vegetables from './Components/Vegetables';
 
 
@@ -24,6 +24,12 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     // justifyContent: 'space-between'
   },
+  gridContainer: {
+    paddingLeft: "40px",
+    paddingRight: "40px",
+    justifyContent: "center",
+    spacing: 4,
+  }
 });
 
 export default function App() {
@@ -49,7 +55,10 @@ export default function App() {
       </Route>
 
       <Route path='/planning'>
-          <Vegetables/>
+        <div className= {classes.gr}>
+        <Vegetables/>
+        </div>
+         
       </Route>
 
       <Route path='/'>
