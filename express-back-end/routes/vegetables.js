@@ -16,7 +16,7 @@ const db = require('../db/lib/db');
   }); 
 
   //helper to select all veg
-  const getVeg = () => db.query(`SELECT * FROM vegetables`)
+  const getVeg = () => db.query(`SELECT * FROM vegetables ORDER BY name`)
   .then(res => {
     return res.rows
   }).catch(err => console.log(err));

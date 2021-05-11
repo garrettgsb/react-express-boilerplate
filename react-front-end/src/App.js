@@ -11,7 +11,7 @@ import Sidebar from './Components/Sidebar';
 import Content from './Components/VegetableBasket';
 import { makeStyles } from '@material-ui/core/styles';
 
-// import VegetableBasket from './Components/VegetableBasket';
+import VegetableBasket from './Components/VegetableBasket';
 import Dashboard from './Components/Dashboard'
 
 const useStyles = makeStyles({
