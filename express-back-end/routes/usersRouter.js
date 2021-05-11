@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../lib/db');
 
+
 // GET route to show logged in user profile and posts (Completed)
 router.get("/profile/:userID", (req, res) => {
   return db.query(
@@ -27,23 +28,29 @@ router.post("/profile/:userID", (req, res) => {
   })
 });
 
-const getUserByEmail = (email) => {
-  return db.query(`SELECT * FROM users WHERE email = $1;`, [email])
-    .then(data => data.rows[0])
-    .catch(err => err.message);
-};
+
 // POST route to submit login information to the database (redirect to homepage)
 router.post("/login", (req, res) => {
-  getUserByEmail(req.body.email)
-  .then(user => {
-    const user_id = req.session.user_id;
-    const user_name = req.session.name;
-    // have to check if password matches as well
+  console.log("BODY1", req.body)
+  const email = req.body.username;
+  const password = req.body.password;
+  console.log('LOGINemail', req.body.username)
+  console.log('LOGINpassword', req.body.password)
 
-  })
-  .catch(err => {
-    res.status(500, "Could Not Complete Request")
-  })
+
+  db.query(
+    "SELECT * FROM users WHERE email = $1 AND password = $2;", [email, password],
+    (err, result) => {
+      if(err) {
+        res.send({err: err})
+      }
+        if (result) {
+          res.send(result);
+        } else {
+          res.send({ message: "Wrong username/password combination!"});
+        }
+    }
+  )
 });
 
 
@@ -52,12 +59,23 @@ router.post("/login", (req, res) => {
 //DON'T NEED REGISTER ROUTE RN, UNLESS SHOWING REGISTER IN MVD
 // POST route to submit registration information to the database (redirect to homepage)
 router.post("/register", (req, res) => {
-  //need the email, password, name from field
-    //check if email is taken or not
-      //if not taken, insert query
-        //encrypt password
-          //json web token
-        //write helper function to encrypt password
+  console.log('name', req.body.name)
+  console.log('email', req.body.username)
+  console.log('password', req.body.password)
+  const email = req.body.username;
+  const password = req.body.password;
+  const name = req.body.name;
+
+  db.query(
+    "INSERT INTO users (name, email, password) VALUES ($1, $2, $3)", [name, email, password],
+    (err, result) => {
+      if(err) {
+        console.log('Unsuccessful Registration');
+      } else {
+        console.log('Successful Registration');
+      }
+    }
+  )
 });
 
 

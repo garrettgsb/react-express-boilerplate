@@ -6,12 +6,14 @@ const db = require('./lib/db')
 const router = Express.Router();
 // const cookieSession = require('cookie-session');
 const session = require('express-session')
+const cors = require('cors');
 
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
+App.use(cors());
 // App.use(cookieSession({
 //   name: 'session',
 //   keys: ['guestID', 'userID'],
