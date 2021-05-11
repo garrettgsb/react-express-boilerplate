@@ -81,8 +81,20 @@ const getCategories = (userId: string) => {
 };
 
 const getUserByUserId = (id: string) => {
-  const query = `SELECT * FROM users
-  WHERE id = $1;`;
+  const query = `
+  SELECT users.*,
+  fonts.script as body_script,
+  title.script as title_script
+  FROM users 
+  JOIN fonts ON users.body_font_id = fonts.id 
+  JOIN (
+    SELECT fonts.*, users.id as user_id
+    FROM users 
+    JOIN fonts ON users.title_font_id = fonts.id 
+    WHERE users.id = $1
+  ) as title
+  ON users.id = title.user_id
+    WHERE users.id = $1;`;
   const queryParams = [id];
   return pool.query(query, queryParams);
 };
