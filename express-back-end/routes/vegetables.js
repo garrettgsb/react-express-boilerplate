@@ -15,11 +15,7 @@ const db = require('../db/lib/db');
     })
   }); 
 
-  router.get('/api/:plotId', (req, res) => {
-    getPlantedVeg().then(data =>{
-      res.json(data)
-    })
-  }); 
+
 
   //helper to select all veg
   const getVeg = () => db.query(`SELECT * FROM vegetables`)
