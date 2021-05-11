@@ -10,10 +10,10 @@ import {
 import Sidebar from './Components/Sidebar';
 import Content from './Components/VegetableBasket';
 import { makeStyles } from '@material-ui/core/styles';
-import VegetableBasket from './Components/VegetableBasket';
-import Maintenance from './Components/Maintenance'
-import Harvest from './Components/Harvest'
-import Weather from './Components/Weather'
+
+// import VegetableBasket from './Components/VegetableBasket';
+import Dashboard from './Components/Dashboard'
+
 
 
 const useStyles = makeStyles({
@@ -26,23 +26,18 @@ const useStyles = makeStyles({
 
 export default function App() {
   const classes = useStyles();
-
+  const cityId = 6173331;
 
     return (
     <Router>
       <Switch>
       <main className="layout">
 
-
-
       <Route path="/tasks">
         <div className="App">
           <div className={classes.row}>
-            <Maintenance />
-            <Harvest />
-          </div>
-          <Weather />
-        </div>
+            <Dashboard />
+            
       </Route>
 
       <Route path='/planning'>
@@ -61,5 +56,3 @@ export default function App() {
     </Router>
     );
   }
-
-
