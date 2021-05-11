@@ -8,8 +8,20 @@ App.use(Express.json());
 App.use(Express.static('public'));
 
 // Sample GET route
-App.get('/api/data', (req:Request, res:Response) => res.json({
-  message: "Seems to work!",
+// App.get('/api/data', (req:Request, res:Response) => res.json({
+//   message: "Seems to work!",
+// }));
+App.get('/api/entries', (req:Request, res:Response) => res.json({
+  message: "Will query for entries!",
+}));
+App.get('/api/entries/:id', (req:Request, res:Response) => res.json({
+  message: "Will query for that entry!",
+}));
+App.get('/api/categories', (req:Request, res:Response) => res.json({
+  message: "Will query for categories!",
+}));
+App.get('/api/categories/id', (req:Request, res:Response) => res.json({
+  message: "Will query for entries under that category!",
 }));
 
 App.listen(PORT, () => {
