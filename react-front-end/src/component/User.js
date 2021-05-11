@@ -46,7 +46,7 @@ export default function User(props) {
         <Form />
       </div>
       <div className="profile">{portfolio[0] && portfolio[0].username}</div>
-      {id == props.activeUser && <div>add Image</div>}
+      {id === `${props.activeUser}` && <div>add Image</div>}
       <div>add another image</div>
       <Artworks art={portfolio} />
     </div>

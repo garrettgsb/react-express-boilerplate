@@ -1,8 +1,8 @@
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
-const PORT = 8080;
-// const PORT = 3003;
+// const PORT = 8080;
+const PORT = 3003;
 const db = require("./lib/db");
 
 // Express Configuration
@@ -118,12 +118,16 @@ App.get("/api/jobs/:id", (req, res) => {
     });
 });
 
-App.get("/api/messages", (req, res) => {
-  const data = db.query("SELECT * FROM messages").then((response) => {
-    res.json({
-      messages: response.rows,
+App.get("/api/messages/:id", (req, res) => {
+  const data = db
+    .query("SELECT * FROM messages WHERE sender_id = $1 OR receiver_id = $1", [
+      req.params.id,
+    ])
+    .then((response) => {
+      res.json({
+        messages: response.rows,
+      });
     });
-  });
 });
 
 App.listen(PORT, () => {

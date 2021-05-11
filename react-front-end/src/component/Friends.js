@@ -17,7 +17,7 @@ export default function Friends(props) {
 
   return (
     <div>
-      <Messenger />
+      <Messenger activeUser={props.activeUser} />
       {friends[0] && <p> Friends loaded </p>}
       <div className="Friend">You have reached the friend route</div>
     </div>

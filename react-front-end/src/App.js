@@ -4,12 +4,10 @@ import "@fontsource/roboto";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import User from "./component/User";
-import Artwork from "./component/Artwork";
 import Artworks from "./component/Artworks";
 import Friends from "./component/Friends";
-import Jobs from "./component/Jobs";
-import Job from "./component/Job";
-import Message from "./component/Message";
+import Jobs from "./component/JobsList";
+import Job from "./component/JobsListItem";
 import PrimarySearchAppBar from "./component/Navbar";
 
 import useApplicationData from "./hooks/useApplicationData";
@@ -26,8 +24,6 @@ export default function App() {
       setActiveUser(userFound);
     }
   }, []);
-
-  // console.log("login", state);
 
   const artworks = (
     <div>

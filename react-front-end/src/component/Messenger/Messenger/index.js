@@ -1,12 +1,12 @@
-import React from 'react';
-import ConversationList from '../ConversationList';
-import MessageList from '../MessageList';
-import './Messenger.css';
+import React from "react";
+import ConversationList from "../ConversationList";
+import MessageList from "../MessageList";
+import "./Messenger.css";
 
 export default function Messenger(props) {
-    return (
-      <div className="messenger">
-        {/* <Toolbar
+  return (
+    <div className="messenger">
+      {/* <Toolbar
           title="Messenger"
           leftItems={[
             <ToolbarButton key="cog" icon="ion-ios-cog" />
@@ -16,7 +16,7 @@ export default function Messenger(props) {
           ]}
         /> */}
 
-        {/* <Toolbar
+      {/* <Toolbar
           title="Conversation Title"
           rightItems={[
             <ToolbarButton key="info" icon="ion-ios-information-circle-outline" />,
@@ -25,13 +25,13 @@ export default function Messenger(props) {
           ]}
         /> */}
 
-        <div className="scrollable sidebar">
-          <ConversationList />
-        </div>
-
-        <div className="scrollable content">
-          <MessageList />
-        </div>
+      <div className="scrollable sidebar">
+        <ConversationList activeUser={props.activeUser} />
       </div>
-    );
+
+      <div className="scrollable content">
+        <MessageList activeUser={props.activeUser} />
+      </div>
+    </div>
+  );
 }
