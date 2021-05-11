@@ -25,10 +25,7 @@ export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     users: [],
     artworks: [],
-    friends: [],
     jobs: [],
-    messages: [],
-    flag: false,
     activeUser: 0,
   });
 
@@ -41,11 +38,11 @@ export default function useApplicationData() {
   };
 
   useEffect(() => {
+    const userLogin = localStorage.getItem("User");
     Promise.all([
       axios.get(`/api/users`),
       axios.get(`/api/artworks`),
       axios.get(`/api/jobs`),
-      axios.get(`/api/messages`),
     ]).then((all) => {
       dispatch({
         type: SET_APPLICATION_DATA,
@@ -53,12 +50,17 @@ export default function useApplicationData() {
           users: all[0].data.users,
           artworks: all[1].data.artworks,
           jobs: all[2].data.jobs,
-          messages: all[3].data.messages,
-          flag: true,
         },
       });
+      if (userLogin) {
+        const userFound = JSON.parse(userLogin);
+        setActiveUser(userFound);
+      }
     });
   }, []);
 
-  return { state, setActiveUser };
+  return {
+    state,
+    setActiveUser,
+  };
 }

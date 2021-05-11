@@ -37,7 +37,16 @@ export default function ConversationList(props) {
       />
       <ConversationSearch />
       {conversations.map((conversation) => (
-        <ConversationListItem key={conversation.username} data={conversation} />
+        <ConversationListItem
+          key={conversation.username}
+          data={conversation}
+          onClick={() =>
+            props.setActiveConversation([
+              conversation.first_id,
+              conversation.second_id,
+            ])
+          }
+        />
       ))}
     </div>
   );
