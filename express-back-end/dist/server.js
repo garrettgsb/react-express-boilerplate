@@ -15,23 +15,19 @@ const getEntryByCategory = (attributes) => {
     let queryStart = 'SELECT ';
     let queryMid = ' FROM entries';
     let queryEnd = ' WHERE entries.user_id = $1';
-    if (!categoryId || categoryId === '0') {
+    if (categoryId === '0') {
         queryStart += '*';
+        queryEnd += ` AND category_id IS NULL`;
     }
-    if (categoryId) {
-        queryEnd += ' AND category_id ';
-        if (categoryId !== '0') {
-            queryStart += 'entries.*, categories.name as category_name';
-            queryMid += ' JOIN categories ON entries.category_id = categories.id';
-            queryEnd += `= $2`;
+    else {
+        queryStart += 'entries.*, categories.name as category_name';
+        queryMid += ' JOIN categories ON entries.category_id = categories.id';
+        if (categoryId) {
+            queryEnd += ' AND category_id = $2';
             queryParams.push(categoryId);
-        }
-        if (categoryId === '0') {
-            queryEnd += `IS NULL`;
         }
     }
     let query = queryStart + queryMid + queryEnd;
-    console.log(query);
     return pool.query(query, queryParams);
 };
 const getEntryByEntryId = (attributes) => {
