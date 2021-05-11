@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 
 const lat = 49.2497;
 const lon = -123.1193;
-const cityId = 6173331;
+// const cityId = 6173331;
 const apiKey = 'f2970ccf10fb5df7afd096a5f96ab733';
 // const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKey}`;
 const weatherUrlCF = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={hourly}&appid=${apiKey}`

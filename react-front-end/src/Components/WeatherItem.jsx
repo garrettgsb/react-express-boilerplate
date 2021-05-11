@@ -64,7 +64,7 @@ export default function WeatherItem(props) {
           <div className={classes.weatherName}>
             {props.description}
           </div>
-          <img className={classes.weatherIcon} src={`http://openweathermap.org/img/w/${props.icon}.png`} />
+          <img className={classes.weatherIcon} src={`http://openweathermap.org/img/w/${props.icon}.png`} alt={''}/>
           <div>
             <strong>{kelvinToCelcius(props.tempMax)}&deg;C / {kelvinToCelcius(props.tempMin)}&deg;C</strong>
           </div>

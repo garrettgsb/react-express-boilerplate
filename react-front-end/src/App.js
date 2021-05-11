@@ -10,7 +10,7 @@ import {
 import Sidebar from './Components/Sidebar';
 import Content from './Components/VegetableBasket';
 import { makeStyles } from '@material-ui/core/styles';
-
+import VegetablesAbout from './Components/VegetablesAbout';
 import VegetableBasket from './Components/VegetableBasket';
 import Dashboard from './Components/Dashboard'
 
@@ -39,6 +39,9 @@ export default function App() {
           </Route>
           <Route path='/planning'>
             <Content />
+          </Route>
+          <Route path='/vegetables'>
+            <VegetablesAbout />
           </Route>
 
           <Route path='/'>
