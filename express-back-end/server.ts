@@ -11,17 +11,19 @@ App.use(Express.static('public'));
 // App.get('/api/data', (req:Request, res:Response) => res.json({
 //   message: "Seems to work!",
 // }));
-App.get('/api/entries', (req:Request, res:Response) => res.json({
+App.get('/api/entries', (req: Request, res: Response) => res.json({
   message: "Will query for entries!",
 }));
-App.get('/api/entries/:id', (req:Request, res:Response) => res.json({
+App.get('/api/entries/:id', (req: Request, res: Response) => res.json({
   message: "Will query for that entry!",
+  id: req.params.id
 }));
-App.get('/api/categories', (req:Request, res:Response) => res.json({
+App.get('/api/categories', (req: Request, res: Response) => res.json({
   message: "Will query for categories!",
 }));
-App.get('/api/categories/id', (req:Request, res:Response) => res.json({
+App.get('/api/categories/:id', (req: Request, res: Response) => res.json({
   message: "Will query for entries under that category!",
+  id: req.params.id
 }));
 
 App.listen(PORT, () => {

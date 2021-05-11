@@ -9,12 +9,14 @@ App.get('/api/entries', (req, res) => res.json({
 }));
 App.get('/api/entries/:id', (req, res) => res.json({
     message: "Will query for that entry!",
+    id: req.params.id
 }));
 App.get('/api/categories', (req, res) => res.json({
     message: "Will query for categories!",
 }));
-App.get('/api/categories/id', (req, res) => res.json({
+App.get('/api/categories/:id', (req, res) => res.json({
     message: "Will query for entries under that category!",
+    id: req.params.id
 }));
 App.listen(PORT, () => {
     console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
