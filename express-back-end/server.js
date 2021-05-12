@@ -1,8 +1,8 @@
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
-const PORT = 8080;
-// const PORT = 3003;
+// const PORT = 8080;
+const PORT = 3003;
 const db = require("./lib/db");
 
 // Express Configuration
@@ -112,7 +112,6 @@ App.get("/api/jobs/:id", (req, res) => {
 });
 
 App.put("/api/jobs", (req, res) => {
-  console.log(req.body);
   const { title, description, pay, company, location, id } = req.body;
   const data = db
     .query(
@@ -120,7 +119,6 @@ App.put("/api/jobs", (req, res) => {
       [title, description, pay, company, location, id]
     )
     .then((response) => {
-      console.log("pirateBooty", response);
       res.json({
         jobs: response.rows,
       });
@@ -132,6 +130,20 @@ App.get("/api/messages/:first_id/:second_id", (req, res) => {
     .query(
       "SELECT * FROM messages WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)",
       [req.params.first_id, req.params.second_id]
+    )
+    .then((response) => {
+      res.json({
+        messages: response.rows,
+      });
+    });
+});
+
+App.put("/api/messages", (req, res) => {
+  const { sender_id, receiver_id, message } = req.body;
+  const data = db
+    .query(
+      `INSERT INTO messages (sender_id, receiver_id, message) VALUES ($1, $2, $3)`,
+      [sender_id, receiver_id, message]
     )
     .then((response) => {
       res.json({

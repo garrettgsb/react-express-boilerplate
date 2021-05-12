@@ -34,6 +34,22 @@ export default function MessageList(props) {
       });
   };
 
+  const addMessage = (message) => {
+    const messagePromise =
+      props.activeConversation[0] === props.activeUser
+        ? axios.put("/api/messages", {
+            sender_id: props.activeConversation[0],
+            receiver_id: props.activeConversation[1],
+            message,
+          })
+        : axios.put("/api/messages", {
+            sender_id: props.activeConversation[1],
+            receiver_id: props.activeConversation[0],
+            message,
+          });
+    messagePromise.then(() => getMessages());
+  };
+
   const renderMessages = () => {
     let i = 0;
     let messageCount = messages.length;
@@ -112,6 +128,7 @@ export default function MessageList(props) {
       <div className="message-list-container">{renderMessages()}</div>
 
       <Compose
+        addMessage={addMessage}
         rightItems={[
           <ToolbarButton key="photo" icon="ion-ios-camera" />,
           <ToolbarButton key="image" icon="ion-ios-image" />,
