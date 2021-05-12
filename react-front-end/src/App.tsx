@@ -4,8 +4,10 @@ import './styles/App.css';
 import Home from './components/Home';
 import Categories from './components/Categories';
 import Entries from './components/Entries';
-import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './components/menu/Navbar';
+import Graphs from './components/Graphs';
+import Settings from './components/Settings';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { UserContext } from './hooks/UserContext';
 
 const App = () => {
@@ -23,20 +25,23 @@ const App = () => {
   }, [])
   return (
     <div className="App">
-      <h2>Advanced React</h2>
+      <h2>Chronicle</h2>
       <UserContext.Provider value={{ userRef }}>
-      {<Router>
-        <Navbar />
+        <Router>
+          <Navbar />
 
-        <Switch>
-          <Route path="/Categories" component={Categories} />
-          <Route path="/entires" component={Entries} />
-          <Route path="/">
-            <Home message="hello there" />
-          </Route>
-        </Switch>
 
-      </Router>}
+
+          <Switch>
+            <Route path="/categories" component={Categories} />
+            <Route path="/entries" component={Entries} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/graphs" component={Graphs} >
+            <Route path="/home" component={Home} />
+            <Redirect to='/' />
+            </Route>
+          </Switch>
+        </Router >
       </UserContext.Provider>
     </div>
   );
