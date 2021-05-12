@@ -193,6 +193,40 @@ App.put("/api/jobs", (req, res) => {
     });
 });
 
+// App.put("/api/jobs/", (req, res) => {
+//   const { title, description, pay, company, location, id } = req.body;
+//   const data = db
+//     .query(
+//       `INSERT INTO jobs (title, description, pay, company, location, user_id) VALUES ($1, $2, $3, $4, $5, $6)
+//       ON CONFLICT (title, user_id)
+//       DO UPDATE SET
+//       EXCLUDED.user_id;`,
+//       [title, description, pay, company, location, id]
+//     )
+//     .then((response) => {
+//       res.json({
+//         jobs: response.rows,
+//       });
+//     });
+// });
+
+// THIS EDITS A JOB
+App.put("/api/jobs/:job_id", (req, res) => {
+  const { title, description, pay, company, location, id } = req.body;
+  const data = db
+    .query(
+      `UPDATE jobs SET title=$2, description=$3, pay=$4, company=$5, location=$6, user_id=$7
+      WHERE id = $1;
+           `,
+      [req.params.job_id, title, description, pay, company, location, id]
+    )
+    .then((response) => {
+      res.json({
+        jobs: response.rows,
+      });
+    });
+});
+
 // THIS DELETES A JOB
 App.delete("/api/jobs/:id", (req, res) => {
   const { id } = req.params;

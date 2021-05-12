@@ -5,7 +5,16 @@ import "./Messenger.css";
 import useApplicationData from "../../../hooks/useApplicationData";
 
 export default function Messenger(props) {
-  const [activeConversation, setActiveConversation] = useState([0, 0]);
+  const conversation = localStorage.getItem("activeConversation").split(",");
+  if (conversation[0] === conversation[1]) {
+    conversation[0] = 0;
+    conversation[1] = 0;
+  }
+  const [activeConversation, setActiveConversation] = useState([
+    conversation[0],
+    conversation[1],
+  ]);
+  localStorage.setItem("activeConversation", [0, 0]);
   const { state } = useApplicationData();
 
   return (

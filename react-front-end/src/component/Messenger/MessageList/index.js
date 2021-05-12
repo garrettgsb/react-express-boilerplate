@@ -4,9 +4,8 @@ import Toolbar from "../Toolbar";
 import ToolbarButton from "../ToolbarButton";
 import Message from "../Message";
 import moment from "moment";
-
 import axios from "axios";
-
+import useInterval from "../../../util/useInterval";
 import "./MessageList.css";
 export default function MessageList(props) {
   const [messages, setMessages] = useState([]);
@@ -14,6 +13,10 @@ export default function MessageList(props) {
   useEffect(() => {
     getMessages();
   }, [props.activeConversation]);
+
+  useInterval(() => {
+    getMessages();
+  }, 1000);
 
   const getMessages = () => {
     axios

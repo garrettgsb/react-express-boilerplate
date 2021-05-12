@@ -25,19 +25,33 @@ const useStyles = makeStyles({
 export default function BasicTable(props) {
   const { state, setJobs, setUserJobs } = useApplicationData();
   const [show, setShow] = useState(false);
+  const [editShow, setEditShow] = useState(false);
+  const [jobId, setJobId] = useState();
 
   const jobForm = () => {
     setShow(true);
   };
   const NO_ACTIVE_USER = 0;
 
-  const onClick = (id) => {
+  const onEdit = (id) => {
+    setEditShow(true);
+    setJobId(id);
+    // axios.put('/api/jobs/')
+  };
+
+  const onDelete = (id) => {
     axios.delete(`/api/jobs/${id}`).then(() => {
       setUserJobs();
       setJobs();
     });
   };
-
+  const onEditSubmit = (job) => {
+    axios.put(`/api/jobs/${jobId}`, job).then(() => {
+      setJobs();
+      setUserJobs();
+      setEditShow(false);
+    });
+  };
   const onSubmit = (job) => {
     axios.put(`/api/jobs`, job).then(() => {
       setJobs();
@@ -89,12 +103,17 @@ export default function BasicTable(props) {
       <br />
       <br />
       <br />
-      {state.activeUser !== 0 && <MyJobsList state={state} onClick={onClick} />}
+      {state.activeUser !== 0 && (
+        <MyJobsList state={state} onDelete={onDelete} onEdit={onEdit} />
+      )}
       {state.activeUser !== NO_ACTIVE_USER && !show && (
         <Empty onAdd={jobForm} />
       )}
       {state.activeUser !== NO_ACTIVE_USER && show && (
         <FormJobs onSubmit={onSubmit} activeUser={state.activeUser} />
+      )}
+      {state.activeUser !== NO_ACTIVE_USER && editShow && (
+        <FormJobs onSubmit={onEditSubmit} activeUser={state.activeUser} />
       )}
     </div>
   );
