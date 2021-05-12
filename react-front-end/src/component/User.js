@@ -7,36 +7,8 @@ import styled from "styled-components";
 import ProfilePic from "./ProfilePic";
 import { makeStyles } from "@material-ui/core/styles";
 import Empty from "./Empty";
-import UserInfoGrid from "./UserInfoGrid";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     maxWidth: "550",
-//     height: "auto",
-//     "&:hover": {
-//       opacity: 0.9,
-//     },
-//   },
-//   media: {
-//     height: 350,
-//   },
-//   container: {
-//     width: "100%",
-//     paddingLeft: "50px",
-//     paddingRight: "50px",
-//     paddingTop: "50px",
-//   },
-//   grid: {
-//     flexGrow: 1,
-//   },
-//   paper: {
-//     padding: theme.spacing(1),
-//     textAlign: "center",
-//     color: theme.palette.text.secondary,
-//   },
-// }));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,48 +46,6 @@ export default function User(props) {
     });
   }, []);
 
-  //   return (
-  //     <div>
-  //       <div>
-  //         {" "}
-  //         <UserInfoGrid />{" "}
-  //       </div>
-  //       <div className={classes.container}>
-  //         {portfolio[0] && <ProfilePic userInfo={portfolio[0]} />}
-  //         {id === `${props.activeUser}` && !art && <Empty onAdd={addArt} />}
-  //         {id === `${props.activeUser}` && art && <Form />}
-  //         <div>{portfolio[0] && portfolio[0].username}</div>
-  //         <div>{portfolio[0] && portfolio[0].first_name}</div>
-  //         <div>{portfolio[0] && portfolio[0].last_name}</div>
-  //         <div>{portfolio[0] && portfolio[0].cool_fact}</div>
-  //       </div>
-  //       <Artworks art={portfolio} />
-  //     </div>
-  //   );
-  // }
-
-  // import Paper from "@material-ui/core/Paper";
-  // import Grid from "@material-ui/core/Grid";
-
-  // export default function UserInfoGrid() {
-  //   const classes = useStyles();
-
-  //   function FormRow() {
-  //     return (
-  //       <React.Fragment>
-  //         <Grid item xs={4}>
-  //           <Paper className={classes.paper}>item</Paper>
-  //         </Grid>
-  //         <Grid item xs={4}>
-  //           <Paper className={classes.paper}>item</Paper>
-  //         </Grid>
-  //         <Grid item xs={4}>
-  //           <Paper className={classes.paper}>item</Paper>
-  //         </Grid>
-  //       </React.Fragment>
-  //     );
-  //   }
-  // function FormRow() {
   return (
     <div className={classes.root}>
       <Grid
