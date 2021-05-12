@@ -2,12 +2,11 @@
 
 .App {
   text-align: center;
-
+  background-color: #Ceedd2;
 }
 
 // Home Page 
 .MoodsPage{
- 
 display: flex;
 flex-direction: column;
 
@@ -81,6 +80,7 @@ a:hover, a:active {
   display: flex;
   justify-content: space-between;
   height: 75px;
+  background-color: #4D4580;
 
   .Buttons {
     display: flex;
@@ -150,8 +150,253 @@ a:hover{
   transform: scale(1.1);
   box-shadow: 1px 1px 5px rgb(39, 39, 39);
 }
+.Heart {
+  color: white;
+  padding-left: 87%;
+  margin-top: -30px;
+  font-size: 1.4rem;
 }
 }
+
+
+// Profile Page
+.UserProfile {
+
+  .NameAndPhoto {
+    margin-top: 40px;
+  }
+  .NameAndEdit {
+    display: flex;
+    margin-left: 25%;
+  }
+  .UserName {
+    margin-top: -5px;
+  }
+  .EditIcon {
+    padding-left: 10px;
+    opacity: .6;
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+  } 
+  hr {
+    width: 70%;
+  }
+  .ResourceBox {
+    display: flex;
+    flex-direction: column;
+    width: 330px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    height: auto;
+    background-color: #61c3d4;
+    border: 1px solid lightgrey;
+  }
+  
+  h4 {
+    color: white;
+    margin-bottom: -15px;
+    margin-top: 10px;
+  }
+  h6 {
+    color: white;
+    opacity: 0.7;
+  }
+  
+  h5 {
+    color: white;
+    margin: 1px 1px;
+  
+  }
+  a {
+    text-decoration: none;
+    color: #61c3d4;
+    font-weight: 600;
+    border: 1px solid rgb(150, 150, 150);
+    margin: 10px 70px 0;
+    padding: 10px;
+    background-color: white;
+    transition: all .2s ease-in-out;
+  }
+  a:hover{
+    transform: scale(1.1);
+    box-shadow: 1px 1px 5px rgb(39, 39, 39);
+  }
+  .Heart {
+    color: #4D4580;
+    padding-left: 87%;
+    margin-top: -30px;
+    font-size: 1.4rem;
+  }
+  .NewNote {
+    margin-left: 40px;
+    width: 70%;
+
+    .SubmitNote {
+      background-color: #61c3d4;
+      text-decoration: none;
+      border-color: white;
+      color: white;
+      font-weight: bold;
+      margin-top: 5px;
+      margin-left: -160px;
+      margin-bottom: 20px;
+    }
+  }
+  .inp {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 280px;
+  border-radius: 3px;
+  overflow: hidden;
+
+  .label {
+    position: absolute;
+    top: 20px;
+    left: 5px;
+    margin-top: -50px;
+    font-size: 16px;
+    font-weight: bolder;
+    color: white;
+    transform-origin: 0 0;
+    transform: translate3d(0,0,0);
+    transition: all .2s ease;
+    pointer-events: none;
+    
+  }
+  .focus-bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  input{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+  padding: 16px 12px 0 12px;
+  height: 56px;
+  font-size: 16px;
+  background-color: lightgrey;
+  font-weight: 400;
+  transition: all .15s ease;
+  &:hover {
+  background: rgb(151, 151, 151);
+  }
+  &:focus {
+
+  outline: none;
+
+  + .label {
+
+    transform:  scale(.75);
+    + .focus-bg{
+      transform: scaleX(1);
+      transition: all .1s ease;
+    }
+  }
+  }
+}
+.PencilIcon {
+  font-size: 1rem;
+}
+}
+.PostedNote{
+  display: flex;
+    flex-direction: column;
+    width: 330px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    height: auto;
+    background-color: #61c3d4;
+    border: 1px solid lightgrey;
+    color: white;
+    font-weight: bold;
+}
+.EditTrashIcon {
+  display: flex;
+  flex-direction: row;
+  margin-left: 80%;
+  margin-bottom: -10px;
+
+  .TrashIcon {
+    margin: 5px;
+  }
+  .EditIcon {
+    margin: 5px;
+  }
+}
+}
+.HomeAnimation{
+ 
+ h1{
+   color: white;
+   font-size: 3.5rem;
+   font-weight: 200;
+   margin-top: 0;
+   position: absolute;
+   right:60px;
+   top: 70px;
+   text-shadow: 1px 3px 2px #c4c4c4;
+   border-bottom: 1px solid white;
+  padding-bottom: 2px;
+  letter-spacing: 10px;
+ }
+ h3 {
+  color: white;
+  font-size: 2rem;
+  font-weight: 300;
+  margin-top: 0;
+  position: absolute;
+  right:90px;
+  width: 200px;
+  bottom: 110px;
+  opacity: 0.8;
+  text-shadow: 1px 3px 2px #c4c4c4;
+ }
+}
+.LoadingAnimation{
+ 
+ h1{
+   color: white;
+   font-size: 3rem;
+   font-weight: 200;
+   margin-top: 0;
+   position: absolute;
+   right:90px;
+   top: 120px;
+   text-shadow: 1px 2px 2px #a7a5a5;
+  padding-bottom: 2px;
+  letter-spacing: 5px;
+ }
+ h3 {
+  color: white;
+  font-size: 2rem;
+  font-weight: 300;
+  margin-top: 0;
+  position: absolute;
+  right:90px;
+  width: 200px;
+  bottom: 150px;
+  opacity: 0.8;
+  text-shadow: 1px 2px 2px #a7a7a7;
+ }
+}
+}
+
+
 
 
 
