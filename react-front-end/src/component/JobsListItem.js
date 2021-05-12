@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
 export default function Job(props) {
   let { id } = useParams();
+  const history = useHistory();
 
   const addFriend = () => {
     const friend = {
@@ -13,6 +14,7 @@ export default function Job(props) {
     axios.put(`/api/friends`, friend).then(() => {
       window.location.reload();
     });
+    history.push("/messages");
   };
 
   const [job, setJob] = useState({});
