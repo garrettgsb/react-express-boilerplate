@@ -6,38 +6,49 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { useContext } from "react";
+import { useContext, useParams, useState, useEffect } from "react";
 import { JobsContext } from "../App.js";
 import { Link } from "react-router-dom";
-import FormJobs from "./FormJobs";
-import MyJobsList from "./MyJobsList";
+import Paper from "@material-ui/core/Paper";
+import axios from "axios";
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-// const rows = [
-//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-//   createData("Eclair", 262, 16.0, 24, 6.0),
-//   createData("Cupcake", 305, 3.7, 67, 4.3),
-//   createData("Gingerbread", 356, 16.0, 49, 3.9),
-// ];
+// let { id } = useParams();
 
 export default function BasicTable(props) {
+  const [myJobs, setmyJobs] = useState([]);
+
+  const onClick = (id) => {
+    console.log("PROPS ::", props);
+    axios.delete(`/api/jobs/${id}`).then(() => {
+      window.location.reload();
+    });
+  };
+
+  // console.log("user", typeof props.activeUser);
+  // console.log("id", typeof id);
+  useEffect(() => {
+    console.log("PROPS ::", props);
+
+    axios.get(`/api/jobs/1`).then((res) => {
+      console.log("pirate treasure", res.data);
+      setmyJobs(res.data.jobData);
+    });
+  }, []);
+
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 650,
+    },
+  });
   const classes = useStyles();
-  const value = useContext(JobsContext);
+  // const value = useContext(JobsContext);
+  console.log("myJobs ======= ", myJobs);
+  const value = myJobs;
 
   return (
     <div>
       <div>{/* <FormJobs /> */}</div>
+      <h1>My Jobs </h1>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -61,16 +72,18 @@ export default function BasicTable(props) {
                 <TableCell align="right">{row.pay}</TableCell>
                 <TableCell align="right">{row.company}</TableCell>
                 <TableCell align="right">{row.location}</TableCell>
+                <button
+                  type="submit"
+                  method="delete"
+                  onClick={() => onClick(row.id)}
+                >
+                  Delete
+                </button>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <br />
-      <br />
-      <br />
-      <br />
-      {props.activeUser !== 0 && <MyJobsList />}
     </div>
   );
 }

@@ -11,8 +11,10 @@ import JobsListItem from "./component/JobsListItem";
 import PrimarySearchAppBar from "./component/Navbar";
 import FormJobs from "./component/FormJobs";
 import Empty from "./component/Empty";
+import MyJobsList from "./component/MyJobsList";
 
 import useApplicationData from "./hooks/useApplicationData";
+import { PinDropSharp } from "@material-ui/icons";
 
 export const JobsContext = createContext([]);
 export const ArtWorksContext = createContext([]);
@@ -34,7 +36,9 @@ export default function App() {
 
   const jobBoard = (
     <JobsContext.Provider value={state.jobs}>
-      <JobsList />
+      <JobsList activeUser={state.activeUser} />
+      <br />
+
       {state.activeUser !== NO_ACTIVE_USER && !show && (
         <Empty onAdd={jobForm} />
       )}
@@ -64,9 +68,19 @@ export default function App() {
             path="/portfolio/:id"
             render={() => <User activeUser={state.activeUser} />}
           />
-          <Route path="/job_board" render={() => jobBoard} />
+          <Route
+            path="/job_board"
+            activeUser={state.activeUser}
+            render={() => jobBoard}
+          />
           <Route path="/jobs/:id" render={() => job} />
-          <Route path="/" render={() => artworks} />
+          <Route
+            path="/myJobs"
+            render={() => (
+              <MyJobsList jobs={state.jobs} activeUser={state.activeUser} />
+            )}
+          />
+          <Route path="/" exact render={() => artworks} />
         </Switch>
       </Router>
     </div>

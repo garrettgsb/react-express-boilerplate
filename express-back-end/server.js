@@ -18,6 +18,7 @@ App.get("/api/users", (req, res) => {
   });
 });
 
+// THIS GETS A USERs ARTWORKS
 App.get("/api/users/:id", (req, res) => {
   const data = db
     .query(
@@ -32,6 +33,38 @@ App.get("/api/users/:id", (req, res) => {
     .then((response) => {
       res.json({
         portfolio: response.rows,
+      });
+    });
+});
+
+// THIS GETS A USERs JOBS
+App.get("/api/jobs/:id", (req, res) => {
+  const data = db
+    .query(
+      `
+    SELECT * 
+    FROM users 
+    JOIN jobs ON users.id = user_id
+    WHERE users.id = $1;
+    `,
+      [req.params.id]
+    )
+    .then((response) => {
+      res.json({
+        jobData: response.rows,
+      });
+    });
+});
+
+// THIS DELETES A JOB
+App.delete("/api/jobs/:id", (req, res) => {
+  console.log("req.params ", req.params);
+  const { id } = req.params;
+  const data = db
+    .query(`DELETE FROM jobs WHERE id = $1;`, [id])
+    .then((response) => {
+      res.json({
+        jobs: response.rows,
       });
     });
 });
@@ -53,6 +86,17 @@ App.put("/api/artworks", (req, res) => {
       `INSERT INTO artworks (author_id, title, img_link, project_link, descrip, for_sale, price) VALUES ($1, $2, $3, $4, $5, $6, $7);`,
       [id, title, imgLink, projectLink, description, forSale, price]
     )
+    .then((response) => {
+      res.json({
+        artworks: response.rows,
+      });
+    });
+});
+
+App.delete("/api/artworks/:id", (req, res) => {
+  const { id } = req.params;
+  const data = db
+    .query(`DELETE FROM artworks WHERE id = $1;`, [id])
     .then((response) => {
       res.json({
         artworks: response.rows,

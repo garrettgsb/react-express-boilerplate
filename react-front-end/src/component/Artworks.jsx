@@ -34,12 +34,15 @@ export default function Artworks(props) {
             return (
               <Grid item xs={12} sm={6} md={4}>
                 <Artwork
+                  id={artpiece.id}
                   title={artpiece.title}
                   image={artpiece.img_link}
                   description={artpiece.descrip}
                   price={artpiece.price}
                   forSale={artpiece.for_sale}
                   url={artpiece.project_link}
+                  author_id={artpiece.author_id}
+                  activeUser={props.activeUser}
                 />
               </Grid>
             );
