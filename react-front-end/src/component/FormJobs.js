@@ -1,9 +1,39 @@
-import FormControl from "@material-ui/core/FormControl";
 import { PinDropSharp } from "@material-ui/icons";
 import React, { useState } from "react";
 import axios from "axios";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Checkbox from "@material-ui/core/Checkbox";
+import TextField from "@material-ui/core/TextField";
+
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     "& > *": {
+//       margin: theme.spacing(1),
+//       width: "25ch",
+//     },
+//   },
+// }));
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      "& > *": {
+        margin: theme.spacing(1),
+        width: "25ch",
+        size: "small",
+      },
+    },
+  })
+);
 
 export default function FormJobs() {
+  const classes = useStyles();
+
   const [title, setNewTitle] = useState("");
   const [description, setNewDescription] = useState("");
   const [pay, setPay] = useState("");
@@ -34,48 +64,83 @@ export default function FormJobs() {
   };
 
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
-      <input
+    <form
+      className={classes.root}
+      noValidate
+      autoComplete="off"
+      onSubmit={(event) => event.preventDefault()}
+    >
+      <TextField
+        id="standard-basic"
+        multiline={true}
+        rows={1}
         type="text"
         value={title}
+        variant="outlined"
+        size="small"
         onChange={(e) => setNewTitle(e.target.value)}
         label="title"
         placeholder="Title"
       />
-      <br />
-      <input
+      <TextField
+        id="filled-basic"
+        multiline={true}
+        rows={1}
+        label="Filled"
+        variant="outlined"
+        size="small"
         type="textarea"
         value={description}
         onChange={(e) => setNewDescription(e.target.value)}
         label="description"
         placeholder="Description"
       />
-      <br />
-      <input
+      <TextField
+        id="outlined-basic"
+        multiline={true}
+        rows={1}
+        label="Outlined"
+        variant="outlined"
+        size="small"
         type="number"
         value={pay}
         onChange={(e) => setPay(e.target.value)}
         label="pay"
-        placeholder="Wage/salary"
+        placeholder="Wage/Salary"
       />
-      <br />
-      <input
+      <TextField
+        id="outlined-basic"
+        multiline={true}
+        rows={1}
+        label="Outlined"
+        variant="outlined"
+        size="small"
         type="text"
         value={company}
         onChange={(e) => setCompany(e.target.value)}
-        label="company"
+        label="Company"
         placeholder="Company Name"
       />
-      <br />
-      <input
+      <TextField
+        id="outlined-basic"
+        multiline={true}
+        rows={1}
+        label="Outlined"
+        variant="outlined"
+        size="small"
         type="text"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
         label="location"
         placeholder="Location"
       />
-      <br />
 
+      {/* <FormControlLabel
+        control={
+          <Checkbox checked={jason} onChange={handleChange} name="jason" />
+        }
+        label="Jason Killian"
+      /> */}
       <button type="submit" value="Submit" onClick={test}>
         Submit
       </button>
@@ -83,6 +148,56 @@ export default function FormJobs() {
   );
 }
 
+//     <form onSubmit={(event) => event.preventDefault()}>
+//       <input
+//         type="text"
+//         value={title}
+//         onChange={(e) => setNewTitle(e.target.value)}
+//         label="title"
+//         placeholder="Title"
+//       />
+//       <br />
+//       <input
+//         type="textarea"
+//         value={description}
+//         onChange={(e) => setNewDescription(e.target.value)}
+//         label="description"
+//         placeholder="Description"
+//       />
+//       <br />
+//       <input
+//         type="number"
+//         value={pay}
+//         onChange={(e) => setPay(e.target.value)}
+//         label="pay"
+//         placeholder="Wage/salary"
+//       />
+//       <br />
+//       <input
+//         type="text"
+//         value={company}
+//         onChange={(e) => setCompany(e.target.value)}
+//         label="company"
+//         placeholder="Company Name"
+//       />
+//       <br />
+//       <input
+//         type="text"
+//         value={location}
+//         onChange={(e) => setLocation(e.target.value)}
+//         label="location"
+//         placeholder="Location"
+//       />
+//       <br />
+
+//       <button type="submit" value="Submit" onClick={test}>
+//         Submit
+//       </button>
+//     </form>
+//   );
+// }
+
+//////////////////////////////////////////////////////
 // class NameForm extends React.Component {
 //   constructor(props) {
 //     super(props);

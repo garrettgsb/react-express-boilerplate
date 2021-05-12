@@ -11,8 +11,12 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 550,
     height: "auto",
+    transition: "transform .2s" /* Animation */,
+
     "&:hover": {
       opacity: 0.9,
+      transform: "scale(1.03)",
+      // "z-index": "9999",
     },
   },
   media: {
@@ -34,6 +38,19 @@ const useStyles = makeStyles({
     },
   },
 });
+
+// .zoom {
+//   padding: 50px;
+//   background-color: green;
+//   transition: transform .2s; /* Animation */
+//   width: 200px;
+//   height: 200px;
+//   margin: 0 auto;
+// }
+
+// .zoom:hover {
+//   transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+// }
 
 export default function Artwork(props) {
   const classes = useStyles();

@@ -8,7 +8,7 @@ export default function Job(props) {
 
   useEffect(() => {
     axios.get(`/api/jobs/${id}`).then((res) => {
-      console.log("pirate treasure", res.data.job);
+      console.log("pirate treasure", res.data.jobData);
       setJob(res.data.job[0]);
     });
   }, []);

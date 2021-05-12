@@ -34,6 +34,9 @@ export default function User(props) {
   const addArt = () => {
     setArt(true);
   };
+  const addArtDone = () => {
+    setArt(false);
+  };
 
   let { id } = useParams();
 
