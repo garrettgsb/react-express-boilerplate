@@ -34,14 +34,13 @@ export default function App() {
   );
 
   const jobBoard = (
-    <JobsList>
-      <br />
-
+    <div>
+      <JobsList />
       {state.activeUser !== NO_ACTIVE_USER && !show && (
         <Empty onAdd={jobForm} />
       )}
       {state.activeUser !== NO_ACTIVE_USER && show && <FormJobs />}
-    </JobsList>
+    </div>
   );
 
   const job = (
