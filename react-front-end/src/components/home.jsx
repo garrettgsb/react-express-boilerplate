@@ -9,12 +9,26 @@ import Resource from './resource';
 
 const Home = (props) => {
 
+
+  const [moods, setMoods] = useState({});
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setMoods({
+      category: e.target.value
+    });
+  };
+
+  useEffect(() => {
+
+  })
+
   return (
     <div className="App">
       <MenuAppBar />
       
-     {/* <Moods/>  */}
-     <Resource /> 
+     <Moods handleClick={handleClick}/> 
+     <Resource category={moods}/> 
       {/* <Login /> */}
       {/* <Register /> */}
       {/* <UserProfile /> */}
