@@ -56,6 +56,7 @@ app.listen(PORT, () => {
 //     }).catch(err => console.log(err));
 // };
 
+
 // const getPlots = function() {
 //   return db.query(`SELECT * FROM plots `)
 //     .then(res => {

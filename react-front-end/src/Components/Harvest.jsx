@@ -63,7 +63,7 @@ export default function Harvest() {
 
     // Grabs harvest dates. Calculates time till harvest.
   const getHarvestDate = function() {
-    axios.get(`/api/1`)
+    axios.get(`/api/plots_vegs`)
     .then(res => {
       getHarvest(res.data)
     })

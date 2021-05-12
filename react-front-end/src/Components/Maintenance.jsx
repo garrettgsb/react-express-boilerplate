@@ -54,7 +54,7 @@ export default function Maintenance() {
 
   // get tasks per plots_vegs.
   const getPlotTasks = function() {
-    axios.get(`/api/1`)
+    axios.get(`/api/plots_vegs`)
     .then(res => {
       setTasks(res.data)
     })

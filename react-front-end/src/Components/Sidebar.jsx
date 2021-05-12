@@ -135,12 +135,12 @@ export default function Sidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            
-          <li>
-          Bloom          |
-          <Link to="/tasks">Maintenance      |     </Link>
-          <Link to="/planning">Planning</Link>
-        </li>
+
+            <div>
+              Bloom 
+          {/* <Link to="/tasks">Maintenance      |     </Link>
+              <Link to="/planning">Planning</Link> */}
+            </div>
           </Typography>
         </Toolbar>
 
@@ -165,43 +165,58 @@ export default function Sidebar() {
         </div>
         <Divider />
 
-      {/* Top list, used as an array. Possible to push new plots into this array to render them? */}
-        
+        {/* Top list, used as an array. Possible to push new plots into this array to render them? */}
+
         <List>
           {['My Gardens'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <img src={garden} width="20px"/> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <img src={garden} width="20px" /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
         <Divider />
 
-      {/* Resources / Static stuff */}
+        {/* Resources / Static stuff */}
 
         <List>
+          <Link to="/vegetables">
             <ListItem button key={'Vegetables'}>
               <ListItemIcon><InboxIcon /></ListItemIcon>
               <ListItemText primary='Vegetables' />
             </ListItem>
-            <ListItem button key={'Resources'}>
-              <ListItemIcon><MailIcon /></ListItemIcon>
-              <ListItemText primary='Resources' />
+          </Link>
+          <Link to="/tasks">
+            <ListItem button key={'Maintenance'}>
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary='Maintenance' />
             </ListItem>
+          </Link>
+          <Link to="/planning">
+            <ListItem button key={'Planning'}>
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary='Planning' />
+            </ListItem>
+          </Link>
+
+          <ListItem button key={'Resources'}>
+            <ListItemIcon><MailIcon /></ListItemIcon>
+            <ListItemText primary='Resources' />
+          </ListItem>
         </List>
         <Divider />
 
-      {/* Bottom stuff. Possible to make appear at bottom of page laster */}
+        {/* Bottom stuff. Possible to make appear at bottom of page laster */}
 
         <List >
-        <ListItem button key={'About Us'}>
-              <ListItemIcon><InfoIcon /></ListItemIcon>
-              <ListItemText primary='About Us' />
-            </ListItem>
-            <ListItem button key={'Settings'}>
-              <ListItemIcon><SettingsIcon /></ListItemIcon>
-              <ListItemText primary='Settings' />
-            </ListItem>
+          <ListItem button key={'About Us'}>
+            <ListItemIcon><InfoIcon /></ListItemIcon>
+            <ListItemText primary='About Us' />
+          </ListItem>
+          <ListItem button key={'Settings'}>
+            <ListItemIcon><SettingsIcon /></ListItemIcon>
+            <ListItemText primary='Settings' />
+          </ListItem>
         </List>
       </Drawer>
     </div>
