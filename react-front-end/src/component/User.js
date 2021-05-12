@@ -71,8 +71,12 @@ export default function User(props) {
 
         {/* ADD ARTWORK BUTTON */}
         <Grid item xs={12} sm={6} md={4}>
-          {id === `${props.activeUser}` && !art && <Empty onAdd={addArt} />}
-          {id === `${props.activeUser}` && art && <Form />}
+          {id === `${props.activeUser}` && props.activeUser !== 0 && !art && (
+            <Empty onAdd={addArt} />
+          )}
+          {id === `${props.activeUser}` && props.activeUser !== 0 && art && (
+            <Form />
+          )}
         </Grid>
       </Grid>
       <div>
