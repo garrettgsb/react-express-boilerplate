@@ -1,0 +1,19 @@
+.root {
+  width: 1000px;
+  height: 300px;
+  margin-left: 100px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.centerCard {
+  display: flex;
+  justify-content: center;
+}
