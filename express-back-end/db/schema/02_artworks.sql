@@ -7,6 +7,6 @@ CREATE TABLE artworks (
   img_link VARCHAR(255) NOT NULL,
   project_link VARCHAR(255) NOT NULL,
   descrip VARCHAR(255) NOT NULL,
-  for_sale BOOLEAN NOT NULL,
-  price INTEGER DEFAULT NULL
+  for_sale BOOLEAN DEFAULT false,
+  price VARCHAR(55) DEFAULT NULL
 );

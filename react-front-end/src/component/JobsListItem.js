@@ -21,9 +21,15 @@ export default function Job(props) {
   console.log("id", typeof id);
 
   useEffect(() => {
+<<<<<<< HEAD
     axios.get(`/api/jobs/`).then((res) => {
       console.log("pirate treasure", res.data[parseInt(id) - 1]);
       setJob(res.data.jobs[parseInt(id) - 1]);
+=======
+    axios.get(`/api/jobs/${id}`).then((res) => {
+      console.log("pirate treasure", res.data.jobData);
+      setJob(res.data.job[0]);
+>>>>>>> e055918514042efe7a4709f091417be56af8e4ae
     });
   }, []);
   console.log("job flag = ", job);
