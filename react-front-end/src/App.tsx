@@ -7,22 +7,23 @@ import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 const App = () => {
+
   return (
     <div className="App">
-      <h2>Advanced React</h2>
+      <h2>Chronicle</h2>
 
-      {<Router>
+      <Router>
         <Navbar />
 
         <Switch>
           <Route path="/Categories" component={Categories} />
           <Route path="/entires" component={Entries} />
           <Route path="/">
-            <Home message="hello there" />
+            <Home />
           </Route>
         </Switch>
 
-      </Router>}
+      </Router>
     </div>
   );
 };

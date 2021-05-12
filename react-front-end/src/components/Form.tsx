@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -21,13 +21,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Form() {
-  // const [ title, setTitle ] = useState("");
-  // const [ entry, setEntry ] = useState("");
+  const [ title, setTitle ] = useState("");
+  const [ entry, setEntry ] = useState("");
+
+
+  // console.log("title", title);
 
   const classes = useStyles();
+ 
 
   return (
-    <form className={classes.root} noValidate autoComplete="off" >
+    <form id="entry_form" className={classes.root} noValidate autoComplete="off" >
       <Box
         width="100%"
         display="flex" 
@@ -36,22 +40,33 @@ export default function Form() {
 
         <TextField 
           id="outlined-basic" 
+          // form="entry_form"
           margin="normal"
           label="Title" 
           variant="outlined" 
+          value={title}
+          onChange={event => setTitle(event.target.value)}
           fullWidth
-          value={""}
+
           />
 
         <TextField 
           id="outlined-basic" 
+          // form="entry_form"
           multiline
           rows="15"
           label="Whats on your mind?" 
           variant="outlined" 
+          value={entry}
+          onChange={event => setEntry(event.target.value)}
           fullWidth/>
 
-        <Button variant="contained" color="primary" onClick={() => console.log("clicked")}>Submit</Button>
+        <Button 
+        variant="contained" 
+        color="primary"
+        onClick={() => {}}>
+          Submit
+        </Button>
       </Box>
     </form>
     
