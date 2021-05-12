@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import MenuAppBar from "./navbar";
 import Login from "./login";
 import Register from "./register";
@@ -35,7 +35,7 @@ const Home = (props) => {
       {/* <Register /> */}
       {/* <UserProfile /> */}
       {/* <HomeAnimation /> */}
-      <LoadingAnimation />
+      {/* <LoadingAnimation /> */}
       {/* <h1>Hello!</h1>
       <button onClick={props.fetchData} >
       Fetch Data
