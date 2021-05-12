@@ -48,7 +48,7 @@ export default function BasicTable(props) {
   return (
     <div>
       <div>{/* <FormJobs /> */}</div>
-      <h1>My Jobs </h1>
+      <h1>My Jobs</h1>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>

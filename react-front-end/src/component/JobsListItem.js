@@ -4,15 +4,17 @@ import axios from "axios";
 
 export default function Job(props) {
   let { id } = useParams();
+
   const [job, setJob] = useState({});
+  console.log("id", typeof id);
 
   useEffect(() => {
-    axios.get(`/api/jobs/${id}`).then((res) => {
-      console.log("pirate treasure", res.data.job);
-      setJob(res.data.job[0]);
+    axios.get(`/api/jobs/`).then((res) => {
+      console.log("pirate treasure", res.data[parseInt(id) - 1]);
+      setJob(res.data.jobs[parseInt(id) - 1]);
     });
   }, []);
-  console.log(job);
+  console.log("job flag = ", job);
   return (
     <div className="Job">
       {job.title}
@@ -21,6 +23,10 @@ export default function Job(props) {
       <div className="Job">{job.pay}</div>
       <div className="Job">{job.company}</div>
       <div className="Job">{job.location}</div>
+      <button type="submit" value="Submit">
+        {/* <button type="submit" value="Submit" onClick={addFriend} path="/messages"> */}
+        Submit
+      </button>
     </div>
   );
 }
