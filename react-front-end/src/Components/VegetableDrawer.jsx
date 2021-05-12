@@ -1,15 +1,10 @@
-import React from "react";
-import clsx from "clsx";
+import React, {useEffect, useState} from 'react';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-// import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
@@ -19,7 +14,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import  VegetableCard from "../VegetableCard";
 
 const drawerWidth = 240;
 
@@ -96,44 +90,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function vegBasket() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+export default function VegetableDrawer(props){
+  const {open, handleDrawerOpen, handleDrawerClose } = props
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+
+
+const classes = useStyles();
+const theme = useTheme();
+// const open = true 
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap className={classes.title}>
-            Persistent drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open
-        })}
-      >
-        <div className={classes.drawerHeader} />
-
-       
-      </main>
-      <Drawer
+    <Drawer
         className={classes.drawer}
         variant="persistent"
         anchor="right"
@@ -186,6 +154,7 @@ export default function vegBasket() {
           Build My Garden
         </Button>
       </Drawer>
-    </div>
-  );
+  )
+
+
 }

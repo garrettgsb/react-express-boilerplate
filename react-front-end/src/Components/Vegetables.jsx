@@ -3,13 +3,20 @@ import axios from 'axios';
 import VegetableCard from './VegetableCard';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
+import VegetableDrawer from './VegetableDrawer'
 
 
 export default function Vegetables() {
-  const[veg, setVeg] = useState([]);
+  const [open, setOpen] = useState(false);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
-  const url = '/api/vegetables'
-  
+  const[veg, setVeg] = useState([]);
+   
   const useStyles = makeStyles({
     row: {
      display: "flex"
@@ -28,7 +35,7 @@ export default function Vegetables() {
         <Grid item md={4}>
         <VegetableCard
          {...element}
-        />
+        onClick ={handleDrawerOpen} />
         </Grid>
       )
     }) 
@@ -36,7 +43,7 @@ export default function Vegetables() {
   }
 
   const getAllVeg = () => {
-    axios.get (url)
+    axios.get ('/api/vegetables')
     .then ((res) =>{
       const allVeg = res.data;
       console.log('1', allVeg)
@@ -48,9 +55,17 @@ export default function Vegetables() {
   }
 
   return (
-    
-    <Grid container spacing={16}>{renderVegetableCard(veg)}
-    </Grid>
+    <div> 
+    <Grid 
+    container spacing={16}>{renderVegetableCard(veg)}
+    </Grid> 
+
+    <VegetableDrawer 
+    open = {open}
+    handleDrawerOpen = {handleDrawerOpen}
+    handleDrawerClose = {handleDrawerClose}
+    />
+    </div>
     
   )
 };
