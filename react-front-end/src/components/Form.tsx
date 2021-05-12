@@ -1,4 +1,5 @@
-import { useState } from 'react';
+// import { useState } from 'react';
+import useEntryData from '../hooks/useEntryData';
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -21,10 +22,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Form() {
-  const [ title, setTitle ] = useState("");
-  const [ entry, setEntry ] = useState("");
 
-
+  { titleData, entryData } = useEntryData();
   // console.log("title", title);
 
   const classes = useStyles();
