@@ -18,6 +18,7 @@ App.get("/api/users", (req, res) => {
   });
 });
 
+// THIS GETS A USERs ARTWORKS
 App.get("/api/users/:id", (req, res) => {
   const data = db
     .query(
@@ -32,6 +33,25 @@ App.get("/api/users/:id", (req, res) => {
     .then((response) => {
       res.json({
         portfolio: response.rows,
+      });
+    });
+});
+
+// THIS GETS A USERs JOBS
+App.get("/api/users/:id", (req, res) => {
+  const data = db
+    .query(
+      `
+    SELECT * 
+    FROM users 
+    JOIN jobs ON users.id = user_id
+    WHERE users.id = $1;
+    `,
+      [req.params.id]
+    )
+    .then((response) => {
+      res.json({
+        jobData: response.rows,
       });
     });
 });
@@ -56,6 +76,17 @@ App.put("/api/artworks", (req, res) => {
     .then((response) => {
       res.json({
         artworks: response.rows,
+      });
+    });
+});
+
+App.delete("/api/artworks", (req, res) => {
+  const { id } = req.body;
+  const data = db
+    .query(`DELETE FROM artworks WHERE id = $1;`, [id])
+    .then((response) => {
+      res.json({
+        artworks: respons.rows,
       });
     });
 });

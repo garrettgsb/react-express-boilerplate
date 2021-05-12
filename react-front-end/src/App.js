@@ -11,6 +11,7 @@ import JobsListItem from "./component/JobsListItem";
 import PrimarySearchAppBar from "./component/Navbar";
 import FormJobs from "./component/FormJobs";
 import Empty from "./component/Empty";
+import MyJobsList from "./component/MyJobsList";
 
 import useApplicationData from "./hooks/useApplicationData";
 
@@ -66,7 +67,8 @@ export default function App() {
           />
           <Route path="/job_board" render={() => jobBoard} />
           <Route path="/jobs/:id" render={() => job} />
-          <Route path="/" render={() => artworks} />
+          <Route path="/myJobs" render={() => <MyJobsList />} />
+          <Route path="/" exact render={() => artworks} />
         </Switch>
       </Router>
     </div>

@@ -9,6 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Empty from "./Empty";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import CardActions from "@material-ui/core/CardActions";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +43,7 @@ export default function User(props) {
   // console.log("id", typeof id);
   useEffect(() => {
     axios.get(`/api/users/${id}`).then((res) => {
-      // console.log("pirate treasure", res.data.portfolio);
+      console.log("pirate treasure", res.data.portfolio);
       setPortfolio(res.data.portfolio);
     });
   }, []);
@@ -80,7 +82,12 @@ export default function User(props) {
         </Grid>
       </Grid>
       <div>
-        <Artworks art={portfolio} />
+        <Artworks art={portfolio} activeUser={props.activeUser} />
+        {/* <CardActions>
+          <Button size="small" color="primary">
+            <a href={props.url}>Learn More</a>
+          </Button>
+        </CardActions> */}
       </div>
     </div>
   );

@@ -40,6 +40,8 @@ export default function Artworks(props) {
                   price={artpiece.price}
                   forSale={artpiece.for_sale}
                   url={artpiece.project_link}
+                  author_id={artpiece.author_id}
+                  activeUser={props.activeUser}
                 />
               </Grid>
             );
