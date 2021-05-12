@@ -92,7 +92,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function VegetableDrawer(props){
-  const {open, handleDrawerOpen, handleDrawerClose } = props
+  const {open, 
+      handleDrawerOpen, 
+      handleDrawerClose,
+      veg} = props
 
 
 
@@ -125,7 +128,7 @@ const theme = useTheme();
         <Divider />
 
         <List>
-          {["Carrots", "Cucumbers", "Beets", "Green Beans"].map(
+          {[props.name].map(
             (text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>
@@ -134,7 +137,7 @@ const theme = useTheme();
                 <ListItemText primary={text} />
                 <Avatar
                   alt="Carrot"
-                  src="images/vegetables/carrots.png"
+                  src={props.image_url}
                 />
               </ListItem>
             )
