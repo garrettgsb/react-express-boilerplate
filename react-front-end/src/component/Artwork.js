@@ -8,6 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -39,6 +40,12 @@ const useStyles = makeStyles({
 
 export default function Artwork(props) {
   const classes = useStyles();
+  console.log("propssss = ", props);
+  const onClick = () => {
+    axios.delete(`/api/artworks/${props.id}`).then(() => {
+      window.location.reload();
+    });
+  };
 
   return (
     <Card className={classes.root}>
@@ -65,8 +72,8 @@ export default function Artwork(props) {
       </CardActionArea>
       {props.author_id === props.activeUser && (
         <CardActions>
-          <Button size="small" color="primary">
-            <a href={props.url}>Delete</a>
+          <Button size="small" color="primary" onClick={onClick}>
+            <h4>Delete</h4>
           </Button>
         </CardActions>
       )}
