@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Sidebar from './Components/Sidebar';
-import Content from './Components/Vegetable/VegetableBasket';
 import { makeStyles } from '@material-ui/core/styles';
 import VegetableAbout from './Components/Vegetable/VegetableAbout';
 import VegetableBasket from './Components/Vegetable/VegetableBasket';
 import Dashboard from './Components/Dashboard'
+import Vegetables from './Components/Vegetables'
 
 const useStyles = makeStyles({
   row: {
     display: 'flex',
     flexDirection: 'row',
   },
+  gridContainer: {
+    paddingLeft: "40px",
+    paddingRight: "40px",
+    justifyContent: "center",
+    spacing: 4,
+  }
 });
 
 export default function App() {
   const classes = useStyles();
-  const cityId = 6173331;
+
 
   return (
     <Router>
@@ -30,7 +36,8 @@ export default function App() {
             </div>
           </Route>
           <Route path='/planning'>
-            <Content />
+           <Vegetables/>
+           <VegetableBasket/>
           </Route>
 
           <Route path='/vegetables'>

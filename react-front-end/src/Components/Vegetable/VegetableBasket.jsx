@@ -19,7 +19,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import VegCard from "./VegetableAdd";
+import  VegetableCard from "../VegetableCard";
 
 const drawerWidth = 240;
 
@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PersistentDrawerRight() {
+export default function vegBasket() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -131,7 +131,7 @@ export default function PersistentDrawerRight() {
       >
         <div className={classes.drawerHeader} />
 
-        <VegCard onClick={handleDrawerOpen} />
+        <VegetableCard onClick={handleDrawerOpen} />
       </main>
       <Drawer
         className={classes.drawer}
@@ -173,6 +173,15 @@ export default function PersistentDrawerRight() {
           )}
         </List>
         <Divider />
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "rtl" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+        </div>
         <Button variant="contained" color="primary" className={classes.buildGardenButton}>
           Build My Garden
         </Button>
