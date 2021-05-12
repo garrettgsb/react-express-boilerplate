@@ -55,7 +55,7 @@ app.listen(PORT, () => {
 // };
 
 const getPlots = function() {
-  return db.query(`SELECT * FROM plots `)
+  return db.query(`SELECT * FROM plots`)
     .then(res => {
       return res.rows
     }).catch(err => console.log(err));
