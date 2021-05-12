@@ -1,5 +1,5 @@
-// import { useState } from 'react';
-import useEntryData from '../hooks/useEntryData';
+import { useState } from 'react';
+// import useEntryData from '../hooks/useEntryData';
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -23,14 +23,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Form() {
 
-  { titleData, entryData } = useEntryData();
-  // console.log("title", title);
+  // { titleData, entryData } = useEntryData();
+
+  const [ title, setTitle ] = useState("");
+  const [ entry, setEntry ] = useState("");
 
   const classes = useStyles();
- 
 
+  function submitHandler(event) {
+    event.preventDefault();
+    // console.log("form was submitted");
+    console.log(title);
+  }
+ 
   return (
-    <form id="entry_form" className={classes.root} noValidate autoComplete="off" >
+    <form id="entry_form" className={classes.root} noValidate autoComplete="off" onSubmit={submitHandler}>
       <Box
         width="100%"
         display="flex" 
@@ -43,10 +50,9 @@ export default function Form() {
           margin="normal"
           label="Title" 
           variant="outlined" 
-          value={title}
-          onChange={event => setTitle(event.target.value)}
           fullWidth
-
+          value={title}
+          onInput={e => setTitle((e.target as any).value)}
           />
 
         <TextField 
@@ -56,16 +62,16 @@ export default function Form() {
           rows="15"
           label="Whats on your mind?" 
           variant="outlined" 
+          fullWidth
           value={entry}
-          onChange={event => setEntry(event.target.value)}
-          fullWidth/>
+          onInput={e => setEntry((e.target as any).value)}
+
+          />
 
         <Button 
         variant="contained" 
         color="primary"
-        onClick={() => {}}>
-          Submit
-        </Button>
+        type="submit"/>
       </Box>
     </form>
     
