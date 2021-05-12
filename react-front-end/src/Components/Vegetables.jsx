@@ -42,6 +42,16 @@ export default function Vegetables() {
     return data
   }
 
+  const renderVegetableDrawer = (veg) =>{
+    const data = veg.map(element => {
+      return (
+        <VegetableDrawer
+        {...element}/>
+        
+      )
+    })
+  }
+
   const getAllVeg = () => {
     axios.get ('/api/vegetables')
     .then ((res) =>{
@@ -53,6 +63,8 @@ export default function Vegetables() {
     })
     .catch(error => console.error(`Error: ${error}`))
   }
+
+
 
   return (
     <div> 

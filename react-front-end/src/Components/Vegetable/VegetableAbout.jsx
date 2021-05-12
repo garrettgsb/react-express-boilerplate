@@ -1,7 +1,9 @@
 import React from 'react';
 import './VegetableAbout.scss';
+import useAppData from "../../Hooks/useAppData";
 
 export default function VegetableAbout() {
+  const { state } = useAppData();
 
   return (
     <div className="mainCard">

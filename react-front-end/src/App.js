@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Sidebar from './Components/Sidebar';
 import { makeStyles } from '@material-ui/core/styles';
 import VegetableAbout from './Components/Vegetable/VegetableAbout';
-import VegetableBasket from './Components/Vegetable/VegetableBasket';
 import Dashboard from './Components/Dashboard'
 import Vegetables from './Components/Vegetables'
+import VegetableDrawer from './Components/VegetableDrawer';
 
 const useStyles = makeStyles({
   row: {
@@ -37,7 +37,7 @@ export default function App() {
           </Route>
           <Route path='/planning'>
            <Vegetables/>
-           <VegetableBasket/>
+           <VegetableDrawer/>
           </Route>
 
           <Route path='/vegetables'>
@@ -46,8 +46,7 @@ export default function App() {
 
           <Route path='/'>
             <Sidebar />
-            <nav className="vegetable__basket">
-              {/* <VegetableBasket /> */}
+            <nav> 
             </nav>
           </Route>
 
