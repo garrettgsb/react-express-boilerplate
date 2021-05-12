@@ -31,21 +31,19 @@ export default function ProfilePic(props) {
   const classes = useStyles();
   console.log("props = ", props.userInfo);
   return (
-    <div className={classes.container}>
-      <Card className={classes.root}>
-        <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={props.userInfo.profile_pic}
-            title={props.userInfo.username}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {props.userInfo.username}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </div>
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image={props.userInfo.profile_pic}
+          title={props.userInfo.username}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {props.userInfo.username}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 }

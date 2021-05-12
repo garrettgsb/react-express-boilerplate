@@ -21,7 +21,7 @@ export const ArtWorksContext = createContext([]);
 export default function App() {
   const { state, setActiveUser } = useApplicationData();
   const [show, setShow] = useState(false);
-  const [art, setArt] = useState(false);
+  // const [art, setArt] = useState(false);
 
   useEffect(() => {
     const userLogin = localStorage.getItem("User");
@@ -34,9 +34,9 @@ export default function App() {
   const jobForm = () => {
     setShow(true);
   };
-  const addArt = () => {
-    setArt(true);
-  };
+  // const addArt = () => {
+  //   setArt(true);
+  // };
 
   const artworks = (
     <div>
@@ -66,28 +66,28 @@ export default function App() {
     </div>
   );
 
-  const addArtwork = (
-    <div>
-      <ArtWorksContext.Provider value={state.artworks}>
-        {console.log("state = ", state)}
-        {state.activeUser === 0 ? (
-          <User activeUser={state.activeUser} />
-        ) : (
-          <>
-            <User activeUser={state.activeUser} />
-            {!art ? (
-              <>
-                <Empty onAdd={addArt} />
-                <h3>Add Artwork</h3>
-              </>
-            ) : (
-              <Form />
-            )}
-          </>
-        )}
-      </ArtWorksContext.Provider>
-    </div>
-  );
+  // const addArtwork = (
+  //   <div>
+  //     <ArtWorksContext.Provider value={state.artworks}>
+  //       {console.log("state = ", state)}
+  //       {state.activeUser === 0 ? (
+  //         <User activeUser={state.activeUser} />
+  //       ) : (
+  //         <>
+  //           <User activeUser={state.activeUser} />
+  //           {!art ? (
+  //             <>
+  //               <Empty onAdd={addArt} />
+  //               <h3>Add Artwork</h3>
+  //             </>
+  //           ) : (
+  //             <Form />
+  //           )}
+  //         </>
+  //       )}
+  //     </ArtWorksContext.Provider>
+  //   </div>
+  // );
 
   const job = (
     <div>
@@ -147,7 +147,7 @@ export default function App() {
           ></Route>
           <Route
             path="/portfolio/:id"
-            render={() => addArtwork}
+            render={() => <User activeUser={state.activeUser} />}
             // children={addArtwork}
           ></Route>
           {/* <Route path="/art_showcase" render={() => artworks}></Route> */}

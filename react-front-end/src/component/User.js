@@ -7,33 +7,58 @@ import { ArtWorksContext } from "../App.js";
 import styled from "styled-components";
 import ProfilePic from "./ProfilePic";
 import { makeStyles } from "@material-ui/core/styles";
+import FormJobs from "./FormJobs";
+import Empty from "./Empty";
 
-// state = {
-//   title: "",
-//   description: "",
-//   img_link: "",
-//   project_link: "",
-//   for_sale: false,
-//   price: 0,
-// };
-
-// useEffect(() => {
-//   axios.post(`/api/artworks`, {nameInput: variable here, Title}).then((res) => {
-//     console.log("this is an artwork post request", res.data.job);
-//     setState(res.data.job[0]);
-//   });
-// }, []);
-
-// App.post("/api/artworks", (req, res) => {
-//   const data = db.query("INSERT INTO artworks (author_id, title, img_link, project_link, descrip, for_sale, price) VALUES ").then((response) => {
-//     res.json({
-//       artworks: response.rows,
-//     });
-//   });
-// })
+const useStyles = makeStyles({
+  root: {
+    maxWidth: "550",
+    height: "auto",
+    "&:hover": {
+      opacity: 0.9,
+    },
+  },
+  media: {
+    height: 350,
+  },
+  container: {
+    width: "100%",
+    paddingLeft: "50px",
+    paddingRight: "50px",
+    paddingTop: "50px",
+  },
+});
 
 export default function User(props) {
   const value = useContext(ArtWorksContext);
+  const classes = useStyles();
+  const [art, setArt] = useState(false);
+
+  const addArt = () => {
+    setArt(true);
+  };
+
+  // const addArtwork = (
+  //   <div>
+  //     {/* <ArtWorksContext.Provider value={state.artworks}> */}
+  //     {console.log("state = ", props)}
+  //     {props.activeUser === 0 ? (
+  //       <User activeUser={props.activeUser} />
+  //     ) : (
+  //       <>
+  //         <User activeUser={props.activeUser} />
+  //         {!art ? (
+  //           <>
+  //             <Empty onAdd={addArt} />
+  //           </>
+  //         ) : (
+  //           <Form />
+  //         )}
+  //       </>
+  //     )}
+  //     {/* </ArtWorksContext.Provider> */}
+  //   </div>
+  // );
 
   let { id } = useParams();
   const [portfolio, setPortfolio] = useState([]);
@@ -48,17 +73,15 @@ export default function User(props) {
 
   return (
     <div>
-      {portfolio[0] && <ProfilePic userInfo={portfolio[0]} />}
-      <div>{portfolio[0] && portfolio[0].username}</div>
-      <div>{portfolio[0] && portfolio[0].first_name}</div>
-      <div>{portfolio[0] && portfolio[0].last_name}</div>
-      <div>{portfolio[0] && portfolio[0].cool_fact}</div>
-      <div>
-        <Form />
+      <div className={classes.container}>
+        {portfolio[0] && <ProfilePic userInfo={portfolio[0]} />}
+        {id === `${props.activeUser}` && !art && <Empty onAdd={addArt} />}
+        {id === `${props.activeUser}` && art && <Form />}
+        <div>{portfolio[0] && portfolio[0].username}</div>
+        <div>{portfolio[0] && portfolio[0].first_name}</div>
+        <div>{portfolio[0] && portfolio[0].last_name}</div>
+        <div>{portfolio[0] && portfolio[0].cool_fact}</div>
       </div>
-      <div className="profile">{portfolio[0] && portfolio[0].username}</div>
-      {id === `${props.activeUser}` && <div>add Image</div>}
-      <div>add another image</div>
       <Artworks art={portfolio} />
     </div>
   );
