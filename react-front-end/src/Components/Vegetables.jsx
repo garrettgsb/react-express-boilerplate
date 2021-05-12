@@ -49,7 +49,7 @@ export default function Vegetables() {
 
   return (
     
-    <Grid container spacing={24}>{renderVegetableCard(veg)}
+    <Grid container spacing={16}>{renderVegetableCard(veg)}
     </Grid>
     
   )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,6 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+const axios = require('axios');
 
 const useStyles = makeStyles({
   root: {
@@ -35,16 +36,52 @@ const useStyles = makeStyles({
     display: 'flex',
     // flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  twidth: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center'
   }
 });
 
 export default function Maintenance() {
   const classes = useStyles();
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    getPlotTasks()
+  }, [])
+
+  // get tasks per plots_vegs.
+  const getPlotTasks = function() {
+    axios.get(`/api/1`)
+    .then(res => {
+      setTasks(res.data)
+    })
+    .catch(err => console.log(err));
+  }
+
+   // repeats each of the watering tasks 10 times
+  const watering = function(tasks) {
+      const waterdays = []
+      tasks.map(x => {
+        let name = x.name
+        let time = x.water_time
+        let i = 1
+        while (i < 10) {
+          let obj = {name: [name], time: time*i}
+          waterdays.push(obj)
+          i++
+        }
+      })
+      return waterdays.sort((a, b) => (a.time > b.time) ? 1 : -1);
+    }
+    
 
   return (
     <Card className={classes.root}>
-      <CardContent>
-        <table >
+      <CardContent className={classes.twidth}>
+        <table className={classes.twidth}>
           <thead >
             <tr >
               <th>Task</th>
@@ -52,99 +89,22 @@ export default function Maintenance() {
               <th>Complete</th>
             </tr>
           </thead>
-          <tbody >
-            <tr>
-              <td>
-                Water
-              </td>
-              <td>
-              1 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Water
-              </td>
-              <td>
-              4 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Fertilize
-              </td>
-              <td>
-              4 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Fertilize
-              </td>
-              <td>
-              5 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Fertilize
-              </td>
-              <td>
-              6 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Fertilize
-              </td>
-              <td>
-              7 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Fertilize
-              </td>
-              <td>
-              8 day
-              </td>
-              <td>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary">Complete</Button>
-              </CardActions>
-              </td>
-            </tr>
-            
+          <tbody>
+          {watering(tasks).map(x => 
+          <tr>
+          <td>
+              {x.name}
+            </td>
+            <td>
+            {x.time}
+            </td>
+            <td>
+            <CardActions>
+              <Button size="small" variant="contained" color="primary">Complete</Button>
+            </CardActions>
+            </td>
+          </tr>
+            )}
           </tbody>
           
         </table>

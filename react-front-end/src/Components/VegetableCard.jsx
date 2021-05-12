@@ -49,7 +49,7 @@ console.log('test',props)
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary"onClick={props.onClick}>
           Add to Basket
         </Button>
       </CardActions>
