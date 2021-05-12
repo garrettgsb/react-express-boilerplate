@@ -5,6 +5,16 @@ import axios from "axios";
 export default function Job(props) {
   let { id } = useParams();
 
+  const addFriend = () => {
+    const friend = {
+      first_user_id: 1,
+      second_user_id: job.user_id,
+    };
+    axios.put(`/api/friends`, friend).then(() => {
+      window.location.reload();
+    });
+  };
+
   const [job, setJob] = useState({});
   console.log("id", typeof id);
 
@@ -23,9 +33,9 @@ export default function Job(props) {
       <div className="Job">{job.pay}</div>
       <div className="Job">{job.company}</div>
       <div className="Job">{job.location}</div>
-      <button type="submit" value="Submit">
-        {/* <button type="submit" value="Submit" onClick={addFriend} path="/messages"> */}
-        Submit
+      {/* <button type="submit" value="Submit"> */}
+      <button type="submit" value="Submit" onClick={addFriend} path="/messages">
+        Contact
       </button>
     </div>
   );

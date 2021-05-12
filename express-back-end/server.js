@@ -10,6 +10,8 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static("public"));
 
+// ------------------------------------- USERS
+
 App.get("/api/users", (req, res) => {
   const data = db.query("SELECT * FROM users").then((response) => {
     res.json({
@@ -37,37 +39,7 @@ App.get("/api/users/:id", (req, res) => {
     });
 });
 
-// THIS GETS A USERs JOBS
-App.get("/api/jobs/:id", (req, res) => {
-  const data = db
-    .query(
-      `
-    SELECT * 
-    FROM users 
-    JOIN jobs ON users.id = user_id
-    WHERE users.id = $1;
-    `,
-      [req.params.id]
-    )
-    .then((response) => {
-      res.json({
-        jobData: response.rows,
-      });
-    });
-});
-
-// THIS DELETES A JOB
-App.delete("/api/jobs/:id", (req, res) => {
-  console.log("req.params ", req.params);
-  const { id } = req.params;
-  const data = db
-    .query(`DELETE FROM jobs WHERE id = $1;`, [id])
-    .then((response) => {
-      res.json({
-        jobs: response.rows,
-      });
-    });
-});
+// ------------------------------------- ARTWORKS
 
 App.get("/api/artworks", (req, res) => {
   const data = db.query("SELECT * FROM artworks").then((response) => {
@@ -104,6 +76,8 @@ App.delete("/api/artworks/:id", (req, res) => {
     });
 });
 
+// ------------------------------------- FRIENDS
+
 App.get("/api/friends/:id", (req, res) => {
   // const data = db.query("SELECT * FROM friends WHERE sender_id = $1 OR receiver_id = $1",[req.params.id]).then((response) => {
   const data = db
@@ -129,11 +103,27 @@ App.get("/api/friends/:id", (req, res) => {
       });
     });
 });
+App.put("/api/friends/", (req, res) => {
+  // const data = db.query("SELECT * FROM friends WHERE sender_id = $1 OR receiver_id = $1",[req.params.id]).then((response) => {
+  const { first_user_id, second_user_id } = req.body;
+  const data = db
+    .query(
+      `INSERT INTO friends (first_user_id, second_user_id) VALUES ($1, $2);`,
+      [first_user_id, second_user_id]
+    )
+    .then((response) => {
+      res.json({
+        friends: response.rows,
+      });
+    });
+});
+
+// ------------------------------------- JOBS
 
 App.get("/api/jobs", (req, res) => {
   const data = db
     .query(
-      `SELECT jobs.id AS id, username, title, description, pay, company, location FROM jobs JOIN users ON users.id = user_id;`
+      `SELECT jobs.id AS id, user_id, username, title, description, pay, company, location FROM jobs JOIN users ON users.id = user_id;`
     )
     .then((response) => {
       res.json({
@@ -168,6 +158,40 @@ App.put("/api/jobs", (req, res) => {
       });
     });
 });
+
+// THIS GETS A USERs JOBS
+App.get("/api/jobs/:id", (req, res) => {
+  const data = db
+    .query(
+      `
+    SELECT * 
+    FROM users 
+    JOIN jobs ON users.id = user_id
+    WHERE users.id = $1;
+    `,
+      [req.params.id]
+    )
+    .then((response) => {
+      res.json({
+        jobData: response.rows,
+      });
+    });
+});
+
+// THIS DELETES A JOB
+App.delete("/api/jobs/:id", (req, res) => {
+  console.log("req.params ", req.params);
+  const { id } = req.params;
+  const data = db
+    .query(`DELETE FROM jobs WHERE id = $1;`, [id])
+    .then((response) => {
+      res.json({
+        jobs: response.rows,
+      });
+    });
+});
+
+// ------------------------------------- MESSAGES
 
 App.get("/api/messages/:first_id/:second_id", (req, res) => {
   const data = db

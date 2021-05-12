@@ -31,7 +31,7 @@ export default function BasicTable(props) {
 
     axios.get(`/api/jobs/1`).then((res) => {
       console.log("pirate treasure", res.data);
-      setmyJobs(res.data.jobData);
+      setmyJobs(res.data.job);
     });
   }, []);
 
