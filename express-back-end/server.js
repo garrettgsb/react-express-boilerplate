@@ -62,6 +62,7 @@ App.put("/api/artworks", (req, res) => {
 });
 
 App.delete("/api/artworks/:id", (req, res) => {
+  const { id } = req.params;
   const data = db
     .query(`DELETE FROM artworks WHERE id = $1;`, [id])
     .then((response) => {

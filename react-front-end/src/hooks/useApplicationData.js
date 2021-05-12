@@ -6,6 +6,7 @@ export default function useApplicationData() {
   const SET_JOBS = "SET_JOBS";
   const SET_ACTIVE_USER = "SET_ACTIVE_USER";
   const SET_ACTIVE_USER_JOBS = "SET_ACTIVE_USER_JOBS";
+  const SET_PORTFOLIO = "SET_PORTFOLIO";
 
   const reducer = (state, action) => {
     const actions = {
@@ -25,6 +26,10 @@ export default function useApplicationData() {
         ...state,
         ...action.data,
       },
+      SET_PORTFOLIO: {
+        ...state,
+        ...action.data,
+      },
       default: new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
       ),
@@ -38,10 +43,14 @@ export default function useApplicationData() {
     jobs: [],
     activeUser: 0,
     userJobs: [],
+    portfolio: [],
   });
 
   const setActiveUser = (userID) => {
-    Promise.all([axios.get(`api/jobs/${userID}`)]).then((all) => {
+    Promise.all([
+      axios.get(`/api/jobs/${userID}`),
+      axios.get(`/api/users/${userID}`),
+    ]).then((all) => {
       dispatch({
         type: SET_ACTIVE_USER,
         data: { activeUser: userID },
@@ -50,12 +59,16 @@ export default function useApplicationData() {
         type: SET_ACTIVE_USER_JOBS,
         data: { userJobs: all[0].data.userJobs },
       });
+      dispatch({
+        type: SET_PORTFOLIO,
+        data: { portfolio: all[1].data.portfolio },
+      });
     });
     localStorage.setItem("User", userID);
   };
 
   const setJobs = () => {
-    Promise.all([axios.get(`api/jobs/`)]).then((all) => {
+    Promise.all([axios.get(`/api/jobs/`)]).then((all) => {
       dispatch({
         type: SET_JOBS,
         data: { jobs: all[0].data.jobs },
@@ -64,7 +77,7 @@ export default function useApplicationData() {
   };
 
   const setUserJobs = () => {
-    Promise.all([axios.get(`api/jobs/${state.activeUser}`)]).then((all) => {
+    Promise.all([axios.get(`/api/jobs/${state.activeUser}`)]).then((all) => {
       dispatch({
         type: SET_ACTIVE_USER_JOBS,
         data: { userJobs: all[0].data.userJobs },
@@ -72,8 +85,24 @@ export default function useApplicationData() {
     });
   };
 
-  useEffect(() => {
+  const setPortfolio = () => {
+    Promise.all([axios.get(`/api/users/${state.activeUser}`)]).then((all) => {
+      dispatch({
+        type: SET_PORTFOLIO,
+        data: { portfolio: all[0].data.portfolio },
+      });
+    });
+  };
+
+  const checkLoggedIn = () => {
     const userLogin = localStorage.getItem("User");
+    if (userLogin) {
+      const userFound = JSON.parse(userLogin);
+      setActiveUser(userFound);
+    }
+  };
+
+  useEffect(() => {
     Promise.all([
       axios.get(`/api/users`),
       axios.get(`/api/artworks`),
@@ -85,13 +114,9 @@ export default function useApplicationData() {
           users: all[0].data.users,
           artworks: all[1].data.artworks,
           jobs: all[2].data.jobs,
-          userJobs: [],
         },
       });
-      if (userLogin) {
-        const userFound = JSON.parse(userLogin);
-        setActiveUser(userFound);
-      }
+      checkLoggedIn();
     });
   }, []);
 
@@ -100,5 +125,7 @@ export default function useApplicationData() {
     setActiveUser,
     setUserJobs,
     setJobs,
+    setPortfolio,
+    checkLoggedIn,
   };
 }

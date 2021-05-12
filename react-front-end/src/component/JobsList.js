@@ -25,14 +25,11 @@ export default function BasicTable(props) {
   const onClick = (id) => {
     axios.delete(`/api/jobs/${id}`).then(() => {
       setUserJobs();
+      setJobs();
     });
   };
 
   const classes = useStyles();
-
-  useEffect(() => {
-    setJobs();
-  }, [state.userJobs]);
 
   return (
     <div>

@@ -14,7 +14,6 @@ import Empty from "./component/Empty";
 import MyJobsList from "./component/MyJobsList";
 
 import useApplicationData from "./hooks/useApplicationData";
-import { PinDropSharp } from "@material-ui/icons";
 
 export const JobsContext = createContext([]);
 export const ArtWorksContext = createContext([]);
