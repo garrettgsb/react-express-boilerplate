@@ -9,11 +9,11 @@ const Moods = (props) => {
       <div className="MoodsTop">
         <div className="MoodBox">
         <input type="image" src={require("../images/newPanda.png")} alt="PandaImage"className="Mood" width="85%" />
-      <button value="Depression" onClick={props.handleClick}>Depressed</button>
+      <button value="Depressed" onClick={props.handleClick}>Depressed</button>
       </div>
       <div className="MoodBox">
       <input type="image" src={require("../images/newPanda.png")} alt="PandaImage"className="Mood" width="85%" />
-      <button value="Anxiety" onClick={props.handleClick}>Anxious</button>
+      <button value="Anxious" onClick={props.handleClick}>Anxious</button>
       </div>
       </div>
       <div className="MoodsBottom">
