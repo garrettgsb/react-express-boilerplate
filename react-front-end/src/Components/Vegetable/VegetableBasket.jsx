@@ -131,7 +131,7 @@ export default function vegBasket() {
       >
         <div className={classes.drawerHeader} />
 
-        <VegetableCard onClick={handleDrawerOpen} />
+       
       </main>
       <Drawer
         className={classes.drawer}
