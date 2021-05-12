@@ -37,38 +37,6 @@ App.get("/api/users/:id", (req, res) => {
     });
 });
 
-// THIS GETS A USERs JOBS
-App.get("/api/jobs/:id", (req, res) => {
-  const data = db
-    .query(
-      `
-    SELECT * 
-    FROM users 
-    JOIN jobs ON users.id = user_id
-    WHERE users.id = $1;
-    `,
-      [req.params.id]
-    )
-    .then((response) => {
-      res.json({
-        jobData: response.rows,
-      });
-    });
-});
-
-// THIS DELETES A JOB
-App.delete("/api/jobs/:id", (req, res) => {
-  console.log("req.params ", req.params);
-  const { id } = req.params;
-  const data = db
-    .query(`DELETE FROM jobs WHERE id = $1;`, [id])
-    .then((response) => {
-      res.json({
-        jobs: response.rows,
-      });
-    });
-});
-
 App.get("/api/artworks", (req, res) => {
   const data = db.query("SELECT * FROM artworks").then((response) => {
     res.json({
@@ -142,15 +110,21 @@ App.get("/api/jobs", (req, res) => {
     });
 });
 
+// THIS GETS A USERs JOBS
 App.get("/api/jobs/:id", (req, res) => {
   const data = db
     .query(
-      `SELECT jobs.id AS id, username, title, description, pay, company, location FROM jobs JOIN users ON users.id = user_id WHERE jobs.id = $1;`,
+      `
+    SELECT * 
+    FROM users 
+    JOIN jobs ON users.id = user_id
+    WHERE users.id = $1;
+    `,
       [req.params.id]
     )
     .then((response) => {
       res.json({
-        job: response.rows,
+        userJobs: response.rows,
       });
     });
 });
@@ -162,6 +136,18 @@ App.put("/api/jobs", (req, res) => {
       `INSERT INTO jobs (title, description, pay, company, location, user_id) VALUES ($1, $2, $3, $4, $5, $6);`,
       [title, description, pay, company, location, id]
     )
+    .then((response) => {
+      res.json({
+        jobs: response.rows,
+      });
+    });
+});
+
+// THIS DELETES A JOB
+App.delete("/api/jobs/:id", (req, res) => {
+  const { id } = req.params;
+  const data = db
+    .query(`DELETE FROM jobs WHERE id = $1;`, [id])
     .then((response) => {
       res.json({
         jobs: response.rows,

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Artwork from "./Artwork";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Artworks(props) {
   const classes = useStyles();
-  // console.log(props.art);
+
   function FormRow() {
     return (
       <React.Fragment>
@@ -43,6 +44,7 @@ export default function Artworks(props) {
                   url={artpiece.project_link}
                   author_id={artpiece.author_id}
                   activeUser={props.activeUser}
+                  onClick={props.onClick}
                 />
               </Grid>
             );
@@ -54,11 +56,9 @@ export default function Artworks(props) {
 
   return (
     <div className={classes.root}>
-      {/* <Grid container spacing={1}> */}
       <Grid container item xs={12} spacing={1}>
         <FormRow />
       </Grid>
-      {/* </Grid> */}
     </div>
   );
 }

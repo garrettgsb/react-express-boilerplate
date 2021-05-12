@@ -29,7 +29,6 @@ const useStyles = makeStyles({
 
 export default function ProfilePic(props) {
   const classes = useStyles();
-  console.log("props = ", props.userInfo);
   return (
     <Card className={classes.root}>
       <CardActionArea>

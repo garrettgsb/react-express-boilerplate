@@ -3,7 +3,10 @@ import { useReducer, useEffect } from "react";
 
 export default function useApplicationData() {
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+  const SET_JOBS = "SET_JOBS";
   const SET_ACTIVE_USER = "SET_ACTIVE_USER";
+  const SET_ACTIVE_USER_JOBS = "SET_ACTIVE_USER_JOBS";
+  const SET_PORTFOLIO = "SET_PORTFOLIO";
 
   const reducer = (state, action) => {
     const actions = {
@@ -11,7 +14,19 @@ export default function useApplicationData() {
         ...state,
         ...action.data,
       },
+      SET_JOBS: {
+        ...state,
+        ...action.data,
+      },
       SET_ACTIVE_USER: {
+        ...state,
+        ...action.data,
+      },
+      SET_ACTIVE_USER_JOBS: {
+        ...state,
+        ...action.data,
+      },
+      SET_PORTFOLIO: {
         ...state,
         ...action.data,
       },
@@ -27,23 +42,71 @@ export default function useApplicationData() {
     artworks: [],
     jobs: [],
     activeUser: 0,
+    userJobs: [],
+    portfolio: [],
   });
 
-  const setActiveUser = (paramId) => {
-    dispatch({
-      type: SET_ACTIVE_USER,
-      data: { activeUser: paramId },
+  const setActiveUser = (userID) => {
+    Promise.all([
+      axios.get(`/api/jobs/${userID}`),
+      axios.get(`/api/users/${userID}`),
+    ]).then((all) => {
+      dispatch({
+        type: SET_ACTIVE_USER,
+        data: { activeUser: userID },
+      });
+      dispatch({
+        type: SET_ACTIVE_USER_JOBS,
+        data: { userJobs: all[0].data.userJobs },
+      });
+      dispatch({
+        type: SET_PORTFOLIO,
+        data: { portfolio: all[1].data.portfolio },
+      });
     });
-    localStorage.setItem("User", paramId);
+    localStorage.setItem("User", userID);
+  };
+
+  const setJobs = () => {
+    Promise.all([axios.get(`/api/jobs/`)]).then((all) => {
+      dispatch({
+        type: SET_JOBS,
+        data: { jobs: all[0].data.jobs },
+      });
+    });
+  };
+
+  const setUserJobs = () => {
+    Promise.all([axios.get(`/api/jobs/${state.activeUser}`)]).then((all) => {
+      dispatch({
+        type: SET_ACTIVE_USER_JOBS,
+        data: { userJobs: all[0].data.userJobs },
+      });
+    });
+  };
+
+  const setPortfolio = () => {
+    Promise.all([axios.get(`/api/users/${state.activeUser}`)]).then((all) => {
+      dispatch({
+        type: SET_PORTFOLIO,
+        data: { portfolio: all[0].data.portfolio },
+      });
+    });
+  };
+
+  const checkLoggedIn = () => {
+    const userLogin = localStorage.getItem("User");
+    if (userLogin) {
+      const userFound = JSON.parse(userLogin);
+      setActiveUser(userFound);
+    }
   };
 
   useEffect(() => {
-    const userLogin = localStorage.getItem("User");
     Promise.all([
       axios.get(`/api/users`),
       axios.get(`/api/artworks`),
       axios.get(`/api/jobs`),
-
     ]).then((all) => {
       dispatch({
         type: SET_APPLICATION_DATA,
@@ -53,15 +116,16 @@ export default function useApplicationData() {
           jobs: all[2].data.jobs,
         },
       });
-      if (userLogin) {
-        const userFound = JSON.parse(userLogin);
-        setActiveUser(userFound);
-      }
+      checkLoggedIn();
     });
   }, []);
 
   return {
     state,
     setActiveUser,
+    setUserJobs,
+    setJobs,
+    setPortfolio,
+    checkLoggedIn,
   };
 }
