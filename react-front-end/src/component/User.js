@@ -3,14 +3,11 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Artworks from "./Artworks";
 import Form from "./Form";
-import styled from "styled-components";
 import ProfilePic from "./ProfilePic";
 import { makeStyles } from "@material-ui/core/styles";
 import Empty from "./Empty";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
+import useApplicationData from "../hooks/useApplicationData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function User(props) {
+  const { state, setPortfolio } = useApplicationData();
   const classes = useStyles();
   const [art, setArt] = useState(false);
 
@@ -41,15 +39,12 @@ export default function User(props) {
   };
 
   let { id } = useParams();
-  const [portfolio, setPortfolio] = useState([]);
-  // console.log("user", typeof props.activeUser);
-  // console.log("id", typeof id);
-  useEffect(() => {
-    axios.get(`/api/users/${id}`).then((res) => {
-      console.log("pirate treasure", res.data.portfolio);
-      setPortfolio(res.data.portfolio);
+
+  const onClick = (id) => {
+    axios.delete(`/api/artworks/${id}`).then(() => {
+      setPortfolio();
     });
-  }, []);
+  };
 
   return (
     <div className={classes.root}>
@@ -63,34 +58,33 @@ export default function User(props) {
       >
         {/* PROFILE PIC */}
         <Grid item xs={12} sm={6} md={4}>
-          {portfolio[0] && <ProfilePic userInfo={portfolio[0]} />}
+          {state.portfolio[0] && <ProfilePic userInfo={state.portfolio[0]} />}
         </Grid>
 
         {/* USER INFO */}
         <Grid item xs={12} sm={6} md={4}>
-          <div>{portfolio[0] && portfolio[0].username}</div>
-          <div>{portfolio[0] && portfolio[0].first_name}</div>
-          <div>{portfolio[0] && portfolio[0].last_name}</div>
-          <div>{portfolio[0] && portfolio[0].cool_fact}</div>
+          <div>{state.portfolio[0] && state.portfolio[0].username}</div>
+          <div>{state.portfolio[0] && state.portfolio[0].first_name}</div>
+          <div>{state.portfolio[0] && state.portfolio[0].last_name}</div>
+          <div>{state.portfolio[0] && state.portfolio[0].cool_fact}</div>
         </Grid>
 
         {/* ADD ARTWORK BUTTON */}
         <Grid item xs={12} sm={6} md={4}>
-          {id === `${props.activeUser}` && props.activeUser !== 0 && !art && (
+          {id === `${state.activeUser}` && state.activeUser !== 0 && !art && (
             <Empty onAdd={addArt} />
           )}
-          {id === `${props.activeUser}` && props.activeUser !== 0 && art && (
-            <Form addArt={addArtDone} />
+          {id === `${state.activeUser}` && state.activeUser !== 0 && art && (
+            <Form />
           )}
         </Grid>
       </Grid>
       <div>
-        <Artworks art={portfolio} activeUser={props.activeUser} />
-        {/* <CardActions>
-          <Button size="small" color="primary">
-            <a href={props.url}>Learn More</a>
-          </Button>
-        </CardActions> */}
+        <Artworks
+          art={state.portfolio}
+          activeUser={state.activeUser}
+          onClick={onClick}
+        />
       </div>
     </div>
   );
