@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 //   createData("Gingerbread", 356, 16.0, 49, 3.9),
 // ];
 
-export default function BasicTable() {
+export default function BasicTable(props) {
   const classes = useStyles();
   const value = useContext(JobsContext);
 
@@ -70,8 +70,7 @@ export default function BasicTable() {
       <br />
       <br />
       <br />
-      <h2>My Jobs</h2>
-      <MyJobsList />
+      {props.activeUser !== 0 && <MyJobsList />}
     </div>
   );
 }
