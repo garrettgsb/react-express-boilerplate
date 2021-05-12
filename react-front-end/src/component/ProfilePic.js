@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: "30%",
+    maxWidth: "550",
     height: "auto",
     "&:hover": {
       opacity: 0.9,

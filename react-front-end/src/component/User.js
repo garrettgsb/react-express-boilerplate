@@ -9,8 +9,11 @@ import ProfilePic from "./ProfilePic";
 import { makeStyles } from "@material-ui/core/styles";
 import FormJobs from "./FormJobs";
 import Empty from "./Empty";
+import UserInfoGrid from "./UserInfoGrid";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "550",
     height: "auto",
@@ -27,7 +30,15 @@ const useStyles = makeStyles({
     paddingRight: "50px",
     paddingTop: "50px",
   },
-});
+  grid: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
 
 export default function User(props) {
   const value = useContext(ArtWorksContext);
@@ -37,28 +48,6 @@ export default function User(props) {
   const addArt = () => {
     setArt(true);
   };
-
-  // const addArtwork = (
-  //   <div>
-  //     {/* <ArtWorksContext.Provider value={state.artworks}> */}
-  //     {console.log("state = ", props)}
-  //     {props.activeUser === 0 ? (
-  //       <User activeUser={props.activeUser} />
-  //     ) : (
-  //       <>
-  //         <User activeUser={props.activeUser} />
-  //         {!art ? (
-  //           <>
-  //             <Empty onAdd={addArt} />
-  //           </>
-  //         ) : (
-  //           <Form />
-  //         )}
-  //       </>
-  //     )}
-  //     {/* </ArtWorksContext.Provider> */}
-  //   </div>
-  // );
 
   let { id } = useParams();
   const [portfolio, setPortfolio] = useState([]);
@@ -71,17 +60,68 @@ export default function User(props) {
     });
   }, []);
 
+  //   return (
+  //     <div>
+  //       <div>
+  //         {" "}
+  //         <UserInfoGrid />{" "}
+  //       </div>
+  //       <div className={classes.container}>
+  //         {portfolio[0] && <ProfilePic userInfo={portfolio[0]} />}
+  //         {id === `${props.activeUser}` && !art && <Empty onAdd={addArt} />}
+  //         {id === `${props.activeUser}` && art && <Form />}
+  //         <div>{portfolio[0] && portfolio[0].username}</div>
+  //         <div>{portfolio[0] && portfolio[0].first_name}</div>
+  //         <div>{portfolio[0] && portfolio[0].last_name}</div>
+  //         <div>{portfolio[0] && portfolio[0].cool_fact}</div>
+  //       </div>
+  //       <Artworks art={portfolio} />
+  //     </div>
+  //   );
+  // }
+
+  // import Paper from "@material-ui/core/Paper";
+  // import Grid from "@material-ui/core/Grid";
+
+  // export default function UserInfoGrid() {
+  //   const classes = useStyles();
+
+  //   function FormRow() {
+  //     return (
+  //       <React.Fragment>
+  //         <Grid item xs={4}>
+  //           <Paper className={classes.paper}>item</Paper>
+  //         </Grid>
+  //         <Grid item xs={4}>
+  //           <Paper className={classes.paper}>item</Paper>
+  //         </Grid>
+  //         <Grid item xs={4}>
+  //           <Paper className={classes.paper}>item</Paper>
+  //         </Grid>
+  //       </React.Fragment>
+  //     );
+  //   }
+
   return (
-    <div>
-      <div className={classes.container}>
+    <div className={classes.root}>
+      {/* PROFILE PIC */}
+      <Grid item xs={12} sm={6} md={4}>
         {portfolio[0] && <ProfilePic userInfo={portfolio[0]} />}
-        {id === `${props.activeUser}` && !art && <Empty onAdd={addArt} />}
-        {id === `${props.activeUser}` && art && <Form />}
+      </Grid>
+
+      {/* USER INFO */}
+      <Grid item xs={12} sm={6} md={4}>
         <div>{portfolio[0] && portfolio[0].username}</div>
         <div>{portfolio[0] && portfolio[0].first_name}</div>
         <div>{portfolio[0] && portfolio[0].last_name}</div>
         <div>{portfolio[0] && portfolio[0].cool_fact}</div>
-      </div>
+      </Grid>
+
+      {/* ADD ARTWORK BUTTON */}
+      <Grid item xs={12} sm={6} md={4}>
+        {id === `${props.activeUser}` && !art && <Empty onAdd={addArt} />}
+        {id === `${props.activeUser}` && art && <Form />}
+      </Grid>
       <Artworks art={portfolio} />
     </div>
   );

@@ -23,11 +23,6 @@ export default function MessageList(props) {
           author: result.sender_id,
           message: result.message,
           timestamp: result.date,
-
-          // photo: result.picture.large,
-          // name: `${result.second_username}`,
-          // text:
-          //   "Hello world! This is a long message that needs to be truncated.",
         };
       });
       setMessages([...messages, ...tempMessages]);
