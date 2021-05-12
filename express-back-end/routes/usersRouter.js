@@ -28,7 +28,7 @@ router.post("/profile/:userID", (req, res) => {
   })
 });
 
-
+// How do I set cookies for login?
 // POST route to submit login information to the database (redirect to homepage)
 router.post("/login", (req, res) => {
   console.log("BODY1", req.body)
@@ -44,8 +44,9 @@ router.post("/login", (req, res) => {
       if(err) {
         res.send({err: err})
       }
-        if (result) {
-          res.send(result);
+        if (result.rows.length > 0) {
+          console.log("RESULT", result.rows[0])
+          res.send(result.rows[0]);
         } else {
           res.send({ message: "Wrong username/password combination!"});
         }
@@ -54,9 +55,6 @@ router.post("/login", (req, res) => {
 });
 
 
-
-
-//DON'T NEED REGISTER ROUTE RN, UNLESS SHOWING REGISTER IN MVD
 // POST route to submit registration information to the database (redirect to homepage)
 router.post("/register", (req, res) => {
   console.log('name', req.body.name)

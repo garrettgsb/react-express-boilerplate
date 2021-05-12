@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import MenuAppBar from './navbar';
 import Login from './login';
 import Register from './register';
@@ -7,10 +8,12 @@ import Moods from './moods';
 import Resource from './resource';
 
 const Home = (props) => {
+
   return (
     <div className="App">
       <MenuAppBar />
-     {/* <Moods />  */}
+      
+     {/* <Moods/>  */}
      <Resource /> 
       {/* <Login /> */}
       {/* <Register /> */}

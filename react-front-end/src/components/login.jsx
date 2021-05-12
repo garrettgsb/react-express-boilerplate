@@ -7,18 +7,18 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
 
   const log = () => {
-    axios.post("http://localhost:3002/api/users/login", {
+    axios.post("http://localhost:8080/api/users/login", {
       username: username,
       password: password
     }).then((res) => {
       console.log(res)
     })
+    //after this
   }
   
   return (
     <div className="Login">
       <h2>Login!</h2>
-      <form method="POST" action="/api/users/login">
         <input type="text" placeholder="email" 
         onChange={(e)=> 
         {setUsername(e.target.value)}}>
@@ -28,7 +28,6 @@ const Login = (props) => {
         {setPassword(e.target.value)}}>
         </input>
         <button onClick={log}>Login</button>
-      </form>
     </div>
   );
 };
