@@ -1,18 +1,28 @@
-import React from 'react';
-import './Compose.css';
+import React, { useState } from "react";
+import "./Compose.css";
 
 export default function Compose(props) {
-    return (
-      <div className="compose">
+  const [text, setText] = useState("");
+
+  const submitForm = (event) => {
+    event.preventDefault();
+    props.addMessage(text);
+    setText("");
+  };
+
+  return (
+    <div className="compose">
+      <form onSubmit={(event) => submitForm(event)}>
         <input
           type="text"
           className="compose-input"
-          placeholder="Type a message, @name"
+          placeholder="Type a message"
+          name="text"
+          value={text}
+          onChange={(event) => setText(event.target.value)}
         />
-
-        {
-          props.rightItems
-        }
-      </div>
-    );
+      </form>
+      {props.rightItems}
+    </div>
+  );
 }
