@@ -51,6 +51,7 @@ console.log('test',props)
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary" onClick={props.onClick}>
+          //insert into table basket and calls invalidate query
           Add to Basket
         </Button>
       </CardActions>

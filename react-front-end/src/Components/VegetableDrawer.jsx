@@ -97,6 +97,7 @@ export default function VegetableDrawer(props){
       handleDrawerClose,
       veg} = props
 
+//have useQuery to fetch the cart data.     
 
 
 const classes = useStyles();
