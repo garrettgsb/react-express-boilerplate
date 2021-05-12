@@ -85,6 +85,7 @@ export default function useApplicationData() {
           users: all[0].data.users,
           artworks: all[1].data.artworks,
           jobs: all[2].data.jobs,
+          userJobs: [],
         },
       });
       if (userLogin) {

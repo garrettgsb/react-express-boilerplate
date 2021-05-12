@@ -35,15 +35,14 @@ export default function App() {
   );
 
   const jobBoard = (
-    <JobsContext.Provider value={state.jobs}>
-      <JobsList activeUser={state.activeUser} />
+    <JobsList>
       <br />
 
       {state.activeUser !== NO_ACTIVE_USER && !show && (
         <Empty onAdd={jobForm} />
       )}
       {state.activeUser !== NO_ACTIVE_USER && show && <FormJobs />}
-    </JobsContext.Provider>
+    </JobsList>
   );
 
   const job = (

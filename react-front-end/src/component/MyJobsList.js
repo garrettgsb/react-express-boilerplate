@@ -8,24 +8,16 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
-import axios from "axios";
-import useApplicationData from "../hooks/useApplicationData";
 
 export default function BasicTable(props) {
-  const { state, setUserJobs } = useApplicationData();
-  const onClick = (id) => {
-    axios.delete(`/api/jobs/${id}`).then(() => {
-      setUserJobs();
-    });
-  };
-
-  useEffect(() => {}, [state.userJobs]);
+  useEffect(() => {}, [props.state.userJobs]);
 
   const useStyles = makeStyles({
     table: {
       minWidth: 650,
     },
   });
+
   const classes = useStyles();
 
   return (
@@ -45,8 +37,8 @@ export default function BasicTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {state.userJobs[0] &&
-              state.userJobs.map((row) => (
+            {props.state.userJobs[0] &&
+              props.state.userJobs.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row">
                     <Link to={`/jobs/${row.id}`}>{row.title}</Link>
@@ -59,7 +51,7 @@ export default function BasicTable(props) {
                   <button
                     type="submit"
                     method="delete"
-                    onClick={() => onClick(row.id)}
+                    onClick={() => props.onClick(row.id)}
                   >
                     Delete
                   </button>
