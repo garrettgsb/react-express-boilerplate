@@ -34,6 +34,7 @@ const useStyles = makeStyles({
 export default function BasicTable(props) {
   const classes = useStyles();
   const value = useContext(JobsContext);
+  console.log("JobsContext = ", value);
 
   return (
     <div>

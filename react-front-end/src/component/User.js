@@ -36,6 +36,9 @@ export default function User(props) {
   const addArt = () => {
     setArt(true);
   };
+  const addArtDone = () => {
+    setArt(false);
+  };
 
   let { id } = useParams();
   const [portfolio, setPortfolio] = useState([]);
@@ -77,7 +80,7 @@ export default function User(props) {
             <Empty onAdd={addArt} />
           )}
           {id === `${props.activeUser}` && props.activeUser !== 0 && art && (
-            <Form />
+            <Form addArt={addArtDone} />
           )}
         </Grid>
       </Grid>

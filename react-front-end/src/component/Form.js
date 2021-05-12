@@ -3,6 +3,13 @@ import { PinDropSharp } from "@material-ui/icons";
 import React, { useState } from "react";
 import axios from "axios";
 
+import FormLabel from "@material-ui/core/FormLabel";
+//import FormControl from '@material-ui/core/FormControl';
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Checkbox from "@material-ui/core/Checkbox";
+
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
@@ -11,8 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       "& > *": {
         margin: theme.spacing(1),
-        width: "25ch",
+        width: "2ch",
         size: "small",
+        paddingLeft: 200,
       },
     },
   })
@@ -24,7 +32,7 @@ export default function BasicTextFields() {
   const [description, setNewDescription] = useState("");
   const [imgLink, setNewImgLink] = useState("");
   const [projectLink, setNewProjectLink] = useState("");
-  const [forSale, setForSale] = useState("");
+  const [forSale, setForSale] = useState(false);
   const [price, setNewPrice] = useState("");
 
   // const onSubmit = (event) => {
@@ -66,16 +74,19 @@ export default function BasicTextFields() {
         rows={1}
         type="text"
         value={title}
+        variant="outlined"
+        size="small"
         onChange={(e) => setNewTitle(e.target.value)}
         label="title"
         placeholder="Title"
       />
+      <br />
       <TextField
         id="filled-basic"
         multiline={true}
         rows={1}
         label="Filled"
-        variant="filled"
+        variant="outlined"
         size="small"
         type="textarea"
         value={description}
@@ -83,48 +94,65 @@ export default function BasicTextFields() {
         label="description"
         placeholder="Description"
       />
+      <br />
       <TextField
         id="outlined-basic"
         multiline={true}
         rows={1}
         label="Outlined"
         variant="outlined"
+        size="small"
         type="text"
         value={imgLink}
         onChange={(e) => setNewImgLink(e.target.value)}
         label="img-link"
         placeholder="Image URL"
       />
+      <br />
       <TextField
         id="outlined-basic"
         multiline={true}
         rows={1}
         label="Outlined"
         variant="outlined"
+        size="small"
         type="text"
         value={projectLink}
         onChange={(e) => setNewProjectLink(e.target.value)}
         label="project_link"
         placeholder="Project URL"
       />
-      <TextField
+      <br />
+      <FormControlLabel
+        control={
+          <Checkbox
+            //checked={gilad}
+            value={forSale}
+            onChange={(e) => setForSale(e.target.value)}
+            name="For Sale"
+          />
+        }
+        label="For Sale"
+      />
+      {/* <TextField
         style={checked}
         id="outlined-basic"
-        multiline={true}
-        rows={1}
+        // multiline={true}
+        // rows={1}
         // label="Outlined"
         // variant="outlined"
         type="checkbox"
         value={forSale}
         onChange={(e) => setForSale(e.target.value)}
         label="for sale"
-      />
+      /> */}
       <TextField
         id="outlined-basic"
         multiline={true}
         rows={1}
         label="Outlined"
         variant="outlined"
+        size="small"
         type="number"
         value={price}
         onChange={(e) => setNewPrice(e.target.value)}
