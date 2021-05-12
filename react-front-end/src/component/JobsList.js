@@ -7,7 +7,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import MyJobsList from "./MyJobsList";
 import Empty from "./Empty";
 import FormJobs from "./FormJobs";
@@ -47,6 +47,7 @@ export default function BasicTable(props) {
   };
 
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <div>
@@ -65,9 +66,14 @@ export default function BasicTable(props) {
           </TableHead>
           <TableBody>
             {state.jobs.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow
+                key={row.id}
+                onClick={() => {
+                  history.push(`/jobs/${row.id}`);
+                }}
+              >
                 <TableCell component="th" scope="row">
-                  <Link to={`/jobs/${row.id}`}>{row.title}</Link>
+                  {row.title}
                 </TableCell>
                 <TableCell align="right">{row.username}</TableCell>
                 <TableCell align="right">{row.description}</TableCell>
