@@ -130,7 +130,7 @@ const insertIntoDatabase = (attributes: IEntry | IUser | ICategory, table: strin
     queryStart += `${attribute}`;
     queryMid += `$${queryParams.length}`;
   }
-  if (table === 'users') {
+  if (table !== 'users') {
     queryEnd += ', user_id';
   }
   const queryString = queryStart + queryMid + queryEnd;
