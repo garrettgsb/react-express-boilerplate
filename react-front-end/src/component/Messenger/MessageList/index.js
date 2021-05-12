@@ -16,21 +16,14 @@ export default function MessageList(props) {
   }, [props.activeConversation]);
 
   const getMessages = () => {
-    axios
-      .get(
-        `/api/messages/${props.activeConversation[0]}/${props.activeConversation[1]}
-    `
-      )
-      .then((response) => {
-        let tempMessages = response.data.messages.map((result) => {
-          return {
-            id: result.id,
-            author: result.sender_id,
-            message: result.message,
-            timestamp: result.date,
-          };
-        });
-        setMessages([...tempMessages]);
+    axios.get(`/api/messages/${props.activeUser}`).then((response) => {
+      let tempMessages = response.data.messages.map((result) => {
+        return {
+          id: result.id,
+          author: result.sender_id,
+          message: result.message,
+          timestamp: result.date,
+        };
       });
   };
 

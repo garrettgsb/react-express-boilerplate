@@ -6,5 +6,7 @@ CREATE TABLE users (
   last_name VARCHAR(255) NOT NULL,
   email VARCHAR(55) NOT NULL,
   password VARCHAR(55) NOT NULL,
+  profile_pic VARCHAR(255) NOT NULL,
+  cool_fact VARCHAR(255) NOT NULL,
   member_since DATE
 );

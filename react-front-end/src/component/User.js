@@ -3,32 +3,38 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Artworks from "./Artworks";
 import Form from "./Form";
+import styled from "styled-components";
+import ProfilePic from "./ProfilePic";
+import { makeStyles } from "@material-ui/core/styles";
+import Empty from "./Empty";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
-// state = {
-//   title: "",
-//   description: "",
-//   img_link: "",
-//   project_link: "",
-//   for_sale: false,
-//   price: 0,
-// };
-
-// useEffect(() => {
-//   axios.post(`/api/artworks`, {nameInput: variable here, Title}).then((res) => {
-//     console.log("this is an artwork post request", res.data.job);
-//     setState(res.data.job[0]);
-//   });
-// }, []);
-
-// App.post("/api/artworks", (req, res) => {
-//   const data = db.query("INSERT INTO artworks (author_id, title, img_link, project_link, descrip, for_sale, price) VALUES ").then((response) => {
-//     res.json({
-//       artworks: response.rows,
-//     });
-//   });
-// })
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+  gridContainer: {
+    paddingLeft: "50px",
+    paddingRight: "50px",
+    paddingBottom: "50px",
+    paddingTop: "50px",
+  },
+}));
 
 export default function User(props) {
+  const classes = useStyles();
+  const [art, setArt] = useState(false);
+
+  const addArt = () => {
+    setArt(true);
+  };
+
   let { id } = useParams();
   const [portfolio, setPortfolio] = useState([]);
   // console.log("user", typeof props.activeUser);
@@ -41,14 +47,37 @@ export default function User(props) {
   }, []);
 
   return (
-    <div>
+    <div className={classes.root}>
+      <Grid
+        container
+        item
+        xs={12}
+        spacing={1}
+        className={classes.gridContainer}
+        justify="center"
+      >
+        {/* PROFILE PIC */}
+        <Grid item xs={12} sm={6} md={4}>
+          {portfolio[0] && <ProfilePic userInfo={portfolio[0]} />}
+        </Grid>
+
+        {/* USER INFO */}
+        <Grid item xs={12} sm={6} md={4}>
+          <div>{portfolio[0] && portfolio[0].username}</div>
+          <div>{portfolio[0] && portfolio[0].first_name}</div>
+          <div>{portfolio[0] && portfolio[0].last_name}</div>
+          <div>{portfolio[0] && portfolio[0].cool_fact}</div>
+        </Grid>
+
+        {/* ADD ARTWORK BUTTON */}
+        <Grid item xs={12} sm={6} md={4}>
+          {id === `${props.activeUser}` && !art && <Empty onAdd={addArt} />}
+          {id === `${props.activeUser}` && art && <Form />}
+        </Grid>
+      </Grid>
       <div>
-        <Form />
+        <Artworks art={portfolio} />
       </div>
-      <div className="profile">{portfolio[0] && portfolio[0].username}</div>
-      {id === `${props.activeUser}` && <div>add Image</div>}
-      <div>add another image</div>
-      <Artworks art={portfolio} />
     </div>
   );
 }
