@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Compose from "../Compose";
 import Toolbar from "../Toolbar";
 import ToolbarButton from "../ToolbarButton";
 import Message from "../Message";
 import moment from "moment";
+
 import axios from "axios";
 
 import "./MessageList.css";
-
 export default function MessageList(props) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     getMessages();
-  }, []);
+  }, [props.activeConversation]);
 
   const getMessages = () => {
     axios.get(`/api/messages/${props.activeUser}`).then((response) => {
@@ -25,8 +25,6 @@ export default function MessageList(props) {
           timestamp: result.date,
         };
       });
-      setMessages([...messages, ...tempMessages]);
-    });
   };
 
   const renderMessages = () => {

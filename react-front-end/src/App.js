@@ -22,14 +22,6 @@ export default function App() {
   const [show, setShow] = useState(false);
   const NO_ACTIVE_USER = 0;
 
-  useEffect(() => {
-    const userLogin = localStorage.getItem("User");
-    if (userLogin) {
-      const userFound = JSON.parse(userLogin);
-      setActiveUser(userFound);
-    }
-  }, []);
-
   const jobForm = () => {
     setShow(true);
   };
