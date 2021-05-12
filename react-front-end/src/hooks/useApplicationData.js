@@ -3,7 +3,9 @@ import { useReducer, useEffect } from "react";
 
 export default function useApplicationData() {
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+  const SET_JOBS = "SET_JOBS";
   const SET_ACTIVE_USER = "SET_ACTIVE_USER";
+  const SET_ACTIVE_USER_JOBS = "SET_ACTIVE_USER_JOBS";
 
   const reducer = (state, action) => {
     const actions = {
@@ -11,7 +13,15 @@ export default function useApplicationData() {
         ...state,
         ...action.data,
       },
+      SET_JOBS: {
+        ...state,
+        ...action.data,
+      },
       SET_ACTIVE_USER: {
+        ...state,
+        ...action.data,
+      },
+      SET_ACTIVE_USER_JOBS: {
         ...state,
         ...action.data,
       },
@@ -27,14 +37,39 @@ export default function useApplicationData() {
     artworks: [],
     jobs: [],
     activeUser: 0,
+    userJobs: [],
   });
 
-  const setActiveUser = (paramId) => {
-    dispatch({
-      type: SET_ACTIVE_USER,
-      data: { activeUser: paramId },
+  const setActiveUser = (userID) => {
+    Promise.all([axios.get(`api/jobs/${userID}`)]).then((all) => {
+      dispatch({
+        type: SET_ACTIVE_USER,
+        data: { activeUser: userID },
+      });
+      dispatch({
+        type: SET_ACTIVE_USER_JOBS,
+        data: { userJobs: all[0].data.userJobs },
+      });
     });
-    localStorage.setItem("User", paramId);
+    localStorage.setItem("User", userID);
+  };
+
+  const setJobs = () => {
+    Promise.all([axios.get(`api/jobs/`)]).then((all) => {
+      dispatch({
+        type: SET_JOBS,
+        data: { jobs: all[0].data.jobs },
+      });
+    });
+  };
+
+  const setUserJobs = () => {
+    Promise.all([axios.get(`api/jobs/${state.activeUser}`)]).then((all) => {
+      dispatch({
+        type: SET_ACTIVE_USER_JOBS,
+        data: { userJobs: all[0].data.userJobs },
+      });
+    });
   };
 
   useEffect(() => {
@@ -43,7 +78,6 @@ export default function useApplicationData() {
       axios.get(`/api/users`),
       axios.get(`/api/artworks`),
       axios.get(`/api/jobs`),
-
     ]).then((all) => {
       dispatch({
         type: SET_APPLICATION_DATA,
@@ -63,5 +97,7 @@ export default function useApplicationData() {
   return {
     state,
     setActiveUser,
+    setUserJobs,
+    setJobs,
   };
 }
