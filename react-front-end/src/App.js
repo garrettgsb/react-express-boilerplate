@@ -14,7 +14,6 @@ import Empty from "./component/Empty";
 import MyJobsList from "./component/MyJobsList";
 
 import useApplicationData from "./hooks/useApplicationData";
-import { PinDropSharp } from "@material-ui/icons";
 
 export const JobsContext = createContext([]);
 export const ArtWorksContext = createContext([]);
@@ -35,15 +34,13 @@ export default function App() {
   );
 
   const jobBoard = (
-    <JobsContext.Provider value={state.jobs}>
-      <JobsList activeUser={state.activeUser} />
-      <br />
-
+    <div>
+      <JobsList />
       {state.activeUser !== NO_ACTIVE_USER && !show && (
         <Empty onAdd={jobForm} />
       )}
       {state.activeUser !== NO_ACTIVE_USER && show && <FormJobs />}
-    </JobsContext.Provider>
+    </div>
   );
 
   const job = (

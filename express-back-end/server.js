@@ -132,15 +132,21 @@ App.get("/api/jobs", (req, res) => {
     });
 });
 
+// THIS GETS A USERs JOBS
 App.get("/api/jobs/:id", (req, res) => {
   const data = db
     .query(
-      `SELECT jobs.id AS id, username, title, description, pay, company, location FROM jobs JOIN users ON users.id = user_id WHERE jobs.id = $1;`,
+      `
+    SELECT * 
+    FROM users 
+    JOIN jobs ON users.id = user_id
+    WHERE users.id = $1;
+    `,
       [req.params.id]
     )
     .then((response) => {
       res.json({
-        job: response.rows,
+        userJobs: response.rows,
       });
     });
 });
@@ -180,7 +186,6 @@ App.get("/api/jobs/:id", (req, res) => {
 
 // THIS DELETES A JOB
 App.delete("/api/jobs/:id", (req, res) => {
-  console.log("req.params ", req.params);
   const { id } = req.params;
   const data = db
     .query(`DELETE FROM jobs WHERE id = $1;`, [id])
