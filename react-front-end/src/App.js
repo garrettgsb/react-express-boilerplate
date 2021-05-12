@@ -67,7 +67,12 @@ export default function App() {
           />
           <Route path="/job_board" render={() => jobBoard} />
           <Route path="/jobs/:id" render={() => job} />
-          <Route path="/myJobs" render={() => <MyJobsList />} />
+          <Route
+            path="/myJobs"
+            render={() => (
+              <MyJobsList jobs={state.jobs} activeUser={state.activeUser} />
+            )}
+          />
           <Route path="/" exact render={() => artworks} />
         </Switch>
       </Router>

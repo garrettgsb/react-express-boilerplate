@@ -38,7 +38,7 @@ App.get("/api/users/:id", (req, res) => {
 });
 
 // THIS GETS A USERs JOBS
-App.get("/api/users/:id", (req, res) => {
+App.get("/api/jobs/:id", (req, res) => {
   const data = db
     .query(
       `
@@ -52,6 +52,19 @@ App.get("/api/users/:id", (req, res) => {
     .then((response) => {
       res.json({
         jobData: response.rows,
+      });
+    });
+});
+
+// THIS DELETES A JOB
+App.delete("/api/jobs/:id", (req, res) => {
+  console.log("req.params ", req.params);
+  const { id } = req.params;
+  const data = db
+    .query(`DELETE FROM jobs WHERE id = $1;`, [id])
+    .then((response) => {
+      res.json({
+        jobs: response.rows,
       });
     });
 });

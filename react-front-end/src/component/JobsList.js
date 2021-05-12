@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { JobsContext } from "../App.js";
 import { Link } from "react-router-dom";
 import FormJobs from "./FormJobs";
+import MyJobsList from "./MyJobsList";
 
 const useStyles = makeStyles({
   table: {
@@ -65,6 +66,12 @@ export default function BasicTable() {
           </TableBody>
         </Table>
       </TableContainer>
+      <br />
+      <br />
+      <br />
+      <br />
+      <h2>My Jobs</h2>
+      <MyJobsList />
     </div>
   );
 }
