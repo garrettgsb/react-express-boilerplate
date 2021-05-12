@@ -157,72 +157,40 @@ const userId = '1';
 
 App.get('/api/entries', (req: Request, res: Response) => {
   getEntryByCategory({categoryId: null, userId})
-  .then((data) => {
-    res.json({
-      body: data.rows
-    })
-  })
+  .then((data) => res.json(data.rows));
 });
 App.get('/api/entries/:id', (req: Request, res: Response) => {
   getEntryByEntryId({entryId: req.params.id, userId})
-  .then((data) => {
-    res.json({
-      body: data.rows
-    })
-  })
+  .then((data) => res.json(data.rows));
 });
 App.get('/api/categories', (req: Request, res: Response) => {
 
   getCategories(userId)
-  .then((data) => {
-    res.json({
-      body: data.rows
-    })
-  });
+  .then((data) => res.json(data.rows));
 });
 App.get('/api/categories/:id', (req: Request, res: Response) => {
    getEntryByCategory({categoryId: req.params.id, userId})
-   .then((data) => {
-    res.json({
-      body: data.rows
-    })
-  })
-});
+   .then((data) => res.json(data.rows));
+  });
 
 App.get('/api/users', (req: Request, res: Response) => {
 
   getUsers()
-  .then((data) => {
-    res.json({
-      body: data.rows
-    })
-  });
+  .then((data) => res.json(data.rows));
 });
 App.get('/api/users/:id', (req: Request, res: Response) => {
    getUserByUserId(req.params.id)
-   .then((data) => {
-    res.json({
-      body: data.rows
-    })
-  })
-});
+   .then((data) => res.json(data.rows));
+  });
 
 App.get('/api/fonts', (req: Request, res: Response) => {
 
   getFonts()
-  .then((data) => {
-    res.json({
-      body: data.rows
-    })
-  });
+  .then((data) => res.json(data.rows));
 });
 App.get('/api/fonts/:id', (req: Request, res: Response) => {
    getFontByFontId(req.params.id)
-   .then((data) => {
-    res.json({
-      body: data.rows
-    })
-  })
+   .then((data) => res.json(data.rows));
 });
 App.post('/api/entries', (req: Request, res: Response) => {
   const attributes = {

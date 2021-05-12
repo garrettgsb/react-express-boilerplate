@@ -109,67 +109,35 @@ App.use(Express.static('public'));
 const userId = '1';
 App.get('/api/entries', (req, res) => {
     getEntryByCategory({ categoryId: null, userId })
-        .then((data) => {
-        res.json({
-            body: data.rows
-        });
-    });
+        .then((data) => res.json(data.rows));
 });
 App.get('/api/entries/:id', (req, res) => {
     getEntryByEntryId({ entryId: req.params.id, userId })
-        .then((data) => {
-        res.json({
-            body: data.rows
-        });
-    });
+        .then((data) => res.json(data.rows));
 });
 App.get('/api/categories', (req, res) => {
     getCategories(userId)
-        .then((data) => {
-        res.json({
-            body: data.rows
-        });
-    });
+        .then((data) => res.json(data.rows));
 });
 App.get('/api/categories/:id', (req, res) => {
     getEntryByCategory({ categoryId: req.params.id, userId })
-        .then((data) => {
-        res.json({
-            body: data.rows
-        });
-    });
+        .then((data) => res.json(data.rows));
 });
 App.get('/api/users', (req, res) => {
     getUsers()
-        .then((data) => {
-        res.json({
-            body: data.rows
-        });
-    });
+        .then((data) => res.json(data.rows));
 });
 App.get('/api/users/:id', (req, res) => {
     getUserByUserId(req.params.id)
-        .then((data) => {
-        res.json({
-            body: data.rows
-        });
-    });
+        .then((data) => res.json(data.rows));
 });
 App.get('/api/fonts', (req, res) => {
     getFonts()
-        .then((data) => {
-        res.json({
-            body: data.rows
-        });
-    });
+        .then((data) => res.json(data.rows));
 });
 App.get('/api/fonts/:id', (req, res) => {
     getFontByFontId(req.params.id)
-        .then((data) => {
-        res.json({
-            body: data.rows
-        });
-    });
+        .then((data) => res.json(data.rows));
 });
 App.post('/api/entries', (req, res) => {
     const attributes = {
