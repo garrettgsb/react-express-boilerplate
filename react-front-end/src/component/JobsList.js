@@ -88,7 +88,7 @@ export default function BasicTable(props) {
         <Empty onAdd={jobForm} />
       )}
       {state.activeUser !== NO_ACTIVE_USER && show && (
-        <FormJobs onSubmit={onSubmit} />
+        <FormJobs onSubmit={onSubmit} activeUser={state.activeUser} />
       )}
     </div>
   );

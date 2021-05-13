@@ -6,7 +6,7 @@ import useApplicationData from "../../../hooks/useApplicationData";
 
 export default function Messenger(props) {
   const [activeConversation, setActiveConversation] = useState([0, 0]);
-  const { state, setFriends } = useApplicationData();
+  const { state } = useApplicationData();
 
   return (
     <div className="messenger">

@@ -1,23 +1,6 @@
-import { PinDropSharp } from "@material-ui/icons";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Checkbox from "@material-ui/core/Checkbox";
 import TextField from "@material-ui/core/TextField";
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     "& > *": {
-//       margin: theme.spacing(1),
-//       width: "25ch",
-//     },
-//   },
-// }));
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +22,7 @@ export default function FormJobs(props) {
   const [pay, setPay] = useState("");
   const [company, setCompany] = useState("");
   const [location, setLocation] = useState("");
-  const [job, setJob] = useState({ id: 1 });
+  const [job, setJob] = useState({ id: props.activeUser });
 
   useEffect(() => {
     setJob({ ...job, title, description, pay, company, location });
@@ -68,7 +51,6 @@ export default function FormJobs(props) {
         id="filled-basic"
         multiline={true}
         rows={1}
-        label="Filled"
         variant="outlined"
         size="small"
         type="textarea"
@@ -81,7 +63,6 @@ export default function FormJobs(props) {
         id="outlined-basic"
         multiline={true}
         rows={1}
-        label="Outlined"
         variant="outlined"
         size="small"
         type="number"
@@ -94,7 +75,6 @@ export default function FormJobs(props) {
         id="outlined-basic"
         multiline={true}
         rows={1}
-        label="Outlined"
         variant="outlined"
         size="small"
         type="text"
@@ -107,7 +87,6 @@ export default function FormJobs(props) {
         id="outlined-basic"
         multiline={true}
         rows={1}
-        label="Outlined"
         variant="outlined"
         size="small"
         type="text"

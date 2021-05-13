@@ -179,11 +179,7 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem>
     </Menu>
   );
-  const user = (
-    <div>
-      <User />
-    </div>
-  );
+
   return (
     <div className={classes.grow}>
       <AppBar position="static" style={{ background: "#2E3B55" }}>
@@ -301,9 +297,6 @@ export default function PrimarySearchAppBar(props) {
               <IconButton
                 edge="end"
                 aria-label="account of current user"
-                //aria-controls={menuId}
-                //aria-haspopup="true"
-                //onClick={handleProfileMenuOpen}
                 color="inherit"
               >
                 <AccountCircle />

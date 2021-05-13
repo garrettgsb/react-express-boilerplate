@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useState } from "react";
+import React, { createContext } from "react";
 import "./App.css";
 import "@fontsource/roboto";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -9,27 +9,13 @@ import Friends from "./component/Friends";
 import JobsList from "./component/JobsList";
 import JobsListItem from "./component/JobsListItem";
 import PrimarySearchAppBar from "./component/Navbar";
-import MyJobsList from "./component/MyJobsList";
 
 import useApplicationData from "./hooks/useApplicationData";
 
 export const JobsContext = createContext([]);
-export const ArtWorksContext = createContext([]);
 
 export default function App() {
   const { state, setActiveUser } = useApplicationData();
-
-  const artworks = (
-    <div>
-      <Artworks art={state.artworks} />
-    </div>
-  );
-
-  const jobBoard = (
-    <div>
-      <JobsList />
-    </div>
-  );
 
   const job = (
     <JobsContext.Provider value={state.jobs}>
@@ -53,19 +39,13 @@ export default function App() {
             path="/portfolio/:id"
             render={() => <User activeUser={state.activeUser} />}
           />
-          <Route
-            path="/job_board"
-            activeUser={state.activeUser}
-            render={() => jobBoard}
-          />
+          <Route path="/job_board" render={() => <JobsList />} />
           <Route path="/jobs/:id" render={() => job} />
           <Route
-            path="/myJobs"
-            render={() => (
-              <MyJobsList jobs={state.jobs} activeUser={state.activeUser} />
-            )}
+            path="/"
+            exact
+            render={() => <Artworks art={state.artworks} />}
           />
-          <Route path="/" exact render={() => artworks} />
         </Switch>
       </Router>
     </div>

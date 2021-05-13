@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Artworks from "./Artworks";
@@ -79,7 +79,7 @@ export default function User(props) {
             <Empty onAdd={addArt} />
           )}
           {id === `${state.activeUser}` && state.activeUser !== 0 && art && (
-            <Form onCreate={onCreate} />
+            <Form onCreate={onCreate} activeUser={state.activeUser} />
           )}
         </Grid>
       </Grid>
