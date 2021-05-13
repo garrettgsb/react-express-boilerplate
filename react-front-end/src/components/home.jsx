@@ -29,7 +29,7 @@ const Home = (props) => {
     <div className="App">
       <MenuAppBar />
      <Moods handleClick={handleClick}/>
-     <a>{props.newsArticle}</a>
+     <p>{props.newsArticle}</p>
      <Resource category={moods}/> 
       {/* <Login /> */}
       {/* <Register /> */}
