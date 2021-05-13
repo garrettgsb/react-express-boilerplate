@@ -32,123 +32,54 @@ export default function useAppData() {
         basket: baskets.data
       }));
     });
-  }, [state.basket])
+  }, [])
 
+
+  const addVegToCart = function(props) {
+    const axiosConfig = {  headers:{ 
+      "Content-Type": "application/json",
+       "Access-Control-Allow-Origin": "*"
+      },
+    }
+    const data = JSON.stringify({
+      vegetableID: props.id, 
+      userID: 1
+    })
+    return axios.post('/api/cart', data, axiosConfig)
+      .then(() => {
+        console.log('test', props)
+        console.log('state.basket', state.basket)
+
+    setState(state => {
+
+    //   const vegetable = {
+    //     ...state.basket[data.vegetableID],
+    //     vegetable: {
+    //     ...vegetable,
+    //   }
+    // }
+
+    //   const basket = {
+    //     ...state.basket,
+    //     [data.vegetableID] : vegetable,
+    //     }
+
+
+        return {...state, basket:[...state.basket, props]}
+      })
+    })
+  }
   
+
+  // console.log('basket', state.basket)
+
+  // setState({...state, basket})
+
   return {
-    state
-    // setDay,
-    // bookInterview,
-    // cancelInterview
+    state,
+    addVegToCart
     };
-  };
-
-
-  // Get all the data
-  // set the data in state
-  // pass the data through to children (useContent?)
-  // get veggies to render on page
-  // function required:
-  //   add to vegBasket
-  //   remove from vegBasket
-  //   add to plot
-  //  
-
-  // const vegBasket = function () {
-  //   const basket = []
-
-
-  // }
-
-  // make vegBasket array
-  // onClick - push the veg into vegBasket array
-  // Need to push obj {id, name, img}
-  // set those based on a query
-  // map over array and render each veg component
-  // on buildClick would insert into plots_vegs by mapping over each and using ID
-
-
-  // const buildGarden = (id, vegetable) => {
-  //   return axios.put(`/api/plots_vegs/${id}`, { interview }).then(() => {
-  //     const appointment = {
-  //       ...state.appointments[id],
-  //       interview: {
-  //         ...interview,
-  //       },
-  //     };
-  //     const appointments = {
-  //       ...state.appointments,
-  //       [id]: appointment,
-  //     };
-
-  //     const days = newDaysArr(
-  //       newSpotDay(state.day, state.days, null),
-  //       state.days
-  //     );
-
-  //     setState({ ...state, appointments, days });
-  //   });
-  // };
-
-
-  // const updateSpots = function (dayName, days, appointments) {
-
-  //   // Find the day Object
-  //   const dayObj = days.find(x => x.name === dayName);
-
-  //   // calculate spots for this day
-  //   const spots = getSpotsForDay(dayObj, appointments);
-
-  //   const newDay = {
-  //     ...dayObj,
-  //     spots
-  //   };
-
-  //   const newDays = days.map(day => day.name === dayName ? newDay : day);
-
-  //   return newDays;
-  // };
-
-  // function bookInterview(id, interview) {
-
-  //   return axios.put(`/api/appointments/${id}`, { interview: interview })
-  //     .then(() => {
-  //       const appointment = {
-  //         ...state.appointments[id],
-  //         interview: {
-  //           ...interview
-  //         }
-  //       };
-  //       const appointments = {
-  //         ...state.appointments,
-  //         [id]: appointment
-  //       };
-
-  //       const days = updateSpots(state.day, state.days, appointments);
-
-  //       setState({ ...state, appointments, days });
-  //     })
-  // }
-
-  // function cancelInterview(id) {
-
-  //   return axios.delete(`/api/appointments/${id}`)
-  //     .then(() => {
-  //       const appointment = {
-  //         ...state.appointments[id],
-  //         interview: null
-  //       };
-  //       const appointments = {
-  //         ...state.appointments,
-  //         [id]: appointment
-  //       };
-
-  //       const days = updateSpots(state.day, state.days, appointments);
-
-  //       setState({ ...state, appointments, days })
-  //     });
-  // }
-
+  }
 
 
 //grabAllVeg Function 
@@ -156,7 +87,10 @@ export default function useAppData() {
 // selects all vegetables and enables us to render data as props to card 
 
 //insertVegCart Function 
-// onclick will grab vegetable.name vegtable url_image and insert into list array
+
+
+
+
 
 // deleteVegCart function 
 // onclick will remove vegetable from state and re render vegdrawer component. 

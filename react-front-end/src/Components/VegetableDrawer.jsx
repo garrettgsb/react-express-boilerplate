@@ -95,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VegetableDrawer(props){
   const { state } = useAppData()
+
   const {open, 
       handleDrawerOpen, 
       handleDrawerClose,
@@ -116,25 +117,13 @@ export default function VegetableDrawer(props){
   //     }
   //   })
   // }
-  const deleteVegFromBasket = (name) => {
+
+  const deleteVegFromBasket = () => {
     
-    return axios.delete(`/api/cart/${name}`).then(() => {
-      // const appointment = {
-      //   ...state.appointments[id],
-      //   interview: null,
-      // };
-      // const appointments = {
-      //   ...state.appointments,
-      //   [id]: appointment,
-      // };
-
-      // const days = newDaysArr(
-      //   newSpotDay(state.day, state.days, true),
-      //   state.days
-      // );
-
+    return axios.delete(`/api/cart/`).then(() => {
       // setState();
     });
+   
   };
 
 
@@ -169,10 +158,10 @@ export default function VegetableDrawer(props){
         <Divider />
 
         <List>
-          {state.basket.map(x => 
-            <ListItem button key={x.name}>
+          {state.basket.map((x, i) => 
+            <ListItem button key={i}>
               <ListItemIcon>
-                <DeleteIcon onClick={deleteVegFromBasket(x.name)}/>
+                <DeleteIcon onClick={deleteVegFromBasket}/>
               </ListItemIcon>
               <ListItemText primary={x.name} />
               <Avatar

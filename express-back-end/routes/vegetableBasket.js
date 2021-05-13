@@ -4,7 +4,7 @@ const db = require('../db/lib/db');
 
 
 const getCart = function () {
-  return db.query(`SELECT vegetables.name, vegetables.id, vegetables.avatar_url FROM veg_baskets 
+  return db.query(`SELECT veg_baskets.id, vegetables.name, vegetables.id as vid, vegetables.avatar_url FROM veg_baskets 
   JOIN users ON users.id=veg_baskets.user_id
   JOIN vegetables ON vegetables.id=veg_baskets.vegetable_id 
   WHERE user_id=1`)
