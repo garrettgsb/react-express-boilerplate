@@ -34,14 +34,18 @@ export default function User(props) {
   const addArt = () => {
     setArt(true);
   };
-  const addArtDone = () => {
-    setArt(false);
-  };
 
   let { id } = useParams();
 
   const onDelete = (id) => {
     axios.delete(`/api/artworks/${id}`).then(() => {
+      setPortfolio();
+    });
+  };
+
+  const onCreate = (artwork) => {
+    axios.put(`/api/artworks`, artwork).then(() => {
+      setArt(false);
       setPortfolio();
     });
   };
@@ -75,7 +79,7 @@ export default function User(props) {
             <Empty onAdd={addArt} />
           )}
           {id === `${state.activeUser}` && state.activeUser !== 0 && art && (
-            <Form />
+            <Form onCreate={onCreate} />
           )}
         </Grid>
       </Grid>

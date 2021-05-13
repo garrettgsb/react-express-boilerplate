@@ -1,6 +1,6 @@
 import FormControl from "@material-ui/core/FormControl";
 import { PinDropSharp } from "@material-ui/icons";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import FormLabel from "@material-ui/core/FormLabel";
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function BasicTextFields() {
+export default function BasicTextFields(props) {
   const classes = useStyles();
   const [title, setNewTitle] = useState("");
   const [description, setNewDescription] = useState("");
@@ -33,6 +33,7 @@ export default function BasicTextFields() {
   const [projectLink, setNewProjectLink] = useState("");
   const [forSale, setForSale] = useState(false);
   const [price, setNewPrice] = useState("");
+  const [artwork, setArtwork] = useState({ id: 1 });
 
   // const onSubmit = (event) => {
   //   const value = event.target.value;
@@ -42,21 +43,32 @@ export default function BasicTextFields() {
   //   });
   // };
 
-  const test = () => {
-    console.log("Submit function call");
-    const artwork = {
-      id: 1,
+  useEffect(() => {
+    setArtwork({
+      ...artwork,
       title,
       description,
       imgLink,
       projectLink,
-      forSale: true,
+      forSale,
       price,
-    };
-    axios.put(`/api/artworks`, artwork).then(() => {
-      window.location.reload();
     });
-  };
+  }, [title, description, imgLink, projectLink, forSale, price]);
+  // const test = () => {
+  //   console.log("Submit function call");
+  //   const artwork = {
+  //     id: 1,
+  //     title,
+  //     description,
+  //     imgLink,
+  //     projectLink,
+  //     forSale: true,
+  //     price,
+  //   };
+  //   axios.put(`/api/artworks`, artwork).then(() => {
+  //     window.location.reload();
+  //   });
+  // };
   const checked = {
     borderBottom: 0,
   };
@@ -164,7 +176,11 @@ export default function BasicTextFields() {
         }
         label="Jason Killian"
       /> */}
-      <button type="submit" value="Submit" onClick={test}>
+      <button
+        type="submit"
+        value="Submit"
+        onClick={() => props.onCreate(artwork)}
+      >
         Submit
       </button>
     </form>
