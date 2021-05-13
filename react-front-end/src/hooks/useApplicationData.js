@@ -7,6 +7,7 @@ export default function useApplicationData() {
   const SET_ACTIVE_USER = "SET_ACTIVE_USER";
   const SET_ACTIVE_USER_JOBS = "SET_ACTIVE_USER_JOBS";
   const SET_PORTFOLIO = "SET_PORTFOLIO";
+  const SET_FRIENDS = "SET_FRIENDS";
 
   const reducer = (state, action) => {
     const actions = {
@@ -30,6 +31,10 @@ export default function useApplicationData() {
         ...state,
         ...action.data,
       },
+      SET_FRIENDS: {
+        ...state,
+        ...action.data,
+      },
       default: new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
       ),
@@ -44,12 +49,14 @@ export default function useApplicationData() {
     activeUser: 0,
     userJobs: [],
     portfolio: [],
+    friends: [],
   });
 
   const setActiveUser = (userID) => {
     Promise.all([
       axios.get(`/api/jobs/${userID}`),
       axios.get(`/api/users/${userID}`),
+      axios.get(`/api/friends/${userID}`),
     ]).then((all) => {
       dispatch({
         type: SET_ACTIVE_USER,
@@ -62,6 +69,10 @@ export default function useApplicationData() {
       dispatch({
         type: SET_PORTFOLIO,
         data: { portfolio: all[1].data.portfolio },
+      });
+      dispatch({
+        type: SET_FRIENDS,
+        data: { friends: all[2].data.friends },
       });
     });
     localStorage.setItem("User", userID);
@@ -90,6 +101,15 @@ export default function useApplicationData() {
       dispatch({
         type: SET_PORTFOLIO,
         data: { portfolio: all[0].data.portfolio },
+      });
+    });
+  };
+
+  const setFriends = () => {
+    Promise.all([axios.get(`/api/friends/${state.activeUser}`)]).then((all) => {
+      dispatch({
+        type: SET_FRIENDS,
+        data: { friends: all[0].data.friends },
       });
     });
   };
@@ -127,5 +147,6 @@ export default function useApplicationData() {
     setJobs,
     setPortfolio,
     checkLoggedIn,
+    setFriends,
   };
 }

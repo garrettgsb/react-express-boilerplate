@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import ConversationList from "../ConversationList";
 import MessageList from "../MessageList";
 import "./Messenger.css";
+import useApplicationData from "../../../hooks/useApplicationData";
 
 export default function Messenger(props) {
   const [activeConversation, setActiveConversation] = useState([0, 0]);
+  const { state, setFriends } = useApplicationData();
 
   return (
     <div className="messenger">
@@ -29,14 +31,15 @@ export default function Messenger(props) {
 
       <div className="scrollable sidebar">
         <ConversationList
-          activeUser={props.activeUser}
+          conversations={state.friends}
+          activeUser={state.activeUser}
           setActiveConversation={setActiveConversation}
         />
       </div>
 
       <div className="scrollable content">
         <MessageList
-          activeUser={props.activeUser}
+          activeUser={state.activeUser}
           activeConversation={activeConversation}
         />
       </div>
