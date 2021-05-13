@@ -132,7 +132,6 @@ export default function useAppData() {
     });
   },
     [])
-  console.log('state:', state);
   // console.log('state:', state);
 
   // console.log(state);

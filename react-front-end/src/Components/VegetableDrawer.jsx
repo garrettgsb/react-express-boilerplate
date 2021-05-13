@@ -97,6 +97,7 @@ export default function VegetableDrawer(props){
       handleDrawerClose,
       veg} = props
 
+//have useQuery to fetch the cart data.     
 
 
 const classes = useStyles();
@@ -128,7 +129,7 @@ const theme = useTheme();
         <Divider />
 
         <List>
-          {[props.name].map(
+          {["carrot, cucumber"].map(
             (text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>
