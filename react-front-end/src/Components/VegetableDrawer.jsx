@@ -129,7 +129,7 @@ const theme = useTheme();
         <Divider />
 
         <List>
-          {[props.name].map(
+          {["carrot, cucumber"].map(
             (text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>

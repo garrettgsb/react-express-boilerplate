@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,6 +8,15 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import useAppData from "../hooks/useAppData";
+
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
 
 
 const useStyles = makeStyles({
@@ -24,9 +33,28 @@ const useStyles = makeStyles({
 
 
 export default function VegetableCard(props) {
-console.log('test',props)
+const { state } = useAppData()
+// console.log('state',state)
+// console.log('test',props)
 
   const classes = useStyles();
+  const data = JSON.stringify(
+    {vegetableID: state.vegetables.id, 
+    userID: state.users.id, 
+    plotID: state.plots.id})
+
+  const addVegToCart = function(state) {
+    axios({
+      method: 'POST',
+      url: 'api/cart',
+      headers:{ 
+        "Content-Type": "application/json",
+         "Access-Control-Allow-Origin": "*"
+        },
+      data: data
+    })
+  }
+
 
 
   
@@ -38,7 +66,7 @@ console.log('test',props)
         <img
           className={classes.media}
           src={props.image_url}
-          alt="COLESTINKS"
+          alt="img"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -50,13 +78,14 @@ console.log('test',props)
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={props.onClick}>
-          //insert into table basket and calls invalidate query
+             
+        <Button size="small" color="primary" onClick={props.onClick}
+        onClick={() => addVegToCart(state)}
+             >
           Add to Basket
         </Button>
       </CardActions>
     </Card>
-    
   );
 }
 
