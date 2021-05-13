@@ -103,12 +103,15 @@ App.get("/api/friends/:id", (req, res) => {
       });
     });
 });
+
 App.put("/api/friends/", (req, res) => {
-  // const data = db.query("SELECT * FROM friends WHERE sender_id = $1 OR receiver_id = $1",[req.params.id]).then((response) => {
   const { first_user_id, second_user_id } = req.body;
   const data = db
     .query(
-      `INSERT INTO friends (first_user_id, second_user_id) VALUES ($1, $2);`,
+      `INSERT INTO friends (first_user_id, second_user_id) 
+      VALUES ($1, $2)
+      ON CONFLICT (first_user_id, second_user_id)
+      DO NOTHING`,
       [first_user_id, second_user_id]
     )
     .then((response) => {
@@ -117,8 +120,6 @@ App.put("/api/friends/", (req, res) => {
       });
     });
 });
-
-// ------------------------------------- JOBS
 
 App.get("/api/jobs", (req, res) => {
   const data = db
