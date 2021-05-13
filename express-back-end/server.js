@@ -35,7 +35,7 @@ app.use(Express.static('public'));
 
 app.use(maintenenceRoutes)
 app.use(vegetableRoutes)
-app.use(vegetableBasketRoutes.router)
+app.use(vegetableBasketRoutes)
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

@@ -9,11 +9,12 @@ router.get('/api/cart', (req, res) => {
   })
 });
 
+
 const getCart = function () {
   return db.query(`SELECT * FROM veg_baskets 
   JOIN vegetables ON vegetables.id=veg_baskets.vegetable_id 
-  JOIN users ON users.id=veg_baskets.users_id
-  JOIN plots ON plots.id=veg_baskets.plots_id
+  JOIN users ON users.id=veg_baskets.user_id
+  JOIN plots ON plots.id=veg_baskets.plot_id
   WHERE user_id=1`)
     .then(res => {
       return res.rows
@@ -21,11 +22,27 @@ const getCart = function () {
     .catch(err => console.log(err));
 }
 
-const addToBasket = function (state) {
-  return router.put(`INSERT INTO veg_baskets (vegetable_id, user_id, plot_id)
-  VALUES
-  (${state.vegetables.id}, ${state.users.id}, ${state.plots.id})`)
-}
+
+router.post('/api/cart', async(req, res) => {
+  console.log('req', req.body)
+  const veg_id = req.body.vegetableID
+  const user_id = req.body.userID
+  const plot_id = req.body.plotID
+  // console.log('req.body'. req.body.plotID, req.body.userID, req.body.plotID)
+  db.query(`INSERT INTO veg_baskets(vegetable_id, user_id, plot_id)
+   VALUES($1,$2,$3)`, [veg_id, user_id, plot_id])
+  .then(data => {
+    res.status(200).send("inserted data yay!!")
+  })
+  .catch(err => console.log("error!", err))
+
+//    router.put(`INSERT INTO veg_baskets (vegetable_id, user_id, plot_id)
+//   VALUES
+  // (${state.vegetables.id}, ${state.users.id}, ${state.plots.id})`)
+})
+
+
+
 
 
 
@@ -42,4 +59,4 @@ const addToBasket = function (state) {
 // });
 
 
-module.exports = {router: router, addToBasket: addToBasket}
+module.exports = router

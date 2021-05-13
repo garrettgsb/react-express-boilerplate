@@ -5,6 +5,7 @@ psql -U labber Bloom < db/schema/01_users.sql
 psql -U labber Bloom < db/schema/02_vegetables.sql
 psql -U labber Bloom < db/schema/03_plots.sql
 psql -U labber Bloom < db/schema/04_plots_vegs.sql
+psql -U labber Bloom < db/schema/05_veg_baskets.sql
 
 psql -U labber Bloom < db/seeds/01_users.sql
 psql -U labber Bloom < db/seeds/02_vegetables.sql
