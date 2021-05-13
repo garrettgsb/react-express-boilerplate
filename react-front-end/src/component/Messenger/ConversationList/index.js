@@ -3,29 +3,10 @@ import ConversationSearch from "../ConversationSearch";
 import ConversationListItem from "../ConversationListItem";
 import Toolbar from "../Toolbar";
 import ToolbarButton from "../ToolbarButton";
-import axios from "axios";
 
 import "./ConversationList.css";
 
 export default function ConversationList(props) {
-  const [conversations, setConversations] = useState([]);
-  useEffect(() => {
-    getConversations();
-  }, []);
-
-  const getConversations = () => {
-    axios.get(`/api/friends/${props.activeUser}`).then((response) => {
-      let newConversations = response.data.friends.map((result) => {
-        return {
-          username: `${result.second_username}`,
-          first_id: result.first_id,
-          second_id: result.second_id,
-        };
-      });
-      setConversations([...conversations, ...newConversations]);
-    });
-  };
-
   return (
     <div className="conversation-list">
       <Toolbar
@@ -36,7 +17,7 @@ export default function ConversationList(props) {
         ]}
       />
       <ConversationSearch />
-      {conversations.map((conversation) => (
+      {props.conversations.map((conversation) => (
         <ConversationListItem
           key={conversation.username}
           data={conversation}

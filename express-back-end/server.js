@@ -1,8 +1,8 @@
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
-// const PORT = 8080;
-const PORT = 3003;
+const PORT = 8080;
+// const PORT = 3003;
 const db = require("./lib/db");
 
 // Express Configuration
@@ -87,7 +87,7 @@ App.get("/api/friends/:id", (req, res) => {
       first_user.id as first_id,
       first_user.first_name as first_fname,
       first_user.last_name as first_lname, 
-      second_user.username as second_username,
+      second_user.username as username,
       second_user.id as second_id,
       second_user.first_name as second_fname,
       second_user.last_name as second_lname
