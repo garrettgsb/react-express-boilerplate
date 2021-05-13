@@ -4,7 +4,8 @@ const db = require('../db/lib/db');
 
 
 const getCart = function () {
-  return db.query(`SELECT vegetables.name, vegetables.id, vegetables.avatar_url FROM veg_baskets 
+  return db.query(`SELECT veg_baskets.id, vegetables.name, vegetables.id as vid, vegetables.avatar_url 
+  FROM veg_baskets 
   JOIN users ON users.id=veg_baskets.user_id
   JOIN vegetables ON vegetables.id=veg_baskets.vegetable_id 
   WHERE user_id=1`)
@@ -28,10 +29,10 @@ router.post('/api/cart', (req, res) => {
   const user_id = req.body.userID
   try {
     db.query(`INSERT INTO veg_baskets(vegetable_id, user_id)
-     VALUES($1,$2)`, [veg_id, user_id])
+     VALUES($1,$2) RETURNING id`, [veg_id, user_id])
       .then(data => {
         // console.log("data", data);
-        res.status(200).send("inserted data yay!!")
+        res.status(200).json(data.rows[0].id)
       })
       .catch(err => console.log("error!", err))
 
