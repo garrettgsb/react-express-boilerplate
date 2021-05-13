@@ -16,14 +16,14 @@ class App extends Component {
     }
   }
 
-  async componentDidMount() {
-    const feed = await parser.parseURL('https://cors-anywhere.herokuapp.com/https://www.goodnewsnetwork.org/category/news/inspiring/feed/');
-    this.setState({ feed });
-    
-    feed.items.slice(-5).forEach(item => {
-      console.log(`${item.title}: ${item.link}`);
+  componentDidMount() {
+    parser.parseURL('https://cors-anywhere.herokuapp.com/https://www.goodnewsnetwork.org/category/news/inspiring/feed/')
+    .then(res => {
+      this.setState({ feed:res.items.map(item => {
+        return [item.title, item.link]
+      })});
     });
-   }    
+  }; 
 
   //this now fetches the user info and posts for user #1 Michael Scott
   fetchDataUser1 = () => {
@@ -39,8 +39,8 @@ class App extends Component {
     }) 
     .catch(err => {
       console.log("Error", err)
-    })
-  }
+    });
+  };
 
   // axios.post('/login')
   // .then((response) => {
@@ -51,7 +51,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Home />
+          <Home newsArticle={this.state.feed[0]}/>
         </Switch>
       </Router>
     )

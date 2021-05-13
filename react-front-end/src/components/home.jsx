@@ -28,8 +28,8 @@ const Home = (props) => {
   return (
     <div className="App">
       <MenuAppBar />
-      
-     <Moods handleClick={handleClick}/> 
+     <Moods handleClick={handleClick}/>
+     <a>{props.newsArticle}</a>
      <Resource category={moods}/> 
       {/* <Login /> */}
       {/* <Register /> */}
@@ -39,7 +39,7 @@ const Home = (props) => {
       {/* <h1>Hello!</h1>
       <button onClick={props.fetchData} >
       Fetch Data
-      </button>         */}
+    </button>         */}
     </div>
   );
 };
