@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import User from "./component/User";
 import Artworks from "./component/Artworks";
+import Artpiece from "./component/Artpiece";
 import Friends from "./component/Friends";
 import JobsList from "./component/JobsList";
 import JobsListItem from "./component/JobsListItem";
@@ -41,6 +42,7 @@ export default function App() {
           />
           <Route path="/job_board" render={() => <JobsList />} />
           <Route path="/jobs/:id" render={() => job} />
+          <Route path="/artpiece/:id" render={() => <Artpiece />} />
           {/* <Route path="/user/:id/jobs" render={() => job} /> */}
           <Route
             path="/"

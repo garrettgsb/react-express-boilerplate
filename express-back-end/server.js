@@ -49,8 +49,18 @@ App.get("/api/artworks", (req, res) => {
   });
 });
 
+App.get("/api/artworks/:id", (req, res) => {
+  const { id } = req.params;
+  const data = db
+    .query("SELECT * FROM artworks WHERE id = $1", [id])
+    .then((response) => {
+      res.json({
+        artwork: response.rows,
+      });
+    });
+});
+
 App.put("/api/artworks", (req, res) => {
-  console.log(req.body);
   const { id, title, imgLink, projectLink, description, forSale, price } =
     req.body;
   const data = db

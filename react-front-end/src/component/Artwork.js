@@ -6,6 +6,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { Link, useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -54,41 +55,44 @@ const useStyles = makeStyles({
 
 export default function Artwork(props) {
   const classes = useStyles();
+  const { id } = useParams();
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={props.image}
-          title={props.title}
-        />
-        {/* <CardContent> */}
-        <Typography
-          gutterBottom
-          variant="h5"
-          component="h2"
-          className={classes.text}
-        >
-          {props.title}
-          <br />${props.price}
-        </Typography>
-        {/* <Typography variant="body2" color="textSecondary" component="p">
-            {props.description} ${props.price} {props.forSale.toString()}
-          </Typography> */}
-        {/* </CardContent> */}
-      </CardActionArea>
-      {props.author_id === props.activeUser && (
-        <CardActions>
-          <Button
-            size="small"
-            color="primary"
-            onClick={() => props.onClick(props.id)}
+    <Link to={`/artpiece/${props.id}`}>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image={props.image}
+            title={props.title}
+          />
+          {/* <CardContent> */}
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            className={classes.text}
           >
-            <h4>Delete</h4>
-          </Button>
-        </CardActions>
-      )}
-    </Card>
+            {props.title}
+            <br />${props.price}
+          </Typography>
+          {/* <Typography variant="body2" color="textSecondary" component="p">
+              {props.description} ${props.price} {props.forSale.toString()}
+            </Typography> */}
+          {/* </CardContent> */}
+        </CardActionArea>
+        {props.author_id === props.activeUser && (
+          <CardActions>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => props.onClick(props.id)}
+            >
+              <h4>Delete</h4>
+            </Button>
+          </CardActions>
+        )}
+      </Card>
+    </Link>
   );
 }
