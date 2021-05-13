@@ -22,9 +22,9 @@ router.get('/api/cart', (req, res) => {
   })
 });
 
+
 // /api/cart
 router.post('/api/cart', (req, res) => {
-  console.log('req', req.body)
   const veg_id = req.body.vegetableID
   const user_id = req.body.userID
   try {
@@ -40,7 +40,7 @@ router.post('/api/cart', (req, res) => {
     console.error("error: ", e)
 
   }
-  // console.log('req.body'. req.body.plotID, req.body.userID, req.body.plotID)
+    // console.log('req.body'. req.body.plotID, req.body.userID, req.body.plotID)
 
 //    router.put(`INSERT INTO veg_baskets (vegetable_id, user_id)
 //   VALUES
@@ -48,7 +48,11 @@ router.post('/api/cart', (req, res) => {
 })
 
 
-
+router.delete("api/cart/:id", (req, res) => {
+  db.query(`DELETE FROM veg_baskets WHERE id = $1::integer`, [
+    request.body.id
+  ])
+});
 
 
 

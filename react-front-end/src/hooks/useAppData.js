@@ -82,6 +82,28 @@ export default function useAppData() {
       })
     })
   }
+
+
+
+  const deleteVegFromCart = function(props) {
+    console.log('props', props.id)
+    
+    return axios.delete(`api/cart/${props.id}`)
+    .then((res) => {
+      console.log('res', res)
+    // .then(() => {
+    //   setState(state => {
+    //   const veg = {
+    //     vid: props.id,
+    //     id: res.data,
+    //     name: props.name,
+    //     avatar_url: null
+    //   }
+
+    //     return {...state, basket:[...state.basket, veg]}
+    //   })
+    // })
+  })}
   
 
   // console.log('basket', state.basket)
@@ -90,7 +112,8 @@ export default function useAppData() {
 
   return {
     state,
-    addVegToCart
+    addVegToCart,
+    deleteVegFromCart
     };
   }
 

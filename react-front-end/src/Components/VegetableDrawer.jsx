@@ -95,10 +95,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VegetableDrawer(props){
 
-  const { state } = useAppData()
+  const { state, deleteVegFromCart } = useAppData()
 
   useEffect(() => {
-    console.log(state.basket)
   }, [state])
 
   const {open, 
@@ -123,20 +122,15 @@ export default function VegetableDrawer(props){
   //   })
   // }
 
-  const deleteVegFromBasket = () => {
-    
-    return axios.delete(`/api/cart/`).then(() => {
-      // setState();
-    });
-   
-  };
-
-
-
-
 
   const classes = useStyles();
   const theme = useTheme();
+  const onClick = function (x) {
+    deleteVegFromCart(x).then(() => {
+      console.log('its gone bitch')
+    })
+  }
+
 
   return (
     <Drawer
@@ -166,7 +160,7 @@ export default function VegetableDrawer(props){
           {state.basket.map((x, i) => 
             <ListItem button key={i}>
               <ListItemIcon>
-                <DeleteIcon onClick={deleteVegFromBasket}/>
+                <DeleteIcon onClick={() => onClick(x)}/>
               </ListItemIcon>
               <ListItemText primary={x.name} />
               <Avatar

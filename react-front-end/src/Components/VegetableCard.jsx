@@ -26,14 +26,12 @@ const useStyles = makeStyles({
 
 
 export default function VegetableCard(props) {
-const { state, addVegToCart } = useAppData()
-
+const { state, addVegToCart } = useAppData();
 
   const classes = useStyles();
 
   const onClick = function () {
     addVegToCart(props).then(() => {
-      // setState()
       props.onClick();
     })
   }
@@ -42,7 +40,6 @@ const { state, addVegToCart } = useAppData()
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia />
-        <div>{props.id}</div>
         <img
           className={classes.media}
           src={props.image_url}
