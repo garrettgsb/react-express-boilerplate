@@ -11,12 +11,13 @@ router.get('/api/plots', (req, res) => {
 });
 
 const getPlots = function () {
-  return db.query(`SELECT * FROM plots `)
+  return db.query(`SELECT * FROM plots`)
     .then(res => {
+      return res.rows
     }).catch(err => console.log(err));
 };
 
-// router.get('/api/:plotId', (req, res) => {
+// router.get('/api/plot/:plotId', (req, res) => {
 //   getPlantedVeg().then(data => {
 //     res.json(data)
 //   })

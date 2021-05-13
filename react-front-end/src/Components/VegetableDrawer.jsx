@@ -15,6 +15,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import axios from 'axios';
+import useAppData from "../hooks/useAppData";
 
 const drawerWidth = 240;
 
@@ -93,64 +94,55 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function VegetableDrawer(props){
+  const { state } = useAppData()
   const {open, 
       handleDrawerOpen, 
       handleDrawerClose,
       veg} = props
 
-  const [state, setState] = useState({
-    users: [],
-    vegetables: [],
-    plots: [],
-    plotsVegs: [],
-    basket: []
-  });
-
-
-
-  useEffect(() => {
-    Promise.all([
-      axios.get(`/api/users`),
-      axios.get(`/api/vegetables`),
-      axios.get(`/api/plots`),
-      axios.get(`/api/plots_vegs`),
-      axios.get(`/api/cart`),
-    ]).then((all) => {
-      const [users, allVeg, plotsList, plotsVegsList, baskets] = all
-      setState(prev => ({
-        ...prev,
-        users: users.data,
-        vegetables: allVeg.data,
-        plots: plotsList.data,
-        plotsVegs: plotsVegsList.data,
-        basket: baskets.data
-      }));
-    });
-  }, [state.basket])
     
     // axios request to get all the vegetable data to grab all vegetable data if vegetable.id is === v
-  const renderBasketList = (state) => {    
-    state.basket.map((veg) => {
-      const found = state.vegetables.find(x => x.id === veg.id)
-      if (found){
-        const data = state.map(element => {
-          return (
-            <listItem
-            {...element} />
-          )
-        })
-        return data 
-      }
-    })
-  }
-
-
-
+  // const renderBasketList = (state) => {    
+  //   state.basket.map((veg) => {
+  //     const found = state.vegetables.find(x => x.id === veg.id)
+  //     if (found) {
+  //       const data = state.map(element => {
+  //         return (
+  //           <listItem
+  //           {...element} />
+  //         )
+  //       })
+  //       return data 
+  //     }
+  //   })
+  // }
+  const deleteVegFromBasket = (name) => {
     
+    return axios.delete(`/api/cart/${name}`).then(() => {
+      // const appointment = {
+      //   ...state.appointments[id],
+      //   interview: null,
+      // };
+      // const appointments = {
+      //   ...state.appointments,
+      //   [id]: appointment,
+      // };
+
+      // const days = newDaysArr(
+      //   newSpotDay(state.day, state.days, true),
+      //   state.days
+      // );
+
+      // setState();
+    });
+  };
+
+
+
+
 
   const classes = useStyles();
   const theme = useTheme();
-  // const open = true 
 
   return (
     <Drawer
@@ -180,7 +172,7 @@ export default function VegetableDrawer(props){
           {state.basket.map(x => 
             <ListItem button key={x.name}>
               <ListItemIcon>
-                <DeleteIcon />
+                <DeleteIcon onClick={deleteVegFromBasket(x.name)}/>
               </ListItemIcon>
               <ListItemText primary={x.name} />
               <Avatar

@@ -2,12 +2,47 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 
 export default function useAppData() {
+  
+  
   const [state, setState] = useState({
     users: [],
     vegetables: [],
     plots: [],
     plotsVegs: [],
+    basket: []
   });
+  
+  
+  
+  useEffect(() => {
+    Promise.all([
+      axios.get(`/api/users`),
+      axios.get(`/api/vegetables`),
+      axios.get(`/api/plots`),
+      axios.get(`/api/plots_vegs`),
+      axios.get(`/api/cart`),
+    ]).then((all) => {
+      const [users, allVeg, plotsList, plotsVegsList, baskets] = all
+      setState(prev => ({
+        ...prev,
+        users: users.data,
+        vegetables: allVeg.data,
+        plots: plotsList.data,
+        plotsVegs: plotsVegsList.data,
+        basket: baskets.data
+      }));
+    });
+  }, [state.basket])
+
+  
+  return {
+    state
+    // setDay,
+    // bookInterview,
+    // cancelInterview
+    };
+  };
+
 
   // Get all the data
   // set the data in state
@@ -114,35 +149,6 @@ export default function useAppData() {
   //     });
   // }
 
-  useEffect(() => {
-    Promise.all([
-      axios.get(`/api/users`),
-      axios.get(`/api/vegetables`),
-      axios.get(`/api/plots`),
-      axios.get(`/api/plots_vegs`),
-    ]).then((all) => {
-      const [users, allVeg, plotsList, plotsVegsList] = all
-      setState(prev => ({
-        ...prev,
-        users: users.data,
-        vegetables: allVeg.data,
-        plots: plotsList.data,
-        plotsVegs: plotsVegsList.data
-      }));
-    });
-  },
-    [])
-  // console.log('state:', state);
-
-  // console.log(state);
-
-  return {
-    state
-    // setDay,
-    // bookInterview,
-    // cancelInterview
-  };
-};
 
 
 //grabAllVeg Function 
