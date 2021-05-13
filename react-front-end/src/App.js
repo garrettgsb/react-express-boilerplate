@@ -23,7 +23,7 @@ class App extends Component {
         return [item.title, item.link]
       })});
     });
-  }; 
+  };
 
   //this now fetches the user info and posts for user #1 Michael Scott
   fetchDataUser1 = () => {
@@ -51,7 +51,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Home newsArticle={this.state.feed[0]}/>
+          {this.state.feed[0] &&<Home newsArticle={this.state.feed[0]}/>}
         </Switch>
       </Router>
     )

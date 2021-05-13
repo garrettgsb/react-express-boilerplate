@@ -10,7 +10,7 @@ import HomeAnimation from "./home_animation";
 import LoadingAnimation from "./loading_animation";
 
 const Home = (props) => {
-
+  const verifiedArticle = Array.isArray(props.newsArticle)? props.newsArticle : [];
 
   const [moods, setMoods] = useState({});
 
@@ -29,7 +29,7 @@ const Home = (props) => {
     <div className="App">
       <MenuAppBar />
      <Moods handleClick={handleClick}/>
-     <p>{props.newsArticle}</p>
+     <a href={props.newsArticle[1]} target="_blank">{props.newsArticle[0]}</a>
      <Resource category={moods}/> 
       {/* <Login /> */}
       {/* <Register /> */}
