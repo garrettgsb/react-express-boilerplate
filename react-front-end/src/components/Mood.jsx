@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import useEntryData from '../hooks/useEntryData'
 
 import Box from '@material-ui/core/Box';
 import smiley from '../emojis/smiley.ico';
@@ -17,23 +18,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Mood = () => {
+export default function Mood() {
   const classes = useStyles();
-
-  // { setState, state } = useFormData();
-
-  // function setMood() {
-  //   const value = event.target.value;
-  // setState({...state, mood: value})
-
-  // }
-
   const stylingContainer = {display:'flex', flexDirection: 'row', 'list-style': 'none'}
+
+  const { moodData } = useEntryData();
 
   const emojiArr = [angry, unhappy, neutral, mild, smiley];
   const emojiList = emojiArr.map((item, index) => {  
     return (
-      <li key={index} id={(index + 1)} onClick={event => console.log(event.currentTarget)}><img src={item} alt={item.toString()}/></li>
+      <li 
+      key={index}  
+      onClick={event => moodData((index + 1))}>
+        <img src={item} alt={item.toString()}/>
+        </li>
     )})
 
   return (
@@ -46,4 +44,3 @@ const Mood = () => {
   )
 }
 
-export default Mood;

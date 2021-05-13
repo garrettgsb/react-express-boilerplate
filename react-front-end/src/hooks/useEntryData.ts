@@ -17,15 +17,15 @@ export default function useEntryData() {
   }
 
   const titleData = (title) => {
-    setState(title);
+    setState({...state, title});
   };
 
   const entryData = (entry) => {
-    setState(entry);
+    setState({...state, entry});
   };
 
   const moodData = (mood) => {
-    setState(mood);
+    setState({...state, mood});
   };
 
 
