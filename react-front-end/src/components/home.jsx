@@ -29,11 +29,11 @@ const Home = (props) => {
     <div className="App">
       <MenuAppBar />
       
-     <Moods handleClick={handleClick}/> 
-     <Resource category={moods}/> 
+     {/* <Moods handleClick={handleClick}/>  */}
+     {/* <Resource category={moods}/>  */}
       {/* <Login /> */}
       {/* <Register /> */}
-      {/* <UserProfile /> */}
+      <UserProfile />
       {/* <HomeAnimation /> */}
       {/* <LoadingAnimation /> */}
       {/* <h1>Hello!</h1>

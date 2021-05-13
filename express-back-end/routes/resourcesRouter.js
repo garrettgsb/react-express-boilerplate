@@ -16,6 +16,15 @@ router.get("/moods/:category", (req, res) => {
   })
 })
 
+router.get("/favourited", (req, res) => {
+  db.query(
+    `SELECT * FROM resources WHERE resources.favourited = true`
+  )
+  .then(data => {
+    res.json(data.rows)
+  })
+})
+
 // router.get("/moods", (req, res) => {
 //   db.query(
 //     `SELECT DISTINCT resources.category FROM resources;`)

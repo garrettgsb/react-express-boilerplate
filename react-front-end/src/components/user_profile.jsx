@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
@@ -68,19 +69,36 @@ const NameAndPhoto = (props) => {
 };
 
 const MyResources = (props) => {
+
+  const [favourited, setFavourited] = useState(null);
+
+  const fetchFavourited = async () => {
+    const response = await axios.get(`http://localhost:8080/api/resources/favourited`);
+    console.log("MYRE", response)
+    setFavourited(response.data)
+  }
+
+  useEffect(() => {
+    fetchFavourited();
+  }, [])
+
   return (
     <div className="Resource">
       <h3>My Resources</h3>
       <div>{/* Render Resource Box From Resource Page */}</div>
-      <section className="ResourceBox">
-        <h4>{props.title}</h4>
-        <h6>{props.category}</h6>
-        <h5>{props.description}</h5>
-        <a href={props.link} target="_blank" rel="noopener noreferrer">
-          Find Out More
-        </a>
-        <FontAwesomeIcon onClick={props.onFavorite} className="Heart" icon={faHeart} />
-      </section>
+      {favourited && favourited.map((favourite) => {
+        return (
+        <section className="ResourceBox" key={favourite.id}>
+          <h4>{favourite.title}</h4>
+          <h6>{favourite.category}</h6>
+          <h5>{favourite.description}</h5>
+          <a href={favourite.link} target="_blank" rel="noopener noreferrer">
+            Find Out More
+          </a>
+          <FontAwesomeIcon onClick={props.onFavorite} className="Heart" icon={faHeart} />
+        </section>
+        )
+      })}
     </div>
   );
 };
@@ -90,13 +108,13 @@ const NewNote = (props) => {
     <div>
       <h3>My Wall</h3>
       <form className="NewNote" method="POST" action="/api/users/login">
-        <label for="inp" class="inp">
+        <label htmlFor="inp" className="inp">
           <input type="text" id="inp" placeholder="&nbsp;"></input>
-          <span class="label">
+          <span className="label">
             Write A New Note{" "}
             <FontAwesomeIcon className="PencilIcon" icon={faPencilAlt} />
           </span>
-          <span class="focus-bg"></span>
+          <span className="focus-bg"></span>
         </label>
         <button className="SubmitNote" type="submit">
           Submit
@@ -107,21 +125,42 @@ const NewNote = (props) => {
 };
 
 const PostedNote = (props) => {
+  const [notes, setNotes] = useState(null);
+
+  const fetchNotes = async () => {
+    const response = await axios.get(`http://localhost:8080/api/posts/notes`);
+    console.log("NOTES", response)
+    setNotes(response.data)
+    console.log("NOTES DATA", response.data)
+  }
+
+  useEffect(() => {
+    fetchNotes();
+  }, [])
+
   return (
     <div className="PostedNote">
-      <p>{props.note}</p>
-      <div className="EditTrashIcon">
-        <FontAwesomeIcon
-          onClick={props.onEdit}
-          className="EditIcon"
-          icon={faEdit}
-        />
-        <FontAwesomeIcon
-          onClick={props.onDelete}
-          className="TrashIcon"
-          icon={faTrashAlt}
-        />
-      </div>
+      <h3>My Notes</h3>
+      {notes && notes.map((note) => {
+        return (
+        <section className="Notes" key={note.id}>
+          <p>{note.body}</p>
+          <p>{note.time_stamp}</p>
+          <div className="EditTrashIcon">
+            <FontAwesomeIcon
+              onClick={props.onEdit}
+              className="EditIcon"
+              icon={faEdit}
+            />
+            <FontAwesomeIcon
+              onClick={props.onDelete}
+              className="TrashIcon"
+              icon={faTrashAlt}
+            />
+          </div>
+        </section>
+        )
+      })}
     </div>
   );
 };
