@@ -41,6 +41,7 @@ export default function App() {
           />
           <Route path="/job_board" render={() => <JobsList />} />
           <Route path="/jobs/:id" render={() => job} />
+          {/* <Route path="/user/:id/jobs" render={() => job} /> */}
           <Route
             path="/"
             exact

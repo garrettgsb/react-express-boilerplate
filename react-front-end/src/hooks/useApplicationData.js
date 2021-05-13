@@ -54,7 +54,7 @@ export default function useApplicationData() {
 
   const setActiveUser = (userID) => {
     Promise.all([
-      axios.get(`/api/jobs/${userID}`),
+      axios.get(`/api/user/${userID}/jobs`),
       axios.get(`/api/users/${userID}`),
       axios.get(`/api/friends/${userID}`),
     ]).then((all) => {
@@ -88,12 +88,14 @@ export default function useApplicationData() {
   };
 
   const setUserJobs = () => {
-    Promise.all([axios.get(`/api/jobs/${state.activeUser}`)]).then((all) => {
-      dispatch({
-        type: SET_ACTIVE_USER_JOBS,
-        data: { userJobs: all[0].data.userJobs },
-      });
-    });
+    Promise.all([axios.get(`/api/user/${state.activeUser}/jobs`)]).then(
+      (all) => {
+        dispatch({
+          type: SET_ACTIVE_USER_JOBS,
+          data: { userJobs: all[0].data.userJobs },
+        });
+      }
+    );
   };
 
   const setPortfolio = () => {

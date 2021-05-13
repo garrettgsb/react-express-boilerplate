@@ -56,7 +56,7 @@ export default function MessageList(props) {
     let tempMessages = [];
 
     while (i < messageCount) {
-      let previous = messages[i - 1];
+      let previous = messages[i];
       let current = messages[i];
       let next = messages[i + 1];
       let isMine = current.author === props.activeUser;

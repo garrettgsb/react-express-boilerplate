@@ -134,7 +134,7 @@ App.get("/api/jobs", (req, res) => {
 });
 
 // THIS GETS A USERs JOBS
-App.get("/api/jobs/:id", (req, res) => {
+App.get("/api/user/:id/jobs", (req, res) => {
   const data = db
     .query(
       `
@@ -152,6 +152,23 @@ App.get("/api/jobs/:id", (req, res) => {
     });
 });
 
+App.get("/api/jobs/:id", (req, res) => {
+  const data = db
+    .query(
+      `
+    SELECT * 
+    FROM jobs
+    WHERE id = $1;
+    `,
+      [req.params.id]
+    )
+    .then((response) => {
+      res.json({
+        job: response.rows,
+      });
+    });
+});
+
 App.put("/api/jobs", (req, res) => {
   const { title, description, pay, company, location, id } = req.body;
   const data = db
@@ -162,25 +179,6 @@ App.put("/api/jobs", (req, res) => {
     .then((response) => {
       res.json({
         jobs: response.rows,
-      });
-    });
-});
-
-// THIS GETS A USERs JOBS
-App.get("/api/jobs/:id", (req, res) => {
-  const data = db
-    .query(
-      `
-    SELECT * 
-    FROM users 
-    JOIN jobs ON users.id = user_id
-    WHERE users.id = $1;
-    `,
-      [req.params.id]
-    )
-    .then((response) => {
-      res.json({
-        jobData: response.rows,
       });
     });
 });
