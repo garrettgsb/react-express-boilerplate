@@ -34,14 +34,15 @@ const useStyles = makeStyles({
 
 export default function VegetableCard(props) {
 const { state } = useAppData()
-// console.log('state',state)
+// console.log('VegetableCard state',state)
 // console.log('test',props)
 
   const classes = useStyles();
-  const data = JSON.stringify(
-    {vegetableID: state.vegetables.id, 
-    userID: state.users.id, 
-    plotID: state.plots.id})
+  const data = JSON.stringify({
+    vegetableID: props.id, 
+    userID: 1
+  })
+  // console.log("VegetableCard data", data);
 
   const addVegToCart = function(state) {
     axios({
@@ -51,18 +52,19 @@ const { state } = useAppData()
         "Content-Type": "application/json",
          "Access-Control-Allow-Origin": "*"
         },
-      data: data
+      data
     })
   }
 
-
+ // need: vegID, userID, 
+ //       on card, 1, 
 
   
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia />
-        <div> </div>
+        <div>{props.id}</div>
         <img
           className={classes.media}
           src={props.image_url}
@@ -80,7 +82,7 @@ const { state } = useAppData()
       <CardActions>
              
         <Button size="small" color="primary" onClick={props.onClick}
-        onClick={() => addVegToCart(state)}
+        onClick={() => addVegToCart(data)}
              >
           Add to Basket
         </Button>
