@@ -30,15 +30,16 @@ const Mood = () => {
 
   const stylingContainer = {display:'flex', flexDirection: 'row', 'list-style': 'none'}
 
+  const emojiArr = [angry, unhappy, neutral, mild, smiley];
+  const emojiList = emojiArr.map((item, index) => {  
+    return (
+      <li key={index} id={(index + 1)} onClick={event => console.log(event.currentTarget)}><img src={item} alt={item.toString()}/></li>
+    )})
+
   return (
     <Box className={classes.root}>
-      <ol style={stylingContainer}
-        onClick={event => console.log("you clicked a smiley ", event.target.alt)}>
-        <li value="1"><img src={smiley} alt="smiley"/></li>
-        <li value="2"><img src={mild} alt="mildly_happy"/></li>
-        <li value="3"><img src={neutral} alt="neutral"/></li>
-        <li value="4"><img src={unhappy} alt="unhappy"/></li>
-        <li value="5"><img src={angry} alt="angry"/></li>
+      <ol style={stylingContainer}>
+        {emojiList}
       </ol>
     </Box>
     
