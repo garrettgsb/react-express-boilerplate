@@ -34,6 +34,7 @@ export default function BasicTable(props) {
               <TableCell align="right">Pay</TableCell>
               <TableCell align="right">Company</TableCell>
               <TableCell align="right">Location</TableCell>
+              <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -48,13 +49,15 @@ export default function BasicTable(props) {
                   <TableCell align="right">{row.pay}</TableCell>
                   <TableCell align="right">{row.company}</TableCell>
                   <TableCell align="right">{row.location}</TableCell>
-                  <button
-                    type="submit"
-                    method="delete"
-                    onClick={() => props.onClick(row.id)}
-                  >
-                    Delete
-                  </button>
+                  <TableCell align="right">
+                    <button
+                      type="submit"
+                      method="delete"
+                      onClick={() => props.onClick(row.id)}
+                    >
+                      Delete
+                    </button>
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>

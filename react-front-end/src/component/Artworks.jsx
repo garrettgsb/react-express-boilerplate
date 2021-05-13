@@ -44,7 +44,7 @@ export default function Artworks(props) {
                   url={artpiece.project_link}
                   author_id={artpiece.author_id}
                   activeUser={props.activeUser}
-                  onClick={props.onClick}
+                  onClick={props.onDelete}
                 />
               </Grid>
             );

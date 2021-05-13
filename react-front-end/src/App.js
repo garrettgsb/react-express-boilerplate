@@ -9,8 +9,6 @@ import Friends from "./component/Friends";
 import JobsList from "./component/JobsList";
 import JobsListItem from "./component/JobsListItem";
 import PrimarySearchAppBar from "./component/Navbar";
-import FormJobs from "./component/FormJobs";
-import Empty from "./component/Empty";
 import MyJobsList from "./component/MyJobsList";
 
 import useApplicationData from "./hooks/useApplicationData";
@@ -20,12 +18,6 @@ export const ArtWorksContext = createContext([]);
 
 export default function App() {
   const { state, setActiveUser } = useApplicationData();
-  const [show, setShow] = useState(false);
-  const NO_ACTIVE_USER = 0;
-
-  const jobForm = () => {
-    setShow(true);
-  };
 
   const artworks = (
     <div>
@@ -36,10 +28,6 @@ export default function App() {
   const jobBoard = (
     <div>
       <JobsList />
-      {state.activeUser !== NO_ACTIVE_USER && !show && (
-        <Empty onAdd={jobForm} />
-      )}
-      {state.activeUser !== NO_ACTIVE_USER && show && <FormJobs />}
     </div>
   );
 

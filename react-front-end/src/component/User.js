@@ -40,7 +40,7 @@ export default function User(props) {
 
   let { id } = useParams();
 
-  const onClick = (id) => {
+  const onDelete = (id) => {
     axios.delete(`/api/artworks/${id}`).then(() => {
       setPortfolio();
     });
@@ -83,7 +83,7 @@ export default function User(props) {
         <Artworks
           art={state.portfolio}
           activeUser={state.activeUser}
-          onClick={onClick}
+          onDelete={onDelete}
         />
       </div>
     </div>

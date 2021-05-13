@@ -12,7 +12,7 @@ export default function Job(props) {
       second_user_id: job.user_id,
     };
     axios.put(`/api/friends`, friend).then(() => {
-      window.location.reload();
+      // window.location.reload();
     });
     history.push("/messages");
   };
