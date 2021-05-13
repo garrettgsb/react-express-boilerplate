@@ -10,6 +10,7 @@ import Friends from "./component/Friends";
 import JobsList from "./component/JobsList";
 import JobsListItem from "./component/JobsListItem";
 import PrimarySearchAppBar from "./component/Navbar";
+import SearchPage from "./component/SearchPage";
 
 import useApplicationData from "./hooks/useApplicationData";
 
@@ -40,6 +41,7 @@ export default function App() {
             path="/portfolio/:id"
             render={() => <User activeUser={state.activeUser} />}
           />
+          {/* <Route path="/search" render={() => <SearchPage />} /> */}
           <Route path="/job_board" render={() => <JobsList />} />
           <Route path="/jobs/:id" render={() => job} />
           <Route path="/artpiece/:id" render={() => <Artpiece />} />
