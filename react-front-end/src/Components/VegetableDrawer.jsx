@@ -14,6 +14,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import axios from 'axios';
 
 const drawerWidth = 240;
 
@@ -97,17 +98,64 @@ export default function VegetableDrawer(props){
       handleDrawerClose,
       veg} = props
 
-//have useQuery to fetch the cart data.     
+  const [state, setState] = useState({
+    users: [],
+    vegetables: [],
+    plots: [],
+    plotsVegs: [],
+    basket: []
+  });
 
 
-const classes = useStyles();
-const theme = useTheme();
-// const open = true 
+
+  useEffect(() => {
+    Promise.all([
+      axios.get(`/api/users`),
+      axios.get(`/api/vegetables`),
+      axios.get(`/api/plots`),
+      axios.get(`/api/plots_vegs`),
+      axios.get(`/api/cart`),
+    ]).then((all) => {
+      const [users, allVeg, plotsList, plotsVegsList, baskets] = all
+      setState(prev => ({
+        ...prev,
+        users: users.data,
+        vegetables: allVeg.data,
+        plots: plotsList.data,
+        plotsVegs: plotsVegsList.data,
+        basket: baskets.data
+      }));
+    });
+  }, [state.basket])
+    
+    // axios request to get all the vegetable data to grab all vegetable data if vegetable.id is === v
+  const renderBasketList = (state) => {    
+    state.basket.map((veg) => {
+      const found = state.vegetables.find(x => x.id === veg.id)
+      if (found){
+        const data = state.map(element => {
+          return (
+            <listItem
+            {...element} />
+          )
+        })
+        return data 
+      }
+    })
+  }
+
+
+
+    
+
+  const classes = useStyles();
+  const theme = useTheme();
+  // const open = true 
 
   return (
     <Drawer
         className={classes.drawer}
-        variant="persistent"
+    variant="persistent"
         anchor="right"
         open={open}
         classes={{
@@ -129,20 +177,19 @@ const theme = useTheme();
         <Divider />
 
         <List>
-          {["carrot, cucumber"].map(
-            (text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <DeleteIcon /> : <DeleteIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-                <Avatar
-                  alt="Carrot"
-                  src={props.image_url}
-                />
-              </ListItem>
-            )
+          {state.basket.map(x => 
+            <ListItem button key={x.name}>
+              <ListItemIcon>
+                <DeleteIcon />
+              </ListItemIcon>
+              <ListItemText primary={x.name} />
+              <Avatar
+                alt="test"
+                src={x.image_url}
+              />
+            </ListItem>
           )}
+        
         </List>
         <Divider />
         <div className={classes.drawerHeader}>

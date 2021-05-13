@@ -9,7 +9,6 @@ const getCart = function () {
   JOIN vegetables ON vegetables.id=veg_baskets.vegetable_id 
   WHERE user_id=1`)
     .then(res => {
-      console.log('res.rows', res.rows)
       return res.rows
     })
     .catch(err => console.log(err));

@@ -10,13 +10,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import useAppData from "../hooks/useAppData";
 
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query'
 
 
 const useStyles = makeStyles({
@@ -55,6 +48,9 @@ const { state } = useAppData()
       data
     })
   }
+  // const handleDrawerOpen = () => {
+  //   setOpen(true);
+  // };
 
  // need: vegID, userID, 
  //       on card, 1, 
@@ -81,8 +77,10 @@ const { state } = useAppData()
       </CardActionArea>
       <CardActions>
              
-        <Button size="small" color="primary" onClick={props.onClick}
-        onClick={() => addVegToCart(data)}
+        <Button size="small" color="primary"  onClick={() => {
+          addVegToCart(props);
+          props.onClick();
+        }}    
              >
           Add to Basket
         </Button>

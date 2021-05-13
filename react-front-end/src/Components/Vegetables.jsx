@@ -56,7 +56,6 @@ export default function Vegetables() {
     axios.get ('/api/vegetables')
     .then ((res) =>{
       const allVeg = res.data;
-      console.log('1', allVeg)
       //add data to state
       setVeg(allVeg)
       console.log('vegetables',res.data)
