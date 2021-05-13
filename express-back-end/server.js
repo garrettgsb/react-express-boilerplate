@@ -51,7 +51,7 @@ App.get('/api/data', (req, res) => {
     res.json(data.rows);
   })
   .catch(err => {
-    console.log(err, 'What the actual fuck');
+    console.log(err, 'There was an error');
   })
 });
 
