@@ -17,17 +17,20 @@ export default function useEntryData() {
     //   .catch(err => console.log("ERROR", err));
   }
 
-  const titleData = (title) => {
-    setState({...state, title});
-  };
+  const titleData = (title) => {prev => {
 
-  const entryData = (entry) => {
-    setState({...state, entry});
-  };
+    setState({...prev, title});
+  }};
 
-  const moodData = (mood) => {
-    setState({...state, mood});
-  };
+  const entryData = (entry) => {prev => {
+
+    setState({...prev, entry});
+  }};
+
+  const moodData = (mood) => {prev => {
+
+    setState({...prev, mood});
+  }};
 
 
   return { titleData, entryData, moodData, submitEntry };

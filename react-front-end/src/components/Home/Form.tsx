@@ -1,5 +1,4 @@
-// import { useState } from 'react';
-import useEntryData from '../hooks/useEntryData'
+import useEntryData from '../../hooks/useEntryData';
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -53,7 +52,7 @@ export default function Form() {
         <TextField 
           id="outlined-basic" 
           multiline
-          rows="15"
+          rows="10"
           label="Whats on your mind?" 
           variant="outlined" 
           fullWidth

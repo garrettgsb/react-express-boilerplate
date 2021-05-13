@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import './styles/App.css';
 import Home from './components/Home';
 import Categories from './components/Categories';
