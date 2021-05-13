@@ -56,12 +56,22 @@ app.listen(PORT, () => {
 //     }).catch(err => console.log(err));
 // };
 
+<<<<<<< HEAD
 const getPlots = function() {
   return db.query(`SELECT * FROM plots`)
     .then(res => {
       return res.rows
     }).catch(err => console.log(err));
 };
+=======
+
+// const getPlots = function() {
+//   return db.query(`SELECT * FROM plots `)
+//     .then(res => {
+//       return res.rows
+//     }).catch(err => console.log(err));
+// };
+>>>>>>> 99377085e69d5e4167cdc7352ff65773a10eac61
 // const tasks = function() {
 //   return db.query(`SELECT * FROM vegetables`)
 //   .then(res => {
