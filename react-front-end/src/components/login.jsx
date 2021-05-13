@@ -18,7 +18,9 @@ const Login = (props) => {
   
   return (
     <div className="Login">
-      <h2>Login!</h2>
+ 
+      <div className="LoginForm">
+      <h2 className="Title">Login</h2>
         <input type="text" placeholder="email" 
         onChange={(e)=> 
         {setUsername(e.target.value)}}>
@@ -28,6 +30,7 @@ const Login = (props) => {
         {setPassword(e.target.value)}}>
         </input>
         <button onClick={log}>Login</button>
+        </div>
     </div>
   );
 };

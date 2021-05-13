@@ -348,11 +348,10 @@ a:hover{
    margin-top: 0;
    position: absolute;
    right:60px;
-   top: 70px;
+   top: 90px;
    text-shadow: 1px 3px 2px #c4c4c4;
-   border-bottom: 1px solid white;
-  padding-bottom: 2px;
-  letter-spacing: 10px;
+   padding-bottom: 2px;
+   letter-spacing: 10px;
  }
  h3 {
   color: white;
@@ -367,86 +366,159 @@ a:hover{
   text-shadow: 1px 3px 2px #c4c4c4;
  }
 }
-.LoadingAnimation{
+.MeditationAnimation{
  
  h1{
-   color: white;
+   color: #59865f;
    font-size: 3rem;
-   font-weight: 200;
+   font-weight: 500;
    margin-top: 0;
    position: absolute;
    right:90px;
-   top: 120px;
-   text-shadow: 1px 2px 2px #a7a5a5;
+   top: 100px;
   padding-bottom: 2px;
-  letter-spacing: 5px;
  }
  h3 {
-  color: white;
-  font-size: 2rem;
-  font-weight: 300;
-  margin-top: 0;
+  color: #659b6c;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0;
+  padding-top: 50px;
   position: absolute;
   right:90px;
   width: 200px;
-  bottom: 150px;
+  bottom: 110px;
   opacity: 0.8;
-  text-shadow: 1px 2px 2px #a7a7a7;
+  line-height: 30px;
+ }
+ h2 {
+  color: #659b6c;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0;
+  position: absolute;
+  right:90px;
+  width: 200px;
+  top: 145px;
+  // opacity: 0.8;
+ 
+ }
+ #timer {
+  border-top: 4px solid #659b6c;
+  margin-top: 25px;
+  padding-top: 20px;
+  font-size: 3rem;
+  font-weight: 400;
  }
 }
+// Login Page
+.Login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 812px;
+  
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+  width: 275px;
+background-color: white;
+padding: 20px;
+margin-bottom: 400px;
+border-radius: 15px;
+box-shadow:0 5px 10px rgba(0, 0, 0, 0.226);
+
+input {
+  margin: 7px;
+  padding:10px;
+  border:0;
+  box-shadow:3px 3px 10px rgba(0, 0, 0, 0.137);
+  border-radius: 8px;
+  outline-color: #fad4d4;
 }
+button {
+  margin-top: 10px;
+  background-color: #fad4d4; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
 
+}
+button:active {
+  background-color: #f7bfbf;
+}
+}
+.Title {
+  color: #4D4580;
+  margin: 0 0 20px 0;
+   font-size: 2.5rem;
+   font-weight: 300;
+   letter-spacing: 3px;
 
+}
+}
+// Registration Page
+.RegisterBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 812px;
+  
+.RegisterForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+  width: 275px;
+background-color: white;
+padding: 20px;
+margin-bottom: 400px;
+border-radius: 15px;
+box-shadow:3px 3px 10px rgba(0, 0, 0, 0.226);
 
+input {
+  margin: 7px;
+  padding:10px;
+  border:0;
+  box-shadow:3px 3px 10px rgba(0, 0, 0, 0.137);
+  border-radius: 8px;
+  outline-color: #fad4d4;
+}
+button {
+  margin-top: 10px;
+  background-color: #fad4d4; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
 
+}
+button:active {
+  background-color: #f7bfbf;
+}
+}
+.Title {
+  color: #4D4580;
+  margin: 0 0 20px 0;
+   font-size: 2.5rem;
+   font-weight: 300;
+   letter-spacing: 3px;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// *** DELETE THESE AFTER WE 100% KNOW WE NO LONGER NEED THEM. THESE ARE THE PREINSTALLED STYLES THAT WE DON'T USE. // 
-
-// .App-logo {
-//   animation: App-logo-spin infinite 20s linear;
-//   height: 40vmin;
-//   pointer-events: none;
-// }
-
-// .App-header {
-//   background-color: #282c34;
-//   min-height: 100vh;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   font-size: calc(10px + 2vmin);
-//   color: white;
-// }
-
-// .App-link {
-//   color: #61dafb;
-// }
-
-// @keyframes App-logo-spin {
-//   from {
-//     transform: rotate(0deg);
-//   }
-//   to {
-//     transform: rotate(360deg);
-//   }
-// }
+}
+}
+}

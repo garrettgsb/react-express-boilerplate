@@ -7,7 +7,9 @@ const HomeAnimation = (props) => {
       alert("Click to Enter");
     }} className="HomeAnimation">
       <h1 className="Title">mindfull</h1>
-        <video loop autoPlay src={pandamation} width="375" height="812"  autoplay="true" />
+      <img src={require("../animations/Pandagif.gif")}
+      alt={"PandaGif"}
+      width="375" height="812" ></img>
         <h3>Tap Anywhere To Enter</h3>
     </div>
   );

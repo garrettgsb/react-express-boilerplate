@@ -7,7 +7,7 @@ import UserProfile from "./user_profile";
 import Moods from "./moods";
 import Resource from "./resource";
 import HomeAnimation from "./home_animation";
-import LoadingAnimation from "./loading_animation";
+import MeditationAnimation from "./meditation_animation";
 
 const Home = (props) => {
 
@@ -27,15 +27,15 @@ const Home = (props) => {
 
   return (
     <div className="App">
-      <MenuAppBar />
+      {/* <MenuAppBar /> */}
       
-     <Moods handleClick={handleClick}/> 
-     <Resource category={moods}/> 
+     {/* <Moods handleClick={handleClick}/>  */}
+     {/* <Resource category={moods}/>  */}
       {/* <Login /> */}
       {/* <Register /> */}
       {/* <UserProfile /> */}
       {/* <HomeAnimation /> */}
-      {/* <LoadingAnimation /> */}
+      <MeditationAnimation />
       {/* <h1>Hello!</h1>
       <button onClick={props.fetchData} >
       Fetch Data

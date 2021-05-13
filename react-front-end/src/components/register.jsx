@@ -20,7 +20,9 @@ const Register = (props) => {
 
   return (
     <div className="Register">
-      <h2>Register!</h2>
+      <div className="RegisterBox">
+      <div className="RegisterForm">
+      <h2 className="Title">Register</h2>
         <input type="text" placeholder="name"onChange={(e)=> 
         {setNameReg(e.target.value)}}></input>
         <input type="text" placeholder="email"onChange={(e)=> 
@@ -28,6 +30,8 @@ const Register = (props) => {
         <input type="text" placeholder="password"onChange={(e)=> 
         {setPasswordReg(e.target.value)}}></input>
         <button onClick={reg}>Register</button>
+        </div>
+        </div>
     </div>
   );
 };
