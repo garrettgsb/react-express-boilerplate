@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 export default function useEntryData() {
 
@@ -7,13 +7,14 @@ export default function useEntryData() {
     title: "", entry: "", mood: null
   });
 
-  console.log("STATE ", state);
-
-  const submitEntry = () => {
   
-    axios.post('api/entries', {state}) 
-      .then(res => console.log("POST", res.data))
-      .catch(err => console.log("ERROR", err));
+  const submitEntry = () => {
+    
+    console.log("STATE ", state);
+
+    // axios.post('api/entries', {state}) 
+    //   .then(res => console.log("POST", res.data))
+    //   .catch(err => console.log("ERROR", err));
   }
 
   const titleData = (title) => {

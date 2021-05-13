@@ -1,5 +1,5 @@
-import { useState } from 'react';
-// import useEntryData from '../hooks/useEntryData';
+// import { useState } from 'react';
+import useEntryData from '../hooks/useEntryData'
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -23,17 +23,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Form() {
 
-  // { titleData, entryData } = useEntryData();
-
-  const [ title, setTitle ] = useState("");
-  const [ entry, setEntry ] = useState("");
-
   const classes = useStyles();
+
+  const { entryData, titleData, submitEntry } = useEntryData();
 
   function submitHandler(event) {
     event.preventDefault();
-    // console.log("form was submitted");
-    console.log(title);
+    console.log("form was submitted");
+    submitEntry();
   }
  
   return (
@@ -46,26 +43,21 @@ export default function Form() {
 
         <TextField 
           id="outlined-basic" 
-          // form="entry_form"
           margin="normal"
           label="Title" 
           variant="outlined" 
           fullWidth
-          value={title}
-          onInput={e => setTitle((e.target as any).value)}
+          onInput={e => titleData((e.target as any).value)}
           />
 
         <TextField 
           id="outlined-basic" 
-          // form="entry_form"
           multiline
           rows="15"
           label="Whats on your mind?" 
           variant="outlined" 
           fullWidth
-          value={entry}
-          onInput={e => setEntry((e.target as any).value)}
-
+          onInput={e => entryData((e.target as any).value)}
           />
 
         <Button 
