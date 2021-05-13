@@ -1,37 +1,57 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
+
+const listeners = [];
+let initialLoad = false;
+
+
+let state = {
+  users: [],
+  vegetables: [],
+  plots: [],
+  plotsVegs: [],
+  basket: []
+};
+
+const setState = function (newState) {
+  if (typeof newState === 'function') {
+    newState = newState(state);
+  }
+  state = newState;
+  listeners.forEach(l => l(newState))
+};
+
 export default function useAppData() {
   
-  
-  const [state, setState] = useState({
-    users: [],
-    vegetables: [],
-    plots: [],
-    plotsVegs: [],
-    basket: []
-  });
-  
-  
+  const [newListener, setNewListener] = useState(state);
   
   useEffect(() => {
-    Promise.all([
-      axios.get(`/api/users`),
-      axios.get(`/api/vegetables`),
-      axios.get(`/api/plots`),
-      axios.get(`/api/plots_vegs`),
-      axios.get(`/api/cart`),
-    ]).then((all) => {
-      const [users, allVeg, plotsList, plotsVegsList, baskets] = all
-      setState(prev => ({
-        ...prev,
-        users: users.data,
-        vegetables: allVeg.data,
-        plots: plotsList.data,
-        plotsVegs: plotsVegsList.data,
-        basket: baskets.data
-      }));
-    });
+    listeners.push(setNewListener)
+    if (!initialLoad) {
+      initialLoad = true;
+      Promise.all([
+        axios.get(`/api/users`),
+        axios.get(`/api/vegetables`),
+        axios.get(`/api/plots`),
+        axios.get(`/api/plots_vegs`),
+        axios.get(`/api/cart`),
+      ]).then((all) => {
+        const [users, allVeg, plotsList, plotsVegsList, baskets] = all
+        setState(prev => ({
+          ...prev,
+          users: users.data,
+          vegetables: allVeg.data,
+          plots: plotsList.data,
+          plotsVegs: plotsVegsList.data,
+          basket: baskets.data
+        }));
+      });
+    }
+    return () => {
+      const index = listeners.findIndex((l) => l === setNewListener)
+      listeners.splice(index, 1)
+    }
   }, [])
 
 
@@ -46,26 +66,19 @@ export default function useAppData() {
       userID: 1
     })
     return axios.post('/api/cart', data, axiosConfig)
-      .then(() => {
-        console.log('test', props)
-        console.log('state.basket', state.basket)
+      .then((res) => {
+        console.log('res', res.data)
 
-    setState(state => {
+      setState(state => {
 
-    //   const vegetable = {
-    //     ...state.basket[data.vegetableID],
-    //     vegetable: {
-    //     ...vegetable,
-    //   }
-    // }
+      const veg = {
+        vid: props.id,
+        id: res.data,
+        name: props.name,
+        avatar_url: null
+      }
 
-    //   const basket = {
-    //     ...state.basket,
-    //     [data.vegetableID] : vegetable,
-    //     }
-
-
-        return {...state, basket:[...state.basket, props]}
+        return {...state, basket:[...state.basket, veg]}
       })
     })
   }

@@ -94,7 +94,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function VegetableDrawer(props){
+
   const { state } = useAppData()
+
+  useEffect(() => {
+    console.log(state.basket)
+  }, [state])
 
   const {open, 
       handleDrawerOpen, 
