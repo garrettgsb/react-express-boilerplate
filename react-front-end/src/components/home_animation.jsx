@@ -1,16 +1,21 @@
 import React from "react";
-import pandamation from "../animations/PandaAnimation.mp4"
+import { useHistory } from "react-router-dom";
 
 const HomeAnimation = (props) => {
+  const history = useHistory();
+  function handleClick() {
+    history.push("/moods");
+  }
   return (
-    <div onClick={() => {
-      alert("Click to Enter");
-    }} className="HomeAnimation">
+    <div onClick={handleClick} className="HomeAnimation">
       <h1 className="Title">mindfull</h1>
-      <img src={require("../animations/Pandagif.gif")}
-      alt={"PandaGif"}
-      width="375" height="812" ></img>
-        <h3>Tap Anywhere To Enter</h3>
+      <img
+        src={require("../animations/Pandagif.gif")}
+        alt={"PandaGif"}
+        width="375"
+        height="736"
+      ></img>
+      <h3>Tap Anywhere To Enter</h3>
     </div>
   );
 };
