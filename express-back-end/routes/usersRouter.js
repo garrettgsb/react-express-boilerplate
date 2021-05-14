@@ -16,17 +16,17 @@ router.get("/profile/:userID", (req, res) => {
 });
 
 //    ******* Incomplete ********      POST route to change their name on profile   
-router.post("/profile/:userID", (req, res) => {
+// router.post("/profile/:userID", (req, res) => {
  
-  return db.query(
-  `UPDATE users SET name = $1 WHERE users.id = $2`, [req.params.name, req.params.userID]) //req.body.name for the name? since were taking the new form data to replace the name in the databse
-  .then(data => {
-    res.json(data.rows)
-  })
-  .catch(err => {
-    res.status(500, "Could Not Complete Request")
-  })
-});
+//   return db.query(
+//   `UPDATE users SET name = $1 WHERE users.id = $2`, [req.params.name, req.params.userID]) //req.body.name for the name? since were taking the new form data to replace the name in the databse
+//   .then(data => {
+//     res.json(data.rows)
+//   })
+//   .catch(err => {
+//     res.status(500, "Could Not Complete Request")
+//   })
+// });
 
 // How do I set cookies for login?
 // POST route to submit login information to the database (redirect to homepage)

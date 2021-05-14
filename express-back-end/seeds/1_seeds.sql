@@ -4,8 +4,8 @@ INSERT INTO users (name, password, email)
 
 
 -- POSTS TABLE SEEDS
-INSERT INTO posts (body, time_stamp, isDeleted, user_id)
- VALUES ('Im not superstitious, just a little stitious', 050721, false, 1);
+INSERT INTO posts (body, isDeleted, user_id)
+ VALUES ('Im not superstitious, just a little stitious', false, 1);
 
 
 -- RESOURCES TABLE SEEDS

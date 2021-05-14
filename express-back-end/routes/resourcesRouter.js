@@ -4,7 +4,7 @@ const db = require('../lib/db');
 
 // this route needs to be checked for the params, and how we can target the clicked mood to show the resources for the clicked mood only
 router.get("/moods/:category", (req, res) => {
-  console.log("PARAMS CAT____", req.params)
+  // console.log("PARAMS CAT____", req.params)
   db.query(
     `SELECT * FROM resources WHERE resources.category = $1;`, [req.params.category])
   .then(data => {
@@ -16,14 +16,35 @@ router.get("/moods/:category", (req, res) => {
   })
 })
 
-router.get("/favourited", (req, res) => {
+// GET route to show favourited resources for user on profile
+router.get("/favourited/:id", (req, res) => {
+  console.log("req.params for fav", req.params)
   db.query(
-    `SELECT * FROM resources WHERE resources.favourited = true`
+    `SELECT * 
+    FROM resources 
+    JOIN favourites ON favourites.resource_id = resources.id
+    WHERE favourites.user_id = $1
+    `, [req.params.user_id]
   )
   .then(data => {
     res.json(data.rows)
   })
 })
+// router.get("/favourited", (req, res) => {
+//   db.query(
+//     `SELECT * FROM resources WHERE resources.favourited = true`
+//   )
+//   .then(data => {
+//     res.json(data.rows)
+//   })
+// })
+
+// POST route to update/remove favourited resource from user
+// router.post("/favourited", (req, res) => {
+//   db.query(
+//     `UPDATE`
+//   )
+// })
 
 // router.get("/moods", (req, res) => {
 //   db.query(

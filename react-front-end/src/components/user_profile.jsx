@@ -72,14 +72,16 @@ const MyResources = (props) => {
 
   const [favourited, setFavourited] = useState(null);
 
-  const fetchFavourited = async () => {
-    const response = await axios.get(`http://localhost:8080/api/resources/favourited`);
+  
+  const fetchFavourited = async (id) => {
+    const response = await axios.get(`http://localhost:8080/api/favourites/favourited/${id}`);
     console.log("MYRE", response)
     setFavourited(response.data)
   }
-
+  console.log("favourited state", favourited)
+  
   useEffect(() => {
-    fetchFavourited();
+    fetchFavourited(id);
   }, [])
 
   return (
@@ -104,39 +106,58 @@ const MyResources = (props) => {
 };
 
 const NewNote = (props) => {
+
+  const [postReg, setPostReg] = useState('');
+
+  const wall = () => {
+    // console.log('wall test', postReg)
+    axios.post('http://localhost:8080/api/posts/profile/create', {
+      body: postReg
+    }).then(() => {
+      window.location.reload();
+    })
+  }
+
   return (
     <div>
       <h3>My Wall</h3>
-      <form className="NewNote" method="POST" action="/api/users/login">
         <label htmlFor="inp" className="inp">
-          <input type="text" id="inp" placeholder="&nbsp;"></input>
+          <input type="text" placeholder="&nbsp;" onChange={(e)=>
+          {setPostReg(e.target.value)}}></input>
           <span className="label">
             Write A New Note{" "}
             <FontAwesomeIcon className="PencilIcon" icon={faPencilAlt} />
           </span>
           <span className="focus-bg"></span>
         </label>
-        <button className="SubmitNote" type="submit">
+        <button onClick={wall} className="SubmitNote" type="submit">
           Submit
         </button>
-      </form>
     </div>
   );
 };
 
 const PostedNote = (props) => {
   const [notes, setNotes] = useState(null);
-
+  // console.log("NOTES11", notes)
   const fetchNotes = async () => {
     const response = await axios.get(`http://localhost:8080/api/posts/notes`);
-    console.log("NOTES", response)
+    // console.log("NOTES", response)
     setNotes(response.data)
-    console.log("NOTES DATA", response.data)
+    // console.log("NOTES DATA", response.data)
+  }
+
+  const deleteNote = (id) => {
+    axios.delete(`http://localhost:8080/api/posts/notes/delete/${id}`)
+    .then(() => {
+      window.location.reload();
+    })
   }
 
   useEffect(() => {
     fetchNotes();
   }, [])
+
 
   return (
     <div className="PostedNote">
@@ -153,7 +174,7 @@ const PostedNote = (props) => {
               icon={faEdit}
             />
             <FontAwesomeIcon
-              onClick={props.onDelete}
+              onClick={()=>deleteNote(note.id)}
               className="TrashIcon"
               icon={faTrashAlt}
             />
