@@ -6,6 +6,13 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 // const db = require('../../../express-back-end/db/lib/db')
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 const moment = require('moment');
 const axios = require('axios');
 
@@ -55,15 +62,16 @@ const useStyles = makeStyles({
 export default function Harvest() {
   const classes = useStyles();
   const [harvest, getHarvest] = useState([]);
+  let { id } = useParams();
 
   useEffect(() => {
-    getHarvestDate()
+    getHarvestDate(id)
   }, [])
 
 
     // Grabs harvest dates. Calculates time till harvest.
-  const getHarvestDate = function() {
-    axios.get(`/api/plots_vegs`)
+  const getHarvestDate = function(plotID) {
+    return axios.get(`/api/plots_vegs/${plotID}`)
     .then(res => {
       getHarvest(res.data)
     })
@@ -78,13 +86,6 @@ export default function Harvest() {
   return counter;
   }
 
-  // const test = function() {
-  // getHarvestDate().then(res => {
-  //   res.map(x => {
-  //     harvest_date(x.planted_date, x.harvest_date)
-  //   }) 
-  // })
-  // }
 
   return (
     <Card className={classes.root}>

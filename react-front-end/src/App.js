@@ -28,7 +28,7 @@ export default function App() {
     <Switch>
         <Router>
         <main className="layout">
-          <Route path="/tasks">
+          <Route path="/tasks/:id">
             <div className="App">
               <div className={classes.row}>
                 <Dashboard />

@@ -34,7 +34,7 @@ router.get('/api/cart/', (req, res) => {
 // }
 
 router.delete('/api/cart/:id', (req,res) => {
-  veg_basketID = req.params.id
+  const veg_basketID = req.params.id
   db.query(`DELETE FROM veg_baskets WHERE id = $1::integer`, [veg_basketID]) 
    .then(data => {
     res.status(200).json(veg_basketID)

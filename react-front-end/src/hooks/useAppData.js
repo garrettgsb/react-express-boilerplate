@@ -54,25 +54,28 @@ export default function useAppData() {
     }
   }, [])
 
-  const buildVegGarden = function (props){
-      const data = JSON.stringify({
-      vegetableID: props.id, 
-      plotID: props.id
-    })
+  const buildVegGarden = function (veg, plot){
+      const data = {
+      vegetableID: veg, 
+      plotID: plot
+    }
     return axios.post('/api/plots_vegs', data)
       .then((res) =>  {
-        console.log('res', res.data)
+        console.log('Garen_veg added')
       }
     )
   }
 
-  const addPlot = function (props){
-    return axios.post('/api/plots_vegs')
+  const addPlot = function (cart){
+
+    return axios.post('/api/plots')
       .then((res) =>  {
-        console.log('res', res.data)
-      }
-    )
-  }
+        console.log('res', res.data.id)
+        cart.map((veg) => {
+          buildVegGarden(veg.vid ,res.data.id)
+        })
+      })
+    }
 
 
   const addVegToCart = function(props) {
@@ -87,7 +90,7 @@ export default function useAppData() {
     })
     return axios.post('/api/cart', data, axiosConfig)
       .then((res) => {
-        console.log('res', res.data)
+        // console.log('res', res.data)
 
       setState(state => {
 
