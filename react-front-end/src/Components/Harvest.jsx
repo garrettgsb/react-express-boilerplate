@@ -6,6 +6,13 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 // const db = require('../../../express-back-end/db/lib/db')
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 const moment = require('moment');
 const axios = require('axios');
 
@@ -55,9 +62,10 @@ const useStyles = makeStyles({
 export default function Harvest() {
   const classes = useStyles();
   const [harvest, getHarvest] = useState([]);
+  let { id } = useParams();
 
   useEffect(() => {
-    getHarvestDate()
+    getHarvestDate(id)
   }, [])
 
 

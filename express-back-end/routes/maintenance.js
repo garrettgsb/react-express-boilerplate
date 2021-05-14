@@ -34,7 +34,6 @@ router.post('/api/plots_vegs/', (req, res) => {
     }
 });
 
-
 router.post('/api/plots', (req, res) => {
   const user_id = 1
   const dimensions_length = 100
@@ -54,9 +53,6 @@ router.post('/api/plots', (req, res) => {
     }
 });
 
-
-
-
 // could clean up later to have all in one get. 
 router.get('/api/plots', (req, res) => {
   getPlots().then(data => {
@@ -64,51 +60,23 @@ router.get('/api/plots', (req, res) => {
   })
 });
 
-
-router.get('/api/plots/:plotId', (req, res) => {
-  getPlantedVeg().then(data => {
-    res.json(data)
-  })
+router.get('/api/plots_vegs/:id', (req, res) => {
+  const plotID = req.params.id
+  console.log('plotID', plotID)
+  return db.query(`SELECT * FROM vegetables JOIN plots_vegs ON vegetables.id=plots_vegs.vegetable_id WHERE plot_id = $1::integer`, [plotID])
+    .then(data => {
+      // console.log('I am inside of the router.get', res.rows)
+      res.status(200).json(data.rows)
+    })
+    .catch(err => console.log(err));
 });
 
-
-
-// get plots_vegs table.
-const getPlotsVegs = function () {
-  return db.query(`SELECT * FROM plots_vegs`)
+const getPlantedVeg = function (req, res) {
+  return db.query(`SELECT * FROM vegetables JOIN plots_vegs ON vegetables.id=plots_vegs.vegetable_id WHERE user_id = 1`)
     .then(res => {
       return res.rows
     })
     .catch(err => console.log(err));
-}
-
-// change where userid too... where plots.id === res
-// get planted veggies per plot.
-const getPlantedVeg = function () {
-  return db.query(`SELECT * FROM vegetables JOIN plots_vegs ON vegetables.id=plots_vegs.vegetable_id WHERE user_id=1`)
-    .then(res => {
-      return res.rows
-    })
-    .catch(err => console.log(err));
-}
-
-
-
-
-// get tasks per plots_vegs.
-// const getPlotTasks = function() {
-//   return db.query(`SELECT name, image_url, water_time FROM vegetables JOIN plots_vegs ON vegetables.id=plots_vegs.vegetable_id`)
-//   .then(res => {
-//     return res.rows
-//   })
-//   .catch(err => console.log(err));
-// }
-
-// router.get('/api/:plotId', (req, res) => {
-//   getPlantedVeg().then(data =>{
-//     res.json(data)
-//   })
-// }); 
-
+};
 
 module.exports = router;

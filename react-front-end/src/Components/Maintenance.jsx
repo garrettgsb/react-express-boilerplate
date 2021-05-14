@@ -9,7 +9,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useParams
 } from "react-router-dom";
 const axios = require('axios');
 
@@ -47,15 +48,20 @@ const useStyles = makeStyles({
 export default function Maintenance() {
   const classes = useStyles();
   const [tasks, setTasks] = useState([]);
+  let { id } = useParams();
+
+  console.log('id', id)
 
   useEffect(() => {
-    getPlotTasks()
+    getPlotTasks(id)
   }, [])
 
   // get tasks per plots_vegs.
-  const getPlotTasks = function() {
-    axios.get(`/api/plots_vegs`)
+  const getPlotTasks = function(plotID) {
+    return axios.get(`/api/plots_vegs/${plotID}`)
     .then(res => {
+      console.log("res.data / maintenance", res.data)
+
       setTasks(res.data)
     })
     .catch(err => console.log(err));
