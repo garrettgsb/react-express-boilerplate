@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios';
+import MenuAppBar from "./navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
@@ -7,45 +8,48 @@ import {
   faPencilAlt,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import UserContext from './UserContext';
+
 
 const UserProfile = (props) => {
   const context = useContext(UserContext);
   console.log("PROFILE CONTEXT", context)
   return (
-    <article className="UserProfile">
-      <NameAndPhoto
-        name={"Example Panda"}
-        imgSrc={require("../images/newPanda.png")}
-        onEdit={() => {
-          alert("Edit");
-        }}
-      />
-      <hr />
-      <MyResources
-        title={"Example Title"}
-        category={"Example Category"}
-        description={"Example Description"}
-        link={"www.google.com"}
-        onFavorite={() => {
-          alert("Favorite");
-        }}
-      />
-      <hr />
-      <div className="UserNote">
-        <NewNote />
-        <hr />
-        <PostedNote
-          note={"Here is a note on how I am feeling today."}
+    <>
+      <MenuAppBar />
+      <article className="UserProfile">
+        <NameAndPhoto
+          name={"Example Panda"}
+          imgSrc={require("../images/newPanda.png")}
           onEdit={() => {
             alert("Edit");
           }}
-          onDelete={() => {
-            alert("Delete");
+        />
+        <hr />
+        <MyResources
+          title={"Example Title"}
+          category={"Example Category"}
+          description={"Example Description"}
+          link={"www.google.com"}
+          onFavorite={() => {
+            alert("Favorite");
           }}
         />
-      </div>
-    </article>
+        <hr />
+        <div className="UserNote">
+          <NewNote />
+          <hr />
+          <PostedNote
+            note={"Here is a note on how I am feeling today."}
+            onEdit={() => {
+              alert("Edit");
+            }}
+            onDelete={() => {
+              alert("Delete");
+            }}
+          />
+        </div>
+      </article>
+    </>
   );
 };
 
