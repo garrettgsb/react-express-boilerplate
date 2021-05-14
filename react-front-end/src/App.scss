@@ -1,8 +1,7 @@
 body {
-
-    background-color: #bfebc5;
+  background-color: #bfebc5;
 }
-@media only screen and (min-width: 375px) {
+@media only screen and (min-width: 414px) and (max-width: 736px) {
   .App {
     text-align: center;
     background-color: #bfebc5;
@@ -34,8 +33,6 @@ body {
     }
 
     .MoodBox {
-      margin-left: 40px;
-      margin-right: -30px;
       padding: 20px;
       height: 100px;
       width: 100px;
@@ -44,7 +41,6 @@ body {
     .Mood {
       width: 190px;
       height: 150px;
-      
     }
 
     h2 {
@@ -94,7 +90,7 @@ body {
     .Buttons {
       display: flex;
     }
-    a{
+    a {
       text-decoration: none;
       color: white;
     }
@@ -291,7 +287,7 @@ body {
         width: 100%;
         border: 0;
         font-family: inherit;
-        padding: 16px 12px 0 12px;
+        padding: 16px 0 16px 0;
         height: 56px;
         font-size: 16px;
         background-color: lightgrey;
@@ -370,7 +366,6 @@ body {
       width: 200px;
       bottom: 110px;
       opacity: 0.8;
-  
     }
   }
 
@@ -400,14 +395,14 @@ body {
       opacity: 0.8;
       line-height: 30px;
     }
-    .Separate{
+    .Separate {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       margin-right: 70px;
       border-bottom: 4px solid #80c289;
-      padding-bottom: 25px;
+      padding-top: 25px;
     }
     h2 {
       color: #659b6c;

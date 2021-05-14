@@ -29,10 +29,14 @@ export default function ButtonAppBar() {
           </Typography>
           <div className="Buttons">
             <Button className="LoginRegister" color="inherit">
-              <a href="/Login">Login</a>
-            </Button>
-            <Button className="LoginRegister" color="inherit">
-              <a href="/Register">Register</a>
+              <a href="/Profile">
+                <img
+                  src={require("../images/newPanda.png")}
+                  alt="Panda"
+                  height="30em"
+                  width="40em"
+                />
+              </a>
             </Button>
           </div>
         </Toolbar>

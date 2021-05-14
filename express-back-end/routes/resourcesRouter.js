@@ -6,7 +6,7 @@ const db = require('../lib/db');
 router.get("/moods/:category", (req, res) => {
   // console.log("PARAMS CAT____", req.params)
   db.query(
-    `SELECT * FROM resources WHERE resources.category = $1;`, [req.params.category])
+    `SELECT * FROM resources WHERE resources.category = $1 ORDER BY id ASC;`, [req.params.category])
   .then(data => {
     res.json(data.rows)
     console.log("222222", data.rows)
@@ -15,16 +15,6 @@ router.get("/moods/:category", (req, res) => {
     res.status(500, "Could Not Complete Request")
   })
 })
-
-
-// router.get("/favourited", (req, res) => {
-//   db.query(
-//     `SELECT * FROM resources WHERE resources.favourited = true`
-//   )
-//   .then(data => {
-//     res.json(data.rows)
-//   })
-// })
 
 // POST route to update/remove favourited resource from user
 // router.post("/favourited", (req, res) => {

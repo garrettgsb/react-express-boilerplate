@@ -14,6 +14,21 @@ const Resource = (props) => {
     setResources(response.data);
   };
 
+  const toggleFavourited = async (id) => {
+    const response = await axios.post(
+      `http://localhost:8080/api/favourites/toggle/${id}`
+    );
+
+    setResources((liveResources) => {
+      return liveResources.map((resource) => {
+        if (resource.id === id) {
+          resource.favourited = !resource.favourited;
+        }
+        return resource;
+      });
+    });
+  };
+
   useEffect(() => {
     fetchResources();
   }, [category]);
@@ -36,9 +51,10 @@ const Resource = (props) => {
                 </button>
                 <FontAwesomeIcon
                   onClick={() => {
-                    alert("Favorited");
+                    toggleFavourited(resource.id);
                   }}
                   className="Heart"
+                  style={{ color: resource.favourited ? "red" : "white" }}
                   icon={faHeart}
                 />
               </div>

@@ -1,10 +1,13 @@
 import React from "react";
 import HomeAnimation from "./home_animation";
 
-const Home = (props) => {
-
-  const [user, setUser] = useState({});
-  const [moods, setMoods] = useState({});
+  const Home = (props) => {
+    return (
+      <div className="App">
+      <HomeAnimation />
+    </div>
+  );
+};
 
 // const Home = (props) => {
 //   const verifiedArticle = Array.isArray(props.newsArticle)? props.newsArticle : [];
@@ -22,13 +25,6 @@ const Home = (props) => {
 
 //   })
 // }
-const Home = (props) => {
-  return (
-    <div className="App">
-      <HomeAnimation />
-    </div>
-  );
-};
 
 export default Home;
 
