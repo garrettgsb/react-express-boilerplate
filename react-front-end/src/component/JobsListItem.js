@@ -14,6 +14,10 @@ export default function Job(props) {
     axios.put(`/api/friends`, friend).then(() => {
       // window.location.reload();
     });
+    localStorage.setItem("activeConversation", [
+      friend.first_user_id,
+      friend.second_user_id,
+    ]);
     history.push("/messages");
   };
 

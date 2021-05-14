@@ -1,20 +1,14 @@
-import React from "react";
+import React, { createContext } from "react";
 import axios from "axios";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
-export default function SearchBar({ keyword, setKeyword }) {
+export default function SearchBar(props) {
   const [searchInputValue, setSearchInputValue] = React.useState("");
-  // const [searchReturnValue, setSearchReturnValue] = React.useState({});
+  const searchContext = createContext();
+  const [searchReturnValue, setSearchReturnValue] = React.useState({});
 
-  // const searchInputChange = (event) => {
-  //   // /api/search?test=2
-  //   console.log("Hello, I'm from onChange : ", event.target.value);
-  //   setSearchInputValue(event.target.value);
-  // };
-
-  const filteredSearch = (queryString) => {
-    console.log("queryString = ", queryString);
-    axios.get(`/api/search?query=${queryString}`);
-  };
+  const history = useHistory();
 
   const BarStyling = {
     width: "20rem",
@@ -22,12 +16,14 @@ export default function SearchBar({ keyword, setKeyword }) {
     border: "none",
     padding: "0.5rem",
   };
+
   return (
     <div>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          filteredSearch(searchInputValue);
+          props.filteredSearch(searchInputValue);
+          // history.push({"/searchResults", });
         }}
       >
         <input
@@ -37,14 +33,9 @@ export default function SearchBar({ keyword, setKeyword }) {
           placeholder={"search"}
           onChange={(e) => setSearchInputValue(e.target.value)}
         />
-        <button
-          type="submit"
-          // onSubmit={(event) => {
-          //   filteredSearch(searchInputValue);
-          // }}
-        >
-          Submit Search
-        </button>
+        {/* <Link to="/searchResults"> */}
+        <button type="submit">Submit Search</button>
+        {/* </Link> */}
       </form>
     </div>
   );

@@ -234,7 +234,7 @@ export default function PrimarySearchAppBar(props) {
               // searchInputValue={state.searchInputValue}
               />
             </div>
-            <SearchBar />
+            <SearchBar filteredSearch={props.filteredSearch} />
             {/* <InputBase
               placeholder="Search…"
               classes={{
