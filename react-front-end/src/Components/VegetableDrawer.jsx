@@ -14,6 +14,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import axios from 'axios';
+import useAppData from "../hooks/useAppData";
 
 const drawerWidth = 240;
 
@@ -92,21 +94,48 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function VegetableDrawer(props){
+
+  const { state, deleteVegFromCart } = useAppData()
+
+  useEffect(() => {
+  }, [state])
+
   const {open, 
       handleDrawerOpen, 
       handleDrawerClose,
       veg} = props
 
+    
+    // axios request to get all the vegetable data to grab all vegetable data if vegetable.id is === v
+  // const renderBasketList = (state) => {    
+  //   state.basket.map((veg) => {
+  //     const found = state.vegetables.find(x => x.id === veg.id)
+  //     if (found) {
+  //       const data = state.map(element => {
+  //         return (
+  //           <listItem
+  //           {...element} />
+  //         )
+  //       })
+  //       return data 
+  //     }
+  //   })
+  // }
 
 
-const classes = useStyles();
-const theme = useTheme();
-// const open = true 
+  const classes = useStyles();
+  const theme = useTheme();
+  const onClick = function (x) {
+    deleteVegFromCart(x).then(() => {
+      console.log('its gone')
+    })
+  }
+
 
   return (
     <Drawer
         className={classes.drawer}
-        variant="persistent"
+    variant="persistent"
         anchor="right"
         open={open}
         classes={{
@@ -128,20 +157,19 @@ const theme = useTheme();
         <Divider />
 
         <List>
-          {[props.name].map(
-            (text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <DeleteIcon /> : <DeleteIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-                <Avatar
-                  alt="Carrot"
-                  src={props.image_url}
-                />
-              </ListItem>
-            )
+          {state.basket.map((x, i) => 
+            <ListItem button key={i}>
+              <ListItemIcon>
+                <DeleteIcon onClick={() => onClick(x)}/>
+              </ListItemIcon>
+              <ListItemText primary={x.name} />
+              <Avatar
+                alt="test"
+                src={x.image_url}
+              />
+            </ListItem>
           )}
+        
         </List>
         <Divider />
         <div className={classes.drawerHeader}>

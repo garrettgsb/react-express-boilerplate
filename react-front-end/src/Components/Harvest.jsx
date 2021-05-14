@@ -89,6 +89,7 @@ export default function Harvest() {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.twidth}>
+      <h2>Harvesting Schedule</h2>
         <table className={classes.twidth}>
           <thead >
             <tr >

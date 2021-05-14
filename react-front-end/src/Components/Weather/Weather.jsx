@@ -26,11 +26,41 @@ export default function Weather() {
     fetchWeather();
   }, [])
 
+  const getAlerts = function () {
+    let alerts = '';
+    let frost = 0;
+    let heat = 0;
+    let rain = 0;
+  
+    for (const day of weatherData) {
+      if (day.temp.min <= 273.15) frost++;
+      if (day.temp.max >= 5.37) heat++;
+      if (day.rain) rain = rain + day.rain;
+    }
+    
+    let alert1;
+    let alert2;
+    let alert3;
+
+    if (frost > 0) {
+      alert1 = <div className="alert frost"><span>warning: </span>Frost Warning</div>;
+    }
+    if (heat > 0) {
+      alert2 = <div className="alert-heat"><span>warning: </span>High Heat Warning. Early morning watering recommended.</div>;
+    }
+    if (rain > 10) {
+      alert3 = <div className="alert-rain"><span>warning: </span>More than 18mm of rain expected.</div>;
+    }
+    return (<div>{alert1}{alert2}{alert3}</div>);
+  }
+  
   return (
-    <Card className="root">
-      <section>
-        <h2>Vancouver, CA</h2>
-        <div className="row">
+    <main>
+      <Card className="root">
+        <section>
+          <h2>Vancouver, CA</h2>
+          <div>{getAlerts()}</div>
+          <div className="row">
             {weatherData.map(w => (
               <WeatherItem classname="centerCard"
                 key={w.weather[0].id}
@@ -41,8 +71,9 @@ export default function Weather() {
                 dte={w.dt}
               />
             ))}
-        </div>
-      </section>
-    </Card>
+          </div>
+        </section>
+      </Card>
+    </main>
   )
 }

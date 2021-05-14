@@ -7,6 +7,7 @@ const moment = require('moment');
 const db = require('./db/lib/db')
 const maintenenceRoutes = require('./routes/maintenance')
 const vegetableRoutes = require('./routes/vegetables')
+const vegetableBasketRoutes = require('./routes/vegetableBasket')
 
 
 // Express Configuration
@@ -34,6 +35,7 @@ app.use(Express.static('public'));
 
 app.use(maintenenceRoutes)
 app.use(vegetableRoutes)
+app.use(vegetableBasketRoutes)
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
@@ -54,12 +56,13 @@ app.listen(PORT, () => {
 //     }).catch(err => console.log(err));
 // };
 
-const getPlots = function() {
-  return db.query(`SELECT * FROM plots`)
-    .then(res => {
-      return res.rows
-    }).catch(err => console.log(err));
-};
+
+// const getPlots = function() {
+//   return db.query(`SELECT * FROM plots `)
+//     .then(res => {
+//       return res.rows
+//     }).catch(err => console.log(err));
+// };
 // const tasks = function() {
 //   return db.query(`SELECT * FROM vegetables`)
 //   .then(res => {
