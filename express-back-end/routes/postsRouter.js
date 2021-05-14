@@ -3,7 +3,6 @@ const router = express.Router();
 const db = require('../lib/db');
 
 // GET route to show users notes 
-
 router.get("/notes", (req, res) => {
   db.query(
     `SELECT * FROM posts WHERE posts.user_id = 1;`)

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,8 +7,11 @@ import {
   faPencilAlt,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import UserContext from './UserContext';
 
 const UserProfile = (props) => {
+  const context = useContext(UserContext);
+  console.log("PROFILE CONTEXT", context)
   return (
     <article className="UserProfile">
       <NameAndPhoto
@@ -72,16 +75,19 @@ const MyResources = (props) => {
 
   const [favourited, setFavourited] = useState(null);
 
-  
-  const fetchFavourited = async (id) => {
-    const response = await axios.get(`http://localhost:8080/api/favourites/favourited/${id}`);
-    console.log("MYRE", response)
-    setFavourited(response.data)
+  const fetchFavourited = async () => {
+    const userID = await axios.get(`http://localhost:8080/api/users/loggedin`);
+    //might need to get user.id from there (accessing user id key)
+    if (userID) {
+      const response = await axios.get(`http://localhost:8080/api/favourites/favourited/${userID}`);
+      console.log("MYRE", response)
+      setFavourited(response.data)
+    }
   }
   console.log("favourited state", favourited)
   
   useEffect(() => {
-    fetchFavourited(id);
+    fetchFavourited();
   }, [])
 
   return (

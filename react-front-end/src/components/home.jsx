@@ -8,11 +8,13 @@ import Moods from "./moods";
 import Resource from "./resource";
 import HomeAnimation from "./home_animation";
 import LoadingAnimation from "./loading_animation";
+import UserContext from './UserContext';
 
 const Home = (props) => {
 
-
+  const [user, setUser] = useState({});
   const [moods, setMoods] = useState({});
+  // console.log("usercontext", UserContext)
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -27,8 +29,7 @@ const Home = (props) => {
 
   return (
     <div className="App">
-      <MenuAppBar />
-      
+      <UserContext.Provider value={{user, setUser}}>
      {/* <Moods handleClick={handleClick}/>  */}
      {/* <Resource category={moods}/>  */}
       {/* <Login /> */}
@@ -40,6 +41,9 @@ const Home = (props) => {
       <button onClick={props.fetchData} >
       Fetch Data
       </button>         */}
+      </UserContext.Provider>
+      <MenuAppBar />
+      
     </div>
   );
 };

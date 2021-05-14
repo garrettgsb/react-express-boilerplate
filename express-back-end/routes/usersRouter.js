@@ -15,27 +15,14 @@ router.get("/profile/:userID", (req, res) => {
   })
 });
 
-//    ******* Incomplete ********      POST route to change their name on profile   
-// router.post("/profile/:userID", (req, res) => {
- 
-//   return db.query(
-//   `UPDATE users SET name = $1 WHERE users.id = $2`, [req.params.name, req.params.userID]) //req.body.name for the name? since were taking the new form data to replace the name in the databse
-//   .then(data => {
-//     res.json(data.rows)
-//   })
-//   .catch(err => {
-//     res.status(500, "Could Not Complete Request")
-//   })
-// });
-
 // How do I set cookies for login?
 // POST route to submit login information to the database (redirect to homepage)
 router.post("/login", (req, res) => {
-  console.log("BODY1", req.body)
+  // console.log("BODY1", req.body)
   const email = req.body.username;
   const password = req.body.password;
-  console.log('LOGINemail', req.body.username)
-  console.log('LOGINpassword', req.body.password)
+  // console.log('LOGINemail', req.body.username)
+  // console.log('LOGINpassword', req.body.password)
 
 
   db.query(
@@ -45,7 +32,7 @@ router.post("/login", (req, res) => {
         res.send({err: err})
       }
         if (result.rows.length > 0) {
-          console.log("RESULT", result.rows[0])
+          // console.log("RESULT", result.rows[0])
           res.send(result.rows[0]);
         } else {
           res.send({ message: "Wrong username/password combination!"});
@@ -57,9 +44,9 @@ router.post("/login", (req, res) => {
 
 // POST route to submit registration information to the database (redirect to homepage)
 router.post("/register", (req, res) => {
-  console.log('name', req.body.name)
-  console.log('email', req.body.username)
-  console.log('password', req.body.password)
+  // console.log('name', req.body.name)
+  // console.log('email', req.body.username)
+  // console.log('password', req.body.password)
   const email = req.body.username;
   const password = req.body.password;
   const name = req.body.name;
@@ -76,12 +63,29 @@ router.post("/register", (req, res) => {
   )
 });
 
+// INCOMPLETE ROUTES
+//    ******* Incomplete ********      POST route to change their name on profile   
+// router.post("/profile/:userID", (req, res) => {
+ 
+//   return db.query(
+//   `UPDATE users SET name = $1 WHERE users.id = $2`, [req.params.name, req.params.userID]) //req.body.name for the name? since were taking the new form data to replace the name in the databse
+//   .then(data => {
+//     res.json(data.rows)
+//   })
+//   .catch(err => {
+//     res.status(500, "Could Not Complete Request")
+//   })
+// });
 
+// router.get("/loggedin", (req, res) => {
+//   //use express session here
+//   //send id to front-end
+// })
 
-// POST route to log a user out (redirect to homepage)
-router.post("/logout", (req, res) => {
+// // POST route to log a user out (redirect to homepage)
+// router.post("/logout", (req, res) => {
 
-});
+// });
 
 
 

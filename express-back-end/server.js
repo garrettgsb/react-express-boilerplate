@@ -14,16 +14,12 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
 App.use(cors());
-// App.use(cookieSession({
-//   name: 'session',
-//   keys: ['guestID', 'userID'],
-//   maxAge: 24 * 60 * 60 * 1000 // 24 hours
-// }));
+
 App.use(session({
   secret: 'secret key',
   resave: false,
   saveUninitialized: false,
-  // 24 hours
+  cookie: {}
 }));
 
 

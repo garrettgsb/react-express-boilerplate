@@ -4,7 +4,7 @@ const db = require('../lib/db');
 
 // GET route to show favourited resources for user on profile
 router.get("/favourited/:id", (req, res) => {
-  console.log("req.params for fav", req.params)
+  // console.log("req.params for fav", req.params)
   db.query(
     `SELECT * 
     FROM resources 
@@ -16,8 +16,16 @@ router.get("/favourited/:id", (req, res) => {
     res.json(data.rows)
   })
 })
-//POST route to change favourited/unfavourited
 
+// //POST route to change favourited/unfavourited
+// router.post("", (req, res) => {
+//   db.query(
+
+//   )
+//   .then(data => {
+//     res.json(data.rows)
+//   })
+// })
 
 
 
