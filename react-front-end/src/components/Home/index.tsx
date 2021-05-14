@@ -7,6 +7,8 @@ const Home = () => {
   const timeElapsed: number = Date.now();
   const currentDay = new Date(timeElapsed);
 
+  console.log("Home has loaded");
+  
   return (
     
       <div>

@@ -36,10 +36,11 @@ const App = () => {
             <Route path="/categories" component={Categories} />
             <Route path="/entries" component={Entries} />
             <Route path="/settings" component={Settings} />
-            <Route path="/graphs" component={Graphs} >
-            <Route path="/home" component={Home} />
+            <Route path="/graphs" component={Graphs} />
+            <Route path="/" component={Home} />
+              
             <Redirect to='/' />
-            </Route>
+            {/* </Route> */}
           </Switch>
         </Router >
       </UserContext.Provider>
