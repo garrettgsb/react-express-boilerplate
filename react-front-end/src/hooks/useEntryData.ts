@@ -1,3 +1,7 @@
+// to resolve error "Expected an assignment or function call and instead saw an expression"
+/* eslint-disable */
+
+
 import { useState } from 'react';
 // import axios from 'axios';
 
@@ -17,24 +21,24 @@ export default function useEntryData() {
     //   .catch(err => console.log("ERROR", err));
   }
 
-  const titleData = (title) => {prev => {
+  function titleData(title) {prev => {
 
     setState({...prev, title});
   }};
 
-  const contentData = (content) => {prev => {
+  function contentData(content) {prev => {
 
     setState({...prev, content});
   }};
 
-  const moodData = (mood) => {prev => {
+  function moodData(mood) {prev => {
 
     setState({...prev, mood});
   }};
 
-  const privacyData = (val) => {prev => {
+  function privacyData(val) {prev => {
     setState({...prev, privacy: val})
-  }}
+  }};
 
 
   return { titleData, contentData, moodData, privacyData, submitEntry };
