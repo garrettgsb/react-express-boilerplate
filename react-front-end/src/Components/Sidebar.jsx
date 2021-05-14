@@ -6,31 +6,18 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import SettingsIcon from '@material-ui/icons/Settings';
-import InfoIcon from '@material-ui/icons/Info';
-// importing image as a variable below
-import garden from './ecology.png'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import NestedList from './Dropdown';
+import "./Sidebar.scss";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
+
   root: {
     display: 'flex',
   },
@@ -59,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
+    backgroundColor: 'lightGreen',
   },
   drawerOpen: {
     width: drawerWidth,
@@ -85,19 +73,26 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
+    backgroundColor: 'lightgreen',
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    }),
+    marginLeft: -drawerWidth
   },
-  // bottom: {
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   flexDirection: 'column',
-  //   alignItems: 'flex-end',
-  //   marginTop: '450px',
-  //   },
+  contentShift: {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    }),
+    marginLeft: 0
+  }
 }));
+
 
 export default function Sidebar() {
   const classes = useStyles();
@@ -113,16 +108,17 @@ export default function Sidebar() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className="root">
       <CssBaseline />
       <AppBar
         position="fixed"
-        color="primary"
+        color="grey"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar className="nav">
+
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -134,14 +130,6 @@ export default function Sidebar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-
-            <div>
-              Bloom 
-          {/* <Link to="/tasks">Maintenance      |     </Link>
-              <Link to="/planning">Planning</Link> */}
-            </div>
-          </Typography>
         </Toolbar>
 
       </AppBar>
@@ -158,66 +146,15 @@ export default function Sidebar() {
           }),
         }}
       >
-        <div className={classes.toolbar}>
+        <div className="toolbar">
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
         <Divider />
 
-        {/* Top list, used as an array. Possible to push new plots into this array to render them? */}
+        <NestedList />
 
-        <List>
-          {['My Gardens'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <img src={garden} width="20px" /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-
-        {/* Resources / Static stuff */}
-
-        <List>
-          <Link to="/vegetables">
-            <ListItem button key={'Vegetables'}>
-              <ListItemIcon><InboxIcon /></ListItemIcon>
-              <ListItemText primary='Vegetables' />
-            </ListItem>
-          </Link>
-          <Link to="/tasks">
-            <ListItem button key={'Maintenance'}>
-              <ListItemIcon><InboxIcon /></ListItemIcon>
-              <ListItemText primary='Maintenance' />
-            </ListItem>
-          </Link>
-          <Link to="/planning">
-            <ListItem button key={'Planning'}>
-              <ListItemIcon><InboxIcon /></ListItemIcon>
-              <ListItemText primary='Planning' />
-            </ListItem>
-          </Link>
-
-          <ListItem button key={'Resources'}>
-            <ListItemIcon><MailIcon /></ListItemIcon>
-            <ListItemText primary='Resources' />
-          </ListItem>
-        </List>
-        <Divider />
-
-        {/* Bottom stuff. Possible to make appear at bottom of page laster */}
-
-        <List >
-          <ListItem button key={'About Us'}>
-            <ListItemIcon><InfoIcon /></ListItemIcon>
-            <ListItemText primary='About Us' />
-          </ListItem>
-          <ListItem button key={'Settings'}>
-            <ListItemIcon><SettingsIcon /></ListItemIcon>
-            <ListItemText primary='Settings' />
-          </ListItem>
-        </List>
       </Drawer>
     </div>
   );

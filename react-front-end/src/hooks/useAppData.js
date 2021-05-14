@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
-
 const listeners = [];
 let initialLoad = false;
 
