@@ -1,22 +1,22 @@
 import React from "react";
 import HomeAnimation from "./home_animation";
 
-const Home = (props) => {
-  const verifiedArticle = Array.isArray(props.newsArticle)? props.newsArticle : [];
+// const Home = (props) => {
+//   const verifiedArticle = Array.isArray(props.newsArticle)? props.newsArticle : [];
 
-  const [moods, setMoods] = useState({});
+//   const [moods, setMoods] = useState({});
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    setMoods({
-      category: e.target.value
-    });
-  };
+//   const handleClick = (e) => {
+//     e.preventDefault();
+//     setMoods({
+//       category: e.target.value
+//     });
+//   };
 
-  useEffect(() => {
+//   useEffect(() => {
 
-  })
-}
+//   })
+// }
 const Home = (props) => {
   return (
     <div className="App">

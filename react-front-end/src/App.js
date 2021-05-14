@@ -59,8 +59,8 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          {this.state.feed[0] &&<Home newsArticle={this.state.feed[0]}/>}
           <Route exact path="/">
+          {/* {this.state.feed[0] &&<Home newsArticle={this.state.feed[0]}/>} */}
             <Home />
           </Route>
           <Route exact path="/moods">
