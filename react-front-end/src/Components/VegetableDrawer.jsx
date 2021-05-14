@@ -127,7 +127,7 @@ export default function VegetableDrawer(props){
   const theme = useTheme();
   const onClick = function (x) {
     deleteVegFromCart(x).then(() => {
-      console.log('its gone bitch')
+      console.log('its gone')
     })
   }
 

@@ -1,3 +1,4 @@
+const { request } = require('express');
 const Express = require('express');
 const router = Express.Router();
 const db = require('../db/lib/db');
@@ -15,13 +16,32 @@ const getCart = function () {
     .catch(err => console.log(err));
 }
 
-
-router.get('/api/cart', (req, res) => {
+//get cart for user 
+router.get('/api/cart/', (req, res) => {
   getCart().then(data => {
     res.json(data)
   })
 });
 
+//get specific veggie to see if its rendering data correctly and to delete the veggie
+
+//  db.query(`SELECT * FROM veg_baskets WHERE id = $1::integer`, [req.params.id])
+//   request.
+//     .then(res => {
+//       return res.rows
+//     })
+//     .catch(err => console.log(err))
+// }
+
+router.delete('/api/cart/:id', (req,res) => {
+  veg_basketID = req.params.id
+  db.query(`DELETE FROM veg_baskets WHERE id = $1::integer`, [veg_basketID]) 
+   .then(data => {
+    res.status(200).json(veg_basketID)
+  })
+  .catch(err => console.log("error!", err))
+
+})
 
 // /api/cart
 router.post('/api/cart', (req, res) => {
@@ -49,7 +69,7 @@ router.post('/api/cart', (req, res) => {
 
 
 router.delete("api/cart/:id", (req, res) => {
-  db.query(`DELETE FROM veg_baskets WHERE id = $1::integer`, [
+  db.query(`DELETE FROM veg_baskets WHERE id = veg_baskets.id`, [
     request.body.id
   ])
 });
