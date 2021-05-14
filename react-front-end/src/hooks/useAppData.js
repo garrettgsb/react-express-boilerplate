@@ -19,11 +19,7 @@ export default function useAppData() {
   //   add to plot
   //  
 
-  // const vegBasket = function () {
-  //   const basket = []
 
-
-  // }
 
   // make vegBasket array
   // onClick - push the veg into vegBasket array
@@ -132,7 +128,7 @@ export default function useAppData() {
     });
   },
     [])
-  console.log('state:', state);
+  console.log(state.users);
   // console.log('state:', state);
 
   // console.log(state);
