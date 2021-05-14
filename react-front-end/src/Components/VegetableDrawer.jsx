@@ -100,12 +100,14 @@ export default function VegetableDrawer(props){
   useEffect(() => {
   }, [state])
 
+ 
+
+
   const {open, 
       handleDrawerOpen, 
       handleDrawerClose,
       veg} = props
 
-    
     // axios request to get all the vegetable data to grab all vegetable data if vegetable.id is === v
   // const renderBasketList = (state) => {    
   //   state.basket.map((veg) => {
@@ -122,18 +124,17 @@ export default function VegetableDrawer(props){
   //   })
   // }
 
+  
 
   const classes = useStyles();
   const theme = useTheme();
 
-  const buildOnClick = function (x) {
-    
-    addPlot()
+  const buildOnClick = function (cart) {
+    addPlot(cart)
       .then(() => {
-      buildVegGarden(x)
-      .then(() => {
-      console.log('success! I like!')
-      })
+        console.log('state-basket', state.basket) 
+        console.log('state-basket-vid', state.basket[0].vid) 
+        console.log('success! we did it!!')
     })
   }
   
@@ -194,7 +195,7 @@ export default function VegetableDrawer(props){
             )}
           </IconButton>
         </div>
-        <Button variant="contained" color="primary" className={classes.buildGardenButton}>
+        <Button onClick={() => buildOnClick(state.basket)} variant="contained" color="primary" className={classes.buildGardenButton}>
           Build My Garden
         </Button>
       </Drawer>
