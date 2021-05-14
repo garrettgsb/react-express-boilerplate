@@ -25,8 +25,8 @@ export default function App() {
 
 
   return (
-    <Router>
-      <Switch>
+    <Switch>
+        <Router>
         <main className="layout">
           <Route path="/tasks">
             <div className="App">
@@ -51,7 +51,7 @@ export default function App() {
           </Route>
 
         </main>
-      </Switch>
-    </Router>
+      </Router>
+    </Switch>
   );
 }

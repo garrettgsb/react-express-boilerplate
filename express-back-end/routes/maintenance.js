@@ -2,27 +2,27 @@ const Express = require('express');
 const router = Express.Router();
 const db = require('../db/lib/db');
 
+const getPlots = function () {
+  return db.query(`SELECT * FROM plots`)
+    .then(res => {
+      return res.rows
+    })
+    .catch(err => console.log(err));
+};
 
-//could clean up later to have all in one get. 
+// could clean up later to have all in one get. 
 router.get('/api/plots', (req, res) => {
   getPlots().then(data => {
-    console.log('data', data)
     res.json(data)
   })
 });
 
-const getPlots = function () {
-  return db.query(`SELECT * FROM plots `)
-    .then(res => {
-      console.log(res.rows)
-    }).catch(err => console.log(err));
-};
 
-// router.get('/api/:plotId', (req, res) => {
-//   getPlantedVeg().then(data => {
-//     res.json(data)
-//   })
-// });
+router.get('/api/plots/:plotId', (req, res) => {
+  getPlantedVeg().then(data => {
+    res.json(data)
+  })
+});
 
 router.get('/api/plots_vegs', (req, res) => {
   getPlantedVeg().then(data => {
