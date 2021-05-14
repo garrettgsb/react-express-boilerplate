@@ -7,7 +7,8 @@ CREATE TABLE jobs (
   company VARCHAR(255),
   location VARCHAR(255),
   posted_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT UC_jobs UNIQUE(title, user_id)
 ); 
 
 

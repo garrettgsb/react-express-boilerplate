@@ -274,6 +274,23 @@ export default function PrimarySearchAppBar(props) {
               </Link>
             )}
 
+            {props.activeUser === 0 && (
+              <Link
+                to="/"
+                onClick={() => {
+                  props.onLogin(2);
+                }}
+                style={{ textDecoration: "none", color: "lavender" }}
+              >
+                <IconButton aria-label="show 4 new mails" color="inherit">
+                  {/* <Badge badgeContent={4} color="secondary">
+                  <MailIcon />
+                </Badge> */}
+                  login2
+                </IconButton>
+              </Link>
+            )}
+
             {props.activeUser !== 0 && (
               <Link
                 to="/"

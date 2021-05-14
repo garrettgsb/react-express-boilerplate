@@ -42,7 +42,12 @@ export default function BasicTable(props) {
               props.state.userJobs.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row">
-                    <Link to={`/jobs/${row.id}`}>{row.title}</Link>
+                    <Link
+                      to={`/jobs/${row.id}`}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      {row.title}
+                    </Link>
                   </TableCell>
                   <TableCell align="right">{row.username}</TableCell>
                   <TableCell align="right">{row.description}</TableCell>
@@ -53,7 +58,16 @@ export default function BasicTable(props) {
                     <button
                       type="submit"
                       method="delete"
-                      onClick={() => props.onClick(row.id)}
+                      onClick={() => props.onEdit(row.id)}
+                    >
+                      Edit
+                    </button>
+                  </TableCell>
+                  <TableCell align="right">
+                    <button
+                      type="submit"
+                      method="delete"
+                      onClick={() => props.onDelete(row.id)}
                     >
                       Delete
                     </button>
