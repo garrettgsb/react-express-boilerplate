@@ -81,17 +81,37 @@ export default function useAppData() {
       })
     })
   }
+
+
+//remove break when we prevent from adding multiple ids of the same veg. 
+  const deleteVegFromCart = function(props) {
+    console.log('propsid', props.id)
+    
+    return axios.delete(`api/cart/${props.id}`)
+    .then((res) => {
+
+      let tempBasket = state.basket
+      for (let i = 0; i <tempBasket.length; i++){
+       console.log('looptest', tempBasket[i].id, res) 
+        if (tempBasket[i].id === props.id) {
+          console.log('found it', tempBasket)
+          tempBasket.splice(i, 1)
+
+          break;
+        }
+      }
+      setState({...state, basket: tempBasket})
+      console.log('test1', state)
+    }) 
+  }
   
-
-  // console.log('basket', state.basket)
-
-  // setState({...state, basket})
 
   return {
     state,
-    addVegToCart
-    };
-  }
+    addVegToCart,
+    deleteVegFromCart
+  };
+}
 
 
 //grabAllVeg Function 
