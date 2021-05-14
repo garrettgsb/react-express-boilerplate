@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
+
 const listeners = [];
 let initialLoad = false;
 
@@ -53,6 +54,26 @@ export default function useAppData() {
     }
   }, [])
 
+  const buildVegGarden = function (props){
+      const data = JSON.stringify({
+      vegetableID: props.id, 
+      plotID: props.id
+    })
+    return axios.post('/api/plots_vegs', data)
+      .then((res) =>  {
+        console.log('res', res.data)
+      }
+    )
+  }
+
+  const addPlot = function (props){
+    return axios.post('/api/plots_vegs')
+      .then((res) =>  {
+        console.log('res', res.data)
+      }
+    )
+  }
+
 
   const addVegToCart = function(props) {
     const axiosConfig = {  headers:{ 
@@ -92,11 +113,8 @@ export default function useAppData() {
 
       let tempBasket = state.basket
       for (let i = 0; i <tempBasket.length; i++){
-       console.log('looptest', tempBasket[i].id, res) 
         if (tempBasket[i].id === props.id) {
-          console.log('found it', tempBasket)
           tempBasket.splice(i, 1)
-
           break;
         }
       }
@@ -109,16 +127,11 @@ export default function useAppData() {
   return {
     state,
     addVegToCart,
-    deleteVegFromCart
+    deleteVegFromCart,
+    buildVegGarden,
+    addPlot,
   };
 }
-
-
-//grabAllVeg Function 
-// renders data to aboutVEG
-// selects all vegetables and enables us to render data as props to card 
-
-//insertVegCart Function 
 
 
 

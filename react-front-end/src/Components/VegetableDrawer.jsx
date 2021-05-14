@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VegetableDrawer(props){
 
-  const { state, deleteVegFromCart } = useAppData()
+  const { state, deleteVegFromCart, buildVegGarden, addPlot } = useAppData()
 
   useEffect(() => {
   }, [state])
@@ -125,9 +125,22 @@ export default function VegetableDrawer(props){
 
   const classes = useStyles();
   const theme = useTheme();
+
+  const buildOnClick = function (x) {
+    
+    addPlot()
+      .then(() => {
+      buildVegGarden(x)
+      .then(() => {
+      console.log('success! I like!')
+      })
+    })
+  }
+  
+  
   const onClick = function (x) {
     deleteVegFromCart(x).then(() => {
-      console.log('its gone')
+      
     })
   }
 
