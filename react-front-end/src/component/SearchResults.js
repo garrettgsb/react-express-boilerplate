@@ -93,7 +93,14 @@ const SearchResults = (props) => {
           {storage.users.map((user) => {
             return (
               <Grid item xs={12} sm={6} md={4}>
-                <ProfilePic userInfo={user} />
+                <div
+                  onClick={() => {
+                    console.log("user = ", user);
+                    history.push(`/portfolio/${user.id}`);
+                  }}
+                >
+                  <ProfilePic userInfo={user} />
+                </div>
               </Grid>
             );
           })}
@@ -144,12 +151,12 @@ const SearchResults = (props) => {
   console.log("storage = ", storage);
   return (
     <div>
-      <h2>{storage.artworks[0] && "Art!"}</h2>
-      <div>{storage.artworks[0] && artworks()}</div>
-      <h2>{storage.users[0] && "People!"}</h2>
-      <div>{storage.users[0] && users()}</div>
-      <h2>{storage.jobs[0] && "Jobs!"}</h2>
-      <div>{storage.jobs[0] && jobs()}</div>
+      <h2>{storage && "Art!"}</h2>
+      <div>{storage && artworks()}</div>
+      <h2>{storage && "People!"}</h2>
+      <div>{storage && users()}</div>
+      <h2>{storage && "Jobs!"}</h2>
+      <div>{storage && jobs()}</div>
     </div>
   );
 };
