@@ -1,4 +1,5 @@
 import React from "react";
+import MenuAppBar from "./navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
@@ -9,39 +10,42 @@ import {
 
 const UserProfile = (props) => {
   return (
-    <article className="UserProfile">
-      <NameAndPhoto
-        name={"Example Panda"}
-        imgSrc={require("../images/newPanda.png")}
-        onEdit={() => {
-          alert("Edit");
-        }}
-      />
-      <hr />
-      <MyResources
-        title={"Example Title"}
-        category={"Example Category"}
-        description={"Example Description"}
-        link={"www.google.com"}
-        onFavorite={() => {
-          alert("Favorite");
-        }}
-      />
-      <hr />
-      <div className="UserNote">
-        <NewNote />
-        <hr />
-        <PostedNote
-          note={"Here is a note on how I am feeling today."}
+    <>
+      <MenuAppBar />
+      <article className="UserProfile">
+        <NameAndPhoto
+          name={"Example Panda"}
+          imgSrc={require("../images/newPanda.png")}
           onEdit={() => {
             alert("Edit");
           }}
-          onDelete={() => {
-            alert("Delete");
+        />
+        <hr />
+        <MyResources
+          title={"Example Title"}
+          category={"Example Category"}
+          description={"Example Description"}
+          link={"www.google.com"}
+          onFavorite={() => {
+            alert("Favorite");
           }}
         />
-      </div>
-    </article>
+        <hr />
+        <div className="UserNote">
+          <NewNote />
+          <hr />
+          <PostedNote
+            note={"Here is a note on how I am feeling today."}
+            onEdit={() => {
+              alert("Edit");
+            }}
+            onDelete={() => {
+              alert("Delete");
+            }}
+          />
+        </div>
+      </article>
+    </>
   );
 };
 
@@ -79,7 +83,11 @@ const MyResources = (props) => {
         <a href={props.link} target="_blank" rel="noopener noreferrer">
           Find Out More
         </a>
-        <FontAwesomeIcon onClick={props.onFavorite} className="Heart" icon={faHeart} />
+        <FontAwesomeIcon
+          onClick={props.onFavorite}
+          className="Heart"
+          icon={faHeart}
+        />
       </section>
     </div>
   );
