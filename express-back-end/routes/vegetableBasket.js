@@ -60,19 +60,15 @@ router.post('/api/cart', (req, res) => {
     console.error("error: ", e)
 
   }
-    // console.log('req.body'. req.body.plotID, req.body.userID, req.body.plotID)
-
-//    router.put(`INSERT INTO veg_baskets (vegetable_id, user_id)
-//   VALUES
-  // (${state.vegetables.id}, ${state.users.id}, ${state.plots.id})`)
+    
 })
 
 
-router.delete("api/cart/:id", (req, res) => {
-  db.query(`DELETE FROM veg_baskets WHERE id = veg_baskets.id`, [
-    request.body.id
-  ])
-});
+// router.delete("api/cart/:id", (req, res) => {
+//   db.query(`DELETE FROM veg_baskets WHERE id = veg_baskets.id`, [
+//     request.body.id
+//   ])
+// });
 
 
 
