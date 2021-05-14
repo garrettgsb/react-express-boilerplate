@@ -126,6 +126,7 @@ export default function PrimarySearchAppBar(props) {
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
+      classes={{ paper: classes.menu }}
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
@@ -149,10 +150,10 @@ export default function PrimarySearchAppBar(props) {
       <Link to="/" style={{ textDecoration: "none", color: "black" }}>
         <MenuItem>
           <IconButton aria-label="show 11 new notifications" color="inherit">
-            <Badge badgeContent={11} color="secondary">
-              {/* Notifications Icon */}
-              <ExploreIcon />
-            </Badge>
+            {/* <Badge badgeContent={11} color="secondary"> */}
+            {/* Notifications Icon */}
+            <ExploreIcon />
+            {/* </Badge> */}
           </IconButton>
           <p>Explore</p>
         </MenuItem>
@@ -161,10 +162,10 @@ export default function PrimarySearchAppBar(props) {
       <Link to="/job_board" style={{ textDecoration: "none", color: "black" }}>
         <MenuItem>
           <IconButton aria-label="show 11 new notifications" color="inherit">
-            <Badge badgeContent={11} color="secondary">
-              {/* Notifications Icon */}
-              <BrushTwoToneIcon />
-            </Badge>
+            {/* <Badge badgeContent={11} color="secondary"> */}
+            {/* Notifications Icon */}
+            <BrushTwoToneIcon />
+            {/* </Badge> */}
           </IconButton>
           <p>Jobs</p>
         </MenuItem>
