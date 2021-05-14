@@ -66,7 +66,7 @@ export default function useAppData() {
     )
   }
 
-  const addToPlot = function (props){
+  const addPlot = function (props){
     return axios.post('/api/plots_vegs')
       .then((res) =>  {
         console.log('res', res.data)
@@ -129,7 +129,7 @@ export default function useAppData() {
     addVegToCart,
     deleteVegFromCart,
     buildVegGarden,
-    addToPlot,
+    addPlot,
   };
 }
 
