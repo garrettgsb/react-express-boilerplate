@@ -55,7 +55,8 @@ App.get("/api/users/:id", (req, res) => {
     SELECT * 
     FROM users 
     LEFT JOIN artworks ON users.id = author_id
-    WHERE users.id = $1;
+    WHERE users.id = $1
+    ORDER BY artworks.id DESC;
     `,
       [req.params.id]
     )
@@ -69,11 +70,13 @@ App.get("/api/users/:id", (req, res) => {
 // ------------------------------------- ARTWORKS
 
 App.get("/api/artworks", (req, res) => {
-  const data = db.query("SELECT * FROM artworks").then((response) => {
-    res.json({
-      artworks: response.rows,
+  const data = db
+    .query("SELECT * FROM artworks ORDER BY id DESC")
+    .then((response) => {
+      res.json({
+        artworks: response.rows,
+      });
     });
-  });
 });
 
 App.get("/api/artworks/search/:input", (req, res) => {
@@ -100,6 +103,33 @@ App.put("/api/artworks", (req, res) => {
     .query(
       `INSERT INTO artworks (author_id, title, img_link, project_link, descrip, for_sale, price) VALUES ($1, $2, $3, $4, $5, $6, $7);`,
       [id, title, imgLink, projectLink, description, forSale, price]
+    )
+    .then((response) => {
+      res.json({
+        artworks: response.rows,
+      });
+    });
+});
+
+// THIS EDITS A ARTWORK
+App.put("/api/artworks/:art_id", (req, res) => {
+  const { id, title, imgLink, projectLink, description, forSale, price } =
+    req.body;
+  const data = db
+    .query(
+      `UPDATE artworks SET author_id=$2, title=$3, img_link=$4, project_link=$5, descrip=$6, for_sale=$7, price=$8
+      WHERE id = $1;
+           `,
+      [
+        req.params.art_id,
+        id,
+        title,
+        imgLink,
+        projectLink,
+        description,
+        forSale,
+        price,
+      ]
     )
     .then((response) => {
       res.json({
@@ -167,7 +197,10 @@ App.put("/api/friends/", (req, res) => {
 App.get("/api/jobs", (req, res) => {
   const data = db
     .query(
-      `SELECT jobs.id AS id, user_id, username, title, description, pay, company, location FROM jobs JOIN users ON users.id = user_id;`
+      `SELECT jobs.id AS id, user_id, username, title, description, pay, company, location 
+      FROM jobs 
+      JOIN users ON users.id = user_id 
+      ORDER BY id DESC;`
     )
     .then((response) => {
       res.json({
@@ -184,7 +217,8 @@ App.get("/api/user/:id/jobs", (req, res) => {
     SELECT * 
     FROM users 
     JOIN jobs ON users.id = user_id
-    WHERE users.id = $1;
+    WHERE users.id = $1
+    ORDER BY jobs.id DESC;
     `,
       [req.params.id]
     )
@@ -202,6 +236,7 @@ App.get("/api/jobs/:id", (req, res) => {
     SELECT * 
     FROM jobs
     WHERE id = $1;
+    ORDER BY id
     `,
       [req.params.id]
     )
@@ -225,23 +260,6 @@ App.put("/api/jobs", (req, res) => {
       });
     });
 });
-
-// App.put("/api/jobs/", (req, res) => {
-//   const { title, description, pay, company, location, id } = req.body;
-//   const data = db
-//     .query(
-//       `INSERT INTO jobs (title, description, pay, company, location, user_id) VALUES ($1, $2, $3, $4, $5, $6)
-//       ON CONFLICT (title, user_id)
-//       DO UPDATE SET
-//       EXCLUDED.user_id;`,
-//       [title, description, pay, company, location, id]
-//     )
-//     .then((response) => {
-//       res.json({
-//         jobs: response.rows,
-//       });
-//     });
-// });
 
 // THIS EDITS A JOB
 App.put("/api/jobs/:job_id", (req, res) => {

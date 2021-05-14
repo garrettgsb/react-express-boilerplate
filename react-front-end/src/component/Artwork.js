@@ -58,8 +58,8 @@ export default function Artwork(props) {
   const { id } = useParams();
 
   return (
-    <Link to={`/artpiece/${props.id}`}>
-      <Card className={classes.root}>
+    <Card className={classes.root}>
+      <Link to={`/artpiece/${props.id}`}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -81,18 +81,25 @@ export default function Artwork(props) {
             </Typography> */}
           {/* </CardContent> */}
         </CardActionArea>
-        {props.author_id === props.activeUser && (
-          <CardActions>
-            <Button
-              size="small"
-              color="primary"
-              onClick={() => props.onClick(props.id)}
-            >
-              <h4>Delete</h4>
-            </Button>
-          </CardActions>
-        )}
-      </Card>
-    </Link>
+      </Link>
+      {props.author_id === props.activeUser && (
+        <CardActions>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => props.onClick(props.id)}
+          >
+            <h4>Delete</h4>
+          </Button>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => props.onEdit(props.id)}
+          >
+            <h4>Edit</h4>
+          </Button>
+        </CardActions>
+      )}
+    </Card>
   );
 }

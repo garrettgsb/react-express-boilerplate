@@ -44,6 +44,7 @@ export default function Artworks(props) {
                   author_id={artpiece.author_id}
                   activeUser={props.activeUser}
                   onClick={props.onDelete}
+                  onEdit={props.onEdit}
                 />
               </Grid>
             );

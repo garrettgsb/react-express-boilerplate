@@ -28,7 +28,10 @@ const useStyles = makeStyles((theme) => ({
 export default function User(props) {
   const [state, setState] = useState({
     addArt: false,
+    showEdit: false,
+    artID: 0,
   });
+
   const classes = useStyles();
 
   const addArt = () => {
@@ -41,7 +44,7 @@ export default function User(props) {
     axios.get(`/api/users/${id}`).then((res) => {
       setState({ ...state, portfolio: res.data.portfolio });
     });
-  }, [state.addArt]);
+  }, [state.addArt, state.showEdit]);
 
   const onDelete = (id) => {
     axios.delete(`/api/artworks/${id}`).then(() => {
@@ -52,6 +55,16 @@ export default function User(props) {
   const onCreate = (artwork) => {
     axios.put(`/api/artworks`, artwork).then((res) => {
       setState({ ...state, addArt: false });
+    });
+  };
+
+  const onEdit = (id) => {
+    setState({ ...state, showEdit: true, artID: id });
+  };
+
+  const onEditSubmit = (art) => {
+    axios.put(`/api/artworks/${state.artID}`, art).then(() => {
+      setState({ ...state, showEdit: false });
     });
   };
 
@@ -82,11 +95,17 @@ export default function User(props) {
         <Grid item xs={12} sm={6} md={4}>
           {id === `${props.activeUser}` &&
             props.activeUser !== 0 &&
-            !state.addArt && <Empty onAdd={addArt} />}
+            !state.addArt &&
+            !state.showEdit && <Empty onAdd={addArt} />}
           {id === `${props.activeUser}` &&
             props.activeUser !== 0 &&
             state.addArt && (
               <Form onCreate={onCreate} activeUser={props.activeUser} />
+            )}
+          {id === `${props.activeUser}` &&
+            props.activeUser !== 0 &&
+            state.showEdit && (
+              <Form onCreate={onEditSubmit} activeUser={props.activeUser} />
             )}
         </Grid>
       </Grid>
@@ -96,6 +115,7 @@ export default function User(props) {
             art={state.portfolio}
             activeUser={props.activeUser}
             onDelete={onDelete}
+            onEdit={onEdit}
           />
         </div>
       )}

@@ -21,6 +21,7 @@ export default function Messenger(props) {
     conversation[1],
   ]);
   localStorage.setItem("activeConversation", [0, 0]);
+
   const { state } = useApplicationData();
 
   return (

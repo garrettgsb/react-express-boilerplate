@@ -45,6 +45,7 @@ export default function BasicTable(props) {
       setJobs();
     });
   };
+
   const onEditSubmit = (job) => {
     axios.put(`/api/jobs/${jobId}`, job).then(() => {
       setJobs();
@@ -52,6 +53,7 @@ export default function BasicTable(props) {
       setEditShow(false);
     });
   };
+
   const onSubmit = (job) => {
     axios.put(`/api/jobs`, job).then(() => {
       setJobs();
