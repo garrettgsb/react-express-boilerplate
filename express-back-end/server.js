@@ -54,7 +54,7 @@ App.get("/api/users/:id", (req, res) => {
       `
     SELECT * 
     FROM users 
-    JOIN artworks ON users.id = author_id
+    LEFT JOIN artworks ON users.id = author_id
     WHERE users.id = $1;
     `,
       [req.params.id]
