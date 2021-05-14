@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -11,17 +11,47 @@ import { useHistory } from "react-router-dom";
 import MyJobsList from "./MyJobsList";
 import EmptyJobs from "./EmptyJobs";
 import FormJobs from "./FormJobs";
-import { useStyles } from "./Component_Style/JobList.jsx";
+//import { useStyles } from "./Component_Style/JobList.jsx";
 
 import axios from "axios";
 
 import useApplicationData from "../hooks/useApplicationData";
 
-// const useStyles = makeStyles({
-//   table: {
-//     minWidth: 650,
-//   },
-// });
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 700,
+  },
+  titleRowText: {
+    fontWeight: "900",
+    fontSize: "18px",
+    // textDecoration: "underline",
+  },
+  titleRow: {
+    border: "1px solid grey",
+  },
+  tableContainer: {
+    marginLeft: "3%",
+    marginRight: "3%",
+  },
+});
 
 export default function BasicTable(props) {
   const { state, setJobs, setUserJobs } = useApplicationData();
@@ -75,32 +105,32 @@ export default function BasicTable(props) {
     <div className={classes.tableContainer}>
       <h1>Jobs</h1>
       <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
+        <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow className={classes.titleRow}>
-              <TableCell align="left" className={classes.titleRowText}>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 Title
-              </TableCell>
-              <TableCell align="left" className={classes.titleRowText}>
+              </StyledTableCell>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 User Name
-              </TableCell>
-              <TableCell align="left" className={classes.titleRowText}>
+              </StyledTableCell>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 Description
-              </TableCell>
-              <TableCell align="left" className={classes.titleRowText}>
+              </StyledTableCell>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 Pay
-              </TableCell>
-              <TableCell align="left" className={classes.titleRowText}>
+              </StyledTableCell>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 Company
-              </TableCell>
-              <TableCell align="left" className={classes.titleRowText}>
+              </StyledTableCell>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 Location
-              </TableCell>
+              </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {state.jobs.map((row) => (
-              <TableRow
+              <StyledTableRow
                 key={row.id}
                 onClick={() => {
                   history.push(`/jobs/${row.id}`);
@@ -109,12 +139,14 @@ export default function BasicTable(props) {
                 <TableCell component="th" scope="row">
                   {row.title}
                 </TableCell>
-                <TableCell align="left">{row.username}</TableCell>
-                <TableCell align="left">{row.description}</TableCell>
-                <TableCell align="left">{row.pay}</TableCell>
-                <TableCell align="left">{row.company}</TableCell>
-                <TableCell align="left">{row.location}</TableCell>
-              </TableRow>
+                <StyledTableCell align="left">{row.username}</StyledTableCell>
+                <StyledTableCell align="left">
+                  {row.description}
+                </StyledTableCell>
+                <StyledTableCell align="left">{row.pay}</StyledTableCell>
+                <StyledTableCell align="left">{row.company}</StyledTableCell>
+                <StyledTableCell align="left">{row.location}</StyledTableCell>
+              </StyledTableRow>
             ))}
           </TableBody>
         </Table>

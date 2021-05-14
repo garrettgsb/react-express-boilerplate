@@ -16,7 +16,7 @@ export default function Artwork(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card data-card-type="profile" className={classes.root}>
       <Link to={`/artpiece/${props.id}`}>
         <CardActionArea>
           <CardMedia
@@ -48,7 +48,7 @@ export default function Artwork(props) {
             onClick={() => props.onEdit(props.id)}
             className={classes.editButton}
           >
-            <EditOutlinedIcon />
+            <EditOutlinedIcon data-card-type="edit" />
           </IconButton>
           <IconButton
             size="small"
@@ -56,7 +56,7 @@ export default function Artwork(props) {
             onClick={() => props.onClick(props.id)}
             className={classes.deleteButton}
           >
-            <DeleteOutlineIcon />
+            <DeleteOutlineIcon data-card-type="delete" />
           </IconButton>
         </CardActions>
       )}

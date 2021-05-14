@@ -15,6 +15,7 @@ import Login from "./component/Login";
 import useApplicationData from "./hooks/useApplicationData";
 import SearchResults from "./component/SearchResults";
 import axios from "axios";
+import Hero from "./component/Hero";
 
 export const JobsContext = createContext([]);
 
@@ -43,6 +44,7 @@ export default function App() {
           activeUser={state.activeUser}
           filteredSearch={filteredSearch}
         />
+        <Hero />
         <Switch>
           <Route path="/messages/" render={() => <Messenger />} />
           <Route

@@ -59,8 +59,11 @@ export default function ProfilePic(props) {
           image={props.userInfo.profile_pic}
           title={props.userInfo.username}
         />
-        <CardContent>
-          <CardActions className={classes.usernameAndButtonContainer}>
+        <CardContent data-card-type="profile-pic">
+          <CardActions
+            data-card-type="profile-pic"
+            className={classes.usernameAndButtonContainer}
+          >
             <div>
               <Typography className={classes.username} gutterBottom>
                 {props.userInfo.username}

@@ -52,6 +52,7 @@ export default function User(props) {
 
   const onEdit = (id) => {
     setState({ ...state, showEdit: true, showAdd: false, artID: id });
+    window.scrollTo(20, 270);
   };
 
   const onEditSubmit = (art) => {
