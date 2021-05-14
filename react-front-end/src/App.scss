@@ -162,7 +162,7 @@ body {
 
     .Heart {
       color: white;
-      padding-left: 87%;
+      margin-left: 87%;
       margin-top: -30px;
       font-size: 1.4rem;
     }
@@ -436,6 +436,7 @@ body {
 
   // Login Page
   .Login {
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -465,7 +466,7 @@ body {
       }
       button {
         margin-top: 10px;
-        background-color: #494949; /* Green */
+        background-color: #e0aeae; /* Green */
         border: none;
         color: white;
         padding: 10px 20px;
@@ -490,6 +491,7 @@ body {
 
   // Registration Page
   .RegisterBox {
+    padding-top: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -519,7 +521,7 @@ body {
       }
       button {
         margin-top: 10px;
-        background-color: #fad4d4; /* Green */
+        background-color: #e0aeae; 
         border: none;
         color: white;
         padding: 10px 20px;
