@@ -89,7 +89,7 @@ export default function User(props) {
                 color="textSecondary"
                 gutterBottom
               >
-                {state.portfolio && state.portfolio[0].first_name}
+                {state.portfolio[0] && state.portfolio[0].first_name}
                 &nbsp;
                 {state.portfolio && state.portfolio[0].last_name}
               </Typography>
