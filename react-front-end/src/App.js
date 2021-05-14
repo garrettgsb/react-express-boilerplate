@@ -16,6 +16,7 @@ import useApplicationData from "./hooks/useApplicationData";
 import SearchResults from "./component/SearchResults";
 import axios from "axios";
 import Hero from "./component/Hero";
+import Footer from "./component/Footer";
 
 export const JobsContext = createContext([]);
 
@@ -71,6 +72,7 @@ export default function App() {
           />
         </Switch>
       </Router>
+      <Footer />
     </div>
   );
 }

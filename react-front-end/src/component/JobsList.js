@@ -45,7 +45,7 @@ const useStyles = makeStyles({
     // textDecoration: "underline",
   },
   titleRow: {
-    border: "1px solid grey",
+    //border: "1px solid grey",
   },
   tableContainer: {
     marginLeft: "3%",
