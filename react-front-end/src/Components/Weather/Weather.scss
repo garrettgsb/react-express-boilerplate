@@ -1,6 +1,6 @@
 .root {
   width: 1000px;
-  height: 300px;
+  height: 400px;
   margin-left: 100px;
   margin-top: 50px;
   display: flex;
@@ -16,4 +16,49 @@
 .centerCard {
   display: flex;
   justify-content: center;
+}
+.alert-heat {
+  background-color: #ffd38d;
+  border: 1px solid #ffbe56;
+  color: rgb(255, 255, 255);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  padding: 10px 36px;
+  margin: 10px;
+  border-radius: 5px;
+  span {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+.alert-frost {
+  background-color: #77b6ff;
+  border: 1px solid #3b96ff;
+  color: rgb(255, 255, 255);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  padding: 10px 36px;
+  margin: 10px;
+  border-radius: 5px;
+  span {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+.alert-rain {
+  background-color: #9aff81;
+  border: 1px solid #68ff4e;
+  color: rgb(255, 255, 255);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  padding: 10px 36px;
+  margin: 10px;
+  border-radius: 5px;
+  span {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 }

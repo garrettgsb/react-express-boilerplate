@@ -81,6 +81,7 @@ export default function Maintenance() {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.twidth}>
+        <h2>Watering Schedule</h2>
         <table className={classes.twidth}>
           <thead >
             <tr >
