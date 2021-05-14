@@ -23,7 +23,7 @@ export default function SearchBar(props) {
         onSubmit={(event) => {
           event.preventDefault();
           props.filteredSearch(searchInputValue);
-          // history.push({"/searchResults", });
+          history.push("/searchResults");
         }}
       >
         <input
