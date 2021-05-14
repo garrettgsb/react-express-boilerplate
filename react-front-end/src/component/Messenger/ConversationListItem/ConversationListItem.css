@@ -8,6 +8,12 @@
   background: #eeeef1;
   cursor: pointer;
 }
+.conversation-list-item:active {
+  background: red;
+}
+.conversation-list-item:visited {
+  background: blue;
+}
 
 .conversation-photo {
   width: 50px;

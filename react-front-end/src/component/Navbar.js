@@ -17,7 +17,8 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import "@fontsource/roboto";
 import { Link } from "react-router-dom";
 import BrushTwoToneIcon from "@material-ui/icons/BrushTwoTone";
-import User from "./User";
+import axios from "axios";
+import SearchBar from "./SearchPage";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -87,6 +88,12 @@ export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [searchInputValue, setSearchInputValue] = React.useState("");
+  const [searchReturnValue, setSearchReturnValue] = React.useState({});
+  // let state = {
+  //   searchInputValue: "",
+  //   searchReturnValue: {},
+  // };
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -107,6 +114,21 @@ export default function PrimarySearchAppBar(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const searchInputChange = (event) => {
+    // /api/search?test=2
+    console.log("Hello, I'm from onChange : ", event.target.value);
+    setSearchInputValue(event.target.value);
+  };
+
+  const filteredSearch = () => {
+    console.log(searchInputValue);
+    axios.get(`/api/search?query=${searchInputValue}`);
+  };
+  // .then(setSearchReturnValue(res.data))
+
+  // axios to db where query SELECT all from * WHERE ... = $1
+  // })
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -177,6 +199,11 @@ export default function PrimarySearchAppBar(props) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+
+      {/* <SearchIcon
+        searchInputChange={searchInputChange}
+        searchInputValue={state.searchInputValue}
+      /> */}
     </Menu>
   );
 
@@ -202,16 +229,30 @@ export default function PrimarySearchAppBar(props) {
 
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
+              <SearchIcon
+
+              // searchInputValue={state.searchInputValue}
+              />
             </div>
-            <InputBase
+            <SearchBar filteredSearch={props.filteredSearch} />
+            {/* <InputBase
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ "aria-label": "search" }}
-            />
+              inputProps={{
+                "aria-label": "search",
+              }}
+              // searchInputChange={searchInputChange}
+              // onChange={(event) => {
+              //   searchInputChange(event);
+              //   filteredSearch();
+              // }}
+              // onSubmit={((event.target.value) => {
+              //   searchReturnValue
+              // })}
+            /> */}
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

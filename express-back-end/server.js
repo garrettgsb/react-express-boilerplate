@@ -10,6 +10,33 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static("public"));
 
+App.get("/api/search", (req, res) => {
+  const searchItem = req.query.query;
+  console.log(req.query);
+  Promise.all([
+    db.query(
+      `SELECT * FROM artworks WHERE LOWER(title) LIKE $1 OR LOWER(descrip) LIKE $1`,
+      ["%" + searchItem.toLowerCase() + "%"]
+    ),
+    db.query(`SELECT * FROM users WHERE LOWER(username) LIKE $1`, [
+      "%" + searchItem.toLowerCase() + "%",
+    ]),
+    db.query(
+      `SELECT * FROM jobs WHERE LOWER(title) LIKE $1 OR LOWER(description) LIKE $1 OR LOWER(location) LIKE $1 OR LOWER(company) LIKE $1`,
+      ["%" + searchItem.toLowerCase() + "%"]
+    ),
+  ]).then((all) => {
+    res.json({
+      artworks: all[0].rows,
+      users: all[1].rows,
+      jobs: all[2].rows,
+    });
+    console.log("Art", all[0].rows);
+    console.log("users", all[1].rows);
+    console.log("jobs", all[2].rows);
+  });
+});
+
 // ------------------------------------- USERS
 
 App.get("/api/users", (req, res) => {
@@ -47,6 +74,12 @@ App.get("/api/artworks", (req, res) => {
       artworks: response.rows,
     });
   });
+});
+
+App.get("/api/artworks/search/:input", (req, res) => {
+  const data = db.query(`
+    SELECT * FROM artworks
+  `);
 });
 
 App.get("/api/artworks/:id", (req, res) => {
