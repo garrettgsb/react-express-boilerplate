@@ -86,13 +86,6 @@ export default function Harvest() {
   return counter;
   }
 
-  // const test = function() {
-  // getHarvestDate().then(res => {
-  //   res.map(x => {
-  //     harvest_date(x.planted_date, x.harvest_date)
-  //   }) 
-  // })
-  // }
 
   return (
     <Card className={classes.root}>
