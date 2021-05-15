@@ -35,12 +35,12 @@ router.get('/api/cart/', (req, res) => {
 
 router.delete('/api/cart/:id', (req,res) => {
   const veg_basketID = req.params.id
+  console.log('from /api/cart/:id')
   db.query(`DELETE FROM veg_baskets WHERE id = $1::integer`, [veg_basketID]) 
    .then(data => {
     res.status(200).json(veg_basketID)
   })
   .catch(err => console.log("error!", err))
-
 })
 
 // /api/cart
@@ -51,24 +51,19 @@ router.post('/api/cart', (req, res) => {
     db.query(`INSERT INTO veg_baskets(vegetable_id, user_id)
      VALUES($1,$2) RETURNING id`, [veg_id, user_id])
       .then(data => {
-        // console.log("data", data);
         res.status(200).json(data.rows[0].id)
       })
       .catch(err => console.log("error!", err))
-
   } catch (e) {
     console.error("error: ", e)
 
   }
-    
 })
 
 
-// router.delete("api/cart/:id", (req, res) => {
-//   db.query(`DELETE FROM veg_baskets WHERE id = veg_baskets.id`, [
-//     request.body.id
-//   ])
-// });
+router.delete("/api/cart/delete/:id", (req, res) => {
+  db.query(`DELETE FROM veg_baskets`)
+});
 
 
 

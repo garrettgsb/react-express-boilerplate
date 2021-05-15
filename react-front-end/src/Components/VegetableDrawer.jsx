@@ -100,9 +100,6 @@ export default function VegetableDrawer(props){
   useEffect(() => {
   }, [state])
 
- 
-
-
   const {open, 
       handleDrawerOpen, 
       handleDrawerClose,

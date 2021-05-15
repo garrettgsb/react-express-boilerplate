@@ -70,13 +70,14 @@ export default function useAppData() {
 
     return axios.post('/api/plots')
       .then((res) =>  {
-        console.log('res', res.data.id)
         cart.map((veg) => {
           buildVegGarden(veg.vid ,res.data.id)
         })
+      }).then (() => {
+        axios.delete(`/api/cart/delete/1`)
       })
+      .catch(err => console.log("error!", err))
     }
-
 
   const addVegToCart = function(props) {
     const axiosConfig = {  headers:{ 
@@ -90,10 +91,8 @@ export default function useAppData() {
     })
     return axios.post('/api/cart', data, axiosConfig)
       .then((res) => {
-        // console.log('res', res.data)
 
       setState(state => {
-
       const veg = {
         vid: props.id,
         id: res.data,
