@@ -209,34 +209,14 @@ export default function PrimarySearchAppBar(props) {
             {/* REACT ROUTER LINK TO LOGIN */}
             {props.activeUser === 0 && (
               <Link
-                to="/"
-                onClick={() => {
-                  props.onLogin(1);
-                }}
+                to="/login"
                 style={{ textDecoration: "none", color: "lavender" }}
               >
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   {/* <Badge badgeContent={4} color="secondary">
                   <MailIcon />
                 </Badge> */}
-                  login
-                </IconButton>
-              </Link>
-            )}
-
-            {props.activeUser === 0 && (
-              <Link
-                to="/"
-                onClick={() => {
-                  props.onLogin(2);
-                }}
-                style={{ textDecoration: "none", color: "lavender" }}
-              >
-                <IconButton aria-label="show 4 new mails" color="inherit">
-                  {/* <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge> */}
-                  login2
+                  Login
                 </IconButton>
               </Link>
             )}
@@ -253,7 +233,7 @@ export default function PrimarySearchAppBar(props) {
                   {/* <Badge badgeContent={4} color="secondary">
                   <MailIcon />
                 </Badge> */}
-                  logout
+                  Logout
                 </IconButton>
               </Link>
             )}

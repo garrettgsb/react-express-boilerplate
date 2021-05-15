@@ -10,6 +10,7 @@ import JobsList from "./component/JobsList";
 import JobsListItem from "./component/JobsListItem";
 import PrimarySearchAppBar from "./component/Navbar";
 import Messenger from "./component/Messenger/Messenger";
+import Login from "./component/Login";
 
 import useApplicationData from "./hooks/useApplicationData";
 import SearchResults from "./component/SearchResults";
@@ -56,6 +57,10 @@ export default function App() {
             render={() => (
               <SearchResults searchReturnValue={searchReturnValue} />
             )}
+          />
+          <Route
+            path="/login"
+            render={() => <Login onLogin={setActiveUser} />}
           />
           <Route
             path="/"
