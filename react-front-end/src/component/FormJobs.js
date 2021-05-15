@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { useStyles } from "./Component_Style/FormJobs.jsx";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import clsx from "clsx";
+import Button from "@material-ui/core/Button";
 
 // const useStyles = makeStyles((theme: Theme) =>
 //   createStyles({
@@ -20,7 +23,7 @@ export default function FormJobs(props) {
 
   const [title, setNewTitle] = useState("");
   const [description, setNewDescription] = useState("");
-  const [pay, setPay] = useState(0);
+  const [pay, setPay] = useState("");
   const [company, setCompany] = useState("");
   const [location, setLocation] = useState("");
   const [job, setJob] = useState({ id: props.activeUser });
@@ -36,6 +39,7 @@ export default function FormJobs(props) {
       autoComplete="off"
       onSubmit={(event) => event.preventDefault()}
     >
+      <br />
       <TextField
         id="standard-basic"
         multiline={true}
@@ -61,6 +65,11 @@ export default function FormJobs(props) {
         placeholder="Description"
       />
       <TextField
+        className={clsx(
+          classes.margin,
+          classes.textField,
+          classes.withoutLabel
+        )}
         id="outlined-basic"
         multiline={true}
         rows={1}
@@ -70,7 +79,10 @@ export default function FormJobs(props) {
         value={pay}
         onChange={(e) => setPay(e.target.value)}
         label="pay"
-        placeholder="Wage/Salary"
+        // placeholder="Wage/Salary"
+        InputProps={{
+          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+        }}
       />
       <TextField
         id="outlined-basic"
@@ -96,9 +108,17 @@ export default function FormJobs(props) {
         label="location"
         placeholder="Location"
       />
-      <button type="submit" value="Submit" onClick={() => props.onSubmit(job)}>
+      {/* <button type="submit" value="Submit" onClick={() => props.onSubmit(job)}>
         Submit
-      </button>
+      </button> */}
+      <Button
+        variant="outlined"
+        type="submit"
+        value="Submit"
+        onClick={() => props.onSubmit(job)}
+      >
+        Submit
+      </Button>
     </form>
   );
 }

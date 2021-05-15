@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 
 import { useStyles } from "./Component_Style/MyJobsList.jsx";
 
@@ -56,15 +57,35 @@ export default function BasicTable(props) {
                   <TableCell align="right">{row.company}</TableCell>
                   <TableCell align="right">{row.location}</TableCell>
                   <TableCell align="right">
-                    <button
+                    {/* <button
                       type="submit"
                       method="delete"
                       onClick={() => props.onEdit(row.id)}
                     >
                       Edit
-                    </button>
+                    </button> */}
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      type="submit"
+                      method="delete"
+                      onClick={() => props.onEdit(row.id)}
+                    >
+                      Edit
+                    </Button>
+                    &nbsp; &nbsp;
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      size="small"
+                      type="submit"
+                      method="delete"
+                      onClick={() => props.onDelete(row.id)}
+                    >
+                      Delete
+                    </Button>
                   </TableCell>
-                  <TableCell align="right">
+                  {/* <TableCell align="right">
                     <button
                       type="submit"
                       method="delete"
@@ -72,7 +93,7 @@ export default function BasicTable(props) {
                     >
                       Delete
                     </button>
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))}
           </TableBody>

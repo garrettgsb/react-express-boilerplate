@@ -17,6 +17,20 @@ const useStyles = makeStyles({
     paddingRight: "50px",
     paddingTop: "50px",
   },
+  usernameAndButtonContainer: {
+    display: "flex",
+    flexDirection: "Row",
+    justifyContent: "space-between",
+    alignContent: "space-between",
+  },
+  button: {
+    justifySelf: "flex-end",
+    width: "30%",
+  },
+  username: {
+    justifySelf: "flex-start",
+    width: "30%",
+  },
 });
 
 export { useStyles };
