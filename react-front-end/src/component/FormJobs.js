@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { useStyles } from "./Component_Style/FormJobs.jsx";
