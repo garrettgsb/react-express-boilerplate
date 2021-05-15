@@ -29,21 +29,32 @@ export default function BasicTextFields(props) {
     forSale: false,
     price: 0,
     titleError: false,
-    imgError: false,
+    imageError: false,
+    imageErrorMessage: "",
   });
 
   const validate = () => {
-    const invalid = { title: false, image: false };
-    state.title === "" ? (invalid.title = true) : (invalid.title = false);
-    state.imgLink === "" ? (invalid.image = true) : (invalid.image = false);
-    if (invalid.image || invalid.title) {
+    const invalid = {
+      titleError: false,
+      imageError: false,
+      imageErrorMessage: "",
+    };
+    state.title === ""
+      ? (invalid.titleError = true)
+      : (invalid.titleError = false);
+    state.imgLink === ""
+      ? (invalid.imageError = true)
+      : (invalid.imageError = false);
+    state.imgLink === ""
+      ? (invalid.imageErrorMessage = "Cannot be blank")
+      : (invalid.imageErrorMessage = "");
+    if (invalid.titleError || invalid.imageError) {
       setState({
         ...state,
-        titleError: invalid.title,
-        imgError: invalid.image,
+        ...invalid,
       });
     }
-    if (!invalid.image && !invalid.title) {
+    if (!invalid.titleError && !invalid.imageError) {
       props.onCreate(state);
     }
   };
@@ -99,7 +110,7 @@ export default function BasicTextFields(props) {
         placeholder="Description"
       />
       <br />
-      {!state.imgError && (
+      {!state.imageError && (
         <TextField
           id="outlined-basic"
           multiline={true}
@@ -113,10 +124,10 @@ export default function BasicTextFields(props) {
           placeholder="Image URL"
         />
       )}
-      {state.imgError && (
+      {state.imageError && (
         <TextField
           error
-          helperText="Cannot be blank"
+          helperText={state.imageErrorMessage}
           id="outlined-basic"
           multiline={true}
           rows={1}
