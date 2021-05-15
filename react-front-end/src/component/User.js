@@ -31,6 +31,7 @@ export default function User(props) {
     addArt: false,
     showEdit: false,
     artID: 0,
+    portfolio: {},
   });
 
   const classes = useStyles();
@@ -45,7 +46,7 @@ export default function User(props) {
     axios.get(`/api/artworks/users/${id}`).then((res) => {
       setState({ ...state, portfolio: res.data.portfolio });
     });
-  }, [state.addArt, state.showEdit, state.artID]);
+  }, [state.addArt, state.showEdit, state.artID, id]);
 
   const onDelete = (id) => {
     axios.delete(`/api/artworks/${id}`).then(() => {
@@ -81,15 +82,15 @@ export default function User(props) {
       >
         {/* PROFILE PIC */}
         <Grid item xs={12} sm={6} md={4}>
-          {state.portfolio && <ProfilePic userInfo={state.portfolio[0]} />}
+          {state.portfolio[0] && <ProfilePic userInfo={state.portfolio[0]} />}
         </Grid>
 
         {/* USER INFO */}
         <Grid item xs={12} sm={6} md={4}>
-          <div>{state.portfolio && state.portfolio[0].username}</div>
-          <div>{state.portfolio && state.portfolio[0].first_name}</div>
-          <div>{state.portfolio && state.portfolio[0].last_name}</div>
-          <div>{state.portfolio && state.portfolio[0].cool_fact}</div>
+          <div>{state.portfolio[0] && state.portfolio[0].username}</div>
+          <div>{state.portfolio[0] && state.portfolio[0].first_name}</div>
+          <div>{state.portfolio[0] && state.portfolio[0].last_name}</div>
+          <div>{state.portfolio[0] && state.portfolio[0].cool_fact}</div>
         </Grid>
 
         {/* ADD ARTWORK BUTTON */}
@@ -110,7 +111,7 @@ export default function User(props) {
             )}
         </Grid>
       </Grid>
-      {state.portfolio && state.portfolio[0].title && (
+      {state.portfolio[0] && state.portfolio[0].title && (
         <div>
           <Artworks
             art={state.portfolio}
