@@ -108,14 +108,14 @@ export default function useAppData() {
   }
 
 
-//remove break when we prevent from adding multiple ids of the same veg. 
+  //remove break when we prevent from adding multiple ids of the same veg. 
   const deleteVegFromCart = function(props) {
     
     return axios.delete(`api/cart/${props.id}`)
     .then((res) => {
 
       let tempBasket = state.basket
-      for (let i = 0; i <tempBasket.length; i++){
+      for (let i = 0; i <tempBasket.length; i++) {
         if (tempBasket[i].id === props.id) {
           tempBasket.splice(i, 1)
           break;
@@ -124,7 +124,33 @@ export default function useAppData() {
       setState({...state, basket: tempBasket})
     }) 
   }
-  
+
+    // builds the tasks for the plots. Used in Maintenance.jsx
+    const buildTasks = function(tasks) {
+    const waterdays = []
+    let t = 1
+    tasks.map(x => {
+      let name = x.name
+      let time = x.water_time
+      let i = 1
+      while (i < 10) {
+        let waterObj = {name: [name], time: time*i}
+        waterdays.push(waterObj)
+        i++
+      }
+    })
+    while (t <= 10) {
+      if (t % 2 == 0) {
+        let fertilize = {name: 'Fertilize garden', time: 10*t/2}
+        waterdays.push(fertilize)
+      }
+      let weed = {name: "Weed beds", time: 7*t}
+      waterdays.push(weed)
+      t++
+    }
+    return waterdays.sort((a, b) => (a.time > b.time) ? 1 : -1);
+  }
+    
 
   return {
     state,
@@ -132,6 +158,7 @@ export default function useAppData() {
     deleteVegFromCart,
     buildVegGarden,
     addPlot,
+    buildTasks
   };
 }
 
