@@ -1,7 +1,12 @@
 import React, { createContext } from "react";
 import "./App.css";
 import "@fontsource/roboto";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 import User from "./component/User";
 import Artworks from "./component/Artworks";
@@ -76,7 +81,8 @@ export default function App() {
               </>
             )}
           />
-          <Route render={() => <ErrorPage />} />
+          <Route path="/404" exact render={() => <ErrorPage />} />
+          <Redirect from="*" to="/404" />
         </Switch>
       </Router>
     </div>
