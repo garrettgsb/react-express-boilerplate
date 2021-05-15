@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import  { Redirect } from 'react-router-dom';
+
 
 
 const listeners = [];
@@ -66,16 +68,22 @@ export default function useAppData() {
     )
   }
 
-  const addPlot = function (cart){
+  const addPlot = function (cart) {
 
     return axios.post('/api/plots')
       .then((res) =>  {
         cart.map((veg) => {
           buildVegGarden(veg.vid ,res.data.id)
         })
-      }).then (() => {
+        return res
+      }).then ((rel) => {
         axios.delete(`/api/cart/delete/1`)
+        return rel
       })
+      // .then((response) => {
+      //   console.log('about to redirect to ', response.data.id)
+      //   res.redirect(`/tasks/${response.data.id}`)   
+      // })
       .catch(err => console.log("error!", err))
     }
 

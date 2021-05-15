@@ -2,6 +2,7 @@ const { request } = require('express');
 const Express = require('express');
 const router = Express.Router();
 const db = require('../db/lib/db');
+var app = Express();
 
 
 const getCart = function () {
@@ -48,7 +49,7 @@ router.post('/api/cart', (req, res) => {
   const veg_id = req.body.vegetableID
   const user_id = req.body.userID
   try {
-    db.query(`INSERT INTO veg_baskets(vegetable_id, user_id)
+    return db.query(`INSERT INTO veg_baskets(vegetable_id, user_id)
      VALUES($1,$2) RETURNING id`, [veg_id, user_id])
       .then(data => {
         res.status(200).json(data.rows[0].id)
