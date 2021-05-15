@@ -9,6 +9,8 @@ import axios from "axios";
 import useApplicationData from "../hooks/useApplicationData";
 import { useStyles } from "./Component_Style/ProfilePic.jsx";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import CardActions from "@material-ui/core/CardActions";
+import Button from "@material-ui/core/Button";
 
 // const useStyles = makeStyles({
 //   root: {
@@ -69,6 +71,23 @@ export default function ProfilePic(props) {
           title={props.userInfo.username}
         />
         <CardContent>
+          <CardActions>
+            <Typography gutterBottom className="usernameAndButtonContainer">
+              {props.userInfo.username}
+            </Typography>
+            <div className="button">
+              {isNotFriends() && (
+                <button
+                  onClick={() => {
+                    addFriend();
+                  }}
+                >
+                  {/* Add {props.userInfo.username} as a friend! */}
+                  <PersonAddIcon />
+                </button>
+              )}
+            </div>
+          </CardActions>
           {/* <div className="usernameAndButtonContainer"> */}
           {/* <div> */}
           <Typography gutterBottom className="usernameAndButtonContainer">
