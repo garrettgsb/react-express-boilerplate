@@ -7,6 +7,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
+import useApplicationData from "../hooks/useApplicationData";
 
 const useStyles = makeStyles({
   root: {
@@ -28,24 +29,36 @@ const useStyles = makeStyles({
 });
 
 export default function ProfilePic(props) {
+  const { state, setFriends } = useApplicationData();
+  const { id } = useParams();
   const classes = useStyles();
-  let { id } = useParams();
-  const history = useHistory();
-  console.log("PIRATE props", props.userInfo);
+  console.log("PIRATE props", props);
 
   const addFriend = () => {
     const friend = {
-      first_user_id: 1,
-      second_user_id: props.userInfo.id,
+      first_user_id: Number(state.activeUser),
+      second_user_id: props.userInfo.user_id,
     };
-    axios.put(`/api/friends`, friend).then(() => {
-      // window.location.reload();
-    });
+    axios.put(`/api/friends`, friend).then(() => {});
     localStorage.setItem("activeConversation", [
       friend.first_user_id,
       friend.second_user_id,
     ]);
-    history.push(`/portfolio/${props.userInfo.id}`);
+    setFriends();
+  };
+
+  const isNotFriends = () => {
+    let notFriends = true;
+    state.friends.map((friend) => {
+      if (
+        friend.first_id === props.userInfo.user_id ||
+        friend.second_id === props.userInfo.user_id ||
+        state.activeUser === props.userInfo.user_id
+      ) {
+        notFriends = false;
+      }
+    });
+    return notFriends;
   };
 
   return (
@@ -60,13 +73,15 @@ export default function ProfilePic(props) {
           <Typography gutterBottom variant="h5" component="h2">
             {props.userInfo.username}
           </Typography>
-          <button
-            onClick={() => {
-              addFriend();
-            }}
-          >
-            Add {props.userInfo.username} as a friend!
-          </button>
+          {isNotFriends() && (
+            <button
+              onClick={() => {
+                addFriend();
+              }}
+            >
+              Add {props.userInfo.username} as a friend!
+            </button>
+          )}
         </CardContent>
       </CardActionArea>
     </Card>

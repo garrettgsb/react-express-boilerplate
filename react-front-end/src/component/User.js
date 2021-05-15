@@ -80,6 +80,7 @@ export default function User(props) {
       >
         {/* PROFILE PIC */}
         <Grid item xs={12} sm={6} md={4}>
+          {console.log("state.portfolio", state)}
           {state.portfolio && <ProfilePic userInfo={state.portfolio[0]} />}
         </Grid>
 

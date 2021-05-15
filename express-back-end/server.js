@@ -18,9 +18,10 @@ App.get("/api/search", (req, res) => {
       `SELECT * FROM artworks WHERE LOWER(title) LIKE $1 OR LOWER(descrip) LIKE $1`,
       ["%" + searchItem.toLowerCase() + "%"]
     ),
-    db.query(`SELECT * FROM users WHERE LOWER(username) LIKE $1`, [
-      "%" + searchItem.toLowerCase() + "%",
-    ]),
+    db.query(
+      `SELECT *, users.id as user_id FROM users WHERE LOWER(username) LIKE $1`,
+      ["%" + searchItem.toLowerCase() + "%"]
+    ),
     db.query(
       `SELECT * FROM jobs WHERE LOWER(title) LIKE $1 OR LOWER(description) LIKE $1 OR LOWER(location) LIKE $1 OR LOWER(company) LIKE $1`,
       ["%" + searchItem.toLowerCase() + "%"]
@@ -52,7 +53,7 @@ App.get("/api/users/:id", (req, res) => {
   const data = db
     .query(
       `
-    SELECT * 
+    SELECT *, users.id as user_id
     FROM users 
     LEFT JOIN artworks ON users.id = author_id
     WHERE users.id = $1
@@ -179,6 +180,8 @@ App.get("/api/friends/:id", (req, res) => {
 
 App.put("/api/friends/", (req, res) => {
   const { first_user_id, second_user_id } = req.body;
+  console.log(first_user_id);
+  console.log(second_user_id);
   const data = db
     .query(
       `INSERT INTO friends (first_user_id, second_user_id) 
