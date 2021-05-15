@@ -63,7 +63,6 @@ export default function useAppData() {
     }
     return axios.post('/api/plots_vegs', data)
       .then((res) =>  {
-        console.log('Garen_veg added')
       }
     )
   }
@@ -75,15 +74,10 @@ export default function useAppData() {
         cart.map((veg) => {
           buildVegGarden(veg.vid ,res.data.id)
         })
-        return res
-      }).then ((rel) => {
+        window.location.replace(`http://localhost:3000/tasks/${res.data.id}`);
+      }).then (() => {
         axios.delete(`/api/cart/delete/1`)
-        return rel
       })
-      // .then((response) => {
-      //   console.log('about to redirect to ', response.data.id)
-      //   res.redirect(`/tasks/${response.data.id}`)   
-      // })
       .catch(err => console.log("error!", err))
     }
 
@@ -116,7 +110,6 @@ export default function useAppData() {
 
 //remove break when we prevent from adding multiple ids of the same veg. 
   const deleteVegFromCart = function(props) {
-    console.log('propsid', props.id)
     
     return axios.delete(`api/cart/${props.id}`)
     .then((res) => {
@@ -129,7 +122,6 @@ export default function useAppData() {
         }
       }
       setState({...state, basket: tempBasket})
-      console.log('test1', state)
     }) 
   }
   

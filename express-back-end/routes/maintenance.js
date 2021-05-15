@@ -20,7 +20,6 @@ router.post('/api/plots_vegs/', (req, res) => {
   const user_id = 1
   const vegetable_id = req.body.vegetableID 
   const plot_id = req.body.plotID
-  console.log('/plots_vegs/add', req.body.vegetableID)
     try {
       db.query(`INSERT INTO plots_vegs(user_id, vegetable_id, plot_id)
       VALUES ($1, $2 ,$3) RETURNING *` ,[user_id, vegetable_id, plot_id])
@@ -39,7 +38,6 @@ router.post('/api/plots', (req, res) => {
   const dimensions_length = 100
   const dimensions_width = 100
   const location = "Kelowna"
-  console.log('plot/add', req.body)
     try {
       db.query(`INSERT INTO plots(user_id, dimensions_length, dimensions_width, location)
       VALUES ($1, $2 ,$3, $4) RETURNING *` ,[user_id, dimensions_length, dimensions_width, location])
@@ -62,7 +60,6 @@ router.get('/api/plots', (req, res) => {
 
 router.get('/api/plots_vegs/:id', (req, res) => {
   const plotID = req.params.id
-  console.log('plotID', plotID)
   return db.query(`SELECT * FROM vegetables JOIN plots_vegs ON vegetables.id=plots_vegs.vegetable_id WHERE plot_id = $1::integer`, [plotID])
     .then(data => {
       // console.log('I am inside of the router.get', res.rows)
