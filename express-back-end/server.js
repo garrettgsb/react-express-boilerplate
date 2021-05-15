@@ -184,7 +184,7 @@ App.put("/api/friends/", (req, res) => {
       `INSERT INTO friends (first_user_id, second_user_id) 
       VALUES ($1, $2)
       ON CONFLICT (first_user_id, second_user_id)
-      DO NOTHING`,
+      DO NOTHING;`,
       [first_user_id, second_user_id]
     )
     .then((response) => {
