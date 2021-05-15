@@ -2,12 +2,14 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Artwork from "./Artwork";
 import { useStyles } from "./Component_Style/Artworks.jsx";
+import Hero from "./Hero";
 
 export default function Artworks(props) {
   const classes = useStyles();
   function FormRow() {
     return (
       <React.Fragment>
+        {/* <Hero /> */}
         <Grid
           container
           spacing={1}

@@ -46,7 +46,7 @@ export default function App() {
           activeUser={state.activeUser}
           filteredSearch={filteredSearch}
         />
-        <Hero />
+        {/* <Hero /> */}
         <Switch>
           <Route path="/messages/" render={() => <Messenger />} />
           <Route
@@ -69,7 +69,12 @@ export default function App() {
           <Route
             path="/"
             exact
-            render={() => <Artworks art={state.artworks} />}
+            render={() => (
+              <>
+                <Hero />
+                <Artworks art={state.artworks} />
+              </>
+            )}
           />
           <Route render={() => <ErrorPage />} />
         </Switch>
