@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VegetableDrawer(props){
 
-  const { state, deleteVegFromCart, buildVegGarden, addPlot } = useAppData()
+  const { state, deleteVegFromCart, buildVegGarden, addPlot } = useAppData();
 
   useEffect(() => {
   }, [state])

@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import useAppData from "../hooks/useAppData";
 import './Planting.scss';
 
 const moment = require('moment');
@@ -52,21 +53,27 @@ export default function Planting() {
   const classes = useStyles();
   const [tasks, setTasks] = useState([]);
   let { id } = useParams();
+  const { state } = useAppData();
+
+  console.log('plating state', state)
 
   useEffect(() => {
-    getPlotTasks(id)
-  }, [])
+    getPlotVeg(id)
+  }, [state]);
 
   // get tasks per plots_vegs.
-  const getPlotTasks = function (plotID) {
+  const getPlotVeg = function (plotID) {
     return axios.get(`/api/plots_vegs/${plotID}`)
       .then(res => {
-        console.log("res.data / maintenance", res.data)
-
         setTasks(res.data)
+        
       })
       .catch(err => console.log(err));
   }
+
+  // const markComplete = function () {
+
+  // }
 
   return (
     <Card className={classes.root}>

@@ -4,6 +4,7 @@ import  { Redirect } from 'react-router-dom';
 
 
 
+
 const listeners = [];
 let initialLoad = false;
 
@@ -13,7 +14,8 @@ let state = {
   vegetables: [],
   plots: [],
   plotsVegs: [],
-  basket: []
+  basket: [],
+  maintenance: []
 };
 
 const setState = function (newState) {
@@ -151,6 +153,7 @@ export default function useAppData() {
     return waterdays.sort((a, b) => (a.time > b.time) ? 1 : -1);
   }
     
+  // setState({...state, maintenance: res.data})
 
   return {
     state,
@@ -158,7 +161,8 @@ export default function useAppData() {
     deleteVegFromCart,
     buildVegGarden,
     addPlot,
-    buildTasks
+    buildTasks,
+
   };
 }
 

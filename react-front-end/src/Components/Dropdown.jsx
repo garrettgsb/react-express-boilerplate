@@ -21,8 +21,6 @@ export default function NestedList() {
   const [open, setOpen] = React.useState(true);
   const { state } = useAppData();
 
-  console.log('state', state.plots)
-
   const handleClick = () => {
     setOpen(!open);
   };
