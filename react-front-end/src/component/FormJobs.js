@@ -101,6 +101,9 @@ export default function FormJobs(props) {
       >
         Submit
       </button>
+      <button type="button" value="Cancel" onClick={() => props.onCancel()}>
+        Cancel
+      </button>
     </form>
   );
 }
