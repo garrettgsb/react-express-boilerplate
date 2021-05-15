@@ -28,25 +28,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function User(props) {
   const [state, setState] = useState({
-    addArt: false,
+    showAdd: false,
     showEdit: false,
     artID: 0,
     portfolio: {},
   });
 
   const classes = useStyles();
-
-  const addArt = () => {
-    setState({ ...state, addArt: true });
-  };
-
   let { id } = useParams();
 
   useEffect(() => {
     axios.get(`/api/artworks/users/${id}`).then((res) => {
       setState({ ...state, portfolio: res.data.portfolio });
     });
-  }, [state.addArt, state.showEdit, state.artID, id]);
+  }, [state.showAdd, state.showEdit, state.artID, id]);
+
+  const showAdd = () => {
+    setState({ ...state, showAdd: true, showEdit: false });
+  };
+
+  const onCreate = (artwork) => {
+    axios.put(`/api/artworks`, artwork).then((res) => {
+      setState({ ...state, showAdd: false });
+    });
+  };
 
   const onDelete = (id) => {
     axios.delete(`/api/artworks/${id}`).then(() => {
@@ -54,20 +59,18 @@ export default function User(props) {
     });
   };
 
-  const onCreate = (artwork) => {
-    axios.put(`/api/artworks`, artwork).then((res) => {
-      setState({ ...state, addArt: false });
-    });
-  };
-
   const onEdit = (id) => {
-    setState({ ...state, showEdit: true, artID: id });
+    setState({ ...state, showEdit: true, showAdd: false, artID: id });
   };
 
   const onEditSubmit = (art) => {
     axios.put(`/api/artworks/${state.artID}`, art).then(() => {
       setState({ ...state, showEdit: false });
     });
+  };
+
+  const onCancel = () => {
+    setState({ ...state, showEdit: false, showAdd: false });
   };
 
   return (
@@ -97,17 +100,27 @@ export default function User(props) {
         <Grid item xs={12} sm={6} md={4}>
           {id === `${props.activeUser}` &&
             props.activeUser !== 0 &&
-            !state.addArt &&
-            !state.showEdit && <Empty onAdd={addArt} />}
+            !state.showAdd &&
+            !state.showEdit && <Empty onAdd={showAdd} />}
           {id === `${props.activeUser}` &&
             props.activeUser !== 0 &&
-            state.addArt && (
-              <Form onCreate={onCreate} activeUser={props.activeUser} />
+            state.showAdd && (
+              <Form
+                onCreate={onCreate}
+                onCancel={onCancel}
+                activeUser={props.activeUser}
+                formHeader={"Add"}
+              />
             )}
           {id === `${props.activeUser}` &&
             props.activeUser !== 0 &&
             state.showEdit && (
-              <Form onCreate={onEditSubmit} activeUser={props.activeUser} />
+              <Form
+                onCreate={onEditSubmit}
+                onCancel={onCancel}
+                activeUser={props.activeUser}
+                formHeader={"Edit"}
+              />
             )}
         </Grid>
       </Grid>

@@ -66,6 +66,7 @@ export default function BasicTextFields(props) {
       autoComplete="off"
       onSubmit={(event) => event.preventDefault()}
     >
+      <h4>{props.formHeader}</h4>
       {!state.titleError && (
         <TextField
           id="standard-basic"
@@ -180,6 +181,9 @@ export default function BasicTextFields(props) {
       <br />
       <button type="submit" value="Submit" onClick={() => validate()}>
         Submit
+      </button>
+      <button type="button" value="Submit" onClick={() => props.onCancel()}>
+        Cancel
       </button>
     </form>
   );
