@@ -11,29 +11,18 @@ import { useStyles } from "./Component_Style/ProfilePic.jsx";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
-
-// const useStyles = makeStyles({
-//   root: {
-//     maxWidth: "550",
-//     height: "auto",
-//     "&:hover": {
-//       opacity: 0.9,
-//     },
-//   },
-//   media: {
-//     height: 350,
-//   },
-//   container: {
-//     width: "100%",
-//     paddingLeft: "50px",
-//     paddingRight: "50px",
-//     paddingTop: "50px",
-//   },
-// });
+import IconButton from "@material-ui/core/IconButton";
+import clsx from "clsx";
 
 export default function ProfilePic(props) {
   const { state, setFriends } = useApplicationData();
   const classes = useStyles();
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   const addFriend = () => {
     const friend = {
@@ -71,44 +60,24 @@ export default function ProfilePic(props) {
           title={props.userInfo.username}
         />
         <CardContent>
-          <CardActions>
-            <Typography gutterBottom className="usernameAndButtonContainer">
-              {props.userInfo.username}
-            </Typography>
-            <div className="button">
+          <CardActions className={classes.usernameAndButtonContainer}>
+            <div>
+              <Typography className={classes.username} gutterBottom>
+                {props.userInfo.username}
+              </Typography>
+            </div>
+            <div className={classes.button}>
               {isNotFriends() && (
                 <button
                   onClick={() => {
                     addFriend();
                   }}
                 >
-                  {/* Add {props.userInfo.username} as a friend! */}
                   <PersonAddIcon />
                 </button>
               )}
             </div>
           </CardActions>
-          {/* <div className="usernameAndButtonContainer"> */}
-          {/* <div> */}
-          <Typography gutterBottom className="usernameAndButtonContainer">
-            <div className="username">{props.userInfo.username}</div>
-            <div className="button">
-              {isNotFriends() && (
-                <button
-                  onClick={() => {
-                    addFriend();
-                  }}
-                >
-                  {/* Add {props.userInfo.username} as a friend! */}
-                  <PersonAddIcon />
-                </button>
-              )}
-            </div>
-          </Typography>
-          {/* </div>
-            <div> */}
-          {/* </div> */}
-          {/* </div> */}
         </CardContent>
       </CardActionArea>
     </Card>
