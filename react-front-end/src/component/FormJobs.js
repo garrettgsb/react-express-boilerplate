@@ -18,16 +18,14 @@ import { useStyles } from "./Component_Style/FormJobs.jsx";
 export default function FormJobs(props) {
   const classes = useStyles();
 
-  const [title, setNewTitle] = useState("");
-  const [description, setNewDescription] = useState("");
-  const [pay, setPay] = useState(0);
-  const [company, setCompany] = useState("");
-  const [location, setLocation] = useState("");
-  const [job, setJob] = useState({ id: props.activeUser });
-
-  useEffect(() => {
-    setJob({ ...job, title, description, pay, company, location });
-  }, [title, description, pay, company, location]);
+  const [state, setState] = useState({
+    id: props.activeUser,
+    title: "",
+    description: "",
+    pay: 0,
+    company: "",
+    location: "",
+  });
 
   return (
     <form
@@ -41,11 +39,11 @@ export default function FormJobs(props) {
         multiline={true}
         rows={1}
         type="text"
-        value={title}
         variant="outlined"
         size="small"
-        onChange={(e) => setNewTitle(e.target.value)}
-        label="title"
+        value={state.title}
+        onChange={(e) => setState({ ...state, title: e.target.value })}
+        label="Title"
         placeholder="Title"
       />
       <TextField
@@ -55,9 +53,9 @@ export default function FormJobs(props) {
         variant="outlined"
         size="small"
         type="textarea"
-        value={description}
-        onChange={(e) => setNewDescription(e.target.value)}
-        label="description"
+        value={state.description}
+        onChange={(e) => setState({ ...state, description: e.target.value })}
+        label="Description"
         placeholder="Description"
       />
       <TextField
@@ -67,9 +65,9 @@ export default function FormJobs(props) {
         variant="outlined"
         size="small"
         type="number"
-        value={pay}
-        onChange={(e) => setPay(e.target.value)}
-        label="pay"
+        value={state.pay}
+        onChange={(e) => setState({ ...state, pay: e.target.value })}
+        label="Pay"
         placeholder="Wage/Salary"
       />
       <TextField
@@ -79,8 +77,8 @@ export default function FormJobs(props) {
         variant="outlined"
         size="small"
         type="text"
-        value={company}
-        onChange={(e) => setCompany(e.target.value)}
+        value={state.company}
+        onChange={(e) => setState({ ...state, company: e.target.value })}
         label="Company"
         placeholder="Company Name"
       />
@@ -91,12 +89,16 @@ export default function FormJobs(props) {
         variant="outlined"
         size="small"
         type="text"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        label="location"
+        value={state.location}
+        onChange={(e) => setState({ ...state, location: e.target.value })}
+        label="Location"
         placeholder="Location"
       />
-      <button type="submit" value="Submit" onClick={() => props.onSubmit(job)}>
+      <button
+        type="submit"
+        value="Submit"
+        onClick={() => props.onSubmit(state)}
+      >
         Submit
       </button>
     </form>
