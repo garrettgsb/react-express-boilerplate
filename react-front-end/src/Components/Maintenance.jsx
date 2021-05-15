@@ -50,8 +50,6 @@ export default function Maintenance() {
   const [tasks, setTasks] = useState([]);
   let { id } = useParams();
 
-  console.log('id', id)
-
   useEffect(() => {
     getPlotTasks(id)
   }, [])
@@ -60,7 +58,7 @@ export default function Maintenance() {
   const getPlotTasks = function(plotID) {
     return axios.get(`/api/plots_vegs/${plotID}`)
     .then(res => {
-      console.log("res.data / maintenance", res.data)
+
 
       setTasks(res.data)
     })

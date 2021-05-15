@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import  { Redirect } from 'react-router-dom';
+
 
 
 const listeners = [];
@@ -61,22 +63,23 @@ export default function useAppData() {
     }
     return axios.post('/api/plots_vegs', data)
       .then((res) =>  {
-        console.log('Garen_veg added')
       }
     )
   }
 
-  const addPlot = function (cart){
+  const addPlot = function (cart) {
 
     return axios.post('/api/plots')
       .then((res) =>  {
-        console.log('res', res.data.id)
         cart.map((veg) => {
           buildVegGarden(veg.vid ,res.data.id)
         })
+        window.location.replace(`http://localhost:3000/tasks/${res.data.id}`);
+      }).then (() => {
+        axios.delete(`/api/cart/delete/1`)
       })
+      .catch(err => console.log("error!", err))
     }
-
 
   const addVegToCart = function(props) {
     const axiosConfig = {  headers:{ 
@@ -90,10 +93,8 @@ export default function useAppData() {
     })
     return axios.post('/api/cart', data, axiosConfig)
       .then((res) => {
-        // console.log('res', res.data)
 
       setState(state => {
-
       const veg = {
         vid: props.id,
         id: res.data,
@@ -109,7 +110,6 @@ export default function useAppData() {
 
 //remove break when we prevent from adding multiple ids of the same veg. 
   const deleteVegFromCart = function(props) {
-    console.log('propsid', props.id)
     
     return axios.delete(`api/cart/${props.id}`)
     .then((res) => {
@@ -122,7 +122,6 @@ export default function useAppData() {
         }
       }
       setState({...state, basket: tempBasket})
-      console.log('test1', state)
     }) 
   }
   

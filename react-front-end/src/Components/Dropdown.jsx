@@ -48,6 +48,7 @@ export default function NestedList() {
         <ListItemText primary="My Plots" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+      {/* Map over elements in this collapse button */}
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItem button className="nested">
@@ -58,6 +59,8 @@ export default function NestedList() {
           </ListItem>
         </List>
       </Collapse>
+      {/* collapse ends here! */}
+
       <ListItem button>
         <ListItemIcon>
           <EcoIcon className="icon"/>
