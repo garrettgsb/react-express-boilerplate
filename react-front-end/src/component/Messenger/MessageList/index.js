@@ -7,6 +7,7 @@ import moment from "moment";
 import axios from "axios";
 import useInterval from "../../../util/useInterval";
 import "./MessageList.css";
+
 export default function MessageList(props) {
   const [messages, setMessages] = useState([]);
 
@@ -57,7 +58,6 @@ export default function MessageList(props) {
     let i = 0;
     let messageCount = messages.length;
     let tempMessages = [];
-
     while (i < messageCount) {
       let previous = messages[i];
       let current = messages[i];
