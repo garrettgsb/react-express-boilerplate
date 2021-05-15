@@ -14,14 +14,22 @@ import BuildIcon from '@material-ui/icons/Build';
 import AddIcon from '@material-ui/icons/Add';
 import RoomIcon from '@material-ui/icons/Room';
 import SettingsIcon from '@material-ui/icons/Settings'
+import useAppData from "../hooks/useAppData";
 import './Dropdown.scss';
 
 export default function NestedList() {
   const [open, setOpen] = React.useState(true);
+  const { state } = useAppData();
+
+  console.log('state', state.plots)
 
   const handleClick = () => {
     setOpen(!open);
   };
+
+  const redirect = function (id) {
+    window.location.replace(`http://localhost:3000/tasks/${id}`)
+  }
 
   return (
     <List className="main"
@@ -48,19 +56,20 @@ export default function NestedList() {
         <ListItemText primary="My Plots" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      {/* Map over elements in this collapse button */}
+      {/* Map over plots to link all plots */}
       <Collapse in={open} timeout="auto" unmountOnExit>
+        {state.plots.map(x => 
         <List component="div" disablePadding>
           <ListItem button className="nested">
             <ListItemIcon>
               <StarBorder className="icon"/>
             </ListItemIcon>
-            <ListItemText primary="Plot 1" />
+              <ListItemText onClick={() => redirect(x.id)} primary={`Plot ${x.id}`} />
           </ListItem>
         </List>
+        )}
       </Collapse>
-      {/* collapse ends here! */}
-
+      {/* Map ends here! */}
       <ListItem button>
         <ListItemIcon>
           <EcoIcon className="icon"/>
