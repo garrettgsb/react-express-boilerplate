@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import useAppData from "../hooks/useAppData";
 import {
   BrowserRouter as Router,
   Switch,
@@ -48,8 +49,10 @@ const useStyles = makeStyles({
 export default function Maintenance() {
   const classes = useStyles();
   const [tasks, setTasks] = useState([]);
+  const { watering } = useAppData();
   let { id } = useParams();
 
+  
   useEffect(() => {
     getPlotTasks(id)
   }, [])
@@ -58,30 +61,18 @@ export default function Maintenance() {
   const getPlotTasks = function(plotID) {
     return axios.get(`/api/plots_vegs/${plotID}`)
     .then(res => {
-
-
-      setTasks(res.data)
+      const temp = watering(res.data)
+      setTasks(temp)
     })
     .catch(err => console.log(err));
   }
-
-   // repeats each of the watering tasks 10 times
-  const watering = function(tasks) {
-      const waterdays = []
-      tasks.map(x => {
-        let name = x.name
-        let time = x.water_time
-        let i = 1
-        while (i < 10) {
-          let obj = {name: [name], time: time*i}
-          waterdays.push(obj)
-          i++
-        }
-      })
-      return waterdays.sort((a, b) => (a.time > b.time) ? 1 : -1);
-    }
+  
+  const removeTask = function (name, time) {
+    const found = tasks.find(task => task.name === name && task.time === time)
+    const newTasks = tasks.filter(task => task !== found)
+    setTasks(newTasks)
+  }
     
-
   return (
     <Card className={classes.root}>
       <CardContent className={classes.twidth}>
@@ -95,9 +86,9 @@ export default function Maintenance() {
             </tr>
           </thead>
           <tbody>
-          {watering(tasks).map(x => 
+          {tasks.map(x => 
           <tr>
-          <td>
+            <td>
               {x.name}
             </td>
             <td>
@@ -105,7 +96,9 @@ export default function Maintenance() {
             </td>
             <td>
             <CardActions>
-              <Button size="small" variant="contained" color="primary">Complete</Button>
+              <Button size="small" 
+              onClick={() => removeTask(x.name, x.time)} 
+              variant="contained" color="primary">Complete</Button>
             </CardActions>
             </td>
           </tr>

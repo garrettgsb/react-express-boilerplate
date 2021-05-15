@@ -115,7 +115,7 @@ export default function useAppData() {
     .then((res) => {
 
       let tempBasket = state.basket
-      for (let i = 0; i <tempBasket.length; i++){
+      for (let i = 0; i <tempBasket.length; i++) {
         if (tempBasket[i].id === props.id) {
           tempBasket.splice(i, 1)
           break;
@@ -124,7 +124,23 @@ export default function useAppData() {
       setState({...state, basket: tempBasket})
     }) 
   }
-  
+
+    // repeats each of the watering tasks 10 times
+    const watering = function(tasks) {
+    const waterdays = []
+    tasks.map(x => {
+      let name = x.name
+      let time = x.water_time
+      let i = 1
+      while (i < 10) {
+        let obj = {name: [name], time: time*i}
+        waterdays.push(obj)
+        i++
+      }
+    })
+    return waterdays.sort((a, b) => (a.time > b.time) ? 1 : -1);
+  }
+    
 
   return {
     state,
@@ -132,6 +148,7 @@ export default function useAppData() {
     deleteVegFromCart,
     buildVegGarden,
     addPlot,
+    watering
   };
 }
 

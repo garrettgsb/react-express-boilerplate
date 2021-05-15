@@ -57,7 +57,7 @@ export default function NestedList() {
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       {/* Map over plots to link all plots */}
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={!open} timeout="auto" unmountOnExit>
         {state.plots.map(x => 
         <List component="div" disablePadding>
           <ListItem button className="nested">
