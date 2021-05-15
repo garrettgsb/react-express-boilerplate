@@ -49,7 +49,7 @@ const useStyles = makeStyles({
 export default function Maintenance() {
   const classes = useStyles();
   const [tasks, setTasks] = useState([]);
-  const { watering } = useAppData();
+  const { buildTasks } = useAppData();
   let { id } = useParams();
 
   
@@ -61,22 +61,22 @@ export default function Maintenance() {
   const getPlotTasks = function(plotID) {
     return axios.get(`/api/plots_vegs/${plotID}`)
     .then(res => {
-      const temp = watering(res.data)
+      const temp = buildTasks(res.data)
       setTasks(temp)
     })
     .catch(err => console.log(err));
   }
   
   const removeTask = function (name, time) {
-    const found = tasks.find(task => task.name === name && task.time === time)
-    const newTasks = tasks.filter(task => task !== found)
-    setTasks(newTasks)
+    const found = tasks.find(task => task.name === name && task.time === time);
+    const newTasks = tasks.filter(task => task !== found);
+    setTasks(newTasks);
   }
     
   return (
     <Card className={classes.root}>
       <CardContent className={classes.twidth}>
-        <h2>Watering Schedule</h2>
+        <h2>Garden Chores</h2>
         <table className={classes.twidth}>
           <thead >
             <tr >
