@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { useStyles } from "./Component_Style/FormJobs.jsx";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import clsx from "clsx";
+import Button from "@material-ui/core/Button";
 
 // const useStyles = makeStyles((theme: Theme) =>
 //   createStyles({
@@ -17,6 +20,7 @@ import { useStyles } from "./Component_Style/FormJobs.jsx";
 
 export default function FormJobs(props) {
   const classes = useStyles();
+
 
   const [state, setState] = useState({
     id: props.activeUser,
@@ -34,6 +38,7 @@ export default function FormJobs(props) {
       autoComplete="off"
       onSubmit={(event) => event.preventDefault()}
     >
+      <br />
       <TextField
         id="standard-basic"
         multiline={true}
@@ -59,6 +64,11 @@ export default function FormJobs(props) {
         placeholder="Description"
       />
       <TextField
+        className={clsx(
+          classes.margin,
+          classes.textField,
+          classes.withoutLabel
+        )}
         id="outlined-basic"
         multiline={true}
         rows={1}
@@ -94,6 +104,7 @@ export default function FormJobs(props) {
         label="Location"
         placeholder="Location"
       />
+
       <button
         type="submit"
         value="Submit"
@@ -104,6 +115,7 @@ export default function FormJobs(props) {
       <button type="button" value="Cancel" onClick={() => props.onCancel()}>
         Cancel
       </button>
+
     </form>
   );
 }

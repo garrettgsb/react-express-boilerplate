@@ -61,6 +61,14 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
+    menuPaper: {
+      // backgroundColor: "lightblue",
+    },
+    menu: {
+      "& .MuiList-root.MuiMenu-list.MuiList-padding": {
+        backgroundColor: "blue",
+      },
+    },
   },
 }));
 

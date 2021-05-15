@@ -4,6 +4,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { useStyles } from "./Component_Style/Form.jsx";
+import Button from "@material-ui/core/Button";
 
 // const useStyles = makeStyles((theme: Theme) =>
 //   createStyles({
@@ -155,7 +156,7 @@ export default function BasicTextFields(props) {
         placeholder="Project URL"
       />
       <br />
-      <FormControlLabel
+      {/* <FormControlLabel
         control={
           <Checkbox
             value={state.forSale}
@@ -165,6 +166,7 @@ export default function BasicTextFields(props) {
         }
         label="For Sale"
       />
+      <br /> */}
       <br />
       <TextField
         id="outlined-basic"
@@ -179,6 +181,7 @@ export default function BasicTextFields(props) {
         placeholder="Price"
       />
       <br />
+
       <button type="submit" value="Submit" onClick={() => validate()}>
         Submit
       </button>

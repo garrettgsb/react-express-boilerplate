@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import BrushTwoToneIcon from "@material-ui/icons/BrushTwoTone";
 import SearchBar from "./SearchPage";
 import { useStyles } from "./Component_Style/Navbar.jsx";
+import ExploreIcon from "@material-ui/icons/Explore";
 
 // const useStyles = makeStyles((theme) => ({
 //   grow: {
@@ -125,6 +126,7 @@ export default function PrimarySearchAppBar(props) {
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
+      classes={{ paper: classes.menu }}
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
@@ -133,48 +135,59 @@ export default function PrimarySearchAppBar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            {/* Mail Icon */}
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
+      <Link to="/messages" style={{ textDecoration: "none", color: "black" }}>
+        <MenuItem>
+          <IconButton aria-label="show 4 new mails" color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              {/* Mail Icon */}
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <p>Messages</p>
+        </MenuItem>
+      </Link>
 
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+      <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+        <MenuItem>
+          <IconButton aria-label="show 11 new notifications" color="inherit">
+            {/* <Badge badgeContent={11} color="secondary"> */}
             {/* Notifications Icon */}
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+            <ExploreIcon />
+            {/* </Badge> */}
+          </IconButton>
+          <p>Explore</p>
+        </MenuItem>
+      </Link>
 
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+      <Link to="/job_board" style={{ textDecoration: "none", color: "black" }}>
+        <MenuItem>
+          <IconButton aria-label="show 11 new notifications" color="inherit">
+            {/* <Badge badgeContent={11} color="secondary"> */}
             {/* Notifications Icon */}
             <BrushTwoToneIcon />
-          </Badge>
-        </IconButton>
-        <p>Jobs</p>
-      </MenuItem>
+            {/* </Badge> */}
+          </IconButton>
+          <p>Jobs</p>
+        </MenuItem>
+      </Link>
 
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          {/* Profile Button */}
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      <Link
+        to={`/portfolio/${props.activeUser}`}
+        style={{ textDecoration: "none", color: "black" }}
+      >
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            {/* Profile Button */}
+            <AccountCircle />
+          </IconButton>
+          <p>Profile</p>
+        </MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -182,14 +195,14 @@ export default function PrimarySearchAppBar(props) {
     <div className={classes.grow}>
       <AppBar position="static" style={{ background: "#2E3B55" }}>
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
 
           {/* inkedin REACT ROUTER LINK TO INDEX */}
           <Link to="/" style={{ textDecoration: "none", color: "lavender" }}>
@@ -198,10 +211,10 @@ export default function PrimarySearchAppBar(props) {
             </Typography>
           </Link>
 
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
+          <div>
+            {/* <div className={classes.searchIcon}>
               <SearchIcon />
-            </div>
+            </div> */}
             <SearchBar filteredSearch={props.filteredSearch} />
           </div>
           <div className={classes.grow} />
@@ -277,7 +290,7 @@ export default function PrimarySearchAppBar(props) {
                 color="inherit"
               >
                 <Badge color="secondary">
-                  <NotificationsIcon />
+                  <ExploreIcon />
                 </Badge>
               </IconButton>
             </Link>

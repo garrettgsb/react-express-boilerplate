@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import useApplicationData from "../hooks/useApplicationData";
 import { useStyles } from "./Component_Style/ProfilePic.jsx";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 // const useStyles = makeStyles({
 //   root: {
@@ -68,18 +69,27 @@ export default function ProfilePic(props) {
           title={props.userInfo.username}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.userInfo.username}
+          {/* <div className="usernameAndButtonContainer"> */}
+          {/* <div> */}
+          <Typography gutterBottom className="usernameAndButtonContainer">
+            <div className="username">{props.userInfo.username}</div>
+            <div className="button">
+              {isNotFriends() && (
+                <button
+                  onClick={() => {
+                    addFriend();
+                  }}
+                >
+                  {/* Add {props.userInfo.username} as a friend! */}
+                  <PersonAddIcon />
+                </button>
+              )}
+            </div>
           </Typography>
-          {isNotFriends() && (
-            <button
-              onClick={() => {
-                addFriend();
-              }}
-            >
-              Add {props.userInfo.username} as a friend!
-            </button>
-          )}
+          {/* </div>
+            <div> */}
+          {/* </div> */}
+          {/* </div> */}
         </CardContent>
       </CardActionArea>
     </Card>
