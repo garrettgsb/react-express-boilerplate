@@ -34,7 +34,7 @@ export default function Weather() {
   
     for (const day of weatherData) {
       if (day.temp.min <= 273.15) frost++;
-      if (day.temp.max >= 5.37) heat++;
+      if (day.temp.max >= 305.37) heat++;
       if (day.rain) rain = rain + day.rain;
     }
     
@@ -48,8 +48,8 @@ export default function Weather() {
     if (heat > 0) {
       alert2 = <div className="alert-heat"><span>warning: </span>High Heat Warning. Early morning watering recommended.</div>;
     }
-    if (rain > 10) {
-      alert3 = <div className="alert-rain"><span>warning: </span>More than 18mm of rain expected.</div>;
+    if (rain > 13) {
+      alert3 = <div className="alert-rain"><span>warning: </span>More than 13mm of rain expected.</div>;
     }
     return (<div>{alert1}{alert2}{alert3}</div>);
   }
