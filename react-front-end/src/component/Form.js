@@ -19,25 +19,34 @@ import { useStyles } from "./Component_Style/Form.jsx";
 
 export default function BasicTextFields(props) {
   const classes = useStyles();
-  const [title, setNewTitle] = useState("");
-  const [description, setNewDescription] = useState("");
-  const [imgLink, setNewImgLink] = useState("");
-  const [projectLink, setNewProjectLink] = useState("");
-  const [forSale, setForSale] = useState(false);
-  const [price, setNewPrice] = useState("");
-  const [artwork, setArtwork] = useState({ id: props.activeUser });
 
-  useEffect(() => {
-    setArtwork({
-      ...artwork,
-      title,
-      description,
-      imgLink,
-      projectLink,
-      forSale,
-      price,
-    });
-  }, [title, description, imgLink, projectLink, forSale, price]);
+  const [state, setState] = useState({
+    id: props.activeUser,
+    title: "",
+    description: "",
+    imgLink: "",
+    projectLink: "",
+    forSale: false,
+    price: 0,
+    titleError: false,
+    imgError: false,
+  });
+
+  const validate = () => {
+    const invalid = { title: false, image: false };
+    state.title === "" ? (invalid.title = true) : (invalid.title = false);
+    state.imgLink === "" ? (invalid.image = true) : (invalid.image = false);
+    if (invalid.image || invalid.title) {
+      setState({
+        ...state,
+        titleError: invalid.title,
+        imgError: invalid.image,
+      });
+    }
+    if (!invalid.image && !invalid.title) {
+      props.onCreate(state);
+    }
+  };
 
   return (
     <form
@@ -46,44 +55,80 @@ export default function BasicTextFields(props) {
       autoComplete="off"
       onSubmit={(event) => event.preventDefault()}
     >
-      <TextField
-        id="standard-basic"
-        multiline={true}
-        rows={1}
-        type="text"
-        value={title}
-        variant="outlined"
-        size="small"
-        onChange={(e) => setNewTitle(e.target.value)}
-        label="title"
-        placeholder="Title"
-      />
+      {!state.titleError && (
+        <TextField
+          id="standard-basic"
+          multiline={true}
+          rows={1}
+          type="text"
+          variant="outlined"
+          size="small"
+          value={state.title}
+          onChange={(e) => setState({ ...state, title: e.target.value })}
+          label="Title"
+          placeholder="Title"
+        />
+      )}
+      {state.titleError && (
+        <TextField
+          error
+          helperText="Cannot be blank"
+          id="standard-basic"
+          multiline={true}
+          rows={1}
+          type="text"
+          variant="outlined"
+          size="small"
+          value={state.title}
+          onChange={(e) => setState({ ...state, title: e.target.value })}
+          label="Title"
+          placeholder="Title"
+        />
+      )}
       <br />
       <TextField
         id="filled-basic"
         multiline={true}
         rows={1}
+        type="textarea"
         variant="outlined"
         size="small"
-        type="textarea"
-        value={description}
-        onChange={(e) => setNewDescription(e.target.value)}
-        label="description"
+        value={state.description}
+        onChange={(e) => setState({ ...state, description: e.target.value })}
+        label="Description"
         placeholder="Description"
       />
       <br />
-      <TextField
-        id="outlined-basic"
-        multiline={true}
-        rows={1}
-        variant="outlined"
-        size="small"
-        type="text"
-        value={imgLink}
-        onChange={(e) => setNewImgLink(e.target.value)}
-        label="img-link"
-        placeholder="Image URL"
-      />
+      {!state.imgError && (
+        <TextField
+          id="outlined-basic"
+          multiline={true}
+          rows={1}
+          variant="outlined"
+          size="small"
+          type="text"
+          value={state.imgLink}
+          onChange={(e) => setState({ ...state, imgLink: e.target.value })}
+          label="Image URL"
+          placeholder="Image URL"
+        />
+      )}
+      {state.imgError && (
+        <TextField
+          error
+          helperText="Cannot be blank"
+          id="outlined-basic"
+          multiline={true}
+          rows={1}
+          variant="outlined"
+          size="small"
+          type="text"
+          value={state.imgLink}
+          onChange={(e) => setState({ ...state, imgLink: e.target.value })}
+          label="Image URL"
+          placeholder="Image URL"
+        />
+      )}
       <br />
       <TextField
         id="outlined-basic"
@@ -92,22 +137,23 @@ export default function BasicTextFields(props) {
         variant="outlined"
         size="small"
         type="text"
-        value={projectLink}
-        onChange={(e) => setNewProjectLink(e.target.value)}
-        label="project_link"
+        value={state.projectLink}
+        onChange={(e) => setState({ ...state, projectLink: e.target.value })}
+        label="Project URL"
         placeholder="Project URL"
       />
       <br />
       <FormControlLabel
         control={
           <Checkbox
-            value={forSale}
-            onChange={(e) => setForSale(e.target.value)}
+            value={state.forSale}
+            onChange={(e) => setState({ ...state, forSale: e.target.value })}
             name="For Sale"
           />
         }
         label="For Sale"
       />
+      <br />
       <TextField
         id="outlined-basic"
         multiline={true}
@@ -115,16 +161,13 @@ export default function BasicTextFields(props) {
         variant="outlined"
         size="small"
         type="number"
-        value={price}
-        onChange={(e) => setNewPrice(e.target.value)}
+        value={state.price}
+        onChange={(e) => setState({ ...state, price: e.target.value })}
         label="Price"
         placeholder="Price"
       />
-      <button
-        type="submit"
-        value="Submit"
-        onClick={() => props.onCreate(artwork)}
-      >
+      <br />
+      <button type="submit" value="Submit" onClick={() => validate()}>
         Submit
       </button>
     </form>

@@ -45,11 +45,11 @@ export default function User(props) {
     axios.get(`/api/artworks/users/${id}`).then((res) => {
       setState({ ...state, portfolio: res.data.portfolio });
     });
-  }, [state.addArt, state.showEdit]);
+  }, [state.addArt, state.showEdit, state.artID]);
 
   const onDelete = (id) => {
     axios.delete(`/api/artworks/${id}`).then(() => {
-      setState({ ...state });
+      setState({ ...state, artID: id });
     });
   };
 
