@@ -2,21 +2,23 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Artwork from "./Artwork";
+import { useStyles } from "./Component_Style/Artworks.jsx";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
-  gridContainer: {
-    paddingLeft: "50px",
-    paddingRight: "50px",
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   paper: {
+//     padding: theme.spacing(1),
+//     textAlign: "center",
+//     color: theme.palette.text.secondary,
+//   },
+//   gridContainer: {
+//     paddingLeft: "50px",
+//     paddingRight: "50px",
+//     paddingTop: "50px",
+//   },
+// }));
 
 export default function Artworks(props) {
   const classes = useStyles();

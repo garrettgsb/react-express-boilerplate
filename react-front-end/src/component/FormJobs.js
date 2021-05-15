@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { useStyles } from "./Component_Style/FormJobs.jsx";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-        size: "small",
-      },
-    },
-  })
-);
+// const useStyles = makeStyles((theme: Theme) =>
+//   createStyles({
+//     root: {
+//       "& > *": {
+//         margin: theme.spacing(1),
+//         width: "25ch",
+//         size: "small",
+//       },
+//     },
+//   })
+// );
 
 export default function FormJobs(props) {
   const classes = useStyles();
 
   const [title, setNewTitle] = useState("");
   const [description, setNewDescription] = useState("");
-  const [pay, setPay] = useState("");
+  const [pay, setPay] = useState(0);
   const [company, setCompany] = useState("");
   const [location, setLocation] = useState("");
   const [job, setJob] = useState({ id: props.activeUser });

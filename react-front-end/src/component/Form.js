@@ -3,18 +3,19 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { useStyles } from "./Component_Style/Form.jsx";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-        size: "small",
-      },
-    },
-  })
-);
+// const useStyles = makeStyles((theme: Theme) =>
+//   createStyles({
+//     root: {
+//       "& > *": {
+//         margin: theme.spacing(1),
+//         width: "25ch",
+//         size: "small",
+//       },
+//     },
+//   })
+// );
 
 export default function BasicTextFields(props) {
   const classes = useStyles();

@@ -33,9 +33,7 @@ export default function SearchBar(props) {
           placeholder={"search"}
           onChange={(e) => setSearchInputValue(e.target.value)}
         />
-        {/* <Link to="/searchResults"> */}
         <button type="submit">Submit Search</button>
-        {/* </Link> */}
       </form>
     </div>
   );

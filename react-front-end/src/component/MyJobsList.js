@@ -9,20 +9,21 @@ import TableRow from "@material-ui/core/TableRow";
 import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 
+import { useStyles } from "./Component_Style/MyJobsList.jsx";
+
 export default function BasicTable(props) {
   useEffect(() => {}, [props.state.userJobs]);
 
-  const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-  });
+  // const useStyles = makeStyles({
+  //   table: {
+  //     minWidth: 650,
+  //   },
+  // });
 
   const classes = useStyles();
 
   return (
     <div>
-      <div>{/* <FormJobs /> */}</div>
       <h1>My Jobs</h1>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">

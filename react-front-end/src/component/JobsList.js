@@ -7,20 +7,21 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import MyJobsList from "./MyJobsList";
 import Empty from "./Empty";
 import FormJobs from "./FormJobs";
+import { useStyles } from "./Component_Style/JobList.jsx";
 
 import axios from "axios";
 
 import useApplicationData from "../hooks/useApplicationData";
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
+// const useStyles = makeStyles({
+//   table: {
+//     minWidth: 650,
+//   },
+// });
 
 export default function BasicTable(props) {
   const { state, setJobs, setUserJobs } = useApplicationData();
@@ -36,7 +37,6 @@ export default function BasicTable(props) {
   const onEdit = (id) => {
     setEditShow(true);
     setJobId(id);
-    // axios.put('/api/jobs/')
   };
 
   const onDelete = (id) => {
@@ -67,7 +67,6 @@ export default function BasicTable(props) {
 
   return (
     <div>
-      <div>{/* <FormJobs /> */}</div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -101,14 +100,10 @@ export default function BasicTable(props) {
           </TableBody>
         </Table>
       </TableContainer>
-      <br />
-      <br />
-      <br />
-      <br />
       {state.activeUser !== 0 && (
         <MyJobsList state={state} onDelete={onDelete} onEdit={onEdit} />
       )}
-      {state.activeUser !== NO_ACTIVE_USER && !show && (
+      {state.activeUser !== NO_ACTIVE_USER && !show && !editShow && (
         <Empty onAdd={jobForm} />
       )}
       {state.activeUser !== NO_ACTIVE_USER && show && (

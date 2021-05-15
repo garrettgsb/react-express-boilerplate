@@ -12,7 +12,6 @@ App.use(Express.static("public"));
 
 App.get("/api/search", (req, res) => {
   const searchItem = req.query.query;
-  console.log(req.query);
   Promise.all([
     db.query(
       `SELECT * FROM artworks WHERE LOWER(title) LIKE $1 OR LOWER(descrip) LIKE $1`,
@@ -32,9 +31,6 @@ App.get("/api/search", (req, res) => {
       users: all[1].rows,
       jobs: all[2].rows,
     });
-    console.log("Art", all[0].rows);
-    console.log("users", all[1].rows);
-    console.log("jobs", all[2].rows);
   });
 });
 
@@ -49,7 +45,7 @@ App.get("/api/users", (req, res) => {
 });
 
 // THIS GETS A USERs ARTWORKS
-App.get("/api/users/:id", (req, res) => {
+App.get("/api/artworks/users/:id", (req, res) => {
   const data = db
     .query(
       `
@@ -180,8 +176,6 @@ App.get("/api/friends/:id", (req, res) => {
 
 App.put("/api/friends/", (req, res) => {
   const { first_user_id, second_user_id } = req.body;
-  console.log(first_user_id);
-  console.log(second_user_id);
   const data = db
     .query(
       `INSERT INTO friends (first_user_id, second_user_id) 
@@ -238,8 +232,7 @@ App.get("/api/jobs/:id", (req, res) => {
       `
     SELECT * 
     FROM jobs
-    WHERE id = $1;
-    ORDER BY id
+    WHERE id = $1
     `,
       [req.params.id]
     )

@@ -5,34 +5,32 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import useApplicationData from "../hooks/useApplicationData";
+import { useStyles } from "./Component_Style/ProfilePic.jsx";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: "550",
-    height: "auto",
-    "&:hover": {
-      opacity: 0.9,
-    },
-  },
-  media: {
-    height: 350,
-  },
-  container: {
-    width: "100%",
-    paddingLeft: "50px",
-    paddingRight: "50px",
-    paddingTop: "50px",
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+//     maxWidth: "550",
+//     height: "auto",
+//     "&:hover": {
+//       opacity: 0.9,
+//     },
+//   },
+//   media: {
+//     height: 350,
+//   },
+//   container: {
+//     width: "100%",
+//     paddingLeft: "50px",
+//     paddingRight: "50px",
+//     paddingTop: "50px",
+//   },
+// });
 
 export default function ProfilePic(props) {
   const { state, setFriends } = useApplicationData();
-  const { id } = useParams();
   const classes = useStyles();
-  console.log("PIRATE props", props);
 
   const addFriend = () => {
     const friend = {

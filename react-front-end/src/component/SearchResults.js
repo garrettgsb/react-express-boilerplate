@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // Artworks
 import Artwork from "./Artwork";
 import Grid from "@material-ui/core/Grid";
@@ -14,26 +14,27 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { useStyles } from "./Component_Style/SearchResults.jsx";
 
 const SearchResults = (props) => {
   const storage = JSON.parse(localStorage.getItem("search_results"));
   console.log("searchResults props", props.searchReturnValue);
 
-  const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      textAlign: "center",
-    },
-    gridContainer: {
-      paddingLeft: "50px",
-      paddingRight: "50px",
-    },
-  });
+  // const useStyles = makeStyles({
+  //   table: {
+  //     minWidth: 650,
+  //   },
+  //   root: {
+  //     flexGrow: 1,
+  //   },
+  //   paper: {
+  //     textAlign: "center",
+  //   },
+  //   gridContainer: {
+  //     paddingLeft: "50px",
+  //     paddingRight: "50px",
+  //   },
+  // });
 
   const classes = useStyles();
   const history = useHistory();
@@ -69,17 +70,6 @@ const SearchResults = (props) => {
     );
   };
 
-  // // RETURN SEARCHED USERS
-  // const users = () => {
-  //   const userList = [];
-  //   for (const user of storage.users) {
-  //     userList.push(
-  //       <ProfilePic userInfo={user} />
-  //       // <ProfilePic image={user.profile_pic} title={user.username} />
-  //     );
-  //   }
-  //   return userList;
-  // };
   // RETURN SEARCHED USERS
   const users = () => {
     return (
@@ -95,7 +85,6 @@ const SearchResults = (props) => {
               <Grid item xs={12} sm={6} md={4}>
                 <div
                   onClick={() => {
-                    console.log("user = ", user);
                     history.push(`/portfolio/${user.id}`);
                   }}
                 >
@@ -148,7 +137,6 @@ const SearchResults = (props) => {
     );
   };
 
-  console.log("storage = ", storage);
   return (
     <div>
       <h2>{storage && "Art!"}</h2>

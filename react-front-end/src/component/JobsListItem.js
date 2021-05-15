@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
+// import { useStyles } from "Component_Style/User.jsx";
 
 export default function Job(props) {
   let { id } = useParams();
@@ -8,12 +9,10 @@ export default function Job(props) {
 
   const addFriend = () => {
     const friend = {
-      first_user_id: 1,
+      first_user_id: props.activeUser,
       second_user_id: job.user_id,
     };
-    axios.put(`/api/friends`, friend).then(() => {
-      // window.location.reload();
-    });
+    axios.put(`/api/friends`, friend).then(() => {});
     localStorage.setItem("activeConversation", [
       friend.first_user_id,
       friend.second_user_id,
@@ -22,15 +21,13 @@ export default function Job(props) {
   };
 
   const [job, setJob] = useState({});
-  console.log("id", typeof id);
 
   useEffect(() => {
     axios.get(`/api/jobs/${id}`).then((res) => {
-      console.log("pirate treasure", res.data);
       setJob(res.data.job[0]);
     });
   }, []);
-  console.log("job flag = ", job);
+
   return (
     <div className="Job">
       {job.title}
@@ -39,7 +36,6 @@ export default function Job(props) {
       <div className="Job">{job.pay}</div>
       <div className="Job">{job.company}</div>
       <div className="Job">{job.location}</div>
-      {/* <button type="submit" value="Submit"> */}
       <button type="submit" value="Submit" onClick={addFriend} path="/messages">
         Contact
       </button>

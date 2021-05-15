@@ -7,6 +7,7 @@ import ProfilePic from "./ProfilePic";
 import { makeStyles } from "@material-ui/core/styles";
 import Empty from "./Empty";
 import Grid from "@material-ui/core/Grid";
+// import { useStyles } from "./Component_Style/User.jsx";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +42,7 @@ export default function User(props) {
   let { id } = useParams();
 
   useEffect(() => {
-    axios.get(`/api/users/${id}`).then((res) => {
+    axios.get(`/api/artworks/users/${id}`).then((res) => {
       setState({ ...state, portfolio: res.data.portfolio });
     });
   }, [state.addArt, state.showEdit]);
@@ -80,7 +81,6 @@ export default function User(props) {
       >
         {/* PROFILE PIC */}
         <Grid item xs={12} sm={6} md={4}>
-          {console.log("state.portfolio", state)}
           {state.portfolio && <ProfilePic userInfo={state.portfolio[0]} />}
         </Grid>
 
