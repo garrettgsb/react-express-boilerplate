@@ -19,32 +19,28 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     overflow: 'auto',
-
-    // justifyContent: 'space-between'
   },
+
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
     transform: 'scale(0.8)',
   },
-  title: {
-    fontSize: 14,
-  },
-  heads: {
-    display: 'flex',
-    // flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
+
   twidth: {
     flex: 1,
     width: '100%'
   },
+
+  td: {
+    margin: '50px',
+  },
+
   avatar: {
-    // minWidth: '20px',
     maxWidth: '35px',
-    // minHeight: '20px',
     maxHeight: '35px',
   },
+
   complete_btn: {
     '&:hover': {
       color: 'green',
@@ -79,13 +75,13 @@ export default function Planting() {
         <table className={classes.twidth}>
           <thead >
             <tr >
-              <th>Avatar</th>
+              <th></th>
               <th>Name</th>
               <th>Instructions</th>
               <th>Complete</th>
             </tr>
           </thead>
-          <tbody >
+          <tbody className={classes.body}>
             {tasks.map(x =>
               <tr>
                 <td >
@@ -96,10 +92,10 @@ export default function Planting() {
                   />
                 </td>
                 <td>
-                  {x.name}
+                  <strong>{x.name}</strong>
                 </td>
                 <td>
-                  Sow seeds in sterile potting soil, in an area that gets about <strong>{x.sun_required} hours</strong> of sunlight per day. Wet the soil with warm water before planting the seeds and place the seeds at a <strong>depth of {x.depth}cm</strong>. Fill the hole with amended soil, use a spray bottle to wet the soil again and continue to water <strong>every {x.water_time} days</strong>.
+                  Sow seeds in sterile potting soil, in an area that gets about <strong>{x.sun_required} hours</strong> of sunlight per day. Wet the soil with warm water before planting the seeds and place the seeds at a <strong>depth of {x.depth}cm</strong> and <strong>space {x.space} inches apart</strong>. Fill the hole with amended soil, use a spray bottle to wet the soil again and continue to water <strong>every {x.water_time} days</strong>.
                 </td>
                 <td>
                   <CardActions>
