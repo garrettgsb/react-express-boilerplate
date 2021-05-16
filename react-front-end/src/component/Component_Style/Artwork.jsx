@@ -30,6 +30,10 @@ const useStyles = makeStyles({
       opacity: 0.7,
     },
   },
+  editDeleteButtons: {
+    minWidth: "5px",
+    Width: "10px",
+  },
 });
 
 export { useStyles };
