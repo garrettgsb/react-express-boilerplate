@@ -6,6 +6,7 @@ import VegetableAbout from './Components/Vegetable/VegetableAbout';
 import Dashboard from './Components/Dashboard'
 import Vegetables from './Components/Vegetables'
 import VegetableDrawer from './Components/VegetableDrawer';
+import Home from './Components/Home/Home'
 
 const useStyles = makeStyles({
   row: {
@@ -26,7 +27,21 @@ export default function App() {
 
   return (
     <Switch>
+   
+
+
         <Router>
+
+        <Route path='/home'>
+        <Home/> 
+        </Route>
+
+        <Route path='/'>
+            
+            <Sidebar />
+            <nav> 
+            </nav>
+          </Route>
         <main className="layout">
           <Route path="/tasks/:id" >
             <div className="App">
@@ -44,11 +59,7 @@ export default function App() {
             <VegetableAbout />
           </Route>
 
-          <Route path='/'>
-            <Sidebar />
-            <nav> 
-            </nav>
-          </Route>
+       
 
         </main>
       </Router>
