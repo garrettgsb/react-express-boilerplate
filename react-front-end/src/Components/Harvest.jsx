@@ -57,22 +57,26 @@ const useStyles = makeStyles({
 
 export default function Harvest() {
   const classes = useStyles();
-  let { id } = useParams();
+  const { id } = useParams();
   const { state, setState, markComplete } = useAppData();
-  // const myHarvest = state.harvest.find(plot => plot.plot_id === id)
-  console.log('myHarvest', myHarvest)
+  const [myHarvest, setMyHarvest] = useState([]);
 
-  console.log('state.harvest', state.harvest)
-  console.log('req params', id)
+  // const myHarvest = state.harvest.find(plot => plot.plot_id === id)
+
+  // console.log('state.harvest', state.harvest)
 
 
   useEffect(() => {
-    // myHarvest(id)
+    getPlotHarvest(id)
+    console.log('test', state.harvest)
   }, [state])
 
-  const myHarvest = function (id) {
-    return state.harvest.find(plot => plot.plot_id === id)
+  const getPlotHarvest = function (id) {
+    const myInfo = state.harvest.filter(plant => plant.plot_id === parseInt(id) && plant.planted_date !== null);
+    console.log('this crap is running again')
+    setMyHarvest(myInfo)
   }
+  // const myHarvest = state.harvest.filter(plant => plant.plot_id === parseInt(id) && plant.planted_date !== null);
 
   const removeHarvest = function (name) {
     const found = state.harvest.find(harvest => harvest.name === name);
@@ -88,7 +92,7 @@ export default function Harvest() {
   return counter;
   }
 
-
+  // console.log('myHarvest', myHarvest)
 
   return (
     <Card className={classes.root}>
@@ -99,11 +103,11 @@ export default function Harvest() {
             <tr >
               <th>Task</th>
               <th>Date</th>
-              <th>Complete</th>
+              <th>Complete </th>
             </tr>
           </thead>
           <tbody >
-          {myHarvest(id).map(x => 
+          {myHarvest.filter(plant => plant.plot_id === parseInt(id) && plant.planted_date !== null).map(x => 
           <tr>
           <td>
               {x.name}

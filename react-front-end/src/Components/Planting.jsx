@@ -33,7 +33,7 @@ export default function Planting() {
     setPlants(newPlants);
   }
 
-  console.log('plants', plants)
+  // console.log('plants', plants)
 
   return (
     <Card className="root">

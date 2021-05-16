@@ -134,7 +134,7 @@ export default function useAppData() {
     return axios.post(`/api/plots_vegs/${id}`)
     .then((res) => {
       console.log('res from plant function', res.data)
-      setState({...state, harvest:[...state.harvest, res.data]})
+      setState({...state, harvest:[...state.harvest, ...res.data]})
     }) 
   }
 
