@@ -4,6 +4,7 @@ import  { Redirect } from 'react-router-dom';
 
 
 
+
 const listeners = [];
 let initialLoad = false;
 
@@ -13,7 +14,9 @@ let state = {
   vegetables: [],
   plots: [],
   plotsVegs: [],
-  basket: []
+  basket: [],
+  maintenance: [],
+  harvest: []
 };
 
 const setState = function (newState) {
@@ -101,7 +104,6 @@ export default function useAppData() {
         name: props.name,
         avatar_url: null
       }
-
         return {...state, basket:[...state.basket, veg]}
       })
     })
@@ -125,32 +127,12 @@ export default function useAppData() {
     }) 
   }
 
-    // builds the tasks for the plots. Used in Maintenance.jsx
-    const buildTasks = function(tasks) {
-    const waterdays = []
-    let t = 1
-    tasks.map(x => {
-      let name = x.name
-      let time = x.water_time
-      let i = 1
-      while (i < 10) {
-        let waterObj = {name: [name], time: time*i}
-        waterdays.push(waterObj)
-        i++
-      }
-    })
-    while (t <= 10) {
-      if (t % 2 == 0) {
-        let fertilize = {name: 'Fertilize garden', time: 10*t/2}
-        waterdays.push(fertilize)
-      }
-      let weed = {name: "Weed beds", time: 7*t}
-      waterdays.push(weed)
-      t++
-    }
-    return waterdays.sort((a, b) => (a.time > b.time) ? 1 : -1);
-  }
     
+  const markComplete = function (index) {
+    setState({...state, maintenance:[...state.maintenance, index], harvest:[...state.harvest, index]})
+
+  }
+
 
   return {
     state,
@@ -158,7 +140,8 @@ export default function useAppData() {
     deleteVegFromCart,
     buildVegGarden,
     addPlot,
-    buildTasks
+    markComplete,
+    setState
   };
 }
 

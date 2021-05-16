@@ -58,7 +58,6 @@ export default function Vegetables() {
       const allVeg = res.data;
       //add data to state
       setVeg(allVeg)
-      console.log('vegetables',res.data)
     })
     .catch(error => console.error(`Error: ${error}`))
   }
