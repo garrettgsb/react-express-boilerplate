@@ -72,17 +72,30 @@ export default function BasicTable(props) {
   const history = useHistory();
 
   return (
-    <div>
+    <div className={classes.tableContainer}>
+      <h1>Jobs</h1>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
-            <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell align="right">User Name</TableCell>
-              <TableCell align="right">Description</TableCell>
-              <TableCell align="right">Pay</TableCell>
-              <TableCell align="right">Company</TableCell>
-              <TableCell align="right">Location</TableCell>
+            <TableRow className={classes.titleRow}>
+              <TableCell align="left" className={classes.titleRowText}>
+                Title
+              </TableCell>
+              <TableCell align="left" className={classes.titleRowText}>
+                User Name
+              </TableCell>
+              <TableCell align="left" className={classes.titleRowText}>
+                Description
+              </TableCell>
+              <TableCell align="left" className={classes.titleRowText}>
+                Pay
+              </TableCell>
+              <TableCell align="left" className={classes.titleRowText}>
+                Company
+              </TableCell>
+              <TableCell align="left" className={classes.titleRowText}>
+                Location
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -96,11 +109,11 @@ export default function BasicTable(props) {
                 <TableCell component="th" scope="row">
                   {row.title}
                 </TableCell>
-                <TableCell align="right">{row.username}</TableCell>
-                <TableCell align="right">{row.description}</TableCell>
-                <TableCell align="right">{row.pay}</TableCell>
-                <TableCell align="right">{row.company}</TableCell>
-                <TableCell align="right">{row.location}</TableCell>
+                <TableCell align="left">{row.username}</TableCell>
+                <TableCell align="left">{row.description}</TableCell>
+                <TableCell align="left">{row.pay}</TableCell>
+                <TableCell align="left">{row.company}</TableCell>
+                <TableCell align="left">{row.location}</TableCell>
               </TableRow>
             ))}
           </TableBody>

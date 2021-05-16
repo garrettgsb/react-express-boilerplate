@@ -56,6 +56,13 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
     },
   },
+  logo: {
+    width: "50px",
+    height: "auto",
+    marginTop: "6px",
+    marginRight: "20px",
+    alignSelf: "flex-start",
+  },
   sectionMobile: {
     display: "flex",
     [theme.breakpoints.up("md")]: {

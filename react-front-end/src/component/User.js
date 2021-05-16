@@ -76,7 +76,7 @@ export default function User(props) {
       >
         {/* PROFILE PIC */}
         <Grid item xs={12} sm={6} md={4}>
-          {state.portfolio[0] && <ProfilePic userInfo={state.portfolio[0]} />}
+          {state.portfolio && <ProfilePic userInfo={state.portfolio[0]} />}
         </Grid>
 
         {/* USER INFO */}
@@ -148,7 +148,7 @@ export default function User(props) {
             )}
         </Grid>
       </Grid>
-      {state.portfolio[0] && state.portfolio[0].title && (
+      {state.portfolio && state.portfolio[0].title && (
         <div>
           <Artworks
             art={state.portfolio}

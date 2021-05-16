@@ -205,9 +205,13 @@ export default function PrimarySearchAppBar(props) {
           </IconButton> */}
 
           {/* inkedin REACT ROUTER LINK TO INDEX */}
-          <Link to="/" style={{ textDecoration: "none", color: "lavender" }}>
+          <Link to="/" style={{ textDecoration: "none", color: "#B9A1BE" }}>
             <Typography className={classes.title} variant="h6" noWrap>
-              Inkedin
+              <img
+                className={classes.logo}
+                src="../images/Inkedin_squid.png"
+                alt="Inkedin Squid"
+              />
             </Typography>
           </Link>
 
@@ -223,7 +227,7 @@ export default function PrimarySearchAppBar(props) {
             {props.activeUser === 0 && (
               <Link
                 to="/login"
-                style={{ textDecoration: "none", color: "lavender" }}
+                style={{ textDecoration: "none", color: "#B9A1BE" }}
               >
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   {/* <Badge badgeContent={4} color="secondary">
@@ -240,7 +244,7 @@ export default function PrimarySearchAppBar(props) {
                 onClick={() => {
                   props.onLogin(0);
                 }}
-                style={{ textDecoration: "none", color: "lavender" }}
+                style={{ textDecoration: "none", color: "#B9A1BE" }}
               >
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   {/* <Badge badgeContent={4} color="secondary">
@@ -254,7 +258,7 @@ export default function PrimarySearchAppBar(props) {
             {/* REACT ROUTER LINK TO MESSAGES */}
             <Link
               to="/messages"
-              style={{ textDecoration: "none", color: "lavender" }}
+              style={{ textDecoration: "none", color: "#B9A1BE" }}
             >
               <IconButton aria-label="show 4 new mails" color="inherit">
                 <Badge badgeContent={4} color="secondary">
@@ -264,7 +268,7 @@ export default function PrimarySearchAppBar(props) {
             </Link>
 
             {/* REACT ROUTER LINK TO SHOWCASE */}
-            <Link to="/" style={{ textDecoration: "none", color: "lavender" }}>
+            <Link to="/" style={{ textDecoration: "none", color: "#B9A1BE" }}>
               <IconButton
                 aria-label="show 17 new notifications"
                 color="inherit"
@@ -278,7 +282,7 @@ export default function PrimarySearchAppBar(props) {
             {/* REACT ROUTER LINK TO JOBS */}
             <Link
               to="/job_board"
-              style={{ textDecoration: "none", color: "lavender" }}
+              style={{ textDecoration: "none", color: "#B9A1BE" }}
             >
               <IconButton
                 aria-label="show 17 new notifications"
@@ -293,7 +297,7 @@ export default function PrimarySearchAppBar(props) {
             {/* REACT ROUTER LINK TO PORTFOLIO */}
             <Link
               to={`/portfolio/${props.activeUser}`}
-              style={{ textDecoration: "none", color: "lavender" }}
+              style={{ textDecoration: "none", color: "#B9A1BE" }}
             >
               <IconButton
                 edge="end"
