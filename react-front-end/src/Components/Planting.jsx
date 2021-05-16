@@ -1,56 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import useAppData from "../hooks/useAppData";
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
-import IconButton from '@material-ui/core/IconButton';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import useAppData from "../hooks/useAppData";
 import './Planting.scss';
 
-const moment = require('moment');
 const axios = require('axios');
 
-const useStyles = makeStyles({
-  root: {
-    width: '90%',
-    marginLeft: '7%',
-    marginTop: '7%',
-    display: 'flex',
-    flexDirection: 'row',
-    overflow: 'auto',
-  },
-
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-
-  twidth: {
-    flex: 1,
-    width: '100%'
-  },
-
-  td: {
-    margin: '50px',
-  },
-
-  avatar: {
-    maxWidth: '35px',
-    maxHeight: '35px',
-  },
-
-  complete_btn: {
-    '&:hover': {
-      color: 'green',
-    }
-  }
-});
-
 export default function Planting() {
-  const classes = useStyles();
   const [plants, setPlants] = useState([]);
   let { id } = useParams();
   const { state, markComplete } = useAppData();
@@ -77,24 +34,26 @@ export default function Planting() {
   }
 
   return (
-    <Card className={classes.root}>
-      <CardContent className={classes.twidth}>
+    <Card className="root">
+      <CardContent className="twidth">
         <h2>Planting Instructions</h2>
-        <table className={classes.twidth}>
+        <table className="plant-instructions">
           <thead >
             <tr >
               <th></th>
-              <th>Name</th>
-              <th>Instructions</th>
-              <th>Complete</th>
+              <th>Vegetable</th>
+              <th>Sunlight</th>
+              <th>Spacing</th>
+              <th>Depth</th>
+              <th>Completed</th>
             </tr>
           </thead>
-          <tbody className={classes.body}>
+          <tbody className="body">
             {plants.map((x, i) =>
               <tr>
                 <td >
                   <img
-                    className={classes.avatar}
+                    className="avatar"
                     src={x.avatar_url}
                     alt="img"
                   />
@@ -103,19 +62,19 @@ export default function Planting() {
                   <strong>{x.name}</strong>
                 </td>
                 <td>
-                  Sow seeds in sterile potting soil, in an area that gets about <strong>{x.sun_required} hours</strong> of sunlight per day. Wet the soil with warm water before planting the seeds and place the seeds at a <strong>depth of {x.depth}cm</strong> and <strong>space {x.space} inches apart</strong>. Fill the hole with amended soil, use a spray bottle to wet the soil again and continue to water <strong>every {x.water_time} days</strong>.
+                  <strong>{x.sun_required} hours per day</strong>
                 </td>
                 <td>
-                  <CardActions>
-                    <IconButton
-                      edge="start"
-                      aria-label="complete"
-                      className={classes.complete_btn}
-                      color="secondary"
-                      onClick={() => {markComplete(plants[i]); removePlanting(x.name)}}>
-                      <CheckCircleOutlinedIcon />
-                    </IconButton>
-                  </CardActions>
+                  <strong>{x.space} inches</strong>
+                </td>
+                <td>
+                  <strong>{x.depth}cm</strong>
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    onClick={() => {markComplete(plants[i]); removePlanting(x.name)}}
+                  />
                 </td>
               </tr>
             )}
