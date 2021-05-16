@@ -43,7 +43,7 @@ export default function Weather() {
     let alert3;
 
     if (frost > 0) {
-      alert1 = <div className="alert frost"><span>warning: </span>Frost Warning</div>;
+      alert1 = <div className="alert-frost"><span>warning: </span>Frost Warning</div>;
     }
     if (heat > 0) {
       alert2 = <div className="alert-heat"><span>warning: </span>High Heat Warning. Early morning watering recommended.</div>;

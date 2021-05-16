@@ -99,13 +99,12 @@ export default function useAppData() {
         vid: props.id,
         id: res.data,
         name: props.name,
-        avatar_url: null
+        avatar_url: props.avatar_url
       }
-
-        return {...state, basket:[...state.basket, veg]}
-      })
+      return {...state, basket:[...state.basket, veg]}
     })
-  }
+  })
+}
 
 
 //remove break when we prevent from adding multiple ids of the same veg. 
