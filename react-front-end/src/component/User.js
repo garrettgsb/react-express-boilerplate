@@ -15,23 +15,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useStyles } from "./Component_Style/User.jsx";
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   paper: {
-//     padding: theme.spacing(1),
-//     textAlign: "center",
-//     color: theme.palette.text.secondary,
-//   },
-//   gridContainer: {
-//     paddingLeft: "50px",
-//     paddingRight: "50px",
-//     paddingBottom: "50px",
-//     paddingTop: "50px",
-//   },
-// }));
-
 export default function User(props) {
   const [state, setState] = useState({
     addArt: false,
