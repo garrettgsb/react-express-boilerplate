@@ -10,14 +10,14 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     textField: {
-      border: "1px solid lavender",
+      border: "1px solid #B9A1BE",
       borderRadius: theme.shape.borderRadius,
     },
     searchButton: {
       width: "20ch",
       padding: "8px",
-      border: "1px solid lavender",
-      color: "lavender",
+      border: "1px solid #B9A1BE",
+      color: "#B9A1BE",
     },
   })
 );

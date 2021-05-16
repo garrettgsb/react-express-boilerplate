@@ -59,7 +59,9 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     width: "50px",
     height: "auto",
-    margin: "3px",
+    marginTop: "6px",
+    marginRight: "20px",
+    alignSelf: "flex-start",
   },
   sectionMobile: {
     display: "flex",
