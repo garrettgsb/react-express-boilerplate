@@ -2,12 +2,8 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import  { Redirect } from 'react-router-dom';
 
-
-
-
 const listeners = [];
 let initialLoad = false;
-
 
 let state = {
   users: [],
@@ -102,13 +98,12 @@ export default function useAppData() {
         vid: props.id,
         id: res.data,
         name: props.name,
-        avatar_url: null
+        avatar_url: props.avatar_url
       }
-        return {...state, basket:[...state.basket, veg]}
-      })
+      return {...state, basket:[...state.basket, veg]}
     })
-  }
-
+  })
+}
 
   //remove break when we prevent from adding multiple ids of the same veg. 
   const deleteVegFromCart = function(props) {
@@ -127,12 +122,9 @@ export default function useAppData() {
     }) 
   }
 
-    
   const markComplete = function (index) {
     setState({...state, maintenance:[...state.maintenance, index], harvest:[...state.harvest, index]})
-
   }
-
 
   return {
     state,
@@ -144,9 +136,6 @@ export default function useAppData() {
     setState
   };
 }
-
-
-
 
 
 // deleteVegCart function 
