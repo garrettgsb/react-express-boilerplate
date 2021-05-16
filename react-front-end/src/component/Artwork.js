@@ -44,20 +44,19 @@ export default function Artwork(props) {
         <CardActions>
           <IconButton
             size="small"
-            color="primary"
-            onClick={() => props.onClick(props.id)}
-            className={{ root: classes.editDeleteButtons }}
+            // color="primary"
+            onClick={() => props.onEdit(props.id)}
+            className={classes.editButton}
           >
-            <DeleteOutlineIcon />
+            <EditOutlinedIcon />
           </IconButton>
           <IconButton
             size="small"
-            color="primary"
-            onClick={() => props.onEdit(props.id)}
-            classes={{ root: classes.editDeleteButtons }}
-            style={{ minWidth: "10px" }}
+            // color="primary"
+            onClick={() => props.onClick(props.id)}
+            className={classes.deleteButton}
           >
-            <EditOutlinedIcon />
+            <DeleteOutlineIcon />
           </IconButton>
         </CardActions>
       )}

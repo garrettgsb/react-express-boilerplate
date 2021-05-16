@@ -34,6 +34,16 @@ const useStyles = makeStyles({
     minWidth: "5px",
     Width: "10px",
   },
+  deleteButton: {
+    "&:hover": {
+      color: "red",
+    },
+  },
+  editButton: {
+    "&:hover": {
+      color: "green",
+    },
+  },
 });
 
 export { useStyles };
