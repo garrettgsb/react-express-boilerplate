@@ -5,18 +5,26 @@ const useStyles = makeStyles({
     maxWidth: 550,
     height: "auto",
     transition: "transform .2s" /* Animation */,
+    display: "flex",
+    flexDirection: "column",
+    // alignItems: "center",
+    // justifyContent: "center",
 
     "&:hover": {
-      opacity: 0.9,
+      opacity: 0.8,
       transform: "scale(1.03)",
+      background: "#C9A1BE",
       // "z-index": "9999",
     },
   },
   media: {
+    // border: "1px solid red",
     height: 350,
   },
   text: {
-    color: "lavender",
+    width: "100%",
+    height: "100%",
+    color: "white",
     fontSize: 35,
     position: "absolute",
     top: "50%",
@@ -24,10 +32,14 @@ const useStyles = makeStyles({
     transform: "translate(-50%, -50%)",
     textAlign: "center",
     opacity: 0,
+    alignSelf: "center",
+    justifySelf: "center",
+    paddingTop: "40%",
+    // border: "1px solid red",
 
     "&:hover": {
-      background: "black",
-      opacity: 0.7,
+      // background: "#B9A1BE",
+      opacity: 1,
     },
   },
   editDeleteButtons: {
