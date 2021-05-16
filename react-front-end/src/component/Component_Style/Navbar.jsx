@@ -3,6 +3,8 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   navbar_container: {
     width: "100%",
+    zIndex: "5",
+    position: "fixed",
   },
   grow: {
     flexGrow: 1,
@@ -13,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     // display: "flex",
     justifyContent: "space-between",
+    zIndex: "100",
   },
   search_container: {
     display: "flex",
