@@ -1,8 +1,27 @@
 import { fade, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  navbar_container: {
+    width: "100%",
+  },
   grow: {
     flexGrow: 1,
+    top: 0,
+    position: "fixed",
+    width: "100%",
+  },
+  toolbar: {
+    // display: "flex",
+    justifyContent: "space-between",
+  },
+  search_container: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  nav_buttons_container: {
+    // border: "1px solid lavender",
+    alignSelf: "center",
   },
   menuButton: {
     marginRight: theme.spacing(2),

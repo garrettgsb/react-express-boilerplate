@@ -20,70 +20,6 @@ import SearchBar from "./SearchPage";
 import { useStyles } from "./Component_Style/Navbar.jsx";
 import ExploreIcon from "@material-ui/icons/Explore";
 
-// const useStyles = makeStyles((theme) => ({
-//   grow: {
-//     flexGrow: 1,
-//   },
-//   menuButton: {
-//     marginRight: theme.spacing(2),
-//   },
-//   title: {
-//     display: "none",
-//     [theme.breakpoints.up("sm")]: {
-//       display: "block",
-//     },
-//   },
-//   search: {
-//     position: "relative",
-//     borderRadius: theme.shape.borderRadius,
-//     backgroundColor: fade(theme.palette.common.white, 0.15),
-//     "&:hover": {
-//       backgroundColor: fade(theme.palette.common.white, 0.25),
-//     },
-//     marginRight: theme.spacing(2),
-//     marginLeft: 0,
-//     width: "100%",
-//     [theme.breakpoints.up("sm")]: {
-//       marginLeft: theme.spacing(3),
-//       width: "auto",
-//     },
-//   },
-//   searchIcon: {
-//     padding: theme.spacing(0, 2),
-//     height: "100%",
-//     position: "absolute",
-//     pointerEvents: "none",
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-//   inputRoot: {
-//     color: "inherit",
-//   },
-//   inputInput: {
-//     padding: theme.spacing(1, 1, 1, 0),
-//     // vertical padding + font size from searchIcon
-//     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-//     transition: theme.transitions.create("width"),
-//     width: "100%",
-//     [theme.breakpoints.up("md")]: {
-//       width: "20ch",
-//     },
-//   },
-//   sectionDesktop: {
-//     display: "none",
-//     [theme.breakpoints.up("md")]: {
-//       display: "flex",
-//     },
-//   },
-//   sectionMobile: {
-//     display: "flex",
-//     [theme.breakpoints.up("md")]: {
-//       display: "none",
-//     },
-//   },
-// }));
-
 export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -192,10 +128,11 @@ export default function PrimarySearchAppBar(props) {
   );
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="static" style={{ background: "#2B2C3B" }}>
-        <Toolbar>
-          {/* <IconButton
+    <div className={classes.navbar_container}>
+      <div className={classes.grow}>
+        <AppBar position="static" style={{ background: "#2B2C3B" }}>
+          <Toolbar className={classes.toolbar}>
+            {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
@@ -203,126 +140,133 @@ export default function PrimarySearchAppBar(props) {
           >
             <MenuIcon />
           </IconButton> */}
+            <div className={classes.search_container}>
+              {/* inkedin REACT ROUTER LINK TO INDEX */}
+              <Link to="/" style={{ textDecoration: "none", color: "#B9A1BE" }}>
+                <Typography className={classes.title} variant="h6" noWrap>
+                  <img
+                    className={classes.logo}
+                    src="../images/Inkedin_squid.png"
+                    alt="Inkedin Squid"
+                  />
+                </Typography>
+              </Link>
 
-          {/* inkedin REACT ROUTER LINK TO INDEX */}
-          <Link to="/" style={{ textDecoration: "none", color: "#B9A1BE" }}>
-            <Typography className={classes.title} variant="h6" noWrap>
-              <img
-                className={classes.logo}
-                src="../images/Inkedin_squid.png"
-                alt="Inkedin Squid"
-              />
-            </Typography>
-          </Link>
-
-          <div>
-            {/* <div className={classes.searchIcon}>
+              <div>
+                {/* <div className={classes.searchIcon}>
               <SearchIcon />
             </div> */}
-            <SearchBar filteredSearch={props.filteredSearch} />
-          </div>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            {/* REACT ROUTER LINK TO LOGIN */}
-            {props.activeUser === 0 && (
-              <Link
-                to="/login"
-                style={{ textDecoration: "none", color: "#B9A1BE" }}
-              >
-                <IconButton aria-label="show 4 new mails" color="inherit">
-                  {/* <Badge badgeContent={4} color="secondary">
+                <SearchBar filteredSearch={props.filteredSearch} />
+              </div>
+            </div>
+
+            <div className={classes.nav_buttons_container}>
+              <div className={classes.sectionDesktop}>
+                {/* REACT ROUTER LINK TO LOGIN */}
+                {props.activeUser === 0 && (
+                  <Link
+                    to="/login"
+                    style={{ textDecoration: "none", color: "#B9A1BE" }}
+                  >
+                    <IconButton aria-label="show 4 new mails" color="inherit">
+                      {/* <Badge badgeContent={4} color="secondary">
                   <MailIcon />
                 </Badge> */}
-                  Login
-                </IconButton>
-              </Link>
-            )}
+                      Login
+                    </IconButton>
+                  </Link>
+                )}
 
-            {props.activeUser !== 0 && (
-              <Link
-                to="/"
-                onClick={() => {
-                  props.onLogin(0);
-                }}
-                style={{ textDecoration: "none", color: "#B9A1BE" }}
-              >
-                <IconButton aria-label="show 4 new mails" color="inherit">
-                  {/* <Badge badgeContent={4} color="secondary">
+                {props.activeUser !== 0 && (
+                  <Link
+                    to="/"
+                    onClick={() => {
+                      props.onLogin(0);
+                    }}
+                    style={{ textDecoration: "none", color: "#B9A1BE" }}
+                  >
+                    <IconButton aria-label="show 4 new mails" color="inherit">
+                      {/* <Badge badgeContent={4} color="secondary">
                   <MailIcon />
                 </Badge> */}
-                  Logout
+                      Logout
+                    </IconButton>
+                  </Link>
+                )}
+
+                {/* REACT ROUTER LINK TO MESSAGES */}
+                <Link
+                  to="/messages"
+                  style={{ textDecoration: "none", color: "#B9A1BE" }}
+                >
+                  <IconButton aria-label="show 4 new mails" color="inherit">
+                    <Badge badgeContent={4} color="secondary">
+                      <MailIcon />
+                    </Badge>
+                  </IconButton>
+                </Link>
+
+                {/* REACT ROUTER LINK TO SHOWCASE */}
+                <Link
+                  to="/"
+                  style={{ textDecoration: "none", color: "#B9A1BE" }}
+                >
+                  <IconButton
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                  >
+                    <Badge color="secondary">
+                      <ExploreIcon />
+                    </Badge>
+                  </IconButton>
+                </Link>
+
+                {/* REACT ROUTER LINK TO JOBS */}
+                <Link
+                  to="/job_board"
+                  style={{ textDecoration: "none", color: "#B9A1BE" }}
+                >
+                  <IconButton
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                  >
+                    <Badge color="secondary">
+                      <BrushTwoToneIcon />
+                    </Badge>
+                  </IconButton>
+                </Link>
+
+                {/* REACT ROUTER LINK TO PORTFOLIO */}
+                <Link
+                  to={`/portfolio/${props.activeUser}`}
+                  style={{ textDecoration: "none", color: "#B9A1BE" }}
+                >
+                  <IconButton
+                    edge="end"
+                    aria-label="account of current user"
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                </Link>
+              </div>
+              <div className={classes.sectionMobile}>
+                <IconButton
+                  aria-label="show more"
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
+                  color="inherit"
+                >
+                  <MoreIcon />
                 </IconButton>
-              </Link>
-            )}
-
-            {/* REACT ROUTER LINK TO MESSAGES */}
-            <Link
-              to="/messages"
-              style={{ textDecoration: "none", color: "#B9A1BE" }}
-            >
-              <IconButton aria-label="show 4 new mails" color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-            </Link>
-
-            {/* REACT ROUTER LINK TO SHOWCASE */}
-            <Link to="/" style={{ textDecoration: "none", color: "#B9A1BE" }}>
-              <IconButton
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge color="secondary">
-                  <ExploreIcon />
-                </Badge>
-              </IconButton>
-            </Link>
-
-            {/* REACT ROUTER LINK TO JOBS */}
-            <Link
-              to="/job_board"
-              style={{ textDecoration: "none", color: "#B9A1BE" }}
-            >
-              <IconButton
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge color="secondary">
-                  <BrushTwoToneIcon />
-                </Badge>
-              </IconButton>
-            </Link>
-
-            {/* REACT ROUTER LINK TO PORTFOLIO */}
-            <Link
-              to={`/portfolio/${props.activeUser}`}
-              style={{ textDecoration: "none", color: "#B9A1BE" }}
-            >
-              <IconButton
-                edge="end"
-                aria-label="account of current user"
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </Link>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+              </div>
+            </div>
+          </Toolbar>
+        </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </div>
     </div>
   );
 }
