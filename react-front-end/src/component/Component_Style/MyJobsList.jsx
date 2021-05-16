@@ -14,6 +14,14 @@ const useStyles = makeStyles({
       color: "green",
     },
   },
+  titleRowText: {
+    fontWeight: "900",
+    fontSize: "18px",
+    textDecoration: "underline",
+  },
+  titleRow: {
+    // border: "1px solid grey",
+  },
 });
 
 export { useStyles };
