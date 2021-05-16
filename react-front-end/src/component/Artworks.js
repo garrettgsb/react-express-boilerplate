@@ -23,7 +23,6 @@ import { useStyles } from "./Component_Style/Artworks.jsx";
 
 export default function Artworks(props) {
   const classes = useStyles();
-
   function FormRow() {
     return (
       <React.Fragment>
@@ -41,10 +40,13 @@ export default function Artworks(props) {
                   id={artpiece.id}
                   title={artpiece.title}
                   image={artpiece.img_link}
-                  description={artpiece.descrip}
+                  // description={artpiece.descrip}
                   price={artpiece.price}
-                  forSale={artpiece.for_sale}
-                  url={artpiece.project_link}
+                  // forSale={artpiece.for_sale}
+                  // url={artpiece.project_link}
+                  // authorUsername={artpiece.username}
+                  // authorFirstName={artpiece.first_name}
+                  // authorSecondName={artpiece.second_name}
                   author_id={artpiece.author_id}
                   activeUser={props.activeUser}
                   onClick={props.onDelete}

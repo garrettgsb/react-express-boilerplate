@@ -30,7 +30,7 @@ export default function User(props) {
   let { id } = useParams();
 
   useEffect(() => {
-    axios.get(`/api/artworks/users/${id}`).then((res) => {
+    axios.get(`/api/users/${id}/artworks`).then((res) => {
       setState({ ...state, portfolio: res.data.portfolio });
     });
   }, [state.showAdd, state.showEdit, state.artID, id]);

@@ -48,7 +48,7 @@ export default function useApplicationData() {
 
   const setActiveUser = (userID) => {
     Promise.all([
-      axios.get(`/api/user/${userID}/jobs`),
+      axios.get(`/api/users/${userID}/jobs`),
       axios.get(`/api/friends/${userID}`),
     ]).then((all) => {
       dispatch({
@@ -77,7 +77,7 @@ export default function useApplicationData() {
   };
 
   const setUserJobs = () => {
-    Promise.all([axios.get(`/api/user/${state.activeUser}/jobs`)]).then(
+    Promise.all([axios.get(`/api/users/${state.activeUser}/jobs`)]).then(
       (all) => {
         dispatch({
           type: SET_ACTIVE_USER_JOBS,
