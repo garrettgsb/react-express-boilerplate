@@ -19,8 +19,9 @@ export default function ConversationList(props) {
       <ConversationSearch />
       {props.conversations.map((conversation) => (
         <ConversationListItem
-          key={conversation.username}
+          key={conversation.friends_id}
           data={conversation}
+          activeUser={props.activeUser}
           onClick={() =>
             props.setActiveConversation([
               conversation.first_id,

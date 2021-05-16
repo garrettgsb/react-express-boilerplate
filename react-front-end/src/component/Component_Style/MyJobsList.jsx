@@ -22,6 +22,10 @@ const useStyles = makeStyles({
   titleRow: {
     // border: "1px solid grey",
   },
+  tableContainer: {
+    marginLeft: "3%",
+    marginRight: "3%",
+  },
 });
 
 export { useStyles };

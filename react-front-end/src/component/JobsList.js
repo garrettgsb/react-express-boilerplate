@@ -29,10 +29,11 @@ export default function BasicTable(props) {
   const [editShow, setEditShow] = useState(false);
   const [jobId, setJobId] = useState();
 
+  const NO_ACTIVE_USER = 0;
+
   const jobForm = () => {
     setShow(true);
   };
-  const NO_ACTIVE_USER = 0;
 
   const onEdit = (id) => {
     setEditShow(true);
@@ -60,6 +61,11 @@ export default function BasicTable(props) {
       setUserJobs();
       setShow(false);
     });
+  };
+
+  const onCancel = () => {
+    setShow(false);
+    setEditShow(false);
   };
 
   const classes = useStyles();
@@ -120,10 +126,18 @@ export default function BasicTable(props) {
         <EmptyJobs onAdd={jobForm} />
       )}
       {state.activeUser !== NO_ACTIVE_USER && show && (
-        <FormJobs onSubmit={onSubmit} activeUser={state.activeUser} />
+        <FormJobs
+          onSubmit={onSubmit}
+          onCancel={onCancel}
+          activeUser={state.activeUser}
+        />
       )}
       {state.activeUser !== NO_ACTIVE_USER && editShow && (
-        <FormJobs onSubmit={onEditSubmit} activeUser={state.activeUser} />
+        <FormJobs
+          onSubmit={onEditSubmit}
+          onCancel={onCancel}
+          activeUser={state.activeUser}
+        />
       )}
     </div>
   );
