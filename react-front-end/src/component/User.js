@@ -37,13 +37,11 @@ export default function User(props) {
     showAdd: false,
     showEdit: false,
     artID: 0,
-    portfolio: {},
   });
 
   const classes = useStyles();
 
   const bull = <span className={classes.bullet}>•</span>;
-
 
   let { id } = useParams();
 
@@ -100,12 +98,6 @@ export default function User(props) {
 
         {/* USER INFO */}
         <Grid item xs={12} sm={6} md={4}>
-
-          {/* <div>{state.portfolio && state.portfolio[0].username}</div>
-          <div>{state.portfolio && state.portfolio[0].first_name}</div>
-          <div>{state.portfolio && state.portfolio[0].last_name}</div>
-          <div>{state.portfolio && state.portfolio[0].cool_fact}</div> */}
-
           <Card>
             <CardContent className={classes.rootUserInfo}>
               <Typography
@@ -127,13 +119,6 @@ export default function User(props) {
                   {state.portfolio && state.portfolio[0].username}
                 </Typography>
               </div>
-              {/* <div>
-                <Typography className={classes.pos} color="textSecondary">
-                  {state.portfolio && state.portfolio[0].first_name}
-                  &nbsp;
-                  {state.portfolio && state.portfolio[0].last_name}
-                </Typography>
-              </div> */}
               <div>
                 <Typography
                   // variant="body2"
@@ -148,12 +133,6 @@ export default function User(props) {
               <Button size="small">Learn More</Button>
             </CardActions>
           </Card>
-
-          <div>{state.portfolio[0] && state.portfolio[0].username}</div>
-          <div>{state.portfolio[0] && state.portfolio[0].first_name}</div>
-          <div>{state.portfolio[0] && state.portfolio[0].last_name}</div>
-          <div>{state.portfolio[0] && state.portfolio[0].cool_fact}</div>
-
         </Grid>
 
         {/* ADD ARTWORK BUTTON */}
