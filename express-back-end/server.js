@@ -45,7 +45,7 @@ App.get("/api/users", (req, res) => {
 });
 
 // THIS GETS A USERs ARTWORKS
-App.get("/api/artworks/users/:id", (req, res) => {
+App.get("/api/users/:id/artworks", (req, res) => {
   const data = db
     .query(
       `
@@ -64,22 +64,43 @@ App.get("/api/artworks/users/:id", (req, res) => {
     });
 });
 
+// THIS GETS A USERs JOBS
+App.get("/api/users/:id/jobs", (req, res) => {
+  const data = db
+    .query(
+      `
+    SELECT * 
+    FROM users 
+    JOIN jobs ON users.id = user_id
+    WHERE users.id = $1
+    ORDER BY jobs.id DESC;
+    `,
+      [req.params.id]
+    )
+    .then((response) => {
+      res.json({
+        userJobs: response.rows,
+      });
+    });
+});
+
 // ------------------------------------- ARTWORKS
 
 App.get("/api/artworks", (req, res) => {
   const data = db
-    .query("SELECT * FROM artworks ORDER BY id DESC")
+    .query(
+      `
+    SELECT *, users.id as user_id
+    FROM users 
+    JOIN artworks ON users.id = author_id
+    ORDER BY artworks.id DESC;
+    `
+    )
     .then((response) => {
       res.json({
         artworks: response.rows,
       });
     });
-});
-
-App.get("/api/artworks/search/:input", (req, res) => {
-  const data = db.query(`
-    SELECT * FROM artworks
-  `);
 });
 
 App.get("/api/artworks/:id", (req, res) => {
@@ -192,6 +213,8 @@ App.put("/api/friends/", (req, res) => {
     });
 });
 
+// ------------------------------------- JOBS
+
 App.get("/api/jobs", (req, res) => {
   const data = db
     .query(
@@ -203,26 +226,6 @@ App.get("/api/jobs", (req, res) => {
     .then((response) => {
       res.json({
         jobs: response.rows,
-      });
-    });
-});
-
-// THIS GETS A USERs JOBS
-App.get("/api/user/:id/jobs", (req, res) => {
-  const data = db
-    .query(
-      `
-    SELECT * 
-    FROM users 
-    JOIN jobs ON users.id = user_id
-    WHERE users.id = $1
-    ORDER BY jobs.id DESC;
-    `,
-      [req.params.id]
-    )
-    .then((response) => {
-      res.json({
-        userJobs: response.rows,
       });
     });
 });

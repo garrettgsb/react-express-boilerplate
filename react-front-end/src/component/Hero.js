@@ -1,5 +1,4 @@
 import React from "react";
-import Banner from "react-js-banner";
 
 import LazyHero from "react-lazy-hero";
 // import { makeStyles } from "@material-ui/core/styles";
