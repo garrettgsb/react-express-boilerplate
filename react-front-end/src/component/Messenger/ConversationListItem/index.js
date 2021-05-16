@@ -8,7 +8,10 @@ export default function ConversationListItem(props) {
     shave(".conversation-snippet", 20);
   });
 
-  const { username } = props.data;
+  let username = "";
+  props.data.first_id === props.activeUser
+    ? (username = props.data.second_username)
+    : (username = props.data.first_username);
 
   return (
     <div className="conversation-list-item" onClick={props.onClick}>

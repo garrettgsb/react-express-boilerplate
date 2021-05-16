@@ -153,11 +153,12 @@ App.get("/api/friends/:id", (req, res) => {
   const data = db
     .query(
       `SELECT 
+      friends.id as friends_id,
       first_user.username as first_username,
       first_user.id as first_id,
       first_user.first_name as first_fname,
       first_user.last_name as first_lname, 
-      second_user.username as username,
+      second_user.username as second_username,
       second_user.id as second_id,
       second_user.first_name as second_fname,
       second_user.last_name as second_lname
