@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import useAppData from "../hooks/useAppData";
 import {
   BrowserRouter as Router,
   Switch,
@@ -48,44 +49,66 @@ const useStyles = makeStyles({
 export default function Maintenance() {
   const classes = useStyles();
   const [tasks, setTasks] = useState([]);
-  let { id } = useParams();
+  // const { buildTasks } = useAppData();
+  // let { id } = useParams();
+  const { state, markComplete } = useAppData();
 
+
+  
   useEffect(() => {
-    getPlotTasks(id)
-  }, [])
+    buildTasks(state.maintenance)
+  }, [state])
 
-  // get tasks per plots_vegs.
-  const getPlotTasks = function(plotID) {
-    return axios.get(`/api/plots_vegs/${plotID}`)
-    .then(res => {
-
-
-      setTasks(res.data)
-    })
-    .catch(err => console.log(err));
-  }
-
-   // repeats each of the watering tasks 10 times
-  const watering = function(tasks) {
-      const waterdays = []
+  // builds the tasks for the plots. Used in Maintenance.jsx
+  const buildTasks = function(tasks) {
+    const waterdays = []
+    let t = 1
+    if (tasks.length > 0) {
       tasks.map(x => {
         let name = x.name
         let time = x.water_time
         let i = 1
         while (i < 10) {
-          let obj = {name: [name], time: time*i}
-          waterdays.push(obj)
+          let waterObj = {name: [name], time: time*i}
+          waterdays.push(waterObj)
           i++
         }
       })
-      return waterdays.sort((a, b) => (a.time > b.time) ? 1 : -1);
+      while (t <= 10) {
+        if (t % 2 == 0) {
+          let fertilize = {name: 'Fertilize garden', time: 10*t/2}
+          waterdays.push(fertilize)
+        }
+        let weed = {name: "Weed beds", time: 7*t}
+        waterdays.push(weed)
+        t++;
+      }
+      const sorted = waterdays.sort((a, b) => (a.time > b.time) ? 1 : -1);
+      setTasks(sorted)
     }
-    
+  }
 
+
+  // get tasks per plots_vegs.
+  // const getPlotTasks = function(plotID) {
+  //   return axios.get(`/api/plots_vegs/${plotID}`)
+  //   .then(res => {
+  //     const temp = buildTasks(res.data)
+  //     setTasks(temp)
+  //   })
+  //   .catch(err => `console`.log(err));
+  // }
+  
+  const removeTask = function (name, time) {
+    const found = tasks.find(task => task.name === name && task.time === time);
+    const newTasks = tasks.filter(task => task !== found);
+    setTasks(newTasks);
+  }
+    
   return (
     <Card className={classes.root}>
       <CardContent className={classes.twidth}>
-        <h2>Watering Schedule</h2>
+        <h2>Garden Chores</h2>
         <table className={classes.twidth}>
           <thead >
             <tr >
@@ -95,17 +118,19 @@ export default function Maintenance() {
             </tr>
           </thead>
           <tbody>
-          {watering(tasks).map(x => 
+          {tasks.map(x => 
           <tr>
-          <td>
+            <td>
               {x.name}
             </td>
             <td>
-            {x.time}
+              {x.time}
             </td>
             <td>
             <CardActions>
-              <Button size="small" variant="contained" color="primary">Complete</Button>
+              <Button size="small" 
+              onClick={() => removeTask(x.name, x.time)} 
+              variant="contained" color="primary">Complete</Button>
             </CardActions>
             </td>
           </tr>

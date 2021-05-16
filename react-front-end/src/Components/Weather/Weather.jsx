@@ -19,7 +19,6 @@ export default function Weather() {
     const fetchWeather = async () => {
       await axios.get(weatherUrlCF)
         .then((response) => {
-          console.log(response);
           setWeatherData(response.data.daily);
         });
     }

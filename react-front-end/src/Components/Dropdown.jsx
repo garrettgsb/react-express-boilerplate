@@ -21,8 +21,6 @@ export default function NestedList() {
   const [open, setOpen] = React.useState(true);
   const { state } = useAppData();
 
-  console.log('state', state.plots)
-
   const handleClick = () => {
     setOpen(!open);
   };
@@ -57,7 +55,7 @@ export default function NestedList() {
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       {/* Map over plots to link all plots */}
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={!open} timeout="auto" unmountOnExit>
         {state.plots.map(x => 
         <List component="div" disablePadding>
           <ListItem button className="nested">

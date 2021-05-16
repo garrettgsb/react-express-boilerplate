@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import useAppData from "../hooks/useAppData";
 import './Planting.scss';
 
 const moment = require('moment');
@@ -50,22 +51,29 @@ const useStyles = makeStyles({
 
 export default function Planting() {
   const classes = useStyles();
-  const [tasks, setTasks] = useState([]);
+  const [plants, setPlants] = useState([]);
   let { id } = useParams();
+  const { state, markComplete } = useAppData();
+
 
   useEffect(() => {
-    getPlotTasks(id)
-  }, [])
+    getPlotVeg(id)
+  }, []);
 
   // get tasks per plots_vegs.
-  const getPlotTasks = function (plotID) {
+  const getPlotVeg = function (plotID) {
     return axios.get(`/api/plots_vegs/${plotID}`)
       .then(res => {
-        console.log("res.data / maintenance", res.data)
-
-        setTasks(res.data)
+        setPlants(res.data)
+        
       })
       .catch(err => console.log(err));
+  }
+
+  const removePlanting = function (name) {
+    const found = plants.find(task => task.name === name );
+    const newPlants = plants.filter(task => task !== found);
+    setPlants(newPlants);
   }
 
   return (
@@ -82,7 +90,7 @@ export default function Planting() {
             </tr>
           </thead>
           <tbody className={classes.body}>
-            {tasks.map(x =>
+            {plants.map((x, i) =>
               <tr>
                 <td >
                   <img
@@ -103,7 +111,8 @@ export default function Planting() {
                       edge="start"
                       aria-label="complete"
                       className={classes.complete_btn}
-                      color="secondary">
+                      color="secondary"
+                      onClick={() => {markComplete(plants[i]); removePlanting(x.name)}}>
                       <CheckCircleOutlinedIcon />
                     </IconButton>
                   </CardActions>
