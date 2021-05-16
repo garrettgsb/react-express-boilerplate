@@ -38,8 +38,8 @@ const useStyles = makeStyles({
     // border: "1px solid red",
 
     "&:hover": {
-      // background: "#B9A1BE",
-      opacity: 1,
+      background: "black",
+      opacity: 0.7,
     },
   },
   editDeleteButtons: {

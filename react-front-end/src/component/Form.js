@@ -156,21 +156,8 @@ export default function BasicTextFields(props) {
         placeholder="Project URL"
       />
       <br />
-      {/* <FormControlLabel
-        control={
-          <Checkbox
-            value={state.forSale}
-            onChange={(e) => setState({ ...state, forSale: e.target.value })}
-            name="For Sale"
-          />
-        }
-        label="For Sale"
-      />
-      <br /> */}
-      <br />
       <TextField
         id="outlined-basic"
-        multiline={true}
         rows={1}
         variant="outlined"
         size="small"
@@ -181,6 +168,17 @@ export default function BasicTextFields(props) {
         placeholder="Price"
       />
       <br />
+      {/* <FormControlLabel
+          control={
+            <Checkbox
+              value={state.forSale}
+              onChange={(e) => setState({ ...state, forSale: e.target.value })}
+              name="For Sale"
+            />
+          }
+          label="For Sale"
+        />
+        <br /> */}
 
       <button type="submit" value="Submit" onClick={() => validate()}>
         Submit
