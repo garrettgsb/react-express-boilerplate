@@ -23,6 +23,7 @@
   font-size: 14px;
   height: 40px;
   background: none;
+  width: 100%;
 }
 
 .compose-input::placeholder {

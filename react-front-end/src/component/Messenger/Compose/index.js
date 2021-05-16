@@ -11,8 +11,8 @@ export default function Compose(props) {
   };
 
   return (
-    <div className="compose">
-      <form onSubmit={(event) => submitForm(event)}>
+    <div>
+      <form className="compose" onSubmit={(event) => submitForm(event)}>
         <input
           type="text"
           className="compose-input"
