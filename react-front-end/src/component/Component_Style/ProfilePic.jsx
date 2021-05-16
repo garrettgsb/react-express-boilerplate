@@ -1,6 +1,20 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  rootLeftButton: {
+    maxWidth: 345,
+  },
+  mediaLeftButton: {
+    height: 0,
+    paddingTop: "56.25%", // 16:9
+  },
+  expandLeftButton: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
   root: {
     maxWidth: "550",
     height: "auto",
@@ -21,16 +35,13 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "Row",
     justifyContent: "space-between",
-    alignContent: "space-between",
-  },
-  button: {
-    justifySelf: "flex-end",
-    width: "30%",
+    paddingTop: "2px",
+    paddingBottom: "0px",
+    // alignContent: "space-between",
   },
   username: {
-    justifySelf: "flex-start",
-    width: "30%",
+    fontSize: 24,
   },
-});
+}));
 
 export { useStyles };

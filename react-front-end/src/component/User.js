@@ -129,9 +129,11 @@ export default function User(props) {
                 </Typography>
               </div>
             </CardContent>
-            <CardActions>
-              <Button size="small">Learn More</Button>
-            </CardActions>
+            {/* <CardActions>
+              <Button size="small" className={classes.websiteLink}>
+                {state.portfolio && state.portfolio[0].username}'s Website
+              </Button>
+            </CardActions> */}
           </Card>
         </Grid>
 

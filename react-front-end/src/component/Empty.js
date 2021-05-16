@@ -1,10 +1,13 @@
 import React from "react";
+import { useStyles } from "./Component_Style/Empty.jsx";
 
 const Empty = (props) => {
+  const classes = useStyles();
+
   return (
-    <main className="appointment__add">
+    <main className={classes.buttonContainer}>
       <img
-        className="appointment__add-button"
+        className={classes.button}
         src="../images/add.png"
         alt="Add"
         onClick={props.onAdd}

@@ -1,0 +1,15 @@
+add friend button
+
+placement ~~> user card, or user portfolio
+
+icon for add friend, onClick {
+  set state to add friend to database
+
+  either
+  1. go to messeages
+  2. change color of icon and do nothing
+  3. go to selected profile
+  
+  then
+  useHistory to link to (possibly chat)
+}
