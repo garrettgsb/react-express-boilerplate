@@ -92,7 +92,7 @@ export default function VegetableCard(props) {
         </div>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={onClick}> 
           Add to Basket
         </Button>
       </CardActions>
