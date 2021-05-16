@@ -21,8 +21,14 @@ export default function Planting() {
   const getPlotVeg = function (plotID) {
     return axios.get(`/api/plots/${plotID}`)
       .then(res => {
-        setPlants(res.data)
-        
+        console.log('planted res.data', res.data)
+        // console.log('parseInt(id)', parseInt(id))
+        // console.log('planted res.data[0].planted_date', res.data[0].planted_date)
+
+
+        const notPlanted = res.data.filter(plant => plant.plot_id === parseInt(id) && plant.planted_date === null);
+        // console.log('notPlanted', notPlanted)
+        setPlants(notPlanted)
       })
       .catch(err => console.log(err));
   }
@@ -33,7 +39,7 @@ export default function Planting() {
     setPlants(newPlants);
   }
 
-  // console.log('plants', plants)
+  console.log('plants', plants)
 
   return (
     <Card className="root">

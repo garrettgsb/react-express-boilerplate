@@ -37,9 +37,10 @@ export default function useAppData() {
         axios.get(`/api/plots`),
         axios.get(`/api/plots_vegs`),
         axios.get(`/api/cart`),
+        axios.get(`/api/plots_vegs`),
         axios.get(`/api/plots_vegs`)
       ]).then((all) => {
-        const [users, allVeg, plotsList, plotsVegsList, baskets, harvest] = all
+        const [users, allVeg, plotsList, plotsVegsList, baskets, maintenanceList, harvestList] = all
         setState(prev => ({
           ...prev,
           users: users.data,
@@ -47,7 +48,8 @@ export default function useAppData() {
           plots: plotsList.data,
           plotsVegs: plotsVegsList.data,
           basket: baskets.data,
-          harvest: harvest.data
+          maintenance: maintenanceList.data,
+          harvest: harvestList.data
         }));
       });
     }
@@ -134,7 +136,7 @@ export default function useAppData() {
     return axios.post(`/api/plots_vegs/${id}`)
     .then((res) => {
       console.log('res from plant function', res.data)
-      setState({...state, harvest:[...state.harvest, ...res.data]})
+      setState({...state, maintenance:[...state.harvest, ...res.data], harvest:[...state.harvest, ...res.data]})
     }) 
   }
 

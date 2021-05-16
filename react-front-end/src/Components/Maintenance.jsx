@@ -52,6 +52,8 @@ export default function Maintenance() {
   // const { buildTasks } = useAppData();
   // let { id } = useParams();
   const { state, markComplete } = useAppData();
+  console.log('state.maintenance', state.maintenance)
+  const { id } = useParams();
 
 
   
@@ -62,9 +64,10 @@ export default function Maintenance() {
   // builds the tasks for the plots. Used in Maintenance.jsx
   const buildTasks = function(tasks) {
     const waterdays = []
+    const myTasks = tasks.filter(plant => plant.plot_id === parseInt(id) && plant.planted_date !== null);
     let t = 1
-    if (tasks.length > 0) {
-      tasks.map(x => {
+    if (myTasks.length > 0) {
+      myTasks.map(x => {
         let name = x.name
         let time = x.water_time
         let i = 1

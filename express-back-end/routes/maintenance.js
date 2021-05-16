@@ -83,7 +83,6 @@ router.get('/api/plots/:id', (req, res) => {
   return db.query(`SELECT * FROM vegetables 
     JOIN plots_vegs ON vegetables.id=plots_vegs.vegetable_id WHERE plot_id = $1::integer`, [plotID])
     .then(data => {
-      // console.log('I am inside of the router.get', res.rows)
       res.status(200).json(data.rows)
     })
     .catch(err => console.log(err));
@@ -91,9 +90,7 @@ router.get('/api/plots/:id', (req, res) => {
 
 router.post('/api/plots_vegs/:id', (req, res) => {
   const plot_vegID = req.params.id
-  // console.log('req.params.id', plot_vegID)
   const now = moment();
-  // console.log('inside maintenance route ot update plant dated with', now)
   return db.query(`UPDATE plots_vegs 
     SET planted_date = $1::timestamp 
     WHERE plots_vegs.id = $2::integer
@@ -105,9 +102,7 @@ router.post('/api/plots_vegs/:id', (req, res) => {
       `, [plot_vegID])
     })
     .then(data => {
-      // console.log('I am inside of the router.get', res.rows)
       res.status(200).json(data.rows)
-      // console.log('data.rows', data.rows)
     })
     .catch(err => console.log(err));
 });
