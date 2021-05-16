@@ -51,29 +51,31 @@ const useStyles = makeStyles({
 
 export default function Planting() {
   const classes = useStyles();
-  const [tasks, setTasks] = useState([]);
+  const [plants, setPlants] = useState([]);
   let { id } = useParams();
-  const { state } = useAppData();
+  const { state, markComplete } = useAppData();
 
   console.log('plating state', state)
 
   useEffect(() => {
     getPlotVeg(id)
-  }, [state]);
+  }, []);
 
   // get tasks per plots_vegs.
   const getPlotVeg = function (plotID) {
     return axios.get(`/api/plots_vegs/${plotID}`)
       .then(res => {
-        setTasks(res.data)
+        setPlants(res.data)
         
       })
       .catch(err => console.log(err));
   }
 
-  // const markComplete = function () {
-
-  // }
+  const removePlanting = function (name) {
+    const found = plants.find(task => task.name === name );
+    const newPlants = plants.filter(task => task !== found);
+    setPlants(newPlants);
+  }
 
   return (
     <Card className={classes.root}>
@@ -89,7 +91,7 @@ export default function Planting() {
             </tr>
           </thead>
           <tbody className={classes.body}>
-            {tasks.map(x =>
+            {plants.map((x, i) =>
               <tr>
                 <td >
                   <img
@@ -110,7 +112,8 @@ export default function Planting() {
                       edge="start"
                       aria-label="complete"
                       className={classes.complete_btn}
-                      color="secondary">
+                      color="secondary"
+                      onClick={() => {markComplete(plants[i]); removePlanting(x.name)}}>
                       <CheckCircleOutlinedIcon />
                     </IconButton>
                   </CardActions>
