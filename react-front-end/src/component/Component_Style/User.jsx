@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
     // minWidth: 275,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-around",
+    // justifyContent: "space-around",
     justifyContent: "flex-start",
     alignItems: "flex-start",
     maxWidth: "550",
-    height: 350,
+    height: 388,
     background: "#696969",
     color: "lavender",
   },
@@ -54,6 +54,9 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     color: "lavender",
+  },
+  websiteLink: {
+    padding: "20px",
   },
 }));
 

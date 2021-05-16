@@ -40,7 +40,6 @@ export default function User(props) {
   });
 
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   const addArt = () => {
     setState({ ...state, addArt: true });
@@ -136,9 +135,11 @@ export default function User(props) {
                 </Typography>
               </div>
             </CardContent>
-            <CardActions>
-              <Button size="small">Learn More</Button>
-            </CardActions>
+            {/* <CardActions>
+              <Button size="small" className={classes.websiteLink}>
+                {state.portfolio && state.portfolio[0].username}'s Website
+              </Button>
+            </CardActions> */}
           </Card>
         </Grid>
 

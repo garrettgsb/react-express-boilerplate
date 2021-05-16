@@ -1,3 +1,18 @@
-// import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-// export default useStyles;
+const useStyles = makeStyles({
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+  },
+  button: {
+    width: "20%",
+    height: "auto",
+  },
+});
+
+export { useStyles };
