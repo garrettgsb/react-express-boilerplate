@@ -2,18 +2,17 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import  { Redirect } from 'react-router-dom';
 
-
-
 const listeners = [];
 let initialLoad = false;
-
 
 let state = {
   users: [],
   vegetables: [],
   plots: [],
   plotsVegs: [],
-  basket: []
+  basket: [],
+  maintenance: [],
+  harvest: []
 };
 
 const setState = function (newState) {
@@ -99,23 +98,21 @@ export default function useAppData() {
         vid: props.id,
         id: res.data,
         name: props.name,
-        avatar_url: null
+        avatar_url: props.avatar_url
       }
-
-        return {...state, basket:[...state.basket, veg]}
-      })
+      return {...state, basket:[...state.basket, veg]}
     })
-  }
+  })
+}
 
-
-//remove break when we prevent from adding multiple ids of the same veg. 
+  //remove break when we prevent from adding multiple ids of the same veg. 
   const deleteVegFromCart = function(props) {
     
     return axios.delete(`api/cart/${props.id}`)
     .then((res) => {
 
       let tempBasket = state.basket
-      for (let i = 0; i <tempBasket.length; i++){
+      for (let i = 0; i <tempBasket.length; i++) {
         if (tempBasket[i].id === props.id) {
           tempBasket.splice(i, 1)
           break;
@@ -124,7 +121,10 @@ export default function useAppData() {
       setState({...state, basket: tempBasket})
     }) 
   }
-  
+
+  const markComplete = function (index) {
+    setState({...state, maintenance:[...state.maintenance, index], harvest:[...state.harvest, index]})
+  }
 
   return {
     state,
@@ -132,11 +132,10 @@ export default function useAppData() {
     deleteVegFromCart,
     buildVegGarden,
     addPlot,
+    markComplete,
+    setState
   };
 }
-
-
-
 
 
 // deleteVegCart function 

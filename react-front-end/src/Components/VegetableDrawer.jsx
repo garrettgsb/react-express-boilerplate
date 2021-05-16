@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
-// import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -11,13 +10,11 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import axios from 'axios';
 import useAppData from "../hooks/useAppData";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,9 +33,6 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen
     }),
     marginRight: drawerWidth
-  },
-  title: {
-    flexGrow: 1
   },
   hide: {
     display: "block"
@@ -63,16 +57,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between"
   },
   ShoppingBasketIcon: {
-    padding: 1,
+    padding: '10px',
   },
   buildGardenButton: {
     marginTop: 500,
     marginBottom: -100,
     borderLeft: 150,
     borderRight: 150,
-  },
-  veggieButton: {
-    display: "block important"
   },
   content: {
     flexGrow: 1,
@@ -89,114 +80,97 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen
     }),
     marginRight: 0
+  },
+  avatar: {
+    maxWidth: '40px',
+    maxHeight: '40px',
+  },
+  name: {
+    marginLeft: '20px',
   }
 }));
 
 
-export default function VegetableDrawer(props){
-
+export default function VegetableDrawer(props) {
+  const classes = useStyles();
+  const theme = useTheme();
   const { state, deleteVegFromCart, buildVegGarden, addPlot } = useAppData()
 
   useEffect(() => {
   }, [state])
 
-  const {open, 
-      handleDrawerOpen, 
-      handleDrawerClose,
-      veg} = props
-
-    // axios request to get all the vegetable data to grab all vegetable data if vegetable.id is === v
-  // const renderBasketList = (state) => {    
-  //   state.basket.map((veg) => {
-  //     const found = state.vegetables.find(x => x.id === veg.id)
-  //     if (found) {
-  //       const data = state.map(element => {
-  //         return (
-  //           <listItem
-  //           {...element} />
-  //         )
-  //       })
-  //       return data 
-  //     }
-  //   })
-  // }
-
-  
-
-  const classes = useStyles();
-  const theme = useTheme();
+  const { open,
+    handleDrawerOpen,
+    handleDrawerClose,
+    veg } = props
 
   const buildOnClick = function (cart) {
     addPlot(cart)
       .then(() => {
-        console.log('state-basket', state.basket) 
-        console.log('state-basket-vid', state.basket[0].vid) 
+        console.log('state-basket', state.basket)
+        console.log('state-basket-vid', state.basket[0].vid)
         console.log('success! we did it!!')
-    })
-  }
-  
-  
-  const onClick = function (x) {
-    deleteVegFromCart(x).then(() => {
-      
-    })
+      })
   }
 
+  const onClick = function (x) {
+    deleteVegFromCart(x).then(() => {
+    })
+  }
 
   return (
     <Drawer
-        className={classes.drawer}
-    variant="persistent"
-        anchor="right"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </div>
-        <h1 className={classes.drawerHeaderTitle}> Vegetable Basket
-        <ShoppingBasketIcon>color="primary"</ShoppingBasketIcon>
-        </h1>
-        <Divider />
-
-        <List>
-          {state.basket.map((x, i) => 
-            <ListItem button key={i}>
-              <ListItemIcon>
-                <DeleteIcon onClick={() => onClick(x)}/>
-              </ListItemIcon>
-              <ListItemText primary={x.name} />
-              <Avatar
-                alt="test"
-                src={x.image_url}
-              />
-            </ListItem>
+      className={classes.drawer}
+      variant="persistent"
+      anchor="right"
+      open={open}
+      classes={{
+        paper: classes.drawerPaper
+      }}
+    >
+      <div className={classes.drawerHeader}>
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === "rtl" ? (
+            <ChevronLeftIcon />
+          ) : (
+            <ChevronRightIcon />
           )}
-        
-        </List>
-        <Divider />
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </div>
-        <Button onClick={() => buildOnClick(state.basket)} variant="contained" color="primary" className={classes.buildGardenButton}>
-          Build My Garden
+        </IconButton>
+      </div>
+      <h2 className={classes.drawerHeaderTitle}> Vegetable Basket
+        <ShoppingBasketIcon color="primary" />
+      </h2>
+      <Divider />
+
+      <List>
+        {state.basket.map((x, i) =>
+          <ListItem button key={i}>
+              <img
+                className={classes.avatar}
+                src={x.avatar_url}
+                alt="img"
+              />
+            <ListItemText className={classes.name} primary={x.name} />
+            <ListItemIcon>
+              <DeleteIcon onClick={() => onClick(x)} />
+            </ListItemIcon>
+          </ListItem>
+        )}
+
+      </List>
+      <Divider />
+      <div className={classes.drawerHeader}>
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === "rtl" ? (
+            <ChevronLeftIcon />
+          ) : (
+            <ChevronRightIcon />
+          )}
+        </IconButton>
+      </div>
+      <Button onClick={() => buildOnClick(state.basket)} variant="contained" color="primary" className={classes.buildGardenButton}>
+        Build My Garden
         </Button>
-      </Drawer>
+    </Drawer>
   )
-
-
 }

@@ -1,0 +1,46 @@
+.root {
+  width: 90%;
+  margin-left: 7%;
+  margin-top: 10%;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+
+.bullet {
+  display: inline-block;
+  margin: 0 2px;
+  transform: scale(0.8);
+}
+
+.title {
+  font-size: 14;
+}
+
+.heads {
+  display: flex;
+  justify-content: space-around;
+}
+
+.twidth {
+  flex: 1;
+  width: 100%;
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
+}
+
+.plant-instructions {
+  border-collapse: collapse;
+  width: 100%;
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+}
