@@ -207,7 +207,11 @@ export default function PrimarySearchAppBar(props) {
           {/* inkedin REACT ROUTER LINK TO INDEX */}
           <Link to="/" style={{ textDecoration: "none", color: "lavender" }}>
             <Typography className={classes.title} variant="h6" noWrap>
-              Inkedin
+              <img
+                className={classes.logo}
+                src="../images/Inkedin_squid.png"
+                alt="Inkedin Squid"
+              />
             </Typography>
           </Link>
 

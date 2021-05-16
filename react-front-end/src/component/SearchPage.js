@@ -7,6 +7,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import { useStyles } from "./Component_Style/SearchPage.jsx";
 
 export default function SearchBar(props) {
   const [searchInputValue, setSearchInputValue] = React.useState("");
@@ -14,22 +15,6 @@ export default function SearchBar(props) {
   const [searchReturnValue, setSearchReturnValue] = React.useState({});
 
   const history = useHistory();
-
-  const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      root: {
-        "& > *": {
-          margin: theme.spacing(1),
-          width: "25ch",
-          size: "small",
-        },
-      },
-      textField: {
-        border: "1px solid blue",
-        borderRadius: theme.shape.borderRadius,
-      },
-    })
-  );
 
   const text = {
     color: "white",
@@ -44,25 +29,6 @@ export default function SearchBar(props) {
   const classes = useStyles();
   return (
     <div>
-      {/* <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          props.filteredSearch(searchInputValue);
-          history.push("/searchResults");
-        }}
-      >
-        <input
-          style={BarStyling}
-          key="random1"
-          value={searchInputValue}
-          placeholder={"search"}
-          onChange={(e) => setSearchInputValue(e.target.value)}
-        /> */}
-      {/* <Link to="/searchResults"> */}
-      {/* <button type="submit">Submit Search</button> */}
-      {/* </Link> */}
-      {/* </form> */}
-
       <form
         className={classes.root}
         noValidate
@@ -85,35 +51,17 @@ export default function SearchBar(props) {
           onChange={(e) => setSearchInputValue(e.target.value)}
           label="search"
           placeholder=""
+          color="lavender"
         />
-
-        {/* <FormControlLabel
-          control={
-            <Checkbox
-              // value={forSale}
-              // onChange={(e) => setForSale(e.target.value)}
-              name="For Sale"
-            />
-          }
-          label="For Sale"
-        /> */}
-
-        {/* <button
-          type="submit"
-          value="Submit"
-          style={text}
-          //onClick={() => props.filteredSearch(searchInputValue)}
-        >
-          Submit
-        </button> */}
         <Button
           variant="outlined"
           color="default"
           type="submit"
           value="Submit"
+          className={classes.searchButton}
           // size="small"
         >
-          Submit
+          <span role="img"> Search 🏄 </span>
         </Button>
       </form>
     </div>

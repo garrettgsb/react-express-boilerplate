@@ -11,6 +11,7 @@ const useStyles = makeStyles({
     minWidth: 275,
     maxWidth: "100%",
     margin: "20px",
+    background: "lavender",
   },
   bullet: {
     display: "inline-block",
@@ -32,6 +33,7 @@ const useStyles = makeStyles({
     padding: "10px",
     "&:hover": {
       color: "green",
+      transform: "scale(1.1)",
     },
   },
 });
