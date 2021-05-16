@@ -1,6 +1,6 @@
+
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-// import { useStyles } from "./Component_Style/Artpiece.jsx";
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";

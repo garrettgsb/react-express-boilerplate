@@ -8,51 +8,9 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Link, useParams } from "react-router-dom";
 import { useStyles } from "./Component_Style/Artwork.jsx";
-
-// const useStyles = makeStyles({
-//   root: {
-//     maxWidth: 550,
-//     height: "auto",
-//     transition: "transform .2s" /* Animation */,
-
-//     "&:hover": {
-//       opacity: 0.9,
-//       transform: "scale(1.03)",
-//       // "z-index": "9999",
-//     },
-//   },
-//   media: {
-//     height: 350,
-//   },
-//   text: {
-//     color: "lavender",
-//     fontSize: 35,
-//     position: "absolute",
-//     top: "50%",
-//     left: "50%",
-//     transform: "translate(-50%, -50%)",
-//     textAlign: "center",
-//     opacity: 0,
-
-//     "&:hover": {
-//       background: "black",
-//       opacity: 0.7,
-//     },
-//   },
-// });
-
-// .zoom {
-//   padding: 50px;
-//   background-color: green;
-//   transition: transform .2s; /* Animation */
-//   width: 200px;
-//   height: 200px;
-//   margin: 0 auto;
-// }
-
-// .zoom:hover {
-//   transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-// }
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import IconButton from "@material-ui/core/IconButton";
 
 export default function Artwork(props) {
   const classes = useStyles();
@@ -84,20 +42,22 @@ export default function Artwork(props) {
       </Link>
       {props.author_id === props.activeUser && (
         <CardActions>
-          <Button
+          <IconButton
             size="small"
-            color="primary"
-            onClick={() => props.onClick(props.id)}
-          >
-            <h4>Delete</h4>
-          </Button>
-          <Button
-            size="small"
-            color="primary"
+            // color="primary"
             onClick={() => props.onEdit(props.id)}
+            className={classes.editButton}
           >
-            <h4>Edit</h4>
-          </Button>
+            <EditOutlinedIcon />
+          </IconButton>
+          <IconButton
+            size="small"
+            // color="primary"
+            onClick={() => props.onClick(props.id)}
+            className={classes.deleteButton}
+          >
+            <DeleteOutlineIcon />
+          </IconButton>
         </CardActions>
       )}
     </Card>

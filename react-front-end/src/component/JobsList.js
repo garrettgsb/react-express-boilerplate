@@ -9,7 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { useHistory } from "react-router-dom";
 import MyJobsList from "./MyJobsList";
-import Empty from "./Empty";
+import EmptyJobs from "./EmptyJobs";
 import FormJobs from "./FormJobs";
 import { useStyles } from "./Component_Style/JobList.jsx";
 
@@ -110,7 +110,7 @@ export default function BasicTable(props) {
         <MyJobsList state={state} onDelete={onDelete} onEdit={onEdit} />
       )}
       {state.activeUser !== NO_ACTIVE_USER && !show && !editShow && (
-        <Empty onAdd={jobForm} />
+        <EmptyJobs onAdd={jobForm} />
       )}
       {state.activeUser !== NO_ACTIVE_USER && show && (
         <FormJobs

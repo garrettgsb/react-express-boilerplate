@@ -9,6 +9,9 @@ import TableRow from "@material-ui/core/TableRow";
 import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import IconButton from "@material-ui/core/IconButton";
 
 import { useStyles } from "./Component_Style/MyJobsList.jsx";
 
@@ -64,26 +67,28 @@ export default function BasicTable(props) {
                     >
                       Edit
                     </button> */}
-                    <Button
+                    <IconButton
                       variant="outlined"
                       size="small"
                       type="submit"
                       method="delete"
                       onClick={() => props.onEdit(row.id)}
+                      className={classes.editButton}
                     >
-                      Edit
-                    </Button>
+                      <EditOutlinedIcon />
+                    </IconButton>
                     &nbsp; &nbsp;
-                    <Button
+                    <IconButton
                       variant="outlined"
-                      color="primary"
+                      // color="primary"
                       size="small"
                       type="submit"
                       method="delete"
                       onClick={() => props.onDelete(row.id)}
+                      className={classes.deleteButton}
                     >
-                      Delete
-                    </Button>
+                      <DeleteOutlineIcon />
+                    </IconButton>
                   </TableCell>
                   {/* <TableCell align="right">
                     <button
