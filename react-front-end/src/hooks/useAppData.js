@@ -37,15 +37,17 @@ export default function useAppData() {
         axios.get(`/api/plots`),
         axios.get(`/api/plots_vegs`),
         axios.get(`/api/cart`),
+        axios.get(`/api/plots_vegs`)
       ]).then((all) => {
-        const [users, allVeg, plotsList, plotsVegsList, baskets] = all
+        const [users, allVeg, plotsList, plotsVegsList, baskets, harvest] = all
         setState(prev => ({
           ...prev,
           users: users.data,
           vegetables: allVeg.data,
           plots: plotsList.data,
           plotsVegs: plotsVegsList.data,
-          basket: baskets.data
+          basket: baskets.data,
+          harvest: harvest.data
         }));
       });
     }
@@ -60,6 +62,7 @@ export default function useAppData() {
       vegetableID: veg, 
       plotID: plot
     }
+    // console.log('data', data)
     return axios.post('/api/plots_vegs', data)
       .then((res) =>  {
       }
@@ -126,6 +129,15 @@ export default function useAppData() {
     setState({...state, maintenance:[...state.maintenance, index], harvest:[...state.harvest, index]})
   }
 
+  const plant = function (id) {
+    console.log('plant called')
+    return axios.post(`/api/plots_vegs/${id}`)
+    .then((res) => {
+      console.log('res from plant function', res.data)
+      setState({...state, harvest:[...state.harvest, res.data]})
+    }) 
+  }
+
   return {
     state,
     addVegToCart,
@@ -133,7 +145,8 @@ export default function useAppData() {
     buildVegGarden,
     addPlot,
     markComplete,
-    setState
+    setState,
+    plant
   };
 }
 

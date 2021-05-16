@@ -55,18 +55,24 @@ const useStyles = makeStyles({
 // test to map over all planted veg and calculate harvest dates
 
 
-  
-
-
-
 export default function Harvest() {
   const classes = useStyles();
   let { id } = useParams();
   const { state, setState, markComplete } = useAppData();
+  // const myHarvest = state.harvest.find(plot => plot.plot_id === id)
+  console.log('myHarvest', myHarvest)
+
+  console.log('state.harvest', state.harvest)
+  console.log('req params', id)
 
 
   useEffect(() => {
+    // myHarvest(id)
   }, [state])
+
+  const myHarvest = function (id) {
+    return state.harvest.find(plot => plot.plot_id === id)
+  }
 
   const removeHarvest = function (name) {
     const found = state.harvest.find(harvest => harvest.name === name);
@@ -83,6 +89,7 @@ export default function Harvest() {
   }
 
 
+
   return (
     <Card className={classes.root}>
       <CardContent className={classes.twidth}>
@@ -96,7 +103,7 @@ export default function Harvest() {
             </tr>
           </thead>
           <tbody >
-          {state.harvest.map(x => 
+          {myHarvest(id).map(x => 
           <tr>
           <td>
               {x.name}

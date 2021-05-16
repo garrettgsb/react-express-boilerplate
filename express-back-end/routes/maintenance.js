@@ -1,6 +1,8 @@
 const Express = require('express');
 const router = Express.Router();
 const db = require('../db/lib/db');
+const moment = require('moment');
+
 
 const getPlots = function () {
   return db.query(`SELECT * FROM plots`)
@@ -33,6 +35,24 @@ router.post('/api/plots_vegs/', (req, res) => {
     }
 });
 
+// router.post('/api/plots_vegs/:id', (req, res) => {
+//   const user_id = 1
+//   const vegetable_id = req.body.vegetableID 
+//   const plot_id = req.body.plotID
+//   console.log('this is happening isntead')
+//     try {
+//       db.query(`INSERT INTO plots_vegs(user_id, vegetable_id, plot_id)
+//       VALUES ($1, $2 ,$3) RETURNING *` ,[user_id, vegetable_id, plot_id])
+//       .then(data => {
+//         res.status(200).json(data.rows)
+//       })
+//       .catch(err => console.log("error!", err))
+//     } 
+//     catch(e) {
+//       console.error("error: ", e)
+//     }
+// });
+
 router.post('/api/plots', (req, res) => {
   const user_id = 1
   const dimensions_length = 100
@@ -58,9 +78,24 @@ router.get('/api/plots', (req, res) => {
   })
 });
 
-router.get('/api/plots_vegs/:id', (req, res) => {
+router.get('/api/plots/:id', (req, res) => {
   const plotID = req.params.id
-  return db.query(`SELECT * FROM vegetables JOIN plots_vegs ON vegetables.id=plots_vegs.vegetable_id WHERE plot_id = $1::integer`, [plotID])
+  return db.query(`SELECT * FROM vegetables 
+    JOIN plots_vegs ON vegetables.id=plots_vegs.vegetable_id WHERE plot_id = $1::integer`, [plotID])
+    .then(data => {
+      // console.log('I am inside of the router.get', res.rows)
+      res.status(200).json(data.rows)
+    })
+    .catch(err => console.log(err));
+});
+
+router.post('/api/plots_vegs/:id', (req, res) => {
+  const plot_vegID = req.params.id
+  console.log('req.params.id', plot_vegID)
+  const now = moment();
+  console.log('inside maintenance route ot update plant dated with', now)
+  return db.query(`UPDATE plots_vegs SET planted_date = $1::timestamp WHERE plots_vegs.id = $2::integer
+    RETURNING *`, [now, plot_vegID])
     .then(data => {
       // console.log('I am inside of the router.get', res.rows)
       res.status(200).json(data.rows)
