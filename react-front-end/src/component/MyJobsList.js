@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -13,7 +13,59 @@ import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import IconButton from "@material-ui/core/IconButton";
 
-import { useStyles } from "./Component_Style/MyJobsList.jsx";
+// import { useStyles } from "./Component_Style/MyJobsList.jsx";
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 700,
+  },
+  titleRowText: {
+    fontWeight: "900",
+    fontSize: "18px",
+    // textDecoration: "underline",
+  },
+  titleRow: {
+    //border: "1px solid grey",
+  },
+  deleteButton: {
+    "&:hover": {
+      color: "red",
+    },
+  },
+  editButton: {
+    "&:hover": {
+      color: "green",
+    },
+  },
+  tableContainer: {
+    // marginLeft: "3%",
+    // marginRight: "3%",
+  },
+  editDeleteRow: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+});
 
 export default function BasicTable(props) {
   useEffect(() => {}, [props.state.userJobs]);
@@ -33,56 +85,88 @@ export default function BasicTable(props) {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="left" className={classes.titleRowText}>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 Title
-              </TableCell>
-              <TableCell align="left" className={classes.titleRowText}>
+              </StyledTableCell>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 User Name
-              </TableCell>
-              <TableCell align="left" className={classes.titleRowText}>
+              </StyledTableCell>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 Description
-              </TableCell>
-              <TableCell align="left" className={classes.titleRowText}>
+              </StyledTableCell>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 Pay
-              </TableCell>
-              <TableCell align="left" className={classes.titleRowText}>
+              </StyledTableCell>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 Company
-              </TableCell>
-              <TableCell align="left" className={classes.titleRowText}>
+              </StyledTableCell>
+              <StyledTableCell align="left" className={classes.titleRowText}>
                 Location
-              </TableCell>
-              <TableCell
+              </StyledTableCell>
+              {/* <StyledTableCell
                 align="left"
                 className={classes.titleRowText}
-              ></TableCell>
+              ></StyledTableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
             {props.state.userJobs[0] &&
               props.state.userJobs.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell component="th" scope="row">
+                <StyledTableRow key={row.id}>
+                  <StyledTableCell component="th" scope="row">
                     <Link
                       to={`/jobs/${row.id}`}
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       {row.title}
                     </Link>
-                  </TableCell>
-                  <TableCell align="left">{row.username}</TableCell>
-                  <TableCell align="left">{row.description}</TableCell>
-                  <TableCell align="left">{row.pay}</TableCell>
-                  <TableCell align="left">{row.company}</TableCell>
-                  <TableCell align="left">{row.location}</TableCell>
-                  <TableCell align="left">
-                    {/* <button
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{row.username}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {row.description}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{row.pay}</StyledTableCell>
+                  <StyledTableCell align="left">{row.company}</StyledTableCell>
+                  <StyledTableCell
+                    align="left"
+                    className={classes.editDeleteRow}
+                  >
+                    <div>{row.location} </div>
+                    <div>
+                      <IconButton
+                        variant="outlined"
+                        size="small"
+                        type="submit"
+                        method="delete"
+                        onClick={() => props.onEdit(row.id)}
+                        className={classes.editButton}
+                      >
+                        <EditOutlinedIcon />
+                      </IconButton>
+                      &nbsp; &nbsp;
+                      <IconButton
+                        variant="outlined"
+                        // color="primary"
+                        size="small"
+                        type="submit"
+                        method="delete"
+                        onClick={() => props.onDelete(row.id)}
+                        className={classes.deleteButton}
+                      >
+                        <DeleteOutlineIcon />
+                      </IconButton>
+                    </div>
+                  </StyledTableCell>
+                  {/* turn off */}
+                  {/* <StyledTableCell align="left"> */}
+                  {/* <button
                       type="submit"
                       method="delete"
                       onClick={() => props.onEdit(row.id)}
                     >
                       Edit
                     </button> */}
-                    <IconButton
+                  {/* <IconButton
                       variant="outlined"
                       size="small"
                       type="submit"
@@ -104,7 +188,7 @@ export default function BasicTable(props) {
                     >
                       <DeleteOutlineIcon />
                     </IconButton>
-                  </TableCell>
+                  </StyledTableCell> */}
                   {/* <TableCell align="right">
                     <button
                       type="submit"
@@ -114,7 +198,7 @@ export default function BasicTable(props) {
                       Delete
                     </button>
                   </TableCell> */}
-                </TableRow>
+                </StyledTableRow>
               ))}
           </TableBody>
         </Table>

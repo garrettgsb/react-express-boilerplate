@@ -53,6 +53,7 @@ export default function User(props) {
 
   const onEdit = (id) => {
     setState({ ...state, showEdit: true, showAdd: false, artID: id });
+    window.scrollTo(20, 270);
   };
 
   const onEditSubmit = (art) => {
@@ -83,6 +84,7 @@ export default function User(props) {
         )}
 
         {/* USER INFO */}
+
         {state.portfolio[0] && (
           <Grid item xs={12} sm={6} md={4}>
             <Card>

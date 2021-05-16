@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Artwork from "./Artwork";
 import { useStyles } from "./Component_Style/Artworks.jsx";
+// import Hero from "./Hero";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -26,6 +27,7 @@ export default function Artworks(props) {
   function FormRow() {
     return (
       <React.Fragment>
+        {/* <Hero /> */}
         <Grid
           container
           spacing={1}
