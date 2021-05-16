@@ -20,6 +20,7 @@ export default function User(props) {
     showAdd: false,
     showEdit: false,
     artID: 0,
+    portfolio: [],
   });
 
   const classes = useStyles();
@@ -75,60 +76,59 @@ export default function User(props) {
         justify="center"
       >
         {/* PROFILE PIC */}
-        <Grid item xs={12} sm={6} md={4}>
-          {state.portfolio && <ProfilePic userInfo={state.portfolio[0]} />}
-        </Grid>
+        {state.portfolio[0] && (
+          <Grid item xs={12} sm={6} md={4}>
+            <ProfilePic userInfo={state.portfolio[0]} />
+          </Grid>
+        )}
 
         {/* USER INFO */}
-        <Grid item xs={12} sm={6} md={4}>
-          <Card>
-            <CardContent className={classes.rootUserInfo}>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                {state.portfolio && state.portfolio[0].first_name}
-                &nbsp;
-                {state.portfolio && state.portfolio[0].last_name}
-              </Typography>
-              <div>
+        {state.portfolio[0] && (
+          <Grid item xs={12} sm={6} md={4}>
+            <Card>
+              <CardContent className={classes.rootUserInfo}>
                 <Typography
-                  // variant="h5"
-                  // component="h2"
-                  className={classes.username}
+                  className={classes.title}
+                  color="textSecondary"
+                  gutterBottom
                 >
-                  {/* {bull} */}
-                  {state.portfolio && state.portfolio[0].username}
+                  {state.portfolio[0].first_name}
+                  {state.portfolio[0].last_name}
                 </Typography>
-              </div>
-              <div>
-                <Typography
-                  // variant="body2"
-                  // component="p"
-                  className={classes.description}
-                >
-                  {state.portfolio && state.portfolio[0].cool_fact}
-                </Typography>
-              </div>
-            </CardContent>
-            {/* <CardActions>
+                <div>
+                  <Typography
+                    // variant="h5"
+                    // component="h2"
+                    className={classes.username}
+                  >
+                    {/* {bull} */}
+                    {state.portfolio[0].username}
+                  </Typography>
+                </div>
+                <div>
+                  <Typography
+                    // variant="body2"
+                    // component="p"
+                    className={classes.description}
+                  >
+                    {state.portfolio[0].cool_fact}
+                  </Typography>
+                </div>
+              </CardContent>
+              {/* <CardActions>
               <Button size="small" className={classes.websiteLink}>
                 {state.portfolio && state.portfolio[0].username}'s Website
               </Button>
             </CardActions> */}
-          </Card>
-        </Grid>
+            </Card>
+          </Grid>
+        )}
 
         {/* ADD ARTWORK BUTTON */}
-        <Grid item xs={12} sm={6} md={4}>
-          {id === `${props.activeUser}` &&
-            props.activeUser !== 0 &&
-            !state.showAdd &&
-            !state.showEdit && <Empty onAdd={showAdd} />}
-          {id === `${props.activeUser}` &&
-            props.activeUser !== 0 &&
-            state.showAdd && (
+        {id === `${props.activeUser}` && props.activeUser !== 0 && (
+          <Grid item xs={12} sm={6} md={4}>
+            {!state.showAdd && !state.showEdit && <Empty onAdd={showAdd} />}
+            {state.showAdd && (
               <Form
                 onCreate={onCreate}
                 onCancel={onCancel}
@@ -136,9 +136,7 @@ export default function User(props) {
                 formHeader={"Add"}
               />
             )}
-          {id === `${props.activeUser}` &&
-            props.activeUser !== 0 &&
-            state.showEdit && (
+            {state.showEdit && (
               <Form
                 onCreate={onEditSubmit}
                 onCancel={onCancel}
@@ -146,9 +144,10 @@ export default function User(props) {
                 formHeader={"Edit"}
               />
             )}
-        </Grid>
+          </Grid>
+        )}
       </Grid>
-      {state.portfolio && state.portfolio[0].title && (
+      {state.portfolio[0] && state.portfolio[0].title && (
         <div>
           <Artworks
             art={state.portfolio}
