@@ -15,8 +15,12 @@ import Login from "./component/Login";
 import useApplicationData from "./hooks/useApplicationData";
 import SearchResults from "./component/SearchResults";
 import axios from "axios";
+
 import Hero from "./component/Hero";
 import Footer from "./component/Footer";
+
+import ErrorPage from "./component/404";
+
 
 export const JobsContext = createContext([]);
 
@@ -65,11 +69,13 @@ export default function App() {
             path="/login"
             render={() => <Login onLogin={setActiveUser} />}
           />
+
           <Route
             path="/"
             exact
             render={() => <Artworks art={state.artworks} />}
           />
+          <Route path="/404" render={() => <ErrorPage />} />
         </Switch>
       </Router>
       <Footer />
