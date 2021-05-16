@@ -55,7 +55,6 @@ export default function Planting() {
   let { id } = useParams();
   const { state, markComplete } = useAppData();
 
-  console.log('plating state', state)
 
   useEffect(() => {
     getPlotVeg(id)

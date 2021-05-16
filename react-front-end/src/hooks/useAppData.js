@@ -15,7 +15,8 @@ let state = {
   plots: [],
   plotsVegs: [],
   basket: [],
-  maintenance: []
+  maintenance: [],
+  harvest: []
 };
 
 const setState = function (newState) {
@@ -126,10 +127,9 @@ export default function useAppData() {
     }) 
   }
 
-
     
   const markComplete = function (index) {
-    setState({...state, maintenance:[...state.maintenance, index]})
+    setState({...state, maintenance:[...state.maintenance, index], harvest:[...state.harvest, index]})
 
   }
 
@@ -140,7 +140,8 @@ export default function useAppData() {
     deleteVegFromCart,
     buildVegGarden,
     addPlot,
-    markComplete
+    markComplete,
+    setState
   };
 }
 

@@ -50,45 +50,43 @@ export default function Maintenance() {
   const classes = useStyles();
   const [tasks, setTasks] = useState([]);
   // const { buildTasks } = useAppData();
-  let { id } = useParams();
+  // let { id } = useParams();
   const { state, markComplete } = useAppData();
 
 
   
   useEffect(() => {
-    // getPlotTasks(id),
     buildTasks(state.maintenance)
   }, [state])
 
-  console.log('state.maintenance', state.maintenance);
-
-      // builds the tasks for the plots. Used in Maintenance.jsx
-      const buildTasks = function(tasks) {
-        const waterdays = []
-        let t = 1
-        tasks.map(x => {
-          let name = x.name
-          let time = x.water_time
-          let i = 1
-          while (i < 10) {
-            let waterObj = {name: [name], time: time*i}
-            waterdays.push(waterObj)
-            i++
-          }
-        })
-        while (t <= 10) {
-          if (t % 2 == 0) {
-            let fertilize = {name: 'Fertilize garden', time: 10*t/2}
-            waterdays.push(fertilize)
-          }
-          let weed = {name: "Weed beds", time: 7*t}
-          waterdays.push(weed)
-          t++;
+  // builds the tasks for the plots. Used in Maintenance.jsx
+  const buildTasks = function(tasks) {
+    const waterdays = []
+    let t = 1
+    if (tasks.length > 0) {
+      tasks.map(x => {
+        let name = x.name
+        let time = x.water_time
+        let i = 1
+        while (i < 10) {
+          let waterObj = {name: [name], time: time*i}
+          waterdays.push(waterObj)
+          i++
         }
-        const sorted = waterdays.sort((a, b) => (a.time > b.time) ? 1 : -1);
-
-        setTasks(sorted)
+      })
+      while (t <= 10) {
+        if (t % 2 == 0) {
+          let fertilize = {name: 'Fertilize garden', time: 10*t/2}
+          waterdays.push(fertilize)
+        }
+        let weed = {name: "Weed beds", time: 7*t}
+        waterdays.push(weed)
+        t++;
       }
+      const sorted = waterdays.sort((a, b) => (a.time > b.time) ? 1 : -1);
+      setTasks(sorted)
+    }
+  }
 
 
   // get tasks per plots_vegs.
@@ -98,7 +96,7 @@ export default function Maintenance() {
   //     const temp = buildTasks(res.data)
   //     setTasks(temp)
   //   })
-  //   .catch(err => console.log(err));
+  //   .catch(err => `console`.log(err));
   // }
   
   const removeTask = function (name, time) {
