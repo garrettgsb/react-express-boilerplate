@@ -3,10 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/roboto": "^4.2.3",
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/data-grid": "^4.0.0-alpha.27",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/x-grid-data-generator": "^4.0.0-alpha.27",
     "axios": "^0.18.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "moment": "^2.23.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-lazy-hero": "^2.0.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "2.1.8",
+    "styled-components": "^5.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,5 +32,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "devDependencies": {
+    "shave": "^2.5.4"
+  },
   "proxy": "http://localhost:8080"
 }
