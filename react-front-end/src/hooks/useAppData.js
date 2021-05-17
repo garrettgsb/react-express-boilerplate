@@ -112,10 +112,8 @@ export default function useAppData() {
 
   //remove break when we prevent from adding multiple ids of the same veg. 
   const deleteVegFromCart = function(props) {
-    
     return axios.delete(`api/cart/${props.id}`)
     .then((res) => {
-
       let tempBasket = state.basket
       for (let i = 0; i <tempBasket.length; i++) {
         if (tempBasket[i].id === props.id) {

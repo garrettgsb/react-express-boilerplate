@@ -35,6 +35,16 @@ router.post('/api/plots_vegs/', (req, res) => {
     }
 });
 
+router.delete('/api/plots_vegs/:id', (req,res) => {
+  const veg_basketID = req.params.id
+  console.log('req.params.id', req.params.id)
+  db.query(`DELETE FROM plots_vegs WHERE id = $1::integer`, [veg_basketID]) 
+   .then(data => {
+    res.status(200).json(veg_basketID)
+  })
+  .catch(err => console.log("error!", err))
+})
+
 // router.post('/api/plots_vegs/:id', (req, res) => {
 //   const user_id = 1
 //   const vegetable_id = req.body.vegetableID 
@@ -114,5 +124,7 @@ const getPlantedVeg = function (req, res) {
     })
     .catch(err => console.log(err));
 };
+
+
 
 module.exports = router;
