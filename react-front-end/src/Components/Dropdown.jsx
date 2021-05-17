@@ -58,11 +58,11 @@ export default function NestedList() {
       <Collapse in={!open} timeout="auto" unmountOnExit>
         {state.plots.map(x => 
         <List component="div" disablePadding>
-          <ListItem button onClick={() => redirect(x.id)} primary={`Plot ${x.id}`} className="nested">
+          <ListItem button onClick={() => redirect(x.id)}  className="nested">
             <ListItemIcon>
               <StarBorder className="icon"/>
             </ListItemIcon>
-              <ListItemText  />
+              <ListItemText primary={`Plot ${x.id}`} />
           </ListItem>
         </List>
         )}
@@ -103,6 +103,5 @@ export default function NestedList() {
         </ListItem>
       </Link>
     </List>
-    
   );
 }
