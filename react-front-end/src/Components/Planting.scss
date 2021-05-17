@@ -32,6 +32,12 @@
   height: 20px;
 }
 
+.strike {
+  background-color: rgba(221, 221, 221, 0.842);
+  text-decoration: line-through;
+  opacity: 40%;
+}
+
 .plant-instructions {
   border-collapse: collapse;
   width: 100%;

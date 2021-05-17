@@ -15,23 +15,27 @@ export default function Planting() {
 
   useEffect(() => {
     getPlotVeg(id)
-  }, []);
+  }, [state]);
 
   // get tasks per plots_vegs.
   const getPlotVeg = function (plotID) {
     return axios.get(`/api/plots/${plotID}`)
       .then(res => {
-        const notPlanted = res.data.filter(plant => plant.plot_id === parseInt(id) && plant.planted_date === null);
+        const notPlanted = res.data.filter(plant => plant.plot_id === parseInt(id));
         setPlants(notPlanted)
       })
       .catch(err => console.log(err));
   }
 
-  const removePlanting = function (name) {
-    const found = plants.find(task => task.name === name );
-    const newPlants = plants.filter(task => task !== found);
-    setPlants(newPlants);
+  const isPlanted = function (plant) {
+    return (plant ? true : false)
   }
+
+  // const removePlanting = function (name) {
+  //   const found = plants.find(task => task.name === name );
+  //   const newPlants = plants.filter(task => task !== found);
+  //   setPlants(newPlants);
+  // }
 
   return (
     <Card className="root">
@@ -50,7 +54,7 @@ export default function Planting() {
           </thead>
           <tbody className="body">
             {plants.map((x, i) =>
-              <tr>
+              <tr className={isPlanted(x.planted_date) ? "strike" : ""}>
                 <td >
                   <img
                     className="avatar"
@@ -74,7 +78,7 @@ export default function Planting() {
                   <input
                     type="checkbox"
                     onClick={() => {markComplete(plants[i]); 
-                      removePlanting(x.name);
+                      // removePlanting(x.name);
                       plant(x.id)}}
                   />
                 </td>
