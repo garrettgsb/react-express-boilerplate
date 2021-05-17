@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -7,13 +9,11 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { useHistory } from "react-router-dom";
-import MyJobsList from "./MyJobsList";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+
 import EmptyJobs from "./EmptyJobs";
 import FormJobs from "./FormJobs";
-//import { useStyles } from "./Component_Style/JobList.jsx";
-
-import axios from "axios";
+import MyJobsList from "./MyJobsList";
 
 import useApplicationData from "../hooks/useApplicationData";
 
@@ -126,6 +126,8 @@ export default function BasicTable(props) {
               <StyledTableCell align="left" className={classes.titleRowText}>
                 Location
               </StyledTableCell>
+              <StyledTableCell align="left"></StyledTableCell>
+              <StyledTableCell align="left"></StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -146,6 +148,8 @@ export default function BasicTable(props) {
                 <StyledTableCell align="left">{row.pay}</StyledTableCell>
                 <StyledTableCell align="left">{row.company}</StyledTableCell>
                 <StyledTableCell align="left">{row.location}</StyledTableCell>
+                <StyledTableCell align="left"></StyledTableCell>
+                <StyledTableCell align="left"></StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

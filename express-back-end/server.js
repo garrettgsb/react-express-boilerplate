@@ -1,8 +1,8 @@
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
-const PORT = 8080;
-// const PORT = 3003;
+// const PORT = 8080;
+const PORT = 3003;
 const db = require("./lib/db");
 
 // Express Configuration

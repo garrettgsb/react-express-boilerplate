@@ -5,7 +5,6 @@ import Artwork from "./Artwork";
 import Grid from "@material-ui/core/Grid";
 // Users
 import ProfilePic from "./ProfilePic";
-import { makeStyles } from "@material-ui/core/styles";
 // Jobs table
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -18,23 +17,6 @@ import { useStyles } from "./Component_Style/SearchResults.jsx";
 
 const SearchResults = (props) => {
   const storage = JSON.parse(localStorage.getItem("search_results"));
-  console.log("searchResults props", props.searchReturnValue);
-
-  // const useStyles = makeStyles({
-  //   table: {
-  //     minWidth: 650,
-  //   },
-  //   root: {
-  //     flexGrow: 1,
-  //   },
-  //   paper: {
-  //     textAlign: "center",
-  //   },
-  //   gridContainer: {
-  //     paddingLeft: "50px",
-  //     paddingRight: "50px",
-  //   },
-  // });
 
   const classes = useStyles();
   const history = useHistory();

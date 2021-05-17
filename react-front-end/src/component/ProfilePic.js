@@ -1,28 +1,22 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+
 import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import axios from "axios";
-import useApplicationData from "../hooks/useApplicationData";
-import { useStyles } from "./Component_Style/ProfilePic.jsx";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import clsx from "clsx";
+import Typography from "@material-ui/core/Typography";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+
+import { useStyles } from "./Component_Style/ProfilePic.jsx";
+
+import useApplicationData from "../hooks/useApplicationData";
 
 export default function ProfilePic(props) {
   const { state, setFriends } = useApplicationData();
   const classes = useStyles();
-
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   const addFriend = () => {
     const friend = {
@@ -47,6 +41,7 @@ export default function ProfilePic(props) {
       ) {
         notFriends = false;
       }
+      return null;
     });
     return notFriends;
   };
@@ -71,13 +66,13 @@ export default function ProfilePic(props) {
             </div>
             <div className={classes.button}>
               {isNotFriends() && (
-                <button
+                <IconButton
                   onClick={() => {
                     addFriend();
                   }}
                 >
                   <PersonAddIcon />
-                </button>
+                </IconButton>
               )}
             </div>
           </CardActions>

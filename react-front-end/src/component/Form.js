@@ -1,22 +1,8 @@
 import React, { useState } from "react";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+// import FormControlLabel from "@material-ui/core/FormControlLabel"; if needed for future use
+import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { useStyles } from "./Component_Style/Form.jsx";
-import Button from "@material-ui/core/Button";
-
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     root: {
-//       "& > *": {
-//         margin: theme.spacing(1),
-//         width: "25ch",
-//         size: "small",
-//       },
-//     },
-//   })
-// );
 
 export default function BasicTextFields(props) {
   const classes = useStyles();
@@ -180,12 +166,12 @@ export default function BasicTextFields(props) {
         />
         <br /> */}
 
-      <button type="submit" value="Submit" onClick={() => validate()}>
+      <Button type="submit" value="Submit" onClick={() => validate()}>
         Submit
-      </button>
-      <button type="button" value="Submit" onClick={() => props.onCancel()}>
+      </Button>
+      <Button type="button" value="Submit" onClick={() => props.onCancel()}>
         Cancel
-      </button>
+      </Button>
     </form>
   );
 }

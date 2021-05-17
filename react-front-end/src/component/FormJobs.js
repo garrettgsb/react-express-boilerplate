@@ -1,26 +1,12 @@
 import React, { useState } from "react";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import { useStyles } from "./Component_Style/FormJobs.jsx";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import clsx from "clsx";
 import Button from "@material-ui/core/Button";
-
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     root: {
-//       "& > *": {
-//         margin: theme.spacing(1),
-//         width: "25ch",
-//         size: "small",
-//       },
-//     },
-//   })
-// );
+import InputAdornment from "@material-ui/core/InputAdornment";
+import TextField from "@material-ui/core/TextField";
+import clsx from "clsx";
+import { useStyles } from "./Component_Style/FormJobs.jsx";
 
 export default function FormJobs(props) {
   const classes = useStyles();
-
 
   const [state, setState] = useState({
     id: props.activeUser,
@@ -40,6 +26,11 @@ export default function FormJobs(props) {
     >
       <br />
       <TextField
+        className={clsx(
+          classes.margin,
+          classes.textField,
+          classes.withoutLabel
+        )}
         id="standard-basic"
         multiline={true}
         rows={1}
@@ -52,6 +43,11 @@ export default function FormJobs(props) {
         placeholder="Title"
       />
       <TextField
+        className={clsx(
+          classes.margin,
+          classes.textField,
+          classes.withoutLabel
+        )}
         id="filled-basic"
         multiline={true}
         rows={1}
@@ -70,7 +66,6 @@ export default function FormJobs(props) {
           classes.withoutLabel
         )}
         id="outlined-basic"
-        multiline={true}
         rows={1}
         variant="outlined"
         size="small"
@@ -79,8 +74,16 @@ export default function FormJobs(props) {
         onChange={(e) => setState({ ...state, pay: e.target.value })}
         label="Pay"
         placeholder="Wage/Salary"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">$</InputAdornment>,
+        }}
       />
       <TextField
+        className={clsx(
+          classes.margin,
+          classes.textField,
+          classes.withoutLabel
+        )}
         id="outlined-basic"
         multiline={true}
         rows={1}
@@ -93,6 +96,11 @@ export default function FormJobs(props) {
         placeholder="Company Name"
       />
       <TextField
+        className={clsx(
+          classes.margin,
+          classes.textField,
+          classes.withoutLabel
+        )}
         id="outlined-basic"
         multiline={true}
         rows={1}
@@ -104,18 +112,30 @@ export default function FormJobs(props) {
         label="Location"
         placeholder="Location"
       />
-
-      <button
+      <Button
+        className={clsx(
+          classes.margin,
+          classes.textField,
+          classes.withoutLabel
+        )}
         type="submit"
         value="Submit"
         onClick={() => props.onSubmit(state)}
       >
         Submit
-      </button>
-      <button type="button" value="Cancel" onClick={() => props.onCancel()}>
+      </Button>
+      <Button
+        className={clsx(
+          classes.margin,
+          classes.textField,
+          classes.withoutLabel
+        )}
+        type="button"
+        value="Cancel"
+        onClick={() => props.onCancel()}
+      >
         Cancel
-      </button>
-
+      </Button>
     </form>
   );
 }

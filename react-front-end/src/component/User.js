@@ -4,14 +4,10 @@ import { useParams } from "react-router-dom";
 import Artworks from "./Artworks";
 import Form from "./Form";
 import ProfilePic from "./ProfilePic";
-import { makeStyles } from "@material-ui/core/styles";
 import Empty from "./Empty";
 import Grid from "@material-ui/core/Grid";
-// import { useStyles } from "./Component_Style/User.jsx";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useStyles } from "./Component_Style/User.jsx";
 
@@ -24,9 +20,6 @@ export default function User(props) {
   });
 
   const classes = useStyles();
-
-  const bull = <span className={classes.bullet}>•</span>;
-
   let { id } = useParams();
 
   useEffect(() => {
@@ -98,30 +91,16 @@ export default function User(props) {
                   {state.portfolio[0].last_name}
                 </Typography>
                 <div>
-                  <Typography
-                    // variant="h5"
-                    // component="h2"
-                    className={classes.username}
-                  >
-                    {/* {bull} */}
+                  <Typography className={classes.username}>
                     {state.portfolio[0].username}
                   </Typography>
                 </div>
                 <div>
-                  <Typography
-                    // variant="body2"
-                    // component="p"
-                    className={classes.description}
-                  >
+                  <Typography className={classes.description}>
                     {state.portfolio[0].cool_fact}
                   </Typography>
                 </div>
               </CardContent>
-              {/* <CardActions>
-              <Button size="small" className={classes.websiteLink}>
-                {state.portfolio && state.portfolio[0].username}'s Website
-              </Button>
-            </CardActions> */}
             </Card>
           </Grid>
         )}

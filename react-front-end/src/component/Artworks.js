@@ -1,32 +1,13 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Artwork from "./Artwork";
 import { useStyles } from "./Component_Style/Artworks.jsx";
-// import Hero from "./Hero";
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   paper: {
-//     padding: theme.spacing(1),
-//     textAlign: "center",
-//     color: theme.palette.text.secondary,
-//   },
-//   gridContainer: {
-//     paddingLeft: "50px",
-//     paddingRight: "50px",
-//     paddingTop: "50px",
-//   },
-// }));
 
 export default function Artworks(props) {
   const classes = useStyles();
   function FormRow() {
     return (
       <React.Fragment>
-        {/* <Hero /> */}
         <Grid
           container
           spacing={1}
@@ -41,12 +22,12 @@ export default function Artworks(props) {
                   title={artpiece.title}
                   image={artpiece.img_link}
                   // description={artpiece.descrip}
-                  price={artpiece.price}
+                  // price={artpiece.price}
                   // forSale={artpiece.for_sale}
                   // url={artpiece.project_link}
                   // authorUsername={artpiece.username}
                   // authorFirstName={artpiece.first_name}
-                  // authorSecondName={artpiece.second_name}
+                  // authorLastName={artpiece.last_name}
                   author_id={artpiece.author_id}
                   activeUser={props.activeUser}
                   onClick={props.onDelete}
