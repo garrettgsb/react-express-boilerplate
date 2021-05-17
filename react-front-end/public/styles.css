@@ -1,0 +1,30 @@
+/* artwork */
+
+[data-card-type="profile"] .MuiCardActions-root {
+  background: black;
+}
+[data-card-type="profile"] .MuiCardActions-root:hover {
+  background: rgb(0, 0, 0);
+}
+
+[data-card-type="delete"].MuiSvgIcon-root {
+  color: lavender;
+}
+
+[data-card-type="delete"].MuiSvgIcon-root:hover {
+  color: red;
+}
+
+[data-card-type="edit"].MuiSvgIcon-root {
+  color: lavender;
+}
+
+[data-card-type="edit"].MuiSvgIcon-root:hover {
+  color: green;
+}
+[data-nav-type="focal"].Mui-focused:focus {
+  color: orange;
+}
+/* [data-card-type="profile-pic"].MuiCardContent-root {
+  color: #503333;
+} */
