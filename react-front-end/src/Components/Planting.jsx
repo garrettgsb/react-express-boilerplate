@@ -10,7 +10,7 @@ const axios = require('axios');
 export default function Planting() {
   const [plants, setPlants] = useState([]);
   let { id } = useParams();
-  const { state, markComplete } = useAppData();
+  const { state, markComplete, plant } = useAppData();
 
 
   useEffect(() => {
@@ -19,10 +19,10 @@ export default function Planting() {
 
   // get tasks per plots_vegs.
   const getPlotVeg = function (plotID) {
-    return axios.get(`/api/plots_vegs/${plotID}`)
+    return axios.get(`/api/plots/${plotID}`)
       .then(res => {
-        setPlants(res.data)
-        
+        const notPlanted = res.data.filter(plant => plant.plot_id === parseInt(id) && plant.planted_date === null);
+        setPlants(notPlanted)
       })
       .catch(err => console.log(err));
   }
@@ -73,7 +73,9 @@ export default function Planting() {
                 <td>
                   <input
                     type="checkbox"
-                    onClick={() => {markComplete(plants[i]); removePlanting(x.name)}}
+                    onClick={() => {markComplete(plants[i]); 
+                      removePlanting(x.name);
+                      plant(x.id)}}
                   />
                 </td>
               </tr>

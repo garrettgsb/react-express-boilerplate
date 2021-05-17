@@ -106,11 +106,11 @@ export default function VegetableDrawer(props) {
 
   const buildOnClick = function (cart) {
     addPlot(cart)
-      .then(() => {
-        console.log('state-basket', state.basket)
-        console.log('state-basket-vid', state.basket[0].vid)
-        console.log('success! we did it!!')
-      })
+      // .then(() => {
+      //   console.log('state-basket', state.basket)
+      //   console.log('state-basket-vid', state.basket[0].vid)
+      //   console.log('success! we did it!!')
+      // })
   }
 
   const onClick = function (x) {

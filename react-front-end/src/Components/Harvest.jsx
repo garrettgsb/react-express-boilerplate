@@ -16,9 +16,6 @@ import {
 const moment = require('moment');
 const axios = require('axios');
 
-
-
-
 const useStyles = makeStyles({
   root: {
     width: 400,
@@ -50,37 +47,41 @@ const useStyles = makeStyles({
 });
 
 
-
-
-// test to map over all planted veg and calculate harvest dates
-
-
-  
-
-
-
 export default function Harvest() {
   const classes = useStyles();
-  let { id } = useParams();
+  const { id } = useParams();
   const { state, setState, markComplete } = useAppData();
+  const [myHarvest, setMyHarvest] = useState([]);
 
+  console.log('myHarvest', myHarvest)
 
   useEffect(() => {
+    getPlotHarvest(id)
   }, [state])
 
-  const removeHarvest = function (name) {
-    const found = state.harvest.find(harvest => harvest.name === name);
-    const newHarvest = state.harvest.filter(harvest => harvest !== found);
-    setState({...state, harvest: newHarvest})
+  const getPlotHarvest = function (id) {
+    const myInfo = state.harvest.filter(plant => plant.plot_id === parseInt(id) && plant.planted_date !== null);
+    setMyHarvest(myInfo)
   }
 
-  // getHarvestDate()
+
+  const removeHarvest = function (plotVegID, name) {
+    return axios.delete(`/api/plots_vegs/${plotVegID}`)
+    .then(res => {
+      const found = myHarvest.find(harvest => harvest.name === name);
+      const newHarvest = myHarvest.filter(harvest => harvest !== found);
+      setMyHarvest(newHarvest)
+    })
+    .catch(err => console.log(err));
+  }
 
   const harvest_date = function (planted, harvest) {
   const harvest_date = moment(planted).add(harvest, 'days')
   const counter = moment(harvest_date).fromNow();
   return counter;
   }
+
+  // const myHarvest = state.harvest.filter(plant => plant.plot_id === parseInt(id) && plant.planted_date !== null);
 
 
   return (
@@ -92,11 +93,11 @@ export default function Harvest() {
             <tr >
               <th>Task</th>
               <th>Date</th>
-              <th>Complete</th>
+              <th>Complete </th>
             </tr>
           </thead>
           <tbody >
-          {state.harvest.map(x => 
+          {myHarvest.map(x => 
           <tr>
           <td>
               {x.name}
@@ -107,14 +108,13 @@ export default function Harvest() {
             <td>
             <CardActions>
               <Button size="small" variant="contained" 
-              onClick={() => removeHarvest(x.name)}
+              onClick={() => removeHarvest(x.id, x.name)}
               color="primary">Complete</Button>
             </CardActions>
             </td>
           </tr>
             )}
           </tbody>
-          
         </table>
       </CardContent>
     </Card>

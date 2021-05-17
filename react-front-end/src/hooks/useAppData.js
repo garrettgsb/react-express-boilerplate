@@ -37,15 +37,19 @@ export default function useAppData() {
         axios.get(`/api/plots`),
         axios.get(`/api/plots_vegs`),
         axios.get(`/api/cart`),
+        axios.get(`/api/plots_vegs`),
+        axios.get(`/api/plots_vegs`)
       ]).then((all) => {
-        const [users, allVeg, plotsList, plotsVegsList, baskets] = all
+        const [users, allVeg, plotsList, plotsVegsList, baskets, maintenanceList, harvestList] = all
         setState(prev => ({
           ...prev,
           users: users.data,
           vegetables: allVeg.data,
           plots: plotsList.data,
           plotsVegs: plotsVegsList.data,
-          basket: baskets.data
+          basket: baskets.data,
+          maintenance: maintenanceList.data,
+          harvest: harvestList.data
         }));
       });
     }
@@ -60,6 +64,7 @@ export default function useAppData() {
       vegetableID: veg, 
       plotID: plot
     }
+    // console.log('data', data)
     return axios.post('/api/plots_vegs', data)
       .then((res) =>  {
       }
@@ -107,10 +112,8 @@ export default function useAppData() {
 
   //remove break when we prevent from adding multiple ids of the same veg. 
   const deleteVegFromCart = function(props) {
-    
     return axios.delete(`api/cart/${props.id}`)
     .then((res) => {
-
       let tempBasket = state.basket
       for (let i = 0; i <tempBasket.length; i++) {
         if (tempBasket[i].id === props.id) {
@@ -126,6 +129,15 @@ export default function useAppData() {
     setState({...state, maintenance:[...state.maintenance, index], harvest:[...state.harvest, index]})
   }
 
+  const plant = function (id) {
+    console.log('plant called')
+    return axios.post(`/api/plots_vegs/${id}`)
+    .then((res) => {
+      console.log('res from plant function', res.data)
+      setState({...state, maintenance:[...state.harvest, ...res.data], harvest:[...state.harvest, ...res.data]})
+    }) 
+  }
+
   return {
     state,
     addVegToCart,
@@ -133,7 +145,8 @@ export default function useAppData() {
     buildVegGarden,
     addPlot,
     markComplete,
-    setState
+    setState,
+    plant
   };
 }
 
