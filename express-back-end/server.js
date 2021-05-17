@@ -106,7 +106,15 @@ App.get("/api/artworks", (req, res) => {
 App.get("/api/artworks/:id", (req, res) => {
   const { id } = req.params;
   const data = db
-    .query("SELECT * FROM artworks WHERE id = $1", [id])
+    .query(
+      `SELECT *
+    FROM artworks
+    JOIN users 
+    ON users.id = author_id 
+    WHERE artworks.id = $1;`,
+      [id]
+    )
+    // .query("SELECT * FROM artworks WHERE id = $1", [id])
     .then((response) => {
       res.json({
         artwork: response.rows,

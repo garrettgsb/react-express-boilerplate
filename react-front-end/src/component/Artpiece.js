@@ -25,6 +25,7 @@ export default function RecipeReviewCard(props) {
   const { id } = useParams();
   const [expanded, setExpanded] = React.useState(false);
   const [artpiece, setArtpiece] = useState({});
+  console.log(artpiece);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -38,7 +39,7 @@ export default function RecipeReviewCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title={artpiece.title} subheader="September 14, 2016" />
+      <CardHeader title={artpiece.title} subheader={artpiece.username} />
       <CardMedia
         className={classes.media}
         image={artpiece.img_link}
@@ -64,16 +65,25 @@ export default function RecipeReviewCard(props) {
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      <CardContent>
-        <Typography title>{artpiece.title}</Typography>
+      <CardContent className={classes.info_card}>
+        <Typography className={classes.title}>{artpiece.title}</Typography>
+        <Typography className={classes.author}>{artpiece.username}</Typography>
+        {/* <Typography title>{artpiece.}</Typography> */}
+        {/* <br /> */}
+        {/* <Typography paragraph>Description:</Typography> */}
+        <Typography className={classes.description}>
+          {artpiece.descrip}
+        </Typography>
         {artpiece.price > 0 && (
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography
+            className={classes.price}
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
             For Sale ${artpiece.price > 0 && artpiece.price}
           </Typography>
         )}
-        <br />
-        <Typography paragraph>Description:</Typography>
-        <Typography paragraph>{artpiece.descrip}</Typography>
       </CardContent>
     </Card>
   );

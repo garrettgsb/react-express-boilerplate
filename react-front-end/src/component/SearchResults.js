@@ -120,12 +120,12 @@ const SearchResults = (props) => {
   };
 
   return (
-    <div>
-      <h2>{storage && "Art!"}</h2>
+    <div className={classes.page_container}>
+      <h2 className={classes.page_titles}>{storage && "Art!"}</h2>
       <div>{storage && artworks()}</div>
-      <h2>{storage && "People!"}</h2>
+      <h2 className={classes.page_titles}>{storage && "People!"}</h2>
       <div>{storage && users()}</div>
-      <h2>{storage && "Jobs!"}</h2>
+      <h2 className={classes.page_titles}>{storage && "Jobs!"}</h2>
       <div>{storage && jobs()}</div>
     </div>
   );

@@ -29,6 +29,8 @@ export default function Artwork(props) {
             className={classes.text}
           >
             {props.title}
+            <br />
+            {props.authorUsername}
           </Typography>
         </CardActionArea>
       </Link>

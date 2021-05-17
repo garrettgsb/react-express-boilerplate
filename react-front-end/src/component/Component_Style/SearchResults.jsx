@@ -14,6 +14,12 @@ const useStyles = makeStyles({
     paddingLeft: "50px",
     paddingRight: "50px",
   },
+  page_container: {
+    paddingTop: "80px",
+  },
+  page_titles: {
+    color: "white",
+  },
 });
 
 export { useStyles };

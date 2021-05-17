@@ -43,6 +43,18 @@ const useStyles = makeStyles((theme) => ({
       opacity: 0.7,
     },
   },
+  title: {
+    fontSize: 35,
+  },
+  author: {
+    fontSize: 28,
+  },
+  description: {
+    fontSize: 20,
+  },
+  info_card: {
+    marginTop: "-30px",
+  },
 }));
 
 export { useStyles };

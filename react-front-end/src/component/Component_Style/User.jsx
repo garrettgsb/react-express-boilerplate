@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     maxWidth: "550",
-    height: 388,
+    height: 392,
     background: "lavender",
   },
   bullet: {
