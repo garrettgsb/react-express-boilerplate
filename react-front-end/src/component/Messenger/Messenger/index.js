@@ -30,6 +30,7 @@ export default function Messenger(props) {
         <ConversationList
           conversations={state.friends}
           activeUser={state.activeUser}
+          activeConversation={activeConversation}
           setActiveConversation={setActiveConversation}
         />
       </div>

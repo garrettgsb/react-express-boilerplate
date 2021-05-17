@@ -14,10 +14,24 @@ export default function ConversationListItem(props) {
     : (username = props.data.first_username);
 
   return (
-    <div className="conversation-list-item" onClick={props.onClick}>
-      <div className="conversation-info">
-        <h1 className="conversation-title">{username}</h1>
-      </div>
-    </div>
+    <>
+      {props.activeConversation && (
+        <div
+          className="conversation-list-item conversation-active"
+          onClick={props.onClick}
+        >
+          <div className="conversation-info">
+            <h1 className="conversation-title">{username}</h1>
+          </div>
+        </div>
+      )}
+      {!props.activeConversation && (
+        <div className="conversation-list-item" onClick={props.onClick}>
+          <div className="conversation-info">
+            <h1 className="conversation-title">{username}</h1>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

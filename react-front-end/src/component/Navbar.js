@@ -1,30 +1,28 @@
 import React from "react";
-import { fade, makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import "@fontsource/roboto";
 import { Link } from "react-router-dom";
+
+import "@fontsource/roboto";
+import AppBar from "@material-ui/core/AppBar";
+import Badge from "@material-ui/core/Badge";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import BrushTwoToneIcon from "@material-ui/icons/BrushTwoTone";
-import SearchBar from "./SearchPage";
-import { useStyles } from "./Component_Style/Navbar.jsx";
 import ExploreIcon from "@material-ui/icons/Explore";
+import MailIcon from "@material-ui/icons/Mail";
+import MoreIcon from "@material-ui/icons/MoreVert";
+
+import SearchBar from "./SearchPage";
+
+import { useStyles } from "./Component_Style/Navbar.jsx";
 
 export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [searchInputValue, setSearchInputValue] = React.useState("");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -74,8 +72,7 @@ export default function PrimarySearchAppBar(props) {
       <Link to="/messages" style={{ textDecoration: "none", color: "black" }}>
         <MenuItem>
           <IconButton aria-label="show 4 new mails" color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              {/* Mail Icon */}
+            <Badge color="secondary">
               <MailIcon />
             </Badge>
           </IconButton>
@@ -86,10 +83,7 @@ export default function PrimarySearchAppBar(props) {
       <Link to="/" style={{ textDecoration: "none", color: "black" }}>
         <MenuItem>
           <IconButton aria-label="show 11 new notifications" color="inherit">
-            {/* <Badge badgeContent={11} color="secondary"> */}
-            {/* Notifications Icon */}
             <ExploreIcon />
-            {/* </Badge> */}
           </IconButton>
           <p>Explore</p>
         </MenuItem>
@@ -98,15 +92,13 @@ export default function PrimarySearchAppBar(props) {
       <Link to="/job_board" style={{ textDecoration: "none", color: "black" }}>
         <MenuItem>
           <IconButton aria-label="show 11 new notifications" color="inherit">
-            {/* <Badge badgeContent={11} color="secondary"> */}
-            {/* Notifications Icon */}
             <BrushTwoToneIcon />
-            {/* </Badge> */}
           </IconButton>
           <p>Jobs</p>
         </MenuItem>
       </Link>
 
+      {/* Profile Button */}
       <Link
         to={`/portfolio/${props.activeUser}`}
         style={{ textDecoration: "none", color: "black" }}
@@ -118,7 +110,6 @@ export default function PrimarySearchAppBar(props) {
             aria-haspopup="true"
             color="inherit"
           >
-            {/* Profile Button */}
             <AccountCircle />
           </IconButton>
           <p>Profile</p>
@@ -132,14 +123,6 @@ export default function PrimarySearchAppBar(props) {
       <div className={classes.grow}>
         <AppBar position="static" style={{ background: "#2B2C3B" }}>
           <Toolbar className={classes.toolbar}>
-            {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton> */}
             <div className={classes.search_container}>
               {/* inkedin REACT ROUTER LINK TO INDEX */}
               <Link to="/" style={{ textDecoration: "none", color: "#B9A1BE" }}>
@@ -151,15 +134,10 @@ export default function PrimarySearchAppBar(props) {
                   />
                 </Typography>
               </Link>
-
               <div>
-                {/* <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div> */}
                 <SearchBar filteredSearch={props.filteredSearch} />
               </div>
             </div>
-
             <div className={classes.nav_buttons_container}>
               <div className={classes.sectionDesktop}>
                 {/* REACT ROUTER LINK TO LOGIN */}
@@ -169,14 +147,10 @@ export default function PrimarySearchAppBar(props) {
                     style={{ textDecoration: "none", color: "#B9A1BE" }}
                   >
                     <IconButton aria-label="show 4 new mails" color="inherit">
-                      {/* <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge> */}
                       Login
                     </IconButton>
                   </Link>
                 )}
-
                 {props.activeUser !== 0 && (
                   <Link
                     to="/"
@@ -186,9 +160,6 @@ export default function PrimarySearchAppBar(props) {
                     style={{ textDecoration: "none", color: "#B9A1BE" }}
                   >
                     <IconButton aria-label="show 4 new mails" color="inherit">
-                      {/* <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge> */}
                       Logout
                     </IconButton>
                   </Link>
@@ -200,7 +171,7 @@ export default function PrimarySearchAppBar(props) {
                   style={{ textDecoration: "none", color: "#B9A1BE" }}
                 >
                   <IconButton aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={4} color="secondary">
+                    <Badge color="secondary">
                       <MailIcon />
                     </Badge>
                   </IconButton>

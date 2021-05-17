@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "./Navbar";
 import { useStyles } from "./Component_Style/404";
 
 export default function ErrorPage() {
