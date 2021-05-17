@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     paddingTop: "20%",
     paddingLeft: "20%",
     marginRight: "-50px",
-    zIndex: "5",
+    zIndex: "1",
   },
   title_text: {
     background: "#00007f",
