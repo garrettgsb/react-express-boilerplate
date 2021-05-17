@@ -1,13 +1,11 @@
 import React from "react";
 import ConversationListItem from "../ConversationListItem";
-import Toolbar from "../Toolbar";
 
 import "./ConversationList.css";
 
 export default function ConversationList(props) {
   return (
     <div className="conversation-list">
-      <Toolbar title="Messenger" />
       {props.conversations.map((conversation) => (
         <ConversationListItem
           key={conversation.friends_id}

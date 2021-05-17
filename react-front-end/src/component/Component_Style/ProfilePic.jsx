@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       opacity: 0.9,
     },
+    background: "lavender",
   },
   media: {
     height: 350,

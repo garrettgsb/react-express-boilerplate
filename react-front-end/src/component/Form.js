@@ -84,7 +84,6 @@ export default function BasicTextFields(props) {
           placeholder="Title"
         />
       )}
-      <br />
       <TextField
         id="filled-basic"
         multiline={true}
@@ -97,7 +96,6 @@ export default function BasicTextFields(props) {
         label="Description"
         placeholder="Description"
       />
-      <br />
       {!state.imageError && (
         <TextField
           id="outlined-basic"
@@ -128,7 +126,6 @@ export default function BasicTextFields(props) {
           placeholder="Image URL"
         />
       )}
-      <br />
       <TextField
         id="outlined-basic"
         multiline={true}
@@ -141,7 +138,6 @@ export default function BasicTextFields(props) {
         label="Project URL"
         placeholder="Project URL"
       />
-      <br />
       <TextField
         id="outlined-basic"
         rows={1}
@@ -153,7 +149,6 @@ export default function BasicTextFields(props) {
         label="Price"
         placeholder="Price"
       />
-      <br />
       {/* <FormControlLabel
           control={
             <Checkbox
@@ -163,13 +158,24 @@ export default function BasicTextFields(props) {
             />
           }
           label="For Sale"
-        />
-        <br /> */}
+        /> */}
 
-      <Button type="submit" value="Submit" onClick={() => validate()}>
+      <Button
+        type="submit"
+        value="Submit"
+        variant="contained"
+        color="primary"
+        onClick={() => validate()}
+      >
         Submit
       </Button>
-      <Button type="button" value="Submit" onClick={() => props.onCancel()}>
+      <Button
+        type="button"
+        value="Submit"
+        variant="contained"
+        color="secondary"
+        onClick={() => props.onCancel()}
+      >
         Cancel
       </Button>
     </form>

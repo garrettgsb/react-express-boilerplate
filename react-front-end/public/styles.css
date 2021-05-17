@@ -4,7 +4,7 @@
   background: black;
 }
 [data-card-type="profile"] .MuiCardActions-root:hover {
-  background: rgb(148, 20, 148);
+  background: rgb(0, 0, 0);
 }
 
 [data-card-type="delete"].MuiSvgIcon-root {
@@ -22,7 +22,9 @@
 [data-card-type="edit"].MuiSvgIcon-root:hover {
   color: green;
 }
-
+[data-nav-type="focal"].Mui-focused:focus {
+  color: orange;
+}
 /* [data-card-type="profile-pic"].MuiCardContent-root {
   color: #503333;
 } */

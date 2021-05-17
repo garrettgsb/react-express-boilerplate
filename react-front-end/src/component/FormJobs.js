@@ -120,6 +120,7 @@ export default function FormJobs(props) {
         )}
         type="submit"
         value="Submit"
+        variant="contained"
         onClick={() => props.onSubmit(state)}
       >
         Submit
@@ -132,6 +133,7 @@ export default function FormJobs(props) {
         )}
         type="button"
         value="Cancel"
+        variant="contained"
         onClick={() => props.onCancel()}
       >
         Cancel

@@ -31,6 +31,9 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 const useStyles = makeStyles({
+  header: {
+    color: "lavender",
+  },
   table: {
     minWidth: 700,
   },
@@ -67,7 +70,7 @@ export default function BasicTable(props) {
 
   return (
     <div className={classes.tableContainer}>
-      <h1>My Jobs</h1>
+      <h1 className={classes.header}>My Jobs</h1>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>

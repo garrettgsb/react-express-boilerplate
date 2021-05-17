@@ -15,7 +15,7 @@ import ExploreIcon from "@material-ui/icons/Explore";
 import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
 
-import SearchBar from "./SearchPage";
+import SearchBar from "./SearchBar";
 
 import { useStyles } from "./Component_Style/Navbar.jsx";
 

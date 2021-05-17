@@ -7,7 +7,15 @@ const useStyles = makeStyles((theme: Theme) =>
         // margin: theme.spacing(1),
         // width: "25ch",
         size: "small",
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: "white",
+        "&:hover": {
+          backgroundColor: "lavender",
+        },
       },
+      background: "white",
+      marginBottom: "4%",
+      paddingBottom: "2%",
     },
     margin: {
       margin: theme.spacing(1),

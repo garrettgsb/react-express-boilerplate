@@ -24,8 +24,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     maxWidth: "550",
     height: 388,
-    background: "#696969",
-    color: "lavender",
+    background: "lavender",
   },
   bullet: {
     display: "inline-block",
@@ -35,17 +34,17 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: 24,
-    color: "lavender",
+    color: "black",
     fontStyle: "bold",
   },
   username: {
     fontSize: 20,
-    color: "lavender",
+    color: "black",
     paddingBottom: "25px",
   },
   description: {
     fontSize: 14,
-    color: "lavender",
+    color: "black",
     paddingBottom: "25px",
   },
   pos: {
@@ -57,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   },
   websiteLink: {
     padding: "20px",
+  },
+  form: {
+    color: "white",
   },
 }));
 

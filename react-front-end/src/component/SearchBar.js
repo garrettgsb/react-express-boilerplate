@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { useStyles } from "./Component_Style/SearchPage.jsx";
+import { useStyles } from "./Component_Style/SearchBar.jsx";
 
 export default function SearchBar(props) {
   const [searchInputValue, setSearchInputValue] = React.useState("");
@@ -22,16 +22,15 @@ export default function SearchBar(props) {
         }}
       >
         <TextField
-          id="standard-basic"
           rows={1}
           className={classes.textField}
           value={searchInputValue}
           variant="outlined"
           size="small"
           onChange={(e) => setSearchInputValue(e.target.value)}
-          label="search"
-          placeholder=""
-          color="lavender"
+          label="Search"
+          data-nav-type="focal"
+          InputProps={{ className: classes.searchField }}
         />
         <Button
           variant="outlined"
