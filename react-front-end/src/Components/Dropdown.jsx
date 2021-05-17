@@ -39,14 +39,14 @@ export default function NestedList() {
       //   </ListSubheader>
       // }
     >
-      <ListItem button>
-        <ListItemIcon>
-          <AddIcon className="icon"/>
-        </ListItemIcon>
-        <NavLink className="a" to="/planning">
-          <ListItemText primary="Build New Plot" />
+      <NavLink className="a" to="/planning">
+        <ListItem button>
+          <ListItemIcon>
+            <AddIcon className="icon"/>
+          </ListItemIcon>
+            <ListItemText primary="Build New Plot" />
+          </ListItem>
         </NavLink>
-      </ListItem>
       <ListItem button onClick={handleClick}>
         <ListItemIcon>
           <RoomIcon className="icon"/>
@@ -58,59 +58,50 @@ export default function NestedList() {
       <Collapse in={!open} timeout="auto" unmountOnExit>
         {state.plots.map(x => 
         <List component="div" disablePadding>
-          <ListItem button className="nested">
+          <ListItem button onClick={() => redirect(x.id)} primary={`Plot ${x.id}`} className="nested">
             <ListItemIcon>
               <StarBorder className="icon"/>
             </ListItemIcon>
-              <ListItemText onClick={() => redirect(x.id)} primary={`Plot ${x.id}`} />
+              <ListItemText  />
           </ListItem>
         </List>
         )}
       </Collapse>
       {/* Map ends here! */}
-      <ListItem button>
-        <ListItemIcon>
-          <EcoIcon className="icon"/>
-        </ListItemIcon>
-        <Link to="/vegetables">
+      <Link to="/vegetables">
+        <ListItem button>
+          <ListItemIcon>
+            <EcoIcon className="icon"/>
+          </ListItemIcon>
           <ListItemText primary="Vegetables" />
+        </ListItem> 
         </Link>
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <BuildIcon className="icon"/>
-        </ListItemIcon>
-        <Link to="/tasks">
-          <ListItemText primary="Maintenance" />
-        </Link>
-      </ListItem>
-
       <Divider />
 
-      <ListItem button>
-        <ListItemIcon>
-          <EcoIcon className="icon"/>
-        </ListItemIcon>
-        <Link to="/vegetables">
-          <ListItemText primary="About" />
-        </Link>
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <BuildIcon className="icon"/>
-        </ListItemIcon>
-        <Link to="/tasks">
-          <ListItemText primary="Resources" />
-        </Link>
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <SettingsIcon className="icon"/>
-        </ListItemIcon>
-        <Link to="/tasks">
-          <ListItemText primary="Settings" />
-        </Link>
-      </ListItem>
+      <Link to="/vegetables">
+        <ListItem button>
+          <ListItemIcon>
+            <EcoIcon className="icon"/>
+          </ListItemIcon>
+            <ListItemText primary="About" />
+        </ListItem>
+      </Link>
+      <Link to="/vegetables">
+        <ListItem button>
+          <ListItemIcon>
+            <BuildIcon className="icon"/>
+          </ListItemIcon>
+            <ListItemText primary="Resources" />
+        </ListItem>
+      </Link>
+      <Link to="/vegetables">
+        <ListItem button>
+          <ListItemIcon>
+            <SettingsIcon className="icon"/>
+          </ListItemIcon>
+            <ListItemText primary="Settings" />
+        </ListItem>
+      </Link>
     </List>
     
   );
