@@ -65,9 +65,12 @@ export default function RecipeReviewCard(props) {
         </IconButton>
       </CardActions>
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          For Sale ${artpiece.price}
-        </Typography>
+        <Typography title>{artpiece.title}</Typography>
+        {artpiece.price > 0 && (
+          <Typography variant="body2" color="textSecondary" component="p">
+            For Sale ${artpiece.price > 0 && artpiece.price}
+          </Typography>
+        )}
         <br />
         <Typography paragraph>Description:</Typography>
         <Typography paragraph>{artpiece.descrip}</Typography>

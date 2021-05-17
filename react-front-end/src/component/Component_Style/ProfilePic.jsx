@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     // alignContent: "space-between",
   },
   username: {
-    fontSize: 24,
+    fontSize: 26,
   },
 }));
 
