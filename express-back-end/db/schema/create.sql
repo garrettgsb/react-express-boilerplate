@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS orders CASCADE;
 DROP TABLE IF EXISTS items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
 DROP TABLE IF EXISTS order_items CASCADE;
 DROP TABLE IF EXISTS promotions CASCADE;
 DROP TABLE IF EXISTS shipping CASCADE;
@@ -14,3 +14,43 @@ CREATE TABLE users (
   admin BOOLEAN DEFAULT FALSE
 );
 
+CREATE TABLE items (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  price INTEGER NOT NULL,
+  status ENUM('available', 'sold', 'sale'),
+  description TEXT,
+  image VARCHAR(255),
+  quantity INTEGER NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+);
+
+
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  shipping_id INTEGER REFERENCES shipping(id) ON DELETE CASCADE,
+  promotion_id INTEGER,
+  order_note VARCHAR(255),
+  created_at VARCHAR(255)
+);
+
+CREATE TABLE order_items (
+  order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
+  item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
+);
+
+CREATE TABLE promotions (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR NOT NULL,
+  discount INTEGER NOT NULL,
+  active BOOLEAN
+);
+
+
+CREATE TABLE shipping (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(75) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  cost INTEGER
+);
