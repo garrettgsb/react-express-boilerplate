@@ -14,17 +14,25 @@ CREATE TABLE users (
   admin BOOLEAN DEFAULT FALSE
 );
 
+CREATE TYPE status AS ENUM ('available', 'sold', 'sale');
+
 CREATE TABLE items (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   price INTEGER NOT NULL,
-  status ENUM('available', 'sold', 'sale'),
+  current_status status,
   description TEXT,
   image VARCHAR(255),
   quantity INTEGER NOT NULL,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE shipping (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(75) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  cost INTEGER
+);
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -37,7 +45,7 @@ CREATE TABLE orders (
 
 CREATE TABLE order_items (
   order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
-  item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
+  item_id INTEGER REFERENCES items(id) ON DELETE CASCADE
 );
 
 CREATE TABLE promotions (
@@ -47,10 +55,3 @@ CREATE TABLE promotions (
   active BOOLEAN
 );
 
-
-CREATE TABLE shipping (
-  id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(75) NOT NULL,
-  description VARCHAR(255) NOT NULL,
-  cost INTEGER
-);
