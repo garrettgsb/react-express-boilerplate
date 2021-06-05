@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "labber",
+    "password": "labber",
+    "database": "collabapp",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "labber",
+    "password": "labber",
+    "database": "collabapp",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "labber",
+    "password": "labber",
+    "database": "collabapp",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}

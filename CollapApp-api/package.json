@@ -6,7 +6,8 @@
   "scripts": {
     "test": "  ",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "db:reset": "npx sequelize-cli db:seed:undo:all && sequelize-cli db:seed:all"
   },
   "author": "",
   "license": "MIT",
@@ -18,6 +19,7 @@
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "sequelize-cli": "^6.2.0"
   }
 }
