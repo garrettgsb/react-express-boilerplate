@@ -35,12 +35,12 @@ GET /items/new (Admin – add item form)
 POST /items (Admin – create item)
 GET /items/:id (show specific item)
 GET /items/:id/edit (Admin – edit item form)
-PUT /items/:id (show updated item)
+POST /items/:id (show updated item)
 DELETE /items/id: (Admin – remove item)
 
-## SALES
+## SALE
 
-GET /sales (view sale items)
+GET /sale (view sale items)
 
 ## USERS
 
@@ -48,7 +48,7 @@ GET /users/new (registration form)
 POST /users (create user/login)
 GET /users/:id (show specific profile)
 GET /items/:id/edit (edit profile form)
-PUT /items/:id (show updated profile)
+POST /items/:id (show updated profile)
 DELETE /items/id: (delete profile)
 
 ## ABOUT
