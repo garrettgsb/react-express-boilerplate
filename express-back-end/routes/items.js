@@ -121,5 +121,20 @@ router.post('/items', (req, res) => {
     });
 });
 
-  
-}
+ // DELETE - admin delete item ===> POST /items/:id/delete
+ router.post('items/:id/delete', (req, res) => {
+
+  db.query(`DELETE FROM items WHERE id = $1;`,[req.params.id])
+    .then(data => {
+      res.redirect('/items');
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+return router;
+
+};
