@@ -62,24 +62,29 @@ router.post('items/:id', (req, res) => {
     queryString += `name = $${queryParams.length}, `;
   }
 
-  if (req.body.description) {
-    queryParams.push(req.body.description);
-    queryString += `description = $${queryParams.length}, `;
-  }
-
   if (req.body.price) {
     queryParams.push(req.body.price);
     queryString += `price = $${queryParams.length}, `;
   }
 
-  if (req.body.photo_url) {
-    queryParams.push(req.body.photo_url);
-    queryString += `photo_url = $${queryParams.length}, `;
+  if (req.body.current_status) {
+    queryParams.push(req.body.current_status);
+    queryString += `current_status = $${queryParams.length}, `;
+  }
+  
+  if (req.body.description) {
+    queryParams.push(req.body.description);
+    queryString += `description = $${queryParams.length}, `;
   }
 
-  if (req.body.sold) {
-    queryParams.push(req.body.sold);
-    queryString += `sold = $${queryParams.length}, `;
+  if (req.body.image) {
+    queryParams.push(req.body.image);
+    queryString += `image = $${queryParams.length}, `;
+  }
+
+  if (req.body.quantity) {
+    queryParams.push(req.body.quantity);
+    queryString += `quantity = $${queryParams.length}, `;
   }
 
   queryString = queryString.slice(0, queryString.length - 2);
@@ -99,7 +104,22 @@ router.post('items/:id', (req, res) => {
     });
 });
     
+// ADD - admin add item  ==> POST /items
+router.post('/items', (req, res) => {
 
+  db.query(`INSERT INTO items (user_id, name, price, current_status, description, image, quantity)
+   VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
+  [req.session.user_id, req.body['item name'], req.body.price, req.body.current_status, req.body.description, req.body.image, req.body.quantity])
+    .then(data => {
+      const items = data.rows[0];
+      res.redirect('/items');
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
 
   
 }
