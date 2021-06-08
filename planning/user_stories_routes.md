@@ -40,7 +40,7 @@ DELETE /items/id: (Admin – remove item)
 
 ## SALE
 
-GET /sale (view sale items)
+GET /sale (view sale items)  ** create from items routes **
 
 ## USERS
 
@@ -53,18 +53,23 @@ DELETE /items/id: (delete profile)
 
 ## ABOUT
 
-GET /about (view about page)
+GET /about (view about page)  ** no route needed **
 
 ## CONTACT
 
-GET /contact (view contact page with form)
-POST /contact (display msg confirmation)
+GET /contact (view contact page with form) ** no route needed **
+POST /contact (display msg confirmation) ** no route needed **
 
 ## CART
+no routes. use frontend localStorage
 
-GET /cart (view cart items)
-POST /cart (add item)
-POST /cart (add remove item)
+## ORDERS
+
+GET /orders (view order)
+GET /orders/:userID
+GET /orders/:id
+
+
 
 ## PAYMENT
 ???

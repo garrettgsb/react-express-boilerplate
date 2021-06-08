@@ -73,10 +73,7 @@ module.exports = (db) => {
     queryString += `WHERE id = $${queryParams.length};`;
 
     db.query(queryString, queryParams)
-      .then((data) => {
-        const user = data.rows[0];
-        res.redirect("/users/:userId");
-      })
+      .then((res) => res.rows[0])
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });

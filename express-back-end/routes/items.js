@@ -72,10 +72,7 @@ module.exports = (db) => {
     queryString += `WHERE id = $${queryParams.length};`;
 
     db.query(queryString, queryParams)
-      .then(data => {
-        const items = data.rows[0];
-        res.redirect('/items');
-      })
+      .then((res) => res.rows[0])
       .catch(err => {
         res
           .status(500)
@@ -89,10 +86,7 @@ module.exports = (db) => {
     db.query(`INSERT INTO items (user_id, name, price, current_status, description, image, quantity)
     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
     [req.session.user_id, req.body['item name'], req.body.price, req.body.current_status, req.body.description, req.body.image, req.body.quantity])
-      .then(data => {
-        const items = data.rows[0];
-        res.redirect('/items');
-      })
+      .then((res) => res.rows[0])
       .catch(err => {
         res
           .status(500)
@@ -101,12 +95,10 @@ module.exports = (db) => {
   });
 
   // DELETE - admin delete item ===> POST /items/:id/delete
-  router.post('/:id/delete', (req, res) => {
+  router.delete('/:id', (req, res) => {
 
     db.query(`DELETE FROM items WHERE id = $1;`,[req.params.id])
-      .then(data => {
-        res.redirect('/items');
-      })
+    .then(() => res.redirect("/"))
       .catch(err => {
         res
           .status(204)
