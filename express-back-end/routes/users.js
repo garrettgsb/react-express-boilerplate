@@ -9,7 +9,7 @@ module.exports = (db) => {
         FROM users
         WHERE id = $1
       `,
-      [userId]
+      [req.params.userId]
     )
       .then(({ rows: user }) => res.json(user))
       .catch((err) => {
@@ -28,7 +28,12 @@ module.exports = (db) => {
         INSERT into users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4)
         RETURNING *
       `,
-      [firstName, lastName, email, password]
+      [
+        req.params.first_name,
+        req.params.last_name,
+        req.params.email,
+        req.params.password,
+      ]
     )
       .then((res) => res.rows[0])
       .catch((err) => {
@@ -74,6 +79,21 @@ module.exports = (db) => {
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
+      });
+  });
+
+  //delete a profile
+  router.delete("/:userId", (req, res) => {
+    db.query(
+      `
+        DELETE FROM users
+        WHERE id = $1
+      `,
+      [req.params.userId]
+    )
+      .then(() => res.redirect("/"))
+      .catch((err) => {
+        res.status(204).json({ error: err.message });
       });
   });
   return router;
