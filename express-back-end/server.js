@@ -16,6 +16,8 @@ db.connect();
 
 App.use("/api/users", users(db));
 
+App.use("/api/items", items(db));
+
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(
