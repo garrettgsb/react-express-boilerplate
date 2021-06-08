@@ -8,11 +8,7 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
 
     db.query(`SELECT * FROM orders;`)
-      .then(data => {
-        const orders = data.rows;
-        //console.log('the items are:', items)
-        res.render('orders', {orders});
-      })
+      .then(({ rows: orders }) => res.json(orders))
       .catch(err => {
         res
           .status(500)
@@ -23,12 +19,8 @@ module.exports = (db) => {
   // BROWSE - view completed order page ==> GET /orders   **SPECIFIC USER ONLY**
   router.get('/:userID', (req, res) => {
 
-    db.query(`SELECT * FROM orders WHERE userID = $1;`)
-      .then(data => {
-        const orders = data.rows;
-        //console.log('the items are:', items)
-        res.render('orders', {orders});
-      })
+    db.query(`SELECT * FROM orders WHERE userID = $1`, [req.params.userId])
+      .then(({ rows: orders }) => res.json(orders))
       .catch(err => {
         res
           .status(500)
@@ -36,6 +28,16 @@ module.exports = (db) => {
       });
   });
 
-  
+  // READ - view specific order ==> GET /orders/:id
+  router.get('/:id', (req, res) => {
+
+    db.query(`SELECT * FROM orders WHERE id = $1`, [req.params.id])
+      .then(({ rows: order }) => res.json(order))
+      .catch(err => {
+        res
+          .status(500)
+          .json({error: err.message});
+      });
+  });
 
 }
