@@ -38,7 +38,7 @@ CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   shipping_id INTEGER REFERENCES shipping(id) ON DELETE CASCADE,
-  promotion_id INTEGER,
+  promotion_id INTEGER REFERENCES promotions(id) ON DELETE CASCADE,
   order_note VARCHAR(255),
   created_at VARCHAR(255)
 );
