@@ -8,11 +8,7 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
 
     db.query(`SELECT * FROM items;`)
-      .then(data => {
-        const items = data.rows;
-        //console.log('the items are:', items)
-        res.render('items', {items});
-      })
+      .then(({ rows: items }) => res.json(items))
       .catch(err => {
         res
           .status(500)
@@ -24,10 +20,7 @@ module.exports = (db) => {
   router.get('/:id', (req, res) => {
 
     db.query(`SELECT * FROM items WHERE id = $1`, [req.params.id])
-      .then(data => {
-        const item = data.rows[0];
-        res.render('item_show', {item});
-      })
+    .then(({ rows: item }) => res.json(item))
       .catch(err => {
         res
           .status(500)
