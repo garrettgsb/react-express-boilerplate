@@ -56,12 +56,12 @@ const Nav = (props) => {
           Login
         </MenuItem>
       )}
-      <MenuItem onClick={handleMenuClose} component={Link} to="/register">
-        Register
-      </MenuItem>
-
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-
+      {!props.login && (
+        <MenuItem onClick={handleMenuClose} component={Link} to="/register">
+          Register
+        </MenuItem>
+      )}
+      {props.login && <MenuItem onClick={handleMenuClose}>Logout</MenuItem>}
       <MenuItem onClick={handleMenuClose} component={Link} to="/itineraries">
         Itineraries
       </MenuItem>

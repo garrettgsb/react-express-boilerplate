@@ -12,8 +12,8 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email && password) history.push("/");
     props.setLogin(true);
+    if (email && password) history.push("/");
   };
 
   const { url } = useRouteMatch();

@@ -8,33 +8,34 @@ import Itineraries from "./pages/Itineraries";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Map from "./pages/Map";
+import Chat from "./pages/Chat";
 
 function App() {
   const [login, setLogin] = useState(false);
 
   return (
-    <Router login={login} setLogin={setLogin}>
+    <Router>
       <div className="App">
-        <Nav />
+        <Nav login={login} setLogin={setLogin} />
         <Layout>
           <Switch>
             <Route path="/login">
               <Login login={login} setLogin={setLogin} />
             </Route>
             <Route path="/register">
-              <Login />
+              <Login login={login} setLogin={setLogin} />
             </Route>
             <Route path="/itineraries">
-              <Itineraries />
+              <Itineraries login={login} />
             </Route>
             <Route path="itinerary/:id/map">
-              <Map />
+              <Map login={login} />
             </Route>
             <Route path="itinerary/:id/chat">
-              <Map />
+              <Chat login={login} />
             </Route>
             <Route path="/itinerary/:id">
-              <Itinerary />
+              <Itinerary login={login} />
             </Route>
             <Route exact path="/">
               <Home />
