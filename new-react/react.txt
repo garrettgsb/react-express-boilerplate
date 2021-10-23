@@ -1,0 +1,69 @@
+Wire-frame Run-down
+
+app -landing page (/)
+      <nav> header? - navIcon components
+      <form>
+
+      -<nav> //4 icons - plan, map, chat, dropdown(My profile) - logout/iterneraries
+
+          -login/logout/register (/login)
+            <form>
+
+          ***** disabled when not login *****
+           -itineraryList (/itineraries)
+             <itineraryListItem> --> each one (/itinerary/:id/plan)
+
+           -plan (/itinerary/:id/plan) 
+
+           -map (/itinerary/:id/map) 
+
+           -chat (/itinerary/:id/chat)
+
+    -activity selection  (/)
+        <nav>
+        <form> - same form from landing page //or remove
+        <ActivityItem> - each one is one card - can click to expand desc
+        -button - (/itinerary/:id/plan) or (/login)
+
+    -planning (itinerary/:id/plan)
+      <DayList>
+          <MemberList>
+            <MemberListItem>
+          <DayListItem>
+            <ActivityList>
+              <ActivityListItem>
+            <DayListNav> - dropdown here - reuse dropdown component from nav? 
+                      - alt day1 - put DayList component with new info
+          selected/favourited
+      -summary (/itinerary/:id/summary)
+
+    -map (/itinerary/:id/map)
+        <LegendList>  
+          <LegendListItem> - pin colour
+        <DayList>
+          <DayListItem> - different format/props
+            <ActivityItem>
+
+    -chat (/itinerary/:id/chat)
+        <nav>
+        <form>
+
+    -group members (/itinerary/:id/members)
+        <MemberList>
+          <MemberListItem>
+        <form?> // search for user
+    
+
+
+
+Routes
+
+/
+/login
+/itineraries
+/itinerary/:id
+/itinerary/:id/map
+/itinerary/:id/chat 
+/itinerary/:id/members --> component
+
+
