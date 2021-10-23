@@ -10,12 +10,12 @@ const Home = () => {
   const [city, setCity] = useState(null);
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
-  let submitted = false;
+  const [submit, setSubmit] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (city && start && end) console.log(city, start, end);
-    submitted = true;
+    setSubmit(true);
   };
   return (
     <div>
@@ -49,7 +49,7 @@ const Home = () => {
           Submit
         </Button>
       </form>
-      {submitted && <Activities />}
+      {submit && <Activities />}
     </div>
   );
 };

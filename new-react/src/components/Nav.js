@@ -2,7 +2,7 @@ import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MapIcon from "@mui/icons-material/Map";
@@ -18,29 +18,26 @@ const useStyles = makeStyles({
   text: { color: "pink" },
 });
 
-const Nav = () => {
+const Nav = (props) => {
   const classes = useStyles();
   let login = false;
 
   const menuId = "primary-search-account-menu";
-  const [dropSelect, setDropSelect] = useState(null);
-  const isMenuOpen = Boolean(dropSelect);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isMenuOpen = Boolean(anchorEl);
 
   const handleMenuOpen = (e) => {
-    login = !login;
-    console.log("login", login);
-    setDropSelect(e.currentTarget);
+    console.log("login", anchorEl);
+    setAnchorEl(e.currentTarget);
   };
 
   const handleMenuClose = () => {
-    login = !login;
-    console.log("login", login);
-    setDropSelect(null);
+    setAnchorEl(null);
   };
 
   const renderMenu = (
     <Menu
-      dropSelect={dropSelect}
+      anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",
@@ -54,8 +51,20 @@ const Nav = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {!props.login && (
+        <MenuItem onClick={handleMenuClose} component={Link} to="/login">
+          Login
+        </MenuItem>
+      )}
+      <MenuItem onClick={handleMenuClose} component={Link} to="/register">
+        Register
+      </MenuItem>
+
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+
+      <MenuItem onClick={handleMenuClose} component={Link} to="/itineraries">
+        Itineraries
+      </MenuItem>
     </Menu>
   );
 
@@ -63,7 +72,9 @@ const Nav = () => {
     <AppBar>
       <Toolbar>
         <Box sx={{ flexGrow: 1 }}>
-          <Button>The Itinerary</Button>
+          <Button size="large" color="inherit" component={Link} to="/">
+            The Itinerary
+          </Button>
         </Box>
         <IconButton
           // classes={{ root: classes.button }}
@@ -100,8 +111,6 @@ const Nav = () => {
           aria-label="menu"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          component={Link}
-          to="/login"
         >
           <AccountCircle />
         </IconButton>
