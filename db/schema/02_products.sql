@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS products CASCADE;
+ 
+CREATE TABLE products (
+id SERIAL PRIMARY KEY NOT NULL,
+price INT NOT NULL,
+img URL,
+description TEXT NOT NULL,
+is_available BOOLEAN NOT NULL
+category_id  INTEGER REFERENCES categories(id) ON DELETE CASCADE,
+user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+);
