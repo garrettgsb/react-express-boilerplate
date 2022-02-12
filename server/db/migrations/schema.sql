@@ -1,7 +1,7 @@
 
 DROP TABLE IF EXISTS users CASCADE;
 
-DROP TABLE IF EXISTS adventure CASCADE;
+DROP TABLE IF EXISTS adventures CASCADE;
 
 DROP TABLE IF EXISTS reservations CASCADE;
 
@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS adventure_reviews CASCADE;
 
 DROP TABLE IF EXISTS favourites CASCADE;
 
-DROP TABLE IF EXISTS excursion_availibilties CASCADE;
+DROP TABLE IF EXISTS adventure_availibilties CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -58,17 +58,17 @@ CREATE TABLE adventure_reviews (
    guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
    adventure_id INTEGER REFERENCES adventures(id) ON DELETE CASCADE,
    reservation_id INTEGER REFERENCES reservations(id) ON DELETE CASCADE,
-   rating SMALLINT NOT NULL DEFUALT 1,
+   rating SMALLINT NOT NULL DEFAULT 1,
    comment TEXT
 );
 
 CREATE TABLE favourites (
    id SERIAL PRIMARY KEY NOT NULL,
    guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-   adventure_id INTEGER REFERENCES adventures(id) ON DELETE CASCADE,
+   adventure_id INTEGER REFERENCES adventures(id) ON DELETE CASCADE
 );
 
-CREATE TABLE excursion_availibilties (
+CREATE TABLE adventure_availibilties (
    id SERIAL PRIMARY KEY NOT NULL,
    adventure_id INTEGER REFERENCES adventures(id) ON DELETE CASCADE,
    date_time timestamp with time zone,
