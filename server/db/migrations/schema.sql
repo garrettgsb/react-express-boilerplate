@@ -74,6 +74,6 @@ CREATE TABLE favourites (
 CREATE TABLE adventure_availibilties (
    id SERIAL PRIMARY KEY NOT NULL,
    adventure_id INTEGER REFERENCES adventures(id) ON DELETE CASCADE,
-   date_time timestamp with time zone,
+   day VARCHAR(255) NOT NULL,
    available BOOLEAN DEFAULT TRUE
 );
