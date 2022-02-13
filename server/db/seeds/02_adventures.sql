@@ -1,32 +1,194 @@
 
-
---// Art and culture -aisha
--- // Food and drink- aisha
--- // Tours - vic
--- // Wellness -vic
--- // Entertainment -vic
--- // Sports - martin
--- // Sightseeing -martin
--- // Nature and Outdoors - martin
-
-
--- Tours
+--Tours
 INSERT into adventures(owner_id,title,description,thumbnail_photo_url,cover_photo_url,prev_price,curr_price,accessible,street,city,province_state,post_code_zip,country,active,is_full,max_occupancy,season,category)
 VALUES(
-  
-)
+21,
+"New Yorker Helicopter Tour",
+"From the moment you arrive at the Downtown Manhattan Heliport look for our friendly HeliNY staff in red shirts! They'll escort you into the heliport and prepare you for the best views of NYC around!",
+"https://a0.muscache.com/im/pictures/e1f63328-f738-422f-84a8-de7e625c4723.jpg?im_w=1200",
+"https://a0.muscache.com/im/pictures/982be626-410c-4f53-8964-b1ee6398d591.jpg?im_w=1440",
+248,
+280,
+true,
+"359 Canal St",
+"New York", 
+"New York",
+"10013",
+"United States",
+true,
+false,
+2,
+null,
+"Tours"
+),
+(
+6,
+"New York Mafia & True Crime Tour"
+"New York City is famous for its gritty past full of gangs, crime, violence and murder. Embark on this walking tour exploring the darkest history of New York’s most notorious neighborhood, Hell’s Kitchen."
+"https://a0.muscache.com/im/pictures/lombard/MtTemplate-2448604-media_library/original/c4eb4f4d-b5d5-4617-b44a-d4b2d2915473.jpg?im_w=1200",
+"https://a0.muscache.com/im/pictures/lombard/MtTemplate-2448604-media_library/original/6796d5b5-c2c5-4594-9c2e-f00f414a5fab.jpg?im_w=1440",
+58,
+65,
+false,
+"337 Lafayette St", 
+"New York", 
+"New York",
+"10012", 
+"United States",
+true,
+false,
+8,
+null,
+"Tours"
+),
+(
+8,
+"Indie Beauty & Wellness Walking Tour",
+"This walking tour is a curated beauty experience that takes place in the trendy and stylish SoHo neighborhood. We will explore SoHo's one-of-kind shops dedicated to all things beauty and wellness.",
+"https://a0.muscache.com/im/pictures/2a7baba2-893d-497c-9bf9-48cd7bc87739.jpg?im_w=1440",
+"https://a0.muscache.com/im/pictures/0b3418ac-1eaf-4ffa-a014-c5771b8a3664.jpg?im_w=1440",
+77,
+98,
+false,
+"214 Mulberry St",
+ "New York",
+ "New York",
+"10012",
+ "United States"
+true,
+false,
+10,
+null,
+"Tours"
+),
 
 -- Wellness
 INSERT into adventures(owner_id,title,description,thumbnail_photo_url,cover_photo_url,prev_price,curr_price,accessible,street,city,province_state,post_code_zip,country,active,is_full,max_occupancy,season,category)
 VALUES(
-  
+  5,
+"Outdoor yoga & river experience overlooking Box Hill",
+"For the brave, the curious & the adventurers in a unique setting for a fun yoga class, overlooking Box Hill. Embrace the elements in an outdoor yoga class & enjoy a hike up Box hill afterwards to soak in the phenomenal views across the Surrey Hills.",
+"https://a0.muscache.com/im/pictures/lombard/MtTemplate-1988569-media_library/original/a1257a0a-591b-4419-b503-d55d723d5f32.jpeg?im_w=1200",
+"https://a0.muscache.com/im/pictures/lombard/MtTemplate-1988569-media_library/original/62a21f6a-f78a-4d5f-99d2-f0035da57aa5.jpeg?im_w=1440",
+87,
+102,
+false,
+"400 Oxford St",
+"London",
+"England",
+"W1A 1AB", 
+"United Kingdom"
+true,
+false,
+15,
+null,
+"Wellness"
+),
+(
+10,
+"Forest Bathing / Shinrin-Yoku",
+"Forest Bathing (Shinrin-Yoku) is a traditional Japanese awareness meditation, proven to be a profound antidote to anxiety, depression, fear and tension.",
+"https://a0.muscache.com/im/pictures/14ac04e4-a07d-43bd-ac70-a67ad4ec1907.jpg?im_w=1440",
+"https://a0.muscache.com/im/pictures/1981fd91-c8c6-48ad-b2f8-346ab7908749.jpg?im_w=1200",
+70,
+90,
+true,
+"98 Westbourne Grove", 
+"London",
+"England",
+"W2 5RU", 
+"United Kingdom",
+true,
+false,
+15,
+"Spring",
+"Wellness"
+),
+(
+13,
+"Meditative & Joyful Acrylic Pouring",
+"Artwork has always had a relaxing effect on human beings, and it also gives us the possibility to express ourselves. Acrylic Pouring is an easy artistic technique, but one of a kind that lets even beginners create their own stunning piece of art.",
+"https://a0.muscache.com/im/pictures/lombard/MtTemplate-2282070-active_media/original/7e76ad57-fefe-4baa-b3af-28bcdddbe7d6.jpeg?im_w=1440",
+"https://a0.muscache.com/im/pictures/lombard/MtTemplate-2282070-poster/original/0ac76196-ae16-4b5e-a7ee-317efef80857.jpeg?im_w=1440",
+172,
+200,
+false,
+"68900 Frank Sinatra Dr", 
+"Rancho Mirage", 
+"California",
+"92270", 
+"United States",
+true,
+false,
+15,
+"Summer",
+"Wellness"
 )
 
 -- Entertainment
 INSERT into adventures(owner_id,title,description,thumbnail_photo_url,cover_photo_url,prev_price,curr_price,accessible,street,city,province_state,post_code_zip,country,active,is_full,max_occupancy,season,category)
 VALUES(
-  
+9,
+"Weird-Bar Crawl with Fanatical Local",
+"I show you the soul of the city by immersing you in its neighborhood culture. This means checking out a neighborhood district, drinking taps from neighborhood breweries, and getting the neighborhood perspective by interacting with someone who lives here!",
+"https://a0.muscache.com/im/pictures/5cb0f942-a44f-4a55-a9dd-724da51fe9ea.jpg?im_w=1440",
+"https://a0.muscache.com/im/pictures/f0d11430-5e85-4706-b09b-c656b4fda3b9.jpg?im_w=1440",
+63,
+78,
+false,
+"9665 SW Washington Square Rd", 
+"Portland", 
+"Oregan" 
+"97223", 
+"United States"
+true,
+false,
+10,
+null,
+"Entertainment"
+),
+(
+3,
+"The Amazing Harry Potter Walking Tour"
+"This walking tour of London unfurls the movie set locations of the world's most famous Wizard (you know who he is!) Great day out for the family. You will see over 10 movie set locations and several locations that inspired JK Rowling. We will visit actual filming locations in London!",
+"https://a0.muscache.com/im/pictures/bd9b177b-601f-407f-95f0-ebbe7fa64a33.jpg?im_w=1440",
+"https://a0.muscache.com/im/pictures/e89fe141-847c-47aa-a389-4bb0fc008a8c.jpg?im_w=1440",
+16,
+22,
+true,
+"15 Studio Tour Dr", 
+"Leavesden",
+"Watford",
+"England",
+"WD25 7LR",
+"United Kingdom"
+true,
+false,
+12,
+null,
+"Entertainment"
+),
+(
+24,
+"Music production session in London"
+"Ever wanted to record a song? Have a Melody running through your head or love singing or rapping in the shower? Or maybe you are you a DJ, Artist or Producer looking for help making your songs/backing tracks sound more professional? Level up your skills with our small group class.",
+"https://a0.muscache.com/im/pictures/lombard/MtTemplate-613312-poster/original/c8e03bc9-a1bd-4398-aab8-20f3814d7c62.jpeg?im_w=1200",
+"https://a0.muscache.com/im/pictures/lombard/MtTemplate-613312-media_library/original/793fe0fa-501b-405b-9baa-25e1ec8e5dd8.jpeg?im_w=1440",
+70,
+86,
+false,
+"50 Dover St",
+"London",
+"England",
+"W1S 4NY", 
+"United Kingdom",
+true,
+false,
+1,
+null,
+"Entertainment"
 )
+
 
 
 -- Art and Culture adventure
@@ -156,7 +318,7 @@ VALUES(
 -- Sports
 INSERT into adventures(owner_id,title,description,thumbnail_photo_url,cover_photo_url,prev_price,curr_price,accessible,street,city,province_state,post_code_zip,country,active,is_full,max_occupancy,season,category)
 VALUES(
-  (1,
+  1,
   "Manta Ray Night Snorkeling Adventure",
   "Enjoy a comfortable sunset cruise up the Waikiki coast on our brand new boat. Rated as one of the top 10 things to do in your lifetime. We also offer observer options for non-swimmers.",
   "https://https://images.unsplash.com/photo-1635427134049-e7d981971433?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80.com/photos/U6Exuf29flo",
@@ -213,11 +375,11 @@ VALUES(
     "fall",
     "Sports"
   )
-)
+
 -- Sightseeing
 INSERT into adventures(owner_id,title,description,thumbnail_photo_url,cover_photo_url,prev_price,curr_price,accessible,street,city,province_state,post_code_zip,country,active,is_full,max_occupancy,season,category)
 VALUES(
-    (4,
+    4,
     "An insider's bike tour of Tulum",
     "We will start our day by visiting the Mayan ruins of Tulum, early before the crowds. We will travel through different ecosystems such as the beach road, forest trails and some hidden places. We will see the local authenticity, the best spots and far from massive tourism.",
     "https://images.unsplash.com/photo-1549414279-d6799fcf2279?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
@@ -274,11 +436,11 @@ VALUES(
     "summer",
     "Sightseeing"
   )
-)
+
 -- Nature and Outdoors
 INSERT into adventures(owner_id,title,description,thumbnail_photo_url,cover_photo_url,prev_price,curr_price,accessible,street,city,province_state,post_code_zip,country,active,is_full,max_occupancy,season,category)
 VALUES(
-  (7,
+  7,
     "North Shore Whale Watching",
     "Sail the coastline on a private boat and learn about the behaviors of migratory whales, great white sharks, dolphins and other marine life. Watch up close on the bow to see these majestic marine mammals and animals in their natural habitat.",
     "https://images.unsplash.com/photo-1568430462989-44163eb1752f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80",
@@ -335,4 +497,3 @@ VALUES(
     "summer",
     "Nature and Outdoors"
   )
-)
