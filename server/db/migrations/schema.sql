@@ -27,8 +27,8 @@ CREATE TABLE adventures (
    
    title VARCHAR(255) NOT NULL,
    description TEXT ,
-   thumbnail_photo_url VARCHAR(255) NOT NULL,
-   cover_photo_url VARCHAR(255) NOT NULL,
+   thumbnail_photo_url TEXT NOT NULL,
+   cover_photo_url TEXT NOT NULL,
    prev_price INTEGER  NOT NULL DEFAULT 0,
    curr_price INTEGER  NOT NULL DEFAULT 0,
    accessible BOOLEAN,
