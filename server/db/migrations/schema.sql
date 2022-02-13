@@ -31,7 +31,7 @@ CREATE TABLE adventures (
    cover_photo_url VARCHAR(255) NOT NULL,
    prev_price INTEGER  NOT NULL DEFAULT 0,
    curr_price INTEGER  NOT NULL DEFAULT 0,
-   accesible BOOLEAN,
+   accessible BOOLEAN,
 
    street VARCHAR(255) NOT NULL,
    city VARCHAR(255) NOT NULL,
