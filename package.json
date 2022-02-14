@@ -1,0 +1,8 @@
+{
+  "name": "beleaf",
+  "version": "0.1.0",
+  "description": "final project",
+  "scripts": {
+    "docker:up": "docker-compose up -d"
+  }
+}

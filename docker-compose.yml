@@ -1,0 +1,10 @@
+version: '3.6'
+
+services: 
+  database:
+    image: postgres:12-alpine
+    ports: ['5432:5432']
+    environment: 
+      - 'POSTGRES_DB=root'
+      - 'POSTGRES_USER=root'
+      - 'POSTGRES_PASSWORD=password1234'
