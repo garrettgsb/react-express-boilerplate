@@ -7,11 +7,11 @@
   "license": "MIT",
   "scripts": {
     "go": "nodemon server.js",
-    "migration:create": "knex migrate:make",
-    "seed:create": "knex seed:make",
     "db:rollback": "knex migrate:rollback",
-    "db:seed": "knex seed:run",
-    "db:migrate": "knex migrate:latest"
+    "migration:create": "knex migrate:make",
+    "db:migrate": "knex migrate:latest",
+    "seed:create": "knex seed:make",
+    "db:seed": "knex seed:run"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
