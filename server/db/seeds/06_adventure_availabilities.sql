@@ -1,4 +1,4 @@
-INSERT INTO adventure_availibilties (adventure_id, date_time, available)
+INSERT INTO adventure_availibilties (adventure_id, day, available)
 VALUES (1,'Monday',true),
 (1,'Tuesday',true),
 (1,'Wednesday',true),
@@ -166,4 +166,4 @@ VALUES (1,'Monday',true),
 (24,'Thursday',true),
 (24,'Friday',true),
 (24,'Saturday',true),
-(24,'Sunday',true),
+(24,'Sunday',true);
