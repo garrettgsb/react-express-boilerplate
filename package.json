@@ -5,5 +5,8 @@
   "scripts": {
     "docker:up": "docker-compose up -d",
     "db:exec": "docker exec -it beleaf_database_1 psql"
+  },
+  "dependencies": {
+    "react-router-dom": "^6.2.1"
   }
 }
