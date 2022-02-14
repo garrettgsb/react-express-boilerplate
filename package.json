@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "final project",
   "scripts": {
-    "docker:up": "docker-compose up -d"
+    "docker:up": "docker-compose up -d",
+    "db:exec": "docker exec -it beleaf_database_1 psql"
   }
 }
