@@ -7,6 +7,7 @@ exports.seed = async function(knex) {
   await knex('users').del()
   await knex('users').insert([
     {
+      id: 1,
       name: 'Chikorita',
       email: 'chikorita@pokemon.com',
       password: 'password',
