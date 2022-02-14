@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const homepage = require('./db/home_queries.js')
 const favourites = require('./db/favourites_queries')
 const reservations = require('./db/reservations_queries')
+const adventureDetails = require('./db/adventure_details_queries')
 
 //env variables
 const PORT = 8080;
@@ -16,7 +17,7 @@ app.use(Express.static('public'));
 
 // Sample GET route
 app.get('/api/data', (req, res) => {
-  reservations.getReservations()
+  adventureDetails.getAdventureDetails()
     .then((products) => {
       res.json(products);
       // res.render()

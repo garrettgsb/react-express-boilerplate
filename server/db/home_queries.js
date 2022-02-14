@@ -21,10 +21,9 @@ const placeholder = () => {
     .then(data => { return data.rows[0] })
 }
 
-const searchDestination = () => {
-  const search = req.params.input
-  return pool.query(
-    `SELECT * 
+const searchDestination = (search) => {
+  return pool.query(`
+    SELECT id, thumbnail_photo_url, title, description, count(adventures)
     FROM adventures 
     WHERE lower(city) LIKE lower(‘%$1%’) 
     OR lower(country) LIKE lower(‘%$1%’) 
