@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './Navbar'
+import Home from './Home'
 
 class App extends Component {
   constructor(props) {
@@ -25,12 +28,20 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>        
-      </div>
+      <Router>
+        <div className="App">
+          <h1>{ this.state.message }</h1>
+          <button onClick={this.fetchData} >
+            Fetch Data
+          </button>
+          <Routes>
+            <Route exact path='/' element={<Home/>}>
+            </Route>
+            <Route exact path='/dashboard'>
+            </Route>
+          </Routes>
+        </div>
+      </Router>
     );
   }
 }
