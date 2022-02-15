@@ -1,33 +1,49 @@
-import React, { useState } from "react";
-import { Button, Dropdown, Menu } from "semantic-ui-react";
+import React from "react";
+import { Segment, Button, Dropdown, Menu, Image } from "semantic-ui-react";
+import logo from "../assets/logo.png";
 
 export default function Navbar(props) {
   const { user } = props;
 
-  const [activeItem, setActiveItem] = useState("home");
+  const renderAuthButton = () => {
+    if (user) {
+      return (
+        <>
+          <Menu.Item name="logged in as {user}" />
 
-  const handleItemClick = (e, { name }) => setActiveItem(name);
+          <Dropdown item text="Menu">
+            <Dropdown.Menu>
+              <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
+              <Dropdown.Item href="/feed">Newsfeed</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+          <Menu.Item>
+            <Button primary href="/dashboard">
+              Logout
+            </Button>
+          </Menu.Item>
+        </>
+      );
+    } else {
+      return (
+        <Menu.Item>
+          <Button primary href="/dashboard">
+            Login
+          </Button>
+        </Menu.Item>
+      );
+    }
+  };
 
   return (
-    <Menu size="large">
-      <Menu.Item
-        name="home"
-        active={activeItem === "home"}
-        onClick={handleItemClick}
-      />
-
-      <Menu.Menu position="right">
-        <Menu.Item>
-          <Button primary>Login/Sign Up</Button>
+    <Segment inverted className="navbar-segment">
+      <Menu inverted secondary>
+        <Menu.Item className="navbar-logo">
+          <Image src={logo} size="small" />
         </Menu.Item>
-
-        <Dropdown item text="Language">
-          <Dropdown.Menu>
-            <Dropdown.Item>Newsfeed</Dropdown.Item>
-            <Dropdown.Item>Add Plant</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </Menu.Menu>
-    </Menu>
+        <Menu.Menu position="right">{renderAuthButton()}</Menu.Menu>
+      </Menu>
+    </Segment>
   );
 }
