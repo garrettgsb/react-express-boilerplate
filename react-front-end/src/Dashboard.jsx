@@ -2,7 +2,7 @@ import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import { Header, Segment, Container, Button } from "semantic-ui-react";
 import Rooms from "./components/Dashboard/Rooms";
-import Namecard from "./components/Dashboard/Namecard";
+import Namecard from "./components/Dashboard/Namecard.jsx";
 
 export default function Dashboard({ user }) {
   return (
