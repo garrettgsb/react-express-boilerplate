@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Home from './Home'
 import NotFound from './NotFound';
 import Profile from './Profile';
+import Dashboard from './Dashboard';
 
 class App extends Component {
   constructor(props) {
@@ -44,22 +45,22 @@ class App extends Component {
       <Router>
         <div className="App">
         <Navbar />
-          <h1>{ this.state.message }</h1>
+          {/* <h1>{ this.state.message }</h1>
           <button onClick={this.fetchData} >
             Fetch Data
-          </button>
+          </button> */}
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path='/' />
-            <Route path='/dashboard/:user_id' />
+            <Route path='/dashboard/:user_id' element={<Dashboard user={this.state.users && this.state.users[0]}/>}/>
             <Route path='/newsfeed'/>
             <Route path='/profile/:user_id' element={<Profile name={this.state.name}/>} />
           </Routes>
-          <h1>Test DB fetch Users</h1>
+          {/* <h1>Test DB fetch Users</h1>
           <button onClick={this.fetchUsers} >
             Fetch Users from DB
           </button>
-          <p>Users JSON Object:<br/>{ JSON.stringify(this.state.users) }</p>
+          <p>Users JSON Object:<br/>{ JSON.stringify(this.state.users) }</p> */}
         </div>
       </Router>
     );
