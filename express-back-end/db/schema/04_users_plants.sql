@@ -6,5 +6,5 @@ CREATE TABLE user_plants (
   nickname VARCHAR(255) NOT NULL,
   location VARCHAR(255) NOT NULL,
   created_at TIMESTAMP NOT NULL,
-  updated_at TIMESTAMP NOT NULL
+  updated_at TIMESTAMP NULL
 );
