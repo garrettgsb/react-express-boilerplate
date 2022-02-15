@@ -52,6 +52,7 @@ class App extends Component {
             <Route path="*" element={<NotFound />} />
             <Route path='/' />
             <Route path='/dashboard/:user_id' />
+            <Route path='/newsfeed'/>
             <Route path='/profile/:user_id' element={<Profile name={this.state.name}/>} />
           </Routes>
           <h1>Test DB fetch Users</h1>
