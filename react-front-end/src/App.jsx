@@ -32,8 +32,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Navbar />
         <div className="App">
+        <Navbar />
           <h1>{ this.state.message }</h1>
           <button onClick={this.fetchData} >
             Fetch Data

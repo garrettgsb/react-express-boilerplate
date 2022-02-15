@@ -19,7 +19,7 @@ export default function Navbar(props) {
           </Dropdown>
 
           <Menu.Item>
-            <Button primary href="/dashboard">
+            <Button primary href="/dashboard/1">
               Logout
             </Button>
           </Menu.Item>
@@ -28,7 +28,7 @@ export default function Navbar(props) {
     } else {
       return (
         <Menu.Item>
-          <Button primary href="/dashboard">
+          <Button primary href="/dashboard/1">
             Login
           </Button>
         </Menu.Item>
