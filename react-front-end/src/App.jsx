@@ -29,6 +29,16 @@ class App extends Component {
     }) 
   }
 
+  fetchUsers = () => {
+    axios.get('/api/users') // Just to test that DB layer works
+    .then((response) => {
+      console.log('Users: ' + response.data.users)
+      this.setState({
+        users: response.data.users
+      });
+    }) 
+  }
+
   render() {
     return (
       <Router>
@@ -44,6 +54,11 @@ class App extends Component {
             <Route path='/dashboard/:user_id' />
             <Route path='/profile/:user_id' element={<Profile name={this.state.name}/>} />
           </Routes>
+          <h1>Test DB fetch Users</h1>
+          <button onClick={this.fetchUsers} >
+            Fetch Users from DB
+          </button>
+          <p>Users JSON Object:<br/>{ JSON.stringify(this.state.users) }</p>
         </div>
       </Router>
     );

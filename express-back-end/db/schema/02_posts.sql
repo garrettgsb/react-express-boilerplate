@@ -6,5 +6,5 @@ CREATE TABLE posts (
   photo TEXT NOT NULL,
   description TEXT NOT NULL,
   topic VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP NOT NULL,
+  created_at TIMESTAMP NOT NULL
 );
