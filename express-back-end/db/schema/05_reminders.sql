@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS reminders CASCADE;
 CREATE TABLE reminders ( 
   id SERIAL PRIMARY KEY NOT NULL,
-  plant_id INTEGER REFERENCES plants(id) ON DELETE CASCADE,
+  plant_id INTEGER REFERENCES user_plants(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   last_watered TIMESTAMP NOT NULL,
-  watering_interval INTEGER,
+  watering_interval INTEGER
 );

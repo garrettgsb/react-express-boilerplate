@@ -10,5 +10,5 @@ CREATE TABLE species (
   soil_type VARCHAR(255) NOT NULL,
   toxic BOOLEAN NOT NULL,
   difficulty_level VARCHAR(255) NOT NULL,
-  watering_interval VARCHAR(255) NOT NULL,
+  watering_interval VARCHAR(255) NOT NULL
 );
