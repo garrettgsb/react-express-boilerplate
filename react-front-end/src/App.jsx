@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, useReducer } from 'react';
 import axios from 'axios';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './Navbar'
+import Navbar from './components/Navbar';
 import Home from './Home'
+import NotFound from './NotFound';
+import Profile from './Profile';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      message: 'Click the button to load data!'
+      message: 'Click the button to load data!',
+      name: 'Kanye',
     }
   }
 
@@ -29,16 +32,17 @@ class App extends Component {
   render() {
     return (
       <Router>
+        <Navbar />
         <div className="App">
           <h1>{ this.state.message }</h1>
           <button onClick={this.fetchData} >
             Fetch Data
           </button>
           <Routes>
-            <Route exact path='/' element={<Home/>}>
-            </Route>
-            <Route exact path='/dashboard'>
-            </Route>
+            <Route path="*" element={<NotFound />} />
+            <Route path='/' />
+            <Route path='/dashboard/:user_id' />
+            <Route path='/profile/:user_id' element={<Profile name={this.state.name}/>} />
           </Routes>
         </div>
       </Router>
