@@ -5,6 +5,6 @@ CREATE TABLE user_plants (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   nickname VARCHAR(255) NOT NULL,
   location VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP,
-  updated_at TIMESTAMP
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL,
 );
