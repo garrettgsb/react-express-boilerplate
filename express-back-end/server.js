@@ -1,29 +1,37 @@
 // load .env data into process.env
-require('dotenv').config({path: '../.env'});
+require('dotenv').config({
+  path: '../.env'
+});
 
 const Express = require('express');
-const Server = Express();
+const App = Express();
 const BodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080;
 
 // Express Configuration
-Server.use(BodyParser.urlencoded({
+App.use(BodyParser.urlencoded({
   extended: false
 }));
-Server.use(BodyParser.json());
-Server.use(Express.static('public'));
+App.use(BodyParser.json());
+App.use(Express.static('public'));
 
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 
+App.use("/api/users", usersRoutes);
+
 // Sample GET route
-Server.use("/api/users", usersRoutes);
+App.get('/api/data', (req, res) => res.json({
+  message: "Seems to work!",
+}));
 
+App.get('/dashboard', (req, res) => res.json({
+  message: "Hit the dashboard!",
+}));
 
-
-Server.listen(PORT, () => {
+App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
