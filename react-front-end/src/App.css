@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin-top: 120px;
 }
 
 .App-logo {
@@ -35,23 +36,59 @@
 main.container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  column-gap: 5%;
-  width: 90%;
+  justify-content: space-evenly;
   margin: auto;
 }
 
 div.plants {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
 }
 
 div.ui.list.plant-list {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  width: 25%;
-  font-size: large;
   margin: auto;
+}
+
+main.plant-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 25px;
+  width: 95%;
+  column-gap: 5%;
+  margin: auto;
+}
+
+div.icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+}
+
+i.rain.icon, i.book.icon, i.sun.icon, i.paw.icon, i.world.icon, i.lab.icon {
+  font-size: 20px;
+}
+
+img.plant-photo {
+  height: 80vh;
+  border-radius: 5%;
+}
+
+div.plant-desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+div.ui.inverted.segment.navbar-segment {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  opacity: 95%;
+  z-index: 100;
 }

@@ -20,18 +20,16 @@ App.use(Express.static('public'));
 const usersRoutes = require("./routes/users");
 const plantsRoutes = require("./routes/plants");
 const speciesRoutes = require("./routes/species");
+const postsRoutes = require("./routes/posts");
 
 App.use("/api/users", usersRoutes);
 App.use("/api/plants", plantsRoutes);
+App.use("/api/posts", postsRoutes);
 App.use("/api/species", speciesRoutes);
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
-}));
-
-App.get('/dashboard', (req, res) => res.json({
-  message: "Hit the dashboard!",
 }));
 
 App.listen(PORT, () => {

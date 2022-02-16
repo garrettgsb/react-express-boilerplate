@@ -8,6 +8,10 @@ import NotFound from './NotFound';
 import Profile from './Profile';
 import Dashboard from './Dashboard';
 import Plant from './Plant';
+import Cookies from 'universal-cookie';
+import Newsfeed from './Newsfeed';
+
+const cookies = new Cookies();
 
 class App extends Component {
   constructor(props) {
@@ -17,8 +21,24 @@ class App extends Component {
       name: 'Kanye',
       plants: [{user_id: 'Hello?'}],
       users: [{name: 'Leafy'}],
-      species: [{name: 'beleaf'}]
+      species: [{name: 'beleaf'}],
+      posts: [{user_id: 'Hello?'}],
+      user: cookies.get('user_id'),
     }
+  };
+
+  login = () => {
+    cookies.set('user_id', 2, { path: '/' });
+    this.setState({
+      user: cookies.get('user_id')
+    });
+  }
+
+  logout = () => {
+    cookies.remove('user_id', { path: '/' });
+    this.setState({
+      user: ''
+    })
   }
 
   fetchData = () => {
@@ -32,7 +52,7 @@ class App extends Component {
         message: response.data.message
       });
     }) 
-  }
+  };
 
   fetchUsers = () => {
     axios.get('/api/users') // Just to test that DB layer works
@@ -42,17 +62,27 @@ class App extends Component {
         users: response.data.users
       });
     }) 
-  }
+  };
 
   fetchPlants = () => {
-    axios.get('/api/plants') // Just to test that DB layer works
+    axios.get('/api/plants')
     .then((response) => {
       console.log('Plants: ' + response.data.plants)
       this.setState({
         plants: response.data.plants
       });
     }) 
-  }
+  };
+
+  fetchPosts = () => {
+    axios.get('/api/posts') 
+    .then((response) => {
+      console.log('Posts: ' + response.data.posts)
+      this.setState({
+        posts: response.data.posts
+      });
+    }) 
+  };
 
   fetchSpecies = () => {
     axios.get('/api/species') // Just to test that DB layer works
@@ -68,27 +98,23 @@ class App extends Component {
     this.fetchPlants();
     this.fetchUsers();
     this.fetchSpecies();
+    this.fetchPosts();
   }
 
   render() {
     return (
       <Router>
         <div className="App">
-        <Navbar />
-          <h1>{ this.state.message }</h1>
-          <button onClick={this.fetchData} >
-            Fetch Data
-          </button>
+        <Navbar user={this.state.user} login={this.login} logout={this.logout} users={this.state.users}/>
           <Routes>
             <Route path="*" element={<NotFound />} />
-            <Route path='/' />
-            <Route
-              path='/dashboard'
-              element={<Dashboard plants={this.state.plants} user={this.state.users && this.state.users[0]} species={this.state.species} />} 
-            />
-            <Route path='/newsfeed'/>
+            <Route path='/' element={<Home />}/>
+            <Route path='/dashboard' element={<Dashboard plants={this.state.plants} users={this.state.users} userId={this.state.user} species={this.state.species}/>}/>
+            <Route path='/newsfeed' element={<Newsfeed posts={this.state.posts} user={this.state.users[0]} />}/>
             <Route path='/profile/:user_id' element={<Profile name={this.state.name} plants={this.state.plants} users={this.state.users}/>} />
-            <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} />}/>
+            <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users}/>}/>
+            <Route path='/login/:user_id' />
+            <Route path='/logout' />
           </Routes>
         </div>
       </Router>
