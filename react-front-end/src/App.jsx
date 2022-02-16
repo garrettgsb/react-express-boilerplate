@@ -13,6 +13,8 @@ class App extends Component {
     this.state = {
       message: 'Click the button to load data!',
       name: 'Kanye',
+      plants: [{user_id: 'Hello?'}],
+      users: [{name: 'Leafy'}]
     }
   }
 
@@ -39,6 +41,21 @@ class App extends Component {
     }) 
   }
 
+  fetchPlants = () => {
+    axios.get('/api/plants') // Just to test that DB layer works
+    .then((response) => {
+      console.log('Plants: ' + response.data.plants)
+      this.setState({
+        plants: response.data.plants
+      });
+    }) 
+  }
+
+  componentDidMount() {
+    this.fetchPlants();
+    this.fetchUsers();
+  }
+
   render() {
     return (
       <Router>
@@ -53,13 +70,18 @@ class App extends Component {
             <Route path='/' />
             <Route path='/dashboard/:user_id' />
             <Route path='/newsfeed'/>
-            <Route path='/profile/:user_id' element={<Profile name={this.state.name}/>} />
+            <Route path='/profile/:user_id' element={<Profile name={this.state.name} plants={this.state.plants} users={this.state.users}/>} />
           </Routes>
           <h1>Test DB fetch Users</h1>
           <button onClick={this.fetchUsers} >
             Fetch Users from DB
           </button>
           <p>Users JSON Object:<br/>{ JSON.stringify(this.state.users) }</p>
+          <h1>fetch Plants! first plant: {this.state.plants[0].nickname}</h1>
+          <button onClick={this.fetchPlants} >
+            Fetch Plants from DB
+          </button>
+          <p>Plants JSON Object:<br/>{ this.state.plants.length > 1 && JSON.stringify(this.state.plants) }</p>
         </div>
       </Router>
     );
