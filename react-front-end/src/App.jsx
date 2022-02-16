@@ -20,7 +20,7 @@ class App extends Component {
       name: 'Kanye',
       plants: [{user_id: 'Hello?'}],
       users: [{name: 'Leafy'}],
-      user: '',
+      user: cookies.get('user_id'),
     }
   }
 
@@ -33,7 +33,6 @@ class App extends Component {
 
   logout = () => {
     cookies.remove('user_id', { path: '/' });
-    console.log('trying to logout')
     this.setState({
       user: ''
     })
