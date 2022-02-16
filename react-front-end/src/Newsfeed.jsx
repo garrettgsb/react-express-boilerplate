@@ -1,29 +1,45 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css"
+import { Header, Segment, Container, Grid, Icon, Divider } from "semantic-ui-react";
 import PostList from "./components/Newsfeed/PostList";
 
 
-
-export default function Newsfeed({ name, posts }) {
-  
+export default function Newsfeed({ user, posts }) {
+  const name = user && user.name;
   return (
-    <main className="ui container">
-      <div>
-        <h2>
-          Hey {name}, what's on your mind?
-        </h2>
-        <div className="ui animated fade button orange">
-          <div className="visible content">
-            Create
-          </div>
-          <div className="hidden content">
-            New Post
-          </div>
-        </div>
-      <div className='feed'>
-       <PostList posts={posts}/>
-      </div>
-    </div>
-    </main>
+    <Container>
+      <Grid>
+        <Grid.Column width={10} >
+          <Segment.Group>
+            <Header size='large'>Hey {name}, what's on your mind?
+            <Icon name='comment alternate olive'/>
+            </Header>
+           
+            <div className="ui animated fade button orange">
+              <div className="visible content">
+                Create
+              </div>
+              <div className="hidden content">
+                New Post
+              </div>
+            </div>
+            
+          </Segment.Group>     
+         </Grid.Column>
+
+        <Grid.Column width={10} >
+            <Divider horizontal>
+              <Header as='h4'>
+                <Icon name='rss olive' />
+                Newsfeed
+              </Header>
+            </Divider>
+
+              <PostList posts={posts}/>
+
+        </Grid.Column>
+      </Grid>
+    </Container>
+    
   );
 };
