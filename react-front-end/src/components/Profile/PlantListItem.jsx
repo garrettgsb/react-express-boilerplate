@@ -10,10 +10,8 @@ export default function PlantListItem({ id, scientificName, commonName, photo, d
       </div>
       <div className="content">
         <div className="header">{commonName}</div>
-        <div className="meta">"{nickname}"</div>
-        <div className="meta">
-          <span className="date">{scientificName}</span>
-        </div>
+        <div className="meta">{scientificName}</div>
+        <div className="meta"><i>"{nickname}"</i></div>
         <div className="description">
           {description}
         </div>

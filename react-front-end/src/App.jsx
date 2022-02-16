@@ -8,6 +8,9 @@ import NotFound from './NotFound';
 import Profile from './Profile';
 import Dashboard from './Dashboard';
 import Plant from './Plant';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 class App extends Component {
   constructor(props) {
@@ -16,8 +19,23 @@ class App extends Component {
       message: 'Click the button to load data!',
       name: 'Kanye',
       plants: [{user_id: 'Hello?'}],
-      users: [{name: 'Leafy'}]
+      users: [{name: 'Leafy'}],
+      user: cookies.get('user_id'),
     }
+  }
+
+  login = () => {
+    cookies.set('user_id', 2, { path: '/' });
+    this.setState({
+      user: cookies.get('user_id')
+    });
+  }
+
+  logout = () => {
+    cookies.remove('user_id', { path: '/' });
+    this.setState({
+      user: ''
+    })
   }
 
   fetchData = () => {
@@ -62,14 +80,16 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-        <Navbar />
+        <Navbar user={this.state.user} login={this.login} logout={this.logout} users={this.state.users}/>
           <Routes>
             <Route path="*" element={<NotFound />} />
-            <Route path='/' />
-            <Route path='/dashboard' element={<Dashboard plants={this.state.plants} user={this.state.users && this.state.users[0]}/>}/>
+            <Route path='/' element={<Home />}/>
+            <Route path='/dashboard' element={<Dashboard plants={this.state.plants} users={this.state.users} userId={this.state.user}/>}/>
             <Route path='/newsfeed'/>
             <Route path='/profile/:user_id' element={<Profile name={this.state.name} plants={this.state.plants} users={this.state.users}/>} />
             <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users}/>}/>
+            <Route path='/login/:user_id' />
+            <Route path='/logout' />
           </Routes>
         </div>
       </Router>
