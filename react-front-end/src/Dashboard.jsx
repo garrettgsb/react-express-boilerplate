@@ -1,9 +1,13 @@
 import React from "react";
-import "semantic-ui-css/semantic.min.css";
-import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
 import Rooms from "./components/Dashboard/Rooms";
 import Namecard from "./components/Dashboard/Namecard.jsx";
 import Reminders from "./components/Dashboard/Reminders";
+import Addplant from "./components/Dashboard/Addplant";
+
+import "semantic-ui-css/semantic.min.css";
+import "./components/Dashboard/styles.css";
+import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
+
 import { getPlantsForUser } from "./helpers/selectors";
 
 export default function Dashboard({ user, plants }) {
@@ -29,6 +33,7 @@ export default function Dashboard({ user, plants }) {
               <Segment textAlign="left" raised>
                 Good Morning, {name}
               </Segment>
+              <br></br>
             </Grid.Row>
             <Grid.Row>
               <Rooms />
@@ -40,6 +45,9 @@ export default function Dashboard({ user, plants }) {
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      <br></br>
+      <br></br>
+      <Addplant />
     </Container>
   );
 }
