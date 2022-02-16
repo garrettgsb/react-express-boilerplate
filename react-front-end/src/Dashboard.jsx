@@ -3,6 +3,7 @@ import "semantic-ui-css/semantic.min.css";
 import { Header, Segment, Container, Button } from "semantic-ui-react";
 import Rooms from "./components/Dashboard/Rooms";
 import Namecard from "./components/Dashboard/Namecard.jsx";
+import Reminders from "./components/Dashboard/Reminders";
 
 export default function Dashboard({ user }) {
   return (
@@ -13,8 +14,9 @@ export default function Dashboard({ user }) {
         <Button basic color='green' content='Wishlist' floated="right"/>
         </Header>
       </Segment>
-      <Segment raised floated="left">Good Morning, Kanye</Segment>
+      <Segment raised floated="left">Good Morning, Chikorita</Segment>
       <Namecard user={user} />
+      <Reminders />
       <Rooms />
      </Container>
   );
