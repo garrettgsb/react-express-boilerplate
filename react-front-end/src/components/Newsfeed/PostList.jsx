@@ -1,5 +1,6 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css"
+import { Container } from "semantic-ui-react";
 //import { Feed } from 'semantic-ui-react'
 import SinglePost from "./SinglePost";
 
@@ -17,5 +18,5 @@ export default function PostList({ posts }) {
       />
       )
     })
-  return <div className='container'> {renderPosts} </div>
+  return <Container> {renderPosts} </Container>
 };
