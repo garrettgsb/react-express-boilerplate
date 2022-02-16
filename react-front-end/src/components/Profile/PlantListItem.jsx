@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PlantListItem({ id, scientificName, commonName, photo, description }) {
+export default function PlantListItem({ id, scientificName, commonName, photo, description, nickname }) {
   return (
     <div className="ui link cards">
     <div className="card">
@@ -9,6 +9,7 @@ export default function PlantListItem({ id, scientificName, commonName, photo, d
       </div>
       <div className="content">
         <div className="header">{commonName}</div>
+        <div className="meta">"{nickname}"</div>
         <div className="meta">
           <span className="date">{scientificName}</span>
         </div>

@@ -11,12 +11,13 @@ export default function PlantList({ plants }) {
       commonName={plant.common_name}
       photo={plant.photo}
       description={plant.description}
+      nickname={plant.nickname}
     />
   );
 
   return (
     <main className="container">
-      <PlantListItem plants={ parsedPlants }/>
+      { parsedPlants }
     </main>
   );
 }
