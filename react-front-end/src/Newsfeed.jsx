@@ -1,6 +1,7 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css"
-import { Header, Segment, Container, Grid, Icon, Divider } from "semantic-ui-react";
+import { Header, Segment, Container, Grid, Icon, Divider, Button } from "semantic-ui-react";
+import NewPost from "./components/Newsfeed/NewPost";
 import PostList from "./components/Newsfeed/PostList";
 
 
@@ -8,8 +9,9 @@ export default function Newsfeed({ user, posts }) {
   const name = user && user.name;
   return (
     <Container>
-      <Grid>
-        <Grid.Column width={10} >
+      
+      <Grid>       
+          <Grid.Column width={10} >
           <Segment.Group>
             <Header size='large'>Hey {name}, what's on your mind?
             <Icon name='comment alternate olive'/>
@@ -23,10 +25,11 @@ export default function Newsfeed({ user, posts }) {
                 New Post
               </div>
             </div>
-            
-          </Segment.Group>     
-         </Grid.Column>
-
+            </Segment.Group>
+             
+         <NewPost/>
+            </Grid.Column>
+         
         <Grid.Column width={10} >
             <Divider horizontal>
               <Header as='h4'>
