@@ -10,3 +10,9 @@ export function getUserById(users, user_id) {
   const foundUser = users.find(item => item.id === user);
   return foundUser;
 }
+
+export function getPlantById(plants, plant_id) {
+  const plant = Number(plant_id);
+  const foundPlant = plants.find(item => item.id === plant);
+  return foundPlant;
+}

@@ -46,3 +46,12 @@ div.plants {
   flex-direction: column;
   justify-content: space-around;
 }
+
+div.ui.list.plant-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 25%;
+  font-size: large;
+  margin: auto;
+}

@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Home from './Home'
 import NotFound from './NotFound';
 import Profile from './Profile';
+import Plant from './Plant';
 
 class App extends Component {
   constructor(props) {
@@ -71,6 +72,7 @@ class App extends Component {
             <Route path='/dashboard/:user_id' />
             <Route path='/newsfeed'/>
             <Route path='/profile/:user_id' element={<Profile name={this.state.name} plants={this.state.plants} users={this.state.users}/>} />
+            <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} />}/>
           </Routes>
         </div>
       </Router>
