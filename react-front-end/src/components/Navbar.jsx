@@ -28,7 +28,7 @@ export default function Navbar(props) {
     } else {
       return (
         <Menu.Item>
-          <Button primary href="/dashboard/1">
+          <Button primary href="/dashboard">
             Login
           </Button>
         </Menu.Item>

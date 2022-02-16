@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Home from './Home'
 import NotFound from './NotFound';
 import Profile from './Profile';
+import Dashboard from './Dashboard';
 import Plant from './Plant';
 import Newsfeed from './Newsfeed';
 
@@ -84,8 +85,8 @@ class App extends Component {
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route exact path='/' />
-            <Route path='/dashboard/:user_id' />
             <Route path='/newsfeed' element={<Newsfeed posts={this.state.posts} />}/>
+            <Route path='/dashboard' element={<Dashboard plants={this.state.plants} user={this.state.users && this.state.users[0]}/>}/>
             <Route path='/profile/:user_id' element={<Profile name={this.state.name} plants={this.state.plants} users={this.state.users}/>} />
             <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} />}/>
           </Routes>
