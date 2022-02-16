@@ -80,7 +80,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-        <Navbar user={this.state.user} login={this.login} logout={this.logout} />
+        <Navbar user={this.state.user} login={this.login} logout={this.logout} users={this.state.users}/>
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path='/' element={<Home />}/>

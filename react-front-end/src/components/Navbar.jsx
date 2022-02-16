@@ -1,15 +1,17 @@
 import React from "react";
 import { Segment, Button, Dropdown, Menu, Image } from "semantic-ui-react";
 import logo from "../assets/logo.png";
+import { getUserById } from "../helpers/selectors";
 
-export default function Navbar({ user, login, logout }) {
+export default function Navbar({ users, user, login, logout }) {
+
+  const loggedUser = getUserById(users, user);
 
   const renderAuthButton = () => {
     if (user) {
       return (
         <>
-          <Menu.Item name="logged in as {user}" />
-
+          <Menu.Item>Logged in as {loggedUser && loggedUser.name}</Menu.Item>
           <Dropdown item text="Menu">
             <Dropdown.Menu>
               <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
