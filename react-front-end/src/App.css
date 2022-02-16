@@ -32,19 +32,16 @@
   }
 }
 
-main.plant-container {
+main.container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  width: 95%;
+  justify-content: space-evenly;
   margin: auto;
-  column-gap: 15px;
 }
 
 div.plants {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
 }
 
 div.ui.list.plant-list {
