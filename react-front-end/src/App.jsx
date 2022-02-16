@@ -86,7 +86,7 @@ class App extends Component {
             <Route path='/' element={<Home />}/>
             <Route path='/dashboard' element={<Dashboard plants={this.state.plants} users={this.state.users} userId={this.state.user}/>}/>
             <Route path='/newsfeed'/>
-            <Route path='/profile/:user_id' element={<Profile name={this.state.name} plants={this.state.plants} users={this.state.users}/>} />
+            <Route path='/profile/:user_id' element={<Profile userId={this.state.user} plants={this.state.plants} users={this.state.users}/>} />
             <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users}/>}/>
             <Route path='/login/:user_id' />
             <Route path='/logout' />
