@@ -8,7 +8,7 @@ export default function Namecard(props) {
     <main class="name-container">
         <div class="ui card">
           <div class="image">
-            <img src="https://archives.bulbagarden.net/media/upload/thumb/b/bf/152Chikorita.png/250px-152Chikorita.png" alt="avatar"/>
+            <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/152.png" alt="avatar"/>
           </div>
           <div class="content">
             <p class="header">Chikorita</p>

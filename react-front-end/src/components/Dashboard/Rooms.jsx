@@ -4,10 +4,10 @@ import { Segment, Button } from "semantic-ui-react";
 
 export default function Rooms(props) {
   return <Segment style={{ overflow: "auto", maxHeight: 400 }}>
-        <main class="name-container">
+        <main>
         <div class="ui card">
           <div class="image">
-            <img src="https://archives.bulbagarden.net/media/upload/thumb/b/bf/152Chikorita.png/250px-152Chikorita.png" alt="avatar"/>
+
           </div>
           <div class="content">
             <p class="header">Chikorita</p>
@@ -23,7 +23,6 @@ export default function Rooms(props) {
     <main class="name-container">
         <div class="ui card">
           <div class="image">
-            <img src="https://archives.bulbagarden.net/media/upload/thumb/b/bf/152Chikorita.png/250px-152Chikorita.png" alt="avatar"/>
           </div>
           <div class="content">
             <p class="header">Chikorita</p>
@@ -36,10 +35,9 @@ export default function Rooms(props) {
         </div>
     </main>
 
-    <main class="name-container">
+    <main>
         <div class="ui card">
           <div class="image">
-            <img src="https://archives.bulbagarden.net/media/upload/thumb/b/bf/152Chikorita.png/250px-152Chikorita.png" alt="avatar"/>
           </div>
           <div class="content">
             <p class="header">Chikorita</p>

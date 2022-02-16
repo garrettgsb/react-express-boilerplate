@@ -1,12 +1,12 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css"
-import { Button, Checkbox, Image, Card, Feed } from 'semantic-ui-react'
+import { Checkbox, Image, Card, Feed } from 'semantic-ui-react'
 import wateringcan from "../../assets/wateringcan.png";
 
 export default function Reminders(props) {
 
   return (
-    <Card>
+    <Card className="reminders">
     <Card.Content>
       <Card.Header>Watering Reminders <Image src={wateringcan} size="tiny" /> </Card.Header>
     </Card.Content>
