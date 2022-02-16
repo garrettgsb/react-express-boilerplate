@@ -6,6 +6,7 @@ import Namecard from "./components/Dashboard/Namecard.jsx";
 import Reminders from "./components/Dashboard/Reminders";
 
 export default function Dashboard({ user }) {
+  const name = user && user.name;
   return (
     <Container>
       <Grid>
@@ -24,7 +25,7 @@ export default function Dashboard({ user }) {
             </Segment>
             <Grid.Row>
               <Segment textAlign="left" raised>
-                Good Morning, Chikorita
+                Good Morning, {name}
               </Segment>
             </Grid.Row>
             <Grid.Row>

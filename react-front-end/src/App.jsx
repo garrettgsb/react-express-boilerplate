@@ -45,10 +45,10 @@ class App extends Component {
       <Router>
         <div className="App">
         <Navbar />
-          {/* <h1>{ this.state.message }</h1>
+          <h1>{ this.state.message }</h1>
           <button onClick={this.fetchData} >
             Fetch Data
-          </button> */}
+          </button>
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path='/' />
@@ -56,11 +56,11 @@ class App extends Component {
             <Route path='/newsfeed'/>
             <Route path='/profile/:user_id' element={<Profile name={this.state.name}/>} />
           </Routes>
-          {/* <h1>Test DB fetch Users</h1>
+          <h1>Test DB fetch Users</h1>
           <button onClick={this.fetchUsers} >
             Fetch Users from DB
           </button>
-          <p>Users JSON Object:<br/>{ JSON.stringify(this.state.users) }</p> */}
+          <p>Users JSON Object:<br/>{ JSON.stringify(this.state.users) }</p>
         </div>
       </Router>
     );
