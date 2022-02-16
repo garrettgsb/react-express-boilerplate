@@ -9,6 +9,7 @@ import Profile from './Profile';
 import Dashboard from './Dashboard';
 import Plant from './Plant';
 import Cookies from 'universal-cookie';
+import Newsfeed from './Newsfeed';
 
 const cookies = new Cookies();
 
@@ -20,9 +21,10 @@ class App extends Component {
       name: 'Kanye',
       plants: [{user_id: 'Hello?'}],
       users: [{name: 'Leafy'}],
+      posts: [{user_id: 'Hello?'}],
       user: cookies.get('user_id'),
     }
-  }
+  };
 
   login = () => {
     cookies.set('user_id', 2, { path: '/' });
@@ -49,7 +51,7 @@ class App extends Component {
         message: response.data.message
       });
     }) 
-  }
+  };
 
   fetchUsers = () => {
     axios.get('/api/users') // Just to test that DB layer works
@@ -59,21 +61,32 @@ class App extends Component {
         users: response.data.users
       });
     }) 
-  }
+  };
 
   fetchPlants = () => {
-    axios.get('/api/plants') // Just to test that DB layer works
+    axios.get('/api/plants')
     .then((response) => {
       console.log('Plants: ' + response.data.plants)
       this.setState({
         plants: response.data.plants
       });
     }) 
-  }
+  };
+
+  fetchPosts = () => {
+    axios.get('/api/posts') 
+    .then((response) => {
+      console.log('Posts: ' + response.data.posts)
+      this.setState({
+        posts: response.data.posts
+      });
+    }) 
+  };
 
   componentDidMount() {
     this.fetchPlants();
     this.fetchUsers();
+    this.fetchPosts();
   }
 
   render() {
@@ -85,7 +98,7 @@ class App extends Component {
             <Route path="*" element={<NotFound />} />
             <Route path='/' element={<Home />}/>
             <Route path='/dashboard' element={<Dashboard plants={this.state.plants} users={this.state.users} userId={this.state.user}/>}/>
-            <Route path='/newsfeed'/>
+            <Route path='/newsfeed' element={<Newsfeed posts={this.state.posts} user={this.state.users[0]} />}/>
             <Route path='/profile/:user_id' element={<Profile userId={this.state.user} plants={this.state.plants} users={this.state.users}/>} />
             <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users}/>}/>
             <Route path='/login/:user_id' />
