@@ -55,6 +55,9 @@ main.plant-container {
   flex-direction: row;
   justify-content: center;
   padding-top: 25px;
+  width: 95%;
+  column-gap: 5%;
+  margin: auto;
 }
 
 div.icons {
