@@ -8,11 +8,12 @@ import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
 import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
 
-import { getPlantsForUser } from "./helpers/selectors";
+import { getPlantsForUser, getPlantByName } from "./helpers/selectors";
 
 export default function Dashboard({ user, plants }) {
   const name = user && user.name;
   const userPlants = getPlantsForUser(plants, user.id)
+  const species = getPlantByName()
   return (
     <Container>
       <Grid>
@@ -47,7 +48,7 @@ export default function Dashboard({ user, plants }) {
       </Grid>
       <br></br>
       <br></br>
-      <Addplant />
+      <Addplant species={species}/>
     </Container>
   );
 }
