@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
 import { Segment, Image, Dropdown, Grid } from "semantic-ui-react";
+import { getPlantByName } from "../../helpers/selectors";
 
 const friendOptions = [
   {
@@ -47,8 +48,17 @@ const friendOptions = [
   },
 ]
 
-export default function Addplant({ user }) {
-  const [plant, setPlant] = useState();
+export default function Addplant({ species }) {
+  const [plant, setPlant] = useState({});
+
+  const clickHandler = (event, data) => {
+    console.log("SPECIES", species)
+    const selectedSpecies = getPlantByName(species, data.value)
+    console.log("DATA.VALUE", data.value)
+    setPlant(selectedSpecies)
+    console.log("DID THIS SET??", plant)
+    console.log("SELECTED SPECIES", selectedSpecies)
+  }
 
   return (
     <div>
@@ -56,18 +66,14 @@ export default function Addplant({ user }) {
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
             <Image
-              src="https://as2.ftcdn.net/v2/jpg/02/12/89/91/1000_F_212899169_gON1sUOS7fpB8sjjtZvWhVdoHRZpNo2u.jpg"
+              src={plant.photo}
               size="medium"
               floated="left"
             />
           </Grid.Column>
           <Grid.Column width={6}>
             <Segment compact>
-              Member of the arum family Araceae, Monstera is native to tropical
-              forests of southern Mexico, south to Panama. As houseplants, they
-              are very unique, easygoing and always eyecatching because of their
-              dramatic green leaves. They are vining plants and love to trail
-              over the pot or climb along a trellis.
+            {plant.description}
             </Segment>
           </Grid.Column>
           <Grid.Column verticalAlign="middle" centered width={5}>
@@ -76,13 +82,12 @@ export default function Addplant({ user }) {
               fluid
               selection
               options={friendOptions}
-              onChange={(event, data) => setPlant(data.value) }
+              onChange={ clickHandler }
             />
-            <Segment compact>Common Name: Swiss Cheese Plant</Segment>
-            <Segment compact>Scientific Name: Monstera Deliciosa.</Segment>
-            <Segment compact>Last Watered: 2 Days Ago</Segment>
-            <Segment compact>Pot Type</Segment>
-            <Segment compact>Soil Type</Segment>
+            <Segment compact>Common Name: {plant.common_name}</Segment>
+            <Segment compact>Scientific Name:{plant.scientific_name}</Segment>
+            <Segment compact>Water Requirments: {plant.watering_interval} Days</Segment>
+            <Segment compact>Soil Type: {plant.soil_type}</Segment>
           </Grid.Column>
         </Grid>
       </Segment>

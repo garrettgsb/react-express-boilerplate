@@ -2,18 +2,18 @@ import React from "react";
 import Rooms from "./components/Dashboard/Rooms";
 import Namecard from "./components/Dashboard/Namecard.jsx";
 import Reminders from "./components/Dashboard/Reminders";
-import Addplant from "./components/Dashboard/Addplant";
+import AddPlant from "./components/Dashboard/AddPlant";
 
 import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
 import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
 
-import { getPlantsForUser, getPlantByName } from "./helpers/selectors";
+import { getPlantsForUser } from "./helpers/selectors";
 
-export default function Dashboard({ user, plants }) {
+export default function Dashboard({ user, plants, species }) {
   const name = user && user.name;
   const userPlants = getPlantsForUser(plants, user.id)
-  const species = getPlantByName()
+
   return (
     <Container>
       <Grid>
@@ -48,7 +48,7 @@ export default function Dashboard({ user, plants }) {
       </Grid>
       <br></br>
       <br></br>
-      <Addplant species={species}/>
+      <AddPlant species={species}/>
     </Container>
   );
 }
