@@ -32,13 +32,13 @@
   }
 }
 
-main.container {
+main.plant-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  column-gap: 5%;
-  width: 90%;
+  justify-content: center;
+  width: 95%;
   margin: auto;
+  column-gap: 15px;
 }
 
 div.plants {
@@ -50,8 +50,35 @@ div.plants {
 div.ui.list.plant-list {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  width: 25%;
-  font-size: large;
   margin: auto;
+}
+
+main.plant-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 25px;
+}
+
+div.icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+}
+
+i.rain.icon, i.book.icon, i.sun.icon, i.paw.icon, i.world.icon, i.lab.icon {
+  font-size: 20px;
+}
+
+img.plant-photo {
+  height: 80vh;
+  border-radius: 5%;
+}
+
+div.plant-desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
 }
