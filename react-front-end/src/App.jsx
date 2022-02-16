@@ -78,17 +78,13 @@ class App extends Component {
       <Router>
         <div className="App">
         <Navbar />
-          {/* <h1>{ this.state.message }</h1>
-          <button onClick={this.fetchData} >
-            Fetch Data
-          </button> */}
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route exact path='/' />
             <Route path='/newsfeed' element={<Newsfeed posts={this.state.posts} user={this.state.users[0]} />}/>
             <Route path='/dashboard' element={<Dashboard plants={this.state.plants} user={this.state.users && this.state.users[0]}/>}/>
             <Route path='/profile/:user_id' element={<Profile name={this.state.name} plants={this.state.plants} users={this.state.users}/>} />
-            <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} />}/>
+            <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users}/>}/>
           </Routes>
         </div>
       </Router>
