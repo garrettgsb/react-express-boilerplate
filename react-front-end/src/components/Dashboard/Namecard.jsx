@@ -3,10 +3,10 @@ import "semantic-ui-css/semantic.min.css"
 import { Button } from 'semantic-ui-react'
 
 export default function Namecard({user}) {
-console.log("USER PROPS", user)
 const avatar = user && user.avatar
 const name = user && user.name
 const quote = user && user.quote
+
   return (
     <main class="name-container">
         <div class="ui card">

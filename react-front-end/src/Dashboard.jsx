@@ -4,9 +4,11 @@ import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
 import Rooms from "./components/Dashboard/Rooms";
 import Namecard from "./components/Dashboard/Namecard.jsx";
 import Reminders from "./components/Dashboard/Reminders";
+import { getPlantsForUser } from "./helpers/selectors";
 
-export default function Dashboard({ user }) {
+export default function Dashboard({ user, plants }) {
   const name = user && user.name;
+  const userPlants = getPlantsForUser(plants, user.id)
   return (
     <Container>
       <Grid>
@@ -34,7 +36,7 @@ export default function Dashboard({ user }) {
           </Grid.Column>
           <Grid.Column width={5}>
             <Namecard user={user} />
-            <Reminders />
+            <Reminders plants={userPlants}/>
           </Grid.Column>
         </Grid.Row>
       </Grid>
