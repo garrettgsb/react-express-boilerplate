@@ -1,25 +1,26 @@
 import React from "react";
 import { Segment, Button, Dropdown, Menu, Image } from "semantic-ui-react";
 import logo from "../assets/logo.png";
+import { getUserById } from "../helpers/selectors";
 
-export default function Navbar(props) {
-  const { user } = props;
+export default function Navbar({ users, user, login, logout }) {
+
+  const loggedUser = getUserById(users, user);
 
   const renderAuthButton = () => {
     if (user) {
       return (
         <>
-          <Menu.Item name="logged in as {user}" />
-
+          <Menu.Item>Logged in as {loggedUser && loggedUser.name}</Menu.Item>
           <Dropdown item text="Menu">
             <Dropdown.Menu>
               <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
-              <Dropdown.Item href="/feed">Newsfeed</Dropdown.Item>
+              <Dropdown.Item href="/newsfeed">Newsfeed</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
           <Menu.Item>
-            <Button primary href="/dashboard/1">
+            <Button primary onClick={logout}>
               Logout
             </Button>
           </Menu.Item>
@@ -28,7 +29,7 @@ export default function Navbar(props) {
     } else {
       return (
         <Menu.Item>
-          <Button primary href="/dashboard">
+          <Button primary onClick={login}>
             Login
           </Button>
         </Menu.Item>
@@ -40,7 +41,7 @@ export default function Navbar(props) {
     <Segment inverted className="navbar-segment">
       <Menu inverted secondary>
         <Menu.Item className="navbar-logo">
-          <Image src={logo} size="small" />
+          <Image href="/dashboard" src={logo} size="small" />
         </Menu.Item>
         <Menu.Menu position="right">{renderAuthButton()}</Menu.Menu>
       </Menu>
