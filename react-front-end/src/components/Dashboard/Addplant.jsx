@@ -5,9 +5,9 @@ import { Segment, Image, Dropdown, Grid } from "semantic-ui-react";
 const friendOptions = [
   {
  
-    key: 'Jenny Hess',
-    text: 'Jenny Hess',
-    value: 'Jenny Hess',
+    key: 'Monstera Deliciosa',
+    text: 'Monstera Deliciosa',
+    value: 'Monstera Deliciosa',
     image:  <Image src='https://as2.ftcdn.net/v2/jpg/02/12/89/91/1000_F_212899169_gON1sUOS7fpB8sjjtZvWhVdoHRZpNo2u.jpg' className='drop' /> ,
   },
   {
@@ -76,7 +76,7 @@ export default function Addplant({ user }) {
               fluid
               selection
               options={friendOptions}
-              onChange={(event, data) => { setPlant(data.value); console.log("PLANT ONCHANGE ---->", data)}}
+              onChange={(event, data) => setPlant(data.value) }
             />
             <Segment compact>Common Name: Swiss Cheese Plant</Segment>
             <Segment compact>Scientific Name: Monstera Deliciosa.</Segment>
