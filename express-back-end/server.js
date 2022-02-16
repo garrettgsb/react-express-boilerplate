@@ -15,12 +15,13 @@ App.use(BodyParser.urlencoded({
 App.use(BodyParser.json());
 App.use(Express.static('public'));
 
-
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
+const plantsRoutes = require("./routes/plants");
 
 App.use("/api/users", usersRoutes);
+App.use("/api/plants", plantsRoutes);
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
