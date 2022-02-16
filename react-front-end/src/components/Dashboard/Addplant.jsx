@@ -3,6 +3,8 @@ import "semantic-ui-css/semantic.min.css";
 import { Segment, Image, Dropdown, Grid } from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
+
+
 const friendOptions = [
   {
  
@@ -51,13 +53,17 @@ const friendOptions = [
 export default function Addplant({ species }) {
   const [plant, setPlant] = useState({});
 
+  const speciesOptions = species.map(element => ({
+      key: element.scientific_name,
+      text: element.scientific_name,
+      value: element.scientific_name,
+      image:  <Image src={element.photo} className='drop' /> 
+    }));
+  
+
   const clickHandler = (event, data) => {
-    console.log("SPECIES", species)
     const selectedSpecies = getPlantByName(species, data.value)
-    console.log("DATA.VALUE", data.value)
     setPlant(selectedSpecies)
-    console.log("DID THIS SET??", plant)
-    console.log("SELECTED SPECIES", selectedSpecies)
   }
 
   return (
@@ -81,7 +87,7 @@ export default function Addplant({ species }) {
               placeholder="Select Friend"
               fluid
               selection
-              options={friendOptions}
+              options={speciesOptions}
               onChange={ clickHandler }
             />
             <Segment compact>Common Name: {plant.common_name}</Segment>
