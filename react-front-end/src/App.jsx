@@ -7,6 +7,9 @@ import Home from './Home'
 import NotFound from './NotFound';
 import Profile from './Profile';
 import Plant from './Plant';
+import Newsfeed from './Newsfeed';
+
+
 
 class App extends Component {
   constructor(props) {
@@ -15,9 +18,10 @@ class App extends Component {
       message: 'Click the button to load data!',
       name: 'Kanye',
       plants: [{user_id: 'Hello?'}],
+      posts: [{user_id: 'Hello?'}],
       users: [{name: 'Leafy'}]
     }
-  }
+  };
 
   fetchData = () => {
     axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
@@ -30,7 +34,7 @@ class App extends Component {
         message: response.data.message
       });
     }) 
-  }
+  };
 
   fetchUsers = () => {
     axios.get('/api/users') // Just to test that DB layer works
@@ -40,21 +44,32 @@ class App extends Component {
         users: response.data.users
       });
     }) 
-  }
+  };
 
   fetchPlants = () => {
-    axios.get('/api/plants') // Just to test that DB layer works
+    axios.get('/api/plants')
     .then((response) => {
       console.log('Plants: ' + response.data.plants)
       this.setState({
         plants: response.data.plants
       });
     }) 
-  }
+  };
+
+  fetchPosts = () => {
+    axios.get('/api/posts') 
+    .then((response) => {
+      console.log('Posts: ' + response.data.posts)
+      this.setState({
+        posts: response.data.posts
+      });
+    }) 
+  };
 
   componentDidMount() {
     this.fetchPlants();
     this.fetchUsers();
+    this.fetchPosts();
   }
 
   render() {
@@ -68,9 +83,9 @@ class App extends Component {
           </button>
           <Routes>
             <Route path="*" element={<NotFound />} />
-            <Route path='/' />
+            <Route exact path='/' />
             <Route path='/dashboard/:user_id' />
-            <Route path='/newsfeed'/>
+            <Route path='/newsfeed' element={<Newsfeed posts={this.state.posts} />}/>
             <Route path='/profile/:user_id' element={<Profile name={this.state.name} plants={this.state.plants} users={this.state.users}/>} />
             <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} />}/>
           </Routes>
