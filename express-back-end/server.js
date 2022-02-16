@@ -19,9 +19,12 @@ App.use(Express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const plantsRoutes = require("./routes/plants");
+const postsRoutes = require("./routes/posts");
 
 App.use("/api/users", usersRoutes);
 App.use("/api/plants", plantsRoutes);
+App.use("/api/posts", postsRoutes);
+
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
