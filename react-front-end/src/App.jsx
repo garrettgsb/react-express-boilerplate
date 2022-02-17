@@ -10,6 +10,7 @@ import Dashboard from './Dashboard';
 import Plant from './Plant';
 import Cookies from 'universal-cookie';
 import Newsfeed from './Newsfeed';
+import Wishlist from './Wishlist';
 
 const cookies = new Cookies();
 
@@ -115,6 +116,7 @@ class App extends Component {
             <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users} />} />
             <Route path='/login/:user_id' />
             <Route path='/logout' />
+            <Route path='/wishlist' element={<Wishlist users={this.state.users} userId={this.state.user}/>}/>
           </Routes>
         </div>
       </Router>

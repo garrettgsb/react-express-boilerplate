@@ -83,7 +83,7 @@ div.plant-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  margin-right: 5%;
 }
 
 img.plant-photo {

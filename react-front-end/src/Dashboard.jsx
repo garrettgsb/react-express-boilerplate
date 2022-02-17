@@ -7,7 +7,6 @@ import AddPlant from "./components/Dashboard/AddPlant";
 import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
 import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
-
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 
 export default function Dashboard({ users, userId, plants, species }) {
