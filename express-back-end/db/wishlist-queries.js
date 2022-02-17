@@ -11,6 +11,26 @@ const getWishlist = () => {
     });
 };
 
+const insertWishlistPlant = (data) => {
+  // eslint-disable-next-line camelcase
+  const { plant_id, user_id } = data;
+  return db.query(
+    `
+      INSERT INTO user_plants (plant_id, user_id, created at) VALUES ($1, $2, $3) RETURNING *;
+    `,
+    // eslint-disable-next-line camelcase
+    [plant_id, user_id, new Date()]
+  )
+    .then((res) => {
+      // console.log('res.rows[0]', res.rows[0]);
+      return res.rows;
+    })
+    .catch((err) => {
+      console.log('DB error inserting wishlist: ' + err.message);
+    });
+};
+
 module.exports = {
-  getWishlist
+  getWishlist,
+  insertWishlistPlant
 };
