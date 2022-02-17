@@ -57,7 +57,7 @@ export default function Dashboard({ users, userId, plants, species }) {
         </Grid>
         <br></br>
         <br></br>
-         {isVisible && <AddPlant user={user} species={species} />}
+         {isVisible && <AddPlant user={user} species={species} setIsVisible={setIsVisible} />}
         <br></br>
         <br></br>
       </Container>

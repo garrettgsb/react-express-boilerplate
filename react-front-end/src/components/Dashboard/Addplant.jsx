@@ -8,15 +8,20 @@ import {
   Grid,
   Button,
   Form,
+  Icon,
 } from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
-export default function AddPlant({ user, species }) {
+export default function AddPlant({ user, species, setIsVisible }) {
   const [state, setState] = useState({
     plant: {},
     nickname: "",
     location: "",
   });
+
+  const onClose = (event) => {
+    setIsVisible(false);
+  };
 
   const speciesOptions = species.map((element) => ({
     key: element.scientific_name,
@@ -47,16 +52,23 @@ export default function AddPlant({ user, species }) {
       .catch(function (error) {
         console.log(error);
       });
+      onClose()
   };
   return (
     <div>
       <Segment>
+        <Button basic color='red' onClick={onClose} floated="right" animated="vertical">
+          <Button.Content hidden>Close</Button.Content>
+          <Button.Content visible>
+            <Icon name="window close" color="red" size="large" />
+          </Button.Content>
+        </Button>
         <h1>Add Plant</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
             <Image src={state.plant.photo} size="large" floated="left" />
           </Grid.Column>
-          <Grid.Column width={6}>
+          <Grid.Column width={5}>
             <Segment compact>{state.plant.description}</Segment>
           </Grid.Column>
           <Grid.Column verticalAlign="middle" centered width={5}>
@@ -68,9 +80,9 @@ export default function AddPlant({ user, species }) {
               options={speciesOptions}
               onChange={clickHandler}
             />
-            <Segment compact>Common Name:  {state.plant.common_name}</Segment>
+            <Segment compact>Common Name: {state.plant.common_name}</Segment>
             <Segment compact>
-              Scientific Name:  {state.plant.scientific_name}
+              Scientific Name: {state.plant.scientific_name}
             </Segment>
             <Form onSubmit={submitForm}>
               <Form.Field>
@@ -103,8 +115,8 @@ export default function AddPlant({ user, species }) {
               </Form.Field>
 
               {/* <Segment compact>
-                Water Requirments: {state.plant.watering_interval} Days
-              </Segment>
+                Water Requirements: {state.plant.watering_interval} Days
+                </Segment>
               <Segment compact>Soil Type: {state.plant.soil_type}</Segment> */}
               <Button type="submit" positive floated="right">
                 Save Your Plant!
