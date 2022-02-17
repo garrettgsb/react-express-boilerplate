@@ -10,7 +10,7 @@ export default function Addplant({ species }) {
 
   const speciesOptions = species.map(element => ({
       key: element.scientific_name,
-      text: element.scientific_name,
+      text: element.common_name,
       value: element.scientific_name,
       image:  <Image src={element.photo} className='drop' /> 
     }));
