@@ -19,12 +19,15 @@ App.use(Express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const plantsRoutes = require("./routes/plants");
+const speciesRoutes = require("./routes/species");
 const postsRoutes = require("./routes/posts");
+const newUserPlant = require("./routes/userPlants");
 
 App.use("/api/users", usersRoutes);
 App.use("/api/plants", plantsRoutes);
 App.use("/api/posts", postsRoutes);
-
+App.use("/api/species", speciesRoutes);
+App.use("/api/user_plants", newUserPlant);
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({

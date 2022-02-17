@@ -1,69 +1,53 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
-import { Segment, Button } from "semantic-ui-react";
+import { Segment, Grid, Image } from "semantic-ui-react";
 
 export default function Rooms(props) {
-  return <Segment style={{ overflow: "auto", maxHeight: 400 }}>
-        <main>
-        <div class="ui card">
-          <div class="image">
+  return (
+    <div>
+      <Segment style={{overflow: 'auto', maxWidth: 800}}>
+      <Segment.Group horizontal>
+      <Grid verticalAlign='middle' centered>
+        <Grid.Column width={8}>
+        <Image
+          src="https://as2.ftcdn.net/v2/jpg/02/12/89/91/1000_F_212899169_gON1sUOS7fpB8sjjtZvWhVdoHRZpNo2u.jpg"
+          size="medium"
+          floated="left"
+        />
+        </Grid.Column>
+        <Grid.Column width={8}>
+        <Segment compact>
+          Member of the arum family Araceae, Monstera is native to tropical
+          forests of southern Mexico, south to Panama. As houseplants, they are
+          very unique, easygoing and always eyecatching because of their
+          dramatic green leaves. They are vining plants and love to trail over
+          the pot or climb along a trellis.
+        </Segment>
+        </Grid.Column>
 
-          </div>
-          <div class="content">
-            <p class="header">Chikorita</p>
-            <div class="meta">
-              <span class="quote">Beleaf in yourself!</span>
-            </div>
-            <Button basic color='blue' content='Edit' floated="left"/>
-          </div>
+                <Grid.Column width={8}>
+        <Segment compact>
+          Member of the arum family Araceae, Monstera is native to tropical
+          forests of southern Mexico, south to Panama. As houseplants, they are
+          very unique, easygoing and always eyecatching because of their
+          dramatic green leaves. They are vining plants and love to trail over
+          the pot or climb along a trellis.
+        </Segment>
+        </Grid.Column>
 
-        </div>
-    </main>
+        <Grid.Column width={8}>
+        <Segment compact>
+          Member of the arum family Araceae, Monstera is native to tropical
+          forests of southern Mexico, south to Panama. As houseplants, they are
+          very unique, easygoing and always eyecatching because of their
+          dramatic green leaves. They are vining plants and love to trail over
+          the pot or climb along a trellis.
+        </Segment>
+        </Grid.Column>
 
-    <main class="name-container">
-        <div class="ui card">
-          <div class="image">
-          </div>
-          <div class="content">
-            <p class="header">Chikorita</p>
-            <div class="meta">
-              <span class="quote">Beleaf in yourself!</span>
-            </div>
-            <Button basic color='blue' content='Edit' floated="left"/>
-          </div>
-
-        </div>
-    </main>
-
-    <main>
-        <div class="ui card">
-          <div class="image">
-          </div>
-          <div class="content">
-            <p class="header">Chikorita</p>
-            <div class="meta">
-              <span class="quote">Beleaf in yourself!</span>
-            </div>
-            <Button basic color='blue' content='Edit' floated="left"/>
-          </div>
-
-        </div>
-    </main>
-
-    <main class="name-container">
-        <div class="ui card">
-          <div class="image">
-            <img src="https://archives.bulbagarden.net/media/upload/thumb/b/bf/152Chikorita.png/250px-152Chikorita.png" alt="avatar"/>
-          </div>
-          <div class="content">
-            <p class="header">Chikorita</p>
-            <div class="meta">
-              <span class="quote">Beleaf in yourself!</span>
-            </div>
-            <Button basic color='blue' content='Edit' floated="left"/>
-          </div>
-
-        </div>
-    </main>
-  </Segment>;
+      </Grid>
+      </Segment.Group>
+      </Segment>
+    </div>
+  );
 }

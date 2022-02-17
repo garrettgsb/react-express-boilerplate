@@ -16,3 +16,8 @@ export function getPlantById(plants, plant_id) {
   const foundPlant = plants.find(item => item.id === plant);
   return foundPlant;
 }
+
+export function getPlantByName(species, scientific_name) {;
+  const foundPlant = species.find(item => item.scientific_name === scientific_name);
+  return foundPlant;
+}
