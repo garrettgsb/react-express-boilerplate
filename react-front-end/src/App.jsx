@@ -114,6 +114,14 @@ class App extends Component {
     this.fetchWishlist();
   }
 
+  // componentDidUpdate() {
+  //   this.fetchWishlist();
+  // }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
     return (
       <Router>

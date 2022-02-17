@@ -28,7 +28,7 @@ export function getWishlistPlants(wishlist, user_id) {
 
   const arr = [];
   wishlist.forEach(item => {
-    if (item.user_id === userId) {
+    if (item.wishlist_user_id === userId) {
       arr.push(item);
     }
   });

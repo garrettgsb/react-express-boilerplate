@@ -15,6 +15,7 @@ export default function Profile({ plants, users, userId }) {
   const plantsForUser = getPlantsForUser(plants, user_id);
 
   const loggedUser = getUserById(users, userId);
+  // console.log('loggedUser', loggedUser)
 
   return (
     <Container>
@@ -28,7 +29,7 @@ export default function Profile({ plants, users, userId }) {
           <Grid.Column width={11} >
             <Segment style={{ overflow: 'auto', maxWidth: 1000 }}>
               <Segment.Group horizontal>
-                <PlantList plants={plantsForUser} />
+                <PlantList plants={plantsForUser} user={userId} />
               </Segment.Group>
             </Segment>
           </Grid.Column>

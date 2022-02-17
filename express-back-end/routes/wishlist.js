@@ -1,10 +1,10 @@
 const express = require('express');
 const router  = express.Router();
-const wishlistQueries = require('../db/wishlist-queries');
+const { insertWishlistPlant, getWishlist } = require('../db/wishlist-queries');
 
 // GET wishlist table
 router.get("/", (req, res) => {
-  wishlistQueries.getWishlist()
+  getWishlist()
     .then((wishlist) => {
       res.json({ wishlist });
     })
@@ -17,8 +17,11 @@ router.get("/", (req, res) => {
 
 // POST wishlist table
 router.post("/", (req, res) => {
-  wishlistQueries.insertWishlistPlant(req.body)
+  // console.log("insert wishlist plant", insertWishlistPlant);
+  console.log("req.body!!!!", req.body);
+  insertWishlistPlant(req.body)
     .then((response) => {
+      console.log('response', response);
       res.json(response);
     })
     .catch((error) => console.log(error));

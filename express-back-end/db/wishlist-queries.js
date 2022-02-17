@@ -13,16 +13,16 @@ const getWishlist = () => {
 
 const insertWishlistPlant = (data) => {
   // eslint-disable-next-line camelcase
-  const { plant_id, user_id } = data;
+  const { plant_id, wishlist_user_id } = data;
   return db.query(
     `
-      INSERT INTO user_plants (plant_id, user_id, created at) VALUES ($1, $2, $3) RETURNING *;
+      INSERT INTO wishlist_plants (plant_id, wishlist_user_id, created_at) VALUES ($1, $2, $3) RETURNING *;
     `,
     // eslint-disable-next-line camelcase
-    [plant_id, user_id, new Date()]
+    [plant_id, wishlist_user_id, new Date()]
   )
     .then((res) => {
-      // console.log('res.rows[0]', res.rows[0]);
+      console.log('res.rows[0] EEEEE', res.rows[0]);
       return res.rows;
     })
     .catch((err) => {
