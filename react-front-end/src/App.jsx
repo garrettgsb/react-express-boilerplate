@@ -25,7 +25,7 @@ class App extends Component {
       species: [{ name: 'beleaf' }],
       posts: [{ user_id: 'Hello?' }],
       user: cookies.get('user_id'),
-      wishlist: [{ name: 'beleaf' }],
+      wishlist: '',
     }
   };
 

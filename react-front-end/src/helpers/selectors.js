@@ -17,7 +17,21 @@ export function getPlantById(plants, plant_id) {
   return foundPlant;
 }
 
-export function getPlantByName(species, scientific_name) {;
+export function getPlantByName(species, scientific_name) {
   const foundPlant = species.find(item => item.scientific_name === scientific_name);
   return foundPlant;
+}
+
+// Returns an array of wishlist objects for a specific user
+export function getWishlistPlants(wishlist, user_id) {
+  const userId = Number(user_id);
+
+  const arr = [];
+  wishlist.forEach(item => {
+    if (item.user_id === userId) {
+      arr.push(item);
+    }
+  });
+  console.log('arr is', arr);
+  return arr;
 }
