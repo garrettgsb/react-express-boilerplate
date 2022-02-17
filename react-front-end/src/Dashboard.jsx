@@ -53,6 +53,8 @@ export default function Dashboard({ users, userId, plants, species }) {
         <br></br>
         <br></br>
         <AddPlant species={species} />
+        <br></br>
+        <br></br>
       </Container>
     );
   }
