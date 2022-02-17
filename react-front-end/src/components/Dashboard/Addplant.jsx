@@ -49,7 +49,7 @@ export default function AddPlant({ species }) {
             <Segment compact>Scientific Name:{plant.scientific_name}</Segment>
             <Segment compact>Water Requirments: {plant.watering_interval} Days</Segment>
             <Segment compact>Soil Type: {plant.soil_type}</Segment>
-            <Button basic color='blue' content='Edit' floated="left"/>
+            <Button basic color='blue' content='Save' floated="right"/>
           </Grid.Column>
         </Grid>
       </Segment>
