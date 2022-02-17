@@ -1,5 +1,6 @@
 import React, { Component, useReducer } from 'react';
 import axios from 'axios';
+import './index.css';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -96,7 +97,7 @@ class App extends Component {
         <Navbar user={this.state.user} login={this.login} logout={this.logout} users={this.state.users}/>
           <Routes>
             <Route path="*" element={<NotFound />} />
-            <Route path='/' element={<Home />}/>
+            <Route path='/' element={<Home/>}/>
             <Route path='/dashboard' element={<Dashboard plants={this.state.plants} users={this.state.users} userId={this.state.user}/>}/>
             <Route path='/newsfeed' element={<Newsfeed posts={this.state.posts} user={this.state.users[0]} />}/>
             <Route path='/profile/:user_id' element={<Profile name={this.state.name} plants={this.state.plants} users={this.state.users}/>} />
