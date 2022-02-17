@@ -1,23 +1,22 @@
 import React from "react";
-import "semantic-ui-css/semantic.min.css";
-import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
 import Rooms from "./components/Dashboard/Rooms";
 import Namecard from "./components/Dashboard/Namecard.jsx";
 import Reminders from "./components/Dashboard/Reminders";
+import AddPlant from "./components/Dashboard/AddPlant.jsx";
+
+import "semantic-ui-css/semantic.min.css";
+import "./components/Dashboard/styles.css";
+import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
+
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 
-export default function Dashboard({ users, userId, plants }) {
-
+export default function Dashboard({ users, userId, plants, species }) {
   const user = getUserById(users, userId);
   const name = user && user.name;
   const userPlants = getPlantsForUser(plants, userId);
 
   if (!user) {
-    return (
-      <h2>
-        Please login or signup.
-      </h2>
-    )
+    return <h2>Please login or signup.</h2>;
   } else {
     return (
       <Container>
@@ -39,6 +38,7 @@ export default function Dashboard({ users, userId, plants }) {
                 <Segment textAlign="left" raised>
                   Good Morning, {name}
                 </Segment>
+                <br></br>
               </Grid.Row>
               <Grid.Row>
                 <Rooms />
@@ -50,6 +50,9 @@ export default function Dashboard({ users, userId, plants }) {
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        <br></br>
+        <br></br>
+        <AddPlant species={species} />
       </Container>
     );
   }
