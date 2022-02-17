@@ -21,6 +21,7 @@ class App extends Component {
       name: 'Kanye',
       plants: [{user_id: 'Hello?'}],
       users: [{name: 'Leafy'}],
+      species: [{name: 'beleaf'}],
       posts: [{user_id: 'Hello?'}],
       user: cookies.get('user_id'),
     }
@@ -83,9 +84,20 @@ class App extends Component {
     }) 
   };
 
+  fetchSpecies = () => {
+    axios.get('/api/species') // Just to test that DB layer works
+    .then((response) => {
+      console.log('Species: ' + response.data.species)
+      this.setState({
+        species: response.data.species
+      });
+    }) 
+  }
+
   componentDidMount() {
     this.fetchPlants();
     this.fetchUsers();
+    this.fetchSpecies();
     this.fetchPosts();
   }
 
@@ -97,7 +109,7 @@ class App extends Component {
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path='/' element={<Home />}/>
-            <Route path='/dashboard' element={<Dashboard plants={this.state.plants} users={this.state.users} userId={this.state.user}/>}/>
+            <Route path='/dashboard' element={<Dashboard plants={this.state.plants} users={this.state.users} userId={this.state.user} species={this.state.species}/>}/>
             <Route path='/newsfeed' element={<Newsfeed posts={this.state.posts} user={this.state.users[0]} />}/>
             <Route path='/profile/:user_id' element={<Profile userId={this.state.user} plants={this.state.plants} users={this.state.users}/>} />
             <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users}/>}/>
