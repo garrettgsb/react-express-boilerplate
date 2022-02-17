@@ -52,7 +52,7 @@ export default function Dashboard({ users, userId, plants, species }) {
         </Grid>
         <br></br>
         <br></br>
-        <AddPlant species={species} />
+        <AddPlant user={user} species={species} />
         <br></br>
         <br></br>
       </Container>

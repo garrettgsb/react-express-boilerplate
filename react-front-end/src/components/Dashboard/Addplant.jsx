@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
-import { Segment, Image, Dropdown, Grid, Button, Form, Input } from "semantic-ui-react";
+import axios from "axios";
+import {
+  Segment,
+  Image,
+  Dropdown,
+  Grid,
+  Button,
+  Form,
+} from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
-export default function AddPlant({ species }) {
-  const [plant, setPlant] = useState({});
+export default function AddPlant({ user, species }) {
+  const [state, setState] = useState({
+    plant: {},
+    nickname: "",
+    location: "",
+  });
 
   const speciesOptions = species.map((element) => ({
     key: element.scientific_name,
@@ -15,19 +27,37 @@ export default function AddPlant({ species }) {
 
   const clickHandler = (event, data) => {
     const selectedSpecies = getPlantByName(species, data.value);
-    setPlant(selectedSpecies);
+    setState((prev) => ({
+      ...prev,
+      plant: selectedSpecies,
+    }));
   };
 
+  const submitForm = () => {
+    axios
+      .post("/api/user_plants", {
+        species_id: state.plant.id,
+        user_id: user.id,
+        nickname: state.nickname,
+        location: state.location,
+      })
+      .then(function (response) {
+        console.log("Post made to db!", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <Segment>
         <h1>Add Plant</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            <Image src={plant.photo} size="medium" floated="left" />
+            <Image src={state.plant.photo} size="medium" floated="left" />
           </Grid.Column>
           <Grid.Column width={6}>
-            <Segment compact>{plant.description}</Segment>
+            <Segment compact>{state.plant.description}</Segment>
           </Grid.Column>
           <Grid.Column verticalAlign="middle" centered width={5}>
             <Dropdown
@@ -38,29 +68,48 @@ export default function AddPlant({ species }) {
               options={speciesOptions}
               onChange={clickHandler}
             />
-            <Segment compact>Common Name: {plant.common_name}</Segment>
-            <Segment compact>Scientific Name:{plant.scientific_name}</Segment>
-            <Form>
-              <Form.Field
-                id="form-input-control-error-nickname"
-                control={Input}
-                label="Nickname"
-                placeholder="Add a name for your plant! (eg. Chrisofern)"
-              />
-            </Form>
-            <Form>
-              <Form.Field
-                id="form-input-control-error-location"
-                control={Input}
-                label="Location"
-                placeholder="Tell us where your plant lives! (eg Living Room)"
-              />
-               </Form>
+            <Segment compact>Common Name: {state.plant.common_name}</Segment>
             <Segment compact>
-              Water Requirments: {plant.watering_interval} Days
+              Scientific Name:{state.plant.scientific_name}
             </Segment>
-            <Segment compact>Soil Type: {plant.soil_type}</Segment>
-            <Button positive floated="right">Save Your Plant!</Button>
+            <Form onSubmit={submitForm}>
+              <Form.Field>
+                <Form.Input
+                  required={true}
+                  onChange={(e, data) => {
+                    console.log("EEEEEE", data);
+                    setState((prev) => ({
+                      ...prev,
+                      nickname: data.value,
+                    }));
+                  }}
+                  label="Nickname"
+                  placeholder="Add a name for your plant! (eg. Chrisofern)"
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  required={true}
+                  onChange={(e, data) => {
+                    console.log("location", data);
+                    setState((prev) => ({
+                      ...prev,
+                      location: data.value,
+                    }));
+                  }}
+                  label="Location"
+                  placeholder="Tell us where your plant lives! (eg Living Room)"
+                />
+              </Form.Field>
+
+              <Segment compact>
+                Water Requirments: {state.plant.watering_interval} Days
+              </Segment>
+              <Segment compact>Soil Type: {state.plant.soil_type}</Segment>
+              <Button type="submit" positive floated="right">
+                Save Your Plant!
+              </Button>
+            </Form>
           </Grid.Column>
         </Grid>
       </Segment>
