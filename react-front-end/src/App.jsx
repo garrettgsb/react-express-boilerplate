@@ -1,5 +1,6 @@
 import React, { Component, useReducer } from 'react';
 import axios from 'axios';
+import './index.css';
 import './App.css';
 import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
