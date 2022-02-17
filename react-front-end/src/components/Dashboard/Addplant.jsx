@@ -9,6 +9,7 @@ import {
   Button,
   Form,
   Icon,
+  List,
 } from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
@@ -52,24 +53,40 @@ export default function AddPlant({ user, species, setIsVisible }) {
       .catch(function (error) {
         console.log(error);
       });
-      onClose()
+    onClose();
   };
   return (
     <div>
       <Segment>
-        <Button basic color='red' onClick={onClose} floated="right" animated="vertical">
+        <Button
+          size="mini"
+          basic
+          color="red"
+          onClick={onClose}
+          floated="right"
+          animated="vertical"
+        >
           <Button.Content hidden>Close</Button.Content>
           <Button.Content visible>
             <Icon name="window close" color="red" size="large" />
           </Button.Content>
         </Button>
-        <h1>Add Plant</h1>
+        <h1>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            <Image src={state.plant.photo} size="large" floated="left" />
+            <Image src={state.plant.photo} size="large" />
           </Grid.Column>
-          <Grid.Column width={5}>
-            <Segment compact>{state.plant.description}</Segment>
+          <Grid.Column width={6} textAlign="center">
+            <div className="plant-info">
+              <h2>
+                Scientific Name: {state.plant && state.plant.scientific_name}
+              </h2>
+              <h2>Common Name: {state.plant && state.plant.common_name}</h2>
+              <h3>
+                <i>{state.plant && state.plant.nickname}</i>
+              </h3>
+              <p>{state.plant && state.plant.description}</p>
+            </div>
           </Grid.Column>
           <Grid.Column verticalAlign="middle" centered width={5}>
             <Dropdown
@@ -80,10 +97,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
               options={speciesOptions}
               onChange={clickHandler}
             />
-            <Segment compact>Common Name: {state.plant.common_name}</Segment>
-            <Segment compact>
-              Scientific Name: {state.plant.scientific_name}
-            </Segment>
+
             <Form onSubmit={submitForm}>
               <Form.Field>
                 <Form.Input
@@ -114,10 +128,47 @@ export default function AddPlant({ user, species, setIsVisible }) {
                 />
               </Form.Field>
 
-              {/* <Segment compact>
-                Water Requirements: {state.plant.watering_interval} Days
-                </Segment>
-              <Segment compact>Soil Type: {state.plant.soil_type}</Segment> */}
+              <div className="plant-info">
+                <List className="plant-list">
+                  <List.Item>
+                    <List.Icon name="rain" />
+                    <List.Content>
+                      Every {state.plant && state.plant.watering_interval} Days
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name="sun" />
+                    <List.Content>
+                      {state.plant && state.plant.light_level}
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name="lab" />
+                    <List.Content>
+                      {state.plant && state.plant.soil_type}
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name="book" />
+                    <List.Content>
+                      {state.plant && state.plant.difficulty_level}
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name="world" />
+                    <List.Content>
+                      {state.plant && state.plant.category}
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name="paw" />
+                    <List.Content>
+                      {state.plant && state.plant.toxic ? "Toxic" : "Non-Toxic"}
+                    </List.Content>
+                  </List.Item>
+                </List>
+              </div>
+              <br></br>
               <Button type="submit" positive floated="right">
                 Save Your Plant!
               </Button>
