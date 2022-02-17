@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
+import flying_bee from "../../assets/flying_bee.png";
 import {
   Segment,
   Image,
@@ -15,7 +16,7 @@ import { getPlantByName } from "../../helpers/selectors";
 
 export default function AddPlant({ user, species, setIsVisible }) {
   const [state, setState] = useState({
-    plant: {},
+    plant: {scientific_name: 'Search for your plant with the drop down menu', photo: flying_bee},
     nickname: "",
     location: "",
   });
@@ -74,12 +75,12 @@ export default function AddPlant({ user, species, setIsVisible }) {
         <h1>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            <Image src={state.plant.photo} size="large" />
+            <Image src={state.plant.photo && state.plant.photo} size="large" />
           </Grid.Column>
           <Grid.Column width={6} textAlign="center">
             <div className="plant-info">
               <h2>
-                Scientific Name: {state.plant && state.plant.scientific_name}
+                Scientific Name: {state.plant.scientific_name && state.plant.scientific_name}
               </h2>
               <h2>Common Name: {state.plant && state.plant.common_name}</h2>
               <h3>
@@ -124,7 +125,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
                     }));
                   }}
                   label="Location"
-                  placeholder="Tell us where your plant lives! (eg Living Room)"
+                  placeholder="Tell us where your plant lives! (eg. Living Room)"
                 />
               </Form.Field>
 
