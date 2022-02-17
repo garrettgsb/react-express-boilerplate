@@ -4,7 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import PlantList from "./components/Profile/PlantList";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import "./components/Profile/Profile.css";
-import { Container, Grid, Segment } from "semantic-ui-react";
+import { Container, Grid, Segment, Button } from "semantic-ui-react";
 
 export default function Profile({ plants, users, userId }) {
 
@@ -48,10 +48,10 @@ export default function Profile({ plants, users, userId }) {
                 </div>
                 <div className="extra content">
                   <span className="left floated">
-                    <button className="ui button" basic color='green'>
+                    <Button basic color='green'>
                       <i className="leaf icon"></i>
                       {plantsForUser && plantsForUser.length} Plants
-                    </button>
+                    </Button>
                   </span>
                   <span className="right floated">
                     <button className="ui button"><i className="add icon"></i>Follow</button>
