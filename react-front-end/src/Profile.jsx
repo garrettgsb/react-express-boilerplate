@@ -15,14 +15,19 @@ export default function Profile({ plants, users, userId }) {
   const plantsForUser = getPlantsForUser(plants, user_id);
 
   const loggedUser = getUserById(users, userId);
-  // console.log('loggedUser', loggedUser)
+  const profileUser = Number(user_id);
 
   return (
     <Container>
       <Segment>
-        <h2>
-          Welcome {loggedUser && loggedUser.name}, thanks for visiting my profile!
-        </h2>
+        { loggedUser && loggedUser.id !== profileUser ?
+          <h2>
+            Welcome {loggedUser && loggedUser.name}, thanks for visiting my profile!
+          </h2>:
+          <h2>
+            My Profile
+          </h2>
+        }
       </Segment>
       <Grid>
         <Grid.Row stretched maxWidth={1000}>
