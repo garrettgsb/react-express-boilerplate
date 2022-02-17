@@ -9,11 +9,13 @@ import "./components/Dashboard/styles.css";
 import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
 
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
+import { useState } from "react";
 
 export default function Dashboard({ users, userId, plants, species }) {
   const user = getUserById(users, userId);
   const name = user && user.name;
   const userPlants = getPlantsForUser(plants, userId);
+  const [isVisible, setIsVisible] = useState(false);
 
   if (!user) {
     return <h2>Please login or signup.</h2>;
@@ -32,6 +34,9 @@ export default function Dashboard({ users, userId, plants, species }) {
                     content="Wishlist"
                     floated="right"
                   />
+                  <Button positive floated="right" onClick={() => setIsVisible(true)}>
+                    Add A New Plant!
+                  </Button>
                 </Header>
               </Segment>
               <Grid.Row>
@@ -52,7 +57,7 @@ export default function Dashboard({ users, userId, plants, species }) {
         </Grid>
         <br></br>
         <br></br>
-        <AddPlant user={user} species={species} />
+         {isVisible && <AddPlant user={user} species={species} />}
         <br></br>
         <br></br>
       </Container>

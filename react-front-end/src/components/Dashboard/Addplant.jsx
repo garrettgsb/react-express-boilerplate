@@ -54,7 +54,7 @@ export default function AddPlant({ user, species }) {
         <h1>Add Plant</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            <Image src={state.plant.photo} size="medium" floated="left" />
+            <Image src={state.plant.photo} size="large" floated="left" />
           </Grid.Column>
           <Grid.Column width={6}>
             <Segment compact>{state.plant.description}</Segment>
@@ -68,9 +68,9 @@ export default function AddPlant({ user, species }) {
               options={speciesOptions}
               onChange={clickHandler}
             />
-            <Segment compact>Common Name: {state.plant.common_name}</Segment>
+            <Segment compact>Common Name:  {state.plant.common_name}</Segment>
             <Segment compact>
-              Scientific Name:{state.plant.scientific_name}
+              Scientific Name:  {state.plant.scientific_name}
             </Segment>
             <Form onSubmit={submitForm}>
               <Form.Field>
@@ -84,7 +84,7 @@ export default function AddPlant({ user, species }) {
                     }));
                   }}
                   label="Nickname"
-                  placeholder="Add a name for your plant! (eg. Chrisofern)"
+                  placeholder="Add a name for your plant! (eg. Christofern)"
                 />
               </Form.Field>
               <Form.Field>
@@ -102,10 +102,10 @@ export default function AddPlant({ user, species }) {
                 />
               </Form.Field>
 
-              <Segment compact>
+              {/* <Segment compact>
                 Water Requirments: {state.plant.watering_interval} Days
               </Segment>
-              <Segment compact>Soil Type: {state.plant.soil_type}</Segment>
+              <Segment compact>Soil Type: {state.plant.soil_type}</Segment> */}
               <Button type="submit" positive floated="right">
                 Save Your Plant!
               </Button>
