@@ -1,8 +1,8 @@
 import React from "react";
 import Rooms from "./components/Dashboard/Rooms";
-import Namecard from "./components/Dashboard/Namecard.jsx";
+import Namecard from "./components/Dashboard/Namecard";
 import Reminders from "./components/Dashboard/Reminders";
-import AddPlant from "./components/Dashboard/AddPlant.jsx";
+import AddPlant from "./components/Dashboard/AddPlant";
 
 import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
