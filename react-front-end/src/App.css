@@ -91,3 +91,25 @@ img.plant-photo {
   width: 90%;
   height: auto;
 }
+
+div.ui.list.wishlist-plant-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 75%;
+  margin: auto;
+}
+
+div.ui.grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 1%;
+}
+
+div.ui.container {
+  width: 100%;
+  margin: auto;
+  padding-left: 1%;
+}

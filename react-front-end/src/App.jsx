@@ -115,10 +115,6 @@ class App extends Component {
     this.fetchWishlist();
   }
 
-  // componentDidUpdate() {
-  //   this.fetchWishlist();
-  // }
-
   componentWillUnmount() {
     clearInterval(this.interval);
   }
@@ -137,7 +133,7 @@ class App extends Component {
             <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users} />} />
             <Route path='/login/:user_id' />
             <Route path='/logout' />
-            <Route path='/wishlist' element={<Wishlist users={this.state.users} userId={this.state.user} wishlist={this.state.wishlist}/>}/>
+            <Route path='/wishlist' element={<Wishlist users={this.state.users} userId={this.state.user} wishlist={this.state.wishlist} user_plants={this.state.plants}/>}/>
           </Routes>
         </div>
       </Router>
