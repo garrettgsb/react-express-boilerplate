@@ -24,10 +24,12 @@ export default function Profile({ plants, users, userId }) {
         </h2>
       </Segment>
       <Grid>
-        <Grid.Row stretched>
-          <Grid.Column width={11}>
-            <Segment>
-              <PlantList plants={plantsForUser} />
+        <Grid.Row stretched maxWidth={1000}>
+          <Grid.Column width={11} >
+            <Segment style={{ overflow: 'auto', maxWidth: 1000 }}>
+              <Segment.Group horizontal>
+                <PlantList plants={plantsForUser} />
+              </Segment.Group>
             </Segment>
           </Grid.Column>
           <Grid.Column width={5}>

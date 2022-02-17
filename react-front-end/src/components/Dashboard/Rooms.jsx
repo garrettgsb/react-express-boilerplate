@@ -6,7 +6,7 @@ export default function Rooms(props) {
   return (
     <div>
       <Segment style={{overflow: 'auto', maxWidth: 800}}>
-      <Segment.Group horizontal>
+      <Segment.Group vertical>
       <Grid verticalAlign='middle' centered>
         <Grid.Column width={8}>
         <Image

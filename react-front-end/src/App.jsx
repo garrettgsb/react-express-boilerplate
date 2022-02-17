@@ -25,6 +25,7 @@ class App extends Component {
       species: [{ name: 'beleaf' }],
       posts: [{ user_id: 'Hello?' }],
       user: cookies.get('user_id'),
+      wishlist: [{ name: 'beleaf' }],
     }
   };
 
@@ -93,13 +94,24 @@ class App extends Component {
           species: response.data.species
         });
       })
-  }
+  };
+
+  fetchWishlist = () => {
+    axios.get('/api/wishlist') // Just to test that DB layer works
+      .then((response) => {
+        console.log('Wishlist: ' + response.data.wishlist)
+        this.setState({
+          wishlist: response.data.wishlist
+        });
+      })
+  };
 
   componentDidMount() {
     this.fetchPlants();
     this.fetchUsers();
     this.fetchSpecies();
     this.fetchPosts();
+    this.fetchWishlist();
   }
 
   render() {
@@ -116,7 +128,7 @@ class App extends Component {
             <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users} />} />
             <Route path='/login/:user_id' />
             <Route path='/logout' />
-            <Route path='/wishlist' element={<Wishlist users={this.state.users} userId={this.state.user}/>}/>
+            <Route path='/wishlist' element={<Wishlist users={this.state.users} userId={this.state.user} wishlist={this.state.wishlist}/>}/>
           </Routes>
         </div>
       </Router>
