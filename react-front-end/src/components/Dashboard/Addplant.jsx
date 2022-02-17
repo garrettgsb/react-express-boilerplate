@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
-import { Segment, Image, Dropdown, Grid } from "semantic-ui-react";
+import { Segment, Image, Dropdown, Grid, Button } from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
 
 
-export default function Addplant({ species }) {
+export default function AddPlant({ species }) {
   const [plant, setPlant] = useState({});
 
   const speciesOptions = species.map(element => ({
@@ -49,6 +49,7 @@ export default function Addplant({ species }) {
             <Segment compact>Scientific Name:{plant.scientific_name}</Segment>
             <Segment compact>Water Requirments: {plant.watering_interval} Days</Segment>
             <Segment compact>Soil Type: {plant.soil_type}</Segment>
+            <Button basic color='blue' content='Edit' floated="left"/>
           </Grid.Column>
         </Grid>
       </Segment>

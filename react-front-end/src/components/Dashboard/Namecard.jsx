@@ -1,7 +1,7 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css"
-import { Button, Card } from 'semantic-ui-react'
-const src = '/images/wireframe/white-image.png'
+import { Button } from 'semantic-ui-react'
+
 
 export default function Namecard({user}) {
 const avatar = user && user.avatar
