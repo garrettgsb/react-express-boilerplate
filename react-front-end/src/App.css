@@ -96,7 +96,7 @@ div.ui.list.wishlist-plant-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 75%;
+  width: 100%;
   margin: auto;
 }
 
@@ -105,11 +105,19 @@ div.ui.grid {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  margin-left: 1%;
+  margin: auto;
 }
 
-div.ui.container {
+div.ui.container.rooms {
   width: 100%;
   margin: auto;
-  padding-left: 1%;
+}
+
+div.avatar {
+  position: fixed;
+}
+
+div.ui.two.cards {
+  width: 100%;
+  margin: auto;
 }

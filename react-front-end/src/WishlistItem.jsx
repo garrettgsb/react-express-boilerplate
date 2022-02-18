@@ -53,7 +53,7 @@ export default function WishlistItem({ id, scientificName, commonName, photo, li
         </span>
         <span className="right floated">
           <Link to={`/plants/${id}`}>
-            <button className="ui button" onClick={() => console.log('See Info clicked! id is', id)}><i className="add icon"></i>Add Plant</button>
+            <button className="ui button" onClick={() => console.log('See Info clicked! id is', id)}><i className="add icon"></i>Add</button>
           </Link>
         </span>
       </Card.Content>
