@@ -1,32 +1,88 @@
-import React from "react";
-import { Segment } from "semantic-ui-react";
-import { useForm } from "react-hook-form";
+import React, {useState, useEffect} from 'react';
+import {Segment, Form, List} from "semantic-ui-react";
+import axios from "axios";
 
-export default function NewPost() {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = data => console.log(data);
+export default function NewPostForm({user, fetchPosts, onClick}) {
+  console.log("user -> ", user);
+
+  const [state, setState] = useState({
+    user: user,
+    title: '',
+    description: '',
+    photo: '',
+    topic: 'general'
+  });
+
+  const submitForm = () => {
+    axios
+      .post("/api/posts", {
+        user_id: state.user.id,
+        title: state.title,
+        description: state.description,
+        photo: state.photo,
+        topic: state.topic
+      })
+      .then(function (response) {
+        console.log("Post made to db!", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    onClick();
+  };
    
   return (
     <Segment raised>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Title</label>
-        <input {...register("title")} placeholder='Please enter a title for your post' />
-        <label>Description</label>
-        <input {...register("description")} placeholder='Tell us more...' />
-        <label>Topic of your post is:</label>
-        <select {...register("topic")}>
-          <option value="general">female</option>
-          <option value="question">male</option>
-          <option value="plant hack">other</option>
-        </select>
+      <Form onSubmit={submitForm}>
 
-        <input type="submit" />
-        <div class="ui buttons">
-        <button class="ui button">Cancel</button>
-        <div class="or"></div>
-        <button class="ui positive button" onClick={onSubmit} >Save</button>
+        <Form.Field>
+          <Form.Input required={true}
+                      onChange={(e, data) => {
+                        console.log("working??", data);
+                        setState((prev) => ({
+                          ...prev,
+                          title: data.value,
+                        }));
+                      }} label='Title' placeholder='Enter post title' />
+        </Form.Field>
+        <Form.Field>
+          <Form.TextArea required={true}
+                    onChange={(e, data) => {
+                      console.log("description", data);
+                      setState((prev) => ({
+                        ...prev,
+                        description: data.value,
+                      }));
+                    }}  label="Location"
+                         placeholder="Tell us more about it"/>
+        </Form.Field>
+
+        <Form.Field>
+
+          <Form.Input onChange={(e, data) => {
+            console.log("Photo", data);
+            setState((prev) => ({
+              ...prev,
+              photo: data.value,
+            }));
+          }}  label="Photo" placeholder='Paste you the URL of your photo' />
+        </Form.Field>
+
+        <List className={'post-topic'}>
+        <List.Item>
+          {state.topic
+            ? "general"
+            : "question"}
+          </List.Item>
+          </List>
+
+        <div className="ui buttons">
+        <button className="ui button" onClick={onClick} >Cancel</button>
+        <div className="or"></div>
+        <button type="submit" className="ui positive button" onClick={onClick} >Save</button>
       </div>
-      </form>
+        
+      </Form>
     </Segment>
   );
 };
