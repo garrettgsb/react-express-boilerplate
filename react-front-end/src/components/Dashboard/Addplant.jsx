@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
 import flying_bee from "../../assets/flying_bee.png";
+import happy_cactus from "../../assets/happy_cactus.jpg";
 import {
   Segment,
   Image,
@@ -16,7 +17,7 @@ import { getPlantByName } from "../../helpers/selectors";
 
 export default function AddPlant({ user, species, setIsVisible }) {
   const [state, setState] = useState({
-    plant: {scientific_name: 'Search for your plant with the drop down menu', photo: flying_bee},
+    plant: null,
     nickname: "",
     location: "",
   });
@@ -75,19 +76,47 @@ export default function AddPlant({ user, species, setIsVisible }) {
         <h1>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            <Image src={state.plant.photo && state.plant.photo} size="large" />
+            {state.plant ?
+            <Image
+            src={state.plant.photo}
+            size="large"
+          /> 
+          :
+             <Image
+             className="bee-default"
+            src={flying_bee}
+            size="large"
+          /> 
+          }
+            
           </Grid.Column>
           <Grid.Column width={6} textAlign="center">
-            <div className="plant-info">
-              <h2>
-                Scientific Name: {state.plant.scientific_name && state.plant.scientific_name}
-              </h2>
-              <h2>Common Name: {state.plant && state.plant.common_name}</h2>
-              <h3>
-                <i>{state.plant && state.plant.nickname}</i>
-              </h3>
-              <p>{state.plant && state.plant.description}</p>
-            </div>
+            {/* Start of ternary to only show if plant selected  */}
+            {state.plant ? (
+              <div className="plant-info">
+                <h2>
+                  Scientific Name:{" "}
+                  {state.plant.scientific_name && state.plant.scientific_name}
+                </h2>
+                <h2>Common Name: {state.plant && state.plant.common_name}</h2>
+                <h3>
+                  <i>{state.plant && state.plant.nickname}</i>
+                </h3>
+                <p>{state.plant && state.plant.description}</p>
+              </div>
+            ) : (
+              <div>
+                <h1>Congrats on your new plant!</h1>
+                <br></br>
+                <Image verticalAlign="middle"
+                  src={happy_cactus}
+                  size="small"
+                />
+
+                <h2>Search for your plant with the drop down menu</h2>
+              </div>
+            )}
+            {/* End of ternary */}
           </Grid.Column>
           <Grid.Column verticalAlign="middle" centered width={5}>
             <Dropdown
@@ -98,82 +127,113 @@ export default function AddPlant({ user, species, setIsVisible }) {
               options={speciesOptions}
               onChange={clickHandler}
             />
+            {/* Start of ternary to only show if plant selected  */}
+            {state.plant ? (
+              <Form onSubmit={submitForm}>
+                <Form.Field>
+                  <Form.Input
+                    required={true}
+                    onChange={(e, data) => {
+                      console.log("EEEEEE", data);
+                      setState((prev) => ({
+                        ...prev,
+                        nickname: data.value,
+                      }));
+                    }}
+                    label="Nickname"
+                    placeholder="Add a name for your plant! (eg. Christofern)"
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Form.Input
+                    required={true}
+                    onChange={(e, data) => {
+                      console.log("location", data);
+                      setState((prev) => ({
+                        ...prev,
+                        location: data.value,
+                      }));
+                    }}
+                    label="Location"
+                    placeholder="Tell us where your plant lives! (eg. Living Room)"
+                  />
+                </Form.Field>
 
-            <Form onSubmit={submitForm}>
-              <Form.Field>
-                <Form.Input
-                  required={true}
-                  onChange={(e, data) => {
-                    console.log("EEEEEE", data);
-                    setState((prev) => ({
-                      ...prev,
-                      nickname: data.value,
-                    }));
-                  }}
-                  label="Nickname"
-                  placeholder="Add a name for your plant! (eg. Christofern)"
-                />
-              </Form.Field>
-              <Form.Field>
-                <Form.Input
-                  required={true}
-                  onChange={(e, data) => {
-                    console.log("location", data);
-                    setState((prev) => ({
-                      ...prev,
-                      location: data.value,
-                    }));
-                  }}
-                  label="Location"
-                  placeholder="Tell us where your plant lives! (eg. Living Room)"
-                />
-              </Form.Field>
-
-              <div className="plant-info">
-                <List className="plant-list">
-                  <List.Item>
-                    <List.Icon name="rain" />
-                    <List.Content>
-                      Every {state.plant && state.plant.watering_interval} Days
-                    </List.Content>
-                  </List.Item>
-                  <List.Item>
-                    <List.Icon name="sun" />
-                    <List.Content>
-                      {state.plant && state.plant.light_level}
-                    </List.Content>
-                  </List.Item>
-                  <List.Item>
-                    <List.Icon name="lab" />
-                    <List.Content>
-                      {state.plant && state.plant.soil_type}
-                    </List.Content>
-                  </List.Item>
-                  <List.Item>
-                    <List.Icon name="book" />
-                    <List.Content>
-                      {state.plant && state.plant.difficulty_level}
-                    </List.Content>
-                  </List.Item>
-                  <List.Item>
-                    <List.Icon name="world" />
-                    <List.Content>
-                      {state.plant && state.plant.category}
-                    </List.Content>
-                  </List.Item>
-                  <List.Item>
-                    <List.Icon name="paw" />
-                    <List.Content>
-                      {state.plant && state.plant.toxic ? "Toxic" : "Non-Toxic"}
-                    </List.Content>
-                  </List.Item>
-                </List>
+                <div className="plant-info">
+                  <List className="plant-list">
+                    <List.Item>
+                      <List.Icon name="rain" />
+                      <List.Content>
+                        Every {state.plant && state.plant.watering_interval}{" "}
+                        Days
+                      </List.Content>
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name="sun" />
+                      <List.Content>
+                        {state.plant && state.plant.light_level}
+                      </List.Content>
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name="lab" />
+                      <List.Content>
+                        {state.plant && state.plant.soil_type}
+                      </List.Content>
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name="book" />
+                      <List.Content>
+                        {state.plant && state.plant.difficulty_level}
+                      </List.Content>
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name="world" />
+                      <List.Content>
+                        {state.plant && state.plant.category}
+                      </List.Content>
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name="paw" />
+                      <List.Content>
+                        {state.plant && state.plant.toxic
+                          ? "Toxic"
+                          : "Non-Toxic"}
+                      </List.Content>
+                    </List.Item>
+                  </List>
+                </div>
+                <br></br>
+                <Button type="submit" positive floated="right">
+                  Save Your Plant!
+                </Button>
+              </Form>
+            ) : (
+              <div className="default-view">
+                <div className="plant-info">
+                  <List className="plant-list">
+                    <List.Item>
+                      <List.Icon name="rain" />
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name="sun" />
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name="lab" />
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name="book" />
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name="world" />
+                    </List.Item>
+                    <List.Item>
+                      <List.Icon name="paw" />
+                    </List.Item>
+                  </List>
+                </div>
               </div>
-              <br></br>
-              <Button type="submit" positive floated="right">
-                Save Your Plant!
-              </Button>
-            </Form>
+            )}
+            {/* End of ternary */}
           </Grid.Column>
         </Grid>
       </Segment>
