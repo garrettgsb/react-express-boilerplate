@@ -10,6 +10,7 @@ import "./components/Dashboard/styles.css";
 import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Dashboard({ users, userId, plants, species }) {
   const user = getUserById(users, userId);
@@ -29,17 +30,15 @@ export default function Dashboard({ users, userId, plants, species }) {
               <Segment clearing>
                 <Header textAlign="left" as="h2">
                   DASHBOARD
-                  <Button
-                    basic
-                    color="green"
-                    content="Wishlist"
-                    floated="right"
-                  />
-                  <Button
-                    positive
-                    floated="right"
-                    onClick={() => setIsVisible(true)}
-                  >
+                  <Link to="/wishlist">
+                    <Button
+                      basic
+                      color="green"
+                      content="Wishlist"
+                      floated="right"
+                    />
+                  </Link>
+                  <Button positive floated="right" onClick={() => setIsVisible(true)}>
                     Add A New Plant!
                   </Button>
                   <Button
@@ -52,17 +51,15 @@ export default function Dashboard({ users, userId, plants, species }) {
                   </Button>
                 </Header>
               </Segment>
-              <Grid.Row>
-                <Segment textAlign="left" raised>
-                  Good Morning, {name}
-                </Segment>
-              </Grid.Row>
+              <Segment textAlign="left" raised>
+                Good Morning, {name}
+              </Segment>
               <Grid.Row>
                 <Rooms />
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={4}>
-              <Namecard user={user} />
+              <Namecard user={user} plants={plants} />
               <Reminders plants={userPlants} />
             </Grid.Column>
           </Grid.Row>

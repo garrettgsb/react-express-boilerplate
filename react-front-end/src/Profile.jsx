@@ -9,10 +9,12 @@ import { Container, Grid, Segment, Button, Card } from "semantic-ui-react";
 export default function Profile({ plants, users, userId }) {
 
   const params = useParams();
-  const user_id = params.user_id;
+  const user_id = Number(params.user_id);
 
   const user = getUserById(users, user_id);
   const plantsForUser = getPlantsForUser(plants, user_id);
+
+  console.log('plantsfor USER', plantsForUser)
 
   const loggedUser = getUserById(users, userId);
   const profileUser = Number(user_id);

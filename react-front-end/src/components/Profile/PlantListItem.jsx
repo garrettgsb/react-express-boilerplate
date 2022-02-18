@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { Card, Image } from "semantic-ui-react";
 
-export default function PlantListItem({ user_id, plant_id, scientificName, commonName, photo, description, nickname, plant_since }) {
+export default function PlantListItem({ user_id, id, scientificName, commonName, photo, description, nickname, plant_since }) {
 
   // console.log('user_id', user_id);
-  // console.log('plant_id', plant_id);
+  console.log('id!!!!', id);
 
   const [state, setState] = useState({
     wishlist_user_id: user_id,
-    plant_id: plant_id
+    plant_id: id
   })
 
   const addWishlistPlant = (wishlist_user_id, plant_id) => {
@@ -45,18 +45,19 @@ export default function PlantListItem({ user_id, plant_id, scientificName, commo
       </Card.Content>
       <Card.Content>
         <span className="right floated">
-          <Link to={`/plants/${plant_id}`}>
+          <Link to={`/plants/${id && id}`}>
             <button className="ui button">See Info</button>
           </Link>
         </span>
         <span className="left floated">
           <button className="ui button" onClick={() => {
             addWishlistPlant(state.wishlist_user_id, state.plant_id);
+
             setState((prev) => ({
               ...prev,
               wishlist: {
                 wishlist_user_id: user_id,
-                plant_id: plant_id
+                plant_id: id
               },
             }));
           }}><i className="like icon"></i>Add to Wishlist</button>
