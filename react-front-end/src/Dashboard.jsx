@@ -3,6 +3,7 @@ import Rooms from "./components/Dashboard/Rooms";
 import Namecard from "./components/Dashboard/Namecard";
 import Reminders from "./components/Dashboard/Reminders";
 import AddPlant from "./components/Dashboard/AddPlant";
+import ViewPlant from "./components/Dashboard/ViewPlant";
 
 import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
@@ -58,6 +59,7 @@ export default function Dashboard({ users, userId, plants, species }) {
         <br></br>
          {isVisible && <AddPlant user={user} species={species} setIsVisible={setIsVisible} />}
         <br></br>
+        {isVisible && <ViewPlant user={user} species={species} plant={plants[0]} setIsVisible={setIsVisible} />}
       </Container>
     );
   }
