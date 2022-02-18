@@ -7,7 +7,7 @@ import Video from "./components/Newsfeed/Video";
 import NewPost from "./components/Newsfeed/NewPost";
 
 
-export default function Newsfeed({ posts, users, userId, fetchPosts }) {
+export default function Newsfeed({ posts, users, userId, fetchPosts, createNewPost }) {
   // const [showNewPostForm, setShowNewPostForm] = React.useState(false);
   // const onClick = () => {
   //   !showNewPostForm ? setShowNewPostForm(true) : setShowNewPostForm(false)
@@ -41,7 +41,7 @@ export default function Newsfeed({ posts, users, userId, fetchPosts }) {
 
           <br></br>
           {isVisible && (
-            <NewPost user={user} setIsVisible={setIsVisible} fetchPosts={fetchPosts} />
+            <NewPost user={user} setIsVisible={setIsVisible} fetchPosts={fetchPosts} createNewPost={createNewPost} />
           )}
           <br></br>
         </Grid.Column>
@@ -57,7 +57,6 @@ export default function Newsfeed({ posts, users, userId, fetchPosts }) {
               Newsfeed
             </Header>
           </Divider>
-
           <PostList posts={posts} users={users} />
 
         </Grid.Column>

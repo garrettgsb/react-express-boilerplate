@@ -4,7 +4,7 @@ import { Container } from "semantic-ui-react";
 import SinglePost from "./SinglePost";
 
 export default function PostList({ posts, users }) {
-  const renderPosts = posts.map((post) => {
+  const renderPosts = posts.sort((a,b) => new Date(b.created_at) - new Date(a.created_at)).map((post) => {
       return (
       <SinglePost
         key={post.id}
@@ -18,5 +18,6 @@ export default function PostList({ posts, users }) {
       />
       )
     })
+
   return <Container> {renderPosts} </Container>
 };
