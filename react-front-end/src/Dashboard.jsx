@@ -41,17 +41,15 @@ export default function Dashboard({ users, userId, plants, species }) {
                   </Button>
                 </Header>
               </Segment>
-              <Grid.Row>
-                <Segment textAlign="left" raised>
-                  Good Morning, {name}
-                </Segment>
-              </Grid.Row>
+              <Segment textAlign="left" raised>
+                Good Morning, {name}
+              </Segment>
               <Grid.Row>
                 <Rooms />
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={4}>
-              <Namecard user={user} />
+              <Namecard user={user} plants={plants} />
               <Reminders plants={userPlants} />
             </Grid.Column>
           </Grid.Row>
