@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
-import flying_bee_right from "../../assets/flying_bee_right.png";
 import happy_cactus from "../../assets/happy_cactus.jpg";
 import {
   Segment,
@@ -94,14 +93,9 @@ export default function AddPlant({ user, species, setIsVisible }) {
         <h1>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            {/* Start of ternary to only show if plant selected  */}
-            {state.plant ? (
+            {state.plant &&
               <Image src={state.plant.photo} size="large" />
-            ) : (
-              <div></div>
-              // <Image className="bee-default" src={flying_bee_right} size="large" />
-            )}
-            {/* End of ternary to only show if plant selected  */}
+            }
           </Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
