@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import { Card } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
 
-export default function PlantListItem({ user_id, plant_id, scientificName, commonName, photo, description, nickname }) {
+export default function PlantListItem({ user_id, plant_id, scientificName, commonName, photo, description, nickname, plant_since }) {
 
-  console.log('user_id', user_id);
-  console.log('plant_id', plant_id);
+  // console.log('user_id', user_id);
+  // console.log('plant_id', plant_id);
 
   const [state, setState] = useState({
     wishlist_user_id: user_id,
@@ -28,19 +28,22 @@ export default function PlantListItem({ user_id, plant_id, scientificName, commo
   };
 
   return (
-    <Card centered compact>
-      <div className="image">
-        <img src={photo} alt="plant" />
-      </div>
-      <div className="content">
+    <Card compact>
+      <Image
+        src={photo}
+        size="medium"
+        centered
+      />
+      <Card.Content>
         <div className="header">{commonName}</div>
         <div className="meta">{scientificName}</div>
-        <div className="meta"><i>"{nickname}"</i></div>
-        <div className="description">
-          {description}
+        <div className="meta">"{nickname}"</div>
+        <div className="meta">
+          <span className="date">Plant Since {(plant_since).split('-')[0]}</span>
         </div>
-      </div>
-      <div className="extra content">
+        <div className="description">{description}</div>
+      </Card.Content>
+      <Card.Content>
         <span className="right floated">
           <Link to={`/plants/${plant_id}`}>
             <button className="ui button">See Info</button>
@@ -58,7 +61,7 @@ export default function PlantListItem({ user_id, plant_id, scientificName, commo
             }));
           }}><i className="like icon"></i>Add to Wishlist</button>
         </span>
-      </div>
+      </Card.Content>
     </Card>
   )
 }

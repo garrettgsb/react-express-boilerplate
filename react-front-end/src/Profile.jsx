@@ -4,7 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import PlantList from "./components/Profile/PlantList";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import "./components/Profile/Profile.css";
-import { Container, Grid, Segment, Button } from "semantic-ui-react";
+import { Container, Grid, Segment, Button, Card } from "semantic-ui-react";
 
 export default function Profile({ plants, users, userId }) {
 
@@ -19,26 +19,23 @@ export default function Profile({ plants, users, userId }) {
 
   return (
     <Container>
-      <Segment>
-        { loggedUser && loggedUser.id !== profileUser ?
-          <h2>
-            Welcome {loggedUser && loggedUser.name}, thanks for visiting my profile!
-          </h2>:
-          <h2>
-            My Profile
-          </h2>
-        }
-      </Segment>
       <Grid>
-        <Grid.Row stretched maxWidth={1000}>
-          <Grid.Column width={11} >
-            <Segment style={{ overflow: 'auto', maxWidth: 1000 }}>
-              <Segment.Group horizontal>
+        <Grid.Row stretched>
+          <Grid.Column width={12}>
+            <Segment>
+              {loggedUser && loggedUser.id !== profileUser ?
+                <h2>
+                  Welcome {loggedUser && loggedUser.name}, thanks for visiting my profile!
+                </h2> : <h2>My Profile</h2>}
+            </Segment>
+            <Segment style={{ overflow: 'auto', maxWidth: 2000 }} >
+              <Card.Group itemsPerRow={3}>
                 <PlantList plants={plantsForUser} user={userId} />
-              </Segment.Group>
+              </Card.Group>
             </Segment>
           </Grid.Column>
-          <Grid.Column width={5}>
+
+          <Grid.Column width={4}>
             <div>
               <div className="ui card">
                 <div className="image">

@@ -1,4 +1,5 @@
 import React from "react";
+import { Card } from "semantic-ui-react";
 import PlantListItem from "./PlantListItem";
 
 export default function PlantList({ plants, user }) {
@@ -13,12 +14,13 @@ export default function PlantList({ plants, user }) {
       description={plant.description}
       nickname={plant.nickname}
       user_id={user}
+      plant_since={plant.created_at}
     />
   );
 
   return (
-    <main className="container">
+    <>
       { parsedPlants }
-    </main>
+    </>
   );
 }
