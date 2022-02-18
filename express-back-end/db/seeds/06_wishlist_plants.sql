@@ -1,4 +1,4 @@
-INSERT INTO wishlist_plants (plant_id, user_id)
+INSERT INTO wishlist_plants (plant_id, wishlist_user_id)
 VALUES (6, 1),
 (6, 2),
 (4, 3),
