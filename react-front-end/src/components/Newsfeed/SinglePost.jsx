@@ -1,15 +1,17 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
-import { Container, Grid, Icon, Image, Segment, Feed } from "semantic-ui-react";
+import { Image, Segment } from "semantic-ui-react";
+import {getUserById} from "../../helpers/selectors";
 
-export default function SinglePost({id, user_id, title, photo, description, topic, created_at}) {
+export default function SinglePost({id, user_id, title, photo, description, topic, created_at, users}) {
+  const user = getUserById(users, user_id)
   return (
     
        <Segment raised>
-         <h2 left>{title}</h2>
+         <h2>{title} ({topic})</h2>
          <div>
-            <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' avatar />
-            <span>posted by Chikorita</span>
+            /*<Image src={user.avatar} avatar />
+            <span>posted by {user.name} on {created_at}</span>*/
           </div>
          <Segment.Group horizontal>
           <Image src={photo} width='50%' height='100%' rounded/>
@@ -17,28 +19,28 @@ export default function SinglePost({id, user_id, title, photo, description, topi
          </Segment.Group>
         
         <Segment.Group horizontal>
-          <Segment><div class="ui labeled button" tabindex="0">
-            <div class="ui button">
-              <i class="heart icon"></i> Like
+          <Segment><div className="ui labeled button" tabIndex="0">
+            <div className="ui button">
+              <i className="heart icon"></i> Like
             </div>
-            <a class="ui basic label">
+            <a className="ui basic label">
               2,048
             </a>
           </div></Segment>
-          <Segment><div class="ui labeled button" tabindex="0">
-            <div class="ui button">
-              <i class="plus icon"></i>
+          <Segment><div className="ui labeled button" tabIndex="0">
+            <div className="ui button">
+              <i className="plus icon"></i>
             </div>
-              <a class="ui basic label">
+              <a className="ui basic label">
                 Follow
               </a>
             </div></Segment>
           <Segment>
-          <div class="ui labeled button" tabindex="0">
-            <div class="ui button">
-              <i class="envelope icon"></i>
+          <div className="ui labeled button" tabIndex="0">
+            <div className="ui button">
+              <i className="envelope icon"></i>
             </div>
-              <a class="ui basic right pointing label">
+              <a className="ui basic right pointing label">
                 Message
               </a>
             </div>
