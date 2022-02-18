@@ -18,6 +18,8 @@ export default function Plant({ plants, users, user_id }) {
     user = getUserById(users, user_id);
   }
 
+  console.log('user_id', user_id)
+
   const [state, setState] = useState({
     wishlist_user_id: user_id,
     plant_id: plant_id

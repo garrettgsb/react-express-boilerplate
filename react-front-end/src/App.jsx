@@ -130,7 +130,7 @@ class App extends Component {
             <Route path='/dashboard' element={<Dashboard plants={this.state.plants} users={this.state.users} userId={this.state.user} species={this.state.species} />} />
             <Route path='/newsfeed' element={<Newsfeed posts={this.state.posts} user={this.state.users[0]} />} />
             <Route path='/profile/:user_id' element={<Profile userId={this.state.user} plants={this.state.plants} users={this.state.users} />} />
-            <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users} />} />
+            <Route path='/plants/:plant_id' element={<Plant plants={this.state.plants} users={this.state.users} user_id={this.state.user} />} />
             <Route path='/login/:user_id' />
             <Route path='/logout' />
             <Route path='/wishlist' element={<Wishlist users={this.state.users} userId={this.state.user} wishlist={this.state.wishlist} user_plants={this.state.plants} species={this.state.species}/>}/>
