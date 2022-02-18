@@ -31,13 +31,13 @@ export default function Plant({ plants, users }) {
             <h1>Common Name: {plant && plant.common_name}</h1>
             <h3><i>"{plant && plant.nickname}"</i></h3>
             <p><b>{user && user.name}'s</b> Plant Since {plant && plant.created_at.split('-')[0]}</p>
-            <p><List.Icon name="home" />Lives in {user && user.name}'s {plant && plant.location}</p>
+            <p><Icon name="leaf" />Lives in {user && user.name}'s {plant && plant.location}</p>
             <p>{plant && plant.description}</p>
             <div>
               <Link to={`/profile/${user && user.id}`}>
                 <Button color='olive'>See {user && user.name}'s Profile</Button>
               </Link>
-              <Button color='orange'><Icon name='like'/>Add to Wishlist</Button>
+              <Button color='orange'><Icon name='like' />Add to Wishlist</Button>
             </div>
           </div>
         </Grid.Column>

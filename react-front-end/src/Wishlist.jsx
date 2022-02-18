@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import WishlistItem from "./WishlistItem";
 import { getPlantsForUser, getUserById, getWishlistPlants } from "./helpers/selectors";
 import { Button, Card, Container, Grid, Segment } from "semantic-ui-react";
+import AddPlant from "./components/Dashboard/AddPlant";
+import { Link } from "react-router-dom";
 
-export default function Wishlist({ users, userId, wishlist, user_plants }) {
+export default function Wishlist({ users, userId, wishlist, user_plants, species }) {
 
   const user = getUserById(users, userId);
   const plants = wishlist && getWishlistPlants(wishlist, userId);
   const plantsForUser = user_plants && getPlantsForUser(user_plants, user && user.id);
+
+  const [isVisible, setIsVisible] = useState(false);
 
   const parsedPlants = plants && plants.map(plant =>
     <WishlistItem
@@ -24,6 +28,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants }) {
       category={plant.category}
       users={users}
       plant_user_id={plant.user_id}
+      setIsVisible={setIsVisible}
     />
   );
 
@@ -49,6 +54,13 @@ export default function Wishlist({ users, userId, wishlist, user_plants }) {
                   {parsedPlants}
                 </Card.Group>
               </Segment>
+
+              <br></br>
+              {isVisible && (
+                <AddPlant user={user} species={species} setIsVisible={setIsVisible} />
+              )}
+              <br></br>
+
             </Grid.Column>
             <Grid.Column width={4}>
               <div className="avatar">
@@ -68,10 +80,12 @@ export default function Wishlist({ users, userId, wishlist, user_plants }) {
                   </div>
                   <div className="extra content">
                     <span className="left floated">
-                      <Button basic color='green'>
-                        <i className="leaf icon"></i>
-                        {plantsForUser && plantsForUser.length} Plants
-                      </Button>
+                      <Link to={`/profile/${user.id}`}>
+                        <Button basic color='green'>
+                          <i className="leaf icon"></i>
+                          {plantsForUser && plantsForUser.length} Plants
+                        </Button>
+                      </Link>
                     </span>
                     <span className="right floated">
                       <button className="ui button"><i className="add icon"></i>Follow</button>

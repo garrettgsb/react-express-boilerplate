@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, List, Image } from "semantic-ui-react";
+import { Card, List, Image, Button } from "semantic-ui-react";
 import { getUserById } from "./helpers/selectors";
 
-export default function WishlistItem({ id, scientificName, commonName, photo, light_level, soil_type, difficulty, toxic, watering_interval, category, users, plant_user_id, }) {
+export default function WishlistItem({ id, scientificName, commonName, photo, light_level, soil_type, difficulty, toxic, watering_interval, category, users, plant_user_id, setIsVisible }) {
 
   const owner = getUserById(users, plant_user_id);
 
@@ -52,9 +52,9 @@ export default function WishlistItem({ id, scientificName, commonName, photo, li
           <button className="ui button" onClick={() => console.log('Add to Wishlist clicked! id is', id)}><i className="cart icon"></i>Purchase</button>
         </span>
         <span className="right floated">
-          <Link to={`/plants/${id}`}>
-            <button className="ui button" onClick={() => console.log('See Info clicked! id is', id)}><i className="add icon"></i>Add</button>
-          </Link>
+          <Button floated="right" onClick={() => setIsVisible(true)}>
+            <i className="add icon"></i>Add
+          </Button>
         </span>
       </Card.Content>
     </Card>

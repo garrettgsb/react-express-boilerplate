@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css"
 import { Button, Card, Icon, Segment } from 'semantic-ui-react'
 import { getPlantsForUser } from "../../helpers/selectors";
@@ -26,10 +27,12 @@ export default function Namecard({ user, plants }) {
         </Card.Content>
         <Card.Content>
           <span className="left floated">
-            <Button basic color='green'>
-              <i className="leaf icon"></i>
-              {plantsForUser && plantsForUser.length} Plants
-            </Button>
+            <Link to={`/profile/${user.id}`}>
+              <Button basic color='green'>
+                <i className="leaf icon"></i>
+                {plantsForUser && plantsForUser.length} Plants
+              </Button>
+            </Link>
           </span>
           <span className="right floated">
             <Button basic color='blue' content='Edit Profile' floated="left" />
