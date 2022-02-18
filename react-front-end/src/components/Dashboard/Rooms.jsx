@@ -11,7 +11,7 @@ export default function Rooms(props) {
       <Grid>
         <Segment raised>
           <Card.Group itemsPerRow={2}>
-            <Card>
+            <Card id="room-card-living">
               <Card.Content>
                 <Card.Header>
                   Living Room
@@ -20,7 +20,13 @@ export default function Rooms(props) {
               <Image
                 src="https://img.freepik.com/free-vector/hygge-lifestyle-flat-composition-with-relaxing-woman-stylish-interior-living-room-with-decor-furniture_1284-59820.jpg?w=826"
                 size="large"
-              />
+              >
+              </Image>
+              <Image
+                src="https://pyxis.nymag.com/v1/imgs/284/267/87ccd2e3f999b864b0b1bab008267cca92-calathea.2x.rsquare.w600.jpg"
+                size="tiny"
+              >
+              </Image>
             </Card>
             <Card>
               <Card.Content>

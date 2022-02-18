@@ -108,7 +108,7 @@ div.ui.grid {
   margin: auto;
 }
 
-div.ui.container.rooms {
+div.ui.container {
   width: 100%;
   margin: auto;
 }
@@ -119,5 +119,10 @@ div.avatar {
 
 div.ui.two.cards {
   width: 100%;
+  margin: auto;
+}
+
+div.ui.container.app-container {
+  width: 97%;
   margin: auto;
 }
