@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
-import flying_bee_right from "../../assets/flying_bee_right.png";
 import happy_cactus from "../../assets/happy_cactus.jpg";
 import {
   Segment,
@@ -94,13 +93,9 @@ export default function AddPlant({ user, species, setIsVisible }) {
         <h1>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            {/* Start of ternary to only show if plant selected  */}
-            {state.plant ? (
+            {state.plant &&
               <Image src={state.plant.photo} size="large" />
-            ) : (
-              <Image className="bee-default" src={flying_bee_right} size="large" />
-            )}
-            {/* End of ternary to only show if plant selected  */}
+            }
           </Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
@@ -127,6 +122,8 @@ export default function AddPlant({ user, species, setIsVisible }) {
             )}
             {/* End of ternary */}
           </Grid.Column>
+            {/* Start of ternary to only show if plant selected  */}
+            {state.plant ? (
           <Grid.Column verticalAlign="middle" centered width={5}>
             <Dropdown
               className="dropdown"
@@ -136,8 +133,6 @@ export default function AddPlant({ user, species, setIsVisible }) {
               options={speciesOptions}
               onChange={clickHandler}
             />
-            {/* Start of ternary to only show if plant selected  */}
-            {state.plant ? (
               <Form onSubmit={submitForm}>
                 <Form.Field>
                   <Form.Input
@@ -216,34 +211,21 @@ export default function AddPlant({ user, species, setIsVisible }) {
                   Save Your Plant!
                 </Button>
               </Form>
+              </Grid.Column>
             ) : (
-              <div className="default-view">
-                <div className="plant-info">
-                  <List className="plant-list">
-                    <List.Item>
-                      <List.Icon name="rain" />
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="sun" />
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="lab" />
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="book" />
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="world" />
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="paw" />
-                    </List.Item>
-                  </List>
-                </div>
-              </div>
+              
+              <Grid.Column verticalAlign="middle" centered width={5}>
+              <Dropdown
+              className="dropdown-default"
+              placeholder="Select Plant"
+              fluid
+              selection
+              options={speciesOptions}
+              onChange={clickHandler}
+            />
+           </Grid.Column>
             )}
-            {/* End of ternary */}
-          </Grid.Column>
+             {/* End of ternary */}
         </Grid>
       </Segment>
     </div>
