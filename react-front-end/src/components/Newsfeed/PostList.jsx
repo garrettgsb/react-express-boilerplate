@@ -1,10 +1,9 @@
 import React from "react";
-import "semantic-ui-css/semantic.min.css"
+import "semantic-ui-css/semantic.min.css";
 import { Container } from "semantic-ui-react";
-//import { Feed } from 'semantic-ui-react'
 import SinglePost from "./SinglePost";
 
-export default function PostList({ posts }) {
+export default function PostList({ posts, users }) {
   const renderPosts = posts.map((post) => {
       return (
       <SinglePost
@@ -15,6 +14,7 @@ export default function PostList({ posts }) {
         description={post.description}
         topic={post.topic}
         created_at={post.created_at}
+        users={users}
       />
       )
     })
