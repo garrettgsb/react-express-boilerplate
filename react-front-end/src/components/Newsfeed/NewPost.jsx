@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Segment, Form, List } from "semantic-ui-react";
+import { Segment, Form, Dropdown } from "semantic-ui-react";
+
 
 
 export default function NewPostForm({ user, setIsVisible, createNewPost }) {
@@ -10,8 +11,24 @@ export default function NewPostForm({ user, setIsVisible, createNewPost }) {
     title: '',
     description: '',
     photo: '',
-    topic: 'general'
+    topic: ''
   });
+
+  const topicValues = ['general', 'question', 'plant hack'];
+
+  const topicOptions = topicValues.map((element) => ({
+    key: element,
+    text: element,
+    value: element
+  }));
+
+  const clickHandler = (event, data) => {
+    setState((prev) => ({
+      ...prev,
+      topic: data.value
+    }));
+  };
+
 
   const submitForm = () => {
     createNewPost(user, state.title, state.description, state.photo, state.topic)
@@ -50,7 +67,7 @@ export default function NewPostForm({ user, setIsVisible, createNewPost }) {
                 ...prev,
                 description: data.value,
               }));
-            }} label="Location"
+            }} label="Description"
             placeholder="Tell us more about it" />
         </Form.Field>
 
@@ -65,13 +82,16 @@ export default function NewPostForm({ user, setIsVisible, createNewPost }) {
           }} label="Photo" placeholder='Paste you the URL of your photo' />
         </Form.Field>
 
-        <List className={'post-topic'}>
-          <List.Item>
-            {state.topic
-              ? "general"
-              : "question"}
-          </List.Item>
-        </List>
+        <Form.Field>
+          
+        <Dropdown
+              placeholder="Select Topic"
+              fluid
+              selection
+              options={topicOptions}
+              onChange={clickHandler}
+            />
+        </Form.Field>
 
         <div className="ui buttons">
           <button className="ui button" onClick={onClose} >Cancel</button>
