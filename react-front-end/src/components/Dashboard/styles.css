@@ -1,3 +1,16 @@
 .drop{
   max-height: 105px !important;
 }
+
+.default-view {
+  padding-top: 140px;
+  padding-bottom: 140px;
+}
+
+.bee-default {
+  padding-bottom: 280px;
+}
+
+.close-button {
+  padding-bottom: 280px;
+}
