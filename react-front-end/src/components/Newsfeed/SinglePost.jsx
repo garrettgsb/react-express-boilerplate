@@ -10,8 +10,8 @@ export default function SinglePost({id, user_id, title, photo, description, topi
        <Segment raised>
          <h2>{title} ({topic})</h2>
          <div>
-            /*<Image src={user && user.avatar} avatar />
-            <span>posted by {user && user.name} on {created_at}</span>*/
+            <Image src={user && user.avatar} avatar />
+            <span>posted by {user && user.name} on {created_at && created_at.split('-')[0]}</span>
           </div>
          <Segment.Group horizontal>
           <Image src={photo} width='50%' height='100%' rounded/>

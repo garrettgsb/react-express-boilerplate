@@ -44,6 +44,8 @@ class App extends Component {
     })
   }
 
+  useEffect
+
   fetchData = () => {
     axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
       .then((response) => {

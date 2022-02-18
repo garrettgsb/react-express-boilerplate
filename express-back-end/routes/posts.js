@@ -7,28 +7,28 @@
 
 const express = require('express');
 const router = express.Router();
-const {getPosts, saveNewPost} = require('../db/post-queries');
-const {existsUserById} = require('../db/user-queries');
+const { getPosts, saveNewPost } = require('../db/post-queries');
+const { existsUserById } = require('../db/user-queries');
 
 // GET posts table
 router.get("/", (req, res) => {
   getPosts()
     .then((posts) => {
-      res.json({posts});
+      res.json({ posts });
     })
     .catch(err => {
       res
         .status(500)
-        .json({error: err.message});
+        .json({ error: err.message });
     });
 });
 
 // POST to posts table
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
   console.log('Route for new post');
 
   const post = req.body;
-  const postError = await isInvalidPost(post);
+  const postError = isInvalidPost(post);
   if (postError) {
     res.status(400).send(postError);
     return;
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
     .catch((error) => console.log(error));
 });
 
-async function isInvalidPost(post) {
+const isInvalidPost = (post) => { // helper function for router
   // 1. validate user_id
   const userId = post.user_id;
   if (!userId) {
@@ -50,24 +50,21 @@ async function isInvalidPost(post) {
     console.log(error);
     return error;
   } else {
-    const exists = await existsUserById(userId);
+    const exists = existsUserById(userId);
     if (!exists) {
       const error = `Invalid request, 'user_id' is not found`;
       console.log(error);
       return error;
     }
   }
-
   // 2. validate topic
   if (!post.topic || !post.topic.trim()) {
     const error = `Invalid request, 'topic' is required`;
     console.log(error);
     return error;
   }
-
-
   return null;
-}
+};
 
 // export router object
 module.exports = router;
