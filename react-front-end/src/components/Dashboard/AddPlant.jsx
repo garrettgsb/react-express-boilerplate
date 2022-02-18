@@ -49,7 +49,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
 
   const clickHandler = (event, data) => {
     const selectedSpecies = getPlantByName(species, data.value);
-    console.log('selectedSpecies!!!!', selectedSpecies)
+    // console.log('selectedSpecies!!!!', selectedSpecies)
     setState((prev) => ({
       ...prev,
       plant: selectedSpecies,

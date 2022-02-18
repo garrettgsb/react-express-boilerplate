@@ -45,14 +45,16 @@ export default function Dashboard({ users, userId, plants, species }) {
                     positive
                     floated="right"
                     onClick={() => setSelectedPlant(plants[0])}
-                    // plants[0] is hardcoded until the drag and drop is implemented //
+                  // plants[0] is hardcoded until the drag and drop is implemented //
                   >
                     Check Out a Plant!
                   </Button>
                 </Header>
               </Segment>
               <Segment textAlign="left" raised>
-                Good Morning, {name}
+                <Header as="h3">
+                  Good Morning, {name}!
+                </Header>
               </Segment>
               <Grid.Row>
                 <Rooms />

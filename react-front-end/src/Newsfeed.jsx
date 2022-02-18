@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css"
 import { Header, Segment, Container, Grid, Icon, Divider } from "semantic-ui-react";
-import NewPostForm from "./components/Newsfeed/NewPost";
 import PostList from "./components/Newsfeed/PostList";
 import { getUserById } from "./helpers/selectors";
 import Video from "./components/Newsfeed/Video";
+import NewPost from "./components/Newsfeed/NewPost";
 
 
 export default function Newsfeed({ posts, users, userId, fetchPosts }) {
-  const [showNewPostForm, setShowNewPostForm] = React.useState(false);
-  const onClick = () => {
-    !showNewPostForm ? setShowNewPostForm(true) : setShowNewPostForm(false)
-  };
+  // const [showNewPostForm, setShowNewPostForm] = React.useState(false);
+  // const onClick = () => {
+  //   !showNewPostForm ? setShowNewPostForm(true) : setShowNewPostForm(false)
+  // };
+
+  const [isVisible, setIsVisible] = useState(false);
+
 
   const user = getUserById(users, userId);
   const name = user && user.name;
@@ -24,8 +27,8 @@ export default function Newsfeed({ posts, users, userId, fetchPosts }) {
             <Header size='large'>Hey {name}, what's on your mind?
               <Icon name='comment alternate olive' />
             </Header>
-           
-            < div onClick={onClick} className="ui animated fade button orange">
+
+            <div onClick={() => setIsVisible(true)} className="ui animated fade button orange">
               <div className="visible content">
                 Create
               </div>
@@ -33,9 +36,14 @@ export default function Newsfeed({ posts, users, userId, fetchPosts }) {
                 New Post
               </div>
             </div>
+
           </Segment.Group>
 
-          <NewPost />
+          <br></br>
+          {isVisible && (
+            <NewPost user={user} setIsVisible={setIsVisible} fetchPosts={fetchPosts} />
+          )}
+          <br></br>
         </Grid.Column>
 
         <Grid.Column width={6}>
@@ -50,7 +58,7 @@ export default function Newsfeed({ posts, users, userId, fetchPosts }) {
             </Header>
           </Divider>
 
-          <PostList posts={posts} users={users}/>
+          <PostList posts={posts} users={users} />
 
         </Grid.Column>
 

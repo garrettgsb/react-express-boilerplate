@@ -1,7 +1,7 @@
 const db = require('./index');
 
 const getPosts = () => {
-  return db.query(`SELECT * FROM posts;`)
+  return db.query(`SELECT * FROM posts ORDER BY created_at DESC;`)
     .then((res) => {
       return res.rows;
     })
@@ -17,20 +17,18 @@ const saveNewPost = (data) => {
     `
     INSERT INTO posts (user_id, title, description, photo, topic, created_at ) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
   `,
-  
-  [user_id, title, description, photo, topic, new Date()]
+
+    [user_id, title, description, photo, topic, new Date()]
   )
 
-  .then((res) => {
-    console.log('res.rows[0]', res.rows[0]);
-    return res.rows;
-  })
-  .catch((err) => {
-    console.log('DB error inserting new post: ' + err.message);
-  });
+    .then((res) => {
+      console.log('res.rows[0]', res.rows[0]);
+      return res.rows;
+    })
+    .catch((err) => {
+      console.log('DB error inserting new post: ' + err.message);
+    });
 };
-
-
 
 module.exports = {
   getPosts, saveNewPost

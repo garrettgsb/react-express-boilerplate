@@ -126,3 +126,13 @@ div.ui.container.app-container {
   width: 97%;
   margin: auto;
 }
+
+div.ui.video {
+  position: fixed;
+  width: 35%;
+  height: auto;
+}
+
+div.ui.inverted.segment.navbar-segment {
+  background-color: #9DBF98;
+}

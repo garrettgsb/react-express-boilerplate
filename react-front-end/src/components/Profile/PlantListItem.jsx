@@ -5,9 +5,6 @@ import { Card, Image } from "semantic-ui-react";
 
 export default function PlantListItem({ user_id, id, scientificName, commonName, photo, description, nickname, plant_since }) {
 
-  // console.log('user_id', user_id);
-  console.log('id!!!!', id);
-
   const [state, setState] = useState({
     wishlist_user_id: user_id,
     plant_id: id

@@ -49,9 +49,11 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
               <h3>
                 <i>"{plant.nickname}"</i>
               </h3>
-              <b>{user.name}'s</b> Plant Since {plant.created_at.split("-")[0]}
+              <h3>
+                <b>{user.name}'s</b> Plant Since {plant.created_at.split("-")[0]}
+              </h3>
               <p>
-                <List.Icon name="home" />
+                <Icon name="leaf" />
                 Lives in {user.name}'s {plant.location}
               </p>
               <p>{plant.description}</p>
