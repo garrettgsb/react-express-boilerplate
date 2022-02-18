@@ -1,67 +1,88 @@
-import React from 'react'
-import { Button, Checkbox, Form, Component, Segment } from 'semantic-ui-react'
+import React, {useState, useEffect} from 'react';
+import {Segment, Form, List} from "semantic-ui-react";
+import axios from "axios";
 
+export default function NewPostForm({user, fetchPosts, onClick}) {
+  console.log("user -> ", user);
 
-class NewPost extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-     value: ''
-    };
+  const [state, setState] = useState({
+    user: user,
+    title: '',
+    description: '',
+    photo: '',
+    topic: 'general'
+  });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  const submitForm = () => {
+    axios
+      .post("/api/posts", {
+        user_id: state.user.id,
+        title: state.title,
+        description: state.description,
+        photo: state.photo,
+        topic: state.topic
+      })
+      .then(function (response) {
+        console.log("Post made to db!", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    onClick();
+  };
+   
+  return (
+    <Segment raised>
+      <Form onSubmit={submitForm}>
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-    // this.setState({description: event.target.description});
-    // this.setState({topic: event.target.topic});
-    // this.setState({image: event.target.image});
-  }
+        <Form.Field>
+          <Form.Input required={true}
+                      onChange={(e, data) => {
+                        console.log("working??", data);
+                        setState((prev) => ({
+                          ...prev,
+                          title: data.value,
+                        }));
+                      }} label='Title' placeholder='Enter post title' />
+        </Form.Field>
+        <Form.Field>
+          <Form.TextArea required={true}
+                    onChange={(e, data) => {
+                      console.log("description", data);
+                      setState((prev) => ({
+                        ...prev,
+                        description: data.value,
+                      }));
+                    }}  label="Location"
+                         placeholder="Tell us more about it"/>
+        </Form.Field>
 
-  handleSubmit(event) {
-    alert('Magic happens and new post appears: ' + this.state.value);
-    event.preventDefault();
-  }
+        <Form.Field>
 
-  render() {
-    return (
-<Segment raised>
-  <Form onSubmit={this.handleSubmit}>
-    <Form.Field>
-      <label>Title</label>
-      <input value={this.state.title} onChange={this.handleChange} placeholder='Please enter a title for your post' />
-    </Form.Field>
-    <Form.Field>
-      <label>Description</label>
-      <textarea value={this.state.description} onChange={this.handleChange} placeholder='Tell us more...' />
-    </Form.Field>
+          <Form.Input onChange={(e, data) => {
+            console.log("Photo", data);
+            setState((prev) => ({
+              ...prev,
+              photo: data.value,
+            }));
+          }}  label="Photo" placeholder='Paste you the URL of your photo' />
+        </Form.Field>
 
-    <label>
-          Topic of you post is:
-          <select value={this.state.topic} onChange={this.handleChange}>
-            <option value="general">General</option>
-            <option value="question">Question</option>
-            <option value="plant hack">Plant Hack</option>
-          </select>
-        </label>
+        <List className={'post-topic'}>
+        <List.Item>
+          {state.topic
+            ? "general"
+            : "question"}
+          </List.Item>
+          </List>
 
-    <Form.Field>
-    <label>Upload an Image</label>
-      <input type="file" />
-    </Form.Field>
-
-    <div class="ui buttons">
-      <button class="ui button">Cancel</button>
-      <div class="or"></div>
-      <button class="ui positive button">Save</button>
-    </div>
-
-  </Form>
-  </Segment>
-    
-    )
-  }
-}
-export default NewPost
+        <div className="ui buttons">
+        <button className="ui button" onClick={onClick} >Cancel</button>
+        <div className="or"></div>
+        <button type="submit" className="ui positive button" onClick={onClick} >Save</button>
+      </div>
+        
+      </Form>
+    </Segment>
+  );
+};
