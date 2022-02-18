@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
 import flying_bee from "../../assets/flying_bee.png";
@@ -15,7 +15,15 @@ import {
 } from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
+ 
 export default function AddPlant({ user, species, setIsVisible }) {
+
+  const divRef = useRef(null);
+  useEffect(() => {
+    divRef.current.scrollIntoView({ behavior: 'smooth' });
+  });
+
+
   const [state, setState] = useState({
     plant: null,
     nickname: "",
@@ -24,7 +32,15 @@ export default function AddPlant({ user, species, setIsVisible }) {
 
   const onClose = (event) => {
     setIsVisible(false);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   };
+  useEffect(() => {
+    window.addEventListener("scroll",[]);
+  }, []);
+  
 
   const speciesOptions = species.map((element) => ({
     key: element.scientific_name,
@@ -58,7 +74,9 @@ export default function AddPlant({ user, species, setIsVisible }) {
     onClose();
   };
   return (
+    
     <div>
+      <div ref={divRef} />;
       <Segment>
         <Button
           size="mini"
@@ -76,19 +94,13 @@ export default function AddPlant({ user, species, setIsVisible }) {
         <h1>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            {state.plant ?
-            <Image
-            src={state.plant.photo}
-            size="large"
-          /> 
-          :
-             <Image
-             className="bee-default"
-            src={flying_bee}
-            size="large"
-          /> 
-          }
-            
+            {/* Start of ternary to only show if plant selected  */}
+            {state.plant ? (
+              <Image src={state.plant.photo} size="large" />
+            ) : (
+              <Image className="bee-default" src={flying_bee} size="large" />
+            )}
+            {/* End of ternary to only show if plant selected  */}
           </Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
@@ -108,10 +120,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
               <div>
                 <h1>Congrats on your new plant!</h1>
                 <br></br>
-                <Image verticalAlign="middle"
-                  src={happy_cactus}
-                  size="small"
-                />
+                <Image verticalAlign="middle" src={happy_cactus} size="small" />
 
                 <h2>Search for your plant with the drop down menu</h2>
               </div>

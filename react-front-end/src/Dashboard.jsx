@@ -43,7 +43,6 @@ export default function Dashboard({ users, userId, plants, species }) {
                 <Segment textAlign="left" raised>
                   Good Morning, {name}
                 </Segment>
-                <br></br>
               </Grid.Row>
               <Grid.Row>
                 <Rooms />
@@ -58,7 +57,6 @@ export default function Dashboard({ users, userId, plants, species }) {
         <br></br>
         <br></br>
          {isVisible && <AddPlant user={user} species={species} setIsVisible={setIsVisible} />}
-        <br></br>
         <br></br>
       </Container>
     );
