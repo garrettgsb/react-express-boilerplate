@@ -75,7 +75,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
   return (
     
     <div>
-      <div ref={divRef} />;
+      <div ref={divRef} />
       <Segment>
         <Button
           size="mini"
