@@ -83,11 +83,46 @@ div.plant-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  margin-right: 5%;
 }
 
 img.plant-photo {
   margin-left: 5%;
   width: 90%;
   height: auto;
+}
+
+div.ui.list.wishlist-plant-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+}
+
+div.ui.grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin: auto;
+}
+
+div.ui.container {
+  width: 100%;
+  margin: auto;
+}
+
+div.avatar {
+  position: fixed;
+}
+
+div.ui.two.cards {
+  width: 100%;
+  margin: auto;
+}
+
+div.ui.container.app-container {
+  width: 97%;
+  margin: auto;
 }

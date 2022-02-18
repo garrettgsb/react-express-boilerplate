@@ -16,6 +16,8 @@ export default function Navbar({ users, user, login, logout }) {
             <Dropdown.Menu>
               <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
               <Dropdown.Item href="/newsfeed">Newsfeed</Dropdown.Item>
+              <Dropdown.Item href={`/profile/${user}`}>Profile</Dropdown.Item>
+              <Dropdown.Item href="/wishlist">Wishlist</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 

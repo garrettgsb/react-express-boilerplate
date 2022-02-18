@@ -1,7 +1,7 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getPlantById, getUserById } from "./helpers/selectors";
-import { Grid, List, Segment } from 'semantic-ui-react';
+import { Button, Grid, Icon, List } from 'semantic-ui-react';
 import "./App.css";
 
 export default function Plant({ plants, users }) {
@@ -33,6 +33,12 @@ export default function Plant({ plants, users }) {
             <p><b>{user && user.name}'s</b> Plant Since {plant && plant.created_at.split('-')[0]}</p>
             <p><List.Icon name="home" />Lives in {user && user.name}'s {plant && plant.location}</p>
             <p>{plant && plant.description}</p>
+            <div>
+              <Link to={`/profile/${user && user.id}`}>
+                <Button color='olive'>See {user && user.name}'s Profile</Button>
+              </Link>
+              <Button color='orange'><Icon name='like'/>Add to Wishlist</Button>
+            </div>
           </div>
         </Grid.Column>
         <Grid.Column width={4}>

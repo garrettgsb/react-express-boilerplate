@@ -8,7 +8,6 @@ import ViewPlant from "./components/Dashboard/ViewPlant";
 import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
 import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
-
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import { useState } from "react";
 
@@ -23,10 +22,10 @@ export default function Dashboard({ users, userId, plants, species }) {
     return <h2>Please login or signup.</h2>;
   } else {
     return (
-      <Container>
+      <Container className="app-container">
         <Grid>
           <Grid.Row stretched>
-            <Grid.Column width={11}>
+            <Grid.Column width={12}>
               <Segment clearing>
                 <Header textAlign="left" as="h2">
                   DASHBOARD
@@ -62,7 +61,7 @@ export default function Dashboard({ users, userId, plants, species }) {
                 <Rooms />
               </Grid.Row>
             </Grid.Column>
-            <Grid.Column width={5}>
+            <Grid.Column width={4}>
               <Namecard user={user} />
               <Reminders plants={userPlants} />
             </Grid.Column>
