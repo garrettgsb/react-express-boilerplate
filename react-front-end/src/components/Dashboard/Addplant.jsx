@@ -18,16 +18,15 @@ import { getPlantByName } from "../../helpers/selectors";
  
 export default function AddPlant({ user, species, setIsVisible }) {
 
-  const divRef = useRef(null);
-  useEffect(() => {
-    divRef.current.scrollIntoView({ behavior: 'smooth' });
-  });
-
-
   const [state, setState] = useState({
     plant: null,
     nickname: "",
     location: "",
+  });
+// Scroll to bottom & Scroll to top //
+  const divRef = useRef(null);
+  useEffect(() => {
+    divRef.current.scrollIntoView({ behavior: 'smooth' });
   });
 
   const onClose = (event) => {
@@ -108,13 +107,13 @@ export default function AddPlant({ user, species, setIsVisible }) {
               <div className="plant-info">
                 <h2>
                   Scientific Name:{" "}
-                  {state.plant.scientific_name && state.plant.scientific_name}
+                  {state.plant.scientific_name}
                 </h2>
-                <h2>Common Name: {state.plant && state.plant.common_name}</h2>
+                <h2>Common Name: {state.plant.common_name}</h2>
                 <h3>
-                  <i>{state.plant && state.plant.nickname}</i>
+                  <i>{state.plant.nickname}</i>
                 </h3>
-                <p>{state.plant && state.plant.description}</p>
+                <h3>{state.plant.description}</h3>
               </div>
             ) : (
               <div>
@@ -173,38 +172,38 @@ export default function AddPlant({ user, species, setIsVisible }) {
                     <List.Item>
                       <List.Icon name="rain" />
                       <List.Content>
-                        Every {state.plant && state.plant.watering_interval}{" "}
+                        Every {state.plant.watering_interval}{" "}
                         Days
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="sun" />
                       <List.Content>
-                        {state.plant && state.plant.light_level}
+                        {state.plant.light_level}
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="lab" />
                       <List.Content>
-                        {state.plant && state.plant.soil_type}
+                        {state.plant.soil_type}
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="book" />
                       <List.Content>
-                        {state.plant && state.plant.difficulty_level}
+                        {state.plant.difficulty_level}
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="world" />
                       <List.Content>
-                        {state.plant && state.plant.category}
+                        {state.plant.category}
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="paw" />
                       <List.Content>
-                        {state.plant && state.plant.toxic
+                        {state.plant.toxic
                           ? "Toxic"
                           : "Non-Toxic"}
                       </List.Content>
