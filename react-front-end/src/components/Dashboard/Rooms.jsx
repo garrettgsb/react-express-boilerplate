@@ -5,7 +5,7 @@ import { Segment, Grid, Image, Container, Card, Header } from "semantic-ui-react
 export default function Rooms(props) {
   return (
     <Container className="rooms">
-      <Segment clearing>
+      <Segment color="olive" raised>
         <Header>My Rooms</Header>
       </Segment>
       <Grid>
@@ -24,7 +24,7 @@ export default function Rooms(props) {
               </Image>
               <Image
                 src="https://pyxis.nymag.com/v1/imgs/284/267/87ccd2e3f999b864b0b1bab008267cca92-calathea.2x.rsquare.w600.jpg"
-                size="tiny"
+                size="small"
               >
               </Image>
             </Card>
@@ -38,6 +38,10 @@ export default function Rooms(props) {
                 src="https://img.freepik.com/free-vector/interior-kitchen-with-furniture-flat-style-vector-illustration-eps-10_505557-1667.jpg?w=826"
                 size="large"
               />
+              <Image
+                src="https://mobileimages.lowes.com/productimages/775eb6c1-054d-4c54-a879-e358756b04b6/15380756.jpg?size=pdhi"
+                size="small"
+              ></Image>
             </Card>
             <Card>
               <Card.Content>

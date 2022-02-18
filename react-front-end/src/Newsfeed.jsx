@@ -4,6 +4,7 @@ import { Header, Segment, Container, Grid, Icon, Divider } from "semantic-ui-rea
 import NewPostForm from "./components/Newsfeed/NewPost";
 import PostList from "./components/Newsfeed/PostList";
 import { getUserById } from "./helpers/selectors";
+import Video from "./components/Newsfeed/Video";
 
 
 export default function Newsfeed({ posts, users, userId, fetchPosts }) {
@@ -16,12 +17,12 @@ export default function Newsfeed({ posts, users, userId, fetchPosts }) {
   const name = user && user.name;
   return (
     <Container>
-      
-      <Grid>       
-          <Grid.Column width={10} >
+
+      <Grid>
+        <Grid.Column width={10} >
           <Segment.Group>
             <Header size='large'>Hey {name}, what's on your mind?
-            <Icon name='comment alternate olive'/>
+              <Icon name='comment alternate olive' />
             </Header>
            
             < div onClick={onClick} className="ui animated fade button orange">
@@ -32,24 +33,29 @@ export default function Newsfeed({ posts, users, userId, fetchPosts }) {
                 New Post
               </div>
             </div>
-            </Segment.Group>
-             
-            { showNewPostForm ? <NewPostForm user={user} fetchPosts={fetchPosts} onClick={onClick}/> : null }
-            </Grid.Column>
-         
-        <Grid.Column width={10} >
-            <Divider horizontal>
-              <Header as='h4'>
-                <Icon name='rss olive' />
-                Newsfeed
-              </Header>
-            </Divider>
+          </Segment.Group>
 
-              <PostList posts={ posts } users={ users }/>
+          <NewPost />
+        </Grid.Column>
+
+        <Grid.Column width={6}>
+          <Video />
+        </Grid.Column>
+
+        <Grid.Column width={10} >
+          <Divider horizontal>
+            <Header as='h4'>
+              <Icon name='rss olive' />
+              Newsfeed
+            </Header>
+          </Divider>
+
+          <PostList posts={posts} users={users}/>
 
         </Grid.Column>
+
       </Grid>
     </Container>
-    
+
   );
 };

@@ -1,5 +1,8 @@
-.drop{
+.drop {
   max-height: 105px !important;
+}
+.dropdown-default {
+  margin-bottom: 350px;
 }
 
 .default-view {
