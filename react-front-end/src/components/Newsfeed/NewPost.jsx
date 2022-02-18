@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Segment, Form, List } from "semantic-ui-react";
-import axios from "axios";
 
-export default function NewPostForm({ user, setIsVisible }) {
+
+export default function NewPostForm({ user, setIsVisible, createNewPost }) {
   console.log("user -> ", user);
 
   const [state, setState] = useState({
@@ -14,23 +14,11 @@ export default function NewPostForm({ user, setIsVisible }) {
   });
 
   const submitForm = () => {
-    axios
-      .post("/api/posts", {
-        user_id: user.id,
-        title: state.title,
-        description: state.description,
-        photo: state.photo,
-        topic: state.topic
-      })
-      .then(function (response) {
-        console.log("Post made to db!", response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    createNewPost(user, state.title, state.description, state.photo, state.topic)
     // fetchPosts();
     onClose();
   };
+  
 
   const onClose = (event) => {
     setIsVisible(false);
