@@ -23,7 +23,7 @@ export default function Newsfeed({ posts, users, userId, fetchPosts }) {
 
       <Grid>
         <Grid.Column width={10} >
-          <Segment.Group>
+          <Segment>
             <Header size='large'>Hey {name}, what's on your mind?
               <Icon name='comment alternate olive' />
             </Header>
@@ -36,8 +36,7 @@ export default function Newsfeed({ posts, users, userId, fetchPosts }) {
                 New Post
               </div>
             </div>
-
-          </Segment.Group>
+          </Segment>
 
           <br></br>
           {isVisible && (
