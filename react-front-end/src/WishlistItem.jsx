@@ -53,7 +53,7 @@ export default function WishlistItem({ id, scientificName, commonName, photo, li
         </span>
         <span className="right floated">
           <Button floated="right" onClick={() => setIsVisible(true)}>
-            <i className="add icon"></i>Add
+            <i className="add icon"></i>Add Plant
           </Button>
         </span>
       </Card.Content>

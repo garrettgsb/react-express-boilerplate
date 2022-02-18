@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getPlantById, getUserById } from "./helpers/selectors";
 import { Button, Grid, Icon, List } from 'semantic-ui-react';
 import "./App.css";
+import axios from "axios";
 
-export default function Plant({ plants, users }) {
+export default function Plant({ plants, users, user_id }) {
 
   const params = useParams();
   const plant_id = params.plant_id;
@@ -16,6 +17,25 @@ export default function Plant({ plants, users }) {
     const user_id = plant.user_id;
     user = getUserById(users, user_id);
   }
+
+  const [state, setState] = useState({
+    wishlist_user_id: user_id,
+    plant_id: plant_id
+  })
+
+  const addWishlistPlant = (wishlist_user_id, plant_id) => {
+    axios
+      .post("/api/wishlist", {
+        wishlist_user_id: wishlist_user_id,
+        plant_id: plant_id
+      })
+      .then(function (response) {
+        console.log("Post made to db!", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <Grid>
@@ -37,7 +57,17 @@ export default function Plant({ plants, users }) {
               <Link to={`/profile/${user && user.id}`}>
                 <Button color='olive'>See {user && user.name}'s Profile</Button>
               </Link>
-              <Button color='orange'><Icon name='like' />Add to Wishlist</Button>
+              <Button color='orange' onClick={() => {
+                addWishlistPlant(state.wishlist_user_id, state.plant_id);
+
+                setState((prev) => ({
+                  ...prev,
+                  wishlist: {
+                    wishlist_user_id: user_id,
+                    plant_id: plant_id
+                  },
+                }));
+              }}><Icon name='like' />Add to Wishlist</Button>
             </div>
           </div>
         </Grid.Column>

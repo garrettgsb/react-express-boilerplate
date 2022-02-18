@@ -126,3 +126,9 @@ div.ui.container.app-container {
   width: 97%;
   margin: auto;
 }
+
+div.ui.video {
+  position: fixed;
+  width: 35%;
+  height: auto;
+}
