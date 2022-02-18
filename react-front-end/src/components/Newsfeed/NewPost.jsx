@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Segment, Form, List } from "semantic-ui-react";
+import { Segment, Form, Dropdown } from "semantic-ui-react";
 import axios from "axios";
 
 export default function NewPostForm({ user, setIsVisible }) {
@@ -10,8 +10,24 @@ export default function NewPostForm({ user, setIsVisible }) {
     title: '',
     description: '',
     photo: '',
-    topic: 'general'
+    topic: ''
   });
+
+  const topicValues = ['general', 'question', 'plant hack'];
+
+  const topicOptions = topicValues.map((element) => ({
+    key: element,
+    text: element,
+    value: element
+  }));
+
+  const clickHandler = (event, data) => {
+    setState((prev) => ({
+      ...prev,
+      topic: data.value
+    }));
+  };
+
 
   const submitForm = () => {
     axios
@@ -62,7 +78,7 @@ export default function NewPostForm({ user, setIsVisible }) {
                 ...prev,
                 description: data.value,
               }));
-            }} label="Location"
+            }} label="Description"
             placeholder="Tell us more about it" />
         </Form.Field>
 
@@ -77,13 +93,16 @@ export default function NewPostForm({ user, setIsVisible }) {
           }} label="Photo" placeholder='Paste you the URL of your photo' />
         </Form.Field>
 
-        <List className={'post-topic'}>
-          <List.Item>
-            {state.topic
-              ? "general"
-              : "question"}
-          </List.Item>
-        </List>
+        <Form.Field>
+          
+        <Dropdown
+              placeholder="Select Topic"
+              fluid
+              selection
+              options={topicOptions}
+              onChange={clickHandler}
+            />
+        </Form.Field>
 
         <div className="ui buttons">
           <button className="ui button" onClick={onClose} >Cancel</button>
