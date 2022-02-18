@@ -24,6 +24,20 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
     <div>
       <div ref={divRef} />
       <Segment>
+        <Button
+          className="close-button"
+          size="mini"
+          basic
+          color="red"
+          onClick={onClose}
+          floated="right"
+          animated="vertical"
+        >
+          <Button.Content hidden>Close</Button.Content>
+          <Button.Content visible>
+            <Icon name="window close" color="red" size="large" />
+          </Button.Content>
+        </Button>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
             <Image src={plant.photo} size="large" />
@@ -44,20 +58,6 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
             </div>
           </Grid.Column>
           <Grid.Column verticalAlign="middle" centered width={5}>
-            <Button
-              className="close-button"
-              size="mini"
-              basic
-              color="red"
-              onClick={onClose}
-              floated="right"
-              animated="vertical"
-            >
-              <Button.Content hidden>Close</Button.Content>
-              <Button.Content visible>
-                <Icon name="window close" color="red" size="large" />
-              </Button.Content>
-            </Button>
             <div className="plant-info">
               <List className="plant-list">
                 <List.Item>
