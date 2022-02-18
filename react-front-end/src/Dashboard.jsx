@@ -9,6 +9,7 @@ import "./components/Dashboard/styles.css";
 import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Dashboard({ users, userId, plants, species }) {
   const user = getUserById(users, userId);
@@ -27,12 +28,14 @@ export default function Dashboard({ users, userId, plants, species }) {
               <Segment clearing>
                 <Header textAlign="left" as="h2">
                   DASHBOARD
-                  <Button
-                    basic
-                    color="green"
-                    content="Wishlist"
-                    floated="right"
-                  />
+                  <Link to="/wishlist">
+                    <Button
+                      basic
+                      color="green"
+                      content="Wishlist"
+                      floated="right"
+                    />
+                  </Link>
                   <Button positive floated="right" onClick={() => setIsVisible(true)}>
                     Add A New Plant!
                   </Button>
@@ -55,7 +58,7 @@ export default function Dashboard({ users, userId, plants, species }) {
         </Grid>
         <br></br>
         <br></br>
-         {isVisible && <AddPlant user={user} species={species} setIsVisible={setIsVisible} />}
+        {isVisible && <AddPlant user={user} species={species} setIsVisible={setIsVisible} />}
         <br></br>
       </Container>
     );
