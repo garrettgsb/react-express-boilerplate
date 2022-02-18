@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
-import flying_bee_right from "../../assets/flying_bee.png";
+import flying_bee_right from "../../assets/flying_bee_right.png";
 import happy_cactus from "../../assets/happy_cactus.jpg";
 import {
   Segment,
