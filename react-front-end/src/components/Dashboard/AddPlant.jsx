@@ -50,6 +50,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
 
   const clickHandler = (event, data) => {
     const selectedSpecies = getPlantByName(species, data.value);
+    console.log('selectedSpecies!!!!', selectedSpecies)
     setState((prev) => ({
       ...prev,
       plant: selectedSpecies,
@@ -59,7 +60,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
   const submitForm = () => {
     axios
       .post("/api/user_plants", {
-        species_id: state.plant.id,
+        species_id: state.plant.species_id,
         user_id: user.id,
         nickname: state.nickname,
         location: state.location,
@@ -114,6 +115,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
                   <i>{state.plant.nickname}</i>
                 </h3>
                 <h3>{state.plant.description}</h3>
+                <h3>{state.plant.species_id} IDDDD</h3>
               </div>
             ) : (
               <div>

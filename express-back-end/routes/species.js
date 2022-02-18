@@ -7,11 +7,11 @@
 
 const express = require('express');
 const router  = express.Router();
-const speciesQueries = require('../db/species-queries');
+const { getSpecies } = require('../db/species-queries');
 
 // GET users table
 router.get("/", (req, res) => {
-  speciesQueries.getSpecies()
+  getSpecies()
     .then((species) => {
       res.json({ species });
     })

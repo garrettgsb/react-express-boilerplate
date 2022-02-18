@@ -1,8 +1,9 @@
 const db = require('./index');
 
 const getPlants = () => {
-  return db.query(`SELECT * FROM user_plants JOIN species ON user_plants.species_id=species.id;`)
+  return db.query(`SELECT * FROM user_plants JOIN species ON user_plants.species_id=species.species_id;`)
     .then((res) => {
+      console.log('res.rows HERE!!!', res.rows);
       return res.rows;
     })
     .catch((err) => {

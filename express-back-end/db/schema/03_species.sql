@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS species CASCADE;
 CREATE TABLE species ( 
-  id SERIAL PRIMARY KEY NOT NULL,
+  species_id SERIAL PRIMARY KEY NOT NULL,
   scientific_name VARCHAR(255) NOT NULL,
   common_name VARCHAR(255) NOT NULL,
   category VARCHAR(255) NOT NULL,
