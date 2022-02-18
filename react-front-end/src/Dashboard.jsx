@@ -17,6 +17,7 @@ export default function Dashboard({ users, userId, plants, species }) {
   const name = user && user.name;
   const userPlants = getPlantsForUser(plants, userId);
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedPlant, setSelectedPlant] = useState(null);
 
   if (!user) {
     return <h2>Please login or signup.</h2>;
@@ -35,8 +36,20 @@ export default function Dashboard({ users, userId, plants, species }) {
                     content="Wishlist"
                     floated="right"
                   />
-                  <Button positive floated="right" onClick={() => setIsVisible(true)}>
+                  <Button
+                    positive
+                    floated="right"
+                    onClick={() => setIsVisible(true)}
+                  >
                     Add A New Plant!
+                  </Button>
+                  <Button
+                    positive
+                    floated="right"
+                    onClick={() => setSelectedPlant(plants[0])}
+                    // plants[0] is hardcoded until the drag and drop is implemented //
+                  >
+                    Check Out a Plant!
                   </Button>
                 </Header>
               </Segment>
@@ -57,9 +70,19 @@ export default function Dashboard({ users, userId, plants, species }) {
         </Grid>
         <br></br>
         <br></br>
-         {isVisible && <AddPlant user={user} species={species} setIsVisible={setIsVisible} />}
+        {isVisible && (
+          <AddPlant user={user} species={species} setIsVisible={setIsVisible} />
+        )}
         <br></br>
-        {isVisible && <ViewPlant user={user} species={species} plant={plants[0]} setIsVisible={setIsVisible} />}
+        {selectedPlant && (
+          <ViewPlant
+            user={user}
+            species={species}
+            plant={selectedPlant}
+            closeViewPlant={() => setSelectedPlant(null)}
+          />
+        )}
+        <br></br>
       </Container>
     );
   }
