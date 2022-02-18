@@ -98,7 +98,8 @@ export default function AddPlant({ user, species, setIsVisible }) {
             {state.plant ? (
               <Image src={state.plant.photo} size="large" />
             ) : (
-              <Image className="bee-default" src={flying_bee_right} size="large" />
+              <div></div>
+              // <Image className="bee-default" src={flying_bee_right} size="large" />
             )}
             {/* End of ternary to only show if plant selected  */}
           </Grid.Column>
@@ -115,7 +116,6 @@ export default function AddPlant({ user, species, setIsVisible }) {
                   <i>{state.plant.nickname}</i>
                 </h3>
                 <h3>{state.plant.description}</h3>
-                <h3>{state.plant.species_id} IDDDD</h3>
               </div>
             ) : (
               <div>
@@ -128,6 +128,8 @@ export default function AddPlant({ user, species, setIsVisible }) {
             )}
             {/* End of ternary */}
           </Grid.Column>
+            {/* Start of ternary to only show if plant selected  */}
+            {state.plant ? (
           <Grid.Column verticalAlign="middle" centered width={5}>
             <Dropdown
               className="dropdown"
@@ -137,8 +139,6 @@ export default function AddPlant({ user, species, setIsVisible }) {
               options={speciesOptions}
               onChange={clickHandler}
             />
-            {/* Start of ternary to only show if plant selected  */}
-            {state.plant ? (
               <Form onSubmit={submitForm}>
                 <Form.Field>
                   <Form.Input
@@ -217,34 +217,21 @@ export default function AddPlant({ user, species, setIsVisible }) {
                   Save Your Plant!
                 </Button>
               </Form>
+              </Grid.Column>
             ) : (
-              <div className="default-view">
-                <div className="plant-info">
-                  <List className="plant-list">
-                    <List.Item>
-                      <List.Icon name="rain" />
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="sun" />
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="lab" />
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="book" />
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="world" />
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="paw" />
-                    </List.Item>
-                  </List>
-                </div>
-              </div>
+              
+              <Grid.Column verticalAlign="middle" centered width={5}>
+              <Dropdown
+              className="dropdown-default"
+              placeholder="Select Plant"
+              fluid
+              selection
+              options={speciesOptions}
+              onChange={clickHandler}
+            />
+           </Grid.Column>
             )}
-            {/* End of ternary */}
-          </Grid.Column>
+             {/* End of ternary */}
         </Grid>
       </Segment>
     </div>
