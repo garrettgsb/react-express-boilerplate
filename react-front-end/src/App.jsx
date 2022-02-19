@@ -27,6 +27,7 @@ class App extends Component {
       posts: [],
       user: cookies.get("user_id"),
       wishlist: "",
+      reminders: []
     };
   }
 
@@ -113,6 +114,16 @@ class App extends Component {
     });
   };
 
+  fetchReminders = () => {
+    axios.get("/api/reminders").then((response) => {
+
+      console.log("Reminders: ", response.data);
+      this.setState({
+        reminders: response.data,
+      });
+    });
+  };
+
   fetchPosts = () => {
     axios.get("/api/posts").then((response) => {
       console.log("Posts: " + response.data.posts);
@@ -150,6 +161,7 @@ class App extends Component {
     this.fetchSpecies();
     this.fetchPosts();
     this.fetchWishlist();
+    this.fetchReminders();
   }
 
   componentWillUnmount() {
@@ -177,6 +189,7 @@ class App extends Component {
                   users={this.state.users}
                   userId={this.state.user}
                   species={this.state.species}
+                  reminders={this.state.reminders}
                 />
               }
             />

@@ -4,7 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import { Checkbox, Image, Card, Feed } from "semantic-ui-react";
 import wateringcan from "../../assets/wateringcan.png";
 
-export default function Reminders({ plants }) {
+export default function Reminders({ plants, reminders }) {
 
   const editWatered = (plantId) => {
     axios
@@ -16,6 +16,7 @@ export default function Reminders({ plants }) {
 
 
   const reminderInstances = plants.map((plant) => {
+    console.log("REEEEMINDERS", reminders)
     const daysLeft = `${plant.nickname} in 5 days`
     // In daysLeft, the integer for amount of days will need to be dynamically rendered later //
   return (  
