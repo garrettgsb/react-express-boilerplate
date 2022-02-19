@@ -7,12 +7,26 @@
 
 const express = require('express');
 const router = express.Router();
-const { getPosts, saveNewPost } = require('../db/post-queries');
+const { getPosts, saveNewPost, getFilteredPosts } = require('../db/post-queries');
 const { existsUserById } = require('../db/user-queries');
 
-// GET posts table
+// GET all posts
 router.get("/", (req, res) => {
   getPosts()
+    .then((posts) => {
+      res.json({ posts });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+// Get filtered posts
+router.get("/filter", (req, res) => {
+  const topicArray = req.body;
+  getFilteredPosts(topicArray)
     .then((posts) => {
       res.json({ posts });
     })
