@@ -5,16 +5,12 @@ import PostList from "./components/Newsfeed/PostList";
 import { getUserById } from "./helpers/selectors";
 import Video from "./components/Newsfeed/Video";
 import NewPost from "./components/Newsfeed/NewPost";
+import FilterPosts from "./components/Newsfeed/FilterPosts";
 
 
-export default function Newsfeed({ posts, users, userId, fetchPosts, createNewPost }) {
-  // const [showNewPostForm, setShowNewPostForm] = React.useState(false);
-  // const onClick = () => {
-  //   !showNewPostForm ? setShowNewPostForm(true) : setShowNewPostForm(false)
-  // };
+export default function Newsfeed({ posts, users, userId, fetchPosts, createNewPost, displayFilteredPosts }) {
 
   const [isVisible, setIsVisible] = useState(false);
-
 
   const user = getUserById(users, userId);
   const name = user && user.name;
@@ -40,7 +36,7 @@ export default function Newsfeed({ posts, users, userId, fetchPosts, createNewPo
 
           <br></br>
           {isVisible && (
-            <NewPost user={user} setIsVisible={setIsVisible} fetchPosts={fetchPosts} createNewPost={createNewPost} />
+            <NewPost user={user} setIsVisible={setIsVisible} createNewPost={createNewPost} />
           )}
           <br></br>
         </Grid.Column>
@@ -50,6 +46,7 @@ export default function Newsfeed({ posts, users, userId, fetchPosts, createNewPo
         </Grid.Column>
 
         <Grid.Column width={10} >
+        <FilterPosts posts={posts} />
           <Divider horizontal>
             <Header as='h4'>
               <Icon name='rss olive' />
