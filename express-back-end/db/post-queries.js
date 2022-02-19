@@ -30,8 +30,8 @@ const saveNewPost = (data) => {
     });
 };
 
-const getFilteredPosts = (topicArray) => {
-  const value = topicArray[0];
+const getFilteredPosts = (topic) => {
+  const value = topic;
   return db.query(`SELECT * FROM posts WHERE topic = $1 ORDER BY created_at DESC RETURNING *;`,
     [value]
   )
