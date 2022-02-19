@@ -1,5 +1,8 @@
 import React from "react";
 import Rooms from "./components/Dashboard/Rooms";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 import Namecard from "./components/Dashboard/Namecard";
 import Reminders from "./components/Dashboard/Reminders";
 import AddPlant from "./components/Dashboard/AddPlant";
@@ -57,7 +60,11 @@ export default function Dashboard({ users, userId, plants, species }) {
                 </Header>
               </Segment>
               <Grid.Row>
-                <Rooms />
+                <DndProvider backend={HTML5Backend}>
+                  <div className="App">
+                    <Rooms plants={plants} userId={userId} />
+                  </div>
+                </DndProvider>
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={4}>

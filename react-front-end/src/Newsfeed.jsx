@@ -1,47 +1,48 @@
 import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css"
-import { Header, Segment, Container, Grid, Icon, Divider } from "semantic-ui-react";
+import { Header, Segment, Container, Grid, Icon, Divider, Item, Button } from "semantic-ui-react";
 import PostList from "./components/Newsfeed/PostList";
 import { getUserById } from "./helpers/selectors";
 import Video from "./components/Newsfeed/Video";
 import NewPost from "./components/Newsfeed/NewPost";
+import FilterPosts from "./components/Newsfeed/FilterPosts";
 
 
-export default function Newsfeed({ posts, users, userId, fetchPosts, createNewPost }) {
-  // const [showNewPostForm, setShowNewPostForm] = React.useState(false);
-  // const onClick = () => {
-  //   !showNewPostForm ? setShowNewPostForm(true) : setShowNewPostForm(false)
-  // };
+export default function Newsfeed({ posts, users, userId, createNewPost, renderFilteredPosts }) {
 
-  const [isVisible, setIsVisible] = useState(false);
-
+  const [isVisibleForm, setIsVisibleForm] = useState(false);
+  const [isVisibleFilter, setIsVisibleFilter] = useState(false);
 
   const user = getUserById(users, userId);
   const name = user && user.name;
   return (
-    <Container>
-
+    <Container className="newsfeed">
       <Grid>
-        <Grid.Column width={10} >
-          <Segment>
-            <Header size='large'>Hey {name}, what's on your mind?
-              <Icon name='comment alternate olive' />
-            </Header>
+        <Grid.Row>
 
-            <div onClick={() => setIsVisible(true)} className="ui animated fade button orange">
-              <div className="visible content">
-                Create
-              </div>
-              <div className="hidden content">
-                New Post
-              </div>
-            </div>
+        <Grid.Column width={10} >
+          <Segment clearing horizontal>
+
+            <Header size='large'>Hey {name}, what's on your mind?</Header>
+
+            <Button floated="right" onClick={() => setIsVisibleForm(true)} animated='fade' color='orange'>
+              <Button.Content visible>Create New Post?</Button.Content>
+              <Button.Content hidden>Sure!</Button.Content>
+            </Button>
+            
+            <Button floated="right" onClick={() => setIsVisibleFilter(true)} animated='vertical' basic color="green">
+              <Button.Content hidden>Filter</Button.Content>
+              <Button.Content visible>
+                <Icon name='filter' />
+              </Button.Content>
+            </Button>
+            
           </Segment>
 
           <br></br>
-          {isVisible && (
-            <NewPost user={user} setIsVisible={setIsVisible} fetchPosts={fetchPosts} createNewPost={createNewPost} />
-          )}
+          {isVisibleForm && (
+            <NewPost user={user} setIsVisibleForm={setIsVisibleForm} createNewPost={createNewPost} />
+            )}
           <br></br>
         </Grid.Column>
 
@@ -50,6 +51,9 @@ export default function Newsfeed({ posts, users, userId, fetchPosts, createNewPo
         </Grid.Column>
 
         <Grid.Column width={10} >
+        {isVisibleFilter && ( 
+        <FilterPosts posts={posts} renderFilteredPosts={renderFilteredPosts} setIsVisibleFilter={setIsVisibleFilter}/>
+        )}
           <Divider horizontal>
             <Header as='h4'>
               <Icon name='rss olive' />
@@ -59,7 +63,7 @@ export default function Newsfeed({ posts, users, userId, fetchPosts, createNewPo
           <PostList posts={posts} users={users} />
 
         </Grid.Column>
-
+      </Grid.Row>
       </Grid>
     </Container>
 
