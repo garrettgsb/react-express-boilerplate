@@ -1,13 +1,15 @@
 import React from "react";
 import { useDrag } from "react-dnd";
 
-function Picture({ id, url }) {
+function Picture({ id, url, key }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "image",
     item: { id: id },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
+    collect: (monitor) => ({isDragging: !!monitor.isDragging()}),
+    isDragging: (monitor) => {
+      console.log(monitor.getItem());
+    },
+    options: { dropEffect: "move" } 
   }));
   return (
     <>
@@ -15,9 +17,9 @@ function Picture({ id, url }) {
         ref={drag}
         src={url}
         width="150px"
-        style={{ border: isDragging ? "5px solid pink" : "0px" }}
+        style={{ border: isDragging ? "5px solid pink" : "0px", borderRadius: "15px" }}
       />
-      <p>Planty</p>
+      <p>{id}</p>
     </>
   );
 }

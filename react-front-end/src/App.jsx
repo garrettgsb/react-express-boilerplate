@@ -94,16 +94,6 @@ class App extends Component {
   };
 
   updateLocation = (id, location) => {
-    const plantObj = this.state.plants.find(plant => plant.id === id);
-    const newPlant = { ...plantObj, location: location };
-
-    // const plants = {
-    //   ...this.state.plants,
-    //   [id]: newPlant,
-    // };
-
-    this.state.plants.map(p => p.id === id ? newPlant : p); // replace oldPlant with newPlant
-
     axios
       .post("/api/plants",
         {
@@ -111,13 +101,15 @@ class App extends Component {
           location: location,
         })
       .then((response) => {
-        // this.setState((prev) => ({
-        //   ...prev,
-        //   plants: plants
-        // }));
+        this.setState((prev) => {
+          return { ...prev, plants: prev.plants.map((plant) => {
+            if (plant.id === id) {
+              plant.location = location; // only updating plant location of the plant id passed in
+            }
+            return plant;
+          })}; // already created new object with ...prev
+        });
         console.log("Put made to db!", response);
-
-        this.fetchPlants();
       })
       .catch(function (error) {
         console.log(error);
