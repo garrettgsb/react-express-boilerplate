@@ -4,8 +4,7 @@ import { Segment, Form, Dropdown } from "semantic-ui-react";
 
 
 export default function NewPostForm({ user, setIsVisible, createNewPost }) {
-  console.log("user -> ", user);
-
+  
   const [state, setState] = useState({
     user: user && user,
     title: '',
@@ -32,11 +31,9 @@ export default function NewPostForm({ user, setIsVisible, createNewPost }) {
 
   const submitForm = () => {
     createNewPost(user, state.title, state.description, state.photo, state.topic)
-    // fetchPosts();
     onClose();
   };
   
-
   const onClose = (event) => {
     setIsVisible(false);
     window.scrollTo({
@@ -52,7 +49,6 @@ export default function NewPostForm({ user, setIsVisible, createNewPost }) {
         <Form.Field>
           <Form.Input required={true}
             onChange={(e, data) => {
-              console.log("working??", data);
               setState((prev) => ({
                 ...prev,
                 title: data.value,
@@ -62,7 +58,6 @@ export default function NewPostForm({ user, setIsVisible, createNewPost }) {
         <Form.Field>
           <Form.TextArea required={true}
             onChange={(e, data) => {
-              console.log("description", data);
               setState((prev) => ({
                 ...prev,
                 description: data.value,
@@ -74,7 +69,6 @@ export default function NewPostForm({ user, setIsVisible, createNewPost }) {
         <Form.Field>
 
           <Form.Input onChange={(e, data) => {
-            console.log("Photo", data);
             setState((prev) => ({
               ...prev,
               photo: data.value,
@@ -83,14 +77,14 @@ export default function NewPostForm({ user, setIsVisible, createNewPost }) {
         </Form.Field>
 
         <Form.Field>
-          
-        <Dropdown
-              placeholder="Select Topic"
-              fluid
-              selection
-              options={topicOptions}
-              onChange={clickHandler}
-            />
+          <label>Topic of Your Post</label>
+          <Dropdown
+            placeholder="Select Topic"
+            fluid
+            selection
+            options={topicOptions}
+            onChange={clickHandler}
+          />
         </Form.Field>
 
         <div className="ui buttons">
