@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Segment, Icon, Dropdown, Button } from "semantic-ui-react";
 
-export default function FilterPosts({ posts, renderFilteredPosts}) {
+export default function FilterPosts({ posts, renderFilteredPosts, setIsVisibleFilter}) {
 
   const [state, setState] = useState({
     posts: posts,
@@ -25,6 +25,7 @@ export default function FilterPosts({ posts, renderFilteredPosts}) {
 
   const onClick = () => {
     renderFilteredPosts(state.topic);
+    setIsVisibleFilter(false);
   }
   
    return (

@@ -3,7 +3,7 @@ import { Segment, Form, Dropdown } from "semantic-ui-react";
 
 
 
-export default function NewPostForm({ user, setIsVisible, createNewPost }) {
+export default function NewPostForm({ user, setIsVisibleForm, createNewPost }) {
   
   const [state, setState] = useState({
     user: user && user,
@@ -35,7 +35,7 @@ export default function NewPostForm({ user, setIsVisible, createNewPost }) {
   };
   
   const onClose = (event) => {
-    setIsVisible(false);
+    setIsVisibleForm(false);
     window.scrollTo({
       top: 0,
       behavior: "smooth"
