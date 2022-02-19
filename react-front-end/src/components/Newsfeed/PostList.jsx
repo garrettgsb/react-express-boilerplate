@@ -13,6 +13,7 @@ export default function PostList({ posts, users }) {
         photo={post.photo}
         description={post.description}
         topic={post.topic}
+        number_of_likes={post.number_of_likes}
         created_at={post.created_at}
         users={users}
       />

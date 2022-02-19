@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css"
+import './Newsfeed.css'
 import { Header, Segment, Container, Grid, Icon, Divider, Item, Button } from "semantic-ui-react";
 import PostList from "./components/Newsfeed/PostList";
 import { getUserById } from "./helpers/selectors";
