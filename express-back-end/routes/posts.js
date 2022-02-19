@@ -23,10 +23,10 @@ router.get("/", (req, res) => {
     });
 });
 
-// Get filtered posts
-router.get("/filter", (req, res) => {
-  const topicArray = req.body;
-  getFilteredPosts(topicArray)
+// POST request to fetch filtered posts
+router.post("/filter", (req, res) => {
+  const {topic} = req.body.data;
+  getFilteredPosts(topic)
     .then((posts) => {
       res.json({ posts });
     })
