@@ -19,6 +19,29 @@ const insertReminder = (data) => {
     });
 };
 
+
+
+const editLastWatered = (data) => {
+  // eslint-disable-next-line camelcase
+  const { plant_id, last_watered } = data;
+  return db.query(
+    `
+    UPDATE reminders SET last_watered = $1 WHERE plant_id = $2 RETURNING *;
+    `,
+    // eslint-disable-next-line camelcase
+    [ last_watered, plant_id ]
+  )
+    .then((res) => {
+      // console.log('res.rows[0]', res.rows[0]);
+      return res.rows;
+    })
+    .catch((err) => {
+      console.log('DB error inserting reminder: ' + err.message);
+    });
+};
+
+
+
 module.exports = {
-  insertReminder
+  insertReminder, editLastWatered
 };
