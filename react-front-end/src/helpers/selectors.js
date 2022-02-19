@@ -4,6 +4,11 @@ export function getPlantsForUser(plants, user_id) {
   const filteredPlants = plants.filter(plant => plant.user_id === user);
   return filteredPlants;
 }
+// Get plants by room for dashboard
+export function getPlantsByRoom(plants, location) {
+  const filteredPlants = plants.filter(plant => plant.location === location);
+  return filteredPlants;
+}
 
 export function getUserById(users, user_id) {  
   const user = Number(user_id);
@@ -16,6 +21,7 @@ export function getPlantById(plants, plant_id) {
   const foundPlant = plants.find(item => item.id === plant);
   return foundPlant;
 }
+
 
 export function getPlantByName(species, scientific_name) {
   const foundPlant = species.find(item => item.scientific_name === scientific_name);
