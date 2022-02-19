@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.18.1",
     "react": "^16.8.6",
+    "react-dnd": "^15.1.1",
+    "react-dnd-html5-backend": "^15.1.2",
     "react-dom": "^16.8.6",
     "react-hook-form": "^7.27.0",
     "react-router-dom": "^6.2.1",
@@ -28,5 +30,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "sass": "^1.49.8"
+  }
 }
