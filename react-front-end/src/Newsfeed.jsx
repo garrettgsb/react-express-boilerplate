@@ -9,7 +9,7 @@ import NewPost from "./components/Newsfeed/NewPost";
 import FilterPosts from "./components/Newsfeed/FilterPosts";
 
 
-export default function Newsfeed({ posts, users, userId, createNewPost, renderFilteredPosts }) {
+export default function Newsfeed({ posts, users, userId, createNewPost, renderFilteredPosts, updatePostsTableWithLikes }) {
 
   const [isVisibleForm, setIsVisibleForm] = useState(false);
   const [isVisibleFilter, setIsVisibleFilter] = useState(false);
@@ -61,7 +61,7 @@ export default function Newsfeed({ posts, users, userId, createNewPost, renderFi
               Newsfeed
             </Header>
           </Divider>
-          <PostList posts={posts} users={users} />
+          <PostList posts={posts} users={users} updatePostsTableWithLikes={updatePostsTableWithLikes}/>
 
         </Grid.Column>
       </Grid.Row>
