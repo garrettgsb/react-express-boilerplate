@@ -8,7 +8,7 @@ import NewPost from "./components/Newsfeed/NewPost";
 import FilterPosts from "./components/Newsfeed/FilterPosts";
 
 
-export default function Newsfeed({ posts, users, userId, fetchPosts, createNewPost, displayFilteredPosts }) {
+export default function Newsfeed({ posts, users, userId, createNewPost, renderFilteredPosts }) {
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -46,7 +46,7 @@ export default function Newsfeed({ posts, users, userId, fetchPosts, createNewPo
         </Grid.Column>
 
         <Grid.Column width={10} >
-        <FilterPosts posts={posts} />
+        <FilterPosts posts={posts} renderFilteredPosts={renderFilteredPosts}/>
           <Divider horizontal>
             <Header as='h4'>
               <Icon name='rss olive' />

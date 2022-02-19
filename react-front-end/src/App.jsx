@@ -24,7 +24,7 @@ class App extends Component {
       plants: [{ user_id: "Hello?" }],
       users: [{ name: "Leafy" }],
       species: [{ name: "beleaf" }],
-      posts: [{ user_id: "Hello?" }],
+      posts: [],
       user: cookies.get("user_id"),
       wishlist: "",
     };
@@ -44,7 +44,18 @@ class App extends Component {
     });
   };
 
-  useEffect;
+  renderFilteredPosts = (topic) => {
+    axios
+      .post("/api/posts/filter", {data: {topic}})
+      .then((response) => {
+        this.setState((prev) => {
+          return { ...prev, posts: [...response.data.posts] };
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+};
 
   createNewPost = (user, title, description, photo, topic) => {
     axios
@@ -179,6 +190,7 @@ class App extends Component {
                   userId={this.state.user}
                   fetchPosts={this.fetchPosts}
                   createNewPost={this.createNewPost}
+                  renderFilteredPosts={this.renderFilteredPosts}
                 />
               }
             />
