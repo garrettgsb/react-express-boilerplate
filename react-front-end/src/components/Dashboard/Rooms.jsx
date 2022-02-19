@@ -9,27 +9,30 @@ import { useDrop } from "react-dnd";
 import { getPlantsByRoom, getPlantsForUser } from "../../helpers/selectors";
 
 export default function Rooms({ plants, userId }) {
-  const [board, setBoard] = useState([]);
+  const [boardLiving, setBoardLiving] = useState([]);
+  const [boardDining, setBoardDining] = useState([]);
+  const [boardBedroom, setBoardBedroom] = useState([]);
+  const [boardOffice, setBoardOffice] = useState([]);
 
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "image",
-    drop: (item) => addImageToBoard(item.id),
+    drop: (item) => addImageToBoardOffice(item.id), // add one for each board ???
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
   }));
 
-  const plantsForUser = getPlantsForUser(plants, userId);
+  const allPlants = getPlantsForUser(plants, userId);
 
-  const livingPlants = getPlantsByRoom(plantsForUser, 'Living room');
-  const diningPlants = getPlantsByRoom(plantsForUser, 'Dining room');
-  const bedroomPlants = getPlantsByRoom(plantsForUser, 'Bedroom');
-  const officePlants = getPlantsByRoom(plantsForUser, 'Office');
+  const livingPlants = getPlantsByRoom(allPlants, 'Living room');
+  const diningPlants = getPlantsByRoom(allPlants, 'Dining room');
+  const bedroomPlants = getPlantsByRoom(allPlants, 'Bedroom');
+  const officePlants = getPlantsByRoom(allPlants, 'Office');
 
-  livingPlants && console.log('livingPlants', livingPlants);
-  diningPlants && console.log('diningPlants', diningPlants);
-  bedroomPlants && console.log('bedroomPlants', bedroomPlants);
-  officePlants && console.log('officePlants', officePlants);
+  const allPictureList = allPlants && allPlants.map((plant) => ({
+    id: plant.id,
+    url: plant.photo
+  }));
 
   const LivingPictureList = livingPlants && livingPlants.map((plant) => ({
     id: plant.id,
@@ -51,9 +54,24 @@ export default function Rooms({ plants, userId }) {
     url: plant.photo
   }));
 
-  const addImageToBoard = (id) => {
-    const pictureList = DiningPictureList.filter((picture) => id === picture.id);
-    setBoard((board) => [...board, pictureList[0]]);
+  const addImageToBoardLiving = (id) => {
+    const pictureList = allPictureList.filter((picture) => id === picture.id);
+    setBoardLiving((boardLiving) => [...boardLiving, pictureList[0]]);
+  };
+
+  const addImageToBoardDining = (id) => {
+    const pictureList = allPictureList.filter((picture) => id === picture.id);
+    setBoardDining((boardDining) => [...boardDining, pictureList[0]]);
+  };
+
+  const addImageToBoardBedroom = (id) => {
+    const pictureList = allPictureList.filter((picture) => id === picture.id);
+    setBoardBedroom((boardBedroom) => [...boardBedroom, pictureList[0]]);
+  };
+
+  const addImageToBoardOffice = (id) => {
+    const pictureList = allPictureList.filter((picture) => id === picture.id);
+    setBoardOffice((boardOffice) => [...boardOffice, pictureList[0]]);
   };
 
   return (
@@ -72,7 +90,7 @@ export default function Rooms({ plants, userId }) {
               </Card.Content>
 
               <div className="Board living" ref={drop}>
-                {board.map((picture) => {
+                {boardLiving.map((picture) => {
                   return <Picture url={picture && picture.url} id={picture && picture.id} />;
                 })}
                 <div className="Pictures">
@@ -91,7 +109,7 @@ export default function Rooms({ plants, userId }) {
               </Card.Content>
 
               <div className="Board dining" ref={drop}>
-                {board.map((picture) => {
+                {boardDining.map((picture) => {
                   return <Picture url={picture && picture.url} id={picture && picture.id} />;
                 })}
                 <div className="Pictures">
@@ -110,7 +128,7 @@ export default function Rooms({ plants, userId }) {
               </Card.Content>
 
               <div className="Board bedroom" ref={drop}>
-                {board.map((picture) => {
+                {boardBedroom.map((picture) => {
                   return <Picture url={picture && picture.url} id={picture && picture.id} />;
                 })}
                 <div className="Pictures">
@@ -129,7 +147,7 @@ export default function Rooms({ plants, userId }) {
               </Card.Content>
 
               <div className="Board office" ref={drop}>
-                {board.map((picture) => {
+                {boardOffice.map((picture) => {
                   return <Picture url={picture && picture.url} id={picture && picture.id} />;
                 })}
                 <div className="Pictures">
