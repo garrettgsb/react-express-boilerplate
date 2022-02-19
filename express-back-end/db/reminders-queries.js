@@ -2,12 +2,12 @@ const db = require("./index");
 
 const getReminders = () => {
   return db
-    .query(`SELECT * FROM reminders;`)
+    .query(`SELECT * FROM reminders JOIN user_plants ON (reminders.plant_id = user_plants.id);`)
     .then((res) => {
       return res.rows;
     })
     .catch((err) => {
-      console.log("DB error inserting reminder: " + err.message);
+      console.log("DB error getting reminders: " + err.message);
     });
 };
 
