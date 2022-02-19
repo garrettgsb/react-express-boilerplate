@@ -9,20 +9,18 @@ export default function FilterPosts({ posts}) {
   });
 
   const displayFilteredPosts = () => {
-    console.log('posts', posts)
+
     const filteredPosts = [];
     for (const post of posts) {
-      console.log('post', post)
       if (post.topic === state.topic) {
-      console.log('Topic',  state.topic)
       filteredPosts.push(post)
       } 
     }
-    console.log("is is this?", filteredPosts);
+    console.log("filtered array?", filteredPosts);
     setState((prev) => {
       return { ...prev, posts: [...prev.posts, filteredPosts]};
   })
-  console.log("is is THAT?", state.posts);
+  console.log("posts state?", state.posts);
 };
   const topicFilterValues = ['general', 'question', 'plant hack'];
 
