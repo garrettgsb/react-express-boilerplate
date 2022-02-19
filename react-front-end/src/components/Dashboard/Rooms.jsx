@@ -1,15 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
 import { Segment, Grid, Image, Container, Card, Header } from "semantic-ui-react";
 
-export default function Rooms(props) {
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import Picture from "./Picture";
+import { useDrop } from "react-dnd";
+import { getPlantsByRoom, getPlantsForUser } from "../../helpers/selectors";
+
+export default function Rooms({ plants, userId }) {
+  const [board, setBoard] = useState([]);
+
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: "image",
+    drop: (item) => addImageToBoard(item.id),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }));
+
+  const plantsForUser = getPlantsForUser(plants, userId);
+
+  const livingPlants = getPlantsByRoom(plantsForUser, 'Living room');
+  const diningPlants = getPlantsByRoom(plantsForUser, 'Dining room');
+  const bedroomPlants = getPlantsByRoom(plantsForUser, 'Bedroom');
+  const officePlants = getPlantsByRoom(plantsForUser, 'Office');
+
+  livingPlants && console.log('livingPlants', livingPlants);
+  diningPlants && console.log('diningPlants', diningPlants);
+  bedroomPlants && console.log('bedroomPlants', bedroomPlants);
+  officePlants && console.log('officePlants', officePlants);
+
+  const LivingPictureList = livingPlants && livingPlants.map((plant) => ({
+    id: plant.id,
+    url: plant.photo
+  }));
+
+  const DiningPictureList = diningPlants && diningPlants.map((plant) => ({
+    id: plant.id,
+    url: plant.photo
+  }));
+
+  const BedroomPictureList = bedroomPlants && bedroomPlants.map((plant) => ({
+    id: plant.id,
+    url: plant.photo
+  }));
+
+  const OfficePictureList = officePlants && officePlants.map((plant) => ({
+    id: plant.id,
+    url: plant.photo
+  }));
+
+  const addImageToBoard = (id) => {
+    const pictureList = DiningPictureList.filter((picture) => id === picture.id);
+    setBoard((board) => [...board, pictureList[0]]);
+  };
+
   return (
-    <Container className="rooms">
-      <Segment color="olive" raised>
-        <Header>My Rooms</Header>
-      </Segment>
-      <Grid>
-        <Segment raised>
+    <>
+      <Container className="rooms">
+        <Segment color="olive" raised>
+          <Header>My Rooms</Header>
+        </Segment>
+        <Grid>
           <Card.Group itemsPerRow={2}>
             <Card id="room-card-living">
               <Card.Content>
@@ -17,31 +70,37 @@ export default function Rooms(props) {
                   Living Room
                 </Card.Header>
               </Card.Content>
-              <Image
-                src="https://img.freepik.com/free-vector/hygge-lifestyle-flat-composition-with-relaxing-woman-stylish-interior-living-room-with-decor-furniture_1284-59820.jpg?w=826"
-                size="large"
-              >
-              </Image>
-              <Image
-                src="https://pyxis.nymag.com/v1/imgs/284/267/87ccd2e3f999b864b0b1bab008267cca92-calathea.2x.rsquare.w600.jpg"
-                size="small"
-              >
-              </Image>
+
+              <div className="Board living" ref={drop}>
+                {board.map((picture) => {
+                  return <Picture url={picture && picture.url} id={picture && picture.id} />;
+                })}
+                <div className="Pictures">
+                  {LivingPictureList.map((picture) => {
+                    return <Picture url={picture && picture.url} id={picture && picture.id} />;
+                  })}
+                </div>
+              </div>
+
             </Card>
             <Card>
               <Card.Content>
                 <Card.Header>
-                  Kitchen
+                  Dining Room
                 </Card.Header>
               </Card.Content>
-              <Image
-                src="https://img.freepik.com/free-vector/interior-kitchen-with-furniture-flat-style-vector-illustration-eps-10_505557-1667.jpg?w=826"
-                size="large"
-              />
-              <Image
-                src="https://mobileimages.lowes.com/productimages/775eb6c1-054d-4c54-a879-e358756b04b6/15380756.jpg?size=pdhi"
-                size="small"
-              ></Image>
+
+              <div className="Board dining" ref={drop}>
+                {board.map((picture) => {
+                  return <Picture url={picture && picture.url} id={picture && picture.id} />;
+                })}
+                <div className="Pictures">
+                  {DiningPictureList.map((picture) => {
+                    return <Picture url={picture && picture.url} id={picture && picture.id} />;
+                  })}
+                </div>
+              </div>
+
             </Card>
             <Card>
               <Card.Content>
@@ -49,10 +108,18 @@ export default function Rooms(props) {
                   Bedroom
                 </Card.Header>
               </Card.Content>
-              <Image
-                src="https://img.freepik.com/free-vector/vector-cartoon-illustration-interior-orange-blue-bedroom-living-room-with-bed-soft-chair_1441-446.jpg?t=st=1645145194~exp=1645145794~hmac=4ddcae07963f9e0af39b5bb386db357c9ecbb63e0adebe4f0f792b21ef9246bb&w=826"
-                size="large"
-              />
+
+              <div className="Board bedroom" ref={drop}>
+                {board.map((picture) => {
+                  return <Picture url={picture && picture.url} id={picture && picture.id} />;
+                })}
+                <div className="Pictures">
+                  {BedroomPictureList.map((picture) => {
+                    return <Picture url={picture && picture.url} id={picture && picture.id} />;
+                  })}
+                </div>
+              </div>
+
             </Card>
             <Card>
               <Card.Content>
@@ -60,14 +127,22 @@ export default function Rooms(props) {
                   Office
                 </Card.Header>
               </Card.Content>
-              <Image
-                src="https://img.freepik.com/free-vector/flat-hand-drawn-colleagues-working-same-room_23-2148828084.jpg?t=st=1645145858~exp=1645146458~hmac=06d1ef4185e1d2e20fcdf2ae7a02db143e15627196fb2dcc7d8c3b0515ac6c44&w=826"
-                size="large"
-              />
+
+              <div className="Board office" ref={drop}>
+                {board.map((picture) => {
+                  return <Picture url={picture && picture.url} id={picture && picture.id} />;
+                })}
+                <div className="Pictures">
+                  {OfficePictureList.map((picture) => {
+                    return <Picture url={picture.url} id={picture && picture.id} />;
+                  })}
+                </div>
+              </div>
+
             </Card>
           </Card.Group>
-        </Segment>
-      </Grid>
-    </Container>
+        </Grid>
+      </Container>
+    </>
   );
 }
