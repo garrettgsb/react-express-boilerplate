@@ -75,9 +75,18 @@ class App extends Component {
       .catch(function (error) {
         console.log(error);
       });
-    // fetchPosts();
-    // onClose();
   };
+
+  updatePostsTableWithLikes = (number_of_likes, post_id) => {
+    const data = {number_of_likes: number_of_likes, post_id: post_id};
+    axios.put("/api/posts", {data})
+    .then((response) => {
+      console.log("Posts updated with likes: " + response.data.posts);
+      this.setState((prev) => {
+        return { ...prev, posts: [...response.data.posts] };
+      });
+    });
+  }
 
   fetchData = () => {
     axios
@@ -191,6 +200,8 @@ class App extends Component {
                   fetchPosts={this.fetchPosts}
                   createNewPost={this.createNewPost}
                   renderFilteredPosts={this.renderFilteredPosts}
+                  updatePostsTableWithLikes = {this.updatePostsTableWithLikes}
+
                 />
               }
             />
