@@ -46,7 +46,7 @@ class App extends Component {
 
   renderFilteredPosts = (topic) => {
     axios
-      .post("/api/posts/filter", {data: {topic}})
+      .post("/api/posts/filter", { data: { topic } })
       .then((response) => {
         this.setState((prev) => {
           return { ...prev, posts: [...response.data.posts] };
@@ -55,7 +55,7 @@ class App extends Component {
       .catch(function (error) {
         console.log(error);
       });
-};
+  };
 
   createNewPost = (user, title, description, photo, topic) => {
     axios
@@ -90,6 +90,37 @@ class App extends Component {
         this.setState({
           message: response.data.message,
         });
+      });
+  };
+
+  updateLocation = (id, location) => {
+    const plantObj = this.state.plants.find(plant => plant.id === id);
+    const newPlant = { ...plantObj, location: location };
+
+    // const plants = {
+    //   ...this.state.plants,
+    //   [id]: newPlant,
+    // };
+
+    this.state.plants.map(p => p.id === id ? newPlant : p); // replace oldPlant with newPlant
+
+    axios
+      .post("/api/plants",
+        {
+          id: id,
+          location: location,
+        })
+      .then((response) => {
+        // this.setState((prev) => ({
+        //   ...prev,
+        //   plants: plants
+        // }));
+        console.log("Put made to db!", response);
+
+        this.fetchPlants();
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   };
 
@@ -177,10 +208,11 @@ class App extends Component {
                   users={this.state.users}
                   userId={this.state.user}
                   species={this.state.species}
+                  updateLocation={this.updateLocation}
                 />
               }
             />
-            {console.log('STATE POSTS',this.state.posts)}
+            {console.log('STATE POSTS', this.state.posts)}
             <Route
               path="/newsfeed"
               element={

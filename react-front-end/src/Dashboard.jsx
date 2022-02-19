@@ -15,7 +15,7 @@ import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Dashboard({ users, userId, plants, species }) {
+export default function Dashboard({ users, userId, plants, species, updateLocation }) {
   const user = getUserById(users, userId);
   const name = user && user.name;
   const userPlants = getPlantsForUser(plants, userId);
@@ -62,7 +62,7 @@ export default function Dashboard({ users, userId, plants, species }) {
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>
                   <div className="App">
-                    <Rooms plants={plants} userId={userId} />
+                    <Rooms plants={plants} userId={userId} updateLocation={updateLocation} />
                   </div>
                 </DndProvider>
               </Grid.Row>
