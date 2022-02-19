@@ -1,27 +1,13 @@
-import React, { useState, axios } from 'react';
-import { Segment, Icon, Dropdown, Button, Container } from "semantic-ui-react";
+import React, { useState } from 'react';
+import { Segment, Icon, Dropdown, Button } from "semantic-ui-react";
 
-export default function FilterPosts({ posts}) {
+export default function FilterPosts({ posts, renderFilteredPosts}) {
 
   const [state, setState] = useState({
     posts: posts,
     topic: ''
   });
 
-  const displayFilteredPosts = () => {
-
-    const filteredPosts = [];
-    for (const post of posts) {
-      if (post.topic === state.topic) {
-      filteredPosts.push(post)
-      } 
-    }
-    console.log("filtered array?", filteredPosts);
-    setState((prev) => {
-      return { ...prev, posts: [...prev.posts, filteredPosts]};
-  })
-  console.log("posts state?", state.posts);
-};
   const topicFilterValues = ['general', 'question', 'plant hack'];
 
   const topicFilterOptions = topicFilterValues.map((element) => ({
@@ -36,6 +22,10 @@ export default function FilterPosts({ posts}) {
       topic: data.value
     }));
   };
+
+  const onClick = () => {
+    renderFilteredPosts(state.topic);
+  }
   
    return (
     <Segment raised>
@@ -48,7 +38,7 @@ export default function FilterPosts({ posts}) {
             options={topicFilterOptions}
             onChange={clickHandler}
           />
-          <Button animated onClick={displayFilteredPosts}>
+          <Button animated onClick={onClick}>
             <Button.Content visible>Go</Button.Content>
             <Button.Content hidden>
               <Icon name='arrow right' />
