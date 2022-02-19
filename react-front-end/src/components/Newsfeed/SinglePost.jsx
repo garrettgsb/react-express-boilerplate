@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
-import { Button, Icon, Image, Segment } from "semantic-ui-react";
+import "../../Newsfeed.css";
+import { Button, Icon, Image, Segment, Label } from "semantic-ui-react";
 import { getUserById } from "../../helpers/selectors";
 
-export default function SinglePost({ id, user_id, title, photo, description, topic, created_at, users }) {
+
+
+
+export default function SinglePost({ id, user_id, title, photo, description, topic, number_of_likes, created_at, users }) {
+  
+  const [state, setState] = useState({
+    likes: number_of_likes, 
+    like_text: 'Like',
+    clicked: false
+  });
+  
+  const likeClicked = () => {
+    setState((prev) => ({
+      ...prev,
+      likes: state.likes + 1,
+      like_text: 'Liked',
+      clicked: true
+    }));
+
+  }
   const user = getUserById(users, user_id);
 
   const getMonth = (value) => {
@@ -20,7 +40,7 @@ export default function SinglePost({ id, user_id, title, photo, description, top
   
   return (
 
-    <Segment raised>
+    <Segment className="newsfeed" raised>
       <h2>{title}</h2>
       <Button floated="right" color="olive">
         <Icon name="leaf" />{topic}
@@ -36,31 +56,38 @@ export default function SinglePost({ id, user_id, title, photo, description, top
       </Segment.Group>
 
       <Segment.Group horizontal>
-        <Segment><div className="ui labeled button" tabIndex="0">
-          <div className="ui button">
-            <i className="heart icon"></i> Like
-          </div>
-          <a className="ui basic label">
-            2,048
-          </a>
-        </div></Segment>
-        <Segment><div className="ui labeled button" tabIndex="0">
-          <div className="ui button">
-            <i className="plus icon"></i>
-          </div>
-          <a className="ui basic label">
-            Follow
-          </a>
-        </div></Segment>
         <Segment>
-          <div className="ui labeled button" tabIndex="0">
-            <div className="ui button">
-              <i className="envelope icon"></i>
-            </div>
-            <a className="ui basic right pointing label">
-              Message
-            </a>
-          </div>
+         
+          <Button as='div' labelPosition='right' id="likes" onClick={likeClicked} disabled={state.clicked}>
+            <Button color='orange'>
+              <Icon name='heart' />
+              {state.like_text}
+            </Button>
+            <Label as='a' basic color='brown' pointing='left'>
+              {state.likes}
+            </Label>
+          </Button>
+
+        </Segment>
+        <Segment>
+        <Button as='div' labelPosition='right' id="follow">
+      <Button color='olive'>
+        <Icon name='plus' />
+      </Button>
+        <Label as='a' basic color='brown' pointing='left'>
+          Follow
+        </Label>
+      </Button> 
+        </Segment>
+        <Segment>
+        <Button as='div' labelPosition='right' id="message">
+      <Button color='yellow'>
+        <Icon name='envelope' />
+      </Button>
+        <Label as='a' basic color='brown' pointing='right'>
+          Message
+        </Label>
+      </Button> 
         </Segment>
       </Segment.Group>
 
