@@ -23,9 +23,9 @@ export default function Reminders({ plants, reminders }) {
     }
   })
 
-  const overdueReminders = remindersWithTime.filter(element => element.timeRemaining < 0)
-  const comingdueReminders = remindersWithTime.filter(element => element.timeRemaining > 0 && element.timeRemaining < 6)
-  const notdueReminders = remindersWithTime.filter(element => element.timeRemaining > 6)
+  const overdueReminders = remindersWithTime.filter(element => element.timeRemaining < 0).sort((a,b) => a.timeRemaining - b.timeRemaining)
+  const comingdueReminders = remindersWithTime.filter(element => element.timeRemaining > 0 && element.timeRemaining < 6).sort((a,b) => a.timeRemaining - b.timeRemaining)
+  const notdueReminders = remindersWithTime.filter(element => element.timeRemaining > 6).sort((a,b) => a.timeRemaining - b.timeRemaining)
 
 
 
