@@ -30,6 +30,19 @@ const saveNewPost = (data) => {
     });
 };
 
+const getFilteredPosts = (topicArray) => {
+  const value = topicArray[0];
+  return db.query(`SELECT * FROM posts WHERE topic = $1 ORDER BY created_at DESC RETURNING *;`,
+    [value]
+  )
+    .then((res) => {
+      return res.rows;
+    })
+    .catch((err) => {
+      console.log('DB error fetching filtered posts: ' + err.message);
+    });
+}
+
 module.exports = {
-  getPosts, saveNewPost
+  getPosts, saveNewPost, getFilteredPosts
 };
