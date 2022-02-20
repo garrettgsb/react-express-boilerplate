@@ -3,16 +3,18 @@ import { Link } from "react-router-dom";
 import { Card, List, Image, Button } from "semantic-ui-react";
 import { getUserById } from "./helpers/selectors";
 
-export default function WishlistItem({ id, scientificName, commonName, photo, light_level, soil_type, difficulty, toxic, watering_interval, category, users, plant_user_id, setIsVisible }) {
+export default function WishlistItem({ id, scientificName, commonName, photo, light_level, soil_type, difficulty, toxic, watering_interval, category, users, plant_user_id, setIsVisible, species_id, setSpecies }) {
+
+  console.log('species id in wishlistitem', species_id)
 
   const owner = getUserById(users, plant_user_id);
 
   return (
-    <Card compact>
+    <Card compact="true">
       <Image
         src={photo}
         size="medium"
-        centered
+        centered={true}
       />
       <Card.Content>
         <div className="header">{commonName}</div>
@@ -52,7 +54,10 @@ export default function WishlistItem({ id, scientificName, commonName, photo, li
           <button className="ui button" onClick={() => console.log('Add to Wishlist clicked! id is', id)}><i className="cart icon"></i>Purchase</button>
         </span>
         <span className="right floated">
-          <Button floated="right" onClick={() => setIsVisible(true)}>
+          <Button floated="right" onClick={() => {
+            setSpecies(species_id);
+            setIsVisible(true);
+          }}>
             <i className="add icon"></i>Add Plant
           </Button>
         </span>

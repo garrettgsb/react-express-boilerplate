@@ -20,41 +20,54 @@
 
 .Board.living {
   overflow: auto;
-  max-height: 400px;
+  max-height: 250px;
   width: 100%;
-  height: 400px;
-  border: 2px solid black;
-  /* background-image: url("https://img.freepik.com/free-vector/hygge-lifestyle-flat-composition-with-relaxing-woman-stylish-interior-living-room-with-decor-furniture_1284-59820.jpg?w=826"); */
+  height: 250px;
   background: #9DBF98;
+  opacity: 0.95;
 }
 
 .Board.dining {
   overflow: auto;
-  max-height: 400px;
+  max-height: 250px;
   width: 100%;
-  height: 400px;
-  border: 2px solid black;
-  /* background-image: url("https://img.freepik.com/free-vector/interior-kitchen-with-furniture-flat-style-vector-illustration-eps-10_505557-1667.jpg?w=826"); */
+  height: 250px;
+  background: #9DBF98;
+  opacity: 0.95;
 }
 
 .Board.bedroom {
   overflow: auto;
-  max-height: 400px;
+  max-height: 250px;
   width: 100%;
-  height: 400px;
-  border: 2px solid black;
-  background-image: url("https://img.freepik.com/free-vector/vector-cartoon-illustration-interior-orange-blue-bedroom-living-room-with-bed-soft-chair_1441-446.jpg?t=st=1645145194~exp=1645145794~hmac=4ddcae07963f9e0af39b5bb386db357c9ecbb63e0adebe4f0f792b21ef9246bb&w=826")
+  height: 250px;
+  background: #9DBF98;
+  opacity: 0.95;
 }
 
 .Board.office {
   overflow: auto;
-  max-height: 400px;
+  max-height: 250px;
   width: 100%;
-  height: 400px;
-  border: 2px solid black;
-  background-image: url("https://img.freepik.com/free-vector/flat-hand-drawn-colleagues-working-same-room_23-2148828084.jpg?t=st=1645145858~exp=1645146458~hmac=06d1ef4185e*1d2e20fcdf2ae7a02db143e15627196fb2dcc7d8c3b0515ac6c44&w=826")
+  height: 250px;
+  background: #9DBF98;
+  opacity: 0.95;
 }
 
+div.header.room-header {
+  height: 5px;
+}
+
+div.notifications {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  row-gap: 5px;
+}
+
+<<<<<<< HEAD
 /* Strikethrough for Checkbox */
 
 .strikethrough {
@@ -99,4 +112,10 @@
 	to {
 		transform: scaleX(3) !important;
 	}
+=======
+h3.ui.header.dash-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+>>>>>>> master
 }

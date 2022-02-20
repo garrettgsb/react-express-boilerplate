@@ -14,8 +14,9 @@ import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import DailyReminders from "./components/Dashboard/DailyReminders";
 
-export default function Dashboard({ users, userId, plants, species, reminders }) {
+export default function Dashboard({ users, userId, plants, species, reminders, updateLocation }) {
   const user = getUserById(users, userId);
   const name = user && user.name;
   const userPlants = getPlantsForUser(plants, userId);
@@ -36,40 +37,35 @@ export default function Dashboard({ users, userId, plants, species, reminders })
                   <Link to="/wishlist">
                     <Button
                       basic
-                      color="green"
-                      content="Wishlist"
+                      positive
+                      content="See Wishlist"
                       floated="right"
                     />
                   </Link>
                   <Button positive floated="right" onClick={() => setIsVisible(true)}>
                     Add A New Plant!
                   </Button>
-                  <Button
-                    positive
-                    floated="right"
-                    onClick={() => setSelectedPlant(plants[0])}
-                  // plants[0] is hardcoded until the drag and drop is implemented //
-                  >
-                    Check Out a Plant!
-                  </Button>
                 </Header>
               </Segment>
               <Segment textAlign="left" raised>
-                <Header as="h3">
-                  Good Morning, {name}!
+                <Header as="h3" className="dash-header">
+                  <div>
+                    Good Morning, {name}!
+                  </div>
+                  <DailyReminders plants={userPlants} reminders={reminders} userId={userId} />
                 </Header>
               </Segment>
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>
-                  <div className="App">
-                    <Rooms plants={plants} userId={userId} />
-                  </div>
+                  <Rooms plants={plants} userId={userId} updateLocation={updateLocation} setSelectedPlant={setSelectedPlant} />
                 </DndProvider>
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={4}>
-              <Namecard user={user} plants={plants} />
-              <Reminders plants={userPlants} reminders={reminders} />
+              <div>
+                <Namecard user={user} plants={plants} />
+                <Reminders plants={userPlants} reminders={reminders} userId={userId} />
+              </div>
             </Grid.Column>
           </Grid.Row>
         </Grid>
