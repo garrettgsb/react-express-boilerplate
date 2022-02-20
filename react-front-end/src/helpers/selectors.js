@@ -22,7 +22,6 @@ export function getPlantById(plants, plant_id) {
   return foundPlant;
 }
 
-
 export function getPlantByName(species, scientific_name) {
   const foundPlant = species.find(item => item.scientific_name === scientific_name);
   return foundPlant;
@@ -41,3 +40,8 @@ export function getWishlistPlants(wishlist, user_id) {
   console.log('arr is', arr);
   return arr;
 }
+
+export function getSpeciesById(species, species_id) { // takes array of species objects and returns one object with that species_id
+  const foundSpecies = species.find(s => s.species_id === species_id); // takes a species_id and returns the species object
+  return foundSpecies;
+};

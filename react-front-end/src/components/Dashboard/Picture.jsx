@@ -19,7 +19,7 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant }) {
     <>
       <Image
         size="small"
-        style={{ border: isDragging ? "5px solid pink" : "0px", background: "#EBEBE8", borderRadius: "5%", padding: "10px", margin: "10px" }}
+        style={{ border: isDragging ? "5px solid pink" : "0px", background: "#EBEBE8", opacity: "0.95", borderRadius: "5%", padding: "10px", margin: "10px" }}
       >
         <img
           ref={drag}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import WishlistItem from "./WishlistItem";
 import { getPlantsForUser, getUserById, getWishlistPlants } from "./helpers/selectors";
 import { Button, Card, Container, Grid, Segment } from "semantic-ui-react";
-import AddPlant from "./components/Dashboard/AddPlant";
+import AddWishlistPlant from "./components/Wishlist/AddWishlistPlant";
 import { Link } from "react-router-dom";
 
 export default function Wishlist({ users, userId, wishlist, user_plants, species }) {
@@ -10,8 +10,14 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
   const user = getUserById(users, userId);
   const plants = wishlist && getWishlistPlants(wishlist, userId);
   const plantsForUser = user_plants && getPlantsForUser(user_plants, user && user.id);
-  
+
   const [isVisible, setIsVisible] = useState(false);
+  const [plantSpecies, setPlantSpecies] = useState('');
+
+  const setSpecies = (species_id) => {
+    setPlantSpecies(species_id);
+    console.log('plantSpecies inside function call!', plantSpecies);
+  };
 
   const parsedPlants = plants && plants.map(plant =>
     <WishlistItem
@@ -28,7 +34,9 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
       category={plant.category}
       users={users}
       plant_user_id={plant.user_id}
+      species_id={plant.species_id}
       setIsVisible={setIsVisible}
+      setSpecies={setSpecies}
     />
   );
 
@@ -57,7 +65,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
 
               <br></br>
               {isVisible && (
-                <AddPlant user={user} species={species} setIsVisible={setIsVisible} />
+                <AddWishlistPlant user={user} species={species} setIsVisible={setIsVisible} plantSpecies={plantSpecies} />
               )}
               <br></br>
 
