@@ -64,23 +64,28 @@ export default function SinglePost({ id, user_id, title, photo, description, top
 
   return (
     <Segment className='newsfeed' raised>
-      <Grid horizontal>
-        <h2>{title}</h2>
-
-        <Image src={user.avatar} avatar />
-        <span>
-          Posted by <b>{user && user.name}</b> on{' '}
+      <Segment.Group horizontal>
+        <Segment>
+          <h2>{title}</h2>
+        </Segment>
+        <Segment>
+          <Image src={user && user.avatar} avatar />
+          <b>{user && user.name}</b> on{' '}
           {created_at && getMonth(created_at.split('-')[1]) + ' ' + created_at.split('-')[2].slice(0, 2) + ', ' + created_at.split('-')[0]}
-        </span>
-        <Label as='a' color='orange' ribbon='right'>
-          <Icon name='leaf' />
-          {topic}
-        </Label>
-      </Grid>
+        </Segment>
+        <Segment>
+          <Label as='a' color='orange' ribbon='right'>
+            <Icon name='leaf' />
+            {topic}
+          </Label>
+        </Segment>
+      </Segment.Group>
 
       <Segment.Group horizontal>
         <Image src={photo} width='50%' height='100%' rounded />
-        <h5>{description}</h5>
+        <span>
+          <h5>{description}</h5>
+        </span>
       </Segment.Group>
 
       <Grid horizontal>
