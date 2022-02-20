@@ -21,12 +21,14 @@ const usersRoutes = require("./routes/users");
 const plantsRoutes = require("./routes/plants");
 const speciesRoutes = require("./routes/species");
 const postsRoutes = require("./routes/posts");
+const commentsRoutes = require("./routes/comments");
 const newUserPlant = require("./routes/userPlants");
 const wishlistRoutes = require("./routes/wishlist");
 
 App.use("/api/users", usersRoutes);
 App.use("/api/plants", plantsRoutes);
 App.use("/api/posts", postsRoutes);
+App.use("/api/comments", commentsRoutes);
 App.use("/api/species", speciesRoutes);
 App.use("/api/user_plants", newUserPlant);
 App.use("/api/wishlist", wishlistRoutes);
