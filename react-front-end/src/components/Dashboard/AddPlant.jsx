@@ -18,7 +18,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
   const [state, setState] = useState({
     plant: null,
     nickname: "",
-    location: "",
+    location: "Living room",
   });
 
   const locationValues = ['Living room', 'Dining room', 'Bedroom', 'Office'];
@@ -30,9 +30,6 @@ export default function AddPlant({ user, species, setIsVisible }) {
   }));
 
   const onClick = (event, data) => { // populates location
-
-    console.log('data on click', data)
-
     setState((prev) => ({
       ...prev,
       location: data.value
@@ -185,13 +182,14 @@ export default function AddPlant({ user, species, setIsVisible }) {
                   <Form.Input
                     label="Location"
                   >
-                    <Form.Dropdown
+                    <Dropdown
                       placeholder="Tell us where your plant lives! (eg. Living room)"
                       fluid
                       selection
                       required={true}
                       options={locationOptions}
                       onChange={onClick}
+                      defaultValue="Living room"
                     />
                   </Form.Input>
                 </Form.Field>

@@ -21,7 +21,7 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
   const [state, setState] = useState({
     plant: plant,
     nickname: "",
-    location: "",
+    location: "Living room",
   });
 
   const locationValues = ['Living room', 'Dining room', 'Bedroom', 'Office'];
