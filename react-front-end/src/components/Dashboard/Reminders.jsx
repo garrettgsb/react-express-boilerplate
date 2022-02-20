@@ -1,23 +1,33 @@
 import React from "react";
+import axios from "axios";
 import "semantic-ui-css/semantic.min.css";
 import { Checkbox, Image, Card, Feed } from "semantic-ui-react";
 import wateringcan from "../../assets/wateringcan.png";
+import dayjs from "dayjs";
+import ReminderGroup from "./ReminderGroup";
+const relativeTime = require("dayjs/plugin/relativeTime");
 
-export default function Reminders({ plants }) {
-  console.log("plants ---->", plants);
-  const reminderInstances = plants.map((plant) => {
-    const daysLeft = `${plant.nickname} in 5 days`
-    // In daysLeft, the integer for amount of days will need to be dynamically rendered later //
-  return (  <Feed.Event>
-      <Feed.Content>
-        <Feed.Date content="Coming Soon" />
-        <Feed.Summary>
-          <Checkbox label={daysLeft} />
-        </Feed.Summary>
-      </Feed.Content>
-    </Feed.Event>
-  )}
-  );
+export default function Reminders({ plants, reminders }) {
+  const editWatered = (plantId) => {
+    axios
+      .patch(`/api/reminders/${plantId}`, { last_watered: new Date() })
+      .then((response) => {
+        console.log(response.data);
+      });
+  };
+
+  const remindersWithTime = reminders.map((reminder) => {
+    const date1 = dayjs(new Date());
+    return  {
+      ...reminder, timeRemaining: reminder.watering_interval - date1.diff(reminder.last_watered, "day"), editWatered: () => editWatered(reminder.plant_id)
+    }
+  })
+
+  const overdueReminders = remindersWithTime.filter(element => element.timeRemaining < 0).sort((a,b) => a.timeRemaining - b.timeRemaining)
+  const comingdueReminders = remindersWithTime.filter(element => element.timeRemaining > 0 && element.timeRemaining < 6).sort((a,b) => a.timeRemaining - b.timeRemaining)
+  const notdueReminders = remindersWithTime.filter(element => element.timeRemaining > 6).sort((a,b) => a.timeRemaining - b.timeRemaining)
+
+
 
   return (
     <Card className="reminders">
@@ -27,7 +37,11 @@ export default function Reminders({ plants }) {
         </Card.Header>
       </Card.Content>
       <Card.Content>
-        <Feed>{reminderInstances}</Feed>
+        <Feed>
+          <ReminderGroup label={"Overdue! Please water your baby!"} reminders={overdueReminders} />
+          <ReminderGroup label={"Coming due"} reminders={comingdueReminders} />
+          <ReminderGroup label={"Not yet due"} reminders={notdueReminders} />
+        </Feed>
       </Card.Content>
     </Card>
   );

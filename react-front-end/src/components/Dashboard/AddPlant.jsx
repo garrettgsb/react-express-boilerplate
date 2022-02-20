@@ -14,31 +14,28 @@ import {
 } from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
- 
 export default function AddPlant({ user, species, setIsVisible }) {
-
   const [state, setState] = useState({
     plant: null,
     nickname: "",
     location: "",
   });
-// Scroll to bottom & Scroll to top //
+  // Scroll to bottom & Scroll to top //
   const divRef = useRef(null);
   useEffect(() => {
-    divRef.current.scrollIntoView({ behavior: 'smooth' });
+    divRef.current.scrollIntoView({ behavior: "smooth" });
   });
 
   const onClose = (event) => {
     setIsVisible(false);
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
   useEffect(() => {
-    window.addEventListener("scroll",[]);
+    window.addEventListener("scroll", []);
   }, []);
-  
 
   const speciesOptions = species.map((element) => ({
     key: element.scientific_name,
@@ -57,15 +54,24 @@ export default function AddPlant({ user, species, setIsVisible }) {
   };
 
   const submitForm = () => {
-    axios
-      .post("/api/user_plants", {
+      axios.post("/api/user_plants", {
         species_id: state.plant.species_id,
         user_id: user.id,
         nickname: state.nickname,
         location: state.location,
       })
-      .then(function (response) {
+      .then((response) => {
         console.log("Post made to db!", response);
+        const newPlant = response.data[0]
+        axios.post("/api/reminders", {
+          plant_id: newPlant.id,
+          user_id: user.id, 
+          watering_interval: state.plant.watering_interval, 
+          last_watered: new Date(),
+        })
+        .then(response => {
+          console.log("reeeeesponse", response)
+        })
       })
       .catch(function (error) {
         console.log(error);
@@ -73,7 +79,6 @@ export default function AddPlant({ user, species, setIsVisible }) {
     onClose();
   };
   return (
-    
     <div>
       <div ref={divRef} />
       <Segment>
@@ -93,18 +98,13 @@ export default function AddPlant({ user, species, setIsVisible }) {
         <h1>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            {state.plant &&
-              <Image src={state.plant.photo} size="large" />
-            }
+            {state.plant && <Image src={state.plant.photo} size="large" />}
           </Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
             {state.plant ? (
               <div className="plant-info">
-                <h2>
-                  Scientific Name:{" "}
-                  {state.plant.scientific_name}
-                </h2>
+                <h2>Scientific Name: {state.plant.scientific_name}</h2>
                 <h2>Common Name: {state.plant.common_name}</h2>
                 <h3>
                   <i>{state.plant.nickname}</i>
@@ -122,17 +122,17 @@ export default function AddPlant({ user, species, setIsVisible }) {
             )}
             {/* End of ternary */}
           </Grid.Column>
-            {/* Start of ternary to only show if plant selected  */}
-            {state.plant ? (
-          <Grid.Column verticalAlign="middle" centered width={5}>
-            <Dropdown
-              className="dropdown"
-              placeholder="Select Plant"
-              fluid
-              selection
-              options={speciesOptions}
-              onChange={clickHandler}
-            />
+          {/* Start of ternary to only show if plant selected  */}
+          {state.plant ? (
+            <Grid.Column verticalAlign="middle" centered width={5}>
+              <Dropdown
+                className="dropdown"
+                placeholder="Select Plant"
+                fluid
+                selection
+                options={speciesOptions}
+                onChange={clickHandler}
+              />
               <Form onSubmit={submitForm}>
                 <Form.Field>
                   <Form.Input
@@ -168,21 +168,16 @@ export default function AddPlant({ user, species, setIsVisible }) {
                     <List.Item>
                       <List.Icon name="rain" />
                       <List.Content>
-                        Every {state.plant.watering_interval}{" "}
-                        Days
+                        Every {state.plant.watering_interval} Days
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="sun" />
-                      <List.Content>
-                        {state.plant.light_level}
-                      </List.Content>
+                      <List.Content>{state.plant.light_level}</List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="lab" />
-                      <List.Content>
-                        {state.plant.soil_type}
-                      </List.Content>
+                      <List.Content>{state.plant.soil_type}</List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="book" />
@@ -192,16 +187,12 @@ export default function AddPlant({ user, species, setIsVisible }) {
                     </List.Item>
                     <List.Item>
                       <List.Icon name="world" />
-                      <List.Content>
-                        {state.plant.category}
-                      </List.Content>
+                      <List.Content>{state.plant.category}</List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="paw" />
                       <List.Content>
-                        {state.plant.toxic
-                          ? "Toxic"
-                          : "Non-Toxic"}
+                        {state.plant.toxic ? "Toxic" : "Non-Toxic"}
                       </List.Content>
                     </List.Item>
                   </List>
@@ -211,21 +202,20 @@ export default function AddPlant({ user, species, setIsVisible }) {
                   Save Your Plant!
                 </Button>
               </Form>
-              </Grid.Column>
-            ) : (
-              
-              <Grid.Column verticalAlign="middle" centered width={5}>
+            </Grid.Column>
+          ) : (
+            <Grid.Column verticalAlign="middle" centered width={5}>
               <Dropdown
-              className="dropdown-default"
-              placeholder="Select Plant"
-              fluid
-              selection
-              options={speciesOptions}
-              onChange={clickHandler}
-            />
-           </Grid.Column>
-            )}
-             {/* End of ternary */}
+                className="dropdown-default"
+                placeholder="Select Plant"
+                fluid
+                selection
+                options={speciesOptions}
+                onChange={clickHandler}
+              />
+            </Grid.Column>
+          )}
+          {/* End of ternary */}
         </Grid>
       </Segment>
     </div>

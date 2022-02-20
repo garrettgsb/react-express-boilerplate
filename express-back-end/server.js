@@ -23,6 +23,8 @@ const speciesRoutes = require("./routes/species");
 const postsRoutes = require("./routes/posts");
 const newUserPlant = require("./routes/userPlants");
 const wishlistRoutes = require("./routes/wishlist");
+const reminderRoutes = require("./routes/reminders");
+
 
 App.use("/api/users", usersRoutes);
 App.use("/api/plants", plantsRoutes);
@@ -30,6 +32,8 @@ App.use("/api/posts", postsRoutes);
 App.use("/api/species", speciesRoutes);
 App.use("/api/user_plants", newUserPlant);
 App.use("/api/wishlist", wishlistRoutes);
+App.use("/api/reminders", reminderRoutes);
+
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
