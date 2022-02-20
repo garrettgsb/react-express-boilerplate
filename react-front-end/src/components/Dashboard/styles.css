@@ -54,3 +54,49 @@
   border: 2px solid black;
   background-image: url("https://img.freepik.com/free-vector/flat-hand-drawn-colleagues-working-same-room_23-2148828084.jpg?t=st=1645145858~exp=1645146458~hmac=06d1ef4185e*1d2e20fcdf2ae7a02db143e15627196fb2dcc7d8c3b0515ac6c44&w=826")
 }
+
+/* Strikethrough for Checkbox */
+
+.strikethrough {
+	display: inline-block !important;
+	position: relative !important;
+	transition: all 0.5s cubic-bezier(.55, 0, .1, 1) !important;
+}
+
+.strikethrough:after {
+	content: '' !important;
+	position: absolute !important;
+	display: block !important;
+	width: 100% !important;
+	height: 2px !important;
+  /* left: 1 !important; */
+	box-shadow: 0 1px rgba(255,255,255,0.6) !important;
+	margin-top: 0.5em !important;
+	background: black;
+	transform-origin: center left !important;
+	animation: strikethrough 1s 0.5s cubic-bezier(.55, 0, .1, 1) 1 !important;
+	/* transition: transform 0.5s cubic-bezier(.55, 0, .1, 1) !important; */
+}
+
+/* hover effect */
+
+.strikethrough:hover {
+	color: rgb(12, 59, 37) !important;
+	background: rgba(255, 189, 182, 0.3) !important;
+}
+
+.strikethrough:hover:after {
+	transform: scaleX(0) !important;
+	transform-origin: center right !important;
+}
+
+/* Keyframes for initial animation */
+
+@keyframes strikethrough {
+	from {
+		transform: scaleX(0) !important;
+	}
+	to {
+		transform: scaleX(3) !important;
+	}
+}
