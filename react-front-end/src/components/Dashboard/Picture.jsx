@@ -28,7 +28,6 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant }) {
         />
         <p><b>{nickname}</b></p>
         <Button size="small" color="green" onClick={() => {
-          // console.log({ plant })
           setSelectedPlant(plant);
         }}>See Info</Button>
       </Image>

@@ -11,11 +11,6 @@ const getPlants = () => {
 };
 
 const updateLocation = (id, location) => {
-  // const { id, location } = data;
-
-  // console.log('DATA is', data);
-  console.log('INSIDE plant queries. id', id, 'location', location);
-
   return db.query(`UPDATE user_plants SET location = $1 WHERE id = $2;`, [location, id])
     .then((res) => {
       return res.rows;

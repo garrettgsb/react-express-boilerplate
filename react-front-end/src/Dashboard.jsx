@@ -22,8 +22,6 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPlant, setSelectedPlant] = useState(null);
 
-  console.log({ plants });
-
   if (!user) {
     return <h2>Please login or signup.</h2>;
   } else {

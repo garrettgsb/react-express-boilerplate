@@ -24,11 +24,8 @@ router.get("/", (req, res) => {
 
 // POST to user_plants table
 router.post("/", (req, res) => {
-  console.log('Route for updating plant location, req.body', req.body);
-
+  // console.log('Route for updating plant location, req.body', req.body);
   const { id, location } = req.body;
-
-  console.log('id is', id, 'location is', location);
 
   plantQueries.updateLocation(id, location)
     .then((response) => {
