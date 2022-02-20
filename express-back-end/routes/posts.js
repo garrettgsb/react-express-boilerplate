@@ -7,46 +7,67 @@
 
 const express = require('express');
 const router = express.Router();
-const { getPosts, saveNewPost, getFilteredPosts, addLikesToPosts } = require('../db/post-queries');
-const { existsUserById } = require('../db/user-queries');
+const {
+  getPosts,
+  saveNewPost,
+  getFilteredPosts,
+  addLikesToPosts
+} = require('../db/post-queries');
+const {
+  existsUserById
+} = require('../db/user-queries');
 
 // GET all posts
 router.get("/", (req, res) => {
   getPosts()
     .then((posts) => {
-      res.json({ posts });
+      res.json({
+        posts
+      });
     })
     .catch(err => {
       res
         .status(500)
-        .json({ error: err.message });
+        .json({
+          error: err.message
+        });
     });
 });
 
 // PUT request to update posts table with likes
 router.put("/", (req, res) => {
-  addLikesToPosts(req.body.data)
-    .then((posts) => {
-      res.json({ posts });
+  addLikesToPosts(req.body)
+    .then((updatedRowsCount) => {
+      res.json({
+        updated: updatedRowsCount ? true : false
+      });
     })
     .catch(err => {
       res
         .status(500)
-        .json({ error: err.message });
+        .json({
+          error: err.message
+        });
     });
 });
 
 // POST request to fetch filtered posts
 router.post("/filter", (req, res) => {
-  const {topic} = req.body.data;
+  const {
+    topic
+  } = req.body.data;
   getFilteredPosts(topic)
     .then((posts) => {
-      res.json({ posts });
+      res.json({
+        posts
+      });
     })
     .catch(err => {
       res
         .status(500)
-        .json({ error: err.message });
+        .json({
+          error: err.message
+        });
     });
 });
 

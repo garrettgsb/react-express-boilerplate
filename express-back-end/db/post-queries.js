@@ -44,13 +44,12 @@ const getFilteredPosts = (topic) => {
 
 const addLikesToPosts = (data) => {
   const {number_of_likes, post_id} = data;
-  return db.query(`UPDATE likes
-  SET number_of_likes = $1 
-WHERE post_id = $2;`,
+  return db.query(
+    `UPDATE posts SET number_of_likes = $1 WHERE id = $2;`,
     [number_of_likes, post_id]
   )
   .then((res) => {
-    return res.rows;
+    return res.rowCount;
   })
   .catch((err) => {
     console.log('DB error fetching updated posts: ' + err.message);
