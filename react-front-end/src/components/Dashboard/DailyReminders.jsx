@@ -29,11 +29,11 @@ export default function DailyReminders({ plants, reminders, userId }) {
   return (
     <>
       <div className="notifications">
-        <Button floated="bottom" as="h4" color={`${dailyUserReminders.length > 0 ? "pink" : "blue"}`}>
+        <Button floated="bottom" as="h4" color={`${dailyUserReminders.length > 0 ? "red" : "blue"}`}>
           <Icon name="rain" />Watering Reminders:
           {dailyUserReminders.length > 0 ? " You have a reminder!" : " Your day looks clear. Enjoy!"}
         </Button>
-        <Button floated="top" as="h4" basic color={`${tomorrowUserReminders.length > 0 ? "pink" : "grey"}`}>
+        <Button floated="top" as="h4" basic color={`${tomorrowUserReminders.length > 0 ? "red" : "grey"}`}>
           {dailyUserReminders.length === 0 && tomorrowUserReminders.length > 0 ? "Upcoming watering tomorrow!" : "No upcoming watering tomorrow."}
         </Button>
       </div>
