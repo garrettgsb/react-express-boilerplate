@@ -1,11 +1,21 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from "react";
+import dayjs from "dayjs";
+import React, { useState } from "react";
 import { useDrag } from "react-dnd";
-import { Button, Card, Grid, Image, Icon } from "semantic-ui-react";
+import { Button, Image, Icon, Progress } from "semantic-ui-react";
 
 function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) {
 
-  reminder && console.log( 'reminder!!!', reminder );
+  const [progress, setProgress] = useState(33);
+
+  reminder && console.log('reminder!!!', reminder);
+  plant && console.log('plant!!!', plant);
+
+  const today = Date.now();
+  // const timeRemaining = today;
+  const timeRemaining = today;
+
+  console.log({ timeRemaining });
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "image",
@@ -16,6 +26,10 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
     // },
     options: { dropEffect: "move" }
   }));
+
+  const water = () => {
+    setProgress((prev) => (prev >= 100 ? 0 : prev + 20));
+  }
 
   return (
     <>
@@ -28,10 +42,16 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
           src={url}
           style={{ borderRadius: "15%" }}
         />
-        <p><b>{nickname}</b></p>
-        <Button color="olive" onClick={() => {
-          setSelectedPlant(plant);
-        }}><Icon name="leaf"/>Info</Button>
+        <div>
+          <p><b>{nickname}</b></p>
+          <Button color="olive" onClick={() => {
+            setSelectedPlant(plant);
+          }}><Icon name="leaf" />Info</Button>
+          <div>
+            <Progress color="blue" percent={progress} indicating />
+            <Button onClick={water}>Water</Button>
+          </div>
+        </div>
       </Image>
     </>
   );
