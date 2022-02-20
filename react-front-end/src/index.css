@@ -1,16 +1,14 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .navbar-segment {
@@ -34,7 +32,7 @@ code {
   width: 100vw;
   height: 100vh;
   background-size: cover;
-  background-image: url("https://images.unsplash.com/photo-1518335935020-cfd6580c1ab4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+  background-image: url('https://images.unsplash.com/photo-1518335935020-cfd6580c1ab4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
   color: white;
 }
 
@@ -42,32 +40,32 @@ code {
   position: fixed;
   top: 80%;
   left: 60%;
-  
+
   transform: translate(-15%, -55%);
   color: white;
-  text-shadow: 3px 3px 7px  black;
+  text-shadow: 3px 3px 7px black;
   font-size: 53px;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #bee {
   position: fixed;
   top: 48%;
-  left: 23%;
+  left: 24%;
 }
 
 #bee:hover {
   transform: scale(103%);
 }
 
-.home h2 {
+/* .home h2 {
   overflow: hidden;
   display: inline-block;
 }
 
 .home h2::before,
 .home h2::after {
- content: '';
+  content: '';
   position: absolute;
   width: 100%;
   left: 0;
@@ -78,7 +76,7 @@ code {
   bottom: 0;
   transform-origin: 100% 50%;
   transform: scaleX(0);
-  transition: transform .3s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
 }
 .home h2::after {
   content: attr(data-replace);
@@ -86,7 +84,7 @@ code {
   top: 0;
   transform-origin: 100% 50%;
   transform: translate3d(200%, 0, 0);
-  transition: transform .3s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
   color: orange;
 }
 
@@ -100,9 +98,9 @@ code {
 
 .home h2 span {
   display: inline-block;
-  transition: transform .3s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .home h2:hover span {
   transform: translate3d(-200%, 0, 0);
-}
+} */
