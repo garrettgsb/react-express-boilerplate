@@ -15,7 +15,7 @@ import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Dashboard({ users, userId, plants, species, updateLocation }) {
+export default function Dashboard({ users, userId, plants, species, reminders, updateLocation }) {
   const user = getUserById(users, userId);
   const name = user && user.name;
   const userPlants = getPlantsForUser(plants, userId);
@@ -64,7 +64,7 @@ export default function Dashboard({ users, userId, plants, species, updateLocati
             </Grid.Column>
             <Grid.Column width={4}>
               <Namecard user={user} plants={plants} />
-              <Reminders plants={userPlants} />
+              <Reminders plants={userPlants} reminders={reminders} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
