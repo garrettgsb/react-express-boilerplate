@@ -22,7 +22,7 @@ export default function Dashboard({ users, userId, plants, species, updateLocati
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPlant, setSelectedPlant] = useState(null);
 
-  console.log({plants});
+  console.log({ plants });
 
   if (!user) {
     return <h2>Please login or signup.</h2>;
@@ -38,21 +38,13 @@ export default function Dashboard({ users, userId, plants, species, updateLocati
                   <Link to="/wishlist">
                     <Button
                       basic
-                      color="green"
-                      content="Wishlist"
+                      positive
+                      content="See Wishlist"
                       floated="right"
                     />
                   </Link>
                   <Button positive floated="right" onClick={() => setIsVisible(true)}>
                     Add A New Plant!
-                  </Button>
-                  <Button
-                    positive
-                    floated="right"
-                    onClick={() => setSelectedPlant(plants[0])}
-                  // plants[0] is hardcoded until the drag and drop is implemented //
-                  >
-                    Check Out a Plant!
                   </Button>
                 </Header>
               </Segment>
@@ -61,11 +53,12 @@ export default function Dashboard({ users, userId, plants, species, updateLocati
                   Good Morning, {name}!
                 </Header>
               </Segment>
+              <Segment>
+                <Header color="orange">Add Reminders Here?</Header>
+              </Segment>
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>
-                  <div className="App">
-                    <Rooms plants={plants} userId={userId} updateLocation={updateLocation} />
-                  </div>
+                  <Rooms plants={plants} userId={userId} updateLocation={updateLocation} setSelectedPlant={setSelectedPlant} />
                 </DndProvider>
               </Grid.Row>
             </Grid.Column>

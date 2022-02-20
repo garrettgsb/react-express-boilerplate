@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import "semantic-ui-css/semantic.min.css";
-import { Segment, Grid, Image, Container, Card, Header } from "semantic-ui-react";
+import { Segment, Grid, Container, Card, Header } from "semantic-ui-react";
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -9,7 +9,7 @@ import { useDrop } from "react-dnd";
 import { getPlantsByRoom, getPlantsForUser } from "../../helpers/selectors";
 import { SingleRoom } from "./SingleRoom";
 
-export default function Rooms({ plants, userId, updateLocation }) {
+export default function Rooms({ plants, userId, updateLocation, setSelectedPlant }) {
   const addImageToBoard = (plant_id, location) => {
     console.log({plant_id, location})
     updateLocation(plant_id, location);
@@ -34,10 +34,10 @@ export default function Rooms({ plants, userId, updateLocation }) {
         </Segment>
         <Grid>
           <Card.Group itemsPerRow={2}>
-            <SingleRoom addImageToBoard={addImageToBoard} roomName={livingRoom} roomClassName="Board living" roomPlants={livingPlants} />
-            <SingleRoom addImageToBoard={addImageToBoard} roomName={diningRoom} roomClassName="Board dining" roomPlants={diningPlants} />
-            <SingleRoom addImageToBoard={addImageToBoard} roomName={bedroom} roomClassName="Board bedroom" roomPlants={bedroomPlants} />
-            <SingleRoom addImageToBoard={addImageToBoard} roomName={office} roomClassName="Board office" roomPlants={officePlants} />
+            <SingleRoom addImageToBoard={addImageToBoard} roomName={livingRoom} roomClassName="Board living" roomPlants={livingPlants} setSelectedPlant={setSelectedPlant} />
+            <SingleRoom addImageToBoard={addImageToBoard} roomName={diningRoom} roomClassName="Board dining" roomPlants={diningPlants} setSelectedPlant={setSelectedPlant}/>
+            <SingleRoom addImageToBoard={addImageToBoard} roomName={bedroom} roomClassName="Board bedroom" roomPlants={bedroomPlants} setSelectedPlant={setSelectedPlant}/>
+            <SingleRoom addImageToBoard={addImageToBoard} roomName={office} roomClassName="Board office" roomPlants={officePlants} setSelectedPlant={setSelectedPlant}/>
           </Card.Group>
         </Grid>
       </Container>

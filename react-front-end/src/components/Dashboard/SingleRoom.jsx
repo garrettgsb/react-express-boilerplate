@@ -1,10 +1,10 @@
 import React from "react";
 import { useDrop } from "react-dnd";
-import { Card } from "semantic-ui-react";
+import { Card, Grid } from "semantic-ui-react";
 import Picture from "./Picture";
 
-export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlants }) {
-  const [ _ , drop] = useDrop(() => ({
+export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlants, setSelectedPlant }) {
+  const [_, drop] = useDrop(() => ({
     accept: "image",
     drop: (item) => {
       console.log(item.id);
@@ -17,23 +17,28 @@ export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlant
 
   const PictureList = roomPlants && roomPlants.map((plant) => ({
     id: plant.id,
-    url: plant.photo
+    url: plant.photo,
+    nickname: plant.nickname,
+    plant: plant
   }));
 
   return (
     <Card>
-    <Card.Content>
-      <Card.Header>
-        {roomName}
-      </Card.Header>
-    </Card.Content>
-    <div className={roomClassName} ref={drop}>
-      <div className="Pictures">
-        {PictureList.map((picture) => {
-          return <Picture url={picture.url} id={picture.id} key={picture.id}/>;
-        })}
-      </div>
-    </div>
-  </Card>
+      <Card.Content>
+        <Card.Header>
+          {roomName}
+        </Card.Header>
+      </Card.Content>
+
+      <Grid>
+        <Grid.Row columns={2}>
+          <div className={roomClassName} ref={drop}>
+            {PictureList.map((picture) => {
+              return <Picture url={picture.url} id={picture.id} key={picture.id} nickname={picture.nickname} setSelectedPlant={setSelectedPlant} plant={picture.plant}/>;
+            })}
+          </div>
+        </Grid.Row>
+      </Grid>
+    </Card>
   )
 }
