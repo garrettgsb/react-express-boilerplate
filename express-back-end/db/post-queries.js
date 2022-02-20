@@ -1,7 +1,7 @@
 const db = require('./index');
 
 const getPosts = () => {
-  return db.query(`SELECT * FROM posts ORDER BY created_at DESC;`)
+  return db.query(`SELECT * FROM posts JOIN COMMENTS ON posts.id = COMMENTS.post_id ORDER BY created_at DESC;`)
     .then((res) => {
       return res.rows;
     })
