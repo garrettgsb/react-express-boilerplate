@@ -23,6 +23,22 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
     nickname: "",
     location: "",
   });
+
+  const locationValues = ['Living room', 'Dining room', 'Bedroom', 'Office'];
+
+  const locationOptions = locationValues.map((element) => ({
+    key: element,
+    text: element,
+    value: element
+  }));
+
+  const onClick = (event, data) => {
+    setState((prev) => ({
+      ...prev,
+      location: data.value
+    }));
+  };
+
   // Scroll to bottom & Scroll to top //
   const divRef = useRef(null);
   useEffect(() => {
@@ -56,24 +72,24 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
   };
 
   const submitForm = () => {
-      axios.post("/api/user_plants", {
-        species_id: state.plant.species_id,
-        user_id: user.id,
-        nickname: state.nickname,
-        location: state.location,
-      })
+    axios.post("/api/user_plants", {
+      species_id: state.plant.species_id,
+      user_id: user.id,
+      nickname: state.nickname,
+      location: state.location,
+    })
       .then((response) => {
         console.log("Post made to db!", response);
         const newPlant = response.data[0]
         axios.post("/api/reminders", {
           plant_id: newPlant.id,
-          user_id: user.id, 
-          watering_interval: state.plant.watering_interval, 
+          user_id: user.id,
+          watering_interval: state.plant.watering_interval,
           last_watered: new Date(),
         })
-        .then(response => {
-          console.log("reeeeesponse", response)
-        })
+          .then(response => {
+            console.log("reeeeesponse", response)
+          })
       })
       .catch(function (error) {
         console.log(error);
@@ -150,19 +166,22 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
                     placeholder="Add a name for your plant! (eg. Christofern)"
                   />
                 </Form.Field>
+
                 <Form.Field>
                   <Form.Input
                     required={true}
-                    onChange={(e, data) => {
-                      console.log("location", data);
-                      setState((prev) => ({
-                        ...prev,
-                        location: data.value,
-                      }));
-                    }}
                     label="Location"
-                    placeholder="Tell us where your plant lives! (eg. Living Room)"
-                  />
+                  >
+                    <Dropdown
+                      placeholder="Tell us where your plant lives! (eg. Living room)"
+                      fluid
+                      selection
+                      required={true}
+                      options={locationOptions}
+                      onChange={onClick}
+                      defaultValue="Living room"
+                    />
+                  </Form.Input>
                 </Form.Field>
 
                 <div className="plant-info">
