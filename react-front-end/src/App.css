@@ -136,3 +136,15 @@ div.ui.video {
 div.ui.inverted.segment.navbar-segment {
   background-color: #9DBF98;
 }
+
+div.plant-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+div.plant-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
