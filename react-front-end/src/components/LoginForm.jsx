@@ -1,25 +1,40 @@
 import React from 'react';
-import { Button, Form, Grid, Checkbox, Image, Message, Segment } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Form, Grid, Checkbox, Segment } from 'semantic-ui-react';
 
-export default function LoginForm() {
+export default function LoginForm({ login, user }) {
+  //const loggedUser = getUserById(users, user);
+
+  const submitForm = () => {
+    login();
+  };
+
   return (
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Form size='large'>
-          <Segment stacked>
-            <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
-            <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password' />
+        <Segment raised >
+          <Form onSubmit={submitForm}>
             <Form.Field>
-              <Checkbox label='I agree to water my plants on time' />
+              <Form.Input required={true} label='Email' placeholder='Enter your email' />
             </Form.Field>
-            <Button color='olive' size='large'>
-              Login
-            </Button>
-          </Segment>
-        </Form>
-        <Message>
-          New to us? <a href='#'>Sign Up</a>
-        </Message>
+
+            <Form.Field>
+              <Form.Input required={true} label='Password' placeholder='Enter your password' />
+            </Form.Field>
+            <Form.Field>
+              <Checkbox label='I will follow water reminders' />
+            </Form.Field>
+            <Link to='/dashboard'>
+              <div className='ui buttons'>
+                <button className='ui yellow button'>Sign Up</button>
+                <div className='or'></div>
+                <button type='submit' className='ui olive button' onClick={submitForm}>
+                  Login
+                </button>
+              </div>
+            </Link>
+          </Form>
+        </Segment>
       </Grid.Column>
     </Grid>
   );
