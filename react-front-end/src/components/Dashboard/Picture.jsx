@@ -3,7 +3,9 @@ import React from "react";
 import { useDrag } from "react-dnd";
 import { Button, Card, Grid, Image, Icon } from "semantic-ui-react";
 
-function Picture({ id, url, key, nickname, setSelectedPlant, plant }) {
+function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) {
+
+  reminder && console.log( 'reminder!!!', reminder );
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "image",

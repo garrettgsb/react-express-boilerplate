@@ -57,7 +57,7 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
               </Segment>
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>
-                  <Rooms plants={plants} userId={userId} updateLocation={updateLocation} setSelectedPlant={setSelectedPlant} />
+                  <Rooms plants={plants} userId={userId} updateLocation={updateLocation} setSelectedPlant={setSelectedPlant} reminders={reminders}/>
                 </DndProvider>
               </Grid.Row>
             </Grid.Column>

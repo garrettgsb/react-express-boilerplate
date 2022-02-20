@@ -53,3 +53,8 @@ export function getUserReminders(user_id, reminders) {
   const filteredReminders = reminders.filter(reminder => reminder.user_id === userId);
   return filteredReminders;
 };
+
+export function getPlantReminder(plant_id, reminders) {
+  const foundReminder = reminders.find(reminder => (reminder.plant_id === plant_id));
+  return foundReminder;
+}
