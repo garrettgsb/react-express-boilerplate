@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import '../../../Newsfeed.css';
 import moment from 'moment';
-import { Button, Icon, Image, Segment, Label, Grid } from 'semantic-ui-react';
+import { Button, Icon, Image, Segment, Label, Grid, Header } from 'semantic-ui-react';
 import { getUserById } from '../../../helpers/selectors';
 import { likePost } from './SinglePostService';
 import CommentList from './CommentList';
@@ -61,12 +61,15 @@ export default function SinglePost({ id, user_id, title, photo, description, top
 
       <Segment.Group horizontal>
         <Image src={photo} width='50%' height='100%' rounded />
-        <span>
-          <h5>{description}</h5>
+        <Segment>
+          <Header as='h3' block>
+            <Icon name='talk' color='olive' />
+            {description}
+          </Header>
           <Segment>
             <CommentList users={users} posts={posts} />
           </Segment>
-        </span>
+        </Segment>
       </Segment.Group>
 
       <Grid horizontal>
