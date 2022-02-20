@@ -34,7 +34,7 @@ export default function DailyReminders({ plants, reminders, userId }) {
           {dailyUserReminders.length > 0 ? " You have a reminder!" : " Your day looks clear. Enjoy!"}
         </Button>
         <Button floated="top" as="h4" basic color={`${tomorrowUserReminders.length > 0 ? "red" : "grey"}`}>
-          {dailyUserReminders.length === 0 && tomorrowUserReminders.length > 0 ? "Upcoming watering tomorrow!" : "No upcoming watering tomorrow."}
+          {tomorrowUserReminders.length > 0 ? "Upcoming watering tomorrow!" : "No upcoming watering tomorrow."}
         </Button>
       </div>
     </>
