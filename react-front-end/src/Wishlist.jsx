@@ -11,6 +11,8 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
   const plants = wishlist && getWishlistPlants(wishlist, userId);
   const plantsForUser = user_plants && getPlantsForUser(user_plants, user && user.id);
 
+  console.log({ plantsForUser })
+
   const [isVisible, setIsVisible] = useState(false);
 
   const parsedPlants = plants && plants.map(plant =>
