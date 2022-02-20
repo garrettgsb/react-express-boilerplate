@@ -27,8 +27,8 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant }) {
           style={{ borderRadius: "15%" }}
         />
         <p><b>{nickname}</b></p>
-        <Button size="small" color="olive" onClick={() => {
-          console.log({ plant })
+        <Button size="small" color="green" onClick={() => {
+          // console.log({ plant })
           setSelectedPlant(plant);
         }}>See Info</Button>
       </Image>
