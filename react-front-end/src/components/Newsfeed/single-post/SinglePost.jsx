@@ -1,26 +1,13 @@
 import React, { useState } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import '../../../Newsfeed.css';
+import moment from 'moment';
 import { Button, Icon, Image, Segment, Label, Grid } from 'semantic-ui-react';
 import { getUserById } from '../../../helpers/selectors';
 import { likePost } from './SinglePostService';
 import CommentList from './CommentList';
 
-export default function SinglePost({
-  id,
-  user_id,
-  title,
-  photo,
-  description,
-  topic,
-  number_of_likes,
-  created_at,
-  comment_user_id,
-  comment_text,
-  commented_at,
-  users,
-  posts,
-}) {
+export default function SinglePost({ id, user_id, title, photo, description, topic, number_of_likes, created_at, users, posts }) {
   const [state, setState] = useState({
     likes: number_of_likes,
     like_text: 'Like',
@@ -52,30 +39,7 @@ export default function SinglePost({
 
   const user = getUserById(users, user_id);
 
-  const getMonth = (value) => {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-    let month = '';
-    let num = Number(value);
-    for (let i = 0; i < months.length; i++) {
-      if (num === i + 1) {
-        month = months[i];
-      }
-    }
-    return month;
-  };
+  const postedDate = moment(created_at).format('ll');
 
   return (
     <Segment className='newsfeed' raised>
@@ -85,8 +49,7 @@ export default function SinglePost({
         </Segment>
         <Segment>
           <Image src={user && user.avatar} avatar />
-          <b>{user && user.name}</b> on{' '}
-          {created_at && getMonth(created_at.split('-')[1]) + ' ' + created_at.split('-')[2].slice(0, 2) + ', ' + created_at.split('-')[0]}
+          <b>{user && user.name}</b> on {postedDate}
         </Segment>
         <Segment>
           <Label as='a' color='orange' ribbon='right'>
