@@ -25,7 +25,7 @@ export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlant
   return (
     <Card>
       <Card.Content>
-        <Card.Header>
+        <Card.Header className="room-header">
           {roomName}
         </Card.Header>
       </Card.Content>

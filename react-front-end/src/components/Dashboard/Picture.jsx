@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { useDrag } from "react-dnd";
-import { Button, Card, Grid, Image } from "semantic-ui-react";
+import { Button, Card, Grid, Image, Icon } from "semantic-ui-react";
 
 function Picture({ id, url, key, nickname, setSelectedPlant, plant }) {
 
@@ -27,9 +27,9 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant }) {
           style={{ borderRadius: "15%" }}
         />
         <p><b>{nickname}</b></p>
-        <Button size="small" color="green" onClick={() => {
+        <Button color="olive" onClick={() => {
           setSelectedPlant(plant);
-        }}>See Info</Button>
+        }}><Icon name="leaf"/>Info</Button>
       </Image>
     </>
   );

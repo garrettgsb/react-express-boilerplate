@@ -14,6 +14,7 @@ import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import DailyReminders from "./components/Dashboard/DailyReminders";
 
 export default function Dashboard({ users, userId, plants, species, reminders, updateLocation }) {
   const user = getUserById(users, userId);
@@ -49,6 +50,7 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
               <Segment textAlign="left" raised>
                 <Header as="h3">
                   Good Morning, {name}!
+                  <DailyReminders plants={userPlants} reminders={reminders} userId={userId}/>
                 </Header>
               </Segment>
               <Grid.Row>
@@ -60,7 +62,7 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
             <Grid.Column width={4}>
             <div>
               <Namecard user={user} plants={plants} />
-              <Reminders plants={userPlants} reminders={reminders} />
+              <Reminders plants={userPlants} reminders={reminders} userId={userId} />
             </div>
             </Grid.Column>
           </Grid.Row>

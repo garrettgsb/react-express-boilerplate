@@ -45,3 +45,11 @@ export function getSpeciesById(species, species_id) { // takes array of species 
   const foundSpecies = species.find(s => s.species_id === species_id); // takes a species_id and returns the species object
   return foundSpecies;
 };
+
+export function getUserReminders(user_id, reminders) {
+
+  const userId = Number(user_id);
+
+  const filteredReminders = reminders.filter(reminder => reminder.user_id === userId);
+  return filteredReminders;
+};
