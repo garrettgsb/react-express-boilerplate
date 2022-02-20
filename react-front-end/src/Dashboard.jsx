@@ -48,9 +48,11 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
                 </Header>
               </Segment>
               <Segment textAlign="left" raised>
-                <Header as="h3">
-                  Good Morning, {name}!
-                  <DailyReminders plants={userPlants} reminders={reminders} userId={userId}/>
+                <Header as="h3" className="dash-header">
+                  <div>
+                    Good Morning, {name}!
+                  </div>
+                  <DailyReminders plants={userPlants} reminders={reminders} userId={userId} />
                 </Header>
               </Segment>
               <Grid.Row>
@@ -60,10 +62,10 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={4}>
-            <div>
-              <Namecard user={user} plants={plants} />
-              <Reminders plants={userPlants} reminders={reminders} userId={userId} />
-            </div>
+              <div>
+                <Namecard user={user} plants={plants} />
+                <Reminders plants={userPlants} reminders={reminders} userId={userId} />
+              </div>
             </Grid.Column>
           </Grid.Row>
         </Grid>

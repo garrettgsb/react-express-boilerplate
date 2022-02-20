@@ -18,18 +18,25 @@ export default function DailyReminders({ plants, reminders, userId }) {
   })
 
   const dailyReminders = remindersWithTime.filter(element => element.timeRemaining < 1);
-  const tomorrowReminders = remindersWithTime.filter(element => element.timeRemaining > 2);
+  const tomorrowReminders = remindersWithTime.filter(element => element.timeRemaining < 2 && element.timeRemaining >= 1);
 
   const dailyUserReminders = getUserReminders(userId, dailyReminders);
   const tomorrowUserReminders = getUserReminders(userId, tomorrowReminders);
 
+  console.log({ dailyUserReminders })
+  console.log({ tomorrowUserReminders })
+
   return (
     <>
-      <Button floated="right" as="h4" color={`${dailyUserReminders.length > 0 ? "red" : "blue"}`}>
-        <Icon name="rain" />Watering Reminders: 
-        {dailyUserReminders.length > 0 ? " You have a reminder!" : " Your day looks clear. Enjoy!"}
-        {!dailyUserReminders && tomorrowUserReminders.length > 0 ? "Upcoming watering tomorrow!" : ""}
-      </Button>
+      <div className="notifications">
+        <Button floated="bottom" as="h4" color={`${dailyUserReminders.length > 0 ? "pink" : "blue"}`}>
+          <Icon name="rain" />Watering Reminders:
+          {dailyUserReminders.length > 0 ? " You have a reminder!" : " Your day looks clear. Enjoy!"}
+        </Button>
+        <Button floated="top" as="h4" basic color={`${tomorrowUserReminders.length > 0 ? "pink" : "grey"}`}>
+          {dailyUserReminders.length === 0 && tomorrowUserReminders.length > 0 ? "Upcoming watering tomorrow!" : "No upcoming watering tomorrow."}
+        </Button>
+      </div>
     </>
   );
 }
