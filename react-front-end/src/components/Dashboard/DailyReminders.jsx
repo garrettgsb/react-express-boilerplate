@@ -10,8 +10,6 @@ const relativeTime = require("dayjs/plugin/relativeTime");
 
 export default function DailyReminders({ plants, reminders, userId }) {
 
-  // const userNum = Number(userId);
-
   const remindersWithTime = reminders.map((reminder) => {
     const date1 = dayjs(new Date());
     return {
