@@ -53,9 +53,6 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
                   Good Morning, {name}!
                 </Header>
               </Segment>
-              <Segment>
-                <Header color="orange">Add Reminders Here?</Header>
-              </Segment>
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>
                   <Rooms plants={plants} userId={userId} updateLocation={updateLocation} setSelectedPlant={setSelectedPlant} />
@@ -63,8 +60,10 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={4}>
+            <div>
               <Namecard user={user} plants={plants} />
               <Reminders plants={userPlants} reminders={reminders} />
+            </div>
             </Grid.Column>
           </Grid.Row>
         </Grid>

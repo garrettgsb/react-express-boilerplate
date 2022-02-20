@@ -19,15 +19,15 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant }) {
     <>
       <Image
         size="small"
-        style={{ background: "cornsilk", borderRadius: "5%", padding: "10px", margin: "10px" }}
+        style={{ border: isDragging ? "5px solid pink" : "0px", background: "#EBEBE8", borderRadius: "5%", padding: "10px", margin: "10px" }}
       >
         <img
           ref={drag}
           src={url}
-          style={{ border: isDragging ? "5px solid pink" : "0px", borderRadius: "15%" }}
+          style={{ borderRadius: "15%" }}
         />
         <p><b>{nickname}</b></p>
-        <Button size="mini" color="orange" onClick={() => {
+        <Button size="small" color="olive" onClick={() => {
           console.log({ plant })
           setSelectedPlant(plant);
         }}>See Info</Button>

@@ -18,14 +18,14 @@ export default function Reminders({ plants, reminders }) {
 
   const remindersWithTime = reminders.map((reminder) => {
     const date1 = dayjs(new Date());
-    return  {
+    return {
       ...reminder, timeRemaining: reminder.watering_interval - date1.diff(reminder.last_watered, "day"), editWatered: () => editWatered(reminder.plant_id)
     }
   })
 
-  const overdueReminders = remindersWithTime.filter(element => element.timeRemaining < 0).sort((a,b) => a.timeRemaining - b.timeRemaining)
-  const comingdueReminders = remindersWithTime.filter(element => element.timeRemaining > 0 && element.timeRemaining < 6).sort((a,b) => a.timeRemaining - b.timeRemaining)
-  const notdueReminders = remindersWithTime.filter(element => element.timeRemaining > 6).sort((a,b) => a.timeRemaining - b.timeRemaining)
+  const overdueReminders = remindersWithTime.filter(element => element.timeRemaining < 0).sort((a, b) => a.timeRemaining - b.timeRemaining)
+  const comingdueReminders = remindersWithTime.filter(element => element.timeRemaining > 0 && element.timeRemaining < 6).sort((a, b) => a.timeRemaining - b.timeRemaining)
+  const notdueReminders = remindersWithTime.filter(element => element.timeRemaining > 6).sort((a, b) => a.timeRemaining - b.timeRemaining)
 
 
 
@@ -39,7 +39,7 @@ export default function Reminders({ plants, reminders }) {
       <Card.Content>
         <Feed>
           <ReminderGroup label={"Overdue! Please water your baby!"} reminders={overdueReminders} />
-          <ReminderGroup label={"Coming due"} reminders={comingdueReminders} />
+          <ReminderGroup label={"Coming soon"} reminders={comingdueReminders} />
           <ReminderGroup label={"Not yet due"} reminders={notdueReminders} />
         </Feed>
       </Card.Content>
