@@ -18,9 +18,6 @@ export default function PostList({ posts, users }) {
           topic={post.topic}
           number_of_likes={post.number_of_likes}
           created_at={post.created_at}
-          comment_user_id={post.comment_user_id}
-          comment_text={post.comment_text}
-          commented_at={post.commented_at}
           users={users}
           posts={posts}
         />
