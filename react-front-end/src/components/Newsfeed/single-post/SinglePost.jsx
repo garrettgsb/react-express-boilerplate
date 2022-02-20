@@ -4,8 +4,23 @@ import '../../../Newsfeed.css';
 import { Button, Icon, Image, Segment, Label, Grid } from 'semantic-ui-react';
 import { getUserById } from '../../../helpers/selectors';
 import { likePost } from './SinglePostService';
+import CommentList from './CommentList';
 
-export default function SinglePost({ id, user_id, title, photo, description, topic, number_of_likes, created_at, users }) {
+export default function SinglePost({
+  id,
+  user_id,
+  title,
+  photo,
+  description,
+  topic,
+  number_of_likes,
+  created_at,
+  comment_user_id,
+  comment_text,
+  commented_at,
+  users,
+  posts,
+}) {
   const [state, setState] = useState({
     likes: number_of_likes,
     like_text: 'Like',
@@ -85,6 +100,9 @@ export default function SinglePost({ id, user_id, title, photo, description, top
         <Image src={photo} width='50%' height='100%' rounded />
         <span>
           <h5>{description}</h5>
+          <Segment>
+            <CommentList users={users} posts={posts} />
+          </Segment>
         </span>
       </Segment.Group>
 
