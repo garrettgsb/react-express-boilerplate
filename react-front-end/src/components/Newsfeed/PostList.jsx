@@ -1,9 +1,9 @@
-import React from 'react';
-import 'semantic-ui-css/semantic.min.css';
-import { Container } from 'semantic-ui-react';
-import SinglePost from './single-post/SinglePost';
+import React from "react";
+import "semantic-ui-css/semantic.min.css";
+import { Container } from "semantic-ui-react";
+import SinglePost from "./single-post/SinglePost";
 
-export default function PostList({ posts, users }) {
+export default function PostList({ posts, comments, users }) {
   const renderPosts = posts
     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
     .map((post) => {
@@ -20,6 +20,7 @@ export default function PostList({ posts, users }) {
           created_at={post.created_at}
           users={users}
           posts={posts}
+          comments={comments}
         />
       );
     });

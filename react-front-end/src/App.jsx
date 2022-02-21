@@ -185,7 +185,7 @@ class App extends Component {
               element={
                 <Newsfeed
                   posts={this.state.posts}
-                  comments={this.comments}
+                  comments={this.state.comments}
                   users={this.state.users}
                   userId={this.state.user}
                   createNewPost={this.createNewPost}

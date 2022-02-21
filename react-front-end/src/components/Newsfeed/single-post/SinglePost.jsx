@@ -8,7 +8,7 @@ import { getUserById } from "../../../helpers/selectors";
 import { likePost } from "./SinglePostService";
 import CommentList from "./CommentList";
 
-export default function SinglePost({ id, user_id, title, photo, description, topic, number_of_likes, created_at, users, posts }) {
+export default function SinglePost({ id, user_id, title, photo, description, topic, number_of_likes, created_at, users, comments }) {
   const [state, setState] = useState({
     likes: number_of_likes,
     like_text: "Like",
