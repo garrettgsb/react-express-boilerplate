@@ -18,7 +18,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState }) {
   const [state, setState] = useState({
     plant: null,
     nickname: "",
-    location: "",
+    location: "Living room",
   });
 
   const locationValues = ['Living room', 'Dining room', 'Bedroom', 'Office'];
@@ -29,7 +29,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState }) {
     value: element
   }));
 
-  const onClick = (event, data) => {
+  const onClick = (event, data) => { // populates location
     setState((prev) => ({
       ...prev,
       location: data.value
@@ -183,7 +183,6 @@ export default function AddPlant({ user, species, setIsVisible, setAppState }) {
                 </Form.Field> */}
                 <Form.Field>
                   <Form.Input
-                    required={true}
                     label="Location"
                   >
                     <Dropdown

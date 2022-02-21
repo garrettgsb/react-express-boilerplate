@@ -120,3 +120,19 @@ h3.ui.header.dash-header {
   flex-direction: row;
   justify-content: space-between;
 } 
+
+
+div.plant-card {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  column-gap: 10px;
+}
+
+div.plant-progress {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 5px;
+  width: 100%;
+}
