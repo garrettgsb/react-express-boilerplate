@@ -8,12 +8,16 @@ import ReminderGroup from "./ReminderGroup";
 import { getUserReminders } from "../../helpers/selectors";
 const relativeTime = require("dayjs/plugin/relativeTime");
 
-export default function Reminders({ plants, reminders, userId }) {
+export default function Reminders({ plants, reminders, userId, setAppState }) {
   const editWatered = (plantId) => {
     axios
       .patch(`/api/reminders/${plantId}`, { last_watered: new Date() })
       .then((response) => {
         console.log(response.data);
+        console.log("rerereresponse.data", response.data[0])
+        setAppState((prev) => {
+          return {...prev,reminders: [...prev.reminders, response.data[0]]}
+        })
       });
   };
 
@@ -30,7 +34,6 @@ export default function Reminders({ plants, reminders, userId }) {
   const comingdueReminders = remindersWithTime.filter(element => element.timeRemaining > 0 && element.timeRemaining < 6).sort((a, b) => a.timeRemaining - b.timeRemaining)
   const notdueReminders = remindersWithTime.filter(element => element.timeRemaining > 6).sort((a, b) => a.timeRemaining - b.timeRemaining)
 
-const overdue = "className={overdue}"
 
   return (
     <Card className="reminders">
@@ -42,7 +45,7 @@ const overdue = "className={overdue}"
       <Card.Content>
         <Feed>
           <ReminderGroup checkboxClass="overdue" label={"Overdue! Please water your baby!"} reminders={overdueReminders} />
-          <ReminderGroup label={"Coming soon"} reminders={comingdueReminders} overdue={overdue} />
+          <ReminderGroup label={"Coming soon"} reminders={comingdueReminders} />
           <ReminderGroup label={"Not yet due"} reminders={notdueReminders} />
         </Feed>
       </Card.Content>
