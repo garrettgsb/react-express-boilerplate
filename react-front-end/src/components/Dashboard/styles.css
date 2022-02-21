@@ -70,10 +70,12 @@ div.notifications {
 .top-label {
   font-size: 17px !important;
   padding-top: 0.7em !important;
+  padding-bottom: 0.2em !important;
 }
 
 .overdue label {
   color: #DB2828 !important;
+  font-style: italic !important;
 }
 
 /* Strikethrough for Checkbox */

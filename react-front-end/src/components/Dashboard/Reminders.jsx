@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import "semantic-ui-css/semantic.min.css";
-import { Checkbox, Image, Card, Feed } from "semantic-ui-react";
+import { Image, Card, Feed } from "semantic-ui-react";
 import wateringcan from "../../assets/wateringcan.png";
 import dayjs from "dayjs";
 import ReminderGroup from "./ReminderGroup";
