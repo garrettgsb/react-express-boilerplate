@@ -67,44 +67,25 @@ div.notifications {
   row-gap: 5px;
 }
 
+.top-label {
+  font-size: 17px !important;
+  padding-top: 0.7em !important;
+}
+
+.overdue label {
+  color: #DB2828 !important;
+}
+
 /* Strikethrough for Checkbox */
 
 .strikethrough {
 	display: inline-block !important;
 	position: relative !important;
 	transition: all 0.5s cubic-bezier(.55, 0, .1, 1) !important;
-  text-decoration: line-through;
+  text-decoration: line-through 1.5px black;
 }
 
-/* /* .strikethrough:after { 
-	/* content: '' !important; */
-	/* position: absolute !important;
-	display: block !important;
-	width: 100% !important;
-	height: 2px !important;
-  /* left: 1 !important; */
-	/* box-shadow: 0 1px rgba(255,255,255,0.6) !important;
-	margin-top: 0.5em !important;
-  margin-left: 2em !important;
-	background: black; */
-	/* transform-origin: center left !important;
-	animation: strikethrough 1s 0.5s cubic-bezier(.55, 0, .1, 1) 1 !important; */ 
-	/* transition: transform 0.5s cubic-bezier(.55, 0, .1, 1) !important; */
-/* } */ 
 
-/* hover effect */
-
-/* .strikethrough:hover { */
-	/* color: rgb(12, 59, 37) !important; */
-	/* background: rgba(179, 201, 248, 0.3) !important; */
-/* } */
-
-/* .strikethrough:hover:after {
-	transform: scaleX(0) !important;
-	transform-origin: center right !important;
-} */
-
-/* Keyframes for initial animation */
 
 @keyframes strikethrough {
 	from {

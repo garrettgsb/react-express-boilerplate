@@ -30,6 +30,8 @@ export default function Reminders({ plants, reminders, userId }) {
   const comingdueReminders = remindersWithTime.filter(element => element.timeRemaining > 0 && element.timeRemaining < 6).sort((a, b) => a.timeRemaining - b.timeRemaining)
   const notdueReminders = remindersWithTime.filter(element => element.timeRemaining > 6).sort((a, b) => a.timeRemaining - b.timeRemaining)
 
+const overdue = "className={overdue}"
+
   return (
     <Card className="reminders">
       <Card.Content>
@@ -39,8 +41,8 @@ export default function Reminders({ plants, reminders, userId }) {
       </Card.Content>
       <Card.Content>
         <Feed>
-          <ReminderGroup label={"Overdue! Please water your baby!"} reminders={overdueReminders} />
-          <ReminderGroup label={"Coming soon"} reminders={comingdueReminders} />
+          <ReminderGroup checkboxClass="overdue" label={"Overdue! Please water your baby!"} reminders={overdueReminders} />
+          <ReminderGroup label={"Coming soon"} reminders={comingdueReminders} overdue={overdue} />
           <ReminderGroup label={"Not yet due"} reminders={notdueReminders} />
         </Feed>
       </Card.Content>
