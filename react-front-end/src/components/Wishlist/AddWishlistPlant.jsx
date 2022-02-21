@@ -21,7 +21,7 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
   const [state, setState] = useState({
     plant: plant,
     nickname: "",
-    location: "",
+    location: "Living room",
   });
 
   const locationValues = ['Living room', 'Dining room', 'Bedroom', 'Office'];
@@ -45,7 +45,7 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
     divRef.current.scrollIntoView({ behavior: "smooth" });
   });
 
-  const onClose = (event) => {
+  const onClose = (event) => { // Add an event to display success message
     setIsVisible(false);
     window.scrollTo({
       top: 0,
@@ -150,6 +150,7 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
                 selection
                 options={speciesOptions}
                 onChange={clickHandler}
+                defaultSearchQuery={"Monstera deliciosa"}
               />
               <Form onSubmit={submitForm}>
                 <Form.Field>
