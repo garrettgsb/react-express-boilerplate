@@ -12,7 +12,7 @@ export default function LoginForm({ login, user }) {
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Message color="green">
+        <Message floating color="green">
           <Form onSubmit={submitForm}>
             <Form.Field>
               <Form.Input required={true} label="Email" value="bulbasaur@plant.it" placeholder="Enter your email" />
@@ -21,7 +21,7 @@ export default function LoginForm({ login, user }) {
               <Form.Input required={true} label="Password" type="password" value="bla-bla-bla" placeholder="Enter your password" />
             </Form.Field>
             <Form.Field>
-              <Segment compact>
+              <Segment>
                 <Checkbox toggle label="I agree to follow watering reminders" />
               </Segment>
             </Form.Field>
