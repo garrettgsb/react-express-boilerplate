@@ -67,11 +67,14 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
         <Card.Header>
           Watering Reminders <Image src={wateringcan} size="tiny" />{" "}
         </Card.Header>
-        {watered && (
+        
+        {watered && ( <>
+          <br></br>
           <Label className="watered-feedback" icon="tint" as="a" color="blue" tag>
             <Icon name="tint" />
             You watered {watered.nickname}!
           </Label>
+          </>
         )}
       </Card.Content>
       <Card.Content>
