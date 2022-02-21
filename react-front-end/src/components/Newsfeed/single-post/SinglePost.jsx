@@ -7,13 +7,28 @@ import { Button, Icon, Image, Segment, Label, Grid, Header } from "semantic-ui-r
 import { getUserById } from "../../../helpers/selectors";
 import { likePost } from "./SinglePostService";
 import CommentList from "./CommentList";
+import NewCommentForm from "../NewCommentForm";
 
-export default function SinglePost({ id, user_id, title, photo, description, topic, number_of_likes, created_at, users, comments }) {
-  const [state, setState] = useState({
+export default function SinglePost({
+  id,
+  user_id,
+  title,
+  photo,
+  description,
+  topic,
+  number_of_likes,
+  created_at,
+  users,
+  comments,
+  createNewComment,
+}) {
+  const [likeState, setLikeState] = useState({
     likes: number_of_likes,
     like_text: "Like",
     clicked: false,
   });
+
+  const [isVisibleCommentForm, setIsVisibleCommentForm] = useState(false);
 
   const likeClicked = () => {
     const new_number_of_likes = number_of_likes + 1;
@@ -30,7 +45,7 @@ export default function SinglePost({ id, user_id, title, photo, description, top
   };
 
   const updateLikesOnUi = (new_number_of_likes) => {
-    setState((prev) => ({
+    setLikeState((prev) => ({
       ...prev,
       likes: new_number_of_likes,
       like_text: "Liked",
@@ -39,7 +54,7 @@ export default function SinglePost({ id, user_id, title, photo, description, top
   };
 
   const user = getUserById(users, user_id);
-  const postUserProfileUrl = "/profile/" + id;
+  const postUserProfileUrl = "/profile/" + user_id;
 
   const postedDate = moment(created_at).format("ll");
 
@@ -60,28 +75,35 @@ export default function SinglePost({ id, user_id, title, photo, description, top
           </Label>
         </Segment>
       </Segment.Group>
-
       <Segment.Group horizontal>
-        <Image src={photo} width="50%" height="100%" rounded />
+        <Image src={photo} width="400px" height="300px" rounded />
         <Segment>
           <Header as="h3" block>
             <Icon name="talk" color="olive" />
             {description}
           </Header>
           <Segment>
+            {isVisibleCommentForm && (
+              <NewCommentForm
+                user_id={user_id}
+                post_id={id}
+                setIsVisibleCommentForm={setIsVisibleCommentForm}
+                createNewComment={createNewComment}
+              />
+            )}
             <CommentList users={users} comments={comments} post_id={id} />
           </Segment>
         </Segment>
       </Segment.Group>
 
       <Grid horizontal>
-        <Button as="div" labelPosition="right" id="likes" onClick={likeClicked} disabled={state.clicked}>
+        <Button as="div" labelPosition="right" id="likes" onClick={likeClicked} disabled={likeState.clicked}>
           <Button color="orange">
             <Icon name="heart" />
-            {state.like_text}
+            {likeState.like_text}
           </Button>
           <Label as="a" basic color="brown" pointing="left">
-            {state.likes}
+            {likeState.likes}
           </Label>
         </Button>
 
@@ -96,7 +118,7 @@ export default function SinglePost({ id, user_id, title, photo, description, top
           </Button>
         </Link>
 
-        <Button as="div" labelPosition="right" id="message">
+        <Button onClick={setIsVisibleCommentForm} as="div" labelPosition="right" id="message">
           <Button color="yellow">
             <Icon name="comment alternate" />
           </Button>
