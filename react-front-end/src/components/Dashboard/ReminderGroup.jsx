@@ -1,9 +1,8 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
-import { Checkbox, Feed } from "semantic-ui-react";
+import { Feed } from "semantic-ui-react";
 
-export default function ReminderGroup({ checkboxClass, label, reminders, setWatered }) {
-
+export default function ReminderGroup({ checkboxClass, label, reminders }) {
   const reminderInstances = reminders.map((reminder) => {
     const manydaysLeft = `${reminder.nickname} in ${reminder.timeRemaining} days`;
     const oneDayleft = `${reminder.nickname} in ${reminder.timeRemaining} day`;
@@ -22,24 +21,28 @@ export default function ReminderGroup({ checkboxClass, label, reminders, setWate
       daysLeft = oneDayOver;
     } else if (reminder.timeRemaining <= -2) {
       daysLeft = manyDaysOver;
-    }else if (reminder.timeRemaining === 0){
-      daysLeft = dueToday
+    } else if (reminder.timeRemaining === 0) {
+      daysLeft = dueToday;
     }
 
     const onChange = () => {
       reminder.editWatered();
-      document.querySelector(`label[for=reminder-${reminder.plant_id}]`).classList.add("strikethrough");
+      document
+        .querySelector(`label[for=reminder-${reminder.plant_id}]`)
+        .classList.add("strikethrough");
     };
 
     return (
       <>
-      <Checkbox
-        className={"checkbox " + checkboxClass}
-        id={`reminder-${reminder.plant_id}`}
-        label={daysLeft}
-        onChange={onChange}
-      />
-      <br></br>
+        <div class={"ui checkbox " + checkboxClass}>
+          <input
+            id={`reminder-${reminder.plant_id}`}
+            tabindex="0"
+            type="checkbox"
+            onChange={onChange}
+          ></input>
+          <label for={`reminder-${reminder.plant_id}`}>{daysLeft}</label>
+        </div>
       </>
     );
   });
