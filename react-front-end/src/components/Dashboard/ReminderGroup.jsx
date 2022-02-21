@@ -1,8 +1,9 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
-import { Checkbox, Feed } from "semantic-ui-react";
+import { Checkbox, Feed, Label, Icon } from "semantic-ui-react";
 
-export default function ReminderGroup({ checkboxClass, label, reminders }) {
+export default function ReminderGroup({ checkboxClass, label, reminders, setWatered }) {
+
   const reminderInstances = reminders.map((reminder) => {
     const manydaysLeft = `${reminder.nickname} in ${reminder.timeRemaining} days`;
     const oneDayleft = `${reminder.nickname} in ${reminder.timeRemaining} day`;
@@ -23,6 +24,7 @@ export default function ReminderGroup({ checkboxClass, label, reminders }) {
     }
 
     const onChange = () => {
+      // setWatered(reminder.plant_id);
       reminder.editWatered();
       document.querySelector(`label[for=reminder-${reminder.plant_id}]`).classList.add("strikethrough");
     };
@@ -35,6 +37,11 @@ export default function ReminderGroup({ checkboxClass, label, reminders }) {
         label={daysLeft}
         onChange={onChange}
       />
+      {/* {watered === reminder.plant_id &&
+           <Label color='blue' floating>
+          <Icon name='tint' />
+         </Label>
+      }  */}
       <br></br>
       </>
     );
