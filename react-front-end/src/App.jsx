@@ -79,11 +79,11 @@ class App extends Component {
       });
   };
 
-  createNewComment = (post_id, user_id, comment_text) => {
+  createNewComment = (post_id, comment_text) => {
     axios
       .post("/api/comments", {
         post_id: post_id,
-        user_id: user_id,
+        user_id: this.state.user,
         comment_text: comment_text,
       })
       .then((response) => {

@@ -85,7 +85,7 @@ export default function SinglePost({
           <Segment>
             {isVisibleCommentForm && (
               <NewCommentForm
-                user_id={user.id}
+                user_id={user_id}
                 post_id={id}
                 setIsVisibleCommentForm={setIsVisibleCommentForm}
                 createNewComment={createNewComment}

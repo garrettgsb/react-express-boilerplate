@@ -11,7 +11,7 @@ export default function NewCommentForm({ user_id, post_id, setIsVisibleCommentFo
   };
 
   const submitForm = () => {
-    createNewComment(post_id, user_id, state.comment_text);
+    createNewComment(post_id, state.comment_text);
     onClose();
   };
 
