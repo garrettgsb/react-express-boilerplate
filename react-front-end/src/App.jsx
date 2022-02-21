@@ -218,6 +218,7 @@ class App extends Component {
                   species={this.state.species}
                   updateLocation={this.updateLocation}
                   reminders={this.state.reminders}
+                  setAppState={this.setState.bind(this)}
                 />
               }
             />
