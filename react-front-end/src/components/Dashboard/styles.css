@@ -67,9 +67,10 @@ div.notifications {
   row-gap: 5px;
 }
 
-.reminder-watered{
-  margin-left: 1em !important;
+.watered-feedback {
+  font-size: 15px !important;
 }
+
 .top-label {
   font-size: 17px !important;
   padding-top: 0.7em !important;

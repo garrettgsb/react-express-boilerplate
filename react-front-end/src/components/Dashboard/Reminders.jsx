@@ -19,21 +19,21 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
       .then((response) => {
         console.log(response.data);
         console.log("rerereresponse.data", response.data[0]);
-        setTimeout(
-          () =>
-            setAppState((prev) => {
-              return {
-                ...prev,
-                reminders: [
-                  ...prev.reminders.filter(
-                    (reminder) => reminder.plant_id !== plantId
-                  ),
-                  response.data[0],
-                ],
-              };
-            }),
-          1200
-        );
+        setTimeout(() => {
+          setAppState((prev) => {
+            return {
+              ...prev,
+              reminders: [
+                ...prev.reminders.filter(
+                  (reminder) => reminder.plant_id !== plantId
+                ),
+                response.data[0],
+              ],
+            };
+          });
+          document.querySelector(`label[for=reminder-${plantId}]`).classList.remove("strikethrough");
+          document.getElementById(`reminder-${plantId}`).checked = false;
+        }, 1200);
 
         setTimeout(() => setWatered(null), 1200);
       });
@@ -68,8 +68,9 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
           Watering Reminders <Image src={wateringcan} size="tiny" />{" "}
         </Card.Header>
         {watered && (
-          <Label icon="tint" as="a" color="blue" tag>
-           <Icon name='tint' />You watered {watered.nickname}!
+          <Label className="watered-feedback" icon="tint" as="a" color="blue" tag>
+            <Icon name="tint" />
+            You watered {watered.nickname}!
           </Label>
         )}
       </Card.Content>
