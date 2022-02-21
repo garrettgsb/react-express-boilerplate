@@ -29,24 +29,7 @@ const saveNewComment = (data) => {
     });
 };
 
-const addCommentToNewPost = (post_id) => {
-  return db.query(
-    `
-    INSERT INTO comments(post_id, comment_user_id, comment_text, commented_at) VALUES ($1) RETURNING *;
-  `,
-
-    [post_id, 4, 'Congrats on your new post! Keep growing. We beleaf in you!', new Date()]
-  )
-
-    .then((res) => {
-      console.log('res.rows[0]', res.rows[0]);
-      return res.rows;
-    })
-    .catch((err) => {
-      console.log('DB error inserting new comment: ' + err.message);
-    });
-}
 
 module.exports = {
-  getComments, saveNewComment, addCommentToNewPost
+  getComments, saveNewComment
 };

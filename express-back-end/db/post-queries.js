@@ -1,5 +1,4 @@
 const db = require('./index');
-import { addCommentToNewPost } from './comments-queries';
 
 const getPosts = () => {
   return db.query(`SELECT * FROM posts ORDER BY created_at DESC;`)
@@ -23,8 +22,7 @@ const saveNewPost = (data) => {
   )
 
     .then((res) => {
-      const postId = getPostIdbyTitle(title, user_id);
-      addCommentToNewPost(postId);
+  
       return res.rows;
     })
     .catch((err) => {
@@ -32,21 +30,6 @@ const saveNewPost = (data) => {
     });
 };
 
-const getPostIdbyTitle = (title) => {
-  return db.query(
-    `
-SELECT id from posts WHERE title = $1 AND user_id = $2;
-  `,
-
-    [title, user_id]
-  )
-  .then((res) => {
-    return res.rows;
-  })
-  .catch((err) => {
-    console.log('DB error getting post ID: ' + err.message);
-  });
-}
 
 const getFilteredPosts = (topic) => {
   return db.query(`SELECT * FROM posts WHERE topic = $1 ORDER BY created_at DESC;`,
