@@ -16,7 +16,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import DailyReminders from "./components/Dashboard/DailyReminders";
 
-export default function Dashboard({ users, userId, plants, species, reminders, updateLocation }) {
+export default function Dashboard({ users, userId, plants, species, reminders, updateLocation, setAppState }) {
   const user = getUserById(users, userId);
   const name = user && user.name;
   const userPlants = getPlantsForUser(plants, userId);
@@ -72,7 +72,7 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
         <br></br>
         <br></br>
         {isVisible && (
-          <AddPlant user={user} species={species} setIsVisible={setIsVisible} />
+          <AddPlant user={user} species={species} setIsVisible={setIsVisible} setAppState={setAppState} />
         )}
         <br></br>
         {selectedPlant && (

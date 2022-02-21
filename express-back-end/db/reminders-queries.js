@@ -12,12 +12,16 @@ const getReminders = () => {
 };
 
 const insertReminder = (data) => {
-  // eslint-disable-next-line camelcase
+
   const { plant_id, user_id, watering_interval, last_watered } = data;
   return db
     .query(
       `
-      INSERT INTO reminders (plant_id, user_id, watering_interval, last_watered) VALUES ($1, $2, $3, $4) RETURNING *;
+      WITH inserted AS (
+        INSERT INTO reminders (plant_id, user_id, watering_interval, last_watered) VALUES ($1, $2, $3, $4) RETURNING *)
+        SELECT inserted.*, user_plants.* 
+        FROM inserted 
+        JOIN user_plants ON (inserted.plant_id = user_plants.id);
     `,
       [plant_id, user_id, watering_interval, last_watered]
     )

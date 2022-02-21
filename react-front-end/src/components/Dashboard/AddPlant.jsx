@@ -14,7 +14,7 @@ import {
 } from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
-export default function AddPlant({ user, species, setIsVisible }) {
+export default function AddPlant({ user, species, setIsVisible, setAppState }) {
   const [state, setState] = useState({
     plant: null,
     nickname: "",
@@ -76,17 +76,20 @@ export default function AddPlant({ user, species, setIsVisible }) {
       nickname: state.nickname,
       location: state.location,
     })
-      .then((response) => {
-        console.log("Post made to db!", response);
-        const newPlant = response.data[0]
+      .then((plantResponse) => {
+        console.log("Post made to db!", plantResponse);
+        const newPlant = plantResponse.data[0]
         axios.post("/api/reminders", {
           plant_id: newPlant.id,
           user_id: user.id,
           watering_interval: state.plant.watering_interval,
           last_watered: new Date(),
         })
-          .then(response => {
-            console.log("reeeeesponse", response)
+          .then(reminderResponse => {
+            console.log("reminder reeeeesponse", reminderResponse)
+            setAppState((prev) => {
+              return {...prev,reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant]};
+            })
           })
       })
       .catch(function (error) {
