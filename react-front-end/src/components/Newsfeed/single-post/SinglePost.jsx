@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import '../../../Newsfeed.css';
 import moment from 'moment';
-import { Button, Icon, Image, Segment, Label, Grid, Header, Message } from 'semantic-ui-react';
+import { Button, Icon, Image, Segment, Label, Grid, Header } from 'semantic-ui-react';
 import { getUserById } from '../../../helpers/selectors';
 import { likePost } from './SinglePostService';
 import CommentList from './CommentList';
@@ -38,6 +39,7 @@ export default function SinglePost({ id, user_id, title, photo, description, top
   };
 
   const user = getUserById(users, user_id);
+  const postUserProfileUrl = '/profile/' + id;
 
   const postedDate = moment(created_at).format('ll');
 
@@ -66,7 +68,6 @@ export default function SinglePost({ id, user_id, title, photo, description, top
             <Icon name='talk' color='olive' />
             {description}
           </Header>
-          <Message color='olive'>{description}</Message>
           <Segment>
             <CommentList users={users} posts={posts} />
           </Segment>
@@ -84,14 +85,16 @@ export default function SinglePost({ id, user_id, title, photo, description, top
           </Label>
         </Button>
 
-        <Button as='div' labelPosition='right' id='follow'>
-          <Button color='olive'>
-            <Icon name='user' />
+        <Link to={postUserProfileUrl}>
+          <Button as='div' labelPosition='right' id='follow'>
+            <Button color='olive'>
+              <Icon name='user' />
+            </Button>
+            <Label as='a' basic color='brown' pointing='left'>
+              View Profile
+            </Label>
           </Button>
-          <Label as='a' basic color='brown' pointing='left'>
-            View Profile
-          </Label>
-        </Button>
+        </Link>
 
         <Button as='div' labelPosition='right' id='message'>
           <Button color='yellow'>
