@@ -11,14 +11,13 @@ const getComments = () => {
 };
 
 const saveNewComment = (data) => {
-  const { post_id, comment_user_id, comment_text } = data;
-  console.log("data??", data);
+  const { post_id, user_id, comment_text } = data;
   return db.query(
     `
     INSERT INTO comments(post_id, comment_user_id, comment_text, commented_at) VALUES ($1, $2, $3, $4) RETURNING *;
   `,
 
-    [post_id, comment_user_id, comment_text, new Date()]
+    [post_id, user_id, comment_text, new Date()]
   )
 
     .then((res) => {
