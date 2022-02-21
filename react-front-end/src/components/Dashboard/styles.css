@@ -67,14 +67,32 @@ div.notifications {
   row-gap: 5px;
 }
 
+.watered-feedback {
+  font-size: 15px !important;
+
+}
+
+.top-label {
+  font-size: 17px !important;
+  padding-top: 0.7em !important;
+  padding-bottom: 0.2em !important;
+}
+
+.overdue label {
+  color: #DB2828 !important;
+  font-style: italic !important;
+}
+
 /* Strikethrough for Checkbox */
 
 .strikethrough {
 	display: inline-block !important;
 	position: relative !important;
 	transition: all 0.5s cubic-bezier(.55, 0, .1, 1) !important;
-  text-decoration: line-through;
+  text-decoration: line-through 1.5px black;
 }
+
+
 
 @keyframes strikethrough {
 	from {

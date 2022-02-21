@@ -45,7 +45,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
   const onClose = (event) => {
     setIsVisible(false);
     window.scrollTo({
-      top: 0,
+      top: 260,
       behavior: "smooth",
     });
   };
