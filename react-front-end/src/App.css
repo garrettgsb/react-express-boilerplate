@@ -153,3 +153,20 @@ div.plant-name {
   flex-direction: column;
   justify-content: center;
 }
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation-name: fadeOut;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 2s
+}

@@ -26,9 +26,10 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
 
   const onSubmit = () => {
     setSuccess(true);
+    // alert("Successfully added!");
     setTimeout(() => {
       setSuccess(false);
-    }, 2000);
+    }, 2500);
   };
 
   if (!user) {
@@ -57,11 +58,8 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
               </Segment>
 
               {success && (
-                <Message color="green">
+                <Message color="green" id="animated-example" className={success && "fadeOut"}>
                   <Message.Header><Icon name="leaf" />Congrats! Your new plant has been added successfully.</Message.Header>
-                  <p>
-                    <Link to="/dashboard">View <b>Dashboard</b> now.</Link>
-                  </p>
                 </Message>
               )}
 

@@ -11,12 +11,10 @@ export default function SingleComment({ users, comment_user_id, comment_text, co
   return (
     <Feed>
       <Feed.Event>
-        <Feed.Label image={user && user.avatar} />
+        <Feed.Label image={user && user.avatar} href={`/profile/${comment_user_id}`}/>
         <Feed.Content>
           <Feed.Date>{date}</Feed.Date>
-          <Feed.Summary>
-            <a>{user && user.name}</a> commented:
-          </Feed.Summary>
+          <Feed.User href={`/profile/${comment_user_id}`}>{user && user.name}</Feed.User> commented:
           <Feed.Extra text>{comment_text}</Feed.Extra>
         </Feed.Content>
       </Feed.Event>

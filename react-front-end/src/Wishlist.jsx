@@ -19,7 +19,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
     setSuccess(true);
     setTimeout(() => {
       setSuccess(false);
-    }, 2000);
+    }, 2500);
   };
 
   const setSpecies = (species_id) => {
@@ -68,7 +68,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
               <br></br>
               {success && (
                 <>
-                  <Message color="green">
+                  <Message color="green" id="animated-example" className={success && "fadeOut"}>
                     <Message.Header><Icon name="leaf" />Congrats! Your new plant has been added successfully.</Message.Header>
                     <p>
                       <Link to="/dashboard">View <b>Dashboard</b> now.</Link>

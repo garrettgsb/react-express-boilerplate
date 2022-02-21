@@ -39,7 +39,7 @@ export default function SinglePost({ id, user_id, title, photo, description, top
   };
 
   const user = getUserById(users, user_id);
-  const postUserProfileUrl = "/profile/" + id;
+  const postUserProfileUrl = "/profile/" + user_id;
 
   const postedDate = moment(created_at).format("ll");
 
