@@ -10,6 +10,27 @@ const getComments = () => {
     });
 };
 
+const saveNewComment = (data) => {
+  const { post_id, comment_user_id, comment_text } = data;
+  console.log("data??", data);
+  return db.query(
+    `
+    INSERT INTO comments(post_id, comment_user_id, comment_text, commented_at) VALUES ($1, $2, $3, $4) RETURNING *;
+  `,
+
+    [post_id, comment_user_id, comment_text, new Date()]
+  )
+
+    .then((res) => {
+      console.log('res.rows[0]', res.rows[0]);
+      return res.rows;
+    })
+    .catch((err) => {
+      console.log('DB error inserting new comment: ' + err.message);
+    });
+};
+
+
 module.exports = {
-  getComments
+  getComments, saveNewComment
 };
