@@ -10,7 +10,7 @@ import ViewPlant from "./components/Dashboard/ViewPlant";
 
 import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
-import { Header, Segment, Container, Button, Grid } from "semantic-ui-react";
+import { Header, Segment, Container, Button, Grid, Message, Icon } from "semantic-ui-react";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -22,6 +22,14 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
   const userPlants = getPlantsForUser(plants, userId);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPlant, setSelectedPlant] = useState(null);
+  const [success, setSuccess] = useState(false);
+
+  const onSubmit = () => {
+    setSuccess(true);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 2000);
+  };
 
   if (!user) {
     return <h2>Please login or signup.</h2>;
@@ -47,6 +55,16 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
                   </Button>
                 </Header>
               </Segment>
+
+              {success && (
+                <Message color="green">
+                  <Message.Header><Icon name="leaf" />Congrats! Your new plant has been added successfully.</Message.Header>
+                  <p>
+                    <Link to="/dashboard">View <b>Dashboard</b> now.</Link>
+                  </p>
+                </Message>
+              )}
+
               <Segment textAlign="left" raised>
                 <Header as="h3" className="dash-header">
                   <div>
@@ -57,7 +75,7 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
               </Segment>
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>
-                  <Rooms plants={plants} userId={userId} updateLocation={updateLocation} setSelectedPlant={setSelectedPlant} reminders={reminders}/>
+                  <Rooms plants={plants} userId={userId} updateLocation={updateLocation} setSelectedPlant={setSelectedPlant} reminders={reminders} />
                 </DndProvider>
               </Grid.Row>
             </Grid.Column>
@@ -72,7 +90,7 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
         <br></br>
         <br></br>
         {isVisible && (
-          <AddPlant user={user} species={species} setIsVisible={setIsVisible} />
+          <AddPlant user={user} species={species} setIsVisible={setIsVisible} onSubmit={onSubmit} />
         )}
         <br></br>
         {selectedPlant && (

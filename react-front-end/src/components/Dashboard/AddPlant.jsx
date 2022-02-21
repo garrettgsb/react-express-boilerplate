@@ -14,7 +14,7 @@ import {
 } from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
-export default function AddPlant({ user, species, setIsVisible }) {
+export default function AddPlant({ user, species, setIsVisible, onSubmit }) {
   const [state, setState] = useState({
     plant: null,
     nickname: "",
@@ -78,6 +78,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
     })
       .then((response) => {
         console.log("Post made to db!", response);
+        onSubmit(); // display success message
         const newPlant = response.data[0]
         axios.post("/api/reminders", {
           plant_id: newPlant.id,

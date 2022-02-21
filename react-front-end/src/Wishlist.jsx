@@ -76,7 +76,6 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
                   </Message>
                 </>
               )}
-
               <br></br>
 
               <Segment style={{ overflow: 'auto', maxWidth: 2000 }} >
