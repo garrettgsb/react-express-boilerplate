@@ -6,6 +6,6 @@ CREATE TABLE posts (
   photo TEXT NOT NULL,
   description TEXT NOT NULL,
   topic VARCHAR(255) NOT NULL,
-  number_of_likes INTEGER NOT NULL,
+  number_of_likes INTEGER,
   created_at TIMESTAMP NOT NULL
 );

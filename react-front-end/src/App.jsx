@@ -125,7 +125,7 @@ class App extends Component {
     axios.get("/api/comments").then((response) => {
       console.log("Comments: " + response.data.comments);
       this.setState({
-        posts: response.data.comments,
+        comments: response.data.comments,
       });
     });
   };
