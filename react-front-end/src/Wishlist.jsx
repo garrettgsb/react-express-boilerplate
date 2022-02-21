@@ -19,7 +19,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
     setSuccess(true);
     setTimeout(() => {
       setSuccess(false);
-    }, 2500);
+    }, 3500);
   };
 
   const setSpecies = (species_id) => {
@@ -49,10 +49,8 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
 
   if (!user) {
     return (
-      <h2>
-        Please login to view wishlist.
-      </h2>
-    )
+      <></>
+    );
   } else {
     return (
       <Container>

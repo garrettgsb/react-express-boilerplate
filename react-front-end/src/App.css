@@ -168,5 +168,19 @@ div.plant-name {
   animation-name: fadeOut;
   animation-duration: 1s;
   animation-fill-mode: both;
-  animation-delay: 2s
+  animation-delay: 3s
+}
+
+div.ui.card.picture {
+  width: 180px;
+  height: auto;
+  margin: 3%;
+  padding: 3%;
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  justify-content: center;
+  background-color: rgb(250, 250, 250);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
 }

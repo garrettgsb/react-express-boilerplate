@@ -1,7 +1,7 @@
 import React from "react";
 import { useDrop } from "react-dnd";
 import { Card, Grid } from "semantic-ui-react";
-import { getPlantReminder, getUserReminders } from "../../helpers/selectors";
+import { getPlantReminder } from "../../helpers/selectors";
 import Picture from "./Picture";
 
 export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlants, setSelectedPlant, reminders, userId }) {
@@ -15,12 +15,6 @@ export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlant
       isOver: !!monitor.isOver(),
     }),
   }));
-
-  // const remindersForUser = getUserReminders(userId, reminders);
-  // console.log({ remindersForUser })
-
-  const plantReminder = getPlantReminder(1, reminders);
-  // console.log({ plantReminder })
 
   const PictureList = roomPlants && roomPlants.map((plant) => ({
     id: plant.id,
@@ -39,7 +33,7 @@ export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlant
       </Card.Content>
 
       <Grid>
-        <Grid.Row columns={2}>
+        <Grid.Row>
           <div className={roomClassName} ref={drop}>
             {PictureList.map((picture) => {
               return <Picture

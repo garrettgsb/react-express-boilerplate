@@ -2,7 +2,7 @@
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import { useDrag } from "react-dnd";
-import { Button, Image, Icon, Progress } from "semantic-ui-react";
+import { Button, Image, Icon, Progress, Card } from "semantic-ui-react";
 
 function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) {
 
@@ -26,24 +26,19 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
 
   return (
     <>
-      <Image
+      <Card
         style={{
           border: isDragging ? "5px solid pink" : "0px",
           background: "#EBEBE8",
           opacity: "0.95",
-          borderRadius: "5%",
-          padding: "10px",
-          margin: "10px",
-          width: "200px",
-          height: "120px"
         }}
-        size='tiny'
+        className="picture"
       >
-        <div className="plant-card">
-          <img
-            ref={drag}
+        <div className="plant-card" ref={drag}
+        >
+          <Image
             src={url}
-            style={{ borderRadius: "15%", width: "80px" }}
+            style={{ borderRadius: "15%", width: "80px", height: "auto"}}
           />
           <div className="plant-progress">
             <b><i>{nickname}</i></b>
@@ -55,24 +50,24 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
               onClick={() => {
                 setSelectedPlant(plant);
               }}>
-            <Button.Content hidden>See Info</Button.Content>
-            <Button.Content visible>
-              <Icon name='leaf' />
-            </Button.Content>
-          </Button>
+              <Button.Content hidden>See Info</Button.Content>
+              <Button.Content visible>
+                <Icon name='leaf' />
+              </Button.Content>
+            </Button>
 
-          <Progress
-            color="red"
-            indicating
-            value={waterPercent >= 0 ? daysRemaining : 0}
-            progress="ratio"
-            total={reminder && reminder.watering_interval}
-            label="Days Left"
-            style={{ fontSize: "11px" }}
-          />
+            <Progress
+              color="red"
+              indicating
+              value={waterPercent >= 0 ? daysRemaining : 0}
+              progress="ratio"
+              total={reminder && reminder.watering_interval}
+              label="Days Left"
+              style={{ fontSize: "11px" }}
+            />
+          </div>
         </div>
-      </div>
-    </Image>
+      </Card>
     </>
   );
 }

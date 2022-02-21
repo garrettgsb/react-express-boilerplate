@@ -17,9 +17,11 @@ import { Link } from "react-router-dom";
 import DailyReminders from "./components/Dashboard/DailyReminders";
 
 export default function Dashboard({ users, userId, plants, species, reminders, updateLocation, setAppState }) {
-  const user = getUserById(users, userId);
+  const user = userId && getUserById(users, userId);
   const name = user && user.name;
-  const userPlants = getPlantsForUser(plants, userId);
+
+  const userPlants = plants && userId && getPlantsForUser(plants, userId);
+
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPlant, setSelectedPlant] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -29,11 +31,11 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
     // alert("Successfully added!");
     setTimeout(() => {
       setSuccess(false);
-    }, 2500);
+    }, 3500);
   };
 
   if (!user) {
-    return <h2>Please login or signup.</h2>;
+    return <></>; // add progress bar?
   } else {
     return (
       <Container className="app-container">
@@ -57,12 +59,6 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
                 </Header>
               </Segment>
 
-              {success && (
-                <Message color="green" id="animated-example" className={success && "fadeOut"}>
-                  <Message.Header><Icon name="leaf" />Congrats! Your new plant has been added successfully.</Message.Header>
-                </Message>
-              )}
-
               <Segment textAlign="left" raised>
                 <Header as="h3" className="dash-header">
                   <div>
@@ -71,6 +67,11 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
                   <DailyReminders plants={userPlants} reminders={reminders} userId={userId} />
                 </Header>
               </Segment>
+              {success && (
+                <Message color="green" id="animated-example" className={success && "fadeOut"}>
+                  <Message.Header><Icon name="leaf" />Congrats! Your new plant has been added successfully.</Message.Header>
+                </Message>
+              )}
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>
                   <Rooms plants={plants} userId={userId} updateLocation={updateLocation} setSelectedPlant={setSelectedPlant} reminders={reminders} />
@@ -88,7 +89,7 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
         <br></br>
         <br></br>
         {isVisible && (
-          <AddPlant user={user} species={species} setIsVisible={setIsVisible} setAppState={setAppState} onSubmit={onSubmit}/>
+          <AddPlant user={user} species={species} setIsVisible={setIsVisible} setAppState={setAppState} onSubmit={onSubmit} />
         )}
         <br></br>
         {selectedPlant && (
