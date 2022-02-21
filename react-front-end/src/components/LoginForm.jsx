@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Form, Grid, Checkbox, Segment } from "semantic-ui-react";
+import { Form, Grid, Checkbox, Segment, Message } from "semantic-ui-react";
 
 export default function LoginForm({ login, user }) {
   //const loggedUser = getUserById(users, user);
@@ -12,7 +12,7 @@ export default function LoginForm({ login, user }) {
   return (
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Segment raised>
+        <Message color="green">
           <Form onSubmit={submitForm}>
             <Form.Field>
               <Form.Input required={true} label="Email" value="bulbasaur@plant.it" placeholder="Enter your email" />
@@ -35,7 +35,7 @@ export default function LoginForm({ login, user }) {
               </div>
             </Link>
           </Form>
-        </Segment>
+        </Message>
       </Grid.Column>
     </Grid>
   );
