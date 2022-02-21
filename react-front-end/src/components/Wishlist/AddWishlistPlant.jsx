@@ -12,11 +12,14 @@ import {
   Icon,
   List,
 } from "semantic-ui-react";
-import { getPlantByName } from "../../helpers/selectors";
+import { getPlantByName, getSpeciesById } from "../../helpers/selectors";
 
-export default function AddPlant({ user, species, setIsVisible }) {
+export default function AddWishlistPlant({ user, species, setIsVisible, plantSpecies }) {
+
+  const plant = getSpeciesById(species, plantSpecies);
+
   const [state, setState] = useState({
-    plant: null,
+    plant: plant,
     nickname: "",
     location: "Living room",
   });
@@ -29,7 +32,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
     value: element
   }));
 
-  const onClick = (event, data) => { // populates location
+  const onClick = (event, data) => {
     setState((prev) => ({
       ...prev,
       location: data.value
@@ -42,7 +45,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
     divRef.current.scrollIntoView({ behavior: "smooth" });
   });
 
-  const onClose = (event) => {
+  const onClose = (event) => { // Add an event to display success message
     setIsVisible(false);
     window.scrollTo({
       top: 0,
@@ -62,7 +65,6 @@ export default function AddPlant({ user, species, setIsVisible }) {
 
   const clickHandler = (event, data) => {
     const selectedSpecies = getPlantByName(species, data.value);
-    // console.log('selectedSpecies!!!!', selectedSpecies)
     setState((prev) => ({
       ...prev,
       plant: selectedSpecies,
@@ -112,7 +114,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
           </Button.Content>
         </Button>
         <h1>ADD PLANT</h1>
-        <Grid verticalAlign="middle" centered>
+        <Grid verticalAlign="middle" centered="true">
           <Grid.Column width={5}>
             {state.plant && <Image src={state.plant.photo} size="large" />}
           </Grid.Column>
@@ -140,7 +142,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
           </Grid.Column>
           {/* Start of ternary to only show if plant selected  */}
           {state.plant ? (
-            <Grid.Column verticalAlign="middle" centered width={5}>
+            <Grid.Column verticalAlign="middle" centered="true" width={5}>
               <Dropdown
                 className="dropdown"
                 placeholder="Select Plant"
@@ -148,6 +150,7 @@ export default function AddPlant({ user, species, setIsVisible }) {
                 selection
                 options={speciesOptions}
                 onChange={clickHandler}
+                defaultSearchQuery={"Monstera deliciosa"}
               />
               <Form onSubmit={submitForm}>
                 <Form.Field>
@@ -164,22 +167,10 @@ export default function AddPlant({ user, species, setIsVisible }) {
                     placeholder="Add a name for your plant! (eg. Christofern)"
                   />
                 </Form.Field>
-                {/* <Form.Field>
-                  <Form.Input
-                    required={true}
-                    onChange={(e, data) => {
-                      console.log("location", data);
-                      setState((prev) => ({
-                        ...prev,
-                        location: data.value,
-                      }));
-                    }}
-                    label="Location"
-                    placeholder="Tell us where your plant lives! (eg. Living Room)"
-                  />
-                </Form.Field> */}
+
                 <Form.Field>
                   <Form.Input
+                    required={true}
                     label="Location"
                   >
                     <Dropdown

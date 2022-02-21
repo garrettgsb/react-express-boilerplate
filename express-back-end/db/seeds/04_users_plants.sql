@@ -4,5 +4,7 @@ VALUES (1, 1, 'Megan Thee Plant', 'Living room', '01-02-2022'),
 (3, 3, 'Cactus Everdeen', 'Living room', '01-02-2022'),
 (4, 1, 'Figgy Smalls', 'Dining room', '01-02-2022'),
 (5, 2, 'Blue Ivy', 'Bedroom', '01-02-2022'),
-(6, 3, 'Vincent Van Grow', 'Bedroom', '01-02-2022')
+(6, 3, 'Vincent Van Grow', 'Bedroom', '01-02-2022'),
+(1, 2, 'Drag', 'Office', '01-02-2022'),
+(7, 2, 'Drop', 'Living room', '01-02-2022')
 ;

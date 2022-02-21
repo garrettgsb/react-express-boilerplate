@@ -28,6 +28,7 @@ class App extends Component {
       comments: [],
       user: cookies.get("user_id"),
       wishlist: "",
+      reminders: []
     };
   }
 
@@ -92,6 +93,29 @@ class App extends Component {
       });
   };
 
+  updateLocation = (id, location) => {
+    axios
+      .post("/api/plants",
+        {
+          id: id,
+          location: location,
+        })
+      .then((response) => {
+        this.setState((prev) => {
+          return { ...prev, plants: prev.plants.map((plant) => {
+            if (plant.id === id) {
+              plant.location = location; // only updating plant location of the plant id passed in
+            }
+            return plant;
+          })}; // already created new object with ...prev
+        });
+        console.log("Put made to db!", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   fetchUsers = () => {
     axios
       .get("/api/users") // Just to test that DB layer works
@@ -108,6 +132,16 @@ class App extends Component {
       console.log("Plants: " + response.data.plants);
       this.setState({
         plants: response.data.plants,
+      });
+    });
+  };
+
+  fetchReminders = () => {
+    axios.get("/api/reminders").then((response) => {
+
+      console.log("Reminders: ", response.data);
+      this.setState({
+        reminders: response.data,
       });
     });
   };
@@ -159,6 +193,7 @@ class App extends Component {
     this.fetchPosts();
     this.fetchComments();
     this.fetchWishlist();
+    this.fetchReminders();
   }
 
   componentWillUnmount() {
@@ -176,10 +211,17 @@ class App extends Component {
             <Route
               path="/dashboard"
               element={
-                <Dashboard plants={this.state.plants} users={this.state.users} userId={this.state.user} species={this.state.species} />
+                <Dashboard
+                  plants={this.state.plants}
+                  users={this.state.users}
+                  userId={this.state.user}
+                  species={this.state.species}
+                  updateLocation={this.updateLocation}
+                  reminders={this.state.reminders}
+                />
               }
             />
-            {console.log("STATE POSTS", this.state.posts)}
+            {console.log('STATE POSTS', this.state.posts)}
             <Route
               path="/newsfeed"
               element={
