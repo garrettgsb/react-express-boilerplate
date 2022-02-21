@@ -15,7 +15,7 @@ export default function LoginForm({ login, user }) {
         <Message floating color="green">
           <Form onSubmit={submitForm}>
             <Form.Field>
-              <Form.Input required={true} label="Email" value="bulbasaur@plant.it" placeholder="Enter your email" />
+              <Form.Input required={true} label="Email" value="bulbasaur@pokemon.com" placeholder="Enter your email" />
             </Form.Field>
             <Form.Field>
               <Form.Input required={true} label="Password" type="password" value="bla-bla-bla" placeholder="Enter your password" />
