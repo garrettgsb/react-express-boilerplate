@@ -7,6 +7,8 @@ import { getUserById } from "../helpers/selectors";
 export default function Navbar({ users, user, login, logout }) {
   const loggedUser = getUserById(users, user);
 
+  const dashboardOrHomepage = () => {};
+
   const renderAuthButton = () => {
     if (user) {
       return (
@@ -44,9 +46,11 @@ export default function Navbar({ users, user, login, logout }) {
   return (
     <Segment inverted className="navbar-segment">
       <Menu inverted secondary>
-        <Menu.Item className="navbar-logo">
-          <Image href="/dashboard" src={logo} size="small" />
-        </Menu.Item>
+        <Link to={user ? "/dashboard" : "/"}>
+          <Menu.Item className="navbar-logo">
+            <Image src={logo} size="small" />
+          </Menu.Item>
+        </Link>
         <Menu.Menu position="right">{renderAuthButton()}</Menu.Menu>
       </Menu>
     </Segment>
