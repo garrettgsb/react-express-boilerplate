@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.1",
+    "moment": "^2.29.1",
     "react": "^16.8.6",
     "react-dnd": "^15.1.1",
     "react-dnd-html5-backend": "^15.1.2",
