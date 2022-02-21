@@ -20,36 +20,36 @@
 
 .Board.living {
   overflow: auto;
-  max-height: 250px;
+  max-height: 275px;
   width: 100%;
-  height: 250px;
+  height: 275px;
   background: #9DBF98;
   opacity: 0.95;
 }
 
 .Board.dining {
   overflow: auto;
-  max-height: 250px;
+  max-height: 275px;
   width: 100%;
-  height: 250px;
+  height: 275px;
   background: #9DBF98;
   opacity: 0.95;
 }
 
 .Board.bedroom {
   overflow: auto;
-  max-height: 250px;
+  max-height: 275px;
   width: 100%;
-  height: 250px;
+  height: 275px;
   background: #9DBF98;
   opacity: 0.95;
 }
 
 .Board.office {
   overflow: auto;
-  max-height: 250px;
+  max-height: 275px;
   width: 100%;
-  height: 250px;
+  height: 275px;
   background: #9DBF98;
   opacity: 0.95;
 }
