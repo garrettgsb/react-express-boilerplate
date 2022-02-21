@@ -7,6 +7,7 @@ import { Button, Icon, Image, Segment, Label, Grid, Header } from "semantic-ui-r
 import { getUserById } from "../../../helpers/selectors";
 import { likePost } from "./SinglePostService";
 import CommentList from "./CommentList";
+import { openAddCommentForm } from "./SingleCommentService";
 
 export default function SinglePost({ id, user_id, title, photo, description, topic, number_of_likes, created_at, users, comments }) {
   const [state, setState] = useState({
@@ -60,7 +61,6 @@ export default function SinglePost({ id, user_id, title, photo, description, top
           </Label>
         </Segment>
       </Segment.Group>
-
       <Segment.Group horizontal>
         <Image src={photo} width="50%" height="100%" rounded />
         <Segment>
@@ -96,7 +96,7 @@ export default function SinglePost({ id, user_id, title, photo, description, top
           </Button>
         </Link>
 
-        <Button as="div" labelPosition="right" id="message">
+        <Button onClick={openAddCommentForm} as="div" labelPosition="right" id="message">
           <Button color="yellow">
             <Icon name="comment alternate" />
           </Button>

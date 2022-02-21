@@ -18,5 +18,5 @@ export default function CommentList({ users, comments, post_id }) {
     );
   });
 
-  return <Segment style={{ overflow: "auto", maxHeight: "20em" }}> {renderComments} </Segment>;
+  return <Segment style={{ overflow: "auto", maxHeight: "20em" }}>{renderComments}</Segment>;
 }

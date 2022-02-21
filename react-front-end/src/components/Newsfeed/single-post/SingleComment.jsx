@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import moment from "moment";
 import "semantic-ui-css/semantic.min.css";
-import { Link } from "react-router-dom";
-import { Feed } from "semantic-ui-react";
+import { Feed, Divider, Icon } from "semantic-ui-react";
 import { getUserById } from "../../../helpers/selectors";
 
 export default function SingleComment({ users, comment_user_id, comment_text, commented_at }) {
   const date = moment(commented_at).startOf("day").fromNow();
 
   const user = getUserById(users, comment_user_id);
-  const linkToUserProfile = "/profile/" + user.id;
+  const user_id = user && user.id;
+  const linkToUserProfile = "/profile/" + user_id;
+
   return (
     <Feed>
       <Feed.Event>
@@ -22,6 +23,9 @@ export default function SingleComment({ users, comment_user_id, comment_text, co
           <Feed.Extra text>{comment_text}</Feed.Extra>
         </Feed.Content>
       </Feed.Event>
+      <Divider horizontal>
+        <Icon name="leaf" />
+      </Divider>
     </Feed>
   );
 }
