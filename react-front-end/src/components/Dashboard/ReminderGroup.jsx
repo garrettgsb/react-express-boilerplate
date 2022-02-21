@@ -28,12 +28,15 @@ export default function ReminderGroup({ checkboxClass, label, reminders }) {
     };
 
     return (
+      <>
       <Checkbox
         className={"checkbox " + checkboxClass}
         id={`reminder-${reminder.plant_id}`}
         label={daysLeft}
         onChange={onChange}
       />
+      <br></br>
+      </>
     );
   });
 
