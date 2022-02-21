@@ -8,7 +8,7 @@ import Video from "./components/Newsfeed/Video";
 import NewPost from "./components/Newsfeed/NewPost";
 import FilterPosts from "./components/Newsfeed/FilterPosts";
 
-export default function Newsfeed({ posts, comments, users, userId, createNewPost, renderFilteredPosts }) {
+export default function Newsfeed({ posts, comments, users, userId, createNewPost, renderFilteredPosts, createNewComment }) {
   const [isVisibleForm, setIsVisibleForm] = useState(false);
   const [isVisibleFilter, setIsVisibleFilter] = useState(false);
 
@@ -54,7 +54,7 @@ export default function Newsfeed({ posts, comments, users, userId, createNewPost
                 Newsfeed
               </Header>
             </Divider>
-            <PostList posts={posts} comments={comments} users={users} />
+            <PostList posts={posts} comments={comments} users={users} createNewComment={createNewComment} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
