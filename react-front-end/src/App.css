@@ -61,7 +61,12 @@ main.plant-container {
   margin: auto;
 }
 
-i.rain.icon, i.book.icon, i.sun.icon, i.paw.icon, i.world.icon, i.lab.icon {
+i.rain.icon,
+i.book.icon,
+i.sun.icon,
+i.paw.icon,
+i.world.icon,
+i.lab.icon {
   font-size: 20px;
 }
 
@@ -134,7 +139,7 @@ div.ui.video {
 }
 
 div.ui.inverted.segment.navbar-segment {
-  background-color: #9DBF98;
+  background-color: #9dbf98;
 }
 
 div.plant-header {

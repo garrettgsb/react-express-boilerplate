@@ -14,7 +14,7 @@ import {
 } from "semantic-ui-react";
 import { getPlantByName, getSpeciesById } from "../../helpers/selectors";
 
-export default function AddWishlistPlant({ user, species, setIsVisible, plantSpecies }) {
+export default function AddWishlistPlant({ user, species, setIsVisible, plantSpecies, onSubmit }) {
 
   const plant = getSpeciesById(species, plantSpecies);
 
@@ -80,7 +80,8 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
     })
       .then((response) => {
         console.log("Post made to db!", response);
-        const newPlant = response.data[0]
+        onSubmit(); // display success message
+        const newPlant = response.data[0];
         axios.post("/api/reminders", {
           plant_id: newPlant.id,
           user_id: user.id,
