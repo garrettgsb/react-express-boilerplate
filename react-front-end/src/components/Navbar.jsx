@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Button, Dropdown, Menu, Image } from "semantic-ui-react";
+import { Segment, Button, Dropdown, Menu, Image, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import logo_no_bee from "../assets/logo_no_bee.png";
@@ -26,8 +26,11 @@ export default function Navbar({ users, user, login, logout }) {
 
           <Menu.Item>
             <Link to="/">
-              <Button inverted color="olive" onClick={logout}>
-                Logout
+              <Button color="grey" onClick={logout} animated="fade">
+                <Button.Content visible>Logout</Button.Content>
+                <Button.Content hidden>
+                  <Icon name="sign-out" />
+                </Button.Content>
               </Button>
             </Link>
           </Menu.Item>
@@ -36,8 +39,11 @@ export default function Navbar({ users, user, login, logout }) {
     } else {
       return (
         <Menu.Item>
-          <Button inverted color="white" onClick={login}>
-            Login
+          <Button color="grey" onClick={login} animated="fade">
+            <Button.Content visible>Login</Button.Content>
+            <Button.Content hidden>
+              <Icon name="sign-in" />
+            </Button.Content>
           </Button>
         </Menu.Item>
       );
