@@ -15,9 +15,8 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
       .then((response) => {
         console.log(response.data);
         console.log("rerereresponse.data", response.data[0])
-        setAppState((prev) => {
-          return {...prev,reminders: [...prev.reminders, response.data[0]]}
-        })
+        setTimeout(() => setAppState((prev) => {
+          return {...prev,reminders: [...prev.reminders.filter(reminder => reminder.plant_id !== plantId), response.data[0]]}}), 1200);
       });
   };
 
