@@ -39,12 +39,14 @@ export default function Navbar({ users, user, login, logout }) {
     } else {
       return (
         <Menu.Item>
-          <Button color="grey" onClick={login} animated="fade">
-            <Button.Content visible>Login</Button.Content>
-            <Button.Content hidden>
-              <Icon name="sign-in" />
-            </Button.Content>
-          </Button>
+          <Link to="/dashboard">
+            <Button color="grey" onClick={login} animated="fade">
+              <Button.Content visible>Login</Button.Content>
+              <Button.Content hidden>
+                <Icon name="sign-in" />
+              </Button.Content>
+            </Button>
+          </Link>
         </Menu.Item>
       );
     }
