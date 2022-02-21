@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import 'semantic-ui-css/semantic.min.css';
-import SingleComment from './SingleComment';
-import { Segment, Image, Feed } from 'semantic-ui-react';
+import React, { useState } from "react";
+import "semantic-ui-css/semantic.min.css";
+import SingleComment from "./SingleComment";
+import { Segment, Image, Feed } from "semantic-ui-react";
 
-export default function CommentList({ users, posts }) {
-  const renderComments = posts
+export default function CommentList({ users, comments, post_id }) {
+  const renderComments = comments
     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-    .map((post) => {
-      return (
-        <SingleComment
-          key={post.id}
-          comment_user_id={post.comment_user_id}
-          comment_text={post.comment_text}
-          commented_at={post.commented_at}
-          users={users}
-        />
-      );
+    .map((comment) => {
+      if (comments.post_id === post_id) {
+        return (
+          <SingleComment
+            key={comment.id}
+            comment_user_id={comment.comment_user_id}
+            comment_text={comment.comment_text}
+            commented_at={comment.commented_at}
+            users={users}
+          />
+        );
+      }
     });
 
-  return <Segment style={{ overflow: 'auto', maxHeight: '20em' }}> {renderComments} </Segment>;
+  return <Segment style={{ overflow: "auto", maxHeight: "20em" }}> {renderComments} </Segment>;
 }

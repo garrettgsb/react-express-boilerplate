@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import 'semantic-ui-css/semantic.min.css';
-import '../../../Newsfeed.css';
-import moment from 'moment';
-import { Button, Icon, Image, Segment, Label, Grid, Header } from 'semantic-ui-react';
-import { getUserById } from '../../../helpers/selectors';
-import { likePost } from './SinglePostService';
-import CommentList from './CommentList';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "semantic-ui-css/semantic.min.css";
+import "../../../Newsfeed.css";
+import moment from "moment";
+import { Button, Icon, Image, Segment, Label, Grid, Header } from "semantic-ui-react";
+import { getUserById } from "../../../helpers/selectors";
+import { likePost } from "./SinglePostService";
+import CommentList from "./CommentList";
 
 export default function SinglePost({ id, user_id, title, photo, description, topic, number_of_likes, created_at, users, posts }) {
   const [state, setState] = useState({
     likes: number_of_likes,
-    like_text: 'Like',
+    like_text: "Like",
     clicked: false,
   });
 
@@ -33,18 +33,18 @@ export default function SinglePost({ id, user_id, title, photo, description, top
     setState((prev) => ({
       ...prev,
       likes: new_number_of_likes,
-      like_text: 'Liked',
+      like_text: "Liked",
       clicked: true,
     }));
   };
 
   const user = getUserById(users, user_id);
-  const postUserProfileUrl = '/profile/' + id;
+  const postUserProfileUrl = "/profile/" + id;
 
-  const postedDate = moment(created_at).format('ll');
+  const postedDate = moment(created_at).format("ll");
 
   return (
-    <Segment className='newsfeed' raised>
+    <Segment className="newsfeed" raised>
       <Segment.Group horizontal>
         <Segment>
           <h2>{title}</h2>
@@ -54,53 +54,53 @@ export default function SinglePost({ id, user_id, title, photo, description, top
           <b>{user && user.name}</b> on {postedDate}
         </Segment>
         <Segment>
-          <Label as='a' color='orange' ribbon='right'>
-            <Icon name='leaf' />
+          <Label as="a" color="orange" ribbon="right">
+            <Icon name="leaf" />
             {topic}
           </Label>
         </Segment>
       </Segment.Group>
 
       <Segment.Group horizontal>
-        <Image src={photo} width='50%' height='100%' rounded />
+        <Image src={photo} width="50%" height="100%" rounded />
         <Segment>
-          <Header as='h3' block>
-            <Icon name='talk' color='olive' />
+          <Header as="h3" block>
+            <Icon name="talk" color="olive" />
             {description}
           </Header>
           <Segment>
-            <CommentList users={users} posts={posts} />
+            <CommentList users={users} comments={comments} post_id={id} />
           </Segment>
         </Segment>
       </Segment.Group>
 
       <Grid horizontal>
-        <Button as='div' labelPosition='right' id='likes' onClick={likeClicked} disabled={state.clicked}>
-          <Button color='orange'>
-            <Icon name='heart' />
+        <Button as="div" labelPosition="right" id="likes" onClick={likeClicked} disabled={state.clicked}>
+          <Button color="orange">
+            <Icon name="heart" />
             {state.like_text}
           </Button>
-          <Label as='a' basic color='brown' pointing='left'>
+          <Label as="a" basic color="brown" pointing="left">
             {state.likes}
           </Label>
         </Button>
 
         <Link to={postUserProfileUrl}>
-          <Button as='div' labelPosition='right' id='follow'>
-            <Button color='olive'>
-              <Icon name='user' />
+          <Button as="div" labelPosition="right" id="follow">
+            <Button color="olive">
+              <Icon name="user" />
             </Button>
-            <Label as='a' basic color='brown' pointing='left'>
+            <Label as="a" basic color="brown" pointing="left">
               View Profile
             </Label>
           </Button>
         </Link>
 
-        <Button as='div' labelPosition='right' id='message'>
-          <Button color='yellow'>
-            <Icon name='comment alternate' />
+        <Button as="div" labelPosition="right" id="message">
+          <Button color="yellow">
+            <Icon name="comment alternate" />
           </Button>
-          <Label as='a' basic color='brown' pointing='right'>
+          <Label as="a" basic color="brown" pointing="right">
             Comment
           </Label>
         </Button>
