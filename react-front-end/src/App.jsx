@@ -25,6 +25,7 @@ class App extends Component {
       users: [{ name: "Leafy" }],
       species: [{ name: "beleaf" }],
       posts: [],
+      comments: [],
       user: cookies.get("user_id"),
       wishlist: "",
       reminders: []
@@ -76,8 +77,6 @@ class App extends Component {
       .catch(function (error) {
         console.log(error);
       });
-    // fetchPosts();
-    // onClose();
   };
 
   fetchData = () => {
@@ -156,6 +155,15 @@ class App extends Component {
     });
   };
 
+  fetchComments = () => {
+    axios.get("/api/comments").then((response) => {
+      console.log("Comments: " + response.data.comments);
+      this.setState({
+        comments: response.data.comments,
+      });
+    });
+  };
+
   fetchSpecies = () => {
     axios
       .get("/api/species") // Just to test that DB layer works
@@ -183,6 +191,7 @@ class App extends Component {
     this.fetchUsers();
     this.fetchSpecies();
     this.fetchPosts();
+    this.fetchComments();
     this.fetchWishlist();
     this.fetchReminders();
   }
@@ -195,12 +204,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Navbar
-            user={this.state.user}
-            login={this.login}
-            logout={this.logout}
-            users={this.state.users}
-          />
+          <Navbar user={this.state.user} login={this.login} logout={this.logout} users={this.state.users} />
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
@@ -223,9 +227,9 @@ class App extends Component {
               element={
                 <Newsfeed
                   posts={this.state.posts}
+                  comments={this.state.comments}
                   users={this.state.users}
                   userId={this.state.user}
-                  fetchPosts={this.fetchPosts}
                   createNewPost={this.createNewPost}
                   renderFilteredPosts={this.renderFilteredPosts}
                 />
@@ -233,23 +237,11 @@ class App extends Component {
             />
             <Route
               path="/profile/:user_id"
-              element={
-                <Profile
-                  userId={this.state.user}
-                  plants={this.state.plants}
-                  users={this.state.users}
-                />
-              }
+              element={<Profile userId={this.state.user} plants={this.state.plants} users={this.state.users} />}
             />
             <Route
               path="/plants/:plant_id"
-              element={
-                <Plant
-                  plants={this.state.plants}
-                  users={this.state.users}
-                  user_id={this.state.user}
-                />
-              }
+              element={<Plant plants={this.state.plants} users={this.state.users} user_id={this.state.user} />}
             />
             <Route path="/login/:user_id" />
             <Route path="/logout" />
