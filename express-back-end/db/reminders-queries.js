@@ -2,7 +2,9 @@ const db = require("./index");
 
 const getReminders = () => {
   return db
-    .query(`SELECT * FROM reminders JOIN user_plants ON (reminders.plant_id = user_plants.id);`)
+    .query(
+      `SELECT * FROM reminders JOIN user_plants ON (reminders.plant_id = user_plants.id);`
+    )
     .then((res) => {
       return res.rows;
     })
@@ -12,7 +14,6 @@ const getReminders = () => {
 };
 
 const insertReminder = (data) => {
-
   const { plant_id, user_id, watering_interval, last_watered } = data;
   return db
     .query(
@@ -38,7 +39,11 @@ const editLastWatered = (data) => {
   return db
     .query(
       `
-    UPDATE reminders SET last_watered = $1 WHERE plant_id = $2 RETURNING *;
+      WITH inserted AS (
+    UPDATE reminders SET last_watered = $1 WHERE plant_id = $2 RETURNING *)
+    SELECT * FROM 
+    inserted 
+    JOIN user_plants ON (inserted.plant_id = user_plants.id);
     `,
       [last_watered, plant_id]
     )

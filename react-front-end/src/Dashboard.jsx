@@ -64,7 +64,7 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
             <Grid.Column width={4}>
               <div>
                 <Namecard user={user} plants={plants} />
-                <Reminders plants={userPlants} reminders={reminders} userId={userId} />
+                <Reminders plants={userPlants} reminders={reminders} userId={userId} setAppState={setAppState} />
               </div>
             </Grid.Column>
           </Grid.Row>
