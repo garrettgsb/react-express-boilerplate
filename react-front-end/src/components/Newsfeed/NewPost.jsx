@@ -10,7 +10,7 @@ export default function NewPostForm({ user, setIsVisibleForm, createNewPost }) {
     title: '',
     description: '',
     photo: '',
-    topic: ''
+    topic: 'general'
   });
 
   const topicValues = ['general', 'question', 'plant hack'];

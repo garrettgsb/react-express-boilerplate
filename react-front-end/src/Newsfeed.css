@@ -1,0 +1,11 @@
+ #likes:hover {
+ transform: scaleX(103%);
+ }
+
+ #follow:hover {
+ transform: scaleX(103%);
+ }
+
+ #message:hover {
+ transform: scaleX(103%);
+ }
