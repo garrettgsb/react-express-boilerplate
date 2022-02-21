@@ -7,6 +7,7 @@
     "db:exec": "docker exec -it beleaf_database_1 psql"
   },
   "dependencies": {
+    "dayjs": "^1.10.7",
     "node-sass": "^7.0.1",
     "react-router-dom": "^6.2.1",
     "sass": "^1.49.7",

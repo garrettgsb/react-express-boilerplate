@@ -25,8 +25,10 @@ class App extends Component {
       users: [{ name: 'Leafy' }],
       species: [{ name: 'beleaf' }],
       posts: [],
-      user: cookies.get('user_id'),
-      wishlist: '',
+      comments: [],
+      user: cookies.get("user_id"),
+      wishlist: "",
+      reminders: []
     };
   }
 
@@ -75,8 +77,6 @@ class App extends Component {
       .catch(function (error) {
         console.log(error);
       });
-    // fetchPosts();
-    // onClose();
   };
 
   fetchData = () => {
@@ -90,6 +90,29 @@ class App extends Component {
         this.setState({
           message: response.data.message,
         });
+      });
+  };
+
+  updateLocation = (id, location) => {
+    axios
+      .post("/api/plants",
+        {
+          id: id,
+          location: location,
+        })
+      .then((response) => {
+        this.setState((prev) => {
+          return { ...prev, plants: prev.plants.map((plant) => {
+            if (plant.id === id) {
+              plant.location = location; // only updating plant location of the plant id passed in
+            }
+            return plant;
+          })}; // already created new object with ...prev
+        });
+        console.log("Put made to db!", response);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   };
 
@@ -113,11 +136,30 @@ class App extends Component {
     });
   };
 
+  fetchReminders = () => {
+    axios.get("/api/reminders").then((response) => {
+
+      console.log("Reminders: ", response.data);
+      this.setState({
+        reminders: response.data,
+      });
+    });
+  };
+
   fetchPosts = () => {
     axios.get('/api/posts').then((response) => {
       console.log('Posts: ' + response.data.posts);
       this.setState({
         posts: response.data.posts,
+      });
+    });
+  };
+
+  fetchComments = () => {
+    axios.get("/api/comments").then((response) => {
+      console.log("Comments: " + response.data.comments);
+      this.setState({
+        comments: response.data.comments,
       });
     });
   };
@@ -149,7 +191,9 @@ class App extends Component {
     this.fetchUsers();
     this.fetchSpecies();
     this.fetchPosts();
+    this.fetchComments();
     this.fetchWishlist();
+    this.fetchReminders();
   }
 
   componentWillUnmount() {
@@ -159,7 +203,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className='App'>
+        <div className="App">
           <Navbar user={this.state.user} login={this.login} logout={this.logout} users={this.state.users} />
           <Routes>
             <Route path='*' element={<NotFound />} />
@@ -167,7 +211,14 @@ class App extends Component {
             <Route
               path='/dashboard'
               element={
-                <Dashboard plants={this.state.plants} users={this.state.users} userId={this.state.user} species={this.state.species} />
+                <Dashboard
+                  plants={this.state.plants}
+                  users={this.state.users}
+                  userId={this.state.user}
+                  species={this.state.species}
+                  updateLocation={this.updateLocation}
+                  reminders={this.state.reminders}
+                />
               }
             />
             {console.log('STATE POSTS', this.state.posts)}
@@ -176,20 +227,20 @@ class App extends Component {
               element={
                 <Newsfeed
                   posts={this.state.posts}
+                  comments={this.state.comments}
                   users={this.state.users}
                   userId={this.state.user}
-                  fetchPosts={this.fetchPosts}
                   createNewPost={this.createNewPost}
                   renderFilteredPosts={this.renderFilteredPosts}
                 />
               }
             />
             <Route
-              path='/profile/:user_id'
+              path="/profile/:user_id"
               element={<Profile userId={this.state.user} plants={this.state.plants} users={this.state.users} />}
             />
             <Route
-              path='/plants/:plant_id'
+              path="/plants/:plant_id"
               element={<Plant plants={this.state.plants} users={this.state.users} user_id={this.state.user} />}
             />
             <Route path='/login/:user_id' />

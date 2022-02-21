@@ -26,19 +26,21 @@ export default function PlantListItem({ user_id, id, scientificName, commonName,
 
   return (
     <Card compact>
-      <Image
-        src={photo}
-        size="medium"
-        centered
-      />
-      <Card.Content>
-        <div className="header">{commonName}</div>
-        <div className="meta">{scientificName}</div>
-        <div className="meta">"{nickname}"</div>
-        <div className="meta">
-          <span className="date">Plant Since {(plant_since).split('-')[0]}</span>
+      <Card.Content centered>
+      <div className="plant-header">
+        <Image
+          src={photo}
+          floated='left'
+          size='small'
+        />
+        <div className="plant-name">
+          <Card.Header>{commonName}</Card.Header>
+          <Card.Meta>{scientificName}</Card.Meta>
+          <Card.Meta><b>"{nickname}"</b></Card.Meta>
+          <Card.Meta>Plant Since {(plant_since).split('-')[0]}</Card.Meta>
         </div>
-        <div className="description">{description}</div>
+      </div>
+        <Card.Description>{description}</Card.Description>
       </Card.Content>
       <Card.Content>
         <span className="right floated">
