@@ -5,3 +5,4 @@ package_lock.json
 .vscode
 .idea
 .eslintrc.js
+.DS_Store
