@@ -1,11 +1,14 @@
 import React from "react";
-import { Segment, Button, Dropdown, Menu, Image } from "semantic-ui-react";
+import { Segment, Button, Dropdown, Menu, Image, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
+import logo_no_bee from "../assets/logo_no_bee.png";
 import { getUserById } from "../helpers/selectors";
 
 export default function Navbar({ users, user, login, logout }) {
-
   const loggedUser = getUserById(users, user);
+
+  const dashboardOrHomepage = () => {};
 
   const renderAuthButton = () => {
     if (user) {
@@ -22,18 +25,28 @@ export default function Navbar({ users, user, login, logout }) {
           </Dropdown>
 
           <Menu.Item>
-            <Button primary onClick={logout}>
-              Logout
-            </Button>
+            <Link to="/">
+              <Button color="grey" onClick={logout} animated="fade">
+                <Button.Content visible>Logout</Button.Content>
+                <Button.Content hidden>
+                  <Icon name="sign-out" />
+                </Button.Content>
+              </Button>
+            </Link>
           </Menu.Item>
         </>
       );
     } else {
       return (
         <Menu.Item>
-          <Button primary onClick={login}>
-            Login
-          </Button>
+          <Link to="/dashboard">
+            <Button color="grey" onClick={login} animated="fade">
+              <Button.Content visible>Login</Button.Content>
+              <Button.Content hidden>
+                <Icon name="sign-in" />
+              </Button.Content>
+            </Button>
+          </Link>
         </Menu.Item>
       );
     }
@@ -42,9 +55,11 @@ export default function Navbar({ users, user, login, logout }) {
   return (
     <Segment inverted className="navbar-segment">
       <Menu inverted secondary>
-        <Menu.Item className="navbar-logo">
-          <Image href="/dashboard" src={logo} size="small" />
-        </Menu.Item>
+        <Link to={user ? "/dashboard" : "/"}>
+          <Menu.Item className="navbar-logo">
+            <Image src={user ? logo : logo_no_bee} size="small" />
+          </Menu.Item>
+        </Link>
         <Menu.Menu position="right">{renderAuthButton()}</Menu.Menu>
       </Menu>
     </Segment>
