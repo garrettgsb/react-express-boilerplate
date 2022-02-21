@@ -1,10 +1,10 @@
 import React from "react";
 import { Segment, Button, Dropdown, Menu, Image } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { getUserById } from "../helpers/selectors";
 
 export default function Navbar({ users, user, login, logout }) {
-
   const loggedUser = getUserById(users, user);
 
   const renderAuthButton = () => {
@@ -22,9 +22,11 @@ export default function Navbar({ users, user, login, logout }) {
           </Dropdown>
 
           <Menu.Item>
-            <Button primary onClick={logout}>
-              Logout
-            </Button>
+            <Link to="/">
+              <Button primary onClick={logout}>
+                Logout
+              </Button>
+            </Link>
           </Menu.Item>
         </>
       );
