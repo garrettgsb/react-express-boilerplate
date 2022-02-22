@@ -43,6 +43,7 @@ export default function ReminderGroup({ checkboxClass, label, reminders }) {
           ></input>
           <label for={`reminder-${reminder.plant_id}`}>{daysLeft}</label>
         </div>
+        <br></br>
       </>
     );
   });
