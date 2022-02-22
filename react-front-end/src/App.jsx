@@ -69,6 +69,10 @@ class App extends Component {
         topic: topic,
       })
       .then((response) => {
+        const post_id = response.data[0].id;
+        const comment_text = "Congrats on your new post. Keep growing, we are rooting for you!";
+        const beleaf_id = 4;
+        this.createNewComment(post_id, comment_text, beleaf_id);
         this.setState((prev) => {
           return { ...prev, posts: [...prev.posts, response.data[0]] };
         });
@@ -79,11 +83,11 @@ class App extends Component {
       });
   };
 
-  createNewComment = (post_id, comment_text) => {
+  createNewComment = (post_id, comment_text, beleaf_id) => {
     axios
       .post("/api/comments", {
         post_id: post_id,
-        user_id: this.state.user,
+        user_id: beleaf_id || this.state.user,
         comment_text: comment_text,
       })
       .then((response) => {
