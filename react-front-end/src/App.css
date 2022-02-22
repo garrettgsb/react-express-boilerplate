@@ -142,7 +142,9 @@ div.ui.video {
 }
 
 div.ui.inverted.segment.navbar-segment {
-  background-color: #395b3d;
+  /* background-color: #395b3d; */
+  background-image: linear-gradient(180deg, #395b3d, #5d8162, #395b3d);
+
 }
 
 div.plant-header {

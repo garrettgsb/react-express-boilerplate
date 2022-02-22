@@ -26,7 +26,7 @@
 
 /* dashboard wgood morning */
 .ui.raised.segment {
-  background-color: cornsilk;
+  background-image: linear-gradient(180deg, #afda96, #f7f5f6, white);
 }
 
 .Board.living {
