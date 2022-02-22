@@ -30,7 +30,7 @@ export default function Navbar({ users, user, login, logout }) {
 
           <Menu.Item>
             <Link to="/">
-              <Button color="grey" onClick={logout} animated="fade">
+              <Button inverted color="grey" onClick={logout} animated="fade">
                 <Button.Content visible>Logout</Button.Content>
                 <Button.Content hidden>
                   <Icon name="sign-out" />
@@ -44,7 +44,7 @@ export default function Navbar({ users, user, login, logout }) {
       return (
         <Menu.Item>
           <Link to="/dashboard">
-            <Button color="grey" onClick={login} animated="fade">
+            <Button inverted color="grey" onClick={login} animated="fade">
               <Button.Content visible>Login</Button.Content>
               <Button.Content hidden>
                 <Icon name="sign-in" />
