@@ -65,8 +65,10 @@ export default function SinglePost({
           <h2>{title}</h2>
         </Segment>
         <Segment>
-          <Image src={user && user.avatar} avatar />
-          <b>{user && user.name}</b> on {postedDate}
+          <Link to={postUserProfileUrl}>
+            <Image src={user && user.avatar} avatar />
+          </Link>
+          <a href={postUserProfileUrl}><b>{user && user.name}</b></a> on {postedDate}
         </Segment>
 
         <Segment>

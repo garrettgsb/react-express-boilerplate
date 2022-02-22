@@ -38,7 +38,7 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
         >
           <Image
             src={url}
-            style={{ borderRadius: "15%", width: "80px", height: "auto" }}
+            style={{ borderRadius: "15%", width: "75px", height: "auto" }}
           />
 
           <div className="plant-info">
