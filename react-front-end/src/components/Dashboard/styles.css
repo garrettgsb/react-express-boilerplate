@@ -23,10 +23,8 @@
   max-height: 275px;
   width: 100%;
   height: 275px;
-  background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm222batch5-kul-36_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=4ce6584b26089e990be89650d5d1cad8");
-  background-repeat: no-repeat;
+  background-image: url("https://image.shutterstock.com/image-illustration/yellow-wall-empty-room-hardwood-260nw-489461038.jpg");
   background-size: cover;
-  box-shadow: 3px 5px 8px grey;
 }
 
 .Board.dining {
@@ -34,10 +32,8 @@
   max-height: 275px;
   width: 100%;
   height: 275px;
-  background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm222batch5-kul-36_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=4ce6584b26089e990be89650d5d1cad8");
-  background-repeat: no-repeat;
+  background-image: url("https://image.shutterstock.com/image-illustration/yellow-wall-empty-room-hardwood-260nw-489461038.jpg");
   background-size: cover;
-  box-shadow: 3px 5px 8px grey;
 }
 
 .Board.bedroom {
@@ -45,10 +41,8 @@
   max-height: 275px;
   width: 100%;
   height: 275px;
-  background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm222batch5-kul-36_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=4ce6584b26089e990be89650d5d1cad8");
-  background-repeat: no-repeat;
+  background-image: url("https://image.shutterstock.com/image-illustration/yellow-wall-empty-room-hardwood-260nw-489461038.jpg");
   background-size: cover;
-  box-shadow: 3px 5px 8px grey;
 }
 
 .Board.office {
@@ -56,10 +50,9 @@
   max-height: 275px;
   width: 100%;
   height: 275px;
-  background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm222batch5-kul-36_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=4ce6584b26089e990be89650d5d1cad8");
-  background-repeat: no-repeat;
+  background-image: url("https://image.shutterstock.com/image-illustration/yellow-wall-empty-room-hardwood-260nw-489461038.jpg");
   background-size: cover;
-  box-shadow: 3px 5px 8px grey;
+  background-repeat: no-repeat;
 }
 
 #room {
