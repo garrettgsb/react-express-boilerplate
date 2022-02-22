@@ -24,7 +24,7 @@ export default function SingleComment({ users, comment_user_id, comment_text, co
         </Feed.Content>
       </Feed.Event>
       <Divider horizontal>
-        <Icon name="leaf" />
+        <Icon name="leaf" color="grey" />
       </Divider>
     </Feed>
   );
