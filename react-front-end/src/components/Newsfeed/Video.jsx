@@ -9,7 +9,7 @@ export default function Video() {
       </Header>
       <Embed
         id='qQIjh4-is3I'
-        placeholder='https://react.semantic-ui.com/images/image-16by9.png'
+        placeholder='../images/posts/preview.png'
         source='youtube'
       />
     </Segment>

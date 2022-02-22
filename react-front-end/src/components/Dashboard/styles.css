@@ -18,15 +18,8 @@
   padding-bottom: 280px;
 }
 
-.Board.living {
-  overflow: auto;
-  max-height: 275px;
-  width: 100%;
-  height: 275px;
-  background: #9dbf98;
-  opacity: 0.95;
-}
-
+.Board.living,
+.Board.bedroom,
 .Board.dining {
   overflow: auto;
   max-height: 275px;
@@ -34,15 +27,7 @@
   height: 275px;
   background: #9dbf98;
   opacity: 0.95;
-}
-
-.Board.bedroom {
-  overflow: auto;
-  max-height: 275px;
-  width: 100%;
-  height: 275px;
-  background: #9dbf98;
-  opacity: 0.95;
+  background-image: url("https://www.transparenttextures.com/patterns/brick-wall-dark.png");
 }
 
 .Board.office {
@@ -52,6 +37,7 @@
   height: 275px;
   background: #9dbf98;
   opacity: 0.95;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
 }
 
 div.header.room-header {
@@ -137,6 +123,34 @@ div.plant-nickname {
   justify-content: center;
 }
 
-.ui.progress .bar>.progress {
+.ui.progress .bar > .progress {
   right: 0.1em;
+  color: black;
+}
+
+div.plant-info-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+p.info-desc {
+  font-size: 16px;
+  margin: 20px;
+}
+
+div.plant-info-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  column-gap: 5px;
+  /* padding: 20px; */
+  margin: auto;
+}
+
+span.info-title {
+  font-size: 18px;
+  margin: 10px;
 }

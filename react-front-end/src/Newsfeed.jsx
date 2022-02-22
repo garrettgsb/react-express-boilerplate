@@ -19,20 +19,26 @@ export default function Newsfeed({ posts, comments, users, userId, createNewPost
       <Grid>
         <Grid.Row>
           <Grid.Column width={10}>
-            <Segment clearing horizontal>
-              <Header size="large">Hey {name}, what's on your mind?</Header>
+            <Segment clearing horizontal color="olive">
+              <div className="news-title">
+                <Header size="large" style={{ margin: "auto"}}>Hey {name}, what's on your mind?</Header>
+                <div>
 
-              <Button floated="right" onClick={() => setIsVisibleForm(true)} animated="fade" color="orange">
-                <Button.Content visible>Create New Post?</Button.Content>
-                <Button.Content hidden>Sure!</Button.Content>
-              </Button>
+                  <Button floated="right" onClick={() => setIsVisibleForm(true)} animated="fade" color="orange">
+                    <Button.Content visible>Create New Post</Button.Content>
+                    <Button.Content hidden>Sure!</Button.Content>
+                  </Button>
 
-              <Button floated="right" onClick={() => setIsVisibleFilter(true)} animated="vertical" basic color="green">
-                <Button.Content hidden>Filter</Button.Content>
-                <Button.Content visible>
-                  <Icon name="filter" />
-                </Button.Content>
-              </Button>
+                  <Button floated="right" onClick={() => setIsVisibleFilter(true)} animated="vertical" basic color="green">
+                    <Button.Content hidden>Filter</Button.Content>
+                    <Button.Content visible>
+                      <Icon name="filter" />
+                    </Button.Content>
+                  </Button>
+                </div>
+
+              </div>
+
             </Segment>
 
             <br></br>
