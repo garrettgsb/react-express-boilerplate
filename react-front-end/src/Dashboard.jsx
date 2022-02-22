@@ -34,14 +34,6 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
               <Segment clearing>
                 <Header textAlign="left" as="h2">
                   DASHBOARD
-                  <Link to="/wishlist">
-                    <Button
-                      basic
-                      positive
-                      content="See Wishlist"
-                      floated="right"
-                    />
-                  </Link>
                   <Button positive floated="right" onClick={() => setIsVisible(true)}>
                     Add A New Plant!
                   </Button>
@@ -49,15 +41,19 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
               </Segment>
               <Segment textAlign="left" raised>
                 <Header as="h3" className="dash-header">
-                  <div>
-                    Good Morning, {name}!
-                  </div>
+                  <div>Good Morning, {name}!</div>
                   <DailyReminders plants={userPlants} reminders={reminders} userId={userId} />
                 </Header>
               </Segment>
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>
-                  <Rooms plants={plants} userId={userId} updateLocation={updateLocation} setSelectedPlant={setSelectedPlant} reminders={reminders}/>
+                  <Rooms
+                    plants={plants}
+                    userId={userId}
+                    updateLocation={updateLocation}
+                    setSelectedPlant={setSelectedPlant}
+                    reminders={reminders}
+                  />
                 </DndProvider>
               </Grid.Row>
             </Grid.Column>
@@ -71,18 +67,9 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
         </Grid>
         <br></br>
         <br></br>
-        {isVisible && (
-          <AddPlant user={user} species={species} setIsVisible={setIsVisible} setAppState={setAppState} />
-        )}
+        {isVisible && <AddPlant user={user} species={species} setIsVisible={setIsVisible} setAppState={setAppState} />}
         <br></br>
-        {selectedPlant && (
-          <ViewPlant
-            user={user}
-            species={species}
-            plant={selectedPlant}
-            closeViewPlant={() => setSelectedPlant(null)}
-          />
-        )}
+        {selectedPlant && <ViewPlant user={user} species={species} plant={selectedPlant} closeViewPlant={() => setSelectedPlant(null)} />}
         <br></br>
       </Container>
     );
