@@ -100,8 +100,8 @@ img.plant-photo {
 div.ui.list.wishlist-plant-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 100%;
+  margin-left: 20px;
+  width: 80%;
   margin: auto;
 }
 
@@ -205,4 +205,15 @@ div.news-title {
   flex-direction: row;
   justify-content: space-between;
   padding-left: 10px;
+}
+
+div.wishlist-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: auto;
+}
+
+div.header-wishlist-plant {
+  font-size: 16px;
 }

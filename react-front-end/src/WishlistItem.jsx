@@ -5,22 +5,26 @@ import { getUserById } from "./helpers/selectors";
 
 export default function WishlistItem({ id, scientificName, commonName, photo, light_level, soil_type, difficulty, toxic, watering_interval, category, users, plant_user_id, setIsVisible, species_id, setSpecies }) {
 
-  console.log('species id in wishlistitem', species_id)
-
   const owner = getUserById(users, plant_user_id);
+  const ownerProfileUrl = "/profile/" + plant_user_id;
 
   return (
     <Card compact="true">
-      <Image
-        src={photo}
-        size="medium"
-        centered={true}
-      />
-      <Card.Content>
-        <div className="header">{commonName}</div>
-        <div className="meta">{scientificName}</div>
-        <div className="description">As Seen on {owner && owner.name}'s Profile</div>
-      </Card.Content>
+      <div className="wishlist-header">
+        <Image
+          src={photo}
+          size="small"
+        />
+        <Card.Content>
+          <div className="header-wishlist-plant"><b>{commonName}</b></div>
+          <div>{scientificName}</div>
+          <div>
+            <Image size="mini" src={owner && owner.avatar} href={ownerProfileUrl} />
+            <div className="meta">As Seen on  <a href={ownerProfileUrl}>{owner && owner.name}'s</a> Profile</div>
+          </div>
+        </Card.Content>
+      </div>
+
       <Card.Content>
         <List className="wishlist-plant-info">
           <List.Item>
@@ -51,10 +55,10 @@ export default function WishlistItem({ id, scientificName, commonName, photo, li
       </Card.Content>
       <Card.Content>
         <span className="left floated">
-          <button className="ui button" onClick={() => console.log('Trying to purchase', id)}><i className="cart icon"></i>Purchase</button>
+          <Button basic color="grey" onClick={() => console.log('Trying to purchase', id)}><i className="cart icon"></i>Purchase</Button>
         </span>
         <span className="right floated">
-          <Button floated="right" onClick={() => {
+          <Button color="olive" floated="right" onClick={() => {
             setSpecies(species_id);
             setIsVisible(true);
           }}>
