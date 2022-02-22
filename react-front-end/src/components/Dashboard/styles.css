@@ -72,13 +72,14 @@
 }
 
 #room {
-  background-color: #9dbf98;
+  background-color: #436648;
 }
 
 #room-plant {
   box-shadow: 3px 3px 5px grey;
-  background: #9dbf98;
-  opacity: 0.95;
+  /* background: #9dbf98; */
+  background: white;
+  /* opacity: 0.95; */
   background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
 }
 

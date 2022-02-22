@@ -53,7 +53,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
     );
   } else {
     return (
-      <Container>
+      <Container className="wishlist">
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
