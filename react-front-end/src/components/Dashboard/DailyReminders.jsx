@@ -1,12 +1,9 @@
 import React from "react";
-import axios from "axios";
 import "semantic-ui-css/semantic.min.css";
 import { Icon, Button, Tab, Message } from "semantic-ui-react";
 import wateringcan from "../../assets/wateringcan.png";
 import dayjs from "dayjs";
-import ReminderGroup from "./ReminderGroup";
 import { getUserReminders } from "../../helpers/selectors";
-const relativeTime = require("dayjs/plugin/relativeTime");
 
 export default function DailyReminders({ plants, reminders, userId, setIsVisible }) {
   const remindersWithTime = reminders.map((reminder) => {
@@ -23,14 +20,11 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
   const dailyUserReminders = getUserReminders(userId, dailyReminders);
   const tomorrowUserReminders = getUserReminders(userId, tomorrowReminders);
 
-  console.log({ dailyUserReminders });
-  console.log({ tomorrowUserReminders });
-
   const panes = [
     {
       menuItem: "Today Reminders!",
       render: () => (
-        <Message color={`${dailyUserReminders.length > 0 ? "red" : "blue"}`}>
+        <Message color={`${dailyUserReminders.length > 0 ? "red" : "blue"}`} >
           <Icon name="rain" />
           {dailyUserReminders.length > 0 ? " You have a reminder!" : " Your day looks clear. Enjoy!"}
         </Message>
@@ -48,11 +42,11 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
     {
       menuItem: "Edit Plants",
       render: () => (
-        <Message>
+        <Message style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
           <Button color="olive" onClick={() => setIsVisible(true)}>
             Add New Plant
           </Button>
-          <Button color="grey">Delete Plant</Button>
+          <Button color="red">Delete Plant</Button>
         </Message>
       ),
     },
@@ -62,15 +56,6 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
     <>
       <div className="notifications">
         <Tab panes={panes} />
-
-        {/* <Button floated="bottom" as="h4" color={`${dailyUserReminders.length > 0 ? "red" : "blue"}`}>
-          <Icon name="rain" />
-          {dailyUserReminders.length > 0 ? " You have a reminder!" : " Your day looks clear. Enjoy!"}
-        </Button>
-        <Button floated="top" as="h4" basic color={`${tomorrowUserReminders.length > 0 ? "red" : "grey"}`}>
-          <Icon name="leaf" />
-          {tomorrowUserReminders.length > 0 ? "Upcoming watering tomorrow!" : "No upcoming watering tomorrow!"}
-        </Button> */}
       </div>
     </>
   );

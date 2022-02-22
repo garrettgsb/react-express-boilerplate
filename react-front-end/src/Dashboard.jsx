@@ -10,10 +10,9 @@ import ViewPlant from "./components/Dashboard/ViewPlant";
 
 import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
-import { Header, Segment, Container, Button, Grid, Message, Icon, Dimmer, Loader, Image } from "semantic-ui-react";
+import { Header, Segment, Container, Grid, Message, Icon } from "semantic-ui-react";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import DailyReminders from "./components/Dashboard/DailyReminders";
 
 export default function Dashboard({ users, userId, plants, species, reminders, updateLocation, setAppState }) {
@@ -44,9 +43,14 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
-              <Segment raised>
+              <Segment raised style={{ backgroundColor: "rgba(225, 205, 48, 0.50)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
                 <Header as="h3" className="dash-header">
-                  <h2>DASHBOARD</h2> Good Morning, {name}!
+                  <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", paddingLeft: "10px" }}>
+                    <h2>DASHBOARD</h2>
+                    <h3>
+                      <i>Good Morning, {name}!</i>
+                    </h3>
+                  </div>
                   <DailyReminders plants={userPlants} reminders={reminders} userId={userId} setIsVisible={setIsVisible} />
                 </Header>
               </Segment>
