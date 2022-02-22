@@ -51,7 +51,7 @@ export default function WishlistItem({ id, scientificName, commonName, photo, li
       </Card.Content>
       <Card.Content>
         <span className="left floated">
-          <button className="ui button" onClick={() => console.log('Add to Wishlist clicked! id is', id)}><i className="cart icon"></i>Purchase</button>
+          <button className="ui button" onClick={() => console.log('Trying to purchase', id)}><i className="cart icon"></i>Purchase</button>
         </span>
         <span className="right floated">
           <Button floated="right" onClick={() => {
