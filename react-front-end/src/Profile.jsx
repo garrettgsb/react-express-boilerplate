@@ -13,9 +13,6 @@ export default function Profile({ plants, users, userId }) {
 
   const user = getUserById(users, user_id);
   const plantsForUser = getPlantsForUser(plants, user_id);
-
-  console.log('plantsfor USER', plantsForUser)
-
   const loggedUser = getUserById(users, userId);
   const profileUser = Number(user_id);
 
@@ -54,15 +51,15 @@ export default function Profile({ plants, users, userId }) {
                   </div>
                 </div>
                 <div className="extra content">
-                  <span className="left floated">
+                  <span className="floated">
                     <Button basic color='green'>
                       <i className="leaf icon"></i>
                       {plantsForUser && plantsForUser.length} Plants
                     </Button>
                   </span>
-                  <span className="right floated">
+                  {/* <span className="right floated">
                     <button className="ui button"><i className="add icon"></i>Follow</button>
-                  </span>
+                  </span> */}
                 </div>
               </div>
             </div>
