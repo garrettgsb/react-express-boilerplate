@@ -38,33 +38,36 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
         >
           <Image
             src={url}
-            style={{ borderRadius: "15%", width: "80px", height: "auto"}}
+            style={{ borderRadius: "15%", width: "80px", height: "auto" }}
           />
-          <div className="plant-progress">
-            <b><i>{nickname}</i></b>
 
-            <Button animated='vertical'
-              color='olive'
-              size="mini"
-              style={{ height: "25px" }}
-              onClick={() => {
-                setSelectedPlant(plant);
-              }}>
-              <Button.Content hidden>See Info</Button.Content>
-              <Button.Content visible>
-                <Icon name='leaf' />
-              </Button.Content>
-            </Button>
-
-            <Progress
-              color="red"
-              indicating
-              value={waterPercent >= 0 ? daysRemaining : 0}
-              progress="ratio"
-              total={reminder && reminder.watering_interval}
-              label="Days Left"
-              style={{ fontSize: "11px" }}
-            />
+          <div className="plant-info">
+            <div className="plant-nickname">
+              <b><i>{nickname}</i></b>
+            </div>
+            <div className="plant-progress">
+              <Button animated='vertical'
+                color='olive'
+                size="mini"
+                style={{ height: "25px", width: "100%", paddingBottom: "5px"}}
+                onClick={() => {
+                  setSelectedPlant(plant);
+                }}>
+                <Button.Content hidden>See Info</Button.Content>
+                <Button.Content visible>
+                  <Icon name='leaf' />
+                </Button.Content>
+              </Button>
+              <Progress
+                color="red"
+                indicating
+                value={waterPercent >= 0 ? daysRemaining : 0}
+                progress="ratio"
+                total={reminder && reminder.watering_interval}
+                label="Days Left"
+                style={{ fontSize: "11px" }}
+              />
+            </div>
           </div>
         </div>
       </Card>

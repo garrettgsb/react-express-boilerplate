@@ -32,22 +32,21 @@ export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlant
         </Card.Header>
       </Card.Content>
 
-      <Grid>
-        <Grid.Row>
-          <div className={roomClassName} ref={drop}>
-            {PictureList.map((picture) => {
-              return <Picture
-                url={picture.url}
-                id={picture.id}
-                key={picture.id}
-                nickname={picture.nickname}
-                setSelectedPlant={setSelectedPlant}
-                plant={picture.plant}
-                reminder={picture.reminder} />;
-            })}
-          </div>
-        </Grid.Row>
-      </Grid>
+      <div className={roomClassName} ref={drop}>
+        <Card.Group itemsPerRow={2}>
+          {PictureList.map((picture) => {
+            return <Picture
+              url={picture.url}
+              id={picture.id}
+              key={picture.id}
+              nickname={picture.nickname}
+              setSelectedPlant={setSelectedPlant}
+              plant={picture.plant}
+              reminder={picture.reminder} />;
+          })}
+        </Card.Group>
+      </div>
+
     </Card>
   )
 }

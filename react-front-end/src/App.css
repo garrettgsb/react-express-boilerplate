@@ -145,13 +145,16 @@ div.ui.inverted.segment.navbar-segment {
 div.plant-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 div.plant-name {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: flex-start; */
+  max-width: 100%;
+  min-width: 100px;
+  row-gap: 25px;
 }
 
 @keyframes fadeOut {
@@ -172,15 +175,20 @@ div.plant-name {
 }
 
 div.ui.card.picture {
-  width: 180px;
+  width: 150px;
   height: auto;
-  margin: 3%;
-  padding: 3%;
+  margin: 2%;
+  padding: 2%;
   display: flex;
   flex-direction: row;
-  align-items: space-between;
-  justify-content: center;
+  align-content: auto;
+  justify-content: space-between;
   background-color: rgb(250, 250, 250);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
+}
+
+.ui.ribbon.label {
+  font-size: 15px;
+  width: 50%;
 }
