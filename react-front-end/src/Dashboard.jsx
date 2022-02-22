@@ -10,7 +10,7 @@ import ViewPlant from "./components/Dashboard/ViewPlant";
 
 import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
-import { Header, Segment, Container, Button, Grid, Message, Icon } from "semantic-ui-react";
+import { Header, Segment, Container, Button, Grid, Message, Icon, Dimmer, Loader, Image } from "semantic-ui-react";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -35,7 +35,9 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
   };
 
   if (!user) {
-    return <></>; // add progress bar?
+    return (
+      <></>
+    );
   } else {
     return (
       <Container className="app-container">

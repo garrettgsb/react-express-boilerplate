@@ -53,7 +53,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
     );
   } else {
     return (
-      <Container>
+      <Container className="wishlist">
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
@@ -91,7 +91,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
             </Grid.Column>
             <Grid.Column width={4}>
               <div className="avatar">
-                <div className="ui card">
+                <div className="ui card avatar">
                   <div className="image">
                     <img src={user && user.avatar} alt="avatar" />
                   </div>

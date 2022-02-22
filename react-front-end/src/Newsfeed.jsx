@@ -55,7 +55,7 @@ export default function Newsfeed({ posts, comments, users, userId, createNewPost
               <FilterPosts posts={posts} renderFilteredPosts={renderFilteredPosts} setIsVisibleFilter={setIsVisibleFilter} />
             )}
             <Divider horizontal>
-              <Header as="h4">
+              <Header as="h4" style={{ color: "white" }}>
                 <Icon name="rss olive" />
                 Newsfeed
               </Header>
