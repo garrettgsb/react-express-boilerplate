@@ -140,3 +140,30 @@ div.plant-nickname {
 .ui.progress .bar>.progress {
   right: 0.1em;
 }
+
+div.plant-info-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+p.info-desc {
+  font-size: 16px;
+  margin: 20px;
+}
+
+div.plant-info-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  column-gap: 5px;
+  /* padding: 20px; */
+  margin: auto;
+}
+
+span.info-title {
+  font-size: 18px;
+  margin: 10px;
+}
