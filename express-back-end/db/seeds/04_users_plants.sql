@@ -8,5 +8,5 @@ VALUES (1, 1, 'Megan Thee Plant', 'Living room', '01-02-2022'),
 (3, 2, 'Spike', 'Office', '01-02-2022'),
 (12, 2, 'Leafy', 'Living room', '02-02-2022'),
 (9, 2, 'Tree Diddy', 'Dining room', '02-08-2022'),
-(13, 2, 'Snake Gyllenhaal', 'Bedroom', '02-15-2022')
+(13, 2, 'Severus Snake', 'Bedroom', '02-15-2022')
 ;

@@ -38,6 +38,8 @@
   background-size: cover;
 }
 
+.Board.living,
+.Board.bedroom,
 .Board.dining {
   overflow: auto;
   max-height: 275px;
@@ -54,6 +56,9 @@
   height: 275px;
   background-image: url("https://image.shutterstock.com/image-illustration/yellow-wall-empty-room-hardwood-260nw-489461038.jpg");
   background-size: cover;
+  /* background: #9dbf98;
+  opacity: 0.95;
+  background-image: url("https://www.transparenttextures.com/patterns/brick-wall-dark.png"); */
 }
 
 .Board.office {
@@ -72,6 +77,9 @@
 
 #room-plant {
   box-shadow: 3px 3px 5px grey;
+  background: #9dbf98;
+  opacity: 0.95;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
 }
 
 div.header.room-header {
@@ -159,4 +167,32 @@ div.plant-nickname {
 
 .ui.progress .bar > .progress {
   right: 0.1em;
+  color: black;
+}
+
+div.plant-info-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+p.info-desc {
+  font-size: 16px;
+  margin: 20px;
+}
+
+div.plant-info-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  column-gap: 5px;
+  /* padding: 20px; */
+  margin: auto;
+}
+
+span.info-title {
+  font-size: 18px;
+  margin: 10px;
 }

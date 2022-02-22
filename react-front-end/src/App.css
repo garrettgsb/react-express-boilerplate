@@ -103,8 +103,8 @@ img.plant-photo {
 div.ui.list.wishlist-plant-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 100%;
+  margin-left: 20px;
+  width: 80%;
   margin: auto;
 }
 
@@ -144,7 +144,6 @@ div.ui.video {
 div.ui.inverted.segment.navbar-segment {
   /* background-color: #395b3d; */
   background-image: linear-gradient(180deg, #395b3d, #5d8162, #395b3d);
-
 }
 
 div.plant-header {
@@ -156,7 +155,14 @@ div.plant-header {
 div.plant-name {
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-start; */
+  max-width: 100%;
+  min-width: 100px;
+  row-gap: 25px;
+}
+
+div.topic-ribbon {
+  display: flex;
+  flex-direction: column;
   max-width: 100%;
   min-width: 100px;
   row-gap: 25px;
@@ -196,4 +202,22 @@ div.ui.card.picture {
 .ui.ribbon.label {
   font-size: 15px;
   width: 50%;
+}
+
+div.news-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10px;
+}
+
+div.wishlist-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: auto;
+}
+
+div.header-wishlist-plant {
+  font-size: 16px;
 }
