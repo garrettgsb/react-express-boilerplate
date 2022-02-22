@@ -41,7 +41,6 @@ main.container {
   flex-direction: row;
   justify-content: space-evenly;
   margin: auto;
-  background-color: red;
 }
 
 div.plants {

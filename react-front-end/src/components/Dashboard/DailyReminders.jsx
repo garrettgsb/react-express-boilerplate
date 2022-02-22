@@ -8,7 +8,7 @@ import ReminderGroup from "./ReminderGroup";
 import { getUserReminders } from "../../helpers/selectors";
 const relativeTime = require("dayjs/plugin/relativeTime");
 
-export default function DailyReminders({ plants, reminders, userId }) {
+export default function DailyReminders({ plants, reminders, userId, setIsVisible }) {
   const remindersWithTime = reminders.map((reminder) => {
     const date1 = dayjs(new Date());
     return {
@@ -39,18 +39,21 @@ export default function DailyReminders({ plants, reminders, userId }) {
     {
       menuItem: "Tomorrow Reminders",
       render: () => (
-        <Message color={`${tomorrowUserReminders.length > 0 ? "red" : "grey"}`} >
+        <Message color={`${tomorrowUserReminders.length > 0 ? "red" : "grey"}`}>
           <Icon name="leaf" />
           {tomorrowUserReminders.length > 0 ? "Upcoming watering tomorrow!" : "No upcoming watering tomorrow!"}
         </Message>
       ),
     },
     {
-      menuItem: "Something else here?",
+      menuItem: "Add New Plant?",
       render: () => (
-        <Tab.Pane>
-          <Message color="olive">WE can add some userful content hereeee</Message>
-        </Tab.Pane>
+        <Message>
+          I don't need less plants, I need more shelves{" "}
+          <Button color="olive" onClick={() => setIsVisible(true)}>
+            Add New Plant
+          </Button>
+        </Message>
       ),
     },
   ];
