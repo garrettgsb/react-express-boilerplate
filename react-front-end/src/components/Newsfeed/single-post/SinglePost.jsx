@@ -59,7 +59,7 @@ export default function SinglePost({
   const postedDate = moment(created_at).format("ll");
 
   return (
-    <Segment className="newsfeed" raised>
+    <Segment className="newsfeed" raised color="olive">
       <Segment.Group horizontal>
         <Segment>
           <h2>{title}</h2>
@@ -68,12 +68,16 @@ export default function SinglePost({
           <Image src={user && user.avatar} avatar />
           <b>{user && user.name}</b> on {postedDate}
         </Segment>
+
         <Segment>
-          <Label as="a" color="orange" ribbon="right">
-            <Icon name="leaf" />
-            {topic}
-          </Label>
+          <div className="topic-ribbon">
+            <Label as="a" color="orange" ribbon="right">
+              <Icon name="leaf" />
+              {topic}
+            </Label>
+          </div>
         </Segment>
+
       </Segment.Group>
       <Segment.Group horizontal>
         <Image src={photo} width="400px" height="300px" rounded />

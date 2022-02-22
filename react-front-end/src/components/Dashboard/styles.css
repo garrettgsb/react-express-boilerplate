@@ -18,40 +18,15 @@
   padding-bottom: 280px;
 }
 
-.Board.living {
+.Board.living, .Board.bedroom, 
+.Board.dining, .Board.office {
   overflow: auto;
   max-height: 275px;
   width: 100%;
   height: 275px;
   background: #9dbf98;
   opacity: 0.95;
-}
-
-.Board.dining {
-  overflow: auto;
-  max-height: 275px;
-  width: 100%;
-  height: 275px;
-  background: #9dbf98;
-  opacity: 0.95;
-}
-
-.Board.bedroom {
-  overflow: auto;
-  max-height: 275px;
-  width: 100%;
-  height: 275px;
-  background: #9dbf98;
-  opacity: 0.95;
-}
-
-.Board.office {
-  overflow: auto;
-  max-height: 275px;
-  width: 100%;
-  height: 275px;
-  background: #9dbf98;
-  opacity: 0.95;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
 }
 
 div.header.room-header {
@@ -139,6 +114,7 @@ div.plant-nickname {
 
 .ui.progress .bar>.progress {
   right: 0.1em;
+  color: black;
 }
 
 div.plant-info-page {
