@@ -26,13 +26,16 @@ export default function Profile({ plants, users, userId }) {
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
-              <Segment>
+              <Segment className="profile">
                 {loggedUser && loggedUser.id !== profileUser ?
                   <h2>
                     Welcome {loggedUser && loggedUser.name}, thanks for visiting my profile!
                   </h2> : <h2>My Profile</h2>}
               </Segment>
-              <Segment style={{ overflow: 'auto', maxWidth: 2000 }} >
+
+              
+
+              <Segment style={{ overflow: 'auto', maxWidth: 2000, backgroundColor: "rgba(225, 205, 48, 0.25)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
                 <Card.Group itemsPerRow={3}>
                   <PlantList plants={plantsForUser} user={userId} />
                 </Card.Group>
@@ -41,21 +44,23 @@ export default function Profile({ plants, users, userId }) {
 
             <Grid.Column width={4}>
               <div>
-                <div className="ui card avatar">
+                <div className="ui card avatar" style={{ overflow: 'auto', maxWidth: 2000, backgroundColor: "rgba(225, 205, 48, 0.65)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
                   <Image src={user && user.avatar} alt="avatar" size="medium" />
                   <div className="content">
                     <a className="header">{user && user.name}</a>
-                    <div className="meta">
+                    <div className="date">
                       <span className="date">Joined in {user && user.created_at.split('-')[0]}</span>
                     </div>
                     <div className="description">
                       {user && user.name} is an art director living in New York.
-                      <h5>"{user && user.quote}"</h5>
+                      <Segment color="olive" style={{ backgroundColor: "rgba(255, 255, 255, 0.20)"}}>
+                        <h5>"{user && user.quote}"</h5>
+                      </Segment>
                     </div>
                   </div>
                   <div className="extra content">
                     <span className="floated">
-                      <Button basic color='green'>
+                      <Button inverted color='grey'>
                         <i className="leaf icon"></i>
                         {plantsForUser && plantsForUser.length} Plants
                       </Button>
