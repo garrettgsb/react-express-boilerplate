@@ -1,6 +1,9 @@
 .App {
   text-align: center;
   margin-top: 120px;
+  background-image: url("https://media.istockphoto.com/photos/closeup-nature-view-of-green-leaf-background-picture-id1208290498?b=1&k=20&m=1208290498&s=170667a&w=0&h=gBgk3i33pieBVDmVlnft31qL0D0rrcD_g1JZaAepg7k=");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .App-logo {
@@ -139,7 +142,8 @@ div.ui.video {
 }
 
 div.ui.inverted.segment.navbar-segment {
-  background-color: #9dbf98;
+  /* background-color: #395b3d; */
+  background-image: linear-gradient(180deg, #395b3d, #5d8162, #395b3d);
 }
 
 div.plant-header {
