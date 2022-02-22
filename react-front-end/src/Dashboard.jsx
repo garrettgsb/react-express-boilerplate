@@ -42,21 +42,14 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
-              <Segment clearing>
-                <Header textAlign="left" as="h2">
-                  DASHBOARD
-                  <Button positive floated="right" onClick={() => setIsVisible(true)}>
-                    Add A New Plant!
-                  </Button>
-                </Header>
-              </Segment>
-
-              <Segment textAlign="left" raised>
+              <Segment raised >
                 <Header as="h3" className="dash-header">
-                  <div>Good Morning, {name}!</div>
+                 <h2>DASHBOARD</h2> Good Morning, {name}!
                   <DailyReminders plants={userPlants} reminders={reminders} userId={userId} />
                 </Header>
+            
               </Segment>
+
               {success && (
                 <Message color="green" id="animated-example" className={success && "fadeOut"}>
                   <Message.Header>
@@ -65,6 +58,11 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
                   </Message.Header>
                 </Message>
               )}
+              <Grid.Column>
+                <Button positive floated="right" onClick={() => setIsVisible(true)}>
+                  Add A New Plant!
+                </Button>
+              </Grid.Column>
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>
                   <Rooms
