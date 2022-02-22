@@ -61,7 +61,12 @@ main.plant-container {
   margin: auto;
 }
 
-i.rain.icon, i.book.icon, i.sun.icon, i.paw.icon, i.world.icon, i.lab.icon {
+i.rain.icon,
+i.book.icon,
+i.sun.icon,
+i.paw.icon,
+i.world.icon,
+i.lab.icon {
   font-size: 20px;
 }
 
@@ -134,17 +139,56 @@ div.ui.video {
 }
 
 div.ui.inverted.segment.navbar-segment {
-  background-color: #9DBF98;
+  background-color: #9dbf98;
 }
 
 div.plant-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 div.plant-name {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: flex-start; */
+  max-width: 100%;
+  min-width: 100px;
+  row-gap: 25px;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation-name: fadeOut;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 3s
+}
+
+div.ui.card.picture {
+  width: 150px;
+  height: auto;
+  margin: 2%;
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+  align-content: auto;
+  justify-content: space-between;
+  background-color: rgb(250, 250, 250);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.ui.ribbon.label {
+  font-size: 15px;
+  width: 50%;
 }

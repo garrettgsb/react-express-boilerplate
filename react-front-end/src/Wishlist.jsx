@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import WishlistItem from "./WishlistItem";
 import { getPlantsForUser, getUserById, getWishlistPlants } from "./helpers/selectors";
-import { Button, Card, Container, Grid, Segment } from "semantic-ui-react";
+import { Button, Card, Container, Divider, Grid, Icon, Image, Message, Segment, Transition } from "semantic-ui-react";
 import AddWishlistPlant from "./components/Wishlist/AddWishlistPlant";
 import { Link } from "react-router-dom";
 
@@ -13,10 +13,17 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
 
   const [isVisible, setIsVisible] = useState(false);
   const [plantSpecies, setPlantSpecies] = useState('');
+  const [success, setSuccess] = useState(false);
+
+  const onSubmit = () => {
+    setSuccess(true);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 3500);
+  };
 
   const setSpecies = (species_id) => {
     setPlantSpecies(species_id);
-    console.log('plantSpecies inside function call!', plantSpecies);
   };
 
   const parsedPlants = plants && plants.map(plant =>
@@ -42,10 +49,8 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
 
   if (!user) {
     return (
-      <h2>
-        Please login to view wishlist.
-      </h2>
-    )
+      <></>
+    );
   } else {
     return (
       <Container>
@@ -57,6 +62,20 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
                   My Wishlist Plants
                 </h1>
               </Segment>
+
+              <br></br>
+              {success && (
+                <>
+                  <Message color="green" id="animated-example" className={success && "fadeOut"}>
+                    <Message.Header><Icon name="leaf" />Congrats! Your new plant has been added successfully.</Message.Header>
+                    <p>
+                      <Link to="/dashboard">View <b>Dashboard</b> now.</Link>
+                    </p>
+                  </Message>
+                </>
+              )}
+              <br></br>
+
               <Segment style={{ overflow: 'auto', maxWidth: 2000 }} >
                 <Card.Group itemsPerRow={3}>
                   {parsedPlants}
@@ -65,7 +84,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
 
               <br></br>
               {isVisible && (
-                <AddWishlistPlant user={user} species={species} setIsVisible={setIsVisible} plantSpecies={plantSpecies} />
+                <AddWishlistPlant user={user} species={species} setIsVisible={setIsVisible} plantSpecies={plantSpecies} onSubmit={onSubmit} />
               )}
               <br></br>
 
