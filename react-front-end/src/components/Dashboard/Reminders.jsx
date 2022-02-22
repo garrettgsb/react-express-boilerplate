@@ -20,6 +20,8 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
         console.log(response.data);
         console.log("rerereresponse.data", response.data[0]);
         setTimeout(() => {
+          document.querySelector(`label[for=reminder-${plantId}]`).classList.remove("strikethrough");
+          document.getElementById(`reminder-${plantId}`).checked = false;
           setAppState((prev) => {
             return {
               ...prev,
@@ -31,10 +33,8 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
               ],
             };
           });
-          document.querySelector(`label[for=reminder-${plantId}]`).classList.remove("strikethrough");
-          document.getElementById(`reminder-${plantId}`).checked = false;
         }, 1200);
-
+        
         setTimeout(() => setWatered(null), 1200);
       });
   };
@@ -81,10 +81,11 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
         <Feed>
           <ReminderGroup
             checkboxClass="overdue"
-            label={"Overdue! Please water your baby!"}
+            label={"Please water your baby"}
             reminders={overdueReminders}
+            watered={watered}
           />
-          <ReminderGroup label={"Coming soon"} reminders={comingdueReminders} />
+          <ReminderGroup label={"Coming due"} reminders={comingdueReminders} />
           <ReminderGroup label={"Not yet due"} reminders={notdueReminders} />
         </Feed>
       </Card.Content>
