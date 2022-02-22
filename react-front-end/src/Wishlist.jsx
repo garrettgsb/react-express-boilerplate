@@ -106,17 +106,12 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
                     </div>
                   </div>
                   <div className="extra content">
-                    <span className="left floated">
-                      <Link to={`/profile/${user.id}`}>
-                        <Button basic color='green'>
-                          <i className="leaf icon"></i>
-                          {plantsForUser && plantsForUser.length} Plants
-                        </Button>
-                      </Link>
-                    </span>
-                    <span className="right floated">
-                      <button className="ui button"><i className="add icon"></i>Follow</button>
-                    </span>
+                    <Link to={`/profile/${user.id}`}>
+                      <Button basic color='green'>
+                        <i className="leaf icon"></i>
+                        {plantsForUser && plantsForUser.length} Plants
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -26,7 +26,7 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
 
   return (
     <>
-      <Card
+      <Card id="room-plant"
         style={{
           border: isDragging ? "5px solid pink" : "0px",
           background: "#EBEBE8",
@@ -38,7 +38,7 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
         >
           <Image
             src={url}
-            style={{ borderRadius: "15%", width: "80px", height: "auto" }}
+            style={{ borderRadius: "15%", width: "75px", height: "auto" }}
           />
 
           <div className="plant-info">
