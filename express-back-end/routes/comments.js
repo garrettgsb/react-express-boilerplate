@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  getComments
+  getComments, saveNewComment
 } = require('../db/comments-queries');
 
 // GET all comments
@@ -20,6 +20,19 @@ router.get("/", (req, res) => {
           error: err.message
         });
     });
+});
+
+// POST to comments table
+router.post("/", (req, res) => {
+  console.log('Route for new comment');
+
+  const comment = req.body;
+  
+  saveNewComment(comment)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((error) => console.log(error));
 });
 
 module.exports = router;
