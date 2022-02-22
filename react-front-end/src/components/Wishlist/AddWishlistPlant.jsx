@@ -14,7 +14,7 @@ import {
 } from "semantic-ui-react";
 import { getPlantByName, getSpeciesById } from "../../helpers/selectors";
 
-export default function AddWishlistPlant({ user, species, setIsVisible, plantSpecies }) {
+export default function AddWishlistPlant({ user, species, setIsVisible, plantSpecies, onSubmit }) {
 
   const plant = getSpeciesById(species, plantSpecies);
 
@@ -80,7 +80,8 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
     })
       .then((response) => {
         console.log("Post made to db!", response);
-        const newPlant = response.data[0]
+        onSubmit(); // display success message
+        const newPlant = response.data[0];
         axios.post("/api/reminders", {
           plant_id: newPlant.id,
           user_id: user.id,
@@ -140,104 +141,89 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
             )}
             {/* End of ternary */}
           </Grid.Column>
-          {/* Start of ternary to only show if plant selected  */}
-          {state.plant ? (
-            <Grid.Column verticalAlign="middle" centered="true" width={5}>
-              <Dropdown
-                className="dropdown"
-                placeholder="Select Plant"
-                fluid
-                selection
-                options={speciesOptions}
-                onChange={clickHandler}
-                defaultSearchQuery={"Monstera deliciosa"}
-              />
-              <Form onSubmit={submitForm}>
-                <Form.Field>
-                  <Form.Input
+          <Grid.Column verticalAlign="middle" centered="true" width={5}>
+            <Dropdown
+              className="dropdown"
+              placeholder="Select Plant"
+              fluid
+              selection
+              options={speciesOptions}
+              onChange={clickHandler}
+              defaultValue={state.plant.scientific_name}
+            />
+            <Form onSubmit={submitForm}>
+              <Form.Field>
+                <Form.Input
+                  required={true}
+                  onChange={(e, data) => {
+                    console.log("EEEEEE", data);
+                    setState((prev) => ({
+                      ...prev,
+                      nickname: data.value,
+                    }));
+                  }}
+                  label="Nickname"
+                  placeholder="Add a name for your plant! (eg. Christofern)"
+                />
+              </Form.Field>
+
+              <Form.Field>
+                <Form.Input
+                  required={true}
+                  label="Location"
+                >
+                  <Dropdown
+                    placeholder="Tell us where your plant lives! (eg. Living room)"
+                    fluid
+                    selection
                     required={true}
-                    onChange={(e, data) => {
-                      console.log("EEEEEE", data);
-                      setState((prev) => ({
-                        ...prev,
-                        nickname: data.value,
-                      }));
-                    }}
-                    label="Nickname"
-                    placeholder="Add a name for your plant! (eg. Christofern)"
+                    options={locationOptions}
+                    onChange={onClick}
+                    defaultValue="Living room"
                   />
-                </Form.Field>
+                </Form.Input>
+              </Form.Field>
 
-                <Form.Field>
-                  <Form.Input
-                    required={true}
-                    label="Location"
-                  >
-                    <Dropdown
-                      placeholder="Tell us where your plant lives! (eg. Living room)"
-                      fluid
-                      selection
-                      required={true}
-                      options={locationOptions}
-                      onChange={onClick}
-                      defaultValue="Living room"
-                    />
-                  </Form.Input>
-                </Form.Field>
-
-                <div className="plant-info">
-                  <List className="plant-list">
-                    <List.Item>
-                      <List.Icon name="rain" />
-                      <List.Content>
-                        Every {state.plant.watering_interval} Days
-                      </List.Content>
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="sun" />
-                      <List.Content>{state.plant.light_level}</List.Content>
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="lab" />
-                      <List.Content>{state.plant.soil_type}</List.Content>
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="book" />
-                      <List.Content>
-                        {state.plant.difficulty_level}
-                      </List.Content>
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="world" />
-                      <List.Content>{state.plant.category}</List.Content>
-                    </List.Item>
-                    <List.Item>
-                      <List.Icon name="paw" />
-                      <List.Content>
-                        {state.plant.toxic ? "Toxic" : "Non-Toxic"}
-                      </List.Content>
-                    </List.Item>
-                  </List>
-                </div>
-                <br></br>
-                <Button type="submit" positive floated="right">
-                  Save Your Plant!
-                </Button>
-              </Form>
-            </Grid.Column>
-          ) : (
-            <Grid.Column verticalAlign="middle" centered width={5}>
-              <Dropdown
-                className="dropdown-default"
-                placeholder="Select Plant"
-                fluid
-                selection
-                options={speciesOptions}
-                onChange={clickHandler}
-              />
-            </Grid.Column>
-          )}
-          {/* End of ternary */}
+              <div className="plant-info">
+                <List className="plant-list">
+                  <List.Item>
+                    <List.Icon name="rain" />
+                    <List.Content>
+                      Every {state.plant.watering_interval} Days
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name="sun" />
+                    <List.Content>{state.plant.light_level}</List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name="lab" />
+                    <List.Content>{state.plant.soil_type}</List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name="book" />
+                    <List.Content>
+                      {state.plant.difficulty_level}
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name="world" />
+                    <List.Content>{state.plant.category}</List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name="paw" />
+                    <List.Content>
+                      {state.plant.toxic ? "Toxic" : "Non-Toxic"}
+                    </List.Content>
+                  </List.Item>
+                </List>
+              </div>
+              <br></br>
+              <Button type="submit" positive floated="right">
+                Save Your Plant!
+              </Button>
+            </Form>
+          </Grid.Column>
         </Grid>
       </Segment>
     </div>

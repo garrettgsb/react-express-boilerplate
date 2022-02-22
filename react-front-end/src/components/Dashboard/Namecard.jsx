@@ -9,7 +9,7 @@ export default function Namecard({ user, plants }) {
   const name = user && user.name;
   const quote = user && user.quote;
 
-  const plantsForUser = getPlantsForUser(plants, user.id);
+  const plantsForUser = user && getPlantsForUser(plants, user.id);
 
   return (
     <main class="name-container">

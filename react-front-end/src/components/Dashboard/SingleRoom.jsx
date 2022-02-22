@@ -1,7 +1,7 @@
 import React from "react";
 import { useDrop } from "react-dnd";
 import { Card, Grid } from "semantic-ui-react";
-import { getPlantReminder, getUserReminders } from "../../helpers/selectors";
+import { getPlantReminder } from "../../helpers/selectors";
 import Picture from "./Picture";
 
 export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlants, setSelectedPlant, reminders, userId }) {
@@ -15,12 +15,6 @@ export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlant
       isOver: !!monitor.isOver(),
     }),
   }));
-
-  // const remindersForUser = getUserReminders(userId, reminders);
-  // console.log({ remindersForUser })
-
-  const plantReminder = getPlantReminder(1, reminders);
-  // console.log({ plantReminder })
 
   const PictureList = roomPlants && roomPlants.map((plant) => ({
     id: plant.id,
@@ -38,22 +32,21 @@ export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlant
         </Card.Header>
       </Card.Content>
 
-      <Grid>
-        <Grid.Row columns={2}>
-          <div className={roomClassName} ref={drop}>
-            {PictureList.map((picture) => {
-              return <Picture
-                url={picture.url}
-                id={picture.id}
-                key={picture.id}
-                nickname={picture.nickname}
-                setSelectedPlant={setSelectedPlant}
-                plant={picture.plant}
-                reminder={picture.reminder} />;
-            })}
-          </div>
-        </Grid.Row>
-      </Grid>
+      <div className={roomClassName} ref={drop}>
+        <Card.Group itemsPerRow={2}>
+          {PictureList.map((picture) => {
+            return <Picture
+              url={picture.url}
+              id={picture.id}
+              key={picture.id}
+              nickname={picture.nickname}
+              setSelectedPlant={setSelectedPlant}
+              plant={picture.plant}
+              reminder={picture.reminder} />;
+          })}
+        </Card.Group>
+      </div>
+
     </Card>
   )
 }

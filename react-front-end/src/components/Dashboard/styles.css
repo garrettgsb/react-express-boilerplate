@@ -20,42 +20,42 @@
 
 .Board.living {
   overflow: auto;
-  max-height: 250px;
+  max-height: 275px;
   width: 100%;
-  height: 250px;
-  background: #9DBF98;
+  height: 275px;
+  background: #9dbf98;
   opacity: 0.95;
 }
 
 .Board.dining {
   overflow: auto;
-  max-height: 250px;
+  max-height: 275px;
   width: 100%;
-  height: 250px;
-  background: #9DBF98;
+  height: 275px;
+  background: #9dbf98;
   opacity: 0.95;
 }
 
 .Board.bedroom {
   overflow: auto;
-  max-height: 250px;
+  max-height: 275px;
   width: 100%;
-  height: 250px;
-  background: #9DBF98;
+  height: 275px;
+  background: #9dbf98;
   opacity: 0.95;
 }
 
 .Board.office {
   overflow: auto;
-  max-height: 250px;
+  max-height: 275px;
   width: 100%;
-  height: 250px;
-  background: #9DBF98;
+  height: 275px;
+  background: #9dbf98;
   opacity: 0.95;
 }
 
 div.header.room-header {
-  height: 5px;
+  height: 10px;
 }
 
 div.notifications {
@@ -69,7 +69,6 @@ div.notifications {
 
 .watered-feedback {
   font-size: 15px !important;
-
 }
 
 .top-label {
@@ -79,48 +78,65 @@ div.notifications {
 }
 
 .overdue label {
-  color: #DB2828 !important;
+  color: #db2828 !important;
   font-style: italic !important;
 }
 
 /* Strikethrough for Checkbox */
 
 .strikethrough {
-	display: inline-block !important;
-	position: relative !important;
-	transition: all 0.5s cubic-bezier(.55, 0, .1, 1) !important;
+  display: inline-block !important;
+  position: relative !important;
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1) !important;
   text-decoration: line-through 1.5px black;
 }
 
-
-
 @keyframes strikethrough {
-	from {
-		transform: scaleX(0) !important;
-	}
-	to {
-		transform: scaleX(3) !important;
-	}
+  from {
+    transform: scaleX(0) !important;
+  }
+  to {
+    transform: scaleX(3) !important;
+  }
 }
 
 h3.ui.header.dash-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-} 
-
+}
 
 div.plant-card {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
-  column-gap: 10px;
+  justify-content: center;
+  column-gap: 5%;
+  margin: auto;
+  width: 100%;
 }
 
 div.plant-progress {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  row-gap: 5px;
+  justify-content: center;
+  row-gap: 2px;
+}
+
+div.plant-info {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  justify-content: center;
+  row-gap: 2px;
+}
+
+div.plant-nickname {
+  display: flex;
+  flex-direction: row;
+  min-width: 90px;
+  justify-content: center;
+}
+
+.ui.progress .bar>.progress {
+  right: 0.1em;
 }
