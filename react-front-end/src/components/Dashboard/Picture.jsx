@@ -26,7 +26,7 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
 
   return (
     <>
-      <Card
+      <Card id="room-plant"
         style={{
           border: isDragging ? "5px solid pink" : "0px",
           background: "#EBEBE8",

@@ -14,7 +14,11 @@ export default function Navbar({ users, user, login, logout }) {
     if (user) {
       return (
         <>
-          <Menu.Item>Logged in as {loggedUser && loggedUser.name}</Menu.Item>
+          <Menu.Item>
+            {" "}
+            <Image src={loggedUser && loggedUser.avatar} avatar /> Logged in as {loggedUser && loggedUser.name}
+          </Menu.Item>
+
           <Dropdown item text="Menu">
             <Dropdown.Menu>
               <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
@@ -26,7 +30,7 @@ export default function Navbar({ users, user, login, logout }) {
 
           <Menu.Item>
             <Link to="/">
-              <Button color="grey" onClick={logout} animated="fade">
+              <Button inverted color="grey" onClick={logout} animated="fade">
                 <Button.Content visible>Logout</Button.Content>
                 <Button.Content hidden>
                   <Icon name="sign-out" />
@@ -40,7 +44,7 @@ export default function Navbar({ users, user, login, logout }) {
       return (
         <Menu.Item>
           <Link to="/dashboard">
-            <Button color="grey" onClick={login} animated="fade">
+            <Button inverted color="grey" onClick={login} animated="fade">
               <Button.Content visible>Login</Button.Content>
               <Button.Content hidden>
                 <Icon name="sign-in" />

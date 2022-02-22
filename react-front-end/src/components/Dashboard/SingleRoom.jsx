@@ -16,37 +16,39 @@ export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlant
     }),
   }));
 
-  const PictureList = roomPlants && roomPlants.map((plant) => ({
-    id: plant.id,
-    url: plant.photo,
-    nickname: plant.nickname,
-    plant: plant,
-    reminder: getPlantReminder(plant.id, reminders)
-  }));
+  const PictureList =
+    roomPlants &&
+    roomPlants.map((plant) => ({
+      id: plant.id,
+      url: plant.photo,
+      nickname: plant.nickname,
+      plant: plant,
+      reminder: getPlantReminder(plant.id, reminders),
+    }));
 
   return (
     <Card>
-      <Card.Content>
-        <Card.Header className="room-header">
-          {roomName}
-        </Card.Header>
+      <Card.Content id="room">
+        <Card.Header className="room-header">{roomName}</Card.Header>
       </Card.Content>
 
       <div className={roomClassName} ref={drop}>
         <Card.Group itemsPerRow={2}>
           {PictureList.map((picture) => {
-            return <Picture
-              url={picture.url}
-              id={picture.id}
-              key={picture.id}
-              nickname={picture.nickname}
-              setSelectedPlant={setSelectedPlant}
-              plant={picture.plant}
-              reminder={picture.reminder} />;
+            return (
+              <Picture
+                url={picture.url}
+                id={picture.id}
+                key={picture.id}
+                nickname={picture.nickname}
+                setSelectedPlant={setSelectedPlant}
+                plant={picture.plant}
+                reminder={picture.reminder}
+              />
+            );
           })}
         </Card.Group>
       </div>
-
     </Card>
-  )
+  );
 }
