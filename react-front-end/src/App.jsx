@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './index.css';
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './Home';
-import NotFound from './NotFound';
-import Profile from './Profile';
-import Dashboard from './Dashboard';
-import Plant from './Plant';
-import Cookies from 'universal-cookie';
-import Newsfeed from './Newsfeed';
-import Wishlist from './Wishlist';
+import React, { Component } from "react";
+import axios from "axios";
+import "./index.css";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./Home";
+import NotFound from "./NotFound";
+import Profile from "./Profile";
+import Dashboard from "./Dashboard";
+import Plant from "./Plant";
+import Cookies from "universal-cookie";
+import Newsfeed from "./Newsfeed";
+import Wishlist from "./Wishlist";
 
 const cookies = new Cookies();
 
@@ -19,36 +19,36 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: 'Click the button to load data!',
-      name: 'Kanye',
-      plants: [{ user_id: 'Hello?' }],
-      users: [{ name: 'Leafy' }],
-      species: [{ name: 'beleaf' }],
+      message: "Click the button to load data!",
+      name: "Kanye",
+      plants: [{ user_id: "Hello?" }],
+      users: [{ name: "Leafy" }],
+      species: [{ name: "beleaf" }],
       posts: [],
       comments: [],
       user: cookies.get("user_id"),
       wishlist: "",
-      reminders: []
+      reminders: [],
     };
   }
 
   login = () => {
-    cookies.set('user_id', 2, { path: '/' });
+    cookies.set("user_id", 2, { path: "/" });
     this.setState({
-      user: cookies.get('user_id'),
+      user: cookies.get("user_id"),
     });
   };
 
   logout = () => {
-    cookies.remove('user_id', { path: '/' });
+    cookies.remove("user_id", { path: "/" });
     this.setState({
-      user: '',
+      user: "",
     });
   };
 
   renderFilteredPosts = (topic) => {
     axios
-      .post('/api/posts/filter', { data: { topic } })
+      .post("/api/posts/filter", { data: { topic } })
       .then((response) => {
         this.setState((prev) => {
           return { ...prev, posts: [...response.data.posts] };
@@ -61,7 +61,7 @@ class App extends Component {
 
   createNewPost = (user, title, description, photo, topic) => {
     axios
-      .post('/api/posts', {
+      .post("/api/posts", {
         user_id: user.id,
         title: title,
         description: description,
@@ -69,10 +69,32 @@ class App extends Component {
         topic: topic,
       })
       .then((response) => {
+        const post_id = response.data[0].id;
+        const comment_text = "Congrats on your new post. Keep growing, we are rooting for you!";
+        const beleaf_id = 4;
+        this.createNewComment(post_id, comment_text, beleaf_id);
         this.setState((prev) => {
           return { ...prev, posts: [...prev.posts, response.data[0]] };
         });
-        console.log('Post made to db!', response);
+        console.log("Post made to db!", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  createNewComment = (post_id, comment_text, beleaf_id) => {
+    axios
+      .post("/api/comments", {
+        post_id: post_id,
+        user_id: beleaf_id || this.state.user,
+        comment_text: comment_text,
+      })
+      .then((response) => {
+        this.setState((prev) => {
+          return { ...prev, comments: [...prev.comments, response.data[0]] };
+        });
+        console.log("Comment made to db!", response);
       })
       .catch(function (error) {
         console.log(error);
@@ -81,7 +103,7 @@ class App extends Component {
 
   fetchData = () => {
     axios
-      .get('/api/data') // You can simply make your requests to "/api/whatever you want"
+      .get("/api/data") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
         // handle success
         console.log(response.data); // The entire response from the Rails API
@@ -95,19 +117,21 @@ class App extends Component {
 
   updateLocation = (id, location) => {
     axios
-      .post("/api/plants",
-        {
-          id: id,
-          location: location,
-        })
+      .post("/api/plants", {
+        id: id,
+        location: location,
+      })
       .then((response) => {
         this.setState((prev) => {
-          return { ...prev, plants: prev.plants.map((plant) => {
-            if (plant.id === id) {
-              plant.location = location; // only updating plant location of the plant id passed in
-            }
-            return plant;
-          })}; // already created new object with ...prev
+          return {
+            ...prev,
+            plants: prev.plants.map((plant) => {
+              if (plant.id === id) {
+                plant.location = location; // only updating plant location of the plant id passed in
+              }
+              return plant;
+            }),
+          }; // already created new object with ...prev
         });
         console.log("Put made to db!", response);
       })
@@ -118,9 +142,9 @@ class App extends Component {
 
   fetchUsers = () => {
     axios
-      .get('/api/users') // Just to test that DB layer works
+      .get("/api/users") // Just to test that DB layer works
       .then((response) => {
-        console.log('Users: ' + response.data.users);
+        console.log("Users: " + response.data.users);
         this.setState({
           users: response.data.users,
         });
@@ -128,8 +152,8 @@ class App extends Component {
   };
 
   fetchPlants = () => {
-    axios.get('/api/plants').then((response) => {
-      console.log('Plants: ' + response.data.plants);
+    axios.get("/api/plants").then((response) => {
+      console.log("Plants: " + response.data.plants);
       this.setState({
         plants: response.data.plants,
       });
@@ -138,7 +162,6 @@ class App extends Component {
 
   fetchReminders = () => {
     axios.get("/api/reminders").then((response) => {
-
       console.log("Reminders: ", response.data);
       this.setState({
         reminders: response.data,
@@ -147,8 +170,8 @@ class App extends Component {
   };
 
   fetchPosts = () => {
-    axios.get('/api/posts').then((response) => {
-      console.log('Posts: ' + response.data.posts);
+    axios.get("/api/posts").then((response) => {
+      console.log("Posts: " + response.data.posts);
       this.setState({
         posts: response.data.posts,
       });
@@ -166,9 +189,9 @@ class App extends Component {
 
   fetchSpecies = () => {
     axios
-      .get('/api/species') // Just to test that DB layer works
+      .get("/api/species") // Just to test that DB layer works
       .then((response) => {
-        console.log('Species: ' + response.data.species);
+        console.log("Species: " + response.data.species);
         this.setState({
           species: response.data.species,
         });
@@ -177,9 +200,9 @@ class App extends Component {
 
   fetchWishlist = () => {
     axios
-      .get('/api/wishlist') // Just to test that DB layer works
+      .get("/api/wishlist") // Just to test that DB layer works
       .then((response) => {
-        console.log('Wishlist: ' + response.data.wishlist);
+        console.log("Wishlist: " + response.data.wishlist);
         this.setState({
           wishlist: response.data.wishlist,
         });
@@ -206,10 +229,10 @@ class App extends Component {
         <div className="App">
           <Navbar user={this.state.user} login={this.login} logout={this.logout} users={this.state.users} />
           <Routes>
-            <Route path='*' element={<NotFound />} />
-            <Route path='/' element={<Home login={this.login} user={this.state.user} />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Home login={this.login} user={this.state.user} />} />
             <Route
-              path='/dashboard'
+              path="/dashboard"
               element={
                 <Dashboard
                   plants={this.state.plants}
@@ -222,9 +245,9 @@ class App extends Component {
                 />
               }
             />
-            {console.log('STATE POSTS', this.state.posts)}
+            {console.log("STATE POSTS", this.state.posts)}
             <Route
-              path='/newsfeed'
+              path="/newsfeed"
               element={
                 <Newsfeed
                   posts={this.state.posts}
@@ -233,6 +256,7 @@ class App extends Component {
                   userId={this.state.user}
                   createNewPost={this.createNewPost}
                   renderFilteredPosts={this.renderFilteredPosts}
+                  createNewComment={this.createNewComment}
                 />
               }
             />
@@ -244,10 +268,10 @@ class App extends Component {
               path="/plants/:plant_id"
               element={<Plant plants={this.state.plants} users={this.state.users} user_id={this.state.user} />}
             />
-            <Route path='/login/:user_id' />
-            <Route path='/logout' />
+            <Route path="/login/:user_id" />
+            <Route path="/logout" />
             <Route
-              path='/wishlist'
+              path="/wishlist"
               element={
                 <Wishlist
                   users={this.state.users}

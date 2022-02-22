@@ -22,13 +22,14 @@ const saveNewPost = (data) => {
   )
 
     .then((res) => {
-      console.log('res.rows[0]', res.rows[0]);
+  
       return res.rows;
     })
     .catch((err) => {
       console.log('DB error inserting new post: ' + err.message);
     });
 };
+
 
 const getFilteredPosts = (topic) => {
   return db.query(`SELECT * FROM posts WHERE topic = $1 ORDER BY created_at DESC;`,

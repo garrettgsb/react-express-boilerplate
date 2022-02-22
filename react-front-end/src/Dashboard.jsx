@@ -42,39 +42,36 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
-              <Segment clearing>
-                <Header textAlign="left" as="h2">
-                  DASHBOARD
-                  <Link to="/wishlist">
-                    <Button
-                      basic
-                      positive
-                      content="See Wishlist"
-                      floated="right"
-                    />
-                  </Link>
-                  <Button positive floated="right" onClick={() => setIsVisible(true)}>
-                    Add A New Plant!
-                  </Button>
-                </Header>
-              </Segment>
-
-              <Segment textAlign="left" raised>
+              <Segment raised >
                 <Header as="h3" className="dash-header">
-                  <div>
-                    Good Morning, {name}!
-                  </div>
+                 <h2>DASHBOARD</h2> Good Morning, {name}!
                   <DailyReminders plants={userPlants} reminders={reminders} userId={userId} />
                 </Header>
+            
               </Segment>
+
               {success && (
                 <Message color="green" id="animated-example" className={success && "fadeOut"}>
-                  <Message.Header><Icon name="leaf" />Congrats! Your new plant has been added successfully.</Message.Header>
+                  <Message.Header>
+                    <Icon name="leaf" />
+                    Congrats! Your new plant has been added successfully.
+                  </Message.Header>
                 </Message>
               )}
+              <Grid.Column>
+                <Button positive floated="right" onClick={() => setIsVisible(true)}>
+                  Add A New Plant!
+                </Button>
+              </Grid.Column>
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>
-                  <Rooms plants={plants} userId={userId} updateLocation={updateLocation} setSelectedPlant={setSelectedPlant} reminders={reminders} />
+                  <Rooms
+                    plants={plants}
+                    userId={userId}
+                    updateLocation={updateLocation}
+                    setSelectedPlant={setSelectedPlant}
+                    reminders={reminders}
+                  />
                 </DndProvider>
               </Grid.Row>
             </Grid.Column>
@@ -88,18 +85,9 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
         </Grid>
         <br></br>
         <br></br>
-        {isVisible && (
-          <AddPlant user={user} species={species} setIsVisible={setIsVisible} setAppState={setAppState} onSubmit={onSubmit} />
-        )}
+        {isVisible && <AddPlant user={user} species={species} setIsVisible={setIsVisible} setAppState={setAppState} onSubmit={onSubmit} />}
         <br></br>
-        {selectedPlant && (
-          <ViewPlant
-            user={user}
-            species={species}
-            plant={selectedPlant}
-            closeViewPlant={() => setSelectedPlant(null)}
-          />
-        )}
+        {selectedPlant && <ViewPlant user={user} species={species} plant={selectedPlant} closeViewPlant={() => setSelectedPlant(null)} />}
         <br></br>
       </Container>
     );
