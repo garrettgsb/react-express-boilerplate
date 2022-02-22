@@ -29,7 +29,7 @@ export function SingleRoom({ addImageToBoard, roomName, roomClassName, roomPlant
   return (
     <Card>
       <Card.Content id="room">
-        <Card.Header className="room-header">{roomName}</Card.Header>
+        <Card.Header className="room-header" style={{ color: "white" }}>{roomName}</Card.Header>
       </Card.Content>
 
       <div className={roomClassName} ref={drop}>

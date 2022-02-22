@@ -120,7 +120,7 @@ div.ui.container {
   margin: auto;
 }
 
-div.avatar {
+div.ui.card.avatar {
   position: fixed;
 }
 

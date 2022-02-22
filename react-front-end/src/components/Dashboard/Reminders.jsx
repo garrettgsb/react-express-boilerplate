@@ -64,7 +64,7 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
   return (
     <Card className="reminders">
       <Card.Content>
-        <Card.Header>
+        <Card.Header className="reminders-title">
           Watering Reminders <Image src={wateringcan} size="tiny" />{" "}
         </Card.Header>
         

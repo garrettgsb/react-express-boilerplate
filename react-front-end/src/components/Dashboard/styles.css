@@ -197,3 +197,12 @@ span.info-title {
   font-size: 18px;
   margin: 10px;
 }
+
+div.ui.card.reminders {
+  background-color: rgb(170 206 214 / 77%);
+}
+
+div.header.reminders-title {
+  color: white !important;
+  text-shadow: 2px 2px 2px black;
+} 

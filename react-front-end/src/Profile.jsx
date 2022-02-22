@@ -4,7 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import PlantList from "./components/Profile/PlantList";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import "./components/Profile/Profile.css";
-import { Container, Grid, Segment, Button, Card } from "semantic-ui-react";
+import { Container, Grid, Segment, Button, Card, Image } from "semantic-ui-react";
 
 export default function Profile({ plants, users, userId }) {
 
@@ -41,10 +41,8 @@ export default function Profile({ plants, users, userId }) {
 
             <Grid.Column width={4}>
               <div>
-                <div className="ui card">
-                  <div className="image">
-                    <img src={user && user.avatar} alt="avatar" />
-                  </div>
+                <div className="ui card avatar">
+                  <Image src={user && user.avatar} alt="avatar" size="medium" />
                   <div className="content">
                     <a className="header">{user && user.name}</a>
                     <div className="meta">
