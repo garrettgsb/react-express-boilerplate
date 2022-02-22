@@ -46,13 +46,13 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
       ),
     },
     {
-      menuItem: "Add New Plant?",
+      menuItem: "Edit Plants",
       render: () => (
         <Message>
-          I don't need less plants, I need more shelves{" "}
           <Button color="olive" onClick={() => setIsVisible(true)}>
             Add New Plant
           </Button>
+          <Button color="grey">Delete Plant</Button>
         </Message>
       ),
     },
