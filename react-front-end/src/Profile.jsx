@@ -1,12 +1,14 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
 import PlantList from "./components/Profile/PlantList";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import "./components/Profile/Profile.css";
-import { Container, Grid, Segment, Button, Card, Image } from "semantic-ui-react";
+import { Container, Grid, Segment, Button, Card, Image, Message, Icon } from "semantic-ui-react";
 
 export default function Profile({ plants, users, userId }) {
+
+  const [success, setSuccess] = useState(false);
 
   const params = useParams();
   const user_id = Number(params.user_id);
@@ -15,6 +17,13 @@ export default function Profile({ plants, users, userId }) {
   const plantsForUser = getPlantsForUser(plants, user_id);
   const loggedUser = getUserById(users, userId);
   const profileUser = Number(user_id);
+
+  const onClick = () => {
+    setSuccess(true);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 3500);
+  };
 
   if (!user) {
     return (
@@ -33,11 +42,22 @@ export default function Profile({ plants, users, userId }) {
                   </h2> : <h2>My Profile</h2>}
               </Segment>
 
-              
+              <br></br>
+              {success && (
+                <>
+                  <Message color="green" id="animated-example" className={success && "fadeOut"}>
+                    <Message.Header><Icon name="leaf" />Plant successfully added to your Wishlist!</Message.Header>
+                    <p>
+                      <Link to="/wishlist">View <b>Wishlist</b> now.</Link>
+                    </p>
+                  </Message>
+                </>
+              )}
+              <br></br>
 
               <Segment style={{ overflow: 'auto', maxWidth: 2000, backgroundColor: "rgba(225, 205, 48, 0.25)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
                 <Card.Group itemsPerRow={3}>
-                  <PlantList plants={plantsForUser} user={userId} />
+                  <PlantList plants={plantsForUser} user={userId} onClick={onClick}/>
                 </Card.Group>
               </Segment>
             </Grid.Column>
@@ -53,7 +73,7 @@ export default function Profile({ plants, users, userId }) {
                     </div>
                     <div className="description">
                       {user && user.name} is an art director living in New York.
-                      <Segment color="olive" style={{ backgroundColor: "rgba(255, 255, 255, 0.20)"}}>
+                      <Segment color="olive" style={{ backgroundColor: "rgba(255, 255, 255, 0.20)" }}>
                         <h5>"{user && user.quote}"</h5>
                       </Segment>
                     </div>

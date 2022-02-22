@@ -41,7 +41,6 @@ code {
   position: fixed;
   top: 80%;
   left: 60%;
-
   transform: translate(-15%, -55%);
   color: white;
   text-shadow: 3px 3px 7px black;
