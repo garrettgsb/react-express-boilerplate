@@ -5,7 +5,7 @@ import { Feed, Divider, Icon } from "semantic-ui-react";
 import { getUserById } from "../../../helpers/selectors";
 
 export default function SingleComment({ users, comment_user_id, comment_text, commented_at }) {
-  const date = moment(commented_at).startOf("day").fromNow();
+  const date = moment(commented_at).fromNow();
 
   const user = getUserById(users, comment_user_id);
   const user_id = user && user.id;
