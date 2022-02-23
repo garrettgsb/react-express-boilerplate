@@ -23,7 +23,7 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
   return (
     <div>
       <div ref={divRef} />
-      <Segment>
+      <Segment raised style={{ width: "90%", margin: "auto", backgroundColor: "rgba(225, 205, 48, 0.70)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
         <Button
           className="close-button"
           size="mini"
