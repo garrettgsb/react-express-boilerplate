@@ -59,7 +59,7 @@ export default function SinglePost({
   const postedDate = moment(created_at).format("ll");
 
   return (
-    <Segment className="newsfeed" raised color="olive" style={{ backgroundColor: "rgba(225, 205, 48, 0.40)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
+    <Segment className="newsfeed" raised color="olive" style={{ backgroundColor: "rgba(225, 205, 48, 0.60)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
       <Segment.Group horizontal style={{ backgroundColor: "rgba(235, 235, 232, 0.8)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
         <Segment>
           <h2>{title}</h2>

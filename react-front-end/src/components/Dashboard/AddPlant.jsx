@@ -93,7 +93,6 @@ export default function AddPlant({
             setAppState((prev) => {
               return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
             });
-          });
       })
       .catch(function (error) {
         console.log(error);

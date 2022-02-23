@@ -6,9 +6,9 @@ VALUES (1, 1, 'Megan Thee Plant', 'Living room', '01-02-2022'),
 (5, 2, 'Blue Ivy', 'Bedroom', '02-12-2022'),
 (3, 3, 'Cactus Everdeen', 'Living room', '01-02-2022'),
 (3, 2, 'Mr. Prickles', 'Office', '01-02-2022'),
-(12, 2, 'Leafy', 'Living room', '02-02-2022'),
-(9, 2, 'Tree Diddy', 'Dining room', '02-08-2022'),
-(13, 2, 'Severus Snake', 'Bedroom', '02-15-2022'),
+-- (12, 2, 'Leafy', 'Living room', '02-02-2022'),
+-- (9, 2, 'Tree Diddy', 'Dining room', '02-08-2022'),
+(13, 2, 'Severus Snake', 'Living room', '02-15-2022'),
 (14, 1, 'Morgan Treeman', 'Living room', '07-07-2021'),
 (11, 3, 'Palmala Haris', 'Dining room', '08-04-2021')
 ;
