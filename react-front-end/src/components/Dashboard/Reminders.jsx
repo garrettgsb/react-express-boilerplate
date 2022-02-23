@@ -63,7 +63,7 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
 
   return (
     <Card className="reminders">
-      <Card.Content>
+      <Card.Content className="watering-can">
         <Card.Header className="reminders-title">
           Watering Reminders <Image src={wateringcan} size="tiny" />{" "}
         </Card.Header>
@@ -77,11 +77,11 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
           </>
         )}
       </Card.Content>
-      <Card.Content>
+      <Card.Content className="reminder-content">
         <Feed>
           <ReminderGroup
             checkboxClass="overdue"
-            label={"Please water your baby"}
+            label={"Water your baby"}
             reminders={overdueReminders}
             watered={watered}
           />

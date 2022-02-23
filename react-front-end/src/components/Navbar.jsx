@@ -13,13 +13,12 @@ export default function Navbar({ users, user, login, logout }) {
     if (user) {
       return (
         <>
-          <Menu.Item>
+          <Menu.Item className="logged-in" >
             {" "}
             <Image src={loggedUser && loggedUser.avatar} avatar /><span style={{ fontSize: "18px" }}>Logged in as <b>{loggedUser && loggedUser.name}</b></span>
           </Menu.Item>
-
-          <Dropdown item text="Menu" style= {{ fontSize: "16px" }}>
-            <Dropdown.Menu style= {{ fontSize: "16px"}}>
+          <Dropdown item text="Menu" className="dropdown-nav">
+            <Dropdown.Menu>
               <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
               <Dropdown.Item href="/newsfeed">Newsfeed</Dropdown.Item>
               <Dropdown.Item href={`/profile/${user}`}>Profile</Dropdown.Item>

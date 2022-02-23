@@ -1,4 +1,5 @@
 import React from "react";
+import "semantic-ui-css/semantic.min.css";
 import Rooms from "./components/Dashboard/Rooms";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -8,7 +9,6 @@ import Reminders from "./components/Dashboard/Reminders";
 import AddPlant from "./components/Dashboard/AddPlant";
 import ViewPlant from "./components/Dashboard/ViewPlant";
 
-import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
 import { Header, Segment, Container, Grid, Message, Icon } from "semantic-ui-react";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
@@ -44,13 +44,13 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
           <Grid.Row stretched>
             <Grid.Column width={12}>
               <Segment raised
-                style={{ backgroundColor: "rgba(225, 205, 48, 0.5)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}
+                style={{ backgroundColor: "rgba(225, 205, 48, 0.5)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)", }}
               >
-                <Header as="h3" className="dash-header">
-                  <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", paddingLeft: "10px", color: "white", textShadow: "2px 2px 2px black" }}>
-                    <h2>DASHBOARD</h2>
-                    <h3>
-                      <i>Good Morning, {name}!</i>
+                <Header as="h3" className="dash-header" >
+                  <div style={{ fontFamily: "Lobster", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", paddingLeft: "10px", color: "white", textShadow: "2px 2px 2px black" }}>
+                    <p className="dashboard-title">DASHBOARD</p>
+                    <h3 style={{ fontFamily: "Lobster", fontSize: "36px"}}>
+                      <p>Good Afternoon, {name}!</p>
                     </h3>
                   </div>
                   <DailyReminders plants={userPlants} reminders={reminders} userId={userId} setIsVisible={setIsVisible} />
