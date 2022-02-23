@@ -59,8 +59,8 @@ export default function SinglePost({
   const postedDate = moment(created_at).format("ll");
 
   return (
-    <Segment className="newsfeed" raised color="olive">
-      <Segment.Group horizontal>
+    <Segment className="newsfeed" raised color="olive" style={{ backgroundColor: "rgba(225, 205, 48, 0.40)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
+      <Segment.Group horizontal style={{ backgroundColor: "rgba(235, 235, 232, 0.8)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
         <Segment>
           <h2>{title}</h2>
         </Segment>
@@ -81,14 +81,14 @@ export default function SinglePost({
         </Segment>
 
       </Segment.Group>
-      <Segment.Group horizontal>
-        <Image src={photo} width="400px" height="300px" rounded />
-        <Segment>
-          <Header as="h3" block>
+      <Segment.Group horizontal style={{ background: "none"}}>
+        <Image src={photo} width="400px" height="300px" rounded style={{ margin: "auto"}}/>
+        <Segment >
+          <Header as="h3" block style={{ backgroundColor: "rgba(235, 235, 232, 0.8)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
             <Icon name="talk" color="olive" />
             {description}
           </Header>
-          <Segment>
+          <Segment style={{ backgroundColor: "rgba(235, 235, 232, 0.8)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
             {isVisibleCommentForm && (
               <NewCommentForm
                 user_id={user_id}
