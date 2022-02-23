@@ -5,7 +5,7 @@ import { Button, Card, Container, Divider, Grid, Icon, Image, Message, Segment, 
 import AddWishlistPlant from "./components/Wishlist/AddWishlistPlant";
 import { Link } from "react-router-dom";
 
-export default function Wishlist({ users, userId, wishlist, user_plants, species }) {
+export default function Wishlist({ users, userId, wishlist, user_plants, species, setAppState }) {
 
   const user = getUserById(users, userId);
   const plants = wishlist && getWishlistPlants(wishlist, userId);
@@ -84,7 +84,13 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
 
               <br></br>
               {isVisible && (
-                <AddWishlistPlant user={user} species={species} setIsVisible={setIsVisible} plantSpecies={plantSpecies} onSubmit={onSubmit} />
+                <AddWishlistPlant 
+                user={user} species={species} 
+                setIsVisible={setIsVisible} 
+                plantSpecies={plantSpecies} 
+                onSubmit={onSubmit}
+                setAppState={setAppState}
+                 />
               )}
               <br></br>
 
