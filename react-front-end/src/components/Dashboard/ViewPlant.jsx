@@ -50,7 +50,7 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
               <h3>
                 <b>{user.name}'s</b> Plant Since {plant.created_at.split("-")[0]}
               </h3>
-              <p>
+              <p className="nickname-plant">
                 <Icon name="leaf" />
                 Lives in {user.name}'s {plant.location}
               </p>
@@ -58,7 +58,7 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
             </div>
           </Grid.Column>
           <Grid.Column verticalAlign="middle" centered width={5}>
-            <div className="plant-info">
+            <div className="plant-info-card">
               <List className="plant-list">
                 <List.Item>
                   <List.Icon name="rain" />

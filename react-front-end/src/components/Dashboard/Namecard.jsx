@@ -19,7 +19,7 @@ export default function Namecard({ user, plants }) {
         </div>
         <Card.Content>
           <p className="Bulb">{name}</p>
-          <span className="date">
+          <span className="date-bulb">
             <Icon name="user" /> User since {user && user.created_at.split("-")[0]}
           </span>
           <div className="description">

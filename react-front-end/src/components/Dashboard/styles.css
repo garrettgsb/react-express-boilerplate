@@ -248,6 +248,14 @@ div.ui.header.reminders-title {
   text-shadow: 2px 2px 2px black !important;
 }
 
+.date-bulb {
+  font-family: Lobster;
+  font-size: 18px;
+  color: white;
+  text-shadow: 2px 2px 2px black !important;
+
+}
+
 .dashboard-title {
   font-family: Paytone One !important;
   font-size: 36px;
@@ -302,6 +310,10 @@ div.ui.header.reminders-title {
   font-size: 20px;
 }
 
-.plant-info {
-  
+.plant-info-card {
+  font-size: 20px;
+}
+
+.nickname-plant {
+  font-size: 16px;
 }
