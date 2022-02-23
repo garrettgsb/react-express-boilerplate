@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { Button, Card, Icon, Image, Label, Segment } from "semantic-ui-react";
 
-export default function PlantListItem({ user_id, id, scientificName, commonName, photo, description, nickname, plant_since }) {
+export default function PlantListItem({ user_id, id, scientificName, commonName, photo, description, nickname, plant_since, onClick }) {
 
   const [state, setState] = useState({
     wishlist_user_id: user_id,
@@ -61,6 +61,7 @@ export default function PlantListItem({ user_id, id, scientificName, commonName,
             basic
             onClick={() => {
               addWishlistPlant(state.wishlist_user_id, state.plant_id);
+              onClick();
               setState((prev) => ({
                 ...prev,
                 wishlist: {

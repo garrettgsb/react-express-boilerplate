@@ -11,7 +11,7 @@ import { SingleRoom } from "./SingleRoom";
 
 export default function Rooms({ plants, userId, updateLocation, setSelectedPlant, reminders }) {
   const addImageToBoard = (plant_id, location) => {
-    console.log({plant_id, location})
+    console.log({ plant_id, location })
     updateLocation(plant_id, location);
   }
   const allPlants = getPlantsForUser(plants, userId);
@@ -29,15 +29,15 @@ export default function Rooms({ plants, userId, updateLocation, setSelectedPlant
   return (
     <>
       <Container className="rooms">
-        <Segment color="olive" raised>
-          <Header>My Rooms</Header>
+        <Segment color="olive" raised style={{ backgroundColor: "rgba(225, 205, 48, 0.50)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
+          <Header className="reminders-title" style={{ color: "white" }}>My Rooms</Header>
         </Segment>
         <Grid>
           <Card.Group itemsPerRow={2}>
-            <SingleRoom addImageToBoard={addImageToBoard} roomName={livingRoom} roomClassName="Board living" roomPlants={livingPlants} setSelectedPlant={setSelectedPlant} reminders={reminders} userId={userId}/>
-            <SingleRoom addImageToBoard={addImageToBoard} roomName={diningRoom} roomClassName="Board dining" roomPlants={diningPlants} setSelectedPlant={setSelectedPlant} reminders={reminders} userId={userId}/>
-            <SingleRoom addImageToBoard={addImageToBoard} roomName={bedroom} roomClassName="Board bedroom" roomPlants={bedroomPlants} setSelectedPlant={setSelectedPlant} reminders={reminders} userId={userId}/>
-            <SingleRoom addImageToBoard={addImageToBoard} roomName={office} roomClassName="Board office" roomPlants={officePlants} setSelectedPlant={setSelectedPlant} reminders={reminders} userId={userId}/>
+            <SingleRoom addImageToBoard={addImageToBoard} roomName={livingRoom} roomClassName="Board living" roomPlants={livingPlants} setSelectedPlant={setSelectedPlant} reminders={reminders} userId={userId} />
+            <SingleRoom addImageToBoard={addImageToBoard} roomName={diningRoom} roomClassName="Board dining" roomPlants={diningPlants} setSelectedPlant={setSelectedPlant} reminders={reminders} userId={userId} />
+            <SingleRoom addImageToBoard={addImageToBoard} roomName={bedroom} roomClassName="Board bedroom" roomPlants={bedroomPlants} setSelectedPlant={setSelectedPlant} reminders={reminders} userId={userId} />
+            <SingleRoom addImageToBoard={addImageToBoard} roomName={office} roomClassName="Board office" roomPlants={officePlants} setSelectedPlant={setSelectedPlant} reminders={reminders} userId={userId} />
           </Card.Group>
         </Grid>
       </Container>
