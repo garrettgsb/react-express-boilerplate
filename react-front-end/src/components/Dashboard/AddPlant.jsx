@@ -5,20 +5,14 @@ import happy_plant from '../../assets/happy_plant.png';
 import { Segment, Image, Dropdown, Grid, Button, Form, Icon, List } from 'semantic-ui-react';
 import { getPlantByName } from '../../helpers/selectors';
 
-export default function AddPlant({
-  user,
-  species,
-  setIsVisible,
-  setAppState,
-  onSubmit,
-}) {
+export default function AddPlant({ user, species, setIsVisible, setAppState, onSubmit }) {
   const [state, setState] = useState({
     plant: null,
     nickname: '',
     location: 'Living room',
   });
 
-  const locationValues = ["Living room", "Dining room", "Bedroom", "Office"];
+  const locationValues = ['Living room', 'Dining room', 'Bedroom', 'Office'];
 
   const locationOptions = locationValues.map((element) => ({
     key: element,
@@ -46,7 +40,7 @@ export default function AddPlant({
     setIsVisible(false);
     window.scrollTo({
       top: 350,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
   useEffect(() => {
@@ -93,30 +87,23 @@ export default function AddPlant({
             setAppState((prev) => {
               return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
             });
+          });
       })
       .catch(function (error) {
         console.log(error);
       });
     onClose();
-  });
+  };
   return (
     <div>
       <div ref={divRef} />
       <Segment
         style={{
-          backgroundColor: "rgba(225, 205, 48, 0.50)",
-          backgroundImage:
-            "url(https://www.transparenttextures.com/patterns/asfalt-light.png)",
+          backgroundColor: 'rgba(225, 205, 48, 0.50)',
+          backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
         }}
       >
-        <Button
-          size="small"
-          inverted
-          color="red"
-          onClick={onClose}
-          floated="right"
-          animated="vertical"
-        >
+        <Button size="small" inverted color="red" onClick={onClose} floated="right" animated="vertical">
           <Button.Content hidden>Close</Button.Content>
           <Button.Content visible>
             <Icon name="window close" color="red" size="large" />
@@ -124,18 +111,11 @@ export default function AddPlant({
         </Button>
         <p className="add-plant">ADD PLANT</p>
         <Grid verticalAlign="middle" centered>
-          <Grid.Column width={5}>
-            {state.plant && (
-              <Image src={state.plant.photo} size="large" rounded />
-            )}
-          </Grid.Column>
+          <Grid.Column width={5}>{state.plant && <Image src={state.plant.photo} size="large" rounded />}</Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
             {state.plant ? (
-              <div
-                className="plant-info"
-                style={{ color: "white", textShadow: "2px 2px 2px black" }}
-              >
+              <div className="plant-info" style={{ color: 'white', textShadow: '2px 2px 2px black' }}>
                 <p className="title-name">Scientific Name:</p>
                 <p className="species-name"> {state.plant.scientific_name} </p>
                 <p className="title-name">Common Name: </p>
@@ -143,10 +123,10 @@ export default function AddPlant({
                 <h3>{state.plant.description}</h3>
               </div>
             ) : (
-              <div style={{ color: "white", textShadow: "2px 2px 2px black" }}>
+              <div style={{ color: 'white', textShadow: '2px 2px 2px black' }}>
                 <p className="congrats">Congrats on your new plant!</p>
                 <br></br>
-                <Image verticalAlign="middle" src={happy_plant} size="small" />
+                <Image verticalAlign="middle" src={happy_plant} size="medium" />
               </div>
             )}
             {/* End of ternary */}
@@ -187,9 +167,9 @@ export default function AddPlant({
                 <div
                   className="plant-info"
                   style={{
-                    color: "white",
-                    textShadow: "2px 2px 2px black",
-                    fontSize: "18px",
+                    color: 'white',
+                    textShadow: '2px 2px 2px black',
+                    fontSize: '18px',
                   }}
                 >
                   <List className="plant-list">
