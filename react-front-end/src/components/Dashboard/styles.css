@@ -141,7 +141,10 @@ h3.ui.header.dash-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-family: lobster;
+  font-size: 22px;
 }
+
 
 div.plant-card {
   display: flex;
@@ -222,4 +225,22 @@ div.ui.checkbox {
 
 .ui.checkbox label {
   font-size: 20px;
+}
+
+span.date {
+  font-family: lobster;
+  font-size: 17px;
+}
+
+div.ui.header.reminders-title {
+  font-size: 29px;
+  font-family: Patua One;
+}
+
+.reminder-content {
+  padding-top: 0px !important;
+}
+
+.watering-can {
+  padding-bottom: 10px !important;
 }
