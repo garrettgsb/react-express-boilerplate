@@ -2,7 +2,7 @@
   text-align: center;
   background-image: url("https://images.unsplash.com/photo-1490932056085-0fd20a6cc206?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTJ8MTEwMjgyOXx8ZW58MHx8fHw%3D&w=1000&q=80");
   background-repeat: repeat;
-  background-size: contain;
+  /* background-size: contain; */
 }
 
 .App-logo {

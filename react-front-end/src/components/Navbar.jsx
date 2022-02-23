@@ -16,7 +16,7 @@ export default function Navbar({ users, user, login, logout }) {
         <>
           <Menu.Item>
             {" "}
-            <Image src={loggedUser && loggedUser.avatar} avatar /> Logged in as {loggedUser && loggedUser.name}
+            <Image src={loggedUser && loggedUser.avatar} avatar /><span style={{ fontSize: "18px" }}>Logged in as {loggedUser && loggedUser.name}</span>
           </Menu.Item>
 
           <Dropdown item text="Menu">
