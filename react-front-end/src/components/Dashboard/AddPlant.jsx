@@ -5,20 +5,14 @@ import happy_plant from '../../assets/happy_plant.png';
 import { Segment, Image, Dropdown, Grid, Button, Form, Icon, List } from 'semantic-ui-react';
 import { getPlantByName } from '../../helpers/selectors';
 
-export default function AddPlant({
-  user,
-  species,
-  setIsVisible,
-  setAppState,
-  onSubmit,
-}) {
+export default function AddPlant({ user, species, setIsVisible, setAppState, onSubmit }) {
   const [state, setState] = useState({
     plant: null,
     nickname: '',
     location: 'Living room',
   });
 
-  const locationValues = ["Living room", "Dining room", "Bedroom", "Office"];
+  const locationValues = ['Living room', 'Dining room', 'Bedroom', 'Office'];
 
   const locationOptions = locationValues.map((element) => ({
     key: element,
@@ -45,8 +39,8 @@ export default function AddPlant({
   const onClose = (event) => {
     setIsVisible(false);
     window.scrollTo({
-      top: 350,
-      behavior: "smooth",
+      top: 0,
+      behavior: 'smooth',
     });
   };
   useEffect(() => {
@@ -93,60 +87,50 @@ export default function AddPlant({
             setAppState((prev) => {
               return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
             });
+          })
       })
       .catch(function (error) {
         console.log(error);
       });
     onClose();
   };
+  
   return (
     <div>
       <div ref={divRef} />
       <Segment
         style={{
-          backgroundColor: "rgba(225, 205, 48, 0.50)",
-          backgroundImage:
-            "url(https://www.transparenttextures.com/patterns/asfalt-light.png)",
+          backgroundColor: 'rgba(225, 205, 48, 0.50)',
+          backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
         }}
       >
-        <Button
-          size="small"
-          inverted
-          color="red"
-          onClick={onClose}
-          floated="right"
-          animated="vertical"
-        >
+        <Button size="small" inverted color="red" onClick={onClose} floated="right" animated="vertical">
           <Button.Content hidden>Close</Button.Content>
           <Button.Content visible>
             <Icon name="window close" color="red" size="large" />
           </Button.Content>
         </Button>
-        <p className="add-plant">ADD PLANT</p>
+        <h1 style={{ color: 'white', textShadow: '2px 2px 2px black' }}>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
-          <Grid.Column width={5}>
-            {state.plant && (
-              <Image src={state.plant.photo} size="large" rounded />
-            )}
-          </Grid.Column>
+          <Grid.Column width={5}>{state.plant && <Image src={state.plant.photo} size="large" rounded />}</Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
             {state.plant ? (
-              <div
-                className="plant-info"
-                style={{ color: "white", textShadow: "2px 2px 2px black" }}
-              >
-                <p className="title-name">Scientific Name:</p>
-                <p className="species-name"> {state.plant.scientific_name} </p>
-                <p className="title-name">Common Name: </p>
-                <p className="species-name">{state.plant.common_name} </p>
+              <div className="plant-info" style={{ color: 'white', textShadow: '2px 2px 2px black' }}>
+                <h2>Scientific Name: {state.plant.scientific_name}</h2>
+                <h2>Common Name: {state.plant.common_name}</h2>
+                <h3>
+                  <i>{state.plant.nickname}</i>
+                </h3>
                 <h3>{state.plant.description}</h3>
               </div>
             ) : (
-              <div style={{ color: "white", textShadow: "2px 2px 2px black" }}>
-                <p className="congrats">Congrats on your new plant!</p>
+              <div style={{ color: 'white', textShadow: '2px 2px 2px black' }}>
+                <h1>Congrats on your new plant!</h1>
                 <br></br>
-                <Image verticalAlign="middle" src={happy_plant} size="small" />
+                <Image verticalAlign="middle" src={happy_plant} size="normal" />
+
+                {/* <h2>Search for your plant with the drop down menu</h2> */}
               </div>
             )}
             {/* End of ternary */}
@@ -184,14 +168,7 @@ export default function AddPlant({
                   </Form.Input>
                 </Form.Field>
 
-                <div
-                  className="plant-info"
-                  style={{
-                    color: "white",
-                    textShadow: "2px 2px 2px black",
-                    fontSize: "18px",
-                  }}
-                >
+                <div className="plant-info" style={{ color: 'white', textShadow: '2px 2px 2px black', fontSize: '18px' }}>
                   <List className="plant-list">
                     <List.Item>
                       <List.Icon name="rain" />
@@ -235,9 +212,6 @@ export default function AddPlant({
                 options={speciesOptions}
                 onChange={clickHandler}
               />
-              {/* <p className="search-instruction">
-                Search for your plant with the drop down menu
-              </p> */}
             </Grid.Column>
           )}
           {/* End of ternary */}
