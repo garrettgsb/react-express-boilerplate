@@ -18,12 +18,6 @@
   padding-bottom: 280px;
 }
 
-.app.container {
-  background-image: url("https://media.istockphoto.com/photos/closeup-nature-view-of-green-leaf-background-picture-id1208290498?b=1&k=20&m=1208290498&s=170667a&w=0&h=gBgk3i33pieBVDmVlnft31qL0D0rrcD_g1JZaAepg7k=");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
 /* dashboard wgood morning */
 .ui.raised.segment {
   background-image: linear-gradient(180deg, #afda96, #f7f5f6, white);
@@ -54,9 +48,6 @@
   height: 275px;
   background-image: url("https://image.shutterstock.com/image-illustration/yellow-wall-empty-room-hardwood-260nw-489461038.jpg");
   background-size: cover;
-  /* background: #9dbf98;
-  opacity: 0.95;
-  background-image: url("https://www.transparenttextures.com/patterns/brick-wall-dark.png"); */
 }
 
 .Board.office {
@@ -209,4 +200,4 @@ div.ui.card.reminders {
 div.header.reminders-title {
   color: white !important;
   text-shadow: 2px 2px 2px black;
-} 
+}

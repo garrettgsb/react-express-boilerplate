@@ -30,12 +30,15 @@ export default function Profile({ plants, users, userId, species }) {
   };
 
   if (!user) {
-    return (
-      <></>
-    );
+    return <></>;
   } else {
     return (
-      <Container className="profile">
+      <Container
+        className="profile"
+        style={{
+          height: 1000,
+        }}
+      >
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
