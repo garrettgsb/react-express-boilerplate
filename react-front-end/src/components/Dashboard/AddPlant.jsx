@@ -221,7 +221,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                   </List>
                 </div>
                 <br></br>
-                <Button type="submit" color="white" floated="right" size="large">
+                <Button type="submit" positive floated="right" size="large">
                   Save Your Plant!
                 </Button>
               </Form>

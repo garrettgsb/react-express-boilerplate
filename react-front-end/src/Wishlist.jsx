@@ -63,30 +63,32 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
                 </h1>
               </Segment>
 
-              <br></br>
               {success && (
                 <>
+                  <br></br>
                   <Message color="green" id="animated-example" className={success && "fadeOut"}>
                     <Message.Header><Icon name="leaf" />Congrats! Your new plant has been added successfully.</Message.Header>
                     <p>
                       <Link to="/dashboard">View <b>Dashboard</b> now.</Link>
                     </p>
                   </Message>
+                  <br></br>
                 </>
               )}
-              <br></br>
+
+              {isVisible && (
+                <>
+                  <br></br>
+                  <AddWishlistPlant user={user} species={species} setIsVisible={setIsVisible} plantSpecies={plantSpecies} onSubmit={onSubmit} />
+                  <br></br>
+                </>
+              )}
 
               <Segment style={{ overflow: 'auto', maxWidth: 2000, backgroundColor: "rgba(225, 205, 48, 0.25)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
                 <Card.Group itemsPerRow={3}>
                   {parsedPlants}
                 </Card.Group>
               </Segment>
-
-              <br></br>
-              {isVisible && (
-                <AddWishlistPlant user={user} species={species} setIsVisible={setIsVisible} plantSpecies={plantSpecies} onSubmit={onSubmit} />
-              )}
-              <br></br>
 
             </Grid.Column>
             <Grid.Column width={4}>
@@ -102,7 +104,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
                     </div>
                     <div className="description">
                       {user && user.name} is an art director living in New York.
-                      <Segment color="olive" style={{ backgroundColor: "rgba(255, 255, 255, 0.20)" }}>
+                      <Segment color="olive" style={{ backgroundColor: "rgba(235, 235, 232, 0.5)" }}>
                         <h5>"{user && user.quote}"</h5>
                       </Segment>
                     </div>

@@ -42,13 +42,16 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
   // Scroll to bottom & Scroll to top //
   const divRef = useRef(null);
   useEffect(() => {
-    divRef.current.scrollIntoView({ behavior: "smooth" });
+    divRef.current.scrollIntoView({
+      block: "center",
+      inline: "center",
+      behavior: "smooth"
+    });
   });
 
   const onClose = (event) => { // Add an event to display success message
     setIsVisible(false);
     window.scrollTo({
-      top: 400,
       behavior: "smooth",
     });
   };
@@ -100,10 +103,10 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
   return (
     <div>
       <div ref={divRef} />
-      <Segment>
+      <Segment style={{ backgroundColor: "rgba(225, 205, 48, 0.50)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
         <Button
-          size="mini"
-          basic
+          size="small"
+          inverted
           color="red"
           onClick={onClose}
           floated="right"
@@ -114,7 +117,7 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
             <Icon name="window close" color="red" size="large" />
           </Button.Content>
         </Button>
-        <h1>ADD PLANT</h1>
+        <h1 style={{ color: "white", textShadow: "2px 2px 2px black" }}>ADD WISHLIST PLANT</h1>
         <Grid verticalAlign="middle" centered="true">
           <Grid.Column width={5}>
             {state.plant && <Image src={state.plant.photo} size="large" />}
@@ -122,7 +125,7 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
             {state.plant ? (
-              <div className="plant-info">
+              <div className="plant-info" style={{ color: "white", textShadow: "2px 2px 2px black" }} >
                 <h2>Scientific Name: {state.plant.scientific_name}</h2>
                 <h2>Common Name: {state.plant.common_name}</h2>
                 <h3>
@@ -151,19 +154,18 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
               onChange={clickHandler}
               defaultValue={state.plant.scientific_name}
             />
-            <Form onSubmit={submitForm}>
+            <Form onSubmit={submitForm} inverted size="large">
               <Form.Field>
                 <Form.Input
                   required={true}
                   onChange={(e, data) => {
-                    console.log("EEEEEE", data);
                     setState((prev) => ({
                       ...prev,
                       nickname: data.value,
                     }));
                   }}
                   label="Nickname"
-                  placeholder="Add a name for your plant! (eg. Christofern)"
+                  placeholder="Add a name for your plant!"
                 />
               </Form.Field>
 
@@ -184,7 +186,7 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
                 </Form.Input>
               </Form.Field>
 
-              <div className="plant-info">
+              <div className="plant-info" style={{ color: "white", textShadow: "2px 2px 2px black" }} >
                 <List className="plant-list">
                   <List.Item>
                     <List.Icon name="rain" />
@@ -219,7 +221,7 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
                 </List>
               </div>
               <br></br>
-              <Button type="submit" positive floated="right">
+              <Button type="submit" positive floated="right" size="large">
                 Save Your Plant!
               </Button>
             </Form>
