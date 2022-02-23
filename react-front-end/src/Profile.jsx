@@ -67,14 +67,15 @@ export default function Profile({ plants, users, userId }) {
                 <div className="ui card avatar" style={{ overflow: 'auto', maxWidth: 2000, backgroundColor: "rgba(225, 205, 48, 0.65)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
                   <Image src={user && user.avatar} alt="avatar" size="medium" />
                   <div className="content">
-                    <a className="header">{user && user.name}</a>
+                    <a className="header" style={{ color: "white", textShadow: "2px 2px 2px #325036" }}>{user && user.name}</a>
                     <div className="date">
-                      <span className="date">Joined in {user && user.created_at.split('-')[0]}</span>
+                      <span className="date" style={{ color: "white", textShadow: "2px 2px 2px #325036" }}>Joined in {user && user.created_at.split('-')[0]}</span>
                     </div>
-                    <div className="description">
+                    <div className="description"><b>
                       {user && user.name} is an art director living in New York.
+                    </b>
                       <Segment color="olive" style={{ backgroundColor: "rgba(235, 235, 232, 0.5)" }}>
-                        <h5>"{user && user.quote}"</h5>
+                        <h5><i>"{user && user.quote}"</i></h5>
                       </Segment>
                     </div>
                   </div>

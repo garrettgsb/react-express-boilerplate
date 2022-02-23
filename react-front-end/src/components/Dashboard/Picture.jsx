@@ -38,7 +38,7 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
         >
           <Image
             src={url}
-            style={{ borderRadius: "15%", width: "75px", height: "auto" }}
+            style={{ borderRadius: "15%", width: "80px", height: "auto" }}
           />
 
           <div className="plant-info">
@@ -65,7 +65,7 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
                 progress="ratio"
                 total={reminder && reminder.watering_interval}
                 label="Days Left"
-                style={{ fontSize: "11px" }}
+                style={{ fontSize: "14px" }}
               />
             </div>
           </div>

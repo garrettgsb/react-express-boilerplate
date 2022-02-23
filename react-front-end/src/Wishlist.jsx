@@ -79,7 +79,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
               {isVisible && (
                 <>
                   <br></br>
-                  <AddWishlistPlant user={user} species={species} setIsVisible={setIsVisible} plantSpecies={plantSpecies} onSubmit={onSubmit} />
+                  <AddWishlistPlant user={user} species={species} setIsVisible={setIsVisible} plantSpecies={plantSpecies} onSubmit={onSubmit} setAppState={setAppState}/>
                   <br></br>
                 </>
               )}
