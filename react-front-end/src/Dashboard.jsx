@@ -1,4 +1,5 @@
 import React from "react";
+import "semantic-ui-css/semantic.min.css";
 import Rooms from "./components/Dashboard/Rooms";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -8,7 +9,6 @@ import Reminders from "./components/Dashboard/Reminders";
 import AddPlant from "./components/Dashboard/AddPlant";
 import ViewPlant from "./components/Dashboard/ViewPlant";
 
-import "semantic-ui-css/semantic.min.css";
 import "./components/Dashboard/styles.css";
 import { Header, Segment, Container, Button, Grid, Message, Icon, Dimmer, Loader, Image } from "semantic-ui-react";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
@@ -45,8 +45,8 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
           <Grid.Row stretched>
             <Grid.Column width={12}>
               <Segment raised>
-                <Header as="h3" className="dash-header">
-                  <h2>DASHBOARD</h2> Good Morning, {name}!
+                <Header as="h3" className="dash-header" >
+                  <h2 >DASHBOARD</h2> Good Morning, {name}!
                   <DailyReminders plants={userPlants} reminders={reminders} userId={userId} setIsVisible={setIsVisible} />
                 </Header>
               </Segment>

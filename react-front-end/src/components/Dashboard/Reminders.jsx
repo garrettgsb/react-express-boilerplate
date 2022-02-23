@@ -81,7 +81,7 @@ export default function Reminders({ plants, reminders, userId, setAppState }) {
         <Feed>
           <ReminderGroup
             checkboxClass="overdue"
-            label={"Please water your baby"}
+            label={"Water your baby"}
             reminders={overdueReminders}
             watered={watered}
           />

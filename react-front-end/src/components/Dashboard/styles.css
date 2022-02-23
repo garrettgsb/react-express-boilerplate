@@ -101,7 +101,7 @@ div.notifications {
 }
 
 .top-label {
-  font-size: 17px !important;
+  font-size: 27px !important;
   padding-top: 0.7em !important;
   padding-bottom: 0.2em !important;
 }
@@ -109,6 +109,10 @@ div.notifications {
 .overdue label {
   color: #db2828 !important;
   font-style: italic !important;
+}
+
+.reminder-normal {
+  font-size: large;
 }
 
 /* Strikethrough for Checkbox */
@@ -200,6 +204,7 @@ span.info-title {
 
 div.ui.card.reminders {
   background-color: rgb(170 206 214 / 77%);
+  font-size: x-large;
 }
 
 div.header.reminders-title {
