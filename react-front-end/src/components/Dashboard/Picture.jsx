@@ -48,8 +48,8 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
             <div className="plant-progress">
               <Button animated='vertical'
                 color='olive'
-                size="mini"
-                style={{ height: "25px", width: "100%", paddingBottom: "5px"}}
+                size="small"
+                style={{ height: "28px", width: "100%" }}
                 onClick={() => {
                   setSelectedPlant(plant);
                 }}>

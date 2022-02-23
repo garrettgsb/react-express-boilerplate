@@ -5,8 +5,10 @@ import PlantList from "./components/Profile/PlantList";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import "./components/Profile/Profile.css";
 import { Container, Grid, Segment, Button, Card, Image, Message, Icon } from "semantic-ui-react";
+// import Plant from "./Plant";
+import ViewPlant from "./components/Dashboard/ViewPlant";
 
-export default function Profile({ plants, users, userId }) {
+export default function Profile({ plants, users, userId, species }) {
 
   const [success, setSuccess] = useState(false);
 
@@ -17,6 +19,8 @@ export default function Profile({ plants, users, userId }) {
   const plantsForUser = getPlantsForUser(plants, user_id);
   const loggedUser = getUserById(users, userId);
   const profileUser = Number(user_id);
+
+  const [selectedPlant, setSelectedPlant] = useState(null);
 
   const onClick = () => {
     setSuccess(true);
@@ -58,7 +62,7 @@ export default function Profile({ plants, users, userId }) {
 
               <Segment style={{ overflow: 'auto', maxWidth: 2000, backgroundColor: "rgba(225, 205, 48, 0.25)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
                 <Card.Group itemsPerRow={3}>
-                  <PlantList plants={plantsForUser} user={userId} onClick={onClick} />
+                  <PlantList plants={plantsForUser} user={userId} onClick={onClick} setSelectedPlant={setSelectedPlant} />
                 </Card.Group>
               </Segment>
             </Grid.Column>
@@ -91,6 +95,17 @@ export default function Profile({ plants, users, userId }) {
                 </div>
               </div>
             </Grid.Column>
+
+            <br></br>
+            <br></br>
+
+            <br></br>
+            {selectedPlant && (<>
+              <Grid.Column width={12} >
+                <ViewPlant user={loggedUser} species={species} closeViewPlant={() => setSelectedPlant(null)} plant={selectedPlant} />
+              </Grid.Column>
+            </>)}
+
           </Grid.Row>
         </Grid>
       </Container>

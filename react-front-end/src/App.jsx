@@ -262,7 +262,7 @@ class App extends Component {
             />
             <Route
               path="/profile/:user_id"
-              element={<Profile userId={this.state.user} plants={this.state.plants} users={this.state.users} />}
+              element={<Profile userId={this.state.user} plants={this.state.plants} users={this.state.users} species={this.state.species}/>}
             />
             <Route
               path="/plants/:plant_id"

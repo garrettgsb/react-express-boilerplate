@@ -19,9 +19,9 @@ export default function Newsfeed({ posts, comments, users, userId, createNewPost
       <Grid>
         <Grid.Row>
           <Grid.Column width={10}>
-            <Segment clearing horizontal color="olive">
+            <Segment clearing horizontal color="olive" style={{ backgroundColor: "rgba(225, 205, 48, 0.65)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
               <div className="news-title">
-                <Header size="large" style={{ margin: "auto"}}>Hey {name}, what's on your mind?</Header>
+                <Header size="large" style={{ margin: "auto", color: "white", textShadow: "2px 2px 2px #325036" }}>Hey {name}, what's on your mind?</Header>
                 <div>
 
                   <Button floated="right" onClick={() => setIsVisibleForm(true)} animated="fade" color="orange">
@@ -29,7 +29,7 @@ export default function Newsfeed({ posts, comments, users, userId, createNewPost
                     <Button.Content hidden>Sure!</Button.Content>
                   </Button>
 
-                  <Button floated="right" onClick={() => setIsVisibleFilter(true)} animated="vertical" basic color="green">
+                  <Button floated="right" onClick={() => setIsVisibleFilter(true)} animated="vertical" inverted color="white">
                     <Button.Content hidden>Filter</Button.Content>
                     <Button.Content visible>
                       <Icon name="filter" />
