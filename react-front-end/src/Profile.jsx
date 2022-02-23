@@ -1,13 +1,12 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import "semantic-ui-css/semantic.min.css";
-import PlantList from "./components/Profile/PlantList";
-import { getPlantsForUser, getUserById } from "./helpers/selectors";
-import "./components/Profile/Profile.css";
-import { Container, Grid, Segment, Button, Card, Image } from "semantic-ui-react";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import 'semantic-ui-css/semantic.min.css';
+import PlantList from './components/Profile/PlantList';
+import { getPlantsForUser, getUserById } from './helpers/selectors';
+import './components/Profile/Profile.css';
+import { Container, Grid, Segment, Button, Card, Image } from 'semantic-ui-react';
 
 export default function Profile({ plants, users, userId }) {
-
   const params = useParams();
   const user_id = Number(params.user_id);
 
@@ -17,22 +16,26 @@ export default function Profile({ plants, users, userId }) {
   const profileUser = Number(user_id);
 
   if (!user) {
-    return (
-      <></>
-    );
+    return <></>;
   } else {
     return (
-      <Container className="profile">
+      <Container
+        className="profile"
+        style={{
+          height: 1000,
+        }}
+      >
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
               <Segment>
-                {loggedUser && loggedUser.id !== profileUser ?
-                  <h2>
-                    Welcome {loggedUser && loggedUser.name}, thanks for visiting my profile!
-                  </h2> : <h2>My Profile</h2>}
+                {loggedUser && loggedUser.id !== profileUser ? (
+                  <h2>Welcome {loggedUser && loggedUser.name}, thanks for visiting my profile!</h2>
+                ) : (
+                  <h2>My Profile</h2>
+                )}
               </Segment>
-              <Segment style={{ overflow: 'auto', maxWidth: 2000 }} >
+              <Segment style={{ overflow: 'auto', maxWidth: 2000 }}>
                 <Card.Group itemsPerRow={3}>
                   <PlantList plants={plantsForUser} user={userId} />
                 </Card.Group>
@@ -55,7 +58,7 @@ export default function Profile({ plants, users, userId }) {
                   </div>
                   <div className="extra content">
                     <span className="floated">
-                      <Button basic color='green'>
+                      <Button basic color="green">
                         <i className="leaf icon"></i>
                         {plantsForUser && plantsForUser.length} Plants
                       </Button>
