@@ -292,3 +292,21 @@ div.ui.header.reminders-title {
   font-size: 25px;
   margin-bottom: 0px !important;
 }
+
+.view-plant {
+  width: 90% !important;
+  margin: auto !important;
+  background-color: rgba(225, 205, 48, 0.70) !important;
+  background-image: url(https://www.transparenttextures.com/patterns/asfalt-light.png)!important;
+  color: white;
+  text-shadow: 2px 2px 2px black !important;
+}
+
+.nickname {
+  font-family: lobster;
+  font-size: 32px;
+}
+
+.description {
+  font-size: 20px;
+}

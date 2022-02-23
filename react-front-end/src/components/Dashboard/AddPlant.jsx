@@ -54,7 +54,7 @@ export default function AddPlant({
   const onClose = (event) => {
     setIsVisible(false);
     window.scrollTo({
-      top: 0,
+      top: 350,
       behavior: "smooth",
     });
   };

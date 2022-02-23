@@ -12,7 +12,7 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
   const onClose = (event) => {
     closeViewPlant(false);
     window.scrollTo({
-      top: 0,
+      top: 350,
       behavior: "smooth",
     });
   };
@@ -23,7 +23,7 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
   return (
     <div>
       <div ref={divRef} />
-      <Segment raised style={{ width: "90%", margin: "auto", backgroundColor: "rgba(225, 205, 48, 0.70)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
+      <Segment raised className="view-plant" >
         <Button
           className="close-button"
           size="mini"
@@ -46,9 +46,7 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
             <div className="plant-info">
               <h2>Scientific Name: {plant.scientific_name}</h2>
               <h2>Common Name: {plant.common_name}</h2>
-              <h3>
-                <i>"{plant.nickname}"</i>
-              </h3>
+                <p className="nickname">"{plant.nickname}"</p>
               <h3>
                 <b>{user.name}'s</b> Plant Since {plant.created_at.split("-")[0]}
               </h3>
@@ -56,7 +54,7 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
                 <Icon name="leaf" />
                 Lives in {user.name}'s {plant.location}
               </p>
-              <p>{plant.description}</p>
+              <p className="description">{plant.description}</p>
             </div>
           </Grid.Column>
           <Grid.Column verticalAlign="middle" centered width={5}>
