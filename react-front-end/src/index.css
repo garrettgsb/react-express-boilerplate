@@ -120,9 +120,16 @@ code {
   font-size: 32px;
 }
 
-.avatar-header{
+.avatar-header {
 color: white; 
 text-shadow: 2px 2px 2px #325036;
 font-family: Paytone One !important;
 font-size: 30px;
+}
+
+.wishlist-title {
+  color: white !important;
+  text-shadow: 2px 2px 2px black !important;
+  font-family: Paytone One !important;
+  font-size: 32px;
 }

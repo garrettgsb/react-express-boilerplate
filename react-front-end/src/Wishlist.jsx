@@ -58,9 +58,9 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
           <Grid.Row stretched>
             <Grid.Column width={12}>
               <Segment className="profile">
-                <h1>
+                <p className="wishlist-title">
                   My Wishlist Plants
-                </h1>
+                </p>
               </Segment>
 
               {success && (
