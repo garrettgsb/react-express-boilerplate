@@ -1,7 +1,6 @@
 .App {
   text-align: center;
-  background-image: url("./assets/image_1.jpeg");
-  background-size: contain;
+  background-image: url('./assets/image_2.jpeg');
 }
 
 /* Where we user this?? */

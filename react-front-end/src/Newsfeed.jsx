@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import "semantic-ui-css/semantic.min.css";
-import "./Newsfeed.css";
-import { Header, Segment, Container, Grid, Icon, Divider, Item, Button } from "semantic-ui-react";
-import PostList from "./components/Newsfeed/PostList";
-import { getUserById } from "./helpers/selectors";
-import Video from "./components/Newsfeed/Video";
-import NewPost from "./components/Newsfeed/NewPost";
-import FilterPosts from "./components/Newsfeed/FilterPosts";
+import React, { useState } from 'react';
+import 'semantic-ui-css/semantic.min.css';
+import './Newsfeed.css';
+import { Header, Segment, Container, Grid, Icon, Divider, Item, Button } from 'semantic-ui-react';
+import PostList from './components/Newsfeed/PostList';
+import { getUserById } from './helpers/selectors';
+import Video from './components/Newsfeed/Video';
+import NewPost from './components/Newsfeed/NewPost';
+import FilterPosts from './components/Newsfeed/FilterPosts';
 
 export default function Newsfeed({ posts, comments, users, userId, createNewPost, renderFilteredPosts, createNewComment }) {
   const [isVisibleForm, setIsVisibleForm] = useState(false);
@@ -21,9 +21,10 @@ export default function Newsfeed({ posts, comments, users, userId, createNewPost
           <Grid.Column width={10}>
             <Segment clearing horizontal color="olive">
               <div className="news-title">
-                <Header size="large" style={{ margin: "auto"}}>Hey {name}, what's on your mind?</Header>
+                <Header size="large" style={{ margin: 'auto' }}>
+                  Hey {name}, what's on your mind?
+                </Header>
                 <div>
-
                   <Button floated="right" onClick={() => setIsVisibleForm(true)} animated="fade" color="orange">
                     <Button.Content visible>Create New Post</Button.Content>
                     <Button.Content hidden>Sure!</Button.Content>
@@ -36,9 +37,7 @@ export default function Newsfeed({ posts, comments, users, userId, createNewPost
                     </Button.Content>
                   </Button>
                 </div>
-
               </div>
-
             </Segment>
 
             <br></br>
@@ -55,7 +54,7 @@ export default function Newsfeed({ posts, comments, users, userId, createNewPost
               <FilterPosts posts={posts} renderFilteredPosts={renderFilteredPosts} setIsVisibleFilter={setIsVisibleFilter} />
             )}
             <Divider horizontal>
-              <Header as="h4" style={{ color: "white" }}>
+              <Header as="h4" style={{ color: 'white' }}>
                 <Icon name="rss olive" />
                 Newsfeed
               </Header>
