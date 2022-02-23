@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "semantic-ui-react";
 import PlantListItem from "./PlantListItem";
 
-export default function PlantList({ plants, user, onClick }) {
+export default function PlantList({ plants, user, onClick, setSelectedPlant, plant, species }) {
 
   const parsedPlants = plants.map(plant =>
     <PlantListItem
@@ -16,6 +16,9 @@ export default function PlantList({ plants, user, onClick }) {
       user_id={user}
       plant_since={plant.created_at}
       onClick={onClick}
+      setSelectedPlant={setSelectedPlant}
+      plant={plant}
+      species={species}
     />
   );
 
