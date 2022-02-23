@@ -88,12 +88,6 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
               return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
             });
           })
-          .then((reminderResponse) => {
-            console.log('reminder reeeeesponse', reminderResponse);
-            setAppState((prev) => {
-              return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
-            });
-          });
       })
       .catch(function (error) {
         console.log(error);
