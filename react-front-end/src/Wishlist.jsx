@@ -62,7 +62,9 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
           <Grid.Row stretched>
             <Grid.Column width={12}>
               <Segment className="profile">
-                <h1>My Wishlist Plants</h1>
+                <p className="wishlist-title">
+                  My Wishlist Plants
+                </p>
               </Segment>
 
               {success && (
@@ -126,11 +128,13 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
                   <div className="content">
                     <a className="header">{user && user.name}</a>
                     <div className="date">
-                      <span className="date">Joined in {user && user.created_at.split('-')[0]}</span>
+                      <span className="date-bulb">Joined in {user && user.created_at.split('-')[0]}</span>
                     </div>
                     <div className="description">
+                    <p className="description-bulby">
                       {user && user.name} is an art director living in New York.
-                      <Segment color="olive" style={{ backgroundColor: 'rgba(235, 235, 232, 0.5)' }}>
+                      </p>
+                      <Segment color="olive" style={{ backgroundColor: 'rgba(235, 235, 232, 0.5)', marginTop: "12px"  }}>
                         <h5>"{user && user.quote}"</h5>
                       </Segment>
                     </div>

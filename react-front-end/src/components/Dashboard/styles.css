@@ -96,7 +96,7 @@ div.notifications {
 }
 
 .top-label {
-  font-size: 17px !important;
+  font-size: 22px !important;
   padding-top: 0.7em !important;
   padding-bottom: 0.2em !important;
 }
@@ -104,6 +104,10 @@ div.notifications {
 .overdue label {
   color: #db2828 !important;
   font-style: italic !important;
+}
+
+.reminder-normal {
+  font-size: large;
 }
 
 /* Strikethrough for Checkbox */
@@ -128,7 +132,10 @@ h3.ui.header.dash-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-family: lobster;
+  font-size: 22px;
 }
+
 
 div.plant-card {
   display: flex;
@@ -195,9 +202,118 @@ span.info-title {
 
 div.ui.card.reminders {
   background-color: rgb(170 206 214 / 77%);
+  font-size: x-large;
 }
 
 div.header.reminders-title {
   color: white !important;
   text-shadow: 2px 2px 2px black;
+  font-family: Paytone One !important;
+  font-size: 32px !important;
+
+} 
+
+div.ui.checkbox {
+  padding-top: 0.6em;
+}
+
+.ui.checkbox label {
+  font-size: 20px;
+}
+
+span.date {
+  font-family: lobster;
+  font-size: 17px;
+}
+
+div.ui.header.reminders-title {
+  font-size: 29px;
+  font-family: Paytone One;
+}
+
+.reminder-content {
+  padding-top: 0px !important;
+}
+
+.watering-can {
+  padding-bottom: 10px !important;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+
+.Bulb {
+  font-family: Paytone One !important;
+  font-size: 30px !important;
+  color: white !important;
+  text-shadow: 2px 2px 2px black !important;
+}
+
+.date-bulb {
+  font-family: Lobster;
+  font-size: 18px;
+  color: white;
+  text-shadow: 2px 2px 2px black !important;
+
+}
+
+.dashboard-title {
+  font-family: Paytone One !important;
+  font-size: 36px;
+}
+
+.add-plant {
+ color: white !important;
+ text-shadow: 2px 2px 2px black !important;
+ font-family: Paytone One !important;
+ font-size: 45px;
+}
+
+.congrats {
+  color: white !important;
+ text-shadow: 2px 2px 2px black !important;
+ font-family: Lobster !important;
+ font-size: 45px;
+}
+
+.species-name {
+  color: white !important;
+  text-shadow: 2px 2px 2px black !important;
+  font-family: Lobster !important;
+  font-size: 45px;
+  margin-bottom: 0px !important;
+}
+
+.title-name {
+  color: white !important;
+  text-shadow: 2px 2px 2px black !important;
+  text-decoration: underline;
+  font-family: Paytone One !important;
+  font-size: 25px;
+  margin-bottom: 0px !important;
+}
+
+.view-plant {
+  width: 90% !important;
+  margin: auto !important;
+  background-color: rgba(225, 205, 48, 0.70) !important;
+  background-image: url(https://www.transparenttextures.com/patterns/asfalt-light.png)!important;
+  color: white;
+  text-shadow: 2px 2px 2px black !important;
+}
+
+.nickname {
+  font-family: lobster;
+  font-size: 32px;
+}
+
+.description {
+  font-size: 20px;
+}
+
+.plant-info-card {
+  font-size: 20px;
+}
+
+.nickname-plant {
+  font-size: 16px;
 }

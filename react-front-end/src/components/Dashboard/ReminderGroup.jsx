@@ -37,6 +37,7 @@ export default function ReminderGroup({ checkboxClass, label, reminders }) {
         <div class={"ui checkbox " + checkboxClass}>
           <input
             id={`reminder-${reminder.plant_id}`}
+            className="reminder-normal"
             tabindex="0"
             type="checkbox"
             onChange={onChange}

@@ -9,3 +9,8 @@
  #message:hover {
  transform: scaleX(103%);
  }
+
+ .newsfeed-title {
+   font-family: Paytone One !important;
+   font-size: 26px !important;
+ }
