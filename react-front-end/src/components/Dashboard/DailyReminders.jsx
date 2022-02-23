@@ -42,11 +42,11 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
     {
       menuItem: "Edit Plants",
       render: () => (
-        <Message style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
+        <Message style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly" }} color='olive'>
           <Button color="olive" onClick={() => setIsVisible(true)}>
             Add New Plant
           </Button>
-          <Button color="red">Delete Plant</Button>
+          <Button color="grey">Delete Plant</Button>
         </Message>
       ),
     },

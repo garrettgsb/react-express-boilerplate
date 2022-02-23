@@ -89,7 +89,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
           .then(reminderResponse => {
             console.log("reminder reeeeesponse", reminderResponse)
             setAppState((prev) => {
-              return {...prev,reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant]};
+              return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
             })
           })
       })
@@ -101,7 +101,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
   return (
     <div>
       <div ref={divRef} />
-      <Segment>
+      <Segment style={{ backgroundColor: "rgba(225, 205, 48, 0.50)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
         <Button
           size="mini"
           basic
@@ -118,7 +118,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
         <h1>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            {state.plant && <Image src={state.plant.photo} size="large" />}
+            {state.plant && <Image src={state.plant.photo} size="large" rounded />}
           </Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
