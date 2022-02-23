@@ -211,3 +211,11 @@ div.header.reminders-title {
   color: white !important;
   text-shadow: 2px 2px 2px black;
 } 
+
+div.ui.checkbox {
+  padding-top: 0.6em;
+}
+
+.ui.checkbox label {
+  font-size: 20px;
+}
