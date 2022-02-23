@@ -264,7 +264,7 @@ class App extends Component {
             />
             <Route
               path="/profile/:user_id"
-              element={<Profile userId={this.state.user} plants={this.state.plants} users={this.state.users} />}
+              element={<Profile userId={this.state.user} plants={this.state.plants} users={this.state.users} species={this.state.species}/>}
             />
             <Route
               path="/plants/:plant_id"
@@ -281,6 +281,7 @@ class App extends Component {
                   wishlist={this.state.wishlist}
                   user_plants={this.state.plants}
                   species={this.state.species}
+                  setAppState={this.setState.bind(this)}
                 />
               }
             />

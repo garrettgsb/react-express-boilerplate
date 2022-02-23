@@ -13,7 +13,7 @@ export default function Namecard({ user, plants }) {
 
   return (
     <main class="name-container">
-      <Card>
+      <Card style={{ overflow: 'auto', maxWidth: 2000, backgroundColor: "rgba(225, 205, 48, 0.65)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
         <div class="image">
           <img src={avatar} alt="avatar" />
         </div>
@@ -22,23 +22,23 @@ export default function Namecard({ user, plants }) {
           <span className="date">
             <Icon name="user" /> User since {user && user.created_at.split("-")[0]}
           </span>
-          <Segment color="olive" compact>
-            <div className="meta">
+          <div className="description">
+            <Segment color="olive" style={{ backgroundColor: "rgba(255, 255, 255, 0.20)", marginTop: "5px" }}>
               <h5>"{quote}"</h5>
-            </div>
-          </Segment>
+            </Segment>
+          </div>
         </Card.Content>
         <Card.Content>
           <span className="left floated">
             <Link to={`/profile/${user.id}`}>
-              <Button basic color="green">
+            <Button inverted color='grey'>
                 <i className="leaf icon"></i>
                 {plantsForUser && plantsForUser.length} Plants
               </Button>
             </Link>
           </span>
           <Link to="/wishlist">
-            <Button basic positive content="See Wishlist" floated="right" />
+            <Button inverted color='grey' content="See Wishlist" floated="right" />
           </Link>
         </Card.Content>
       </Card>

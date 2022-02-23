@@ -15,11 +15,11 @@ export default function Navbar({ users, user, login, logout }) {
         <>
           <Menu.Item>
             {" "}
-            <Image src={loggedUser && loggedUser.avatar} avatar /> Logged in as {loggedUser && loggedUser.name}
+            <Image src={loggedUser && loggedUser.avatar} avatar /><span style={{ fontSize: "18px" }}>Logged in as <b>{loggedUser && loggedUser.name}</b></span>
           </Menu.Item>
 
-          <Dropdown item text="Menu">
-            <Dropdown.Menu>
+          <Dropdown item text="Menu" style= {{ fontSize: "16px" }}>
+            <Dropdown.Menu style= {{ fontSize: "16px"}}>
               <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
               <Dropdown.Item href="/newsfeed">Newsfeed</Dropdown.Item>
               <Dropdown.Item href={`/profile/${user}`}>Profile</Dropdown.Item>
@@ -30,7 +30,7 @@ export default function Navbar({ users, user, login, logout }) {
           <Menu.Item>
             <Link to="/">
               <Button inverted color="grey" onClick={logout} animated="fade">
-                <Button.Content visible>Logout</Button.Content>
+                <Button.Content visible style= {{ fontSize: "16px" }}>Logout</Button.Content>
                 <Button.Content hidden>
                   <Icon name="sign-out" />
                 </Button.Content>

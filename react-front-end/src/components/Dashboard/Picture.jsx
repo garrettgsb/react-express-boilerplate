@@ -38,7 +38,7 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
         >
           <Image
             src={url}
-            style={{ borderRadius: "15%", width: "75px", height: "auto" }}
+            style={{ borderRadius: "15%", width: "80px", height: "auto" }}
           />
 
           <div className="plant-info">
@@ -48,8 +48,8 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
             <div className="plant-progress">
               <Button animated='vertical'
                 color='olive'
-                size="mini"
-                style={{ height: "25px", width: "100%", paddingBottom: "5px"}}
+                size="small"
+                style={{ height: "28px", width: "100%" }}
                 onClick={() => {
                   setSelectedPlant(plant);
                 }}>
@@ -65,7 +65,7 @@ function Picture({ id, url, key, nickname, setSelectedPlant, plant, reminder }) 
                 progress="ratio"
                 total={reminder && reminder.watering_interval}
                 label="Days Left"
-                style={{ fontSize: "11px" }}
+                style={{ fontSize: "14px" }}
               />
             </div>
           </div>

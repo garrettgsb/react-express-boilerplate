@@ -1,12 +1,9 @@
 import React from "react";
-import axios from "axios";
 import "semantic-ui-css/semantic.min.css";
-import { Icon, Button, Tab, Message } from "semantic-ui-react";
+import { Icon, Button, Tab, Message, Segment } from "semantic-ui-react";
 import wateringcan from "../../assets/wateringcan.png";
 import dayjs from "dayjs";
-import ReminderGroup from "./ReminderGroup";
 import { getUserReminders } from "../../helpers/selectors";
-const relativeTime = require("dayjs/plugin/relativeTime");
 
 export default function DailyReminders({ plants, reminders, userId, setIsVisible }) {
   const remindersWithTime = reminders.map((reminder) => {
@@ -23,21 +20,18 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
   const dailyUserReminders = getUserReminders(userId, dailyReminders);
   const tomorrowUserReminders = getUserReminders(userId, tomorrowReminders);
 
-  console.log({ dailyUserReminders });
-  console.log({ tomorrowUserReminders });
-
   const panes = [
     {
-      menuItem: "Today Reminders!",
+      menuItem: "Today's Reminders",
       render: () => (
-        <Message color={`${dailyUserReminders.length > 0 ? "red" : "blue"}`}>
+        <Message color={`${dailyUserReminders.length > 0 ? "red" : "blue"}`} >
           <Icon name="rain" />
           {dailyUserReminders.length > 0 ? " You have a reminder!" : " Your day looks clear. Enjoy!"}
         </Message>
       ),
     },
     {
-      menuItem: "Tomorrow Reminders",
+      menuItem: "Tomorrow's Reminders",
       render: () => (
         <Message color={`${tomorrowUserReminders.length > 0 ? "red" : "grey"}`}>
           <Icon name="leaf" />
@@ -48,12 +42,14 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
     {
       menuItem: "Edit Plants",
       render: () => (
-        <Message>
-          <Button color="olive" onClick={() => setIsVisible(true)}>
-            Add New Plant
-          </Button>
-          <Button color="grey">Delete Plant</Button>
-        </Message>
+        <>
+          <Segment color="olive" stretched style={{ backgroundColor: "rgba(235, 235, 232, 0.90)" }}>
+            <Button color="olive" onClick={() => setIsVisible(true)}>
+              Add New Plant
+            </Button>
+            <Button color="grey">Delete Plant</Button>
+          </Segment>
+        </>
       ),
     },
   ];
@@ -61,16 +57,9 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
   return (
     <>
       <div className="notifications">
-        <Tab panes={panes} />
-
-        {/* <Button floated="bottom" as="h4" color={`${dailyUserReminders.length > 0 ? "red" : "blue"}`}>
-          <Icon name="rain" />
-          {dailyUserReminders.length > 0 ? " You have a reminder!" : " Your day looks clear. Enjoy!"}
-        </Button>
-        <Button floated="top" as="h4" basic color={`${tomorrowUserReminders.length > 0 ? "red" : "grey"}`}>
-          <Icon name="leaf" />
-          {tomorrowUserReminders.length > 0 ? "Upcoming watering tomorrow!" : "No upcoming watering tomorrow!"}
-        </Button> */}
+        <Tab panes={panes}
+          menu={{ color: "grey", attached: false, tabular: false, size: "large", inverted: false, fontWeight: "bold", raised: true, backgroundColor: "rgba(235, 235, 232, 0.90)" }}
+          />
       </div>
     </>
   );

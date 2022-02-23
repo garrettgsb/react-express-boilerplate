@@ -5,7 +5,7 @@ import { Button, Card, Container, Divider, Grid, Icon, Image, Message, Segment, 
 import AddWishlistPlant from './components/Wishlist/AddWishlistPlant';
 import { Link } from 'react-router-dom';
 
-export default function Wishlist({ users, userId, wishlist, user_plants, species }) {
+export default function Wishlist({ users, userId, wishlist, user_plants, species, setAppState }) {
   const user = getUserById(users, userId);
   const plants = wishlist && getWishlistPlants(wishlist, userId);
   const plantsForUser = user_plants && getPlantsForUser(user_plants, user && user.id);
@@ -61,13 +61,13 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
-              <Segment>
+              <Segment className="profile">
                 <h1>My Wishlist Plants</h1>
               </Segment>
 
-              <br></br>
               {success && (
                 <>
+                  <br></br>
                   <Message color="green" id="animated-example" className={success && 'fadeOut'}>
                     <Message.Header>
                       <Icon name="leaf" />
@@ -79,45 +79,65 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
                       </Link>
                     </p>
                   </Message>
+                  <br></br>
                 </>
               )}
-              <br></br>
 
-              <Segment style={{ overflow: 'auto', maxWidth: 2000 }}>
+              {isVisible && (
+                <>
+                  <br></br>
+                  <AddWishlistPlant
+                    user={user}
+                    species={species}
+                    setIsVisible={setIsVisible}
+                    plantSpecies={plantSpecies}
+                    onSubmit={onSubmit}
+                    setAppState={setAppState}
+                  />
+                  <br></br>
+                </>
+              )}
+
+              <Segment
+                style={{
+                  overflow: 'auto',
+                  maxWidth: 2000,
+                  backgroundColor: 'rgba(225, 205, 48, 0.25)',
+                  backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
+                }}
+              >
                 <Card.Group itemsPerRow={3}>{parsedPlants}</Card.Group>
               </Segment>
-
-              <br></br>
-              {isVisible && (
-                <AddWishlistPlant
-                  user={user}
-                  species={species}
-                  setIsVisible={setIsVisible}
-                  plantSpecies={plantSpecies}
-                  onSubmit={onSubmit}
-                />
-              )}
-              <br></br>
             </Grid.Column>
             <Grid.Column width={4}>
               <div className="avatar">
-                <div className="ui card avatar">
+                <div
+                  className="ui card avatar"
+                  style={{
+                    overflow: 'auto',
+                    maxWidth: 2000,
+                    backgroundColor: 'rgba(225, 205, 48, 0.65)',
+                    backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
+                  }}
+                >
                   <div className="image">
                     <img src={user && user.avatar} alt="avatar" />
                   </div>
                   <div className="content">
                     <a className="header">{user && user.name}</a>
-                    <div className="meta">
+                    <div className="date">
                       <span className="date">Joined in {user && user.created_at.split('-')[0]}</span>
                     </div>
                     <div className="description">
                       {user && user.name} is an art director living in New York.
-                      <h5>"{user && user.quote}"</h5>
+                      <Segment color="olive" style={{ backgroundColor: 'rgba(235, 235, 232, 0.5)' }}>
+                        <h5>"{user && user.quote}"</h5>
+                      </Segment>
                     </div>
                   </div>
                   <div className="extra content">
                     <Link to={`/profile/${user.id}`}>
-                      <Button basic color="green">
+                      <Button inverted color="grey">
                         <i className="leaf icon"></i>
                         {plantsForUser && plantsForUser.length} Plants
                       </Button>

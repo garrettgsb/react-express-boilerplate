@@ -1,18 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
-import "semantic-ui-css/semantic.min.css";
-import axios from "axios";
-import happy_plant from "../../assets/happy_plant.png";
-import { Segment, Image, Dropdown, Grid, Button, Form, Icon, List } from "semantic-ui-react";
-import { getPlantByName } from "../../helpers/selectors";
+import React, { useState, useRef, useEffect } from 'react';
+import 'semantic-ui-css/semantic.min.css';
+import axios from 'axios';
+import happy_plant from '../../assets/happy_plant.png';
+import { Segment, Image, Dropdown, Grid, Button, Form, Icon, List } from 'semantic-ui-react';
+import { getPlantByName } from '../../helpers/selectors';
 
 export default function AddPlant({ user, species, setIsVisible, setAppState, onSubmit }) {
   const [state, setState] = useState({
     plant: null,
-    nickname: "",
-    location: "Living room",
+    nickname: '',
+    location: 'Living room',
   });
 
-  const locationValues = ["Living room", "Dining room", "Bedroom", "Office"];
+  const locationValues = ['Living room', 'Dining room', 'Bedroom', 'Office'];
 
   const locationOptions = locationValues.map((element) => ({
     key: element,
@@ -31,18 +31,20 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
   // Scroll to bottom & Scroll to top //
   const divRef = useRef(null);
   useEffect(() => {
-    divRef.current.scrollIntoView({ behavior: "smooth" });
+    divRef.current.scrollIntoView({
+      behavior: 'smooth',
+    });
   });
 
   const onClose = (event) => {
     setIsVisible(false);
     window.scrollTo({
-      top: 260,
-      behavior: "smooth",
+      top: 0,
+      behavior: 'smooth',
     });
   };
   useEffect(() => {
-    window.addEventListener("scroll", []);
+    window.addEventListener('scroll', []);
   }, []);
 
   const speciesOptions = species.map((element) => ({
@@ -63,25 +65,31 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
 
   const submitForm = () => {
     axios
-      .post("/api/user_plants", {
+      .post('/api/user_plants', {
         species_id: state.plant.species_id,
         user_id: user.id,
         nickname: state.nickname,
         location: state.location,
       })
       .then((plantResponse) => {
-        console.log("Post made to db!", plantResponse);
+        console.log('Post made to db!', plantResponse);
         onSubmit(); // display success message
         const newPlant = plantResponse.data[0];
         axios
-          .post("/api/reminders", {
+          .post('/api/reminders', {
             plant_id: newPlant.id,
             user_id: user.id,
             watering_interval: state.plant.watering_interval,
             last_watered: new Date(),
           })
           .then((reminderResponse) => {
-            console.log("reminder reeeeesponse", reminderResponse);
+            console.log('reminder reeeeesponse', reminderResponse);
+            setAppState((prev) => {
+              return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
+            });
+          })
+          .then((reminderResponse) => {
+            console.log('reminder reeeeesponse', reminderResponse);
             setAppState((prev) => {
               return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
             });
@@ -95,20 +103,25 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
   return (
     <div>
       <div ref={divRef} />
-      <Segment>
-        <Button size="mini" basic color="red" onClick={onClose} floated="right" animated="vertical">
+      <Segment
+        style={{
+          backgroundColor: 'rgba(225, 205, 48, 0.50)',
+          backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
+        }}
+      >
+        <Button size="small" inverted color="red" onClick={onClose} floated="right" animated="vertical">
           <Button.Content hidden>Close</Button.Content>
           <Button.Content visible>
             <Icon name="window close" color="red" size="large" />
           </Button.Content>
         </Button>
-        <h1>ADD PLANT</h1>
+        <h1 style={{ color: 'white', textShadow: '2px 2px 2px black' }}>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
-          <Grid.Column width={5}>{state.plant && <Image src={state.plant.photo} size="large" />}</Grid.Column>
+          <Grid.Column width={5}>{state.plant && <Image src={state.plant.photo} size="large" rounded />}</Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
             {state.plant ? (
-              <div className="plant-info">
+              <div className="plant-info" style={{ color: 'white', textShadow: '2px 2px 2px black' }}>
                 <h2>Scientific Name: {state.plant.scientific_name}</h2>
                 <h2>Common Name: {state.plant.common_name}</h2>
                 <h3>
@@ -117,7 +130,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                 <h3>{state.plant.description}</h3>
               </div>
             ) : (
-              <div>
+              <div style={{ color: 'white', textShadow: '2px 2px 2px black' }}>
                 <h1>Congrats on your new plant!</h1>
                 <br></br>
                 <Image verticalAlign="middle" src={happy_plant} size="normal" />
@@ -131,35 +144,21 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
           {state.plant ? (
             <Grid.Column verticalAlign="middle" centered width={5}>
               <Dropdown className="dropdown" placeholder="Select Plant" fluid selection options={speciesOptions} onChange={clickHandler} />
-              <Form onSubmit={submitForm}>
+              <Form onSubmit={submitForm} inverted size="large">
                 <Form.Field>
                   <Form.Input
                     required={true}
                     onChange={(e, data) => {
-                      console.log("EEEEEE", data);
+                      console.log('EEEEEE', data);
                       setState((prev) => ({
                         ...prev,
                         nickname: data.value,
                       }));
                     }}
                     label="Nickname"
-                    placeholder="Add a name for your plant! (eg. Christofern)"
+                    placeholder="Add a name for your plant!"
                   />
                 </Form.Field>
-                {/* <Form.Field>
-                  <Form.Input
-                    required={true}
-                    onChange={(e, data) => {
-                      console.log("location", data);
-                      setState((prev) => ({
-                        ...prev,
-                        location: data.value,
-                      }));
-                    }}
-                    label="Location"
-                    placeholder="Tell us where your plant lives! (eg. Living Room)"
-                  />
-                </Form.Field> */}
                 <Form.Field>
                   <Form.Input label="Location">
                     <Dropdown
@@ -174,7 +173,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                   </Form.Input>
                 </Form.Field>
 
-                <div className="plant-info">
+                <div className="plant-info" style={{ color: 'white', textShadow: '2px 2px 2px black', fontSize: '18px' }}>
                   <List className="plant-list">
                     <List.Item>
                       <List.Icon name="rain" />
@@ -198,12 +197,12 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                     </List.Item>
                     <List.Item>
                       <List.Icon name="paw" />
-                      <List.Content>{state.plant.toxic ? "Toxic" : "Non-Toxic"}</List.Content>
+                      <List.Content>{state.plant.toxic ? 'Toxic' : 'Non-Toxic'}</List.Content>
                     </List.Item>
                   </List>
                 </div>
                 <br></br>
-                <Button type="submit" positive floated="right">
+                <Button type="submit" positive floated="right" size="large">
                   Save Your Plant!
                 </Button>
               </Form>

@@ -32,8 +32,6 @@
   background-size: cover;
 }
 
-.Board.living,
-.Board.bedroom,
 .Board.dining {
   overflow: auto;
   max-height: 275px;
@@ -63,19 +61,25 @@
 }
 
 #room {
-  background-color: #436648;
+  /* background-color: #436648; */
+  text-shadow: 2px 2px 2px black;
+  background-color: rgba(67, 102, 72, 0.90);
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
 }
 
 #room-plant {
   box-shadow: 3px 3px 5px grey;
   /* background: #9dbf98; */
-  background: white;
+  /* background: white; */
   /* opacity: 0.95; */
-  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  /* background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png"); */
 }
 
 div.header.room-header {
   height: 10px;
+  /* overflow: auto;
+  background-color: rgba(57, 91, 61, 0.65);
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png") */
 }
 
 div.notifications {

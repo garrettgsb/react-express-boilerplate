@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { Button, Card, Icon, Image, Label, Segment } from "semantic-ui-react";
+import { getPlantById } from "../../helpers/selectors";
 
-export default function PlantListItem({ user_id, id, scientificName, commonName, photo, description, nickname, plant_since }) {
+export default function PlantListItem({ user_id, id, scientificName, commonName, photo, description, nickname, plant_since, onClick, setSelectedPlant, plant }) {
 
   const [state, setState] = useState({
     wishlist_user_id: user_id,
     plant_id: id
-  })
+  });
 
   const addWishlistPlant = (wishlist_user_id, plant_id) => {
     axios
@@ -61,6 +62,7 @@ export default function PlantListItem({ user_id, id, scientificName, commonName,
             basic
             onClick={() => {
               addWishlistPlant(state.wishlist_user_id, state.plant_id);
+              onClick();
               setState((prev) => ({
                 ...prev,
                 wishlist: {
@@ -75,14 +77,16 @@ export default function PlantListItem({ user_id, id, scientificName, commonName,
         </span>
 
         <span className="right floated">
-          <Link to={`/plants/${id && id}`}>
-            <Button
-              color="grey"
-              basic
-            >
-              See Info
-            </Button>
-          </Link>
+          <Button
+            color="grey"
+            basic
+            onClick={() => {
+              setSelectedPlant(plant);
+              console.log("clicked");
+            }}
+          >
+            See Info
+          </Button>
         </span>
       </Card.Content>
     </Card>
