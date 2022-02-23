@@ -24,7 +24,7 @@ export default function Newsfeed({ posts, comments, users, userId, createNewPost
               horizontal
               color="olive"
               style={{
-                backgroundColor: 'rgba(225, 205, 48, 0.65)',
+                backgroundColor: 'rgba(225, 205, 48, 0.75)',
                 backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
               }}
             >
