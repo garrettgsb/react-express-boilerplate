@@ -14,12 +14,12 @@ export default function Navbar({ users, user, login, logout }) {
     if (user) {
       return (
         <>
-          <Menu.Item>
+          <Menu.Item className="logged-in" >
             {" "}
             <Image src={loggedUser && loggedUser.avatar} avatar /> Logged in as {loggedUser && loggedUser.name}
           </Menu.Item>
 
-          <Dropdown item text="Menu">
+          <Dropdown item text="Menu" className="dropdown-nav">
             <Dropdown.Menu>
               <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
               <Dropdown.Item href="/newsfeed">Newsfeed</Dropdown.Item>

@@ -18,7 +18,7 @@ export default function Namecard({ user, plants }) {
           <img src={avatar} alt="avatar" />
         </div>
         <Card.Content>
-          <p class="header">{name}</p>
+          <p className="Bulb">{name}</p>
           <span className="date">
             <Icon name="user" /> User since {user && user.created_at.split("-")[0]}
           </span>

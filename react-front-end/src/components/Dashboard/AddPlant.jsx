@@ -14,25 +14,32 @@ import {
 } from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
-export default function AddPlant({ user, species, setIsVisible, setAppState, onSubmit }) {
+export default function AddPlant({
+  user,
+  species,
+  setIsVisible,
+  setAppState,
+  onSubmit,
+}) {
   const [state, setState] = useState({
     plant: null,
     nickname: "",
     location: "Living room",
   });
 
-  const locationValues = ['Living room', 'Dining room', 'Bedroom', 'Office'];
+  const locationValues = ["Living room", "Dining room", "Bedroom", "Office"];
 
   const locationOptions = locationValues.map((element) => ({
     key: element,
     text: element,
-    value: element
+    value: element,
   }));
 
-  const onClick = (event, data) => { // populates location
+  const onClick = (event, data) => {
+    // populates location
     setState((prev) => ({
       ...prev,
-      location: data.value
+      location: data.value,
     }));
   };
 
@@ -72,28 +79,34 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
   };
 
   const submitForm = () => {
-    axios.post("/api/user_plants", {
-      species_id: state.plant.species_id,
-      user_id: user.id,
-      nickname: state.nickname,
-      location: state.location,
-    })
+    axios
+      .post("/api/user_plants", {
+        species_id: state.plant.species_id,
+        user_id: user.id,
+        nickname: state.nickname,
+        location: state.location,
+      })
       .then((plantResponse) => {
         console.log("Post made to db!", plantResponse);
         onSubmit(); // display success message
-        const newPlant = plantResponse.data[0]
-        axios.post("/api/reminders", {
-          plant_id: newPlant.id,
-          user_id: user.id,
-          watering_interval: state.plant.watering_interval,
-          last_watered: new Date(),
-        })
-          .then(reminderResponse => {
-            console.log("reminder reeeeesponse", reminderResponse)
-            setAppState((prev) => {
-              return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
-            })
+        const newPlant = plantResponse.data[0];
+        axios
+          .post("/api/reminders", {
+            plant_id: newPlant.id,
+            user_id: user.id,
+            watering_interval: state.plant.watering_interval,
+            last_watered: new Date(),
           })
+          .then((reminderResponse) => {
+            console.log("reminder reeeeesponse", reminderResponse);
+            setAppState((prev) => {
+              return {
+                ...prev,
+                reminders: [...prev.reminders, reminderResponse.data[0]],
+                plants: [...prev.plants, newPlant],
+              };
+            });
+          });
       })
       .catch(function (error) {
         console.log(error);
@@ -103,7 +116,13 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
   return (
     <div>
       <div ref={divRef} />
-      <Segment style={{ backgroundColor: "rgba(225, 205, 48, 0.50)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
+      <Segment
+        style={{
+          backgroundColor: "rgba(225, 205, 48, 0.50)",
+          backgroundImage:
+            "url(https://www.transparenttextures.com/patterns/asfalt-light.png)",
+        }}
+      >
         <Button
           size="small"
           inverted
@@ -117,29 +136,31 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
             <Icon name="window close" color="red" size="large" />
           </Button.Content>
         </Button>
-        <h1 style={{ color: "white", textShadow: "2px 2px 2px black" }}>ADD PLANT</h1>
+        <p className="add-plant">ADD PLANT</p>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
-            {state.plant && <Image src={state.plant.photo} size="large" rounded />}
+            {state.plant && (
+              <Image src={state.plant.photo} size="large" rounded />
+            )}
           </Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
             {state.plant ? (
-              <div className="plant-info" style={{ color: "white", textShadow: "2px 2px 2px black" }} >
-                <h2>Scientific Name: {state.plant.scientific_name}</h2>
-                <h2>Common Name: {state.plant.common_name}</h2>
-                <h3>
-                  <i>{state.plant.nickname}</i>
-                </h3>
+              <div
+                className="plant-info"
+                style={{ color: "white", textShadow: "2px 2px 2px black" }}
+              >
+                <p className="title-name">Scientific Name:</p>
+                <p className="plant-name"> {state.plant.scientific_name} </p>
+                <p className="title-name">Common Name: </p>
+                <p className="plant-name">{state.plant.common_name} </p>
                 <h3>{state.plant.description}</h3>
               </div>
             ) : (
-              <div style={{ color: "white", textShadow: "2px 2px 2px black" }} >
-                <h1>Congrats on your new plant!</h1>
+              <div style={{ color: "white", textShadow: "2px 2px 2px black" }}>
+                <p className="congrats">Congrats on your new plant!</p>
                 <br></br>
                 <Image verticalAlign="middle" src={happy_cactus} size="small" />
-
-                <h2>Search for your plant with the drop down menu</h2>
               </div>
             )}
             {/* End of ternary */}
@@ -171,9 +192,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                   />
                 </Form.Field>
                 <Form.Field>
-                  <Form.Input
-                    label="Location"
-                  >
+                  <Form.Input label="Location">
                     <Dropdown
                       placeholder="Tell us where your plant lives! (eg. Living room)"
                       fluid
@@ -186,7 +205,14 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                   </Form.Input>
                 </Form.Field>
 
-                <div className="plant-info" style={{ color: "white", textShadow: "2px 2px 2px black", fontSize: "18px" }}>
+                <div
+                  className="plant-info"
+                  style={{
+                    color: "white",
+                    textShadow: "2px 2px 2px black",
+                    fontSize: "18px",
+                  }}
+                >
                   <List className="plant-list">
                     <List.Item>
                       <List.Icon name="rain" />
@@ -236,6 +262,9 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                 options={speciesOptions}
                 onChange={clickHandler}
               />
+              {/* <p className="search-instruction">
+                Search for your plant with the drop down menu
+              </p> */}
             </Grid.Column>
           )}
           {/* End of ternary */}

@@ -104,3 +104,11 @@ code {
 .home h2:hover span {
   transform: translate3d(-200%, 0, 0);
 } */
+
+.logged-in {
+  font-size: 17px !important;
+}
+
+.dropdown-nav {
+  font-size: 17px !important;
+}

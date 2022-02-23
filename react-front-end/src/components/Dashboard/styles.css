@@ -105,7 +105,7 @@ div.notifications {
 }
 
 .top-label {
-  font-size: 27px !important;
+  font-size: 22px !important;
   padding-top: 0.7em !important;
   padding-bottom: 0.2em !important;
 }
@@ -217,6 +217,9 @@ div.ui.card.reminders {
 div.header.reminders-title {
   color: white !important;
   text-shadow: 2px 2px 2px black;
+  font-family: Paytone One !important;
+  font-size: 32px !important;
+
 } 
 
 div.ui.checkbox {
@@ -234,7 +237,7 @@ span.date {
 
 div.ui.header.reminders-title {
   font-size: 29px;
-  font-family: Patua One;
+  font-family: Paytone One;
 }
 
 .reminder-content {
@@ -243,4 +246,49 @@ div.ui.header.reminders-title {
 
 .watering-can {
   padding-bottom: 10px !important;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+
+.Bulb {
+  font-family: Paytone One !important;
+  font-size: 30px !important;
+  color: white !important;
+  text-shadow: 2px 2px 2px black !important;
+}
+
+.dashboard-title {
+  font-family: Paytone One !important;
+  font-size: 36px;
+}
+
+.add-plant {
+ color: white !important;
+ text-shadow: 2px 2px 2px black !important;
+ font-family: Paytone One !important;
+ font-size: 45px;
+}
+
+.congrats {
+  color: white !important;
+ text-shadow: 2px 2px 2px black !important;
+ font-family: Lobster !important;
+ font-size: 45px;
+}
+
+.plant-name {
+  color: white !important;
+  text-shadow: 2px 2px 2px black !important;
+  font-family: Lobster !important;
+  font-size: 45px;
+  margin-bottom: 0px !important;
+}
+
+.title-name {
+  color: white !important;
+  text-shadow: 2px 2px 2px black !important;
+  text-decoration: underline;
+  font-family: Paytone One !important;
+  font-size: 25px;
+  margin-bottom: 0px !important;
 }
