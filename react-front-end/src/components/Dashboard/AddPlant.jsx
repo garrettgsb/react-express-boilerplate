@@ -1,17 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import "semantic-ui-css/semantic.min.css";
 import axios from "axios";
-import happy_cactus from "../../assets/happy_cactus.jpg";
-import {
-  Segment,
-  Image,
-  Dropdown,
-  Grid,
-  Button,
-  Form,
-  Icon,
-  List,
-} from "semantic-ui-react";
+import happy_plant from "../../assets/happy_plant.png";
+import { Segment, Image, Dropdown, Grid, Button, Form, Icon, List } from "semantic-ui-react";
 import { getPlantByName } from "../../helpers/selectors";
 
 export default function AddPlant({ user, species, setIsVisible, setAppState, onSubmit }) {
@@ -21,18 +12,19 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
     location: "Living room",
   });
 
-  const locationValues = ['Living room', 'Dining room', 'Bedroom', 'Office'];
+  const locationValues = ["Living room", "Dining room", "Bedroom", "Office"];
 
   const locationOptions = locationValues.map((element) => ({
     key: element,
     text: element,
-    value: element
+    value: element,
   }));
 
-  const onClick = (event, data) => { // populates location
+  const onClick = (event, data) => {
+    // populates location
     setState((prev) => ({
       ...prev,
-      location: data.value
+      location: data.value,
     }));
   };
 
@@ -70,28 +62,30 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
   };
 
   const submitForm = () => {
-    axios.post("/api/user_plants", {
-      species_id: state.plant.species_id,
-      user_id: user.id,
-      nickname: state.nickname,
-      location: state.location,
-    })
+    axios
+      .post("/api/user_plants", {
+        species_id: state.plant.species_id,
+        user_id: user.id,
+        nickname: state.nickname,
+        location: state.location,
+      })
       .then((plantResponse) => {
         console.log("Post made to db!", plantResponse);
         onSubmit(); // display success message
-        const newPlant = plantResponse.data[0]
-        axios.post("/api/reminders", {
-          plant_id: newPlant.id,
-          user_id: user.id,
-          watering_interval: state.plant.watering_interval,
-          last_watered: new Date(),
-        })
-          .then(reminderResponse => {
-            console.log("reminder reeeeesponse", reminderResponse)
-            setAppState((prev) => {
-              return {...prev,reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant]};
-            })
+        const newPlant = plantResponse.data[0];
+        axios
+          .post("/api/reminders", {
+            plant_id: newPlant.id,
+            user_id: user.id,
+            watering_interval: state.plant.watering_interval,
+            last_watered: new Date(),
           })
+          .then((reminderResponse) => {
+            console.log("reminder reeeeesponse", reminderResponse);
+            setAppState((prev) => {
+              return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
+            });
+          });
       })
       .catch(function (error) {
         console.log(error);
@@ -102,14 +96,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
     <div>
       <div ref={divRef} />
       <Segment>
-        <Button
-          size="mini"
-          basic
-          color="red"
-          onClick={onClose}
-          floated="right"
-          animated="vertical"
-        >
+        <Button size="mini" basic color="red" onClick={onClose} floated="right" animated="vertical">
           <Button.Content hidden>Close</Button.Content>
           <Button.Content visible>
             <Icon name="window close" color="red" size="large" />
@@ -117,9 +104,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
         </Button>
         <h1>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
-          <Grid.Column width={5}>
-            {state.plant && <Image src={state.plant.photo} size="large" />}
-          </Grid.Column>
+          <Grid.Column width={5}>{state.plant && <Image src={state.plant.photo} size="large" />}</Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
             {state.plant ? (
@@ -135,9 +120,9 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
               <div>
                 <h1>Congrats on your new plant!</h1>
                 <br></br>
-                <Image verticalAlign="middle" src={happy_cactus} size="small" />
+                <Image verticalAlign="middle" src={happy_plant} size="normal" />
 
-                <h2>Search for your plant with the drop down menu</h2>
+                {/* <h2>Search for your plant with the drop down menu</h2> */}
               </div>
             )}
             {/* End of ternary */}
@@ -145,14 +130,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
           {/* Start of ternary to only show if plant selected  */}
           {state.plant ? (
             <Grid.Column verticalAlign="middle" centered width={5}>
-              <Dropdown
-                className="dropdown"
-                placeholder="Select Plant"
-                fluid
-                selection
-                options={speciesOptions}
-                onChange={clickHandler}
-              />
+              <Dropdown className="dropdown" placeholder="Select Plant" fluid selection options={speciesOptions} onChange={clickHandler} />
               <Form onSubmit={submitForm}>
                 <Form.Field>
                   <Form.Input
@@ -183,9 +161,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                   />
                 </Form.Field> */}
                 <Form.Field>
-                  <Form.Input
-                    label="Location"
-                  >
+                  <Form.Input label="Location">
                     <Dropdown
                       placeholder="Tell us where your plant lives! (eg. Living room)"
                       fluid
@@ -202,9 +178,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                   <List className="plant-list">
                     <List.Item>
                       <List.Icon name="rain" />
-                      <List.Content>
-                        Every {state.plant.watering_interval} Days
-                      </List.Content>
+                      <List.Content>Every {state.plant.watering_interval} Days</List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="sun" />
@@ -216,9 +190,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                     </List.Item>
                     <List.Item>
                       <List.Icon name="book" />
-                      <List.Content>
-                        {state.plant.difficulty_level}
-                      </List.Content>
+                      <List.Content>{state.plant.difficulty_level}</List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="world" />
@@ -226,9 +198,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                     </List.Item>
                     <List.Item>
                       <List.Icon name="paw" />
-                      <List.Content>
-                        {state.plant.toxic ? "Toxic" : "Non-Toxic"}
-                      </List.Content>
+                      <List.Content>{state.plant.toxic ? "Toxic" : "Non-Toxic"}</List.Content>
                     </List.Item>
                   </List>
                 </div>
