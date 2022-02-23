@@ -51,9 +51,9 @@ export default function Profile({ plants, users, userId, species }) {
                   <br></br>
                   <Message color="green" id="animated-example" className={success && "fadeOut"}>
                     <Message.Header><Icon name="leaf" />Plant successfully added to your Wishlist!</Message.Header>
-                    <p>
+                    {/* <p>
                       <Link to="/wishlist">View <b>Wishlist</b> now.</Link>
-                    </p>
+                    </p> */}
                   </Message>
                   <br></br>
                 </>
