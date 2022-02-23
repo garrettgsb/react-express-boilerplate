@@ -48,7 +48,7 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
   const onClose = (event) => { // Add an event to display success message
     setIsVisible(false);
     window.scrollTo({
-      top: 0,
+      top: 400,
       behavior: "smooth",
     });
   };

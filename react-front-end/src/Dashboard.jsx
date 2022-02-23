@@ -43,7 +43,9 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
-              <Segment raised style={{ backgroundColor: "rgba(225, 205, 48, 0.5)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
+              <Segment raised
+                style={{ backgroundColor: "rgba(225, 205, 48, 0.5)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}
+              >
                 <Header as="h3" className="dash-header">
                   <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", paddingLeft: "10px", color: "white", textShadow: "2px 2px 2px black" }}>
                     <h2>DASHBOARD</h2>
@@ -57,18 +59,22 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
 
               <br></br>
               {success && (
-                <Message color="green" id="animated-example" className={success && "fadeOut"}>
-                  <Message.Header>
-                    <Icon name="leaf" />
-                    Congrats! Your new plant has been added successfully.
-                  </Message.Header>
-                </Message>
+                <>
+                  <Message color="green" id="animated-example" className={success && "fadeOut"}>
+                    <Message.Header>
+                      <Icon name="leaf" />
+                      Congrats! Your new plant has been added successfully.
+                    </Message.Header>
+                  </Message>
+                  <br></br>
+                </>
               )}
-              <br></br>
-
-              <br></br>
-              {isVisible && <AddPlant user={user} species={species} setIsVisible={setIsVisible} setAppState={setAppState} onSubmit={onSubmit} />}
-              <br></br>
+              {isVisible &&
+                <>
+                  <AddPlant user={user} species={species} setIsVisible={setIsVisible} setAppState={setAppState} onSubmit={onSubmit} />
+                  <br></br>
+                </>
+              }
 
               <Grid.Row>
                 <DndProvider backend={HTML5Backend}>

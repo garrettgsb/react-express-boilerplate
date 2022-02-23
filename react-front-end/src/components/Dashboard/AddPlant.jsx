@@ -39,13 +39,15 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
   // Scroll to bottom & Scroll to top //
   const divRef = useRef(null);
   useEffect(() => {
-    divRef.current.scrollIntoView({ behavior: "smooth" });
+    divRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
   });
 
   const onClose = (event) => {
     setIsVisible(false);
     window.scrollTo({
-      top: 260,
+      top: 0,
       behavior: "smooth",
     });
   };
@@ -103,8 +105,8 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
       <div ref={divRef} />
       <Segment style={{ backgroundColor: "rgba(225, 205, 48, 0.50)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
         <Button
-          size="mini"
-          basic
+          size="small"
+          inverted
           color="red"
           onClick={onClose}
           floated="right"
@@ -115,7 +117,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
             <Icon name="window close" color="red" size="large" />
           </Button.Content>
         </Button>
-        <h1>ADD PLANT</h1>
+        <h1 style={{ color: "white", textShadow: "2px 2px 2px black" }}>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>
             {state.plant && <Image src={state.plant.photo} size="large" rounded />}
@@ -123,7 +125,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
             {state.plant ? (
-              <div className="plant-info">
+              <div className="plant-info" style={{ color: "white", textShadow: "2px 2px 2px black" }} >
                 <h2>Scientific Name: {state.plant.scientific_name}</h2>
                 <h2>Common Name: {state.plant.common_name}</h2>
                 <h3>
@@ -132,7 +134,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                 <h3>{state.plant.description}</h3>
               </div>
             ) : (
-              <div>
+              <div style={{ color: "white", textShadow: "2px 2px 2px black" }} >
                 <h1>Congrats on your new plant!</h1>
                 <br></br>
                 <Image verticalAlign="middle" src={happy_cactus} size="small" />
@@ -153,7 +155,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                 options={speciesOptions}
                 onChange={clickHandler}
               />
-              <Form onSubmit={submitForm}>
+              <Form onSubmit={submitForm} inverted size="large">
                 <Form.Field>
                   <Form.Input
                     required={true}
@@ -165,23 +167,9 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                       }));
                     }}
                     label="Nickname"
-                    placeholder="Add a name for your plant! (eg. Christofern)"
+                    placeholder="Add a name for your plant!"
                   />
                 </Form.Field>
-                {/* <Form.Field>
-                  <Form.Input
-                    required={true}
-                    onChange={(e, data) => {
-                      console.log("location", data);
-                      setState((prev) => ({
-                        ...prev,
-                        location: data.value,
-                      }));
-                    }}
-                    label="Location"
-                    placeholder="Tell us where your plant lives! (eg. Living Room)"
-                  />
-                </Form.Field> */}
                 <Form.Field>
                   <Form.Input
                     label="Location"
@@ -198,7 +186,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                   </Form.Input>
                 </Form.Field>
 
-                <div className="plant-info">
+                <div className="plant-info" style={{ color: "white", textShadow: "2px 2px 2px black", fontSize: "18px" }}>
                   <List className="plant-list">
                     <List.Item>
                       <List.Icon name="rain" />
@@ -233,7 +221,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                   </List>
                 </div>
                 <br></br>
-                <Button type="submit" positive floated="right">
+                <Button type="submit" color="white" floated="right" size="large">
                   Save Your Plant!
                 </Button>
               </Form>

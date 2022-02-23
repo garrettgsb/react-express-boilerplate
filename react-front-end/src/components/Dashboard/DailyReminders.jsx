@@ -1,6 +1,6 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
-import { Icon, Button, Tab, Message } from "semantic-ui-react";
+import { Icon, Button, Tab, Message, Segment } from "semantic-ui-react";
 import wateringcan from "../../assets/wateringcan.png";
 import dayjs from "dayjs";
 import { getUserReminders } from "../../helpers/selectors";
@@ -22,7 +22,7 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
 
   const panes = [
     {
-      menuItem: "Today Reminders!",
+      menuItem: "Today's Reminders",
       render: () => (
         <Message color={`${dailyUserReminders.length > 0 ? "red" : "blue"}`} >
           <Icon name="rain" />
@@ -31,7 +31,7 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
       ),
     },
     {
-      menuItem: "Tomorrow Reminders",
+      menuItem: "Tomorrow's Reminders",
       render: () => (
         <Message color={`${tomorrowUserReminders.length > 0 ? "red" : "grey"}`}>
           <Icon name="leaf" />
@@ -42,12 +42,14 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
     {
       menuItem: "Edit Plants",
       render: () => (
-        <Message style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly" }} color='olive'>
-          <Button color="olive" onClick={() => setIsVisible(true)}>
-            Add New Plant
-          </Button>
-          <Button color="grey">Delete Plant</Button>
-        </Message>
+        <>
+          <Segment color="olive" stretched style={{ backgroundColor: "rgba(235, 235, 232, 0.90)" }}>
+            <Button color="olive" onClick={() => setIsVisible(true)}>
+              Add New Plant
+            </Button>
+            <Button color="grey">Delete Plant</Button>
+          </Segment>
+        </>
       ),
     },
   ];
@@ -55,7 +57,9 @@ export default function DailyReminders({ plants, reminders, userId, setIsVisible
   return (
     <>
       <div className="notifications">
-        <Tab panes={panes} />
+        <Tab panes={panes}
+          menu={{ color: "grey", attached: false, tabular: false, size: "large", inverted: false, fontWeight: "bold", raised: true, backgroundColor: "rgba(235, 235, 232, 0.90)" }}
+          />
       </div>
     </>
   );
