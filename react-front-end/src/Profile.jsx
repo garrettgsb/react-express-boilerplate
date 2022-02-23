@@ -5,6 +5,7 @@ import PlantList from "./components/Profile/PlantList";
 import { getPlantsForUser, getUserById } from "./helpers/selectors";
 import "./components/Profile/Profile.css";
 import { Container, Grid, Segment, Button, Card, Image, Message, Icon } from "semantic-ui-react";
+import Plant from "./Plant";
 
 export default function Profile({ plants, users, userId }) {
 
@@ -90,6 +91,15 @@ export default function Profile({ plants, users, userId }) {
                 </div>
               </div>
             </Grid.Column>
+
+            <br></br>
+            <br></br>
+            <Grid.Column width={12} style={{ marginTop: "25px" }}>
+              <Segment>
+                <Plant plants={plants && plants} users={users && users} />
+              </Segment>
+            </Grid.Column>
+
           </Grid.Row>
         </Grid>
       </Container>
