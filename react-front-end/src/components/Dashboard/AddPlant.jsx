@@ -1,18 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
-import "semantic-ui-css/semantic.min.css";
-import axios from "axios";
-import happy_cactus from "../../assets/happy_cactus.jpg";
-import {
-  Segment,
-  Image,
-  Dropdown,
-  Grid,
-  Button,
-  Form,
-  Icon,
-  List,
-} from "semantic-ui-react";
-import { getPlantByName } from "../../helpers/selectors";
+import React, { useState, useRef, useEffect } from 'react';
+import 'semantic-ui-css/semantic.min.css';
+import axios from 'axios';
+import happy_plant from '../../assets/happy_plant.png';
+import { Segment, Image, Dropdown, Grid, Button, Form, Icon, List } from 'semantic-ui-react';
+import { getPlantByName } from '../../helpers/selectors';
 
 export default function AddPlant({
   user,
@@ -23,8 +14,8 @@ export default function AddPlant({
 }) {
   const [state, setState] = useState({
     plant: null,
-    nickname: "",
-    location: "Living room",
+    nickname: '',
+    location: 'Living room',
   });
 
   const locationValues = ["Living room", "Dining room", "Bedroom", "Office"];
@@ -47,7 +38,7 @@ export default function AddPlant({
   const divRef = useRef(null);
   useEffect(() => {
     divRef.current.scrollIntoView({
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   });
 
@@ -59,7 +50,7 @@ export default function AddPlant({
     });
   };
   useEffect(() => {
-    window.addEventListener("scroll", []);
+    window.addEventListener('scroll', []);
   }, []);
 
   const speciesOptions = species.map((element) => ({
@@ -80,31 +71,33 @@ export default function AddPlant({
 
   const submitForm = () => {
     axios
-      .post("/api/user_plants", {
+      .post('/api/user_plants', {
         species_id: state.plant.species_id,
         user_id: user.id,
         nickname: state.nickname,
         location: state.location,
       })
       .then((plantResponse) => {
-        console.log("Post made to db!", plantResponse);
+        console.log('Post made to db!', plantResponse);
         onSubmit(); // display success message
         const newPlant = plantResponse.data[0];
         axios
-          .post("/api/reminders", {
+          .post('/api/reminders', {
             plant_id: newPlant.id,
             user_id: user.id,
             watering_interval: state.plant.watering_interval,
             last_watered: new Date(),
           })
           .then((reminderResponse) => {
-            console.log("reminder reeeeesponse", reminderResponse);
+            console.log('reminder reeeeesponse', reminderResponse);
             setAppState((prev) => {
-              return {
-                ...prev,
-                reminders: [...prev.reminders, reminderResponse.data[0]],
-                plants: [...prev.plants, newPlant],
-              };
+              return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
+            });
+          })
+          .then((reminderResponse) => {
+            console.log('reminder reeeeesponse', reminderResponse);
+            setAppState((prev) => {
+              return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
             });
           });
       })
@@ -160,7 +153,7 @@ export default function AddPlant({
               <div style={{ color: "white", textShadow: "2px 2px 2px black" }}>
                 <p className="congrats">Congrats on your new plant!</p>
                 <br></br>
-                <Image verticalAlign="middle" src={happy_cactus} size="small" />
+                <Image verticalAlign="middle" src={happy_plant} size="small" />
               </div>
             )}
             {/* End of ternary */}
@@ -168,20 +161,13 @@ export default function AddPlant({
           {/* Start of ternary to only show if plant selected  */}
           {state.plant ? (
             <Grid.Column verticalAlign="middle" centered width={5}>
-              <Dropdown
-                className="dropdown"
-                placeholder="Select Plant"
-                fluid
-                selection
-                options={speciesOptions}
-                onChange={clickHandler}
-              />
+              <Dropdown className="dropdown" placeholder="Select Plant" fluid selection options={speciesOptions} onChange={clickHandler} />
               <Form onSubmit={submitForm} inverted size="large">
                 <Form.Field>
                   <Form.Input
                     required={true}
                     onChange={(e, data) => {
-                      console.log("EEEEEE", data);
+                      console.log('EEEEEE', data);
                       setState((prev) => ({
                         ...prev,
                         nickname: data.value,
@@ -216,9 +202,7 @@ export default function AddPlant({
                   <List className="plant-list">
                     <List.Item>
                       <List.Icon name="rain" />
-                      <List.Content>
-                        Every {state.plant.watering_interval} Days
-                      </List.Content>
+                      <List.Content>Every {state.plant.watering_interval} Days</List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="sun" />
@@ -230,9 +214,7 @@ export default function AddPlant({
                     </List.Item>
                     <List.Item>
                       <List.Icon name="book" />
-                      <List.Content>
-                        {state.plant.difficulty_level}
-                      </List.Content>
+                      <List.Content>{state.plant.difficulty_level}</List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name="world" />
@@ -240,9 +222,7 @@ export default function AddPlant({
                     </List.Item>
                     <List.Item>
                       <List.Icon name="paw" />
-                      <List.Content>
-                        {state.plant.toxic ? "Toxic" : "Non-Toxic"}
-                      </List.Content>
+                      <List.Content>{state.plant.toxic ? 'Toxic' : 'Non-Toxic'}</List.Content>
                     </List.Item>
                   </List>
                 </div>

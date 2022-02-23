@@ -2,7 +2,6 @@ import React from "react";
 import { Segment, Button, Dropdown, Menu, Image, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
-import logo_no_bee from "../assets/logo_no_bee.png";
 import { getUserById } from "../helpers/selectors";
 
 export default function Navbar({ users, user, login, logout }) {
@@ -60,7 +59,7 @@ export default function Navbar({ users, user, login, logout }) {
       <Menu inverted secondary>
         <Link to={user ? "/dashboard" : "/"}>
           <Menu.Item className="navbar-logo">
-            <Image src={user ? logo : logo_no_bee} size="small" />
+            <Image src={logo} size="small" />
           </Menu.Item>
         </Link>
         <Menu.Menu position="right">{renderAuthButton()}</Menu.Menu>
