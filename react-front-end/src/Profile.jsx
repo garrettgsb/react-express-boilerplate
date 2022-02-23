@@ -39,7 +39,8 @@ export default function Profile({ plants, users, userId }) {
                 {loggedUser && loggedUser.id !== profileUser ?
                   <h2>
                     Welcome {loggedUser && loggedUser.name}, thanks for visiting my profile!
-                  </h2> : <h1>My Profile</h1>}
+                  </h2> : 
+                  <p className="profile-header">My Profile</p>}
               </Segment>
 
               {success && (
@@ -67,7 +68,7 @@ export default function Profile({ plants, users, userId }) {
                 <div className="ui card avatar" style={{ overflow: 'auto', maxWidth: 2000, backgroundColor: "rgba(225, 205, 48, 0.65)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }} >
                   <Image src={user && user.avatar} alt="avatar" size="medium" />
                   <div className="content">
-                    <a className="header" style={{ color: "white", textShadow: "2px 2px 2px #325036" }}>{user && user.name}</a>
+                    <a className="avatar-header">{user && user.name}</a>
                     <div className="date">
                       <span className="date" style={{ color: "white", textShadow: "2px 2px 2px #325036" }}>Joined in {user && user.created_at.split('-')[0]}</span>
                     </div>

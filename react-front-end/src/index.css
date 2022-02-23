@@ -112,3 +112,17 @@ code {
 .dropdown-nav {
   font-size: 17px !important;
 }
+
+.profile-header {
+  color: white !important;
+  text-shadow: 2px 2px 2px black !important;
+  font-family: Paytone One !important;
+  font-size: 32px;
+}
+
+.avatar-header{
+color: white; 
+text-shadow: 2px 2px 2px #325036;
+font-family: Paytone One !important;
+font-size: 30px;
+}

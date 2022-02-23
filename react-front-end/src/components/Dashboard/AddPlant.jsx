@@ -151,9 +151,9 @@ export default function AddPlant({
                 style={{ color: "white", textShadow: "2px 2px 2px black" }}
               >
                 <p className="title-name">Scientific Name:</p>
-                <p className="plant-name"> {state.plant.scientific_name} </p>
+                <p className="species-name"> {state.plant.scientific_name} </p>
                 <p className="title-name">Common Name: </p>
-                <p className="plant-name">{state.plant.common_name} </p>
+                <p className="species-name">{state.plant.common_name} </p>
                 <h3>{state.plant.description}</h3>
               </div>
             ) : (
