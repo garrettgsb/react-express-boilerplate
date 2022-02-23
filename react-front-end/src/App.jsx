@@ -279,6 +279,7 @@ class App extends Component {
                   wishlist={this.state.wishlist}
                   user_plants={this.state.plants}
                   species={this.state.species}
+                  setAppState={this.setState.bind(this)}
                 />
               }
             />
