@@ -24,12 +24,16 @@ export default function Newsfeed({ posts, comments, users, userId, createNewPost
               horizontal
               color="olive"
               style={{
-                backgroundColor: 'rgba(225, 205, 48, 0.75)',
+                backgroundColor: 'rgba(225, 205, 48, 0.55)',
                 backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
               }}
             >
-              <div className="news-title" >
-                <Header className="newsfeed-title" size="large" style={{ margin: 'auto', color: 'white', textShadow: '2px 2px 2px #325036' }}>
+              <div className="news-title">
+                <Header
+                  className="newsfeed-title"
+                  size="large"
+                  style={{ margin: 'auto', color: 'white', textShadow: '2px 2px 2px #325036' }}
+                >
                   Hey {name}, what's on your mind?
                 </Header>
                 <div>

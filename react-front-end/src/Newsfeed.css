@@ -1,16 +1,37 @@
- #likes:hover {
- transform: scaleX(103%);
- }
+#likes:hover {
+  transform: scaleX(103%);
+}
 
- #follow:hover {
- transform: scaleX(103%);
- }
+#follow:hover {
+  transform: scaleX(103%);
+}
 
- #message:hover {
- transform: scaleX(103%);
- }
+#message:hover {
+  transform: scaleX(103%);
+}
 
- .newsfeed-title {
-   font-family: Paytone One !important;
-   font-size: 26px !important;
- }
+.newsfeed-title {
+  font-family: Paytone One !important;
+  font-size: 26px !important;
+}
+
+.video header {
+  box-shadow: 3px 3px 5px black;
+  margin-bottom: 300px;
+}
+
+.topic-ribbon {
+  text-shadow: 1px 1px 3px rgb(72, 82, 19);
+}
+
+#post-image {
+  box-shadow: 2px 2px 9px rgb(37, 37, 7);
+}
+#post-image:hover {
+  transform: scale(102%);
+}
+
+#post-avatar:hover {
+  transform: scale(115%);
+  box-shadow: 1px 1px 3px;
+}
