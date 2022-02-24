@@ -52,7 +52,7 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
     return <></>;
   } else {
     return (
-      <Container className="wishlist">
+      <Container className="wishlist" style={{ height: 1300 }}>
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
