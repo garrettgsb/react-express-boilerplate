@@ -28,7 +28,6 @@ export default function Dashboard({ users, userId, plants, species, reminders, u
 
   const onSubmit = () => {
     setSuccess(true);
-    // alert("Successfully added!");
     setTimeout(() => {
       setSuccess(false);
     }, 3500);

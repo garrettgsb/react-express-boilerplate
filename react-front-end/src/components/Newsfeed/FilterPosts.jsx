@@ -38,6 +38,7 @@ export default function FilterPosts({ posts, renderFilteredPosts, setIsVisibleFi
             selection
             options={topicFilterOptions}
             onChange={clickHandler}
+            style={{ textShadow: "none" }}
           />
           <Button animated onClick={onClick}>
             <Button.Content visible>Go</Button.Content>

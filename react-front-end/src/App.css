@@ -3,6 +3,11 @@
 
   background-color: #3d6b1d;
   background-image: linear-gradient(280deg, #678a40 0%, #00210b 40%);
+  /* background-image: url('./assets/image_2.jpeg'); */
+  /* background-image: url("https://soowood.co.jp/wp/wp-content/uploads/2019/12/AdobeStock_300572424-1024x683.jpeg");
+  background-repeat: repeat-x;*/
+  /* background-size: contain;
+  background-color: black; */
 }
 
 /* Where we user this?? */
@@ -87,8 +92,6 @@ div.ui.inverted.segment.navbar-segment {
   z-index: 100;
 }
 
-
-
 div.plant-info {
   display: flex;
   flex-direction: column;
@@ -123,9 +126,9 @@ div.ui.container {
   margin: auto;
 }
 
-div.ui.card.avatar {
+/* div.ui.card.avatar {
   position: fixed;
-}
+} */
 
 div.ui.two.cards {
   width: 100%;
@@ -141,7 +144,7 @@ div.ui.container.app-container {
   margin-top: 78px;
   padding-top: 40px;
   padding-left: 20px;
-  /* padding-bottom: 120px; */
+  padding-bottom: 120px;
 }
 
 div.ui.container.plant-page {
@@ -166,7 +169,7 @@ div.ui.inverted.segment.navbar-segment {
 }
 
 .button {
-  box-shadow: 2px 2px 5px grey
+  box-shadow: 2px 2px 5px grey;
 }
 
 div.plant-header {
