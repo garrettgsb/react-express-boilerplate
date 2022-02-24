@@ -1,9 +1,8 @@
 .App {
   text-align: center;
-  background-image: url('./assets/image_2.jpeg');
-  /* background-image: url("https://soowood.co.jp/wp/wp-content/uploads/2019/12/AdobeStock_300572424-1024x683.jpeg");
-  background-repeat: repeat-y;
-  background-size: contain;*/
+
+  background-color: #3d6b1d;
+  background-image: linear-gradient(290deg, #678a40 0%, #00210b 50%);
 }
 
 /* Where we user this?? */
