@@ -1,8 +1,9 @@
-import React from "react";
-import { Segment, Button, Dropdown, Menu, Image, Icon } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
-import { getUserById } from "../helpers/selectors";
+import React from 'react';
+import '../App.css';
+import { Segment, Button, Dropdown, Menu, Image, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png';
+import { getUserById } from '../helpers/selectors';
 
 export default function Navbar({ users, user, login, logout }) {
   const loggedUser = getUserById(users, user);
@@ -13,11 +14,14 @@ export default function Navbar({ users, user, login, logout }) {
     if (user) {
       return (
         <>
-          <Menu.Item className="logged-in" >
-            {" "}
-            <Image src={loggedUser && loggedUser.avatar} avatar /><span style={{ fontSize: "18px" }}>Logged in as <b>{loggedUser && loggedUser.name}</b></span>
+          <Menu.Item className="logged-in">
+            {' '}
+            <Image src={loggedUser && loggedUser.avatar} avatar />
+            <span style={{ fontSize: '18px' }}>
+              Logged in as <b>{loggedUser && loggedUser.name}</b>
+            </span>
           </Menu.Item>
-          <Dropdown item text="Menu" className="dropdown-nav">
+          <Dropdown item text="Menu" className="dropdown-nav" color="grey">
             <Dropdown.Menu>
               <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
               <Dropdown.Item href="/newsfeed">Newsfeed</Dropdown.Item>
@@ -28,8 +32,10 @@ export default function Navbar({ users, user, login, logout }) {
 
           <Menu.Item>
             <Link to="/">
-              <Button inverted color="grey" onClick={logout} animated="fade">
-                <Button.Content visible style= {{ fontSize: "16px" }}>Logout</Button.Content>
+              <Button className="button" inverted color="grey" onClick={logout} animated="fade">
+                <Button.Content visible style={{ fontSize: '16px' }}>
+                  Logout
+                </Button.Content>
                 <Button.Content hidden>
                   <Icon name="sign-out" />
                 </Button.Content>
@@ -42,7 +48,7 @@ export default function Navbar({ users, user, login, logout }) {
       return (
         <Menu.Item>
           <Link to="/dashboard">
-            <Button inverted color="grey" onClick={login} animated="fade">
+            <Button className="button" inverted color="grey" onClick={login} animated="fade">
               <Button.Content visible>Login</Button.Content>
               <Button.Content hidden>
                 <Icon name="sign-in" />
@@ -57,7 +63,7 @@ export default function Navbar({ users, user, login, logout }) {
   return (
     <Segment inverted className="navbar-segment">
       <Menu inverted secondary>
-        <Link to={user ? "/dashboard" : "/"}>
+        <Link to={user ? '/dashboard' : '/'}>
           <Menu.Item className="navbar-logo">
             <Image src={logo} size="small" />
           </Menu.Item>

@@ -71,7 +71,7 @@ export default function SinglePost({
       <Segment.Group
         horizontal
         style={{
-          backgroundColor: 'rgba(235, 235, 232, 0.8)',
+          backgroundColor: 'rgba(235, 235, 232, 0.7)',
           backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
         }}
       >
@@ -82,7 +82,7 @@ export default function SinglePost({
           <Link to={postUserProfileUrl}>
             <Image id="post-avatar" src={user && user.avatar} avatar />
           </Link>
-          <a href={postUserProfileUrl}>
+          <a href={postUserProfileUrl} >
             <b>{user && user.name}</b>
           </a>{' '}
           on {postedDate}

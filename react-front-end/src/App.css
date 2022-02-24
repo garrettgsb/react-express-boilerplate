@@ -2,7 +2,7 @@
   text-align: center;
 
   background-color: #3d6b1d;
-  background-image: linear-gradient(290deg, #678a40 0%, #00210b 50%);
+  background-image: linear-gradient(280deg, #678a40 0%, #00210b 40%);
 }
 
 /* Where we user this?? */
@@ -87,6 +87,8 @@ div.ui.inverted.segment.navbar-segment {
   z-index: 100;
 }
 
+
+
 div.plant-info {
   display: flex;
   flex-direction: column;
@@ -159,7 +161,12 @@ div.ui.video {
 
 div.ui.inverted.segment.navbar-segment {
   /* background-color: #395b3d; */
-  background-image: linear-gradient(180deg, #395b3d, #5d8162, #395b3d);
+  background-image: linear-gradient(180deg, #395b3d, #68926c, #395b3d);
+  box-shadow: 2px 2px 9px black;
+}
+
+.button {
+  box-shadow: 2px 2px 5px grey
 }
 
 div.plant-header {
