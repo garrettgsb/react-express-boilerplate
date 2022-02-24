@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "semantic-ui-css/semantic.min.css";
-import "../../../Newsfeed.css";
-import moment from "moment";
-import { Button, Icon, Image, Segment, Label, Grid, Header } from "semantic-ui-react";
-import { getUserById } from "../../../helpers/selectors";
-import { likePost } from "./SinglePostService";
-import CommentList from "./CommentList";
-import NewCommentForm from "../NewCommentForm";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import 'semantic-ui-css/semantic.min.css';
+import '../../../Newsfeed.css';
+import moment from 'moment';
+import { Button, Icon, Image, Segment, Label, Grid, Header } from 'semantic-ui-react';
+import { getUserById } from '../../../helpers/selectors';
+import { likePost } from './SinglePostService';
+import CommentList from './CommentList';
+import NewCommentForm from '../NewCommentForm';
 
 export default function SinglePost({
   id,
@@ -24,7 +24,7 @@ export default function SinglePost({
 }) {
   const [likeState, setLikeState] = useState({
     likes: number_of_likes,
-    like_text: "Like",
+    like_text: 'Like',
     clicked: false,
   });
 
@@ -48,27 +48,44 @@ export default function SinglePost({
     setLikeState((prev) => ({
       ...prev,
       likes: new_number_of_likes,
-      like_text: "Liked",
+      like_text: 'Liked',
       clicked: true,
     }));
   };
 
   const user = getUserById(users, user_id);
-  const postUserProfileUrl = "/profile/" + user_id;
+  const postUserProfileUrl = '/profile/' + user_id;
 
-  const postedDate = moment(created_at).format("ll");
+  const postedDate = moment(created_at).format('ll');
 
   return (
-    <Segment className="newsfeed" raised color="olive" style={{ backgroundColor: "rgba(225, 205, 48, 0.60)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
-      <Segment.Group horizontal style={{ backgroundColor: "rgba(235, 235, 232, 0.8)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
+    <Segment
+      className="newsfeed"
+      raised
+      color="olive"
+      style={{
+        backgroundColor: 'rgba(225, 205, 48, 0.60)',
+        backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
+      }}
+    >
+      <Segment.Group
+        horizontal
+        style={{
+          backgroundColor: 'rgba(235, 235, 232, 0.7)',
+          backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
+        }}
+      >
         <Segment>
           <h2>{title}</h2>
         </Segment>
         <Segment>
           <Link to={postUserProfileUrl}>
-            <Image src={user && user.avatar} avatar />
+            <Image id="post-avatar" src={user && user.avatar} avatar />
           </Link>
-          <a href={postUserProfileUrl}><b>{user && user.name}</b></a> on {postedDate}
+          <a href={postUserProfileUrl} >
+            <b>{user && user.name}</b>
+          </a>{' '}
+          on {postedDate}
         </Segment>
 
         <Segment>
@@ -79,16 +96,27 @@ export default function SinglePost({
             </Label>
           </div>
         </Segment>
-
       </Segment.Group>
-      <Segment.Group horizontal style={{ background: "none"}}>
-        <Image src={photo} width="400px" height="300px" rounded style={{ margin: "auto"}}/>
-        <Segment >
-          <Header as="h3" block style={{ backgroundColor: "rgba(235, 235, 232, 0.8)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
+      <Segment.Group horizontal style={{ background: 'none' }}>
+        <Image id="post-image" src={photo} width="400px" height="300px" rounded style={{ margin: 'auto' }} />
+        <Segment>
+          <Header
+            as="h3"
+            block
+            style={{
+              backgroundColor: 'rgba(235, 235, 232, 0.8)',
+              backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
+            }}
+          >
             <Icon name="talk" color="olive" />
             {description}
           </Header>
-          <Segment style={{ backgroundColor: "rgba(235, 235, 232, 0.8)", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
+          <Segment
+            style={{
+              backgroundColor: 'rgba(235, 235, 232, 0.8)',
+              backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-light.png)',
+            }}
+          >
             {isVisibleCommentForm && (
               <NewCommentForm
                 user_id={user_id}

@@ -1,10 +1,13 @@
 .App {
   text-align: center;
-  background-image: url('./assets/image_2.jpeg');
+
+  background-color: #3d6b1d;
+  background-image: linear-gradient(280deg, #678a40 0%, #00210b 40%);
+  /* background-image: url('./assets/image_2.jpeg'); */
   /* background-image: url("https://soowood.co.jp/wp/wp-content/uploads/2019/12/AdobeStock_300572424-1024x683.jpeg");
   background-repeat: repeat-x;*/
-  background-size: contain;
-  background-color: black;
+  /* background-size: contain;
+  background-color: black; */
 }
 
 /* Where we user this?? */
@@ -161,7 +164,12 @@ div.ui.video {
 
 div.ui.inverted.segment.navbar-segment {
   /* background-color: #395b3d; */
-  background-image: linear-gradient(180deg, #395b3d, #5d8162, #395b3d);
+  background-image: linear-gradient(180deg, #395b3d, #68926c, #395b3d);
+  box-shadow: 2px 2px 9px black;
+}
+
+.button {
+  box-shadow: 2px 2px 5px grey;
 }
 
 div.plant-header {
