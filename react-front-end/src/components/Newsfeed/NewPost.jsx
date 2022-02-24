@@ -84,6 +84,7 @@ export default function NewPostForm({ user, setIsVisibleForm, createNewPost }) {
             selection
             options={topicOptions}
             onChange={clickHandler}
+            style={{ textShadow: "none" }}
           />
         </Form.Field>
 
