@@ -1,0 +1,144 @@
+body {
+  background: #8acdeb;
+}
+#container {
+  position: absolute;
+
+  top: 55%;
+  left: 30%;
+  transform: translate(-20%, -50%);
+}
+.steam {
+  position: absolute;
+  height: 80px;
+  width: 87px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-top: 0px;
+  margin-left: 193px;
+  z-index: 100;
+  opacity: 0;
+}
+
+#steam1 {
+  -webkit-animation: steam1 4s ease-out infinite;
+  animation: steam1 4s ease-out infinite;
+}
+
+#steam3 {
+  -webkit-animation: steam1 4s ease-out 1s infinite;
+  animation: steam1 4s ease-out 1s infinite;
+}
+
+@-webkit-keyframes steam1 {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.25);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-200px) translateX(-20px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes steam1 {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.25);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-200px) translateX(-20px) scale(1);
+    opacity: 0;
+  }
+}
+
+#steam2 {
+  -webkit-animation: steam2 4s ease-out 0.5s infinite;
+  animation: steam2 4s ease-out 0.5s infinite;
+}
+
+#steam4 {
+  -webkit-animation: steam2 4s ease-out 1.5s infinite;
+  animation: steam2 4s ease-out 1.5s infinite;
+}
+
+@-webkit-keyframes steam2 {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.25);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-200px) translateX(20px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes steam2 {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.25);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-200px) translateX(20px) scale(1);
+    opacity: 0;
+  }
+}
+
+#cup {
+  z-index: 1;
+}
+
+#cup-body {
+  position: absolute;
+
+  top: 70%;
+  left: 60%;
+  height: 50px;
+  width: 70px;
+  border-radius: 0 0 150px 150px;
+  background-color: rgb(161, 153, 81);
+  margin: auto;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+  font-size: 17px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: lighter;
+  color: rgb(216, 214, 205);
+  box-shadow: 3px 3px 7px rgba(1, 44, 23, 0.623);
+}
+
+/* #cup-shade {
+  position: relative;
+  height: 20px;
+  width: 60px;
+  background-color: #f3f3f3;
+  display: inline-block;
+  margin-left: 42%;
+  margin-top: -3px;
+  transform: rotate(50deg);
+  z-index: 1;
+} */
+
+/* didn't cooperate */
+#cup-handle {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  border-radius: 0 150px 150px 0;
+  margin-bottom: 50px;
+  margin-left: 300px;
+  z-index: 0;
+}
+
+#saucer {
+  position: absolute;
+  height: 10px;
+  width: 80px;
+  border-radius: 0 0 100px 100px;
+  background-color: rgb(131, 124, 67);
+  margin-top: 20px;
+  margin-left: 198px;
+  z-index: 2;
+  box-shadow: 3px 3px 7px rgba(1, 44, 23, 0.623);
+}
