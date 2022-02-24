@@ -33,12 +33,7 @@ export default function Profile({ plants, users, userId, species }) {
     return <></>;
   } else {
     return (
-      <Container
-        className="profile"
-        style={{
-          height: 1000,
-        }}
-      >
+      <Container className="app-container">
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
@@ -46,7 +41,7 @@ export default function Profile({ plants, users, userId, species }) {
                 {loggedUser && loggedUser.id !== profileUser ?
                   <h2>
                     Welcome {loggedUser && loggedUser.name}, thanks for visiting my profile!
-                  </h2> : 
+                  </h2> :
                   <p className="profile-header">My Profile</p>}
               </Segment>
 
@@ -78,10 +73,10 @@ export default function Profile({ plants, users, userId, species }) {
                     </div>
                     <div className="description">
                       <p className="description-bulby">
-                      {user && user.name} is an art director living in New York.
+                        {user && user.name} is an art director living in New York.
                       </p>
-                    <Segment color="olive" style={{ backgroundColor: "rgba(255, 255, 255, 0.20)", marginTop: "12px" }}>
-              <h5>"{user && user.quote}"</h5>
+                      <Segment color="olive" style={{ backgroundColor: "rgba(255, 255, 255, 0.20)", marginTop: "12px" }}>
+                        <h5>"{user && user.quote}"</h5>
                       </Segment>
                     </div>
                   </div>
@@ -96,19 +91,15 @@ export default function Profile({ plants, users, userId, species }) {
                 </div>
               </div>
             </Grid.Column>
-
-            <br></br>
-            <br></br>
-
-            <br></br>
-            {selectedPlant && (<>
-              <Grid.Column width={12} >
-                <ViewPlant user={loggedUser} species={species} closeViewPlant={() => setSelectedPlant(null)} plant={selectedPlant} />
-              </Grid.Column>
-            </>)}
-
           </Grid.Row>
         </Grid>
+        <br></br>
+
+        <br></br>
+        {selectedPlant && (<>
+          <ViewPlant user={loggedUser} species={species} closeViewPlant={() => setSelectedPlant(null)} plant={selectedPlant} />
+        </>)}
+        <br></br>
       </Container>
     );
   }

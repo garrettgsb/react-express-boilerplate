@@ -31,9 +31,10 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
   // Scroll to bottom & Scroll to top //
   const divRef = useRef(null);
   useEffect(() => {
-    divRef.current.scrollIntoView({
+    window.scrollTo({
+      top: 150,
       behavior: 'smooth',
-    });
+    })
   });
 
   const onClose = (event) => {
@@ -56,7 +57,6 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
 
   const clickHandler = (event, data) => {
     const selectedSpecies = getPlantByName(species, data.value);
-    // console.log('selectedSpecies!!!!', selectedSpecies)
     setState((prev) => ({
       ...prev,
       plant: selectedSpecies,
@@ -94,10 +94,9 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
       });
     onClose();
   };
-  
+
   return (
     <div>
-      <div ref={divRef} />
       <Segment
         style={{
           backgroundColor: 'rgba(225, 205, 48, 0.50)',
