@@ -39,7 +39,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
   const onClose = (event) => {
     setIsVisible(false);
     window.scrollTo({
-      top: 350,
+      top: 0,
       behavior: 'smooth',
     });
   };
@@ -87,13 +87,14 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
             setAppState((prev) => {
               return { ...prev, reminders: [...prev.reminders, reminderResponse.data[0]], plants: [...prev.plants, newPlant] };
             });
-          });
+          })
       })
       .catch(function (error) {
         console.log(error);
       });
     onClose();
   };
+  
   return (
     <div>
       <div ref={divRef} />
@@ -109,24 +110,27 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
             <Icon name="window close" color="red" size="large" />
           </Button.Content>
         </Button>
-        <p className="add-plant">ADD PLANT</p>
+        <h1 style={{ color: 'white', textShadow: '2px 2px 2px black' }}>ADD PLANT</h1>
         <Grid verticalAlign="middle" centered>
           <Grid.Column width={5}>{state.plant && <Image src={state.plant.photo} size="large" rounded />}</Grid.Column>
           <Grid.Column width={6} textAlign="center">
             {/* Start of ternary to only show if plant selected  */}
             {state.plant ? (
               <div className="plant-info" style={{ color: 'white', textShadow: '2px 2px 2px black' }}>
-                <p className="title-name">Scientific Name:</p>
-                <p className="species-name"> {state.plant.scientific_name} </p>
-                <p className="title-name">Common Name: </p>
-                <p className="species-name">{state.plant.common_name} </p>
+                <h2>Scientific Name: {state.plant.scientific_name}</h2>
+                <h2>Common Name: {state.plant.common_name}</h2>
+                <h3>
+                  <i>{state.plant.nickname}</i>
+                </h3>
                 <h3>{state.plant.description}</h3>
               </div>
             ) : (
               <div style={{ color: 'white', textShadow: '2px 2px 2px black' }}>
-                <p className="congrats">Congrats on your new plant!</p>
+                <h1>Congrats on your new plant!</h1>
                 <br></br>
-                <Image verticalAlign="middle" src={happy_plant} size="medium" />
+                <Image verticalAlign="middle" src={happy_plant} size="normal" />
+
+                {/* <h2>Search for your plant with the drop down menu</h2> */}
               </div>
             )}
             {/* End of ternary */}
@@ -164,14 +168,7 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                   </Form.Input>
                 </Form.Field>
 
-                <div
-                  className="plant-info"
-                  style={{
-                    color: 'white',
-                    textShadow: '2px 2px 2px black',
-                    fontSize: '18px',
-                  }}
-                >
+                <div className="plant-info" style={{ color: 'white', textShadow: '2px 2px 2px black', fontSize: '18px' }}>
                   <List className="plant-list">
                     <List.Item>
                       <List.Icon name="rain" />
@@ -215,9 +212,6 @@ export default function AddPlant({ user, species, setIsVisible, setAppState, onS
                 options={speciesOptions}
                 onChange={clickHandler}
               />
-              {/* <p className="search-instruction">
-                Search for your plant with the drop down menu
-              </p> */}
             </Grid.Column>
           )}
           {/* End of ternary */}

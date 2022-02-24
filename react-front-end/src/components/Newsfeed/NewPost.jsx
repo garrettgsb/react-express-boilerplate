@@ -43,8 +43,8 @@ export default function NewPostForm({ user, setIsVisibleForm, createNewPost }) {
   };
 
   return (
-    <Segment raised>
-      <Form onSubmit={submitForm}>
+    <Segment raised style={{ backgroundColor: "rgba(225, 205, 48, 0.65)", textShadow: "2px 2px 2px #325036", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
+      <Form onSubmit={submitForm} inverted size="large">
 
         <Form.Field>
           <Form.Input required={true}
