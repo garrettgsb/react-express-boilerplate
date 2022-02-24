@@ -29,8 +29,8 @@ export default function FilterPosts({ posts, renderFilteredPosts, setIsVisibleFi
   }
   
    return (
-    <Segment raised>
-      <label>Filter Posts by Topic:</label>
+    <Segment raised style={{ backgroundColor: "rgba(225, 205, 48, 0.65)", textShadow: "2px 2px 2px #325036", backgroundImage: "url(https://www.transparenttextures.com/patterns/asfalt-light.png)" }}>
+      <label style={{ color: "white", fontSize: "18px", fontWeight: "bold" }}>Filter Posts by Topic:</label>
      <Segment.Group horizontal>
           <Dropdown
             placeholder="Click to select your filter"
