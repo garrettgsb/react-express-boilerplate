@@ -52,19 +52,12 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
     return <></>;
   } else {
     return (
-      <Container
-        className="wishlist"
-        style={{
-          height: 1000,
-        }}
-      >
+      <Container className="wishlist">
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width={12}>
               <Segment className="profile">
-                <p className="wishlist-title">
-                  My Wishlist Plants
-                </p>
+                <p className="wishlist-title">My Wishlist Plants</p>
               </Segment>
 
               {success && (
@@ -131,10 +124,8 @@ export default function Wishlist({ users, userId, wishlist, user_plants, species
                       <span className="date-bulb">Joined in {user && user.created_at.split('-')[0]}</span>
                     </div>
                     <div className="description">
-                    <p className="description-bulby">
-                      {user && user.name} is an art director living in New York.
-                      </p>
-                      <Segment color="olive" style={{ backgroundColor: 'rgba(235, 235, 232, 0.5)', marginTop: "12px"  }}>
+                      <p className="description-bulby">{user && user.name} is an art director living in New York.</p>
+                      <Segment color="olive" style={{ backgroundColor: 'rgba(235, 235, 232, 0.5)', marginTop: '12px' }}>
                         <h5>"{user && user.quote}"</h5>
                       </Segment>
                     </div>
