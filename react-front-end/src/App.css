@@ -2,8 +2,8 @@
   text-align: center;
   background-image: url('./assets/image_2.jpeg');
   /* background-image: url("https://soowood.co.jp/wp/wp-content/uploads/2019/12/AdobeStock_300572424-1024x683.jpeg");
-  background-repeat: repeat-y;
-  background-size: contain;*/
+  background-repeat: repeat-x;*/
+  background-size: contain;
 }
 
 /* Where we user this?? */
@@ -122,9 +122,9 @@ div.ui.container {
   margin: auto;
 }
 
-div.ui.card.avatar {
+/* div.ui.card.avatar {
   position: fixed;
-}
+} */
 
 div.ui.two.cards {
   width: 100%;
@@ -140,7 +140,7 @@ div.ui.container.app-container {
   margin-top: 78px;
   padding-top: 40px;
   padding-left: 20px;
-  /* padding-bottom: 120px; */
+  padding-bottom: 120px;
 }
 
 div.ui.container.plant-page {
