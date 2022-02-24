@@ -14,6 +14,15 @@ Please come back soon to see a finished result!
 
 
 
+## Screenshot
+
+!["Screenshot of Landing Page"](https://github.com/julia-gatina/beleaf/blob/master/react-front-end/public/images/landing-page.png?raw=true)
+
+
+
+* Stay tuned for more!
+
+
 
 ## Running the projects
 
