@@ -43,8 +43,8 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
   const divRef = useRef(null);
   useEffect(() => {
     divRef.current.scrollIntoView({
-      block: "center",
-      inline: "center",
+      block: "nearest",
+      inline: "nearest",
       behavior: "smooth"
     });
   });
@@ -52,6 +52,7 @@ export default function AddWishlistPlant({ user, species, setIsVisible, plantSpe
   const onClose = (event) => { // Add an event to display success message
     setIsVisible(false);
     window.scrollTo({
+      top: 0,
       behavior: "smooth",
     });
   };

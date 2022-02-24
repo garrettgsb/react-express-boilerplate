@@ -12,7 +12,8 @@ export default function ViewPlant({ plant, user, species, closeViewPlant }) {
   const onClose = (event) => {
     closeViewPlant(false);
     window.scrollTo({
-      top: 350,
+      // top: 350,
+      top: 0,
       behavior: "smooth",
     });
   };
