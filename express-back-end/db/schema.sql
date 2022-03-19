@@ -35,8 +35,9 @@ CREATE TABLE professionals (
 CREATE TABLE appointments (
   id SERIAL PRIMARY KEY NOT NULL,
   client_id INTEGER REFERENCES clients(id) ON DELETE CASCADE,
-  professionals_id INTEGER REFERENCES professionals(id) ON DELETE CASCADE,
+  professional_id INTEGER REFERENCES professionals(id) ON DELETE CASCADE,
   date DATE NOT NULL,
+  time TIME NOT NULL,
   description TEXT
 );
 
@@ -47,6 +48,6 @@ CREATE TABLE specialties (
 
 CREATE TABLE professionals_specialties (
   id SERIAL PRIMARY KEY NOT NULL,
-  professionals_id INTEGER REFERENCES professionals(id) ON DELETE CASCADE,
-  specialties_id INTEGER REFERENCES specialties(id) ON DELETE CASCADE
+  professional_id INTEGER REFERENCES professionals(id) ON DELETE CASCADE,
+  specialty_id INTEGER REFERENCES specialties(id) ON DELETE CASCADE
 );
