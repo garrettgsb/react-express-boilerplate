@@ -5,7 +5,7 @@ const router = require("express").Router();
 const clientRoutes = () => {
   
   router.get('/', (req, res) => {
-    res.json([{data: 'Hello from the Clients API!'}]);
+    res.json({data: 'Hello from the Clients API!'});
   })
 
   return router;
