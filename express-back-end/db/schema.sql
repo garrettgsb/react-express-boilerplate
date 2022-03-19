@@ -12,7 +12,8 @@ CREATE TABLE clients (
   city VARCHAR(255),
   province VARCHAR(255),
   language_1 VARCHAR(255),
-  language_2 VARCHAR(255)
+  language_2 VARCHAR(255),
+  icon_link VARCHAR(255)
 );
 
 CREATE TABLE professionals (
@@ -24,7 +25,9 @@ CREATE TABLE professionals (
   language_1 VARCHAR(255) NOT NULL,
   language_2 VARCHAR(255),
   profession VARCHAR(255) NOT NULL,
-  cost_per_session INTEGER
+  cost_per_session INTEGER,
+  icon_link VARCHAR(255),
+  description TEXT
 );
 
 CREATE TABLE appointments (
