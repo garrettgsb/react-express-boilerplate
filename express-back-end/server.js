@@ -1,3 +1,4 @@
+require("dotenv").config();
 const Express = require("express");
 const morgan = require("morgan");
 const BodyParser = require("body-parser");
@@ -18,13 +19,7 @@ App.use(
 App.use(BodyParser.json());
 
 // Routes
-App.use("/api/clients", clientRoutes());
-
-App.get("/api/data", (req, res) =>
-  res.json({
-    message: "Seems to work!",
-  })
-);
+App.use("/api/clients", clientRoutes);
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
