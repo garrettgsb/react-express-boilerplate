@@ -24,12 +24,6 @@ app.get("/api/data", (req, res) =>
   })
 );
 
-// app.get("/test", (req, res) =>
-//   res.json({
-//     message: "TEST",
-//   })
-// );
-
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(
