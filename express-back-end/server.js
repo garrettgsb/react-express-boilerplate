@@ -2,26 +2,31 @@ require("dotenv").config();
 const Express = require("express");
 const morgan = require("morgan");
 const BodyParser = require("body-parser");
-const App = Express();
+const app = Express();
 const PORT = 8080;
 
 // Express Configuration
-App.use(Express.static("public"));
+// app.use(Express.static("public"));
 
 // Routes requires
 const clientRoutes = require("./routes/clients");
+const professionalRoutes = require("./routes/professionals");
 
 // Middleware
-App.use(morgan("dev"));
-App.use(
+app.use(morgan("dev"));
+app.use(
   BodyParser.urlencoded({ extended: false })
 );
-App.use(BodyParser.json());
+app.use(BodyParser.json());
 
 // Routes
-App.use("/api/clients", clientRoutes);
+app.use("/api/clients", clientRoutes);
+app.use(
+  "/api/professionals",
+  professionalRoutes()
+);
 
-App.listen(PORT, () => {
+app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(
     `Express seems to be listening on port ${PORT} so that's pretty good 👍`
