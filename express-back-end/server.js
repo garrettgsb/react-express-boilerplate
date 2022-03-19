@@ -3,12 +3,11 @@ const morgan = require("morgan");
 const BodyParser = require("body-parser");
 const App = Express();
 const PORT = 8080;
-
 // Express Configuration
 App.use(Express.static("public"));
 
 // Routes requires
-const clientRoutes = require("/routes/clients");
+const clientRoutes = require("./routes/clients");
 
 // Middleware
 App.use(morgan("dev"));
@@ -18,7 +17,7 @@ App.use(
 App.use(BodyParser.json());
 
 // Routes
-App.use("/clients", clientRoutes());
+App.use("/api/clients", clientRoutes());
 
 App.get("/api/data", (req, res) =>
   res.json({
