@@ -5,8 +5,10 @@ const App = Express();
 const PORT = 8080;
 
 // Express Configuration
-
 App.use(Express.static("public"));
+
+// Routes requires
+const clientRoutes = require("/routes/clients");
 
 // Middleware
 App.use(morgan("dev"));
@@ -15,7 +17,9 @@ App.use(
 );
 App.use(BodyParser.json());
 
-// Sample GET route
+// Routes
+App.use("/clients", clientRoutes());
+
 App.get("/api/data", (req, res) =>
   res.json({
     message: "Seems to work!",
