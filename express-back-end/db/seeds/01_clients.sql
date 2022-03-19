@@ -1,0 +1,5 @@
+insert into clients (id, first_name, last_name, email, city, province, language_1, language_2) values (1, 'Donalt', 'O''Murtagh', 'domurtagh0@dyndns.org', 'Norfolk County', 'ON', 'Tagalog', null);
+insert into clients (id, first_name, last_name, email, city, province, language_1, language_2) values (2, 'Maryellen', 'Madders', 'mmadders1@umn.edu', 'Saint-Raymond', 'QC', 'Mandarin', null);
+insert into clients (id, first_name, last_name, email, city, province, language_1, language_2) values (3, 'Marla', 'Enderby', 'menderby2@mashable.com', 'L''Assomption', 'QC', 'Spanish', null);
+insert into clients (id, first_name, last_name, email, city, province, language_1, language_2) values (4, 'Jessalin', 'Dawson', 'jdawson3@ebay.com', 'New Glasgow', 'NS', 'Japanese', null);
+insert into clients (id, first_name, last_name, email, city, province, language_1, language_2) values (5, 'Katerina', 'Romero', 'kromero4@joomla.org', 'Viking', 'AB', 'Cantonese', null);
