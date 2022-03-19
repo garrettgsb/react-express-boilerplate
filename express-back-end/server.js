@@ -1,28 +1,36 @@
-const Express = require("express");
+const express = require("express");
 const morgan = require("morgan");
-const BodyParser = require("body-parser");
-const App = Express();
+const bodyParser = require("body-parser");
+const app = express();
 const PORT = 8080;
 
 // Express Configuration
+// app.use(express.static("public"));
 
-App.use(Express.static("public"));
+// Routes requires
+const clientRoutes = require("./routes/clients");
 
 // Middleware
-App.use(morgan("dev"));
-App.use(
-  BodyParser.urlencoded({ extended: false })
-);
-App.use(BodyParser.json());
+app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-// Sample GET route
-App.get("/api/data", (req, res) =>
+// Routes
+app.use("/api/clients", clientRoutes());
+
+app.get("/api/data", (req, res) =>
   res.json({
     message: "Seems to work!",
   })
 );
 
-App.listen(PORT, () => {
+// app.get("/test", (req, res) =>
+//   res.json({
+//     message: "TEST",
+//   })
+// );
+
+app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(
     `Express seems to be listening on port ${PORT} so that's pretty good 👍`
