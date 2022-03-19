@@ -9,6 +9,7 @@ const PORT = 8080;
 
 // Routes requires
 const clientRoutes = require("./routes/clients");
+const professionalRoutes = require("./routes/professionals");
 
 // Middleware
 app.use(morgan("dev"));
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/api/clients", clientRoutes());
+app.use("/api/professionals", professionalRoutes());
 
 app.get("/api/data", (req, res) =>
   res.json({
