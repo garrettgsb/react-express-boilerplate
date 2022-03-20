@@ -13,6 +13,7 @@ const clientRoutes = require("./routes/clients");
 const professionalRoutes = require("./routes/professionals");
 const appointmentRoute = require("./routes/appointments");
 const specialtiesRoute = require("./routes/specialties");
+
 // Middleware
 app.use(morgan("dev"));
 app.use(
