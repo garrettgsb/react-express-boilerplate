@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-//all the clients routes comes here//
+//all the clients routes come  here//
 
 const clientRoutes = () => {
   router.get("/", (req, res) => {
