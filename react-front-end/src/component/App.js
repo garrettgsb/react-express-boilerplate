@@ -1,5 +1,6 @@
 import React from 'react';
 import useApplicationData from '../hooks/hook';
+// import '../sass/app.scss';
 
 export default function App(){
   const { state, fetchData } = useApplicationData();
