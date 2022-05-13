@@ -24,6 +24,13 @@ Use the psql -U development command to login to the PostgreSQL server with the u
 Create a database with the command CREATE DATABASE piggy;. Run command < \i express-back-end/src/db/schema/create.sql >
 
 Copy the .env.example file to .env and fill in the necessary PostgreSQL configuration. The node-postgres library uses these environment variables by default.
+This should look like this below:
+
+```
+PGHOST=localhost
+PGDATABASE=piggy
+PGPORT=8081
+```
 
 Run the command < \i express-back-end/src/db/seeds/allinone.sql > to populate the seed data to the tables.
 
