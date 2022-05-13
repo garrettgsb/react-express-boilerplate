@@ -1,1 +1,19 @@
-
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
+#topNav {
+  width: 100%;
+  border: solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+}
+#topNav .fa-piggy-bank {
+  display: flex;
+  flex-direction: row;
+  color: #FFA10A;
+  transform: scale(3);
+  position: absolute;
+  left: 25px;
+  top: 25px;
+}
