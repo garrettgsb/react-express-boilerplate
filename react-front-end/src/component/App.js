@@ -3,35 +3,33 @@ import useVisualMode from '../hooks/useVisualMode';
 import useApplicationData from '../hooks/hook';
 import Main from './mainView/Main';
 import Login from './Login';
+import Signup from './Signup';
 import '../sass/app.scss';
 
 
-export default function App(){
+export default function App(props){
   const { state, fetchData } = useApplicationData();
 
   //views
   const LOGIN = 'LOGIN'; 
-  // const SIGNUP = 'SIGNUP';
+  const SIGNUP = 'SIGNUP';
   const SHOW = 'SHOW';
 
   const { mode, transition, back } = useVisualMode(
-    state.SHOW ?
+    props.user ?
       SHOW :
       LOGIN
   );
 
   return (
     <div className="app">
-      < Login />
+      {mode === LOGIN && <Login />}
 
-      <Main />
-      <h1>{state.message}</h1>
-      <button onClick={fetchData} >
-        Fetch Data
-      </button>
+      {mode === SIGNUP && <Signup />}
+      
+      {mode === SHOW && <Main />}
 
-
-
+      
     </div>
   );
 }
