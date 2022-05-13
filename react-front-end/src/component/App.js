@@ -1,6 +1,6 @@
 import React from 'react';
 import useApplicationData from '../hooks/hook';
-import Main from './Main';
+import Main from './mainView/Main';
 import Login from './Login';
 // import '../sass/app.scss';
 
