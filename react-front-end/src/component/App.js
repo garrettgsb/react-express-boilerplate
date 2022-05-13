@@ -5,6 +5,7 @@ import Main from './mainView/Main';
 import Login from './Login';
 import '../sass/app.scss';
 
+
 export default function App(){
   const { state, fetchData } = useApplicationData();
 
