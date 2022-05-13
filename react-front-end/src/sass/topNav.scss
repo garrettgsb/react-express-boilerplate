@@ -1,20 +1,10 @@
 @import './partials/mixins';
 @import './partials/variables';
 
-#topNav {
-  width: 100%;
-  border: solid;
-  @include flexRow;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-
-  .fa-piggy-bank {
-    @include flexRow;
-    color: $OrangePeel;
-    transform: scale(3);
-    position: absolute;
-    left: 25px;
-    top: 25px;
-  }
+.fa-piggy-bank {
+  color: $OrangePeel;
+  transform: scale(3);
+  position: absolute;
+  left: 25px;
+  top: 20px;
 }
