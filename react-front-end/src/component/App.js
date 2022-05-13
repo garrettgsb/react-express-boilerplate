@@ -1,6 +1,7 @@
 import React from 'react';
 import useApplicationData from '../hooks/hook';
-import Nav from './Nav';
+import TopNav from './TopNav';
+import BotNav from './BotNav';
 // import '../sass/app.scss';
 
 export default function App(){
@@ -8,11 +9,12 @@ export default function App(){
 
   return (
     <div className="App">
-      <Nav />
+      <TopNav />
       <h1>{state.message}</h1>
       <button onClick={fetchData} >
         Fetch Data
       </button>
+      <BotNav />
     </div>
   );
 }
