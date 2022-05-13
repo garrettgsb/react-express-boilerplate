@@ -3,7 +3,7 @@ import useVisualMode from '../hooks/useVisualMode';
 import useApplicationData from '../hooks/hook';
 import Main from './mainView/Main';
 import Login from './Login';
-// import '../sass/app.scss';
+import '../sass/app.scss';
 
 export default function App(){
   const { state, fetchData } = useApplicationData();
@@ -20,7 +20,7 @@ export default function App(){
   );
 
   return (
-    <div className="App">
+    <div className="app">
       < Login />
 
       <Main />
