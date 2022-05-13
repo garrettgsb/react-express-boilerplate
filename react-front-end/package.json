@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.1",
+    "node-sass": "npm:sass@^1.51.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
@@ -13,7 +14,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sass" : "sass src/sass:src/css --watch --no-source-map"
+    "sass": "sass src/sass:src/css --watch --no-source-map"
   },
   "eslintConfig": {
     "extends": "react-app"
