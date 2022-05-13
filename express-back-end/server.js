@@ -3,6 +3,8 @@ const App = Express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
 const sassMiddleware = require('../react-front-end/lib/sass-middleware');
+const users = require("./routes/users");
+// const db = require("./db");
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -17,10 +19,15 @@ App.use(
   })
 );
 
+App.use("/api", users(db));
+
+
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
 }));
+
+
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
