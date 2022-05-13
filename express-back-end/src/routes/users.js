@@ -1,20 +1,20 @@
-const router = require('require').Router();
+// const router = require('express').Router();
 
-// const express = require('require');
-// const app = express.Router();
+const express = require('express');
+const router = express.Router();
 
 module.exports = db => {
   router.get('/users', (req, res) => {
-    db.query(
-      `SELECT * FROM users;`
-      )
+    db.query(`
+      SELECT * FROM users;
+      `)
     .then(data => {
-      console.log('data', data);
-      // const users = data .????
-      // res.json(users) ???
+      const users = data.rows;
+      res.json(users);
     })
     .catch(error => {
       console.log('The error is: ', error);
     })
   });
+  return router;
 };

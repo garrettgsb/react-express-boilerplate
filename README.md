@@ -29,7 +29,9 @@ This should look like this below:
 ```
 PGHOST=localhost
 PGDATABASE=piggy
-PGPORT=8081
+PGPORT=5432
+DB_USER=vagrant
+DB_PASS=123
 ```
 
 Run the command < \i express-back-end/src/db/seeds/allinone.sql > to populate the seed data to the tables.
