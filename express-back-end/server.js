@@ -2,8 +2,8 @@ const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
-const sassMiddleware = require('../react-front-end/lib/sass-middleware');
-const users = require("./routes/users");
+const sassMiddleware = require('./lib/sass-middleware');
+// const users = require("./routes/users");
 // const db = require("./db");
 
 // Express Configuration
@@ -19,7 +19,7 @@ App.use(
   })
 );
 
-App.use("/api", users(db));
+// App.use("/api", users(db));
 
 
 // Sample GET route

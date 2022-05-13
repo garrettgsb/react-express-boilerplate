@@ -6,15 +6,14 @@
     "axios": "^0.18.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8",
-    "sass": "^1.51.0"
+    "react-scripts": "2.1.8"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sass-watch": "sass --watch public/styles:public/stylesheets --no-source-map"
+    "sass" : "sass src/sass:src/css --watch --no-source-map"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -25,5 +24,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "sass": "^1.51.0"
+  }
 }
