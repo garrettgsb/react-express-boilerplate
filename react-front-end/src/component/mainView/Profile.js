@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function Main() {
+export default function Profile() {
 
   return (
     <h1>
-      Main
+      Profile
     </h1>
   );
 }
