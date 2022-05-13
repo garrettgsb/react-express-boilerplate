@@ -7,9 +7,10 @@ import Profile from './Profile';
 
 export default function Main() {
 
-  const PROFILE = 'PROFILE';
-  const SAVINGS = 'SAVINGS';
-  const SPENDING = 'SPENDING';
+  
+  // const PROFILE = 'PROFILE';
+  // const SAVINGS = 'SAVINGS';
+  // const SPENDING = 'SPENDING';
 
   return (
     <div>
