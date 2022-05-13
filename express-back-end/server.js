@@ -8,7 +8,7 @@ const sassMiddleware = require('../react-front-end/lib/sass-middleware');
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
-app.use(
+App.use(
   "/styles",
   sassMiddleware({
     source: __dirname + "/styles",
