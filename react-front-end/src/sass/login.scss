@@ -12,7 +12,7 @@ background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
 
 .banner {
-  background-color: #eee;
+  background-color: rgb(181, 175, 175);
 }
 
 .image {
@@ -21,7 +21,7 @@ background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 
 @media (min-width: 768px) {
 .gradient-form {
-height: 100vh !important;
+height: 100% !important;
 }
 }
 @media (min-width: 769px) {
