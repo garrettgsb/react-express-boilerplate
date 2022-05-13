@@ -4,6 +4,7 @@ import BotNav from './BotNav';
 import Savings from './Savings';
 import Spending from './Spending';
 import Profile from './Profile';
+import '../../sass/main.scss';
 
 export default function Main() {
 
