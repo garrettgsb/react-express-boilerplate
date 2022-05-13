@@ -25,4 +25,6 @@ Create a database with the command CREATE DATABASE piggy;. Run command < \i expr
 
 Copy the .env.example file to .env and fill in the necessary PostgreSQL configuration. The node-postgres library uses these environment variables by default.
 
+Run the command < \i express-back-end/src/db/seeds/allinone.sql > to populate the seed data to the tables.
+
 ## Dependencies
