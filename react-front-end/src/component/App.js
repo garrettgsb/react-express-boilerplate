@@ -1,20 +1,29 @@
 import React from 'react';
 import useApplicationData from '../hooks/hook';
-import TopNav from './TopNav';
-import BotNav from './BotNav';
+import Main from './Main';
+import Login from './Login';
 // import '../sass/app.scss';
 
 export default function App(){
   const { state, fetchData } = useApplicationData();
 
+  //views
+  const LOGIN = 'LOGIN'; 
+  const SIGNUP = 'SIGNUP';
+  const SHOW = 'SHOW';
+
   return (
     <div className="App">
-      <TopNav />
+      <Login />
+
+      <Main />
       <h1>{state.message}</h1>
       <button onClick={fetchData} >
         Fetch Data
       </button>
-      <BotNav />
+
+
+
     </div>
   );
 }
