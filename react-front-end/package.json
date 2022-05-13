@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.1",
+    "mdb-ui-kit": "^4.0.0",
     "node-sass": "npm:sass@^1.51.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
