@@ -12,7 +12,7 @@ module.exports = db => {
       res.json(expenses);
     })
     .catch(error => {
-      console.log('ERROR?!?!? ', error);
+      console.log('The error is: ', error);
     })
   });
 
