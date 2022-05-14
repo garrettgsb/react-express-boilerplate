@@ -4,9 +4,9 @@ import React from 'react';
 export default function TopNav() {
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <i
             className="logo fa-solid fa-piggy-bank"
             height="15"
@@ -14,27 +14,27 @@ export default function TopNav() {
             loading="lazy"
           />
         </div>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
               <h4>Piggy Projections</h4>
             </li>
           </ul>
         </div>
         {/* <!-- Right elements --> */}
-        <div class="d-flex align-items-center">
+        <div className="d-flex align-items-center">
           {/* <!-- Avatar --> */}
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="dropdown-item text-danger" href="#">Logout</a>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a className="dropdown-item text-danger" href="#">Logout</a>
               </li>
             </ul>
           </div>
-          <div class="dropdown">
+          <div className="dropdown">
             <img
               src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-              class="rounded-circle"
+              className="rounded-circle"
               height="25"
               alt="Black and White Portrait of a Man"
               loading="lazy"
