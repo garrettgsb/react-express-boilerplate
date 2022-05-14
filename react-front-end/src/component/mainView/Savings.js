@@ -8,7 +8,7 @@ export default function Savings() {
   const PIE = 'PIE';
   const LINE = 'LINE';
 
-  const { mode, transition, back } = useVisualMode(PIE);
+  const { mode/*, transition, back */} = useVisualMode(LINE);
 
   return (
     <div>
