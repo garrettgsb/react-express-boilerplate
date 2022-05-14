@@ -11,7 +11,7 @@ export default function Main(props) {
   const SAVINGS = 'SAVINGS';
   const SPENDING = 'SPENDING';
 
-  const { mode, transition, back } = useVisualMode(SPENDING);
+const { mode/*, transition, back */} = useVisualMode(SAVINGS);
 
   return (
     <div>
