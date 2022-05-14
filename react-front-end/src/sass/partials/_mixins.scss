@@ -3,6 +3,6 @@
   flex-direction: column;
 }
 @mixin flexRow {
-  display: flex;
+  display: flexbox;
   flex-direction: row;
 }
