@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = db => {
-  router.get('/addamounts', (req, res) => {
+  router.get('/addsavings', (req, res) => {
     db.query(`
       SELECT *
       FROM add_savings;

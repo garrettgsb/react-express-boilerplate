@@ -26,10 +26,9 @@ export default function App(props){
       {mode === LOGIN && <Login />}
 
       {mode === SIGNUP && <Signup />}
-      
+
       {mode === SHOW && <Main />}
 
-      
     </div>
   );
 }

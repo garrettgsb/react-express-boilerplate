@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = db => {
-  router.get('/savingsjar', (req, res) => {
+  router.get('/savings', (req, res) => {
     db.query(`
     SELECT *
     FROM savings;

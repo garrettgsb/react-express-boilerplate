@@ -3,6 +3,7 @@ const App = Express();
 const BodyParser = require('body-parser');
 const PORT = 8081;
 const sassMiddleware = require('./lib/sass-middleware');
+const cors = require('cors');
 
 const { Pool } = require('pg');
 require('dotenv').config();
@@ -12,10 +13,11 @@ db.connect();
 
 const users = require('./src/routes/users');
 const expenses = require('./src/routes/expenses');
-const addAmounts = require('./src/routes/addAmounts');
+const addSavings = require('./src/routes/addsavings');
 const categories = require('./src/routes/categories');
-const savingJars = require('./src/routes/savingJars');
+const savings = require('./src/routes/savings');
 
+App.use(cors());
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
@@ -31,9 +33,9 @@ App.use(
 
 App.use('/api', users(db));
 App.use('/api', expenses(db));
-App.use('/api', addAmounts(db));
+App.use('/api', addSavings(db));
 App.use('/api', categories(db));
-App.use('/api', savingJars(db));
+App.use('/api', savings(db));
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
