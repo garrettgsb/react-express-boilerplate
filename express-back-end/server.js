@@ -14,6 +14,7 @@ const users = require('./src/routes/users');
 const expenses = require('./src/routes/expenses');
 const addAmounts = require('./src/routes/addAmounts');
 const categories = require('./src/routes/categories');
+const savingJars = require('./src/routes/savingJars');
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -32,6 +33,7 @@ App.use('/api', users(db));
 App.use('/api', expenses(db));
 App.use('/api', addAmounts(db));
 App.use('/api', categories(db));
+App.use('/api', savingJars(db));
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
