@@ -3,12 +3,15 @@ const App = Express();
 const BodyParser = require('body-parser');
 const PORT = 8081;
 const sassMiddleware = require('./lib/sass-middleware');
-const users = require("./src/routes/users");
+
 const { Pool } = require('pg');
 require('dotenv').config();
 const dbParams = require("./lib/db");
 const db = new Pool(dbParams);
 db.connect();
+
+const users = require('./src/routes/users');
+const expenses = require('./src/routes/expenses');
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -23,7 +26,8 @@ App.use(
   })
 );
 
-App.use("/api", users(db));
+App.use('/api', users(db));
+App.use('/api', expenses(db));
 
 
 // Sample GET route
