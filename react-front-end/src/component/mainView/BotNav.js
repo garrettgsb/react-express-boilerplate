@@ -5,7 +5,7 @@ export default function BotNav() {
 
   return (
 
-    <nav className="bot-nav navbar navbar-expand-lg navbar-dark fixed-bottom">
+    <nav className="gradient-custom-2 bot-nav navbar navbar-expand-lg navbar-dark fixed-bottom">
 
       <div className="container-fluid">
 
