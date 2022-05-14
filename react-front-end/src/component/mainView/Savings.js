@@ -1,5 +1,5 @@
 import React from 'react';
-import PieGraph from './PieChart';
+import PieChart from './PieChart';
 import LineGraph from './LineGraph';
 import useVisualMode from '../../hooks/useVisualMode';
 

@@ -1,14 +1,15 @@
 import React from 'react';
 
 
-export default function PieGraph() {
+export default function PieChart() {
 
-  return (
+
+
+return (
     <div>
-      
-    <h1>
-      Savings
-    </h1>
+      <h1>
+        PieChart
+      </h1>
     </div>
   );
 }
