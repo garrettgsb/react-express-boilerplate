@@ -7,7 +7,7 @@ export default function useApplicationData() {
   });
   
   useEffect(() => {
-    const apiUsers = 'http://localhost:8081/api/users';
+    const apiUsers = 'http://localhost:8081/api/users/';
     const apiSavings = 'http://localhost:8081/api/savings';
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiAddSavings = 'http://localhost:8081/api/addsavings';

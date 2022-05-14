@@ -14,7 +14,7 @@ const PieChart = (props) => {
     ],
     datasets: [{
       label: 'My First Dataset',
-      data: [300, 50, 100],
+      data: [5, 15, 90],
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
@@ -35,6 +35,9 @@ const PieChart = (props) => {
         data={data}
         width={600}
         height={400}
+        options={{
+          maintainAspectRatio: true
+        }}
       />
     </div>
   );

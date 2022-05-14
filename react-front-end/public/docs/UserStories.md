@@ -7,10 +7,6 @@ User can Logout
 
 ## Views
 
-### Profile
-User can see profile
-User can edit profile (STRETCH)
-
 ### Savings
 User can see saving goals
 User can see how much &/or how long it would take to hit goals
