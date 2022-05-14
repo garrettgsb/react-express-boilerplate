@@ -1,0 +1,4 @@
+Project Title: Bar Hopper
+Project description: A bar hopping app that allows users to start a bar crawl where they are given randomly selected bars with a radius of them.
+Target audience: Anyone of legal drinking age!
+Team Members: Dave McKinnon, Lucus Riccioni, Matt Lawson
