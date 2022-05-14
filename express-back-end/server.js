@@ -12,6 +12,7 @@ db.connect();
 
 const users = require('./src/routes/users');
 const expenses = require('./src/routes/expenses');
+const addAmounts = require('./src/routes/addAmounts');
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -28,7 +29,7 @@ App.use(
 
 App.use('/api', users(db));
 App.use('/api', expenses(db));
-
+App.use('/api', addAmounts(db));
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
