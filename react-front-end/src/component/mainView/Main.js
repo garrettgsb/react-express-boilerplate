@@ -3,7 +3,7 @@ import TopNav from './TopNav';
 import BotNav from './BotNav';
 import Savings from './Savings';
 import Spending from './Spending';
-import Profile from './Profile';
+import Profile from '../Profile';
 import useVisualMode from '../../hooks/useVisualMode';
 import '../../sass/main.scss';
 
