@@ -20,7 +20,7 @@ export default function App(props){
   const { mode, transition, back } = useVisualMode(
     !props.user ?
       SHOW :
-      Login
+      LOGIN
   );
 
   return (
