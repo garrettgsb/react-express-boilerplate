@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './App.css';
+import './App.scss';
 import Header from './components/Header';
+// import Venue from './components/Venue';
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        {/* <Venue /> */}
         <h1>{ this.state.message }</h1>
         <button onClick={this.fetchData} >
           Fetch Data

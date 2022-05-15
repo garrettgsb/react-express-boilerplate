@@ -13,6 +13,7 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "2.1.8",
+    "sass": "^1.51.0",
     "styled-components": "^5.3.5"
   },
   "scripts": {
@@ -30,5 +31,9 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "node-sass-install": "^1.0.2",
+    "npx": "^10.2.2"
+  }
 }
