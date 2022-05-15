@@ -1,0 +1,12 @@
+@import './partials/mixins';
+@import './partials/variables';
+
+.bot-nav {
+  background-color: #ffa10a;
+  text-align: center;
+
+  .bot-nav-text-container {
+    @include flexRow;
+    justify-content: space-around;
+  }
+}
