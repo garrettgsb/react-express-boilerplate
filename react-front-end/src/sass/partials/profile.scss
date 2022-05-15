@@ -1,5 +1,5 @@
-@import './partials/mixins';
-@import './partials/variables';
+@import './mixins';
+@import './variables';
 
 @import '~mdb-ui-kit/css/mdb.min.css';
 
@@ -7,6 +7,13 @@
   background-color: #eee;
 }
 
-.mt-3 {
-  
+.background {
+  // background-image: url("https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp")
+}
+
+.card {
+  border-radius: 15px;
+  .Rounded-circle img-fluid {
+    width: 100px;
+  }
 }
