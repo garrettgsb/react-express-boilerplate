@@ -13,9 +13,9 @@ db.connect();
 
 const users = require('./src/routes/users');
 const expenses = require('./src/routes/expenses');
-const addSavings = require('./src/routes/addsavings');
+const goals = require('./src/routes/goals');
 const categories = require('./src/routes/categories');
-const savings = require('./src/routes/savings');
+const incomes = require('./src/routes/incomes');
 
 App.use(cors());
 // Express Configuration
@@ -33,9 +33,9 @@ App.use(
 
 App.use('/api', users(db));
 App.use('/api', expenses(db));
-App.use('/api', addSavings(db));
+App.use('/api', goals(db));
 App.use('/api', categories(db));
-App.use('/api', savings(db));
+App.use('/api', incomes(db));
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({

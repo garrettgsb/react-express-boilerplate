@@ -3,30 +3,34 @@ import axios from "axios"
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    message: "Click the button to load data!",
+    users: [],
+    goals: [],
+    expenses: [],
+    incomes: [],
+    categories: []
   });
   
   useEffect(() => {
-    const apiUsers = 'http://localhost:8081/api/users/';
-    const apiSavings = 'http://localhost:8081/api/savings';
+    const apiUsers = 'http://localhost:8081/api/users';
+    const apiGoals = 'http://localhost:8081/api/goals';
     const apiExpenses = 'http://localhost:8081/api/expenses';
-    const apiAddSavings = 'http://localhost:8081/api/addsavings';
+    const apiIncomes = 'http://localhost:8081/api/incomes';
     const apiCategories = 'http://localhost:8081/api/categories';
     Promise.all([
       axios.get(apiUsers),
-      axios.get(apiSavings),
+      axios.get(apiGoals),
       axios.get(apiExpenses),
-      axios.get(apiAddSavings),
+      axios.get(apiIncomes),
       axios.get(apiCategories)
     ])
     .then(all => {
       setState((prev) => ({
         ...prev,
-        something: all[0],
-        something: all[0],
-        something: all[0],
-        something: all[0],
-        something: all[0]
+        users: all[0].data,
+        goals: all[1].data,
+        expenses: all[2].data,
+        incomes: all[3].data,
+        categories: all[4].data
       }));
     })
     .catch(error => {

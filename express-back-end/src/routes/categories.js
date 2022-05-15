@@ -12,8 +12,8 @@ module.exports = db => {
       res.json(categroies);
     })
     .catch(error => {
-      console.log('The erorr is: ', error);
-    })
+      console.log('The error is: ', error);
+    });
   });
   return router;
 };

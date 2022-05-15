@@ -2,18 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = db => {
-  router.get('/savings', (req, res) => {
+  router.get('/goals', (req, res) => {
     db.query(`
     SELECT *
-    FROM savings;
+    FROM goals;
     `)
     .then(data => {
-      const savings = data.rows;
-      res.json(savings);
+      const goals = data.rows;
+      res.json(goals);
     })
     .catch(error => {
       console.log('The error is: ', error);
-    })
+    });
   });
   return router;
 };
