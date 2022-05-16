@@ -38,7 +38,23 @@ module.exports = db => {
     db.query(`
     SELECT *
     FROM expenses
-    where user_id = ${req.params.id};
+    WHERE user_id = ${req.params.id};
+    `)
+    .then(data => {
+      const expenses = data.rows;
+      res.json(expenses);
+    })
+    .catch(error => {
+      console.log('The error is: ', error);
+    });
+  });
+
+  router.get('/expenses/:id/:catid', (req, res) => {
+    db.query(`
+    SELECT *
+    FROM expenses
+    WHERE user_id = ${req.params.id}
+    AND category_id = ${req.params.catid};
     `)
     .then(data => {
       const expenses = data.rows;
