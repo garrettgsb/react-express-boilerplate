@@ -3,12 +3,18 @@ import axios from "axios"
 
 export default function useApplicationData() {
   const [state, setState] = useState({
+    tab: 'PROFILE',
+    user: 'Alvin',
     users: [],
     goals: [],
     expenses: [],
     incomes: [],
     categories: []
   });
+  
+  // const setTab = tab => setState({...state, tab});
+  const setUser = user => setState({...state, user});
+
   
   useEffect(() => {
     const apiUsers = 'http://localhost:8081/api/users';
@@ -40,6 +46,8 @@ export default function useApplicationData() {
 
 
   return {
-    state
+    state,
+    // setTab,
+    setUser
   };
 }
