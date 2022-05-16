@@ -18,28 +18,43 @@ export default function Expenses(props) {
 
         <div id='user-expense-input'>
           <ExpenseTable />
-          <div>
-
-
-            <form class="row row-cols-lg-auto g-3 align-items-center">
-              <div class="col-12">
-                <label class="visually-hidden" for="inlineFormInputGroupUsername">Amount</label>
-                <div class="input-group">
-                  <div class="input-group-text">$</div>
+          <div className='d-flex align-items-center justify-content-center text-center'>
+            <form className="row row-cols-lg-auto g-3 align-items-center">
+              <div className="col-12">
+                <label className="visually-hidden" for="inlineFormSelectPref">Category</label>
+                <select className="select select-dropdown">
+                  <option value="1">January</option>
+                  <option value="2">Febrary</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+              </div>
+              <div className="col-12">
+                <label className="visually-hidden" for="inlineFormInputGroupUsername">Amount</label>
+                <div className="input-group">
+                  <div className="input-group-text">$</div>
                   <input
                     type="number"
                     imputmode='decimal'
                     min='0.01'
                     step='0.01'
-                    class="form-control"
+                    className="form-control"
                     id="inlineFormInputGroupUsername"
                     placeholder="Amount" />
                 </div>
               </div>
 
-              <div class="col-12">
-                <label class="visually-hidden" for="inlineFormSelectPref">Category</label>
-                <select class="select">
+              <div className="col-12">
+                <label className="visually-hidden" for="inlineFormSelectPref">Category</label>
+                <select className="select">
                   <option value="1">Clothes</option>
                   <option value="2">Eating Out</option>
                   <option value="3">Entertainment</option>
@@ -53,21 +68,21 @@ export default function Expenses(props) {
                 </select>
               </div>
 
-              <div class="col-12">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="inlineFormCheck" />
-                  <label class="form-check-label" for="inlineFormCheck">
+              <div className="col-12">
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" id="inlineFormCheck" />
+                  <label className="form-check-label" for="inlineFormCheck">
                     Income
                   </label>
                 </div>
               </div>
 
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary">Submit</button>
+              <div className="col-12">
+                <button type="submit" className="btn btn-primary">Submit</button>
               </div>
 
             </form>
-            {/* <select class="form-select">
+            {/* <select className="form-select">
               <option selected>Default Form Select</option>
               <option value="1">Web Designing</option>
               <option value="2">Web Development</option>
@@ -75,21 +90,21 @@ export default function Expenses(props) {
               <option value="4">WordPress Website</option>
             </select> */}
 
-            {/* <div className="dropdown">
+            {/* <div classNameName="dropdown">
               <button
-                className="btn btn-primary dropdown-toggle"
+                classNameName="btn btn-primary dropdown-toggle"
                 type="button"
                 id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
                 aria-expanded="false">
                   Category
               </button>
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <ul classNameName="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
               </ul>
-              <div className="form-outline">
-                <input type="number" id="typeNumber" className="form-control" />
-                <label className="form-label" for="typeNumber">Amount</label>
+              <div classNameName="form-outline">
+                <input type="number" id="typeNumber" classNameName="form-control" />
+                <label classNameName="form-label" for="typeNumber">Amount</label>
               </div>
             </div> */}
           </div>
