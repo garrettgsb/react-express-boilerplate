@@ -1,9 +1,10 @@
 import React from 'react';
 import LineGraph from './LineGraph';
+import ExpenseTable from './ExpenseTable';
 import useVisualMode from '../../hooks/useVisualMode';
 import "../../sass/spending.scss"
 
-export default function Expenses() {
+export default function Expenses(props) {
 
   const LINE = 'LINE';
   const EXPENSES = 'EXPENSES';
@@ -15,8 +16,8 @@ export default function Expenses() {
       {mode === LINE && <LineGraph />}
       {mode === EXPENSES &&
         
-
         <div id='user-expense-input'>
+          <ExpenseTable />
           <div className="dropdown">
             <button
               className="btn btn-primary dropdown-toggle"
