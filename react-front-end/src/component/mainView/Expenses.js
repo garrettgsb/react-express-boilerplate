@@ -76,37 +76,10 @@ export default function Expenses(props) {
                   </label>
                 </div>
               </div>
-
               <div className="col-12">
                 <button type="submit" className="btn btn-primary">Submit</button>
               </div>
-
             </form>
-            {/* <select className="form-select">
-              <option selected>Default Form Select</option>
-              <option value="1">Web Designing</option>
-              <option value="2">Web Development</option>
-              <option value="3">Graphic Design</option>
-              <option value="4">WordPress Website</option>
-            </select> */}
-
-            {/* <div classNameName="dropdown">
-              <button
-                classNameName="btn btn-primary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false">
-                  Category
-              </button>
-              <ul classNameName="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-              </ul>
-              <div classNameName="form-outline">
-                <input type="number" id="typeNumber" classNameName="form-control" />
-                <label classNameName="form-label" for="typeNumber">Amount</label>
-              </div>
-            </div> */}
           </div>
         </div>
       }
