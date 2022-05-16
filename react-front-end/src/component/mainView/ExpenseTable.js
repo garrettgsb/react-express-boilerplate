@@ -3,30 +3,66 @@ import React from 'react';
 export default function ExpenseTable(props) {
 
   return (
-    <table className="table">
+    <table className="table ">
       <thead className='table-info'>
-        <tr>
-          <th scope="col">Date</th>
+        <th className='d-flex justify-content-around'>
+          <th scope="col">MONTH</th>
           <th scope="col">Category</th>
           <th scope="col">DESCRIPTION(OPTIONAL)</th>
           <th scope="col">Amount</th>
-        </tr>
+        </th>
       </thead>
-      <tbody>
-        <tr className="table-success">
-          <th scope="row">DATE</th>
+      <tbody id='expense-table' className='container list-group infinite-scroll'>
+        <tr className="table-success d-flex justify-content-around">
+          <th scope="row">MONTH</th>
           <td>INCOME</td>
           <td>DESCRIPTION</td>
           <td>$AMOUNT</td>
         </tr>
-        <tr className="table-danger">
-          <th scope="row">DATE</th>
+        <tr className="table-danger d-flex justify-content-around">
+          <th scope="row">MONTH</th>
           <td>EXPENSES</td>
           <td>DESCRIPTION</td>
           <td>$AMOUNT</td>
         </tr>
-        <tr className="table-warning">
-          <th scope="row">DATE</th>
+        <tr className="table-danger d-flex justify-content-around">
+          <th scope="row">MONTH</th>
+          <td>EXPENSES</td>
+          <td>DESCRIPTION</td>
+          <td>$AMOUNT</td>
+        </tr>
+        <tr className="table-danger d-flex justify-content-around">
+          <th scope="row">MONTH</th>
+          <td>EXPENSES</td>
+          <td>DESCRIPTION</td>
+          <td>$AMOUNT</td>
+        </tr>
+        <tr className="table-danger d-flex justify-content-around">
+          <th scope="row">MONTH</th>
+          <td>EXPENSES</td>
+          <td>DESCRIPTION</td>
+          <td>$AMOUNT</td>
+        </tr>
+        <tr className="table-danger d-flex justify-content-around">
+          <th scope="row">MONTH</th>
+          <td>EXPENSES</td>
+          <td>DESCRIPTION</td>
+          <td>$AMOUNT</td>
+        </tr>
+        <tr className="table-danger d-flex justify-content-around">
+          <th scope="row">MONTH</th>
+          <td>EXPENSES</td>
+          <td>DESCRIPTION</td>
+          <td>$AMOUNT</td>
+        </tr>
+        <tr className="table-danger d-flex justify-content-around">
+          <th scope="row">MONTH</th>
+          <td>EXPENSES</td>
+          <td>DESCRIPTION</td>
+          <td>$AMOUNT</td>
+        </tr>
+        <tr className="table-warning d-flex justify-content-around">
+          <th scope="row">MONTH</th>
           <td>SAVINGS</td>
           <td>DESCRIPTION</td>
           <td>$AMOUNT</td>
