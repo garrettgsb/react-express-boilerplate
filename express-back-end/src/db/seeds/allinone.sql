@@ -3,7 +3,7 @@ INSERT INTO users(username, email, password)
   ('Alvin', 'alvintest@hotmail.com', 'test123'),
   ('Ricky', 'ricky2test@hotmail.com', 'test123'),
   ('Kevin', 'kevin3test@hotmail.com', 'test123');
- 
+
 INSERT INTO categories(name)
   VALUES
   ('eating out'),
@@ -16,7 +16,7 @@ INSERT INTO categories(name)
   ('savings'),
   ('shopping'),
   ('other');
- 
+
 INSERT INTO expenses (user_id, created_at, amount, category_id)
   VALUES 
   (1, '2021-12-29 07:57:54', 9928, 6),
