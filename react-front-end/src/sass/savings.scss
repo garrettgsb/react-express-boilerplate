@@ -1,2 +1,8 @@
 @import './partials/mixins';
 @import './partials/variables';
+
+.goal-container {
+  @include flexRow;
+  height: 100vh;
+
+}

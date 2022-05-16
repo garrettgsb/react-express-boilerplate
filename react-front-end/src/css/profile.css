@@ -1,1 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
+@import '~mdb-ui-kit/css/mdb.min.css';
+.vh-100 {
+  background-color: #eee;
+}
+
+.card {
+  border-radius: 15px;
+}
+.card .Rounded-circle img-fluid {
+  width: 100px;
+}
