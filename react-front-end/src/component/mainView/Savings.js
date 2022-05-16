@@ -13,22 +13,13 @@ export default function Savings(props) {
     days: 25
   }
 
-  const PIE = 'PIE';
-  const LINE = 'LINE';
-
-  const { mode/*, transition, back */ } = useVisualMode(PIE);
-
   return (
     <div>
-      <h1>
-        Savings
-      </h1>
-      <div class='goal-container'>
-        {mode === PIE && <PieChart />}
-        {mode === LINE && <LineGraph />}
+      <div className='goal-container'>
+        <PieChart />
         <br />
         <br />
-        <div class='d-flex align-items-center justify-content-center text-center'>
+        <div className='d-flex align-items-center justify-content-center text-center'>
           <table>
             <tr>
               <td>
