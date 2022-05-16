@@ -1,9 +1,19 @@
 import React from 'react';
+import LineGraph from './LineGraph';
+import useVisualMode from '../../hooks/useVisualMode';
 import "../../sass/spending.scss"
 
 export default function Spending() {
+  
+  const LINE = 'LINE';
+  const EXPENSES = 'EXPENSES';
+
+  const { mode/*, transition, back */ } = useVisualMode(LINE);
 
   return (
+    <div>
+    {mode === LINE && <LineGraph />}
+    {mode === EXPENSES && 
     <div className="dropdown">
       <button
         className="btn btn-primary dropdown-toggle"
@@ -11,7 +21,7 @@ export default function Spending() {
         id="dropdownMenuButton"
         data-mdb-toggle="dropdown"
         aria-expanded="false"
-      >
+        >
         Dropdown button
       </button>
       <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -31,6 +41,7 @@ export default function Spending() {
         <input type="number" id="typeNumber" className="form-control" />
         <label className="form-label" for="typeNumber">Amount</label>
       </div>
-    </div>
+    </div>}
+  </div>
   );
 }

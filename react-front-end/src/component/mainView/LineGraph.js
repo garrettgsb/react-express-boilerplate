@@ -51,16 +51,14 @@ export default function LineGraph(props) {
   };
 
   return (
-    <div>
-      <h1>
-        LineGraph
-      </h1>
+    <div id='line'>
         <Line
           data={data}
           height={400}
-          width={600}
+          width={400}
           options={{
-            maintainAspectRatio: true
+            maintainAspectRatio: false,
+            responsive: true
           }}
         />
     </div>
