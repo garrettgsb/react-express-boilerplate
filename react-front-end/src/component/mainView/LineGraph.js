@@ -73,11 +73,13 @@ export default function LineGraph(props) {
   };
 
   const getTotalIncome = (state) => {
-    const incomeList = state.expenses.filter(expense => expense.income)
-
-    return Object.values(incomeList).reduce((prev, current) => prev + current)
+    
+    const incomeList = state.expenses.map(expense => {
+      return expense.amount
+    })
+    return incomeList.reduce((first, next) => first + next)    
   };
-
+  
   const labels = [
     'January',
     'February',
@@ -96,6 +98,9 @@ export default function LineGraph(props) {
   // const getGuideData = (state, id) => {
 
   // };
+  // const getUserData = (state, id) => {
+
+  // }
 
   const data = {
     labels: labels,
