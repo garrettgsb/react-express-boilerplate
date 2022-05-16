@@ -8,7 +8,7 @@ import '../sass/app.scss';
 
 
 export default function App(props){
-  const { state, fetchData } = useApplicationData();
+  const { state, setTab, setUser } = useApplicationData();
 
   //views
   const LOGIN = 'LOGIN'; 
@@ -24,11 +24,11 @@ export default function App(props){
   return (
     <div className="app">
 
-      {mode === LOGIN && <Login />}
+      {mode === LOGIN && <Login setUser={setUser}/>}
 
       {mode === SIGNUP && <Signup />}
       
-      {mode === SHOW && <Main />}
+      {mode === SHOW && <Main tab={state.tab}/>}
 
       
     </div>
