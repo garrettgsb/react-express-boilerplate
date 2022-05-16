@@ -55,14 +55,14 @@ export default function Expenses(props) {
               <div className="col-12">
                 <label className="visually-hidden" for="inlineFormSelectPref">Category</label>
                 <select className="select">
-                  <option value="1">Clothes</option>
-                  <option value="2">Eating Out</option>
-                  <option value="3">Entertainment</option>
-                  <option value="4">Fuel</option>
-                  <option value="5">Gifts</option>
-                  <option value="6">Groceries</option>
-                  <option value="7">Insurance</option>
-                  <option value="8">Rent</option>
+                  <option value="1">Eating Out</option>
+                  <option value="2">Entertainment</option>
+                  <option value="3">Fuel</option>
+                  <option value="4">Gifts</option>
+                  <option value="5">Groceries</option>
+                  <option value="6">Insurance</option>
+                  <option value="7">Rent</option>
+                  <option value="8">Savings</option>
                   <option value="9">Shopping</option>
                   <option value="10">Other</option>
                 </select>
