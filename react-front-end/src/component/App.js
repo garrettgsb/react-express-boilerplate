@@ -11,7 +11,6 @@ export default function App(props){
   const { state, fetchData } = useApplicationData();
 
   //views
-  const PROFILE = 'PROFILE';
   const LOGIN = 'LOGIN'; 
   const SIGNUP = 'SIGNUP';
   const SHOW = 'SHOW';

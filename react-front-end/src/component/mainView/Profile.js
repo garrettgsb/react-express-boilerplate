@@ -12,8 +12,8 @@ export default function Profile() {
         <div className="card">
           <div className="card-body text-center">
             <div className="mt-3 mb-4 background">
-               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
-                className="rounded-circle img-fluid"  /> 
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+                className="rounded-circle img-fluid" alt='animated-girl-with-glasses'  /> 
             </div>
             <h4 className="mb-2">Julie L. Arsenault</h4>
             <p className="text-muted mb-4">@Programmer <span className="mx-2">|</span> <a
