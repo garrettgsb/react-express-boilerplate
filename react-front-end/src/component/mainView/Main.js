@@ -2,7 +2,7 @@ import React from 'react';
 import TopNav from './TopNav';
 import BotNav from './BotNav';
 import Savings from './Savings';
-import Spending from './Spending';
+import Expenses from './Expenses';
 import Profile from './Profile';
 import useVisualMode from '../../hooks/useVisualMode';
 import '../../sass/main.scss';
@@ -11,9 +11,9 @@ export default function Main(props) {
 
   const PROFILE = 'PROFILE';
   const SAVINGS = 'SAVINGS';
-  const SPENDING = 'SPENDING';
+  const EXPENSES = 'EXPENSES';
 
-const { mode/*, transition, back */} = useVisualMode(SPENDING);
+const { mode/*, transition, back */} = useVisualMode(EXPENSES);
 
   return (
     <div>
@@ -21,7 +21,7 @@ const { mode/*, transition, back */} = useVisualMode(SPENDING);
 
       {mode === PROFILE && <Profile />}
       {mode === SAVINGS && <Savings />}
-      {mode === SPENDING && <Spending />}
+      {mode === EXPENSES && <Expenses />}
 
       <BotNav />
     </div>

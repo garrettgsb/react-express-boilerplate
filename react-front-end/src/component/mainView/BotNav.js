@@ -18,7 +18,7 @@ export default function BotNav() {
               <h2 className="nav-link" href="/">Savings</h2>
             </li>
             <li className="nav-item">
-              <h2 className="nav-link" href="/">Spending</h2>
+              <h2 className="nav-link" href="/">Expenses</h2>
             </li>
           </ul>
         </div>
