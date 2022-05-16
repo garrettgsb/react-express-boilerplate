@@ -7,7 +7,7 @@ export default function Savings(props) {
 
 
   const hardProps = {
-    goal: 'THE GOAL',
+    goal: 'A GOAT',
     saved_cents: 100000,
     goalTotal_cents: 500000,
     days: 25
@@ -26,12 +26,32 @@ export default function Savings(props) {
       <div class='goal-container'>
         {mode === PIE && <PieChart />}
         {mode === LINE && <LineGraph />}
-        <div>
-        GoalTABLE
-        
+        <br />
+        <br />
+        <div class='d-flex align-items-center justify-content-center text-center'>
+          <table>
+            <tr>
+              <td>
+                <h1>
+                  {hardProps.goal}
+                </h1>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h1>
+                  {hardProps.saved_cents} / {hardProps.goalTotal_cents}
+                </h1>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {hardProps.days} days until {hardProps.goal}
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
-      
     </div>
   );
 }

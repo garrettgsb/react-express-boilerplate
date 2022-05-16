@@ -39,11 +39,6 @@ const PieChart = (props) => {
           }}
         />
       </div>
-      <div>
-        <h1>
-          PIE sHart
-        </h1>
-      </div>
     </div>
   );
 }
