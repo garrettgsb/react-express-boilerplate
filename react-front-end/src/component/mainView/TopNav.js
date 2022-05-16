@@ -33,10 +33,10 @@ export default function TopNav() {
           </div>
           <div className="dropdown">
             <img
-              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
               className="rounded-circle"
               height="25"
-              alt="Black and White Portrait of a Man"
+              alt='animated-girl-with-glasses'
               loading="lazy"
             />
           </div>
