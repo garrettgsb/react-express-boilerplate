@@ -1,12 +1,21 @@
 import React from 'react';
 import "../../sass/profile.scss";
+import PieChart from './PieChart';
 
 export default function Profile() {
 
+  const hardProps = {
+    goal: 'A GOAT',
+    saved_cents: 100000,
+    goalTotal_cents: 500000,
+    days: 25
+  }
+
   return (
-    <section className="vh-100">
-  <div className="container py-5 h-100">
-    <div className="row d-flex justify-content-center align-items-center h-100">
+    
+    <section className="vw-100 row">
+  <div className="container p-card">
+    <div className="row d-flex justify-content-start align-items-center h-100">
       <div className="col-md-12 col-xl-4">
 
         <div className="card">
@@ -52,6 +61,37 @@ export default function Profile() {
       </div>
     </div>
   </div>
+  <div className="chart-align">
+      <div className='goal-container'>
+        <PieChart />
+        <br />
+        <br />
+        <div className='d-flex align-items-end justify-content-center text-center'>
+          <table className="table table-bordered">
+            <button>EDIT</button>
+            <tr>
+              <td>
+                <h1>
+                  {hardProps.goal}
+                </h1>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h1>
+                  {hardProps.saved_cents} / {hardProps.goalTotal_cents}
+                </h1>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {hardProps.days} days until {hardProps.goal}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
 </section>
   )
 }

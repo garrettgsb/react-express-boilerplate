@@ -17,3 +17,19 @@
     width: 100px;
   }
 }
+
+.chart-align{
+  flex-shrink: 0;
+    width: 50%;
+    max-width: 50%;
+    padding-right: calc(var(--mdb-gutter-x) * 0.5);
+    padding-left: calc(var(--mdb-gutter-x) * 0.5);
+    margin-top: var(--mdb-gutter-y);
+}
+
+.p-card {
+  width: 50%;
+  max-width: 50%;
+}
+
+
