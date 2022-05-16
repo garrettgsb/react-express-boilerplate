@@ -1,5 +1,5 @@
 import React from 'react';
-import "../sass/partials/profile.scss";
+import "../../sass/partials/profile.scss";
 
 export default function Profile() {
 
