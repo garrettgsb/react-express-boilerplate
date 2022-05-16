@@ -23,6 +23,7 @@ export default function Expenses(props) {
               <div className="col-12">
                 <label className="visually-hidden" for="inlineFormSelectPref">Category</label>
                 <select className="select select-dropdown">
+                  <option value="month" disabled selected>Month</option>
                   <option value="1">January</option>
                   <option value="2">Febrary</option>
                   <option value="3">March</option>
@@ -55,11 +56,12 @@ export default function Expenses(props) {
               <div className="col-12">
                 <label className="visually-hidden" for="inlineFormSelectPref">Category</label>
                 <select className="select">
+                  <option value="category" disabled selected>Category</option>
                   <option value="1">Eating Out</option>
                   <option value="2">Entertainment</option>
                   <option value="3">Fuel</option>
-                  <option value="4">Gifts</option>
-                  <option value="5">Groceries</option>
+                  <option value="4">Groceries</option>
+                  <option value="5">Income</option>
                   <option value="6">Insurance</option>
                   <option value="7">Rent</option>
                   <option value="8">Savings</option>
@@ -69,12 +71,6 @@ export default function Expenses(props) {
               </div>
 
               <div className="col-12">
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="inlineFormCheck" />
-                  <label className="form-check-label" for="inlineFormCheck">
-                    Income
-                  </label>
-                </div>
               </div>
               <div className="col-12">
                 <button type="submit" className="btn btn-primary">Submit</button>

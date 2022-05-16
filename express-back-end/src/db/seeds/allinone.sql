@@ -18,10 +18,10 @@ INSERT INTO categories(name)
   ('shopping'),
   ('other');
  
-INSERT INTO expenses (user_id, created_at, amount, category_id)
+INSERT INTO expenses (user_id, created_at, amount, category_id, income)
   VALUES 
-  (1, '2021-12-29 07:57:54', 9928, 6), 
-  (3, '2022-03-31 14:55:30', 190, 10),
+  (1, '2021-12-29 07:57:54', 9928, 6, true), 
+  (3, '2022-03-31 14:55:30', 190, 10, false),
   (3, '2021-11-16 21:54:17', 4257, 5),
   (3, '2021-06-29 19:15:20', 9048, 9),
   (1, '2021-03-22 19:36:16', 8329, 3),

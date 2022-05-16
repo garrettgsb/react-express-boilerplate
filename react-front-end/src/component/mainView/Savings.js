@@ -8,7 +8,7 @@ export default function Savings(props) {
 
   const hardProps = {
     goal: 'A GOAT',
-    saved_cents: 100000,
+    saved_cents: 2500,
     goalTotal_cents: 500000,
     days: 25
   }
