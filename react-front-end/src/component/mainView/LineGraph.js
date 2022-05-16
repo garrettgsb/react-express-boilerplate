@@ -68,18 +68,10 @@ export default function LineGraph(props) {
         "income": true
       }
     ],
-    incomes: [],
     categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   };
 
-  const getTotalIncome = (state) => {
-    
-    const incomeList = state.expenses.map(expense => {
-      return expense.amount
-    })
-    return incomeList.reduce((first, next) => first + next)    
-  };
-  
+ 
   const labels = [
     'January',
     'February',
@@ -94,6 +86,7 @@ export default function LineGraph(props) {
     'November',
     'December'
   ];
+
 
   // const getGuideData = (state, id) => {
 
