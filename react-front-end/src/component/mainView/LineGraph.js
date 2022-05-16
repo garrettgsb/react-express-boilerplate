@@ -9,7 +9,7 @@ import {
   Legend,
   Tooltip,
 
-}  from 'chart.js';
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
 Chart.register(
@@ -51,7 +51,8 @@ export default function LineGraph(props) {
   };
 
   return (
-    <div id='line'>
+    <div>
+      <div id='line'>
         <Line
           data={data}
           height={400}
@@ -61,6 +62,11 @@ export default function LineGraph(props) {
             responsive: true
           }}
         />
+      </div>
+      <br />
+      <div className='d-flex align-items-center justify-content-center'>
+      <button className='btn'>back</button>
+      </div>
     </div>
   );
 }

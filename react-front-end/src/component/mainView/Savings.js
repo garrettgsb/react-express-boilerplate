@@ -15,11 +15,11 @@ export default function Savings(props) {
 
   return (
     <div>
-      <div class='goal-container'>
+      <div className='goal-container'>
         <PieChart />
         <br />
         <br />
-        <div class='d-flex align-items-center justify-content-center text-center'>
+        <div className='d-flex align-items-center justify-content-center text-center'>
           <table>
             <tr>
               <td>
