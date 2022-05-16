@@ -15,5 +15,17 @@ module.exports = db => {
       console.log('The error is: ', error);
     });
   });
+  
+  router.get('/users/:id', (req, res) => {
+    db.query(`
+    SELECT *
+    FROM users
+    WHERE id = $1
+    `, [req.params.id])
+    .then(data => {
+      const user = data.rows;
+      res.json(user);
+    })
+  });
   return router;
 };
