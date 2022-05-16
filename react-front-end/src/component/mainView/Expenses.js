@@ -2,7 +2,7 @@ import React from 'react';
 import LineGraph from './LineGraph';
 import ExpenseTable from './ExpenseTable';
 import useVisualMode from '../../hooks/useVisualMode';
-import "../../sass/spending.scss"
+import "../../sass/expenses.scss"
 
 export default function Expenses(props) {
 
