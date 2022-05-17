@@ -1,8 +1,18 @@
 import React from 'react';
 import "../../sass/profile.scss";
 import PieChart from './PieChart';
+import useVisualMode from '../../hooks/useVisualMode';
+
+
 
 export default function Profile() {
+
+  const EDIT = 'EDIT';
+  const GOAL = 'GOAL';
+
+  const { mode, transition, back } = useVisualMode(GOAL)
+
+  
 
   const hardProps = {
     goal: 'A GOAT',
@@ -31,16 +41,8 @@ export default function Profile() {
                 </div>
                 <div className="d-flex justify-content-between text-center mt-5 mb-2">
                   <div>
-                    <p className="mb-2 h5">8471</p>
-                    <p className="text-muted mb-0">Wallets Balance</p>
-                  </div>
-                  <div className="px-3">
-                    <p className="mb-2 h5">8512</p>
-                    <p className="text-muted mb-0">Income amounts</p>
-                  </div>
-                  <div>
-                    <p className="mb-2 h5">4751</p>
-                    <p className="text-muted mb-0">Total Transactions</p>
+                    <p className="mb-2 h5">1333337</p>
+                    <p className="text-muted mb-0">Total Saved</p>
                   </div>
                 </div>
               </div>
@@ -49,6 +51,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      {mode === GOAL && 
       <div className="chart-align">
         <div className='goal-container'>
           <br />
@@ -77,11 +80,23 @@ export default function Profile() {
                   </td>
                 </tr>
               </thead>
-              <PieChart />
             </table>
           </div>
         </div>
+      
+      
+      
+      
       </div>
+      }
+      {mode === EDIT && <div>Edit</div>
+      // <Form
+      //                   goals={hardProps.goal}
+      //                   total={hardProps.goalTotal_cents}
+      //                   daysUntil={hardProps.days}
+      //                   />
+      }
+
     </section>
   )
 }
