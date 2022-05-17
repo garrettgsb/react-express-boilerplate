@@ -32,10 +32,14 @@ export default function Expenses(props) {
 
   return (
     <div>
-      {mode === LINE && <LineGraph back={back} />}
+      {mode === LINE && 
+      <LineGraph
+      key={props.expense.length} 
+      back={back} />}
       {mode === EXPENSES &&
         <div id='user-expense-input'>
           <ExpenseTable
+            key={props.expenses.length}
             expenses={props.expenses}
           />
           <div className='d-flex align-items-center justify-content-center text-center'>
@@ -47,10 +51,9 @@ export default function Expenses(props) {
                   className="form-control"
                   type="date"
                   value={state.date}
-                  onChange={(event) => {
-                    event.preventDefault()
+                  onChange={(event) => 
                     setState({ ...state, date: event.target.value })
-                  }}
+                  }
                 />
                 <span id="dateSelected"></span>
               </div>
@@ -66,10 +69,9 @@ export default function Expenses(props) {
                     className="form-control"
                     id="inlineFormInputGroupUsername"
                     placeholder="Amount"
-                    onChange={(event) => {
-                      event.preventDefault()
+                    onChange={(event) =>                       
                       setState({ ...state, amount: event.target.value * 100 })
-                    }}
+                    }
                   />
                 </div>
               </div>

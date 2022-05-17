@@ -63,7 +63,7 @@ export default function useApplicationData() {
     .catch(error => {
       console.log('hook error?!: ', error);
     })
-  }, []);
+  }, [state]);
 
 
   return {

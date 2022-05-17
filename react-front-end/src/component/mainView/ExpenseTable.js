@@ -17,7 +17,7 @@ export default function ExpenseTable(props) {
 
 
   return (
-    <table key={props.expenses.id} className="table">
+    <table className="table">
       <thead className='table-info'>
         <tr className='d-flex justify-content-around'>
           <td>Date</td>
