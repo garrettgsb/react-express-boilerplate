@@ -4,14 +4,15 @@ import useVisualMode from '../../hooks/useVisualMode';
 
 
 
-export default function Profile() {
+
+export default function Profile(props) {
 
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
 
   const { mode, transition, back } = useVisualMode(GOAL)
 
-  
+
 
   const hardProps = {
     goal: 'A GOAT',
