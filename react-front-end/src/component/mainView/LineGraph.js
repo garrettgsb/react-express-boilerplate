@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTotalIncome } from '../../helpers/selecters';
+import { getTotalIncome } from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
