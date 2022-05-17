@@ -9,6 +9,7 @@
     "node-sass": "npm:sass@^1.51.0",
     "react": "^16.8.6",
     "react-chartjs-2": "^4.1.0",
+    "react-circular-progressbar": "1.0.0",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
   },

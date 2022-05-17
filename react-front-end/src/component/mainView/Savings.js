@@ -1,7 +1,6 @@
 import React from 'react';
 import PieChart from './PieChart';
-import LineGraph from './LineGraph';
-import useVisualMode from '../../hooks/useVisualMode';
+import ProgressCircle from './ProgressCircle'
 
 export default function Savings(props) {
 
@@ -16,11 +15,11 @@ export default function Savings(props) {
   return (
     <div>
       <div className='goal-container'>
-        <PieChart />
         <br />
         <br />
         <div className='d-flex align-items-center justify-content-center text-center'>
           <table>
+            <thead>
             <tr>
               <td>
                 <h1>
@@ -40,6 +39,8 @@ export default function Savings(props) {
                 {hardProps.days} days until {hardProps.goal}
               </td>
             </tr>
+            </thead>
+            <ProgressCircle />
           </table>
         </div>
       </div>
