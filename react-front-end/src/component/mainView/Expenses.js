@@ -21,9 +21,9 @@ export default function Expenses(props) {
           <div className='d-flex align-items-center justify-content-center text-center'>
             <form className="row row-cols-lg-auto g-3 align-items-center">
               <div className="col-12">
-                <label className="visually-hidden" for="inlineFormSelectPref">Category</label>
+                <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
                 <select className="select select-dropdown">
-                  <option value="month" disabled selected>Month</option>
+                  <option value="month" disabled>Month</option>
                   <option value="1">January</option>
                   <option value="2">Febrary</option>
                   <option value="3">March</option>
@@ -39,7 +39,7 @@ export default function Expenses(props) {
                 </select>
               </div>
               <div className="col-12">
-                <label className="visually-hidden" for="inlineFormInputGroupUsername">Amount</label>
+                <label className="visually-hidden" htmlFor="inlineFormInputGroupUsername">Amount</label>
                 <div className="input-group">
                   <div className="input-group-text">$</div>
                   <input
@@ -54,9 +54,9 @@ export default function Expenses(props) {
               </div>
 
               <div className="col-12">
-                <label className="visually-hidden" for="inlineFormSelectPref">Category</label>
+                <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
                 <select className="select">
-                  <option value="category" disabled selected>Category</option>
+                  <option value="category" disabled>Category</option>
                   <option value="1">Eating Out</option>
                   <option value="2">Entertainment</option>
                   <option value="3">Fuel</option>
