@@ -1,7 +1,7 @@
-export function getTotalExpensesForUser (state, userId) {
-  const filteredExpenses = state.expenses.filter((expenses) => expenses.user_id === userId);
+export function getTotalExpensesForUser (state, user) {
+  const filteredExpenses = state.expenses.filter((expenses) => expenses.username === user);
   const totalExpense = filteredExpenses.reduce((previous, current) => previous + current.amount, 0);
-  return totalExpense;
+  return '$' + totalExpense.toFixed(2)/100;
 };
 
 export function getTotalIncome (state) {
