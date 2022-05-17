@@ -11,13 +11,8 @@
     "@mui/styled-engine-sc": "^5.7.0",
     "axios": "^0.18.1",
     "node-sass": "^4.14.1",
-<<<<<<< HEAD
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-=======
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
->>>>>>> 77055f5f542c30943e5820dea28f9cb2048319b3
     "react-scripts": "2.1.8",
     "sass": "^1.51.0",
     "styled-components": "^5.3.5"
