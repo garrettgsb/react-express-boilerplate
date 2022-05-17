@@ -5,8 +5,8 @@ export function getTotalExpensesForUser (state, user) {
 };
 
 export function getTotalIncome (state) {
-  const incomeList = state.expenses.map(expense => {
-    return expense.amount
+  const incomeList = state.map(expense => {
+    return expense.amount;
   })
   return incomeList.reduce((first, next) => first + next)    
 };

@@ -16,7 +16,6 @@ const expenses = require('./src/routes/expenses');
 const goals = require('./src/routes/goals');
 const categories = require('./src/routes/categories');
 
-
 App.use(cors());
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
