@@ -8,7 +8,7 @@ export default function ExpenseTable(props) {
     return (
       <tr key={exp.id} className="table-success d-flex justify-content-around">
       <th scope="row">{exp.created_at.substring(0, 10)}</th>
-      <td>{exp.category_name}</td>
+      <td>{exp.category}</td>
       <td>{'$' + exp.amount.toFixed(2)/100}</td>
     </tr>
     )

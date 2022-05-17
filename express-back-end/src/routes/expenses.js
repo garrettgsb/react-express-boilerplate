@@ -19,6 +19,20 @@ module.exports = db => {
     });
   });
 
+  router.get('/allexpenses', (req, res) => {
+    db.query(`
+    SELECT *
+    FROM expenses;
+    `)
+    .then(data => {
+      const expenses = data.rows;
+      res.json(expenses);
+    })
+    .catch(error => {
+      console.log('The error is: ', error);
+    });
+  });
+
   router.get('/incomes', (req, res) => {
     db.query(`
     SELECT *, users.username
