@@ -11,18 +11,18 @@ import { getExpensesForUser } from '../helpers/helper_functions';
 export default function App(props){
   const { state, /*setTab,*/ setUser, addExpense } = useApplicationData();
 
-  const expenses = getExpensesForUser(state, state.user);
-  const expenseTable = expenses.map((exp) => {
-    // console.log('EXP?!', exp);
-    return (
-      <Main
-        tab={state.tab}
-        addExpense={addExpense}
-        // {...exp}
-        userId={exp.userid}
-      />
-    );
-  });
+  // const expenses = getExpensesForUser(state, state.user);
+  // const expenseTable = expenses.map((exp) => {
+  //   // console.log('EXP?!', exp);
+  //   return (
+  //     <Main
+  //       tab={state.tab}
+  //       addExpense={addExpense}
+  //       // {...exp}
+  //       userId={exp.userid}
+  //     />
+  //   );
+  // });
 
 
   //views
@@ -48,6 +48,7 @@ export default function App(props){
       addExpense={addExpense} 
       userId={state.user}
       expenses={state.expenses}
+      incomes={state.incomes}
       />}
 
     </div>
