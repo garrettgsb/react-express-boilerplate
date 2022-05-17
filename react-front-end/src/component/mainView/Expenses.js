@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LineGraph from './LineGraph';
 import ExpenseTable from './ExpenseTable';
 import useVisualMode from '../../hooks/useVisualMode';
 import "../../sass/expenses.scss"
 
 export default function Expenses(props) {
+  const [date, setDate] = useState("");
+  const [amount, setAmount] = useState("");
+  const [catergoryId, setCategoryId] = useState("");
 
+  
   const LINE = 'LINE';
   const EXPENSES = 'EXPENSES';
 
   const { mode, transition, back } = useVisualMode(EXPENSES);
+
+  const submit = (userId, date, amount, categoryId) => {
+    const expense = {
+      user_id: userId,
+      created_at: date,
+      amount,
+      category_id: categoryId
+    };
+    props.addExpense(expense.created_at, expense.amount, expense.category_id);
+  };
 
   return (
     <div>
@@ -21,7 +35,7 @@ export default function Expenses(props) {
             <form className="row row-cols-lg-auto g-3 align-items-center">
               <div className="col-lg-3 col-sm-6">
                 <label htmlFor="endDate" className='visually-hidden'>End</label>
-                <input id="endDate" className="form-control" type="date" />
+                <input id="endDate" className="form-control" type="date" value={date} onChange={(event) => setDate(event.target.value)}/>
                 <span id="endDateSelected"></span>
               </div>
               <div className="col-12">
@@ -35,13 +49,16 @@ export default function Expenses(props) {
                     step='0.01'
                     className="form-control"
                     id="inlineFormInputGroupUsername"
-                    placeholder="Amount" />
+                    placeholder="Amount"
+                    value={amount}
+                    onChange={(event) => setAmount(event.target.value)}
+                    />
                 </div>
               </div>
 
               <div className="col-12">
                 <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
-                <select className="select">
+                <select className="select" value={catergoryId} onChange={(event) => setCategoryId(event.target.value)}>
                   <option value="category" disabled>Category</option>
                   <option value="1">Eating Out</option>
                   <option value="2">Entertainment</option>
@@ -59,7 +76,7 @@ export default function Expenses(props) {
               <div className="col-12">
               </div>
               <div className="col-12">
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary" onClick={() => submit(props.userId, date, amount, catergoryId)}>Submit</button>
               </div>
 
               <div className="col-12" onClick={() => transition(LINE)}>

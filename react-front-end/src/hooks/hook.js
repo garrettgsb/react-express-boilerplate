@@ -11,6 +11,22 @@ export default function useApplicationData() {
     incomes: [],
     categories: []
   });
+
+  const addExpense = (userId, date, amount, categoryId) => {
+    const expenses = {
+      ...state.expenses,
+      created_at: date,
+      amount: amount,
+      category_id: categoryId
+    };
+
+    return axios
+    .put(`http://localhost:8081/api/expenses/${categoryId}`)
+    .then((res) => {
+      setState({...state, expenses})
+      return res;
+    })
+  };
   
   // const setTab = tab => setState({...state, tab});
   const setUser = user => setState({...state, user});
@@ -48,6 +64,7 @@ export default function useApplicationData() {
   return {
     state,
     // setTab,
-    setUser
+    setUser,
+    addExpense
   };
 }
