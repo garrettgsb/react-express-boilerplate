@@ -40,11 +40,12 @@ export default function ExpenseTable(props) {
   return (
     <table className="table ">
       <thead className='table-info'>
-        <th className='d-flex justify-content-around'>
-          <th scope="col">MONTH</th>
-          <th scope="col">Category</th>
-          <th scope="col">Amount</th>
-        </th>
+        <tr className='d-flex justify-content-around'>
+          <td>MONTH</td>
+          <td>Category</td>
+          <td>DESCRIPTION(OPTIONAL)</td>
+          <td>Amount</td>
+        </tr>
       </thead>
       <tbody id='expense-table' className='container list-group infinite-scroll'>
         {expenses}
