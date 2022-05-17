@@ -35,7 +35,9 @@ export default function Expenses(props) {
       {mode === LINE && <LineGraph back={back} />}
       {mode === EXPENSES &&
         <div id='user-expense-input'>
-          <ExpenseTable />
+          <ExpenseTable 
+          expenses={props.expenses}
+          />
           <div className='d-flex align-items-center justify-content-center text-center'>
             <form className="row row-cols-lg-auto g-3 align-items-center">
               <div className="col-lg-3 col-sm-6">

@@ -46,7 +46,9 @@ export default function App(props){
       {mode === SHOW && <Main 
       tab={state.tab} 
       addExpense={addExpense} 
-      userId={1}/>}
+      userId={state.user}
+      expenses={state.expenses}
+      />}
 
     </div>
   );

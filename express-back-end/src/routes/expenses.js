@@ -4,7 +4,7 @@ const router = express.Router();
 module.exports = db => {
   router.get('/expenses', (req, res) => {
     db.query(`
-    SELECT *, users.username, categories.name as category_name
+    SELECT expenses.*, username, categories.name AS category 
     FROM expenses
     JOIN users ON user_id = users.id
     JOIN categories ON category_id = categories.id
