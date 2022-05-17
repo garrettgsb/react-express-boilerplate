@@ -43,7 +43,6 @@ export default function ExpenseTable(props) {
         <tr className='d-flex justify-content-around'>
           <td>MONTH</td>
           <td>Category</td>
-          <td>DESCRIPTION(OPTIONAL)</td>
           <td>Amount</td>
         </tr>
       </thead>
