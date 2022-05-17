@@ -9,7 +9,7 @@ export default function ExpenseTable(props) {
       <tr key={exp.id} className="table-success d-flex justify-content-around">
         <td>{exp.created_at}</td>
         <td>{exp.category_id}</td>
-        <td>{'$' + (exp.amount / 100).toFixed(2)}</td>
+        <td>{'$' + (exp.amount/100).toFixed(2)}</td>
       </tr>
     )
   })
@@ -19,7 +19,7 @@ export default function ExpenseTable(props) {
     <table key={props.expenses.id} className="table ">
       <thead className='table-info'>
         <tr className='d-flex justify-content-around'>
-          <td>MONTH</td>
+          <td>Date</td>
           <td>Category</td>
           <td>Amount</td>
         </tr>
