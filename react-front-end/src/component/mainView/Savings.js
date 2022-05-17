@@ -1,13 +1,17 @@
 import React from 'react';
-import PieChart from './PieChart';
-import ProgressCircle from './ProgressCircle'
+import ProgressCircle from './ProgressCircle';
+import { getTotalIncome } from '../../helpers/helper_functions';
 
 export default function Savings(props) {
 
+  console.log('PROPS>INCOME', props.incomes)
+  const getIncomebyID = props.incomes.filter((expenses) => expenses.user_id == props.userId);
+  console.log('props.userId', props.userId)
+  const total = getTotalIncome(getIncomebyID);
 
   const hardProps = {
     goal: 'A GOAT',
-    saved_cents: 2500,
+    // saved_cents: 2500,
     goalTotal_cents: 500000,
     days: 25
   }
@@ -30,7 +34,7 @@ export default function Savings(props) {
             <tr>
               <td>
                 <h1>
-                  {hardProps.saved_cents} / {hardProps.goalTotal_cents}
+                  {total} / {hardProps.goalTotal_cents}
                 </h1>
               </td>
             </tr>
@@ -40,7 +44,9 @@ export default function Savings(props) {
               </td>
             </tr>
             </thead>
-            <ProgressCircle />
+            <ProgressCircle 
+            total_saved={total} 
+            goalTotal_cents={hardProps.goalTotal_cents}/>
           </table>
         </div>
       </div>

@@ -9,6 +9,8 @@ import '../../sass/main.scss';
 
 export default function Main(props) {
 
+  console.log('props.userId', props.userId)
+  console.log('PROPS1', props.incomes)
   const PROFILE = 'PROFILE';
   const SAVINGS = 'SAVINGS';
   const EXPENSES = 'EXPENSES';
@@ -20,7 +22,10 @@ export default function Main(props) {
       <TopNav />
 
       {mode === PROFILE && <Profile />}
-      {mode === SAVINGS && <Savings />}
+      {mode === SAVINGS && <Savings
+      userId={props.userId}
+      incomes={props.incomes}
+      />}
       {mode === EXPENSES && <Expenses 
       key={props.expenses.length}
       addExpense={props.addExpense} 
