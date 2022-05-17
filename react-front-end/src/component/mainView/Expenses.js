@@ -9,7 +9,7 @@ export default function Expenses(props) {
   const LINE = 'LINE';
   const EXPENSES = 'EXPENSES';
 
-  const { mode, transition, back } = useVisualMode(EXPENSES);
+  const { mode, transition, back } = useVisualMode(LINE);
 
   return (
     <div>
