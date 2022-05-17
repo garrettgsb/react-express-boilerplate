@@ -1,15 +1,15 @@
 import * as React from 'react';
 import '../styles/Crawl.scss';
-import { CardContent, CardMedia, Typography, Card } from '@mui/material';
+import { CardContent, /*CardMedia*/ Typography, Card } from '@mui/material';
 
 export default function Crawl() {
 
 return (
 
 <Card className ="crawl">
-<CardMedia classname="crawl-media"/>
+{/* <CardMedia className="crawl-media"/> */}
 <CardContent>
-<Typography classname="crawl-title"
+<Typography className="crawl-title"
 variant="h5"
 >
 CRAWL TYPE

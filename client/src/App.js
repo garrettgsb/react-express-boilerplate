@@ -9,7 +9,7 @@ import Crawls from './components/Crawls';
 export default function App() {
 
   const [message, setMessage ] = useState('Click the button to load data!');
-
+  
   const fetchData = () => { 
       axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
@@ -33,12 +33,12 @@ export default function App() {
       },
       headers: {
         'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com',
-        'X-RapidAPI-Key': '2f8033e889mshb4c8ca74d55c336p1769fcjsna7c55af16b77'
+        'X-RapidAPI-Key': `${process.env.REACT_APP_RapidAPI_Key}`
       }
     };
     
     axios.request(options).then(function (response) {
-      console.log(response.data);
+      console.log(response.data.results[0]);
     }).catch(function (error) {
       console.error(error);
     });
