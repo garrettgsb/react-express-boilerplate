@@ -131,8 +131,8 @@ export default function LineGraph(props) {
         />
       </div>
       <br />
-      <div className='d-flex align-items-center justify-content-center'>
-        <button className='btn'>back</button>
+      <div className='d-flex align-items-center justify-content-center' onClick={() => props.back()}>
+        <button className='btn btn-primary'>Back</button>
       </div>
     </div>
   );

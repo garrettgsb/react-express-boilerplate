@@ -9,11 +9,11 @@ export default function Expenses(props) {
   const LINE = 'LINE';
   const EXPENSES = 'EXPENSES';
 
-  const { mode/*, transition, back */ } = useVisualMode(EXPENSES);
+  const { mode, transition, back } = useVisualMode(EXPENSES);
 
   return (
     <div>
-      {mode === LINE && <LineGraph />}
+      {mode === LINE && <LineGraph back={back} />}
       {mode === EXPENSES &&
 
         <div id='user-expense-input'>
@@ -75,6 +75,11 @@ export default function Expenses(props) {
               <div className="col-12">
                 <button type="submit" className="btn btn-primary">Submit</button>
               </div>
+
+              <div className="col-12" onClick={() => transition(LINE)}>
+                <button type="submit" className="btn btn-primary">Line Graph</button>
+              </div>
+
             </form>
           </div>
         </div>
