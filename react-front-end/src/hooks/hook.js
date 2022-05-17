@@ -12,7 +12,7 @@ export default function useApplicationData() {
     categories: []
   });
 
-  const addExpense = (id, expense) => {
+  const addExpense = (expense) => {
     console.log('ADDEXPENSES LOG:', state.expenses);
     
     const expenses = [
@@ -25,7 +25,7 @@ export default function useApplicationData() {
     // console.log('BEFORE PUT:', state);
 
     return axios
-    .put(`http://localhost:8081/api/expenses/${id}`, {
+    .put(`http://localhost:8081/api/expenses`, {
       expense
     })
     .then((res) => {

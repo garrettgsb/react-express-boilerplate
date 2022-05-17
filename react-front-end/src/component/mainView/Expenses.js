@@ -27,7 +27,7 @@ export default function Expenses(props) {
       amount,
       category_id
     };
-    props.addExpense(props.expenses.length + 1, expense);
+    props.addExpense(expense);
   };
 
   return (

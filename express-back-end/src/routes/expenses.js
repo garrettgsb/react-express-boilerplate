@@ -61,7 +61,7 @@ module.exports = db => {
   };
   const dateTime = `${date} ${timeFormat(time)}`;
 
-  router.put('/expenses/:id', (req, res) => {
+  router.put('/expenses', (req, res) => {
     db.query(`
     INSERT INTO expenses (user_id, created_at, amount, category_id)
     VALUES ($1, $2, $3, $4);
