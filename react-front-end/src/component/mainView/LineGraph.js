@@ -1,4 +1,5 @@
 import React from 'react';
+import { getTotalIncome } from '../../helpers/selecters';
 import {
   Chart,
   LineElement,
@@ -68,10 +69,10 @@ export default function LineGraph(props) {
         "income": true
       }
     ],
+    incomes: [],
     categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   };
-
- 
+  
   const labels = [
     'January',
     'February',
@@ -86,7 +87,6 @@ export default function LineGraph(props) {
     'November',
     'December'
   ];
-
 
   // const getGuideData = (state, id) => {
 
