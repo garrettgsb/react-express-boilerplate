@@ -11,21 +11,21 @@ export default function Expenses(props) {
   const [state, setState] = useState({
     date: '',
     amount: 0,
-    categoryId: 'category' 
+    categoryId: 'category'
   })
-  
+
   const LINE = 'LINE';
   const EXPENSES = 'EXPENSES';
 
   const { mode, transition, back } = useVisualMode(EXPENSES);
 
-// console.log(props.expenses)
-  const submit = (userId, date, amount, categoryId) => {
+  // console.log(props.expenses)
+  const submit = (user_id, created_at, amount, category_id) => {
     const expense = {
-      user_id: userId,
-      created_at: date,
-      amount: amount,
-      category_id: categoryId
+      user_id,
+      created_at,
+      amount,
+      category_id
     };
     props.addExpense(props.expenses.length + 1, expense);
   };
@@ -35,21 +35,22 @@ export default function Expenses(props) {
       {mode === LINE && <LineGraph back={back} />}
       {mode === EXPENSES &&
         <div id='user-expense-input'>
-          <ExpenseTable 
-          expenses={props.expenses}
+          <ExpenseTable
+            expenses={props.expenses}
           />
           <div className='d-flex align-items-center justify-content-center text-center'>
             <form className="row row-cols-lg-auto g-3 align-items-center">
               <div className="col-lg-3 col-sm-6">
                 <label htmlFor="date" className='visually-hidden'>End</label>
-                <input 
-                id="date" 
-                className="form-control" 
-                type="date" 
-                value={state.date} 
-                onChange={(event) => {
-                setState({...state, date: event.target.value})}} 
-                onSubmit={e => e.preventDefault()}
+                <input
+                  id="date"
+                  className="form-control"
+                  type="date"
+                  value={state.date}
+                  onChange={(event) => {
+                    event.preventDefault()
+                    setState({ ...state, date: event.target.value })
+                  }}
                 />
                 <span id="dateSelected"></span>
               </div>
@@ -65,20 +66,22 @@ export default function Expenses(props) {
                     className="form-control"
                     id="inlineFormInputGroupUsername"
                     placeholder="Amount"
-                    onSubmit={e => e.preventDefault()}
                     onChange={(event) => {
-                      setState({...state, amount: event.target.value * 100})}}
-                    />
+                      event.preventDefault()
+                      setState({ ...state, amount: event.target.value * 100 })
+                    }}
+                  />
                 </div>
               </div>
 
               <div className="col-12">
                 <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
-                <select 
-                className="select" 
-                value={state.categoryId}
-                onChange={(event) => {
-                setState({...state, categoryId: event.target.value})}}>
+                <select
+                  className="select"
+                  value={state.categoryId}
+                  onChange={(event) => {
+                    setState({ ...state, categoryId: event.target.value })
+                  }}>
                   <option value="category" disabled>Category</option>
                   <option value="1">Eating Out</option>
                   <option value="2">Entertainment</option>
@@ -96,14 +99,14 @@ export default function Expenses(props) {
               <div className="col-12">
               </div>
               <div className="col-12">
-                <button 
-                type="submit" 
-                className="btn btn-primary" 
-                onClick={(e) => {
-                  e.preventDefault()
-                  submit(props.userId, state.date, state.amount, state.categoryId)
-                } 
-                }>Submit</button>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    submit(props.userId, state.date, state.amount, state.categoryId)
+                  }
+                  }>Submit</button>
               </div>
 
               <div className="col-12" onClick={() => transition(LINE)}>
