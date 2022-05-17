@@ -15,7 +15,7 @@ const users = require('./src/routes/users');
 const expenses = require('./src/routes/expenses');
 const goals = require('./src/routes/goals');
 const categories = require('./src/routes/categories');
-const incomes = require('./src/routes/incomes');
+
 
 App.use(cors());
 // Express Configuration
@@ -35,7 +35,6 @@ App.use('/api', users(db));
 App.use('/api', expenses(db));
 App.use('/api', goals(db));
 App.use('/api', categories(db));
-App.use('/api', incomes(db));
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
