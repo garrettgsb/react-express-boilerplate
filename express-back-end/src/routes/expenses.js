@@ -61,13 +61,14 @@ module.exports = db => {
   const dateTime = `${date} ${timeFormat(time)}`;
 
   router.put('/expenses/:id', (req, res) => {
-    console.log('REQ.BODY 1:--', req.body);
     db.query(`
     INSERT INTO expenses (user_id, created_at, amount, category_id)
     VALUES ($1, $2, $3, $4);
-    `, [Number(req.body), dateTime, Number(req.body.something), Number(req.params.id)])
-    console.log('REQ.BODY 2:--', req.body)
-    // console.log('REQ.PARAMS: --', req.params)
+    `, [req.body.expense.user_id, req.body.expense.created_at, req.body.expense.amount, req.body.expense.category_id])
+    .then(data => {
+      const expenses = data.rows;
+      res.json(expenses);
+    })
     .catch(error => {
       console.log('The error is: ', error);
     });
