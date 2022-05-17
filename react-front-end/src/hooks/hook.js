@@ -29,7 +29,6 @@ export default function useApplicationData() {
       expense
     })
     .then((res) => {
-      console.log('PUT STATE:', state)
       setState({...state, expenses})
     })
   };
@@ -64,7 +63,7 @@ export default function useApplicationData() {
     .catch(error => {
       console.log('hook error?!: ', error);
     })
-  }, []);
+  }, [state]);
 
 
   return {

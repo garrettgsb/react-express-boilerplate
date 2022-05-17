@@ -15,7 +15,7 @@ export default function Main(props) {
   const SAVINGS = 'SAVINGS';
   const EXPENSES = 'EXPENSES';
 
-  const { mode, transition, /*back*/} = useVisualMode(props.tab);
+  const { mode, transition} = useVisualMode(props.tab);
 
   return (
     <div>
@@ -27,6 +27,7 @@ export default function Main(props) {
       incomes={props.incomes}
       />}
       {mode === EXPENSES && <Expenses 
+      key={props.expenses.length}
       addExpense={props.addExpense} 
       userId={props.userId}
       expenses={props.expenses}

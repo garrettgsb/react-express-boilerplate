@@ -1,22 +1,33 @@
 import React from 'react';
-
+import SingleExpense from './SingleExpense';
 export default function ExpenseTable(props) {
 
   // console.log('PROPS.EXPENSE:', props.expenses)
 
-  const expenses = props.expenses.map(exp => {
+  const expenses = props.expenses.map(expense => {
+    let classname = '';
+    switch (expense.category_id) {
+      case 5: classname = 'Income';
+        break;
+      case 8: classname = 'Savings';
+        break;
+      default: classname = 'Expense';
+        break;
+    }
     return (
-      <tr key={exp.id} className="table-success d-flex justify-content-around">
-        <td>{exp.created_at}</td>
-        <td>{exp.category_id}</td>
-        <td>{'$' + (exp.amount/100).toFixed(2)}</td>
-      </tr>
+      <SingleExpense
+        key={expense.id}
+        created_at={expense.created_at}
+        category_id={expense.category_id}
+        amount={expense.amount}
+        classname={classname}
+      />
     )
-  })
+  });
 
 
   return (
-    <table key={props.expenses.id} className="table ">
+    <table className="table">
       <thead className='table-info'>
         <tr className='d-flex justify-content-around'>
           <td>Date</td>

@@ -22,7 +22,8 @@ module.exports = db => {
   router.get('/allexpenses', (req, res) => {
     db.query(`
     SELECT *
-    FROM expenses;
+    FROM expenses 
+    ORDER BY id DESC;
     `)
     .then(data => {
       const expenses = data.rows;
