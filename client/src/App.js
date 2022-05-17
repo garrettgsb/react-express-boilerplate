@@ -19,6 +19,30 @@ export default function App() {
         setMessage(response.data.message);
     })
   }
+
+  const Search = () => {
+    
+    const options = {
+      method: 'GET',
+      url: 'https://google-maps28.p.rapidapi.com/maps/api/place/nearbysearch/json',
+      params: {
+        location: '49.2657017,-123.1009721',
+        radius: '5000',
+        language: 'en',
+        keyword: 'brewery, bar, pub, gastropub '
+      },
+      headers: {
+        'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com',
+        'X-RapidAPI-Key': '2f8033e889mshb4c8ca74d55c336p1769fcjsna7c55af16b77'
+      }
+    };
+    
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }
   
     return (
       
@@ -27,8 +51,8 @@ export default function App() {
          <Header />
          {/* <Venue /> */}
          <h1>{ message }</h1>
-         <button onClick={fetchData} >
-           Fetch Data
+         <button onClick={Search} >
+           Hop
          </button>    
          <Crawls />
        </div>
