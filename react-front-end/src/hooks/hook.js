@@ -29,7 +29,6 @@ export default function useApplicationData() {
       expense
     })
     .then((res) => {
-      console.log('PUT STATE:', state)
       setState({...state, expenses})
     })
   };
