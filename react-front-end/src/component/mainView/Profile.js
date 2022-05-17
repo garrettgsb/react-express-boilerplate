@@ -26,21 +26,9 @@ export default function Profile() {
                 </div>
                 <h4 className="mb-2">Julie L. Arsenault</h4>
                 <p className="text-muted mb-4">@Programmer <span className="mx-2">|</span> <a
-                  href="#!">mdbootstrap.com</a></p>
+                  href="#!">Lighthouselabs</a></p>
                 <div className="mb-4 pb-2">
-                  <button type="button" className="btn btn-outline-primary btn-floating">
-                    <i className="fab fa-facebook-f fa-lg"></i>
-                  </button>
-                  <button type="button" className="btn btn-outline-primary btn-floating">
-                    <i className="fab fa-twitter fa-lg"></i>
-                  </button>
-                  <button type="button" className="btn btn-outline-primary btn-floating">
-                    <i className="fab fa-skype fa-lg"></i>
-                  </button>
                 </div>
-                <button type="button" className="btn btn-primary btn-rounded btn-lg">
-                  Message now
-                </button>
                 <div className="d-flex justify-content-between text-center mt-5 mb-2">
                   <div>
                     <p className="mb-2 h5">8471</p>
@@ -63,7 +51,6 @@ export default function Profile() {
       </div>
       <div className="chart-align">
         <div className='goal-container'>
-          <PieChart />
           <br />
           <br />
           <div className='d-flex align-items-center justify-content-center text-center flex-column'>
@@ -90,6 +77,7 @@ export default function Profile() {
                   </td>
                 </tr>
               </thead>
+              <PieChart />
             </table>
           </div>
         </div>
