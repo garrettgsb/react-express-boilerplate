@@ -6,24 +6,28 @@ Chart.register(ArcElement, Tooltip, Legend);
 
 const PieChart = (props) => {
 
+  const hardProps = {
+    goalName: 'GOAL',
+    totalSaved: 'TOTALSAVED'
+  }
+
   const data = {
     labels: [
-      'Red',
-      'Blue',
-      'Yellow'
+      hardProps.goalName,
+      hardProps.totalSaved
     ],
     datasets: [{
-      label: 'My First Dataset',
-      data: [5, 15, 90],
+      label: 'Savings',
+      data: [15, 15],
       backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)'
+        'rgb(255,140,0)',
+        'rgb(0, 0, 0, 0.5)'
       ],
-      borderColor: ['rgba(220, 38, 38, 1)',
-        'rgba(0, 153, 246, 1)'],
+      borderColor: ['rgb(255,215,0)',
+        'rgb(220,220,220)'],
       hoverOffset: 4
-    }]
+    }
+  ]
   };
 
   return (
