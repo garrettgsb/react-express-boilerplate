@@ -13,7 +13,7 @@ export default function App(props){
 
   const expenses = getExpensesForUser(state, state.user);
   const expenseTable = expenses.map((exp) => {
-    console.log('EXP?!', exp);
+    // console.log('EXP?!', exp);
     return (
       <Main
         tab={state.tab}
