@@ -4,9 +4,9 @@ export default function SingleExpense(props) {
 
 
   const tableClass = classNames('d-flex justify-content-around', {
-    'table-warning': props.savings,
-    'table-danger': props.expense,
-    'table-success': props.success
+    'table-warning': props.classname === 'Savings',
+    'table-danger': props.classname === 'Expense',
+    'table-success': props.classname === 'Income'
   });
 
   return (

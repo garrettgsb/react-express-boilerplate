@@ -4,16 +4,26 @@ export default function ExpenseTable(props) {
 
   // console.log('PROPS.EXPENSE:', props.expenses)
 
-  const expenses = props.expenses.map(exp => {
-      return (
-        <SingleExpense
-          key={exp.id}
-          created_at={exp.created_at}
-          category_id={exp.category_id}
-          amount={exp.amount}
-        />
-      )
-    });
+  const expenses = props.expenses.map(expense => {
+    let classname = '';
+    switch (expense.category_id) {
+      case 5: classname = 'Income';
+        break;
+      case 8: classname = 'Savings';
+        break;
+      default: classname = 'Expense';
+        break;
+    }
+    return (
+      <SingleExpense
+        key={expense.id}
+        created_at={expense.created_at}
+        category_id={expense.category_id}
+        amount={expense.amount}
+        classname={classname}
+      />
+    )
+  });
 
 
   return (
