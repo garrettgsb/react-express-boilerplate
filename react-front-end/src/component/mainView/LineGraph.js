@@ -148,7 +148,7 @@ export default function LineGraph(props) {
       "name": "other"
     }]
   };
-  
+
   const labels = [
     'January',
     'February',
@@ -167,20 +167,24 @@ export default function LineGraph(props) {
   // const getUserData = (state, user) => {
 
   // }
-  const getGuideData = (state, user) => {
-    const data = [0, ];
-      const userExpenses = state.expenses.filter(expense => expense.username === user);
-      getTotalIncome(userExpenses)
-    return data;
+  const getYearGuideData = (state, user) => {
+    const guideData = [0];
+    const userExpenses = state.expenses.filter(expense => expense.username === user);
+    const guide = (getTotalIncome(userExpenses) / 12).toFixed(2) / 100;
+    while (guideData.length <= 12) {
+      guideData.push(guide + ((guideData.length - 1) * guide))
+    }
+    console.log('GUIDEDATA:', guideData)
+    return guideData;
   };
 
-  const goalData = getGuideData(state, 'Alvin')
+  const yearGoalData = getYearGuideData(state, 'Alvin')
   const data = {
     labels: labels,
     datasets: [
       {
         label: 'TESTING',
-        data: [10, 5, 80, 81, 56, 55, 40],
+        data: [10, 5, 80, 81, 56, 55, 40, 30],
         fill: false,
         backgroundColor: 'rgba(220, 38, 38, 0.7)',
         borderColor: 'rgba(0, 153, 246, 1)',
@@ -188,10 +192,11 @@ export default function LineGraph(props) {
       },
       {
         label: 'Guide',
-        data: {goalData},
+
+        data: yearGoalData,
         fill: false,
-        backgroundColor: 'rgba(220, 38, 38, 0.7)',
-        borderColor: 'rgba(0, 153, 246, 1)',
+        backgroundColor: 'limegreen',
+        borderColor: 'limegreen',
         tension: 0.1
       }
     ]
