@@ -31,9 +31,3 @@ CREATE TABLE goals (
   end_date DATE NOT NULL,
   amount INTEGER
 );
-
-CREATE TABLE incomes (
-  id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  total INTEGER NOT NULL
-);
