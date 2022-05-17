@@ -35,7 +35,7 @@ module.exports = db => {
 
   router.get('/incomes', (req, res) => {
     db.query(`
-    SELECT *, users.username
+    SELECT expenses.*, username
     FROM expenses
     JOIN users ON user_id = users.id
     WHERE category_id = 5;
