@@ -4,12 +4,30 @@ const router = express.Router();
 module.exports = db => {
   router.get('/expenses', (req, res) => {
     db.query(`
-    SELECT *
-    FROM expenses;
+    SELECT *, users.username
+    FROM expenses
+    JOIN users ON user_id = users.id
+    WHERE category_id != 5;
     `)
     .then(data => {
       const expenses = data.rows;
       res.json(expenses);
+    })
+    .catch(error => {
+      console.log('The error is: ', error);
+    });
+  });
+
+  router.get('/incomes', (req, res) => {
+    db.query(`
+    SELECT *, users.username
+    FROM expenses
+    JOIN users ON user_id = users.id
+    WHERE category_id = 5;
+    `)
+    .then(data => {
+      const income = data.rows;
+      res.json(income);
     })
     .catch(error => {
       console.log('The error is: ', error);
