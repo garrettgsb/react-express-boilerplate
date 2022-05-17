@@ -9,34 +9,20 @@ export default function Expenses(props) {
   const LINE = 'LINE';
   const EXPENSES = 'EXPENSES';
 
-  const { mode, transition, back } = useVisualMode(LINE);
+  const { mode, transition, back } = useVisualMode(EXPENSES);
 
   return (
     <div>
       {mode === LINE && <LineGraph back={back} />}
       {mode === EXPENSES &&
-
         <div id='user-expense-input'>
           <ExpenseTable />
           <div className='d-flex align-items-center justify-content-center text-center'>
             <form className="row row-cols-lg-auto g-3 align-items-center">
-              <div className="col-12">
-                <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
-                <select className="select select-dropdown">
-                  <option value="month" disabled>Month</option>
-                  <option value="1">January</option>
-                  <option value="2">Febrary</option>
-                  <option value="3">March</option>
-                  <option value="4">April</option>
-                  <option value="5">May</option>
-                  <option value="6">June</option>
-                  <option value="7">July</option>
-                  <option value="8">August</option>
-                  <option value="9">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12">December</option>
-                </select>
+              <div className="col-lg-3 col-sm-6">
+                <label htmlFor="endDate" className='visually-hidden'>End</label>
+                <input id="endDate" className="form-control" type="date" />
+                <span id="endDateSelected"></span>
               </div>
               <div className="col-12">
                 <label className="visually-hidden" htmlFor="inlineFormInputGroupUsername">Amount</label>
