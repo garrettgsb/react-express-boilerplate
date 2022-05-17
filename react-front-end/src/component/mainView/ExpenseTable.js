@@ -26,12 +26,20 @@ export default function ExpenseTable(props) {
     }
   ];
 
+  // const moneyFormat = amount => {
+  //   let amtArr = amount.map(exp => {
+  //     return '$' + exp.amount.toFixed(2)/100
+  //   })
+  //   return amtArr
+  // }
+  
+
   const expenses = expense.map(exp => {
     return (
       <tr className="table-success d-flex justify-content-around">
       <th scope="row">{exp.created_at}</th>
       <td>{exp.category_id}</td>
-      <td>{exp.amount}</td>
+      <td>{'$' + exp.amount.toFixed(2)/100}</td>
     </tr>
     )
   })
