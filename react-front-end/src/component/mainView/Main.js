@@ -13,7 +13,7 @@ export default function Main(props) {
   const SAVINGS = 'SAVINGS';
   const EXPENSES = 'EXPENSES';
 
-  const { mode, transition, back} = useVisualMode(props.tab);
+  const { mode, transition, /*back*/} = useVisualMode(props.tab);
 
   return (
     <div>
@@ -21,7 +21,7 @@ export default function Main(props) {
 
       {mode === PROFILE && <Profile />}
       {mode === SAVINGS && <Savings />}
-      {mode === EXPENSES && <Expenses />}
+      {mode === EXPENSES && <Expenses addExpense={props.addExpense} userId={props.userId}/>}
 
       <BotNav transition={transition} />
     </div>

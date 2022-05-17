@@ -3,7 +3,7 @@ import axios from "axios"
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    tab: 'SAVINGS',
+    tab: 'EXPENSES',
     user: 'Alvin',
     users: [],
     goals: [],
@@ -11,6 +11,26 @@ export default function useApplicationData() {
     incomes: [],
     categories: []
   });
+
+  const addExpense = (state, expense) => {
+    const expenses = [
+      ...state.expenses,
+      {user_id: state.userId,
+      created_at: state.date,
+      amount: state.amount,
+      category_id: state.categoryId}
+    ];
+    console.log('BEFORE PUT:', state);
+
+    return axios
+    .put(`http://localhost:8081/api/expenses`, {
+      expense
+    })
+    .then((res) => {
+      console.log('PUT STATE:', state)
+      setState({...state, expenses})
+    })
+  };
   
   // const setTab = tab => setState({...state, tab});
   const setUser = user => setState({...state, user});
@@ -48,6 +68,7 @@ export default function useApplicationData() {
   return {
     state,
     // setTab,
-    setUser
+    setUser,
+    addExpense
   };
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import "../../sass/profile.scss";
-import PieChart from './PieChart';
 import useVisualMode from '../../hooks/useVisualMode';
 
 
