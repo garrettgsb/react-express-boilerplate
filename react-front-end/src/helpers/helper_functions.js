@@ -4,9 +4,9 @@ export function getTotalExpensesForUser (state, user) {
   return '$' + totalExpense.toFixed(2)/100;
 };
 
-export function getTotalIncome (state) {
-  const incomeList = state.expenses.map(expense => {
-    return expense.amount
+export function getTotalIncome (expenses) {
+  const incomeList = expenses.map(expense => {
+    return expense.amount;
   })
   return incomeList.reduce((first, next) => first + next)    
 };

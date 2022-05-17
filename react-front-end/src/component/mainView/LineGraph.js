@@ -25,8 +25,46 @@ Chart.register(
 export default function LineGraph(props) {
 
   const state = {
-    users: ['Alvin', 'Kevin', 'Ricky'],
-    goals: [1, 2, 3],
+    users: [
+      {
+        "id": 1,
+        "username": "Alvin",
+        "email": "alvintest@hotmail.com",
+        "password": "test123"
+      },
+      {
+        "id": 2,
+        "username": "Ricky",
+        "email": "ricky2test@hotmail.com",
+        "password": "test123"
+      },
+      {
+        "id": 3,
+        "username": "Kevin",
+        "email": "kevin3test@hotmail.com",
+        "password": "test123"
+      }
+    ],
+    goals: [
+      {
+        "id": 1,
+        "user_id": 1,
+        "end_date": "2023-02-08T07:00:00.000Z",
+        "amount": 3284932
+      },
+      {
+        "id": 2,
+        "user_id": 2,
+        "end_date": "2023-05-04T06:00:00.000Z",
+        "amount": 219638673
+      },
+      {
+        "id": 3,
+        "user_id": 3,
+        "end_date": "2022-12-21T07:00:00.000Z",
+        "amount": 323618
+      }
+    ],
     expenses: [
       {
         "id": 1,
@@ -34,43 +72,81 @@ export default function LineGraph(props) {
         "created_at": "2021-12-29T07:00:00.000Z",
         "amount": 9928,
         "category_id": 6,
-        "income": false
+        "username": "Alvin",
+        "email": "alvintest@hotmail.com",
+        "password": "test123"
       },
       {
-        "id": 5,
+        "id": 3,
+        "user_id": 3,
+        "created_at": "2022-03-31T06:00:00.000Z",
+        "amount": 190,
+        "category_id": 10,
+        "username": "Kevin",
+        "email": "kevin3test@hotmail.com",
+        "password": "test123"
+      },
+      {
+        "id": 3,
+        "user_id": 3,
+        "created_at": "2021-06-29T06:00:00.000Z",
+        "amount": 9048,
+        "category_id": 9,
+        "username": "Kevin",
+        "email": "kevin3test@hotmail.com",
+        "password": "test123"
+      },
+      {
+        "id": 1,
         "user_id": 1,
         "created_at": "2021-03-22T06:00:00.000Z",
         "amount": 8329,
         "category_id": 3,
-        "income": false
-      },
-      {
-        "id": 7,
-        "user_id": 1,
-        "created_at": "2021-08-27T06:00:00.000Z",
-        "amount": 6745,
-        "category_id": 8,
-        "income": false
-      },
-      {
-        "id": 11,
-        "user_id": 1,
-        "created_at": "2021-10-18T06:00:00.000Z",
-        "amount": 9488,
-        "category_id": 9,
-        "income": true
-      },
-      {
-        "id": 15,
-        "user_id": 1,
-        "created_at": "2021-03-04T07:00:00.000Z",
-        "amount": 8109,
-        "category_id": 11,
-        "income": true
+        "username": "Alvin",
+        "email": "alvintest@hotmail.com",
+        "password": "test123"
       }
     ],
-    incomes: [],
-    categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    categories: [{
+      "id": 1,
+      "name": "eating out"
+    },
+    {
+      "id": 2,
+      "name": "entertainment"
+    },
+    {
+      "id": 3,
+      "name": "fuel"
+    },
+    {
+      "id": 4,
+      "name": "groceries"
+    },
+    {
+      "id": 5,
+      "name": "income"
+    },
+    {
+      "id": 6,
+      "name": "insurance"
+    },
+    {
+      "id": 7,
+      "name": "rent"
+    },
+    {
+      "id": 8,
+      "name": "savings"
+    },
+    {
+      "id": 9,
+      "name": "shopping"
+    },
+    {
+      "id": 10,
+      "name": "other"
+    }]
   };
   
   const labels = [
@@ -88,13 +164,17 @@ export default function LineGraph(props) {
     'December'
   ];
 
-  // const getGuideData = (state, id) => {
-
-  // };
-  // const getUserData = (state, id) => {
+  // const getUserData = (state, user) => {
 
   // }
+  const getGuideData = (state, user) => {
+    const data = [0, ];
+      const userExpenses = state.expenses.filter(expense => expense.username === user);
+      getTotalIncome(userExpenses)
+    return data;
+  };
 
+  const goalData = getGuideData(state, 'Alvin')
   const data = {
     labels: labels,
     datasets: [
@@ -108,7 +188,7 @@ export default function LineGraph(props) {
       },
       {
         label: 'Guide',
-        data: [0, 10, 20, 30, 40],
+        data: {goalData},
         fill: false,
         backgroundColor: 'rgba(220, 38, 38, 0.7)',
         borderColor: 'rgba(0, 153, 246, 1)',
