@@ -43,7 +43,10 @@ export default function App(props){
 
       {mode === SIGNUP && <Signup />}
       
-      {mode === SHOW && <Main tab={state.tab} addExpense={addExpense} userId={1}/>}
+      {mode === SHOW && <Main 
+      tab={state.tab} 
+      addExpense={addExpense} 
+      userId={1}/>}
 
     </div>
   );

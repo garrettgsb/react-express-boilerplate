@@ -14,20 +14,20 @@ export default function Expenses(props) {
     categoryId: 'category' 
   })
   
-
   const LINE = 'LINE';
   const EXPENSES = 'EXPENSES';
 
   const { mode, transition, back } = useVisualMode(EXPENSES);
 
+
   const submit = (userId, date, amount, categoryId) => {
     const expense = {
       user_id: userId,
       created_at: date,
-      amount,
+      amount: amount,
       category_id: categoryId
     };
-    props.addExpense(expense.created_at, expense.amount, expense.category_id);
+    props.addExpense(state, expense);
   };
 
   return (

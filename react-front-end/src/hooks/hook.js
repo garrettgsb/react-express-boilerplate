@@ -12,19 +12,23 @@ export default function useApplicationData() {
     categories: []
   });
 
-  const addExpense = (userId, date, amount, categoryId) => {
-    const expenses = {
+  const addExpense = (state, expense) => {
+    const expenses = [
       ...state.expenses,
-      created_at: date,
-      amount: amount,
-      category_id: categoryId
-    };
+      {user_id: state.userId,
+      created_at: state.date,
+      amount: state.amount,
+      category_id: state.categoryId}
+    ];
+    console.log('BEFORE PUT:', state);
 
     return axios
-    .put(`http://localhost:8081/api/expenses/${categoryId}`)
+    .put(`http://localhost:8081/api/expenses`, {
+      expense
+    })
     .then((res) => {
+      console.log('PUT STATE:', state)
       setState({...state, expenses})
-      return res;
     })
   };
   
