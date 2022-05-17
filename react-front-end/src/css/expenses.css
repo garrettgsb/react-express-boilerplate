@@ -1,0 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
+@import '~mdb-ui-kit/css/mdb.min.css';
+#expense-table {
+  max-height: 300px;
+  max-width: 1500px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}

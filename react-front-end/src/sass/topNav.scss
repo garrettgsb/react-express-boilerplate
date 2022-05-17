@@ -1,0 +1,10 @@
+@import './partials/mixins';
+@import './partials/variables';
+
+.fa-piggy-bank {
+  color: $OrangePeel;
+  transform: scale(3);
+  position: absolute;
+  left: 25px;
+  top: 20px;
+}
