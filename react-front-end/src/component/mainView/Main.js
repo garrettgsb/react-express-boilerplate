@@ -21,7 +21,11 @@ export default function Main(props) {
 
       {mode === PROFILE && <Profile />}
       {mode === SAVINGS && <Savings />}
-      {mode === EXPENSES && <Expenses addExpense={props.addExpense} userId={props.userId}/>}
+      {mode === EXPENSES && <Expenses 
+      addExpense={props.addExpense} 
+      userId={props.userId}
+      expenses={props.expenses}
+      />}
 
       <BotNav transition={transition} />
     </div>

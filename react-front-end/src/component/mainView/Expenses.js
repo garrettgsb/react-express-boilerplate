@@ -19,7 +19,7 @@ export default function Expenses(props) {
 
   const { mode, transition, back } = useVisualMode(EXPENSES);
 
-
+// console.log(props.expenses)
   const submit = (userId, date, amount, categoryId) => {
     const expense = {
       user_id: userId,
@@ -27,7 +27,7 @@ export default function Expenses(props) {
       amount: amount,
       category_id: categoryId
     };
-    props.addExpense(state, expense);
+    props.addExpense(props.expenses.length + 1, expense);
   };
 
   return (
@@ -35,7 +35,9 @@ export default function Expenses(props) {
       {mode === LINE && <LineGraph back={back} />}
       {mode === EXPENSES &&
         <div id='user-expense-input'>
-          <ExpenseTable />
+          <ExpenseTable 
+          expenses={props.expenses}
+          />
           <div className='d-flex align-items-center justify-content-center text-center'>
             <form className="row row-cols-lg-auto g-3 align-items-center">
               <div className="col-lg-3 col-sm-6">
@@ -46,7 +48,6 @@ export default function Expenses(props) {
                 type="date" 
                 value={state.date} 
                 onChange={(event) => {
-                  console.log('DATESTATE:', state);
                 setState({...state, date: event.target.value})}} 
                 onSubmit={e => e.preventDefault()}
                 />
@@ -66,8 +67,7 @@ export default function Expenses(props) {
                     placeholder="Amount"
                     onSubmit={e => e.preventDefault()}
                     onChange={(event) => {
-                      console.log('STATEMAMOUNT:', state)
-                      setState({...state, amount: event.target.value})}}
+                      setState({...state, amount: event.target.value * 100})}}
                     />
                 </div>
               </div>
@@ -78,7 +78,6 @@ export default function Expenses(props) {
                 className="select" 
                 value={state.categoryId}
                 onChange={(event) => {
-                  console.log('CATSTATE:', state)
                 setState({...state, categoryId: event.target.value})}}>
                   <option value="category" disabled>Category</option>
                   <option value="1">Eating Out</option>
@@ -100,7 +99,8 @@ export default function Expenses(props) {
                 <button 
                 type="submit" 
                 className="btn btn-primary" 
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault()
                   submit(props.userId, state.date, state.amount, state.categoryId)
                 } 
                 }>Submit</button>

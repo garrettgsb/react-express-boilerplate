@@ -1,5 +1,7 @@
 import React from 'react';
 import PieChart from './PieChart';
+import LineGraph from './LineGraph';
+import useVisualMode from '../../hooks/useVisualMode';
 
 export default function Savings(props) {
 
