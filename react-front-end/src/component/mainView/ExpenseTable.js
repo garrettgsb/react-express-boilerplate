@@ -29,7 +29,7 @@ export default function ExpenseTable(props) {
 
   const expenses = expense.map(exp => {
     return (
-      <tr className="table-success d-flex justify-content-around">
+      <tr key={exp.id} className="table-success d-flex justify-content-around">
       <th scope="row">{exp.created_at.substring(0, 10)}</th>
       <td>{exp.category_name}</td>
       <td>{'$' + exp.amount.toFixed(2)/100}</td>

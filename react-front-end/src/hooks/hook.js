@@ -22,14 +22,14 @@ export default function useApplicationData() {
     ];
     console.log('BEFORE PUT:', state);
 
-    return axios
-    .put(`http://localhost:8081/api/expenses`, {
-      expense
-    })
-    .then((res) => {
-      console.log('PUT STATE:', state)
-      setState({...state, expenses})
-    })
+    // return axios
+    // .put(`http://localhost:8081/api/expenses`, {
+    //   expense
+    // })
+    // .then((res) => {
+    //   console.log('PUT STATE:', state)
+    //   setState({...state, expenses})
+    // })
   };
   
   // const setTab = tab => setState({...state, tab});
