@@ -12,9 +12,9 @@ export default function useApplicationData() {
     categories: []
   });
 
+  console.log('STATEEXPENSES:', state.expenses)
+
   const addExpense = (expense) => {
-    console.log('ADDEXPENSES LOG:', state.expenses);
-    
     const expenses = [
       ...state.expenses,
       {user_id: expense.userId,
@@ -63,7 +63,7 @@ export default function useApplicationData() {
     .catch(error => {
       console.log('hook error?!: ', error);
     })
-  }, [state]);
+  }, []);
 
 
   return {
