@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.1",
     "chart.js": "^3.7.1",
+    "classnames": "^2.3.1",
     "mdb-ui-kit": "^4.0.0",
     "node-sass": "npm:sass@^1.51.0",
     "react": "^16.8.6",
