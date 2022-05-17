@@ -2,47 +2,24 @@ import React from 'react';
 
 export default function ExpenseTable(props) {
 
-  let expense = [
-    {
-      id: 1,
-      user_id: 1,
-      created_at: "2021-12-29T08:00:00.000Z",
-      amount: 9928,
-      category_id: 6,
-    },
-    {
-      id: 2,
-      user_id: 1,
-      created_at: "2022-03-31T07:00:00.000Z",
-      amount: 190,
-      category_id: 10,
-    },
-    {
-      id: 3,
-      user_id: 1,
-      created_at: "2021-11-16T08:00:00.000Z",
-      amount: 4257,
-      category_id: 5,
-    }
-  ];
-  
+  // console.log('PROPS.EXPENSE:', props.expenses)
 
-  const expenses = expense.map(exp => {
+  const expenses = props.expenses.map(exp => {
     return (
-      <tr className="table-success d-flex justify-content-around">
-      <th scope="row">{exp.created_at.substring(0, 10)}</th>
-      <td>{exp.category_name}</td>
-      <td>{'$' + exp.amount.toFixed(2)/100}</td>
-    </tr>
+      <tr key={exp.id} className="table-success d-flex justify-content-around">
+        <td>{exp.created_at}</td>
+        <td>{exp.category_id}</td>
+        <td>{'$' + (exp.amount/100).toFixed(2)}</td>
+      </tr>
     )
   })
-  
+
 
   return (
-    <table className="table ">
+    <table key={props.expenses.id} className="table ">
       <thead className='table-info'>
         <tr className='d-flex justify-content-around'>
-          <td>MONTH</td>
+          <td>Date</td>
           <td>Category</td>
           <td>Amount</td>
         </tr>

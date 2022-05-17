@@ -4,7 +4,7 @@ import axios from "axios"
 export default function useApplicationData() {
   const [state, setState] = useState({
     tab: 'EXPENSES',
-    user: 'Alvin',
+    user: 1,
     users: [],
     goals: [],
     expenses: [],
@@ -12,18 +12,20 @@ export default function useApplicationData() {
     categories: []
   });
 
-  const addExpense = (state, expense) => {
+  const addExpense = (id, expense) => {
+    console.log('ADDEXPENSES LOG:', state.expenses);
+    
     const expenses = [
       ...state.expenses,
-      {user_id: state.userId,
-      created_at: state.date,
-      amount: state.amount,
-      category_id: state.categoryId}
+      {user_id: expense.userId,
+      created_at: expense.date,
+      amount: expense.amount,
+      category_id: expense.categoryId}
     ];
-    console.log('BEFORE PUT:', state);
+    // console.log('BEFORE PUT:', state);
 
     return axios
-    .put(`http://localhost:8081/api/expenses`, {
+    .put(`http://localhost:8081/api/expenses/${id}`, {
       expense
     })
     .then((res) => {
@@ -39,7 +41,7 @@ export default function useApplicationData() {
   useEffect(() => {
     const apiUsers = 'http://localhost:8081/api/users';
     const apiGoals = 'http://localhost:8081/api/goals';
-    const apiExpenses = 'http://localhost:8081/api/expenses';
+    const apiExpenses = 'http://localhost:8081/api/allexpenses';
     const apiIncomes = 'http://localhost:8081/api/incomes';
     const apiCategories = 'http://localhost:8081/api/categories';
     Promise.all([
