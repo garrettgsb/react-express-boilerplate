@@ -5,9 +5,6 @@ import useVisualMode from '../../hooks/useVisualMode';
 import "../../sass/expenses.scss"
 
 export default function Expenses(props) {
-  // const [date, setDate] = useState("");
-  // const [amount, setAmount] = useState("");
-  // const [catergoryId, setCategoryId] = useState("");
   const [state, setState] = useState({
     date: '',
     amount: 0,
@@ -19,7 +16,6 @@ export default function Expenses(props) {
 
   const { mode, transition, back } = useVisualMode(EXPENSES);
 
-  // console.log(props.expenses)
   const submit = (user_id, created_at, amount, category_id) => {
     const expense = {
       user_id,

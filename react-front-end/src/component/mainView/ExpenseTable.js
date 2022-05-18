@@ -2,8 +2,6 @@ import React from 'react';
 import SingleExpense from './SingleExpense';
 export default function ExpenseTable(props) {
 
-  // console.log('PROPS.EXPENSE:', props.expenses)
-
   const expenses = props.expenses.map(expense => {
     let classname = '';
     switch (expense.category_id) {
