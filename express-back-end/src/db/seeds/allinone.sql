@@ -120,8 +120,8 @@ INSERT INTO expenses (user_id, created_at, amount, category_id)
   (3, '2022-03-27', 4751, 3),
   (1, '2021-04-21', 506, 5);
 
-INSERT INTO goals (user_id, end_date, amount)
+INSERT INTO goals (user_id, goal_name, start_date, end_date, amount)
   VALUES
-  (1, '2023-02-08', 3284932),
-  (2, '2023-05-04', 219638673),
-  (3, '2022-12-21', 323618);
+  (1, '2014 Infiniti Q50S', '2022-02-21', '2023-02-08', 3284932),
+  (2, 'House', '2021-07-20', '2023-05-04', 219638673),
+  (3, 'Macbook', '2022-01-13', '2023-01-21', 323618);
