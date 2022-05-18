@@ -1,24 +1,25 @@
 import React from 'react';
 import SingleExpense from './SingleExpense';
+import { getCategoryName } from '../../helpers/helper_functions';
 export default function ExpenseTable(props) {
 
   const expenses = props.expenses.map(expense => {
-    let classname = '';
-    switch (expense.category_id) {
-      case 5: classname = 'Income';
-        break;
-      case 8: classname = 'Savings';
-        break;
-      default: classname = 'Expense';
-        break;
+    let categoryName = getCategoryName(expense.category_id)
+    const classname = (prop) => {
+      switch (prop) {
+        case 'income': return 'Income';
+        case 'savings': return 'Savings';
+        default: return 'Expense';
+      }
     }
+
     return (
       <SingleExpense
         key={expense.id}
         created_at={expense.created_at}
-        category_name={expense.category_name}
+        category_name={expense.category_name || categoryName}
         amount={expense.amount}
-        classname={classname}
+        classname={classname(expense.category_name || categoryName)}
       />
     )
   });

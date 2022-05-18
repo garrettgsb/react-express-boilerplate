@@ -3,12 +3,14 @@ import LineGraph from './LineGraph';
 import ExpenseTable from './ExpenseTable';
 import useVisualMode from '../../hooks/useVisualMode';
 import "../../sass/expenses.scss"
+import { getCategoryName } from '../../helpers/helper_functions';
 
 export default function Expenses(props) {
   const [state, setState] = useState({
     date: '',
     amount: 0,
-    categoryId: 'category'
+    category_name: 'category',
+    category_id: 0
   })
 
   const LINE = 'LINE';
@@ -16,22 +18,24 @@ export default function Expenses(props) {
 
   const { mode, transition, back } = useVisualMode(EXPENSES);
 
-  const submit = (user_id, created_at, amount, category_id) => {
+  const submit = (user_id, created_at, amount, category_id, category_name) => {
+
     const expense = {
       user_id,
       created_at,
       amount,
-      category_id
+      category_id,
+      category_name
     };
     props.addExpense(expense);
   };
 
+  console.log('PROPSEXPENESSE:', props.expenses)
   return (
     <div>
-      {mode === LINE && 
-      <LineGraph
-      key={props.expense.length} 
-      back={back} />}
+      {mode === LINE &&
+        <LineGraph
+          back={back} />}
       {mode === EXPENSES &&
         <div id='user-expense-input'>
           <ExpenseTable
@@ -47,7 +51,7 @@ export default function Expenses(props) {
                   className="form-control"
                   type="date"
                   value={state.date}
-                  onChange={(event) => 
+                  onChange={(event) =>
                     setState({ ...state, date: event.target.value })
                   }
                 />
@@ -65,7 +69,7 @@ export default function Expenses(props) {
                     className="form-control"
                     id="inlineFormInputGroupUsername"
                     placeholder="Amount"
-                    onChange={(event) =>                       
+                    onChange={(event) =>
                       setState({ ...state, amount: event.target.value * 100 })
                     }
                   />
@@ -76,9 +80,9 @@ export default function Expenses(props) {
                 <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
                 <select
                   className="select"
-                  value={state.categoryId}
+                  value={state.category_name}
                   onChange={(event) => {
-                    setState({ ...state, categoryId: event.target.value })
+                    setState({ ...state, category_name: event.target.value, category_id: parseInt(getCategoryName(event.target.value)) })
                   }}>
                   <option value="category" disabled>Category</option>
                   <option value="1">Eating Out</option>
@@ -102,9 +106,10 @@ export default function Expenses(props) {
                   className="btn btn-primary"
                   onClick={(e) => {
                     e.preventDefault()
-                    submit(props.userId, state.date, state.amount, state.categoryId)
+                    submit(props.userId, state.date, state.amount, state.category_name)
                   }
-                  }>Submit</button>
+                }
+                >Submit</button>
               </div>
 
               <div className="col-12" onClick={() => transition(LINE)}>

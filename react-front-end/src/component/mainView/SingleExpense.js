@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 export default function SingleExpense(props) {
 
-
   const tableClass = classNames('d-flex justify-content-around', {
     'table-warning': props.classname === 'Savings',
     'table-danger': props.classname === 'Expense',

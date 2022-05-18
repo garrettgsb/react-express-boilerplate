@@ -19,24 +19,26 @@ export default function useApplicationData() {
   });
 
   const addExpense = (expense) => {
+
     const expenses = [
       {
         user_id: expense.user_id,
         created_at: expense.created_at,
         amount: expense.amount,
-        category_id: expense.category_id
+        category_id: expense.category_id,
+        category_name: expense.category_name
       },
       ...state.expenses
     ];
-    console.log('EXPENSES:', expenses);
 
     return axios
       .put(`http://localhost:8081/api/expenses`, {
         expense
       })
       .then((res) => {
-        setState(prev => { 
-          return {...prev, expenses} })
+        setState(prev => {
+          return { ...prev, expenses }
+        })
       })
   };
 
