@@ -10,12 +10,7 @@ export default function useApplicationData() {
     goals: [],
     expenses: [],
     incomes: [],
-    categories: [],
-    fake: [
-      {
-        placeholder: 'goalie!!!!!'
-      }
-    ]
+    categories: []
   });
 
   const addExpense = (expense) => {
