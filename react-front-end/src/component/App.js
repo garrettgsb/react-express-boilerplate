@@ -5,8 +5,6 @@ import Main from './mainView/Main';
 import Login from './Login';
 import Signup from './Signup';
 import '../sass/app.scss';
-// import { getExpensesForUser } from '../helpers/helper_functions';
-
 
 export default function App(props){
   const { state, setUser, addExpense } = useApplicationData();
@@ -16,7 +14,7 @@ export default function App(props){
   const SIGNUP = 'SIGNUP';
   const SHOW = 'SHOW';
 
-  const { mode, /*transition, back*/} = useVisualMode(
+  const { mode } = useVisualMode(
     !props.user ?
       SHOW :
       LOGIN

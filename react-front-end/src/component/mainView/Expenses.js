@@ -19,7 +19,6 @@ export default function Expenses(props) {
   const { mode, transition, back } = useVisualMode(EXPENSES);
 
   const submit = (user_id, created_at, amount, category_id, category_name) => {
-
     const expense = {
       user_id,
       created_at,
@@ -30,7 +29,6 @@ export default function Expenses(props) {
     props.addExpense(expense);
   };
 
-  console.log('PROPSEXPENESSE:', props.expenses)
   return (
     <div>
       {mode === LINE &&

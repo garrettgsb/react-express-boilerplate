@@ -1,9 +1,8 @@
-import { useState, useEffect, /*useRef*/ } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios"
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    test: 'test',
     tab: 'EXPENSES',
     user: 1,
     users: [],
@@ -68,7 +67,6 @@ export default function useApplicationData() {
         console.log('hook error?!: ', error);
       })
   }, []);
-
 
   return {
     state,

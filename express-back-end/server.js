@@ -4,13 +4,6 @@ const BodyParser = require('body-parser');
 const PORT = 8081;
 const sassMiddleware = require('./lib/sass-middleware');
 const cors = require('cors');
-const http = require('http').Server(App);
-const io = require('socket.io')(http, {
-  cors: {
-    origin: 'http://localhost:8000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  },
-});;
 
 const { Pool } = require('pg');
 require('dotenv').config();
@@ -22,28 +15,6 @@ const users = require('./src/routes/users');
 const expenses = require('./src/routes/expenses');
 const goals = require('./src/routes/goals');
 const categories = require('./src/routes/categories');
-
-io.on("connection", socket => {
-  console.log('Socket connected.')
-  console.log('SOCKET:', socket)
-  socket.onmessage = event => {
-    console.log(`Message Received: ${event.data}`);
-
-    if (event.data === "ping") {
-      socket.send(JSON.stringify("pong"));
-    }
-  };
-});
-io.on('message', () => {
-  socket.onmessage = event => {
-    console.log(`Message Received2: ${event.data}`)
-  }
-});
-
-io.on('stateChange', event => {
-  io.emit(event);
-  console.log(event);
-})
 
 App.use(cors());
 // Express Configuration
