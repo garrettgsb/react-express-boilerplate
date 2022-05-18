@@ -174,7 +174,6 @@ export default function LineGraph(props) {
     while (guideData.length <= 12) {
       guideData.push(guide + ((guideData.length - 1) * guide))
     }
-    console.log('GUIDEDATA:', guideData)
     return guideData;
   };
 

@@ -9,8 +9,6 @@ import '../../sass/main.scss';
 
 export default function Main(props) {
 
-  console.log('props.userId', props.userId)
-  console.log('PROPS1', props.incomes)
   const PROFILE = 'PROFILE';
   const SAVINGS = 'SAVINGS';
   const EXPENSES = 'EXPENSES';

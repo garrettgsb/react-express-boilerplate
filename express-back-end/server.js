@@ -4,15 +4,18 @@ const BodyParser = require('body-parser');
 const PORT = 8081;
 const sassMiddleware = require('./lib/sass-middleware');
 const cors = require('cors');
-const http = require('http');
-const socketio = require('socket.io');
+const http = require('http').Server(App);
+const io = require('socket.io')(http, {
+  cors: {
+    origin: 'http://localhost:8000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
+});;
 
 const { Pool } = require('pg');
 require('dotenv').config();
 const dbParams = require("./lib/db");
 const db = new Pool(dbParams);
-const server = http.createServer(App);
-const io = socketio(server);
 db.connect();
 
 const users = require('./src/routes/users');
@@ -50,7 +53,7 @@ App.use('/api', expenses(db));
 App.use('/api', goals(db));
 App.use('/api', categories(db));
 
-App.listen(PORT, () => {
+http.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });

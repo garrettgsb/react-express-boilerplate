@@ -11,6 +11,7 @@ import { getExpensesForUser } from '../helpers/helper_functions';
 export default function App(props){
   const { state, /*setTab,*/ setUser, addExpense } = useApplicationData();
 
+
   // const expenses = getExpensesForUser(state, state.user);
   // const expenseTable = expenses.map((exp) => {
   //   // console.log('EXP?!', exp);

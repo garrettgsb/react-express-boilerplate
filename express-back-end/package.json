@@ -16,7 +16,6 @@
     "nodemon": "^1.18.7",
     "pg": "^8.7.3",
     "sass": "^1.51.0",
-    "socket.io": "^4.5.0",
-    "socket.io-client": "^4.5.1"
+    "socket.io": "^4.5.0"
   }
 }
