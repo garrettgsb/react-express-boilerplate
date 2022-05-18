@@ -16,7 +16,7 @@ export default function ExpenseTable(props) {
       <SingleExpense
         key={expense.id}
         created_at={expense.created_at}
-        category_id={expense.category_id}
+        category_id={expense.category_name}
         amount={expense.amount}
         classname={classname}
       />

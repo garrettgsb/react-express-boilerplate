@@ -4,11 +4,10 @@ const router = express.Router();
 module.exports = db => {
   router.get('/expenses', (req, res) => {
     db.query(`
-    SELECT expenses.*, username, categories.name AS category 
+    SELECT expenses.*, categories.name AS category_name
     FROM expenses
-    JOIN users ON user_id = users.id
     JOIN categories ON category_id = categories.id
-    WHERE category_id != 5;
+    ORDER BY id DESC;
     `)
     .then(data => {
       const expenses = data.rows;
