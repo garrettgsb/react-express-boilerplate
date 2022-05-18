@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTotalAmount } from '../../helpers/helper_functions';
+import { getSavingsByID } from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
@@ -25,8 +25,10 @@ Chart.register(
   TimeScale);
 
 export default function LineGraph(props) {
-
+  
   const { user, goals, expenses, back } = props;
+
+  const dateUnit = 'month';
 
   const state = {
     users: [
@@ -127,7 +129,11 @@ export default function LineGraph(props) {
     'November',
     'December'
   ];
-
+  const savingsDataPoints = [];
+  const savings = getSavingsByID(expenses, user)
+  console.log('EXPENSES:', expenses)
+  console.log('SAVINGS:', savings)
+  console.log('USER:', user)
   // const getUserData = (state, user) => {
 
   // }
@@ -190,7 +196,7 @@ export default function LineGraph(props) {
               x: {
                 type: 'time',
                 time: {
-                  unit: 'month'
+                  unit: dateUnit
                 }
               }
             }
