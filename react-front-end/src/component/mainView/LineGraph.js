@@ -9,9 +9,10 @@ import {
   LinearScale,
   Legend,
   Tooltip,
-
+  TimeScale
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import 'chartjs-adapter-date-fns';
 
 Chart.register(
   LineElement,
@@ -20,9 +21,12 @@ Chart.register(
   CategoryScale,
   LinearScale,
   Legend,
-  Tooltip);
+  Tooltip,
+  TimeScale);
 
 export default function LineGraph(props) {
+
+  const { user, goals, expenses, back } = props;
 
   const state = {
     users: [
@@ -106,47 +110,7 @@ export default function LineGraph(props) {
         "email": "alvintest@hotmail.com",
         "password": "test123"
       }
-    ],
-    categories: [{
-      "id": 1,
-      "name": "eating out"
-    },
-    {
-      "id": 2,
-      "name": "entertainment"
-    },
-    {
-      "id": 3,
-      "name": "fuel"
-    },
-    {
-      "id": 4,
-      "name": "groceries"
-    },
-    {
-      "id": 5,
-      "name": "income"
-    },
-    {
-      "id": 6,
-      "name": "insurance"
-    },
-    {
-      "id": 7,
-      "name": "rent"
-    },
-    {
-      "id": 8,
-      "name": "savings"
-    },
-    {
-      "id": 9,
-      "name": "shopping"
-    },
-    {
-      "id": 10,
-      "name": "other"
-    }]
+    ]
   };
 
   const labels = [
@@ -167,9 +131,10 @@ export default function LineGraph(props) {
   // const getUserData = (state, user) => {
 
   // }
-  const getYearGuideData = (state, user) => {
+
+  const getYearGuideData = (goals, id) => {
     const guideData = [0];
-    const userExpenses = state.expenses.filter(expense => expense.username === user);
+    const userExpenses = goals.filter(goal => goal.user_id === id);
     const guide = (getTotalAmount(userExpenses) / 12).toFixed(2) / 100;
     while (guideData.length <= 12) {
       guideData.push(guide + ((guideData.length - 1) * guide))
@@ -177,12 +142,12 @@ export default function LineGraph(props) {
     return guideData;
   };
 
-  const yearGoalData = getYearGuideData(state, 'Alvin')
+  const yearGoalData = getYearGuideData(goals, user)
   const data = {
     labels: labels,
     datasets: [
       {
-        label: 'TESTING',
+        label: 'Savings',
         data: [10, 5, 80, 81, 56, 55, 40, 30],
         fill: false,
         backgroundColor: 'rgba(220, 38, 38, 0.7)',
@@ -190,8 +155,7 @@ export default function LineGraph(props) {
         tension: 0.1
       },
       {
-        label: 'Guide',
-
+        label: 'Goal',
         data: yearGoalData,
         fill: false,
         backgroundColor: 'limegreen',
@@ -210,7 +174,12 @@ export default function LineGraph(props) {
           width={400}
           options={{
             maintainAspectRatio: false,
-            responsive: true
+            responsive: true,
+            scales: {
+              x: {
+                type: 'time'
+              }
+            }
           }}
         />
       </div>
