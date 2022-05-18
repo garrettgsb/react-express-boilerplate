@@ -132,31 +132,42 @@ export default function LineGraph(props) {
 
   // }
 
-  const getYearGuideData = (goals, id) => {
-    const guideData = [0];
-    const userExpenses = goals.filter(goal => goal.user_id === id);
-    const guide = (getTotalAmount(userExpenses) / 12).toFixed(2) / 100;
-    while (guideData.length <= 12) {
-      guideData.push(guide + ((guideData.length - 1) * guide))
-    }
-    return guideData;
-  };
+  // const getYearGuideData = (goals, id) => {
+  //   const guideData = [0];
+  //   const userExpenses = goals.filter(goal => goal.user_id === id);
+  //   const guide = (getTotalAmount(userExpenses) / 12).toFixed(2) / 100;
+  //   while (guideData.length <= 12) {
+  //     guideData.push(guide + ((guideData.length - 1) * guide))
+  //   }
+  //   return guideData;
+  // };
 
-  const yearGoalData = getYearGuideData(goals, user)
+  // const yearGoalData = getYearGuideData(goals, user)
   const data = {
-    labels: labels,
     datasets: [
       {
         label: 'Savings',
-        data: [10, 5, 80, 81, 56, 55, 40, 30],
+        data: [
+          { x: '2022-01-01', y: 10000},
+          { x: '2022-02-01', y: 20000},
+          { x: '2022-03-01', y: 8000},
+          { x: '2022-04-01', y: 8100},
+          { x: '2022-05-01', y: 5600},
+          { x: '2022-06-15', y: 5500},
+          { x: '2022-07-01', y: 4000},
+          { x: '2022-08-01', y: 30000}
+        ],
         fill: false,
         backgroundColor: 'rgba(220, 38, 38, 0.7)',
-        borderColor: 'rgba(0, 153, 246, 1)',
+        borderColor: 'rgba(220, 38, 38, 0.7)',
         tension: 0.1
       },
       {
         label: 'Goal',
-        data: yearGoalData,
+        data: [
+          {x:'2022-01-01' , y: 0},
+          {x:'2022-12-01' , y: 30000}
+        ],
         fill: false,
         backgroundColor: 'limegreen',
         borderColor: 'limegreen',
@@ -177,14 +188,17 @@ export default function LineGraph(props) {
             responsive: true,
             scales: {
               x: {
-                type: 'time'
+                type: 'time',
+                time: {
+                  unit: 'month'
+                }
               }
             }
           }}
         />
       </div>
       <br />
-      <div className='d-flex align-items-center justify-content-center' onClick={() => props.back()}>
+      <div className='d-flex align-items-center justify-content-center' onClick={() => back()}>
         <button className='btn btn-primary'>Back</button>
       </div>
     </div>

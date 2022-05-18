@@ -6,7 +6,7 @@ import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions'
 export default function Profile(props) {
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
-  const { mode, transition, back } = useVisualMode(GOAL)
+  const { mode, transition, back } = useVisualMode(EDIT)
 
 
   const savingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
