@@ -4,7 +4,9 @@ import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions'
 
 export default function Savings(props) {
   const savingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
-  const totalSaved = getTotalAmount(savingsbyID);
+  const savingsByCatId = savingsbyID.filter((categories) => categories.category_id === 8);
+  const totalSaved = getTotalAmount(savingsByCatId);
+  
   const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
   const totalGoal = getTotalAmount(goalByID);
   const totalDaysTillGoal = getDaysTillGoal(goalByID);
