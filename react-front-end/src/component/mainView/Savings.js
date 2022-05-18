@@ -3,8 +3,8 @@ import ProgressCircle from './ProgressCircle';
 import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions';
 
 export default function Savings(props) {
-  const getIncomebyID = props.incomes.filter((expenses) => expenses.user_id === props.userId);
-  const total = getTotalAmount(getIncomebyID);
+  const savingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
+  const totalSaved = getTotalAmount(savingsbyID);
   const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
   const totalGoal = getTotalAmount(goalByID);
   const totalDaysTillGoal = getDaysTillGoal(goalByID);
@@ -27,7 +27,7 @@ export default function Savings(props) {
             <tr>
               <td>
                 <h1>
-                  ${(total / 100).toFixed(2)} / ${(totalGoal / 100).toFixed(2)}
+                  ${(totalSaved / 100).toFixed(2)} / ${(totalGoal / 100).toFixed(2)}
                 </h1>
               </td>
             </tr>
@@ -39,7 +39,7 @@ export default function Savings(props) {
             </thead>
             </table>
             <ProgressCircle 
-            total_saved={total} 
+            total_saved={totalSaved} 
             goalTotal_cents={totalGoal}/>
         </div>
       </div>

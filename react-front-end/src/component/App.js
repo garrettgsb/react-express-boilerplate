@@ -19,6 +19,7 @@ export default function App(props){
       SHOW :
       LOGIN
   );
+  console.log( 'APPPROPS:', state)
 
   return (
     <div className="app">
@@ -33,6 +34,7 @@ export default function App(props){
       userId={state.user}
       expenses={state.expenses}
       incomes={state.incomes}
+      savings={state.savings}
       goals={state.goals}
       />}
 

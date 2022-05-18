@@ -1,15 +1,15 @@
 import React from 'react';
 import "../../sass/profile.scss";
 import useVisualMode from '../../hooks/useVisualMode';
-import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions';
+import { getDaysTillGoal } from '../../helpers/helper_functions';
 
 export default function Profile(props) {
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
   const { mode, transition, back } = useVisualMode(GOAL)
 
-  console.log('PROFILE:', props)
-  const getSavingsbyID = props.savings.filter((expenses) => expenses.user_id === props.userId);
+
+  const getSavingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
   const total = getSavingsbyID[0].amount;
   const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
   const totalGoal = goalByID[0].amount;
@@ -44,52 +44,64 @@ export default function Profile(props) {
           </div>
         </div>
       </div>
-      {mode === GOAL && 
-      <div className="chart-align">
-        <div className='goal-container'>
-          <br />
-          <br />
-          <div className='d-flex align-items-center justify-content-center text-center flex-column'>
-              <button>EDIT</button>
-            <table className="table table-bordered">
-              <thead>
-                <tr>
-                  <td>
-                    <h1>
-                    {goalByID[0].goal_name}
-                    </h1>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <h1>
-                    ${(total / 100).toFixed(2)} / ${(totalGoal / 100).toFixed(2)}
-                    </h1>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                  {totalDaysTillGoal} days until {goalByID[0].goal_name}
-                  </td>
-                </tr>
-              </thead>
-            </table>
+      {mode === EDIT &&
+      <form>
+        <div class="row g-3">
+          <div class="col-sm-7">
+            <div class="form-outline">
+              <input type="text" id="form10Example1" class="form-control" />
+              <label class="form-label" for="form10Example1">Name</label>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="form-outline">
+              <input type="text" id="form10Example2" class="form-control" />
+              <label class="form-label" for="form10Example2">Name</label>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="form-outline">
+              <input type="text" id="form10Example3" class="form-control" />
+              <label class="form-label" for="form10Example3">Name</label>
+            </div>
           </div>
         </div>
-      
-      
-      
-      
-      </div>
+      </form>
       }
-      {mode === EDIT && <div>Edit</div>
-      // <Form
-      //                   goals={hardProps.goal}
-      //                   total={hardProps.goalTotal_cents}
-      //                   daysUntil={hardProps.days}
-      //                   />
+      {mode === GOAL &&
+        <div className="chart-align">
+          <div className='goal-container'>
+            <br />
+            <br />
+            <div className='d-flex align-items-center justify-content-center text-center flex-column'>
+              <button>EDIT</button>
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <td>
+                      <h1>
+                        {goalByID[0].goal_name}
+                      </h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h1>
+                        ${(total / 100).toFixed(2)} / ${(totalGoal / 100).toFixed(2)}
+                      </h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {totalDaysTillGoal} days until {goalByID[0].goal_name}
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
       }
-
     </section>
   )
 }

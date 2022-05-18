@@ -3,7 +3,7 @@ import axios from "axios"
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    tab: 'PROFILE',
+    tab: 'EXPENSES',
     user: 1,
     users: [],
     goals: [],
