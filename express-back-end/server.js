@@ -35,7 +35,7 @@ App.use('/api', expenses(db));
 App.use('/api', goals(db));
 App.use('/api', categories(db));
 
-http.listen(PORT, () => {
+App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
