@@ -36,13 +36,23 @@ export default function useApplicationData() {
       ...state.incomes
     ];
 
+    const savings = [
+      {
+        user_id: expense.user_id,
+        created_at: expense.created_at,
+        amount: expense.amount,
+        category_id: expense.category_id,
+      },
+      ...state.savings
+    ];
+
     return axios
       .put(`http://localhost:8081/api/expenses`, {
         expense
       })
       .then((res) => {
         setState(prev => {
-          return { ...prev, expenses, incomes }
+          return { ...prev, expenses, incomes, savings }
         })
       })
   };
