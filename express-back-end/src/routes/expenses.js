@@ -74,6 +74,22 @@ module.exports = db => {
     });
   })
   
+  router.get('/savings', (req, res) => {
+    db.query(`
+    SELECT expenses.*, username
+    FROM expenses
+    JOIN users ON user_id = users.id
+    WHERE category_id = 8;
+    `)
+    .then(data => {
+      const savings = data.rows;
+      res.json(savings);
+    })
+    .catch(error => {
+      console.log('The error is: ', error);
+    });
+  });
+
 
   return router;
 };
