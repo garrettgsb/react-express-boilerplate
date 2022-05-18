@@ -1,7 +1,7 @@
 import React from 'react';
 import "../../sass/profile.scss";
 import useVisualMode from '../../hooks/useVisualMode';
-import { getDaysTillGoal } from '../../helpers/helper_functions';
+import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions';
 
 export default function Profile(props) {
   const EDIT = 'EDIT';
@@ -9,10 +9,10 @@ export default function Profile(props) {
   const { mode, transition, back } = useVisualMode(GOAL)
 
 
-  const getSavingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
-  const total = getSavingsbyID[0].amount;
+  const savingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
+  const totalSaved = getTotalAmount(savingsbyID);
   const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
-  const totalGoal = goalByID[0].amount;
+  const totalGoal = getTotalAmount(goalByID);
   const totalDaysTillGoal = getDaysTillGoal(goalByID);
 
   return (
@@ -27,14 +27,14 @@ export default function Profile(props) {
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
                     className="rounded-circle img-fluid" alt='animated-girl-with-glasses' />
                 </div>
-                <h4 className="mb-2">{getSavingsbyID[0].username}</h4>
+                <h4 className="mb-2">{savingsbyID.username}</h4>
                 <p className="text-muted mb-4">@Programmer <span className="mx-2">|</span> <a
                   href="#!">Lighthouselabs</a></p>
                 <div className="mb-4 pb-2">
                 </div>
                 <div className="d-flex justify-content-between text-center mt-5 mb-2">
                   <div>
-                    <p className="mb-2 h5">${(total / 100).toFixed(2)}</p>
+                    <p className="mb-2 h5">${(totalSaved / 100).toFixed(2)}</p>
                     <p className="text-muted mb-0">Total Saved</p>
                   </div>
                 </div>
@@ -87,7 +87,7 @@ export default function Profile(props) {
                   <tr>
                     <td>
                       <h1>
-                        ${(total / 100).toFixed(2)} / ${(totalGoal / 100).toFixed(2)}
+                        ${(totalSaved / 100).toFixed(2)} / ${(totalGoal / 100).toFixed(2)}
                       </h1>
                     </td>
                   </tr>
