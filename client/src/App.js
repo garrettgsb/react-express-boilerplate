@@ -1,15 +1,15 @@
-import React /*, { useState }*/ from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./App.scss";
 import Header from "./components/Header";
-import { CssBaseline } from "@mui/material";
-// import Crawls from "./components/Crawls";
+// import Venue from './components/Venue';
 import { CardFlip } from "./components/Card";
 import TripContainer from "./components/TripContainer";
-// import Venue from './components/Venue';
+import LoginForm from "./components/LoginForm";
 
 export default function App() {
-  // const [message] = useState("Click the button to load data!");
+
+  // const [message, setMessage ] = useState('Click the button to load data!');
 
   // const fetchData = () => {
   //     axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
@@ -49,8 +49,8 @@ export default function App() {
 
   return (
     <div className="App">
-      <CssBaseline />
       <Header />
+      <LoginForm />
       <div className="main">
         <CardFlip />
         <TripContainer />

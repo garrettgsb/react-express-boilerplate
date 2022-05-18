@@ -7,7 +7,7 @@
 // return (
 
 // <Card className ="crawl">
-// <CardMedia classname="crawl-media"/>
+// <CardMedia className="crawl-media"/>
 // <CardContent>
 // <Typography
 // variant="h5"
