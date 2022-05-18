@@ -25,13 +25,23 @@ export default function useApplicationData() {
       ...state.expenses
     ];
 
+    const incomes = [
+      {
+        user_id: expense.user_id,
+        created_at: expense.created_at,
+        amount: expense.amount,
+        category_id: expense.category_id,
+      },
+      ...state.incomes
+    ];
+
     return axios
       .put(`http://localhost:8081/api/expenses`, {
         expense
       })
       .then((res) => {
         setState(prev => {
-          return { ...prev, expenses }
+          return { ...prev, expenses, incomes }
         })
       })
   };
@@ -64,7 +74,7 @@ export default function useApplicationData() {
         }));
       })
       .catch(error => {
-        console.log('hook error?!: ', error);
+        console.log('We got a hook err! -->', error);
       })
   }, []);
 

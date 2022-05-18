@@ -16,22 +16,19 @@ export function getTotalExpensesForUser (state, user) {
 //   return newArr;
 // };
 
-
 export function getDaysTillGoal (state) {
   const startDate = new Date(state[0].start_date);
   const endDate = new Date(state[0].end_date);
   const difference = endDate - startDate;
   const daysBetween = Math.ceil(difference / (1000 * 3600 * 24));
-  return daysBetween
-}
-
-
+  return daysBetween;
+};
 
 export function getTotalAmount (state) {
   const amountList = state.map(expense => {
     return expense.amount;
-  })
-  return amountList.reduce((first, next) => first + next)    
+  });
+  return amountList.reduce((first, next) => first + next);
 };
 
 export function getCategoryName (prop) {
@@ -50,5 +47,5 @@ export function getCategoryName (prop) {
     default: categoryID = prop;
       break;
   }
-  return categoryID
-}
+  return categoryID;
+};

@@ -4,14 +4,14 @@ import { getCategoryName } from '../../helpers/helper_functions';
 export default function ExpenseTable(props) {
 
   const expenses = props.expenses.map(expense => {
-    let categoryName = getCategoryName(expense.category_id)
+    const categoryName = getCategoryName(expense.category_id);
     const classname = (prop) => {
       switch (prop) {
         case 'income': return 'Income';
         case 'savings': return 'Savings';
         default: return 'Expense';
       }
-    }
+    };
 
     return (
       <SingleExpense

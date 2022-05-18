@@ -11,7 +11,7 @@ export default function Expenses(props) {
     amount: 0,
     category_name: 'category',
     category_id: 0
-  })
+  });
 
   const LINE = 'LINE';
   const EXPENSES = 'EXPENSES';
@@ -78,11 +78,11 @@ export default function Expenses(props) {
                 <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
                 <select
                   className="select"
-                  value={state.category_name}
+                  value={state.category_id}
                   onChange={(event) => {
-                    setState({ ...state, category_name: event.target.value, category_id: parseInt(getCategoryName(event.target.value)) })
+                    setState({ ...state, category_name: getCategoryName(event.target.value), category_id: parseInt(event.target.value)})
                   }}>
-                  <option value="category" disabled>Category</option>
+                  <option value="0" disabled>Category</option>
                   <option value="1">Eating Out</option>
                   <option value="2">Entertainment</option>
                   <option value="3">Fuel</option>
@@ -104,7 +104,7 @@ export default function Expenses(props) {
                   className="btn btn-primary"
                   onClick={(e) => {
                     e.preventDefault()
-                    submit(props.userId, state.date, state.amount, state.category_name)
+                    submit(props.userId, state.date, state.amount, state.category_id, state.category_name)
                   }
                 }
                 >Submit</button>

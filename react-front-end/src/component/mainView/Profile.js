@@ -9,9 +9,9 @@ export default function Profile(props) {
   const { mode, /*transition, back*/ } = useVisualMode(GOAL)
 
   const getIncomebyID = props.incomes.filter((expenses) => expenses.user_id === props.userId);
-  const total = getIncomebyID[0].amount;
+  const total = getTotalAmount(getIncomebyID);
   const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
-  const totalGoal = goalByID[0].amount;
+  const totalGoal = getTotalAmount(goalByID);
   const totalDaysTillGoal = getDaysTillGoal(goalByID);
 
   return (
