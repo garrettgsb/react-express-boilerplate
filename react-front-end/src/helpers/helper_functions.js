@@ -21,6 +21,9 @@ export const getSavingsByID = (expenses, id) =>
     expense.user_id === id && expense.category_id === 8
   );
 
+export const getGoalByID = (goals, id) =>
+  goals.filter(goal => goal.user_id === id);
+
 export function getDaysTillGoal(state) {
   const startDate = new Date(state[0].start_date);
   const endDate = new Date(state[0].end_date);
