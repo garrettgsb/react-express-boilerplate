@@ -45,7 +45,7 @@ export default function useApplicationData() {
   useEffect(() => {
     const apiUsers = 'http://localhost:8081/api/users';
     const apiGoals = 'http://localhost:8081/api/goals';
-    const apiExpenses = 'http://localhost:8081/api/allexpenses';
+    const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiIncomes = 'http://localhost:8081/api/incomes';
     const apiCategories = 'http://localhost:8081/api/categories';
     const socket = io('http://localhost:8000');
