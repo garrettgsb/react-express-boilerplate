@@ -23,58 +23,21 @@ export function getTotalAmount (state) {
   return amountList.reduce((first, next) => first + next)    
 };
 
-const state = {
-  user: 'Alvin',
-    expenses: [
-      {
-      "id": 6,
-      "user_id": 1,
-      "created_at": "2021-12-29T08:00:00.000Z",
-      "amount": 9928,
-      "category_id": 6,
-      "username": "Alvin",
-      "email": "alvintest@hotmail.com",
-      "password": "test123",
-      "name": "insurance",
-      "category_name": "insurance"
-      },
-      {
-      "id": 10,
-      "user_id": 3,
-      "created_at": "2022-03-31T07:00:00.000Z",
-      "amount": 190,
-      "category_id": 10,
-      "username": "Kevin",
-      "email": "kevin3test@hotmail.com",
-      "password": "test123",
-      "name": "other",
-      "category_name": "other"
-      },
-      {
-      "id": 9,
-      "user_id": 3,
-      "created_at": "2021-06-29T07:00:00.000Z",
-      "amount": 9048,
-      "category_id": 9,
-      "username": "Kevin",
-      "email": "kevin3test@hotmail.com",
-      "password": "test123",
-      "name": "shopping",
-      "category_name": "shopping"
-      },
-      {
-      "id": 3,
-      "user_id": 1,
-      "created_at": "2021-03-22T07:00:00.000Z",
-      "amount": 8329,
-      "category_id": 3,
-      "username": "Alvin",
-      "email": "alvintest@hotmail.com",
-      "password": "test123",
-      "name": "fuel",
-      "category_name": "fuel"
-      }
-    ]
-  };
-
-// getExpensesForUser(state, state.user);
+export function getCategoryName (prop) {
+  let categoryID = '';
+  switch (prop) {
+    case 1: return categoryID = 'Eating';
+    case 2: return categoryID = 'Entertainment';
+    case 3: return categoryID = 'Fuel';
+    case 4: return categoryID = 'Groceries';
+    case 5: return categoryID = 'Income';
+    case 6: return categoryID = 'Insurance';
+    case 7: return categoryID = 'Rent';
+    case 8: return categoryID = 'Savings';
+    case 9: return categoryID = 'Shopping';
+    case 10: return categoryID = 'Other';
+    default: categoryID = prop;
+      break;
+  }
+  return categoryID
+}

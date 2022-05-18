@@ -17,6 +17,7 @@ export default function Expenses(props) {
   const { mode, transition, back } = useVisualMode(EXPENSES);
 
   const submit = (user_id, created_at, amount, category_id) => {
+
     const expense = {
       user_id,
       created_at,
@@ -26,12 +27,13 @@ export default function Expenses(props) {
     props.addExpense(expense);
   };
 
+  console.log('PROPSEXPENESSE:', props.expenses)
   return (
     <div>
-      {mode === LINE && 
-      <LineGraph
-      key={props.expense.length} 
-      back={back} />}
+      {mode === LINE &&
+        <LineGraph
+          key={props.expense.length}
+          back={back} />}
       {mode === EXPENSES &&
         <div id='user-expense-input'>
           <ExpenseTable
@@ -47,7 +49,7 @@ export default function Expenses(props) {
                   className="form-control"
                   type="date"
                   value={state.date}
-                  onChange={(event) => 
+                  onChange={(event) =>
                     setState({ ...state, date: event.target.value })
                   }
                 />
@@ -65,7 +67,7 @@ export default function Expenses(props) {
                     className="form-control"
                     id="inlineFormInputGroupUsername"
                     placeholder="Amount"
-                    onChange={(event) =>                       
+                    onChange={(event) =>
                       setState({ ...state, amount: event.target.value * 100 })
                     }
                   />
@@ -104,7 +106,8 @@ export default function Expenses(props) {
                     e.preventDefault()
                     submit(props.userId, state.date, state.amount, state.categoryId)
                   }
-                  }>Submit</button>
+                }
+                >Submit</button>
               </div>
 
               <div className="col-12" onClick={() => transition(LINE)}>
