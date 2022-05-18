@@ -11,8 +11,14 @@ export default function useApplicationData() {
     goals: [],
     expenses: [],
     incomes: [],
-    categories: []
+    categories: [],
+    fake: [
+      {
+        placeholder: 'goalie!!!!!'
+      }
+    ]
   });
+
   const client = useRef();
 
   console.log('STATEEXPENSES:', state.expenses)

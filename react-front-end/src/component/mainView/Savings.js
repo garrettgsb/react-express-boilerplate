@@ -3,15 +3,12 @@ import ProgressCircle from './ProgressCircle';
 import { getTotalAmount } from '../../helpers/helper_functions';
 
 export default function Savings(props) {
-
-  console.log('PROPS>INCOME', props.incomes)
-  const getIncomebyID = props.incomes.filter((expenses) => expenses.user_id == props.userId);
-  console.log('props.userId', props.userId)
+  const getIncomebyID = props.incomes.filter((expenses) => expenses.user_id === props.userId);
   const total = getTotalAmount(getIncomebyID);
-  const goalByID = props.goals.filter((goal) => goal.user_id == props.userId);
+  const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
   const totalGoal = getTotalAmount(goalByID);
-  console.log('goalByID', goalByID)
-  
+   
+  // props.fake can be used (not maped yet) fake data
 
   const hardProps = {
     goal: 'A GOAT',
@@ -48,10 +45,10 @@ export default function Savings(props) {
               </td>
             </tr>
             </thead>
+            </table>
             <ProgressCircle 
             total_saved={total} 
             goalTotal_cents={totalGoal}/>
-          </table>
         </div>
       </div>
     </div>

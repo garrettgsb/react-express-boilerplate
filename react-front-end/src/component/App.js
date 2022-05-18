@@ -51,6 +51,7 @@ console.log('state.goals', state.goals)
       expenses={state.expenses}
       incomes={state.incomes}
       goals={state.goals}
+      fake={state.fake}
       />}
 
     </div>
