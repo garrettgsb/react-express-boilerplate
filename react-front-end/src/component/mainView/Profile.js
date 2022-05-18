@@ -6,7 +6,7 @@ import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions'
 export default function Profile(props) {
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
-  const { mode, transition, back } = useVisualMode(EDIT)
+  const { mode, transition, back } = useVisualMode(GOAL)
 
 
   const savingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
@@ -101,7 +101,6 @@ export default function Profile(props) {
                 <button className='btn btn-primary m-2'>
                   Confirm
                 </button>
-
                 <button className='btn btn-danger m-2'>
                   Cancel
                 </button>

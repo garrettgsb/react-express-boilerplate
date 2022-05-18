@@ -1,7 +1,7 @@
-export function getTotalExpensesForUser (state, user) {
+export function getTotalExpensesForUser(state, user) {
   const filteredExpenses = state.expenses.filter((expenses) => expenses.username === user);
   const totalExpense = filteredExpenses.reduce((previous, current) => previous + current.amount, 0);
-  return '$' + (totalExpense/100).toFixed(2);
+  return '$' + (totalExpense / 100).toFixed(2);
 };
 
 // export function getExpensesForUser (incomes, user) {
@@ -16,7 +16,12 @@ export function getTotalExpensesForUser (state, user) {
 //   return newArr;
 // };
 
-export function getDaysTillGoal (state) {
+export const getSavingsByID = (expenses, id) =>
+  expenses.filter(expense =>
+    expense.user_id === id && expense.category_id === 8
+  );
+
+export function getDaysTillGoal(state) {
   const startDate = new Date(state[0].start_date);
   const endDate = new Date(state[0].end_date);
   const difference = endDate - startDate;
@@ -24,14 +29,14 @@ export function getDaysTillGoal (state) {
   return daysBetween;
 };
 
-export function getTotalAmount (state) {
+export function getTotalAmount(state) {
   const amountList = state.map(expense => {
     return expense.amount;
   });
   return amountList.reduce((first, next) => first + next);
 };
 
-export function getCategoryName (prop) {
+export function getCategoryName(prop) {
   let categoryID = '';
   switch (prop) {
     case '1': return categoryID = 'eating';

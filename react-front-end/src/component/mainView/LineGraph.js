@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTotalAmount } from '../../helpers/helper_functions';
+import { getSavingsByID } from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
@@ -9,9 +9,10 @@ import {
   LinearScale,
   Legend,
   Tooltip,
-
+  TimeScale
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import 'chartjs-adapter-date-fns';
 
 Chart.register(
   LineElement,
@@ -20,9 +21,14 @@ Chart.register(
   CategoryScale,
   LinearScale,
   Legend,
-  Tooltip);
+  Tooltip,
+  TimeScale);
 
 export default function LineGraph(props) {
+  
+  const { user, goals, expenses, back } = props;
+
+  const dateUnit = 'month';
 
   const state = {
     users: [
@@ -106,47 +112,7 @@ export default function LineGraph(props) {
         "email": "alvintest@hotmail.com",
         "password": "test123"
       }
-    ],
-    categories: [{
-      "id": 1,
-      "name": "eating out"
-    },
-    {
-      "id": 2,
-      "name": "entertainment"
-    },
-    {
-      "id": 3,
-      "name": "fuel"
-    },
-    {
-      "id": 4,
-      "name": "groceries"
-    },
-    {
-      "id": 5,
-      "name": "income"
-    },
-    {
-      "id": 6,
-      "name": "insurance"
-    },
-    {
-      "id": 7,
-      "name": "rent"
-    },
-    {
-      "id": 8,
-      "name": "savings"
-    },
-    {
-      "id": 9,
-      "name": "shopping"
-    },
-    {
-      "id": 10,
-      "name": "other"
-    }]
+    ]
   };
 
   const labels = [
@@ -163,36 +129,51 @@ export default function LineGraph(props) {
     'November',
     'December'
   ];
-
+  const savingsDataPoints = [];
+  const savings = getSavingsByID(expenses, user)
+  console.log('EXPENSES:', expenses)
+  console.log('SAVINGS:', savings)
+  console.log('USER:', user)
   // const getUserData = (state, user) => {
 
   // }
-  const getYearGuideData = (state, user) => {
-    const guideData = [0];
-    const userExpenses = state.expenses.filter(expense => expense.username === user);
-    const guide = (getTotalAmount(userExpenses) / 12).toFixed(2) / 100;
-    while (guideData.length <= 12) {
-      guideData.push(guide + ((guideData.length - 1) * guide))
-    }
-    return guideData;
-  };
 
-  const yearGoalData = getYearGuideData(state, 'Alvin')
+  // const getYearGuideData = (goals, id) => {
+  //   const guideData = [0];
+  //   const userExpenses = goals.filter(goal => goal.user_id === id);
+  //   const guide = (getTotalAmount(userExpenses) / 12).toFixed(2) / 100;
+  //   while (guideData.length <= 12) {
+  //     guideData.push(guide + ((guideData.length - 1) * guide))
+  //   }
+  //   return guideData;
+  // };
+
+  // const yearGoalData = getYearGuideData(goals, user)
   const data = {
-    labels: labels,
     datasets: [
       {
-        label: 'TESTING',
-        data: [10, 5, 80, 81, 56, 55, 40, 30],
+        label: 'Savings',
+        data: [
+          { x: '2022-01-01', y: 10000},
+          { x: '2022-02-01', y: 20000},
+          { x: '2022-03-01', y: 8000},
+          { x: '2022-04-01', y: 8100},
+          { x: '2022-05-01', y: 5600},
+          { x: '2022-06-15', y: 5500},
+          { x: '2022-07-01', y: 4000},
+          { x: '2022-08-01', y: 30000}
+        ],
         fill: false,
         backgroundColor: 'rgba(220, 38, 38, 0.7)',
-        borderColor: 'rgba(0, 153, 246, 1)',
+        borderColor: 'rgba(220, 38, 38, 0.7)',
         tension: 0.1
       },
       {
-        label: 'Guide',
-
-        data: yearGoalData,
+        label: 'Goal',
+        data: [
+          {x:'2022-01-01' , y: 0},
+          {x:'2022-12-01' , y: 30000}
+        ],
         fill: false,
         backgroundColor: 'limegreen',
         borderColor: 'limegreen',
@@ -210,12 +191,20 @@ export default function LineGraph(props) {
           width={400}
           options={{
             maintainAspectRatio: false,
-            responsive: true
+            responsive: true,
+            scales: {
+              x: {
+                type: 'time',
+                time: {
+                  unit: dateUnit
+                }
+              }
+            }
           }}
         />
       </div>
       <br />
-      <div className='d-flex align-items-center justify-content-center' onClick={() => props.back()}>
+      <div className='d-flex align-items-center justify-content-center' onClick={() => back()}>
         <button className='btn btn-primary'>Back</button>
       </div>
     </div>

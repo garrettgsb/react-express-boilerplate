@@ -33,7 +33,12 @@ export default function Expenses(props) {
     <div>
       {mode === LINE &&
         <LineGraph
-          back={back} />}
+          key={props.userId}
+          user={props.userId}
+          goals={props.goals}
+          expenses={props.expenses}
+          back={back}
+          />}
       {mode === EXPENSES &&
         <div id='user-expense-input'>
           <ExpenseTable
