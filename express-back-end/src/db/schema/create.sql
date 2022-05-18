@@ -27,6 +27,6 @@ CREATE TABLE expenses (
 CREATE TABLE goals (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  end_date DATE NOT NULL,
+  end_date VARCHAR(11) NOT NULL,
   amount INTEGER
 );
