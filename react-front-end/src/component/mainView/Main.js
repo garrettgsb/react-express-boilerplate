@@ -23,6 +23,7 @@ export default function Main(props) {
       userId={props.userId}
       incomes={props.incomes}
       goals={props.goals}
+      fake={props.fake}
       />}
       {mode === EXPENSES && <Expenses 
       key={props.expenses.length}

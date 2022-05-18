@@ -3,14 +3,11 @@ import ProgressCircle from './ProgressCircle';
 import { getTotalAmount } from '../../helpers/helper_functions';
 
 export default function Savings(props) {
-
-  console.log('PROPS>INCOME', props.incomes)
   const getIncomebyID = props.incomes.filter((expenses) => expenses.user_id == props.userId);
-  console.log('props.userId', props.userId)
   const total = getTotalAmount(getIncomebyID);
-  const goalByID = props.goals.filter((goal) => goal.user_id == props.userId);
+  const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
   const totalGoal = getTotalAmount(goalByID);
-  console.log('goalByID', goalByID)
+  
   
 
   const hardProps = {

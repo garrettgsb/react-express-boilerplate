@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-// import { io } from 'socket.io-client';
 import axios from "axios"
 
 export default function useApplicationData() {
@@ -11,19 +10,23 @@ export default function useApplicationData() {
     goals: [],
     expenses: [],
     incomes: [],
-    categories: []
+    categories: [],
+    fake: [
+      {
+        placeholder: 'goalie!!!!!'
+      }
+    ]
   });
-  // const client = useRef();
 
   const addExpense = (expense) => {
     const expenses = [
-      ...state.expenses,
       {
         user_id: expense.user_id,
         created_at: expense.created_at,
         amount: expense.amount,
         category_id: expense.category_id
-      }
+      },
+      ...state.expenses
     ];
     console.log('EXPENSES:', expenses);
 
@@ -37,7 +40,6 @@ export default function useApplicationData() {
       })
   };
 
-  // const setTab = tab => setState({...state, tab});
   const setUser = user => setState({ ...state, user });
 
 
@@ -47,19 +49,6 @@ export default function useApplicationData() {
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiIncomes = 'http://localhost:8081/api/incomes';
     const apiCategories = 'http://localhost:8081/api/categories';
-    // const socket = io('http://localhost:8000');
-
-    // socket.on('connect', () => console.log(`Client connected:`, socket.io, socket.emit('ping') 
-    // ))
-    // socket.on('message', msg => console.log('MESSAGE:', msg))
-
-    // socket.on('disconnect', disconnect => {
-    //   console.log(`Client disconnected: ${disconnect}`)
-    // })
-    // client.current = socket;
-
-    // socket.on('stateChange', event => socket.emit(event))
-    // socket.connect()
 
     Promise.all([
       axios.get(apiUsers),
