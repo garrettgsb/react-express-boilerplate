@@ -9,6 +9,7 @@ export default function useApplicationData() {
     goals: [],
     expenses: [],
     incomes: [],
+    savings: [],
     categories: []
   });
 
@@ -35,13 +36,23 @@ export default function useApplicationData() {
       ...state.incomes
     ];
 
+    const savings = [
+      {
+        user_id: expense.user_id,
+        created_at: expense.created_at,
+        amount: expense.amount,
+        category_id: expense.category_id,
+      },
+      ...state.savings
+    ];
+
     return axios
       .put(`http://localhost:8081/api/expenses`, {
         expense
       })
       .then((res) => {
         setState(prev => {
-          return { ...prev, expenses, incomes }
+          return { ...prev, expenses, incomes, savings }
         })
       })
   };
@@ -54,6 +65,7 @@ export default function useApplicationData() {
     const apiGoals = 'http://localhost:8081/api/goals';
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiIncomes = 'http://localhost:8081/api/incomes';
+    const apiSavings = 'http://localhost:8081/api/savings';
     const apiCategories = 'http://localhost:8081/api/categories';
 
     Promise.all([
@@ -61,6 +73,7 @@ export default function useApplicationData() {
       axios.get(apiGoals),
       axios.get(apiExpenses),
       axios.get(apiIncomes),
+      axios.get(apiSavings),
       axios.get(apiCategories)
     ])
       .then(all => {
@@ -70,7 +83,8 @@ export default function useApplicationData() {
           goals: all[1].data,
           expenses: all[2].data,
           incomes: all[3].data,
-          categories: all[4].data
+          savings: all[4].data,
+          categories: all[5].data
         }));
       })
       .catch(error => {

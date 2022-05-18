@@ -43,7 +43,7 @@ export default function Expenses(props) {
           <div className='d-flex align-items-center justify-content-center text-center'>
             <form className="row row-cols-lg-auto g-3 align-items-center">
               <div className="col-lg-3 col-sm-6">
-                <label htmlFor="date" className='visually-hidden'>End</label>
+                <label htmlFor="date" className='visually-hidden'>date</label>
                 <input
                   id="date"
                   className="form-control"
