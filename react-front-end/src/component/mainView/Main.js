@@ -18,7 +18,11 @@ export default function Main(props) {
     <div>
       <TopNav />
 
-      {mode === PROFILE && <Profile />}
+      {mode === PROFILE && <Profile
+      userId={props.userId}
+      incomes={props.incomes}
+      goals={props.goals}
+      />}
       {mode === SAVINGS && <Savings
       userId={props.userId}
       incomes={props.incomes}

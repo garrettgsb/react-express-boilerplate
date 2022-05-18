@@ -1,25 +1,18 @@
 import React from 'react';
 import "../../sass/profile.scss";
 import useVisualMode from '../../hooks/useVisualMode';
-
-
-
+import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions';
 
 export default function Profile(props) {
-
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
+  const { mode, /*transition, back*/ } = useVisualMode(GOAL)
 
-  const { mode, transition, back } = useVisualMode(GOAL)
-
-
-
-  const hardProps = {
-    goal: 'A GOAT',
-    saved_cents: 100000,
-    goalTotal_cents: 500000,
-    days: 25
-  }
+  const getIncomebyID = props.incomes.filter((expenses) => expenses.user_id === props.userId);
+  const total = getTotalAmount(getIncomebyID);
+  const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
+  const totalGoal = getTotalAmount(goalByID);
+  const totalDaysTillGoal = getDaysTillGoal(goalByID);
 
   return (
 
@@ -34,14 +27,14 @@ export default function Profile(props) {
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
                     className="rounded-circle img-fluid" alt='animated-girl-with-glasses' />
                 </div>
-                <h4 className="mb-2">Julie L. Arsenault</h4>
+                <h4 className="mb-2">{getIncomebyID[0].username}</h4>
                 <p className="text-muted mb-4">@Programmer <span className="mx-2">|</span> <a
                   href="#!">Lighthouselabs</a></p>
                 <div className="mb-4 pb-2">
                 </div>
                 <div className="d-flex justify-content-between text-center mt-5 mb-2">
                   <div>
-                    <p className="mb-2 h5">1333337</p>
+                    <p className="mb-2 h5">${(total / 100).toFixed(2)}</p>
                     <p className="text-muted mb-0">Total Saved</p>
                   </div>
                 </div>
@@ -63,20 +56,20 @@ export default function Profile(props) {
                 <tr>
                   <td>
                     <h1>
-                      {hardProps.goal}
+                    {goalByID[0].goal_name}
                     </h1>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <h1>
-                      {hardProps.saved_cents} / {hardProps.goalTotal_cents}
+                    ${(total / 100).toFixed(2)} / ${(totalGoal / 100).toFixed(2)}
                     </h1>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    {hardProps.days} days until {hardProps.goal}
+                  {totalDaysTillGoal} days until {goalByID[0].goal_name}
                   </td>
                 </tr>
               </thead>

@@ -1,21 +1,13 @@
 import React from 'react';
 import ProgressCircle from './ProgressCircle';
-import { getTotalAmount } from '../../helpers/helper_functions';
+import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions';
 
 export default function Savings(props) {
-  const getIncomebyID = props.incomes.filter((expenses) => expenses.user_id == props.userId);
+  const getIncomebyID = props.incomes.filter((expenses) => expenses.user_id === props.userId);
   const total = getTotalAmount(getIncomebyID);
   const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
   const totalGoal = getTotalAmount(goalByID);
-  
-  
-
-  const hardProps = {
-    goal: 'A GOAT',
-    // saved_cents: 2500,
-    // goalTotal_cents: 500000,
-    days: 25
-  }
+  const totalDaysTillGoal = getDaysTillGoal(goalByID);
 
   return (
     <div>
@@ -28,7 +20,7 @@ export default function Savings(props) {
             <tr>
               <td>
                 <h1>
-                  {hardProps.goal}
+                  {goalByID[0].goal_name}
                 </h1>
               </td>
             </tr>
@@ -41,7 +33,7 @@ export default function Savings(props) {
             </tr>
             <tr>
               <td>
-                {hardProps.days} days until {hardProps.goal}
+                {totalDaysTillGoal} days until {goalByID[0].goal_name}
               </td>
             </tr>
             </thead>

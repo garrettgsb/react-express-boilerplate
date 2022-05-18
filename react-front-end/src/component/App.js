@@ -5,7 +5,7 @@ import Main from './mainView/Main';
 import Login from './Login';
 import Signup from './Signup';
 import '../sass/app.scss';
-import { getExpensesForUser } from '../helpers/helper_functions';
+// import { getExpensesForUser } from '../helpers/helper_functions';
 
 
 export default function App(props){

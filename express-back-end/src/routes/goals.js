@@ -4,8 +4,9 @@ const router = express.Router();
 module.exports = db => {
   router.get('/goals', (req, res) => {
     db.query(`
-    SELECT *
-    FROM goals;
+    SELECT goals.*, users.username, users.email
+    FROM goals
+    JOIN users ON user_id = users.id;
     `)
     .then(data => {
       const goals = data.rows;
