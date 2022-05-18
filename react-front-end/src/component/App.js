@@ -24,7 +24,7 @@ export default function App(props){
   //   );
   // });
 
-
+console.log('state.goals', state.goals)
   //views
   const LOGIN = 'LOGIN'; 
   const SIGNUP = 'SIGNUP';
@@ -49,6 +49,7 @@ export default function App(props){
       userId={state.user}
       expenses={state.expenses}
       incomes={state.incomes}
+      goals={state.goals}
       />}
 
     </div>
