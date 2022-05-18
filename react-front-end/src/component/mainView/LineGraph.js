@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getSavingsByID, getGoalByID } from '../../helpers/helper_functions';
 import {
   Chart,
@@ -28,8 +28,11 @@ export default function LineGraph(props) {
 
   const { user, goals, expenses, back } = props;
 
-  const dateUnit = 'month';
-  
+  const [state, setState] = useState({
+    dateUnit: 'month'
+  })
+  // let dateUnit = 'month';
+
   const savingsDataPoints = [
     { x: goals[0].start_date, y: 0 }
   ];
@@ -37,7 +40,7 @@ export default function LineGraph(props) {
   const goal = getGoalByID(goals, user)[0]
 
   savings.forEach(item => {
-    savingsDataPoints.push({x: item.created_at, y: item.amount})
+    savingsDataPoints.push({ x: item.created_at, y: item.amount })
   });
 
   const data = {
@@ -78,7 +81,7 @@ export default function LineGraph(props) {
               x: {
                 type: 'time',
                 time: {
-                  unit: dateUnit
+                  unit: state.dateUnit
                 }
               },
               y: {
@@ -94,8 +97,24 @@ export default function LineGraph(props) {
         />
       </div>
       <br />
-      <div className='d-flex align-items-center justify-content-center' onClick={() => back()}>
-        <button className='btn btn-primary'>Back</button>
+      <div className='d-flex align-items-center justify-content-center' >
+        <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
+        <select
+          className="select"
+          value={state.dateUnit}
+          onChange={e => setState({ ...state, dateUnit: e.target.value})}>
+          <option value="day">Days</option>
+          <option value="week">Weeks</option>
+          <option value="month">Months</option>
+          <option value="quarter">Quarterly</option>
+          <option value="year">Years</option>
+        </select>
+        <button
+          className='btn btn-primary'
+          onClick={() => back()
+          }>
+          Back
+        </button>
       </div>
     </div>
   );
