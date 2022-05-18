@@ -4,6 +4,7 @@ import Login from "./Login";
 export default function LoginForm(){
 
   const testUser = {
+    username: "test-person",
     email: "test@test.com",
     password: "test",
   };
@@ -32,7 +33,7 @@ return (
 <div className="App">
         {(user.email !== "") ? (
           <div>
-            <h2>Welcome, <span>{user.email}</span></h2>
+            <h2>Welcome, <span>{user.username}</span></h2>
             <button onClick={logout}>Logout</button>
           </div>
         ) : (
