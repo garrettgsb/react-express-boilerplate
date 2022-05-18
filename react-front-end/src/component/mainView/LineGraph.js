@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSavingsByID } from '../../helpers/helper_functions';
+import { getSavingsByID, getGoalByID } from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
@@ -129,11 +129,18 @@ export default function LineGraph(props) {
     'November',
     'December'
   ];
-  const savingsDataPoints = [];
+  const savingsDataPoints = [
+    {x: goals[0].start_date, y: 0},
+    { x: '2020-03-21', y: 20000},
+  ];
   const savings = getSavingsByID(expenses, user)
   console.log('EXPENSES:', expenses)
   console.log('SAVINGS:', savings)
   console.log('USER:', user)
+  const goal = getGoalByID(goals, user)[0]
+
+  // console.log('GOALS:', goals)
+  // console.log('GOAL:', goal)
   // const getUserData = (state, user) => {
 
   // }
@@ -153,16 +160,7 @@ export default function LineGraph(props) {
     datasets: [
       {
         label: 'Savings',
-        data: [
-          { x: '2022-01-01', y: 10000},
-          { x: '2022-02-01', y: 20000},
-          { x: '2022-03-01', y: 8000},
-          { x: '2022-04-01', y: 8100},
-          { x: '2022-05-01', y: 5600},
-          { x: '2022-06-15', y: 5500},
-          { x: '2022-07-01', y: 4000},
-          { x: '2022-08-01', y: 30000}
-        ],
+        data: savingsDataPoints,
         fill: false,
         backgroundColor: 'rgba(220, 38, 38, 0.7)',
         borderColor: 'rgba(220, 38, 38, 0.7)',
@@ -171,8 +169,8 @@ export default function LineGraph(props) {
       {
         label: 'Goal',
         data: [
-          {x:'2022-01-01' , y: 0},
-          {x:'2022-12-01' , y: 30000}
+          {x: goal.start_date , y: 0},
+          {x: goal.end_date, y: goal.amount}
         ],
         fill: false,
         backgroundColor: 'limegreen',
@@ -198,7 +196,15 @@ export default function LineGraph(props) {
                 time: {
                   unit: dateUnit
                 }
-              }
+              },
+              y: {
+                ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, ticks) {
+                        return '$' + value.toFixed(2) / 100;
+                    }
+                }
+            }              
             }
           }}
         />
