@@ -19,7 +19,7 @@ CREATE TABLE categories (
 CREATE TABLE expenses (
 	id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-	created_at DATE NOT NULL,
+	created_at VARCHAR(11) NOT NULL,
 	amount INTEGER NOT NULL,
 	category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE
 );
