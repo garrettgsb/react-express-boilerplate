@@ -9,17 +9,6 @@ export default function Savings(props) {
   const totalGoal = getTotalAmount(goalByID);
   const totalDaysTillGoal = getDaysTillGoal(goalByID);
 
-  
-  console.log('ggggg', goalByID[0].goal_name)
-  
-
-  // const hardProps = {
-  //   goal: 'A GOAT',
-  //   // saved_cents: 2500,
-  //   // goalTotal_cents: 500000,
-  //   days: 25
-  // }
-
   return (
     <div>
       <div className='goal-container'>
