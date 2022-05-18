@@ -14,7 +14,6 @@ export default function Main(props) {
   const EXPENSES = 'EXPENSES';
 
   const { mode, transition} = useVisualMode(props.tab);
-  console.log('props.goals.end_date2', props.goals.end_date)
   return (
     <div>
       <TopNav />

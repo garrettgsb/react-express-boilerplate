@@ -9,23 +9,8 @@ import { getExpensesForUser } from '../helpers/helper_functions';
 
 
 export default function App(props){
-  const { state, /*setTab,*/ setUser, addExpense } = useApplicationData();
+  const { state, setUser, addExpense } = useApplicationData();
 
-
-  // const expenses = getExpensesForUser(state, state.user);
-  // const expenseTable = expenses.map((exp) => {
-  //   // console.log('EXP?!', exp);
-  //   return (
-  //     <Main
-  //       tab={state.tab}
-  //       addExpense={addExpense}
-  //       // {...exp}
-  //       userId={exp.userid}
-  //     />
-  //   );
-  // });
-
-console.log('state.goals.end_date1', state.goals.end_date)
   //views
   const LOGIN = 'LOGIN'; 
   const SIGNUP = 'SIGNUP';
