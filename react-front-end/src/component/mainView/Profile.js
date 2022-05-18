@@ -6,7 +6,7 @@ import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions'
 export default function Profile(props) {
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
-  const { mode, transition, back } = useVisualMode(GOAL)
+  const { mode, transition, back } = useVisualMode(EDIT)
 
 
   const savingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
@@ -45,28 +45,70 @@ export default function Profile(props) {
         </div>
       </div>
       {mode === EDIT &&
-      <form>
-        <div class="row g-3">
-          <div class="col-sm-7">
-            <div class="form-outline">
-              <input type="text" id="form10Example1" class="form-control" />
-              <label class="form-label" for="form10Example1">Name</label>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="form-outline">
-              <input type="text" id="form10Example2" class="form-control" />
-              <label class="form-label" for="form10Example2">Name</label>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="form-outline">
-              <input type="text" id="form10Example3" class="form-control" />
-              <label class="form-label" for="form10Example3">Name</label>
+        <div className="card chart-align">
+          <div className='card goal-container'>
+            <div className='d-flex align-items-center justify-content-center text-center flex-column'>
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <td>
+                      <div class="form-outline mb-4">
+                        <input
+                          type="text"
+                          id="goalName"
+                          class="form-control align-items-center"
+                          value={goalByID[0].goal_name}
+                          onChange={() => { }}
+                        />
+                        <label class="form-label visually-hidden" htmlFor="goalName">
+                          Goal Name
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input
+                        type="number"
+                        id="goalAmount"
+                        class="form-control align-items-center"
+                        value={`${(totalGoal / 100).toFixed(2)}`}
+                        onChange={() => { }}
+                      />
+                      <label class="form-label visually-hidden" htmlFor="goalAmount">
+                        goalAmount
+                      </label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div className="col-lg-3 col-sm-6">
+                        <label htmlFor="date" className='visually-hidden'>date</label>
+                        <input
+                          id="date"
+                          className="form-control"
+                          type="date"
+                          value={'date'}
+                          onChange={() => { }}
+                        />
+                        <span id="dateSelected"></span>
+                      </div>
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+              <div>
+                <button className='btn btn-primary m-2'>
+                  Confirm
+                </button>
+
+                <button className='btn btn-danger m-2'>
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </form>
       }
       {mode === GOAL &&
         <div className="chart-align">
