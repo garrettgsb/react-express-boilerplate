@@ -7,8 +7,8 @@ export default function ExpenseTable(props) {
     let categoryName = getCategoryName(expense.category_id)
     const classname = (prop) => {
       switch (prop) {
-        case 5: return 'Income';
-        case 8: return 'Savings';
+        case 'income': return 'Income';
+        case 'savings': return 'Savings';
         default: return 'Expense';
       }
     }
@@ -19,7 +19,7 @@ export default function ExpenseTable(props) {
         created_at={expense.created_at}
         category_name={expense.category_name || categoryName}
         amount={expense.amount}
-        classname={classname(expense.category_id)}
+        classname={classname(expense.category_name || categoryName)}
       />
     )
   });

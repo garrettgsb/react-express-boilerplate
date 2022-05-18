@@ -20,52 +20,22 @@ export default function useApplicationData() {
 
   const addExpense = (expense) => {
 
-    // const category = (prop) => {
-    //   let categoryID = '';
-
-    //   switch (prop) {
-    //     case 'Eating': categoryID = 1;
-    //       break;
-    //     case 'Entertainment': categoryID = 2;
-    //       break;
-    //     case 'Fuel': categoryID = 3;
-    //       break;
-    //     case 'Groceries': categoryID = 4;
-    //       break;
-    //     case 'Income': categoryID = 5;
-    //       break;
-    //     case 'Insurance': categoryID = 6;
-    //       break;
-    //     case 'Rent': categoryID = 7;
-    //       break;
-    //     case 'Savings': categoryID = 8;
-    //       break;
-    //     case 'Shopping': categoryID = 9;
-    //       break;
-    //     default: categoryID = 10;
-    //       break;
-    //   }
-    //   return categoryID
-    // }
-
     const expenses = [
       {
         user_id: expense.user_id,
         created_at: expense.created_at,
         amount: expense.amount,
-        category_id: expense.category_id
+        category_id: expense.category_id,
+        category_name: expense.category_name
       },
       ...state.expenses
     ];
-    console.log('EXPENSE:', expense);
-    console.log('EXPENSES:', expenses);
 
     return axios
       .put(`http://localhost:8081/api/expenses`, {
         expense
       })
       .then((res) => {
-        console.log('RES:', res)
         setState(prev => {
           return { ...prev, expenses }
         })
