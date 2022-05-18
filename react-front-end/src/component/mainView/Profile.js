@@ -6,16 +6,16 @@ import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions'
 export default function Profile(props) {
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
-  const { mode, /*transition, back*/ } = useVisualMode(GOAL)
+  const { mode, transition, back } = useVisualMode(GOAL)
 
-  const getIncomebyID = props.incomes.filter((expenses) => expenses.user_id === props.userId);
-  const total = getTotalAmount(getIncomebyID);
+  console.log('PROFILE:', props)
+  const getSavingsbyID = props.savings.filter((expenses) => expenses.user_id === props.userId);
+  const total = getSavingsbyID[0].amount;
   const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
-  const totalGoal = getTotalAmount(goalByID);
+  const totalGoal = goalByID[0].amount;
   const totalDaysTillGoal = getDaysTillGoal(goalByID);
 
   return (
-
     <section className="vw-100 row">
       <div className="container p-card">
         <div className="row d-flex justify-content-start align-items-center h-100">
@@ -27,7 +27,7 @@ export default function Profile(props) {
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
                     className="rounded-circle img-fluid" alt='animated-girl-with-glasses' />
                 </div>
-                <h4 className="mb-2">{getIncomebyID[0].username}</h4>
+                <h4 className="mb-2">{getSavingsbyID[0].username}</h4>
                 <p className="text-muted mb-4">@Programmer <span className="mx-2">|</span> <a
                   href="#!">Lighthouselabs</a></p>
                 <div className="mb-4 pb-2">
