@@ -15,8 +15,6 @@ export default function useApplicationData() {
   });
   const client = useRef();
 
-  console.log('STATEEXPENSES:', state.expenses)
-
   const addExpense = (expense) => {
     const expenses = [
       ...state.expenses,
@@ -27,7 +25,6 @@ export default function useApplicationData() {
         category_id: expense.categoryId
       }
     ];
-    // console.log('BEFORE PUT:', state);
 
     return axios
       .put(`http://localhost:8081/api/expenses`, {
