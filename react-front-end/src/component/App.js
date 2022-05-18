@@ -34,7 +34,6 @@ export default function App(props){
       expenses={state.expenses}
       incomes={state.incomes}
       goals={state.goals}
-      fake={state.fake}
       />}
 
     </div>
