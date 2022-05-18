@@ -14,7 +14,7 @@ export default function Main(props) {
   const EXPENSES = 'EXPENSES';
 
   const { mode, transition} = useVisualMode(props.tab);
-
+  console.log('props.goals', props.goals)
   return (
     <div>
       <TopNav />
@@ -23,6 +23,7 @@ export default function Main(props) {
       {mode === SAVINGS && <Savings
       userId={props.userId}
       incomes={props.incomes}
+      goals={props.goals}
       />}
       {mode === EXPENSES && <Expenses 
       key={props.expenses.length}
