@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import "./App.scss";
 import Header from "./components/Header";
@@ -22,14 +22,15 @@ export default function App() {
   // }
 
   const Search = () => {
+    
     const options = {
-      method: "GET",
-      url: "https://google-maps28.p.rapidapi.com/maps/api/place/nearbysearch/json",
+      method: 'GET',
+      url: 'https://google-maps28.p.rapidapi.com/maps/api/place/nearbysearch/json',
       params: {
-        location: "49.2657017,-123.1009721",
-        radius: "5000",
-        language: "en",
-        keyword: "brewery, bar, pub, gastropub ",
+        location: '49.2657017,-123.1009721',
+        radius: '5000',
+        language: 'en',
+        keyword: 'brewery, bar, pub, gastropub '
       },
       headers: {
         "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
