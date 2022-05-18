@@ -25,7 +25,7 @@ export default function App(props){
   //   );
   // });
 
-console.log('state.goals', state.goals)
+console.log('state.goals.end_date1', state.goals.end_date)
   //views
   const LOGIN = 'LOGIN'; 
   const SIGNUP = 'SIGNUP';
