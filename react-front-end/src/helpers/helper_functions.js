@@ -16,11 +16,11 @@ export function getTotalExpensesForUser (state, user) {
 //   return newArr;
 // };
 
-export function getTotalIncome (state) {
-  const incomeList = state.map(expense => {
+export function getTotalAmount (state) {
+  const amountList = state.map(expense => {
     return expense.amount;
   })
-  return incomeList.reduce((first, next) => first + next)    
+  return amountList.reduce((first, next) => first + next)    
 };
 
 const state = {

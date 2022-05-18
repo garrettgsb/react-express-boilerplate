@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTotalIncome } from '../../helpers/helper_functions';
+import { getTotalAmount } from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
@@ -170,7 +170,7 @@ export default function LineGraph(props) {
   const getYearGuideData = (state, user) => {
     const guideData = [0];
     const userExpenses = state.expenses.filter(expense => expense.username === user);
-    const guide = (getTotalIncome(userExpenses) / 12).toFixed(2) / 100;
+    const guide = (getTotalAmount(userExpenses) / 12).toFixed(2) / 100;
     while (guideData.length <= 12) {
       guideData.push(guide + ((guideData.length - 1) * guide))
     }
