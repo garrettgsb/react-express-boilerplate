@@ -48,10 +48,10 @@ export default function Savings(props) {
               </td>
             </tr>
             </thead>
+            </table>
             <ProgressCircle 
             total_saved={total} 
             goalTotal_cents={totalGoal}/>
-          </table>
         </div>
       </div>
     </div>

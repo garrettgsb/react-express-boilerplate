@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 import axios from "axios"
 
 export default function useApplicationData() {
@@ -13,25 +13,27 @@ export default function useApplicationData() {
     incomes: [],
     categories: []
   });
-  const client = useRef();
+  // const client = useRef();
 
   const addExpense = (expense) => {
     const expenses = [
       ...state.expenses,
       {
-        user_id: expense.userId,
-        created_at: expense.date,
+        user_id: expense.user_id,
+        created_at: expense.created_at,
         amount: expense.amount,
-        category_id: expense.categoryId
+        category_id: expense.category_id
       }
     ];
+    console.log('EXPENSES:', expenses);
 
     return axios
       .put(`http://localhost:8081/api/expenses`, {
         expense
       })
       .then((res) => {
-        setState({ ...state, expenses })
+        setState(prev => { 
+          return {...prev, expenses} })
       })
   };
 
@@ -45,18 +47,19 @@ export default function useApplicationData() {
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiIncomes = 'http://localhost:8081/api/incomes';
     const apiCategories = 'http://localhost:8081/api/categories';
-    const socket = io('http://localhost:8000');
+    // const socket = io('http://localhost:8000');
 
-    socket.on('connect', () => console.log(`Client connected: ${socket.io}`))
+    // socket.on('connect', () => console.log(`Client connected:`, socket.io, socket.emit('ping') 
+    // ))
+    // socket.on('message', msg => console.log('MESSAGE:', msg))
 
-    socket.on('disconnect', disconnect => {
-      console.log(`Client disconnected: ${disconnect}`)
-      socket.offAny();
-    })
-    socket.on('responseData', msg => setState({ ...state, test: msg }))
-    client.current = socket;
+    // socket.on('disconnect', disconnect => {
+    //   console.log(`Client disconnected: ${disconnect}`)
+    // })
+    // client.current = socket;
 
-    socket.on('stateChange', event => setState(...state, event))
+    // socket.on('stateChange', event => socket.emit(event))
+    // socket.connect()
 
     Promise.all([
       axios.get(apiUsers),

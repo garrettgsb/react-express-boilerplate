@@ -25,6 +25,7 @@ const categories = require('./src/routes/categories');
 
 io.on("connection", socket => {
   console.log('Socket connected.')
+  console.log('SOCKET:', socket)
   socket.onmessage = event => {
     console.log(`Message Received: ${event.data}`);
 
@@ -33,6 +34,16 @@ io.on("connection", socket => {
     }
   };
 });
+io.on('message', () => {
+  socket.onmessage = event => {
+    console.log(`Message Received2: ${event.data}`)
+  }
+});
+
+io.on('stateChange', event => {
+  io.emit(event);
+  console.log(event);
+})
 
 App.use(cors());
 // Express Configuration
