@@ -1,16 +1,14 @@
 import React from 'react';
 import ProgressCircle from './ProgressCircle';
-import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions';
+import { getTotalAmount, getDaysTillGoal, getGoalByID, getSavingsByID, getCategoryById } from '../../helpers/helper_functions';
 
 export default function Savings(props) {
-  const savingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
-  const savingsByCatId = savingsbyID.filter((categories) => categories.category_id === 8);
-  const totalSaved = getTotalAmount(savingsByCatId);
-  
-  const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
-  const totalGoal = getTotalAmount(goalByID);
-  const totalDaysTillGoal = getDaysTillGoal(goalByID);
-
+const savingsbyID = getSavingsByID(props.savings, props.userId)
+const savingsByCatId = getCategoryById(savingsbyID);
+const totalSaved = getTotalAmount(savingsByCatId);
+const goalByID = getGoalByID(props.goals, props.userId);
+const totalGoal = getTotalAmount(goalByID);
+const totalDaysTillGoal = getDaysTillGoal(goalByID);
   return (
     <div>
       <div className='goal-container'>
