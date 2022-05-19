@@ -9,4 +9,17 @@
     @include flexRow;
     justify-content: space-around;
   }
+
+  .nav-button {
+    transform: scale(0.9);
+    opacity: 0.8;
+    &:hover {
+      transition: all .3s ease-in;
+      transform: scaleX(1.1);
+      opacity: 1.5;
+      color: $white;
+      
+    }
+  }
+  
 }

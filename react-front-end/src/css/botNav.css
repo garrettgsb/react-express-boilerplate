@@ -8,3 +8,13 @@
   flex-direction: row;
   justify-content: space-around;
 }
+.bot-nav .nav-button {
+  transform: scale(0.9);
+  opacity: 0.8;
+}
+.bot-nav .nav-button:hover {
+  transition: all 0.3s ease-in;
+  transform: scaleX(1.1);
+  opacity: 1.5;
+  color: #fff;
+}
