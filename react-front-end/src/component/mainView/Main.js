@@ -24,6 +24,7 @@ export default function Main(props) {
 
       {mode === PROFILE && <Profile
       userId={props.userId}
+      users={props.users}
       incomes={props.incomes}
       savings={props.savings}
       goals={props.goals}

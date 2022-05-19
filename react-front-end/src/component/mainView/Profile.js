@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import "../../sass/profile.scss";
 import useVisualMode from '../../hooks/useVisualMode';
-import { getTotalAmount, getDaysTillGoal, getGoalByID, getSavingsByID } from '../../helpers/helper_functions';
-// import { updateGoals } from '../../hooks/';
 import useApplicationData from '../../hooks/hook';
+import {
+  getTotalAmount,
+  getDaysTillGoal,
+  getGoalByID,
+  getSavingsByID,
+  getUserByID
+} from '../../helpers/helper_functions';
 
 export default function Profile(props) {
-  
-  
+
   const { updateGoals } = useApplicationData();
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
@@ -18,6 +22,7 @@ export default function Profile(props) {
   const goalByID = getGoalByID(props.goals, props.userId);
   const totalGoal = getTotalAmount(goalByID);
   const totalDaysTillGoal = getDaysTillGoal(goalByID);
+  const username = getUserByID(props.users, props.userId)[0].username;
 
   const [state, setState] = useState({
     user_id: props.userId,
@@ -45,7 +50,7 @@ export default function Profile(props) {
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
                     className="rounded-circle img-fluid" alt='animated-girl-with-glasses' />
                 </div>
-                <h4 className="mb-2">{savingsbyID[0].username}</h4>
+                <h4 className="mb-2">{username}</h4>
                 <p className="text-muted mb-4">@Programmer <span className="mx-2">|</span> <a
                   href="#!">Lighthouselabs</a></p>
                 <div className="mb-4 pb-2">
@@ -76,7 +81,7 @@ export default function Profile(props) {
                           id="goalName"
                           class="form-control align-items-center"
                           value={state.goal_name}
-                          onChange={(event) => setState({...state, goal_name: event.target.value})}
+                          onChange={(event) => setState({ ...state, goal_name: event.target.value })}
                         />
                         <label class="form-label visually-hidden" htmlFor="goalName">
                           Goal Name
@@ -91,8 +96,8 @@ export default function Profile(props) {
                         id="goalAmount"
                         class="form-control align-items-center"
                         value={state.totalGoal}
-                        onChange={(event) => setState({...state, totalGoal: event.target.value})}
-                    />
+                        onChange={(event) => setState({ ...state, totalGoal: event.target.value })}
+                      />
                       <label class="form-label visually-hidden" htmlFor="goalAmount">
                         goalAmount
                       </label>
@@ -107,7 +112,7 @@ export default function Profile(props) {
                           className="form-control"
                           type="date"
                           value={state.date}
-                          onChange={(event) => setState({...state, date: event.target.value})}
+                          onChange={(event) => setState({ ...state, date: event.target.value })}
                         />
                         <span id="dateSelected"></span>
                       </div>
@@ -116,11 +121,11 @@ export default function Profile(props) {
                 </thead>
               </table>
               <div>
-                <button onClick={onChange}className='btn btn-primary m-2'>
+                <button onClick={onChange} className='btn btn-primary m-2'>
                   Confirm
                 </button>
 
-                <button onClick={() => back()}className='btn btn-danger m-2'>
+                <button onClick={() => back()} className='btn btn-danger m-2'>
                   Cancel
                 </button>
               </div>
