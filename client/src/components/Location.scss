@@ -1,0 +1,40 @@
+$white: #ffffff;
+
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: black solid 3px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50px;
+  padding-top: 9px;
+  background-color: $white;
+  background-image: url("https://www.transparenttextures.com/patterns/paper.png");
+
+  &--name {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: larger;
+  }
+
+  &--form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
+  }
+
+  &--textbox {
+    margin-top: 20px;
+    width: 98%;
+
+    & input {
+      width: 100%;
+      height: 40px;
+    }
+  }
+
+  &--button {
+    width: 30%;
+  }
+}
