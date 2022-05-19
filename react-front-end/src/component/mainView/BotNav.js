@@ -6,7 +6,7 @@ export default function BotNav(props) {
 
   const SAVINGS = 'SAVINGS';
   const VACATION = 'VACATION';
-  const {mode} = useVisualMode(SAVINGS)
+  const {mode} = useVisualMode(VACATION)
   
   return (
 
@@ -22,6 +22,13 @@ export default function BotNav(props) {
             {mode === SAVINGS && 
             <li className="nav-item" onClick={() => props.transition('SAVINGS')}>
               <h2 className="nav-link" >Savings</h2>
+            </li>
+            }
+            {mode === VACATION && 
+            <li 
+            className="nav-item" 
+            onClick={() => props.transition('VACATION')}>
+              <h2 className="nav-link" >Budget</h2>
             </li>
             }
             <li className="nav-item" onClick={() => props.transition('EXPENSES')}>
