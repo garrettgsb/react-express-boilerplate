@@ -18,7 +18,8 @@ export default function Main(props) {
     <div>
       <TopNav 
       savings={props.savings} 
-      userId={props.userId} 
+      userId={props.userId}
+      users={props.users} 
       />
 
       {mode === PROFILE && <Profile

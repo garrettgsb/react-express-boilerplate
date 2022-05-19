@@ -1,8 +1,10 @@
-import '../../sass/topNav.scss'
 import React from 'react';
+import '../../sass/topNav.scss'
+import { getUserByID } from '../../helpers/helper_functions';
 
 export default function TopNav(props) {
-  
+  const username = getUserByID(props.users, props.userId);
+  console.log('USERNAME:', username)
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -32,7 +34,7 @@ export default function TopNav(props) {
             </ul>
           </div>
           <div className="dropdown">
-          Welcome {}!!
+          Welcome {username}!!
             <img
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
               className="rounded-circle"

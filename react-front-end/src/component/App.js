@@ -38,6 +38,7 @@ export default function App(props){
       tab={state.tab} 
       addExpense={addExpense} 
       userId={state.user}
+      users={state.users}
       expenses={state.expenses}
       incomes={state.incomes}
       savings={state.savings}

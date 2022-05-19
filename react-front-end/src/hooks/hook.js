@@ -95,33 +95,33 @@ export default function useApplicationData() {
   const setUser = user => setState({ ...state, user });
 
   useEffect(() => {
-    // const apiUsers = 'http://localhost:8081/api/users';
     const apiGoals = 'http://localhost:8081/api/goals';
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiIncomes = 'http://localhost:8081/api/incomes';
     const apiSavings = 'http://localhost:8081/api/savings';
     const apiCategories = 'http://localhost:8081/api/categories';
     const apiDataPoints = `http://localhost:8081/api/dataPoints`;
+    const apiUsers = 'http://localhost:8081/api/users';
 
     Promise.all([
-      // axios.get(apiUsers),
       axios.get(apiGoals),
       axios.get(apiExpenses),
       axios.get(apiIncomes),
       axios.get(apiSavings),
       axios.get(apiCategories),
-      axios.get(apiDataPoints)
+      axios.get(apiDataPoints),
+      axios.get(apiUsers)
     ])
       .then(all => {
         setState((prev) => ({
           ...prev,
-          // users: all[0].data,
           goals: all[0].data,
           expenses: all[1].data,
           incomes: all[2].data,
           savings: all[3].data,
           categories: all[4].data,
-          dataPoints: all[5].data
+          dataPoints: all[5].data,
+          users: all[6].data
         }));
       })
       .catch(error => {
