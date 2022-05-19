@@ -7,25 +7,33 @@ import Signup from './Signup';
 import '../sass/app.scss';
 
 export default function App(props){
-  const { state, setUser, addExpense, loginUser } = useApplicationData();
+  const { state, addExpense, loginUser } = useApplicationData();
 
   //views
   const LOGIN = 'LOGIN'; 
   const SIGNUP = 'SIGNUP';
   const SHOW = 'SHOW';
 
-  const { mode, transition } = useVisualMode(
-    state.user > 3 ?
-      LOGIN :
-      SHOW
+  const { mode, transition, back } = useVisualMode(
+    state.user === '1' ||
+    state.user === '2' ||
+    state.user === '3' ?
+    SHOW :
+    LOGIN
   );
 
   return (
     <div className="app">
 
-      {mode === LOGIN && <Login user={state.user} setUser={setUser} transition={transition} loginUser={loginUser}/>}
+      {mode === LOGIN && <Login  
+      transition={transition} 
+      loginUser={loginUser}
+      />}
 
-      {mode === SIGNUP && <Signup transition={transition}/>}
+      {mode === SIGNUP && <Signup 
+      transition={transition}
+      back={back}
+      />}
       
       {mode === SHOW && <Main 
       tab={state.tab} 

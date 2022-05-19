@@ -4,7 +4,7 @@ import axios from 'axios';
 export default function useApplicationData() {
   const [state, setState] = useState({
     tab: 'EXPENSES',
-    user: 4,
+    user: '' || null,
     users: [],
     goals: [],
     expenses: [],
