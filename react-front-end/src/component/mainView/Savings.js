@@ -72,6 +72,7 @@ const totalDaysTillGoal = getDaysTillGoal(goalByID);
             total_saved={totalSaved} 
             goalTotal_cents={totalGoal}/>
         </div>
+        <img src="https://c.tenor.com/k_giby7nsyIAAAAC/money-piggy-bank.gif" alt="piggy animation"/>
       </div>
     </div>
   );
