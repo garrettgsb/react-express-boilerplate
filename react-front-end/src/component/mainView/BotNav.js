@@ -14,24 +14,24 @@ export default function BotNav(props) {
 
       <div className="container-fluid">
 
-        <div className="navbar-collapse" id="navbarSupportedContent">
+        <div className="navbar-collapse row d-flex justify-content-around" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-5 mb-lg-0 d-flex justify-content-around">
-            <li className="nav-item" onClick={() => props.transition('PROFILE')}>
+            <li className="h-100 w-100 nav-item nav-button" onClick={() => props.transition('PROFILE')}>
               <h2 className="nav-link" >Profile</h2>
             </li>
             {mode === SAVINGS && 
-            <li className="nav-item" onClick={() => props.transition('SAVINGS')}>
+            <li className="h-100 w-100 nav-item nav-button" onClick={() => props.transition('SAVINGS')}>
               <h2 className="nav-link" >Savings</h2>
             </li>
             }
             {mode === VACATION && 
             <li 
-            className="nav-item" 
+            className="h-100 w-100 nav-item nav-button" 
             onClick={() => props.transition('VACATION')}>
               <h2 className="nav-link" >Budget</h2>
             </li>
             }
-            <li className="nav-item" onClick={() => props.transition('EXPENSES')}>
+            <li className="h-100 w-100 nav-item nav-button" onClick={() => props.transition('EXPENSES')}>
               <h2 className="nav-link" >Expenses</h2>
             </li>
           </ul>

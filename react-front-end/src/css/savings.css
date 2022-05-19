@@ -4,3 +4,14 @@
   flex-direction: row;
   height: 100vh;
 }
+
+#piggy-animation {
+  position: absolute;
+  opacity: 0.5;
+  top: 200px;
+  right: 150px;
+  z-index: 0;
+  transform: scale(2);
+  border-radius: 100%;
+  width: 26%;
+}
