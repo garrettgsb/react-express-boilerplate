@@ -4,6 +4,7 @@ import BotNav from './BotNav';
 import Savings from './Savings';
 import Expenses from './Expenses';
 import Profile from './Profile';
+import Vacation from '../mainView/Vacation/Vacation';
 import useVisualMode from '../../hooks/useVisualMode';
 import '../../sass/main.scss';
 
@@ -12,6 +13,7 @@ export default function Main(props) {
   const PROFILE = 'PROFILE';
   const SAVINGS = 'SAVINGS';
   const EXPENSES = 'EXPENSES';
+  const VACATION = 'VACATION';
 
   const { mode, transition} = useVisualMode(props.tab);
   return (
@@ -42,6 +44,10 @@ export default function Main(props) {
       expenses={props.expenses}
       dataPoints={props.dataPoints}
       goals={props.goals}
+      />}
+
+      {mode === VACATION && <Vacation 
+      
       />}
 
       <BotNav 

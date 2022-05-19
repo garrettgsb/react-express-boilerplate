@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ProgressCircle from './ProgressCircle';
 import { getTotalAmount, getDaysTillGoal, getGoalByID, getSavingsByID } from '../../helpers/helper_functions';
 
@@ -11,6 +11,12 @@ const goalByID = getGoalByID(props.goals, props.userId);
 const totalGoal = getTotalAmount(goalByID);
 const totalDaysTillGoal = getDaysTillGoal(goalByID);
 
+const [state, setState] = useState({
+  goal: goalByID[0].goal_name
+})
+
+// if state.goal === 'Vacation' && (props.totalSaved >= props.totalGoal)
+//  transition('VACATION')
 
   // gets money per day/week/month/year
   const moneyTillGoal = totalGoal - totalSaved;
