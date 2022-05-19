@@ -44,27 +44,27 @@ export default function Savings(props) {
             </tr>
             <tr>
               <td>
-                {totalDaysTillGoal} days until {goalByID[0].goal_name}
+                {totalDaysTillGoal} days until {goalByID[0].end_date}
               </td>
             </tr>
             <tr>
               <td>
-                {moneyPerDayToGoal} / day until you reach your goal by {goalByID[0].end_date}
+                You can save {moneyPerDayToGoal}/day
               </td>
             </tr>
             <tr>
               <td>
-                {moneyPerWeekToGoal} / day until you reach your goal by {goalByID[0].end_date}
+                {moneyPerWeekToGoal}/day
               </td>
             </tr>
             <tr>
               <td>
-                {moneyPerMonthToGoal} / day until you reach your goal by {goalByID[0].end_date}
+                {moneyPerMonthToGoal}/day
               </td>
             </tr>
             <tr>
               <td>
-                {moneyPerYearToGoal} / day until you reach your goal by {goalByID[0].end_date}
+                {moneyPerYearToGoal}/day
               </td>
             </tr>
             </thead>
