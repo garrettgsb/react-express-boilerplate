@@ -4,7 +4,7 @@ import axios from 'axios';
 export default function useApplicationData() {
   const [state, setState] = useState({
     tab: 'EXPENSES',
-    user: '' || null,
+    user: '',
     users: [],
     goals: [],
     expenses: [],
@@ -21,9 +21,9 @@ export default function useApplicationData() {
         setState(prev => {
           return { ...prev, user: user.id }
         })
-        console.log(state.user)
       })
-  };
+    };
+    console.log('STATE.USER:', state.user)
 
 
   const updateGoals = (id, goals) => {
