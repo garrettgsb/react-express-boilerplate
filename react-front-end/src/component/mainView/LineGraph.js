@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getGoalByID } from '../../helpers/helper_functions';
+import { getGoalByID, getDataByID } from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
@@ -25,13 +25,12 @@ Chart.register(
   TimeScale);
 
 export default function LineGraph(props) {
-
-  const { user, goals, back } = props;
   
-  const goal = getGoalByID(goals, user)[0]
+  const goal = getGoalByID(props.goals, props.user)[0]
+  const dataPoints = getDataByID(props.dataPoints)
   const [state, setState] = useState({
     dateUnit: 'month',
-    dataPoints: props.dataPoints
+    dataPoints: dataPoints
   })
 
   
@@ -122,7 +121,7 @@ export default function LineGraph(props) {
         </select>
         <button
           className='btn btn-primary'
-          onClick={() => back()
+          onClick={() => props.back()
           }>
           Back
         </button>
