@@ -14,7 +14,7 @@ export default function BotNav(props) {
 
       <div className="container-fluid">
 
-        <div className="navbar-collapse" id="navbarSupportedContent">
+        <div className="navbar-collapse row d-flex justify-content-around" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-5 mb-lg-0 d-flex justify-content-around">
             <li className="nav-item" onClick={() => props.transition('PROFILE')}>
               <h2 className="nav-link" >Profile</h2>
