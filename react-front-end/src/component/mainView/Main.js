@@ -16,7 +16,11 @@ export default function Main(props) {
   const { mode, transition} = useVisualMode(props.tab);
   return (
     <div>
-      <TopNav savings={props.savings} userId={props.userId}/>
+      <TopNav 
+      savings={props.savings} 
+      userId={props.userId}
+      users={props.users} 
+      />
 
       {mode === PROFILE && <Profile
       userId={props.userId}
@@ -39,7 +43,9 @@ export default function Main(props) {
       goals={props.goals}
       />}
 
-      <BotNav transition={transition} />
+      <BotNav 
+      transition={transition} 
+      />
     </div>
   );
 }
