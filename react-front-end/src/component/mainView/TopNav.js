@@ -28,11 +28,12 @@ export default function TopNav(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="dropdown-item text-danger" href="/">Welcome {savingsbyID[0].username}!!  Logout</a>
+                <a className="dropdown-item text-danger" href="/">Logout</a>
               </li>
             </ul>
           </div>
           <div className="dropdown">
+          Welcome {savingsbyID[0].username}!!
             <img
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
               className="rounded-circle"
