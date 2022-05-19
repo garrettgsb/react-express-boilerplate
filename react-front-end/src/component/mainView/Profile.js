@@ -1,19 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../../sass/profile.scss";
 import useVisualMode from '../../hooks/useVisualMode';
 import { getTotalAmount, getDaysTillGoal } from '../../helpers/helper_functions';
+// import { updateGoals } from '../../hooks/';
+import useApplicationData from '../../hooks/hook';
 
 export default function Profile(props) {
+  
+  
+  const { updateGoals } = useApplicationData();
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
-  const { mode, transition, back } = useVisualMode(EDIT)
-
+  const { mode, transition, back } = useVisualMode(GOAL)
 
   const savingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
-  const totalSaved = getTotalAmount(savingsbyID);
+  const savingsByCatId = savingsbyID.filter((categories) => categories.category_id === 8);
+  const totalSaved = getTotalAmount(savingsByCatId);
   const goalByID = props.goals.filter((goal) => goal.user_id === props.userId);
   const totalGoal = getTotalAmount(goalByID);
   const totalDaysTillGoal = getDaysTillGoal(goalByID);
+
+  const [state, setState] = useState({
+    user_id: props.userId,
+    goal_name: goalByID[0].goal_name,
+    totalGoal,
+    date: goalByID[0].end_date
+  })
+
+  const onChange = function () {
+    updateGoals(props.userId, state)
+    transition(GOAL)
+  }
+
+
 
   return (
     <section className="vw-100 row">
@@ -57,8 +76,8 @@ export default function Profile(props) {
                           type="text"
                           id="goalName"
                           class="form-control align-items-center"
-                          value={goalByID[0].goal_name}
-                          onChange={() => { }}
+                          value={state.goal_name}
+                          onChange={(event) => setState({...state, goal_name: event.target.value})}
                         />
                         <label class="form-label visually-hidden" htmlFor="goalName">
                           Goal Name
@@ -72,9 +91,9 @@ export default function Profile(props) {
                         type="number"
                         id="goalAmount"
                         class="form-control align-items-center"
-                        value={`${(totalGoal / 100).toFixed(2)}`}
-                        onChange={() => { }}
-                      />
+                        value={state.totalGoal}
+                        onChange={(event) => setState({...state, totalGoal: event.target.value})}
+                    />
                       <label class="form-label visually-hidden" htmlFor="goalAmount">
                         goalAmount
                       </label>
@@ -88,8 +107,8 @@ export default function Profile(props) {
                           id="date"
                           className="form-control"
                           type="date"
-                          value={'date'}
-                          onChange={() => { }}
+                          value={state.date}
+                          onChange={(event) => setState({...state, date: event.target.value})}
                         />
                         <span id="dateSelected"></span>
                       </div>
@@ -98,11 +117,11 @@ export default function Profile(props) {
                 </thead>
               </table>
               <div>
-                <button className='btn btn-primary m-2'>
+                <button onClick={onChange}className='btn btn-primary m-2'>
                   Confirm
                 </button>
 
-                <button className='btn btn-danger m-2'>
+                <button onClick={() => transition(GOAL)}className='btn btn-danger m-2'>
                   Cancel
                 </button>
               </div>
@@ -116,7 +135,7 @@ export default function Profile(props) {
             <br />
             <br />
             <div className='d-flex align-items-center justify-content-center text-center flex-column'>
-              <button>EDIT</button>
+              <button onClick={() => transition(EDIT)}>EDIT</button>
               <table className="table table-bordered">
                 <thead>
                   <tr>

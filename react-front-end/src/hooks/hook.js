@@ -1,100 +1,122 @@
-import { useState, useEffect } from "react";
-import axios from "axios"
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function useApplicationData() {
-  const [state, setState] = useState({
-    tab: 'EXPENSES',
-    user: 1,
-    users: [],
-    goals: [],
-    expenses: [],
-    incomes: [],
-    savings: [],
-    categories: []
-  });
+	const [state, setState] = useState({
+		tab: 'EXPENSES',
+		user: 1,
+		users: [],
+		goals: [],
+		expenses: [],
+		incomes: [],
+		savings: [],
+		categories: [],
+	});
 
-  const addExpense = (expense) => {
+	const updateGoals = (id, goals) => {
+		const newGoal = state.goals.map(item =>
+			item.user_id === id
+				? (item = {
+						...item,
+						goal_name: goals.goal_name,
+						totalGoal: goals.totalGoals,
+						date: goals.date,
+				  })
+				: item
+		);
 
-    const expenses = [
-      {
-        user_id: expense.user_id,
-        created_at: expense.created_at,
-        amount: expense.amount,
-        category_id: expense.category_id,
-        category_name: expense.category_name
-      },
-      ...state.expenses
-    ];
+		return axios
+			.put(`http://localhost:8081/api/goals`, {
+				goals
+			})
+			.then(res => {
+				setState(prev => {
+					return { ...prev, goal:newGoal };
+				});
+			});
+	};
 
-    const incomes = [
-      {
-        user_id: expense.user_id,
-        created_at: expense.created_at,
-        amount: expense.amount,
-        category_id: expense.category_id,
-      },
-      ...state.incomes
-    ];
+	const addExpense = expense => {
+		const expenses = [
+			{
+				user_id: expense.user_id,
+				created_at: expense.created_at,
+				amount: expense.amount,
+				category_id: expense.category_id,
+				category_name: expense.category_name,
+			},
+			...state.expenses,
+		];
 
-    const savings = [
-      {
-        user_id: expense.user_id,
-        created_at: expense.created_at,
-        amount: expense.amount,
-        category_id: expense.category_id,
-      },
-      ...state.savings
-    ];
+		const incomes = [
+			{
+				user_id: expense.user_id,
+				created_at: expense.created_at,
+				amount: expense.amount,
+				category_id: expense.category_id,
+			},
+			...state.incomes,
+		];
 
-    return axios
-      .put(`http://localhost:8081/api/expenses`, {
-        expense
-      })
-      .then((res) => {
-        setState(prev => {
-          return { ...prev, expenses, incomes, savings }
-        })
-      })
-  };
+		const savings = [
+			{
+				user_id: expense.user_id,
+				created_at: expense.created_at,
+				amount: expense.amount,
+				category_id: expense.category_id,
+			},
+			...state.savings,
+		];
 
-  const setUser = user => setState({ ...state, user });
+		return axios
+			.put(`http://localhost:8081/api/expenses`, {
+				expense,
+			})
+			.then(res => {
+				setState(prev => {
+					return { ...prev, expenses, incomes, savings };
+				});
+			});
+	};
 
+	const setUser = user => setState({ ...state, user });
 
-  useEffect(() => {
-    const apiUsers = 'http://localhost:8081/api/users';
-    const apiGoals = 'http://localhost:8081/api/goals';
-    const apiExpenses = 'http://localhost:8081/api/expenses';
-    const apiIncomes = 'http://localhost:8081/api/incomes';
-    const apiSavings = 'http://localhost:8081/api/savings';
-    const apiCategories = 'http://localhost:8081/api/categories';
+	useEffect(() => {
+		const apiUsers = 'http://localhost:8081/api/users';
+		const apiGoals = 'http://localhost:8081/api/goals';
+		const apiExpenses = 'http://localhost:8081/api/expenses';
+		const apiIncomes = 'http://localhost:8081/api/incomes';
+		const apiSavings = 'http://localhost:8081/api/savings';
+		const apiCategories = 'http://localhost:8081/api/categories';
 
-    Promise.all([
-      axios.get(apiUsers),
-      axios.get(apiGoals),
-      axios.get(apiExpenses),
-      axios.get(apiIncomes),
-      axios.get(apiSavings),
-      axios.get(apiCategories)
-    ])
-      .then(all => {
-        setState((prev) => ({
-          ...prev,
-          users: all[0].data,
-          goals: all[1].data,
-          expenses: all[2].data,
-          incomes: all[3].data,
-          savings: all[4].data,
-          categories: all[5].data
-        }));
-      })
-      .catch(error => {
-        console.log('We got a hook err! -->', error);
-      })
-  }, []);
+		Promise.all([
+			axios.get(apiUsers),
+			axios.get(apiGoals),
+			axios.get(apiExpenses),
+			axios.get(apiIncomes),
+			axios.get(apiSavings),
+			axios.get(apiCategories),
+		])
+			.then(all => {
+				setState(prev => ({
+					...prev,
+					users: all[0].data,
+					goals: all[1].data,
+					expenses: all[2].data,
+					incomes: all[3].data,
+					savings: all[4].data,
+					categories: all[5].data,
+				}));
+			})
+			.catch(error => {
+				console.log('We got a hook err! -->', error);
+			});
+	}, []);
 
-  return {
-    state,
-    setUser,
-    addExpense
-  };
+	return {
+		state,
+		setUser,
+		addExpense,
+		updateGoals,
+	};
 }
