@@ -38,7 +38,7 @@ export default function Profile(props) {
 
   return (
     <section className="vw-100 row">
-      <div className="container p-card">
+      <div className="m-2 container p-card">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-md-12 col-xl-4">
             <div className="card">
@@ -131,7 +131,7 @@ export default function Profile(props) {
         </div>
       }
       {mode === GOAL &&
-        <div className="chart-align">
+        <div className="m-2 chart-align">
           <div className='card goal-container'>
             <br />
             <br />
