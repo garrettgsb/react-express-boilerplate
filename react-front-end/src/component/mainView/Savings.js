@@ -54,17 +54,17 @@ export default function Savings(props) {
             </tr>
             <tr>
               <td>
-                {moneyPerWeekToGoal}/day
+              You can save {moneyPerWeekToGoal}/week
               </td>
             </tr>
             <tr>
               <td>
-                {moneyPerMonthToGoal}/day
+              You can save {moneyPerMonthToGoal}/month
               </td>
             </tr>
             <tr>
               <td>
-                {moneyPerYearToGoal}/day
+              You can save {moneyPerYearToGoal}/year
               </td>
             </tr>
             </thead>
