@@ -6,7 +6,7 @@ import "../sass/login.scss";
 export default function Login(props) {
   
   const [state, setState] = useState({
-    id: props.user,
+    id: '',
     /*email: '',
     password: ''*/
   });

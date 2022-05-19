@@ -33,7 +33,7 @@ export default function TopNav(props) {
             </ul>
           </div>
           <div className="dropdown">
-          Welcome {savingsbyID[0].username}!!
+          {/* Welcome {savingsbyID[0].username}!! */}
             <img
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
               className="rounded-circle"
