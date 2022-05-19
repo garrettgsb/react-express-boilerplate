@@ -53,7 +53,7 @@ export function getTotalAmount(state) {
 export function getCategoryName(prop) {
   let categoryID = '';
   switch (prop) {
-    case '1': return categoryID = 'eating';
+    case '1': return categoryID = 'eating out';
     case '2': return categoryID = 'entertainment';
     case '3': return categoryID = 'fuel';
     case '4': return categoryID = 'groceries';
