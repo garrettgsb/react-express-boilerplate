@@ -23,13 +23,13 @@ export default function TopNav(props) {
           </ul>
         </div>
         {/* <!-- Right elements --> */}
-        <div className="d-flex align-items-center">
+        <div className="fw-bold d-flex align-items-center">
           {/* <!-- Avatar --> */}
-          <div className="dropdown">
-          Welcome {username}!!
+          <div className="dropdown d-flex align-items-center">
+            Welcome {username}!!
             <img
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
-              className="rounded-circle"
+              className="m-2 rounded-circle"
               height="25"
               alt='animated-girl-with-glasses'
               loading="lazy"
@@ -38,7 +38,7 @@ export default function TopNav(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="dropdown-item text-danger" href="/">Logout</a>
+                <a className="fw-bold dropdown-item text-danger" href="/">Logout</a>
               </li>
             </ul>
           </div>
