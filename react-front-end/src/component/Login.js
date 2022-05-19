@@ -6,7 +6,7 @@ import "../sass/login.scss";
 export default function Login(props) {
 
   const [state, setState] = useState({
-    id: '' || null,
+    id: '',
     /*email: '',
     password: ''*/
   });
@@ -18,9 +18,9 @@ export default function Login(props) {
   };
 
   const validate = (id) => {
-    id === 1 ||
-      id === 2 ||
-      id === 3 ?
+    id === '1' ||
+      id === '2' ||
+      id === '3' ?
       login(id) :
       props.transition('SIGNUP')
   }
