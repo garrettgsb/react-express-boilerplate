@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import ProgressCircle from './ProgressCircle';
+import '../../sass/savings.scss';
 import { getTotalAmount, getDaysTillGoal, getGoalByID, getSavingsByID } from '../../helpers/helper_functions';
 
 export default function Savings(props) {
@@ -78,7 +79,7 @@ const [state, setState] = useState({
             total_saved={totalSaved} 
             goalTotal_cents={totalGoal}/>
         </div>
-        <img src="https://c.tenor.com/k_giby7nsyIAAAAC/money-piggy-bank.gif" alt="piggy animation"/>
+        <img id='piggy-animation' src="https://c.tenor.com/k_giby7nsyIAAAAC/money-piggy-bank.gif" alt="piggy animation"/>
       </div>
     </div>
   );
