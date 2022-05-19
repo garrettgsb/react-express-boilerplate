@@ -48,6 +48,7 @@ export default function Expenses(props) {
           />
           <div className='d-flex align-items-center justify-content-center text-center'>
             <form className="row row-cols-lg-auto g-3 align-items-center">
+            <div className="disappear">
               <div className="col-lg-3 col-sm-6">
                 <label htmlFor="date" className='visually-hidden'>date</label>
                 <input
@@ -59,6 +60,7 @@ export default function Expenses(props) {
                     setState({ ...state, date: event.target.value })
                   }
                 />
+                
                 <span id="dateSelected"></span>
               </div>
               <div className="col-12">
@@ -115,9 +117,11 @@ export default function Expenses(props) {
                   }
                 >Submit</button>
               </div>
+              </div>
+              <button type="submit" className="btn btn-primary">Add New/Income</button>
 
-              <div className="col-12" onClick={() => transition(LINE)}>
-                <button type="submit" className="btn btn-primary">Line Graph</button>
+              <div className="col-12">
+                <button type="submit" onClick={() => transition(LINE)} className="btn btn-primary">Line Graph</button>
               </div>
 
             </form>
