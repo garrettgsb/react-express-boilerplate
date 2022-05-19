@@ -28,39 +28,18 @@ export default function LineGraph(props) {
 
   const goal = getGoalByID(props.goals, props.user)[0]
   const dataPoints = getDataByID(props.dataPoints, props.user)
-  console.log('DATAPOINTS:', dataPoints)
+
   const updatePoints = []
   dataPoints.forEach(point => {
-    if (updatePoints.slice(-1).length > 0) {
-    console.log('1 - POINTSLICE:', updatePoints.slice(-1))
-    console.log('2 - currentPOINt:', point)
-    point = {...point, y: (updatePoints.slice(-1)[0].y + point.y)}
+    if (updatePoints.slice(-1)[0]) {
+      point = { ...point, y: (updatePoints.slice(-1)[0].y + point.y) }
     }
-    console.log('-- push --')
     updatePoints.push(point)
   })
-  console.log('UPDATEPOINTS:', updatePoints)
   const [state, setState] = useState({
     dateUnit: 'month',
     dataPoints: updatePoints
   })
-
-  // const savings = getSavingsByID(expenses, user)
-  // const state.dataPoints = [];
-  // savings.forEach(item => {
-  //   if (state.dataPoints.length === 0) {
-  //     setState(prev => {
-  //       return {...prev, dataPoints: [{ x: item.created_at, y: item.amount }]}
-  //     })
-  //   }
-  //     else {
-  //       const allDataAmounts = state.dataPoints.map(expense => expense.amount);
-  //       console.log('ALL AMOUNTS:', allDataAmounts)
-  //       setState(prev => {
-  //         return {...prev, dataPoints: [...prev.dataPoints, { x: item.created_at, y: allDataAmounts }]}
-  //     })
-  //   }
-  // });
 
   const data = {
     datasets: [
