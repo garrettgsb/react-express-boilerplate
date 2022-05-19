@@ -35,6 +35,7 @@ export default function Main(props) {
       addExpense={props.addExpense} 
       userId={props.userId}
       expenses={props.expenses}
+      goals={props.goals}
       />}
 
       <BotNav transition={transition} />

@@ -46,7 +46,7 @@ export default function Profile(props) {
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
                     className="rounded-circle img-fluid" alt='animated-girl-with-glasses' />
                 </div>
-                <h4 className="mb-2">{savingsbyID.username}</h4>
+                <h4 className="mb-2">{savingsbyID[0].username}</h4>
                 <p className="text-muted mb-4">@Programmer <span className="mx-2">|</span> <a
                   href="#!">Lighthouselabs</a></p>
                 <div className="mb-4 pb-2">

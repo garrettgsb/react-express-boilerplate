@@ -5,7 +5,9 @@
   "dependencies": {
     "axios": "^0.18.1",
     "chart.js": "^3.7.1",
+    "chartjs-adapter-date-fns": "^2.0.0",
     "classnames": "^2.3.1",
+    "date-fns": "^2.28.0",
     "mdb-ui-kit": "^4.0.0",
     "node-sass": "npm:sass@^1.51.0",
     "react": "^16.8.6",

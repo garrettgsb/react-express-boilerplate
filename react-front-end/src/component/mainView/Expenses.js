@@ -33,7 +33,12 @@ export default function Expenses(props) {
     <div>
       {mode === LINE &&
         <LineGraph
-          back={back} />}
+          key={props.userId}
+          user={props.userId}
+          goals={props.goals}
+          expenses={props.expenses}
+          back={back}
+        />}
       {mode === EXPENSES &&
         <div id='user-expense-input'>
           <ExpenseTable
@@ -80,7 +85,7 @@ export default function Expenses(props) {
                   className="select"
                   value={state.category_id}
                   onChange={(event) => {
-                    setState({ ...state, category_name: getCategoryName(event.target.value), category_id: parseInt(event.target.value)})
+                    setState({ ...state, category_name: getCategoryName(event.target.value), category_id: parseInt(event.target.value) })
                   }}>
                   <option value="0" disabled>Category</option>
                   <option value="1">Eating Out</option>
@@ -106,7 +111,7 @@ export default function Expenses(props) {
                     e.preventDefault()
                     submit(props.userId, state.date, state.amount, state.category_id, state.category_name)
                   }
-                }
+                  }
                 >Submit</button>
               </div>
 

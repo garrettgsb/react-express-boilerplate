@@ -1,7 +1,7 @@
 import React from 'react';
 import "../sass/signup.scss";
 
-export default function Signup() {
+export default function Signup(props) {
 
   return (
     <section className="vh-100 bg-image">
@@ -47,7 +47,7 @@ export default function Signup() {
                     className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                 </div>
 
-                <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
+                <p className="text-center text-muted mt-5 mb-0">Have already an account? <a onClick={() => props.transition('LOGIN')} href="#!"
                     className="fw-bold text-body"><u>Login here</u></a></p>
 
               </form>
