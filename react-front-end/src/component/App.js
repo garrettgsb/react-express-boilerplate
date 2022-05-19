@@ -34,6 +34,7 @@ export default function App(props){
       expenses={state.expenses}
       incomes={state.incomes}
       savings={state.savings}
+      dataPoints={state.dataPoints}
       goals={state.goals}
       />}
 

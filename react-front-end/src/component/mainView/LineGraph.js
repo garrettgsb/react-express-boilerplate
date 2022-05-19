@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getSavingsByID, getGoalByID } from '../../helpers/helper_functions';
+import { getGoalByID, getDataByID } from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
@@ -26,28 +26,26 @@ Chart.register(
 
 export default function LineGraph(props) {
 
-  const { user, goals, expenses, back } = props;
+  const goal = getGoalByID(props.goals, props.user)[0]
+  const dataPoints = getDataByID(props.dataPoints, props.user)
 
-  const [state, setState] = useState({
-    dateUnit: 'month'
+  const updatePoints = []
+  dataPoints.forEach(point => {
+    if (updatePoints.slice(-1)[0]) {
+      point = { ...point, y: (updatePoints.slice(-1)[0].y + point.y) }
+    }
+    updatePoints.push(point)
   })
-  // let dateUnit = 'month';
-
-  const savingsDataPoints = [
-    { x: goals[0].start_date, y: 0 }
-  ];
-  const savings = getSavingsByID(expenses, user)
-  const goal = getGoalByID(goals, user)[0]
-
-  savings.forEach(item => {
-    savingsDataPoints.push({ x: item.created_at, y: item.amount })
-  });
+  const [state, setState] = useState({
+    dateUnit: 'month',
+    dataPoints: updatePoints
+  })
 
   const data = {
     datasets: [
       {
         label: 'Savings',
-        data: savingsDataPoints,
+        data: state.dataPoints,
         fill: false,
         backgroundColor: 'rgba(220, 38, 38, 0.7)',
         borderColor: 'rgba(220, 38, 38, 0.7)',
@@ -82,7 +80,8 @@ export default function LineGraph(props) {
                 type: 'time',
                 time: {
                   unit: state.dateUnit
-                }
+                },
+                beginAtZero: true
               },
               y: {
                 ticks: {
@@ -90,7 +89,8 @@ export default function LineGraph(props) {
                   callback: function (value, index, ticks) {
                     return '$' + value.toFixed(2) / 100;
                   }
-                }
+                },
+                beginAtZero: true
               }
             }
           }}
@@ -102,7 +102,7 @@ export default function LineGraph(props) {
         <select
           className="select"
           value={state.dateUnit}
-          onChange={e => setState({ ...state, dateUnit: e.target.value})}>
+          onChange={e => setState({ ...state, dateUnit: e.target.value })}>
           <option value="day">Days</option>
           <option value="week">Weeks</option>
           <option value="month">Months</option>
@@ -111,7 +111,7 @@ export default function LineGraph(props) {
         </select>
         <button
           className='btn btn-primary'
-          onClick={() => back()
+          onClick={() => props.back()
           }>
           Back
         </button>
