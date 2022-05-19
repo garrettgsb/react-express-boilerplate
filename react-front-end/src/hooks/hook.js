@@ -23,8 +23,6 @@ export default function useApplicationData() {
         })
       })
     };
-    console.log('STATE.USER:', state.user)
-
 
   const updateGoals = (id, goals) => {
     const newGoal = state.goals.map(item =>
