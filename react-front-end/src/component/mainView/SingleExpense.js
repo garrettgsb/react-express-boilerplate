@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import "../../sass/expenses.scss"
 export default function SingleExpense(props) {
 
   const tableClass = classNames('d-flex justify-content-around', {
@@ -10,9 +11,9 @@ export default function SingleExpense(props) {
 
   return (
     <tr className={tableClass}>
-      <td>{props.created_at}</td>
-      <td>{props.category_name}</td>
-      <td>{'$' + (props.amount / 100).toFixed(2)}</td>
+      <td className='textalign'>{props.created_at}</td>
+      <td className='textalign'>{props.category_name}</td>
+      <td className='textalign'>{'$' + (props.amount / 100).toFixed(2)}</td>
     </tr>
   )
 };
