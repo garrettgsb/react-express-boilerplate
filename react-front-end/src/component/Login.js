@@ -10,7 +10,7 @@ export default function Login(props) {
     /*email: '',
     password: ''*/
   });
-
+console.log('state.id login page:~ ', state.id)
   const login = (id) => {
     const user = { id };
     props.loginUser(user)
@@ -18,9 +18,9 @@ export default function Login(props) {
   };
 
   const validate = (id) => {
-    id === '1' ||
-      id === '2' ||
-      id === '3' ?
+    id === 1 ||
+      id === 2 ||
+      id === 3 ?
       login(id) :
       props.transition('SIGNUP')
   }
@@ -35,7 +35,7 @@ export default function Login(props) {
                 <div className="col-lg-6">
                   <div className="card-body p-md-5 mx-md-4">
                     <div className="text-center">
-                      <img src="../../public/piggy-logo.png"
+                      <img src="../../piggy-logo.png"
                         alt="logo" className="image" />
                       <h4 className="danger mt-1 mb-5 pb-1">We are The Piggy Team</h4>
                     </div>
@@ -45,7 +45,7 @@ export default function Login(props) {
 
                       <div className="form-outline mb-4">
                         <input type="number" id="form2Example11" className="form-control"
-                          placeholder="Email address" value={state.id} onChange={(event) => setState({ ...state, id: event.target.value})} />
+                          placeholder="Email address" value={state.id} onChange={(event) => setState({ ...state, id: parseInt(event.target.value)})} />
                         <label className="form-label" htmlFor="form2Example11">Username</label>
                       </div>
 

@@ -5,7 +5,12 @@
 
 #expense-table {
   max-height: 300px;
-  max-width: 1500px;
   overflow-y: scroll;
   scroll-behavior: smooth;
+}
+
+.textalign {
+  text-align: center;
+  width: 100%;
+  font-weight: bolder;
 }
