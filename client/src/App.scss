@@ -27,6 +27,17 @@
   color: #61dafb;
 }
 
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background: url('./assets/wooden-texture_1208-334.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

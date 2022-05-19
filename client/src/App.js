@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './App.scss';
 import Header from './components/Header';
-import { CssBaseline } from '@mui/material';
 import Crawls from './components/Crawls';
 import Venue from './components/Venue';
+import {CardFlip} from "./components/Card";
+import TripContainer from "./components/TripContainer";
+import LoginForm from "./components/LoginForm";
+
+
+
 
 
 export default function App() {
@@ -12,7 +17,7 @@ export default function App() {
   const [message ] = useState('Click the button to load data!');
   const [searchResults, setSearchResults] = useState([]);
   const [bar,  setBar] = useState({});
-  const [photo, setPhoto] = useState({});
+  // const [photo, setPhoto] = useState({});
  
   // const fetchData = () => { 
   //     axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
@@ -39,9 +44,9 @@ export default function App() {
         keyword: 'brewery, bar, pub, gastropub '
       },
       headers: {
-        'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com',
-        'X-RapidAPI-Key': `${process.env.REACT_APP_RapidAPI_Key}`
-      }
+        "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
+        "X-RapidAPI-Key": `${process.env.REACT_APP_RapidAPI_Key}`,
+      },
     };
 
     
@@ -102,22 +107,24 @@ export default function App() {
     
     return (
         <div className="App">
-        <CssBaseline />
          <Header />
-         <Venue 
-          bar={bar}
-         />
+         <LoginForm />
+        <div className="main">
+          <CardFlip 
+            bar= {bar}>
+          </CardFlip >
+          <TripContainer />
+          {/* <button onClick={Search}>Hop</button> */}
+        </div>
+          
+         
          <h1>{ message }</h1>
          <button onClick={click} >
            Check
          </button> 
          <button onClick={Search} >
            Where are you from?
-         </button>  
-         <button onClick={RandNum} >
-           Hop
-         </button>    
-         <Crawls />
+         </button>     
        </div>
     );
 }
