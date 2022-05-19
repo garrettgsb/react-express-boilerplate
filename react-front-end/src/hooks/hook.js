@@ -11,7 +11,8 @@ export default function useApplicationData() {
     incomes: [],
     savings: [],
     categories: [],
-    dataPoints: []
+    dataPoints: [],
+    alvinVacationSpent: []
   });
 
   const loginUser = (user) => {
@@ -79,13 +80,25 @@ export default function useApplicationData() {
       ...state.savings,
     ];
 
+    const alvinVacationSpent = [
+      {
+        user_id: expense.user_id,
+        created_at: expense.created_at,
+        amount: expense.amount,
+        category_id: expense.category_id,
+        start_date: '2022-03-13',
+        end_date: '2022-08-13',
+      },
+      ...state.alvinVacationSpent,
+    ];
+
     return axios
       .put(`http://localhost:8081/api/expenses`, {
         expense,
       })
       .then(res => {
         setState(prev => {
-          return { ...prev, expenses, incomes, savings };
+          return { ...prev, expenses, incomes, savings, alvinVacationSpent };
         });
       });
   };
@@ -100,6 +113,7 @@ export default function useApplicationData() {
     const apiCategories = 'http://localhost:8081/api/categories';
     const apiDataPoints = `http://localhost:8081/api/dataPoints`;
     const apiUsers = 'http://localhost:8081/api/users';
+    const apiAlvinVacationSpent = 'http://localhost:8081/api/alvin/vacation/spent';
 
     Promise.all([
       axios.get(apiGoals),
@@ -108,7 +122,8 @@ export default function useApplicationData() {
       axios.get(apiSavings),
       axios.get(apiCategories),
       axios.get(apiDataPoints),
-      axios.get(apiUsers)
+      axios.get(apiUsers),
+      axios.get(apiAlvinVacationSpent)
     ])
       .then(all => {
         setState((prev) => ({
@@ -119,7 +134,8 @@ export default function useApplicationData() {
           savings: all[3].data,
           categories: all[4].data,
           dataPoints: all[5].data,
-          users: all[6].data
+          users: all[6].data,
+          alvinVacationSpent: all[7].data
         }));
       })
       .catch(error => {

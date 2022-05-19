@@ -1,19 +1,27 @@
 import React from 'react';
 import ProgressCircle from '../ProgressCircle';
+import {
+  getTotalAmount,
+  getDaysTillGoal,
+  getGoalByID,
+  getSavingsByID,
+  getUserByID
+} from '../../../helpers/helper_functions';
 
 export default function Vacation(props) {
+  const savingsById = getSavingsByID(props.savings, props.userId);
+  const totalSaved = getTotalAmount(savingsById);
 
+  const totalSpent = getTotalAmount(props.alvinVacationSpent);
+  const goalName = props.alvinVacationSpent[0].goal_name;
+  const daysTillEndOfVacation = getDaysTillGoal(props.alvinVacationSpent);
 
-
-  const goalByID = [{
-    goal_name: 'test',
-  }]
-  const totalSaved = 1000000;
-  const totalSpent = 690000;
-  const totalDaysTillGoal = 69;
-  const moneyPerDayToGoal = 0;
-  const moneyPerWeekToGoal = 0;
-  const moneyPerMonthToGoal = 0;
+  // gets money per day/week/month/year
+  const moneyTillGoal = totalSaved - totalSpent;
+  const moneyPerDayToGoal = '$' + (moneyTillGoal / daysTillEndOfVacation / 100).toFixed(2);
+  const moneyPerWeekToGoal = '$' + (moneyTillGoal / (daysTillEndOfVacation / 7) / 100).toFixed(2);
+  const moneyPerMonthToGoal = '$' + (moneyTillGoal / (daysTillEndOfVacation / 31) / 100).toFixed(2);
+  const moneyPerYearToGoal = '$' + (moneyTillGoal / (daysTillEndOfVacation / 365) / 100).toFixed(2);
 
 return (
   <div>
@@ -26,7 +34,7 @@ return (
             <tr>
               <td>
                 <h1>
-                  {goalByID[0].goal_name}
+                  {goalName}
                 </h1>
               </td>
             </tr>
@@ -39,7 +47,7 @@ return (
             </tr>
             <tr>
               <td>
-                {totalDaysTillGoal} days until home time
+                {daysTillEndOfVacation} days until home time
               </td>
             </tr>
             <tr>
@@ -55,6 +63,11 @@ return (
             <tr>
               <td>
                 Advised to spend no more than {moneyPerMonthToGoal}/month
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Advised to spend no more than {moneyPerYearToGoal}/year
               </td>
             </tr>
           </thead>
