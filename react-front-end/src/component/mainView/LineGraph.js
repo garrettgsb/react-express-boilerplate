@@ -25,16 +25,26 @@ Chart.register(
   TimeScale);
 
 export default function LineGraph(props) {
-  
+
   const goal = getGoalByID(props.goals, props.user)[0]
   const dataPoints = getDataByID(props.dataPoints, props.user)
-  console.log(dataPoints)
+  console.log('DATAPOINTS:', dataPoints)
+  const updatePoints = []
+  dataPoints.forEach(point => {
+    if (updatePoints.slice(-1).length > 0) {
+    console.log('1 - POINTSLICE:', updatePoints.slice(-1))
+    console.log('2 - currentPOINt:', point)
+    point = {...point, y: (updatePoints.slice(-1)[0].y + point.y)}
+    }
+    console.log('-- push --')
+    updatePoints.push(point)
+  })
+  console.log('UPDATEPOINTS:', updatePoints)
   const [state, setState] = useState({
     dateUnit: 'month',
-    dataPoints: dataPoints
+    dataPoints: updatePoints
   })
 
-  
   // const savings = getSavingsByID(expenses, user)
   // const state.dataPoints = [];
   // savings.forEach(item => {
@@ -113,7 +123,7 @@ export default function LineGraph(props) {
         <select
           className="select"
           value={state.dateUnit}
-          onChange={e => setState({ ...state, dateUnit: e.target.value})}>
+          onChange={e => setState({ ...state, dateUnit: e.target.value })}>
           <option value="day">Days</option>
           <option value="week">Weeks</option>
           <option value="month">Months</option>
