@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../../sass/profile.scss";
 import useVisualMode from '../../hooks/useVisualMode';
-import { getTotalAmount, getDaysTillGoal, getGoalByID, getSavingsByID, getCategoryById } from '../../helpers/helper_functions';
+import { getTotalAmount, getDaysTillGoal, getGoalByID, getSavingsByID } from '../../helpers/helper_functions';
 // import { updateGoals } from '../../hooks/';
 import useApplicationData from '../../hooks/hook';
 
@@ -14,8 +14,7 @@ export default function Profile(props) {
   const { mode, transition, back } = useVisualMode(GOAL)
 
   const savingsbyID = getSavingsByID(props.savings, props.userId)
-  const savingsByCatId = getCategoryById(savingsbyID);
-  const totalSaved = getTotalAmount(savingsByCatId);
+  const totalSaved = getTotalAmount(savingsbyID);
   const goalByID = getGoalByID(props.goals, props.userId);
   const totalGoal = getTotalAmount(goalByID);
   const totalDaysTillGoal = getDaysTillGoal(goalByID);

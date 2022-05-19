@@ -1,12 +1,11 @@
 import React from 'react';
 import ProgressCircle from './ProgressCircle';
-import { getTotalAmount, getDaysTillGoal, getGoalByID, getSavingsByID, getCategoryById } from '../../helpers/helper_functions';
+import { getTotalAmount, getDaysTillGoal, getGoalByID, getSavingsByID } from '../../helpers/helper_functions';
 
 export default function Savings(props) {
   // gets total amount of saved money
 const savingsbyID = getSavingsByID(props.savings, props.userId)
-const savingsByCatId = getCategoryById(savingsbyID);
-const totalSaved = getTotalAmount(savingsByCatId);
+const totalSaved = getTotalAmount(savingsbyID);
   // gets days until end date for goal
 const goalByID = getGoalByID(props.goals, props.userId);
 const totalGoal = getTotalAmount(goalByID);

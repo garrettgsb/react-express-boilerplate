@@ -59,10 +59,6 @@ export function getCategoryName(prop) {
 };
 
 
-
-export function getCategoryById(savings) {
-  savings.filter((categories) => categories.category_id === 8);
-} 
   
 // export const totalSaved = getTotalAmount(savingsByCatId);
   
