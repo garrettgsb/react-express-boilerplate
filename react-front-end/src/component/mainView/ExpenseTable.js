@@ -34,7 +34,7 @@ export default function ExpenseTable(props) {
           <td>Amount</td>
         </tr>
       </thead>
-      <tbody id='expense-table' className='container list-group infinite-scroll'>
+      <tbody id='expense-table' className='list-group infinite-scroll'>
         {expenses}
       </tbody>
     </table>

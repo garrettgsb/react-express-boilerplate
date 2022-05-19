@@ -35,7 +35,7 @@ export default function Login(props) {
                 <div className="col-lg-6">
                   <div className="card-body p-md-5 mx-md-4">
                     <div className="text-center">
-                      <img src="../../public/piggy-logo.png"
+                      <img src="../../piggy-logo.png"
                         alt="logo" className="image" />
                       <h4 className="danger mt-1 mb-5 pb-1">We are The Piggy Team</h4>
                     </div>
