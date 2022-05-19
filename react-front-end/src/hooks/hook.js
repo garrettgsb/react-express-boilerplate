@@ -12,10 +12,8 @@ export default function useApplicationData() {
     savings: [],
     categories: []
   });
-  console.log('state.user', state.user);
 
   const loginUser = (user) => {
-    
     const users = [
       {
         id: user.id,
@@ -28,8 +26,6 @@ export default function useApplicationData() {
       return {...prev, user: users[0].id}
     });
 
-    
-
     // return axios
     // .get(`http://localhost:8081/api/users/${users[0].email}`)
     // .then(() => {
@@ -38,7 +34,6 @@ export default function useApplicationData() {
     //   })
     // })
   };
-
 
 	const updateGoals = (id, goals) => {
 		const newGoal = state.goals.map(item =>
