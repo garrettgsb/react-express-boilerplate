@@ -36,6 +36,7 @@ export default function Expenses(props) {
           key={props.userId}
           user={props.userId}
           goals={props.goals}
+          dataPoints={props.dataPoints}
           expenses={props.expenses}
           back={back}
         />}

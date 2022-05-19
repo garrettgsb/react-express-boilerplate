@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getSavingsByID, getGoalByID } from '../../helpers/helper_functions';
+import { getSavingsByID, getGoalByID, getTotalAmount } from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
@@ -26,28 +26,37 @@ Chart.register(
 
 export default function LineGraph(props) {
 
-  const { user, goals, expenses, back } = props;
+  const { user, goals, expenses, back, dataPoints } = props;
 
   const [state, setState] = useState({
-    dateUnit: 'month'
+    dateUnit: 'month',
+    dataPoints: [dataPoints]
   })
-  // let dateUnit = 'month';
 
-  const savingsDataPoints = [
-    { x: goals[0].start_date, y: 0 }
-  ];
+  // const state.dataPoints = [];
   const savings = getSavingsByID(expenses, user)
   const goal = getGoalByID(goals, user)[0]
 
-  savings.forEach(item => {
-    savingsDataPoints.push({ x: item.created_at, y: item.amount })
-  });
+  // savings.forEach(item => {
+  //   if (state.dataPoints.length === 0) {
+  //     setState(prev => {
+  //       return {...prev, dataPoints: [{ x: item.created_at, y: item.amount }]}
+  //     })
+  //   }
+  //     else {
+  //       const allDataAmounts = state.dataPoints.map(expense => expense.amount);
+  //       console.log('ALL AMOUNTS:', allDataAmounts)
+  //       setState(prev => {
+  //         return {...prev, dataPoints: [...prev.dataPoints, { x: item.created_at, y: allDataAmounts }]}
+  //     })
+  //   }
+  // });
 
   const data = {
     datasets: [
       {
         label: 'Savings',
-        data: savingsDataPoints,
+        data: state.dataPoints,
         fill: false,
         backgroundColor: 'rgba(220, 38, 38, 0.7)',
         borderColor: 'rgba(220, 38, 38, 0.7)',
@@ -82,7 +91,8 @@ export default function LineGraph(props) {
                 type: 'time',
                 time: {
                   unit: state.dateUnit
-                }
+                },
+                beginAtZero: true
               },
               y: {
                 ticks: {
@@ -90,7 +100,8 @@ export default function LineGraph(props) {
                   callback: function (value, index, ticks) {
                     return '$' + value.toFixed(2) / 100;
                   }
-                }
+                },
+                beginAtZero: true
               }
             }
           }}

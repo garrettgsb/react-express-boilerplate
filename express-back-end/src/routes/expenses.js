@@ -79,7 +79,8 @@ module.exports = db => {
     SELECT expenses.*, username
     FROM expenses
     JOIN users ON user_id = users.id
-    WHERE category_id = 8;
+    WHERE category_id = 8
+    ORDER BY created_at;
     `)
     .then(data => {
       const savings = data.rows;
@@ -89,6 +90,23 @@ module.exports = db => {
       console.log('The error is: ', error);
     });
   });
+
+  router.get('/dataPoints/:id', (req, res) => {
+    db.query(`
+    SELECT user_id, created_at AS x, amount AS y 
+    FROM expenses 
+    WHERE user_id = ${req.params.id} ;
+    `)
+    .then(data => {
+      const dataPoints = data.rows;
+      res.json(dataPoints);
+    })
+    .catch(error => {
+      console.log('The error is: ', error);
+    });
+  });
+
+
 
   return router;
 };

@@ -4,13 +4,14 @@ import axios from 'axios';
 export default function useApplicationData() {
   const [state, setState] = useState({
     tab: 'EXPENSES',
-    user: '4',
+    user: 4,
     users: [],
     goals: [],
     expenses: [],
     incomes: [],
     savings: [],
-    categories: []
+    categories: [],
+    dataPoints: []
   });
   console.log('state.user', state.user);
 
@@ -47,8 +48,8 @@ export default function useApplicationData() {
 						...item,
 						goal_name: goals.goal_name,
 						totalGoal: goals.totalGoals,
-						date: goals.date,
-				  })
+						date: goals.date
+          })
 				: item
 		);
 
@@ -115,6 +116,7 @@ export default function useApplicationData() {
     const apiIncomes = 'http://localhost:8081/api/incomes';
     const apiSavings = 'http://localhost:8081/api/savings';
     const apiCategories = 'http://localhost:8081/api/categories';
+    const apiDataPoints = `http://localhost:8081/api/dataPoints/${state.user}`;
 
     Promise.all([
       // axios.get(apiUsers),
@@ -122,7 +124,8 @@ export default function useApplicationData() {
       axios.get(apiExpenses),
       axios.get(apiIncomes),
       axios.get(apiSavings),
-      axios.get(apiCategories)
+      axios.get(apiCategories),
+      axios.get(apiDataPoints)
     ])
       .then(all => {
         setState((prev) => ({
@@ -132,7 +135,8 @@ export default function useApplicationData() {
           expenses: all[1].data,
           incomes: all[2].data,
           savings: all[3].data,
-          categories: all[4].data
+          categories: all[4].data,
+          dataPoints: all[5].data
         }));
       })
       .catch(error => {
