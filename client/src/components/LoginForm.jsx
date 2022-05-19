@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Login from "./Login";
+import Axios from "axios";
 
 export default function LoginForm(){
 
@@ -14,15 +15,21 @@ const [user, setUser] = useState({ name: "", email: "" });
 const userLogin = function(loginInfo) {
   console.log("Login!");
 
-  if (loginInfo.email === testUser.email && loginInfo.password === testUser.password) {
-  console.log("Logged in!");
-  setUser({
-    email: loginInfo.email
-  });
-} else {
-  console.log("Wrong username or password!")
+  const data = {
+    email: loginInfo.email,
+    password: loginInfo.password
   }
+
+  Axios.post("/login", data)
+    .then((res) => {
+      setUser({name: res.data.name, email: res.data.email})
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
 }
+
 const logout = () => {
   setUser({ email: "" });
 }; 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import "./App.scss";
 import Header from "./components/Header";
@@ -9,17 +9,17 @@ import LoginForm from "./components/LoginForm";
 
 export default function App() {
 
-  // const [message, setMessage ] = useState('Click the button to load data!');
+  const [message, setMessage ] = useState('Click the button to load data!');
 
-  // const fetchData = () => {
-  //     axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-  //     .then((response) => {
-  //       // handle success
-  //       console.log(response.data) // The entire response from the Rails API
-  //       console.log(response.data.message) // Just the message
-  //       setMessage(response.data.message);
-  //   })
-  // }
+  const fetchData = () => {
+      axios.get('/') // You can simply make your requests to "/api/whatever you want"
+      .then((response) => {
+        // handle success
+        console.log(response.data) // The entire response from the Rails API
+        console.log(response.data.message) // Just the message
+        setMessage(response.data.message);
+    })
+  }
 
   const Search = () => {
     
@@ -55,7 +55,8 @@ export default function App() {
       <div className="main">
         <CardFlip />
         <TripContainer />
-        <button onClick={Search}>Hop</button>
+        {/* <button onClick={Search}>Hop</button> */}
+        <button onClick={fetchData}>Data</button>
       </div>
     </div>
   );
