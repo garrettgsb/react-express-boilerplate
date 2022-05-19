@@ -27,7 +27,8 @@ Chart.register(
 export default function LineGraph(props) {
   
   const goal = getGoalByID(props.goals, props.user)[0]
-  const dataPoints = getDataByID(props.dataPoints)
+  const dataPoints = getDataByID(props.dataPoints, props.user)
+  console.log(dataPoints)
   const [state, setState] = useState({
     dateUnit: 'month',
     dataPoints: dataPoints
