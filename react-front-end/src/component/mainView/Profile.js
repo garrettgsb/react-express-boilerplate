@@ -36,14 +36,11 @@ export default function Profile(props) {
     transition(GOAL)
   }
 
-
-
   return (
     <section className="vw-100 row">
       <div className="container p-card">
-        <div className="row d-flex justify-content-start align-items-center h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-md-12 col-xl-4">
-
             <div className="card">
               <div className="card-body text-center">
                 <div className="mt-3 mb-4 background">
@@ -79,7 +76,7 @@ export default function Profile(props) {
                         <input
                           type="text"
                           id="goalName"
-                          class="form-control align-items-center"
+                          className="form-control align-items-center"
                           value={state.goal_name}
                           onChange={(event) => setState({ ...state, goal_name: event.target.value })}
                         />
@@ -135,7 +132,7 @@ export default function Profile(props) {
       }
       {mode === GOAL &&
         <div className="chart-align">
-          <div className='goal-container'>
+          <div className='card goal-container'>
             <br />
             <br />
             <div className='d-flex align-items-center justify-content-center text-center flex-column'>
