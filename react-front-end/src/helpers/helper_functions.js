@@ -57,3 +57,11 @@ export function getCategoryName(prop) {
   }
   return categoryID;
 };
+
+
+  
+// export const totalSaved = getTotalAmount(savingsByCatId);
+  
+// export const totalGoal = getTotalAmount(goalByID);
+  
+// export const totalDaysTillGoal = getDaysTillGoal(goalByID);
