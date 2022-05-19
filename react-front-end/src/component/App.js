@@ -14,10 +14,9 @@ export default function App(props){
   const SIGNUP = 'SIGNUP';
   const SHOW = 'SHOW';
 
+  console.log('STATEAPPPUSER:', state.user)
   const { mode, transition, back } = useVisualMode(
-    state.user === '1' ||
-    state.user === '2' ||
-    state.user === '3' ?
+    state.user ?
     SHOW :
     LOGIN
   );

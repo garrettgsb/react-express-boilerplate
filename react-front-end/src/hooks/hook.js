@@ -21,9 +21,9 @@ export default function useApplicationData() {
         setState(prev => {
           return { ...prev, user: user.id }
         })
-        console.log(state.user)
       })
-  };
+    };
+    console.log('STATE.USER:', state.user)
 
 
   const updateGoals = (id, goals) => {

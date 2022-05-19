@@ -1,20 +1,29 @@
-import React, { useState }from 'react';
+import React, { useState } from 'react';
 // import * as mdb from 'mdb-ui-kit'; // lib
 // import { Input } from 'mdb-ui-kit'; // module
 import "../sass/login.scss";
 
 export default function Login(props) {
-  
+
   const [state, setState] = useState({
-    id: '',
+    id: '' || null,
     /*email: '',
     password: ''*/
   });
 
   const login = (id) => {
     const user = { id };
-    props.loginUser(user);
+    props.loginUser(user)
+      .then(() => props.transition('SHOW'))
   };
+
+  const validate = (id) => {
+    id === 1 ||
+      id === 2 ||
+      id === 3 ?
+      login(id) :
+      props.transition('SIGNUP')
+  }
 
   return (
     <section className="h-100 gradient-form banner">
@@ -36,12 +45,12 @@ export default function Login(props) {
 
                       <div className="form-outline mb-4">
                         <input type="number" id="form2Example11" className="form-control"
-                          placeholder="Email address" value={state.id} onChange={(event) => setState({...state, id: event.target.value})}/>
+                          placeholder="Email address" value={state.id} onChange={(event) => setState({ ...state, id: event.target.value})} />
                         <label className="form-label" htmlFor="form2Example11">Username</label>
                       </div>
 
                       <div className="form-outline mb-4">
-                        <input type="password" id="form2Example22" className="form-control" /*value={state.password} onChange={(event) => setState({...state, password: event.target.value})}*//>
+                        <input type="password" id="form2Example22" className="form-control" /*value={state.password} onChange={(event) => setState({...state, password: event.target.value})}*/ />
                         <label className="form-label" htmlFor="form2Example22"
                         >Password</label>
                       </div>
@@ -49,8 +58,7 @@ export default function Login(props) {
                       <div className="text-center pt-1 mb-5 pb-1">
                         <button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" onClick={(e) => {
                           e.preventDefault();
-                          login(state.id/*state.email, state.password*/);
-                          props.transition('SHOW');
+                          validate(state.id);
                         }}>Log
                           in</button>
                         <a className="text-muted" href="/">Forgot password?</a>
