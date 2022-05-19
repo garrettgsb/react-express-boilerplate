@@ -4,7 +4,7 @@ import axios from "axios"
 export default function useApplicationData() {
   const [state, setState] = useState({
     tab: 'EXPENSES',
-    user: 1,
+    user: '4',
     users: [],
     goals: [],
     expenses: [],
@@ -12,6 +12,33 @@ export default function useApplicationData() {
     savings: [],
     categories: []
   });
+  console.log('state.user', state.user);
+
+  const loginUser = (user) => {
+    
+    const users = [
+      {
+        id: user.id,
+        // email: user.email,
+        // password: user.password
+      },
+      // ...state.users
+    ];
+    setState((prev) => {
+      return {...prev, user: users[0].id}
+    });
+
+    
+
+    // return axios
+    // .get(`http://localhost:8081/api/users/${users[0].email}`)
+    // .then(() => {
+    //   setState(prev => {
+    //     return { ...prev, users }
+    //   })
+    // })
+  };
+
 
   const addExpense = (expense) => {
 
@@ -61,7 +88,7 @@ export default function useApplicationData() {
 
 
   useEffect(() => {
-    const apiUsers = 'http://localhost:8081/api/users';
+    // const apiUsers = 'http://localhost:8081/api/users';
     const apiGoals = 'http://localhost:8081/api/goals';
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiIncomes = 'http://localhost:8081/api/incomes';
@@ -69,7 +96,7 @@ export default function useApplicationData() {
     const apiCategories = 'http://localhost:8081/api/categories';
 
     Promise.all([
-      axios.get(apiUsers),
+      // axios.get(apiUsers),
       axios.get(apiGoals),
       axios.get(apiExpenses),
       axios.get(apiIncomes),
@@ -79,12 +106,12 @@ export default function useApplicationData() {
       .then(all => {
         setState((prev) => ({
           ...prev,
-          users: all[0].data,
-          goals: all[1].data,
-          expenses: all[2].data,
-          incomes: all[3].data,
-          savings: all[4].data,
-          categories: all[5].data
+          // users: all[0].data,
+          goals: all[0].data,
+          expenses: all[1].data,
+          incomes: all[2].data,
+          savings: all[3].data,
+          categories: all[4].data
         }));
       })
       .catch(error => {
@@ -95,6 +122,7 @@ export default function useApplicationData() {
   return {
     state,
     setUser,
-    addExpense
+    addExpense,
+    loginUser
   };
 }
