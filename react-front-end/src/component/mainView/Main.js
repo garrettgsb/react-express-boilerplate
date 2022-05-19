@@ -16,7 +16,7 @@ export default function Main(props) {
   const { mode, transition} = useVisualMode(props.tab);
   return (
     <div>
-      <TopNav />
+      <TopNav savings={props.savings} userId={props.userId}/>
 
       {mode === PROFILE && <Profile
       userId={props.userId}

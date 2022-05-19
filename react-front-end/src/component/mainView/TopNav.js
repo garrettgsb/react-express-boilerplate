@@ -1,7 +1,8 @@
 import '../../sass/topNav.scss'
 import React from 'react';
 
-export default function TopNav() {
+export default function TopNav(props) {
+  const savingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -27,7 +28,7 @@ export default function TopNav() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="dropdown-item text-danger" href="/">Logout</a>
+                <a className="dropdown-item text-danger" href="/">Welcome {savingsbyID[0].username}!!  Logout</a>
               </li>
             </ul>
           </div>
