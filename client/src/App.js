@@ -69,39 +69,36 @@ export default function App() {
 
 
   function click() {
-  // console.log(Search()[0].name)
-  // console.log(bar);
-  // console.log(bar2);
   setBar(searchResults[RandNum()]);
   console.log(bar);
-  console.log(grabPhoto());
-  console.log(photo);
+  // console.log(grabPhoto());
+  // console.log(photo);
   console.log(bar.name);
   }
 
-  function grabPhoto() {
-    const options = {
-      method: 'GET',
-      url: 'https://google-maps28.p.rapidapi.com/maps/api/place/photo',
-      params: {
-        photo_reference: "",
-        maxwidth: '400',
-        maxheight: '400'
-      },
-      headers: {
-        'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com',
-        'X-RapidAPI-Key': '2f8033e889mshb4c8ca74d55c336p1769fcjsna7c55af16b77'
-      }
-    };
+  // function grabPhoto() {
+  //   const options = {
+  //     method: 'GET',
+  //     url: 'https://google-maps28.p.rapidapi.com/maps/api/place/photo',
+  //     params: {
+  //       photo_reference: "",
+  //       maxwidth: '400',
+  //       maxheight: '400'
+  //     },
+  //     headers: {
+  //       'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com',
+  //       'X-RapidAPI-Key': '2f8033e889mshb4c8ca74d55c336p1769fcjsna7c55af16b77'
+  //     }
+  //   };
 
-    axios.request(options).then(function (response) {
-      console.log(response.data);
-      setPhoto(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
+  //   axios.request(options).then(function (response) {
+  //     console.log(response.data);
+  //     setPhoto(response.data);
+  //   }).catch(function (error) {
+  //     console.error(error);
+  //   });
     
-  }
+  // }
     
     return (
         <div className="App">
