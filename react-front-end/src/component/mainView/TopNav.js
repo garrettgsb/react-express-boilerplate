@@ -2,8 +2,7 @@ import '../../sass/topNav.scss'
 import React from 'react';
 
 export default function TopNav(props) {
-  const savingsbyID = props.savings.filter((savings) => savings.user_id === props.userId);
-
+  
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -33,7 +32,7 @@ export default function TopNav(props) {
             </ul>
           </div>
           <div className="dropdown">
-          {/* Welcome {savingsbyID[0].username}!! */}
+          Welcome {}!!
             <img
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
               className="rounded-circle"
