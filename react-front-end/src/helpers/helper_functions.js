@@ -43,7 +43,11 @@ export function getDaysTillGoal(state) {
 
 export function getTotalAmount(state) {
   const amountList = state.map(expense => expense.amount);
-  return amountList.reduce((first, next) => first + next);
+  
+  return amountList.length > 1 ?
+  amountList.reduce((first, next) => first + next) :
+  amountList;
+
 };
 
 export function getCategoryName(prop) {
