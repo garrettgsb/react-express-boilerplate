@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getSavingsByID, getGoalByID, getTotalAmount } from '../../helpers/helper_functions';
+import { getGoalByID } from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
@@ -26,17 +26,17 @@ Chart.register(
 
 export default function LineGraph(props) {
 
-  const { user, goals, expenses, back, dataPoints } = props;
-
+  const { user, goals, back } = props;
+  
+  const goal = getGoalByID(goals, user)[0]
   const [state, setState] = useState({
     dateUnit: 'month',
-    dataPoints: [dataPoints]
+    dataPoints: props.dataPoints
   })
 
+  
+  // const savings = getSavingsByID(expenses, user)
   // const state.dataPoints = [];
-  const savings = getSavingsByID(expenses, user)
-  const goal = getGoalByID(goals, user)[0]
-
   // savings.forEach(item => {
   //   if (state.dataPoints.length === 0) {
   //     setState(prev => {

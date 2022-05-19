@@ -91,11 +91,10 @@ module.exports = db => {
     });
   });
 
-  router.get('/dataPoints/:id', (req, res) => {
+  router.get('/dataPoints', (req, res) => {
     db.query(`
     SELECT user_id, created_at AS x, amount AS y 
-    FROM expenses 
-    WHERE user_id = ${req.params.id} ;
+    FROM expenses; 
     `)
     .then(data => {
       const dataPoints = data.rows;

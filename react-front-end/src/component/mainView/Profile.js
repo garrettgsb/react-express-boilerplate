@@ -121,7 +121,7 @@ export default function Profile(props) {
                   Confirm
                 </button>
 
-                <button onClick={() => transition(GOAL)}className='btn btn-danger m-2'>
+                <button onClick={() => back()}className='btn btn-danger m-2'>
                   Cancel
                 </button>
               </div>

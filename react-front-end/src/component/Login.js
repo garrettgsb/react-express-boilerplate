@@ -11,12 +11,8 @@ export default function Login(props) {
     password: ''*/
   });
 
-  const login = (id/*email, password*/) => {
-    const user = {
-      id
-      /*email,
-      password*/
-    };
+  const login = (id) => {
+    const user = { id };
     props.loginUser(user);
   };
 
@@ -32,7 +28,7 @@ export default function Login(props) {
                     <div className="text-center">
                       <img src="../../public/piggy-logo.png"
                         alt="logo" className="image" />
-                      <h4 className="mt-1 mb-5 pb-1">We are The Piggy Team</h4>
+                      <h4 className="danger mt-1 mb-5 pb-1">We are The Piggy Team</h4>
                     </div>
 
                     <form>
@@ -40,7 +36,7 @@ export default function Login(props) {
 
                       <div className="form-outline mb-4">
                         <input type="number" id="form2Example11" className="form-control"
-                          placeholder="Email address" value={state.id} onChange={(event) => setState({...state, id: parseInt(event.target.value)})}/>
+                          placeholder="Email address" value={state.id} onChange={(event) => setState({...state, id: event.target.value})}/>
                         <label className="form-label" htmlFor="form2Example11">Username</label>
                       </div>
 

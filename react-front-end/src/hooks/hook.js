@@ -13,101 +13,86 @@ export default function useApplicationData() {
     categories: [],
     dataPoints: []
   });
-  console.log('state.user', state.user);
 
   const loginUser = (user) => {
-    
-    const users = [
-      {
-        id: user.id,
-        // email: user.email,
-        // password: user.password
-      },
-      // ...state.users
-    ];
-    setState((prev) => {
-      return {...prev, user: users[0].id}
-    });
-
-    
-
-    // return axios
-    // .get(`http://localhost:8081/api/users/${users[0].email}`)
-    // .then(() => {
-    //   setState(prev => {
-    //     return { ...prev, users }
-    //   })
-    // })
+    return axios
+      .get(`http://localhost:8081/api/dataPoints`)
+      .then(() => {
+        setState(prev => {
+          return { ...prev, user: user.id }
+        })
+        console.log(state.user)
+      })
   };
 
 
-	const updateGoals = (id, goals) => {
-		const newGoal = state.goals.map(item =>
-			item.user_id === id
-				? (item = {
-						...item,
-						goal_name: goals.goal_name,
-						totalGoal: goals.totalGoals,
-						date: goals.date
-          })
-				: item
-		);
+  const updateGoals = (id, goals) => {
+    const newGoal = state.goals.map(item =>
+      item.user_id === id
+        ? (item = {
+          ...item,
+          goal_name: goals.goal_name,
+          totalGoal: goals.totalGoals,
+          date: goals.date
+        })
+        : item
+    );
 
-		return axios
-			.put(`http://localhost:8081/api/goals`, {
-				goals
-			})
-			.then(res => {
-				setState(prev => {
-					return { ...prev, goal:newGoal };
-				});
-			});
-	};
+    return axios
+      .put(`http://localhost:8081/api/goals`, {
+        goals
+      })
+      .then(res => {
+        setState(prev => {
+          return { ...prev, goal: newGoal };
+        });
+      });
+  };
 
-	const addExpense = expense => {
-		const expenses = [
-			{
-				user_id: expense.user_id,
-				created_at: expense.created_at,
-				amount: expense.amount,
-				category_id: expense.category_id,
-				category_name: expense.category_name,
-			},
-			...state.expenses,
-		];
+  const addExpense = expense => {
+    const expenses = [
+      {
+        user_id: expense.user_id,
+        created_at: expense.created_at,
+        amount: expense.amount,
+        category_id: expense.category_id,
+        category_name: expense.category_name,
+      },
+      ...state.expenses,
+    ];
 
-		const incomes = [
-			{
-				user_id: expense.user_id,
-				created_at: expense.created_at,
-				amount: expense.amount,
-				category_id: expense.category_id,
-			},
-			...state.incomes,
-		];
+    const incomes = [
+      {
+        user_id: expense.user_id,
+        created_at: expense.created_at,
+        amount: expense.amount,
+        category_id: expense.category_id,
+      },
+      ...state.incomes,
+    ];
 
-		const savings = [
-			{
-				user_id: expense.user_id,
-				created_at: expense.created_at,
-				amount: expense.amount,
-				category_id: expense.category_id,
-			},
-			...state.savings,
-		];
+    const savings = [
+      {
+        user_id: expense.user_id,
+        created_at: expense.created_at,
+        amount: expense.amount,
+        category_id: expense.category_id,
+      },
+      ...state.savings,
+    ];
 
-		return axios
-			.put(`http://localhost:8081/api/expenses`, {
-				expense,
-			})
-			.then(res => {
-				setState(prev => {
-					return { ...prev, expenses, incomes, savings };
-				});
-			});
-	};
+    return axios
+      .put(`http://localhost:8081/api/expenses`, {
+        expense,
+      })
+      .then(res => {
+        setState(prev => {
+          return { ...prev, expenses, incomes, savings };
+        });
+      });
+  };
 
-	const setUser = user => setState({ ...state, user });
+  const setUser = user => setState({ ...state, user });
 
   useEffect(() => {
     // const apiUsers = 'http://localhost:8081/api/users';
@@ -116,7 +101,7 @@ export default function useApplicationData() {
     const apiIncomes = 'http://localhost:8081/api/incomes';
     const apiSavings = 'http://localhost:8081/api/savings';
     const apiCategories = 'http://localhost:8081/api/categories';
-    const apiDataPoints = `http://localhost:8081/api/dataPoints/${state.user}`;
+    const apiDataPoints = `http://localhost:8081/api/dataPoints`;
 
     Promise.all([
       // axios.get(apiUsers),
@@ -143,6 +128,7 @@ export default function useApplicationData() {
         console.log('We got a hook err! -->', error);
       })
   }, []);
+
 
   return {
     state,
