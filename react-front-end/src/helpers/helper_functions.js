@@ -18,7 +18,7 @@ export function getTotalExpensesForUser(state, user) {
 
 export const getUserByID = (users, id) =>
   users.filter(user =>
-    user.id === id
+    user.id === parseInt(id)
   );
 export const getSavingsByID = (expenses, id) =>
   expenses.filter(expense =>

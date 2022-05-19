@@ -3,8 +3,7 @@ import '../../sass/topNav.scss'
 import { getUserByID } from '../../helpers/helper_functions';
 
 export default function TopNav(props) {
-  const username = getUserByID(props.users, props.userId);
-  console.log('USERNAME:', username)
+  const username = getUserByID(props.users, props.userId)[0].username;
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -26,13 +25,6 @@ export default function TopNav(props) {
         {/* <!-- Right elements --> */}
         <div className="d-flex align-items-center">
           {/* <!-- Avatar --> */}
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="dropdown-item text-danger" href="/">Logout</a>
-              </li>
-            </ul>
-          </div>
           <div className="dropdown">
           Welcome {username}!!
             <img
@@ -42,6 +34,13 @@ export default function TopNav(props) {
               alt='animated-girl-with-glasses'
               loading="lazy"
             />
+          </div>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a className="dropdown-item text-danger" href="/">Logout</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
