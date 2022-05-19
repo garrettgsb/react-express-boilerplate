@@ -105,7 +105,31 @@ module.exports = db => {
     });
   });
 
-
+  router.get('/alvin/vacation/spent', (req, res) => {
+    db.query(`
+    SELECT expenses.user_id,
+      expenses.created_at,
+      expenses.amount,
+      expenses.category_id,
+      goals.start_date AS start_date,
+      goals.end_date AS end_date,
+      goals.goal_name
+    FROM expenses
+    JOIN users ON expenses.user_id = users.id
+    JOIN goals ON goals.user_id = users.id
+    WHERE category_id != 8
+    AND category_id !=5
+    AND goals.id = 4
+    AND expenses.created_at > goals.start_date;
+    `)
+    .then(data => {
+      const savings = data.rows;
+      res.json(savings);
+    })
+    .catch(error => {
+      console.log('The error is: ', error);
+    });
+  });
 
   return router;
 };

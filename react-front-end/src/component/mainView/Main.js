@@ -47,7 +47,9 @@ export default function Main(props) {
       />}
 
       {mode === VACATION && <Vacation 
-      
+      savings={props.savings}
+      userId={props.userId}
+      alvinVacationSpent={props.alvinVacationSpent}
       />}
 
       <BotNav 

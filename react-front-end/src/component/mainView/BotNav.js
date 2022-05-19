@@ -6,7 +6,7 @@ export default function BotNav(props) {
 
   const SAVINGS = 'SAVINGS';
   const VACATION = 'VACATION';
-  const {mode} = useVisualMode(SAVINGS)
+  const {mode} = useVisualMode(VACATION);
   
   return (
 

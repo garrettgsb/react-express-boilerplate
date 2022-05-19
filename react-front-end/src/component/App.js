@@ -6,7 +6,7 @@ import Login from './Login';
 import Signup from './Signup';
 import '../sass/app.scss';
 
-export default function App(props){
+export default function App(){
   const { state, addExpense, loginUser } = useApplicationData();
 
   //views
@@ -14,7 +14,6 @@ export default function App(props){
   const SIGNUP = 'SIGNUP';
   const SHOW = 'SHOW';
 
-  console.log('STATEAPPPUSER:', state.user)
   const { mode, transition, back } = useVisualMode(
     state.user ?
     SHOW :
@@ -44,6 +43,7 @@ export default function App(props){
       savings={state.savings}
       dataPoints={state.dataPoints}
       goals={state.goals}
+      alvinVacationSpent={state.alvinVacationSpent}
       />}
 
     </div>

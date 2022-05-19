@@ -10,7 +10,7 @@ export default function Login(props) {
     /*email: '',
     password: ''*/
   });
-console.log('state.id login page:~ ', state.id)
+
   const login = (id) => {
     const user = { id };
     props.loginUser(user)
