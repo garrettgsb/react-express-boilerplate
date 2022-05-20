@@ -27,8 +27,14 @@ export default function Expenses(props) {
 
 	const removeIncomeButton = classNames('w-25', {
 		'disappear': state.input !== 'disappear',
-		'btn btn-primary': state.input === 'disappear'
+		'btn btn-primary': state.input === 'disappear',
+		'graph-thumbnail': state.input === 'appear'
 	});
+
+	const removeMapview = classNames('text-center w-50', {
+		'disappear': state.input !== 'disappear',
+		'btn card': state.input === 'disappear'
+	})
 
 	const LINE = 'LINE';
 	const EXPENSES = 'EXPENSES';
@@ -189,9 +195,13 @@ export default function Expenses(props) {
 								<div className='w-50 d-flex justify-content-center'>
 									<button
 										name='graph-thumbnail'
-										className='card text-center btn w-50'>
+										className={removeMapview}>
 										<img 
-										onClick={() => transition(LINE)}
+										onClick={
+											() => {
+												transition(LINE);
+												setState({...state, input: 'appear'})}
+											}
 										id='graph-thumbnail' src='../../../graph_thumbnail.png' alt='graph thumbnail' />
 									</button>
 								</div>
