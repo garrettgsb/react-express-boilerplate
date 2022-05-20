@@ -59,7 +59,10 @@ export default function Expenses(props) {
 			)}
 			{mode === EXPENSES && (
 				<div id="user-expense-input">
-					<ExpenseTable key={props.expenses.length} expenses={props.expenses} />
+					<ExpenseTable 
+					key={props.expenses.length} 
+					expenses={props.expenses} 
+					/>
 					<div id='input-card' className={expenseInput}>
 						<form className="d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3">
 							<div className="col-lg-3 col-sm-6">
