@@ -12,7 +12,8 @@ export default function useApplicationData() {
     savings: [],
     categories: [],
     dataPoints: [],
-    alvinVacationSpent: []
+    alvinVacationSpent: [],
+    vacations: []
   });
   
   const loginUser = (user) => {
@@ -115,6 +116,7 @@ export default function useApplicationData() {
     const apiDataPoints = `http://localhost:8081/api/dataPoints`;
     const apiUsers = 'http://localhost:8081/api/users';
     const apiAlvinVacationSpent = 'http://localhost:8081/api/alvin/vacation/spent';
+    const apiVacations = 'http://localhost:8081/api/vacations';
 
     Promise.all([
       axios.get(apiGoals),
@@ -124,7 +126,8 @@ export default function useApplicationData() {
       axios.get(apiCategories),
       axios.get(apiDataPoints),
       axios.get(apiUsers),
-      axios.get(apiAlvinVacationSpent)
+      axios.get(apiAlvinVacationSpent),
+      axios.get(apiVacations)
     ])
       .then(all => {
         setState((prev) => ({
@@ -136,7 +139,8 @@ export default function useApplicationData() {
           categories: all[4].data,
           dataPoints: all[5].data,
           users: all[6].data,
-          alvinVacationSpent: all[7].data
+          alvinVacationSpent: all[7].data,
+          vacations: all[8].data,
         }));
       })
       .catch(error => {
