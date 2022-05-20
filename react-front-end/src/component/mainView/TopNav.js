@@ -5,7 +5,7 @@ import { getUserByID } from '../../helpers/helper_functions';
 export default function TopNav(props) {
   const username = getUserByID(props.users, props.userId)[0].username;
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light top-nav-items">
       <div className="container-fluid">
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <i
@@ -17,7 +17,7 @@ export default function TopNav(props) {
         </div>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+            <li className="nav-item nav-name">
               <h4>Piggy Projections</h4>
             </li>
           </ul>
