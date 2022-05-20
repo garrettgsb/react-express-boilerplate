@@ -20,7 +20,7 @@ module.exports = db => {
 			});
 	});
 
-	router.put('/vacation', (req, res) => {
+	router.put('/vacations', (req, res) => {
 		db.query(
 			`
 			SELECT goals.*, users.username AS name 
@@ -30,13 +30,14 @@ module.exports = db => {
     `
 		)
 			.then(data => {
-				const goals = data.rows;
-				res.json(goals);
+				const vacations = data.rows;
+				res.json(vacations);
 			})
 			.catch(error => {
 				console.log('The error is: ', error);
 			});
 	});
+
 	router.put('/goals', (req, res) => {
 		db.query(
 			`
