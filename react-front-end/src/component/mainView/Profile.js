@@ -74,7 +74,7 @@ export default function Profile(props) {
                         <input
                           type="text"
                           id="goalName"
-                          className="form-control align-items-center fs-5 text-center"
+                          className="form-control align-items-center fw-bolder text-center"
                           value={state.goal_name}
                           onChange={(event) => setState({ ...state, goal_name: event.target.value })}
                         />
@@ -92,7 +92,7 @@ export default function Profile(props) {
                           id="goalAmount"
                           class="form-control align-items-center"
                           value={state.totalGoal}
-                          onChange={(event) => setState({ ...state, totalGoal: event.target.value })}
+                          onChange={(event) => setState({ ...state, totalGoal: parseInt(event.target.value)})}
                         />
                       </div>
                       <label class="form-label visually-hidden" htmlFor="goalAmount">
@@ -118,11 +118,11 @@ export default function Profile(props) {
                 </thead>
               </table>
               <div>
-                <button onClick={onChange} className='btn btn-primary m-2'>
+                <button onClick={onChange} className='btn btn-primary mb-3 m-1'>
                   Confirm
                 </button>
 
-                <button onClick={() => back()} className='btn btn-danger m-2'>
+                <button onClick={() => back()} className='btn btn-danger mb-3 m-1'>
                   Cancel
                 </button>
               </div>
@@ -166,7 +166,7 @@ export default function Profile(props) {
                 </thead>
               </table>
               <button
-                className='btn btn-info'
+                className='btn btn-info mb-3'
                 onClick={() => transition(EDIT)}
               >
                 EDIT
