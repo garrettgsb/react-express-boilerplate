@@ -33,7 +33,7 @@ export default function useApplicationData() {
           ...item,
           goal_name: goals.goal_name,
           amount: parseInt(goals.totalGoals),
-          date: goals.date
+          end_date: goals.date
         })
         : item
     );
@@ -48,7 +48,7 @@ export default function useApplicationData() {
         });
       });
   };
-console.log('STATE:', state.goals)
+
   const addExpense = expense => {
     const expenses = [
       {
