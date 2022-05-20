@@ -9,6 +9,8 @@ export default function SingleExpense(props) {
     'table-success': props.classname === 'Income'
   });
 
+  
+
   return (
     <tr className={tableClass}>
       <td className='textalign'>{props.created_at}</td>
