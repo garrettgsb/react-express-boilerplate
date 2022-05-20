@@ -26,7 +26,6 @@ export default function Vacation(props) {
 
 return (
   <div>
-    <div className="background-photo"></div>
       <br />
       <br />
       <div className='d-flex align-items-center justify-content-center text-center goalbox'>

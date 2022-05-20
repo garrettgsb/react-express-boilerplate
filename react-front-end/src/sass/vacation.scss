@@ -1,19 +1,10 @@
 @import './partials/mixins';
 @import './partials/variables';
 
-.background-photo {
-background-image: url('../docs/vacation.jpeg');
-// opacity: 0.2;
-height: 100%;
-width: 100%;
-z-index: 10000;
-// position:absolute;
-top:0;
-left:0;
-}
 
 .goalbox {
+  background-image: url('../docs/vacation2.jpg');
   z-index: 2;
-  // background-image: url('../docs/vacation.jpeg');
-  font-weight: bold;
+  font-weight: bolder;
+  color: black;
 }
