@@ -41,7 +41,8 @@ export default function App() {
         location: '49.2657017,-123.1009721',
         radius: '5000',
         language: 'en',
-        keyword: 'brewery, bar, pub, gastropub '
+        keyword: 'brewery, bar, pub, gastropub ',
+        opennow: 'true'
       },
       headers: {
         "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
@@ -74,6 +75,7 @@ export default function App() {
 
 
   function click() {
+  //Flip
   setBar(searchResults[RandNum()]);
   console.log(bar);
   // console.log(grabPhoto());
