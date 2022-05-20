@@ -21,7 +21,7 @@ export default function App(){
   );
 
   return (
-    <div className="app">
+    <div className="app overflow-hidden">
 
       {mode === LOGIN && <Login  
       transition={transition} 

@@ -4,7 +4,6 @@ import useVisualMode from '../../hooks/useVisualMode';
 import useApplicationData from '../../hooks/hook';
 import {
   getTotalAmount,
-  getDaysTillGoal,
   getGoalByID,
   getSavingsByID,
   getUserByID
@@ -21,7 +20,6 @@ export default function Profile(props) {
   const totalSaved = getTotalAmount(savingsbyID);
   const goalByID = getGoalByID(props.goals, props.userId);
   const totalGoal = getTotalAmount(goalByID);
-  const totalDaysTillGoal = getDaysTillGoal(goalByID);
   const username = getUserByID(props.users, props.userId)[0].username;
 
   const [state, setState] = useState({
@@ -140,16 +138,16 @@ export default function Profile(props) {
                 <thead>
                   <tr>
                     <td>
-                      <h1>
-                        {goalByID[0].goal_name}
-                      </h1>
+                      <h3>
+                        Saving for: {goalByID[0].goal_name}
+                      </h3>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <h1>
-                        {(totalGoal / 100).toFixed(2)}
-                      </h1>
+                      <h3>
+                        Aiming for: ${(totalGoal / 100).toFixed(2)}
+                      </h3>
                     </td>
                   </tr>
                   <tr>
