@@ -117,7 +117,8 @@ INSERT INTO expenses (user_id, created_at, amount, category_id)
     (3, '2022-05-20', 55836, 8),
     (3, '2022-05-24', 79374, 2),
     (1, '2022-05-26', 23958, 9),
-    (2, '2022-05-28', 70626, 1);
+    (2, '2022-05-28', 70626, 1),
+    (1, '2022-05-28', 1500000, 8);
 
 INSERT INTO goals (user_id, goal_name, start_date, end_date, amount)
   VALUES
