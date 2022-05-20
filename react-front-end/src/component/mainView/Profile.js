@@ -38,9 +38,9 @@ export default function Profile(props) {
 
   return (
     <section className="vw-100 row">
-      <div className="m-2 container p-card">
-        <div className="row d-flex justify-content-center h-100 mt-5">
-          <div className="w-50 col-md-12 col-xl-4">
+      <div className="container p-card">
+        <div className="row d-flex justify-content-center h-100">
+          <div className="w-50 col-md-12 col-xl-4 m-4">
             <div className="card">
               <div className="card-body text-center">
                 <div className="mt-3 mb-4 background">
@@ -131,12 +131,11 @@ export default function Profile(props) {
         </div>
       }
       {mode === GOAL &&
-        <div className="m-2 chart-align">
-          <div className='goal-container mt-5'>
+        <div className="chart-align">
+          <div className='goal-container'>
             <br />
             <br />
-            <div className='card d-flex align-items-center justify-content-center text-center flex-column'>
-              <button onClick={() => transition(EDIT)}>EDIT</button>
+            <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
               <table className="table table-bordered">
                 <thead>
                   <tr>
@@ -149,17 +148,29 @@ export default function Profile(props) {
                   <tr>
                     <td>
                       <h1>
-                        ${(totalSaved / 100).toFixed(2)} / ${(totalGoal / 100).toFixed(2)}
+                        {(totalGoal / 100).toFixed(2)}
                       </h1>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      {totalDaysTillGoal} days until {goalByID[0].goal_name}
+                      <h3>
+                        Current end date:
+                        <br />
+                        <span className='fw-bold'>
+                          {goalByID[0].end_date}
+                        </span>
+                      </h3>
                     </td>
                   </tr>
                 </thead>
               </table>
+              <button
+                className='btn btn-info'
+                onClick={() => transition(EDIT)}
+              >
+                EDIT
+              </button>
             </div>
           </div>
         </div>
