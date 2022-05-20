@@ -70,7 +70,7 @@ export default function Profile(props) {
                 <thead>
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
-                      <div class="form-outline w-75">
+                      <div className="form-outline w-75">
                         <input
                           type="text"
                           id="goalName"
@@ -78,7 +78,7 @@ export default function Profile(props) {
                           value={state.goal_name}
                           onChange={(event) => setState({ ...state, goal_name: event.target.value })}
                         />
-                        <label class="form-label visually-hidden" htmlFor="goalName">
+                        <label className="form-label visually-hidden" htmlFor="goalName">
                           Goal Name
                         </label>
                       </div>
@@ -90,12 +90,12 @@ export default function Profile(props) {
                         <input
                           type="number"
                           id="goalAmount"
-                          class="form-control align-items-center"
+                          className="form-control align-items-center"
                           value={state.totalGoal}
                           onChange={(event) => setState({ ...state, totalGoal: parseInt(event.target.value)})}
                         />
                       </div>
-                      <label class="form-label visually-hidden" htmlFor="goalAmount">
+                      <label className="form-label visually-hidden" htmlFor="goalAmount">
                         goalAmount
                       </label>
                     </td>
