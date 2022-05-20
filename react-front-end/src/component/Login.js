@@ -44,13 +44,13 @@ export default function Login(props) {
                       <p>Please login to your account</p>
 
                       <div className="form-outline mb-4">
-                        <input type="number" id="form2Example11" className="form-control"
+                        <input type="number" id="username" className="form-control"
                           placeholder="Email address" value={state.id} onChange={(event) => setState({ ...state, id: parseInt(event.target.value)})} />
                         <label className="form-label" htmlFor="form2Example11">Username</label>
                       </div>
 
                       <div className="form-outline mb-4">
-                        <input type="password" id="form2Example22" className="form-control" /*value={state.password} onChange={(event) => setState({...state, password: event.target.value})}*/ />
+                        <input type="password" id="password" className="form-control" /*value={state.password} onChange={(event) => setState({...state, password: event.target.value})}*/ />
                         <label className="form-label" htmlFor="form2Example22"
                         >Password</label>
                       </div>
