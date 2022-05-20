@@ -20,6 +20,23 @@ module.exports = db => {
 			});
 	});
 
+	router.put('/vacation', (req, res) => {
+		db.query(
+			`
+			SELECT goals.*, users.username AS name 
+			FROM goals
+			JOIN users ON user_id = users.id
+			WHERE goal_name LIKE '%acation%';
+    `
+		)
+			.then(data => {
+				const goals = data.rows;
+				res.json(goals);
+			})
+			.catch(error => {
+				console.log('The error is: ', error);
+			});
+	});
 	router.put('/goals', (req, res) => {
 		db.query(
 			`
