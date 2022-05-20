@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import "../../sass/profile.scss";
 import useVisualMode from '../../hooks/useVisualMode';
-import useApplicationData from '../../hooks/hook';
 import {
   getTotalAmount,
   getGoalByID,
@@ -11,7 +10,7 @@ import {
 
 export default function Profile(props) {
 
-  const { updateGoals } = useApplicationData();
+
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
   const { mode, transition, back } = useVisualMode(GOAL)
@@ -19,19 +18,18 @@ export default function Profile(props) {
   const savingsbyID = getSavingsByID(props.savings, props.userId)
   const totalSaved = getTotalAmount(savingsbyID);
   const goalByID = getGoalByID(props.goals, props.userId);
-  const totalGoal = getTotalAmount(goalByID);
   const username = getUserByID(props.users, props.userId)[0].username;
 
   const [state, setState] = useState({
     user_id: props.userId,
     goal_name: goalByID[0].goal_name,
-    totalGoal,
+    totalGoals: goalByID[0].amount,
     date: goalByID[0].end_date
   })
 
-  const onChange = function () {
-    updateGoals(props.userId, state)
-    transition(GOAL)
+  const onChange = (goals) => {
+    props.updateGoals(props.id, goals);
+    transition(GOAL);
   }
 
   return (
@@ -91,8 +89,8 @@ export default function Profile(props) {
                           type="number"
                           id="goalAmount"
                           className="form-control align-items-center"
-                          value={state.totalGoal}
-                          onChange={(event) => setState({ ...state, totalGoal: parseInt(event.target.value)})}
+                          value={state.totalGoals}
+                          onChange={(event) => setState({ ...state, totalGoals: parseInt(event.target.value)})}
                         />
                       </div>
                       <label className="form-label visually-hidden" htmlFor="goalAmount">
@@ -118,7 +116,7 @@ export default function Profile(props) {
                 </thead>
               </table>
               <div>
-                <button onClick={onChange} className='btn btn-primary mb-3 m-1'>
+                <button onClick={() => onChange(state)} className='btn btn-primary mb-3 m-1'>
                   Confirm
                 </button>
 
@@ -146,7 +144,7 @@ export default function Profile(props) {
                   <tr>
                     <td>
                       <h3>
-                        Aiming for: ${(totalGoal / 100).toFixed(2)}
+                        Aiming for: ${(state.totalGoals/ 100).toFixed(2)}
                       </h3>
                     </td>
                   </tr>

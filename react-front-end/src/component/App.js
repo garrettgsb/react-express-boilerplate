@@ -6,44 +6,49 @@ import Login from './Login';
 import Signup from './Signup';
 import '../sass/app.scss';
 
-export default function App(){
-  const { state, addExpense, loginUser } = useApplicationData();
+export default function App() {
+  const {
+    state,
+    addExpense,
+    loginUser,
+    updateGoals } = useApplicationData();
 
   //views
-  const LOGIN = 'LOGIN'; 
+  const LOGIN = 'LOGIN';
   const SIGNUP = 'SIGNUP';
   const SHOW = 'SHOW';
 
   const { mode, transition, back } = useVisualMode(
     state.user ?
-    SHOW :
-    LOGIN
+      SHOW :
+      LOGIN
   );
 
   return (
     <div className="app overflow-hidden">
 
-      {mode === LOGIN && <Login  
-      transition={transition} 
-      loginUser={loginUser}
+      {mode === LOGIN && <Login
+        transition={transition}
+        loginUser={loginUser}
       />}
 
-      {mode === SIGNUP && <Signup 
-      transition={transition}
-      back={back}
+      {mode === SIGNUP && <Signup
+        transition={transition}
+        back={back}
       />}
-      
-      {mode === SHOW && <Main 
-      tab={state.tab} 
-      addExpense={addExpense} 
-      userId={state.user}
-      users={state.users}
-      expenses={state.expenses}
-      incomes={state.incomes}
-      savings={state.savings}
-      dataPoints={state.dataPoints}
-      goals={state.goals}
-      alvinVacationSpent={state.alvinVacationSpent}
+
+      {mode === SHOW && <Main
+        tab={state.tab}
+        addExpense={addExpense}
+        userId={state.user}
+        users={state.users}
+        expenses={state.expenses}
+        incomes={state.incomes}
+        savings={state.savings}
+        dataPoints={state.dataPoints}
+        updateGoals={updateGoals}
+        goals={state.goals}
+        alvinVacationSpent={state.alvinVacationSpent}
       />}
 
     </div>
