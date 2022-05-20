@@ -45,7 +45,8 @@ module.exports = db => {
     SET goal_name = $1, 
     end_date = $2, 
     amount = $3 
-    WHERE id = $4;
+    WHERE id = $4
+		AND goals.amount > 0;
     `, [
 			req.body.goals.goal_name,
 			req.body.goals.date,

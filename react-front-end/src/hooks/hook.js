@@ -15,7 +15,7 @@ export default function useApplicationData() {
     alvinVacationSpent: [],
     vacations: []
   });
-  
+  console.log('STATE.GOALS', state.goals);
   const loginUser = (user) => {
     return axios
       .get(`http://localhost:8081/api/dataPoints`)
