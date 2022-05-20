@@ -24,11 +24,11 @@ export default function Expenses(props) {
 	const blur = classNames('', {
 		'blur': state.input !== 'disappear'
 	});
-	
-  const removeIncomeButton = classNames('', {
-    'disappear': state.input !== 'disappear',
+
+	const removeIncomeButton = classNames('w-25', {
+		'disappear': state.input !== 'disappear',
 		'btn btn-primary': state.input === 'disappear'
-  });
+	});
 
 	const LINE = 'LINE';
 	const EXPENSES = 'EXPENSES';
@@ -61,7 +61,11 @@ export default function Expenses(props) {
 			)}
 			{mode === EXPENSES && (
 				<div id="user-expense-input">
-					<ExpenseTable key={props.expenses.length} expenses={props.expenses} userId={props.userId}/>
+					<ExpenseTable
+						key={props.expenses.length}
+						expenses={props.expenses}
+						userId={props.userId}
+					/>
 					<div id='input-card' className={expenseInput}>
 						<form className="d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3">
 							<div className="col-lg-3 col-sm-6">
@@ -168,11 +172,11 @@ export default function Expenses(props) {
 							</div>
 						</form>
 					</div>
-								<div className={blur}>
-								</div>
-					<div className="col-12">
+					<div className={blur}>
+					</div>
+					<div className="">
 						<div className="d-flex column align-items-center justify-content-center text-center">
-							<div>
+							<div className='d-flex row justify-content-center align-items-center w-75'>
 								<button
 									type="submit"
 									className={removeIncomeButton}
@@ -182,13 +186,15 @@ export default function Expenses(props) {
 								>
 									Add New
 								</button>
-								<button
-									type="submit"
-									onClick={() => transition(LINE)}
-									className="btn btn-primary"
-								>
-									Line Graph
-								</button>
+								<div className='w-50 d-flex justify-content-center'>
+									<button
+										name='graph-thumbnail'
+										className='card text-center btn w-50'>
+										<img 
+										onClick={() => transition(LINE)}
+										id='graph-thumbnail' src='../../../graph_thumbnail.png' alt='graph thumbnail' />
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
