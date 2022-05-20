@@ -39,8 +39,8 @@ export default function Profile(props) {
   return (
     <section className="vw-100 row">
       <div className="m-2 container p-card">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col-md-12 col-xl-4">
+        <div className="row d-flex justify-content-center h-100 mt-5">
+          <div className="w-50 col-md-12 col-xl-4">
             <div className="card">
               <div className="card-body text-center">
                 <div className="mt-3 mb-4 background">
@@ -132,10 +132,10 @@ export default function Profile(props) {
       }
       {mode === GOAL &&
         <div className="m-2 chart-align">
-          <div className='card goal-container'>
+          <div className='goal-container mt-5'>
             <br />
             <br />
-            <div className='d-flex align-items-center justify-content-center text-center flex-column'>
+            <div className='card d-flex align-items-center justify-content-center text-center flex-column'>
               <button onClick={() => transition(EDIT)}>EDIT</button>
               <table className="table table-bordered">
                 <thead>
