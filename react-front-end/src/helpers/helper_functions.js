@@ -57,6 +57,12 @@ export function getCategoryName(prop) {
   return categoryID;
 };
 
+export function getExpenseById(expenses, id) {
+  return expenses.filter(expense =>
+    expense.user_id === parseInt(id)
+  );
+};
+
 
   
 // export const totalSaved = getTotalAmount(savingsByCatId);
