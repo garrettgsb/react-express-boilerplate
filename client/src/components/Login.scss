@@ -1,11 +1,14 @@
 .login {
-  border: solid black 5px;
+  border: solid black 3px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 97.5%;
   height: 97.5%;
+  margin-top: 10%;
+  background-color: #2E3B55;
 
   &--inner {
     display: flex;
@@ -14,6 +17,10 @@
     align-items: flex-start;
     width: 90%;
     height: 90%;
+
+    & h2 {
+      color: white;
+    }
 
     &--forgot {
       font-size: 13px;
@@ -31,7 +38,7 @@
     &--values {
       
       & input {
-        width: 137%;
+        width: 133%;
         height: 120%;
         border: none;
         border-bottom: solid rgb(144, 144, 144) 2px;
@@ -42,13 +49,23 @@
   &--buttons {
     width: 100%;
 
+    &--left {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    
+    &--right {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
     & button {
       width: 50%;
       height: 50px;
       border: none;
       border-top: solid rgb(214, 214, 214) 1px;
       border-right: solid rgb(214, 214, 214) 1px;
-      background: none;
+      background-color: white;
 
       &:hover {
         background-color: #2E3B55;

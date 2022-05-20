@@ -6,11 +6,13 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import LoginForm from './LoginForm';
+import Dropdown from './Dropdown';
 
-export default function Header() {
+export default function Header({userLogin}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ background: '#2E3B55', borderBottom: "solid black 2px" }}>
+      <AppBar position="static" style={{ background: '#2E3B55', borderBottom: "solid black 2px", color: "white"}}>
         <Toolbar>
           <IconButton
             size="large"
@@ -24,7 +26,7 @@ export default function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             BAR HOPPER
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Dropdown userLogin={userLogin} />
         </Toolbar>
       </AppBar>
     </Box>

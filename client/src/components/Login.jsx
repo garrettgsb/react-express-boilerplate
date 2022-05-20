@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import './Login.scss'
 
-export default function Login({ userLogin }) {
+export default function Login({ onLogin }) {
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
 
   const loginHandler = (e) => {
     e.preventDefault();
-    userLogin(loginInfo);
+    onLogin(loginInfo);
   };
 
   return (
@@ -46,7 +46,7 @@ export default function Login({ userLogin }) {
         </div>
         <div className="login--buttons">
           <button className="login--buttons--left">Register</button>
-          <button type="submit" value="Sign">Sign In</button>
+          <button className="login--buttons--right" type="submit" value="Sign">Sign In</button>
         </div>
         
       </div>

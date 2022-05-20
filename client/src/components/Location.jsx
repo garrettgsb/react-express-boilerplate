@@ -31,6 +31,35 @@ export default function Location(props) {
   
   }
 
+  let result = [];
+
+  const Search = () => {
+
+    const options = {
+      method: 'GET',
+      url: 'https://google-maps28.p.rapidapi.com/maps/api/place/nearbysearch/json',
+      params: {
+        location: '49.2657017,-123.1009721',
+        radius: '5000',
+        language: 'en',
+        keyword: 'brewery, bar, pub, gastropub '
+      },
+      headers: {
+        "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",
+        "X-RapidAPI-Key": `${process.env.REACT_APP_RapidAPI_Key}`,
+      },
+    };
+
+    axios.request(options).then(function (response) {
+      props.setSearchResults(response.data.results);
+            
+    }).catch(function (error) {
+      console.error(error);
+    });
+    
+    return result;
+  };
+
   return (
     <main className="location">
       <div className="location--name"> WELCOME!</div>
@@ -40,6 +69,7 @@ export default function Location(props) {
           start the trip:
           <div className="location--textbox">
             <input
+              autoFocus
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -47,7 +77,7 @@ export default function Location(props) {
           </div>
         </label>
         <div>
-        <button className="location--button" onClick={() => locationSearch(name)}>Select</button>
+        <button className="location--button" onClick={() => [locationSearch(name), Search()]}>Select</button>
         </div>
       </form>
     </main>
