@@ -46,14 +46,14 @@ export default function Profile(props) {
                     className="rounded-circle img-fluid" alt='animated-girl-with-glasses' />
                 </div>
                 <h4 className="mb-2">{username}</h4>
-                <p className="text-muted mb-4">@Programmer <span className="mx-2">|</span> <a
+                <p className="job-name mb-4">@Programmer <span className="mx-2">|</span> <a
                   href="#!">Lighthouselabs</a></p>
                 <div className="mb-4 pb-2">
                 </div>
-                <div className="d-flex justify-content-between text-center mt-5 mb-2">
+                <div className="d-flex justify-content-center text-center mt-5 mb-2">
                   <div>
-                    <p className="mb-2 h5">${(totalSaved / 100).toFixed(2)}</p>
-                    <p className="text-muted mb-0">Total Saved</p>
+                    <p className="mb-2 h5 total-saved-amount">${(totalSaved / 100).toFixed(2)}</p>
+                    <p className="total-saved-text mb-0">Total Saved</p>
                   </div>
                 </div>
               </div>
