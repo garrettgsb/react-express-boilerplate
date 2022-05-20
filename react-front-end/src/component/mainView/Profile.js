@@ -63,18 +63,18 @@ export default function Profile(props) {
         </div>
       </div>
       {mode === EDIT &&
-        <div className="card chart-align">
-          <div className='card goal-container'>
-            <div className='d-flex align-items-center justify-content-center text-center flex-column'>
+        <div className="chart-align">
+          <div className='goal-container'>
+            <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
               <table className="table table-bordered">
                 <thead>
                   <tr>
-                    <td>
-                      <div class="form-outline mb-4">
+                    <td className='d-flex justify-content-center w-100'>
+                      <div class="form-outline w-75">
                         <input
                           type="text"
                           id="goalName"
-                          className="form-control align-items-center"
+                          className="form-control align-items-center fw-bolder text-center"
                           value={state.goal_name}
                           onChange={(event) => setState({ ...state, goal_name: event.target.value })}
                         />
@@ -85,22 +85,24 @@ export default function Profile(props) {
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <input
-                        type="number"
-                        id="goalAmount"
-                        class="form-control align-items-center"
-                        value={state.totalGoal}
-                        onChange={(event) => setState({ ...state, totalGoal: event.target.value })}
-                      />
+                    <td className='d-flex justify-content-center w-100'>
+                      <div className='w-50'>
+                        <input
+                          type="number"
+                          id="goalAmount"
+                          class="form-control align-items-center"
+                          value={state.totalGoal}
+                          onChange={(event) => setState({ ...state, totalGoal: parseInt(event.target.value)})}
+                        />
+                      </div>
                       <label class="form-label visually-hidden" htmlFor="goalAmount">
                         goalAmount
                       </label>
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <div className="col-lg-3 col-sm-6">
+                    <td className='d-flex justify-content-center w-100'>
+                      <div className="w-50 col-lg-3 justify-content-center col-sm-6">
                         <label htmlFor="date" className='visually-hidden'>date</label>
                         <input
                           id="date"
@@ -116,11 +118,11 @@ export default function Profile(props) {
                 </thead>
               </table>
               <div>
-                <button onClick={onChange} className='btn btn-primary m-2'>
+                <button onClick={onChange} className='btn btn-primary mb-3 m-1'>
                   Confirm
                 </button>
 
-                <button onClick={() => back()} className='btn btn-danger m-2'>
+                <button onClick={() => back()} className='btn btn-danger mb-3 m-1'>
                   Cancel
                 </button>
               </div>
@@ -164,7 +166,7 @@ export default function Profile(props) {
                 </thead>
               </table>
               <button
-                className='btn btn-info'
+                className='btn btn-info mb-3'
                 onClick={() => transition(EDIT)}
               >
                 EDIT
