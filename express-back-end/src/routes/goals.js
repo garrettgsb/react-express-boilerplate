@@ -39,16 +39,19 @@ module.exports = db => {
 	});
 
 	router.put('/goals', (req, res) => {
-		console.log(req.body)
 		db.query(
 			`
     UPDATE goals 
-    SET goal_name = '${req.body.goals.goal_name}', 
-    end_date = '${req.body.goals.date}', 
-    amount = ${req.body.goals.totalGoal} 
-    WHERE user_id = ${req.body.goals.user_id}
-		AND goal_name NOT LIKE '%acation%';
-    `
+    SET goal_name = $1, 
+    end_date = $2, 
+    amount = $3 
+    WHERE id = $4;
+    `, [
+			req.body.goals.goal_name,
+			req.body.goals.date,
+			req.body.goals.totalGoals,
+			req.body.goals.goal_id
+		]
 		)
 			.then(data => {
 				const goals = data.rows;

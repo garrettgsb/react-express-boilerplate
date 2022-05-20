@@ -20,7 +20,9 @@ export default function Profile(props) {
   const goalByID = getGoalByID(props.goals, props.userId);
   const username = getUserByID(props.users, props.userId)[0].username;
 
+  console.log('GOALBYID:', goalByID)
   const [state, setState] = useState({
+    goal_id: goalByID[0].id,
     user_id: props.userId,
     goal_name: goalByID[0].goal_name,
     totalGoals: goalByID[0].amount,
@@ -90,7 +92,7 @@ export default function Profile(props) {
                           id="goalAmount"
                           className="form-control align-items-center"
                           value={state.totalGoals}
-                          onChange={(event) => setState({ ...state, totalGoals: event.target.value})}
+                          onChange={(event) => setState({ ...state, totalGoals: parseInt(event.target.value)})}
                         />
                       </div>
                       <label className="form-label visually-hidden" htmlFor="goalAmount">

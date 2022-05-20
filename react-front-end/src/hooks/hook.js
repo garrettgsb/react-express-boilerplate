@@ -96,7 +96,7 @@ export default function useApplicationData() {
 
     return axios
       .put(`http://localhost:8081/api/expenses`, {
-        expense,
+        expense
       })
       .then(res => {
         setState(prev => {
