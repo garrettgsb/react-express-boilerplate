@@ -1,9 +1,12 @@
 import React from 'react'
+import Stamp from './Stamp'
 import "./TripContainer.scss"
 
 export default function TripContainer () {
 
   return (
-    <div className='tripContainer'>You have no trips planned yet</div>
+    <div className='tripContainer'>
+      <Stamp />
+    </div>
   )
 }

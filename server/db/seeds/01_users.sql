@@ -1,5 +1,5 @@
 INSERT INTO users (id, username, email, password)
 VALUES
-    ('1', 'Carly Khomich', 'ckhomich0@telegraph.co.uk', 'f9AaTV3'),
-    ('2', 'Loella Cullinan', 'lcullinan1@economist.com', 'NmCUhR'),
-    ('3', 'Monty Czaple', 'mczaple2@w3.org', 'sYwxQ2')
+    ('1', 'Dave', 'dave@test.com', 'test'),
+    ('2', 'Matt', 'matt@test.com', 'test'),
+    ('3', 'Lucus', 'lucus@test.com', 'test')
