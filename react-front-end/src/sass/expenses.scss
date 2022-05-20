@@ -53,9 +53,23 @@
     border-radius: 8px;
   }
 
-  .expense-btn {
-    color: $black;
-    
+  .expense-button {
+    color:red;
+    position: absolute;
+    right: 0;
+    border-radius: 5px;
+    border-style: none;
+    opacity: 0.5;
+    transform: scale(0.7);
+    &:hover {
+      color: white;
+      background-color: red;
+      border: solid;
+      transition: all .4s ease-in;
+      transform: scaleX(1.1);
+      opacity: 1;
+      font-weight: 500;
+    }
   }
 }
   
