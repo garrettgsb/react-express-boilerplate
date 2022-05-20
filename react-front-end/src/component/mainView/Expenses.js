@@ -12,12 +12,12 @@ export default function Expenses(props) {
 		amount: 0,
 		category_name: 'category',
 		category_id: 0,
-		disappear: 'disappear',
+		input: 'disappear',
 	});
 
 	const expenseInput = classNames('vw-100 col align-items-center', {
-		'disappear': state.disappear === 'disappear',
-    'card': state.disappear !== 'disappear'
+		'disappear': state.input === 'disappear',
+		'card': state.input !== 'disappear',
 	});
 
 	const LINE = 'LINE';
@@ -136,7 +136,7 @@ export default function Expenses(props) {
 									<div className="col-12">
 										<button
 											type="submit"
-											className="btn btn-primary"
+											className="btn btn-primary m-1"
 											onClick={e => {
 												e.preventDefault();
 												submit(
@@ -150,6 +150,13 @@ export default function Expenses(props) {
 										>
 											Submit
 										</button>
+                    <button 
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setState({...state, input: 'disappear'})} }
+                    className='btn btn-danger m-1'>
+                  Cancel
+                </button>
 									</div>
 								</form>
 							</div>
@@ -157,10 +164,8 @@ export default function Expenses(props) {
 								<button
 									type="submit"
 									className="btn btn-primary"
-									onClick={(e) => { console.log('e', e.target.value);
-                  console.log('state.disappear',state.disappear)
-										setState({ ...state, disappear: e.target.value });
-                    console.log('state.disappear2',state.disappear)
+									onClick={() => {
+										setState({ ...state, input: 'appear' });
 									}}
 								>
 									Add New/Income
