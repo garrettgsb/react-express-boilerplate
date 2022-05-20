@@ -1,10 +1,39 @@
 @import './partials/mixins';
 @import './partials/variables';
+#nav-container {
 
-.fa-piggy-bank {
-  color: $OrangePeel;
-  transform: scale(3);
-  position: absolute;
-  left: 25px;
-  top: 20px;
+  #nav-title {
+    color: $OrangePeel;
+  }
+  #nav-username {
+    color: $Cerise;
+  }
+  
+  #nav-logout {
+    opacity: 0.5;
+    border-radius: 10px;
+
+    .logout {
+      color: red;
+      &:hover {
+        color: white;
+        transition: all .4s ease-in;
+        transform: scaleX(1.1);
+      }
+    }
+    &:hover {
+      background-color: red;
+      transition: all .4s ease-in;
+      transform: scaleX(1.1);
+      opacity: 1.5;
+    }
+  }
+
+  .fa-piggy-bank {
+    color: $OrangePeel;
+    transform: scale(3);
+    position: absolute;
+    left: 25px;
+    top: 20px;
+  }
 }

@@ -13,6 +13,7 @@ export default function Expenses(props) {
 		category_name: 'category',
 		category_id: 0,
 		input: 'disappear',
+		goal_name: 'Mexico',
 	});
 
 	const expenseInput = classNames('vw-50  align-items-center', {
@@ -34,13 +35,14 @@ export default function Expenses(props) {
 
 	const { mode, transition, back } = useVisualMode(EXPENSES);
 
-	const submit = (user_id, created_at, amount, category_id, category_name) => {
+	const submit = (user_id, created_at, amount, category_id, category_name, goal_name) => {
 		const expense = {
 			user_id,
 			created_at,
 			amount,
 			category_id,
 			category_name,
+			goal_name,
 		};
 		props.addExpense(expense);
 	};
@@ -62,6 +64,7 @@ export default function Expenses(props) {
 					<ExpenseTable 
 					key={props.expenses.length} 
 					expenses={props.expenses} 
+					userId={props.userId}
 					/>
 					<div id='input-card' className={expenseInput}>
 						<form className="d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3">
@@ -151,7 +154,8 @@ export default function Expenses(props) {
 											state.date,
 											state.amount,
 											state.category_id,
-											state.category_name
+											state.category_name,
+											state.goal_name
 										);
 									}}
 								>

@@ -14,7 +14,7 @@ export default function useApplicationData() {
     dataPoints: [],
     alvinVacationSpent: []
   });
-
+  
   const loginUser = (user) => {
     return axios
       .get(`http://localhost:8081/api/dataPoints`)
@@ -88,6 +88,7 @@ export default function useApplicationData() {
         category_id: expense.category_id,
         start_date: '2022-03-13',/******************************** */
         end_date: '2022-08-13', /******************************** */
+        goal_name: expense.goal_name
       },
       ...state.alvinVacationSpent,
     ];
