@@ -9,7 +9,7 @@
   transition: all .4s ease-in;
     
   #expense-table {
-    max-height: 60vh;
+    max-height: 50vh;
     overflow-y: scroll;
     scroll-behavior: smooth;
     border-radius: 1%;
@@ -46,6 +46,11 @@
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.728);
     z-index: 0;
+  }
+
+  #graph-thumbnail {
+    width: 100%;
+    border-radius: 8px;
   }
 }
   
