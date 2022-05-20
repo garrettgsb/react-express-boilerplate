@@ -24,8 +24,6 @@ export default function Vacation(props) {
 
 return (
   <div>
-      <br />
-      <br />
       <div className='d-flex align-items-center justify-content-center text-center goalbox'>
     <div className='goal-container'>
         <table>
