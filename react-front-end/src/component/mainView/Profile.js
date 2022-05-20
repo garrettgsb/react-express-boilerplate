@@ -17,20 +17,19 @@ export default function Profile(props) {
 
   const savingsbyID = getSavingsByID(props.savings, props.userId)
   const totalSaved = getTotalAmount(savingsbyID);
-  const goalByID = getGoalByID(props.goals, props.userId);
+  const goalByID = getGoalByID(props.goals, props.userId)[0];
   const username = getUserByID(props.users, props.userId)[0].username;
 
-  console.log('GOALBYID:', goalByID)
+
   const [state, setState] = useState({
-    goal_id: goalByID[0].id,
-    user_id: props.userId,
-    goal_name: goalByID[0].goal_name,
-    totalGoals: goalByID[0].amount,
-    date: goalByID[0].end_date
+    goal_id: goalByID.id,
+    goal_name: goalByID.goal_name,
+    totalGoals: goalByID.amount,
+    date: goalByID.end_date
   })
 
-  const onChange = (goals) => {
-    props.updateGoals(props.id, goals);
+  const onChange = (newGoal) => {
+    props.updateGoals(goalByID.id, newGoal);
     transition(GOAL);
   }
 
@@ -92,7 +91,7 @@ export default function Profile(props) {
                           id="goalAmount"
                           className="form-control align-items-center"
                           value={state.totalGoals}
-                          onChange={(event) => setState({ ...state, totalGoals: parseInt(event.target.value)})}
+                          onChange={(event) => setState({ ...state, totalGoals: event.target.value})}
                         />
                       </div>
                       <label className="form-label visually-hidden" htmlFor="goalAmount">
@@ -139,7 +138,7 @@ export default function Profile(props) {
                   <tr>
                     <td>
                       <h3>
-                        Saving for: {goalByID[0].goal_name}
+                        Saving for: {goalByID.goal_name}
                       </h3>
                     </td>
                   </tr>
@@ -156,7 +155,7 @@ export default function Profile(props) {
                         Current end date:
                         <br />
                         <span className='fw-bold'>
-                          {goalByID[0].end_date}
+                          {goalByID.end_date}
                         </span>
                       </h3>
                     </td>

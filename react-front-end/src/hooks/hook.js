@@ -26,13 +26,13 @@ export default function useApplicationData() {
       })
     };
 
-  const updateGoals = (id, goals) => {
+  const updateGoals = (goalID, goals) => {
     const newGoal = state.goals.map(item =>
-      item.user_id === id
+      item.id === goalID
         ? (item = {
           ...item,
           goal_name: goals.goal_name,
-          totalGoal: goals.totalGoals,
+          amount: parseInt(goals.totalGoals),
           date: goals.date
         })
         : item
@@ -44,11 +44,11 @@ export default function useApplicationData() {
       })
       .then(res => {
         setState(prev => {
-          return { ...prev, goal: newGoal };
+          return { ...prev, goals: newGoal };
         });
       });
   };
-
+console.log('STATE:', state.goals)
   const addExpense = expense => {
     const expenses = [
       {
