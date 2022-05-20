@@ -93,6 +93,15 @@ export default function useApplicationData() {
       },
       ...state.alvinVacationSpent,
     ];
+    
+    const dataPoints = [
+      ...state.dataPoints,
+      {
+        user_id: expense.user_id,
+        x: expense.created_at,
+        y: expense.amount,
+      },
+    ];
 
     return axios
       .put(`http://localhost:8081/api/expenses`, {
@@ -100,7 +109,7 @@ export default function useApplicationData() {
       })
       .then(res => {
         setState(prev => {
-          return { ...prev, expenses, incomes, savings, alvinVacationSpent };
+          return { ...prev, expenses, incomes, savings, alvinVacationSpent, dataPoints };
         });
       });
   };
