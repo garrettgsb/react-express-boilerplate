@@ -1,17 +1,34 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
 @import '~mdb-ui-kit/css/mdb.min.css';
-#expense-table {
+#expenses-page {
+  height: 100vh;
+}
+#expenses-page #expense-table {
   max-height: 300px;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
-
-.textalign {
+#expenses-page .textalign {
   text-align: center;
   width: 100%;
   font-weight: bolder;
 }
-
-.disappear {
+#expenses-page .disappear {
   display: none;
+}
+#expenses-page #input-card {
+  position: absolute;
+  left: 25vw;
+  top: 40vh;
+  width: 50vw;
+  z-index: 5;
+}
+#expenses-page .blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.728);
+  z-index: 0;
 }
