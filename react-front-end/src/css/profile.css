@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
+@import '~mdb-ui-kit/css/mdb.min.css';
+.vw-100 {
+  background-color: rgba(249, 216, 175, 0.543);
+}
+
+.card {
+  border-radius: 15px;
+}
+.card .Rounded-circle img-fluid {
+  width: 100px;
+}
+
+.chart-align {
+  flex-shrink: 0;
+  width: 50%;
+  max-width: 50%;
+  padding-right: calc(var(--mdb-gutter-x) * 0.5);
+  padding-left: calc(var(--mdb-gutter-x) * 0.5);
+  margin-top: var(--mdb-gutter-y);
+}
+
+.p-card {
+  width: 45%;
+  max-width: 45%;
+}
+
+.total-saved-amount {
+  font-weight: bold;
+  color: green;
+}
+
+.job-name {
+  color: #757575;
+  font-weight: bold;
+}
+
+.total-saved-text {
+  color: #757575;
+  font-weight: bold;
+}
