@@ -15,3 +15,10 @@
 .disappear {
   display: none;
 }
+
+#input-card {
+  position: absolute;
+  left: 25vw;
+  top: 40vh;
+  width: 50vw;
+}

@@ -15,7 +15,7 @@ export default function Expenses(props) {
 		input: 'disappear',
 	});
 
-	const expenseInput = classNames('vw-100 col align-items-center', {
+	const expenseInput = classNames('vw-50  align-items-center', {
 		'disappear': state.input === 'disappear',
 		'card': state.input !== 'disappear',
 	});
@@ -51,10 +51,8 @@ export default function Expenses(props) {
 			{mode === EXPENSES && (
 				<div id="user-expense-input">
 					<ExpenseTable key={props.expenses.length} expenses={props.expenses} />
-					<div className="col-12">
-						<div className="d-flex column align-items-center justify-content-center text-center">
-							<div className={expenseInput}>
-								<form className="row row-cols-lg-auto g-3 align-items-center">
+					<div id='input-card' className={expenseInput}>
+								<form className="d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3">
 									<div className="col-lg-3 col-sm-6">
 										<label htmlFor="date" className="visually-hidden">
 											date
@@ -97,7 +95,6 @@ export default function Expenses(props) {
 											/>
 										</div>
 									</div>
-
 									<div className="col-12">
 										<label
 											className="visually-hidden"
@@ -131,9 +128,7 @@ export default function Expenses(props) {
 											<option value="10">Other</option>
 										</select>
 									</div>
-
-									<div className="col-12"></div>
-									<div className="col-12">
+									<div className="col-12 d-flex align-items-center">
 										<button
 											type="submit"
 											className="btn btn-primary m-1"
@@ -160,6 +155,8 @@ export default function Expenses(props) {
 									</div>
 								</form>
 							</div>
+					<div className="col-12">
+						<div className="d-flex column align-items-center justify-content-center text-center">
 							<div>
 								<button
 									type="submit"
