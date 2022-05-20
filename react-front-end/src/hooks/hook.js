@@ -140,7 +140,7 @@ export default function useApplicationData() {
           dataPoints: all[5].data,
           users: all[6].data,
           alvinVacationSpent: all[7].data,
-          vacations: all[8].data
+          vacations: all[8].data,
         }));
       })
       .catch(error => {

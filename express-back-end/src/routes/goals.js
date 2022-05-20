@@ -20,7 +20,7 @@ module.exports = db => {
 			});
 	});
 
-	router.put('/vacations', (req, res) => {
+	router.get('/vacations', (req, res) => {
 		db.query(
 			`
 			SELECT goals.*, users.username AS name 
