@@ -42,7 +42,7 @@ export default function Profile(props) {
             <div className="card">
               <div className="card-body text-center">
                 <div className="mt-3 mb-4 background">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+                  <img src="../../person-icon.jpeg"
                     className="rounded-circle img-fluid" alt='animated-girl-with-glasses' />
                 </div>
                 <h4 className="mb-2">{username}</h4>
