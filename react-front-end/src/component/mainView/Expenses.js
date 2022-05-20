@@ -173,7 +173,7 @@ export default function Expenses(props) {
 										setState({ ...state, input: 'appear' });
 									}}
 								>
-									Add New/Income
+									Add New
 								</button>
 								<button
 									type="submit"
