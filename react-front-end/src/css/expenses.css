@@ -11,3 +11,7 @@
   width: 100%;
   font-weight: bolder;
 }
+
+.disappear {
+  display: none;
+}
