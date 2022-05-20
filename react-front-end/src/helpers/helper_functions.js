@@ -4,18 +4,6 @@ export function getTotalExpensesForUser(state, user) {
   return '$' + (totalExpense / 100).toFixed(2);
 };
 
-// export function getExpensesForUser (incomes, user) {
-//   const filteredExpenses = incomes.filter((expenses) => expenses.user_id === user);
-//   // const totalExpense = filteredExpenses.reduce((previous, current) => previous + current.amount, 0);
-//   let newArr = [];
-//   filteredExpenses.forEach((x) =>{
-//     // console.log('what?!', x);
-//     // newArr = {expenses: x}
-//     newArr.push(x)
-//   });
-//   return newArr;
-// };
-
 export const getUserByID = (users, id) =>
   users.filter(user =>
     user.id === parseInt(id)

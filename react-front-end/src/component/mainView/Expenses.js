@@ -19,15 +19,16 @@ export default function Expenses(props) {
 		'disappear': state.input === 'disappear',
 		'card': state.input !== 'disappear'
 	});
-	
-
-
-
 
 	const blur = classNames('', {
 		'blur': state.input !== 'disappear'
 	});
 	
+  const removeIncomeButton = classNames('', {
+    'disappear': state.input !== 'disappear',
+		'btn btn-primary': state.input === 'disappear'
+  });
+
 	const LINE = 'LINE';
 	const EXPENSES = 'EXPENSES';
 
@@ -171,12 +172,12 @@ export default function Expenses(props) {
 							<div>
 								<button
 									type="submit"
-									className="btn btn-primary"
+									className={removeIncomeButton}
 									onClick={() => {
 										setState({ ...state, input: 'appear' });
 									}}
 								>
-									Add New/Income
+									Add New
 								</button>
 								<button
 									type="submit"

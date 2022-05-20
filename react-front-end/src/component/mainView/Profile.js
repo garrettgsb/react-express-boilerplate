@@ -42,18 +42,18 @@ export default function Profile(props) {
             <div className="card">
               <div className="card-body text-center">
                 <div className="mt-3 mb-4 background">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+                  <img src="../../person-icon.jpeg"
                     className="rounded-circle img-fluid" alt='animated-girl-with-glasses' />
                 </div>
                 <h4 className="mb-2">{username}</h4>
-                <p className="text-muted mb-4">@Programmer <span className="mx-2">|</span> <a
+                <p className="job-name mb-4">@Programmer <span className="mx-2">|</span> <a
                   href="#!">Lighthouselabs</a></p>
                 <div className="mb-4 pb-2">
                 </div>
-                <div className="d-flex justify-content-between text-center mt-5 mb-2">
+                <div className="d-flex justify-content-center text-center mt-5 mb-2">
                   <div>
-                    <p className="mb-2 h5">${(totalSaved / 100).toFixed(2)}</p>
-                    <p className="text-muted mb-0">Total Saved</p>
+                    <p className="mb-2 h5 total-saved-amount">${(totalSaved / 100).toFixed(2)}</p>
+                    <p className="total-saved-text mb-0">Total Saved</p>
                   </div>
                 </div>
               </div>
@@ -70,7 +70,7 @@ export default function Profile(props) {
                 <thead>
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
-                      <div class="form-outline w-75">
+                      <div className="form-outline w-75">
                         <input
                           type="text"
                           id="goalName"
@@ -78,7 +78,7 @@ export default function Profile(props) {
                           value={state.goal_name}
                           onChange={(event) => setState({ ...state, goal_name: event.target.value })}
                         />
-                        <label class="form-label visually-hidden" htmlFor="goalName">
+                        <label className="form-label visually-hidden" htmlFor="goalName">
                           Goal Name
                         </label>
                       </div>
@@ -90,12 +90,12 @@ export default function Profile(props) {
                         <input
                           type="number"
                           id="goalAmount"
-                          class="form-control align-items-center"
+                          className="form-control align-items-center"
                           value={state.totalGoal}
                           onChange={(event) => setState({ ...state, totalGoal: parseInt(event.target.value)})}
                         />
                       </div>
-                      <label class="form-label visually-hidden" htmlFor="goalAmount">
+                      <label className="form-label visually-hidden" htmlFor="goalAmount">
                         goalAmount
                       </label>
                     </td>

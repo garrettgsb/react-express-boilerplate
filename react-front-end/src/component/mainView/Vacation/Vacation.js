@@ -1,5 +1,6 @@
 import React from 'react';
 import ProgressCircle from '../ProgressCircle';
+import '../../../sass/vacation.scss';
 import {
   getTotalAmount,
   getDaysTillGoal,
@@ -25,10 +26,11 @@ export default function Vacation(props) {
 
 return (
   <div>
+    <div className="background-photo"></div>
+      <br />
+      <br />
+      <div className='d-flex align-items-center justify-content-center text-center goalbox'>
     <div className='goal-container'>
-      <br />
-      <br />
-      <div className='d-flex align-items-center justify-content-center text-center'>
         <table>
           <thead>
             <tr>
