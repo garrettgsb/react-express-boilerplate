@@ -35,7 +35,7 @@ export default function Profile(props) {
   }
 
   return (
-    <section className="vw-100 row">
+    <section className="vw-100 m-0 row">
       <div className="container p-card">
         <div className="row d-flex justify-content-center h-100">
           <div className="w-50 col-md-12 col-xl-4 m-4">
@@ -70,7 +70,7 @@ export default function Profile(props) {
                 <thead>
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
-                      <div class="form-outline w-75">
+                      <div className="form-outline w-75">
                         <input
                           type="text"
                           id="goalName"
@@ -78,7 +78,7 @@ export default function Profile(props) {
                           value={state.goal_name}
                           onChange={(event) => setState({ ...state, goal_name: event.target.value })}
                         />
-                        <label class="form-label visually-hidden" htmlFor="goalName">
+                        <label className="form-label visually-hidden" htmlFor="goalName">
                           Goal Name
                         </label>
                       </div>
@@ -90,12 +90,12 @@ export default function Profile(props) {
                         <input
                           type="number"
                           id="goalAmount"
-                          class="form-control align-items-center"
+                          className="form-control align-items-center"
                           value={state.totalGoal}
                           onChange={(event) => setState({ ...state, totalGoal: parseInt(event.target.value)})}
                         />
                       </div>
-                      <label class="form-label visually-hidden" htmlFor="goalAmount">
+                      <label className="form-label visually-hidden" htmlFor="goalAmount">
                         goalAmount
                       </label>
                     </td>
@@ -133,8 +133,6 @@ export default function Profile(props) {
       {mode === GOAL &&
         <div className="chart-align">
           <div className='goal-container'>
-            <br />
-            <br />
             <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
               <table className="table table-bordered">
                 <thead>
