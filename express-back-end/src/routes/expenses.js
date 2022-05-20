@@ -72,7 +72,26 @@ module.exports = db => {
     .catch(error => {
       console.log('The error is: ', error);
     });
-  })
+  });
+// expense_id
+  router.delete('/delete', (req, res) => {
+    console.log('req.body!!?', req.body);
+    db.query(
+      `
+      DELETE FROM expense
+      WHERE expense_id = $1;
+      `,
+      [req.body.expense.id]
+    )
+    .then(data => {
+      console.log('data.row?!?!?', data.rows);
+      const deletedExpense = data.rows;
+      res.json(deletedExpense);
+    })
+    .catch(error => {
+      console.log('The error is: ', error);
+    });
+  });
   
   router.get('/savings', (req, res) => {
     db.query(`

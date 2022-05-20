@@ -54,13 +54,9 @@ module.exports = db => {
 			req.body.goals.goal_id
 		]
 		)
-			.then(data => {
-				const goals = data.rows;
-				res.json(goals);
-			})
-			.catch(error => {
-				console.log('The error is: ', error);
-			});
+		.catch(error => {
+			console.log('The error is: ', error);
+		});
 	});
 
 	return router;
