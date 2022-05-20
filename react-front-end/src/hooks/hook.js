@@ -86,8 +86,8 @@ export default function useApplicationData() {
         created_at: expense.created_at,
         amount: expense.amount,
         category_id: expense.category_id,
-        start_date: '2022-03-13',
-        end_date: '2022-08-13',
+        start_date: '2022-03-13',/******************************** */
+        end_date: '2022-08-13', /******************************** */
       },
       ...state.alvinVacationSpent,
     ];

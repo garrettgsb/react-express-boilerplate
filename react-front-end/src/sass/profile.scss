@@ -3,8 +3,8 @@
 
 @import '~mdb-ui-kit/css/mdb.min.css';
 
-.vh-100 {
-  background-color: #eee;
+.vw-100 {
+  background-color: rgba(249, 216, 175, 0.543);
 }
 
 .card {
@@ -26,6 +26,8 @@
 .p-card {
   width: 45%;
   max-width: 45%;
-}
+}          
+                        
+
 
 
