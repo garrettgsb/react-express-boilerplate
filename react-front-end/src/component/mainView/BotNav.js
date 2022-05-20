@@ -1,12 +1,12 @@
 import React from 'react';
 import '../../sass/botNav.scss';
-import useVisualMode from '../../hooks/useVisualMode';
+// import useVisualMode from '../../hooks/useVisualMode';
 
 export default function BotNav(props) {
 
-  const SAVINGS = 'SAVINGS';
-  const VACATION = 'VACATION';
-  const {mode} = useVisualMode(SAVINGS);
+  // const SAVINGS = 'SAVINGS';
+  // const VACATION = 'VACATION';
+  // const {mode} = useVisualMode(SAVINGS);
   
   return (
 

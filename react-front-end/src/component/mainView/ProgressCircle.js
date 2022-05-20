@@ -9,6 +9,7 @@ import "react-circular-progressbar/dist/styles.css";
 
 
 const ProgressCircle = (props) => {
+
   const percentage = ((props.total_saved / props.goalTotal_cents) * 100).toFixed(1);
   return (
 
@@ -28,8 +29,7 @@ const ProgressCircle = (props) => {
             text: {
               fill: "rgb(238,177,39)"
             }
-          }
-          }
+          }}
         />
       </div>
     </div>
