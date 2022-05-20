@@ -90,7 +90,7 @@ export default function Profile(props) {
                           id="goalAmount"
                           className="form-control align-items-center"
                           value={state.totalGoals}
-                          onChange={(event) => setState({ ...state, totalGoals: parseInt(event.target.value)})}
+                          onChange={(event) => setState({ ...state, totalGoals: event.target.value})}
                         />
                       </div>
                       <label className="form-label visually-hidden" htmlFor="goalAmount">
