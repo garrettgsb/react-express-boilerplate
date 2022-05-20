@@ -83,11 +83,11 @@ module.exports = db => {
       `,
       [req.body.expense.id]
     )
-    .then(data => {
-      console.log('data.row?!?!?', data.rows);
-      const deletedExpense = data.rows;
-      res.json(deletedExpense);
-    })
+    .then(data => {                             // delete?
+      console.log('data.row?!?!?', data.rows); // delete?
+      const deletedExpense = data.rows;       // delete?
+      res.json(deletedExpense);              // delete?
+    })                                      // delete?
     .catch(error => {
       console.log('The error is: ', error);
     });
