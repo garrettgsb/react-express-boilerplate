@@ -32,7 +32,7 @@ export default function TopNav(props) {
             <div id='nav-username' className="dropdown d-flex align-items-center">
               Welcome {username}!!
               <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+                src="../../person-icon.jpeg"
                 className="m-2 rounded-circle"
                 height="25"
                 alt='animated-girl-with-glasses'
