@@ -82,6 +82,11 @@ module.exports = db => {
       `,
       [req.body.id]
     )
+    .then(data => {       
+      console.log('It has sucessfully deleted expense ID!! ',req.body);
+      const deletedExpense = data.rows;
+      res.json(deletedExpense);
+    })
     .catch(error => {
       console.log('The error is: ', error);
     });
