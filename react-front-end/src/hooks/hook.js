@@ -15,7 +15,7 @@ export default function useApplicationData() {
     alvinVacationSpent: [],
     vacations: []
   });
-  console.log('STATE.GOALS', state.goals);
+
   const loginUser = (user) => {
     return axios
       .get(`http://localhost:8081/api/dataPoints`)
@@ -24,17 +24,17 @@ export default function useApplicationData() {
           return { ...prev, user: user.id }
         })
       })
-    };
+  };
 
   const updateGoals = (goalID, goals) => {
     const newGoal = state.goals.map(item =>
-      item.id === goalID
-        ? (item = {
+      item.id === goalID ?
+        item = {
           ...item,
           goal_name: goals.goal_name,
           amount: parseInt(goals.totalGoals),
           end_date: goals.date
-        })
+        }
         : item
     );
 
@@ -48,6 +48,25 @@ export default function useApplicationData() {
         });
       });
   };
+
+  const removeExpense = expenseID => {
+    console.log('EXPENSEID:', expenseID)
+    const newExpenseList = state.expenses.map((expense, i) => {
+      return expense.id === expenseID ?
+        state.expenses.splice(i, 1) :
+        expense
+    })
+
+    return axios
+      .delete(`http://localhost:8081/api/delete`, {
+        data: { id: expenseID }
+      })
+      .then(() => {
+        setState(prev => {
+          return { ...prev, expenses: newExpenseList }
+        })
+      })
+  }
 
   const addExpense = expense => {
     const expenses = [
@@ -163,6 +182,7 @@ export default function useApplicationData() {
     setUser,
     addExpense,
     loginUser,
-    updateGoals
+    updateGoals,
+    removeExpense
   };
 }

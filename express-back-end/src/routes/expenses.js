@@ -73,15 +73,15 @@ module.exports = db => {
       console.log('The error is: ', error);
     });
   });
-// expense_id
+
   router.delete('/delete', (req, res) => {
     console.log('req.body!!?', req.body);
     db.query(
       `
-      DELETE FROM expense
-      WHERE expense_id = $1;
+      DELETE FROM expenses
+      WHERE id = $1;
       `,
-      [req.body.expense.id]
+      [req.body.id]
     )
     .then(data => {                             // delete?
       console.log('data.row?!?!?', data.rows); // delete?

@@ -71,6 +71,7 @@ export default function Expenses(props) {
 						key={props.expenses.length}
 						expenses={props.expenses}
 						userId={props.userId}
+						removeExpense={props.removeExpense}
 					/>
 					<div id='input-card' className={expenseInput}>
 						<form className="d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3">
@@ -197,11 +198,7 @@ export default function Expenses(props) {
 										name='graph-thumbnail'
 										className={removeMapview}>
 										<img 
-										onClick={
-											() => {
-												transition(LINE);
-												setState({...state, input: 'appear'})}
-											}
+										onClick={() => transition(LINE)}
 										id='graph-thumbnail' src='../../../graph_thumbnail.png' alt='graph thumbnail' />
 									</button>
 								</div>
