@@ -12,7 +12,7 @@
   opacity: 0.5;
   top: 200px;
   right: 150px;
-  z-index: 0;
+  z-index: 1;
   transform: scale(2);
   border-radius: 100%;
   width: 26%;
@@ -87,9 +87,10 @@ button {
 }
 
 .pig-image {
-  top: 0;
-  left: 0;
+  top: 5px;
+  left: 0px;
  position:absolute;
+  z-index: 6;
 }
 
 .pig-break {
@@ -99,5 +100,10 @@ button {
   top: 116px;
   left: 170px;
   display:none;
+  z-index: 7;
 }
 
+.disappear {
+  display: none;
+  transition: all .4s ease-in;
+}
