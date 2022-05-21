@@ -209,17 +209,19 @@ export default function Savings(props) {
 					</div>
 
 					<div>
+						{totalSaved / totalGoal >= 1 && (
 						<div className="wrap">
 							<button className="button-vac">VACATION MODE</button>
+							<button
+								className={piggyAppear}
+								onClick={() => {
+									setState({ ...state, input: 'disappear' });
+								}}
+							>
+								<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
+							</button>
 						</div>
-						<button
-							className={piggyAppear}
-							onClick={() => {
-								setState({ ...state, input: 'disappear' });
-							}}
-						>
-							<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
-						</button>
+						)}
 
 						<img
 							className={piggyBreak}
