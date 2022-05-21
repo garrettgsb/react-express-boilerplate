@@ -1,3 +1,5 @@
+const vacationSearch = /vacation/i;
+
 export function getTotalExpensesForUser(state, user) {
   const filteredExpenses = state.expenses.filter((expenses) => expenses.username === user);
   const totalExpense = filteredExpenses.reduce((previous, current) => previous + current.amount, 0);
@@ -5,17 +7,19 @@ export function getTotalExpensesForUser(state, user) {
 };
 
 export const getUserByID = (users, id) =>
-  users.filter(user =>
-    user.id === parseInt(id)
+  users.find(user =>
+    user.id === id
   );
+
 export const getSavingsByID = (expenses, id) =>
   expenses.filter(expense =>
     expense.user_id === id && expense.category_id === 8
   );
 
 export const getGoalByID = (goals, id) =>
-  goals.filter(goal =>
-    goal.user_id === parseInt(id));
+  goals.find(goal =>
+    goal.user_id === parseInt(id) &&
+    goal.goal_name.match(vacationSearch));
 
 export const getDataByID = (data, id) =>
   data.filter(item =>
@@ -33,8 +37,8 @@ export function getTotalAmount(state) {
   const amountList = state.map(expense => expense.amount);
 
   return amountList.length > 1 ?
-  amountList.reduce((first, next) => first + next) :
-  amountList;
+    amountList.reduce((first, next) => first + next) :
+    amountList;
 };
 
 export function getExpenseById(expenses, id) {

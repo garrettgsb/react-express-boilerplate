@@ -57,13 +57,11 @@ export default function useApplicationData() {
         expense
     });
     
-    console.log('DATAPOINT:', state.dataPoints)
     const newDataPoints = state.dataPoints.map((datapoint, i) => {
       return datapoint.id === expenseID ?
       state.dataPoints.splice(i, 1) :
       datapoint
     })
-    console.log('DATAPOINT:', state.dataPoints)
 
     return axios
       .delete(`http://localhost:8081/api/delete`, {
