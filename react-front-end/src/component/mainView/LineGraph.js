@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getGoalByID, getDataByID } from '../../helpers/helper_functions';
+import { getGoalByID, getDataByID, getVacationData } from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
@@ -27,7 +27,7 @@ Chart.register(
 export default function LineGraph(props) {
   console.log('LINEPROPS:,', props)
   const goal = getGoalByID(props.goals, props.user)
-
+  const dataPoints = getDataByID(props.dataPoints, props.user)
 
   const updatePoints = []
   let total = '';
@@ -36,7 +36,6 @@ export default function LineGraph(props) {
   let trackData = [];
 
   if (!props.vacationMode) {
-    const dataPoints = getDataByID(props.dataPoints, props.user)
 
     total = 'Savings'
     trackLine = goal.goal_name;
@@ -62,7 +61,7 @@ export default function LineGraph(props) {
       start_date: '2022-03-14',
       end_date: '2022-06-01'
     }
-
+    console.log('GOAL:', goal)
     total = 'Total Spent'
     trackLine = 'Budget';
     trackUnits = 'day';
@@ -72,14 +71,15 @@ export default function LineGraph(props) {
       // { x: goal.end_date, y: 0 }
       { x: vacation.end_date, y: 0 }
     ];
-
-    updatePoints.push(
-      // { x: goal.start_date, y: goal.budget },
-      { x: vacation.start_date, y: vacation.budget },
-      { x: '2022-03-30', y: 490000 },
-      { x: '2022-04-15', y: 340000 }
-    );
-
+    const vacationData = getVacationData(dataPoints, vacation.start_date)
+    console.log('DATAPOINTS:', dataPoints)
+    vacationData.forEach(point => {
+      if (updatePoints.slice(-1)[0]) {
+        point = { ...point, y: (updatePoints.slice(-1)[0].y + point.y) }
+      }
+      updatePoints.push(point)
+    })
+    console.log('VACATIONDATA:', vacationData)
 
     // dataPoints.forEach(point => {
     //   if (updatePoints.slice(-1)[0]) {

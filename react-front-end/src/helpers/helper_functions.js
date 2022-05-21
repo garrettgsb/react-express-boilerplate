@@ -79,3 +79,8 @@ export const getVacationExpenses = (stateExpense, userId) => {
     expense.created_at > expense.start_date
   )
 };
+
+export const getVacationData = (data, date) =>
+  data.filter(item =>
+    item.x >= date
+  );
