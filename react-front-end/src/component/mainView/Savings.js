@@ -101,34 +101,58 @@ export default function Savings(props) {
 								<tr>
 									<td>
 										<h1 className='fw-bold'>
-											<span className='total-saved'>${(totalSaved / 100).toFixed(2) }</span>
-											<span> / ${(totalGoal / 100).toFixed(2)}</span>
+											<span className='total-saved'>
+												${(totalSaved / 100).toFixed(2)}
+											</span>
+											<span>	/ ${(totalGoal / 100).toFixed(2)}
+											</span>
 										</h1>
 									</td>
 								</tr>
 								<tr>
-									<td>
+									<td className='fs-2'>
 										{totalDaysTillGoal} days until {goalByID.end_date}
 									</td>
 								</tr>
 								{state.day &&
 									<tr className="fw-bold">
-										<td>Advised to save {moneyPerDayToGoal}/day</td>
+										<td>
+											Advised to save
+											<span>	{moneyPerDayToGoal}</span>	/
+											<span classNames='fs-6'>
+												day
+											</span>
+										</td>
 									</tr>
 								}
 								{state.week &&
 									<tr className="fw-bold">
-										<td>Advised to save {moneyPerWeekToGoal}/week</td>
+										<td>Advised to save
+											<span>	{moneyPerWeekToGoal}</span>	/
+											<span classNames='fs-6'>
+												week
+											</span>
+										</td>
 									</tr>
 								}
 								{state.month &&
 									<tr className="fw-bold">
-										<td>Advised to save {moneyPerMonthToGoal}/month</td>
+										<td>Advised to save
+											<span>	{moneyPerMonthToGoal}</span>	/
+											<span classNames='fs-6'>
+												month
+											</span>
+										</td>
 									</tr>
 								}
 								{state.year &&
 									<tr className="fw-bold">
-										<td>Advised to save {moneyPerYearToGoal}/year</td>
+										<td>Advised to save
+											<span>	{moneyPerYearToGoal}</span>	/
+											<span classNames='fs-6'>
+												year
+											</span>
+										</td>
 									</tr>
 								}
 								{(state.day ||
