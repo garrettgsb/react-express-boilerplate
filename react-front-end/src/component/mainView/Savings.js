@@ -8,6 +8,7 @@ import {
 	getSavingsByID,
 } from '../../helpers/helper_functions';
 import classNames from 'classnames';
+import useVisualMode from '../../hooks/useVisualMode';
 
 export default function Savings(props) {
 	// gets total amount of saved money
@@ -94,42 +95,73 @@ export default function Savings(props) {
 							<thead>
 								<tr>
 									<td>
-										<h1>{goalByID.goal_name}</h1>
+										<h2>{goalByID.goal_name}</h2>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<h1>
-											${(totalSaved / 100).toFixed(2)} / $
-											{(totalGoal / 100).toFixed(2)}
+										<h1 className='fw-bold'>
+											<span className='total-saved'>
+												${(totalSaved / 100).toFixed(2)}
+											</span>
+											<span>	/ ${(totalGoal / 100).toFixed(2)}
+											</span>
 										</h1>
 									</td>
 								</tr>
 								<tr>
-									<td>
-										{totalDaysTillGoal} days until {goalByID.end_date}
+									<td className='fs-2'>
+										<span className='days-until'>{totalDaysTillGoal}</span> days until {goalByID.end_date}
 									</td>
 								</tr>
-								{state.day && (
+								{state.day &&
 									<tr className="fw-bold">
-										<td>You can save {moneyPerDayToGoal}/day</td>
+										<td>
+											Advised to save
+											<span className='advice'>	{moneyPerDayToGoal}</span>	/
+											<span >
+												day
+											</span>
+										</td>
 									</tr>
-								)}
-								{state.week && (
+								}
+								{state.week &&
 									<tr className="fw-bold">
-										<td>You can save {moneyPerWeekToGoal}/week</td>
+										<td>Advised to save
+											<span className='advice'>	{moneyPerWeekToGoal}</span>	/
+											<span >
+												week
+											</span>
+										</td>
 									</tr>
-								)}
-								{state.month && (
+								}
+								{state.month &&
 									<tr className="fw-bold">
-										<td>You can save {moneyPerMonthToGoal}/month</td>
+										<td>Advised to save
+											<span className='advice'>	{moneyPerMonthToGoal}</span>	/
+											<span >
+												month
+											</span>
+										</td>
 									</tr>
-								)}
-								{state.year && (
+								}
+								{state.year &&
 									<tr className="fw-bold">
-										<td>You can save {moneyPerYearToGoal}/year</td>
+										<td>Advised to save
+											<span className='advice'>	{moneyPerYearToGoal}</span>	/
+											<span >
+												year
+											</span>
+										</td>
 									</tr>
-								)}
+								}
+								{(state.day ||
+									state.week ||
+									state.month ||
+									state.year) &&
+									<tr className='track fw-bold'>
+										<td className='fs-3 fw-bolder'>to stay on track!</td>
+									</tr>}
 							</thead>
 						</table>
 						<div id="progress-circle">
