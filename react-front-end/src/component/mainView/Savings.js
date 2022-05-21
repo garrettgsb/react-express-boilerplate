@@ -17,6 +17,7 @@ export default function Savings(props) {
 	const totalGoal = getTotalAmount(goalByID);
 	const totalDaysTillGoal = getDaysTillGoal(goalByID);
 
+
 	// const [state, setState] = useState({
 	//   goal: goalByID[0].goal_name
 	// })
@@ -37,50 +38,81 @@ export default function Savings(props) {
 
 	return (
 		<div>
-			<div className="goal-container">
+			<div className="goal-container d-flex flex-column align-items-center justify-content-center h-50 mt-5 text-center">
 				<br />
 				<br />
-				<div className="d-flex align-items-center justify-content-center text-center">
-					<table>
-						<thead>
-							<tr>
-								<td>
-									<h1>{goalByID.goal_name}</h1>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h1>
-										${(totalSaved / 100).toFixed(2)} / $
-										{(totalGoal / 100).toFixed(2)}
-									</h1>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									{totalDaysTillGoal} days until {goalByID.end_date}
-								</td>
-							</tr>
-							<tr>
-								<td>You can save {moneyPerDayToGoal}/day</td>
-							</tr>
-							<tr>
-								<td>You can save {moneyPerWeekToGoal}/week</td>
-							</tr>
-							<tr>
-								<td>You can save {moneyPerMonthToGoal}/month</td>
-							</tr>
-							<tr>
-								<td>You can save {moneyPerYearToGoal}/year</td>
-							</tr>
-						</thead>
-					</table>
-
-					<div id="progress-circle">
-						<ProgressCircle
-							total_saved={totalSaved}
-							goalTotal_cents={totalGoal}
-						/>
+				<div className="d-flex w-50 flex-column align-items-center justify-content-center text-center">
+					<div className='w-100 h-75 d-flex align-items-center justify-content-center text-center'>
+						<table>
+							<thead>
+								<tr>
+									<td>
+										<h1>{goalByID.goal_name}</h1>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h1>
+											${(totalSaved / 100).toFixed(2)} / $
+											{(totalGoal / 100).toFixed(2)}
+										</h1>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										{totalDaysTillGoal} days until {goalByID.end_date}
+									</td>
+								</tr>
+								<tr>
+									<td>You can save {moneyPerDayToGoal}/day</td>
+								</tr>
+								<tr>
+									<td>You can save {moneyPerWeekToGoal}/week</td>
+								</tr>
+								<tr>
+									<td>You can save {moneyPerMonthToGoal}/month</td>
+								</tr>
+								<tr>
+									<td>You can save {moneyPerYearToGoal}/year</td>
+								</tr>
+							</thead>
+						</table>
+						<div id="progress-circle">
+							<ProgressCircle
+								total_saved={totalSaved}
+								goalTotal_cents={totalGoal}
+							/>
+						</div>
+					</div>
+					<div className='w-100 d-flex justify-content-space-evenly'>
+					<div id='switch' className='d-flex h-25 mb-3 align-items-center justify-content-center'>
+						<div className='m-1'>
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+								<label class="form-check-label" for="flexSwitchCheckDefault">Day</label>
+							</div>
+						</div>
+						<div className='m-1'>
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
+								<label class="form-check-label" for="flexSwitchCheckChecked">Week</label>
+							</div>
+						</div>
+						<div className='m-1'>
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled />
+								<label class="form-check-label" for="flexSwitchCheckDisabled">Month</label>
+							</div>
+						</div>
+						<div className='m-1'>
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled />
+								<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Year</label>
+							</div>
+						</div>
+					</div>
+					<div id='switch-right'>
+					</div>
 					</div>
 				</div>
 
@@ -91,9 +123,9 @@ export default function Savings(props) {
 					<button className="pig-image">
 						<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
 					</button>
-          <button className="pig-break">
-          <img src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif" alt="piggy bank broken"/>
-          </button>
+					<button className="pig-break">
+						<img src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif" alt="piggy bank broken" />
+					</button>
 				</div>
 
 				<img

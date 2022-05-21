@@ -9,7 +9,7 @@ import "react-circular-progressbar/dist/styles.css";
 
 
 const ProgressCircle = (props) => {
-
+  console.log(props)
   const percentage = ((props.total_saved / props.goalTotal_cents) * 100).toFixed(1);
   return (
 
