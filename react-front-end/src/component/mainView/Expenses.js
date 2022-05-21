@@ -28,13 +28,15 @@ export default function Expenses(props) {
 	const removeIncomeButton = classNames('w-25', {
 		'disappear': state.input !== 'disappear',
 		'btn btn-primary': state.input === 'disappear',
-		'graph-thumbnail': state.input === 'appear'
+		'graph-thumbnail': state.input === 'appear',
+		'card vw-50  align-items-center': state.input !== 'appear'
 	});
 
 	const removeMapview = classNames('text-center w-50', {
 		'disappear': state.input !== 'disappear',
 		'btn card': state.input === 'disappear'
-	})
+	});
+
 
 	const LINE = 'LINE';
 	const EXPENSES = 'EXPENSES';
@@ -76,7 +78,7 @@ export default function Expenses(props) {
 						removeExpense={props.removeExpense}
 					/>
 					<div id='input-card' className={expenseInput}>
-						<form className="d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3">
+						<form className={"d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3"}>
 							<div className="col-lg-3 col-sm-6">
 								<label htmlFor="date" className="visually-hidden">
 									date
@@ -158,6 +160,7 @@ export default function Expenses(props) {
 									className="btn btn-primary m-1"
 									onClick={e => {
 										e.preventDefault();
+										setState({ ...state, input: 'disappear' });
 										submit(
 											props.userId,
 											state.date,
