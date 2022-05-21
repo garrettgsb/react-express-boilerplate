@@ -75,7 +75,6 @@ module.exports = db => {
   });
 
   router.delete('/delete', (req, res) => {
-    console.log('req.body!!?', req.body);
     db.query(
       `
       DELETE FROM expenses
@@ -83,11 +82,6 @@ module.exports = db => {
       `,
       [req.body.id]
     )
-    .then(data => {                             // delete?
-      console.log('data.row?!?!?', data.rows); // delete?
-      const deletedExpense = data.rows;       // delete?
-      res.json(deletedExpense);              // delete?
-    })                                      // delete?
     .catch(error => {
       console.log('The error is: ', error);
     });
