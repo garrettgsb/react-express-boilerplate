@@ -17,7 +17,7 @@ export default function useApplicationData() {
     vacationMode: true,
     vacations: []
   });
-  console.log('STATE:', state)
+
 
   const loginUser = (user) => {
     return axios
@@ -30,7 +30,7 @@ export default function useApplicationData() {
   };
 
   const updateGoals = (goalID, goals) => {
-    console.log("GOALS:", goals)
+
     const updatedGoal = state.goals.map(item =>
       item.id === goalID ?
         item = {
@@ -45,13 +45,12 @@ export default function useApplicationData() {
       return { ...prev, goals: updatedGoal }
     })
 
-    
     return axios
       .put(`http://localhost:8081/api/goals`, {
         goals
       })
       .then(res => {
-        console.log('res');
+        console.log(res, ': not reached?');
       })
   };
 
@@ -91,6 +90,7 @@ export default function useApplicationData() {
   const addExpense = expense => {
     const expenses = [
       {
+        id: expense.id,
         user_id: expense.user_id,
         created_at: expense.created_at,
         amount: expense.amount,
@@ -102,6 +102,7 @@ export default function useApplicationData() {
 
     const incomes = [
       {
+        id: expense.id,
         user_id: expense.user_id,
         created_at: expense.created_at,
         amount: expense.amount,
@@ -112,6 +113,7 @@ export default function useApplicationData() {
 
     const savings = [
       {
+        id: expense.id,
         user_id: expense.user_id,
         created_at: expense.created_at,
         amount: expense.amount,
@@ -122,6 +124,7 @@ export default function useApplicationData() {
 
     const alvinVacationSpent = [
       {
+        id: expense.id,
         user_id: expense.user_id,
         created_at: expense.created_at,
         amount: expense.amount,
@@ -136,6 +139,7 @@ export default function useApplicationData() {
     const dataPoints = [
       ...state.dataPoints,
       {
+        id: expense.id,
         user_id: expense.user_id,
         x: expense.created_at,
         y: expense.amount,

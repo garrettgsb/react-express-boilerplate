@@ -7,6 +7,7 @@ import { getCategoryName } from '../../helpers/helper_functions';
 import classNames from 'classnames';
 
 export default function Expenses(props) {
+	console.log('props:', props)
 	const [state, setState] = useState({
 		date: '',
 		amount: 0,
@@ -43,8 +44,11 @@ export default function Expenses(props) {
 
 	const { mode, transition, back } = useVisualMode(EXPENSES);
 
-	const submit = (user_id, created_at, amount, category_id, category_name, goal_name) => {
+	const expenseID = props.expenses.find(expense => !Array.isArray(expense))
+	console.log('EXPENSEID:', expenseID.id)
+	const submit = (id, user_id, created_at, amount, category_id, category_name, goal_name) => {
 		const expense = {
+			id,
 			user_id,
 			created_at,
 			amount,
@@ -162,6 +166,7 @@ export default function Expenses(props) {
 										e.preventDefault();
 										setState({ ...state, input: 'disappear' });
 										submit(
+											expenseID.id + 1,
 											props.userId,
 											state.date,
 											state.amount,
