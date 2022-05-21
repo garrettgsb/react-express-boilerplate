@@ -66,6 +66,7 @@ module.exports = db => {
     VALUES ($1, $2, $3, $4);
     `, [req.body.expense.user_id, req.body.expense.created_at, req.body.expense.amount, req.body.expense.category_id])
     .then(data => {
+      console.log('It has sucessfully added a new expense!!');
       const expenses = data.rows;
       res.json(expenses);
     })
@@ -82,6 +83,11 @@ module.exports = db => {
       `,
       [req.body.id]
     )
+    .then(data => {       
+      console.log('It has sucessfully deleted expense ID!! ',req.body);
+      const removed = data.rows;
+      res.json(removed);
+    })
     .catch(error => {
       console.log('The error is: ', error);
     });

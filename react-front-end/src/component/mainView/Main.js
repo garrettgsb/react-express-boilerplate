@@ -19,12 +19,14 @@ export default function Main(props) {
   return (
     <div>
       <TopNav 
+      key='topnav'
       savings={props.savings} 
       userId={props.userId}
       users={props.users} 
       />
 
       {mode === PROFILE && <Profile
+      key='profile'
       userId={props.userId}
       users={props.users}
       incomes={props.incomes}
@@ -33,28 +35,32 @@ export default function Main(props) {
       updateGoals={props.updateGoals}
       />}
       {mode === SAVINGS && <Savings
+      key='savings'
       userId={props.userId}
       incomes={props.incomes}
       savings={props.savings}
       goals={props.goals}
       />}
       {mode === EXPENSES && <Expenses 
-      key={props.expenses.length}
+      key='expenses'
       addExpense={props.addExpense} 
       userId={props.userId}
       expenses={props.expenses}
       dataPoints={props.dataPoints}
       goals={props.goals}
       removeExpense={props.removeExpense}
+      vacationMode={props.vacationMode}
       />}
 
       {mode === VACATION && <Vacation 
+      key='vacation'
       savings={props.savings}
       userId={props.userId}
       alvinVacationSpent={props.alvinVacationSpent}
       />}
 
       <BotNav 
+      key='botnav'
       transition={transition} 
       />
     </div>
