@@ -78,7 +78,7 @@ export default function Savings(props) {
           </table>
           <div id='progress-circle'>
             <ProgressCircle
-              key={props.userId}
+              key='savingCircle'
               total_saved={totalSaved}
               goalTotal_cents={totalGoal}
             />

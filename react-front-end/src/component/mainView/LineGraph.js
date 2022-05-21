@@ -70,7 +70,7 @@ export default function LineGraph(props) {
     <div>
       <div id='line'>
         <Line
-          key={props.user}
+          key='savingGraph'
           data={data}
           height={400}
           width={400}

@@ -58,7 +58,7 @@ export default function Expenses(props) {
 
 			{mode === LINE && (
 				<LineGraph
-					key={props.userId}
+					key='savingGraph'
 					user={props.userId}
 					goals={props.goals}
 					dataPoints={props.dataPoints}
@@ -70,7 +70,7 @@ export default function Expenses(props) {
 			{mode === EXPENSES && (
 				<div id="user-expense-input">
 					<ExpenseTable
-						key={props.userId}
+						key='expenseTable'
 						expenses={props.expenses}
 						userId={props.userId}
 						removeExpense={props.removeExpense}

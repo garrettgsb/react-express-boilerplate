@@ -16,6 +16,7 @@ const ProgressCircle = (props) => {
     <div>
       <div style={{ width: "100%" }}>
         <CircularProgressbar
+          key='Circle'
           percentage={percentage}
           text={`${percentage}%`}
           styles={{
