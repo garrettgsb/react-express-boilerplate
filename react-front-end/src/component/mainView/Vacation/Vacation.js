@@ -4,11 +4,13 @@ import '../../../sass/vacation.scss';
 import {
   getTotalAmount,
   getDaysTillGoal,
-  getSavingsByID
+  getSavingsByID,
+  filteredVacationExpenses,
+  getGoalByID
 } from '../../../helpers/helper_functions';
 
 export default function Vacation(props) {
-	console.log(props)
+	console.log('PROPS:', props)
 
   const savingsById = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsById);
@@ -16,6 +18,10 @@ export default function Vacation(props) {
   const totalSpent = getTotalAmount(props.alvinVacationSpent);
   const goalName = props.alvinVacationSpent[0].goal_name;
   const daysTillEndOfVacation = getDaysTillGoal(props.alvinVacationSpent[0]);
+
+  const vacationInfo = getGoalByID(props.goals, props.userId)
+  const vacationExpenses = filteredVacationExpenses(props.expenses, props.userId)
+  console.log('VACATION EXPENSES:', vacationExpenses)
 
   // gets money per day/week/month/year
   const moneyTillGoal = totalSaved - totalSpent;

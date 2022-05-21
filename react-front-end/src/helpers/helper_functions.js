@@ -80,6 +80,14 @@ export const getVacationExpenses = (stateExpense, userId) => {
   )
 };
 
+export const filteredVacationExpenses = (expenses, id, date) =>
+  expenses.filter(expense =>
+    expense.category_id !== 5 &&
+    expense.category_id !== 8 &&
+    expense.user_id === id &&
+    expense.created_at >= date);
+
+
 export const getVacationData = (data, date) =>
   data.filter(item =>
     item.x >= date

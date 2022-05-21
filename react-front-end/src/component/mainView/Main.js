@@ -56,6 +56,8 @@ export default function Main(props) {
       key='vacation'
       savings={props.savings}
       userId={props.userId}
+      goals={props.goals}
+      expenses={props.expenses}
       alvinVacationSpent={props.alvinVacationSpent}
       />}
 

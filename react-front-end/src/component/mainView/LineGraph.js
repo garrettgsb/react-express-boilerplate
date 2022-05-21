@@ -25,7 +25,7 @@ Chart.register(
   TimeScale);
 
 export default function LineGraph(props) {
-  console.log('LINEPROPS:,', props)
+
   const goal = getGoalByID(props.goals, props.user)
   const dataPoints = getDataByID(props.dataPoints, props.user)
 
