@@ -32,7 +32,7 @@ class CardFlip extends React.Component {
 
           {/* <YOUR_BACK_COMPONENT> */}
           {/* This is the back of the card. */}
-          {(Object.keys(this.props.bar).length > 0)&&<Venue  bar={this.props.bar}>Click to flip</Venue>}
+          {(this.props.bar && Object.keys(this.props.bar).length > 0)&&<Venue  bar={this.props.bar}>Click to flip</Venue>}
           {/* </YOUR_BACK_COMPONENT> */}
         </ReactCardFlip>
         <button className="card--button" onClick={this.handleClick}>
