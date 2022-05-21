@@ -59,22 +59,25 @@ export default function LineGraph(props) {
       user_id: 1,
       goal_name: goal.goal_name,
       budget: 500000,
-      start_date: '2022-05-20',
-      end_date: '2022-07-01'
+      start_date: '2022-03-14',
+      end_date: '2022-06-01'
     }
 
     total = 'Total Spent'
-    trackLine = 'Budget' ;
+    trackLine = 'Budget';
     trackUnits = 'day';
     trackData = [
+      // { x: goal.start_date, y: goal.budget },
       { x: vacation.start_date, y: vacation.budget },
+      // { x: goal.end_date, y: 0 }
       { x: vacation.end_date, y: 0 }
     ];
 
     updatePoints.push(
+      // { x: goal.start_date, y: goal.budget },
       { x: vacation.start_date, y: vacation.budget },
-      { x: '2022-05-30', y: 490000 },
-      { x: '2022-06-07', y: 340000 }
+      { x: '2022-03-30', y: 490000 },
+      { x: '2022-04-15', y: 340000 }
     );
 
 
