@@ -13,18 +13,19 @@ export default function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [bar, setBar] = useState({});
   const [history, setHistory] = useState([]);
-  // const [photo, setPhoto] = useState({});
   let newResults = [];
   const {flip,isFlipped} = useChangeState();
 
  
   function click() {
     flip();
+    const currentHistory = [...history, bar];
+    console.log("******* CURRENT HISTORY STATE **********")
+    console.log(currentHistory);
+    setHistory(currentHistory);
     venue = searchResults[RandNum(searchResults)];
     setBar(venue);
     setTimeout(flip,3000);
-    // console.log(grabPhoto());
-    // console.log(photo);
   }
 
   const userLogin = function (loginInfo, cb) {
@@ -105,30 +106,6 @@ export default function App() {
     return (result, newResults);
   };
 
-  // function grabPhoto() {
-  //   const options = {
-  //     method: 'GET',
-  //     url: 'https://google-maps28.p.rapidapi.com/maps/api/place/photo',
-  //     params: {
-  //       photo_reference: `${photo}`,
-  //       maxwidth: '400',
-  //       maxheight: '400'
-  //     },
-  //     headers: {
-  //       'X-RapidAPI-Host': 'google-maps28.p.rapidapi.com',
-  //       'X-RapidAPI-Key':`5c41b0e00fmsh909a8fa79575aafp1e7795jsna8ea2a497dd3`
-  //     }
-  //   };
-
-  //   axios.request(options).then(function (response) {
-  //     console.log(response.data);
-      
-  //   }).catch(function (error) {
-  //     console.error(error);
-  //   });
-
-  // }
-
   const RandNum = (results) => {
     let max =results.length;
     // console.log(max);
@@ -149,7 +126,7 @@ export default function App() {
           <Location setFound={setFound} setSearchResults={setSearchResults}  locationSearch={locationSearch} />
         )}
         <button onClick={click}>Next Bar!</button>
-        <TripContainer/>
+        <TripContainer history={history}/>
       </div>
     </div>
   );

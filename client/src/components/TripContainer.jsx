@@ -2,11 +2,11 @@ import React from 'react'
 import Stamp from './Stamp'
 import "./TripContainer.scss"
 
-export default function TripContainer () {
+export default function TripContainer ({history}) {
 
   return (
     <div className='tripContainer'>
-      <Stamp />
+      {(history.length > 0) && <Stamp history={history} />}
     </div>
   )
 }
