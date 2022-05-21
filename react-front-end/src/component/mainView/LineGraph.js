@@ -25,13 +25,25 @@ Chart.register(
   TimeScale);
 
 export default function LineGraph(props) {
-  console.log('LINEPROPS:,', props )
+  console.log('LINEPROPS:,', props)
 
   const goal = getGoalByID(props.goals, props.user)[0]
   const dataPoints = getDataByID(props.dataPoints, props.user)
 
   const updatePoints = []
+  let trackLine = '';
+  let trackUnits = '';
+  let trackData = [];
+
   if (!props.vacationMode) {
+
+    trackLine = goal.goal_name;
+    trackUnits = 'month';
+    trackData = [
+      { x: goal.start_date, y: 0 },
+      { x: goal.end_date, y: goal.amount }
+    ];
+
     updatePoints.push({ x: goal.start_date, y: 0 })
     dataPoints.forEach(point => {
       if (updatePoints.slice(-1)[0]) {
@@ -39,9 +51,38 @@ export default function LineGraph(props) {
       }
       updatePoints.push(point)
     })
+  } else if (props.vacationMode) {
+    const vacation = {
+      user_id: 1,
+      goal_name: 'Mexico',
+      budget: 500000,
+      start_date: '2022-05-20',
+      end_date: '2022-07-01'
+    }
+    
+    trackLine = vacation.goal_name;
+    trackUnits = 'day';
+    trackData = [
+      { x: vacation.start_date, y: vacation.budget },
+      { x: goal.end_date, y: 0 }
+    ];
+
+    updatePoints.push(
+      { x: vacation.start_date, y: vacation.budget },
+      { x: '2022-05-30', y: 490000 },
+      { x: '2022-06-07', y: 340000 }
+      );
+
+
+    // dataPoints.forEach(point => {
+    //   if (updatePoints.slice(-1)[0]) {
+    //     point = { ...point, y: (updatePoints.slice(-1)[0].y + point.y) }
+    //   }
+    //   updatePoints.push(point)
+    // })
   }
   const [state, setState] = useState({
-    dateUnit: 'month',
+    dateUnit: trackUnits,
     dataPoints: updatePoints
   })
 
@@ -56,11 +97,8 @@ export default function LineGraph(props) {
         tension: 0.1
       },
       {
-        label: 'Goal',
-        data: [
-          { x: goal.start_date, y: 0 },
-          { x: goal.end_date, y: goal.amount }
-        ],
+        label: trackLine,
+        data: trackData,
         fill: false,
         backgroundColor: 'limegreen',
         borderColor: 'limegreen',

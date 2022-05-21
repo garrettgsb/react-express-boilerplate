@@ -54,7 +54,7 @@ export default function App() {
         goals={state.goals}
         alvinVacationSpent={state.alvinVacationSpent}
         removeExpense={removeExpense}
-        vacactionMode={state.vacationMode}
+        vacationMode={state.vacationMode}
       />}
     </div>
   );
