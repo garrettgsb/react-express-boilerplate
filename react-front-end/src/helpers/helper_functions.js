@@ -10,7 +10,8 @@ export const getUserByID = (users, id) =>
   );
 export const getSavingsByID = (expenses, id) =>
   expenses.filter(expense =>
-    expense.user_id === id && expense.category_id === 8
+    expense.user_id === id &&
+    expense.category_id === 8
   );
 
 export const getGoalByID = (goals, id) =>
@@ -27,6 +28,16 @@ export function getDaysTillGoal(state) {
   const difference = endDate - startDate;
   const daysBetween = Math.ceil(difference / (1000 * 3600 * 24));
   return daysBetween;
+};
+
+export const getVacationExpenses = (stateExpense, userId) => {
+  return stateExpense.filter(expense =>
+    expense.category_id !== 5 &&
+    expense.category_id!== 8 &&
+    expense.goals_id > 3 &&
+    expense.goals_user_id === userId &&
+    expense.created_at > expense.start_date
+  )
 };
 
 export function getTotalAmount(state) {

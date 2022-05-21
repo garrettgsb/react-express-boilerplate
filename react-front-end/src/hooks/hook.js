@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getVacationExpenses } from '../helpers/helper_functions';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -50,6 +51,9 @@ export default function useApplicationData() {
       });
   };
 
+  // console.log('state.alvinVacationSpent', state.alvinVacationSpent);
+
+  console.log('state.expenses', state.expenses);
   const removeExpense = expenseID => {
     const newExpenseList = state.expenses.map((expense, i) => {
       return expense.id === expenseID ?
@@ -57,16 +61,20 @@ export default function useApplicationData() {
         expense
     });
 
+    // console.log('newExpenseList', newExpenseList);
+    const vacationExpense = getVacationExpenses(newExpenseList, 1);
+    // console.log('vacationExpense', vacationExpense);
+    
     return axios
       .delete(`http://localhost:8081/api/delete`, {
         data: { id: expenseID }
       })
       .then(() => {
         setState(prev => {
-          return { ...prev, expenses: newExpenseList, savings: newExpenseList }
+          return { ...prev, expenses: newExpenseList, savings: newExpenseList, alvinVacationSpent: vacationExpense }
         })
       })
-  }
+  };
 
   const addExpense = expense => {
     const expenses = [
