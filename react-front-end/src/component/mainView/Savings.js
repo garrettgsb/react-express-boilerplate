@@ -19,7 +19,39 @@ export default function Savings(props) {
 	const totalDaysTillGoal = getDaysTillGoal(goalByID);
 	const [state, setState] = useState({
 		input: 'appear',
+		switch: "Off",
+		day: false,
+		week: false,
+		month: false,
+		year: false,
 	});
+
+	const dayClick = () => {
+		setState({...state,
+			day: !state.day,
+			switch: !state.switch ? 'ON' : 'OFF'
+		});
+	};
+
+	const weekClick = () => {
+		setState({...state,
+			week: !state.week,
+			switch: !state.switch ? 'ON' : 'OFF'
+		});
+	};
+
+	const monthClick = () => {
+		setState({...state,
+			month: !state.month,
+			switch: !state.switch ? 'ON' : 'OFF'
+		});
+	};
+	const yearClick = () => {
+		setState({...state,
+			year: !state.year,
+			switch: !state.switch ? 'ON' : 'OFF'
+		});
+	};
 
 	const piggyAppear = classNames('pig-image', {
 		disappear: state.input === 'disappear',
@@ -74,18 +106,26 @@ export default function Savings(props) {
 										{totalDaysTillGoal} days until {goalByID.end_date}
 									</td>
 								</tr>
-								<tr>
-									<td>You can save {moneyPerDayToGoal}/day</td>
-								</tr>
-								<tr>
-									<td>You can save {moneyPerWeekToGoal}/week</td>
-								</tr>
-								<tr>
-									<td>You can save {moneyPerMonthToGoal}/month</td>
-								</tr>
-								<tr>
-									<td>You can save {moneyPerYearToGoal}/year</td>
-								</tr>
+								{state.day &&
+									<tr className="fw-bold">
+										<td>You can save {moneyPerDayToGoal}/day</td>
+									</tr>
+								}
+								{state.week &&
+									<tr className="fw-bold">
+										<td>You can save {moneyPerWeekToGoal}/week</td>
+									</tr>
+								}
+								{state.month &&
+									<tr className="fw-bold">
+										<td>You can save {moneyPerMonthToGoal}/month</td>
+									</tr>
+								}
+								{state.year &&
+									<tr className="fw-bold">
+										<td>You can save {moneyPerYearToGoal}/year</td>
+									</tr>
+								}
 							</thead>
 						</table>
 						<div id="progress-circle">

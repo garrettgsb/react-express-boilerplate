@@ -11,6 +11,7 @@ export const getUserByID = (users, id) =>
 
 export const getSavingsByID = (expenses, id) =>
   expenses.filter(expense =>
+    expense && 
     expense.user_id === id &&
     expense.category_id === 8
   );
@@ -21,11 +22,12 @@ export const getGoalByID = (goals, id) =>
 
 export const getDataByID = (data, id) =>
   data.filter(item =>
+    item &&
     item.user_id === parseInt(id));
 
 export function getExpenseById(expenses, id) {
   return expenses.filter(expense =>
-    expense.user_id === parseInt(id)
+    expense && expense.user_id === parseInt(id)
   );
 };
 
@@ -82,6 +84,7 @@ export const getVacationExpenses = (stateExpense, userId) => {
 
 export const filteredVacationExpenses = (expenses, id, date) =>
   expenses.filter(expense =>
+    expense && 
     expense.category_id !== 5 &&
     expense.category_id !== 8 &&
     expense.user_id === id &&

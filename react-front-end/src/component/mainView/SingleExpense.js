@@ -15,7 +15,7 @@ export default function SingleExpense(props) {
 
   
   return (
-    <tr id={props.id} className={tableClass}>
+    <tr key={props.id} id={props.id} className={tableClass}>
       <td className='textalign'>{props.created_at}</td>
       <td className='textalign'>{props.category_name}</td>
       <td className='textalign'>{'$' + (props.amount / 100).toFixed(2)}</td>
