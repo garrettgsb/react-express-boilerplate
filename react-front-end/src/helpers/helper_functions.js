@@ -37,6 +37,12 @@ export function getTotalAmount(state) {
   amountList;
 };
 
+export function getExpenseById(expenses, id) {
+  return expenses.filter(expense =>
+    expense.user_id === parseInt(id)
+  );
+};
+
 export function getCategoryName(prop) {
   let categoryID = '';
   switch (prop) {
@@ -55,17 +61,3 @@ export function getCategoryName(prop) {
   }
   return categoryID;
 };
-
-export function getExpenseById(expenses, id) {
-  return expenses.filter(expense =>
-    expense.user_id === parseInt(id)
-  );
-};
-
-
-  
-// export const totalSaved = getTotalAmount(savingsByCatId);
-  
-// export const totalGoal = getTotalAmount(goalByID);
-  
-// export const totalDaysTillGoal = getDaysTillGoal(goalByID);

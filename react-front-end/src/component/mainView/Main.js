@@ -45,6 +45,7 @@ export default function Main(props) {
       expenses={props.expenses}
       dataPoints={props.dataPoints}
       goals={props.goals}
+      removeExpense={props.removeExpense}
       />}
 
       {mode === VACATION && <Vacation 

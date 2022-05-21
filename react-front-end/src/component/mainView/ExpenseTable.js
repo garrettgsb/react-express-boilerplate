@@ -22,6 +22,7 @@ export default function ExpenseTable(props) {
         category_name={expense.category_name || categoryName}
         amount={expense.amount}
         classname={classname(expense.category_name || categoryName)}
+        removeExpense={props.removeExpense}
       />
     )
   });
