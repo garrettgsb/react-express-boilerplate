@@ -30,9 +30,9 @@ export function getExpenseById(expenses, id) {
 };
 
 export function getDaysTillGoal(state) {
-  const startDate = new Date(state.start_date);
+  const today = Date.now();
   const endDate = new Date(state.end_date);
-  const difference = endDate - startDate;
+  const difference = endDate - today;
   const daysBetween = Math.ceil(difference / (1000 * 3600 * 24));
   return daysBetween;
 };
@@ -86,7 +86,6 @@ export const filteredVacationExpenses = (expenses, id, date) =>
     expense.category_id !== 8 &&
     expense.user_id === id &&
     expense.created_at >= date);
-
 
 export const getVacationData = (data, date) =>
   data.filter(item =>
