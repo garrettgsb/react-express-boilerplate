@@ -1,5 +1,3 @@
-const vacationSearch = /vacation/i;
-
 export function getTotalExpensesForUser(state, user) {
   const filteredExpenses = state.expenses.filter((expenses) => expenses.username === user);
   const totalExpense = filteredExpenses.reduce((previous, current) => previous + current.amount, 0);
@@ -19,29 +17,24 @@ export const getSavingsByID = (expenses, id) =>
 
 export const getGoalByID = (goals, id) =>
   goals.find(goal =>
-    goal.user_id === parseInt(id) &&
-    goal.goal_name.match(vacationSearch));
+    goal.user_id === parseInt(id));
 
 export const getDataByID = (data, id) =>
   data.filter(item =>
     item.user_id === parseInt(id));
 
-export function getDaysTillGoal(state) {
-  const startDate = new Date(state.start_date);
-  const endDate = new Date(state.end_date);
-  const difference = endDate - startDate;
-  const daysBetween = Math.ceil(difference / (1000 * 3600 * 24));
-  return daysBetween;
+export function getExpenseById(expenses, id) {
+  return expenses.filter(expense =>
+    expense.user_id === parseInt(id)
+  );
 };
 
-export const getVacationExpenses = (stateExpense, userId) => {
-  return stateExpense.filter(expense =>
-    expense.category_id !== 5 &&
-    expense.category_id!== 8 &&
-    expense.goals_id > 3 &&
-    expense.goals_user_id === userId &&
-    expense.created_at > expense.start_date
-  )
+export function getDaysTillGoal(state) {
+  const today = Date.now();
+  const endDate = new Date(state.end_date);
+  const difference = endDate - today;
+  const daysBetween = Math.ceil(difference / (1000 * 3600 * 24));
+  return daysBetween;
 };
 
 export function getTotalAmount(state) {
@@ -56,12 +49,6 @@ export function getTotalAmount(state) {
   } else {
     return state;
   }
-};
-
-export function getExpenseById(expenses, id) {
-  return expenses.filter(expense =>
-    expense.user_id === parseInt(id)
-  );
 };
 
 export function getCategoryName(prop) {
@@ -82,3 +69,25 @@ export function getCategoryName(prop) {
   }
   return categoryID;
 };
+
+export const getVacationExpenses = (stateExpense, userId) => {
+  return stateExpense.filter(expense =>
+    expense.category_id !== 5 &&
+    expense.category_id !== 8 &&
+    expense.goals_id > 3 &&
+    expense.goals_user_id === userId &&
+    expense.created_at > expense.start_date
+  )
+};
+
+export const filteredVacationExpenses = (expenses, id, date) =>
+  expenses.filter(expense =>
+    expense.category_id !== 5 &&
+    expense.category_id !== 8 &&
+    expense.user_id === id &&
+    expense.created_at >= date);
+
+export const getVacationData = (data, date) =>
+  data.filter(item =>
+    item.x >= date
+  );

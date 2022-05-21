@@ -17,6 +17,7 @@ export default function useApplicationData() {
     vacationMode: true,
     vacations: []
   });
+  console.log('STATE:', state)
 
   const loginUser = (user) => {
     return axios
@@ -51,9 +52,7 @@ export default function useApplicationData() {
       });
   };
 
-  // console.log('state.alvinVacationSpent', state.alvinVacationSpent);
 
-  console.log('state.expenses', state.expenses);
   const removeExpense = expenseID => {
     const newExpenseList = state.expenses.map((expense, i) => {
       return expense.id === expenseID ?
@@ -67,10 +66,8 @@ export default function useApplicationData() {
       datapoint
     })
 
-    // console.log('newExpenseList', newExpenseList);
     const vacationExpense = getVacationExpenses(newExpenseList, 1);
-    // console.log('vacationExpense', vacationExpense);
-    
+
     return axios
       .delete(`http://localhost:8081/api/delete`, {
         data: { id: expenseID }
@@ -80,6 +77,7 @@ export default function useApplicationData() {
           return { ...prev, 
             expenses: newExpenseList, 
             savings: newExpenseList, 
+            dataPoints: newDataPoints,
             alvinVacationSpent: vacationExpense }
         })
       })
