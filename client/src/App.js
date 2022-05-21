@@ -5,21 +5,19 @@ import Header from "./components/Header";
 import { CardFlip } from "./components/Card";
 import TripContainer from "./components/TripContainer";
 import Location from "./components/Location";
+import { Preview } from "@mui/icons-material";
 
 export default function App() {
   const [found, setFound] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [bar, setBar] = useState({});
+  const [history, setHistory] = useState([])
   
   // const [photo, setPhoto] = useState({});
 
-
- 
   function click() {
-    venue =searchResults[RandNum(searchResults)]
+    venue = searchResults[RandNum(searchResults)]
     setBar(venue);
-    // console.log(grabPhoto());
-    // console.log(photo);
     console.log(bar.name);
   }
 
@@ -74,9 +72,9 @@ export default function App() {
       url: 'https://google-maps28.p.rapidapi.com/maps/api/place/nearbysearch/json',
       params: {
         location: `${lat},${lng}`,
-        radius: '5000',
+        radius: '1000',
         language: 'en',
-        keyword: 'brewery, bar, pub, gastropub '
+        keyword: 'pub'
       },
       headers: {
         "X-RapidAPI-Host": "google-maps28.p.rapidapi.com",

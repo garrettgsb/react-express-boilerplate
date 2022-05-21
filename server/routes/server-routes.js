@@ -4,7 +4,7 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    console.log("FAVOURITES REQ BODY", req.body)
+    console.log("REQ BODY", req.body)
     const sql = `SELECT * FROM users;
     `
     db.query(sql)
@@ -37,15 +37,25 @@ module.exports = (db) => {
       res.send(e);
     });
   })
-  //   if (loginInfo.email === testUser.email && loginInfo.password === testUser.password) {
-  //     setUser({
-  //       email: loginInfo.email
-  //     });
-  //   } else {
-  //     console.log("Wrong username or password!")
-  //     }
-  //   }
-  // })
+  
+  router.get("/crawls", (req, res) => {
+    console.log("CRAWLS REQ BODY", req.body)
+    const sql = `
+    SELECT *
+      FROM venues
+      JOIN crawls ON crawl_id = crawls.id
+      JOIN users ON user_id = users.id
+    `
+    db.query(sql)
+    .then((results) => {
+      res.send(results.rows)
+      console.log("ROWS", results.rows)
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+  })
 
   return router;
 };
