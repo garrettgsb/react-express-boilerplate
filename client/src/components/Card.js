@@ -4,26 +4,15 @@ import Venue from "./Venue";
 import VenueBack from "./VenueBack";
 import "./Card.scss";
 
-class CardFlip extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isFlipped: false,
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
+export default function CardFlip({isFlipped, bar}) {
 
-  handleClick(e) {
-    e.preventDefault();
-    this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
-  }
-
-  render() {
-    return (
+   
+  return (
       <div className="card">
         <ReactCardFlip
-          isFlipped={this.state.isFlipped}
+          isFlipped={isFlipped}
           flipDirection="horizontal"
+
         >
           {/* <YOUR_FRONT_CCOMPONENT> */}
           {/* This is the front of the card. */}
@@ -32,15 +21,12 @@ class CardFlip extends React.Component {
 
           {/* <YOUR_BACK_COMPONENT> */}
           {/* This is the back of the card. */}
-          {(this.props.bar && Object.keys(this.props.bar).length > 0)&&<Venue  bar={this.props.bar}>Click to flip</Venue>}
+          {(bar && Object.keys(bar).length > 0)&&<Venue  bar={bar}>Click to flip</Venue>}
           {/* </YOUR_BACK_COMPONENT> */}
         </ReactCardFlip>
-        <button className="card--button" onClick={this.handleClick}>
-          FLIP
-        </button>
       </div>
     );
-  }
+
 }
 
 export { CardFlip };
