@@ -13,7 +13,7 @@ export default function useApplicationData() {
     categories: [],
     dataPoints: [],
     alvinVacationSpent: [],
-    vacationMode: true,
+    vacationMode: false,
     vacations: []
   });
 
@@ -56,6 +56,14 @@ export default function useApplicationData() {
         state.expenses.splice(i, 1) :
         expense
     });
+    
+    console.log('DATAPOINT:', state.dataPoints)
+    const newDataPoints = state.dataPoints.map((datapoint, i) => {
+      return datapoint.id === expenseID ?
+      state.dataPoints.splice(i, 1) :
+      datapoint
+    })
+    console.log('DATAPOINT:', state.dataPoints)
 
     return axios
       .delete(`http://localhost:8081/api/delete`, {
@@ -63,7 +71,10 @@ export default function useApplicationData() {
       })
       .then(() => {
         setState(prev => {
-          return { ...prev, expenses: newExpenseList, savings: newExpenseList }
+          return { ...prev, 
+            expenses: newExpenseList, 
+            savings: newExpenseList, 
+            dataPoints: newDataPoints}
         })
       })
   }

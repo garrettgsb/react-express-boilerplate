@@ -52,7 +52,7 @@ export default function Expenses(props) {
 		};
 		props.addExpense(expense);
 	};
-console.log('EXPENSES:', props)
+
 	return (
 		<div id='expenses-page'>
 			{mode === LINE && (
