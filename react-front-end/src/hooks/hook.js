@@ -49,16 +49,17 @@ export default function useApplicationData() {
       });
   };
 
-  const removeExpense = id => {
+  const removeExpense = expenseID => {
+    console.log('EXPENSEID:', expenseID)
     const newExpenseList = state.expenses.map((expense, i) => {
-      return expense.id === id ?
+      return expense.id === expenseID ?
         state.expenses.splice(i, 1) :
         expense
     })
 
     return axios
       .delete(`http://localhost:8081/api/delete`, {
-        id
+        data: { id: expenseID }
       })
       .then(() => {
         setState(prev => {
