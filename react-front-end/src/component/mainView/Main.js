@@ -50,8 +50,8 @@ export default function Main(props) {
       goals={props.goals}
       removeExpense={props.removeExpense}
       vacationMode={props.vacationMode}
+      vacationData={props.alvinVacationSpent}
       />}
-
       {mode === VACATION && <Vacation 
       key='vacation'
       savings={props.savings}

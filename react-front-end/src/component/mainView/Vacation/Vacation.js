@@ -13,7 +13,7 @@ export default function Vacation(props) {
 
   const totalSpent = getTotalAmount(props.alvinVacationSpent);
   const goalName = props.alvinVacationSpent[0].goal_name;
-  const daysTillEndOfVacation = getDaysTillGoal(props.alvinVacationSpent);
+  const daysTillEndOfVacation = getDaysTillGoal(props.alvinVacationSpent[0]);
 
   // gets money per day/week/month/year
   const moneyTillGoal = totalSaved - totalSpent;
@@ -61,6 +61,7 @@ export default function Vacation(props) {
           </table>
           <br />
           <ProgressCircle
+            key='vacationCircle'
             total_saved={totalSpent}
             goalTotal_cents={totalSaved} />
         </div>

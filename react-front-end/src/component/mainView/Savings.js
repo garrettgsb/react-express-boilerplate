@@ -45,7 +45,7 @@ export default function Savings(props) {
 						<thead>
 							<tr>
 								<td>
-									<h1>{goalByID[0].goal_name}</h1>
+									<h1>{goalByID.goal_name}</h1>
 								</td>
 							</tr>
 							<tr>
@@ -58,7 +58,7 @@ export default function Savings(props) {
 							</tr>
 							<tr>
 								<td>
-									{totalDaysTillGoal} days until {goalByID[0].end_date}
+									{totalDaysTillGoal} days until {goalByID.end_date}
 								</td>
 							</tr>
 							<tr>

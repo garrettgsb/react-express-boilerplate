@@ -4,8 +4,17 @@ const router = express.Router();
 module.exports = db => {
   router.get('/expenses', (req, res) => {
     db.query(`
-    SELECT expenses.*, categories.name AS category_name
+    SELECT expenses.*,
+      categories.name AS category_name,
+      goals.goal_name,
+      goals.end_date,
+      goals.id AS goals_id,
+      goals.user_id AS goals_user_id,
+      goals.start_date,
+      goals.end_date
     FROM expenses
+    JOIN users ON expenses.user_id = users.id
+    JOIN goals ON goals.user_id = users.id
     JOIN categories ON category_id = categories.id
     ORDER BY id DESC;
     `)
@@ -112,7 +121,7 @@ module.exports = db => {
 
   router.get('/dataPoints', (req, res) => {
     db.query(`
-    SELECT user_id, created_at AS x, amount AS y 
+    SELECT id, user_id, created_at AS x, amount AS y 
     FROM expenses; 
     `)
     .then(data => {
@@ -132,7 +141,9 @@ module.exports = db => {
       expenses.category_id,
       goals.start_date AS start_date,
       goals.end_date AS end_date,
-      goals.goal_name
+      goals.goal_name,
+      goals.user_id AS goals_user_id,
+      goals.id AS goals_id
     FROM expenses
     JOIN users ON expenses.user_id = users.id
     JOIN goals ON goals.user_id = users.id

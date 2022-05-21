@@ -3,7 +3,9 @@ import '../../sass/topNav.scss'
 import { getUserByID } from '../../helpers/helper_functions';
 
 export default function TopNav(props) {
-  const username = getUserByID(props.users, props.userId)[0].username;
+
+  const username = getUserByID(props.users, props.userId).username
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light top-nav-items">
       <div id='nav-container' className="container-fluid">
