@@ -90,6 +90,7 @@ button {
   top: 0;
   left: 0;
  position:absolute;
+ display: none
 }
 
 .pig-break {
@@ -101,3 +102,9 @@ button {
   display:none;
 }
 
+#switch {
+  width: 60%;
+}
+#switch-right {
+  width: 40%;
+}
