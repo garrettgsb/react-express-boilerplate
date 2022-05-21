@@ -88,26 +88,26 @@ export default function Savings(props) {
 					<div id='switch' className='d-flex h-25 mb-3 align-items-center justify-content-center'>
 						<div className='m-1'>
 							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-								<label class="form-check-label" for="flexSwitchCheckDefault">Day</label>
+								<input class="form-check-input" type="checkbox" aria-checked="false" role="switch" id="day-switch" />
+								<label class="form-check-label" htmlFor="day-switch">Day</label>
 							</div>
 						</div>
 						<div className='m-1'>
 							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
-								<label class="form-check-label" for="flexSwitchCheckChecked">Week</label>
+								<input class="form-check-input" type="checkbox"aria-checked="false" role="switch" id="week-switch" />
+								<label class="form-check-label" htmlFor="week-switch">Week</label>
 							</div>
 						</div>
 						<div className='m-1'>
 							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled />
-								<label class="form-check-label" for="flexSwitchCheckDisabled">Month</label>
+								<input class="form-check-input" type="checkbox"aria-checked="false" role="switch" id="month-switch" />
+								<label class="form-check-label" htmlFor="month-switch">Month</label>
 							</div>
 						</div>
 						<div className='m-1'>
 							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled />
-								<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Year</label>
+								<input class="form-check-input" type="checkbox"aria-checked="false" role="switch" id="year-switch" />
+								<label class="form-check-label" htmlFor="year-switch">Year</label>
 							</div>
 						</div>
 					</div>
