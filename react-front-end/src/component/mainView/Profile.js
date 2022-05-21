@@ -17,8 +17,8 @@ export default function Profile(props) {
 
   const savingsbyID = getSavingsByID(props.savings, props.userId)
   const totalSaved = getTotalAmount(savingsbyID);
-  const goalByID = getGoalByID(props.goals, props.userId)[0];
-  const username = getUserByID(props.users, props.userId)[0].username;
+  const goalByID = getGoalByID(props.goals, props.userId);
+  const username = getUserByID(props.users, props.userId).username;
 
 
   const [state, setState] = useState({

@@ -27,12 +27,13 @@ const PieChart = (props) => {
         'rgb(220,220,220)'],
       hoverOffset: 4
     }
-  ]
+    ]
   };
 
   return (
     <div id='pie'>
       <Pie
+        key='pie'
         data={data}
         width={400}
         height={400}

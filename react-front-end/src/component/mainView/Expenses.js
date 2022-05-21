@@ -55,22 +55,22 @@ export default function Expenses(props) {
 
 	return (
 		<div id='expenses-page'>
-
 			{mode === LINE && (
 				<LineGraph
-					key={props.userId}
+					key='savingGraph'
 					user={props.userId}
 					goals={props.goals}
 					dataPoints={props.dataPoints}
 					expenses={props.expenses}
 					back={back}
 					vacationMode={props.vacationMode}
+					vacationData={props.vacationData}
 				/>
 			)}
 			{mode === EXPENSES && (
 				<div id="user-expense-input">
 					<ExpenseTable
-						key={props.userId}
+						key='expenseTable'
 						expenses={props.expenses}
 						userId={props.userId}
 						removeExpense={props.removeExpense}

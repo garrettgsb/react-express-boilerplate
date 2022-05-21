@@ -121,7 +121,7 @@ module.exports = db => {
 
   router.get('/dataPoints', (req, res) => {
     db.query(`
-    SELECT user_id, created_at AS x, amount AS y 
+    SELECT id, user_id, created_at AS x, amount AS y 
     FROM expenses; 
     `)
     .then(data => {

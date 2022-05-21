@@ -8,7 +8,6 @@ module.exports = db => {
     SELECT goals.*, users.username, users.email
     FROM goals
     JOIN users ON user_id = users.id
-		WHERE goals.amount > 0;
     `
 		)
 			.then(data => {

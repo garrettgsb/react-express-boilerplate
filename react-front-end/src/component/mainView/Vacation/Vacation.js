@@ -61,6 +61,7 @@ export default function Vacation(props) {
           </table>
           <br />
           <ProgressCircle
+            key='vacationCircle'
             total_saved={totalSpent}
             goalTotal_cents={totalSaved} />
         </div>

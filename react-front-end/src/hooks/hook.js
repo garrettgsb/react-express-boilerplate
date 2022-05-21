@@ -60,6 +60,12 @@ export default function useApplicationData() {
         state.expenses.splice(i, 1) :
         expense
     });
+    
+    const newDataPoints = state.dataPoints.map((datapoint, i) => {
+      return datapoint.id === expenseID ?
+      state.dataPoints.splice(i, 1) :
+      datapoint
+    })
 
     // console.log('newExpenseList', newExpenseList);
     const vacationExpense = getVacationExpenses(newExpenseList, 1);
@@ -71,7 +77,10 @@ export default function useApplicationData() {
       })
       .then(() => {
         setState(prev => {
-          return { ...prev, expenses: newExpenseList, savings: newExpenseList, alvinVacationSpent: vacationExpense }
+          return { ...prev, 
+            expenses: newExpenseList, 
+            savings: newExpenseList, 
+            alvinVacationSpent: vacationExpense }
         })
       })
   };
