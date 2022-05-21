@@ -55,7 +55,6 @@ export default function Expenses(props) {
 
 	return (
 		<div id='expenses-page'>
-
 			{mode === LINE && (
 				<LineGraph
 					key='savingGraph'

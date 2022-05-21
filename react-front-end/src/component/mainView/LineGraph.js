@@ -25,18 +25,21 @@ Chart.register(
   TimeScale);
 
 export default function LineGraph(props) {
-
+  console.log('LINEPROPS:,', props )
 
   const goal = getGoalByID(props.goals, props.user)[0]
   const dataPoints = getDataByID(props.dataPoints, props.user)
 
-  const updatePoints = [{ x: goal.start_date, y: 0 }]
-  dataPoints.forEach(point => {
-    if (updatePoints.slice(-1)[0]) {
-      point = { ...point, y: (updatePoints.slice(-1)[0].y + point.y) }
-    }
-    updatePoints.push(point)
-  })
+  const updatePoints = []
+  if (!props.vacationMode) {
+    updatePoints.push({ x: goal.start_date, y: 0 })
+    dataPoints.forEach(point => {
+      if (updatePoints.slice(-1)[0]) {
+        point = { ...point, y: (updatePoints.slice(-1)[0].y + point.y) }
+      }
+      updatePoints.push(point)
+    })
+  }
   const [state, setState] = useState({
     dateUnit: 'month',
     dataPoints: updatePoints
