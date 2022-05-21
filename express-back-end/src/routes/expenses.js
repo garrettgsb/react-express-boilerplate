@@ -66,6 +66,7 @@ module.exports = db => {
     VALUES ($1, $2, $3, $4);
     `, [req.body.expense.user_id, req.body.expense.created_at, req.body.expense.amount, req.body.expense.category_id])
     .then(data => {
+      console.log('It has sucessfully added a new expense!!');
       const expenses = data.rows;
       res.json(expenses);
     })
