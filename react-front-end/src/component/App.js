@@ -29,16 +29,19 @@ export default function App() {
     <div className="app overflow-hidden">
 
       {mode === LOGIN && <Login
+        key='login'
         transition={transition}
         loginUser={loginUser}
       />}
 
       {mode === SIGNUP && <Signup
+        key='signup'
         transition={transition}
         back={back}
       />}
 
       {mode === SHOW && <Main
+        key='main'
         tab={state.tab}
         addExpense={addExpense}
         userId={state.user}
@@ -51,8 +54,8 @@ export default function App() {
         goals={state.goals}
         alvinVacationSpent={state.alvinVacationSpent}
         removeExpense={removeExpense}
+        vacactionMode={state.vacationMode}
       />}
-
     </div>
   );
 }

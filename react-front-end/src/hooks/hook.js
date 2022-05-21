@@ -13,6 +13,7 @@ export default function useApplicationData() {
     categories: [],
     dataPoints: [],
     alvinVacationSpent: [],
+    vacationMode: true,
     vacations: []
   });
 
