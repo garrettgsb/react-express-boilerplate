@@ -48,22 +48,22 @@ export default function useApplicationData() {
         });
       });
   };
-
+  // console.log('STATE.SAVINGS', state.savings);
   const removeExpense = expenseID => {
-    console.log('EXPENSEID:', expenseID)
+    // console.log('EXPENSEID:', expenseID);
     const newExpenseList = state.expenses.map((expense, i) => {
       return expense.id === expenseID ?
         state.expenses.splice(i, 1) :
         expense
-    })
-
+    });
+    // console.log('newExpenseList!?!?', newExpenseList);
     return axios
       .delete(`http://localhost:8081/api/delete`, {
         data: { id: expenseID }
       })
       .then(() => {
         setState(prev => {
-          return { ...prev, expenses: newExpenseList }
+          return { ...prev, expenses: newExpenseList, savings: newExpenseList }
         })
       })
   }
