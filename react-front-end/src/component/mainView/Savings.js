@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProgressCircle from './ProgressCircle';
 import '../../sass/savings.scss';
 import {
@@ -7,6 +7,7 @@ import {
 	getGoalByID,
 	getSavingsByID,
 } from '../../helpers/helper_functions';
+import classNames from 'classnames';
 
 export default function Savings(props) {
 	// gets total amount of saved money
@@ -16,6 +17,13 @@ export default function Savings(props) {
 	const goalByID = getGoalByID(props.goals, props.userId);
 	const totalGoal = getTotalAmount(goalByID);
 	const totalDaysTillGoal = getDaysTillGoal(goalByID);
+	const [state, setState] = useState({
+		input: 'appear',
+	});
+
+	const piggyAppear = classNames('pig-image', {
+		disappear: state.input !== 'disappear',
+	});
 
 
 	// const [state, setState] = useState({
@@ -120,11 +128,19 @@ export default function Savings(props) {
 					<div className="wrap">
 						<button className="button-vac">VACATION MODE</button>
 					</div>
-					<button className="pig-image">
+					<button 
+						className={piggyAppear}
+						onClick={() => {
+							setState({ ...state, input: 'disappear' });
+						}}
+					>
 						<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
 					</button>
 					<button className="pig-break">
-						<img src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif" alt="piggy bank broken" />
+						<img
+							src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
+							alt="piggy bank broken"
+						/>
 					</button>
 				</div>
 
