@@ -23,3 +23,81 @@
 #progress-circle {
   z-index: 5;
 }
+
+//vacation button
+
+html, body {
+  height: 100%;
+}
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-vac {
+  right: 150px;
+  min-width: 300px;
+  min-height: 60px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+  text-align: center;
+  color: #313133;
+  background: #4FD1C5;
+background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+  border: none;
+  border-radius: 1000px;
+  box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 10px;
+  }
+
+
+
+.button-vac:hover, .button-vac:focus {
+  color: #313133;
+  transform: translateY(-6px);
+}
+
+
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+.pig-image {
+  top: 0;
+  left: 0;
+ position:absolute;
+}
+
+.pig-break {
+  transform: scale(1.7);
+  position: absolute;
+  opacity: 0.5;
+  top: 116px;
+  left: 170px;
+  display:none;
+}
+

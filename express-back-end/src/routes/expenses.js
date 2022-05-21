@@ -4,8 +4,17 @@ const router = express.Router();
 module.exports = db => {
   router.get('/expenses', (req, res) => {
     db.query(`
-    SELECT expenses.*, categories.name AS category_name
+    SELECT expenses.*,
+      categories.name AS category_name,
+      goals.goal_name,
+      goals.end_date,
+      goals.id AS goals_id,
+      goals.user_id AS goals_user_id,
+      goals.start_date,
+      goals.end_date
     FROM expenses
+    JOIN users ON expenses.user_id = users.id
+    JOIN goals ON goals.user_id = users.id
     JOIN categories ON category_id = categories.id
     ORDER BY id DESC;
     `)
@@ -66,6 +75,7 @@ module.exports = db => {
     VALUES ($1, $2, $3, $4);
     `, [req.body.expense.user_id, req.body.expense.created_at, req.body.expense.amount, req.body.expense.category_id])
     .then(data => {
+      console.log('It has sucessfully added a new expense!!');
       const expenses = data.rows;
       res.json(expenses);
     })
@@ -82,10 +92,11 @@ module.exports = db => {
       `,
       [req.body.id]
     )
-    .then(data => {                       
+    .then(data => {       
+      console.log('It has sucessfully deleted expense ID!! ',req.body);
       const removed = data.rows;
       res.json(removed);
-    })                                   
+    })
     .catch(error => {
       console.log('The error is: ', error);
     });
@@ -130,7 +141,9 @@ module.exports = db => {
       expenses.category_id,
       goals.start_date AS start_date,
       goals.end_date AS end_date,
-      goals.goal_name
+      goals.goal_name,
+      goals.user_id AS goals_user_id,
+      goals.id AS goals_id
     FROM expenses
     JOIN users ON expenses.user_id = users.id
     JOIN goals ON goals.user_id = users.id
