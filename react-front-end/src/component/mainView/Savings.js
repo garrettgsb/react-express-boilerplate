@@ -20,7 +20,7 @@ export default function Savings(props) {
 	const totalDaysTillGoal = getDaysTillGoal(goalByID);
 	const [state, setState] = useState({
 		input: 'appear',
-		switch: "Off",
+		switch: 'Off',
 		day: false,
 		week: false,
 		month: false,
@@ -28,29 +28,33 @@ export default function Savings(props) {
 	});
 
 	const dayClick = () => {
-		setState({...state,
+		setState({
+			...state,
 			day: !state.day,
-			switch: !state.switch ? 'ON' : 'OFF'
+			switch: !state.switch ? 'ON' : 'OFF',
 		});
 	};
 
 	const weekClick = () => {
-		setState({...state,
+		setState({
+			...state,
 			week: !state.week,
-			switch: !state.switch ? 'ON' : 'OFF'
+			switch: !state.switch ? 'ON' : 'OFF',
 		});
 	};
 
 	const monthClick = () => {
-		setState({...state,
+		setState({
+			...state,
 			month: !state.month,
-			switch: !state.switch ? 'ON' : 'OFF'
+			switch: !state.switch ? 'ON' : 'OFF',
 		});
 	};
 	const yearClick = () => {
-		setState({...state,
+		setState({
+			...state,
 			year: !state.year,
-			switch: !state.switch ? 'ON' : 'OFF'
+			switch: !state.switch ? 'ON' : 'OFF',
 		});
 	};
 
@@ -107,26 +111,26 @@ export default function Savings(props) {
 										{totalDaysTillGoal} days until {goalByID.end_date}
 									</td>
 								</tr>
-								{state.day &&
+								{state.day && (
 									<tr className="fw-bold">
 										<td>You can save {moneyPerDayToGoal}/day</td>
 									</tr>
-								}
-								{state.week &&
+								)}
+								{state.week && (
 									<tr className="fw-bold">
 										<td>You can save {moneyPerWeekToGoal}/week</td>
 									</tr>
-								}
-								{state.month &&
+								)}
+								{state.month && (
 									<tr className="fw-bold">
 										<td>You can save {moneyPerMonthToGoal}/month</td>
 									</tr>
-								}
-								{state.year &&
+								)}
+								{state.year && (
 									<tr className="fw-bold">
 										<td>You can save {moneyPerYearToGoal}/year</td>
 									</tr>
-								}
+								)}
 							</thead>
 						</table>
 						<div id="progress-circle">
@@ -142,91 +146,95 @@ export default function Savings(props) {
 							className="d-flex h-25 mb-3 align-items-center justify-content-center"
 						>
 							<div className="m-1">
-								<div class="form-check form-switch">
+								<div className="form-check form-switch">
 									<input
-										class="form-check-input"
+										className="form-check-input"
 										type="checkbox"
 										aria-checked="false"
 										role="switch"
 										id="day-switch"
+										onChange={() => dayClick()}
 									/>
-									<label class="form-check-label" htmlFor="day-switch">
+									<label className="form-check-label" htmlFor="day-switch">
 										Day
 									</label>
 								</div>
 							</div>
 							<div className="m-1">
-								<div class="form-check form-switch">
+								<div className="form-check form-switch">
 									<input
-										class="form-check-input"
+										className="form-check-input"
 										type="checkbox"
 										aria-checked="false"
 										role="switch"
 										id="week-switch"
+										onChange={() => weekClick()}
 									/>
-									<label class="form-check-label" htmlFor="week-switch">
+									<label className="form-check-label" htmlFor="week-switch">
 										Week
 									</label>
 								</div>
 							</div>
 							<div className="m-1">
-								<div class="form-check form-switch">
+								<div className="form-check form-switch">
 									<input
-										class="form-check-input"
+										className="form-check-input"
 										type="checkbox"
 										aria-checked="false"
 										role="switch"
 										id="month-switch"
+										onChange={() => monthClick()}
 									/>
-									<label class="form-check-label" htmlFor="month-switch">
+									<label className="form-check-label" htmlFor="month-switch">
 										Month
 									</label>
 								</div>
 							</div>
 							<div className="m-1">
-								<div class="form-check form-switch">
+								<div className="form-check form-switch">
 									<input
-										class="form-check-input"
+										className="form-check-input"
 										type="checkbox"
 										aria-checked="false"
 										role="switch"
 										id="year-switch"
+										onChange={() => yearClick()}
 									/>
-									<label class="form-check-label" htmlFor="year-switch">
+									<label className="form-check-label" htmlFor="year-switch">
 										Year
 									</label>
 								</div>
 							</div>
+							<div id="switch-right"></div>
 						</div>
-						<div id="switch-right"></div>
 					</div>
-				</div>
 
-				<div>
-					<div className="wrap">
-						<button className="button-vac">VACATION MODE</button>
+					<div>
+						<div className="wrap">
+							<button className="button-vac">VACATION MODE</button>
+						</div>
+						<button
+							className={piggyAppear}
+							onClick={() => {
+								setState({ ...state, input: 'disappear' });
+							}}
+						>
+							<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
+						</button>
+
+						<img
+							className={piggyBreak}
+							src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
+							alt="piggy bank broken"
+						/>
 					</div>
-					<button
-						className={piggyAppear}
-						onClick={() => {
-							setState({ ...state, input: 'disappear' });
-						}}
-					>
-						<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
-					</button>
 
 					<img
-						className={piggyBreak}
-						src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
-						alt="piggy bank broken"
+						id="piggy-animation"
+						src="https://c.tenor.com/k_giby7nsyIAAAAC/money-piggy-bank.gif"
+						alt="piggy animation"
 					/>
 				</div>
-
-				<img
-					id="piggy-animation"
-					src="https://c.tenor.com/k_giby7nsyIAAAAC/money-piggy-bank.gif"
-					alt="piggy animation"
-				/>
 			</div>
 		</div>
 	);
