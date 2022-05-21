@@ -11,8 +11,13 @@ export default function Savings(props) {
   const goalByID = getGoalByID(props.goals, props.userId);
   const totalGoal = getTotalAmount(goalByID);
   const totalDaysTillGoal = getDaysTillGoal(goalByID);
-
-
+  console.log('SAVINGS:BYID',  savingsbyID)
+  console.log('SAVINGS:TOTAL', totalSaved)
+  console.log('GOALS:BYID',   goalByID)
+  console.log('GOAL:TOTAL', totalGoal)
+  console.log('totalDaystill:', totalDaysTillGoal)
+ 
+  
   // const [state, setState] = useState({
   //   goal: goalByID[0].goal_name
   // })
@@ -38,7 +43,7 @@ export default function Savings(props) {
               <tr>
                 <td>
                   <h1>
-                    {goalByID[0].goal_name}
+                    {goalByID.goal_name}
                   </h1>
                 </td>
               </tr>
@@ -51,7 +56,7 @@ export default function Savings(props) {
               </tr>
               <tr>
                 <td>
-                  {totalDaysTillGoal} days until {goalByID[0].end_date}
+                  {totalDaysTillGoal} days until {goalByID.end_date}
                 </td>
               </tr>
               <tr>

@@ -26,19 +26,25 @@ export const getDataByID = (data, id) =>
     item.user_id === parseInt(id));
 
 export function getDaysTillGoal(state) {
-  const startDate = new Date(state[0].start_date);
-  const endDate = new Date(state[0].end_date);
+  const startDate = new Date(state.start_date);
+  const endDate = new Date(state.end_date);
   const difference = endDate - startDate;
   const daysBetween = Math.ceil(difference / (1000 * 3600 * 24));
   return daysBetween;
 };
 
 export function getTotalAmount(state) {
-  const amountList = state.map(expense => expense.amount);
 
-  return amountList.length > 1 ?
-    amountList.reduce((first, next) => first + next) :
-    amountList;
+  if (Array.isArray(state)) {
+
+    const amountList = state.map(expense => expense.amount);
+
+    return amountList.length > 1 ?
+      amountList.reduce((first, next) => first + next) :
+      amountList;
+  } else {
+    return state;
+  }
 };
 
 export function getExpenseById(expenses, id) {
