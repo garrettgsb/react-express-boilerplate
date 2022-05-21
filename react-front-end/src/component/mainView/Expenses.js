@@ -55,6 +55,7 @@ export default function Expenses(props) {
 
 	return (
 		<div id='expenses-page'>
+
 			{mode === LINE && (
 				<LineGraph
 					key={props.userId}
@@ -63,12 +64,13 @@ export default function Expenses(props) {
 					dataPoints={props.dataPoints}
 					expenses={props.expenses}
 					back={back}
+					vacationMode={props.vacationMode}
 				/>
 			)}
 			{mode === EXPENSES && (
 				<div id="user-expense-input">
 					<ExpenseTable
-						key={props.expenses.length}
+						key={props.userId}
 						expenses={props.expenses}
 						userId={props.userId}
 						removeExpense={props.removeExpense}
@@ -197,9 +199,9 @@ export default function Expenses(props) {
 									<button
 										name='graph-thumbnail'
 										className={removeMapview}>
-										<img 
-										onClick={() => transition(LINE)}
-										id='graph-thumbnail' src='../../../graph_thumbnail.png' alt='graph thumbnail' />
+										<img
+											onClick={() => transition(LINE)}
+											id='graph-thumbnail' src='../../../graph_thumbnail.png' alt='graph thumbnail' />
 									</button>
 								</div>
 							</div>

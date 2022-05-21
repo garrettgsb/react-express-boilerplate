@@ -26,6 +26,7 @@ Chart.register(
 
 export default function LineGraph(props) {
 
+
   const goal = getGoalByID(props.goals, props.user)[0]
   const dataPoints = getDataByID(props.dataPoints, props.user)
 
@@ -69,6 +70,7 @@ export default function LineGraph(props) {
     <div>
       <div id='line'>
         <Line
+          key={props.user}
           data={data}
           height={400}
           width={400}

@@ -21,50 +21,50 @@ export default function Vacation(props) {
   const moneyPerWeekToGoal = '$' + (moneyTillGoal / (daysTillEndOfVacation / 7) / 100).toFixed(2);
 
 
-return (
-  <div>
+  return (
+    <div>
       <div className='d-flex align-items-center justify-content-center text-center goalbox'>
-    <div className='goal-container'>
-      <br/>
-        <table>
-          <thead>
-            <tr>
-              <td>
-                <h1>
-                  {goalName}
-                </h1>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <h1>
-                  ${(totalSpent / 100).toFixed(2)} / ${(totalSaved / 100).toFixed(2)}
-                </h1>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                {daysTillEndOfVacation} days until home time
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Advised to spend no more than {moneyPerDayToGoal}/day
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Advised to spend no more than {moneyPerWeekToGoal}/week
-              </td>
-            </tr>
-          </thead>
-        </table>
-        <br />
-        <ProgressCircle
-          total_saved={totalSpent}
-          goalTotal_cents={totalSaved} />
+        <div className='goal-container'>
+          <br />
+          <table>
+            <thead>
+              <tr>
+                <td>
+                  <h1>
+                    {goalName}
+                  </h1>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h1>
+                    ${(totalSpent / 100).toFixed(2)} / ${(totalSaved / 100).toFixed(2)}
+                  </h1>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {daysTillEndOfVacation} days until home time
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Advised to spend no more than {moneyPerDayToGoal}/day
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Advised to spend no more than {moneyPerWeekToGoal}/week
+                </td>
+              </tr>
+            </thead>
+          </table>
+          <br />
+          <ProgressCircle
+            total_saved={totalSpent}
+            goalTotal_cents={totalSaved} />
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
 };

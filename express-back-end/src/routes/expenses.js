@@ -82,6 +82,10 @@ module.exports = db => {
       `,
       [req.body.id]
     )
+    .then(data => {                       
+      const removed = data.rows;
+      res.json(removed);
+    })                                   
     .catch(error => {
       console.log('The error is: ', error);
     });
