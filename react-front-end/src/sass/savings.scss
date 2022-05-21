@@ -96,11 +96,11 @@ button {
 .pig-break {
   transform: scale(1.7);
   position: absolute;
-  opacity: 0.5;
+  opacity: 1;
   top: 116px;
   left: 170px;
-  display:none;
-  z-index: 7;
+  // display:none;
+  z-index: 11;
 }
 
 .disappear {
@@ -112,4 +112,8 @@ button {
 }
 #switch-right {
   width: 40%;
+}
+
+.form-check-input {
+  z-index: 10;
 }
