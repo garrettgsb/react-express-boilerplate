@@ -6,15 +6,9 @@ module.exports = db => {
     db.query(`
     SELECT expenses.*,
       categories.name AS category_name,
-      goals.goal_name,
-      goals.end_date,
-      goals.id AS goals_id,
-      goals.user_id AS goals_user_id,
-      goals.start_date,
-      goals.end_date
+      users.username
     FROM expenses
     JOIN users ON expenses.user_id = users.id
-    JOIN goals ON goals.user_id = users.id
     JOIN categories ON category_id = categories.id
     ORDER BY id DESC;
     `)
