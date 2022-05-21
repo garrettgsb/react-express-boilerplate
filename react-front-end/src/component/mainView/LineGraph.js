@@ -29,28 +29,32 @@ export default function LineGraph(props) {
   const goal = getGoalByID(props.goals, props.user)
   const dataPoints = getDataByID(props.dataPoints, props.user)
 
-  const updatePoints = []
-  let total = '';
-  let trackLine = '';
-  let trackUnits = '';
-  let trackData = [];
+  let graphData = {
+    updatePoints: [],
+    total: '',
+    trackLine: '',
+    trackUnits: '',
+    trackData: []
+  }
 
   if (!props.vacationMode) {
 
-    total = 'Savings'
-    trackLine = goal.goal_name;
-    trackUnits = 'month';
-    trackData = [
-      { x: goal.start_date, y: 0 },
-      { x: goal.end_date, y: goal.amount }
-    ];
+    graphData = { ...graphData,
+      total: 'Savings',
+      trackLine: goal.goal_name,
+      trackUnits: 'month',
+      trackData: [
+        { x: goal.start_date, y: 0 },
+        { x: goal.end_date, y: goal.amount }
+      ]
+    }
 
-    updatePoints.push({ x: goal.start_date, y: 0 })
+    graphData.updatePoints.push({ x: goal.start_date, y: 0 })
     dataPoints.forEach(point => {
-      if (updatePoints.slice(-1)[0]) {
-        point = { ...point, y: (updatePoints.slice(-1)[0].y + point.y) }
+      if (graphData.updatePoints.slice(-1)[0]) {
+        point = { ...point, y: (graphData.updatePoints.slice(-1)[0].y + point.y) }
       }
-      updatePoints.push(point)
+      graphData.updatePoints.push(point)
     })
   } else if (props.vacationMode) {
 
@@ -61,42 +65,37 @@ export default function LineGraph(props) {
       start_date: '2022-03-14',
       end_date: '2022-06-01'
     }
-    console.log('GOAL:', goal)
-    total = 'Total Spent'
-    trackLine = 'Budget';
-    trackUnits = 'day';
-    trackData = [
-      // { x: goal.start_date, y: goal.budget },
-      { x: vacation.start_date, y: vacation.budget },
-      // { x: goal.end_date, y: 0 }
-      { x: vacation.end_date, y: 0 }
-    ];
-    const vacationData = getVacationData(dataPoints, vacation.start_date)
-    console.log('DATAPOINTS:', dataPoints)
-    vacationData.forEach(point => {
-      if (updatePoints.slice(-1)[0]) {
-        point = { ...point, y: (updatePoints.slice(-1)[0].y + point.y) }
-      }
-      updatePoints.push(point)
-    })
-    console.log('VACATIONDATA:', vacationData)
+    graphData = { ...graphData,
+      total: 'Savings',
+      trackLine: 'Budget',
+      trackUnits: 'day',
+      trackData: [
+        // { x: goal.start_date, y: goal.budget },//SWAP WITH HARDCODE DATA FOR DEPLOY
+        { x: vacation.start_date, y: vacation.budget }, //HARDCODED DATA FOR DEV
+        // { x: goal.end_date, y: 0 } // SWAP WITH HARDCODE DATA FOR DEPLOY 
+        { x: vacation.end_date, y: 0 } //HARDCODED DATA FOR DEV
+      ]
+    }
 
-    // dataPoints.forEach(point => {
-    //   if (updatePoints.slice(-1)[0]) {
-    //     point = { ...point, y: (updatePoints.slice(-1)[0].y + point.y) }
-    //   }
-    //   updatePoints.push(point)
-    // })
+    const vacationData = getVacationData(dataPoints, vacation.start_date)
+    graphData.updatePoints.push({ x: vacation.start_date, y: vacation.budget })
+    vacationData.forEach(point => {
+      if (graphData.updatePoints.slice(-1)[0]) {
+        point = { ...point, y: (graphData.updatePoints.slice(-1)[0].y - point.y) }
+      }
+      graphData.updatePoints.push(point)
+    })
+
   }
   const [state, setState] = useState({
-    dateUnit: trackUnits,
-    dataPoints: updatePoints
+    dateUnit: graphData.trackUnits,
+    dataPoints: graphData.updatePoints
   })
 
   const data = {
     datasets: [
       {
-        label: total,
+        label: graphData.total,
         data: state.dataPoints,
         fill: false,
         backgroundColor: 'rgba(220, 38, 38, 0.7)',
@@ -104,8 +103,8 @@ export default function LineGraph(props) {
         tension: 0.1
       },
       {
-        label: trackLine,
-        data: trackData,
+        label: graphData.trackLine,
+        data: graphData.trackData,
         fill: false,
         backgroundColor: 'limegreen',
         borderColor: 'limegreen',
