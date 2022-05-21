@@ -47,7 +47,7 @@ export function getTotalAmount(state) {
       amountList.reduce((first, next) => first + next) :
       amountList;
   } else {
-    return state;
+    return state.amount;
   }
 };
 

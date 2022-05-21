@@ -26,23 +26,23 @@ export default function Vacation(props) {
 
   const savingsById = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsById);
-  const totalSpent = getTotalAmount(props.alvinVacationSpent);
-
-  const goalName = props.alvinVacationSpent[0].goal_name;
-  const daysTillEndOfVacation = getDaysTillGoal(props.alvinVacationSpent[0]);
-
+  
   const vacationInfo = getGoalByID(props.goals, props.userId)
-
+  
   const vacationExpenses = filteredVacationExpenses(props.expenses, props.userId, testData.start_date /*vacationInfo.start_date*/)
   const totalSpentOnVacation = getTotalAmount(vacationExpenses);
-
   // const homeTime = getDaysTillGoal(vacationInfo) //SWAP WHEN DEPLOY
   const homeTime = getDaysTillGoal(testData) // HARDCODE DATA FOR DEV
+  
+  
+  // const totalSpent = getTotalAmount(props.alvinVacationSpent);
 
+  // const goalName = props.alvinVacationSpent[0].goal_name;
+  // const daysTillEndOfVacation = getDaysTillGoal(props.alvinVacationSpent[0]);
   // gets money per day/week/month/year
-  const moneyTillGoal = totalSaved - totalSpent;
-  const moneyPerDayToGoal = '$' + (moneyTillGoal / daysTillEndOfVacation / 100).toFixed(2);
-  const moneyPerWeekToGoal = '$' + (moneyTillGoal / (daysTillEndOfVacation / 7) / 100).toFixed(2);
+  // const moneyTillGoal = totalSaved - totalSpent;
+  // const moneyPerDayToGoal = '$' + (moneyTillGoal / daysTillEndOfVacation / 100).toFixed(2);
+  // const moneyPerWeekToGoal = '$' + (moneyTillGoal / (daysTillEndOfVacation / 7) / 100).toFixed(2);
 
   const budgetLeft = totalSaved - totalSpentOnVacation;
   const dayAllowance = `$${(budgetLeft / homeTime / 100).toFixed(2)}`;
