@@ -43,7 +43,7 @@ export default function Venue({bar}) {
        
         </div>
         <div className="data--right"> 
-        <a href={`https://www.google.com/maps/search/?api=1&query=<address>&query_place_id=${bar.place_id}`} target="_blank" rel="noreferrer noopener" >
+        <a href={`https://www.google.com/maps/search/?api=1&query=${bar.vicinity}&query_place_id=${bar.place_id}`} target="_blank" rel="noreferrer noopener" >
           <MapOutlinedIcon >
            </MapOutlinedIcon>
         </a>

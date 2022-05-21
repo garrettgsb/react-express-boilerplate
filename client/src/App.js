@@ -5,20 +5,26 @@ import Header from "./components/Header";
 import { CardFlip } from "./components/Card";
 import TripContainer from "./components/TripContainer";
 import Location from "./components/Location";
-import { Preview } from "@mui/icons-material";
+import { Flip, Splitscreen } from "@mui/icons-material";
+import useChangeState from "./components/hooks/useChangeState"
 
 export default function App() {
   const [found, setFound] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [bar, setBar] = useState({});
-  const [history, setHistory] = useState([])
-  
+  const [history, setHistory] = useState([]);
   // const [photo, setPhoto] = useState({});
+  let newResults = [];
+  const {flip,isFlipped} = useChangeState();
 
+ 
   function click() {
-    venue = searchResults[RandNum(searchResults)]
+    flip();
+    venue = searchResults[RandNum(searchResults)];
     setBar(venue);
-    console.log(bar.name);
+    setTimeout(flip,3000);
+    // console.log(grabPhoto());
+    // console.log(photo);
   }
 
   const userLogin = function (loginInfo, cb) {
@@ -90,11 +96,13 @@ export default function App() {
       // setTimeout(grabPhoto,5000);
       console.log("Venue:",venue);
       setBar(venue);
+      newResults = results;
+      flip();
     }).catch(function (error) {
       console.error(error);
     });
     
-    return result;
+    return (result, newResults);
   };
 
   // function grabPhoto() {
@@ -136,13 +144,13 @@ export default function App() {
       {/* <LoginForm /> */}
       <div className="main">
         {found ? (
-          <CardFlip bar={bar} />
+          <CardFlip bar={bar} isFlipped={isFlipped} click={click} />
         ) : (
-          <Location setFound={setFound} setSearchResults={setSearchResults} click={click} locationSearch={locationSearch} />
+          <Location setFound={setFound} setSearchResults={setSearchResults}  locationSearch={locationSearch} />
         )}
+        <button onClick={click}>Next Bar!</button>
         <TripContainer/>
       </div>
-      <button onClick={click}>Check</button>
     </div>
   );
 }
