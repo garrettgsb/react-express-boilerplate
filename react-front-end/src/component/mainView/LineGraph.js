@@ -27,16 +27,16 @@ Chart.register(
 export default function LineGraph(props) {
   console.log('LINEPROPS:,', props)
 
-  
+
   const updatePoints = []
   let trackLine = '';
   let trackUnits = '';
   let trackData = [];
-  
+
   if (!props.vacationMode) {
     const goal = getGoalByID(props.goals, props.user)[0]
     const dataPoints = getDataByID(props.dataPoints, props.user)
-    
+
     trackLine = goal.goal_name;
     trackUnits = 'month';
     trackData = [
@@ -52,7 +52,7 @@ export default function LineGraph(props) {
       updatePoints.push(point)
     })
   } else if (props.vacationMode) {
-    
+
     const vacation = {
       user_id: 1,
       goal_name: 'Mexico',
@@ -60,7 +60,17 @@ export default function LineGraph(props) {
       start_date: '2022-05-20',
       end_date: '2022-07-01'
     }
-    
+
+    const getVacationInfo = (data, id) => {
+      const vacation = /vacation/i;
+
+      return props.vacationData.find(data =>
+        data.goal_name.match(vacation)
+      )
+    }
+    const vacationInfo = getVacationInfo(props.goals, props.user)
+    console.log('VACATIONINFO:', vacationInfo)
+
     trackLine = vacation.goal_name;
     trackUnits = 'day';
     trackData = [
@@ -72,7 +82,7 @@ export default function LineGraph(props) {
       { x: vacation.start_date, y: vacation.budget },
       { x: '2022-05-30', y: 490000 },
       { x: '2022-06-07', y: 340000 }
-      );
+    );
 
 
     // dataPoints.forEach(point => {
