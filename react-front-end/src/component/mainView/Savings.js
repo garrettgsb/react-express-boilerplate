@@ -22,9 +22,12 @@ export default function Savings(props) {
 	});
 
 	const piggyAppear = classNames('pig-image', {
-		disappear: state.input !== 'disappear',
+		disappear: state.input === 'disappear',
 	});
 
+	const piggyBreak = classNames('pig-break', {
+		disappear: state.input !== 'disappear',
+	});
 
 	// const [state, setState] = useState({
 	//   goal: goalByID[0].goal_name
@@ -50,7 +53,7 @@ export default function Savings(props) {
 				<br />
 				<br />
 				<div className="d-flex w-50 flex-column align-items-center justify-content-center text-center">
-					<div className='w-100 h-75 d-flex align-items-center justify-content-center text-center'>
+					<div className="w-100 h-75 d-flex align-items-center justify-content-center text-center">
 						<table>
 							<thead>
 								<tr>
@@ -92,35 +95,69 @@ export default function Savings(props) {
 							/>
 						</div>
 					</div>
-					<div className='w-100 d-flex justify-content-space-evenly'>
-					<div id='switch' className='d-flex h-25 mb-3 align-items-center justify-content-center'>
-						<div className='m-1'>
-							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" aria-checked="false" role="switch" id="day-switch" />
-								<label class="form-check-label" htmlFor="day-switch">Day</label>
+					<div className="w-100 d-flex justify-content-space-evenly">
+						<div
+							id="switch"
+							className="d-flex h-25 mb-3 align-items-center justify-content-center"
+						>
+							<div className="m-1">
+								<div class="form-check form-switch">
+									<input
+										class="form-check-input"
+										type="checkbox"
+										aria-checked="false"
+										role="switch"
+										id="day-switch"
+									/>
+									<label class="form-check-label" htmlFor="day-switch">
+										Day
+									</label>
+								</div>
+							</div>
+							<div className="m-1">
+								<div class="form-check form-switch">
+									<input
+										class="form-check-input"
+										type="checkbox"
+										aria-checked="false"
+										role="switch"
+										id="week-switch"
+									/>
+									<label class="form-check-label" htmlFor="week-switch">
+										Week
+									</label>
+								</div>
+							</div>
+							<div className="m-1">
+								<div class="form-check form-switch">
+									<input
+										class="form-check-input"
+										type="checkbox"
+										aria-checked="false"
+										role="switch"
+										id="month-switch"
+									/>
+									<label class="form-check-label" htmlFor="month-switch">
+										Month
+									</label>
+								</div>
+							</div>
+							<div className="m-1">
+								<div class="form-check form-switch">
+									<input
+										class="form-check-input"
+										type="checkbox"
+										aria-checked="false"
+										role="switch"
+										id="year-switch"
+									/>
+									<label class="form-check-label" htmlFor="year-switch">
+										Year
+									</label>
+								</div>
 							</div>
 						</div>
-						<div className='m-1'>
-							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox"aria-checked="false" role="switch" id="week-switch" />
-								<label class="form-check-label" htmlFor="week-switch">Week</label>
-							</div>
-						</div>
-						<div className='m-1'>
-							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox"aria-checked="false" role="switch" id="month-switch" />
-								<label class="form-check-label" htmlFor="month-switch">Month</label>
-							</div>
-						</div>
-						<div className='m-1'>
-							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox"aria-checked="false" role="switch" id="year-switch" />
-								<label class="form-check-label" htmlFor="year-switch">Year</label>
-							</div>
-						</div>
-					</div>
-					<div id='switch-right'>
-					</div>
+						<div id="switch-right"></div>
 					</div>
 				</div>
 
@@ -128,7 +165,7 @@ export default function Savings(props) {
 					<div className="wrap">
 						<button className="button-vac">VACATION MODE</button>
 					</div>
-					<button 
+					<button
 						className={piggyAppear}
 						onClick={() => {
 							setState({ ...state, input: 'disappear' });
@@ -136,12 +173,12 @@ export default function Savings(props) {
 					>
 						<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
 					</button>
-					<button className="pig-break">
-						<img
-							src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
-							alt="piggy bank broken"
-						/>
-					</button>
+
+					<img
+						className={piggyBreak}
+						src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
+						alt="piggy bank broken"
+					/>
 				</div>
 
 				<img
