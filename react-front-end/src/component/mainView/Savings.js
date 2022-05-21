@@ -111,15 +111,15 @@ export default function Savings(props) {
 								</tr>
 								<tr>
 									<td className='fs-2'>
-										{totalDaysTillGoal} days until {goalByID.end_date}
+										<span className='days-until'>{totalDaysTillGoal}</span> days until {goalByID.end_date}
 									</td>
 								</tr>
 								{state.day &&
 									<tr className="fw-bold">
 										<td>
 											Advised to save
-											<span>	{moneyPerDayToGoal}</span>	/
-											<span classNames='fs-6'>
+											<span className='advice'>	{moneyPerDayToGoal}</span>	/
+											<span >
 												day
 											</span>
 										</td>
@@ -128,8 +128,8 @@ export default function Savings(props) {
 								{state.week &&
 									<tr className="fw-bold">
 										<td>Advised to save
-											<span>	{moneyPerWeekToGoal}</span>	/
-											<span classNames='fs-6'>
+											<span className='advice'>	{moneyPerWeekToGoal}</span>	/
+											<span >
 												week
 											</span>
 										</td>
@@ -138,8 +138,8 @@ export default function Savings(props) {
 								{state.month &&
 									<tr className="fw-bold">
 										<td>Advised to save
-											<span>	{moneyPerMonthToGoal}</span>	/
-											<span classNames='fs-6'>
+											<span className='advice'>	{moneyPerMonthToGoal}</span>	/
+											<span >
 												month
 											</span>
 										</td>
@@ -148,8 +148,8 @@ export default function Savings(props) {
 								{state.year &&
 									<tr className="fw-bold">
 										<td>Advised to save
-											<span>	{moneyPerYearToGoal}</span>	/
-											<span classNames='fs-6'>
+											<span className='advice'>	{moneyPerYearToGoal}</span>	/
+											<span >
 												year
 											</span>
 										</td>
