@@ -30,7 +30,8 @@ export default function useApplicationData() {
   };
 
   const updateGoals = (goalID, goals) => {
-    const newGoal = state.goals.map(item =>
+    console.log("GOALS:", goals)
+    const updatedGoal = state.goals.map(item =>
       item.id === goalID ?
         item = {
           ...item,
@@ -40,16 +41,18 @@ export default function useApplicationData() {
         }
         : item
     );
+    setState(prev => {
+      return { ...prev, goals: updatedGoal }
+    })
 
+    
     return axios
       .put(`http://localhost:8081/api/goals`, {
         goals
       })
       .then(res => {
-        setState(prev => {
-          return { ...prev, goals: newGoal };
-        });
-      });
+        console.log('res');
+      })
   };
 
 
@@ -59,11 +62,11 @@ export default function useApplicationData() {
         state.expenses.splice(i, 1) :
         expense
     });
-    
+
     const newDataPoints = state.dataPoints.map((datapoint, i) => {
       return datapoint.id === expenseID ?
-      state.dataPoints.splice(i, 1) :
-      datapoint
+        state.dataPoints.splice(i, 1) :
+        datapoint
     })
 
     const vacationExpense = getVacationExpenses(newExpenseList, 1);
@@ -74,11 +77,13 @@ export default function useApplicationData() {
       })
       .then(() => {
         setState(prev => {
-          return { ...prev, 
-            expenses: newExpenseList, 
-            savings: newExpenseList, 
+          return {
+            ...prev,
+            expenses: newExpenseList,
+            savings: newExpenseList,
             dataPoints: newDataPoints,
-            alvinVacationSpent: vacationExpense }
+            alvinVacationSpent: vacationExpense
+          }
         })
       })
   };
@@ -127,7 +132,7 @@ export default function useApplicationData() {
       },
       ...state.alvinVacationSpent,
     ];
-    
+
     const dataPoints = [
       ...state.dataPoints,
       {
