@@ -8,6 +8,8 @@ import {
 } from '../../../helpers/helper_functions';
 
 export default function Vacation(props) {
+	console.log(props)
+
   const savingsById = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsById);
 

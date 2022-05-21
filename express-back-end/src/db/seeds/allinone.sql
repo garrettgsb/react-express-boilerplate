@@ -129,7 +129,7 @@ INSERT INTO expenses (user_id, created_at, amount, category_id)
 
 INSERT INTO goals (user_id, goal_name, start_date, end_date, amount)
   VALUES
-  (1, 'Car: 2014 Infiniti Q50S', '2022-01-02', '2023-02-08', 3000000),
+  (1, 'Vacation: Iceland', '2022-01-02', '2023-02-08', 3000000),
   (2, 'House', '2022-01-02', '2023-05-04', 219000000),
   (3, 'Macbook', '2022-01-08', '2023-01-21', 320000),
-  (1, 'Vacation: Mexico', '2022-03-13', '2022-08-13', 0);
+  (1, 'Vacation: Mexico', '2022-03-13', '2022-08-13', 3000000);

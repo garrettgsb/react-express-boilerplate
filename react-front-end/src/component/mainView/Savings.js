@@ -85,8 +85,8 @@ export default function Savings(props) {
 				</div>
 
 				<div>
-					<div class="wrap">
-						<button class="button-vac">VACATION MODE</button>
+					<div className="wrap">
+						<button className="button-vac">VACATION MODE</button>
 					</div>
 					<button className="pig-image">
 						<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />

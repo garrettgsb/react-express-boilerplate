@@ -26,17 +26,19 @@ Chart.register(
 
 export default function LineGraph(props) {
   console.log('LINEPROPS:,', props)
+  const goal = getGoalByID(props.goals, props.user)
 
 
   const updatePoints = []
+  let total = '';
   let trackLine = '';
   let trackUnits = '';
   let trackData = [];
 
   if (!props.vacationMode) {
-    const goal = getGoalByID(props.goals, props.user)[0]
     const dataPoints = getDataByID(props.dataPoints, props.user)
 
+    total = 'Savings'
     trackLine = goal.goal_name;
     trackUnits = 'month';
     trackData = [
@@ -55,23 +57,14 @@ export default function LineGraph(props) {
 
     const vacation = {
       user_id: 1,
-      goal_name: 'Mexico',
+      goal_name: goal.goal_name,
       budget: 500000,
       start_date: '2022-05-20',
       end_date: '2022-07-01'
     }
 
-    const getVacationInfo = (data, id) => {
-      const vacation = /vacation/i;
-
-      return props.vacationData.find(data =>
-        data.goal_name.match(vacation)
-      )
-    }
-    const vacationInfo = getVacationInfo(props.goals, props.user)
-    console.log('VACATIONINFO:', vacationInfo)
-
-    trackLine = vacation.goal_name;
+    total = 'Total Spent'
+    trackLine = 'Budget' ;
     trackUnits = 'day';
     trackData = [
       { x: vacation.start_date, y: vacation.budget },
@@ -100,7 +93,7 @@ export default function LineGraph(props) {
   const data = {
     datasets: [
       {
-        label: 'Savings',
+        label: total,
         data: state.dataPoints,
         fill: false,
         backgroundColor: 'rgba(220, 38, 38, 0.7)',
