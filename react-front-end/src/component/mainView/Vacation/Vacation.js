@@ -35,6 +35,7 @@ export default function Vacation(props) {
 
   const vacationExpenses = filteredVacationExpenses(props.expenses, props.userId, testData.start_date /*vacationInfo.start_date*/)
   const totalSpentOnVacation = getTotalAmount(vacationExpenses);
+
   // const homeTime = getDaysTillGoal(vacationInfo) //SWAP WHEN DEPLOY
   const homeTime = getDaysTillGoal(testData) // HARDCODE DATA FOR DEV
 
@@ -43,6 +44,9 @@ export default function Vacation(props) {
   const moneyPerDayToGoal = '$' + (moneyTillGoal / daysTillEndOfVacation / 100).toFixed(2);
   const moneyPerWeekToGoal = '$' + (moneyTillGoal / (daysTillEndOfVacation / 7) / 100).toFixed(2);
 
+  const budgetLeft = totalSaved - totalSpentOnVacation;
+  const dayAllowance = `$${(budgetLeft / homeTime / 100).toFixed(2)}`;
+  const weekAllowance = `$${(budgetLeft / (homeTime / 7) / 100).toFixed(2)}`;
 
   return (
     <div>
@@ -61,7 +65,7 @@ export default function Vacation(props) {
               <tr>
                 <td>
                   <h1>
-                    ${(totalSpentOnVacation / 100).toFixed(2)} / ${(vacationInfo.amount / 100).toFixed(2)}
+                    ${((vacationInfo.amount / 100) - (totalSpentOnVacation / 100)).toFixed(2)} / ${(vacationInfo.amount / 100).toFixed(2)}
                   </h1>
                 </td>
               </tr>
@@ -72,12 +76,12 @@ export default function Vacation(props) {
               </tr>
               <tr>
                 <td>
-                  Advised to spend no more than {moneyPerDayToGoal}/day
+                  Advised to spend no more than {dayAllowance}/day
                 </td>
               </tr>
               <tr>
                 <td>
-                  Advised to spend no more than {moneyPerWeekToGoal}/week
+                  Advised to spend no more than {weekAllowance}/week
                 </td>
               </tr>
             </thead>
@@ -85,7 +89,7 @@ export default function Vacation(props) {
           <br />
           <ProgressCircle
             key='vacationCircle'
-            total_saved={totalSpent}
+            total_saved={totalSpentOnVacation}
             goalTotal_cents={totalSaved} />
         </div>
       </div>
