@@ -13,7 +13,8 @@ export default function Profile(props) {
   const GOAL = 'GOAL';
   const EMPTY = 'EMPTY';
   const CREATE = 'CREATE';
-  const { mode, transition, back } = useVisualMode(CREATE);
+  const REMOVE = 'REMOVE';
+  const { mode, transition, back } = useVisualMode(REMOVE);
 
   const savingsbyID = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsbyID);
@@ -280,6 +281,41 @@ export default function Profile(props) {
           </div>
         </div>
       }
+
+      {mode === REMOVE &&
+        <div className="chart-align">
+          <div className='goal-container'>
+            <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
+              <table>
+                <thead>
+                  <tr>
+                    <td className='d-flex justify-content-center w-100'>
+                      <h1 className='text--semi-bold'>
+                        Do you actually wish to give up on this dream?
+                      </h1>
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+              <div className='mb-2'>
+                <button
+                  onClick={() => back}
+                className='m-1 btn'
+                  danger >
+                  Cancel
+                </button>
+                <button
+                    className='m-1 btn btn-danger'
+                  onClick={() => {
+                    transition(EMPTY)
+                  }}
+                  danger >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>}
     </section>
   )
 }
