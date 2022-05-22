@@ -27,7 +27,7 @@ export default function Savings(props) {
 		vacation: '',
 		goal_id: goalByID.id,
 		goal_name: goalByID.goal_name,
-		totalGoals: goalByID.amount / 100,
+		totalGoals: goalByID.amount,
 		start_date: goalByID.start_date,
 		end_date: goalByID.end_date,
 	});
@@ -71,14 +71,14 @@ export default function Savings(props) {
 
 	const piggyAppear = classNames('pig-image', {
 		'disappear': state.input === 'disappear' ||
-			state.vacation === 'edit'
+			state.vacation === 'ON'
 	});
 
 	const piggyBreak = classNames('pig-break', {
-		'disappear': state.input !== 'disappear'
+		'disappear': state.input !== 'ON'
 	});
 	const vacationMode = classNames('button-vac', {
-		'disappear': state.vacation === 'edit'
+		'disappear': state.vacation === 'ON'
 	})
 
 
@@ -228,7 +228,7 @@ export default function Savings(props) {
 								<button
 									className={vacationMode}
 									onClick={() => {
-										setState({ ...state, vacation: 'edit' })
+										setState({ ...state, vacation: 'ON' })
 									}}
 								>VACATION MODE</button>
 								<button
@@ -255,7 +255,7 @@ export default function Savings(props) {
 					/>
 				</div>
 			</div>
-			{state.vacation === 'edit' &&
+			{state.vacation === 'ON' &&
 				<div className="chart-align w-50 h-50">
 					<div className='vacation-start'>
 						<div className='card d-flex align-items-center justify-content-center text-center flex-column'>

@@ -11,9 +11,10 @@ export default function App() {
     state,
     addExpense,
     loginUser,
-    updateGoals, 
-    removeExpense, 
-    removeGoal } = useApplicationData();
+    updateGoals,
+    removeExpense,
+    removeGoal,
+    changeTab } = useApplicationData();
 
   //views
   const LOGIN = 'LOGIN';
@@ -45,6 +46,7 @@ export default function App() {
         key='main'
         state={state}
         tab={state.tab}
+        changeTab={changeTab}
         removeGoal={removeGoal}
         addExpense={addExpense}
         userId={state.user}

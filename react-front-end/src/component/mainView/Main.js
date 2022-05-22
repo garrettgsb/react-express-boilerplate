@@ -15,7 +15,7 @@ export default function Main(props) {
   const EXPENSES = 'EXPENSES';
   const VACATION = 'VACATION';
 
-  const { mode, transition} = useVisualMode(props.tab);
+  const {transition} = useVisualMode(props.tab);
   return (
     <div>
       <TopNav 
@@ -25,7 +25,7 @@ export default function Main(props) {
       users={props.users} 
       />
 
-      {mode === PROFILE && <Profile
+      {props.state.tab === PROFILE && <Profile
       key='profile'
       removeGoal={props.removeGoal}
       userId={props.userId}
@@ -35,7 +35,7 @@ export default function Main(props) {
       goals={props.goals}
       updateGoals={props.updateGoals}
       />}
-      {mode === SAVINGS && <Savings
+      {props.state.tab === SAVINGS && <Savings
       key='savings'
       userId={props.userId}
       incomes={props.incomes}
@@ -43,7 +43,7 @@ export default function Main(props) {
       goals={props.goals}
       updateGoals={props.updateGoals}
       />}
-      {mode === EXPENSES && <Expenses 
+      {props.state.tab === EXPENSES && <Expenses 
       key='expenses'
       addExpense={props.addExpense} 
       userId={props.userId}
@@ -54,7 +54,7 @@ export default function Main(props) {
       vacationMode={props.vacationMode}
       vacationData={props.alvinVacationSpent}
       />}
-      {mode === VACATION && <Vacation 
+      {props.state.tab === VACATION && <Vacation 
       key='vacation'
       savings={props.savings}
       userId={props.userId}
@@ -66,6 +66,7 @@ export default function Main(props) {
       <BotNav 
       key='botnav'
       transition={transition} 
+      changeTab={props.changeTab}
       />
     </div>
   );
