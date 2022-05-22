@@ -1,0 +1,10 @@
+@import './partials/mixins';
+@import './partials/variables';
+
+
+.goalbox {
+  background-image: url('../docs/vacation2.jpg');
+  z-index: 2;
+  font-weight: bolder;
+  color: black;
+}

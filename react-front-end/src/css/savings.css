@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
+.goal-container {
+  display: flexbox;
+  flex-direction: row;
+  height: 100vh;
+}
+
+#piggy-animation {
+  position: absolute;
+  opacity: 0.5;
+  top: 200px;
+  right: 150px;
+  z-index: 0;
+  transform: scale(2);
+  border-radius: 100%;
+  width: 26%;
+  border: solid;
+  border-color: rgb(238, 177, 39);
+}
+
+#progress-circle {
+  z-index: 5;
+}

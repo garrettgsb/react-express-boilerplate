@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
+.bot-nav {
+  background-color: #ffa10a;
+  text-align: center;
+}
+.bot-nav .bot-nav-text-container {
+  display: flexbox;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.bot-nav .nav-button {
+  transform: scale(0.9);
+  opacity: 0.8;
+}
+.bot-nav .nav-button:hover {
+  transition: all 0.3s ease-in;
+  transform: scaleX(1.1);
+  opacity: 1.5;
+  color: #fff;
+}

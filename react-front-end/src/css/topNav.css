@@ -1,0 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
+.fa-piggy-bank {
+  color: #FFA10A;
+  transform: scale(3);
+  position: absolute;
+  left: 25px;
+  top: 20px;
+}
