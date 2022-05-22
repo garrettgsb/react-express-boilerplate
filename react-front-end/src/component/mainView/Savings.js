@@ -65,6 +65,7 @@ export default function Savings(props) {
 		disappear: state.input !== 'disappear',
 	});
 
+
 	// gets money per day/week/month/year
 	const moneyTillGoal = totalGoal - totalSaved;
 	const moneyPerDayToGoal =
@@ -82,6 +83,7 @@ export default function Savings(props) {
 				<br />
 				<br />
 				<div className="d-flex w-50 flex-column align-items-center justify-content-center text-center">
+				{(totalSaved / totalGoal) <= 1 && (
 					<div className="w-100 h-75 d-flex align-items-center justify-content-center text-center">
 						<table>
 							<thead>
@@ -132,6 +134,8 @@ export default function Savings(props) {
 							/>
 						</div>
 					</div>
+				)}
+				{(totalSaved / totalGoal) <= 1 && (
 					<div className="w-100 d-flex justify-content-space-evenly">
 						<div
 							id="switch"
@@ -200,10 +204,10 @@ export default function Savings(props) {
 							<div id="switch-right"></div>
 						</div>
 					</div>
+				)}
 
 					<div>
-
-						{(totalSaved) / (totalGoal) >= 1 && (
+						{(totalSaved / totalGoal) >= 1 && (
 						<div className="wrap">
 							<button className="button-vac">VACATION MODE</button>
 							<button
@@ -211,10 +215,9 @@ export default function Savings(props) {
 								onClick={() => {
 									setState({ ...state, input: 'disappear' });
 								}}
-							>
+							> 
 								<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
 							</button>
-							<button type="button" className="btn btn-secondary new-goals">New Goals</button>
 							<img
 							className={piggyBreak}
 							src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
