@@ -59,5 +59,21 @@ module.exports = db => {
 		});
 	});
 
+	router.delete('/goals', (req, res) => {
+		db.query(
+			`
+			DELETE FROM goals
+      WHERE id = $1;
+    `, [
+			req.body.id
+		]
+		)
+		.catch(error => {
+			console.log('This error is inside -> put (\'/goals\') route: ', error);
+		});
+	});
+
+	
+
 	return router;
 };
