@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { getGoalByID, getDataByID, getVacationData } from '../../helpers/helper_functions';
+import {
+  getGoalByID,
+  getDataByID,
+  getVacationData,
+  filterDataPoints
+} from '../../helpers/helper_functions';
 import {
   Chart,
   LineElement,
@@ -25,7 +30,7 @@ Chart.register(
   TimeScale);
 
 export default function LineGraph(props) {
-
+  console.log('LINE:', props)
   const goal = getGoalByID(props.goals, props.user)
   const dataPoints = getDataByID(props.dataPoints, props.user)
 
@@ -39,7 +44,8 @@ export default function LineGraph(props) {
 
   if (!props.vacationMode) {
 
-    graphData = { ...graphData,
+    graphData = {
+      ...graphData,
       total: 'Savings',
       trackLine: goal.goal_name,
       trackUnits: 'month',
@@ -50,7 +56,7 @@ export default function LineGraph(props) {
     }
 
     graphData.updatePoints.push({ x: goal.start_date, y: 0 })
-    dataPoints.forEach(point => {
+    filterDataPoints(dataPoints, 8).forEach(point => {
       if (graphData.updatePoints.slice(-1)[0]) {
         point = { ...point, y: (graphData.updatePoints.slice(-1)[0].y + point.y) }
       }
@@ -65,15 +71,14 @@ export default function LineGraph(props) {
       start_date: '2022-05-01',
       end_date: '2022-06-01'
     }
-    graphData = { ...graphData,
+    graphData = {
+      ...graphData,
       total: 'Savings',
       trackLine: 'Budget',
       trackUnits: 'day',
       trackData: [
-        // { x: goal.start_date, y: goal.budget },//SWAP WITH HARDCODE DATA FOR DEPLOY
-        { x: vacation.start_date, y: vacation.budget }, //HARDCODED DATA FOR DEV
-        // { x: goal.end_date, y: 0 } // SWAP WITH HARDCODE DATA FOR DEPLOY 
-        { x: vacation.end_date, y: 0 } //HARDCODED DATA FOR DEV
+        { x: goal.start_date, y: goal.budget },
+        { x: goal.end_date, y: 0 }
       ]
     }
 

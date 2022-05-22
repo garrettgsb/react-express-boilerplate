@@ -57,6 +57,7 @@ export default function App() {
         dataPoints={state.dataPoints}
         updateGoals={updateGoals}
         goals={state.goals}
+        back={back}
         alvinVacationSpent={state.alvinVacationSpent}
         removeExpense={removeExpense}
         vacationMode={state.vacationMode}
