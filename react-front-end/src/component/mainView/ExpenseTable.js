@@ -29,7 +29,7 @@ export default function ExpenseTable(props) {
 
 
   return (
-    <table className="table">
+    <table className="table table-striped table-hover">
       <thead className='table-info fs-5 fw-bolder'>
         <tr className='d-flex justify-content-around'>
           <td>Date</td>

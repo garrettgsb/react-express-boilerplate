@@ -15,25 +15,25 @@ export default function Profile(props) {
   const EMPTY = 'EMPTY';
   const CREATE = 'CREATE';
   const REMOVE = 'REMOVE';
-  const { mode, transition, back } = useVisualMode(GOAL);
-  
+  const { mode, transition, back } = useVisualMode(EMPTY);
+
   const savingsbyID = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsbyID);
   const goalByID = getGoalByID(props.goals, props.userId);
   const username = getUserByID(props.users, props.userId).username;
-  
+
   const [state, setState] = useState({
     goal_id: goalByID.id || '',
     goal_name: goalByID.goal_name || '',
     totalGoals: goalByID.amount || '',
     date: goalByID.end_date || '',
   });
-  
+
   const onChange = newGoal => {
     props.updateGoals(goalByID.id, newGoal);
     transition(GOAL);
   };
-  
+
   const removeGoal = (id) => {
     props.removeGoal(id)
     transition(EMPTY)
@@ -69,22 +69,41 @@ export default function Profile(props) {
       {mode === EMPTY &&
         <div className="chart-align">
           <div className='goal-container'>
-            <div>
-              New Piggy Bank?
-              <button
-                className="new-pig"
-                onClick={() => transition(EDIT)}
-              >
-                <i
-                  className="logo fa-solid fa-piggy-bank new-pig"
-                  height="15"
-                  alt="pig logo"
-                  loading="lazy"
-                />
-              </button>
+            <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
+              <table className="table table-borderless">
+                <thead>
+                  <tr>
+                    <td className='d-flex justify-content-center w-100'>
+                      <span className='fs-3 fw-2 text-success'>
+                        New Piggy Bank?
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='d-flex justify-content-center w-100'>
+                      <button
+                        className="new-pig"
+                        onClick={() => transition(EDIT)}
+                      >
+                        <i
+                          id='new-pig'
+                          className="logo fa-solid fa-piggy-bank new-pig"
+                          height="15"
+                          alt="pig logo"
+                          loading="lazy"
+                        />
+                      </button>
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+              <div>
+              </div>
             </div>
           </div>
         </div>
+
+
       }
       {mode === CREATE &&
         <div className="chart-align">
