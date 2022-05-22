@@ -60,7 +60,7 @@ export default function Vacation(props) {
           <br />
           <ProgressCircle
             key='vacationCircle'
-            total_saved={((vacationInfo.amount - totalSpentOnVacation )/ 100).toFixed(2)}
+            total_saved={(totalSpentOnVacation / 100).toFixed(2)}
             goalTotal_cents={(vacationInfo.amount / 100).toFixed(2)} />
         </div>
       </div>
