@@ -6,16 +6,16 @@ INSERT INTO users(username, email, password)
 
 INSERT INTO categories(name)
   VALUES
-  ('eating out'),
-  ('entertainment'),
-  ('fuel'),
-  ('groceries'),
-  ('income'),
-  ('insurance'),
-  ('rent'),
-  ('savings'),
-  ('shopping'),
-  ('other');
+  ('Eating Out'),
+  ('Entertainment'),
+  ('Ffuel'),
+  ('Groceries'),
+  ('Income'),
+  ('Insurance'),
+  ('Rent'),
+  ('Savings'),
+  ('Shopping'),
+  ('Other');
 
 INSERT INTO expenses (user_id, created_at, amount, category_id)
   VALUES (3, '2022-01-01', 2226, 6),

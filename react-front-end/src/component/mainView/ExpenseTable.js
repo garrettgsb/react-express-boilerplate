@@ -8,8 +8,8 @@ export default function ExpenseTable(props) {
     const categoryName = getCategoryName(expense.category_id);
     const classname = (prop) => {
       switch (prop) {
-        case 'income': return 'Income';
-        case 'savings': return 'Savings';
+        case 'Income': return 'Income';
+        case 'Savings': return 'Savings';
         default: return 'Expense';
       }
     };
@@ -30,14 +30,14 @@ export default function ExpenseTable(props) {
 
   return (
     <table className="table">
-      <thead className='table-info'>
+      <thead className='table-info fs-5 fw-bolder'>
         <tr className='d-flex justify-content-around'>
           <td>Date</td>
           <td>Category</td>
           <td>Amount</td>
         </tr>
       </thead>
-      <tbody id='expense-table' className='list-group infinite-scroll'>
+      <tbody id='expense-table' className='list-group infinite-scroll fw-bold'>
         {expenses}
       </tbody>
     </table>
