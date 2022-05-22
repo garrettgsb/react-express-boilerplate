@@ -53,7 +53,7 @@ module.exports = db => {
 			req.body.goals.goal_name,
 			req.body.goals.start_date,
 			req.body.goals.end_date,
-			req.body.goals.totalGoals,
+			req.body.goals.totalGoals * 100,
 			req.body.goals.goal_id
 		]
 		)

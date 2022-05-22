@@ -18,18 +18,18 @@ export default function BotNav(props) {
             <li className="h-100 w-100 nav-item nav-button" onClick={() => changeTab('PROFILE')}>
               <h2 className="nav-link" >Profile</h2>
             </li>
-            {/* {mode === SAVINGS &&  */}
-            <li className="h-100 w-100 nav-item nav-button" onClick={() => changeTab('SAVINGS')}>
-              <h2 className="nav-link" >Savings</h2>
-            </li>
-            {/* } */}
-            {/* {mode === VACATION &&  */}
-            <li
-              className="h-100 w-100 nav-item nav-button"
-              onClick={() => changeTab('VACATION')}>
-              <h2 className="nav-link" >Budget</h2>
-            </li>
-            {/* } */}
+            {!props.vacationMode &&
+              <li className="h-100 w-100 nav-item nav-button" onClick={() => changeTab('SAVINGS')}>
+                <h2 className="nav-link" >Savings</h2>
+              </li>
+            }
+            {props.vacationMode &&
+              <li
+                className="h-100 w-100 nav-item nav-button"
+                onClick={() => changeTab('VACATION')}>
+                <h2 className="nav-link" >Budget</h2>
+              </li>
+            }
             <li className="h-100 w-100 nav-item nav-button" onClick={() => changeTab('EXPENSES')}>
               <h2 className="nav-link" >Expenses</h2>
             </li>

@@ -67,6 +67,7 @@ export default function Main(props) {
       key='botnav'
       transition={transition} 
       changeTab={props.changeTab}
+      vacationMode={props.state.vacationMode}
       />
     </div>
   );

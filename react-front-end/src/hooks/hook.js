@@ -14,7 +14,7 @@ export default function useApplicationData() {
     categories: [],
     dataPoints: [],
     alvinVacationSpent: [],
-    vacationMode: true,
+    vacationMode: false,
     vacations: []
   });
 
