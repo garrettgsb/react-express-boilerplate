@@ -20,7 +20,6 @@ export default function Profile(props) {
   const goalByID = getGoalByID(props.goals, props.userId);
   const username = getUserByID(props.users, props.userId).username;
 
-
   const [state, setState] = useState({
     goal_id: goalByID.id,
     goal_name: goalByID.goal_name,
@@ -88,10 +87,18 @@ export default function Profile(props) {
                       <div className='w-50'>
                         <input
                           type="number"
+                          imputmode="decimal"
+                          min="0.01"
+                          step="0.01"
                           id="goalAmount"
                           className="form-control align-items-center"
                           value={state.totalGoals}
-                          onChange={(event) => setState({ ...state, totalGoals: event.target.value})}
+                          onChange={event =>
+                            setState({
+                              ...state,
+                              totalGoals: event.target.value,
+                            })
+                          }
                         />
                       </div>
                       <label className="form-label visually-hidden" htmlFor="goalAmount">
@@ -145,7 +152,7 @@ export default function Profile(props) {
                   <tr>
                     <td>
                       <h3>
-                        Aiming for: ${(state.totalGoals/ 100).toFixed(2)}
+                        Aiming for: ${Number(state.totalGoals).toFixed(2)}
                       </h3>
                     </td>
                   </tr>
