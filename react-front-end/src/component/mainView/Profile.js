@@ -191,6 +191,7 @@ export default function Profile(props) {
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
                       <div className="w-50">
+                        Goal Name
                         <input
                           type="text"
                           id="goalName"
@@ -207,6 +208,7 @@ export default function Profile(props) {
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
                       <div className='w-50'>
+                        Amount
                         <input
                           type="number"
                           imputmode="decimal"
@@ -232,6 +234,7 @@ export default function Profile(props) {
                     <td className='d-flex justify-content-center w-100'>
                       <div className="w-50 col-lg-3 justify-content-center col-sm-6">
                         <label htmlFor="date" className='visually-hidden'>date</label>
+                          End Date
                         <input
                           id="date"
                           className="form-control"
