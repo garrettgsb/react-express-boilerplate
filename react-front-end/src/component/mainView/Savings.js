@@ -27,7 +27,7 @@ export default function Savings(props) {
 		vacation: '',
 		goal_id: goalByID.id,
 		goal_name: goalByID.goal_name,
-		totalGoals: goalByID.amount,
+		totalGoals: goalByID.amount / 100,
 		start_date: goalByID.start_date,
 		end_date: goalByID.end_date,
 	});
