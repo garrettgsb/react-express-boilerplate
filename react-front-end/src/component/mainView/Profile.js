@@ -2,33 +2,33 @@ import React, { useState } from 'react';
 import '../../sass/profile.scss';
 import useVisualMode from '../../hooks/useVisualMode';
 import {
-	getTotalAmount,
-	getGoalByID,
-	getSavingsByID,
-	getUserByID,
+  getTotalAmount,
+  getGoalByID,
+  getSavingsByID,
+  getUserByID,
 } from '../../helpers/helper_functions';
 
 export default function Profile(props) {
-	const EDIT = 'EDIT';
-	const GOAL = 'GOAL';
-	const { mode, transition, back } = useVisualMode(GOAL);
+  const EDIT = 'EDIT';
+  const GOAL = 'GOAL';
+  const { mode, transition, back } = useVisualMode(GOAL);
 
-	const savingsbyID = getSavingsByID(props.savings, props.userId);
-	const totalSaved = getTotalAmount(savingsbyID);
-	const goalByID = getGoalByID(props.goals, props.userId);
-	const username = getUserByID(props.users, props.userId).username;
+  const savingsbyID = getSavingsByID(props.savings, props.userId);
+  const totalSaved = getTotalAmount(savingsbyID);
+  const goalByID = getGoalByID(props.goals, props.userId);
+  const username = getUserByID(props.users, props.userId).username;
 
-	const [state, setState] = useState({
-		goal_id: goalByID.id,
-		goal_name: goalByID.goal_name,
-		totalGoals: goalByID.amount,
-		date: goalByID.end_date,
-	});
+  const [state, setState] = useState({
+    goal_id: goalByID.id,
+    goal_name: goalByID.goal_name,
+    totalGoals: goalByID.amount,
+    date: goalByID.end_date,
+  });
 
-	const onChange = newGoal => {
-		props.updateGoals(goalByID.id, newGoal);
-		transition(GOAL);
-	};
+  const onChange = newGoal => {
+    props.updateGoals(goalByID.id, newGoal);
+    transition(GOAL);
+  };
 
   return (
     <section className="vw-100 m-0 row">
@@ -167,22 +167,24 @@ export default function Profile(props) {
                   </tr>
                 </thead>
               </table>
-              <button
-                className='btn btn-info mb-3'
-                onClick={() => transition(EDIT)}
-              >
-                EDIT
-              </button>
-              <button type="button" class="btn btn-danger">
-								Delete
-							</button>
-							<button
-								className="btn btn-info mb-3"
-								onClick={() => transition(EDIT)}
-							>
-								New Goal
-							</button>
+              <div className='mb-3 d-flex align-items-center justify-content-center text-center'>
+                <button
+                  className='btn btn-info m-1'
+                  onClick={() => transition(EDIT)}
+                >
+                  EDIT
+                </button>
+                <button type="button" class="btn btn-danger m-1">
+                  Delete
+                </button>
+              </div>
             </div>
+            <button
+              className="btn btn-info"
+              onClick={() => transition(EDIT)}
+            >
+              New Goal
+            </button>
           </div>
         </div>
       }
