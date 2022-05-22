@@ -4,7 +4,6 @@ import '../../../sass/vacation.scss';
 import {
   getTotalAmount,
   getDaysTillGoal,
-  getSavingsByID,
   filteredVacationExpenses,
   getGoalByID
 } from '../../../helpers/helper_functions';
