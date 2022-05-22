@@ -137,7 +137,8 @@ module.exports = db => {
       goals.end_date AS end_date,
       goals.goal_name,
       goals.user_id AS goals_user_id,
-      goals.id AS goals_id
+      goals.id AS goals_id,
+      goals.amount AS goal_amount
     FROM expenses
     JOIN users ON expenses.user_id = users.id
     JOIN goals ON goals.user_id = users.id

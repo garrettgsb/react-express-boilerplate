@@ -22,14 +22,15 @@ const testData = {
 
 
 export default function Vacation(props) {
-  console.log('PROPS:', props)
+  // console.log('PROPS:', props)
 
   const savingsById = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsById);
   
-  const vacationInfo = getGoalByID(props.goals, props.userId)
+  const vacationInfo = getGoalByID(props.alvinVacationSpent, props.userId);
+  console.log('vacationInfo', vacationInfo);
   
-  const vacationExpenses = filteredVacationExpenses(props.expenses, props.userId, testData.start_date /*vacationInfo.start_date*/)
+  const vacationExpenses = filteredVacationExpenses(props.expenses, props.userId, testData.start_date /*vacationInfo.start_date*/);
   const totalSpentOnVacation = getTotalAmount(vacationExpenses);
   // const homeTime = getDaysTillGoal(vacationInfo) //SWAP WHEN DEPLOY
   const homeTime = getDaysTillGoal(testData) // HARDCODE DATA FOR DEV
@@ -65,7 +66,7 @@ export default function Vacation(props) {
               <tr>
                 <td>
                   <h1>
-                    ${((vacationInfo.amount / 100) - (totalSpentOnVacation / 100)).toFixed(2)} / ${(vacationInfo.amount / 100).toFixed(2)}
+                    ${((totalSpentOnVacation / 100)).toFixed(2) - (vacationInfo.amount / 100)} / ${(vacationInfo.goal_amount / 100).toFixed(2)}
                   </h1>
                 </td>
               </tr>
