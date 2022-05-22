@@ -26,7 +26,8 @@ export default function Profile(props) {
     goal_id: goalByID.id,
     goal_name: goalByID.goal_name,
     totalGoals: goalByID.amount/100,
-    date: goalByID.end_date,
+    start_date: goalByID.start_date,
+    end_date: goalByID.end_date,
   });
 
   const onChange = newGoal => {
@@ -236,7 +237,7 @@ export default function Profile(props) {
                           className="form-control"
                           type="date"
                           value={state.date}
-                          onChange={(event) => setState({ ...state, date: event.target.value })}
+                          onChange={(event) => setState({ ...state, end_date: event.target.value })}
                         />
                         <span id="dateSelected"></span>
                       </div>

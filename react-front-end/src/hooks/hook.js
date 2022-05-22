@@ -29,18 +29,24 @@ export default function useApplicationData() {
       })
   };
 
-  const updateGoals = (goalID, goals) => {
+  const updateGoals = (goalID, goals, vacationMode = false) => {
 
+    
     const updatedGoal = state.goals.map(item =>
       item.id === goalID ?
         item = {
           ...item,
           goal_name: goals.goal_name,
           amount: parseInt(goals.totalGoals) * 100,
-          end_date: goals.date
+          start_date: goals.start_date,
+          end_date: goals.end_date
         }
         : item
     );
+    vacationMode ? 
+    setState(prev => {
+      return { ...prev, tab: 'VACATION', goals: updatedGoal, vacationMode: true }
+    }) :
     setState(prev => {
       return { ...prev, goals: updatedGoal }
     })

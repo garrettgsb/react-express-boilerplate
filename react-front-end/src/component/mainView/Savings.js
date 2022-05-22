@@ -24,7 +24,19 @@ export default function Savings(props) {
 		week: false,
 		month: false,
 		year: false,
+		vacation: '',
+		goal_id: goalByID.id,
+		goal_name: goalByID.goal_name,
+		totalGoals: goalByID.amount / 100,
+		start_date: goalByID.start_date,
+		end_date: goalByID.end_date,
 	});
+
+	const onChange = newGoal => {
+		props.updateGoals(goalByID.id, newGoal);
+		setState({ ...state, vacation: '' }
+		)
+	};
 
 	const dayClick = () => {
 		setState({
@@ -58,12 +70,16 @@ export default function Savings(props) {
 	};
 
 	const piggyAppear = classNames('pig-image', {
-		disappear: state.input === 'disappear',
+		'disappear': state.input === 'disappear' ||
+			state.vacation === 'edit'
 	});
 
 	const piggyBreak = classNames('pig-break', {
-		disappear: state.input !== 'disappear',
+		'disappear': state.input !== 'disappear'
 	});
+	const vacationMode = classNames('button-vac', {
+		'disappear': state.vacation === 'edit'
+	})
 
 
 	// gets money per day/week/month/year
@@ -83,147 +99,152 @@ export default function Savings(props) {
 				<br />
 				<br />
 				<div className="d-flex w-50 flex-column align-items-center justify-content-center text-center">
-				{(totalSaved / totalGoal) <= 1 && (
-					<div className="w-100 h-75 d-flex align-items-center justify-content-center text-center">
-						<table>
-							<thead>
-								<tr>
-									<td>
-										<h1>{goalByID.goal_name}</h1>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h1>
-											${(totalSaved / 100).toFixed(2)} / $
-											{(totalGoal / 100).toFixed(2)}
-										</h1>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										{totalDaysTillGoal} days until {goalByID.end_date}
-									</td>
-								</tr>
-								{state.day && (
-									<tr className="fw-bold">
-										<td>You can save {moneyPerDayToGoal}/day</td>
+					{(totalSaved / totalGoal) <= 1 && (
+						<div className="w-100 h-75 d-flex align-items-center justify-content-center text-center">
+							<table>
+								<thead>
+									<tr>
+										<td>
+											<h1>{goalByID.goal_name}</h1>
+										</td>
 									</tr>
-								)}
-								{state.week && (
-									<tr className="fw-bold">
-										<td>You can save {moneyPerWeekToGoal}/week</td>
+									<tr>
+										<td>
+											<h1>
+												${(totalSaved / 100).toFixed(2)} / $
+												{(totalGoal / 100).toFixed(2)}
+											</h1>
+										</td>
 									</tr>
-								)}
-								{state.month && (
-									<tr className="fw-bold">
-										<td>You can save {moneyPerMonthToGoal}/month</td>
+									<tr>
+										<td>
+											{totalDaysTillGoal} days until {goalByID.end_date}
+										</td>
 									</tr>
-								)}
-								{state.year && (
-									<tr className="fw-bold">
-										<td>You can save {moneyPerYearToGoal}/year</td>
-									</tr>
-								)}
-							</thead>
-						</table>
-						<div id="progress-circle">
-							<ProgressCircle
-								total_saved={totalSaved}
-								goalTotal_cents={totalGoal}
-							/>
+									{state.day && (
+										<tr className="fw-bold">
+											<td>You can save {moneyPerDayToGoal}/day</td>
+										</tr>
+									)}
+									{state.week && (
+										<tr className="fw-bold">
+											<td>You can save {moneyPerWeekToGoal}/week</td>
+										</tr>
+									)}
+									{state.month && (
+										<tr className="fw-bold">
+											<td>You can save {moneyPerMonthToGoal}/month</td>
+										</tr>
+									)}
+									{state.year && (
+										<tr className="fw-bold">
+											<td>You can save {moneyPerYearToGoal}/year</td>
+										</tr>
+									)}
+								</thead>
+							</table>
+							<div id="progress-circle">
+								<ProgressCircle
+									total_saved={totalSaved}
+									goalTotal_cents={totalGoal}
+								/>
+							</div>
 						</div>
-					</div>
-				)}
-				{(totalSaved / totalGoal) <= 1 && (
-					<div className="w-100 d-flex justify-content-space-evenly">
-						<div
-							id="switch"
-							className="d-flex h-25 mb-3 align-items-center justify-content-center"
-						>
-							<div className="m-1">
-								<div className="form-check form-switch">
-									<input
-										className="form-check-input"
-										type="checkbox"
-										aria-checked="false"
-										role="switch"
-										id="day-switch"
-										onChange={() => dayClick()}
-									/>
-									<label className="form-check-label" htmlFor="day-switch">
-										Day
-									</label>
+					)}
+					{(totalSaved / totalGoal) <= 1 && (
+						<div className="w-100 d-flex justify-content-space-evenly">
+							<div
+								id="switch"
+								className="d-flex h-25 mb-3 align-items-center justify-content-center"
+							>
+								<div className="m-1">
+									<div className="form-check form-switch">
+										<input
+											className="form-check-input"
+											type="checkbox"
+											aria-checked="false"
+											role="switch"
+											id="day-switch"
+											onChange={() => dayClick()}
+										/>
+										<label className="form-check-label" htmlFor="day-switch">
+											Day
+										</label>
+									</div>
 								</div>
-							</div>
-							<div className="m-1">
-								<div className="form-check form-switch">
-									<input
-										className="form-check-input"
-										type="checkbox"
-										aria-checked="false"
-										role="switch"
-										id="week-switch"
-										onChange={() => weekClick()}
-									/>
-									<label className="form-check-label" htmlFor="week-switch">
-										Week
-									</label>
+								<div className="m-1">
+									<div className="form-check form-switch">
+										<input
+											className="form-check-input"
+											type="checkbox"
+											aria-checked="false"
+											role="switch"
+											id="week-switch"
+											onChange={() => weekClick()}
+										/>
+										<label className="form-check-label" htmlFor="week-switch">
+											Week
+										</label>
+									</div>
 								</div>
-							</div>
-							<div className="m-1">
-								<div className="form-check form-switch">
-									<input
-										className="form-check-input"
-										type="checkbox"
-										aria-checked="false"
-										role="switch"
-										id="month-switch"
-										onChange={() => monthClick()}
-									/>
-									<label className="form-check-label" htmlFor="month-switch">
-										Month
-									</label>
+								<div className="m-1">
+									<div className="form-check form-switch">
+										<input
+											className="form-check-input"
+											type="checkbox"
+											aria-checked="false"
+											role="switch"
+											id="month-switch"
+											onChange={() => monthClick()}
+										/>
+										<label className="form-check-label" htmlFor="month-switch">
+											Month
+										</label>
+									</div>
 								</div>
-							</div>
-							<div className="m-1">
-								<div className="form-check form-switch">
-									<input
-										className="form-check-input"
-										type="checkbox"
-										aria-checked="false"
-										role="switch"
-										id="year-switch"
-										onChange={() => yearClick()}
-									/>
-									<label className="form-check-label" htmlFor="year-switch">
-										Year
-									</label>
+								<div className="m-1">
+									<div className="form-check form-switch">
+										<input
+											className="form-check-input"
+											type="checkbox"
+											aria-checked="false"
+											role="switch"
+											id="year-switch"
+											onChange={() => yearClick()}
+										/>
+										<label className="form-check-label" htmlFor="year-switch">
+											Year
+										</label>
+									</div>
 								</div>
+								<div id="switch-right"></div>
 							</div>
-							<div id="switch-right"></div>
 						</div>
-					</div>
-				)}
+					)}
 
 					<div>
 						{(totalSaved / totalGoal) >= 1 && (
-						<div className="wrap">
-							<button className="button-vac">VACATION MODE</button>
-							<button
-							className={piggyAppear}
-								onClick={() => {
-									setState({ ...state, input: 'disappear' });
-								}}
-							> 
-								<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
-							</button>
-							<img
-							className={piggyBreak}
-							src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
-							alt="piggy bank broken"
-						/>
-						</div>
+							<div className="wrap">
+								<button
+									className={vacationMode}
+									onClick={() => {
+										setState({ ...state, vacation: 'edit' })
+									}}
+								>VACATION MODE</button>
+								<button
+									className={piggyAppear}
+									onClick={() => {
+										setState({ ...state, input: 'disappear' });
+									}}
+								>
+									<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
+								</button>
+								<img
+									className={piggyBreak}
+									src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
+									alt="piggy bank broken"
+								/>
+							</div>
 						)}
 					</div>
 
@@ -234,6 +255,92 @@ export default function Savings(props) {
 					/>
 				</div>
 			</div>
+			{state.vacation === 'edit' &&
+				<div className="chart-align w-50 h-50">
+					<div className='vacation-start'>
+						<div className='card d-flex align-items-center justify-content-center text-center flex-column'>
+							<table className="table table-bordered">
+								<thead>
+									<tr>
+										<td className='d-flex justify-content-center w-100'>
+											<div className="form-outline w-75">
+												<label className="form-label " htmlFor="goalName">
+													Location
+												</label>
+												<input
+													type="text"
+													id="goalName"
+													className="form-control align-items-center fw-bolder text-center"
+													value={state.goal_name}
+													onChange={(event) => setState({ ...state, goal_name: event.target.value })}
+												/>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td className='d-flex justify-content-center w-100'>
+											<div className='w-50'>
+											<label className="form-label " htmlFor="goalAmount">
+												Budget
+											</label>
+												<input
+													type="number"
+													imputmode="decimal"
+													min="0.01"
+													step="0.01"
+													id="goalAmount"
+													className="form-control align-items-center"
+													value={state.totalGoals}
+													onChange={event =>
+														setState({
+															...state,
+															totalGoals: event.target.value,
+														})
+													}
+												/>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td className='d-flex justify-content-center w-100'>
+											<div className="w-50 col-lg-3 justify-content-center col-sm-6">
+												<label htmlFor="date" className=''>Start Date</label>
+												<input
+													id="date"
+													className="form-control"
+													type="date"
+													value={state.date}
+													onChange={(event) => setState({ ...state, start_date: event.target.value })}
+												/>
+												<span id="dateSelected"></span>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td className='d-flex justify-content-center w-100'>
+											<div className="w-50 col-lg-3 justify-content-center col-sm-6">
+												<label htmlFor="date" className=''>End Date</label>
+												<input
+													id="date"
+													className="form-control"
+													type="date"
+													value={state.date}
+													onChange={(event) => setState({ ...state, end_date: event.target.value })}
+												/>
+												<span id="dateSelected"></span>
+											</div>
+										</td>
+									</tr>
+								</thead>
+							</table>
+							<div>
+								<button onClick={() => onChange(state)} className='btn btn-primary mb-3 m-1'>
+									Confirm
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>}
 		</div>
 	);
 }

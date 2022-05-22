@@ -39,17 +39,20 @@ module.exports = db => {
 	});
 
 	router.put('/goals', (req, res) => {
+		console.log(req.body)
 		db.query(
 			`
     UPDATE goals 
     SET goal_name = $1, 
-    end_date = $2, 
-    amount = $3 
-    WHERE id = $4
+		start_date = $2,
+    end_date = $3, 
+    amount = $4 
+    WHERE id = $5
 		AND goals.amount > 0;
     `, [
 			req.body.goals.goal_name,
-			req.body.goals.date,
+			req.body.goals.start_date,
+			req.body.goals.end_date,
 			req.body.goals.totalGoals,
 			req.body.goals.goal_id
 		]

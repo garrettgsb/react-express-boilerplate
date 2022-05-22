@@ -41,6 +41,7 @@ export default function Main(props) {
       incomes={props.incomes}
       savings={props.savings}
       goals={props.goals}
+      updateGoals={props.updateGoals}
       />}
       {mode === EXPENSES && <Expenses 
       key='expenses'
