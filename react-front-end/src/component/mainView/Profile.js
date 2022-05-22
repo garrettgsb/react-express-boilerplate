@@ -8,31 +8,36 @@ import {
   getUserByID,
 } from '../../helpers/helper_functions';
 
+
 export default function Profile(props) {
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
   const EMPTY = 'EMPTY';
   const CREATE = 'CREATE';
   const REMOVE = 'REMOVE';
-  const { mode, transition, back } = useVisualMode(REMOVE);
-
+  const { mode, transition, back } = useVisualMode(GOAL);
+  
   const savingsbyID = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsbyID);
   const goalByID = getGoalByID(props.goals, props.userId);
   const username = getUserByID(props.users, props.userId).username;
-
+  
   const [state, setState] = useState({
     goal_id: goalByID.id || '',
     goal_name: goalByID.goal_name || '',
     totalGoals: goalByID.amount || '',
     date: goalByID.end_date || '',
   });
-
+  
   const onChange = newGoal => {
     props.updateGoals(goalByID.id, newGoal);
     transition(GOAL);
   };
-
+  
+  const removeGoal = (id) => {
+    props.removeGoal(id)
+    transition(EMPTY)
+  }
   return (
     <section className="vw-100 m-0 row">
       <div className="container p-card">
@@ -224,8 +229,10 @@ export default function Profile(props) {
                 <button onClick={() => onChange(state)} className='btn btn-primary mb-3 m-1'>
                   Confirm
                 </button>
-
-                <button onClick={() => back()} className='btn btn-danger mb-3 m-1'>
+                <button onClick={() => transition(REMOVE)} class="btn btn-danger mb-3 m-1">
+                  Delete
+                </button>
+                <button onClick={() => back()} className='btn mb-3 m-1'>
                   Cancel
                 </button>
               </div>
@@ -273,9 +280,6 @@ export default function Profile(props) {
                 >
                   EDIT
                 </button>
-                <button type="button" class="btn btn-danger m-1">
-                  Delete
-                </button>
               </div>
             </div>
           </div>
@@ -299,18 +303,18 @@ export default function Profile(props) {
               </table>
               <div className='mb-2'>
                 <button
-                  onClick={() => back}
-                className='m-1 btn'
-                  danger >
-                  Cancel
-                </button>
-                <button
-                    className='m-1 btn btn-danger'
+                  className='m-1 btn btn-danger'
                   onClick={() => {
-                    transition(EMPTY)
+                    removeGoal()
                   }}
                   danger >
                   Confirm
+                </button>
+                <button
+                  onClick={() => back()}
+                  className='m-1 btn'
+                  danger >
+                  Cancel
                 </button>
               </div>
             </div>

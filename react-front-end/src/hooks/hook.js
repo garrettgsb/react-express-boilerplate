@@ -93,6 +93,27 @@ export default function useApplicationData() {
       })
   };
 
+  const removeGoal = goalID => {
+    const newGoalList = state.goals.map((goal, i) => {
+      return goal.id === goalID ?
+        state.goals.splice(i, 1) :
+        goal
+    });
+
+    return axios
+      .delete(`http://localhost:8081/api/delete`, {
+        data: { id: goalID }
+      })
+      .then(() => {
+        setState(prev => {
+          return {
+            ...prev,
+            goals: newGoalList
+          }
+        })
+      })
+  };
+
   const addExpense = expense => {
     const expenses = [
       {
@@ -214,6 +235,7 @@ export default function useApplicationData() {
     addExpense,
     loginUser,
     updateGoals,
-    removeExpense
+    removeExpense,
+    removeGoal
   };
 }

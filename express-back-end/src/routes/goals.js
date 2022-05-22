@@ -54,9 +54,9 @@ module.exports = db => {
 			req.body.goals.goal_id
 		]
 		)
-		.catch(error => {
-			console.log('This error is inside -> put (\'/goals\') route: ', error);
-		});
+			.catch(error => {
+				console.log('This error is inside -> put (\'/goals\') route: ', error);
+			});
 	});
 
 	router.delete('/goals', (req, res) => {
@@ -67,13 +67,17 @@ module.exports = db => {
     `, [
 			req.body.id
 		]
-		)
-		.catch(error => {
-			console.log('This error is inside -> put (\'/goals\') route: ', error);
-		});
+		).then(data => {
+			console.log('It has sucessfully deleted goal ID!! ', req.body);
+			const removed = data.rows;
+			res.json(removed);
+		})
+			.catch(error => {
+				console.log('This error is inside -> put (\'/goals\') route: ', error);
+			});
 	});
 
-	
+
 
 	return router;
 };
