@@ -167,7 +167,7 @@ export default function Expenses(props) {
 										e.preventDefault();
 										setState({ ...state, input: 'disappear' });
 										submit(
-											expenseID.id + 1,
+											expenseID.id + 1 || props.expenses.length + 1,
 											props.userId,
 											state.date,
 											state.amount,
