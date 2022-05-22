@@ -27,18 +27,9 @@ export default function Vacation(props) {
   console.log('vacationexpenses:', vacationExpenses)
   console.log('TOTAL:', totalSpentOnVacation)
   
-  // const totalSpent = getTotalAmount(props.alvinVacationSpent);
-
-  // const goalName = props.alvinVacationSpent[0].goal_name;
-  // const daysTillEndOfVacation = getDaysTillGoal(props.alvinVacationSpent[0]);
-  // gets money per day/week/month/year
-  // const moneyTillGoal = totalSaved - totalSpent;
-  // const moneyPerDayToGoal = '$' + (moneyTillGoal / daysTillEndOfVacation / 100).toFixed(2);
-  // const moneyPerWeekToGoal = '$' + (moneyTillGoal / (daysTillEndOfVacation / 7) / 100).toFixed(2);
-
   const budgetLeft = totalSaved - totalSpentOnVacation;
-  const dayAllowance = `$${(budgetLeft / homeTime / 100).toFixed(2)}`;
-  const weekAllowance = `$${(budgetLeft / (homeTime / 7) / 100).toFixed(2)}`;
+  const dayAllowance = `$${((budgetLeft / homeTime )/ 100).toFixed(2)}`;
+  const weekAllowance = `$${(((budgetLeft / homeTime) * 7) / 100).toFixed(2)}`;
 
   return (
     <div>
@@ -57,7 +48,7 @@ export default function Vacation(props) {
               <tr>
                 <td>
                   <h1>
-                    ${((vacationInfo.amount - totalSpentOnVacation )/ 100).toFixed(2)} / ${(vacationInfo.amount / 100).toFixed(2)}
+                    ${((totalSpentOnVacation )/ 100).toFixed(2)} / ${(vacationInfo.amount / 100).toFixed(2)}
                   </h1>
                 </td>
               </tr>
