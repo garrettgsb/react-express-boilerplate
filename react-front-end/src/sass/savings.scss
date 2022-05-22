@@ -55,7 +55,8 @@ html, body {
 .button-vac {
   z-index: 20;
   right: 150px;
-  min-width: 300px;
+  width: 80vw;
+  max-height: 10vh;
   min-height: 60px;
   font-family: 'Nunito', sans-serif;
   font-size: 22px;
@@ -72,8 +73,9 @@ html, body {
   transition: all 0.3s ease-in-out 0s;
   cursor: pointer;
   outline: none;
-  position: relative;
+  position: absolute;
   padding: 10px;
+  bottom: 15vh;
   }
 
 

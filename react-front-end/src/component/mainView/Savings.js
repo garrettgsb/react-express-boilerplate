@@ -75,7 +75,8 @@ export default function Savings(props) {
 	});
 
 	const piggyBreak = classNames('pig-break', {
-		'disappear': state.input !== 'ON'
+		'disappear': state.input !== 'disappear' ||
+			state.vacation === 'ON'
 	});
 	const vacationMode = classNames('button-vac', {
 		'disappear': state.vacation === 'ON'
@@ -223,27 +224,27 @@ export default function Savings(props) {
 					</div>
 				}
 				{(totalSaved / totalGoal) >= 1 &&
-						<div className="wrap">
-							<button
-								className={vacationMode}
-								onClick={() => {
-									setState({ ...state, vacation: 'ON' })
-								}}
-							>VACATION MODE</button>
-							<button
-								className={piggyAppear}
-								onClick={() => {
-									setState({ ...state, input: 'disappear' });
-								}}
-							>
-								<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
-							</button>
-							<img
-								className={piggyBreak}
-								src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
-								alt="piggy bank broken"
-							/>
-						</div>
+					<div className="wrap">
+						<button
+							className={vacationMode}
+							onClick={() => {
+								setState({ ...state, vacation: 'ON' })
+							}}
+						>VACATION MODE</button>
+						<button
+							className={piggyAppear}
+							onClick={() => {
+								setState({ ...state, input: 'disappear' });
+							}}
+						>
+							<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
+						</button>
+						<img
+							className={piggyBreak}
+							src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
+							alt="piggy bank broken"
+						/>
+					</div>
 
 				}
 
