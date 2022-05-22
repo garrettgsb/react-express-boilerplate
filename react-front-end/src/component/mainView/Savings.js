@@ -26,10 +26,10 @@ export default function Savings(props) {
 		month: false,
 		year: false,
 		vacation: '',
-    goal_id: goalByID.id,
-    goal_name: goalByID.goal_name,
-    totalGoals: goalByID.amount/100,
-    start_date: goalByID.start_date,
+		goal_id: goalByID.id,
+		goal_name: goalByID.goal_name,
+		totalGoals: goalByID.amount / 100,
+		start_date: goalByID.start_date,
 		end_date: goalByID.end_date,
 	});
 
@@ -257,14 +257,17 @@ export default function Savings(props) {
 				</div>
 			</div>
 			{state.vacation === 'edit' &&
-				<div className="chart-align">
-					<div className='goal-container'>
-						<div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
+				<div className="chart-align w-50 h-50">
+					<div className='vacation-start'>
+						<div className='card d-flex align-items-center justify-content-center text-center flex-column'>
 							<table className="table table-bordered">
 								<thead>
 									<tr>
 										<td className='d-flex justify-content-center w-100'>
 											<div className="form-outline w-75">
+												<label className="form-label " htmlFor="goalName">
+													Location
+												</label>
 												<input
 													type="text"
 													id="goalName"
@@ -272,15 +275,15 @@ export default function Savings(props) {
 													value={state.goal_name}
 													onChange={(event) => setState({ ...state, goal_name: event.target.value })}
 												/>
-												<label className="form-label visually-hidden" htmlFor="goalName">
-													Goal Name
-												</label>
 											</div>
 										</td>
 									</tr>
 									<tr>
 										<td className='d-flex justify-content-center w-100'>
 											<div className='w-50'>
+											<label className="form-label " htmlFor="goalAmount">
+												Budget
+											</label>
 												<input
 													type="number"
 													imputmode="decimal"
@@ -297,21 +300,33 @@ export default function Savings(props) {
 													}
 												/>
 											</div>
-											<label className="form-label visually-hidden" htmlFor="goalAmount">
-												goalAmount
-											</label>
 										</td>
 									</tr>
 									<tr>
 										<td className='d-flex justify-content-center w-100'>
 											<div className="w-50 col-lg-3 justify-content-center col-sm-6">
-												<label htmlFor="date" className='visually-hidden'>date</label>
+												<label htmlFor="date" className=''>Start Date</label>
 												<input
 													id="date"
 													className="form-control"
 													type="date"
 													value={state.date}
-													onChange={(event) => setState({ ...state, date: event.target.value })}
+													onChange={(event) => setState({ ...state, start_date: event.target.value })}
+												/>
+												<span id="dateSelected"></span>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td className='d-flex justify-content-center w-100'>
+											<div className="w-50 col-lg-3 justify-content-center col-sm-6">
+												<label htmlFor="date" className=''>End Date</label>
+												<input
+													id="date"
+													className="form-control"
+													type="date"
+													value={state.date}
+													onChange={(event) => setState({ ...state, end_date: event.target.value })}
 												/>
 												<span id="dateSelected"></span>
 											</div>
