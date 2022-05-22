@@ -27,16 +27,16 @@ export default function Savings(props) {
 		year: false,
 		vacation: '',
 		goal_id: '',
-    goal_name: '',
-    totalGoals: '',
-    date: '',
+		goal_name: '',
+		totalGoals: '',
+		date: '',
 	});
 
 	const onChange = newGoal => {
-    props.updateGoals(goalByID.id, newGoal);
-		setState({...state, vacation: ''}
+		props.updateGoals(goalByID.id, newGoal);
+		setState({ ...state, vacation: '' }
 		)
-  };
+	};
 
 	const dayClick = () => {
 		setState({
@@ -221,7 +221,12 @@ export default function Savings(props) {
 					<div>
 						{(totalSaved / totalGoal) >= 1 && (
 							<div className="wrap">
-								<button className="button-vac">VACATION MODE</button>
+								<button
+									className="button-vac"
+									onClick={() => {
+										setState({ ...state, vacation: 'edit' })
+									}}
+								>VACATION MODE</button>
 								<button
 									className={piggyAppear}
 									onClick={() => {
