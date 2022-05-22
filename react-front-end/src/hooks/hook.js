@@ -50,7 +50,7 @@ export default function useApplicationData() {
         goals
       })
       .then(res => {
-        console.log(res, ': not reached?');
+        console.log('Function updateGoals not reached. res--> ', res);
       })
   };
 
