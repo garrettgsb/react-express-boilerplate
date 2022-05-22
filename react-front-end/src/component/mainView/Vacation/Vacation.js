@@ -9,29 +9,23 @@ import {
   getGoalByID
 } from '../../../helpers/helper_functions';
 
-const testData = {
-  amount: 3000000,
-  email: "alvintest@hotmail.com",
-  end_date: "2022-06-01",
-  goal_name: "Vacation: Iceland",
-  id: 1,
-  start_date: "2022-03-14",
-  user_id: 1,
-  username: "Alvin",
-}
+
 
 
 export default function Vacation(props) {
+  console.log('PROPS:', props)
   const savingsById = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsById);
   
-  const vacationInfo = getGoalByID(props.alvinVacationSpent, props.userId);
+  const vacationInfo = getGoalByID(props.goals, props.userId);
   
-  const vacationExpenses = filteredVacationExpenses(props.expenses, props.userId, testData.start_date /*vacationInfo.start_date*/);
+  console.log('VACATION INFO:', vacationInfo)
+  const vacationExpenses = filteredVacationExpenses(props.expenses, props.userId, vacationInfo.start_date);
   const totalSpentOnVacation = getTotalAmount(vacationExpenses);
-  // const homeTime = getDaysTillGoal(vacationInfo) //SWAP WHEN DEPLOY
-  const homeTime = getDaysTillGoal(testData) // HARDCODE DATA FOR DEV
-  
+  const homeTime = getDaysTillGoal(vacationInfo) //SWAP WHEN DEPLOY
+  // const homeTime = getDaysTillGoal(testData) // HARDCODE DATA FOR DEV
+  console.log('vacationexpenses:', vacationExpenses)
+  console.log('TOTAL:', totalSpentOnVacation)
   
   // const totalSpent = getTotalAmount(props.alvinVacationSpent);
 
@@ -63,7 +57,7 @@ export default function Vacation(props) {
               <tr>
                 <td>
                   <h1>
-                    ${(totalSpentOnVacation / 100).toFixed(2)} / ${(vacationInfo.goal_amount / 100).toFixed(2)}
+                    ${((vacationInfo.amount - totalSpentOnVacation )/ 100).toFixed(2)} / ${(vacationInfo.amount / 100).toFixed(2)}
                   </h1>
                 </td>
               </tr>

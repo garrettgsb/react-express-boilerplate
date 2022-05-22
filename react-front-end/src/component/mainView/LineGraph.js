@@ -62,7 +62,7 @@ export default function LineGraph(props) {
       user_id: 1,
       goal_name: goal.goal_name,
       budget: 500000,
-      start_date: '2022-03-14',
+      start_date: '2022-05-01',
       end_date: '2022-06-01'
     }
     graphData = { ...graphData,

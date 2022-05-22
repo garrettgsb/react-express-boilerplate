@@ -23,10 +23,10 @@ export default function Profile(props) {
   const username = getUserByID(props.users, props.userId).username;
 
   const [state, setState] = useState({
-    goal_id: goalByID.id || '',
-    goal_name: goalByID.goal_name || '',
-    totalGoals: goalByID.amount || '',
-    date: goalByID.end_date || '',
+    goal_id: goalByID.id,
+    goal_name: goalByID.goal_name,
+    totalGoals: goalByID.amount/100,
+    date: goalByID.end_date,
   });
 
   const onChange = newGoal => {
