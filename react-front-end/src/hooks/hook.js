@@ -36,7 +36,7 @@ export default function useApplicationData() {
         item = {
           ...item,
           goal_name: goals.goal_name,
-          amount: parseInt(goals.totalGoals),
+          amount: parseInt(goals.totalGoals) * 100,
           end_date: goals.date
         }
         : item
