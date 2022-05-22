@@ -63,7 +63,7 @@ export default function Vacation(props) {
               <tr>
                 <td>
                   <h1>
-                    ${((totalSpentOnVacation / 100) - (vacationInfo.amount / 100)).toFixed(2)} / ${(vacationInfo.goal_amount / 100).toFixed(2)}
+                    ${(totalSpentOnVacation / 100).toFixed(2)} / ${(vacationInfo.goal_amount / 100).toFixed(2)}
                   </h1>
                 </td>
               </tr>
