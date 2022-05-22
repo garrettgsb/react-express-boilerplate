@@ -26,10 +26,11 @@ export default function Savings(props) {
 		month: false,
 		year: false,
 		vacation: '',
-		goal_id: '',
-		goal_name: '',
-		totalGoals: '',
-		date: '',
+    goal_id: goalByID.id,
+    goal_name: goalByID.goal_name,
+    totalGoals: goalByID.amount/100,
+    start_date: goalByID.start_date,
+		end_date: goalByID.end_date,
 	});
 
 	const onChange = newGoal => {
@@ -70,12 +71,16 @@ export default function Savings(props) {
 	};
 
 	const piggyAppear = classNames('pig-image', {
-		disappear: state.input === 'disappear',
+		'disappear': state.input === 'disappear' ||
+			state.vacation === 'edit'
 	});
 
 	const piggyBreak = classNames('pig-break', {
-		disappear: state.input !== 'disappear',
+		'disappear': state.input !== 'disappear'
 	});
+	const vacationMode = classNames('button-vac', {
+		'disappear': state.vacation === 'edit'
+	})
 
 
 	// gets money per day/week/month/year
@@ -222,7 +227,7 @@ export default function Savings(props) {
 						{(totalSaved / totalGoal) >= 1 && (
 							<div className="wrap">
 								<button
-									className="button-vac"
+									className={vacationMode}
 									onClick={() => {
 										setState({ ...state, vacation: 'edit' })
 									}}
