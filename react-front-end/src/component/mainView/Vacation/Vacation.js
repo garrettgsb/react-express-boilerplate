@@ -26,6 +26,7 @@ export default function Vacation(props) {
   const budgetLeft = totalSaved - totalSpentOnVacation;
   const dayAllowance = `$${((budgetLeft / homeTime )/ 100).toFixed(2)}`;
   const weekAllowance = `$${(((budgetLeft / homeTime) * 7) / 100).toFixed(2)}`;
+  
 
   return (
     <div>

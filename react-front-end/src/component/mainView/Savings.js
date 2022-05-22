@@ -8,7 +8,6 @@ import {
 	getSavingsByID,
 } from '../../helpers/helper_functions';
 import classNames from 'classnames';
-import useVisualMode from '../../hooks/useVisualMode';
 
 export default function Savings(props) {
 	// gets total amount of saved money
