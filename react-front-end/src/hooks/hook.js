@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getVacationExpenses } from '../helpers/helper_functions';
+// import { getVacationExpenses } from '../helpers/helper_functions';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -68,7 +68,13 @@ export default function useApplicationData() {
         datapoint
     })
 
-    const vacationExpense = getVacationExpenses(newExpenseList, 1);
+    const newVacationList = state.alvinVacationSpent.map((expense, i) => {
+      return expense.id === expenseID ?
+        state.alvinVacationSpent.splice(i, 1) :
+        expense
+    })
+
+    // const vacationExpense = getVacationExpenses(newExpenseList, state.user);
 
     return axios
       .delete(`http://localhost:8081/api/delete`, {
@@ -81,7 +87,7 @@ export default function useApplicationData() {
             expenses: newExpenseList,
             savings: newExpenseList,
             dataPoints: newDataPoints,
-            alvinVacationSpent: vacationExpense
+            alvinVacationSpent: newVacationList
           }
         })
       })
@@ -131,7 +137,8 @@ export default function useApplicationData() {
         category_id: expense.category_id,
         start_date: '2022-03-13',/******************************** */
         end_date: '2022-08-13', /******************************** */
-        goal_name: expense.goal_name
+        goal_name: expense.goal_name,
+        goal_amount: expense.goal_amount
       },
       ...state.alvinVacationSpent,
     ];
