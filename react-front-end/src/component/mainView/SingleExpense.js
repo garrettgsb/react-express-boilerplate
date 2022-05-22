@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import "../../sass/expenses.scss"
 export default function SingleExpense(props) {
-console.log(props)
   const tableClass = classNames('d-flex justify-content-around position-relative', {
     'table-warning': props.classname === 'Savings',
     'table-danger': props.classname === 'Expense',

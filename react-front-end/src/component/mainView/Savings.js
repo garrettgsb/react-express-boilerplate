@@ -65,13 +65,6 @@ export default function Savings(props) {
 		disappear: state.input !== 'disappear',
 	});
 
-	// const [state, setState] = useState({
-	//   goal: goalByID[0].goal_name
-	// })
-
-	// if state.goal === 'Vacation' && (props.totalSaved >= props.totalGoal)
-	//  transition('VACATION')
-
 	// gets money per day/week/month/year
 	const moneyTillGoal = totalGoal - totalSaved;
 	const moneyPerDayToGoal =
