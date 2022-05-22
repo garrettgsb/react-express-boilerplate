@@ -30,6 +30,12 @@ export const filterSavingsDataPoints = (data, categoryID) =>
     item &&
     item.category_id === categoryID);
 
+export const filterVacationDataPoints = (data, categoryID1, categoryID2) =>
+  data.filter(item =>
+    item &&
+    (item.category_id !== categoryID1 &&
+      item.category_id !== categoryID2));
+
 export function getExpenseById(expenses, id) {
   return expenses.filter(expense =>
     expense && expense.user_id === parseInt(id)

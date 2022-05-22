@@ -56,6 +56,7 @@ export default function LineGraph(props) {
     }
 
     graphData.updatePoints.push({ x: goal.start_date, y: 0 })
+
     filterSavingsDataPoints(dataPoints, 8).forEach(point => {
       if (graphData.updatePoints.slice(-1)[0]) {
         point = { ...point, y: (graphData.updatePoints.slice(-1)[0].y + point.y) }
@@ -76,8 +77,8 @@ export default function LineGraph(props) {
     }
 
     const vacationData = getVacationData(dataPoints, goal.start_date)
-    console.log(vacationData)
     graphData.updatePoints.push({ x: goal.start_date, y: goal.amount })
+    console.log('VACATIONDATA:', vacationData)
     vacationData.forEach(point => {
       if (graphData.updatePoints.slice(-1)[0]) {
         point = { ...point, y: (graphData.updatePoints.slice(-1)[0].y - point.y) }
@@ -86,6 +87,7 @@ export default function LineGraph(props) {
     })
 
   }
+
   const [state, setState] = useState({
     dateUnit: graphData.trackUnits,
     dataPoints: graphData.updatePoints
