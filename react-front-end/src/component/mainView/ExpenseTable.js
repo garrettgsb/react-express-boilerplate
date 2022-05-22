@@ -2,7 +2,7 @@ import React from 'react';
 import SingleExpense from './SingleExpense';
 import { getCategoryName, getExpenseById } from '../../helpers/helper_functions';
 export default function ExpenseTable(props) {
-  console.log('PROPS:', props)
+
   const filteredExpensesById = getExpenseById(props.expenses, props.userId);
   const expenses = filteredExpensesById.map(expense => {
     const categoryName = getCategoryName(expense.category_id);

@@ -3,7 +3,7 @@ import {
   getGoalByID,
   getDataByID,
   getVacationData,
-  filterDataPoints
+  filterSavingsDataPoints
 } from '../../helpers/helper_functions';
 import {
   Chart,
@@ -56,7 +56,8 @@ export default function LineGraph(props) {
     }
 
     graphData.updatePoints.push({ x: goal.start_date, y: 0 })
-    filterDataPoints(dataPoints, 8).forEach(point => {
+
+    filterSavingsDataPoints(dataPoints, 8).forEach(point => {
       if (graphData.updatePoints.slice(-1)[0]) {
         point = { ...point, y: (graphData.updatePoints.slice(-1)[0].y + point.y) }
       }
@@ -64,26 +65,20 @@ export default function LineGraph(props) {
     })
   } else if (props.vacationMode) {
 
-    const vacation = {
-      user_id: 1,
-      goal_name: goal.goal_name,
-      budget: 500000,
-      start_date: '2022-05-01',
-      end_date: '2022-06-01'
-    }
     graphData = {
       ...graphData,
       total: 'Savings',
       trackLine: 'Budget',
       trackUnits: 'day',
       trackData: [
-        { x: goal.start_date, y: goal.budget },
+        { x: goal.start_date, y: goal.amount },
         { x: goal.end_date, y: 0 }
       ]
     }
 
-    const vacationData = getVacationData(dataPoints, vacation.start_date)
-    graphData.updatePoints.push({ x: vacation.start_date, y: vacation.budget })
+    const vacationData = getVacationData(dataPoints, goal.start_date)
+    graphData.updatePoints.push({ x: goal.start_date, y: goal.amount })
+    console.log('VACATIONDATA:', vacationData)
     vacationData.forEach(point => {
       if (graphData.updatePoints.slice(-1)[0]) {
         point = { ...point, y: (graphData.updatePoints.slice(-1)[0].y - point.y) }
@@ -92,6 +87,7 @@ export default function LineGraph(props) {
     })
 
   }
+
   const [state, setState] = useState({
     dateUnit: graphData.trackUnits,
     dataPoints: graphData.updatePoints
