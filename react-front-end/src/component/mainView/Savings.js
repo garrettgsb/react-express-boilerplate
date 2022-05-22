@@ -12,6 +12,7 @@ import classNames from 'classnames';
 export default function Savings(props) {
 	// gets total amount of saved money
 	const savingsbyID = getSavingsByID(props.savings, props.userId);
+	console.log('SAVINGS:', savingsbyID)
 	const totalSaved = getTotalAmount(savingsbyID);
 	// gets days until end date for goal
 	const goalByID = getGoalByID(props.goals, props.userId);
