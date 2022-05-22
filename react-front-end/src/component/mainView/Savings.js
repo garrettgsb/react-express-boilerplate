@@ -262,7 +262,7 @@ export default function Savings(props) {
 								<thead>
 									<tr>
 										<td className='d-flex justify-content-center w-100'>
-											<div className="form-outline w-75">
+											<div className="w-50">
 												<label className="form-label " htmlFor="goalName">
 													Location
 												</label>
