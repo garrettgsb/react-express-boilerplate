@@ -4,32 +4,15 @@ import '../../../sass/vacation.scss';
 import {
   getTotalAmount,
   getDaysTillGoal,
-  getSavingsByID,
   filteredVacationExpenses,
   getGoalByID
 } from '../../../helpers/helper_functions';
 
-
-
-
 export default function Vacation(props) {
-
-  const savingsById = getSavingsByID(props.savings, props.userId);
-  const totalSaved = getTotalAmount(savingsById);
-  
   const vacationInfo = getGoalByID(props.goals, props.userId);
-  
   const vacationExpenses = filteredVacationExpenses(props.expenses, props.userId, vacationInfo.start_date);
   const totalSpentOnVacation = getTotalAmount(vacationExpenses);
   const homeTime = getDaysTillGoal(vacationInfo)
-  
-  // const budgetLeft = totalSaved - totalSpentOnVacation;
-  // const dayAllowance = `$${((budgetLeft / homeTime )/ 100).toFixed(2)}`;
-  // const weekAllowance = `$${(((budgetLeft / homeTime) * 7) / 100).toFixed(2)}`;
-  // console.log('budgetLeft', budgetLeft);
-  console.log('totalSaved', totalSaved);
-  console.log('totalSpentOnVacation', totalSpentOnVacation);
-  console.log('homeTime', homeTime);
 
   const dayAllowance = `$${((vacationInfo.amount - totalSpentOnVacation) / 100 / homeTime).toFixed(2)}`
   const weekAllowance = `$${((vacationInfo.amount - totalSpentOnVacation) * 7 / 100 / homeTime).toFixed(2)}`;
@@ -50,7 +33,7 @@ export default function Vacation(props) {
               <tr>
                 <td>
                   <h1>
-                    ${((totalSpentOnVacation )/ 100).toFixed(2)} / ${(vacationInfo.amount / 100).toFixed(2)}
+                    ${((totalSpentOnVacation) / 100).toFixed(2)} / ${(vacationInfo.amount / 100).toFixed(2)}
                   </h1>
                 </td>
               </tr>
@@ -74,7 +57,7 @@ export default function Vacation(props) {
           <br />
           <ProgressCircle
             key='vacationCircle'
-            total_saved={((vacationInfo.amount - totalSpentOnVacation )/ 100).toFixed(2)}
+            total_saved={((vacationInfo.amount - totalSpentOnVacation) / 100).toFixed(2)}
             goalTotal_cents={(vacationInfo.amount / 100).toFixed(2)} />
         </div>
       </div>
