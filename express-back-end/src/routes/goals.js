@@ -8,6 +8,7 @@ module.exports = db => {
     SELECT goals.*, users.username, users.email
     FROM goals
     JOIN users ON user_id = users.id
+		WHERE goal_name NOT LIKE '%acation%';
     `
 		)
 			.then(data => {

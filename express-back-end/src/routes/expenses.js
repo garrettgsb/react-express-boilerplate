@@ -143,7 +143,7 @@ module.exports = db => {
     JOIN goals ON goals.user_id = users.id
     WHERE category_id != 8
     AND category_id !=5
-    AND goals.id = 4
+    AND goal_name LIKE '%acation%'
     AND expenses.created_at > goals.start_date;
     `)
     .then(data => {
