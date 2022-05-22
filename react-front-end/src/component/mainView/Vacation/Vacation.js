@@ -24,7 +24,8 @@ export default function Vacation(props) {
   const totalSpentOnVacation = getTotalAmount(vacationExpenses);
   const homeTime = getDaysTillGoal(vacationInfo) //SWAP WHEN DEPLOY
   // const homeTime = getDaysTillGoal(testData) // HARDCODE DATA FOR DEV
-  
+  console.log('vacationexpenses:', vacationExpenses)
+  console.log('TOTAL:', totalSpentOnVacation)
   
   // const totalSpent = getTotalAmount(props.alvinVacationSpent);
 
