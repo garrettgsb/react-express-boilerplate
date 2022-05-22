@@ -11,7 +11,8 @@ import {
 export default function Profile(props) {
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
-  const { mode, transition, back } = useVisualMode(GOAL);
+  const EMPTY = 'EMPTY';
+  const { mode, transition, back } = useVisualMode(EMPTY);
 
   const savingsbyID = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsbyID);
@@ -58,6 +59,26 @@ export default function Profile(props) {
           </div>
         </div>
       </div>
+      {mode === EMPTY &&
+        <div className="chart-align">
+          <div className='goal-container'>
+            <div>
+              New Piggy Bank?
+              <button
+                className="new-pig"
+                onClick={() => transition(EDIT)}
+              >
+                <i
+                  className="logo fa-solid fa-piggy-bank new-pig"
+                  height="15"
+                  alt="pig logo"
+                  loading="lazy"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      }
       {mode === EDIT &&
         <div className="chart-align">
           <div className='goal-container'>
@@ -179,12 +200,6 @@ export default function Profile(props) {
                 </button>
               </div>
             </div>
-            <button
-              className="btn btn-info"
-              onClick={() => transition(EDIT)}
-            >
-              New Goal
-            </button>
           </div>
         </div>
       }
