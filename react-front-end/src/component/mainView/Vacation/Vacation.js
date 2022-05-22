@@ -39,7 +39,8 @@ export default function Vacation(props) {
   const budgetLeft = totalSaved - totalSpentOnVacation;
   const dayAllowance = `$${(budgetLeft / homeTime / 100).toFixed(2)}`;
   const weekAllowance = `$${(budgetLeft / (homeTime / 7) / 100).toFixed(2)}`;
-
+  console.log('totalSaved', totalSaved);
+  console.log('totalSpentOnVacation', totalSpentOnVacation);
   return (
     <div>
       <div className='d-flex align-items-center justify-content-center text-center goalbox'>
@@ -81,8 +82,8 @@ export default function Vacation(props) {
           <br />
           <ProgressCircle
             key='vacationCircle'
-            total_saved={totalSpentOnVacation}
-            goalTotal_cents={totalSaved} />
+            total_saved={((vacationInfo.amount - totalSpentOnVacation )/ 100).toFixed(2)}
+            goalTotal_cents={(vacationInfo.amount / 100).toFixed(2)} />
         </div>
       </div>
     </div>
