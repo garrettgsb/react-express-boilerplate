@@ -56,16 +56,16 @@ export function getTotalAmount(state) {
 export function getCategoryName(prop) {
   let categoryID = '';
   switch (prop) {
-    case '1': return categoryID = 'eating out';
-    case '2': return categoryID = 'entertainment';
-    case '3': return categoryID = 'fuel';
-    case '4': return categoryID = 'groceries';
-    case '5': return categoryID = 'income';
-    case '6': return categoryID = 'insurance';
-    case '7': return categoryID = 'rent';
-    case '8': return categoryID = 'savings';
-    case '9': return categoryID = 'shopping';
-    case '10': return categoryID = 'other';
+    case '1': return categoryID = 'Eating Out';
+    case '2': return categoryID = 'Entertainment';
+    case '3': return categoryID = 'Fuel';
+    case '4': return categoryID = 'Groceries';
+    case '5': return categoryID = 'Income';
+    case '6': return categoryID = 'Insurance';
+    case '7': return categoryID = 'Rent';
+    case '8': return categoryID = 'Savings';
+    case '9': return categoryID = 'Shopping';
+    case '10': return categoryID = 'Other';
     default: categoryID = prop;
       break;
   }
