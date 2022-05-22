@@ -23,10 +23,16 @@ export default function Vacation(props) {
   const totalSpentOnVacation = getTotalAmount(vacationExpenses);
   const homeTime = getDaysTillGoal(vacationInfo)
   
-  const budgetLeft = totalSaved - totalSpentOnVacation;
-  const dayAllowance = `$${((budgetLeft / homeTime )/ 100).toFixed(2)}`;
-  const weekAllowance = `$${(((budgetLeft / homeTime) * 7) / 100).toFixed(2)}`;
-  
+  // const budgetLeft = totalSaved - totalSpentOnVacation;
+  // const dayAllowance = `$${((budgetLeft / homeTime )/ 100).toFixed(2)}`;
+  // const weekAllowance = `$${(((budgetLeft / homeTime) * 7) / 100).toFixed(2)}`;
+  // console.log('budgetLeft', budgetLeft);
+  console.log('totalSaved', totalSaved);
+  console.log('totalSpentOnVacation', totalSpentOnVacation);
+  console.log('homeTime', homeTime);
+
+  const dayAllowance = `$${((vacationInfo.amount - totalSpentOnVacation) / 100 / homeTime).toFixed(2)}`
+  const weekAllowance = `$${((vacationInfo.amount - totalSpentOnVacation) * 7 / 100 / homeTime).toFixed(2)}`;
   return (
     <div>
       <div className='d-flex align-items-center justify-content-center text-center goalbox'>
