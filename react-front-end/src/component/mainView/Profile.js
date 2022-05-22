@@ -12,7 +12,8 @@ export default function Profile(props) {
   const EDIT = 'EDIT';
   const GOAL = 'GOAL';
   const EMPTY = 'EMPTY';
-  const { mode, transition, back } = useVisualMode(EMPTY);
+  const CREATE = 'CREATE';
+  const { mode, transition, back } = useVisualMode(CREATE);
 
   const savingsbyID = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsbyID);
@@ -20,10 +21,10 @@ export default function Profile(props) {
   const username = getUserByID(props.users, props.userId).username;
 
   const [state, setState] = useState({
-    goal_id: goalByID.id,
-    goal_name: goalByID.goal_name,
-    totalGoals: goalByID.amount,
-    date: goalByID.end_date,
+    goal_id: goalByID.id || '',
+    goal_name: goalByID.goal_name || '',
+    totalGoals: goalByID.amount || '',
+    date: goalByID.end_date || '',
   });
 
   const onChange = newGoal => {
@@ -75,6 +76,82 @@ export default function Profile(props) {
                   loading="lazy"
                 />
               </button>
+            </div>
+          </div>
+        </div>
+      }
+      {mode === CREATE &&
+        <div className="chart-align">
+          <div className='goal-container'>
+            <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <td className='d-flex justify-content-center w-100'>
+                      <div className="form-outline w-75">
+                        <input
+                          type="text"
+                          id="goalName"
+                          className="form-control align-items-center fw-bolder text-center"
+                          value={state.goal_name}
+                          onChange={(event) => setState({ ...state, goal_name: event.target.value })}
+                        />
+                        <label className="form-label visually-hidden" htmlFor="goalName">
+                          Goal Name
+                        </label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='d-flex justify-content-center w-100'>
+                      <div className='w-50'>
+                        <input
+                          type="number"
+                          imputmode="decimal"
+                          min="0.01"
+                          step="0.01"
+                          id="goalAmount"
+                          className="form-control align-items-center"
+                          value={state.totalGoals}
+                          onChange={event =>
+                            setState({
+                              ...state,
+                              totalGoals: event.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <label className="form-label visually-hidden" htmlFor="goalAmount">
+                        goalAmount
+                      </label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className='d-flex justify-content-center w-100'>
+                      <div className="w-50 col-lg-3 justify-content-center col-sm-6">
+                        <label htmlFor="date" className='visually-hidden'>date</label>
+                        <input
+                          id="date"
+                          className="form-control"
+                          type="date"
+                          value={state.date}
+                          onChange={(event) => setState({ ...state, date: event.target.value })}
+                        />
+                        <span id="dateSelected"></span>
+                      </div>
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+              <div>
+                <button onClick={() => onChange(state)} className='btn btn-primary mb-3 m-1'>
+                  Confirm
+                </button>
+
+                <button onClick={() => back()} className='btn btn-danger mb-3 m-1'>
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
