@@ -336,6 +336,9 @@ export default function Savings(props) {
 								<button onClick={() => onChange(state)} className='btn btn-primary mb-3 m-1'>
 									Confirm
 								</button>
+								<button onClick={(event) => setState({ ...state, vacation: ''})} className='btn btn-danger mb-3 m-1'>
+                  Cancel
+                </button>
 							</div>
 						</div>
 					</div>
