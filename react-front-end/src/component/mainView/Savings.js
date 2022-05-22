@@ -71,14 +71,15 @@ export default function Savings(props) {
 
 	const piggyAppear = classNames('pig-image', {
 		'disappear': state.input === 'disappear' ||
-			state.vacation === 'edit'
+			state.vacation === 'ON'
 	});
 
 	const piggyBreak = classNames('pig-break', {
-		'disappear': state.input !== 'disappear'
+		'disappear': state.input !== 'disappear' ||
+			state.vacation === 'ON'
 	});
 	const vacationMode = classNames('button-vac', {
-		'disappear': state.vacation === 'edit'
+		'disappear': state.vacation === 'ON'
 	})
 
 
@@ -98,8 +99,8 @@ export default function Savings(props) {
 			<div className="goal-container d-flex flex-column align-items-center justify-content-center h-50 mt-5 text-center">
 				<br />
 				<br />
-				<div className="d-flex w-50 flex-column align-items-center justify-content-center text-center">
-					{(totalSaved / totalGoal) <= 1 && (
+				{(totalSaved / totalGoal) <= 1 &&
+					<div className="d-flex w-50 flex-column align-items-center justify-content-center text-center">
 						<div className="w-100 h-75 d-flex align-items-center justify-content-center text-center">
 							<table>
 								<thead>
@@ -150,8 +151,7 @@ export default function Savings(props) {
 								/>
 							</div>
 						</div>
-					)}
-					{(totalSaved / totalGoal) <= 1 && (
+
 						<div className="w-100 d-flex justify-content-space-evenly">
 							<div
 								id="switch"
@@ -220,42 +220,41 @@ export default function Savings(props) {
 								<div id="switch-right"></div>
 							</div>
 						</div>
-					)}
 
-					<div>
-						{(totalSaved / totalGoal) >= 1 && (
-							<div className="wrap">
-								<button
-									className={vacationMode}
-									onClick={() => {
-										setState({ ...state, vacation: 'edit' })
-									}}
-								>VACATION MODE</button>
-								<button
-									className={piggyAppear}
-									onClick={() => {
-										setState({ ...state, input: 'disappear' });
-									}}
-								>
-									<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
-								</button>
-								<img
-									className={piggyBreak}
-									src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
-									alt="piggy bank broken"
-								/>
-							</div>
-						)}
+					</div>
+				}
+				{(totalSaved / totalGoal) >= 1 &&
+					<div className="wrap">
+						<button
+							className={vacationMode}
+							onClick={() => {
+								setState({ ...state, vacation: 'ON' })
+							}}
+						>VACATION MODE</button>
+						<button
+							className={piggyAppear}
+							onClick={() => {
+								setState({ ...state, input: 'disappear' });
+							}}
+						>
+							<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
+						</button>
+						<img
+							className={piggyBreak}
+							src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
+							alt="piggy bank broken"
+						/>
 					</div>
 
-					<img
-						id="piggy-animation"
-						src="https://c.tenor.com/k_giby7nsyIAAAAC/money-piggy-bank.gif"
-						alt="piggy animation"
-					/>
-				</div>
+				}
+
+				<img
+					id="piggy-animation"
+					src="https://c.tenor.com/k_giby7nsyIAAAAC/money-piggy-bank.gif"
+					alt="piggy animation"
+				/>
 			</div>
-			{state.vacation === 'edit' &&
+			{state.vacation === 'ON' &&
 				<div className="chart-align w-50 h-50">
 					<div className='vacation-start'>
 						<div className='card d-flex align-items-center justify-content-center text-center flex-column'>
@@ -280,9 +279,9 @@ export default function Savings(props) {
 									<tr>
 										<td className='d-flex justify-content-center w-100'>
 											<div className='w-50'>
-											<label className="form-label " htmlFor="goalAmount">
-												Budget
-											</label>
+												<label className="form-label " htmlFor="goalAmount">
+													Budget
+												</label>
 												<input
 													type="number"
 													imputmode="decimal"

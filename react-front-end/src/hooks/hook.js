@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    tab: 'EXPENSES',
+    tab: 'SAVINGS',
     user: '',
     users: [],
     goals: [],
@@ -14,7 +14,7 @@ export default function useApplicationData() {
     categories: [],
     dataPoints: [],
     alvinVacationSpent: [],
-    vacationMode: true,
+    vacationMode: false,
     vacations: []
   });
 
@@ -29,9 +29,14 @@ export default function useApplicationData() {
       })
   };
 
-  const updateGoals = (goalID, goals, vacationMode = false) => {
+  const changeTab = (tab) =>
+    setState(prev => {
+      return { ...prev, tab }
+    })
 
-    
+
+  const updateGoals = (goalID, goals) => {
+
     const updatedGoal = state.goals.map(item =>
       item.id === goalID ?
         item = {
@@ -43,13 +48,13 @@ export default function useApplicationData() {
         }
         : item
     );
-    vacationMode ? 
-    setState(prev => {
-      return { ...prev, tab: 'VACATION', goals: updatedGoal, vacationMode: true }
-    }) :
-    setState(prev => {
-      return { ...prev, goals: updatedGoal }
-    })
+    goals.vacation === 'ON' ?
+      setState(prev => {
+        return { ...prev, tab: 'VACATION', goals: updatedGoal, vacationMode: true }
+      }) :
+      setState(prev => {
+        return { ...prev, goals: updatedGoal }
+      })
 
     return axios
       .put(`http://localhost:8081/api/goals`, {
@@ -243,6 +248,7 @@ export default function useApplicationData() {
     loginUser,
     updateGoals,
     removeExpense,
-    removeGoal
+    removeGoal,
+    changeTab
   };
 }

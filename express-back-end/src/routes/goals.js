@@ -39,7 +39,6 @@ module.exports = db => {
 	});
 
 	router.put('/goals', (req, res) => {
-		console.log(req.body)
 		db.query(
 			`
     UPDATE goals 
@@ -53,7 +52,7 @@ module.exports = db => {
 			req.body.goals.goal_name,
 			req.body.goals.start_date,
 			req.body.goals.end_date,
-			req.body.goals.totalGoals,
+			req.body.goals.totalGoals * 100,
 			req.body.goals.goal_id
 		]
 		)
@@ -63,7 +62,6 @@ module.exports = db => {
 	});
 
 	router.delete('/goals', (req, res) => {
-		console.log(req.body)
 		db.query(
 			`
 			DELETE FROM goals
