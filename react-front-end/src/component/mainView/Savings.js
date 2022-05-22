@@ -214,7 +214,7 @@ export default function Savings(props) {
 						<div className="wrap">
 							<button className="button-vac">VACATION MODE</button>
 							<button
-								className={piggyAppear}
+							className={piggyAppear}
 								onClick={() => {
 									setState({ ...state, input: 'disappear' });
 								}}
@@ -222,14 +222,13 @@ export default function Savings(props) {
 								<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
 							</button>
 							<button type="button" className="btn btn-secondary new-goals">New Goals</button>
-						</div>
-						)}
-
-						<img
+							<img
 							className={piggyBreak}
 							src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
 							alt="piggy bank broken"
 						/>
+						</div>
+						)}
 					</div>
 
 					<img
