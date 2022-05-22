@@ -27,6 +27,7 @@ export default function Main(props) {
 
       {mode === PROFILE && <Profile
       key='profile'
+      removeGoal={props.removeGoal}
       userId={props.userId}
       users={props.users}
       incomes={props.incomes}

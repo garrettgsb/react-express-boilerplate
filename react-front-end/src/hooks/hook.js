@@ -94,6 +94,7 @@ export default function useApplicationData() {
   };
 
   const removeGoal = goalID => {
+    console.log(goalID)
     const newGoalList = state.goals.map((goal, i) => {
       return goal.id === goalID ?
         state.goals.splice(i, 1) :

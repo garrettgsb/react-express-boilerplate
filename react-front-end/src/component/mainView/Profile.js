@@ -15,7 +15,7 @@ export default function Profile(props) {
   const EMPTY = 'EMPTY';
   const CREATE = 'CREATE';
   const REMOVE = 'REMOVE';
-  const { mode, transition, back } = useVisualMode(EMPTY);
+  const { mode, transition, back } = useVisualMode(GOAL);
 
   const savingsbyID = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsbyID);
@@ -248,7 +248,7 @@ export default function Profile(props) {
                 <button onClick={() => onChange(state)} className='btn btn-primary mb-3 m-1'>
                   Confirm
                 </button>
-                <button onClick={() => transition(REMOVE)} class="btn btn-danger mb-3 m-1">
+                <button onClick={() => transition(REMOVE)} className="btn btn-danger mb-3 m-1">
                   Delete
                 </button>
                 <button onClick={() => back()} className='btn mb-3 m-1'>
@@ -324,15 +324,15 @@ export default function Profile(props) {
                 <button
                   className='m-1 btn btn-danger'
                   onClick={() => {
-                    removeGoal()
+                    removeGoal(goalByID.id)
                   }}
-                  danger >
+                  >
                   Confirm
                 </button>
                 <button
                   onClick={() => back()}
                   className='m-1 btn'
-                  danger >
+                  >
                   Cancel
                 </button>
               </div>

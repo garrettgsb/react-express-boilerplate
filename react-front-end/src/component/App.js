@@ -12,7 +12,8 @@ export default function App() {
     addExpense,
     loginUser,
     updateGoals, 
-    removeExpense } = useApplicationData();
+    removeExpense, 
+    removeGoal } = useApplicationData();
 
   //views
   const LOGIN = 'LOGIN';
@@ -42,7 +43,9 @@ export default function App() {
 
       {mode === SHOW && <Main
         key='main'
+        state={state}
         tab={state.tab}
+        removeGoal={removeGoal}
         addExpense={addExpense}
         userId={state.user}
         users={state.users}

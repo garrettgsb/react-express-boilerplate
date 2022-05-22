@@ -60,6 +60,7 @@ module.exports = db => {
 	});
 
 	router.delete('/goals', (req, res) => {
+		console.log(req.body)
 		db.query(
 			`
 			DELETE FROM goals
