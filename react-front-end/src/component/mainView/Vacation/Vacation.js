@@ -13,23 +13,10 @@ import {
 
 
 export default function Vacation(props) {
-
-  const savingsById = getSavingsByID(props.savings, props.userId);
-  const totalSaved = getTotalAmount(savingsById);
-  
   const vacationInfo = getGoalByID(props.goals, props.userId);
-  
   const vacationExpenses = filteredVacationExpenses(props.expenses, props.userId, vacationInfo.start_date);
   const totalSpentOnVacation = getTotalAmount(vacationExpenses);
   const homeTime = getDaysTillGoal(vacationInfo)
-  
-  // const budgetLeft = totalSaved - totalSpentOnVacation;
-  // const dayAllowance = `$${((budgetLeft / homeTime )/ 100).toFixed(2)}`;
-  // const weekAllowance = `$${(((budgetLeft / homeTime) * 7) / 100).toFixed(2)}`;
-  // console.log('budgetLeft', budgetLeft);
-  console.log('totalSaved', totalSaved);
-  console.log('totalSpentOnVacation', totalSpentOnVacation);
-  console.log('homeTime', homeTime);
 
   const dayAllowance = `$${((vacationInfo.amount - totalSpentOnVacation) / 100 / homeTime).toFixed(2)}`
   const weekAllowance = `$${((vacationInfo.amount - totalSpentOnVacation) * 7 / 100 / homeTime).toFixed(2)}`;
