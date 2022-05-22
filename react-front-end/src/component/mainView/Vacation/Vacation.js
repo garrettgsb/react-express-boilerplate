@@ -13,19 +13,15 @@ import {
 
 
 export default function Vacation(props) {
-  console.log('PROPS:', props)
+
   const savingsById = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsById);
   
   const vacationInfo = getGoalByID(props.goals, props.userId);
   
-  console.log('VACATION INFO:', vacationInfo)
   const vacationExpenses = filteredVacationExpenses(props.expenses, props.userId, vacationInfo.start_date);
   const totalSpentOnVacation = getTotalAmount(vacationExpenses);
-  const homeTime = getDaysTillGoal(vacationInfo) //SWAP WHEN DEPLOY
-  // const homeTime = getDaysTillGoal(testData) // HARDCODE DATA FOR DEV
-  console.log('vacationexpenses:', vacationExpenses)
-  console.log('TOTAL:', totalSpentOnVacation)
+  const homeTime = getDaysTillGoal(vacationInfo)
   
   const budgetLeft = totalSaved - totalSpentOnVacation;
   const dayAllowance = `$${((budgetLeft / homeTime )/ 100).toFixed(2)}`;
