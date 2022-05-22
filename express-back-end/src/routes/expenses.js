@@ -129,7 +129,9 @@ module.exports = db => {
 
   router.get('/alvin/vacation/spent', (req, res) => {
     db.query(`
-    SELECT expenses.user_id,
+    SELECT 
+      expenses.id AS id,
+      expenses.user_id,
       expenses.created_at,
       expenses.amount,
       expenses.category_id,
