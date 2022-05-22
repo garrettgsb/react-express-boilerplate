@@ -12,7 +12,7 @@ module.exports = db => {
       res.json(categroies);
     })
     .catch(error => {
-      console.log('The error is: ', error);
+      console.log('This error is inside -> get (\'/categories\') route: ', error);
     });
   });
   return router;

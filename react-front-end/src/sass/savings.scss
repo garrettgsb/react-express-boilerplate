@@ -53,6 +53,7 @@ html, body {
 }
 
 .button-vac {
+  z-index: 20;
   right: 150px;
   min-width: 300px;
   min-height: 60px;
@@ -106,7 +107,7 @@ button {
   left: 0px;
   position:absolute;
   z-index: 6;
-  display: none;
+  // display: none;
 }
 
 .pig-break {
@@ -136,4 +137,8 @@ button {
 
 .track {
   color: $OrangePeel;
+}
+
+.new-goals {
+  margin-right: 200px;
 }

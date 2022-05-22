@@ -8,7 +8,6 @@ import {
 	getSavingsByID,
 } from '../../helpers/helper_functions';
 import classNames from 'classnames';
-import useVisualMode from '../../hooks/useVisualMode';
 
 export default function Savings(props) {
 	// gets total amount of saved money
@@ -95,73 +94,42 @@ export default function Savings(props) {
 							<thead>
 								<tr>
 									<td>
-										<h2>{goalByID.goal_name}</h2>
+										<h1>{goalByID.goal_name}</h1>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<h1 className='fw-bold'>
-											<span className='total-saved'>
-												${(totalSaved / 100).toFixed(2)}
-											</span>
-											<span>	/ ${(totalGoal / 100).toFixed(2)}
-											</span>
+										<h1>
+											${(totalSaved / 100).toFixed(2)} / $
+											{(totalGoal / 100).toFixed(2)}
 										</h1>
 									</td>
 								</tr>
 								<tr>
-									<td className='fs-2'>
-										<span className='days-until'>{totalDaysTillGoal}</span> days until {goalByID.end_date}
+									<td>
+										{totalDaysTillGoal} days until {goalByID.end_date}
 									</td>
 								</tr>
-								{state.day &&
+								{state.day && (
 									<tr className="fw-bold">
-										<td>
-											Advised to save
-											<span className='advice'>	{moneyPerDayToGoal}</span>	/
-											<span >
-												day
-											</span>
-										</td>
+										<td>You can save {moneyPerDayToGoal}/day</td>
 									</tr>
-								}
-								{state.week &&
+								)}
+								{state.week && (
 									<tr className="fw-bold">
-										<td>Advised to save
-											<span className='advice'>	{moneyPerWeekToGoal}</span>	/
-											<span >
-												week
-											</span>
-										</td>
+										<td>You can save {moneyPerWeekToGoal}/week</td>
 									</tr>
-								}
-								{state.month &&
+								)}
+								{state.month && (
 									<tr className="fw-bold">
-										<td>Advised to save
-											<span className='advice'>	{moneyPerMonthToGoal}</span>	/
-											<span >
-												month
-											</span>
-										</td>
+										<td>You can save {moneyPerMonthToGoal}/month</td>
 									</tr>
-								}
-								{state.year &&
+								)}
+								{state.year && (
 									<tr className="fw-bold">
-										<td>Advised to save
-											<span className='advice'>	{moneyPerYearToGoal}</span>	/
-											<span >
-												year
-											</span>
-										</td>
+										<td>You can save {moneyPerYearToGoal}/year</td>
 									</tr>
-								}
-								{(state.day ||
-									state.week ||
-									state.month ||
-									state.year) &&
-									<tr className='track fw-bold'>
-										<td className='fs-3 fw-bolder'>to stay on track!</td>
-									</tr>}
+								)}
 							</thead>
 						</table>
 						<div id="progress-circle">
@@ -241,23 +209,26 @@ export default function Savings(props) {
 					</div>
 
 					<div>
+
+						{(totalSaved) / (totalGoal) >= 1 && (
 						<div className="wrap">
 							<button className="button-vac">VACATION MODE</button>
-						</div>
-						<button
+							<button
 							className={piggyAppear}
-							onClick={() => {
-								setState({ ...state, input: 'disappear' });
-							}}
-						>
-							<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
-						</button>
-
-						<img
+								onClick={() => {
+									setState({ ...state, input: 'disappear' });
+								}}
+							>
+								<img src="../../../pig2-NO-bg.png" alt="piggy bank break" />
+							</button>
+							<button type="button" className="btn btn-secondary new-goals">New Goals</button>
+							<img
 							className={piggyBreak}
 							src="https://c.tenor.com/SoiNuY5rLrQAAAAC/sailor-moon-pig.gif"
 							alt="piggy bank broken"
 						/>
+						</div>
+						)}
 					</div>
 
 					<img

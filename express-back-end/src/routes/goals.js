@@ -8,6 +8,7 @@ module.exports = db => {
     SELECT goals.*, users.username, users.email
     FROM goals
     JOIN users ON user_id = users.id
+		WHERE goal_name NOT LIKE '%acation%';
     `
 		)
 			.then(data => {
@@ -15,7 +16,7 @@ module.exports = db => {
 				res.json(goals);
 			})
 			.catch(error => {
-				console.log('The error is: ', error);
+				console.log('This error is inside -> get (\'/goals\') route: ', error);
 			});
 	});
 
@@ -33,7 +34,7 @@ module.exports = db => {
 				res.json(vacations);
 			})
 			.catch(error => {
-				console.log('The error is: ', error);
+				console.log('This error is inside -> get (\'/vacations\') route: ', error);
 			});
 	});
 
@@ -54,7 +55,7 @@ module.exports = db => {
 		]
 		)
 		.catch(error => {
-			console.log('The error is: ', error);
+			console.log('This error is inside -> put (\'/goals\') route: ', error);
 		});
 	});
 

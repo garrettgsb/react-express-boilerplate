@@ -17,7 +17,7 @@ module.exports = db => {
       res.json(expenses);
     })
     .catch(error => {
-      console.log('The error is: ', error);
+      console.log('This error is inside -> get (\'/expenses\') route: ', error);
     });
   });
 
@@ -32,7 +32,7 @@ module.exports = db => {
       res.json(expenses);
     })
     .catch(error => {
-      console.log('The error is: ', error);
+      console.log('This error is inside -> get (\'/allexpenses\') route: ', error);
     });
   });
 
@@ -48,7 +48,7 @@ module.exports = db => {
       res.json(income);
     })
     .catch(error => {
-      console.log('The error is: ', error);
+      console.log('This error is inside -> get (\'/incomes\') route: ', error);
     });
   });
 
@@ -74,7 +74,7 @@ module.exports = db => {
       res.json(expenses);
     })
     .catch(error => {
-      console.log('The error is: ', error);
+      console.log('This error is inside -> put (\'/expenses\') route: ', error);
     });
   });
 
@@ -92,7 +92,7 @@ module.exports = db => {
       res.json(removed);
     })
     .catch(error => {
-      console.log('The error is: ', error);
+      console.log('This error is inside -> delete (\'/delete\') route: ', error);
     });
   });
   
@@ -109,7 +109,7 @@ module.exports = db => {
       res.json(savings);
     })
     .catch(error => {
-      console.log('The error is: ', error);
+      console.log('This error is inside -> get (\'/savings\') route: ', error);
     });
   });
 
@@ -123,7 +123,7 @@ module.exports = db => {
       res.json(dataPoints);
     })
     .catch(error => {
-      console.log('The error is: ', error);
+      console.log('This error is inside -> get (\'/dataPoints\') route: ', error);
     });
   });
 
@@ -137,13 +137,14 @@ module.exports = db => {
       goals.end_date AS end_date,
       goals.goal_name,
       goals.user_id AS goals_user_id,
-      goals.id AS goals_id
+      goals.id AS goals_id,
+      goals.amount AS goal_amount
     FROM expenses
     JOIN users ON expenses.user_id = users.id
     JOIN goals ON goals.user_id = users.id
     WHERE category_id != 8
     AND category_id !=5
-    AND goals.id = 4
+    AND goal_name LIKE '%acation%'
     AND expenses.created_at > goals.start_date;
     `)
     .then(data => {
@@ -151,7 +152,7 @@ module.exports = db => {
       res.json(savings);
     })
     .catch(error => {
-      console.log('The error is: ', error);
+      console.log('This error is inside -> get (\'/alvin/vacation/spent\') route: ', error);
     });
   });
 

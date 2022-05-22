@@ -1,37 +1,34 @@
 import React, { useState } from 'react';
-import "../../sass/profile.scss";
+import '../../sass/profile.scss';
 import useVisualMode from '../../hooks/useVisualMode';
 import {
-  getTotalAmount,
-  getGoalByID,
-  getSavingsByID,
-  getUserByID
+	getTotalAmount,
+	getGoalByID,
+	getSavingsByID,
+	getUserByID,
 } from '../../helpers/helper_functions';
 
 export default function Profile(props) {
+	const EDIT = 'EDIT';
+	const GOAL = 'GOAL';
+	const { mode, transition, back } = useVisualMode(GOAL);
 
+	const savingsbyID = getSavingsByID(props.savings, props.userId);
+	const totalSaved = getTotalAmount(savingsbyID);
+	const goalByID = getGoalByID(props.goals, props.userId);
+	const username = getUserByID(props.users, props.userId).username;
 
-  const EDIT = 'EDIT';
-  const GOAL = 'GOAL';
-  const { mode, transition, back } = useVisualMode(GOAL)
+	const [state, setState] = useState({
+		goal_id: goalByID.id,
+		goal_name: goalByID.goal_name,
+		totalGoals: goalByID.amount,
+		date: goalByID.end_date,
+	});
 
-  const savingsbyID = getSavingsByID(props.savings, props.userId)
-  const totalSaved = getTotalAmount(savingsbyID);
-  const goalByID = getGoalByID(props.goals, props.userId);
-  const username = getUserByID(props.users, props.userId).username;
-
-
-  const [state, setState] = useState({
-    goal_id: goalByID.id,
-    goal_name: goalByID.goal_name,
-    totalGoals: goalByID.amount,
-    date: goalByID.end_date
-  })
-
-  const onChange = (newGoal) => {
-    props.updateGoals(goalByID.id, newGoal);
-    transition(GOAL);
-  }
+	const onChange = newGoal => {
+		props.updateGoals(goalByID.id, newGoal);
+		transition(GOAL);
+	};
 
   return (
     <section className="vw-100 m-0 row">
@@ -88,10 +85,18 @@ export default function Profile(props) {
                       <div className='w-50'>
                         <input
                           type="number"
+                          imputmode="decimal"
+                          min="0.01"
+                          step="0.01"
                           id="goalAmount"
                           className="form-control align-items-center"
                           value={state.totalGoals}
-                          onChange={(event) => setState({ ...state, totalGoals: event.target.value})}
+                          onChange={event =>
+                            setState({
+                              ...state,
+                              totalGoals: event.target.value,
+                            })
+                          }
                         />
                       </div>
                       <label className="form-label visually-hidden" htmlFor="goalAmount">
@@ -145,7 +150,7 @@ export default function Profile(props) {
                   <tr>
                     <td>
                       <h3>
-                        Aiming for: ${(state.totalGoals/ 100).toFixed(2)}
+                        Aiming for: ${Number(state.totalGoals).toFixed(2)}
                       </h3>
                     </td>
                   </tr>
@@ -168,6 +173,15 @@ export default function Profile(props) {
               >
                 EDIT
               </button>
+              <button type="button" class="btn btn-danger">
+								Delete
+							</button>
+							<button
+								className="btn btn-info mb-3"
+								onClick={() => transition(EDIT)}
+							>
+								New Goal
+							</button>
             </div>
           </div>
         </div>
