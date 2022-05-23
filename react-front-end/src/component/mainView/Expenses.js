@@ -27,7 +27,7 @@ export default function Expenses(props) {
 		'blur': state.input !== 'disappear'
 	});
 
-	const removeIncomeButton = classNames('w-25 gradient-custom-4', {
+	const removeIncomeButton = classNames('w-25 gradient-custom-4 text-dark', {
 		'disappear': state.input !== 'disappear',
 		'graph-thumbnail': state.input === 'appear',
 		'card vw-50  align-items-center': state.input !== 'appear'
@@ -163,7 +163,7 @@ export default function Expenses(props) {
 							<div className="col-12 d-flex align-items-center">
 								<button
 									type="submit"
-									className="btn btn-primary m-1"
+									className="btn btn-primary submit text-dark m-1 gradient-custom-3"
 									onClick={e => {
 										e.preventDefault();
 										setState({ ...state, input: 'disappear' });
@@ -186,7 +186,7 @@ export default function Expenses(props) {
 										e.preventDefault()
 										setState({ ...state, input: 'disappear' })
 									}}
-									className='btn btn-danger m-1'>
+									className='btn btn-danger m-1 cancel'>
 									Cancel
 								</button>
 							</div>
