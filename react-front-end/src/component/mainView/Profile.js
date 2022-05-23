@@ -41,7 +41,7 @@ export default function Profile(props) {
     transition(EMPTY)
   }
   return (
-    <section className="vw-100 m-0 row">
+    <section id='profile' className="vw-100 m-0 row">
       <div className="container p-card">
         <div className="row d-flex justify-content-center h-100">
           <div className="w-50 col-md-12 col-xl-4 m-4">
@@ -232,7 +232,7 @@ export default function Profile(props) {
         <div className="chart-align">
           <div className='goal-container'>
             <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
-              <table className="table table-bordered">
+              <table className="table">
                 <thead>
                   <tr>
                     <td>
