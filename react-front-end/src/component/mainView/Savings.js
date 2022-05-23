@@ -82,19 +82,25 @@ export default function Savings(props) {
 	const vacationMode = classNames('button-vac', {
 		'disappear': state.vacation === 'ON'
 	})
-
-
+	//  if the DAYS until END DATE is less than a WEEK then DO NOT RENDER
+	//  if the DAYS until END DATE is less than a MONTH then DO NOT RENDER
+	//  if the DAYS until END DATE is less than a YEAR then DO NOT RENDER
 	// gets money per day/week/month/year
 	const moneyTillGoal = totalGoal - totalSaved;
 	const moneyPerDayToGoal =
-		'$' + (moneyTillGoal / totalDaysTillGoal / 100).toFixed(2);
+	'$' + (moneyTillGoal / totalDaysTillGoal / 100).toFixed(2);
 	const moneyPerWeekToGoal =
-		'$' + (moneyTillGoal / (totalDaysTillGoal / 7) / 100).toFixed(2);
+	'$' + (moneyTillGoal / (totalDaysTillGoal / 7) / 100).toFixed(2);
 	const moneyPerMonthToGoal =
-		'$' + (moneyTillGoal / (totalDaysTillGoal / 31) / 100).toFixed(2);
+	'$' + (moneyTillGoal / (totalDaysTillGoal / 31) / 100).toFixed(2);
 	const moneyPerYearToGoal =
-		'$' + (moneyTillGoal / (totalDaysTillGoal / 365) / 100).toFixed(2);
+	'$' + (moneyTillGoal / (totalDaysTillGoal / 365) / 100).toFixed(2);
+	console.log('totalDaysTillGoal', totalDaysTillGoal);
+	// const ifEnoughMoney = () => {
+	// 	if (totalDaysTillGoal < 7) {
 
+	// 	}
+	// };
 	return (
 		<div>
 			<div className="goal-container d-flex flex-column align-items-center justify-content-center h-50 mt-5 text-center">
@@ -173,51 +179,54 @@ export default function Savings(props) {
 										</label>
 									</div>
 								</div>
-								<div className="m-1">
-									<div className="form-check form-switch">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											aria-checked="false"
-											role="switch"
-											id="week-switch"
-											onChange={() => weekClick()}
-										/>
-										<label className="form-check-label" htmlFor="week-switch">
-											Week
-										</label>
+									<div className="m-1">
+										<div className="form-check form-switch">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												aria-checked="false"
+												role="switch"
+												id="week-switch"
+												disabled={totalDaysTillGoal < 7}
+												onChange={() => weekClick()}
+											/>
+											<label className="form-check-label" htmlFor="week-switch">
+												Week
+											</label>
+										</div>
 									</div>
-								</div>
-								<div className="m-1">
-									<div className="form-check form-switch">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											aria-checked="false"
-											role="switch"
-											id="month-switch"
-											onChange={() => monthClick()}
-										/>
-										<label className="form-check-label" htmlFor="month-switch">
-											Month
-										</label>
+									<div className="m-1">
+										<div className="form-check form-switch">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												aria-checked="false"
+												role="switch"
+												id="month-switch"
+												disabled={totalDaysTillGoal < 30}
+												onChange={() => monthClick()}
+											/>
+											<label className="form-check-label" htmlFor="month-switch">
+												Month
+											</label>
+										</div>
 									</div>
-								</div>
-								<div className="m-1">
-									<div className="form-check form-switch">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											aria-checked="false"
-											role="switch"
-											id="year-switch"
-											onChange={() => yearClick()}
-										/>
-										<label className="form-check-label" htmlFor="year-switch">
-											Year
-										</label>
+									<div className="m-1">
+										<div className="form-check form-switch">
+											<input
+												className="form-check-input"
+												type="checkbox"
+												aria-checked="false"
+												role="switch"
+												id="year-switch"
+												disabled={totalDaysTillGoal < 365}
+												onChange={() => yearClick()}
+											/>
+											<label className="form-check-label" htmlFor="year-switch">
+												Year
+											</label>
+										</div>
 									</div>
-								</div>
 								<div id="switch-right"></div>
 							</div>
 						</div>
