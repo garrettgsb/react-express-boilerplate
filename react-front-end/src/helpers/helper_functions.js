@@ -51,7 +51,6 @@ export function getDaysTillGoal(state) {
 };
 
 export function getTotalAmount(state) {
-
   if (Array.isArray(state)) {
 
     const amountList = state.map(expense => expense.amount);

@@ -38,7 +38,7 @@ export default function useApplicationData() {
   const updateGoals = (goalID, goals) => {
 
     const updatedGoal = state.goals.map(item =>
-      item.id === goalID ?
+      !Array.isArray(item) && item.id === goalID ?
         item = {
           ...item,
           goal_name: goals.goal_name,
@@ -68,24 +68,22 @@ export default function useApplicationData() {
 
   const removeExpense = expenseID => {
     const newExpenseList = state.expenses.map((expense, i) => {
-      return expense.id === expenseID ?
+      return !Array.isArray(expense) && expense.id === expenseID ?
         state.expenses.splice(i, 1) :
         expense
     });
 
     const newDataPoints = state.dataPoints.map((datapoint, i) => {
-      return datapoint.id === expenseID ?
+      return !Array.isArray(datapoint) && datapoint.id === expenseID ?
         state.dataPoints.splice(i, 1) :
         datapoint
     })
 
     const newVacationList = state.alvinVacationSpent.map((expense, i) => {
-      return expense.id === expenseID ?
+      return !Array.isArray(expense) && expense.id === expenseID ?
         state.alvinVacationSpent.splice(i, 1) :
         expense
     })
-
-    // const vacationExpense = getVacationExpenses(newExpenseList, state.user);
 
     return axios
       .delete(`http://localhost:8081/api/delete`, {
@@ -127,6 +125,7 @@ export default function useApplicationData() {
   };
 
   const addExpense = expense => {
+    console.log('EXPENSE:', expense)
     const expenses = [
       {
         id: expense.id,

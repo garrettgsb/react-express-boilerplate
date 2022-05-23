@@ -7,6 +7,7 @@ import {
   getSavingsByID,
   getUserByID,
 } from '../../helpers/helper_functions';
+import NewGoal from './NewGoal';
 
 
 export default function Profile(props) {
@@ -25,7 +26,7 @@ export default function Profile(props) {
   const [state, setState] = useState({
     goal_id: goalByID.id,
     goal_name: goalByID.goal_name,
-    totalGoals: goalByID.amount/100,
+    totalGoals: goalByID.amount / 100,
     start_date: goalByID.start_date,
     end_date: goalByID.end_date,
   });
@@ -68,41 +69,10 @@ export default function Profile(props) {
         </div>
       </div>
       {mode === EMPTY &&
-        <div className="chart-align">
-          <div className='goal-container'>
-            <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
-              <table className="table table-borderless">
-                <thead>
-                  <tr>
-                    <td className='d-flex justify-content-center w-100'>
-                      <span className='fs-3 fw-2 text-success'>
-                        New Piggy Bank?
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='d-flex justify-content-center w-100'>
-                      <button
-                        className="new-pig"
-                        onClick={() => transition(EDIT)}
-                      >
-                        <i
-                          id='new-pig'
-                          className="logo fa-solid fa-piggy-bank new-pig"
-                          height="15"
-                          alt="pig logo"
-                          loading="lazy"
-                        />
-                      </button>
-                    </td>
-                  </tr>
-                </thead>
-              </table>
-              <div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <NewGoal
+          transition={transition}
+          editMode={EDIT}
+        />
       }
       {mode === CREATE &&
         <div className="chart-align">
@@ -188,7 +158,7 @@ export default function Profile(props) {
                 <thead>
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
-                      <div className="w-50">
+                      <div className="form-outline w-75">
                         <input
                           type="text"
                           id="goalName"
@@ -325,13 +295,13 @@ export default function Profile(props) {
                   onClick={() => {
                     removeGoal(goalByID.id)
                   }}
-                  >
+                >
                   Confirm
                 </button>
                 <button
                   onClick={() => back()}
                   className='m-1 btn'
-                  >
+                >
                   Cancel
                 </button>
               </div>
