@@ -168,6 +168,16 @@ button {
   z-index: 6;
   // display: none;
 }
+#break-title {
+  z-index: 7;
+  height: 30vh;
+  width: 30vw;
+  transform: rotate(-30deg);
+}
+#piggy-break {
+  color: $Cerise;
+  font-weight: bolder;
+}
 
 .pig-break {
   transform: scale(1.7);
