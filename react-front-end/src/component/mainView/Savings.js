@@ -88,6 +88,9 @@ export default function Savings(props) {
 		'blur': state.input !== 'disappear'
 	})
 
+	const disappearText = classNames('break-title', {
+		'disappear': state.vacation === 'ON'
+	})
 	//  if the DAYS until END DATE is less than a WEEK then DO NOT RENDER
 	//  if the DAYS until END DATE is less than a MONTH then DO NOT RENDER
 	//  if the DAYS until END DATE is less than a YEAR then DO NOT RENDER
@@ -247,7 +250,7 @@ export default function Savings(props) {
 								setState({ ...state, vacation: 'ON' })
 							}}
 						>VACATION MODE</button>
-						<div id='break-title' className='container'>
+						<div className={disappearText}>
 							<h1 id='piggy-break'>PIGGY BREAK!</h1>
 						</div>
 						<button

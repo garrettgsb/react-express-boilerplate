@@ -168,7 +168,7 @@ button {
   z-index: 6;
   // display: none;
 }
-#break-title {
+.break-title {
   z-index: 7;
   width: 30vw;
   transform: rotate(-30deg);
@@ -179,6 +179,7 @@ button {
   border-color: $OrangePeel;
   background-color: rgba(228, 154, 26, 0.427);
 }
+
 #piggy-break {
   color: $Cerise;
   font-weight: bolder;
