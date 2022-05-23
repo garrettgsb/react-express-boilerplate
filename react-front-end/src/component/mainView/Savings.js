@@ -75,13 +75,17 @@ export default function Savings(props) {
 			state.vacation === 'ON'
 	});
 
-	const piggyBreak = classNames('pig-break', {
+	const piggyBreak = classNames('pig-break border border-4', {
 		'disappear': state.input !== 'disappear' ||
 			state.vacation === 'ON'
 	});
 
 	const vacationMode = classNames('button-vac', {
 		'disappear': state.vacation === 'ON'
+	})
+
+	const blur = classNames('', {
+		'blur': state.input !== 'disappear'
 	})
 
 	//  if the DAYS until END DATE is less than a WEEK then DO NOT RENDER
@@ -263,7 +267,7 @@ export default function Savings(props) {
 				<div className="chart-align w-50 h-50">
 					<div className='vacation-start'>
 						<div className='card d-flex align-items-center justify-content-center text-center flex-column'>
-							<table className="table table-bordered">
+							<table className="table">
 								<thead>
 									<tr>
 										<td className='d-flex justify-content-center w-100'>
@@ -346,6 +350,8 @@ export default function Savings(props) {
 								</button>
 							</div>
 						</div>
+					</div>
+					<div className={blur}>
 					</div>
 				</div>}
 		</div>

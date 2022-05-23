@@ -5,7 +5,17 @@
   height: 100vh;
   background-color: #9fd1cd;
   background-image: url(http://www.transparenttextures.com/patterns/pinstripe.png);
+}
 
+.blur {
+  position: fixed;
+  transition: all .4s ease-in;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.728);
+  z-index: 0;
 }
 
 .goal-container {
