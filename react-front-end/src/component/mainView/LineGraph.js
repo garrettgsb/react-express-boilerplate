@@ -36,6 +36,7 @@ export default function LineGraph(props) {
   const goal = getGoalByID(props.goals, props.user)
   const dataPoints = getDataByID(props.dataPoints, props.user)
   const symbols = Object.keys(props.currencySymbols)
+  // const getExchangeRate = (rate, value) => rate * value;
   const currencies = symbols.map((currency, ii) => {
     return <option key={ii} value={symbols[ii]}>{props.currencySymbols[currency]}</option>
   }
@@ -92,8 +93,10 @@ export default function LineGraph(props) {
   const [state, setState] = useState({
     dateUnit: graphData.trackUnits,
     dataPoints: graphData.updatePoints,
-    currency: props.currentCurrency
+    currency: props.currentCurrency,
+    exchangeRate: props.exchangeRates.rates[props.currentCurrency]
   })
+  console.log(state)
 
   const data = {
     datasets: [
@@ -139,7 +142,7 @@ export default function LineGraph(props) {
                 ticks: {
                   // Include a dollar sign in the ticks
                   callback: function (value, index, ticks) {
-                    return value + ` ${state.currency}`;
+                    return (value * state.exchangeRate).toFixed(2) + ` ${state.currency}`;
                   }
                 },
                 beginAtZero: true
@@ -164,7 +167,7 @@ export default function LineGraph(props) {
                 console.log(e.target.value)
                 props.changeCurrency(e.target.value)
                 setState(prev => {
-                  return { ...prev, currency: e.target.value }
+                  return { ...prev, currency: e.target.value, exchangeRate: props.exchangeRates.rates[e.target.value] }
                 })
               }}
             />

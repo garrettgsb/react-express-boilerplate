@@ -76,6 +76,7 @@ export default function Expenses(props) {
 					currencySymbols={props.currencySymbols}
 					currentCurrency={props.state.currentCurrency}
 					changeCurrency={props.changeCurrency}
+					exchangeRates={props.state.exchangeRates}
 				/>
 			)}
 			{mode === EXPENSES && (
