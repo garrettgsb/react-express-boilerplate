@@ -115,7 +115,6 @@ export default function Expenses(props) {
 									Amount
 								</label>
 								<div className="input-group">
-									<div className="input-group-text">$</div>
 									<input
 										type="number"
 										imputmode="decimal"
@@ -131,6 +130,7 @@ export default function Expenses(props) {
 											})
 										}
 									/>
+									<div className="input-group-text">{props.currentCurrency}</div>
 								</div>
 							</div>
 							<div className="col-12">
