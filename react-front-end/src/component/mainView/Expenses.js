@@ -74,6 +74,8 @@ export default function Expenses(props) {
 					vacationMode={props.vacationMode}
 					vacationData={props.vacationData}
 					currencySymbols={props.currencySymbols}
+					currentCurrency={props.state.currentCurrency}
+					changeCurrency={props.changeCurrency}
 				/>
 			)}
 			{mode === EXPENSES && (

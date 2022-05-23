@@ -13,12 +13,13 @@ export default function useApplicationData() {
     dataPoints: [],
     vacationMode: false,
     currencySymbols: {},
+    currentCurrency: 'CAD',
     exchangeRates: {},
     currenies: []
   });
 
 
-  const loginUser = (user) => {
+  const loginUser = user => {
     return axios
       .get(`http://localhost:8081/api/dataPoints`)
       .then(() => {
@@ -28,11 +29,16 @@ export default function useApplicationData() {
       })
   };
 
-  const changeTab = (tab) =>
+  const changeTab = tab =>
     setState(prev => {
       return { ...prev, tab }
     })
 
+  const changeCurrency = currency => {
+    setState(prev => {
+      return {...prev, currency}
+    })
+  } 
 
   const updateGoals = (goalID, goals) => {
 

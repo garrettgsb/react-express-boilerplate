@@ -91,7 +91,8 @@ export default function LineGraph(props) {
 
   const [state, setState] = useState({
     dateUnit: graphData.trackUnits,
-    dataPoints: graphData.updatePoints
+    dataPoints: graphData.updatePoints,
+    currency: 'CAD'
   })
 
   const data = {
@@ -138,7 +139,7 @@ export default function LineGraph(props) {
                 ticks: {
                   // Include a dollar sign in the ticks
                   callback: function (value, index, ticks) {
-                    return '$' + value;
+                    return value + state.currency;
                   }
                 },
                 beginAtZero: true
@@ -150,16 +151,23 @@ export default function LineGraph(props) {
       <br />
       <div className='d-flex align-items-center m-2 justify-content-center' >
 
-        <input 
-        className="form-control" 
-        list="datalistOptions" 
-        id="exchange-search"
-        placeholder="Type to search currency..." />
-        <datalist id="datalistOptions">
-          {currencies}
-        </datalist>
+        {props.vacationMode &&
+          <div className='d-flex align-items-center m-2 justify-content-center w-25'>
+            <input
+              className="form-control w-100"
+              list="datalistOptions"
+              id="exchange-search"
+              value={props.currentCurrency}
+              placeholder="Type to search currency..."
+              onChange={() => {}}
+              />
+            <datalist id="datalistOptions">
+              {currencies}
+            </datalist>
+          </div>
+        }
         <select
-          className="select rounded-2 form-select form-select-lg w-25 d-flex align-items-center m-2 justify-content-center"
+          className="select rounded-2 form-select form-select-md w-25 d-flex align-items-center m-2 justify-content-center"
           value={state.dateUnit}
           onChange={e => setState({ ...state, dateUnit: e.target.value })}>
           <option value="day">Days</option>

@@ -53,6 +53,8 @@ export default function Main(props) {
         vacationMode={props.vacationMode}
         vacationData={props.alvinVacationSpent}
         currencySymbols={props.state.currencySymbols}
+        changeCurrency={props.changeCurrency}
+        state={props.state}
       />}
       {props.state.tab === VACATION && <Vacation
         key='vacation'
