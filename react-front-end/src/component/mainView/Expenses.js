@@ -45,7 +45,8 @@ export default function Expenses(props) {
 	const { mode, transition, back } = useVisualMode(EXPENSES);
 
 	const expenseID = props.expenses.find(expense => !Array.isArray(expense))
-
+	
+	console.log('EXPENSs:', props.exchangeRates.rates['USD'])
 	const submit = (id, user_id, created_at, amount, category_id, category_name, goal_name, goal_amount) => {
 		const expense = {
 			id,
@@ -55,9 +56,8 @@ export default function Expenses(props) {
 			category_id,
 			category_name,
 			goal_name,
-			goal_amount,
+			goal_amount: (goal_amount / props.exchangeRates.rates.USD),
 		};
-		console.log('EXPENSs:', expense)
 		props.addExpense(expense);
 	};
 

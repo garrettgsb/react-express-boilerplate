@@ -57,6 +57,7 @@ export default function Main(props) {
         currencySymbols={props.state.currencySymbols}
         changeCurrency={props.changeCurrency}
         currentCurrency={props.state.currentCurrency}
+        exchangeRates={props.state.exchangeRates}
         state={props.state}
       />}
       {props.state.tab === VACATION && <Vacation
