@@ -136,24 +136,32 @@ export default function Savings(props) {
 									</tr>
 									{state.day && (
 										<tr className="fw-bold">
-											<td>You can save {moneyPerDayToGoal}/day</td>
+											<td>Advised to save {moneyPerDayToGoal}/day</td>
 										</tr>
 									)}
 									{state.week && (
 										<tr className="fw-bold">
-											<td>You can save {moneyPerWeekToGoal}/week</td>
+											<td>Advised to save {moneyPerWeekToGoal}/week</td>
 										</tr>
 									)}
 									{state.month && (
 										<tr className="fw-bold">
-											<td>You can save {moneyPerMonthToGoal}/month</td>
+											<td>Advised to save {moneyPerMonthToGoal}/month</td>
 										</tr>
 									)}
 									{state.year && (
 										<tr className="fw-bold">
-											<td>You can save {moneyPerYearToGoal}/year</td>
+											<td>Advised to save {moneyPerYearToGoal}/year</td>
 										</tr>
 									)}
+									{(state.day ||
+										state.week ||
+										state.month ||
+										state.year) &&
+										<tr className="fw-bold">
+											<td>to stay on track!</td>
+										</tr>
+									}
 								</thead>
 							</table>
 							<div id="progress-circle">
