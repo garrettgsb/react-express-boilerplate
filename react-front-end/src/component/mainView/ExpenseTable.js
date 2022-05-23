@@ -1,13 +1,20 @@
 import React from 'react';
 import SingleExpense from './SingleExpense';
-import { getCategoryName, getExpenseById } from '../../helpers/helper_functions';
+import { getCategoryName, getExpenseById, filteredVacationExpenses, getGoalByID } from '../../helpers/helper_functions';
 import "../../sass/signup.scss"
 
 export default function ExpenseTable(props) {
 
-  const filteredExpensesById = getExpenseById(props.expenses, props.userId);
+  const vacation = getGoalByID(props.goals, props.userId)
+  
+  const filteredExpensesById =
+    props.vacationMode ?
+      filteredVacationExpenses(props.expenses, props.userId, vacation.start_date) :
+      getExpenseById(props.expenses, props.userId);
+
   const expenses = filteredExpensesById.map(expense => {
     const categoryName = getCategoryName(expense.category_id);
+
     const classname = (prop) => {
       switch (prop) {
         case 'Income': return 'Income';
@@ -25,6 +32,7 @@ export default function ExpenseTable(props) {
         amount={expense.amount}
         classname={classname(expense.category_name || categoryName)}
         removeExpense={props.removeExpense}
+        vacationMode={props.vacationMode}
       />
     )
   });

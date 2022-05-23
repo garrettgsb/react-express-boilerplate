@@ -86,6 +86,8 @@ export default function Expenses(props) {
 						expenses={props.expenses}
 						userId={props.userId}
 						removeExpense={props.removeExpense}
+						goals={props.goals}
+						vacationMode={props.vacationMode}
 					/>
 					<div id='input-card' className={expenseInput}>
 						<form className={"d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3"}>

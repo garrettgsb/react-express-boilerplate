@@ -62,7 +62,9 @@ export default function Main(props) {
         userId={props.userId}
         goals={props.goals}
         expenses={props.expenses}
-        alvinVacationSpent={props.alvinVacationSpent}
+        vacationMode={props.vacationMode}
+        currentCurrency={props.state.currentCurrency}
+        exchangeRates={props.state.exchangeRates}
       />}
 
 
