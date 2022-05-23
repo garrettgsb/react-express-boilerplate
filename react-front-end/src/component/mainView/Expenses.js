@@ -73,6 +73,7 @@ export default function Expenses(props) {
 					back={back}
 					vacationMode={props.vacationMode}
 					vacationData={props.vacationData}
+					currencySymbols={props.currencySymbols}
 				/>
 			)}
 			{mode === EXPENSES && (

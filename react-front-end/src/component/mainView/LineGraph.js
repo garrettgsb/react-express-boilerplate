@@ -35,6 +35,11 @@ export default function LineGraph(props) {
 
   const goal = getGoalByID(props.goals, props.user)
   const dataPoints = getDataByID(props.dataPoints, props.user)
+  const symbols = Object.keys(props.currencySymbols)
+  const currencies = symbols.map((currency, ii) => {
+    return <option key={ii} value={symbols[ii]}>{props.currencySymbols[currency]}</option>
+  }
+  )
 
   let graphData = {
     updatePoints: [],
@@ -145,9 +150,10 @@ export default function LineGraph(props) {
       <br />
       <div className='d-flex align-items-center m-2 justify-content-center' >
 
-        <input class="form-control" list="datalistOptions" id="exchange-search" placeholder="Type to search currency..." />
+        <input className="form-control" list="datalistOptions" id="exchange-search" placeholder="Type to search currency..." />
         <datalist id="datalistOptions">
-          <option value="San Francisco" />
+          {currencies}
+          <option value="San Francisco">SANFRANCISCO</option>
           <option value="New York" />
           <option value="Seattle" />
           <option value="Los Angeles" />
