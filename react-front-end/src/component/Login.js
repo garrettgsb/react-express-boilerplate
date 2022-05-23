@@ -46,33 +46,46 @@ export default function Login(props) {
                           type="number"
                           id="username"
                           className="form-control"
-                          placeholder="Email address"
                           value={state.id}
                           onChange={(event) =>
                             setState({ ...state, id: parseInt(event.target.value) })} />
-                        <label className="form-label" htmlFor="form2Example11">Username</label>
+                        <label
+                          className="form-label"
+                          htmlFor="username">
+                          Username
+                        </label>
                       </div>
 
                       <div className="form-outline mb-4">
-                        <input type="password" id="password" className="form-control" /*value={state.password} onChange={(event) => setState({...state, password: event.target.value})}*/ />
-                        <label className="form-label" htmlFor="form2Example22"
+                        <input
+                          type="password"
+                          id="password"
+                          className="form-control" /*value={state.password} onChange={(event) => setState({...state, password: event.target.value})}*/ />
+                        <label
+                          className="form-label"
+                          htmlFor="password"
                         >Password</label>
                       </div>
 
                       <div className="text-center pt-1 mb-5 pb-1">
-                        <button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" onClick={(e) => {
-                          e.preventDefault();
-                          validate(state.id);
-                        }}>Log
-                          in</button>
+                        <button
+                          className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            validate(state.id);
+                          }}>Log in</button>
                         <a className="text-muted" href="/">Forgot password?</a>
                       </div>
 
                       <div className="d-flex align-items-center justify-content-center pb-4">
                         <p className="mb-0 me-2">Don't have an account?</p>
-                        <button type="button" className="btn btn-outline-danger" onClick={() => props.transition('SIGNUP')}>Create new</button>
+                        <button
+                          type="button"
+                          className="btn btn-outline-danger"
+                          onClick={() =>
+                            props.transition('SIGNUP')}>Create new</button>
                       </div>
-
                     </form>
 
                   </div>
