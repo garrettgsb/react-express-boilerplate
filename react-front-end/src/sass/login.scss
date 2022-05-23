@@ -8,7 +8,6 @@ background: #fccb90;
 background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 
 
-
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
@@ -19,7 +18,9 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 .banner {
-  background-color: rgb(181, 175, 175);
+  background-color: #363e3d;
+  background-image: url(http://www.transparenttextures.com/patterns/white-diamond.png);
+
 }
 
 .image {
@@ -27,14 +28,14 @@ input::-webkit-inner-spin-button {
 }
 
 @media (min-width: 768px) {
-.gradient-form {
-height: 100% !important;
-}
+  .gradient-form {
+    height: 100% !important;
+  }
 }
 @media (min-width: 769px) {
-.gradient-custom-2 {
-border-top-right-radius: .3rem;
-border-bottom-right-radius: .3rem;
-}
+  .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+  }
 }
 

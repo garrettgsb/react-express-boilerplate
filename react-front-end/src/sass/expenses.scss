@@ -5,9 +5,9 @@
 
 #expenses-page {
   height: 100vh;
-  background-color:rgb(242, 235, 235);
-  transition: all .4s ease-in;
-    
+  background-color:rgba(179, 189, 188, 0.468);
+  background-image: url(http://www.transparenttextures.com/pattern/Office);
+
   #expense-table {
     max-height: 50vh;
     overflow-y: scroll;
@@ -55,6 +55,7 @@
 
   .expense-button {
     color:red;
+    background-color: none;
     position: absolute;
     right: 0;
     border-radius: 5px;
@@ -62,14 +63,46 @@
     opacity: 0.5;
     transform: scale(0.7);
     &:hover {
-      color: white;
-      background-color: red;
-      border: solid;
-      transition: all .4s ease-in;
-      transform: scaleX(1.1);
+      z-index: 3;
+      background-color: rgba(255, 0, 0, 0.666);
+      background-position: 0% 100%;
+      transition: all .3s ease-in;
+      transform: scaleX(1);
       opacity: 1;
       font-weight: 500;
     }
   }
-}
+
+  #add-expense {
+    border-radius: 5px;
+    border-style: none;
+    transform: scale(0.9);
+    &:hover {
+      border: solid;
+      transition: all .3s ease-in;
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+
+  .submit {
+    &:hover {
+      background-color: 0% 100%;
+      transition: all .3s ease-in;
+    }
+  }
+  .cancel {
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+      background-color: 0% 100%;
+      transition: all .3s ease-in;
+    }
+  }
+
+  #line {
+    background-color: #ffffff;
+    max-width: 95vw;
+  }
   
+}

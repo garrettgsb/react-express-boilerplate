@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import * as mdb from 'mdb-ui-kit'; // lib
-// import { Input } from 'mdb-ui-kit'; // module
 import "../sass/login.scss";
 
 export default function Login(props) {
@@ -44,40 +42,59 @@ export default function Login(props) {
                       <p>Please login to your account</p>
 
                       <div className="form-outline mb-4">
-                        <input type="number" id="username" className="form-control"
-                          placeholder="Email address" value={state.id} onChange={(event) => setState({ ...state, id: parseInt(event.target.value)})} />
-                        <label className="form-label" htmlFor="form2Example11">Username</label>
+                        <input
+                          type="number"
+                          id="username"
+                          className="form-control"
+                          value={state.id}
+                          onChange={(event) =>
+                            setState({ ...state, id: parseInt(event.target.value) })} />
+                        <label
+                          className="form-label"
+                          htmlFor="username">
+                          Username
+                        </label>
                       </div>
 
                       <div className="form-outline mb-4">
-                        <input type="password" id="password" className="form-control" /*value={state.password} onChange={(event) => setState({...state, password: event.target.value})}*/ />
-                        <label className="form-label" htmlFor="form2Example22"
+                        <input
+                          type="password"
+                          id="password"
+                          className="form-control" /*value={state.password} onChange={(event) => setState({...state, password: event.target.value})}*/ />
+                        <label
+                          className="form-label"
+                          htmlFor="password"
                         >Password</label>
                       </div>
 
                       <div className="text-center pt-1 mb-5 pb-1">
-                        <button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" onClick={(e) => {
-                          e.preventDefault();
-                          validate(state.id);
-                        }}>Log
-                          in</button>
+                        <button
+                          className="btn btn-primary btn-block fa-lg gradient-custom-4 mb-3 text-dark"
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            validate(state.id);
+                          }}>Log in</button>
                         <a className="text-muted" href="/">Forgot password?</a>
                       </div>
 
                       <div className="d-flex align-items-center justify-content-center pb-4">
                         <p className="mb-0 me-2">Don't have an account?</p>
-                        <button type="button" className="btn btn-outline-danger" onClick={() => props.transition('SIGNUP')}>Create new</button>
+                        <button
+                          type="button"
+                          className="btn btn-outline-danger"
+                          onClick={() =>
+                            props.transition('SIGNUP')}>Create new</button>
                       </div>
-
                     </form>
 
                   </div>
                 </div>
-                <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                  <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                    <h4 className="mb-4">Piggy Financial is here to help!</h4>
+                <div className="col-lg-6 rounded-3 d-flex align-items-center gradient-custom-4">
+                  <div className="text-dark px-3 py-4 p-md-5 mx-md-4">
+                    <h4 className="mb-4"><strong>Piggy Break </strong>is here to help!</h4>
                     <p className="small mb-0">Having troubles saving money? Have secret saving goals that you don't want your significant other to find out about?
-                      Then look no further, Piggy Financial is here to help you save and reach your goals!
+                      Then look no further, Piggy Break is here to help you save and reach your goals!
                     </p>
                   </div>
                 </div>

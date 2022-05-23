@@ -1,6 +1,8 @@
 import React from 'react';
 import SingleExpense from './SingleExpense';
 import { getCategoryName, getExpenseById } from '../../helpers/helper_functions';
+import "../../sass/signup.scss"
+
 export default function ExpenseTable(props) {
 
   const filteredExpensesById = getExpenseById(props.expenses, props.userId);
@@ -30,7 +32,7 @@ export default function ExpenseTable(props) {
 
   return (
     <table className="table table-striped table-hover">
-      <thead className='table-info fs-5 fw-bolder'>
+      <thead className='gradient-custom-4 fs-5 fw-bolder'>
         <tr className='d-flex justify-content-around'>
           <td>Date</td>
           <td>Category</td>

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../../sass/login.scss';
+import '../../sass/expenses.scss';
 import {
   getGoalByID,
   getDataByID,
@@ -109,8 +111,8 @@ export default function LineGraph(props) {
   };
 
   return (
-    <div>
-      <div id='line'>
+    <div className='d-flex justify-content-center row'>
+      <div id='line' className='d-flex justify-content-center col rounded-3 mt-5'>
         <Line
           key='savingGraph'
           data={data}
@@ -141,10 +143,10 @@ export default function LineGraph(props) {
         />
       </div>
       <br />
-      <div className='d-flex align-items-center justify-content-center' >
+      <div className='d-flex align-items-center m-2 justify-content-center' >
         <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
         <select
-          className="select"
+          className="select rounded-2"
           value={state.dateUnit}
           onChange={e => setState({ ...state, dateUnit: e.target.value })}>
           <option value="day">Days</option>
@@ -154,7 +156,7 @@ export default function LineGraph(props) {
           <option value="year">Years</option>
         </select>
         <button
-          className='btn btn-primary'
+          className='btn btn-primary m-2 gradient-custom-4 submit text-dark'
           onClick={() => props.back()
           }>
           Back
