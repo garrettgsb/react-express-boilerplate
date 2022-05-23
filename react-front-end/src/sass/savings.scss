@@ -170,13 +170,16 @@ button {
 }
 #break-title {
   z-index: 7;
-  height: 30vh;
   width: 30vw;
   transform: rotate(-30deg);
+  position: absolute;
+  top: 22vh;
+  left: 32vw;
 }
 #piggy-break {
   color: $Cerise;
   font-weight: bolder;
+  font-size: 3rem;
 }
 
 .pig-break {

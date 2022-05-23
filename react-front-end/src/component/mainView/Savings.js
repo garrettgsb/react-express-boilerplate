@@ -247,7 +247,7 @@ export default function Savings(props) {
 								setState({ ...state, vacation: 'ON' })
 							}}
 						>VACATION MODE</button>
-						<div id='break-title' className='container fs-1'>
+						<div id='break-title' className='container'>
 							<h1 id='piggy-break'>PIGGY BREAK!</h1>
 						</div>
 						<button
