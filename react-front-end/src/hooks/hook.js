@@ -12,6 +12,8 @@ export default function useApplicationData() {
     expenses: [],
     dataPoints: [],
     vacationMode: false,
+    currencySymbols: {},
+    exchangeRates: {}
   });
 
 
@@ -167,6 +169,8 @@ export default function useApplicationData() {
     const apiSavings = 'http://localhost:8081/api/savings';
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiDataPoints = 'http://localhost:8081/api/dataPoints';
+    const apiCurrencySymbols = 'https://api.currencyfreaks.com/historical-data-limits';
+    // const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=';
 
     Promise.all([
       axios.get(apiGoals),
@@ -174,6 +178,7 @@ export default function useApplicationData() {
       axios.get(apiSavings),
       axios.get(apiExpenses),
       axios.get(apiDataPoints),
+      axios.get(apiCurrencySymbols)
     ])
       .then(all => {
         setState((prev) => ({
@@ -183,6 +188,8 @@ export default function useApplicationData() {
           savings: all[2].data,
           expenses: all[3].data,
           dataPoints: all[4].data,
+          apiCurrencySymbols: all[5].data,
+          // apiExchangeRates: all[6].data
         }));
       })
       .catch(error => {
