@@ -14,60 +14,60 @@ export default function Main(props) {
   const SAVINGS = 'SAVINGS';
   const EXPENSES = 'EXPENSES';
   const VACATION = 'VACATION';
-
-  const {transition} = useVisualMode(props.tab);
+  
+  const { transition } = useVisualMode(props.tab);
   return (
     <div>
-      <TopNav 
-      key='topnav'
-      savings={props.savings} 
-      userId={props.userId}
-      users={props.users} 
+      <TopNav
+        key='topnav'
+        savings={props.savings}
+        userId={props.userId}
+        users={props.users}
       />
-
       {props.state.tab === PROFILE && <Profile
-      key='profile'
-      removeGoal={props.removeGoal}
-      userId={props.userId}
-      users={props.users}
-      incomes={props.incomes}
-      savings={props.savings}
-      goals={props.goals}
-      updateGoals={props.updateGoals}
+        key='profile'
+        removeGoal={props.removeGoal}
+        userId={props.userId}
+        users={props.users}
+        incomes={props.incomes}
+        savings={props.savings}
+        goals={props.goals}
+        updateGoals={props.updateGoals}
       />}
       {props.state.tab === SAVINGS && <Savings
-      key='savings'
-      userId={props.userId}
-      incomes={props.incomes}
-      savings={props.savings}
-      goals={props.goals}
-      updateGoals={props.updateGoals}
+        key='savings'
+        userId={props.userId}
+        incomes={props.incomes}
+        savings={props.savings}
+        goals={props.goals}
+        updateGoals={props.updateGoals}
       />}
-      {props.state.tab === EXPENSES && <Expenses 
-      key='expenses'
-      addExpense={props.addExpense} 
-      userId={props.userId}
-      expenses={props.expenses}
-      dataPoints={props.dataPoints}
-      goals={props.goals}
-      removeExpense={props.removeExpense}
-      vacationMode={props.vacationMode}
-      vacationData={props.alvinVacationSpent}
+      {props.state.tab === EXPENSES && <Expenses
+        key='expenses'
+        addExpense={props.addExpense}
+        userId={props.userId}
+        expenses={props.expenses}
+        dataPoints={props.dataPoints}
+        goals={props.goals}
+        removeExpense={props.removeExpense}
+        vacationMode={props.vacationMode}
+        vacationData={props.alvinVacationSpent}
       />}
-      {props.state.tab === VACATION && <Vacation 
-      key='vacation'
-      savings={props.savings}
-      userId={props.userId}
-      goals={props.goals}
-      expenses={props.expenses}
-      alvinVacationSpent={props.alvinVacationSpent}
+      {props.state.tab === VACATION && <Vacation
+        key='vacation'
+        savings={props.savings}
+        userId={props.userId}
+        goals={props.goals}
+        expenses={props.expenses}
+        alvinVacationSpent={props.alvinVacationSpent}
       />}
 
-      <BotNav 
-      key='botnav'
-      transition={transition} 
-      changeTab={props.changeTab}
-      vacationMode={props.state.vacationMode}
+
+      <BotNav
+        key='botnav'
+        transition={transition}
+        changeTab={props.changeTab}
+        vacationMode={props.state.vacationMode}
       />
     </div>
   );

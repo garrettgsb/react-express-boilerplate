@@ -7,7 +7,7 @@ export default function TopNav(props) {
   const username = getUserByID(props.users, props.userId).username
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light top-nav-items">
+    <nav className="nav-top navbar navbar-expand-lg navbar-light bg-light top-nav-items">
       <div id='nav-container' className="container-fluid">
         <div className='w-100'>
           <div id="logo">
@@ -23,7 +23,7 @@ export default function TopNav(props) {
           <div id="nav-title">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <h4>Piggy Break</h4>
+                <h4 className='fw-bolder'>Piggy Break</h4>
               </li>
             </ul>
           </div>

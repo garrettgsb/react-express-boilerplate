@@ -101,7 +101,7 @@ export default function Savings(props) {
 
 	return (
 		<div id='savings'>
-			<div className="goal-container d-flex flex-column align-items-center justify-content-center h-50 mt-5 text-center">
+			<div className="goal-container d-flex flex-column align-items-center justify-content-center h-50 text-center">
 				<br />
 				<br />
 				{(totalSaved / totalGoal) <= 1 &&

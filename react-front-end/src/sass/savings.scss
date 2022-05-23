@@ -153,8 +153,8 @@ button {
 
 .pig-image {
   top: 5px;
-  left: 0px;
-  position:absolute;
+  left: 22vw;
+  position: absolute;
   z-index: 6;
   // display: none;
 }
@@ -164,9 +164,10 @@ button {
   position: absolute;
   opacity: 1;
   top: 116px;
-  left: 170px;
+  left: 34vw;
   // display:none;
-  z-index: 11;
+  z-index: 8;
+  border-radius: 20rem;
 }
 
 .disappear {
