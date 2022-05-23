@@ -69,7 +69,7 @@ export default function Login(props) {
 
                       <div className="text-center pt-1 mb-5 pb-1">
                         <button
-                          className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                          className="btn btn-primary btn-block fa-lg gradient-custom-4 mb-3 text-dark"
                           type="button"
                           onClick={(e) => {
                             e.preventDefault();
@@ -90,11 +90,11 @@ export default function Login(props) {
 
                   </div>
                 </div>
-                <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                  <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                    <h4 className="mb-4">Piggy Financial is here to help!</h4>
+                <div className="col-lg-6 d-flex align-items-center gradient-custom-4">
+                  <div className="text-dark px-3 py-4 p-md-5 mx-md-4">
+                    <h4 className="mb-4"><strong>Piggy Break </strong>is here to help!</h4>
                     <p className="small mb-0">Having troubles saving money? Have secret saving goals that you don't want your significant other to find out about?
-                      Then look no further, Piggy Financial is here to help you save and reach your goals!
+                      Then look no further, Piggy Break is here to help you save and reach your goals!
                     </p>
                   </div>
                 </div>
