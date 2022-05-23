@@ -108,3 +108,14 @@ export const getVacationData = (data, date) =>
     item.category_id !== 5 &&
     item.x >= date
   );
+
+export const getNewList = (list, itemID) => {
+  return list.filter(item =>
+    !Array.isArray(item)
+  )
+    .map((item, i) => {
+      return item.id === itemID ?
+        list.splice(i, 1) :
+        item
+    });
+}

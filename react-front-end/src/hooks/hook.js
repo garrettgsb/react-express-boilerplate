@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { getVacationExpenses } from '../helpers/helper_functions';
+import { getNewList } from '../helpers/helper_functions';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -38,7 +38,7 @@ export default function useApplicationData() {
   const updateGoals = (goalID, goals) => {
 
     const updatedGoal = state.goals.map(item =>
-      item.id === goalID ?
+      !Array.isArray(item) && item.id === goalID ?
         item = {
           ...item,
           goal_name: goals.goal_name,
@@ -67,25 +67,14 @@ export default function useApplicationData() {
 
 
   const removeExpense = expenseID => {
-    const newExpenseList = state.expenses.map((expense, i) => {
-      return expense.id === expenseID ?
-        state.expenses.splice(i, 1) :
-        expense
-    });
 
-    const newDataPoints = state.dataPoints.map((datapoint, i) => {
-      return datapoint.id === expenseID ?
-        state.dataPoints.splice(i, 1) :
-        datapoint
-    })
+    const newExpenseList = getNewList(state.expenses, expenseID);
+    
+    const newSavingList = getNewList(state.savings, expenseID);
+    
+    const newDataPoints = getNewList(state.dataPoints, expenseID)
 
-    const newVacationList = state.alvinVacationSpent.map((expense, i) => {
-      return expense.id === expenseID ?
-        state.alvinVacationSpent.splice(i, 1) :
-        expense
-    })
-
-    // const vacationExpense = getVacationExpenses(newExpenseList, state.user);
+    const newVacationList = getNewList(state.alvinVacationSpent, expenseID)
 
     return axios
       .delete(`http://localhost:8081/api/delete`, {
@@ -96,7 +85,7 @@ export default function useApplicationData() {
           return {
             ...prev,
             expenses: newExpenseList,
-            savings: newExpenseList,
+            savings: newSavingList,
             dataPoints: newDataPoints,
             alvinVacationSpent: newVacationList
           }
@@ -127,6 +116,7 @@ export default function useApplicationData() {
   };
 
   const addExpense = expense => {
+    console.log('EXPENSE:', expense)
     const expenses = [
       {
         id: expense.id,

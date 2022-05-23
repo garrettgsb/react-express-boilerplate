@@ -30,7 +30,7 @@ Chart.register(
   TimeScale);
 
 export default function LineGraph(props) {
-  console.log('LINE:', props)
+
   const goal = getGoalByID(props.goals, props.user)
   const dataPoints = getDataByID(props.dataPoints, props.user)
 
@@ -51,17 +51,14 @@ export default function LineGraph(props) {
       trackUnits: 'month',
       trackData: [
         { x: goal.start_date, y: 0 },
-        { x: goal.end_date, y: goal.amount }
+        { x: goal.end_date, y: goal.amount / 100 }
       ]
     }
 
     graphData.updatePoints.push({ x: goal.start_date, y: 0 })
 
     filterSavingsDataPoints(dataPoints, 8).forEach(point => {
-      if (graphData.updatePoints.slice(-1)[0]) {
-        point = { ...point, y: (graphData.updatePoints.slice(-1)[0].y + point.y) }
-      }
-      graphData.updatePoints.push(point)
+        graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y + (point.y / 100) })
     })
   } else if (props.vacationMode) {
 
@@ -71,19 +68,16 @@ export default function LineGraph(props) {
       trackLine: 'Budget',
       trackUnits: 'day',
       trackData: [
-        { x: goal.start_date, y: goal.amount },
+        { x: goal.start_date, y: goal.amount / 100 },
         { x: goal.end_date, y: 0 }
       ]
     }
 
     const vacationData = getVacationData(dataPoints, goal.start_date)
-    graphData.updatePoints.push({ x: goal.start_date, y: goal.amount })
-    console.log('VACATIONDATA:', vacationData)
+    graphData.updatePoints.push({ x: goal.start_date, y: goal.amount / 100 })
+
     vacationData.forEach(point => {
-      if (graphData.updatePoints.slice(-1)[0]) {
-        point = { ...point, y: (graphData.updatePoints.slice(-1)[0].y - point.y) }
-      }
-      graphData.updatePoints.push(point)
+        graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y - (point.y / 100) })
     })
 
   }
@@ -137,7 +131,7 @@ export default function LineGraph(props) {
                 ticks: {
                   // Include a dollar sign in the ticks
                   callback: function (value, index, ticks) {
-                    return '$' + value.toFixed(2) / 100;
+                    return '$' + value;
                   }
                 },
                 beginAtZero: true

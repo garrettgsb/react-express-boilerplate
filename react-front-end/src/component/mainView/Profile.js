@@ -26,7 +26,7 @@ export default function Profile(props) {
   const [state, setState] = useState({
     goal_id: goalByID.id,
     goal_name: goalByID.goal_name,
-    totalGoals: goalByID.amount/100,
+    totalGoals: goalByID.amount / 100,
     start_date: goalByID.start_date,
     end_date: goalByID.end_date,
   });
@@ -69,7 +69,7 @@ export default function Profile(props) {
         </div>
       </div>
       {mode === EMPTY &&
-        <NewGoal 
+        <NewGoal
           transition={transition}
           editMode={EDIT}
         />
@@ -295,13 +295,13 @@ export default function Profile(props) {
                   onClick={() => {
                     removeGoal(goalByID.id)
                   }}
-                  >
+                >
                   Confirm
                 </button>
                 <button
                   onClick={() => back()}
                   className='m-1 btn'
-                  >
+                >
                   Cancel
                 </button>
               </div>
