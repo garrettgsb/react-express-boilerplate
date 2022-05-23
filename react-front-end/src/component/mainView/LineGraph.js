@@ -47,7 +47,9 @@ export default function LineGraph(props) {
     total: '',
     trackLine: '',
     trackUnits: '',
-    trackData: []
+    trackData: [],
+    backgroundColor: '',
+    borderColor: ''
   }
 
   if (!props.vacationMode) {
@@ -60,7 +62,9 @@ export default function LineGraph(props) {
       trackData: [
         { x: goal.start_date, y: 0 },
         { x: goal.end_date, y: goal.amount / 100 }
-      ]
+      ],
+      backgroundColor: '#FFA10A',
+      borderColor: '#FFA10A'
     }
 
     graphData.updatePoints.push({ x: goal.start_date, y: 0 })
@@ -78,7 +82,9 @@ export default function LineGraph(props) {
       trackData: [
         { x: goal.start_date, y: goal.amount / 100 },
         { x: goal.end_date, y: 0 }
-      ]
+      ],
+      backgroundColor: 'rgba(220, 38, 38, 0.7)',
+      borderColor: 'rgba(220, 38, 38, 0.7)',
     }
 
     const vacationData = getVacationData(dataPoints, goal.start_date)
@@ -93,10 +99,9 @@ export default function LineGraph(props) {
   const [state, setState] = useState({
     dateUnit: graphData.trackUnits,
     dataPoints: graphData.updatePoints,
-    currency: props.currentCurrency,
+    currency: props.currentCurrency || 'CAD',
     exchangeRate: props.exchangeRates.rates[props.currentCurrency]
   })
-  console.log(state)
 
   const data = {
     datasets: [
@@ -104,8 +109,8 @@ export default function LineGraph(props) {
         label: graphData.total,
         data: state.dataPoints,
         fill: false,
-        backgroundColor: 'rgba(220, 38, 38, 0.7)',
-        borderColor: 'rgba(220, 38, 38, 0.7)',
+        backgroundColor: graphData.backgroundColor,
+        borderColor: graphData.borderColor,
         tension: 0.1
       },
       {
@@ -142,7 +147,7 @@ export default function LineGraph(props) {
                 ticks: {
                   // Include a dollar sign in the ticks
                   callback: function (value, index, ticks) {
-                    return (value * state.exchangeRate).toFixed(2) + ` ${state.currency}`;
+                    return parseInt(value * (state.exchangeRate || 1)) + ` ${state.currency}`;
                   }
                 },
                 beginAtZero: true
