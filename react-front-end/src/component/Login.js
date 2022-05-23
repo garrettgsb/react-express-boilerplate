@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import * as mdb from 'mdb-ui-kit'; // lib
-// import { Input } from 'mdb-ui-kit'; // module
 import "../sass/login.scss";
 
 export default function Login(props) {
@@ -44,8 +42,14 @@ export default function Login(props) {
                       <p>Please login to your account</p>
 
                       <div className="form-outline mb-4">
-                        <input type="number" id="username" className="form-control"
-                          placeholder="Email address" value={state.id} onChange={(event) => setState({ ...state, id: parseInt(event.target.value)})} />
+                        <input
+                          type="number"
+                          id="username"
+                          className="form-control"
+                          placeholder="Email address"
+                          value={state.id}
+                          onChange={(event) =>
+                            setState({ ...state, id: parseInt(event.target.value) })} />
                         <label className="form-label" htmlFor="form2Example11">Username</label>
                       </div>
 
