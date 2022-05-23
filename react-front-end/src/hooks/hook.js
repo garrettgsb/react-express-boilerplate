@@ -149,7 +149,7 @@ export default function useApplicationData() {
       return { ...prev, expenses, savings, dataPoints };
     });
 
-    console.log('STATEDATAPOINT3:', state.dataPoints);
+
     return axios
       .put(`http://localhost:8081/api/expenses`, {
         expense
