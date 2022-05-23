@@ -7,6 +7,7 @@ import {
   getSavingsByID,
   getUserByID,
 } from '../../helpers/helper_functions';
+import NewGoal from './NewGoal';
 
 
 export default function Profile(props) {
@@ -15,7 +16,7 @@ export default function Profile(props) {
   const EMPTY = 'EMPTY';
   const CREATE = 'CREATE';
   const REMOVE = 'REMOVE';
-  const { mode, transition, back } = useVisualMode(GOAL);
+  const { mode, transition, back } = useVisualMode(EMPTY);
 
   const savingsbyID = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsbyID);
@@ -68,43 +69,10 @@ export default function Profile(props) {
         </div>
       </div>
       {mode === EMPTY &&
-        <div className="chart-align">
-          <div className='goal-container'>
-            <div className='m-5 card d-flex align-items-center justify-content-center text-center flex-column'>
-              <table className="table table-borderless">
-                <thead>
-                  <tr>
-                    <td className='d-flex justify-content-center w-100'>
-                      <span className='fs-3 fw-2 text-success'>
-                        New Piggy Bank?
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='d-flex justify-content-center w-100'>
-                      <button
-                        className="new-pig"
-                        onClick={() => transition(EDIT)}
-                      >
-                        <i
-                          id='new-pig'
-                          className="logo fa-solid fa-piggy-bank new-pig"
-                          height="15"
-                          alt="pig logo"
-                          loading="lazy"
-                        />
-                      </button>
-                    </td>
-                  </tr>
-                </thead>
-              </table>
-              <div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
+        <NewGoal 
+          transition={transition}
+          editMode={EDIT}
+        />
       }
       {mode === CREATE &&
         <div className="chart-align">
@@ -190,8 +158,7 @@ export default function Profile(props) {
                 <thead>
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
-                      <div className="w-50">
-                        Goal Name
+                      <div className="form-outline w-75">
                         <input
                           type="text"
                           id="goalName"
@@ -208,7 +175,6 @@ export default function Profile(props) {
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
                       <div className='w-50'>
-                        Amount
                         <input
                           type="number"
                           imputmode="decimal"
@@ -234,7 +200,6 @@ export default function Profile(props) {
                     <td className='d-flex justify-content-center w-100'>
                       <div className="w-50 col-lg-3 justify-content-center col-sm-6">
                         <label htmlFor="date" className='visually-hidden'>date</label>
-                          End Date
                         <input
                           id="date"
                           className="form-control"
