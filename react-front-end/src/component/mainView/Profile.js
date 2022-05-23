@@ -103,8 +103,6 @@ export default function Profile(props) {
             </div>
           </div>
         </div>
-
-
       }
       {mode === CREATE &&
         <div className="chart-align">
