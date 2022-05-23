@@ -171,8 +171,8 @@ export default function useApplicationData() {
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiCurrenies = 'https://api.currencyfreaks.com/supported-currencies'; 
     const apiDataPoints = 'http://localhost:8081/api/dataPoints';
-    const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=bd341fe5384842489348b286b255c67a';
     const apiCurrencySymbols = 'https://api.currencyfreaks.com/currency-symbols';
+    // const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=bd341fe5384842489348b286b255c67a';
 
     Promise.all([
       axios.get(apiGoals),
@@ -181,8 +181,8 @@ export default function useApplicationData() {
       axios.get(apiExpenses),
       axios.get(apiCurrenies),
       axios.get(apiDataPoints),
-      axios.get(apiExchangeRates),
-      axios.get(apiCurrencySymbols)
+      axios.get(apiCurrencySymbols),
+      // axios.get(apiExchangeRates),
     ])
       .then(all => {
         setState((prev) => ({
@@ -193,8 +193,8 @@ export default function useApplicationData() {
           expenses: all[3].data,
           currenies: all[4].data,
           dataPoints: all[5].data,
-          exchangeRates: all[6].data,
-          currencySymbols: all[7].data,
+          currencySymbols: all[6].data,
+          // exchangeRates: all[7].data,
         }));
       })
       .catch(error => {

@@ -60,7 +60,7 @@ export default function LineGraph(props) {
     graphData.updatePoints.push({ x: goal.start_date, y: 0 })
 
     filterSavingsDataPoints(dataPoints, 8).forEach(point => {
-        graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y + (point.y / 100) })
+      graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y + (point.y / 100) })
     })
   } else if (props.vacationMode) {
 
@@ -79,7 +79,7 @@ export default function LineGraph(props) {
     graphData.updatePoints.push({ x: goal.start_date, y: goal.amount / 100 })
 
     vacationData.forEach(point => {
-        graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y - (point.y / 100) })
+      graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y - (point.y / 100) })
     })
 
   }
@@ -144,9 +144,17 @@ export default function LineGraph(props) {
       </div>
       <br />
       <div className='d-flex align-items-center m-2 justify-content-center' >
-        <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
+
+        <input class="form-control" list="datalistOptions" id="exchange-search" placeholder="Type to search currency..." />
+        <datalist id="datalistOptions">
+          <option value="San Francisco" />
+          <option value="New York" />
+          <option value="Seattle" />
+          <option value="Los Angeles" />
+          <option value="Chicago" />
+        </datalist>
         <select
-          className="select rounded-2"
+          className="select rounded-2 form-select form-select-lg w-25 d-flex align-items-center m-2 justify-content-center"
           value={state.dateUnit}
           onChange={e => setState({ ...state, dateUnit: e.target.value })}>
           <option value="day">Days</option>
