@@ -5,8 +5,7 @@
 
 #expenses-page {
   height: 100vh;
-  background-color:rgb(242, 235, 235);
-  transition: all .4s ease-in;
+  background-color:rgba(154, 154, 154, 0.468);
     
   #expense-table {
     max-height: 50vh;
@@ -53,6 +52,26 @@
     border-radius: 8px;
   }
 
+  .expense-button {
+    color:red;
+    background-color: none;
+    position: absolute;
+    right: 0;
+    border-radius: 5px;
+    border-style: none;
+    opacity: 0.5;
+    transform: scale(0.7);
+    &:hover {
+      z-index: 3;
+      background-color: rgba(255, 0, 0, 0.666);
+      background-position: 0% 100%;
+      transition: all .3s ease-in;
+      transform: scaleX(1);
+      opacity: 1;
+      font-weight: 500;
+    }
+  }
+
   #add-expense {
     border-radius: 5px;
     border-style: none;
@@ -64,5 +83,5 @@
       opacity: 1;
     }
   }
-}
   
+}
