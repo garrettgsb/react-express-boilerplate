@@ -92,7 +92,7 @@ export default function LineGraph(props) {
   const [state, setState] = useState({
     dateUnit: graphData.trackUnits,
     dataPoints: graphData.updatePoints,
-    currency: 'CAD'
+    currency: props.currentCurrency
   })
 
   const data = {
@@ -139,7 +139,7 @@ export default function LineGraph(props) {
                 ticks: {
                   // Include a dollar sign in the ticks
                   callback: function (value, index, ticks) {
-                    return value + state.currency;
+                    return value + ` ${state.currency}`;
                   }
                 },
                 beginAtZero: true
@@ -159,8 +159,12 @@ export default function LineGraph(props) {
               id="exchange-search"
               value={props.currentCurrency}
               placeholder="Type to search currency..."
-              onChange={() => {}}
-              />
+              onChange={e => {
+                setState(prev => {
+                  return { ...prev, currency: e.target.value }
+                })
+              }}
+            />
             <datalist id="datalistOptions">
               {currencies}
             </datalist>
