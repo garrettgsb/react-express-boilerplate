@@ -5,7 +5,17 @@
   height: 100vh;
   background-color: #9fd1cd;
   background-image: url(http://www.transparenttextures.com/patterns/pinstripe.png);
+}
 
+.blur {
+  position: fixed;
+  transition: all .4s ease-in;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.728);
+  z-index: 0;
 }
 
 .goal-container {
@@ -153,10 +163,23 @@ button {
 
 .pig-image {
   top: 5px;
-  left: 0px;
-  position:absolute;
+  left: 22vw;
+  position: absolute;
   z-index: 6;
   // display: none;
+}
+#break-title {
+  z-index: 7;
+  width: 30vw;
+  transform: rotate(-30deg);
+  position: absolute;
+  top: 22vh;
+  left: 32vw;
+}
+#piggy-break {
+  color: $Cerise;
+  font-weight: bolder;
+  font-size: 3rem;
 }
 
 .pig-break {
@@ -164,9 +187,10 @@ button {
   position: absolute;
   opacity: 1;
   top: 116px;
-  left: 170px;
+  left: 34vw;
   // display:none;
-  z-index: 11;
+  z-index: 8;
+  border-radius: 20rem;
 }
 
 .disappear {
