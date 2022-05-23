@@ -96,13 +96,9 @@ export default function Savings(props) {
 	const moneyPerYearToGoal =
 	'$' + (moneyTillGoal / (totalDaysTillGoal / 365) / 100).toFixed(2);
 	console.log('totalDaysTillGoal', totalDaysTillGoal);
-	// const ifEnoughMoney = () => {
-	// 	if (totalDaysTillGoal < 7) {
 
-	// 	}
-	// };
 	return (
-		<div>
+		<div id='savings'>
 			<div className="goal-container d-flex flex-column align-items-center justify-content-center h-50 mt-5 text-center">
 				<br />
 				<br />
