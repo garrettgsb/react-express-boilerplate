@@ -8,14 +8,10 @@ export default function useApplicationData() {
     user: '',
     users: [],
     goals: [],
-    expenses: [],
-    incomes: [],
     savings: [],
-    categories: [],
+    expenses: [],
     dataPoints: [],
-    alvinVacationSpent: [],
     vacationMode: false,
-    vacations: []
   });
 
 
@@ -48,6 +44,7 @@ export default function useApplicationData() {
         }
         : item
     );
+
     goals.vacation === 'ON' ?
       setState(prev => {
         return { ...prev, tab: 'VACATION', goals: updatedGoal, vacationMode: true }
@@ -69,12 +66,10 @@ export default function useApplicationData() {
   const removeExpense = expenseID => {
 
     const newExpenseList = getNewList(state.expenses, expenseID);
-    
-    const newSavingList = getNewList(state.savings, expenseID);
-    
-    const newDataPoints = getNewList(state.dataPoints, expenseID)
 
-    const newVacationList = getNewList(state.alvinVacationSpent, expenseID)
+    const newSavingList = getNewList(state.savings, expenseID);
+
+    const newDataPoints = getNewList(state.dataPoints, expenseID)
 
     return axios
       .delete(`http://localhost:8081/api/delete`, {
@@ -86,8 +81,7 @@ export default function useApplicationData() {
             ...prev,
             expenses: newExpenseList,
             savings: newSavingList,
-            dataPoints: newDataPoints,
-            alvinVacationSpent: newVacationList
+            dataPoints: newDataPoints
           }
         })
       })
@@ -116,7 +110,7 @@ export default function useApplicationData() {
   };
 
   const addExpense = expense => {
-    console.log('EXPENSE:', expense)
+
     const expenses = [
       {
         id: expense.id,
@@ -127,17 +121,6 @@ export default function useApplicationData() {
         category_name: expense.category_name,
       },
       ...state.expenses,
-    ];
-
-    const incomes = [
-      {
-        id: expense.id,
-        user_id: expense.user_id,
-        created_at: expense.created_at,
-        amount: expense.amount,
-        category_id: expense.category_id,
-      },
-      ...state.incomes,
     ];
 
     const savings = [
@@ -151,39 +134,28 @@ export default function useApplicationData() {
       ...state.savings,
     ];
 
-    const alvinVacationSpent = [
-      {
-        id: expense.id,
-        user_id: expense.user_id,
-        created_at: expense.created_at,
-        amount: expense.amount,
-        category_id: expense.category_id,
-        start_date: '2022-03-13',/******************************** */
-        end_date: '2022-08-13', /******************************** */
-        goal_name: expense.goal_name,
-        goal_amount: expense.goal_amount
-      },
-      ...state.alvinVacationSpent,
-    ];
-
     const dataPoints = [
       ...state.dataPoints,
       {
         id: expense.id,
         user_id: expense.user_id,
+        category_id: expense.category_id,
         x: expense.created_at,
-        y: expense.amount,
-      },
+        y: parseInt(expense.amount),
+      }
     ];
 
+    setState(prev => {
+      return { ...prev, expenses, savings, dataPoints };
+    });
+
+    console.log('STATEDATAPOINT3:', state.dataPoints);
     return axios
       .put(`http://localhost:8081/api/expenses`, {
         expense
       })
       .then(res => {
-        setState(prev => {
-          return { ...prev, expenses, incomes, savings, alvinVacationSpent, dataPoints };
-        });
+        console.log('Function updateGoals not reached. res--> ', res);
       });
   };
 
@@ -191,45 +163,32 @@ export default function useApplicationData() {
 
   useEffect(() => {
     const apiGoals = 'http://localhost:8081/api/goals';
-    const apiExpenses = 'http://localhost:8081/api/expenses';
-    const apiIncomes = 'http://localhost:8081/api/incomes';
-    const apiSavings = 'http://localhost:8081/api/savings';
-    const apiCategories = 'http://localhost:8081/api/categories';
-    const apiDataPoints = `http://localhost:8081/api/dataPoints`;
     const apiUsers = 'http://localhost:8081/api/users';
-    const apiAlvinVacationSpent = 'http://localhost:8081/api/alvin/vacation/spent';
-    const apiVacations = 'http://localhost:8081/api/vacations';
+    const apiSavings = 'http://localhost:8081/api/savings';
+    const apiExpenses = 'http://localhost:8081/api/expenses';
+    const apiDataPoints = 'http://localhost:8081/api/dataPoints';
 
     Promise.all([
       axios.get(apiGoals),
-      axios.get(apiExpenses),
-      axios.get(apiIncomes),
-      axios.get(apiSavings),
-      axios.get(apiCategories),
-      axios.get(apiDataPoints),
       axios.get(apiUsers),
-      axios.get(apiAlvinVacationSpent),
-      axios.get(apiVacations)
+      axios.get(apiSavings),
+      axios.get(apiExpenses),
+      axios.get(apiDataPoints),
     ])
       .then(all => {
         setState((prev) => ({
           ...prev,
           goals: all[0].data,
-          expenses: all[1].data,
-          incomes: all[2].data,
-          savings: all[3].data,
-          categories: all[4].data,
-          dataPoints: all[5].data,
-          users: all[6].data,
-          alvinVacationSpent: all[7].data,
-          vacations: all[8].data,
+          users: all[1].data,
+          savings: all[2].data,
+          expenses: all[3].data,
+          dataPoints: all[4].data,
         }));
       })
       .catch(error => {
         console.log('We got a hook err! -->', error);
       })
   }, []);
-
 
   return {
     state,

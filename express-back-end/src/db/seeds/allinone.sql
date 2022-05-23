@@ -8,7 +8,7 @@ INSERT INTO categories(name)
   VALUES
   ('Eating Out'),
   ('Entertainment'),
-  ('Ffuel'),
+  ('Fuel'),
   ('Groceries'),
   ('Income'),
   ('Insurance'),

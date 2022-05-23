@@ -57,6 +57,7 @@ export default function Expenses(props) {
 			goal_name,
 			goal_amount,
 		};
+		console.log('EXPENSs:',  expense)
 		props.addExpense(expense);
 	};
 
