@@ -2,7 +2,6 @@ import React from "react";
 import '../../sass/profile.scss';
 
 export default function NewGoal(props) {
-  console.log('NEWGOALSprops', props);
 	return (
 		<div className="chart-align">
           <div className='goal-container'>
