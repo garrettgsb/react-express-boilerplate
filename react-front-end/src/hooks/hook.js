@@ -13,7 +13,7 @@ export default function useApplicationData() {
     dataPoints: [],
     vacationMode: false,
     currencySymbols: {},
-    currentCurrency: 'CAD',
+    currentCurrency: '',
     exchangeRates: {},
     currenies: []
   });
@@ -34,11 +34,12 @@ export default function useApplicationData() {
       return { ...prev, tab }
     })
 
-  const changeCurrency = currency => {
+  const changeCurrency = currency =>
     setState(prev => {
-      return {...prev, currency}
-    })
-  } 
+      return { ...prev, currentCurrency: currency }
+    });
+
+
 
   const updateGoals = (goalID, goals) => {
 
@@ -175,7 +176,7 @@ export default function useApplicationData() {
     const apiUsers = 'http://localhost:8081/api/users';
     const apiSavings = 'http://localhost:8081/api/savings';
     const apiExpenses = 'http://localhost:8081/api/expenses';
-    const apiCurrenies = 'https://api.currencyfreaks.com/supported-currencies'; 
+    const apiCurrenies = 'https://api.currencyfreaks.com/supported-currencies';
     const apiDataPoints = 'http://localhost:8081/api/dataPoints';
     const apiCurrencySymbols = 'https://api.currencyfreaks.com/currency-symbols';
     // const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=bd341fe5384842489348b286b255c67a';
@@ -216,6 +217,7 @@ export default function useApplicationData() {
     updateGoals,
     removeExpense,
     removeGoal,
-    changeTab
+    changeTab,
+    changeCurrency
   };
 }
