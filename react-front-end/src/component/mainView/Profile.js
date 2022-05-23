@@ -16,7 +16,7 @@ export default function Profile(props) {
   const EMPTY = 'EMPTY';
   const CREATE = 'CREATE';
   const REMOVE = 'REMOVE';
-  const { mode, transition, back } = useVisualMode(EMPTY);
+  const { mode, transition, back } = useVisualMode(GOAL);
 
   const savingsbyID = getSavingsByID(props.savings, props.userId);
   const totalSaved = getTotalAmount(savingsbyID);
@@ -158,7 +158,7 @@ export default function Profile(props) {
                 <thead>
                   <tr>
                     <td className='d-flex justify-content-center w-100'>
-                      <div className="form-outline w-75">
+                      <div className="w-50">
                         <input
                           type="text"
                           id="goalName"
