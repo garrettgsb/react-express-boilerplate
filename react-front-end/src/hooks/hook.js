@@ -13,7 +13,8 @@ export default function useApplicationData() {
     dataPoints: [],
     vacationMode: false,
     currencySymbols: {},
-    exchangeRates: {}
+    exchangeRates: {},
+    currenies: []
   });
 
 
@@ -169,6 +170,7 @@ export default function useApplicationData() {
     const apiSavings = 'http://localhost:8081/api/savings';
     const apiExpenses = 'http://localhost:8081/api/expenses';
     const apiDataPoints = 'http://localhost:8081/api/dataPoints';
+    const apiCurrenies = 'https://api.currencyfreaks.com/supported-currencies'; 
     const apiCurrencySymbols = 'https://api.currencyfreaks.com/historical-data-limits';
     // const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=';
 
@@ -188,7 +190,8 @@ export default function useApplicationData() {
           savings: all[2].data,
           expenses: all[3].data,
           dataPoints: all[4].data,
-          apiCurrencySymbols: all[5].data,
+          apiCurrenies: all[5].data,
+          apiCurrencySymbols: all[6].data,
           // apiExchangeRates: all[6].data
         }));
       })
