@@ -175,6 +175,9 @@ button {
   position: absolute;
   top: 22vh;
   left: 32vw;
+  border: solid;
+  border-color: $OrangePeel;
+  background-color: rgba(228, 154, 26, 0.427);
 }
 #piggy-break {
   color: $Cerise;

@@ -150,14 +150,13 @@ export default function LineGraph(props) {
       <br />
       <div className='d-flex align-items-center m-2 justify-content-center' >
 
-        <input className="form-control" list="datalistOptions" id="exchange-search" placeholder="Type to search currency..." />
+        <input 
+        className="form-control" 
+        list="datalistOptions" 
+        id="exchange-search"
+        placeholder="Type to search currency..." />
         <datalist id="datalistOptions">
           {currencies}
-          <option value="San Francisco">SANFRANCISCO</option>
-          <option value="New York" />
-          <option value="Seattle" />
-          <option value="Los Angeles" />
-          <option value="Chicago" />
         </datalist>
         <select
           className="select rounded-2 form-select form-select-lg w-25 d-flex align-items-center m-2 justify-content-center"
