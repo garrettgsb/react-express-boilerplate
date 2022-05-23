@@ -31,8 +31,8 @@
 
 #piggy-animation {
   position: absolute;
-  opacity: 0.5;
-  top: 200px;
+  opacity: 0.6;
+  top: 35vh;
   right: 150px;
   z-index: 1;
   transform: scale(2);
@@ -123,10 +123,9 @@ html, body {
       animation: ring 1.5s infinite;
     }
     
-    // &:hover::after, button:focus::after {
-    //   animation: none;
-    //   display: none;
-    // }
+    &:hover::after, button:focus::after {
+      animation: ring 0.8s infinite;
+    }
     
     @keyframes ring {
       0% {

@@ -3,6 +3,7 @@ import LineGraph from './LineGraph';
 import ExpenseTable from './ExpenseTable';
 import useVisualMode from '../../hooks/useVisualMode';
 import '../../sass/expenses.scss';
+import '../../sass/login.scss';
 import { getCategoryName } from '../../helpers/helper_functions';
 import classNames from 'classnames';
 
@@ -26,9 +27,8 @@ export default function Expenses(props) {
 		'blur': state.input !== 'disappear'
 	});
 
-	const removeIncomeButton = classNames('w-25', {
+	const removeIncomeButton = classNames('w-25 gradient-custom-4', {
 		'disappear': state.input !== 'disappear',
-		'btn btn-primary': state.input === 'disappear',
 		'graph-thumbnail': state.input === 'appear',
 		'card vw-50  align-items-center': state.input !== 'appear'
 	});
@@ -45,7 +45,7 @@ export default function Expenses(props) {
 	const { mode, transition, back } = useVisualMode(EXPENSES);
 
 	const expenseID = props.expenses.find(expense => !Array.isArray(expense))
-	
+
 	const submit = (id, user_id, created_at, amount, category_id, category_name, goal_name, goal_amount) => {
 		const expense = {
 			id,
@@ -57,7 +57,7 @@ export default function Expenses(props) {
 			goal_name,
 			goal_amount,
 		};
-		console.log('EXPENSs:',  expense)
+		console.log('EXPENSs:', expense)
 		props.addExpense(expense);
 	};
 
@@ -198,6 +198,7 @@ export default function Expenses(props) {
 						<div className="d-flex column align-items-center justify-content-center text-center">
 							<div className='d-flex row justify-content-center align-items-center w-75'>
 								<button
+									id='add-expense'
 									type="submit"
 									className={removeIncomeButton}
 									onClick={() => {
