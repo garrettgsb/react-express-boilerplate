@@ -17,8 +17,13 @@ export default function Vacation(props) {
       getTotalAmount(vacationExpenses);
   const homeTime = getDaysTillGoal(vacationInfo)
 
-  const dayAllowance = (((vacationInfo.amount - totalSpentOnVacation) / 100 / homeTime) * props.exchangeRates.rates[props.currentCurrency]).toFixed(2) 
-  const weekAllowance = (((vacationInfo.amount - totalSpentOnVacation) * 7 / 100 / homeTime)* props.exchangeRates.rates[props.currentCurrency]).toFixed(2) ;
+  const dayAllowance =
+    (((vacationInfo.amount - totalSpentOnVacation) / 100 / homeTime) *
+      props.exchangeRates.rates[props.currentCurrency]).toFixed(2);
+
+  const weekAllowance =
+    (((vacationInfo.amount - totalSpentOnVacation) * 7 / 100 / homeTime) *
+      props.exchangeRates.rates[props.currentCurrency]).toFixed(2);
   return (
     <div>
       <div className='d-flex align-items-center justify-content-center text-center goalbox'>

@@ -33,6 +33,8 @@ export default function Main(props) {
         savings={props.savings}
         goals={props.goals}
         updateGoals={props.updateGoals}
+        currentCurrency={props.state.currentCurrency}
+        exchangeRates={props.state.exchangeRates}
       />}
       {props.state.tab === SAVINGS && <Savings
         key='savings'

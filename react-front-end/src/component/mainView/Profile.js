@@ -244,14 +244,16 @@ export default function Profile(props) {
                   <tr>
                     <td>
                       <h3>
-                        Aiming for: ${Number(state.totalGoals).toFixed(2)}
+                        Aiming for: {(Number(state.totalGoals) * props.exchangeRates.rates[props.currentCurrency]).toFixed(2)} {props.currentCurrency}
                       </h3>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <h3>
-                        Current end date:
+                        {props.vacationMode ?
+                          <span>Home Time:</span> :
+                          <span>Current Deadline:</span>}
                         <br />
                         <span className='fw-bold'>
                           {goalByID.end_date}

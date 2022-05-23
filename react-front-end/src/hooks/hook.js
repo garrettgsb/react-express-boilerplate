@@ -13,7 +13,7 @@ export default function useApplicationData() {
     dataPoints: [],
     vacationMode: false,
     currencySymbols: {},
-    currentCurrency: 'CAD',
+    currentCurrency: 'USD',
     exchangeRates: {},
     currenies: []
   });
