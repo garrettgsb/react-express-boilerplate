@@ -41,7 +41,7 @@ export default function Vacation(props) {
               <tr>
                 <td>
                   <h1>
-                    {((totalSpentOnVacation) / 100).toFixed(2)} {props.currentCurrency}/ {((vacationInfo.amount / 100)).toFixed(2)} {props.currentCurrency}
+                    {((totalSpentOnVacation * props.exchangeRates.rates[props.currentCurrency]) / 100).toFixed(2)} {props.currentCurrency}/ {(((vacationInfo.amount * props.exchangeRates.rates[props.currentCurrency]) / 100)).toFixed(2)} {props.currentCurrency}
                   </h1>
                 </td>
               </tr>
