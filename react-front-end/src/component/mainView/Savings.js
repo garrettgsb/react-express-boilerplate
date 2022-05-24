@@ -104,7 +104,6 @@ export default function Savings(props) {
 		'$' + (moneyTillGoal / (totalDaysTillGoal / 31) / 100).toFixed(2);
 	const moneyPerYearToGoal =
 		'$' + (moneyTillGoal / (totalDaysTillGoal / 365) / 100).toFixed(2);
-	console.log('totalDaysTillGoal', totalDaysTillGoal);
 
 	return (
 		<div id='savings'>

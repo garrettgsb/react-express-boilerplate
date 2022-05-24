@@ -168,7 +168,6 @@ export default function LineGraph(props) {
               placeholder="Type to search currency..."
               onChange={e => {
                 e.persist();
-                console.log(e.target.value)
                 props.changeCurrency(e.target.value)
                 setState(prev => {
                   return { ...prev, currency: e.target.value, exchangeRate: props.exchangeRates.rates[e.target.value] }

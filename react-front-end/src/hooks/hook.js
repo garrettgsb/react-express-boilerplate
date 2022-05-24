@@ -22,7 +22,6 @@ export default function useApplicationData() {
   });
 
   // const [ cookies, setCookie, removeCookie ] = useCookies(['user']);
-  console.log('state.users', state.users)
   const signupUser = (username, email, password) => {
     const users = [
       {
@@ -57,7 +56,6 @@ export default function useApplicationData() {
     };
 
     const user = getUserByEmail(email, state.users);
-    console.log('user!!!!!', user);
     return Promise.all([
       axios.get(`http://localhost:8081/api/dataPoints`),
       axios.post(`http://localhost:8081/api/login`, users),
@@ -138,7 +136,6 @@ export default function useApplicationData() {
   };
 
   const removeGoal = goalID => {
-    console.log(goalID)
     const newGoalList = state.goals.map((goal, i) => {
       return goal.id === goalID ?
         state.goals.splice(i, 1) :
