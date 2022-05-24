@@ -1,14 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
-.background-photo {
-  background-image: url("../docs/vacation.jpeg");
-  height: 100%;
-  width: 100%;
-  z-index: 10000;
-  top: 0;
-  left: 0;
-}
-
 .goalbox {
+  background-image: url("../docs/vacation2.jpg");
   z-index: 2;
-  font-weight: bold;
+  font-weight: bolder;
+  color: black;
 }

@@ -14,7 +14,10 @@ export default function App() {
     updateGoals,
     removeExpense,
     removeGoal,
-    changeTab } = useApplicationData();
+    changeTab,
+    changeCurrency,
+    signupUser
+  } = useApplicationData();
 
   //views
   const LOGIN = 'LOGIN';
@@ -25,7 +28,7 @@ export default function App() {
     state.user ?
       SHOW :
       LOGIN
-  );
+      );
 
   return (
     <div className="app overflow-hidden">
@@ -34,12 +37,14 @@ export default function App() {
         key='login'
         transition={transition}
         loginUser={loginUser}
+        users={state.users}
       />}
 
       {mode === SIGNUP && <Signup
         key='signup'
         transition={transition}
         back={back}
+        signupUser={signupUser}
       />}
 
       {mode === SHOW && <Main
@@ -61,6 +66,7 @@ export default function App() {
         alvinVacationSpent={state.alvinVacationSpent}
         removeExpense={removeExpense}
         vacationMode={state.vacationMode}
+        changeCurrency={changeCurrency}
       />}
     </div>
   );

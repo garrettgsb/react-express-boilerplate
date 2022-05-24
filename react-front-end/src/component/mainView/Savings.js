@@ -104,14 +104,13 @@ export default function Savings(props) {
 		'$' + (moneyTillGoal / (totalDaysTillGoal / 31) / 100).toFixed(2);
 	const moneyPerYearToGoal =
 		'$' + (moneyTillGoal / (totalDaysTillGoal / 365) / 100).toFixed(2);
-	console.log('totalDaysTillGoal', totalDaysTillGoal);
 
 	return (
 		<div id='savings'>
 			<div className="goal-container d-flex flex-column align-items-center justify-content-center h-50 text-center">
 				<br />
 				<br />
-				{(totalSaved / totalGoal) <= 1 &&
+				{(totalSaved / totalGoal) < 1 &&
 					<div className="d-flex w-50 flex-column align-items-center justify-content-center text-center">
 						<div className="w-100 h-75 d-flex align-items-center justify-content-center text-center">
 							<table>
@@ -124,36 +123,44 @@ export default function Savings(props) {
 									<tr>
 										<td>
 											<h1>
-												${(totalSaved / 100).toFixed(2)} / $
+												<span>${(totalSaved / 100).toFixed(2)}</span> / $
 												{(totalGoal / 100).toFixed(2)}
 											</h1>
 										</td>
 									</tr>
-									<tr>
+									<tr className='fs-4'>
 										<td>
-											{totalDaysTillGoal} days until {goalByID.end_date}
+											<span className='fw-bold'>{totalDaysTillGoal}</span> days until <span className='fw-bold'>{goalByID.end_date}</span>
 										</td>
 									</tr>
 									{state.day && (
 										<tr className="fw-bold">
-											<td>You can save {moneyPerDayToGoal}/day</td>
+											<td>Advised to save <span className='advice-number'>{moneyPerDayToGoal}</span>/day</td>
 										</tr>
 									)}
 									{state.week && (
 										<tr className="fw-bold">
-											<td>You can save {moneyPerWeekToGoal}/week</td>
+											<td>Advised to save <span className='advice-number'>{moneyPerWeekToGoal}</span>/week</td>
 										</tr>
 									)}
 									{state.month && (
 										<tr className="fw-bold">
-											<td>You can save {moneyPerMonthToGoal}/month</td>
+											<td>Advised to save <span className='advice-number'>{moneyPerMonthToGoal}</span>/month</td>
 										</tr>
 									)}
 									{state.year && (
 										<tr className="fw-bold">
-											<td>You can save {moneyPerYearToGoal}/year</td>
+											<td>Advised to save <span className='advice-number'>{moneyPerYearToGoal}</span>/year</td>
 										</tr>
 									)}
+									{(state.day ||
+										state.week ||
+										state.month ||
+										state.year) &&
+										<tr className="fw-bold track">
+											<td>to stay on track!</td>
+										</tr>
+									}
 								</thead>
 							</table>
 							<div id="progress-circle">
@@ -164,7 +171,7 @@ export default function Savings(props) {
 							</div>
 						</div>
 
-						<div className="w-100 d-flex justify-content-space-evenly">
+						<div class="w-100 d-flex col align-items-end justify-content-space-evenly">
 							<div
 								id="switch"
 								className="d-flex h-25 mb-3 align-items-center justify-content-center"
@@ -244,12 +251,14 @@ export default function Savings(props) {
 				}
 				{(totalSaved / totalGoal) >= 1 &&
 					<div className="wrap">
-						<button
-							className={vacationMode}
-							onClick={() => {
-								setState({ ...state, vacation: 'ON' })
-							}}
-						>VACATION MODE</button>
+						{goalByID.goal_name.match(/vacation.*/i) &&
+							<button
+								className={vacationMode}
+								onClick={() => {
+									setState({ ...state, vacation: 'ON' })
+								}}
+							>VACATION MODE</button>
+						}
 						<div className={disappearText}>
 							<h1 id='piggy-break'>PIGGY BREAK!</h1>
 						</div>

@@ -33,6 +33,9 @@ export default function Main(props) {
         savings={props.savings}
         goals={props.goals}
         updateGoals={props.updateGoals}
+        currentCurrency={props.state.currentCurrency}
+        exchangeRates={props.state.exchangeRates}
+        vacationMode={props.state.vacationMode}
       />}
       {props.state.tab === SAVINGS && <Savings
         key='savings'
@@ -52,6 +55,11 @@ export default function Main(props) {
         removeExpense={props.removeExpense}
         vacationMode={props.vacationMode}
         vacationData={props.alvinVacationSpent}
+        currencySymbols={props.state.currencySymbols}
+        changeCurrency={props.changeCurrency}
+        currentCurrency={props.state.currentCurrency}
+        exchangeRates={props.state.exchangeRates}
+        state={props.state}
       />}
       {props.state.tab === VACATION && <Vacation
         key='vacation'
@@ -59,7 +67,9 @@ export default function Main(props) {
         userId={props.userId}
         goals={props.goals}
         expenses={props.expenses}
-        alvinVacationSpent={props.alvinVacationSpent}
+        vacationMode={props.vacationMode}
+        currentCurrency={props.state.currentCurrency}
+        exchangeRates={props.state.exchangeRates}
       />}
 
 

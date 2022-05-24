@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function getTotalExpensesForUser(state, user) {
   const filteredExpenses = state.expenses.filter((expenses) => expenses.username === user);
   const totalExpense = filteredExpenses.reduce((previous, current) => previous + current.amount, 0);
@@ -119,3 +121,13 @@ export const getNewList = (list, itemID) => {
         item
     });
 }
+
+export const getUserByEmail = (email, state) => state.find(user => user.email === email);
+
+export const getCurrenciesOptions = currencyList => {
+  const symbols = Object.keys(currencyList)
+  return symbols.map((currency, ii) => {
+    return <option key={ii} value={symbols[ii]}>{currencyList[currency]}</option>
+  }
+  )
+};

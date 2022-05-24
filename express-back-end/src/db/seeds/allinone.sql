@@ -1,8 +1,8 @@
 INSERT INTO users(username, email, password)
   VALUES
-  ('Alvin', 'alvintest@hotmail.com', 'test123'),
-  ('Ricky', 'ricky2test@hotmail.com', 'test123'),
-  ('Kevin', 'kevin3test@hotmail.com', 'test123');
+  ('Alvin', 'alvin@hotmail.com', '$2a$10$JE583jGFxPoQTuMabzQQ0O2zOw.DehvjX/9AXkmWTH3rw80pfhNda'),
+  ('Ricky', 'ricky@hotmail.com', '$2a$10$JE583jGFxPoQTuMabzQQ0O2zOw.DehvjX/9AXkmWTH3rw80pfhNda'),
+  ('Kevin', 'kevin@hotmail.com', '$2a$10$JE583jGFxPoQTuMabzQQ0O2zOw.DehvjX/9AXkmWTH3rw80pfhNda');
 
 INSERT INTO categories(name)
   VALUES
@@ -48,7 +48,7 @@ INSERT INTO expenses (user_id, created_at, amount, category_id)
     (3, '2022-02-05', 53439, 9),
     (3, '2022-02-06', 94671, 7),
     (1, '2022-02-06', 3015, 2),
-    (1, '2022-02-06', 8007, 8),
+    (1, '2022-02-06', 28007, 8),
     (3, '2022-02-08', 31445, 10),
     (3, '2022-02-09', 59633, 8),
     (2, '2022-02-11', 82986, 4),
@@ -67,7 +67,7 @@ INSERT INTO expenses (user_id, created_at, amount, category_id)
     (2, '2022-03-04', 15380, 10),
     (1, '2022-03-06', 40700, 5),
     (2, '2022-03-06', 9191, 6),
-    (1, '2022-03-06', 17007, 8),
+    (1, '2022-03-06', 7007, 8),
     (3, '2022-03-07', 81546, 1),
     (2, '2022-03-08', 82940, 8),
     (2, '2022-03-09', 89621, 8),

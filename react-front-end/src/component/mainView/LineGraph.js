@@ -5,7 +5,8 @@ import {
   getGoalByID,
   getDataByID,
   getVacationData,
-  filterSavingsDataPoints
+  filterSavingsDataPoints, 
+  getCurrenciesOptions
 } from '../../helpers/helper_functions';
 import {
   Chart,
@@ -36,12 +37,18 @@ export default function LineGraph(props) {
   const goal = getGoalByID(props.goals, props.user)
   const dataPoints = getDataByID(props.dataPoints, props.user)
 
+
+
+  const currencies = getCurrenciesOptions(props.currencySymbols); 
+
   let graphData = {
     updatePoints: [],
     total: '',
     trackLine: '',
     trackUnits: '',
-    trackData: []
+    trackData: [],
+    backgroundColor: '',
+    borderColor: ''
   }
 
   if (!props.vacationMode) {
@@ -54,13 +61,15 @@ export default function LineGraph(props) {
       trackData: [
         { x: goal.start_date, y: 0 },
         { x: goal.end_date, y: goal.amount / 100 }
-      ]
+      ],
+      backgroundColor: '#FFA10A',
+      borderColor: '#FFA10A'
     }
 
     graphData.updatePoints.push({ x: goal.start_date, y: 0 })
 
     filterSavingsDataPoints(dataPoints, 8).forEach(point => {
-        graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y + (point.y / 100) })
+      graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y + (point.y / 100) })
     })
   } else if (props.vacationMode) {
 
@@ -72,21 +81,25 @@ export default function LineGraph(props) {
       trackData: [
         { x: goal.start_date, y: goal.amount / 100 },
         { x: goal.end_date, y: 0 }
-      ]
+      ],
+      backgroundColor: 'rgba(220, 38, 38, 0.7)',
+      borderColor: 'rgba(220, 38, 38, 0.7)',
     }
 
     const vacationData = getVacationData(dataPoints, goal.start_date)
     graphData.updatePoints.push({ x: goal.start_date, y: goal.amount / 100 })
 
     vacationData.forEach(point => {
-        graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y - (point.y / 100) })
+      graphData.updatePoints.push({ ...point, y: graphData.updatePoints.slice(-1)[0].y - (point.y / 100) })
     })
 
   }
 
   const [state, setState] = useState({
     dateUnit: graphData.trackUnits,
-    dataPoints: graphData.updatePoints
+    dataPoints: graphData.updatePoints,
+    currency: props.currentCurrency || 'USD',
+    exchangeRate: props.exchangeRates.rates[props.currentCurrency]
   })
 
   const data = {
@@ -95,8 +108,8 @@ export default function LineGraph(props) {
         label: graphData.total,
         data: state.dataPoints,
         fill: false,
-        backgroundColor: 'rgba(220, 38, 38, 0.7)',
-        borderColor: 'rgba(220, 38, 38, 0.7)',
+        backgroundColor: graphData.backgroundColor,
+        borderColor: graphData.borderColor,
         tension: 0.1
       },
       {
@@ -133,7 +146,7 @@ export default function LineGraph(props) {
                 ticks: {
                   // Include a dollar sign in the ticks
                   callback: function (value, index, ticks) {
-                    return '$' + value;
+                    return parseInt(value * (state.exchangeRate || 1)) + ` ${state.currency}`;
                   }
                 },
                 beginAtZero: true
@@ -144,9 +157,30 @@ export default function LineGraph(props) {
       </div>
       <br />
       <div className='d-flex align-items-center m-2 justify-content-center' >
-        <label className="visually-hidden" htmlFor="inlineFormSelectPref">Category</label>
+
+        {props.vacationMode &&
+          <div className='d-flex align-items-center m-2 justify-content-center w-25'>
+            <input
+              className="form-control w-100"
+              list="datalistOptions"
+              id="exchange-search"
+              value={props.currentCurrency}
+              placeholder="Type to search currency..."
+              onChange={e => {
+                e.persist();
+                props.changeCurrency(e.target.value)
+                setState(prev => {
+                  return { ...prev, currency: e.target.value, exchangeRate: props.exchangeRates.rates[e.target.value] }
+                })
+              }}
+            />
+            <datalist id="datalistOptions">
+              {currencies}
+            </datalist>
+          </div>
+        }
         <select
-          className="select rounded-2"
+          className="select rounded-2 form-select form-select-md w-25 d-flex align-items-center m-2 justify-content-center"
           value={state.dateUnit}
           onChange={e => setState({ ...state, dateUnit: e.target.value })}>
           <option value="day">Days</option>
