@@ -14,18 +14,18 @@ export default function App() {
     updateGoals,
     removeExpense,
     removeGoal,
-    changeTab } = useApplicationData();
-
-  //views
-  const LOGIN = 'LOGIN';
-  const SIGNUP = 'SIGNUP';
-  const SHOW = 'SHOW';
-
-  const { mode, transition, back } = useVisualMode(
-    state.user ?
+    changeTab,
+    signupUser } = useApplicationData();
+    //views
+    const LOGIN = 'LOGIN';
+    const SIGNUP = 'SIGNUP';
+    const SHOW = 'SHOW';
+    
+    const { mode, transition, back } = useVisualMode(
+      state.user ?
       SHOW :
       LOGIN
-  );
+      );
 
   return (
     <div className="app overflow-hidden">
@@ -34,12 +34,14 @@ export default function App() {
         key='login'
         transition={transition}
         loginUser={loginUser}
+        users={state.users}
       />}
 
       {mode === SIGNUP && <Signup
         key='signup'
         transition={transition}
         back={back}
+        signupUser={signupUser}
       />}
 
       {mode === SHOW && <Main
