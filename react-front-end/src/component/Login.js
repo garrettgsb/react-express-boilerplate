@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 import "../sass/login.scss";
+import { getUserByEmail } from '../helpers/helper_functions';
+const bcrypt = require('bcryptjs');
 
 export default function Login(props) {
 
   const [state, setState] = useState({
     id: '',
-    /*email: '',
-    password: ''*/
+    email: '',
+    password: ''
   });
 
-  const login = (id) => {
-    const user = { id };
-    props.loginUser(user)
-      .then(() => props.transition('SHOW'))
+  const login = (email, password) => {
+    props.loginUser(email, password)
+    .then(() => props.transition('SHOW'))
   };
-
-  const validate = (id) => {
-    id === 1 ||
-      id === 2 ||
-      id === 3 ?
-      login(id) :
-      props.transition('SIGNUP')
-  }
+  
+  const validate = (email, password) => {
+    const user = getUserByEmail(email, props.users);
+    bcrypt.compare(password, user.password, (error, response) => {
+      if (response) {
+        login(email, password);
+      } else {
+        console.log('Password error: ~', error);
+        props.transition('SIGNUP');
+      }
+    })
+  };
 
   return (
     <section className="h-100 gradient-form banner">
@@ -43,16 +48,18 @@ export default function Login(props) {
 
                       <div className="form-outline mb-4">
                         <input
-                          type="number"
-                          id="username"
+                          type="email"
+                          id="email"
                           className="form-control"
-                          value={state.id}
-                          onChange={(event) =>
-                            setState({ ...state, id: parseInt(event.target.value) })} />
+                          value={state.email}
+                          onChange={(event) => {
+                            setState({ ...state, email: event.target.value });
+                          }}
+                        />
                         <label
                           className="form-label"
-                          htmlFor="username">
-                          Username
+                          htmlFor="email">
+                          Email
                         </label>
                       </div>
 
@@ -60,7 +67,12 @@ export default function Login(props) {
                         <input
                           type="password"
                           id="password"
-                          className="form-control" /*value={state.password} onChange={(event) => setState({...state, password: event.target.value})}*/ />
+                          className="form-control"
+                          value={state.password}
+                          onChange={(event) => {
+                            setState({...state, password: event.target.value});
+                          }}
+                          />
                         <label
                           className="form-label"
                           htmlFor="password"
@@ -73,7 +85,7 @@ export default function Login(props) {
                           type="button"
                           onClick={(e) => {
                             e.preventDefault();
-                            validate(state.id);
+                            validate(state.email, state.password);
                           }}>Log in</button>
                         <a className="text-muted" href="/">Forgot password?</a>
                       </div>
