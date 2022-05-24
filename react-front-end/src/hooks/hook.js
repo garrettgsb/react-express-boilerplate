@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
+// import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { getNewList } from '../helpers/helper_functions';
+import { getNewList , getUserByEmail } from '../helpers/helper_functions';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     tab: 'SAVINGS',
     user: '',
+    username: '',
+    // email: '',
     users: [],
     goals: [],
     savings: [],
@@ -14,15 +17,53 @@ export default function useApplicationData() {
     vacationMode: false,
   });
 
+  // const [ cookies, setCookie, removeCookie ] = useCookies(['user']);
+  console.log('state.users', state.users)
+  const signupUser = (username, email, password) => {
+    const users = [
+      {
+        username,
+        email,
+        password,
+      },
+      ...state.users,
+    ];
 
-  const loginUser = (user) => {
+    const newUsers =
+      {
+        username,
+        email,
+        password,
+      };
+      console.log('newUsers', newUsers)
     return axios
-      .get(`http://localhost:8081/api/dataPoints`)
-      .then(() => {
+      .post(`http://localhost:8081/api/register`, newUsers)
+      .then(res => {
         setState(prev => {
-          return { ...prev, user: user.id }
+          return { ...prev, users }
         })
+        console.log('signupUser not reached. res--> ', res);
+      });
+  };
+
+  const loginUser = (email, password) => {
+    // setCookie('email', email, { path: '/'});
+    const users = {
+      email,
+      password,
+    };
+
+    const user = getUserByEmail(email, state.users);
+    console.log('user!!!!!', user);
+    return Promise.all([
+      axios.get(`http://localhost:8081/api/dataPoints`),
+      axios.post(`http://localhost:8081/api/login`, users),
+    ])
+    .then(() => {
+      setState(prev => {
+        return { ...prev, user: user.id }
       })
+    })
   };
 
   const changeTab = (tab) =>
@@ -198,6 +239,8 @@ export default function useApplicationData() {
     updateGoals,
     removeExpense,
     removeGoal,
-    changeTab
+    changeTab,
+    signupUser,
+    // removeCookie
   };
 }

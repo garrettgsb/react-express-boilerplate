@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import "../sass/login.scss";
-import { getUserByEmail } from '../helpers/helper_functions';
-const bcrypt = require('bcryptjs');
 
 export default function Login(props) {
 
@@ -17,15 +15,8 @@ export default function Login(props) {
   };
   
   const validate = (email, password) => {
-    const user = getUserByEmail(email, props.users);
-    bcrypt.compare(password, user.password, (error, response) => {
-      if (response) {
-        login(email, password);
-      } else {
-        console.log('Password error: ~', error);
-        props.transition('SIGNUP');
-      }
-    })
+    login(email, password);
+    props.transition('SIGNUP');
   };
 
   return (

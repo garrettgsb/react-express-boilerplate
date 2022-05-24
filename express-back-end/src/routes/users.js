@@ -24,7 +24,6 @@ module.exports = db => {
       if (error) {
         console.log('Hash error: ', error);
       }
-      
       db.query(`
       INSERT INTO users (username, email, password)
       VALUES ($1, $2, $3);
@@ -36,7 +35,7 @@ module.exports = db => {
       .catch(error => {
         console.log('This error is inside -> post (\'/register\') route: ', error);
       });
-    })
+    });
   });
 
   router.post('/login', (req, res) => {
@@ -48,20 +47,12 @@ module.exports = db => {
     [req.body.email])
     .then(data => {
       const users = data.rows;
-      bcrypt.compare(req.body.password, data.rows[0].password, (error, response) => {
-        if (response) {
-          res.json(users);
-        }
-        else {
-          console.log('Password error: ~', error);
-        }
+        res.json(users);
       })
-    })
     .catch(error => {
       console.log('This error is inside -> post (\'/login\') route: ', error);
     });
   });
-
 
   return router;
 };
