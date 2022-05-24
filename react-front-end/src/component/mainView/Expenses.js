@@ -15,7 +15,9 @@ export default function Expenses(props) {
 		category_id: 0,
 		input: 'disappear',
 		goal_name: 'Vacation: Iceland',
-		goal_amount: 3000000
+		goal_amount: 3000000,
+		currency: props.currentCurrency || 'USD',
+		exchangeRate: props.exchangeRates.rates[props.currentCurrency]
 	});
 
 	const expenseInput = classNames('vw-50  align-items-center', {
@@ -56,10 +58,18 @@ export default function Expenses(props) {
 			category_id,
 			category_name,
 			goal_name,
-			goal_amount: (goal_amount / props.exchangeRates.rates.USD),
-			currency: props.currentCurrency || 'USD',
-			exchangeRate: props.exchangeRates.rates[props.currentCurrency]
+			goal_amount,
 		};
+		setState(prev => {
+			return {
+				...prev,
+				date: '',
+				amount: 0,
+				category_name: 'category',
+				category_id: 0,
+				input: 'disappear'
+			}
+		})
 		props.addExpense(expense);
 	};
 
@@ -90,6 +100,10 @@ export default function Expenses(props) {
 						removeExpense={props.removeExpense}
 						goals={props.goals}
 						vacationMode={props.vacationMode}
+						currencySymbols={props.currencySymbols}
+						currentCurrency={props.state.currentCurrency}
+						changeCurrency={props.changeCurrency}
+						exchangeRates={props.state.exchangeRates}
 					/>
 					<div id='input-card' className={expenseInput}>
 						<form className={"d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3"}>
@@ -103,7 +117,7 @@ export default function Expenses(props) {
 									type="date"
 									value={state.date}
 									onChange={event =>
-										setState({ ...state, date: event.target.value })
+										setState(prev => { return { ...prev, date: event.target.value } })
 									}
 								/>
 
@@ -126,9 +140,11 @@ export default function Expenses(props) {
 										id="inlineFormInputGroupUsername"
 										placeholder="Amount"
 										onChange={event =>
-											setState({
-												...state,
-												amount: event.target.value * 100,
+											setState(prev => {
+												return {
+													...prev,
+													amount: (event.target.value / props.exchangeRates.rates[props.currentCurrency]) * 100
+												}
 											})
 										}
 									/>
@@ -140,7 +156,6 @@ export default function Expenses(props) {
 											value={props.currentCurrency}
 											onChange={e => {
 												e.persist();
-												console.log(e.target.value)
 												props.changeCurrency(e.target.value)
 												setState(prev => {
 													return { ...prev, currency: e.target.value, exchangeRate: props.exchangeRates.rates[e.target.value] }
@@ -165,10 +180,12 @@ export default function Expenses(props) {
 									className="select form-select-lg"
 									value={state.category_id}
 									onChange={event => {
-										setState({
-											...state,
-											category_name: getCategoryName(event.target.value),
-											category_id: parseInt(event.target.value),
+										setState(prev => {
+											return {
+												...prev,
+												category_name: getCategoryName(event.target.value),
+												category_id: parseInt(event.target.value)
+											}
 										});
 									}}
 								>
@@ -193,7 +210,6 @@ export default function Expenses(props) {
 									className="btn btn-primary submit text-dark m-1 gradient-custom-3"
 									onClick={e => {
 										e.preventDefault();
-										setState({ ...state, input: 'disappear' });
 										submit(
 											expenseID.id + 1 || props.expenses.length + 1,
 											props.userId,
@@ -211,7 +227,9 @@ export default function Expenses(props) {
 								<button
 									onClick={(e) => {
 										e.preventDefault()
-										setState({ ...state, input: 'disappear' })
+										setState(prev => {
+											return { ...prev, input: 'disappear' }
+										})
 									}}
 									className='btn btn-danger m-1 cancel'>
 									Cancel
@@ -229,7 +247,7 @@ export default function Expenses(props) {
 									type="submit"
 									className={removeIncomeButton}
 									onClick={() => {
-										setState({ ...state, input: 'appear' });
+										setState(prev => {return { ...prev, input: 'appear' }});
 									}}
 								>
 									Add New
