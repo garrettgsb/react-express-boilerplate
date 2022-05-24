@@ -1,7 +1,26 @@
 import React from 'react';
 import "../sass/signup.scss";
-
+import { useState } from 'react';
 export default function Signup(props) {
+
+  const [state, setState] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    checkBox: 'false',
+  });
+
+  const signup = (username, email, password, checkBox) => {
+    if (password !== state.confirmPassword) {
+      alert('Password does not match!')
+    }
+    if (checkBox === 'false') {
+      alert('Can not proceed unless you have read the terms and checked the box.')
+    }
+    props.signupUser(username, email, password)
+      .then(() => props.transition('LOGIN'));
+  };
 
   return (
     <section className="vh-100 bg-image">
@@ -17,29 +36,43 @@ export default function Signup(props) {
                     <div className="form-outline mb-4">
                       <input
                         type="text"
-                        id="signup-name"
+                        id="signup-username"
                         className="form-control form-control-lg"
+                        value={state.username}
+                        onChange={(event) => {
+                          setState({...state, username: event.target.value});
+                        }}
                       />
                       <label
                         className="form-label"
-                        htmlFor="signup-name">Your Name</label>
+                        htmlFor="signup-username">Username</label>
                     </div>
 
                     <div className="form-outline mb-4">
                       <input
                         type="email"
                         id="signup-email"
-                        className="form-control form-control-lg" />
-                      <label c
-                        lassName="form-label"
-                        htmlFor="signup-email">Your Email</label>
+                        className="form-control form-control-lg"
+                        value={state.email}
+                        onChange={(event) => {
+                          setState({...state, email: event.target.value});
+                        }}
+                      />
+                      <label
+                        className="form-label"
+                        htmlFor="signup-email">Email</label>
                     </div>
 
                     <div className="form-outline mb-4">
                       <input
                         type="password"
                         id="signup-password"
-                        className="form-control form-control-lg" />
+                        className="form-control form-control-lg"
+                        value={state.password}
+                        onChange={(event) => {
+                          setState({...state, password: event.target.value});
+                        }}  
+                      />
                       <label
                         className="form-label"
                         htmlFor="signup-password">Password</label>
@@ -49,18 +82,27 @@ export default function Signup(props) {
                       <input
                         type="password"
                         id="signup-repeat"
-                        className="form-control form-control-lg" />
+                        className="form-control form-control-lg"
+                        value={state.confirmPassword}
+                        onChange={(event) => {
+                          setState({...state, confirmPassword: event.target.value});
+                        }}
+                      />
                       <label
                         className="form-label"
-                        htmlFor="signup-repeat">Repeat your password</label>
+                        htmlFor="signup-repeat">Password Confirmation</label>
                     </div>
 
                     <div className="form-check d-flex justify-content-center mb-5">
                       <input
                         className="form-check-input me-2"
                         type="checkbox"
-                        value=""
-                        id="signup-terms" />
+                        id="signup-terms"
+                        aria-checked={state.checkBox}
+                        onChange={(event) => {
+                          setState({...state, checkBox: event.target.value});
+                        }}
+                        />
                       <label
                         className="form-check-label"
                         htmlFor="signup-terms">
@@ -70,6 +112,10 @@ export default function Signup(props) {
 
                     <div className="d-flex justify-content-center">
                       <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          signup(state.username, state.email, state.password, state.checkBox);
+                        }}
                         type="button"
                         className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                     </div>
