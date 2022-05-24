@@ -131,7 +131,7 @@ export default function Savings(props) {
 									</tr>
 									<tr className='fs-4'>
 										<td>
-										<span className='fw-bold'>{totalDaysTillGoal}</span> days until <span className='fw-bold'>{goalByID.end_date}</span>
+											<span className='fw-bold'>{totalDaysTillGoal}</span> days until <span className='fw-bold'>{goalByID.end_date}</span>
 										</td>
 									</tr>
 									{state.day && (
@@ -252,12 +252,14 @@ export default function Savings(props) {
 				}
 				{(totalSaved / totalGoal) >= 1 &&
 					<div className="wrap">
-						<button
-							className={vacationMode}
-							onClick={() => {
-								setState({ ...state, vacation: 'ON' })
-							}}
-						>VACATION MODE</button>
+						{goalByID.goal_name.match(/vacation.*/i) &&
+							<button
+								className={vacationMode}
+								onClick={() => {
+									setState({ ...state, vacation: 'ON' })
+								}}
+							>VACATION MODE</button>
+						}
 						<div className={disappearText}>
 							<h1 id='piggy-break'>PIGGY BREAK!</h1>
 						</div>
