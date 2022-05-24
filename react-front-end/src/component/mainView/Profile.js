@@ -237,7 +237,10 @@ export default function Profile(props) {
                   <tr>
                     <td>
                       <h3>
-                        Saving for: {goalByID.goal_name}
+                        {props.vacationMode ?
+                          <span>Location: </span> :
+                          <span>Saving for: </span>}
+                        <span className='fw-bold'>{goalByID.goal_name}</span>
                       </h3>
                     </td>
                   </tr>
@@ -247,7 +250,7 @@ export default function Profile(props) {
                         {props.vacationMode ?
                           <span>Starting Budget: </span> :
                           <span>Aiming for: </span>}
-                        {(Number(state.totalGoals) * props.exchangeRates.rates[props.currentCurrency]).toFixed(2)} {props.currentCurrency}
+                        <span className='fw-bold'>{(Number(state.totalGoals) * props.exchangeRates.rates[props.currentCurrency]).toFixed(2)} {props.currentCurrency} </span>
                       </h3>
                     </td>
                   </tr>

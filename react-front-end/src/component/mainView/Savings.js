@@ -111,7 +111,7 @@ export default function Savings(props) {
 			<div className="goal-container d-flex flex-column align-items-center justify-content-center h-50 text-center">
 				<br />
 				<br />
-				{(totalSaved / totalGoal) <= 1 &&
+				{(totalSaved / totalGoal) < 1 &&
 					<div className="d-flex w-50 flex-column align-items-center justify-content-center text-center">
 						<div className="w-100 h-75 d-flex align-items-center justify-content-center text-center">
 							<table>
@@ -124,41 +124,41 @@ export default function Savings(props) {
 									<tr>
 										<td>
 											<h1>
-												${(totalSaved / 100).toFixed(2)} / $
+												<span>${(totalSaved / 100).toFixed(2)}</span> / $
 												{(totalGoal / 100).toFixed(2)}
 											</h1>
 										</td>
 									</tr>
-									<tr>
+									<tr className='fs-4'>
 										<td>
-											{totalDaysTillGoal} days until {goalByID.end_date}
+										<span className='fw-bold'>{totalDaysTillGoal}</span> days until <span className='fw-bold'>{goalByID.end_date}</span>
 										</td>
 									</tr>
 									{state.day && (
 										<tr className="fw-bold">
-											<td>Advised to save {moneyPerDayToGoal}/day</td>
+											<td>Advised to save <span className='advice-number'>{moneyPerDayToGoal}</span>/day</td>
 										</tr>
 									)}
 									{state.week && (
 										<tr className="fw-bold">
-											<td>Advised to save {moneyPerWeekToGoal}/week</td>
+											<td>Advised to save <span className='advice-number'>{moneyPerWeekToGoal}</span>/week</td>
 										</tr>
 									)}
 									{state.month && (
 										<tr className="fw-bold">
-											<td>Advised to save {moneyPerMonthToGoal}/month</td>
+											<td>Advised to save <span className='advice-number'>{moneyPerMonthToGoal}</span>/month</td>
 										</tr>
 									)}
 									{state.year && (
 										<tr className="fw-bold">
-											<td>Advised to save {moneyPerYearToGoal}/year</td>
+											<td>Advised to save <span className='advice-number'>{moneyPerYearToGoal}</span>/year</td>
 										</tr>
 									)}
 									{(state.day ||
 										state.week ||
 										state.month ||
 										state.year) &&
-										<tr className="fw-bold">
+										<tr className="fw-bold track">
 											<td>to stay on track!</td>
 										</tr>
 									}
@@ -172,7 +172,7 @@ export default function Savings(props) {
 							</div>
 						</div>
 
-						<div className="w-100 d-flex justify-content-space-evenly">
+						<div class="w-100 d-flex col align-items-end justify-content-space-evenly">
 							<div
 								id="switch"
 								className="d-flex h-25 mb-3 align-items-center justify-content-center"
