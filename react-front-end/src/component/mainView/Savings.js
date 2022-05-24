@@ -111,7 +111,7 @@ export default function Savings(props) {
 			<div className="goal-container d-flex flex-column align-items-center justify-content-center h-50 text-center">
 				<br />
 				<br />
-				{(totalSaved / totalGoal) <= 1 &&
+				{(totalSaved / totalGoal) < 1 &&
 					<div className="d-flex w-50 flex-column align-items-center justify-content-center text-center">
 						<div className="w-100 h-75 d-flex align-items-center justify-content-center text-center">
 							<table>
