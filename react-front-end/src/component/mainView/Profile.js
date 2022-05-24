@@ -6,6 +6,7 @@ import {
   getGoalByID,
   getSavingsByID,
   getUserByID,
+  getAvatarByID
 } from '../../helpers/helper_functions';
 import NewGoal from './NewGoal';
 
@@ -40,6 +41,9 @@ export default function Profile(props) {
     props.removeGoal(id)
     transition(EMPTY)
   }
+
+  const photo = getAvatarByID(props.userId)
+  
   return (
     <section id='profile' className="vw-100 m-0 row">
       <div className="container p-card">
@@ -48,8 +52,8 @@ export default function Profile(props) {
             <div className="card">
               <div className="card-body text-center">
                 <div className="mt-3 mb-4 background">
-                  <img src="../../person-icon.jpeg"
-                    className="rounded-circle img-fluid" alt='animated-girl-with-glasses' />
+                  <img src={photo}
+                    className="rounded-circle img-fluid" alt='man in suit' />
                 </div>
                 <h4 className="mb-2">{username}</h4>
                 <p className="job-name mb-4">@Programmer <span className="mx-2">|</span> <a

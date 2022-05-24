@@ -1,10 +1,12 @@
 import React from 'react';
 import '../../sass/topNav.scss'
-import { getUserByID } from '../../helpers/helper_functions';
+import { getUserByID, getAvatarByID } from '../../helpers/helper_functions';
 
 export default function TopNav(props) {
 
   const username = getUserByID(props.users, props.userId).username
+
+  const photo = getAvatarByID(props.userId)
 
   return (
     <nav className="nav-top navbar navbar-expand-lg navbar-light bg-light top-nav-items">
@@ -34,10 +36,11 @@ export default function TopNav(props) {
             <div id='nav-username' className="dropdown d-flex align-items-center">
               Welcome {username}!!
               <img
-                src="../../person-icon.jpeg"
+                id='nav-avatar'
+                src={photo}
                 className="m-2 rounded-circle"
                 height="25"
-                alt='animated-girl-with-glasses'
+                alt='man in suit'
                 loading="lazy"
               />
             </div>

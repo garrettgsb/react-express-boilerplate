@@ -15,6 +15,13 @@ export default function Login(props) {
   };
   
   const validate = (email, password) => {
+    setState(prev=>{
+      return {...prev,
+        id: '',
+        email: '',
+        password: ''
+      }
+    })
     login(email, password);
     props.transition('SIGNUP');
   };
