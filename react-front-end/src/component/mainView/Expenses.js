@@ -59,6 +59,7 @@ export default function Expenses(props) {
 			category_name,
 			goal_name,
 			goal_amount,
+			currentCurrency: state.currency
 		};
 		setState(prev => {
 			return {
@@ -107,22 +108,6 @@ export default function Expenses(props) {
 					/>
 					<div id='input-card' className={expenseInput}>
 						<form className={"d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3"}>
-							<div className="col-lg-3 col-sm-6 expense-input-date">
-								<label htmlFor="date" className="visually-hidden">
-									date
-								</label>
-								<input
-									id="date"
-									className="form-control"
-									type="date"
-									value={state.date}
-									onChange={event =>
-										setState(prev => { return { ...prev, date: event.target.value } })
-									}
-								/>
-
-								<span id="dateSelected"></span>
-							</div>
 							<div className="col-12">
 								<label
 									className="visually-hidden form-select-lg"
@@ -130,42 +115,47 @@ export default function Expenses(props) {
 								>
 									Amount
 								</label>
-								<div className="input-group">
+								<div className="input-group-text form-select-sm w-100">
 									<input
-										type="number"
-										imputmode="decimal"
-										min="0.01"
-										step="0.01"
-										className="form-control"
-										id="inlineFormInputGroupUsername"
-										placeholder="Amount"
-										onChange={event =>
+										className="form-control form-control-sm w-100"
+										list="datalistOptions"
+										id="exchange-search"
+										value={props.currentCurrency}
+										onChange={e => {
+											e.persist();
+											props.changeCurrency(e.target.value)
 											setState(prev => {
-												return {
-													...prev,
-													amount: (event.target.value / props.exchangeRates.rates[props.currentCurrency]) * 100
-												}
+												return { ...prev, 
+													currency: e.target.value, 
+													exchangeRate: props.exchangeRates.rates[e.target.value] }
 											})
-										}
+										}}
 									/>
-									<div className="expense-currency-input input-group-text w-50 form-select-sm">
-										<input
-											className="form-control form-control-sm w-100"
-											list="datalistOptions"
-											id="exchange-search"
-											value={props.currentCurrency}
-											onChange={e => {
-												e.persist();
-												props.changeCurrency(e.target.value)
-												setState(prev => {
-													return { ...prev, currency: e.target.value, exchangeRate: props.exchangeRates.rates[e.target.value] }
-												})
-											}}
-										/>
-										<datalist id="datalistOptions">
-											{currencies}
-										</datalist></div>
-								</div>
+									<datalist id="datalistOptions">
+										{currencies}
+									</datalist></div>
+							</div>
+							<div className="input-group w-25">
+								<input
+									type="number"
+									imputmode="decimal"
+									min="0.01"
+									step="0.01"
+									className="form-control"
+									id="inlineFormInputGroupUsername"
+									placeholder="Amount"
+									onChange={event => {
+										event.persist();
+										setState(prev => {
+											return {
+												...prev,
+												amount: (event.target.value / props.exchangeRates.rates[props.currentCurrency]) * 100
+											}
+										})
+									}
+									}
+								/>
+
 
 							</div>
 
@@ -180,6 +170,7 @@ export default function Expenses(props) {
 									className="select form-select-lg"
 									value={state.category_id}
 									onChange={event => {
+										event.persist();
 										setState(prev => {
 											return {
 												...prev,
@@ -204,6 +195,23 @@ export default function Expenses(props) {
 									<option value="10">Other</option>
 								</select>
 							</div>
+							<div className="col-lg-3 col-sm-6">
+								<label htmlFor="date" className="visually-hidden">
+									date
+								</label>
+								<input
+									id="date"
+									className="form-control"
+									type="date"
+									value={state.date}
+									onChange={event => {
+										event.persist();
+										setState(prev => { return { ...prev, date: event.target.value } })
+									}}
+								/>
+
+								<span id="dateSelected"></span>
+							</div>
 							<div className="col-12 d-flex align-items-center">
 								<button
 									type="submit"
@@ -227,9 +235,7 @@ export default function Expenses(props) {
 								<button
 									onClick={(e) => {
 										e.preventDefault()
-										setState(prev => {
-											return { ...prev, input: 'disappear' }
-										})
+										setState({ ...state, input: 'disappear' })
 									}}
 									className='btn btn-danger m-1 cancel'>
 									Cancel
@@ -247,7 +253,7 @@ export default function Expenses(props) {
 									type="submit"
 									className={removeIncomeButton}
 									onClick={() => {
-										setState(prev => {return { ...prev, input: 'appear' }});
+										setState(prev => { return { ...prev, input: 'appear' } });
 									}}
 								>
 									Add New

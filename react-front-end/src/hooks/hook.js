@@ -126,7 +126,7 @@ export default function useApplicationData() {
         id: expense.id,
         user_id: expense.user_id,
         created_at: expense.created_at,
-        amount: expense.amount,
+        amount: (expense.amount),
         category_id: expense.category_id,
         category_name: expense.category_name,
       },
@@ -138,7 +138,7 @@ export default function useApplicationData() {
         id: expense.id,
         user_id: expense.user_id,
         created_at: expense.created_at,
-        amount: expense.amount,
+        amount: (expense.amount),
         category_id: expense.category_id,
       },
       ...state.savings,
@@ -151,12 +151,12 @@ export default function useApplicationData() {
         user_id: expense.user_id,
         category_id: expense.category_id,
         x: expense.created_at,
-        y: parseInt(expense.amount),
+        y: expense.amount,
       }
     ];
 
     setState(prev => {
-      return { ...prev, expenses, savings, dataPoints };
+      return { ...prev, expenses, savings, dataPoints, currentCurrency: expense.currentCurrency };
     });
 
 
