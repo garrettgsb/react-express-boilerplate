@@ -15,7 +15,8 @@ input::-webkit-inner-spin-button {
 }
 
 .banner {
-  background-color: rgb(181, 175, 175);
+  background-color: #363e3d;
+  background-image: url(http://www.transparenttextures.com/patterns/white-diamond.png);
 }
 
 .image {

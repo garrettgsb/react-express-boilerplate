@@ -3,7 +3,7 @@
 #savings {
   width: 100vw;
   height: 100vh;
-  background-color: #9fd1cd;
+  background-color: #d5a698;
   background-image: url(http://www.transparenttextures.com/patterns/pinstripe.png);
 }
 
@@ -43,11 +43,11 @@
   position: absolute;
   opacity: 0.6;
   top: 35vh;
-  right: 150px;
+  right: 190px;
   z-index: 1;
   transform: scale(2);
   border-radius: 100%;
-  width: 26%;
+  width: 25%;
   border: solid;
   border-color: rgb(238,177,39);
 }
@@ -60,6 +60,11 @@
 
 html, body {
   height: 100%;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 }
 
 .wrap {
@@ -226,4 +231,12 @@ button {
   left: 25vw;
   z-index: 5;
   width: 50vw;
+}
+
+.advice-number {
+  color: rgb(63, 148, 63);
+}
+
+.track {
+  color: $OrangePeel
 }

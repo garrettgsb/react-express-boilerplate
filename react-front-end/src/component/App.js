@@ -15,14 +15,17 @@ export default function App() {
     removeExpense,
     removeGoal,
     changeTab,
-    signupUser } = useApplicationData();
-    //views
-    const LOGIN = 'LOGIN';
-    const SIGNUP = 'SIGNUP';
-    const SHOW = 'SHOW';
-    
-    const { mode, transition, back } = useVisualMode(
-      state.user ?
+    changeCurrency,
+    signupUser
+  } = useApplicationData();
+
+  //views
+  const LOGIN = 'LOGIN';
+  const SIGNUP = 'SIGNUP';
+  const SHOW = 'SHOW';
+
+  const { mode, transition, back } = useVisualMode(
+    state.user ?
       SHOW :
       LOGIN
       );
@@ -63,6 +66,7 @@ export default function App() {
         alvinVacationSpent={state.alvinVacationSpent}
         removeExpense={removeExpense}
         vacationMode={state.vacationMode}
+        changeCurrency={changeCurrency}
       />}
     </div>
   );

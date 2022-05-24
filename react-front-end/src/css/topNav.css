@@ -1,5 +1,32 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
-.fa-piggy-bank {
+nav {
+  z-index: 100;
+}
+nav #nav-container #nav-title {
+  color: #FFA10A;
+}
+nav #nav-container #nav-username {
+  color: #F50062;
+}
+nav #nav-container #nav-logout {
+  opacity: 0.5;
+  border-radius: 10px;
+}
+nav #nav-container #nav-logout .logout {
+  color: red;
+}
+nav #nav-container #nav-logout .logout:hover {
+  color: white;
+  transition: all 0.4s ease-in;
+  transform: scaleX(1.1);
+}
+nav #nav-container #nav-logout:hover {
+  background-color: red;
+  transition: all 0.4s ease-in;
+  transform: scaleX(1.1);
+  opacity: 1.5;
+}
+nav #nav-container .fa-piggy-bank {
   color: #FFA10A;
   transform: scale(3);
   position: absolute;
