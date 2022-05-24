@@ -1,6 +1,5 @@
 const Express = require('express');
 const App = Express();
-const cookieParser = require('cookie-parser');
 const BodyParser = require('body-parser');
 const PORT = 8081;
 const sassMiddleware = require('./lib/sass-middleware');
@@ -18,7 +17,6 @@ const goals = require('./src/routes/goals');
 const categories = require('./src/routes/categories');
 
 App.use(cors());
-App.user(cookieParser());
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
