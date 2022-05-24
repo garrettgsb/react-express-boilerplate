@@ -21,7 +21,8 @@ export default function useApplicationData() {
     currenies: []
   });
 
-  // const [ cookies, setCookie, removeCookie ] = useCookies(['user']);
+  // const [ cookies, setCookie, removeCookie ] = useCookies(['email']);
+
   const signupUser = (username, email, password) => {
     const users = [
       {
