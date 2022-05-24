@@ -244,7 +244,10 @@ export default function Profile(props) {
                   <tr>
                     <td>
                       <h3>
-                        Aiming for: {(Number(state.totalGoals) * props.exchangeRates.rates[props.currentCurrency]).toFixed(2)} {props.currentCurrency}
+                        {props.vacationMode ?
+                          <span>Starting Budget: </span> :
+                          <span>Aiming for: </span>}
+                        {(Number(state.totalGoals) * props.exchangeRates.rates[props.currentCurrency]).toFixed(2)} {props.currentCurrency}
                       </h3>
                     </td>
                   </tr>

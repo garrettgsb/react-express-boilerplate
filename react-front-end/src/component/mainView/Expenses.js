@@ -4,7 +4,7 @@ import ExpenseTable from './ExpenseTable';
 import useVisualMode from '../../hooks/useVisualMode';
 import '../../sass/expenses.scss';
 import '../../sass/login.scss';
-import { getCategoryName } from '../../helpers/helper_functions';
+import { getCategoryName, getCurrenciesOptions } from '../../helpers/helper_functions';
 import classNames from 'classnames';
 
 export default function Expenses(props) {
@@ -45,8 +45,8 @@ export default function Expenses(props) {
 	const { mode, transition, back } = useVisualMode(EXPENSES);
 
 	const expenseID = props.expenses.find(expense => !Array.isArray(expense))
-	
-	console.log('EXPENSs:', props.exchangeRates.rates['USD'])
+	const currencies = getCurrenciesOptions(props.currencySymbols)
+
 	const submit = (id, user_id, created_at, amount, category_id, category_name, goal_name, goal_amount) => {
 		const expense = {
 			id,
@@ -57,6 +57,8 @@ export default function Expenses(props) {
 			category_name,
 			goal_name,
 			goal_amount: (goal_amount / props.exchangeRates.rates.USD),
+			currency: props.currentCurrency || 'USD',
+			exchangeRate: props.exchangeRates.rates[props.currentCurrency]
 		};
 		props.addExpense(expense);
 	};
@@ -91,7 +93,7 @@ export default function Expenses(props) {
 					/>
 					<div id='input-card' className={expenseInput}>
 						<form className={"d-flex justify-content-around row row-cols-lg-auto g-3 align-items-center p-3"}>
-							<div className="col-lg-3 col-sm-6">
+							<div className="col-lg-3 col-sm-6 expense-input-date">
 								<label htmlFor="date" className="visually-hidden">
 									date
 								</label>
@@ -109,7 +111,7 @@ export default function Expenses(props) {
 							</div>
 							<div className="col-12">
 								<label
-									className="visually-hidden"
+									className="visually-hidden form-select-lg"
 									htmlFor="inlineFormInputGroupUsername"
 								>
 									Amount
@@ -130,11 +132,29 @@ export default function Expenses(props) {
 											})
 										}
 									/>
-									<div className="input-group-text">{props.currentCurrency}</div>
+									<div className="expense-currency-input input-group-text w-50 form-select-sm">
+										<input
+											className="form-control form-control-sm w-100"
+											list="datalistOptions"
+											id="exchange-search"
+											value={props.currentCurrency}
+											onChange={e => {
+												e.persist();
+												console.log(e.target.value)
+												props.changeCurrency(e.target.value)
+												setState(prev => {
+													return { ...prev, currency: e.target.value, exchangeRate: props.exchangeRates.rates[e.target.value] }
+												})
+											}}
+										/>
+										<datalist id="datalistOptions">
+											{currencies}
+										</datalist></div>
 								</div>
+
 							</div>
-							
-							<div className="col-12">
+
+							<div className="col-12 expense-input-category">
 								<label
 									className="visually-hidden"
 									htmlFor="inlineFormSelectPref"
@@ -142,7 +162,7 @@ export default function Expenses(props) {
 									Category
 								</label>
 								<select
-									className="select"
+									className="select form-select-lg"
 									value={state.category_id}
 									onChange={event => {
 										setState({

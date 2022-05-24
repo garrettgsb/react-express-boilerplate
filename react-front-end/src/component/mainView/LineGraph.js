@@ -98,7 +98,7 @@ export default function LineGraph(props) {
   const [state, setState] = useState({
     dateUnit: graphData.trackUnits,
     dataPoints: graphData.updatePoints,
-    currency: props.currentCurrency || 'CAD',
+    currency: props.currentCurrency || 'USD',
     exchangeRate: props.exchangeRates.rates[props.currentCurrency]
   })
 
