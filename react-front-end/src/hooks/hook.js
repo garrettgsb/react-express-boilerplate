@@ -12,10 +12,14 @@ export default function useApplicationData() {
     expenses: [],
     dataPoints: [],
     vacationMode: false,
+    currencySymbols: {},
+    currentCurrency: 'USD',
+    exchangeRates: {},
+    currenies: []
   });
 
 
-  const loginUser = (user) => {
+  const loginUser = user => {
     return axios
       .get(`http://localhost:8081/api/dataPoints`)
       .then(() => {
@@ -25,10 +29,16 @@ export default function useApplicationData() {
       })
   };
 
-  const changeTab = (tab) =>
+  const changeTab = tab =>
     setState(prev => {
       return { ...prev, tab }
     })
+
+  const changeCurrency = currency =>
+    setState(prev => {
+      return { ...prev, currentCurrency: currency }
+    });
+
 
 
   const updateGoals = (goalID, goals) => {
@@ -116,7 +126,7 @@ export default function useApplicationData() {
         id: expense.id,
         user_id: expense.user_id,
         created_at: expense.created_at,
-        amount: expense.amount,
+        amount: (expense.amount),
         category_id: expense.category_id,
         category_name: expense.category_name,
       },
@@ -128,7 +138,7 @@ export default function useApplicationData() {
         id: expense.id,
         user_id: expense.user_id,
         created_at: expense.created_at,
-        amount: expense.amount,
+        amount: (expense.amount),
         category_id: expense.category_id,
       },
       ...state.savings,
@@ -141,12 +151,12 @@ export default function useApplicationData() {
         user_id: expense.user_id,
         category_id: expense.category_id,
         x: expense.created_at,
-        y: parseInt(expense.amount),
+        y: expense.amount,
       }
     ];
 
     setState(prev => {
-      return { ...prev, expenses, savings, dataPoints };
+      return { ...prev, expenses, savings, dataPoints, currentCurrency: expense.currentCurrency };
     });
 
 
@@ -166,14 +176,20 @@ export default function useApplicationData() {
     const apiUsers = 'http://localhost:8081/api/users';
     const apiSavings = 'http://localhost:8081/api/savings';
     const apiExpenses = 'http://localhost:8081/api/expenses';
+    const apiCurrenies = 'https://api.currencyfreaks.com/supported-currencies';
     const apiDataPoints = 'http://localhost:8081/api/dataPoints';
+    const apiCurrencySymbols = 'https://api.currencyfreaks.com/currency-symbols';
+    const apiExchangeRates = 'https://api.currencyfreaks.com/latest?apikey=bd341fe5384842489348b286b255c67a';
 
     Promise.all([
       axios.get(apiGoals),
       axios.get(apiUsers),
       axios.get(apiSavings),
       axios.get(apiExpenses),
+      axios.get(apiCurrenies),
       axios.get(apiDataPoints),
+      axios.get(apiCurrencySymbols),
+      axios.get(apiExchangeRates),
     ])
       .then(all => {
         setState((prev) => ({
@@ -182,7 +198,10 @@ export default function useApplicationData() {
           users: all[1].data,
           savings: all[2].data,
           expenses: all[3].data,
-          dataPoints: all[4].data,
+          currenies: all[4].data,
+          dataPoints: all[5].data,
+          currencySymbols: all[6].data,
+          exchangeRates: all[7].data,
         }));
       })
       .catch(error => {
@@ -198,6 +217,7 @@ export default function useApplicationData() {
     updateGoals,
     removeExpense,
     removeGoal,
-    changeTab
+    changeTab,
+    changeCurrency
   };
 }

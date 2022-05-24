@@ -14,7 +14,8 @@ export default function App() {
     updateGoals,
     removeExpense,
     removeGoal,
-    changeTab } = useApplicationData();
+    changeTab,
+    changeCurrency } = useApplicationData();
 
   //views
   const LOGIN = 'LOGIN';
@@ -61,6 +62,7 @@ export default function App() {
         alvinVacationSpent={state.alvinVacationSpent}
         removeExpense={removeExpense}
         vacationMode={state.vacationMode}
+        changeCurrency={changeCurrency}
       />}
     </div>
   );

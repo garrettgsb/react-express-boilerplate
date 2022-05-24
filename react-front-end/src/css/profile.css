@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
 @import '~mdb-ui-kit/css/mdb.min.css';
+#profile {
+  background-color: rgba(200, 255, 250, 0.7333333333);
+  background-image: url(http://www.transparenttextures.comnone);
+  background-image: url(http://www.transparenttextures.com/patterns/type.png);
+}
+
 .vw-100 {
   background-color: rgba(249, 216, 175, 0.543);
 }
@@ -38,4 +44,9 @@
 .total-saved-text {
   color: #757575;
   font-weight: bold;
+}
+
+.new-pig {
+  transform: scale(2);
+  color: #FFA10A;
 }
