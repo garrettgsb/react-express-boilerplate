@@ -133,6 +133,7 @@ export default function Expenses(props) {
 									<div className="input-group-text">{props.currentCurrency}</div>
 								</div>
 							</div>
+							
 							<div className="col-12">
 								<label
 									className="visually-hidden"

@@ -5,7 +5,8 @@ import {
   getGoalByID,
   getDataByID,
   getVacationData,
-  filterSavingsDataPoints
+  filterSavingsDataPoints, 
+  getCurrenciesOptions
 } from '../../helpers/helper_functions';
 import {
   Chart,
@@ -35,12 +36,10 @@ export default function LineGraph(props) {
 
   const goal = getGoalByID(props.goals, props.user)
   const dataPoints = getDataByID(props.dataPoints, props.user)
-  const symbols = Object.keys(props.currencySymbols)
-  // const getExchangeRate = (rate, value) => rate * value;
-  const currencies = symbols.map((currency, ii) => {
-    return <option key={ii} value={symbols[ii]}>{props.currencySymbols[currency]}</option>
-  }
-  )
+
+
+
+  const currencies = getCurrenciesOptions(props.currencySymbols); 
 
   let graphData = {
     updatePoints: [],
