@@ -119,3 +119,5 @@ export const getNewList = (list, itemID) => {
         item
     });
 }
+
+export const getUserByEmail = (email, state) => state.find(user => user.email === email);
