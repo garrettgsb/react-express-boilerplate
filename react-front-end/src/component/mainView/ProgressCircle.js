@@ -1,6 +1,5 @@
 import React from "react";
-
-
+import '../../sass/savings.scss';
 
 // Import module and default styles
 // import CircularProgressbar, { buildStyles } from "react-circular-progressbar";
@@ -14,7 +13,7 @@ const ProgressCircle = (props) => {
   return (
 
     <div>
-      <div className='ml-25' style={{ width: "90%" }}>
+      <div className='circle' style={{ width: "80%" }}>
         <CircularProgressbar
           key='Circle'
           percentage={percentage}
