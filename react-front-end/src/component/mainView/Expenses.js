@@ -264,7 +264,7 @@ export default function Expenses(props) {
 										className={removeMapview}>
 										<img
 											onClick={() => transition(LINE)}
-											id='graph-thumbnail' src='../../../graph_thumbnail.png' alt='graph thumbnail' />
+											id='graph-thumbnail' src='../../../chart.png' alt='graph thumbnail' />
 									</button>
 								</div>
 							</div>

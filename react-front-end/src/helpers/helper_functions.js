@@ -122,10 +122,12 @@ export const getNewList = (list, itemID) => {
     });
 }
 
+export const getUserByEmail = (email, state) => state.find(user => user.email === email);
+
 export const getCurrenciesOptions = currencyList => {
   const symbols = Object.keys(currencyList)
   return symbols.map((currency, ii) => {
     return <option key={ii} value={symbols[ii]}>{currencyList[currency]}</option>
   }
   )
-}
+};
