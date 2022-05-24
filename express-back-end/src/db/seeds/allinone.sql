@@ -1,8 +1,8 @@
 INSERT INTO users(username, email, password)
   VALUES
-  ('Alvin', 'alvintest@hotmail.com', 'test123'),
-  ('Ricky', 'ricky2test@hotmail.com', 'test123'),
-  ('Kevin', 'kevin3test@hotmail.com', 'test123');
+  ('Alvin', 'alvintest@hotmail.com', '$2a$10$dU8Yigagy9Tcj3ZsDWd79uVCfXyQW8KvFtKKPI3dSsb4ijWcLeAaC'),
+  ('Ricky', 'ricky2test@hotmail.com', '$2a$10$dU8Yigagy9Tcj3ZsDWd79uVCfXyQW8KvFtKKPI3dSsb4ijWcLeAaC'),
+  ('Kevin', 'kevin3test@hotmail.com', '$2a$10$dU8Yigagy9Tcj3ZsDWd79uVCfXyQW8KvFtKKPI3dSsb4ijWcLeAaC');
 
 INSERT INTO categories(name)
   VALUES
