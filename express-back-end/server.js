@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const BodyParser = require('body-parser');
+// const BodyParser = require('body-parser');
 const PORT = 8080;
 
 //socket IO
@@ -15,9 +15,9 @@ io.on('connection', socket => {
 });
 
 // Express Configuration
-app.use(BodyParser.urlencoded({ extended: false }));
-app.use(BodyParser.json());
-app.use(express.static('public'));
+// app.use(BodyParser.urlencoded({ extended: false }));
+// app.use(BodyParser.json());
+// app.use(express.static('public'));
 
 // Sample GET route
 app.get('/api/data', (req, res) => res.json({

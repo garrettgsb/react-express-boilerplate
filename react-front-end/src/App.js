@@ -11,7 +11,7 @@ const App = () => {
 
   const [state, setState] = useState({
     message: 'Click the button to load data!',
-    src: 'https://cdns-preview-b.dzcdn.net/stream/c-b2e0166bba75a78251d6dca9c9c3b41a-7.mp3'
+    src: ''
   });
 
   useEffect(() => {
@@ -25,12 +25,12 @@ const App = () => {
     .then((response) => {
       // handle success
       console.log(response.data) // The entire response from the Rails API
-
       console.log(response.data.title) // Just the message
       setState({
         message: response.data.title,
         src: response.data.preview
       });
+      get
     }) 
   }
 
@@ -44,7 +44,5 @@ const App = () => {
     </div>
   );
 }
-
-
 
 export default App;
