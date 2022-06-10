@@ -1,4 +1,8 @@
-# React + Express No-Fluff Boilerplate
+# Songbird 🎶 🕊
+
+Simple, multiplayer puzzle game revolving around music.
+
+## Boilerplate deets
 
 A boilerplate project for anyone interested in making a project that uses React and Express.
 
@@ -36,8 +40,8 @@ And don't forget to update the README!
 
 You might want to look at examples of projects that have used this boilerplate for hints on how to extend it. Here are a few:
 
-* [Later Cart](https://github.com/bonitac/later-cart)
-* [Buddi.io](https://github.com/Danny-Tran/buddi.io)
+- [Later Cart](https://github.com/bonitac/later-cart)
+- [Buddi.io](https://github.com/Danny-Tran/buddi.io)
 
 If you'd like your project added to the list, please shoot me a message.
 
