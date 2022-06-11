@@ -36,7 +36,9 @@ const users = [];
 
 //Socket listeners
 io.on('connection', socket => {
-  console.log("User has connected")
+  console.log("User has connected ", socket.handshake.query.username )
+  users.push(socket.handshake.query.username)
+  console.log("users: ", users)
 });  
 
 
