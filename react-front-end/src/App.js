@@ -6,19 +6,34 @@ import AudioPlayer from './AudioPlayer';
 //Socket io client
 import socketIOClient from 'socket.io-client';
 const ENDPOINT = '/';
+const socket = socketIOClient(ENDPOINT);
 
 const App = () => {
-
+  const [user, setUser] = useState('');
+  const [users, setUsers] = useState([]);
   const [state, setState] = useState({
     message: 'Click the button to load data!',
     src: ''
   });
 
   useEffect(() => {
-    console.log("TEST")
-    const socket = socketIOClient(ENDPOINT);
-    socket.on('connect', () => console.log("we have connected!"))
-  }, []);
+    console.log("This useEffect runs only once!")
+    socket.on('INITIAL_CONNNECTION', data => {
+      setUser(data.name)
+      setUsers(data.users)
+    })
+
+    socket.on('NEW_USER', data => {
+      setUsers(prev => {
+        return [...prev, data.name]
+      })
+    })
+
+    socket.on('DISCONNECTED_USER', data => {
+      setUsers(data.users)
+    })
+
+  }, [socket]);
   
   const fetchData = () => {
     axios.get('/api/data') 
@@ -30,16 +45,25 @@ const App = () => {
         src: response.data.src
       });
     }) 
-
   }
 
   return (
     <div className="App">
       <h1>{ state.message }</h1>
       <button onClick={fetchData} >
-        Fetch Data
-      </button>        
+        Fetch Music Data
+      </button>
+      <br></br>
+      <input type='text' id='username' placeholder='Enter Username'>
+      </input>
+      <button>
+        Submit
+      </button>
       {state.src && <AudioPlayer src ={state.src}/>}
+      {user ? <h2>User: {user}</h2> : <h3>Loading...</h3>}
+      <ul>
+        {users.map(user => <li>{user}</li>)}
+      </ul> 
     </div>
   );
 }
