@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
-// const BodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const PORT = 8080;
+const axios = require('axios')
+const { getToken, getPlaylist } = require('./helpers/spotify')
+require('dotenv').config()
 
 //socket IO
 const socketio = require('socket.io');
@@ -15,14 +18,20 @@ io.on('connection', socket => {
 });
 
 // Express Configuration
-// app.use(BodyParser.urlencoded({ extended: false }));
-// app.use(BodyParser.json());
-// app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
+
+let token = ''
+getToken().then((res) => token = res.data.access_token)
 
 // Sample GET route
-app.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+app.get('/api/data', (req, res) => {
+  getPlaylist(token)
+    .then(result => res.json( {src: result.data.tracks[0].preview_url} ))
+})
+
 
 server.listen(PORT, () => {
   // eslint-disable-next-line no-console

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import AudioPLayer from './AudioPlayer';
+import AudioPlayer from './AudioPlayer';
 
 //Socket io client
 import socketIOClient from 'socket.io-client';
@@ -15,23 +15,22 @@ const App = () => {
   });
 
   useEffect(() => {
-  console.log("TEST")
-  const socket = socketIOClient(ENDPOINT);
-  socket.on('connect', () => console.log("we have connected!"))
+    console.log("TEST")
+    const socket = socketIOClient(ENDPOINT);
+    socket.on('connect', () => console.log("we have connected!"))
   }, []);
   
   const fetchData = () => {
-    axios.get('https://api.deezer.com/track/3135554') // You can simply make your requests to "/api/whatever you want"
+    axios.get('/api/data') 
     .then((response) => {
       // handle success
-      console.log(response.data) // The entire response from the Rails API
-      console.log(response.data.title) // Just the message
+      console.log(response.data) 
       setState({
-        message: response.data.title,
-        src: response.data.preview
+        ...state,
+        src: response.data.src
       });
-      get
     }) 
+
   }
 
   return (
@@ -40,7 +39,7 @@ const App = () => {
       <button onClick={fetchData} >
         Fetch Data
       </button>        
-      <AudioPLayer src = {state.src}/>
+      {state.src && <AudioPlayer src ={state.src}/>}
     </div>
   );
 }
