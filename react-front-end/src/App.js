@@ -2,24 +2,23 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import AudioPlayer from './AudioPlayer';
+import UserForm from './components/UserForm';
+import Game from './Game'
 
 //Socket io client
 import socketIOClient from 'socket.io-client';
 const ENDPOINT = '/';
+let socket = '';
 
 const App = () => {
 
+  const[username, setUsername] = useState('');
+  const [users, setUsers] = useState([]);
   const [state, setState] = useState({
     message: 'Click the button to load data!',
     src: ''
   });
 
-  useEffect(() => {
-    console.log("TEST")
-    const socket = socketIOClient(ENDPOINT);
-    socket.on('connect', () => console.log("we have connected!"))
-  }, []);
-  
   const fetchData = () => {
     axios.get('/api/data') 
     .then((response) => {
@@ -32,6 +31,12 @@ const App = () => {
     }) 
 
   }
+  const createSocket = (user) => {
+    socket = socketIOClient(ENDPOINT, {
+      query: `username=${user}`
+    });
+    setUsername(user);
+  }
 
   return (
     <div className="App">
@@ -40,6 +45,9 @@ const App = () => {
         Fetch Data
       </button>        
       {state.src && <AudioPlayer src ={state.src}/>}
+      
+      {username ? <Game username = {username} socket = {socket}/> : <UserForm setUserName ={setUsername} createSocket = {createSocket}/>}
+      
     </div>
   );
 }

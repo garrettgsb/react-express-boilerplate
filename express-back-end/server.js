@@ -12,17 +12,10 @@ const http = require('http');
 const server = http.createServer(app);
 const io = socketio(server);
 
-//Socket listeners
-io.on('connection', socket => {
-  console.log("User has connected")
-  console.log(socket)
-});
-
 // Express Configuration
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
-
 
 let token = ''
 getToken().then((res) => token = res.data.access_token)
@@ -33,8 +26,19 @@ app.get('/api/data', (req, res) => {
     .then(result => res.json( {src: result.data.tracks[0].preview_url} ))
 })
 
-
 server.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
+
+
+const users = [];
+
+//Socket listeners
+io.on('connection', socket => {
+  console.log("User has connected")
+});  
+
+
+
+
