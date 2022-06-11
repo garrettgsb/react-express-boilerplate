@@ -5,7 +5,6 @@ const PORT = 8080;
 const axios = require("axios");
 const { getToken, getPlaylist } = require("./helpers/spotify");
 require("dotenv").config();
-const ikea = require("ikea-name-generator"); // to be removed
 
 // socket IO
 const socketio = require("socket.io");

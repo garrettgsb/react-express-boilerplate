@@ -23,7 +23,7 @@
 
 ## Third-Party Integrations
 
-- Spotify API and Spotify SDK
+- Spotify API
 - autoComplete.js
 
 ## Extra
