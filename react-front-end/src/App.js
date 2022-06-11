@@ -43,12 +43,7 @@ const App = () => {
       <button onClick={fetchData} >
         Fetch Music Data
       </button>
-      <br></br>
-      <input type='text' id='username' placeholder='Enter Username'>
-      </input>
-      <button>
-        Submit
-      </button>
+
       {state.src && <AudioPlayer src ={state.src}/>}
       
       {username ? <Game username = {username} socket = {socket}/> : <UserForm setUserName ={setUsername} createSocket = {createSocket}/>}
