@@ -24,7 +24,6 @@
 ## Third-Party Integrations
 
 - Spotify API and Spotify SDK
-- Deezer API
 - autoComplete.js
 
 ## Extra
