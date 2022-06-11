@@ -15,6 +15,7 @@ const io = socketio(server);
 //Socket listeners
 io.on('connection', socket => {
   console.log("User has connected")
+  console.log(socket)
 });
 
 // Express Configuration
