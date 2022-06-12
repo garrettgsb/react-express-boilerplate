@@ -1,8 +1,4 @@
-export interface IUser {
-  username: string;
-  roomId: string;
-  score: number;
-}
+import { IUser } from "./AppInterfaces";
 
 export interface IGameProps {
   user: IUser;

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { ISocket } from './interfaces/AppInterfaces';
 import { IGameProps } from './interfaces/GameInterfaces';
 
 
 const Game = (props: IGameProps) => {
-  const socket = props.socket
-  const [guess, setGuess] = useState('');
+  const socket: ISocket = props.socket
+  const [guess, setGuess] = useState<string>("");
 
   const sendGuess = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

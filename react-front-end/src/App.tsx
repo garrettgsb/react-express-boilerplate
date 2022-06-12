@@ -5,6 +5,7 @@ import AudioPlayer from "./components/AudioPlayer";
 import UserForm from "./components/UserForm";
 import Game from "./Game";
 import { getRoomId } from "./util/roomGenerator";
+import { IUser, ISocket } from "./interfaces/AppInterfaces";
 
 // socket io client
 // import socketIOClient from "socket.io-client";
@@ -13,27 +14,19 @@ const ENDPOINT = "/";
 
 const App = () => {
   // Grab the window URL and set the Room ID to that url. URL should be formatted as localhost:3000/?[:roomId]
-  const roomId = getRoomId();
+  const roomId: string = getRoomId();
 
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<IUser>({
     username: '',
     roomId: roomId,
     score: 0
   });
-  const [socket, setSocket] = useState({})
-  const [state, setState] = useState({
-    message: "Click the button to load data!",
-    src: "",
-  });
+  const [socket, setSocket] = useState<ISocket | undefined>(undefined)
 
   const fetchData = (): void => {
     axios.get("/api/data").then((response) => {
       // handle success
       console.log(response.data);
-      setState({
-        ...state,
-        src: response.data.src,
-      });
     });
   };
 
@@ -51,10 +44,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>{state.message}</h1>
+      <h1>Fetch tracks and print to console</h1>
       <button onClick={fetchData}>Fetch Music Data</button>
 
-      {state.src && <AudioPlayer src={state.src} />}
+      {/* {state.src && <AudioPlayer src={state.src} />} */}
 
       {user.username ? (
         <Game user={user} socket={socket} />
