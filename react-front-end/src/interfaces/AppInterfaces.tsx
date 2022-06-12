@@ -5,6 +5,6 @@ export interface IUser {
 }
 
 export interface ISocket {
-  emit: (eventName: string, receivedData: string) => void;
+  emit: (eventName: string, sentData: string) => void;
   on: (eventName: string, callback: (message: string) => void) => void;
 }
