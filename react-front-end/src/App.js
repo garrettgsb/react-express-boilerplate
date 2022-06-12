@@ -11,9 +11,9 @@ import socketIOClient from "socket.io-client";
 const ENDPOINT = "/";
 
 const App = () => {
-  // Grab the window URL and set the Room ID to that url.
+  // Grab the window URL and set the Room ID to that url. URL should be formatted as localhost:3000/?[:roomId]
   const windowUrl = window.location.search;
-  const roomId = windowUrl.slice(windowUrl.indexOf('=') + 1, windowUrl.length - 1);
+  const roomId = windowUrl.substring(1);
 
   const [user, setUser] = useState({
     username: '',
@@ -44,7 +44,6 @@ const App = () => {
         username: username,
       }
     });
-    
     setSocket(socketIOClient(ENDPOINT, {
       query: { username: username, roomId: user.roomId }
     }));
