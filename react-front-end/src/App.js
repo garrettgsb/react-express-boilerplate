@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-
 import AudioPlayer from "./AudioPlayer";
 import UserForm from "./components/UserForm";
 import Game from "./Game";
+import { generateRoomId } from "./util/roomGenerator";
 
 // socket io client
 import socketIOClient from "socket.io-client";
@@ -13,7 +13,10 @@ const ENDPOINT = "/";
 const App = () => {
   // Grab the window URL and set the Room ID to that url. URL should be formatted as localhost:3000/?[:roomId]
   const windowUrl = window.location.search;
-  const roomId = windowUrl.substring(1);
+  let roomId = windowUrl.substring(1);
+  if (!roomId) {
+    roomId = generateRoomId()
+  }
 
   const [user, setUser] = useState({
     username: '',
