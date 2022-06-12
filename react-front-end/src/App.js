@@ -11,7 +11,15 @@ import socketIOClient from "socket.io-client";
 const ENDPOINT = "/";
 
 const App = () => {
-  const [username, setUsername] = useState("");
+  // Grab the window URL and set the Room ID to that url.
+  const windowUrl = window.location.search;
+  const roomId = windowUrl.slice(windowUrl.indexOf('=') + 1, windowUrl.length - 1);
+
+  const [user, setUser] = useState({
+    username: '',
+    roomId: roomId,
+    score: 0
+  });
   const [users, setUsers] = useState([]);
   const [socket, setSocket] = useState({})
   const [state, setState] = useState({
@@ -30,12 +38,18 @@ const App = () => {
     });
   };
 
-  const createSocket = (user, roomId) => {
+  const createSocket = (user) => {
     setSocket(socketIOClient(ENDPOINT, {
       query: { username: user, roomId: roomId }
       
     }));
-    setUsername(user);
+    setUser(prev => {
+      return { 
+        ...prev,
+        username:user,
+        roomId: prev.roomId ? prev.roomId : roomId 
+      }
+    });
   };
 
   return (
@@ -45,10 +59,10 @@ const App = () => {
 
       {state.src && <AudioPlayer src={state.src} />}
 
-      {username ? (
-        <Game username={username} socket={socket} />
+      {user.username ? (
+        <Game user={user} socket={socket} />
       ) : (
-        <UserForm setUserName={setUsername} createSocket={createSocket} />
+        <UserForm createSocket={createSocket} />
       )}
     </div>
   );

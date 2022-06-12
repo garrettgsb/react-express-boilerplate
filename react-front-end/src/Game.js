@@ -6,7 +6,7 @@ const Game = (props) => {
 
   const sendGuess = (e) => {
     e.preventDefault();
-    console.log(`${props.username}: ${guess}`)
+    console.log(`${props.user.username}: ${guess}`)
     socket.emit('Guess', guess);
   }
 
