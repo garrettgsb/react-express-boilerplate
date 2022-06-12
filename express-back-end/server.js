@@ -50,7 +50,7 @@ io.on("connection", (socket) => {
     socket.to(roomId).emit("chat-messages", `${user}: ${guess}`);
   });
 
-  // disconnect user and removes them from users array
+  // disconnects user and removes them from users array
   socket.on("disconnect", () => {
     users = users.filter((name) => name !== user);
 
