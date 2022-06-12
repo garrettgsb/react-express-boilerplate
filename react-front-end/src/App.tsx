@@ -44,10 +44,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Fetch tracks and print to console</h1>
+      {/* <h1>Fetch tracks and print to console</h1>
       <button onClick={fetchData}>Fetch Music Data</button>
 
-      {/* {state.src && <AudioPlayer src={state.src} />} */}
+      {state.src && <AudioPlayer src={state.src} />} */}
 
       {user.username ? (
         <Game user={user} socket={socket} />
