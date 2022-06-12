@@ -9,7 +9,7 @@
 
 ## Lobby
 
-- **Step 5:** User can invite other to join
+- **Step 5:** User can invite other to join via room code
 - **Step 6:** Host is able to select music genre and specify # of rounds
 - **Step 7:** Host can select a ‘start game’ button when ready
 
