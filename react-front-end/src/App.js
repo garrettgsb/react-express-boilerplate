@@ -30,9 +30,10 @@ const App = () => {
     });
   };
 
-  const createSocket = (user) => {
+  const createSocket = (user, roomId) => {
     setSocket(socketIOClient(ENDPOINT, {
-      query: `username=${user}`,
+      query: { username: user, roomId: roomId }
+      
     }));
     setUsername(user);
   };

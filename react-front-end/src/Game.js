@@ -6,13 +6,15 @@ const Game = (props) => {
 
   const sendGuess = (e) => {
     e.preventDefault();
+    console.log(`${props.username}: ${guess}`)
     socket.emit('Guess', guess);
-    console.log("Guess sent");
   }
 
   useEffect(() => {
-    console.log("This useEffect runs only once!")
-  }, [socket]);
+    socket.on('chat-messages', (message) => {
+      console.log(message);
+    })
+  }, []);
 
   return(
     <>

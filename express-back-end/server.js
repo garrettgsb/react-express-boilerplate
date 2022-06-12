@@ -37,13 +37,17 @@ let users = [];
 
 //Socket listeners
 io.on('connection', socket => {
-  console.log("User has connected ", socket.handshake.query.username )
-  users.push(socket.handshake.query.username)
+  const user = socket.handshake.query.username;
+  const roomId = socket.handshake.query.roomId;
+  console.log("User has connected ", user )
+  users.push(user)
   console.log("users: ", users)
-});  
+  socket.join(roomId);
 
-io.on('guess', socket => {
-  console.log()
-})
+  socket.on('Guess', guess => {
+    socket.to(roomId).emit('chat-messages', `${user}: ${guess}`)
+  })
+
+});  
 
 
