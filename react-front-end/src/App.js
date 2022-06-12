@@ -9,11 +9,11 @@ import Game from "./Game";
 // socket io client
 import socketIOClient from "socket.io-client";
 const ENDPOINT = "/";
-let socket = "";
 
 const App = () => {
   const [username, setUsername] = useState("");
   const [users, setUsers] = useState([]);
+  const [socket, setSocket] = useState({})
   const [state, setState] = useState({
     message: "Click the button to load data!",
     src: "",
@@ -31,9 +31,9 @@ const App = () => {
   };
 
   const createSocket = (user) => {
-    socket = socketIOClient(ENDPOINT, {
+    setSocket(socketIOClient(ENDPOINT, {
       query: `username=${user}`,
-    });
+    }));
     setUsername(user);
   };
 
