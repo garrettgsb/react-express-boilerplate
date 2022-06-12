@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -20,7 +20,6 @@ const App = () => {
     roomId: roomId,
     score: 0
   });
-  const [users, setUsers] = useState([]);
   const [socket, setSocket] = useState({})
   const [state, setState] = useState({
     message: "Click the button to load data!",
@@ -38,18 +37,17 @@ const App = () => {
     });
   };
 
-  const createSocket = (user) => {
-    setSocket(socketIOClient(ENDPOINT, {
-      query: { username: user, roomId: roomId }
-      
-    }));
+  const createSocket = (username) => {
     setUser(prev => {
       return { 
         ...prev,
-        username:user,
-        roomId: prev.roomId ? prev.roomId : roomId 
+        username: username,
       }
     });
+    
+    setSocket(socketIOClient(ENDPOINT, {
+      query: { username: username, roomId: user.roomId }
+    }));
   };
 
   return (
