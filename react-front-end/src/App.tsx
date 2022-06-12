@@ -5,7 +5,7 @@ import AudioPlayer from "./components/AudioPlayer";
 import UserForm from "./components/UserForm";
 import Game from "./Game";
 import { getRoomId } from "./util/roomGenerator";
-import { IUser, ISocket } from "./interfaces/AppInterfaces";
+import { IUser, ISocket, ITheme } from "./interfaces/AppInterfaces";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // socket io client
@@ -17,7 +17,7 @@ const App = () => {
   // Grab the window URL and set the Room ID to that url. URL should be formatted as localhost:3000/?[:roomId]
   const roomId: string = getRoomId();
   // Create a colour palette for the App
-  const theme = createTheme({
+  const theme: ITheme = createTheme({
     palette: {
       primary: {
         main: '#3EB489', // Mint Green
@@ -27,6 +27,7 @@ const App = () => {
       },
     },
   });
+  
   const [user, setUser] = useState<IUser>({
     username: '',
     roomId: roomId,
