@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { IGameProps } from './interfaces/GameInterfaces';
 
-const Game = (props) => {
-  const socket  = props.socket
+
+const Game = (props: IGameProps) => {
+  const socket = props.socket
   const [guess, setGuess] = useState('');
 
-  const sendGuess = (e) => {
+  const sendGuess = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(`${props.user.username}: ${guess}`)
     socket.emit('Guess', guess);
   }
 
   useEffect(() => {
-    socket.on('chat-messages', (message) => {
+    socket.on('chat-messages', (message: string) => {
       console.log(message);
     })
   }, []);

@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-import AudioPlayer from "./AudioPlayer";
+import AudioPlayer from "./components/AudioPlayer";
 import UserForm from "./components/UserForm";
 import Game from "./Game";
-import { generateRoomId } from "./util/roomGenerator";
+import { getRoomId } from "./util/roomGenerator";
 
 // socket io client
-import socketIOClient from "socket.io-client";
+// import socketIOClient from "socket.io-client";
+const socketIOClient = require("socket.io-client");
 const ENDPOINT = "/";
 
 const App = () => {
   // Grab the window URL and set the Room ID to that url. URL should be formatted as localhost:3000/?[:roomId]
-  const windowUrl = window.location.search;
-  let roomId = windowUrl.substring(1);
-  if (!roomId) {
-    roomId = generateRoomId()
-  }
+  const roomId = getRoomId();
 
   const [user, setUser] = useState({
     username: '',
@@ -29,7 +26,7 @@ const App = () => {
     src: "",
   });
 
-  const fetchData = () => {
+  const fetchData = (): void => {
     axios.get("/api/data").then((response) => {
       // handle success
       console.log(response.data);
@@ -40,7 +37,7 @@ const App = () => {
     });
   };
 
-  const createSocket = (username) => {
+  const createSocket = (username: string): void => {
     setUser(prev => {
       return { 
         ...prev,

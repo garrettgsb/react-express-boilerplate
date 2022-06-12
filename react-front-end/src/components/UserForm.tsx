@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { IUserFormProps } from '../interfaces/UserFormInterfaces';
 
-const UserForm = (props) => {  
+const UserForm = (props: IUserFormProps) => {  
   const[username, setUsername] = useState('');
 
-  const userNameSubmitted = (e) => {
+  const userNameSubmitted = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (username === '') {
       return;
