@@ -8,10 +8,9 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
 
-// Sample GET route
-App.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+// Mount all /api resources
+const apiRoutes = require('./routes/apiRoutes');
+App.use('/api', apiRoutes);
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
