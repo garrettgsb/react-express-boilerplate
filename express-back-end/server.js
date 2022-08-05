@@ -9,7 +9,7 @@ App.use(BodyParser.json());
 App.use(Express.static('public'));
 
 // Mount all /api resources
-const apiRoutes = require('./routes/apiRoutes');
+const apiRoutes = require('./routes/api-routes');
 App.use('/api', apiRoutes);
 
 App.listen(PORT, () => {
