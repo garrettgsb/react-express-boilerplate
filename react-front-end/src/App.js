@@ -13,7 +13,8 @@ const App = () => {
       axios.get('/api/users/1'),
       axios.get('/api/users/1/messages'),
       axios.get('/api/users/1/likedBy'),
-      axios.get('/api/users/1/matchings')
+      axios.get('/api/users/1/matchings'),
+      axios.get('/api/users/1/preferences')
     ])
     .then((all) => {
       console.log('all', all);

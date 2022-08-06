@@ -140,14 +140,53 @@ router.post("/users/:id/matchings", (req, res) => {
 // working progress
 router.patch("/users/:id/preferences", (req, res) => {
   const userId = req.params.id;
-  const {preferences} = req.body;
+  const { preferences } = req.body;
   const query =`
-  UPDATE users
-  SET 
-    
-  
-  
-  `
+  UPDATE preferences
+  SET min_age = $1,
+      max_age = $2,
+      location = $3,
+      min_height_in_cm = $4,
+      max_height_in_cm = $5,
+  WHERE users.id = $10;
+
+  UPDATE genders
+  SET value = $6
+  WHERE users.id = $10;
+
+  UPDATE drinks
+  SET value = $7
+  WHERE users.id = $10;
+
+  UPDATE exercise
+  SET value = $8
+  WHERE users.id = $10;
+
+  UPDATE dating_goals
+  SET value = $9
+  WHERE users.id = $10;
+  `;
+
+  return db
+    .query(query, [preferences.min_age, preferences.max_age, preferences.location, preferences.min_height_in_cm, preferences.max_height_in_cm, genders.value, drinks.value, exercise.value, dating_goals.value, userId])
+    .then(({rows: userPreferences}) => {
+      res.json(userPreferences);
+    })
+    .catch(error => console.log("error:", error))
 });
+
+router.get("/users/:id/preferences", (req, res) => {
+  const userId = req.params.id;
+  const query = `
+    SELECT * FROM preferences
+    WHERE id = $1;
+  `
+  return db
+    .query(query, [userId])
+    .then(({ rows: userPreferences }) => {
+      res.json(userPreferences);
+    })
+    .catch((error) => console.log("err:", error));
+})
 
 module.exports = router;
