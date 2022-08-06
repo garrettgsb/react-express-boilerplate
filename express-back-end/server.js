@@ -51,6 +51,13 @@ App.post('/login', (req, res) => {
 });
 // END OF POST REQ FOR LOGIN
 
+// POST REQUEST FOR LOG OUT
+App.post('/logout', (req, res) => {
+  req.session = null;
+  res.redirect('/');
+});
+// END OF LOG OUT
+
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
