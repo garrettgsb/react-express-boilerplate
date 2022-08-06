@@ -138,9 +138,12 @@ router.post("/users/:id/matchings", (req, res) => {
 });
 
 // working progress
-router.patch("/users/:id/preferences", (req, res) => {
+router.post("/users/:id/preferences", (req, res) => {
   const userId = req.params.id;
-  const { preferences } = req.body;
+  const preferences = req.body;
+
+  console.log("preferences", preferences)
+
   const query =`
   UPDATE preferences
   SET min_age = $1,
@@ -148,33 +151,22 @@ router.patch("/users/:id/preferences", (req, res) => {
       location = $3,
       min_height_in_cm = $4,
       max_height_in_cm = $5,
-  WHERE users.id = $10;
-
-  UPDATE genders
-  SET value = $6
-  WHERE users.id = $10;
-
-  UPDATE drinks
-  SET value = $7
-  WHERE users.id = $10;
-
-  UPDATE exercise
-  SET value = $8
-  WHERE users.id = $10;
-
-  UPDATE dating_goals
-  SET value = $9
+      gender_id = $6,
+      drink_id = $7,
+      exercise =$8,
+      dating_goal_id =$9
   WHERE users.id = $10;
   `;
 
   return db
-    .query(query, [preferences.min_age, preferences.max_age, preferences.location, preferences.min_height_in_cm, preferences.max_height_in_cm, genders.value, drinks.value, exercise.value, dating_goals.value, userId])
+    .query(query, [preferences.min_age, preferences.max_age, preferences.location, preferences.min_height_in_cm, preferences.max_height_in_cm, preferences.genders, preferences.drinks, preferences.exercise, preferences.dating_goals, userId])
     .then(({rows: userPreferences}) => {
       res.json(userPreferences);
     })
     .catch(error => console.log("error:", error))
 });
 
+// get request to get users preferences
 router.get("/users/:id/preferences", (req, res) => {
   const userId = req.params.id;
   const query = `
@@ -184,7 +176,7 @@ router.get("/users/:id/preferences", (req, res) => {
   return db
     .query(query, [userId])
     .then(({ rows: userPreferences }) => {
-      res.json(userPreferences);
+      res.json(userPreferences[0]);
     })
     .catch((error) => console.log("err:", error));
 })
