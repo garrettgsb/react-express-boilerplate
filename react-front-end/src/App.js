@@ -54,6 +54,16 @@ const App = () => {
   };
   /// End of login and signout stuff
 
+  // SIGN OUT FUNCTION AND BUTTON
+  const handleClickLogOut = (e) => {
+    e.preventDefault();
+    console.log('Logn out clicked');
+    axios.post('/logout')
+      .then()
+      .catch((error) => console.log('err:', error));
+  }
+  // END OF SIGN OUT
+
   return (
     <div className="App">
       <button>
@@ -73,6 +83,9 @@ const App = () => {
             Log in
           </button> 
         </form>
+        <button type='submit' onClick={handleClickLogOut}>
+          Sign Out
+        </button>
       </div>
     </div>
   );
