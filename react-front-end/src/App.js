@@ -87,7 +87,6 @@ const App = () => {
       </button>        
       <button onClick={() => swipeUser(3, true)}> 
         Post Data       
-
       </button>        
       <button onClick={() => blockUser(4)}> 
         Block user       
