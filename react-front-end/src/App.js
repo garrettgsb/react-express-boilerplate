@@ -38,23 +38,25 @@ const App = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
+  
+  // Makes post request when preferences update
+  useEffect(() => {
+    axios.post('/api/users/1/preferences', state.preferences)
+    .then(() => {})
+    .catch(error => console.log(error));
+  }, [state.preferences]);
 
+  // Update users preferences state
   const updatePreferences = (min_age, max_age, location, min_height_in_cm, max_height_in_cm, genders, drinks, exercise, dating_goals) => {
     const newPref = {
       ...state.preferences,
       min_age, max_age, location, min_height_in_cm, max_height_in_cm, genders, drinks, exercise, dating_goals
     };
     setState({...state, preferences: newPref});
-    
-    axios.post('/api/users/1/preferences', state.preferences)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch(error => console.log(error));
-  }
+  };
+  
 // block user
-
   const blockUser = (blockId) => {
     axios.post('/api/users/1/blocked', {blockId})
       .then((response) => {
@@ -63,8 +65,7 @@ const App = () => {
       .catch((error) => {
         console.log(error);
       });
-  }
-
+  };
 
   // LOGIN AND SIGNOUT - everything in here will likely need to be moved to login page when we start working on front end
   // DISCUSS: either keep pw as strings or implement bcrpyt later on
@@ -108,14 +109,12 @@ const App = () => {
       <button onClick={() => swipeUser(3, true)}> 
         Post Data       
       </button>
-      <button onClick={() => updatePreferences(18, 30, 'Las Vegas', 175, 188, 2, 1, 3, 3)}>
+      <button onClick={ () => updatePreferences(18, 30, 'Sydney', 175, 188, 2, 1, 3, 3)}>
         Set Preferences  
       </button>      
       <button onClick={() => blockUser(4)}> 
         Block user       
       </button>        
-
-    
 
       <div>
         <form>
