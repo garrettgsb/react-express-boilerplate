@@ -3,13 +3,13 @@ DROP TABLE IF EXISTS user_photos CASCADE;
 DROP TABLE IF EXISTS messages CASCADE;
 DROP TABLE IF EXISTS matchings CASCADE;
 DROP TABLE IF EXISTS block_users CASCADE;
+DROP TABLE IF EXISTS preferences CASCADE;
+DROP TABLE IF EXISTS genders CASCADE;
+DROP TABLE IF EXISTS drinks CASCADE;
+DROP TABLE IF EXISTS exercises CASCADE;
+DROP TABLE IF EXISTS dating_goals CASCADE;
 
 SET timezone = 'America/Los_Angeles';
-
--- drinking
--- id0 - never
--- 1=- sometimes
--- 2 =yes
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -30,30 +30,12 @@ CREATE TABLE users (
   is_active BOOLEAN NOT NULL DEFAULT true
 );
 
--- pref={state.preferences} - when render preferences from app.js
--- const [pref, setPref] = useState(props.pref); inside preferences
-CREATE TABLE preferences (
-  id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  min_age INTEGER NOT NULL DEFAULT 18,
-  max_age INTEGER NOT NULL DEFAULT 80,
-  location TEXT NOT NULL DEFAULT 'Earth',
-  min_height_in_cm INTEGER NOT NULL DEFAULT 130,
-  max_height_in_cm INTEGER NOT NULL DEFAULT 200,
-  gender_id INTEGER REFERENCES genders(id) ON DELETE CASCADE DEFAULT NULL,
-  drink_id INTEGER REFERENCES drinks(id) ON DELETE CASCADE DEFAULT 0,
-  exercise_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE DEFAULT 0,
-  dating_goal_id INTEGER REFERENCES dating_goals(id) ON DELETE CASCADE DEFAULT 0
-);
 
 
 CREATE TABLE genders (
   id SERIAL PRIMARY KEY NOT NULL,
   value TEXT NOT NULL 
 );
-
--- INSERT into GENDERS (anyone, female, male, other)
--- values (0)
 
 CREATE TABLE drinks (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -100,3 +82,17 @@ CREATE TABLE block_users (
   blocked_by_user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   blocked_user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
  );
+
+CREATE TABLE preferences (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  min_age INTEGER NOT NULL DEFAULT 18,
+  max_age INTEGER NOT NULL DEFAULT 80,
+  location TEXT NOT NULL DEFAULT 'Earth',
+  min_height_in_cm INTEGER NOT NULL DEFAULT 130,
+  max_height_in_cm INTEGER NOT NULL DEFAULT 200,
+  gender_id INTEGER REFERENCES genders(id) ON DELETE CASCADE DEFAULT NULL,
+  drink_id INTEGER REFERENCES drinks(id) ON DELETE CASCADE DEFAULT 1,
+  exercise_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE DEFAULT 1,
+  dating_goal_id INTEGER REFERENCES dating_goals(id) ON DELETE CASCADE DEFAULT 1
+);

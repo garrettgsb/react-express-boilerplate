@@ -4,13 +4,12 @@ VALUES
   
 INSERT INTO drinks (value) 
 VALUES 
-  (`Don't Care`), ('No'), ('Sometimes'), ('Yes');
+  ('Do Not Care'), ('No'), ('Sometimes'), ('Yes');
 
 INSERT INTO exercises (value) 
 VALUES 
-  (`Don't Care`), ('No'), ('Sometimes'), ('Yes'), ();
+  ('Do Not Care'), ('No'), ('Sometimes'), ('Yes');
 
 INSERT INTO dating_goals (value) 
 VALUES 
-  ('dont know yet'), ('short-term'), ('long-term'), ('life-partner'),
-;
+  ('Dont Know Yet'), ('Short Term'), ('Long Term'), ('Life Partner');

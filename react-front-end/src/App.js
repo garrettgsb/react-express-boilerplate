@@ -16,6 +16,7 @@ const App = () => {
       axios.get('/api/users/1/matchings')
     ])
     .then((all) => {
+      console.log('all', all);
       setState({...state, users: all[0].data, user: all[1].data, messages: all[2].data, likedBy: all[3].data, matches: all[4].data});
     }) 
   }
@@ -29,12 +30,6 @@ const App = () => {
         console.log(error);
       });
   }
-
-
-  // const preferences = (state.user) => {
-  //   axios.patch('/users/:id/preferences')
-  // }
-
 
   return (
     <div className="App">

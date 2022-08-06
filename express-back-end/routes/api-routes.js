@@ -49,8 +49,6 @@ router.get("/users/:id", (req, res) => {
     })
     .catch((error) => console.log("err:", error));
 });
-//router.post(/users/:id)
-//router.patch(/users/:id)
 
 // Get request for all msgs sent by yourself
 router.get("/users/:id/messages", (req, res) => {
@@ -120,6 +118,7 @@ router.get("/users/:id/matchings", (req, res) => {
 });
 
 // Post request on each swipe
+// 8/5 - works
 router.post("/users/:id/matchings", (req, res) => {
   const userId = req.params.id;
   const { toId, like } = req.body;
@@ -138,10 +137,7 @@ router.post("/users/:id/matchings", (req, res) => {
     .catch((error) => console.log("err:", error));
 });
 
-// preference - list of preference click on to edit 
-// [preferences] = useState(props.preference)
-// when you go into one area, example drinking,
-// you change drinking sec
+// working progress
 router.patch("/users/:id/preferences", (req, res) => {
   const userId = req.params.id;
   const {preferences} = req.body;
@@ -152,17 +148,6 @@ router.patch("/users/:id/preferences", (req, res) => {
   
   
   `
-})
-
-// UPDATE table_name
-// SET column1 = value1, column2 = value2...., columnN = valueN
-// WHERE [condition];
-//
-
-// # Example looking @ user "1"
-// SELECT
-// FROM
-// WHERE
-//   from_user_id = $1
+});
 
 module.exports = router;
