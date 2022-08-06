@@ -18,7 +18,13 @@ const App = () => {
     ])
     .then((all) => {
       console.log('all', all);
-      setState({...state, users: all[0].data, user: all[1].data, messages: all[2].data, likedBy: all[3].data, matches: all[4].data});
+      setState({...state, 
+        users: all[0].data, 
+        user: all[1].data, 
+        messages: all[2].data, 
+        likedBy: all[3].data, 
+        matches: all[4].data, 
+        preferences: all[5].data});
     }) 
   }, []);
 
@@ -32,6 +38,20 @@ const App = () => {
       });
   }
 
+  const updatePreferences = (min_age, max_age, location, min_height_in_cm, max_height_in_cm, genders, drinks, exercise, dating_goals) => {
+    const newPref = {
+      ...state.preferences,
+      min_age, max_age, location, min_height_in_cm, max_height_in_cm, genders, drinks, exercise, dating_goals
+    };
+    setState({...state, preferences: newPref});
+    
+    axios.post('/api/users/1/preferences', state.preferences)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch(error => console.log(error));
+  }
+
   return (
     <div className="App">
       <button>
@@ -39,7 +59,10 @@ const App = () => {
       </button>        
       <button onClick={() => swipeUser(3, true)}> 
         Post Data       
-      </button>        
+      </button>
+      <button onClick={() => updatePreferences(18, 30, 'Las Vegas', 175, 188, 2, 1, 3, 3)}>
+        Set Preferences  
+      </button>
     </div>
   );
 }
