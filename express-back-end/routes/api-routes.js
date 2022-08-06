@@ -87,21 +87,6 @@ router.get("/users/:id/likedBy", (req, res) => {
 });
 
 
-// do we need list of blocked? or request db on every message post?
-router.get("/users/:id/blocked", (req, res) => {
-  const userId = req.params.id;
-  const query = `
-    SELECT from_user_id block_users
-    WHERE blocked_by_user_id = $1;
-  `;
-  return db
-    .query(query, [userId])
-    .then(({ rows: allBlocked }) => {
-      res.json(allBlocked);
-    })
-    .catch((error) => console.log("err", error));
-});
-
 
 router.post("/users/:id/blocked", (req, res) => {
   const userId = req.params.id;

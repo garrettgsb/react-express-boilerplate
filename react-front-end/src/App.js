@@ -37,10 +37,10 @@ const App = () => {
 
   const blockUser = (blockId) => {
     axios.post('/api/users/1/blocked', {blockId})
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }
