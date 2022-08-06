@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import Nav from "./components/Nav";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  Redirect,
+} from "react-router-dom";
+//pages
+import MainPage from "./pages/main";
+import About from "./pages/about";
+import Search from "./pages/search";
+import Match from "./pages/match";
+import Login from './pages/login';
+import SignUp from './pages/signup';
 
 class App extends Component {
   constructor(props) {
@@ -25,12 +40,18 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>        
-      </div>
+      <Router>
+        <Nav/>
+        <Routes>
+          <Route path="/" element={<MainPage />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/search" element={<Search />}></Route>
+          <Route path="/match" element={<Match />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
+
+        </Routes>
+      </Router>
     );
   }
 }
