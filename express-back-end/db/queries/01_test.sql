@@ -9,3 +9,15 @@
       WHERE users.id = 2 AND user_photos.is_profile is TRUE;
       
     
+
+  UPDATE preferences
+  SET min_age = 20,
+      max_age = 30,
+      location = 'Hawaii',
+      min_height_in_cm = 175,
+      max_height_in_cm = 188,
+      gender_id = 2,
+      drink_id = 1,
+      exercise_id = 1,
+      dating_goal_id =2 
+  WHERE user_id = 1;

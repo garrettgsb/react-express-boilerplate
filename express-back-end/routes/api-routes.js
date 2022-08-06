@@ -86,8 +86,6 @@ router.get("/users/:id/likedBy", (req, res) => {
     .catch((error) => console.log("err", error));
 });
 
-
-
 router.post("/users/:id/blocked", (req, res) => {
   const userId = req.params.id;
   const { blockId } = req.body;
@@ -105,14 +103,6 @@ router.post("/users/:id/blocked", (req, res) => {
     })
     .catch((error) => console.log("err:", error));
 });
-
-
-
-
-
-
-
-
 
 // Get request for list of confirmed matches for a user
 router.get("/users/:id/matchings", (req, res) => {
@@ -171,13 +161,10 @@ router.post("/users/:id/matchings", (req, res) => {
     .catch((error) => console.log("err:", error));
 });
 
-// working progress
+// Post request to update user's preferences in db
 router.post("/users/:id/preferences", (req, res) => {
   const userId = req.params.id;
   const preferences = req.body;
-
-  console.log("preferences", preferences)
-
   const query =`
   UPDATE preferences
   SET min_age = $1,
@@ -187,9 +174,10 @@ router.post("/users/:id/preferences", (req, res) => {
       max_height_in_cm = $5,
       gender_id = $6,
       drink_id = $7,
-      exercise =$8,
-      dating_goal_id =$9
-  WHERE users.id = $10;
+      exercise_id = $8,
+      dating_goal_id =$9 
+  WHERE user_id = $10
+  RETURNING *;
   `;
 
   return db
