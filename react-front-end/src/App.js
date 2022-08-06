@@ -31,6 +31,17 @@ const App = () => {
       });
   }
 
+  const blockUser = (blockId) => {
+    axios.post('/api/users/1/blocked', {blockId})
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
   return (
     <div className="App">
       <button onClick={fetchData} >
@@ -38,6 +49,9 @@ const App = () => {
       </button>        
       <button onClick={() => swipeUser(3, true)}> 
         Post Data       
+      </button>        
+      <button onClick={() => blockUser(4)}> 
+        Block user       
       </button>        
     </div>
   );
