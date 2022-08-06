@@ -18,7 +18,7 @@ CREATE TABLE users (
   password VARCHAR(20) NOT NULL,
   bio TEXT NOT NULL,
   age INTEGER NOT NULL,
-  gender_id TEXT NOT NULL,
+  gender_id INTEGER NOT NULL,
   location VARCHAR(255) NOT NULL,
   height_in_cm INTEGER NOT NULL,
   education VARCHAR(255) NOT NULL,

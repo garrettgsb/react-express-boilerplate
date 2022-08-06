@@ -21,6 +21,8 @@ const App = () => {
     }) 
   }, []);
 
+
+  // like user
   const swipeUser = (toId, like) => {
     axios.post('/api/users/1/matchings', {toId, like})
       .then(function (response) {
@@ -30,6 +32,19 @@ const App = () => {
         console.log(error);
       });
   }
+
+// block user
+
+  const blockUser = (blockId) => {
+    axios.post('/api/users/1/blocked', {blockId})
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 
   // LOGIN AND SIGNOUT - everything in here will likely need to be moved to login page when we start working on front end
   // DISCUSS: either keep pw as strings or implement bcrpyt later on
@@ -64,6 +79,7 @@ const App = () => {
   }
   // END OF SIGN OUT
 
+
   return (
     <div className="App">
       <button>
@@ -71,7 +87,12 @@ const App = () => {
       </button>        
       <button onClick={() => swipeUser(3, true)}> 
         Post Data       
-      </button>     
+      </button>        
+      <button onClick={() => blockUser(4)}> 
+        Block user       
+      </button>        
+
+    
 
       <div>
         <form>
@@ -87,6 +108,7 @@ const App = () => {
           Sign Out
         </button>
       </div>
+
     </div>
   );
 }
