@@ -86,8 +86,6 @@ router.get("/users/:id/likedBy", (req, res) => {
     .catch((error) => console.log("err", error));
 });
 
-
-
 router.post("/users/:id/blocked", (req, res) => {
   const userId = req.params.id;
   const { blockId } = req.body;
@@ -105,14 +103,6 @@ router.post("/users/:id/blocked", (req, res) => {
     })
     .catch((error) => console.log("err:", error));
 });
-
-
-
-
-
-
-
-
 
 // Get request for list of confirmed matches for a user
 router.get("/users/:id/matchings", (req, res) => {
@@ -171,17 +161,46 @@ router.post("/users/:id/matchings", (req, res) => {
     .catch((error) => console.log("err:", error));
 });
 
-// working progress
-router.patch("/users/:id/preferences", (req, res) => {
+// Post request to update user's preferences in db
+router.post("/users/:id/preferences", (req, res) => {
   const userId = req.params.id;
-  const {preferences} = req.body;
+  const preferences = req.body;
   const query =`
-  UPDATE users
-  SET 
-    
-  
-  
-  `
+  UPDATE preferences
+  SET min_age = $1,
+      max_age = $2,
+      location = $3,
+      min_height_in_cm = $4,
+      max_height_in_cm = $5,
+      gender_id = $6,
+      drink_id = $7,
+      exercise_id = $8,
+      dating_goal_id =$9 
+  WHERE user_id = $10
+  RETURNING *;
+  `;
+
+  return db
+    .query(query, [preferences.min_age, preferences.max_age, preferences.location, preferences.min_height_in_cm, preferences.max_height_in_cm, preferences.genders, preferences.drinks, preferences.exercise, preferences.dating_goals, userId])
+    .then(({rows: userPreferences}) => {
+      res.json(userPreferences);
+    })
+    .catch(error => console.log("error:", error))
 });
+
+// get request to get users preferences
+router.get("/users/:id/preferences", (req, res) => {
+  const userId = req.params.id;
+  const query = `
+    SELECT * FROM preferences
+    WHERE id = $1;
+  `
+  return db
+    .query(query, [userId])
+    .then(({ rows: userPreferences }) => {
+      res.json(userPreferences[0]);
+    })
+    .catch((error) => console.log("err:", error));
+})
 
 module.exports = router;

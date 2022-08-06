@@ -13,11 +13,18 @@ const App = () => {
       axios.get('/api/users/1'),
       axios.get('/api/users/1/messages'),
       axios.get('/api/users/1/likedBy'),
-      axios.get('/api/users/1/matchings')
+      axios.get('/api/users/1/matchings'),
+      axios.get('/api/users/1/preferences')
     ])
     .then((all) => {
       console.log('all', all);
-      setState({...state, users: all[0].data, user: all[1].data, messages: all[2].data, likedBy: all[3].data, matches: all[4].data});
+      setState({...state, 
+        users: all[0].data, 
+        user: all[1].data, 
+        messages: all[2].data, 
+        likedBy: all[3].data, 
+        matches: all[4].data, 
+        preferences: all[5].data});
     }) 
   }, []);
 
@@ -31,10 +38,25 @@ const App = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
+  
+  // Makes post request when preferences update
+  useEffect(() => {
+    axios.post('/api/users/1/preferences', state.preferences)
+    .then(() => {})
+    .catch(error => console.log(error));
+  }, [state.preferences]);
 
+  // Update users preferences state
+  const updatePreferences = (min_age, max_age, location, min_height_in_cm, max_height_in_cm, genders, drinks, exercise, dating_goals) => {
+    const newPref = {
+      ...state.preferences,
+      min_age, max_age, location, min_height_in_cm, max_height_in_cm, genders, drinks, exercise, dating_goals
+    };
+    setState({...state, preferences: newPref});
+  };
+  
 // block user
-
   const blockUser = (blockId) => {
     axios.post('/api/users/1/blocked', {blockId})
       .then((response) => {
@@ -43,8 +65,7 @@ const App = () => {
       .catch((error) => {
         console.log(error);
       });
-  }
-
+  };
 
   // LOGIN AND SIGNOUT - everything in here will likely need to be moved to login page when we start working on front end
   // DISCUSS: either keep pw as strings or implement bcrpyt later on
@@ -87,12 +108,13 @@ const App = () => {
       </button>        
       <button onClick={() => swipeUser(3, true)}> 
         Post Data       
-      </button>        
+      </button>
+      <button onClick={ () => updatePreferences(18, 30, 'Sydney', 175, 188, 2, 1, 3, 3)}>
+        Set Preferences  
+      </button>      
       <button onClick={() => blockUser(4)}> 
         Block user       
       </button>        
-
-    
 
       <div>
         <form>
