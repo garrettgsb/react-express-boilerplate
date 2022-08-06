@@ -28,6 +28,8 @@ const App = () => {
     }) 
   }, []);
 
+
+  // like user
   const swipeUser = (toId, like) => {
     axios.post('/api/users/1/matchings', {toId, like})
       .then(function (response) {
@@ -51,6 +53,52 @@ const App = () => {
     })
     .catch(error => console.log(error));
   }
+// block user
+
+  const blockUser = (blockId) => {
+    axios.post('/api/users/1/blocked', {blockId})
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+
+  // LOGIN AND SIGNOUT - everything in here will likely need to be moved to login page when we start working on front end
+  // DISCUSS: either keep pw as strings or implement bcrpyt later on
+  // initial state of these empty string
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const handleClickLogIn = (e) => {
+    // prevent default action of a button type = submit 
+    e.preventDefault();
+    axios.post('/login', {username, password})
+      .then((response) => {
+        if (!response.data) {
+          // do error alert
+          console.log('no login msg', response);
+        } else {
+          setUsername('');
+          setPassword('');
+        }
+      })
+      .catch((error) => console.log('err:', error));
+  };
+  /// End of login and signout stuff
+
+  // SIGN OUT FUNCTION AND BUTTON
+  const handleClickLogOut = (e) => {
+    e.preventDefault();
+    console.log('Logn out clicked');
+    axios.post('/logout')
+      .then()
+      .catch((error) => console.log('err:', error));
+  }
+  // END OF SIGN OUT
+
 
   return (
     <div className="App">
@@ -62,7 +110,28 @@ const App = () => {
       </button>
       <button onClick={() => updatePreferences(18, 30, 'Las Vegas', 175, 188, 2, 1, 3, 3)}>
         Set Preferences  
-      </button>
+      </button>      
+      <button onClick={() => blockUser(4)}> 
+        Block user       
+      </button>        
+
+    
+
+      <div>
+        <form>
+          <label>Username</label>
+          <input type='text' name='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
+          <label>Password</label>
+          <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <button type='submit' onClick={handleClickLogIn}>
+            Log in
+          </button> 
+        </form>
+        <button type='submit' onClick={handleClickLogOut}>
+          Sign Out
+        </button>
+      </div>
+
     </div>
   );
 }
