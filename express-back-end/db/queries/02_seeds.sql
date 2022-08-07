@@ -44,9 +44,9 @@ VALUES
 
 
   INSERT INTO preferences 
-  (user_id) 
+  (user_id, gender_id, drink_id, exercise_id, dating_goal_id) 
 VALUES 
-(1),
-(2),
-(3),
-(4);
+(1, 1, 1, 1, 1),
+(2,2,2,2,2),
+(3,3,3,3,3),
+(4,1,1,1,1);
