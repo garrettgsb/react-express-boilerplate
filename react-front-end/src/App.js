@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import UserCardContainer from './components/UserCardContainer';
 
 const App = () => {
   const [state, setState] = useState({});
@@ -29,7 +30,6 @@ const App = () => {
   useEffect(() => {
     axios.get('/api/users/1/preferences')
       .then((results) => {
-        console.log("from axios get req:", results.data);
         setPreferences({...results.data});
       })
   }, []);
@@ -56,7 +56,6 @@ const App = () => {
     console.log('newPref', newPref);
     axios.post('/api/users/1/preferences', newPref)
     .then((results) => {
-      console.log('results:', results);
       setPreferences({...results.data})
     })
     .catch(error => console.log(error));
@@ -109,7 +108,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h4 className="text-3xl font-bold underline">
+      <h4 className="text-md font-bold">
         Hello World!
       </h4>
 
@@ -140,6 +139,12 @@ const App = () => {
           Sign Out
         </button>
       </div>
+
+      <UserCardContainer 
+        users={state.users}
+        preferences={preferences}
+        likedBy={state.likedBy}
+      />
 
     </div>
   );
