@@ -103,20 +103,20 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold underline">
+      <h4 className="text-3xl font-bold underline">
         Hello World!
-      </h1>
+      </h4>
 
-      <button>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
         unused button
       </button>        
-      <button onClick={() => swipeUser(3, true)}> 
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => swipeUser(3, true)}> 
         Post Data       
       </button>
-      <button onClick={ () => updatePreferences(18, 30, 'Sydney', 175, 188, 2, 1, 3, 3)}>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={ () => updatePreferences(18, 30, 'Sydney', 175, 188, 2, 1, 3, 3)}>
         Set Preferences  
       </button>      
-      <button onClick={() => blockUser(4)}> 
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => blockUser(4)}> 
         Block user       
       </button>        
 
