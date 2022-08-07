@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import Nav from "./Nav";
+
 
 const App = () => {
   const [state, setState] = useState({});
@@ -108,6 +110,9 @@ const App = () => {
 
 
   return (
+<>
+    <header></header>
+    <body>
     <div className="App">
       <h4 className="text-3xl font-bold underline">
         Hello World!
@@ -142,6 +147,8 @@ const App = () => {
       </div>
 
     </div>
+    </body>
+    </>
   );
 }
 
