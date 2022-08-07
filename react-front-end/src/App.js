@@ -51,7 +51,7 @@ const App = () => {
   const updatePreferences = () => {
     const newPref = {
       ...preferences,
-      location: 'tesrser'
+      location: 'testtt'
     };
     console.log('newPref', newPref);
     axios.post('/api/users/1/preferences', newPref)

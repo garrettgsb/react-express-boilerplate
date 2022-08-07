@@ -170,7 +170,6 @@ router.get("/users/:id/preferences", (req, res) => {
   `
   return db.query(query, [userId])
     .then(({ rows: userPreferences }) => {
-      console.log('users pref from db:', userPreferences[0]);
       res.json(userPreferences[0]);
     })
     .catch((error) => console.log("err:", error));
@@ -180,7 +179,6 @@ router.get("/users/:id/preferences", (req, res) => {
 router.post("/users/:id/preferences", (req, res) => {
   const userId = req.params.id;
   const preferences = req.body;
-  console.log('preferences in server', preferences);
   const query =`
   UPDATE preferences
   SET min_age = $1,
@@ -195,7 +193,6 @@ router.post("/users/:id/preferences", (req, res) => {
   WHERE user_id = $10
   RETURNING *;
   `;
-  console.log("before db", preferences);
   return db
     .query(query, [preferences.min_age, preferences.max_age, preferences.location, preferences.min_height_in_cm, preferences.max_height_in_cm, preferences.gender_id, preferences.drink_id, preferences.exercise_id, preferences.dating_goal_id, userId])
     .then(({rows: userPreferences}) => {
