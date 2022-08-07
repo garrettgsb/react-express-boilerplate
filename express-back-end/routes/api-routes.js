@@ -14,22 +14,35 @@ router.get("/users/:id/all", (req, res) => {
       FROM matchings
       WHERE from_user_id = $1 
       AND like_value is not null
+    ),
+    photos as (
+      SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
     )
-    SELECT * FROM users 
+    SELECT 
+      users.id, users.name, users.email, users.age, users.bio, users.gender_id, users.location, users.height_in_cm, users.education, users.occupation, users.drink_id, users.exercise_id, users.dating_goal_id, users.is_active, photos
+    FROM 
+      users 
     LEFT JOIN 
       matching_seen_cte 
     ON 
       users.id = matching_seen_cte.to_user_id
+    LEFT JOIN 
+      photos 
+    ON 
+      users.id = photos.user_id
     WHERE 
       users.id != $1
     AND users.id not in (
         select distinct to_user_id
         from matching_seen_cte)
-    ;
+    GROUP BY
+      users.id,
+      photos.photos;
   `;
   return db
     .query(query, [userId])
     .then(({ rows: users }) => {
+      console.log('in db', users);
       res.json(users);
     })
     .catch((error) => console.log("err:", error));
@@ -196,7 +209,6 @@ router.post("/users/:id/preferences", (req, res) => {
   return db
     .query(query, [preferences.min_age, preferences.max_age, preferences.location, preferences.min_height_in_cm, preferences.max_height_in_cm, preferences.gender_id, preferences.drink_id, preferences.exercise_id, preferences.dating_goal_id, userId])
     .then(({rows: userPreferences}) => {
-      console.log('after db:', userPreferences[0]);
       res.json(userPreferences[0]);
     })
     .catch(error => console.log("error:", error))
