@@ -4,6 +4,7 @@ import './App.css';
 
 const App = () => {
   const [state, setState] = useState({});
+  const [preferences, setPreferences] = useState({});
   
   // promise chain for setting initial states
   // Depency: Will likely depend on swiping state
@@ -14,20 +15,24 @@ const App = () => {
       axios.get('/api/users/1/messages'),
       axios.get('/api/users/1/likedBy'),
       axios.get('/api/users/1/matchings'),
-      axios.get('/api/users/1/preferences')
     ])
     .then((all) => {
-      console.log('all', all);
       setState({...state, 
         users: all[0].data, 
         user: all[1].data, 
         messages: all[2].data, 
         likedBy: all[3].data, 
-        matches: all[4].data, 
-        preferences: all[5].data});
+        matches: all[4].data});
     }) 
   }, []);
 
+  useEffect(() => {
+    axios.get('/api/users/1/preferences')
+      .then((results) => {
+        console.log("from axios get req:", results.data);
+        setPreferences({...results.data});
+      })
+  }, []);
 
   // like user
   const swipeUser = (toId, like) => {
@@ -39,21 +44,22 @@ const App = () => {
         console.log(error);
       });
   };
-  
   // Makes post request when preferences update
-  useEffect(() => {
-    axios.post('/api/users/1/preferences', state.preferences)
-    .then(() => {})
-    .catch(error => console.log(error));
-  }, [state.preferences]);
 
   // Update users preferences state
-  const updatePreferences = (min_age, max_age, location, min_height_in_cm, max_height_in_cm, genders, drinks, exercise, dating_goals) => {
+  // need to pass preference key and new value as obj
+  const updatePreferences = () => {
     const newPref = {
-      ...state.preferences,
-      min_age, max_age, location, min_height_in_cm, max_height_in_cm, genders, drinks, exercise, dating_goals
+      ...preferences,
+      location: 'tesrser'
     };
-    setState({...state, preferences: newPref});
+    console.log('newPref', newPref);
+    axios.post('/api/users/1/preferences', newPref)
+    .then((results) => {
+      console.log('results:', results);
+      setPreferences({...results.data})
+    })
+    .catch(error => console.log(error));
   };
   
 // block user
@@ -109,7 +115,7 @@ const App = () => {
       <button onClick={() => swipeUser(3, true)}> 
         Post Data       
       </button>
-      <button onClick={ () => updatePreferences(18, 30, 'Sydney', 175, 188, 2, 1, 3, 3)}>
+      <button onClick={updatePreferences}>
         Set Preferences  
       </button>      
       <button onClick={() => blockUser(4)}> 
