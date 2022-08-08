@@ -19,7 +19,7 @@ router.get("/users/:id/all", (req, res) => {
       SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
     )
     SELECT 
-      users.id, users.name, users.email, users.age, users.bio, users.gender_id, users.location, users.height_in_cm, users.education, users.occupation, users.drink_id, users.exercise_id, users.dating_goal_id, users.is_active, photos
+      users.id, users.name, users.email, users.age, users.bio, genders.value AS gender, users.location, users.height_in_cm, users.education, users.occupation, drinks.value AS drinks, exercises.value AS exercises, dating_goals.value as goal, users.is_active, photos
     FROM 
       users 
     LEFT JOIN 
@@ -30,6 +30,10 @@ router.get("/users/:id/all", (req, res) => {
       photos 
     ON 
       users.id = photos.user_id
+    LEFT JOIN genders ON users.gender_id = genders.id
+    LEFT JOIN drinks ON users.drink_id = drinks.id
+    LEFT JOIN exercises ON users.exercise_id = exercises.id
+    LEFT JOIN dating_goals ON users.dating_goal_id = dating_goals.id
     WHERE 
       users.id != $1
     AND users.id not in (
@@ -37,7 +41,11 @@ router.get("/users/:id/all", (req, res) => {
         from matching_seen_cte)
     GROUP BY
       users.id,
-      photos.photos;
+      photos.photos,
+      genders.value,
+      drinks.value,
+      exercises.value,
+      dating_goals.value;
   `;
   return db
     .query(query, [userId])
