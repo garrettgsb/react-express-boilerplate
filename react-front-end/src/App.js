@@ -113,7 +113,7 @@ const App = () => {
 <>
     <header> <Nav state={state}/></header>
     
-    {/* <body>
+    <body>
     <div className="App">
       <h4 className="text-3xl font-bold underline">
         Hello World!
@@ -148,7 +148,7 @@ const App = () => {
       </div>
 
     </div>
-    </body> */}
+    </body>
     </>
   );
 }
