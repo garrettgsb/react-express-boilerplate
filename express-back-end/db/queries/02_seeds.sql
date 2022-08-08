@@ -4,7 +4,8 @@ VALUES
   ('Brennan Padilla','ectus.quis@icloud.com', '1111', 'lorem bio', 25, 1, 'Vancouver', 180 , 'high school', 'student', 1, 2, 1, true),
   ('Belle Hendrick','quis@hotmail.couk', '1111', 'lorem bio', 30, 0, 'Toronto', 155 , 'University', 'Barista', 1, 2, 1, true),
   ('dfasdf Hendrick','fddfsdf@hotmail.couk', '1111', 'lorem bio', 22, 1, 'Vancouver', 145 , 'high school', 'student', 1, 2, 1, true),
-  ('new person','new@hotmail.couk', '1111', 'lorem bio', 50, 1, 'Vancouver', 199 , 'high school', 'Plumber', 1, 2, 1, true);
+  ('new person','new@hotmail.couk', '1111', 'lorem bio', 50, 1, 'Vancouver', 199 , 'high school', 'Plumber', 1, 2, 1, true),
+  ('New User 5','fddfsdf@hotmail.couk', '1111', 'lorem bio', 22, 1, 'Vancouver', 145 , 'high school', 'student', 1, 2, 1, true);
 
 
 INSERT INTO user_photos (user_id, url, is_profile)
@@ -17,7 +18,9 @@ VALUES
 (3, 'https://images.hola.com/us/images/025b-0ee0dbb57971-3e4d042ce881-1000/vertical-800/ana-de-armas-luciendo-sus-looks-de-cabello-oscuro.jpg', false),
 (4, 'https://www.xtrafondos.com/wallpapers/vertical/ana-de-armas-en-photoshoot-5501.jpg', false),
 (4, 'https://www.xtrafondos.com/wallpapers/vertical/ana-de-armas-2020-6113.jpg', true),
-(4, 'https://images.hola.com/us/images/025b-0ee0dbb57971-3e4d042ce881-1000/vertical-800/ana-de-armas-luciendo-sus-looks-de-cabello-oscuro.jpg', false);
+(4, 'https://images.hola.com/us/images/025b-0ee0dbb57971-3e4d042ce881-1000/vertical-800/ana-de-armas-luciendo-sus-looks-de-cabello-oscuro.jpg', false),
+(5, 'https://media.vogue.co.uk/photos/5e81ba5e138bdd00089677d9/2:3/w_2560%2Cc_limit/shutterstock_editorial_10576430d.jpg', true),
+(5, 'https://media.glamour.com/photos/617ed8cd81d28bb722b6812b/master/pass/1194078278', false);
 
 
 INSERT INTO messages (from_user_id, to_user_id, message, message_seen, date_sent) 
