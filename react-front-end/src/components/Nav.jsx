@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, useEffect, useState} from "react";
 import {
   PlusCircleIcon,
   UserGroupIcon,
@@ -13,8 +13,13 @@ import {
 
 export default function Nav(props) {
   const [open, setOpen] = useState(false)
-  const user = props.state.user[0] 
-  // const user = {}
+  let user
+  console.log(user)
+  // useEffect(() =>{
+  //   const user = props.state.user[0]
+  // },[])
+  props.state.user? user = props.state.user[0] : user = {Name: "", email : "", profile_photo: "" }
+  
   console.log(user)
   return (
   
