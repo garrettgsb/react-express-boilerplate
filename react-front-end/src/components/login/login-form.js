@@ -75,19 +75,19 @@ function LoginForm(props) {
           <p className="pl-8">Ava K</p>
           <div className="flex pr-20">
             <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="22" height="16" className="mr-1"></img>
-            <a href="https://github.com/avacadok" className="hover:text-fuchsia-800">avacadok</a>
+            <a href="https://github.com/avacadok" className="hover:text-fuchsia-800 text-gray-600">avacadok</a>
           </div>
 
           <p className="flex pr-16 pl-12">Denis K</p>
           <div className="flex">
             <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="22" height="16" className="mr-1 ml-7"></img>
-            <a href="https://github.com/ukflava" className="hover:text-fuchsia-800">ukflava</a>
+            <a href="https://github.com/ukflava" className="hover:text-fuchsia-800 text-gray-600">ukflava</a>
           </div>
 
           <p className="flex pl-20">Phil Y</p>
           <div className="flex pl-8">
             <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="22" height="16" className="mr-1"></img>
-            <a href="https://github.com/josemourinho333" className="hover:text-fuchsia-800">josemourinho333</a>
+            <a href="https://github.com/josemourinho333" className="hover:text-fuchsia-800 text-gray-600">josemourinho333</a>
           </div>
         </div>
       </div>
