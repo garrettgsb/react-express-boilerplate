@@ -18,3 +18,16 @@
 .more-info-carousel > div {
   font-weight: 300;
 }
+
+.user-card-container {
+  display: grid;
+  min-height: 0;
+  min-width: 0;
+  justify-items: center;
+} 
+
+.keen-tinder-card {
+  grid-area: 1 / 1 / 2 / 2;
+  overflow: hidden;
+  min-width: 0;
+}

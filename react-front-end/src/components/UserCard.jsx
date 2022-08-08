@@ -40,7 +40,7 @@ const UserCard = (props) => {
   };
 
   return (
-    <article className="user-profile flex flex-col user-card w-1/3 drop-shadow-2xl h-full rounded-xl overflow-y-scroll" id={props.id}>
+    <article className="user-profile flex flex-col user-card w-full drop-shadow-2xl h-full rounded-xl overflow-y-scroll" id={props.id}>
       <div className="user-photos-container rounded-t-xl h-3/4">
         <img src={props.photos[pager]} alt=""/>
       </div>
