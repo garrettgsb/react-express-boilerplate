@@ -26,7 +26,7 @@ function LoginForm(props) {
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-full">
       <div className="flex justify-center items-center mt-10 mb-10 ">
         <img src="https://media.istockphoto.com/photos/loving-couple-on-the-seashore-happy-valentines-day-picture-id1290253065?k=20&m=1290253065&s=612x612&w=0&h=zz7C8qIsECPkmF0Tgo3EIOdQ91tbERXaOGuaSli3YLM=" className=" max-w-full h-auto rounded drop-shadow-xl" />
 
@@ -67,21 +67,28 @@ function LoginForm(props) {
         </form>
       </div>
       <div >
-        <p className="text-l font-bold flex justify-center">
+        <p className="text-l font-bold flex justify-center mb-10">
           Created By
         </p>
 
-        <div className="grid grid-rows-2 grid-flow-col">
-          <p>Ava K</p>
-          <div className="flex ">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="20" height="20"></img>
-            <a href="https://github.com/avacadok">avacadok</a>
+        <div className="grid grid-rows-2 grid-flow-col place-content-center ">
+          <p className="pl-8">Ava K</p>
+          <div className="flex pr-20">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="22" height="16" className="mr-1"></img>
+            <a href="https://github.com/avacadok" className="hover:text-fuchsia-800">avacadok</a>
           </div>
-          
-          <p>Denis K</p>
-          <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="20" height="20"></img>
-          <p>Phil Y</p>
-          <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="20" height="20"></img>
+
+          <p className="flex pr-16 pl-12">Denis K</p>
+          <div className="flex">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="22" height="16" className="mr-1 ml-7"></img>
+            <a href="https://github.com/ukflava" className="hover:text-fuchsia-800">ukflava</a>
+          </div>
+
+          <p className="flex pl-20">Phil Y</p>
+          <div className="flex pl-8">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="22" height="16" className="mr-1"></img>
+            <a href="https://github.com/josemourinho333" className="hover:text-fuchsia-800">josemourinho333</a>
+          </div>
         </div>
       </div>
 
