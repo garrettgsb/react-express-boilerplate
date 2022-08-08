@@ -50,7 +50,6 @@ router.get("/users/:id/all", (req, res) => {
   return db
     .query(query, [userId])
     .then(({ rows: users }) => {
-      console.log('in db', users);
       res.json(users);
     })
     .catch((error) => console.log("err:", error));
