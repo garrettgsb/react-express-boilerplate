@@ -59,12 +59,19 @@ router.get("/users/:id/all", (req, res) => {
 router.get("/users/:id", (req, res) => {
   const userId = req.params.id;
   const query = `
-  SELECT users.id, users.name, users.email, users.password, users.bio, users.age, users.is_active, genders.value AS Gender, drinks.value AS Drink, exercises.value AS Exercise, dating_goals.value AS Goal, user_photos.url AS Profile_photo
+  WITH photos as (
+    SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
+  )
+  SELECT users.id, users.name, users.email, users.bio, users.age, users.education, users.location, users.height_in_cm, users.occupation, users.is_active, genders.value AS gender, drinks.value AS drinks, exercises.value AS exercises, dating_goals.value AS goal, user_photos.url AS profile_photo, photos
       FROM users
       LEFT JOIN genders ON users.gender_id = genders.id
       LEFT JOIN drinks ON users.drink_id = drinks.id
       LEFT JOIN exercises ON users.exercise_id = exercises.id
       LEFT JOIN dating_goals ON users.dating_goal_id = dating_goals.id
+      LEFT JOIN 
+      photos 
+    ON 
+      users.id = photos.user_id
       LEFT JOIN user_photos ON user_photos.user_id = users.id
       WHERE users.id = $1 AND user_photos.is_profile is TRUE;
   `;
@@ -96,7 +103,8 @@ router.get("/users/:id/likedBy", (req, res) => {
   const userId = req.params.id;
   const query = `
     SELECT from_user_id FROM matchings
-    WHERE to_user_id = $1;
+    WHERE to_user_id = $1
+    AND like_value = true;
   `;
   return db
     .query(query, [userId])
@@ -140,18 +148,19 @@ router.get("/users/:id/matchings", (req, res) => {
       AND A.like_value
       AND B.like_value
       AND A.from_user_id = $1
+    ),
+    photos as (
+      SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
     )
-    SELECT DISTINCT
+    SELECT
       users.id,
       users.name,
-      user_photos.url
+      photos
     FROM 
       matched_users
     INNER JOIN users 
       ON users.id = matched_users.to_user_id
-    INNER JOIN user_photos
-      ON user_photos.user_id = matched_users.to_user_id
-    LIMIT 1;
+    LEFT JOIN photos ON users.id = photos.user_id;
   `;
   return db
     .query(query, [userId])

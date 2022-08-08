@@ -33,8 +33,9 @@ INSERT INTO matchings (from_user_id, to_user_id, like_value, seen, matched_date)
 VALUES 
 (1, 2, true, true, CURRENT_TIMESTAMP),
 (2, 1, true, true, CURRENT_TIMESTAMP),
-(3, 1, true, true, CURRENT_TIMESTAMP);
-
+(3, 1, false, true, CURRENT_TIMESTAMP),
+(4, 1, true, true, CURRENT_TIMESTAMP),
+(5, 1, true, true, CURRENT_TIMESTAMP);
 
 INSERT INTO genders (value) 
 VALUES 
