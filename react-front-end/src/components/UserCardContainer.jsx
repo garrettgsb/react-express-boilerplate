@@ -5,20 +5,24 @@ import TinderCard from 'react-tinder-card';
 
 const UserCardContainer = (props) => {
 
-  // Helper to decide what happens when swiped left or right
-  const onSwipe = (direction) => {
-    console.log('You swiped: ' + direction)
+  // Helper to decide what to do after cards left
+  const onCardLeftScreen = (id) => {
+    console.log(id + ' left the screen')
   };
 
-  // Helper to decide what to do after cards left
-  const onCardLeftScreen = (myIdentifier) => {
-    console.log(myIdentifier + ' left the screen')
+  // Helper to decide what happens when swiped left or right
+  const onSwipe = (direction, id) => {
+    if (direction === 'right') {
+      props.swipeUser(id, true);
+    } else if (direction === 'left') {
+      props.swipeUser(id, false);
+    }
   };
 
   // Map over users and render profile cards
   const userCards = props.users?.map((user) => {
     return (
-      <TinderCard onSwipe={onSwipe} onCardLeftScreen={() => onCardLeftScreen('fooBar')} preventSwipe={['right', 'left']} className="keen-tinder-card w-1/3">
+      <TinderCard onSwipe={(direction) => onSwipe(direction, user.id)} onCardLeftScreen={() => onCardLeftScreen(user.id)} className="keen-tinder-card w-1/3 rounded-xl drop-shadow-2xl" key={user.id}>
         <UserCard 
           key={user.id}
           id={user.id}
@@ -40,6 +44,8 @@ const UserCardContainer = (props) => {
     )
   });
 
+  
+  
   return (
       <section className="user-card-container border-8 border-red-500 w-full h-screen place-content-center p-5">
         {userCards ? userCards : "Loading" }

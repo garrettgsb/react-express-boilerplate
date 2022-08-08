@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import UserCardContainer from './components/UserCardContainer';
+import UserCard from './components/UserCard';
 
 const App = () => {
   const [state, setState] = useState({});
@@ -34,13 +35,16 @@ const App = () => {
       })
   }, []);
 
-  // like user
+  // like user - takes in swiped on Ids and like value:boolean
   const swipeUser = (toId, like) => {
+    console.log("your swiped data in app.js:", {toId, like});
     axios.post('/api/users/1/matchings', {toId, like})
       .then(function (response) {
+        console.log('success');
         console.log(response);
       })
       .catch(function (error) {
+        console.log('nope');
         console.log(error);
       });
   };
@@ -144,8 +148,15 @@ const App = () => {
         users={state.users}
         preferences={preferences}
         likedBy={state.likedBy}
+        swipeUser={swipeUser}
+        profile={false}
       />
 
+      <UserCardContainer 
+        user={state.user}
+        profile={true}
+      />
+      
     </div>
   );
 }

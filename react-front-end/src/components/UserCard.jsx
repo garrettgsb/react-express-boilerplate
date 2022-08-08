@@ -40,7 +40,7 @@ const UserCard = (props) => {
   };
 
   return (
-    <article className="user-profile flex flex-col user-card w-full drop-shadow-2xl h-full rounded-xl overflow-y-scroll" id={props.id}>
+    <article className="user-profile flex flex-col user-card w-full h-full overflow-y-scroll" id={props.id}>
       <div className="user-photos-container rounded-t-xl h-3/4">
         <img src={props.photos[pager]} alt=""/>
       </div>
@@ -70,6 +70,7 @@ const UserCard = (props) => {
         <div className="more-info-carousel grid grid-cols-2 my-2 gap-2">
           <div className="gender flex align-center"><UserIcon className="h-5 w-5 mr-2" />{formatText(props.gender)}</div>
           <div className="age flex"><CakeIcon className="h-5 w-5 mr-2" />{props.age}</div>
+          <div className="age flex"><MapIcon className="h-5 w-5 mr-2" />{props.location}</div>
           <div className="job flex"><BriefcaseIcon className="h-5 w-5 mr-2" />{formatText(props.occupation)}</div>
           <div className="edu flex"><AcademicCapIcon className="h-5 w-5 mr-2" />{formatText(props.education)}</div>
           <div className="height flex"><ChartBarIcon className="h-5 w-5 mr-2" />{`${cmToFeet(props.height)}`} / {props.height}cm</div>
