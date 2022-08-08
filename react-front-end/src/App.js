@@ -7,6 +7,8 @@ import UserCard from './components/UserCard';
 const App = () => {
   const [state, setState] = useState({});
   const [preferences, setPreferences] = useState({});
+  const [matches, setMatches] = useState([])
+  const [swipeHistory, setSwipeHistory] = useState([]);
   
   // promise chain for setting initial states
   // Depency: Will likely depend on swiping state
@@ -15,16 +17,14 @@ const App = () => {
       axios.get('/api/users/1/all'),
       axios.get('/api/users/1'),
       axios.get('/api/users/1/messages'),
-      axios.get('/api/users/1/likedBy'),
-      axios.get('/api/users/1/matchings'),
+      axios.get('/api/users/1/likedBy')
     ])
     .then((all) => {
       setState({...state, 
         users: all[0].data, 
         user: all[1].data, 
         messages: all[2].data, 
-        likedBy: all[3].data, 
-        matches: all[4].data});
+        likedBy: all[3].data});
     }) 
   }, []);
 
@@ -35,17 +35,25 @@ const App = () => {
       })
   }, []);
 
+  // Separating matches so it has dependency to update
+  useEffect(() => {
+    axios.get('/api/users/1/matchings')
+      .then((matches) => {
+        console.log('matches', matches.data);
+        setMatches(prev => [...prev, ...matches.data]);
+      })
+  }, [swipeHistory])
+
   // like user - takes in swiped on Ids and like value:boolean
   const swipeUser = (toId, like) => {
     console.log("your swiped data in app.js:", {toId, like});
     axios.post('/api/users/1/matchings', {toId, like})
-      .then(function (response) {
-        console.log('success');
-        console.log(response);
+      .then((response) => {
+        const freshSwipe = response.data[0];
+        setSwipeHistory(prev => [...prev, freshSwipe])
       })
-      .catch(function (error) {
-        console.log('nope');
-        console.log(error);
+      .catch((error) => {
+        console.log('error', error);
       });
   };
   // Makes post request when preferences update
@@ -111,6 +119,7 @@ const App = () => {
 
 
   return (
+    
     <div className="App">
       {/* <h4 className="text-3xl font-bold">
         Hello World!
@@ -144,19 +153,19 @@ const App = () => {
         </button>
       </div> */}
 
-      <UserCardContainer 
+      {state.users && <UserCardContainer 
         users={state.users}
         preferences={preferences}
         likedBy={state.likedBy}
         swipeUser={swipeUser}
         profile={false}
-      />
+      />}
 
-      <UserCardContainer 
+      {state.user && <UserCardContainer 
         user={state.user}
         profile={true}
-      />
-      
+      />}
+
     </div>
   );
 }

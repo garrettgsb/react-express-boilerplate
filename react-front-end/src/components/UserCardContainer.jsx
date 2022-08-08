@@ -44,7 +44,37 @@ const UserCardContainer = (props) => {
     )
   });
 
-  
+  const userProfile = props.user?.map((user) => {
+    return (
+      <div className="keen-tinder-card w-1/3 rounded-xl drop-shadow-2xl" key={user.id}>
+        <UserCard 
+          key={user.id}
+          id={user.id}
+          name={user.name}
+          age={user.age}
+          bio={user.bio}
+          education={user.education}
+          occupation={user.occupation}
+          location={user.location}
+          goal={user.goal}
+          drinks={user.drinks}
+          exercises={user.exercises}
+          gender={user.gender}
+          height={user.height_in_cm}
+          isActive={user.is_active}
+          photos={user.photos}
+        />
+      </div>
+    )
+  });
+
+  if (props.profile) {
+    return (
+      <section className="user-card-container border-8 border-red-500 w-full h-screen place-content-center p-5">
+        { userProfile ? userProfile : "Loading" }
+      </section>
+    );
+  }
   
   return (
       <section className="user-card-container border-8 border-red-500 w-full h-screen place-content-center p-5">
