@@ -74,29 +74,6 @@ const App = () => {
       });
   };
 
-  // LOGIN AND SIGNOUT - everything in here will likely need to be moved to login page when we start working on front end
-  // DISCUSS: either keep pw as strings or implement bcrpyt later on
-  // initial state of these empty string
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  
-  const handleClickLogIn = (e) => {
-    // prevent default action of a button type = submit 
-    e.preventDefault();
-    axios.post('/login', {username, password})
-      .then((response) => {
-        if (!response.data) {
-          // do error alert
-          console.log('no login msg', response);
-        } else {
-          setUsername('');
-          setPassword('');
-        }
-      })
-      .catch((error) => console.log('err:', error));
-  };
-  /// End of login and signout stuff
-
   // SIGN OUT FUNCTION AND BUTTON
   const handleClickLogOut = (e) => {
     e.preventDefault();
