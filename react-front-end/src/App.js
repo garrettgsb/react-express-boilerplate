@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import Nav from "./Nav";
+import Nav from "./components/Nav";
 
 
 const App = () => {
@@ -111,7 +111,8 @@ const App = () => {
 
   return (
 <>
-    <header></header>
+    <header> <Nav /></header>
+    
     <body>
     <div className="App">
       <h4 className="text-3xl font-bold underline">
