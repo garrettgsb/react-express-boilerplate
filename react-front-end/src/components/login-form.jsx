@@ -58,7 +58,6 @@ function LoginForm(props) {
               <p className="sm:text-xs text-gray-600 text-right mt-3 border-b-2 pb-6">Forgot Password?</p>
 
               <div className="flex mt-7 justify-center">
-
                 <p className="sm:text-xs text-slate-900 pr-1">Don't have an account?</p>
                 <p className="sm:text-xs text-fuchsia-800">Sign up</p>
               </div>
@@ -91,7 +90,6 @@ function LoginForm(props) {
           </div>
         </div>
       </div>
-
     </div>
 
   )
