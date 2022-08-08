@@ -3,3 +3,18 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.user-profile::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.user-profile {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.more-info-carousel > div {
+  font-weight: 300;
+}

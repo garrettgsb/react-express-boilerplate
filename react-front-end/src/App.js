@@ -108,7 +108,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h4 className="text-md font-bold">
+      {/* <h4 className="text-3xl font-bold">
         Hello World!
       </h4>
 
@@ -138,7 +138,7 @@ const App = () => {
         <button type='submit' onClick={handleClickLogOut}>
           Sign Out
         </button>
-      </div>
+      </div> */}
 
       <UserCardContainer 
         users={state.users}
