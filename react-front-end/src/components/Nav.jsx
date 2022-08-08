@@ -19,30 +19,31 @@ export default function Nav() {
         <div className="flex space-x-6 mr-10">
         <HeartIcon className="h-10 cursor-pointer rounded-full shadow-sm hover:text-fuchsia-700" />
         <BellIcon className="h-10 cursor-pointer rounded-full hover:text-fuchsia-700" />
-        <UserCircleIcon className="h-10 cursor-pointer rounded-full hover:text-fuchsia-700" />
+        <UserCircleIcon className="h-10 cursor-pointer rounded-full hover:text-fuchsia-700 hover:shadow-l" />
 
 
 
-        <button type="button" onClick={() =>{setOpen(!open)}}>
+        <button className="dropdown-relative" type="button" onClick={() =>{setOpen(!open)}}>
         <img className="w-10 h-10 rounded-full" src="https://www.w3schools.com/howto/img_avatar.png" alt="user photo" />
         </button>
-<div>{open ? (<div className="my-40 list-none shadow dark:bg-gray-700 dark:divide-gray-600" data-dropdown-placement="bottom">
+<div>{open ? (<div className="fixed top-20 right-5  dropdown-toggle min-w-max items-right bg-white text-base z-50 float-right
+                        py-2 list-none text-down rounded-lg shadow-lg mt-1 mr-50 bg-clip-padding border-none">
         <div className="py-3 px-4">
           <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
           <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
         </div>
         <ul className="py-1" aria-labelledby="user-menu-button">
           <li>
-            <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+            <a href="/" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Home</a>
           </li>
           <li>
-            <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+            <a href="/settings" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Settings</a>
           </li>
           <li>
-            <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
+            <a href="/preferences" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Preferences</a>
           </li>
           <li>
-            <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+            <a href="/logout" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Sign out</a>
           </li>
         </ul>
       </div>) : (<p></p>)}</div>
@@ -77,7 +78,7 @@ export default function Nav() {
 
         </div>
         </div>
-        // </div>
+        </div>
   );
 }
 
