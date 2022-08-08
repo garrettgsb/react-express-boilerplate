@@ -1,4 +1,4 @@
-import React, { useState }from "react";
+import React, { useState } from "react";
 import axios from 'axios';
 
 function LoginForm(props) {
@@ -19,7 +19,7 @@ function LoginForm(props) {
         } else {
           setUsername('');
           setPassword('');
-
+          console.log("res: ", response)
         }
       })
       .catch((error) => console.log('err:', error));
@@ -27,23 +27,27 @@ function LoginForm(props) {
   /// End of login and signout stuff
 
   return (
-    <div className="flex flex-col justify-center items-center mt-20">
-      <form className="bg-white drop-shadow px-8 pt-6 pb-8 mb-4">
+    <div className="flex justify-center items-center mt-20">
+
+
+      <img src="https://media.istockphoto.com/photos/loving-couple-on-the-seashore-happy-valentines-day-picture-id1290253065?k=20&m=1290253065&s=612x612&w=0&h=zz7C8qIsECPkmF0Tgo3EIOdQ91tbERXaOGuaSli3YLM=" className=" max-w-full h-auto rounded-lg drop-shadow-2xl " />
+
+      <form className="bg-white drop-shadow px-8 pt-6 pb-8 mb-4 mix-blend-normal overflow-visible">
         <div className="form-inner">
           <h1 className="text-center mb-5 font-bold text-xl mt-10">Keen</h1>
           {/* error msg */}
           <div className="mb-3 pt-3">
-            <input 
-            onChange={(event) => setUsername(event.target.value)}
-            type="text" 
-            placeholder="Username/Email" 
-            className="px-1 py-1 w-full placeholder-slate-700 bg-gray-50 rounded-sm border border-gray-300 sm:text-xs focus:ring-fuchsia-800 focus:border-fuchsia-800 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-800 dark:focus:border-fuchsia-800" />
+            <input
+              onChange={(event) => setUsername(event.target.value)}
+              type="text"
+              placeholder="Username/Email"
+              className="px-1 py-1 w-full placeholder-slate-700 bg-gray-50 rounded-sm border border-gray-300 sm:text-xs focus:ring-fuchsia-800 focus:border-fuchsia-800 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-800 dark:focus:border-fuchsia-800" />
 
             <input
-            onChange={(event) => setPassword(event.target.value)}
-            type="text" 
-            placeholder="Password" 
-            className="px-1 py-1 mt-3 w-full placeholder-slate-700 bg-gray-50 rounded-sm border border-gray-300 sm:text-xs focus:ring-fuchsia-800 focus:border-fuchsia-800 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-800 dark:focus:border-fuchsia-800" />
+              onChange={(event) => setPassword(event.target.value)}
+              type="text"
+              placeholder="Password"
+              className="px-1 py-1 mt-3 w-full placeholder-slate-700 bg-gray-50 rounded-sm border border-gray-300 sm:text-xs focus:ring-fuchsia-800 focus:border-fuchsia-800 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-800 dark:focus:border-fuchsia-800" />
           </div>
 
           <div className="mb-3 pt-3">
