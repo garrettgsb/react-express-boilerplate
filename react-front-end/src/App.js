@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import UserCardContainer from './components/UserCardContainer';
-import UserCard from './components/UserCard';
+import { Routes, Route, Link } from 'react-router-dom';
 
 const App = () => {
   const [state, setState] = useState({});
@@ -39,7 +39,6 @@ const App = () => {
   useEffect(() => {
     axios.get('/api/users/1/matchings')
       .then((matches) => {
-        console.log('matches', matches.data);
         setMatches(prev => [...prev, ...matches.data]);
       })
   }, [swipeHistory])
@@ -117,54 +116,48 @@ const App = () => {
   }
   // END OF SIGN OUT
 
-
+  // Updating user profile 
+  const updateProfile = (newValues) => {
+    console.log('new profile values in app.js', newValues);
+    // make axios post call
+  };
+  // end of updating user profile
   return (
     
     <div className="App">
-      {/* <h4 className="text-3xl font-bold">
-        Hello World!
-      </h4>
+  
+      <Routes>
+        <Route path='/' element={
+          <>    
+            <button className="border border-black">
+              <Link to="/home">Home</Link>
+            </button>        
+            <button className="border border-black ml-2"> 
+              <Link to="/users/1">/users/:id/edit</Link>
+            </button>
+          </>
+        } />
 
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-        unused button
-      </button>        
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => swipeUser(3, true)}> 
-        Post Data       
-      </button>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={ () => updatePreferences(18, 30, 'Sydney', 175, 188, 2, 1, 3, 3)}>
-        Set Preferences  
-      </button>      
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => blockUser(4)}> 
-        Block user       
-      </button>        
+        <Route path='/home' element={
+          <UserCardContainer 
+            users={state.users}
+            preferences={preferences}
+            likedBy={state.likedBy}
+            swipeUser={swipeUser}
+            profile={false}
+          />
+        } />
 
-      <div>
-        <form>
-          <label>Username</label>
-          <input type='text' name='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
-          <label>Password</label>
-          <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-          <button type='submit' onClick={handleClickLogIn}>
-            Log in
-          </button> 
-        </form>
-        <button type='submit' onClick={handleClickLogOut}>
-          Sign Out
-        </button>
-      </div> */}
+        <Route path='/users/1' element={
+          <UserCardContainer 
+            user={state.user}
+            profile={true}
+            editMode={false}
+            updateProfile={updateProfile}
+          />
+        } />
 
-      {state.users && <UserCardContainer 
-        users={state.users}
-        preferences={preferences}
-        likedBy={state.likedBy}
-        swipeUser={swipeUser}
-        profile={false}
-      />}
-
-      {state.user && <UserCardContainer 
-        user={state.user}
-        profile={true}
-      />}
+      </Routes>
 
     </div>
   );

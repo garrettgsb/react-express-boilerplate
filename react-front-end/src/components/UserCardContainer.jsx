@@ -22,7 +22,7 @@ const UserCardContainer = (props) => {
   // Map over users and render profile cards
   const userCards = props.users?.map((user) => {
     return (
-      <TinderCard onSwipe={(direction) => onSwipe(direction, user.id)} onCardLeftScreen={() => onCardLeftScreen(user.id)} className="keen-tinder-card w-1/3 rounded-xl drop-shadow-2xl" key={user.id}>
+      <TinderCard onSwipe={(direction) => onSwipe(direction, user.id)} onCardLeftScreen={() => onCardLeftScreen(user.id)} className="keen-tinder-card w-full rounded-xl drop-shadow-2xl" key={user.id}>
         <UserCard 
           key={user.id}
           id={user.id}
@@ -44,9 +44,10 @@ const UserCardContainer = (props) => {
     )
   });
 
+  // Render User's profile (you)
   const userProfile = props.user?.map((user) => {
     return (
-      <div className="keen-tinder-card w-1/3 rounded-xl drop-shadow-2xl" key={user.id}>
+      <div className="keen-tinder-card w-full rounded-xl drop-shadow-2xl" key={user.id}>
         <UserCard 
           key={user.id}
           id={user.id}
@@ -63,18 +64,32 @@ const UserCardContainer = (props) => {
           height={user.height_in_cm}
           isActive={user.is_active}
           photos={user.photos}
+          profile={props.profile}
+          editMode={props.editMode}
+          updateProfile={props.updateProfile}
+          currentProfile={user}
         />
       </div>
     )
   });
 
-  if (props.profile) {
+  // Render your profile
+  if (props.profile && !props.editMode) {
     return (
       <section className="user-card-container border-8 border-red-500 w-full h-screen place-content-center p-5">
         { userProfile ? userProfile : "Loading" }
       </section>
     );
   }
+
+  // // Render your profile in edit mode
+  // if (props.profile && props.editMode) {
+  //   return (
+  //     <section className="user-card-container border-8 border-red-500 w-full h-screen place-content-center p-5">
+  //       { userProfile ? userProfile : "Loading" }
+  //     </section>
+  //   )
+  // }
   
   return (
       <section className="user-card-container border-8 border-red-500 w-full h-screen place-content-center p-5">

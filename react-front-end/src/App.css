@@ -24,6 +24,7 @@
   min-height: 0;
   min-width: 0;
   justify-items: center;
+  grid-template-columns: 30%;
 } 
 
 .keen-tinder-card {

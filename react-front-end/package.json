@@ -7,6 +7,8 @@
     "axios": "^0.18.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "react-tinder-card": "^1.4.5",
     "tailwindcss": "^3.1.8"
