@@ -122,7 +122,7 @@ const App = () => {
   };
   // end of updating user profile
   return (
-    <div className="App">
+    <div className="App h-screen overflow-y-hidden">
 
       <Routes>
         <Route path='/' element={
