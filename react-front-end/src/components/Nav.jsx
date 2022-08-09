@@ -18,10 +18,8 @@ import * as ROUTES from './routes';
 // Kept dropdown in this 
 
 export default function Nav(props) {
-  let user
-  const [open, setOpen] = useState(false)
-  console.log(user)
-
+  let user;
+  const [open, setOpen] = useState(false);
   // TRY USEEFECT TO SAVE PROPS
 
   // useEffect(() =>{
@@ -30,7 +28,6 @@ export default function Nav(props) {
 
   props.state.user? user = props.state.user[0] : user = {Name: "", email : "", profile_photo: "" }
   
-  console.log(user)
   return (
     <>
     <div className="grid content-center shadow-xl h-20 border-b big-white sticky top-0 z-50 ">
@@ -77,10 +74,10 @@ export default function Nav(props) {
             <p className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Preferences</p>
             </Link>
           </li>
-          <li>
-          <Link to={ROUTES.LOGOUT}>
+          <li> 
+          <button onClick={props.handleClickLogOut}>
             <p className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Sign out</p>
-            </Link>
+          </button>
           </li>
 
         </ul>

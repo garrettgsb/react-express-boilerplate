@@ -14,12 +14,11 @@ function LoginForm(props) {
     axios.post('/login', { username, password })
       .then((response) => {
         if (!response.data) {
-          // do error alert
-          console.log('no login msg', response);
+          props.setLoggedIn(false);
         } else {
           setUsername('');
           setPassword('');
-          console.log("res: ", response)
+          props.setLoggedIn(true);
         }
       })
       .catch((error) => console.log('err:', error));

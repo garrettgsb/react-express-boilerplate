@@ -21,6 +21,11 @@ const db = require("./db/database");
 const apiRoutes = require('./routes/api-routes');
 App.use('/api', apiRoutes);
 
+// return session.user_id value for checking log in state
+App.get('/loggedIn', (req, res) => {
+  res.json(req.session.user_id);
+});
+
 // POST REQUEST FOR LOGIN
 // Helper - move this to helpers.js later
 const validateUser = (email, pass) => {
@@ -43,6 +48,7 @@ App.post('/login', (req, res) => {
     .then((response) => {
       if (!response) {
         res.json(response);
+        res.redirect('/login');
       } else {
         req.session.user_id = response;
         res.redirect('/');
@@ -54,7 +60,7 @@ App.post('/login', (req, res) => {
 // POST REQUEST FOR LOG OUT
 App.post('/logout', (req, res) => {
   req.session = null;
-  res.redirect('/');
+  res.json(req.session);
 });
 // END OF LOG OUT
 

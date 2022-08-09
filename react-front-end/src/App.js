@@ -13,8 +13,22 @@ const App = () => {
   const [preferences, setPreferences] = useState({});
   const [matches, setMatches] = useState([])
   const [swipeHistory, setSwipeHistory] = useState([]);
-  
+  const [loggedIn, setLoggedIn] = useState(false);
 
+  // if req.session.user_id exists, set loggedIn to true
+  useEffect(() => {
+    axios.get('/loggedIn')
+      .then((results) => {
+        if (results.data) {
+          console.log('logged in');
+          setLoggedIn(true);
+        } else {
+          console.log('not logged in');
+          setLoggedIn(false);
+        }
+      })
+  }, [loggedIn]);
+  
   // promise chain for setting initial states
   // Depency: Will likely depend on swiping state
   useEffect(() => {
@@ -93,7 +107,10 @@ const App = () => {
     e.preventDefault();
     console.log('Logn out clicked');
     axios.post('/logout')
-      .then()
+      .then((results) => {
+        console.log('rep session', results);
+        setLoggedIn(false);
+      })
       .catch((error) => console.log('err:', error));
   }
   // END OF SIGN OUT
@@ -109,39 +126,56 @@ const App = () => {
 
       <Routes>
         <Route path='/' element={
-          <>
-            <Nav state={state} />
-            <UserCardContainer 
-              users={state.users}
-              preferences={preferences}
-              likedBy={state.likedBy}
-              swipeUser={swipeUser}
-              profile={false}
-            />
-          </>
+          !loggedIn 
+          ? <LoginForm setLoggedIn={setLoggedIn} /> 
+          : <>
+              <Nav state={state} handleClickLogOut={handleClickLogOut}/>
+              <UserCardContainer 
+                users={state.users}
+                preferences={preferences}
+                likedBy={state.likedBy}
+                swipeUser={swipeUser}
+                profile={false}
+              />
+            </>
         } />
 
         <Route path='/users/1' element={
-          <>
-            <Nav state={state} />
-            <UserCardContainer 
-              user={state.user}
-              profile={true}
-              editMode={false}
-              updateProfile={updateProfile}
-            />
-          </>
+          !loggedIn 
+            ? <LoginForm setLoggedIn={setLoggedIn} /> 
+            : <>
+                <Nav state={state} handleClickLogOut={handleClickLogOut}/>
+                <UserCardContainer 
+                  user={state.user}
+                  profile={true}
+                  editMode={false}
+                  updateProfile={updateProfile}
+                />
+              </>
         } />
 
         <Route path='/login' element={
-          <LoginForm />
+          !loggedIn 
+            ? <LoginForm setLoggedIn={setLoggedIn} /> 
+            : <>
+                <Nav state={state} handleClickLogOut={handleClickLogOut} />
+                <UserCardContainer 
+                  users={state.users}
+                  preferences={preferences}
+                  likedBy={state.likedBy}
+                  swipeUser={swipeUser}
+                  profile={false}
+                />
+              </>
         } />
 
         <Route path='/matches' element={
-          <>
-            <Nav state={state} />
-            <Matches state={state} />
-          </>
+          !loggedIn 
+            ? <LoginForm setLoggedIn={setLoggedIn} /> 
+            : <>
+                <Nav state={state} handleClickLogOut={handleClickLogOut} />
+                <Matches state={state} />
+              </>
         } />
 
       </Routes>
