@@ -21,9 +21,13 @@ export default function Nav(props) {
   let user
   const [open, setOpen] = useState(false)
   console.log(user)
+
+  // TRY USEEFECT TO SAVE PROPS
+
   // useEffect(() =>{
   //   const user = props.state.user[0]
   // },[props])
+
   props.state.user? user = props.state.user[0] : user = {Name: "", email : "", profile_photo: "" }
   
   console.log(user)
@@ -36,15 +40,15 @@ export default function Nav(props) {
         <div className="flex space-x-6 mr-10">
 
         <Link to={ROUTES.HOME}>
-        <HomeIcon className="h-10 cursor-pointer rounded-full hover:text-[#8A00A0]" />
+        <HomeIcon className="h-10 cursor-pointer rounded-full hover:text-[#8A00A0] hover:bg-gray-100" />
         </Link>
 
         <Link to={ROUTES.MATCHES}>
-        <HeartIcon className="h-10 cursor-pointer rounded-full hover:text-[#8A00A0]" />
+        <HeartIcon className="h-10 cursor-pointer rounded-full hover:text-[#8A00A0] hover:bg-gray-100" />
         </Link>
 
         <Link to={ROUTES.PREF}>
-        <UserCircleIcon className="h-10 cursor-pointer rounded-full hover:text-[#8A00A0] " />
+        <UserCircleIcon className="h-10 cursor-pointer rounded-full hover:text-[#8A00A0] hover:bg-gray-100 " />
         </Link>
 
         <button className="dropdown-relative" type="button" onClick={() =>{setOpen(!open)}}>
