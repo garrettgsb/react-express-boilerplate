@@ -14,18 +14,38 @@ router.get("/users/:id/all", (req, res) => {
       FROM matchings
       WHERE from_user_id = $1 
       AND like_value is not null
+    ),
+    photos as (
+      SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
     )
-    SELECT * FROM users 
+    SELECT 
+      users.id, users.name, users.email, users.age, users.bio, genders.value AS gender, users.location, users.height_in_cm, users.education, users.occupation, drinks.value AS drinks, exercises.value AS exercises, dating_goals.value as goal, users.is_active, photos
+    FROM 
+      users 
     LEFT JOIN 
       matching_seen_cte 
     ON 
       users.id = matching_seen_cte.to_user_id
+    LEFT JOIN 
+      photos 
+    ON 
+      users.id = photos.user_id
+    LEFT JOIN genders ON users.gender_id = genders.id
+    LEFT JOIN drinks ON users.drink_id = drinks.id
+    LEFT JOIN exercises ON users.exercise_id = exercises.id
+    LEFT JOIN dating_goals ON users.dating_goal_id = dating_goals.id
     WHERE 
       users.id != $1
     AND users.id not in (
         select distinct to_user_id
         from matching_seen_cte)
-    ;
+    GROUP BY
+      users.id,
+      photos.photos,
+      genders.value,
+      drinks.value,
+      exercises.value,
+      dating_goals.value;
   `;
   return db
     .query(query, [userId])
@@ -39,12 +59,19 @@ router.get("/users/:id/all", (req, res) => {
 router.get("/users/:id", (req, res) => {
   const userId = req.params.id;
   const query = `
-  SELECT users.id, users.name, users.email, users.password, users.bio, users.age, users.is_active, genders.value AS Gender, drinks.value AS Drink, exercises.value AS Exercise, dating_goals.value AS Goal, user_photos.url AS Profile_photo
+  WITH photos as (
+    SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
+  )
+  SELECT users.id, users.name, users.email, users.bio, users.age, users.education, users.location, users.height_in_cm, users.occupation, users.is_active, genders.value AS gender, drinks.value AS drinks, exercises.value AS exercises, dating_goals.value AS goal, user_photos.url AS profile_photo, photos
       FROM users
       LEFT JOIN genders ON users.gender_id = genders.id
       LEFT JOIN drinks ON users.drink_id = drinks.id
       LEFT JOIN exercises ON users.exercise_id = exercises.id
       LEFT JOIN dating_goals ON users.dating_goal_id = dating_goals.id
+      LEFT JOIN 
+      photos 
+    ON 
+      users.id = photos.user_id
       LEFT JOIN user_photos ON user_photos.user_id = users.id
       WHERE users.id = $1 AND user_photos.is_profile is TRUE;
   `;
@@ -76,7 +103,8 @@ router.get("/users/:id/likedBy", (req, res) => {
   const userId = req.params.id;
   const query = `
     SELECT from_user_id FROM matchings
-    WHERE to_user_id = $1;
+    WHERE to_user_id = $1
+    AND like_value = true;
   `;
   return db
     .query(query, [userId])
@@ -120,18 +148,19 @@ router.get("/users/:id/matchings", (req, res) => {
       AND A.like_value
       AND B.like_value
       AND A.from_user_id = $1
+    ),
+    photos as (
+      SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
     )
-    SELECT DISTINCT
+    SELECT
       users.id,
       users.name,
-      user_photos.url
+      photos
     FROM 
       matched_users
     INNER JOIN users 
       ON users.id = matched_users.to_user_id
-    INNER JOIN user_photos
-      ON user_photos.user_id = matched_users.to_user_id
-    LIMIT 1;
+    LEFT JOIN photos ON users.id = photos.user_id;
   `;
   return db
     .query(query, [userId])
@@ -170,7 +199,6 @@ router.get("/users/:id/preferences", (req, res) => {
   `
   return db.query(query, [userId])
     .then(({ rows: userPreferences }) => {
-      console.log('users pref from db:', userPreferences[0]);
       res.json(userPreferences[0]);
     })
     .catch((error) => console.log("err:", error));
@@ -180,7 +208,6 @@ router.get("/users/:id/preferences", (req, res) => {
 router.post("/users/:id/preferences", (req, res) => {
   const userId = req.params.id;
   const preferences = req.body;
-  console.log('preferences in server', preferences);
   const query =`
   UPDATE preferences
   SET min_age = $1,
@@ -195,14 +222,39 @@ router.post("/users/:id/preferences", (req, res) => {
   WHERE user_id = $10
   RETURNING *;
   `;
-  console.log("before db", preferences);
   return db
     .query(query, [preferences.min_age, preferences.max_age, preferences.location, preferences.min_height_in_cm, preferences.max_height_in_cm, preferences.gender_id, preferences.drink_id, preferences.exercise_id, preferences.dating_goal_id, userId])
     .then(({rows: userPreferences}) => {
-      console.log('after db:', userPreferences[0]);
       res.json(userPreferences[0]);
     })
     .catch(error => console.log("error:", error))
+});
+
+// Post request to update user's information
+router.post('/users/:id/edit', (req, res) => {
+  const userId = req.params.id;
+  const profile = req.body;
+  const query = `
+    UPDATE users
+    SET 
+      bio = $1
+      location = $2
+      education = $3
+      occupation = $4
+      drink_id = $5
+      exercise_id = $6
+      dating_goal_id = $7
+    WHERE users.id = $8
+    RETURNING *;
+  `;
+  return db.query(query, [
+    profile.bio, profile.location, profile.education, profile.occupation,
+    profile.drink_id, profile.exercise_id, profile.dating_goal_id, userId
+  ])
+  .then(({rows: updatedProfile}) => {
+    res.json(updatedProfile[0]);
+  })
+  .catch((error) => console.log('error', error));
 });
 
 module.exports = router;

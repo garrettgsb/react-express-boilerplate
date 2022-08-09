@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import UserCardContainer from './components/UserCardContainer';
+import { Routes, Route, Link } from 'react-router-dom';
+import LoginForm from './components/login-form'
+import Nav from "./components/Nav";
+import Matches from "./components/Matches";
+
 
 const App = () => {
   const [state, setState] = useState({});
   const [preferences, setPreferences] = useState({});
+  const [matches, setMatches] = useState([])
+  const [swipeHistory, setSwipeHistory] = useState([]);
   
+
   // promise chain for setting initial states
   // Depency: Will likely depend on swiping state
   useEffect(() => {
@@ -13,35 +22,42 @@ const App = () => {
       axios.get('/api/users/1/all'),
       axios.get('/api/users/1'),
       axios.get('/api/users/1/messages'),
-      axios.get('/api/users/1/likedBy'),
-      axios.get('/api/users/1/matchings'),
+      axios.get('/api/users/1/likedBy')
     ])
     .then((all) => {
       setState({...state, 
         users: all[0].data, 
         user: all[1].data, 
         messages: all[2].data, 
-        likedBy: all[3].data, 
-        matches: all[4].data});
+        likedBy: all[3].data});
     }) 
   }, []);
 
   useEffect(() => {
     axios.get('/api/users/1/preferences')
       .then((results) => {
-        console.log("from axios get req:", results.data);
         setPreferences({...results.data});
       })
   }, []);
 
-  // like user
-  const swipeUser = (toId, like) => {
-    axios.post('/api/users/1/matchings', {toId, like})
-      .then(function (response) {
-        console.log(response);
+  // Separating matches so it has dependency to update
+  useEffect(() => {
+    axios.get('/api/users/1/matchings')
+      .then((matches) => {
+        setMatches([...matches.data]);
       })
-      .catch(function (error) {
-        console.log(error);
+  }, [swipeHistory])
+
+  // like user - takes in swiped on Ids and like value:boolean
+  const swipeUser = (toId, like) => {
+    console.log("your swiped data in app.js:", {toId, like});
+    axios.post('/api/users/1/matchings', {toId, like})
+      .then((response) => {
+        const freshSwipe = response.data[0];
+        setSwipeHistory(prev => [...prev, freshSwipe])
+      })
+      .catch((error) => {
+        console.log('error', error);
       });
   };
   // Makes post request when preferences update
@@ -51,20 +67,19 @@ const App = () => {
   const updatePreferences = () => {
     const newPref = {
       ...preferences,
-      location: 'tesrser'
+      location: 'testtt'
     };
     console.log('newPref', newPref);
     axios.post('/api/users/1/preferences', newPref)
     .then((results) => {
-      console.log('results:', results);
       setPreferences({...results.data})
     })
     .catch(error => console.log(error));
   };
-  
-// block user
+
+  // block user
   const blockUser = (blockId) => {
-    axios.post('/api/users/1/blocked', {blockId})
+    axios.post('/api/users/1/blocked', { blockId })
       .then((response) => {
         console.log(response);
       })
@@ -72,29 +87,6 @@ const App = () => {
         console.log(error);
       });
   };
-
-  // LOGIN AND SIGNOUT - everything in here will likely need to be moved to login page when we start working on front end
-  // DISCUSS: either keep pw as strings or implement bcrpyt later on
-  // initial state of these empty string
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  
-  const handleClickLogIn = (e) => {
-    // prevent default action of a button type = submit 
-    e.preventDefault();
-    axios.post('/login', {username, password})
-      .then((response) => {
-        if (!response.data) {
-          // do error alert
-          console.log('no login msg', response);
-        } else {
-          setUsername('');
-          setPassword('');
-        }
-      })
-      .catch((error) => console.log('err:', error));
-  };
-  /// End of login and signout stuff
 
   // SIGN OUT FUNCTION AND BUTTON
   const handleClickLogOut = (e) => {
@@ -106,41 +98,48 @@ const App = () => {
   }
   // END OF SIGN OUT
 
-
+  // Updating user profile 
+  const updateProfile = (newValues) => {
+    console.log('new profile values in app.js', newValues);
+    // make axios post call
+  };
+  // end of updating user profile
   return (
     <div className="App">
-      <h4 className="text-3xl font-bold underline">
-        Hello World!
-      </h4>
+      <header> <Nav state={state} /></header>
+      <Routes>
+        <Route path='/' element={
+          <UserCardContainer 
+            users={state.users}
+            preferences={preferences}
+            likedBy={state.likedBy}
+            swipeUser={swipeUser}
+            profile={false}
+          />
+        } />
 
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-        unused button
-      </button>        
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => swipeUser(3, true)}> 
-        Post Data       
-      </button>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={ () => updatePreferences(18, 30, 'Sydney', 175, 188, 2, 1, 3, 3)}>
-        Set Preferences  
-      </button>      
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => blockUser(4)}> 
-        Block user       
-      </button>        
+        <Route path='/users/1' element={
+          <UserCardContainer 
+            user={state.user}
+            profile={true}
+            editMode={false}
+            updateProfile={updateProfile}
+          />
+        } />
 
-      <div>
-        <form>
-          <label>Username</label>
-          <input type='text' name='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
-          <label>Password</label>
-          <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-          <button type='submit' onClick={handleClickLogIn}>
-            Log in
-          </button> 
-        </form>
-        <button type='submit' onClick={handleClickLogOut}>
-          Sign Out
-        </button>
-      </div>
+        <Route path='/login' element={
+          <LoginForm />
+        } />
 
+        <Route path='/login' element={
+          <LoginForm />
+        } />
+
+        <Route path='/matches' element={
+          <Matches state={state} />
+        } />
+
+      </Routes>
     </div>
   );
 }
