@@ -3,7 +3,7 @@ import {
   PlusCircleIcon,
   UserGroupIcon,
   HeartIcon,
-  BellIcon,
+  HomeIcon,
   UserCircleIcon,
 } from "@heroicons/react/outline";
 import {
@@ -17,8 +17,8 @@ import * as ROUTES from './routes';
 // color ------------------------- #8A00A0
 // Kept dropdown in this 
 
-let user
 export default function Nav(props) {
+  let user
   const [open, setOpen] = useState(false)
   console.log(user)
   // useEffect(() =>{
@@ -34,9 +34,18 @@ export default function Nav(props) {
         <div className="flex justify-between content-center space-x-4">
         <div className="Vwhite-text text-4xl ml-10 myfont text-left cursor-pointer hover:text-[#8A00A0]">KEEN</div>
         <div className="flex space-x-6 mr-10">
+
+        <Link to={ROUTES.HOME}>
+        <HomeIcon className="h-10 cursor-pointer rounded-full hover:text-[#8A00A0]" />
+        </Link>
+
+        <Link to={ROUTES.MATCHES}>
         <HeartIcon className="h-10 cursor-pointer rounded-full hover:text-[#8A00A0]" />
-        <BellIcon className="h-10 cursor-pointer rounded-full hover:text-[#8A00A0]" />
+        </Link>
+
+        <Link to={ROUTES.PREF}>
         <UserCircleIcon className="h-10 cursor-pointer rounded-full hover:text-[#8A00A0] " />
+        </Link>
 
         <button className="dropdown-relative" type="button" onClick={() =>{setOpen(!open)}}>
         <img className="w-10 h-10 rounded-full" src={user.profile_photo} alt="user photo" />
@@ -61,12 +70,15 @@ export default function Nav(props) {
           </li>
           <li>
           <Link to={ROUTES.PREF}>
-            <a href="/preferences" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Preferences</a>
+            <p className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Preferences</p>
             </Link>
           </li>
           <li>
-            <a href="/logout" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Sign out</a>
+          <Link to={ROUTES.LOGOUT}>
+            <p className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Sign out</p>
+            </Link>
           </li>
+
         </ul>
       </div>) : (<p></p>)}</div>
 
