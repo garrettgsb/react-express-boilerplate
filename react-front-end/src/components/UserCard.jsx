@@ -52,13 +52,13 @@ const UserCard = (props) => {
 
   // Helper to update your profile
   const profileUpdater = () => {
-    props.updateProfile(newProfile, profileHistory.photos);
+    props.updateProfile(newProfile);
   };
 
   // user profile edit html
   const profileView = (
     <div className='fixed w-full flex flex-row justify-between items-center p-1 z-50'>
-      <button onClick={undoChanges}><RefreshIcon className='h-5 w-5 text-black hover:text-fuchsia-800'/></button>
+      <button><RefreshIcon className='h-5 w-5 text-black hover:text-fuchsia-800'/></button>
       <button onClick={() => setEditView(false)} className='hover:text-fuchsia-800'>View</button>
       <button onClick={() => setEditView(true)} className='hover:text-fuchsia-800'>Edit</button>
       <button onClick={profileUpdater}><CheckIcon className='h-5 w-5 text-black hover:text-fuchsia-800'/></button>
@@ -130,7 +130,7 @@ const UserCard = (props) => {
     <article className="user-profile flex flex-col user-card w-full" id={props.id}>
       {props.profile ? profileView : <></>}
       <div className="user-photos-container rounded-t-xl h-3/4">
-        <img src={props.photos[pager].f2} alt=""/>
+        <img src={props.profile ? props.photos[pager].f2 : props.photos[pager]} alt=""/>
       </div>
       <div className="h-3/4 flex flex-row justify-between absolute left-0 bg-transparent hover:bg-white/25">
         <button onClick={() => handlePager('prev')}><ChevronLeftIcon className='h-5 w-5 bg-transparent text-white'/></button>

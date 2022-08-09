@@ -114,10 +114,11 @@ const App = () => {
   // END OF SIGN OUT
 
   // Updating user profile 
-  const updateProfile = (newValues, oldUrls) => {
-    newValues.oldPhotos = oldUrls;
+  const updateProfile = (newValues) => {
+    const newProfileValues = newValues;
+    console.log('newvalues from newProfileValues', newProfileValues);
     // make axios post call
-    axios.post('/api/users/1/edit', newValues)
+    axios.post('/api/users/1/edit', newProfileValues)
       .then((results) => {
         const oldProfile = state.user[0];
         const updatedUser = {...oldProfile, ...results.data[0]};
