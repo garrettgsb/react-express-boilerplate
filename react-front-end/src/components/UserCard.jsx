@@ -151,7 +151,7 @@ const UserCard = (props) => {
       <div className="user-photos-container rounded-t-xl h-3/4">
         <img src={props.photos[pager]} alt=""/>
       </div>
-      <div className="h-3/4 flex flex-row justify-between fixed left-0 bg-transparent hover:bg-white/25">
+      <div className="h-3/4 flex flex-row justify-between absolute left-0 bg-transparent hover:bg-white/25">
         <button onClick={() => handlePager('prev')}><ChevronLeftIcon className='h-5 w-5 bg-transparent text-white'/></button>
       </div>
       <div className="h-3/4 flex flex-row justify-between fixed right-0 bg-transparent hover:bg-white/25">
