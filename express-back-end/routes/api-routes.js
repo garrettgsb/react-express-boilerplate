@@ -233,6 +233,51 @@ router.post("/users/:id/preferences", (req, res) => {
 // Post request to update user's information
 router.post('/users/:id/edit', (req, res) => {
   console.log('work in progress');
+  const userId = req.params.id;
+  const newValue = req.body;
+  const newPhotoUrl = req.body.photos;
+  const query = `
+  UPDATE users
+  SET 
+    bio = $1,
+    location = $2,
+    education = $3,
+    occupation = $4
+  WHERE users.id = $5;
+  `;
+    db.query(query, [newValue.bio, newValue.location, newValue.education, newValue.occupation, userId])
+    .then(() => {
+      for (const newPhoto of newPhotoUrl) {
+        const photoId = newPhoto.f1;
+        const newUrl = newPhoto.f2;
+        const updatePhotoQuery = `UPDATE user_photos SET url = '${newUrl}' WHERE user_photos.id = ${photoId} AND user_photos.user_id = ${userId};`;
+        db.query(updatePhotoQuery).then()
+      }
+    })
+    .then(() => {
+      const getUser = `
+      WITH photos as (
+        SELECT user_photos.user_id, array_to_json(array_agg(row(user_photos.id, user_photos.url))) AS photos FROM user_photos GROUP BY user_photos.user_id
+      )
+      SELECT users.id, users.name, users.email, users.bio, users.age, users.education, users.location, users.height_in_cm, users.occupation, users.is_active, genders.value AS gender, drinks.value AS drinks, exercises.value AS exercises, dating_goals.value AS goal, user_photos.url AS profile_photo, photos
+          FROM users
+          LEFT JOIN genders ON users.gender_id = genders.id
+          LEFT JOIN drinks ON users.drink_id = drinks.id
+          LEFT JOIN exercises ON users.exercise_id = exercises.id
+          LEFT JOIN dating_goals ON users.dating_goal_id = dating_goals.id
+          LEFT JOIN 
+          photos 
+        ON 
+          users.id = photos.user_id
+          LEFT JOIN user_photos ON user_photos.user_id = users.id
+          WHERE users.id = $1 AND user_photos.is_profile is TRUE;
+      `;
+      return db.query(getUser, [userId])
+        .then(({rows: user}) => {
+          res.json(user);
+        })
+        .catch((error) => console.log('error', error));
+    })
 });
 
 module.exports = router;
