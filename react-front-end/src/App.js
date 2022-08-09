@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import Nav from "./components/Nav";
+import Matches from "./components/Matches";
 
 
 const App = () => {
@@ -112,6 +113,7 @@ const App = () => {
   return (
 <>
     <header> <Nav state={state}/></header>
+    <header> <Matches state={state}/></header>
     
     {/* <body>
     <div className="App">
