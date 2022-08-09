@@ -11,7 +11,7 @@ VALUES
 INSERT INTO user_photos (user_id, url, is_profile)
 VALUES 
 (1, 'https://images.genius.com/51f5c16c628a0d96dd7285f7fdf26348.1000x1000x1.jpg', true),
-(1, 'https://static.wikia.nocookie.net/youtube/images/e/ed/NIKI.jpg/revision/latest?cb=20220626041042', false),
+(1, 'https://pbs.twimg.com/media/ENLQQLJVUAATN8a.jpg', false),
 (2, 'http://d17zbv0kd7tyek.cloudfront.net/wp-content/uploads/2015/06/leonardo-dicaprio-fb.jpg', true),
 (2, 'https://d1jyxxz9imt9yb.cloudfront.net/person/1571/detail_image/mobile/LDC-High-Res-Headshot.jpg', false),
 (3, 'https://www.xtrafondos.com/wallpapers/vertical/ana-de-armas-en-photoshoot-5501.jpg', true),
