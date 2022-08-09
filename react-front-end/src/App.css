@@ -60,3 +60,9 @@
   overflow: hidden;
   min-width: 0;
 }
+
+.matches {
+  grid-area: 1 / 1 / 2 / 2;
+  overflow: hidden;
+  min-width: 0;
+}

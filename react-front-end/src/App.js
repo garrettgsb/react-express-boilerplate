@@ -174,7 +174,7 @@ const App = () => {
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
                 <Nav state={state} handleClickLogOut={handleClickLogOut} />
-                <Matches state={state} />
+                <Matches matches={matches} user={state.user} messages={state.messages} />
               </>
         } />
 
