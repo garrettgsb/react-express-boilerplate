@@ -106,29 +106,31 @@ const App = () => {
   // end of updating user profile
   return (
     <div className="App">
-      <header> <Nav state={state} /></header>
+
       <Routes>
         <Route path='/' element={
-          <UserCardContainer 
-            users={state.users}
-            preferences={preferences}
-            likedBy={state.likedBy}
-            swipeUser={swipeUser}
-            profile={false}
-          />
+          <>
+            <Nav state={state} />
+            <UserCardContainer 
+              users={state.users}
+              preferences={preferences}
+              likedBy={state.likedBy}
+              swipeUser={swipeUser}
+              profile={false}
+            />
+          </>
         } />
 
         <Route path='/users/1' element={
-          <UserCardContainer 
-            user={state.user}
-            profile={true}
-            editMode={false}
-            updateProfile={updateProfile}
-          />
-        } />
-
-        <Route path='/login' element={
-          <LoginForm />
+          <>
+            <Nav state={state} />
+            <UserCardContainer 
+              user={state.user}
+              profile={true}
+              editMode={false}
+              updateProfile={updateProfile}
+            />
+          </>
         } />
 
         <Route path='/login' element={
@@ -136,7 +138,10 @@ const App = () => {
         } />
 
         <Route path='/matches' element={
-          <Matches state={state} />
+          <>
+            <Nav state={state} />
+            <Matches state={state} />
+          </>
         } />
 
       </Routes>

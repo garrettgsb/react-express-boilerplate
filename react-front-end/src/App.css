@@ -4,6 +4,27 @@
   box-sizing: border-box;
 }
 
+.login-hero {
+  display: grid;
+  min-height: 0;
+  min-width: 0;
+  justify-items: center;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 10% 1fr 10%;
+}
+
+.img-container {
+  grid-area: 2 / 2 / 3 / 4;
+}
+
+.login-form {
+  grid-area: 2 / 3 / 3 / 5;
+}
+
+.creators {
+  grid-area: 4 / 2 / 4 / 5;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .user-profile::-webkit-scrollbar {
   display: none;

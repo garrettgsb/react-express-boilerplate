@@ -26,11 +26,14 @@ function LoginForm(props) {
   };
 
   return (
-    <div className="h-full">
-      <div className="flex justify-center items-center mt-10 mb-10 ">
-        <img src="https://media.istockphoto.com/photos/loving-couple-on-the-seashore-happy-valentines-day-picture-id1290253065?k=20&m=1290253065&s=612x612&w=0&h=zz7C8qIsECPkmF0Tgo3EIOdQ91tbERXaOGuaSli3YLM=" className=" max-w-full h-auto rounded drop-shadow-xl" />
+    <div className="flex flex-col h-full">
 
-        <form className="bg-white drop-shadow px-8 pt-6 pb-8 mb-4 mix-blend-normal overflow-visible">
+      <div className="login-hero gird items-center">
+        <div className="img-container">
+          <img src="https://media.istockphoto.com/photos/loving-couple-on-the-seashore-happy-valentines-day-picture-id1290253065?k=20&m=1290253065&s=612x612&w=0&h=zz7C8qIsECPkmF0Tgo3EIOdQ91tbERXaOGuaSli3YLM=" alt='' className="w-full h-full rounded-xl drop-shadow-2xl" />
+        </div>
+
+        <form className="login-form bg-white drop-shadow px-8 pt-6 pb-8 mb-4 mix-blend-normal">
           <div className="form-inner bg-white">
             <h1 className="text-center mb-5 font-bold text-xl mt-10 bg-white">Keen</h1>
             {/* error msg */}
@@ -64,34 +67,46 @@ function LoginForm(props) {
             </div>
           </div>
         </form>
+
+        <div className="creators flex flex-col">
+
+          <p className="text-md font-bold flex justify-center mb-5">Created By</p>
+
+          <div className='flex justify-center'>
+            <div className="flex items-center mx-10">
+              <div className='w-5 mr-3'>
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt='' className="w-full"></img>
+              </div>
+              <div className='flex flex-col'>
+                <p>Ava K</p>
+                <a href="https://github.com/avacadok" className="hover:text-fuchsia-800 text-gray-600">avacadok</a>
+              </div>
+            </div>
+
+            <div className="flex items-center mx-20">
+              <div className='w-5 mr-3'>
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt='' className="w-full"></img>
+              </div>
+              <div className='flex flex-col'>
+                <p>Denis K</p>
+                <a href="https://github.com/ukflava" className="hover:text-fuchsia-800 text-gray-600">ukflava</a>
+              </div>
+            </div>
+
+            <div className="flex items-center mx-10">
+              <div className='w-5 mr-3'>
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt='' className="w-full"></img>
+              </div>
+              <div className='flex flex-col'>
+                <p>Phil Y</p>
+                <a href="https://github.com/josemourinho333" className="hover:text-fuchsia-800 text-gray-600">josemourinho333</a>
+              </div>
+            </div>
+          </div>
+        </div>        
       </div>
-      <div >
-        <p className="text-l font-bold flex justify-center mb-10">
-          Created By
-        </p>
 
-        <div className="grid grid-rows-2 grid-flow-col place-content-center ">
-          <p className="pl-8">Ava K</p>
-          <div className="flex pr-20">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="22" height="16" className="mr-1"></img>
-            <a href="https://github.com/avacadok" className="hover:text-fuchsia-800 text-gray-600">avacadok</a>
-          </div>
-
-          <p className="flex pr-16 pl-12">Denis K</p>
-          <div className="flex">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="22" height="16" className="mr-1 ml-7"></img>
-            <a href="https://github.com/ukflava" className="hover:text-fuchsia-800 text-gray-600">ukflava</a>
-          </div>
-
-          <p className="flex pl-20">Phil Y</p>
-          <div className="flex pl-8">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="22" height="16" className="mr-1"></img>
-            <a href="https://github.com/josemourinho333" className="hover:text-fuchsia-800 text-gray-600">josemourinho333</a>
-          </div>
-        </div>
-      </div>
     </div>
-
   )
 }
 
