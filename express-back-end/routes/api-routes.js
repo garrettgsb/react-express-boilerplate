@@ -230,4 +230,31 @@ router.post("/users/:id/preferences", (req, res) => {
     .catch(error => console.log("error:", error))
 });
 
+// Post request to update user's information
+router.post('/users/:id/edit', (req, res) => {
+  const userId = req.params.id;
+  const profile = req.body;
+  const query = `
+    UPDATE users
+    SET 
+      bio = $1
+      location = $2
+      education = $3
+      occupation = $4
+      drink_id = $5
+      exercise_id = $6
+      dating_goal_id = $7
+    WHERE users.id = $8
+    RETURNING *;
+  `;
+  return db.query(query, [
+    profile.bio, profile.location, profile.education, profile.occupation,
+    profile.drink_id, profile.exercise_id, profile.dating_goal_id, userId
+  ])
+  .then(({rows: updatedProfile}) => {
+    res.json(updatedProfile[0]);
+  })
+  .catch((error) => console.log('error', error));
+});
+
 module.exports = router;
