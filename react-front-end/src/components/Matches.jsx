@@ -6,19 +6,19 @@ import {
   Link
 } from "react-router-dom";
 // import * as ROUTES from './routes';
-import Messages from "./Messages";
+import Messages from "./MessagesContainer";
 
 export default function Matches(props) {
 
 
   const match = props.matches.map(match =>   {
 return(
-  <div><div>
-{match.name}
-  </div>
-  <div>
-<img className="w-12 h-12 rounded-full pointer-events-none object-cover" src={match.photos[0]} />
-  </div>
+  <div key={match.id}>
+    {/* match.id */}
+  
+<img className="w-12 h-12 rounded-full pointer-events-none object-cover" src={match.photos[0]} href="/users/:id/messages"/>
+{match.name} 
+  
   </div>)
 
     })
@@ -26,57 +26,28 @@ return(
 
 
 
-console.log("state from matches", props.matches)
+console.log("state from matches", props)
 return (
-  
 <>
-{/* <section className="user-card-container w-full h-screen place-content-center p-5"> */}
-<div className="flex flex-col mt-8">
-<div>
-          <p className="mt-4 indent-2 font-semibold">
-            You logged in as
-            {/* <span className="text-fuschia-800 hover:underline"> {props.user.name}</span> */}
-          </p>
-        </div>
 
-          <div className="flex flex-row items-center justify-between text-xs">
-          <div className="ml-2 text-sm font-semibold">
-            MATCHES LIST
-{match}
-{/* here will be mapped matches in buttons*/}
+<div class="grid grid-cols-5 gap-3 w-3/5 mx-auto rounded-2xl border border-spacing-2 border-cyan-900">
+  <div class="bg-blue-100 rounded-3xl">
+  <p className="mt-4 indent-2 font-semibold">
+                {props.user? props.user[0].name : 'Loading'}
+               </p>
+  </div>
+  
+  <div class="bg-red-100 col-span-4">MATCHES NAME</div>
 </div>
-          </div>
-          </div>
-          
-          <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
-      <div classNane="relative flex items-center space-x-4">
-        here wil be mapped messages
-        {/* <Messages /> */}
-      </div>
-      </div>
+
+<div class="grid grid-cols-5 gap-3 w-3/5 mx-auto">
+  <div class="bg-blue-100 rounded-3xl border border-fuchsia-800">{match}</div>
+  <div class="bg-red-100 col-span-4">MESSAGES</div>
+</div>
 
 
 
-{/* 
-  <article className="user-profile flex flex-col user-card h-screen overflow-y-scroll" id={props.id}>
-<div className="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
-   <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
-      <div classNane="relative flex items-center space-x-4">
-        here wil be mapped messages
-      </div>
-      </div>
-        </div>
-        </article>
-       */}
-
-        {/* </section> */}
-
-
-
-        </>
-
-
-
+</>
 )
 
 

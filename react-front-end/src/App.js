@@ -45,6 +45,8 @@ const App = () => {
         messages: all[2].data, 
         likedBy: all[3].data});
     }) 
+    // Discusss if we need cleanUp for Effect Hook
+    // return () => axios.isCancel()
   }, []);
 
   useEffect(() => {
