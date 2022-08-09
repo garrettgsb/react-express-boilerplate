@@ -32,9 +32,9 @@
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.user-profile::-webkit-scrollbar {
+/* .user-profile::-webkit-scrollbar {
   display: none;
-}
+} */
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .user-profile {
@@ -47,16 +47,25 @@
 }
 
 .user-card-container {
-  height: 90vh;
+  height: calc(100vh - 8vh);
   display: grid;
   min-height: 0;
   min-width: 0;
   justify-items: center;
-  grid-template-columns: 30%;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 5% repeat(3, 1fr) 5%;
 } 
 
 .keen-tinder-card {
-  grid-area: 1 / 1 / 2 / 2;
-  overflow: hidden;
+  grid-area: 2 / 3 / 5 / 5;
   min-width: 0;
+  overflow: scroll;
 }
+
+.keen-tinder-card::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
