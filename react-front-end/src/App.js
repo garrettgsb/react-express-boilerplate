@@ -3,6 +3,10 @@ import axios from 'axios';
 import './App.css';
 import UserCardContainer from './components/UserCardContainer';
 import { Routes, Route, Link } from 'react-router-dom';
+import LoginForm from './components/login-form'
+import Nav from "./components/Nav";
+import Matches from "./components/Matches";
+
 
 const App = () => {
   const [state, setState] = useState({});
@@ -10,6 +14,7 @@ const App = () => {
   const [matches, setMatches] = useState([])
   const [swipeHistory, setSwipeHistory] = useState([]);
   
+
   // promise chain for setting initial states
   // Depency: Will likely depend on swiping state
   useEffect(() => {
@@ -39,7 +44,7 @@ const App = () => {
   useEffect(() => {
     axios.get('/api/users/1/matchings')
       .then((matches) => {
-        setMatches(prev => [...prev, ...matches.data]);
+        setMatches([...matches.data]);
       })
   }, [swipeHistory])
 
@@ -71,10 +76,10 @@ const App = () => {
     })
     .catch(error => console.log(error));
   };
-  
-// block user
+
+  // block user
   const blockUser = (blockId) => {
-    axios.post('/api/users/1/blocked', {blockId})
+    axios.post('/api/users/1/blocked', { blockId })
       .then((response) => {
         console.log(response);
       })
@@ -82,29 +87,6 @@ const App = () => {
         console.log(error);
       });
   };
-
-  // LOGIN AND SIGNOUT - everything in here will likely need to be moved to login page when we start working on front end
-  // DISCUSS: either keep pw as strings or implement bcrpyt later on
-  // initial state of these empty string
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  
-  const handleClickLogIn = (e) => {
-    // prevent default action of a button type = submit 
-    e.preventDefault();
-    axios.post('/login', {username, password})
-      .then((response) => {
-        if (!response.data) {
-          // do error alert
-          console.log('no login msg', response);
-        } else {
-          setUsername('');
-          setPassword('');
-        }
-      })
-      .catch((error) => console.log('err:', error));
-  };
-  /// End of login and signout stuff
 
   // SIGN OUT FUNCTION AND BUTTON
   const handleClickLogOut = (e) => {
@@ -123,22 +105,10 @@ const App = () => {
   };
   // end of updating user profile
   return (
-    
     <div className="App">
-  
+      <header> <Nav state={state} /></header>
       <Routes>
         <Route path='/' element={
-          <>    
-            <button className="border border-black">
-              <Link to="/home">Home</Link>
-            </button>        
-            <button className="border border-black ml-2"> 
-              <Link to="/users/1">/users/:id/edit</Link>
-            </button>
-          </>
-        } />
-
-        <Route path='/home' element={
           <UserCardContainer 
             users={state.users}
             preferences={preferences}
@@ -157,8 +127,19 @@ const App = () => {
           />
         } />
 
-      </Routes>
+        <Route path='/login' element={
+          <LoginForm />
+        } />
 
+        <Route path='/login' element={
+          <LoginForm />
+        } />
+
+        <Route path='/matches' element={
+          <Matches state={state} />
+        } />
+
+      </Routes>
     </div>
   );
 }

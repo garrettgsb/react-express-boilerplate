@@ -65,7 +65,7 @@ const UserCard = (props) => {
   );
 
   // Mapping over images for edit mode
-  const imgReplaceMap = newProfile.photos.map((photo, index) => {
+  const imgReplaceMap = newProfile.photos?.map((photo, index) => {
     return (
       <ImageReplacer 
         key={index}
@@ -80,7 +80,7 @@ const UserCard = (props) => {
 
   if (editView) {
     return (
-      <article className="user-profile flex flex-col user-card h-full overflow-y-scroll" id={props.id}>
+      <article className="user-profile flex flex-col user-card h-screen overflow-y-scroll" id={props.id}>
       {props.profile ? profileView : <></>}
       
         <div className="user-edit-info p-5">

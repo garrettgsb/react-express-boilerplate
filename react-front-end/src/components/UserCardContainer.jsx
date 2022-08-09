@@ -76,7 +76,7 @@ const UserCardContainer = (props) => {
   // Render your profile
   if (props.profile && !props.editMode) {
     return (
-      <section className="user-card-container border-8 border-red-500 w-full h-screen place-content-center p-5">
+      <section className="user-card-container border-8 w-full h-screen place-content-center p-5">
         { userProfile ? userProfile : "Loading" }
       </section>
     );
@@ -92,7 +92,7 @@ const UserCardContainer = (props) => {
   // }
   
   return (
-      <section className="user-card-container border-8 border-red-500 w-full h-screen place-content-center p-5">
+      <section className="user-card-container w-full h-screen place-content-center p-5">
         {userCards ? userCards : "Loading" }
       </section>
   );
