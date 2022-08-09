@@ -47,6 +47,7 @@
 }
 
 .user-card-container {
+  height: 90vh;
   display: grid;
   min-height: 0;
   min-width: 0;
