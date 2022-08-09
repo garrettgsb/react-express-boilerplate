@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import LoginForm from './components/login-form'
+import Nav from "./components/Nav";
+import Matches from "./components/Matches";
+
 
 const App = () => {
   const [state, setState] = useState({});
   const [preferences, setPreferences] = useState({});
-  
+
   // promise chain for setting initial states
   // Depency: Will likely depend on swiping state
   useEffect(() => {
@@ -17,27 +20,29 @@ const App = () => {
       axios.get('/api/users/1/likedBy'),
       axios.get('/api/users/1/matchings'),
     ])
-    .then((all) => {
-      setState({...state, 
-        users: all[0].data, 
-        user: all[1].data, 
-        messages: all[2].data, 
-        likedBy: all[3].data, 
-        matches: all[4].data});
-    }) 
+      .then((all) => {
+        setState({
+          ...state,
+          users: all[0].data,
+          user: all[1].data,
+          messages: all[2].data,
+          likedBy: all[3].data,
+          matches: all[4].data
+        });
+      })
   }, []);
 
   useEffect(() => {
     axios.get('/api/users/1/preferences')
       .then((results) => {
         console.log("from axios get req:", results.data);
-        setPreferences({...results.data});
+        setPreferences({ ...results.data });
       })
   }, []);
 
   // like user
   const swipeUser = (toId, like) => {
-    axios.post('/api/users/1/matchings', {toId, like})
+    axios.post('/api/users/1/matchings', { toId, like })
       .then(function (response) {
         console.log(response);
       })
@@ -56,16 +61,16 @@ const App = () => {
     };
     console.log('newPref', newPref);
     axios.post('/api/users/1/preferences', newPref)
-    .then((results) => {
-      console.log('results:', results);
-      setPreferences({...results.data})
-    })
-    .catch(error => console.log(error));
+      .then((results) => {
+        console.log('results:', results);
+        setPreferences({ ...results.data })
+      })
+      .catch(error => console.log(error));
   };
-  
-// block user
+
+  // block user
   const blockUser = (blockId) => {
-    axios.post('/api/users/1/blocked', {blockId})
+    axios.post('/api/users/1/blocked', { blockId })
       .then((response) => {
         console.log(response);
       })
@@ -86,42 +91,12 @@ const App = () => {
 
 
   return (
-    <div className="App">
-      {/* <h4 className="text-3xl font-bold underline">
-        Hello World!
-      </h4>
-
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-        unused button
-      </button>        
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => swipeUser(3, true)}> 
-        Post Data       
-      </button>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={ () => updatePreferences(18, 30, 'Sydney', 175, 188, 2, 1, 3, 3)}>
-        Set Preferences  
-      </button>      
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => blockUser(4)}> 
-        Block user       
-      </button>        
-
-      <div>
-        <form>
-          <label>Username</label>
-          <input type='text' name='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
-          <label>Password</label>
-          <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-          <button type='submit' onClick={handleClickLogIn}>
-            Log in
-          </button> 
-        </form>
-        <button type='submit' onClick={handleClickLogOut}>
-          Sign Out
-        </button>
-      </div> */}
-
+    <>
+      <header> <Nav state={state} /></header>
+      <Matches state={state} />
       <LoginForm />
 
-    </div>
+    </>
   );
 }
 
