@@ -52,8 +52,7 @@ const UserCard = (props) => {
 
   // Helper to update your profile
   const profileUpdater = () => {
-    console.log('newProfile to update db', newProfile);
-    props.updateProfile(newProfile);
+    props.updateProfile(newProfile, profileHistory.photos);
   };
 
   // user profile edit html
@@ -72,7 +71,7 @@ const UserCard = (props) => {
       <ImageReplacer 
         key={index}
         index={index}
-        url={photo}
+        url={photo.f2}
         newProfile={newProfile}
         photos={newProfile.photos}
         setNewProfile={setNewProfile}
@@ -118,9 +117,9 @@ const UserCard = (props) => {
           <textarea value={newProfile.occupation} onChange={(e) => setNewProfile({...newProfile, occupation: e.target.value})} className="user-bio resize-none w-full h-11 border border-gray-900 rounded-lg p-2">{newProfile.occupation}</textarea>
          
          <div className="more-info-carousel grid grid-cols-2 my-2 gap-2">
-            <div className="drinks flex"><BeakerIcon className="h-5 w-5 mr-2" />{formatText(props.drinks)}</div>
+            <div className="drinks flex"><BeakerIcon className="h-5 w-5 mr-2" />{formatText(newProfile.drinks)}</div>
             {/* <div className="exercises flex">{props.exercises}</div> */}
-            <div className="goal flex"><SearchIcon className="h-5 w-5 mr-2" />{formatText(props.goal)}</div>
+            <div className="goal flex"><SearchIcon className="h-5 w-5 mr-2" />{formatText(newProfile.goal)}</div>
           </div>
         </div>
       </article>
@@ -131,7 +130,7 @@ const UserCard = (props) => {
     <article className="user-profile flex flex-col user-card w-full" id={props.id}>
       {props.profile ? profileView : <></>}
       <div className="user-photos-container rounded-t-xl h-3/4">
-        <img src={props.photos[pager]} alt=""/>
+        <img src={props.photos[pager].f2} alt=""/>
       </div>
       <div className="h-3/4 flex flex-row justify-between absolute left-0 bg-transparent hover:bg-white/25">
         <button onClick={() => handlePager('prev')}><ChevronLeftIcon className='h-5 w-5 bg-transparent text-white'/></button>

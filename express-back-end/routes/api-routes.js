@@ -60,7 +60,7 @@ router.get("/users/:id", (req, res) => {
   const userId = req.params.id;
   const query = `
   WITH photos as (
-    SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
+    SELECT user_photos.user_id, array_to_json(array_agg(row(user_photos.id, user_photos.url))) AS photos FROM user_photos GROUP BY user_photos.user_id
   )
   SELECT users.id, users.name, users.email, users.bio, users.age, users.education, users.location, users.height_in_cm, users.occupation, users.is_active, genders.value AS gender, drinks.value AS drinks, exercises.value AS exercises, dating_goals.value AS goal, user_photos.url AS profile_photo, photos
       FROM users
@@ -232,29 +232,7 @@ router.post("/users/:id/preferences", (req, res) => {
 
 // Post request to update user's information
 router.post('/users/:id/edit', (req, res) => {
-  const userId = req.params.id;
-  const profile = req.body;
-  const query = `
-    UPDATE users
-    SET 
-      bio = $1
-      location = $2
-      education = $3
-      occupation = $4
-      drink_id = $5
-      exercise_id = $6
-      dating_goal_id = $7
-    WHERE users.id = $8
-    RETURNING *;
-  `;
-  return db.query(query, [
-    profile.bio, profile.location, profile.education, profile.occupation,
-    profile.drink_id, profile.exercise_id, profile.dating_goal_id, userId
-  ])
-  .then(({rows: updatedProfile}) => {
-    res.json(updatedProfile[0]);
-  })
-  .catch((error) => console.log('error', error));
+  console.log('work in progress');
 });
 
 module.exports = router;

@@ -20,10 +20,8 @@ const App = () => {
     axios.get('/loggedIn')
       .then((results) => {
         if (results.data) {
-          console.log('logged in');
           setLoggedIn(true);
         } else {
-          console.log('not logged in');
           setLoggedIn(false);
         }
       })
@@ -116,13 +114,23 @@ const App = () => {
   // END OF SIGN OUT
 
   // Updating user profile 
-  const updateProfile = (newValues) => {
-    console.log('new profile values in app.js', newValues);
+  const updateProfile = (newValues, oldUrls) => {
+    newValues.oldPhotos = oldUrls;
     // make axios post call
+    axios.post('/api/users/1/edit', newValues)
+      .then((results) => {
+        const oldProfile = state.user[0];
+        const updatedUser = {...oldProfile, ...results.data[0]};
+        console.log('updated user', updatedUser);
+        setState({...state, user: [updatedUser]});
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
   };
   // end of updating user profile
   return (
-    <div className="App h-screen overflow-y-hidden">
+    <div className="App">
 
       <Routes>
         <Route path='/' element={
