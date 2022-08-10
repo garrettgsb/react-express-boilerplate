@@ -12,7 +12,7 @@ const MessageBubble = (props) => {
   if (props.userId !== props.from) {
     return (
       <>
-        <div onClick={() => selectMsg()} className='justify-self-center self-start bg-gray-100 text-gray-700 font-light rounded-xl px-3 py-1 text-sm min-w-max my-1 mr-2 relative'>
+        <div onClick={() => selectMsg()} className='justify-self-center self-start bg-gray-100 text-gray-800 font-light rounded-xl px-3 py-1 text-sm min-w-max my-1 mr-2 relative'>
           <div className='relative bg-gray-100 z-50'>{props.content}</div>
           <MoonIcon className='rotate-90 bg-transparent text-gray-100 w-5 h-5 absolute top-4 -left-1'/>
         </div>

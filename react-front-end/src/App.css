@@ -94,6 +94,23 @@
   align-self: center;
 }
 
+.chat-room-container {
+  overflow-y: auto;
+}
+
+.chat-room-container::-webkit-scrollbar {
+  width: 10px;
+  background-color:#fff;
+  border: 1px solid hsl(0, 0%, 23%, 0.25);
+  border-radius: 20px;
+}
+
+.chat-room-container::-webkit-scrollbar-thumb {
+  width: 10px;
+  background-color:#3b3b3b;
+  border-radius: 20px;
+}
+
 
 
 

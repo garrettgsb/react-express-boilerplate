@@ -4,7 +4,7 @@ const MatchHeader = (props) => {
   return (
     <div className='bg-white flex flex-row border-b border-gray-300 items-center justify-between px-3'>
       <div className="bg-white display-match-name font-semibold flex items-center">
-        {props.match
+        {props.selected
           ? <>
               <img className='bg-white w-6 h-6 rounded-full' src={props.selected?.photos[0].url} alt="" />
               <div className='bg-white ml-2'>{props.selected?.name}</div>
