@@ -42,6 +42,8 @@ const App = () => {
         user: all[1].data, 
         likedBy: all[2].data});
     }) 
+    // Discusss if we need cleanUp for Effect Hook
+    // return () => axios.isCancel()
   }, []);
 
   // Getting list of all messages
@@ -66,6 +68,7 @@ const App = () => {
       .then((matches) => {
         setMatches([...matches.data]);
       })
+      // return () => axios.isCancel()
   }, [swipeHistory])
 
   // like user - takes in swiped on Ids and like value:boolean

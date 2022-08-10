@@ -26,23 +26,28 @@ VALUES
 
 INSERT INTO messages (from_user_id, to_user_id, message, message_seen, date_sent) 
 VALUES 
-(1, 2, 'Hey Id 2', false, CURRENT_TIMESTAMP),
-(2, 1, 'Hello id 1', false, CURRENT_TIMESTAMP),
-(1, 2, 'hey again from id.1 to id.2', false, CURRENT_TIMESTAMP),
-(2, 1, 'Hello again', false, CURRENT_TIMESTAMP),
-(1, 2, 'Hey Id 2', false, CURRENT_TIMESTAMP),
-(2, 1, 'Hello id 1', false, CURRENT_TIMESTAMP),
-(1, 2, 'hey again from id.1 to id.2', false, CURRENT_TIMESTAMP),
-(2, 1, 'Hello again', false, CURRENT_TIMESTAMP),
-(2, 3, 'Test msg to see fetch works', false, CURRENT_TIMESTAMP);
+(1, 2, 'hey from id.1 to id.2', false, CURRENT_TIMESTAMP),
+(2, 1, 'hey from id.2 to id.1', false, CURRENT_TIMESTAMP),
+(1, 5, 'hey again from id.1 to id.5', true, CURRENT_TIMESTAMP),
+(1, 4, 'hey again from id.1 to id.4', true, CURRENT_TIMESTAMP),
+(4, 2, 'hey again from id.4 to id.2', true, CURRENT_TIMESTAMP),
+(4, 1, 'hey again from id.4 to id.1', true, CURRENT_TIMESTAMP),
+(5, 1, 'hey again from id.5 to id.1', true, CURRENT_TIMESTAMP),
+(4, 3, 'hey again from id.4 to id.3', false, CURRENT_TIMESTAMP);
 
 
 INSERT INTO matchings (from_user_id, to_user_id, like_value, seen, matched_date) 
 VALUES 
 (1, 2, true, true, CURRENT_TIMESTAMP),
+(1, 3, true, true, CURRENT_TIMESTAMP),
+(1, 4, true, true, CURRENT_TIMESTAMP),
+(1, 5, true, true, CURRENT_TIMESTAMP),
 (2, 1, true, true, CURRENT_TIMESTAMP),
 (3, 1, false, true, CURRENT_TIMESTAMP),
 (4, 1, true, true, CURRENT_TIMESTAMP),
+(4, 2, true, true, CURRENT_TIMESTAMP),
+(4, 3, true, true, CURRENT_TIMESTAMP),
+(4, 5, true, true, CURRENT_TIMESTAMP),
 (5, 1, true, true, CURRENT_TIMESTAMP);
 
 INSERT INTO genders (value) 
