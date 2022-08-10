@@ -1,34 +1,40 @@
 import {useState, useEffect} from 'react';
+import axios from 'axios';
 import InputArea from './InputArea';
 import MessageBubble from './MessageBubble';
 
 const ChatRoom = (props) => {
-  const [messageHistory, setMessageHistory] = useState([]);
+  const [messagesHistory, setMessagesHistory] = useState([]);
   const [message, setMessage] = useState('');
 
-  // set message history as state
+  // Filter messages based on user Id and who is selected in chat view
   useEffect(() => {
-    const filteredMsgs = props.messages?.filter(msg => msg.to_user_id === props.match.id || msg.from_user_id === props.match.id);
-    setMessageHistory([...filteredMsgs]);
-  }, [])
+    const filtered = props.allMessages?.filter(msg => msg.to_user_id === props.selected.id || msg.from_user_id === props.selected.id);
+    setMessagesHistory([...filtered]);
+  }, [props.allMessages]);
 
-  // build msgdata objt to send to message history and eventually post request
+  // // build msgdata objt to send to message history and eventually post request
   const sendMessage = (msgData) => {
     console.log('you clicked to send the msg', msgData);
-    const newMsgs = [...messageHistory, msgData];
-    setMessageHistory(newMsgs);
-    setMessage('');
+    axios.post('/api/users/1/messages/new', msgData)
+      .then((results) => {
+        console.log('new msg from db', results.data);
+        const msgFetchTrigger = props.messageSent;
+        props.setMessageSent(!msgFetchTrigger);
+        setMessage('');
+      })
+      .catch((error) => console.log('error:', error));
   };
 
   // map over message history and render messages on screen
-  const renderedMsgs = messageHistory?.map((msg) => {
+  const renderedMsgs = messagesHistory?.map((msg) => {
     return (
       <MessageBubble 
         key={msg.id}
         id={msg.id}
         content={msg.message}
         to={msg.to_user_id}
-        toName={props.match.name}
+        toName={props.selected.name}
         from={msg.from_user_id}
         userName={props.user[0].name}
         userId={props.user[0].id}
@@ -42,7 +48,7 @@ const ChatRoom = (props) => {
     <div className='bg-white chat-room-container flex flex-col px-4 py-4 justify-end'>
       {renderedMsgs}
     </div>
-    <InputArea user={props.user} match={props.match} message={message} setMessage={setMessage} sendMessage={sendMessage}/>
+    <InputArea selected={props.selected} user={props.user} message={message} setMessage={setMessage} sendMessage={sendMessage}/>
     </>
   );
 };

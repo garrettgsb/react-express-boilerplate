@@ -8,11 +8,13 @@ import Nav from "./components/Nav";
 import Matches from "./components/Matches";
 
 const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
   const [state, setState] = useState({});
+  const [allMessages, setAllMessages] = useState([]);
+  const [messageSent, setMessageSent] = useState(false);
   const [preferences, setPreferences] = useState({});
   const [matches, setMatches] = useState([])
   const [swipeHistory, setSwipeHistory] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
 
   // if req.session.user_id exists, set loggedIn to true
   useEffect(() => {
@@ -32,18 +34,25 @@ const App = () => {
     Promise.all([
       axios.get('/api/users/1/all'),
       axios.get('/api/users/1'),
-      axios.get('/api/users/1/messages'),
       axios.get('/api/users/1/likedBy')
     ])
     .then((all) => {
       setState({...state, 
         users: all[0].data, 
         user: all[1].data, 
-        messages: all[2].data, 
-        likedBy: all[3].data});
+        likedBy: all[2].data});
     }) 
   }, []);
 
+  // Getting list of all messages
+  useEffect(() => {
+    axios.get('/api/users/1/messages')
+      .then((msgs) => {
+        setAllMessages([...msgs.data])
+      });
+  }, [messageSent]);
+
+  // Getting users current preferences settings
   useEffect(() => {
     axios.get('/api/users/1/preferences')
       .then((results) => {
@@ -51,7 +60,7 @@ const App = () => {
       })
   }, []);
 
-  // Separating matches so it has dependency to update
+  // Getting list of confirmed matches
   useEffect(() => {
     axios.get('/api/users/1/matchings')
       .then((matches) => {
@@ -71,10 +80,8 @@ const App = () => {
         console.log('error', error);
       });
   };
-  // Makes post request when preferences update
 
-  // Update users preferences state
-  // need to pass preference key and new value as obj
+  // Update users preferences
   const updatePreferences = () => {
     const newPref = {
       ...preferences,
@@ -88,7 +95,7 @@ const App = () => {
     .catch(error => console.log(error));
   };
 
-  // block user
+  // block a user
   const blockUser = (blockId) => {
     axios.post('/api/users/1/blocked', { blockId })
       .then((response) => {
@@ -110,13 +117,11 @@ const App = () => {
       })
       .catch((error) => console.log('err:', error));
   }
-  // END OF SIGN OUT
 
   // Updating user profile 
   const updateProfile = (newValues) => {
     const newProfileValues = newValues;
     console.log('newvalues from newProfileValues', newProfileValues);
-    // make axios post call
     axios.post('/api/users/1/edit', newProfileValues)
       .then((results) => {
         const oldProfile = state.user[0];
@@ -128,7 +133,7 @@ const App = () => {
         console.log('error:', error);
       });
   };
-  // end of updating user profile
+
   return (
     <div className="App">
 
@@ -182,7 +187,7 @@ const App = () => {
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
                 <Nav state={state} handleClickLogOut={handleClickLogOut} />
-                <Matches state={state} matches={matches} />
+                <Matches state={state} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
               </>
         } />
 

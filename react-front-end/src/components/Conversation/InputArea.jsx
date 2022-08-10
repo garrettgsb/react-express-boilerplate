@@ -10,8 +10,8 @@ const InputArea = (props) => {
       const msgData = {
         from_user_id: props.user[0].id,
         message: props.message,
-        to_user_id: props.match.id,
-        date_sent: new Date().toISOString(),
+        to_user_id: props.selected.id,
+        // date_sent: new Date().toISOString(),
         message_seen: false
       };
       props.sendMessage(msgData);
@@ -19,6 +19,8 @@ const InputArea = (props) => {
       console.log('need to type something');
     }
   };
+
+  // selected={props.selected} user={props.user} message={message} setMessage={setMessage} sendMessage={sendMessage}
 
   return (
     <div className='bg-white border flex border-gray-300 rounded-2xl justify-self-center items-center w-11/12 px-2 h-2/3'>

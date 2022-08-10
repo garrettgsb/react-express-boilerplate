@@ -1,15 +1,13 @@
 import {PhoneIcon, VideoCameraIcon, DotsCircleHorizontalIcon} from '@heroicons/react/outline';
 
 const MatchHeader = (props) => {
-
-  console.log(props.photos);
   return (
     <div className='bg-white flex flex-row border-b border-gray-300 items-center justify-between px-3'>
       <div className="bg-white display-match-name font-semibold flex items-center">
         {props.match
           ? <>
-              <img className='bg-white w-6 h-6 rounded-full' src={props.match?.photos[0].url} alt="" />
-              <div className='bg-white ml-2'>{props.match?.name}</div>
+              <img className='bg-white w-6 h-6 rounded-full' src={props.selected?.photos[0].url} alt="" />
+              <div className='bg-white ml-2'>{props.selected?.name}</div>
             </>
           : "Loading"
         }
