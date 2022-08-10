@@ -29,7 +29,7 @@ export default function Matches(props) {
   <img className="w-10 h-10 cursor-pointer  rounded-full object-cover" src={match.photos? match.photos[0]: ""} href="/users/:id/messages"/>
   {match.name}
  <br />
- { seen(match.id)? <BellIcon className="mx-3 h-4 cursor-pointer rounded-full text-[#8A00A0] hover:bg-gray-50 " />: <></>}
+ { seen(match.id)? <BellIcon className="h-5 relative cursor-pointer rounded-full text-[#8A00A0] hover:bg-gray-50 " />: <></>}
  
   {/* {props.messages.sort((a,b) => b.date_sent - a.date_sent)} */}
 
@@ -38,6 +38,7 @@ export default function Matches(props) {
   )
 
     })
+
 
 
 console.log("state from matches", props)
