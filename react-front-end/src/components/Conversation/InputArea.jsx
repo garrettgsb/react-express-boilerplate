@@ -8,10 +8,11 @@ const InputArea = (props) => {
   const buildMsgData = () => {
     if (props.message) {
       const msgData = {
-        from: props.user[0].id,
+        from_user_id: props.user[0].id,
         message: props.message,
-        to: props.match.id,
-        // date_sent: date
+        to_user_id: props.match.id,
+        date_sent: new Date().toISOString(),
+        message_seen: false
       };
       props.sendMessage(msgData);
     } else {

@@ -15,6 +15,9 @@ const ChatRoom = (props) => {
   // build msgdata objt to send to message history and eventually post request
   const sendMessage = (msgData) => {
     console.log('you clicked to send the msg', msgData);
+    const newMsgs = [...messageHistory, msgData];
+    setMessageHistory(newMsgs);
+    setMessage('');
   };
 
   // map over message history and render messages on screen
@@ -36,7 +39,7 @@ const ChatRoom = (props) => {
 
   return (
     <>
-    <div className='bg-white chat-room-container flex flex-col px-4 py-2'>
+    <div className='bg-white chat-room-container flex flex-col px-4 py-4 justify-end'>
       {renderedMsgs}
     </div>
     <InputArea user={props.user} match={props.match} message={message} setMessage={setMessage} sendMessage={sendMessage}/>
