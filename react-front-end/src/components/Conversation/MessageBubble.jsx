@@ -13,7 +13,7 @@ const MessageBubble = (props) => {
     return (
       <>
         <div onClick={() => selectMsg()} className='justify-self-center self-start bg-gray-100 text-gray-800 font-light rounded-xl px-3 py-1 text-sm min-w-max my-1 mr-2 relative'>
-          <div className='relative bg-gray-100 z-50'>{props.content}</div>
+          <div className='relative bg-gray-100 z-50 whitespace-pre-line'>{props.content}</div>
           <MoonIcon className='rotate-90 bg-transparent text-gray-100 w-5 h-5 absolute top-4 -left-1'/>
         </div>
         { selected 
@@ -27,7 +27,7 @@ const MessageBubble = (props) => {
   return (
     <>
     <div onClick={() => selectMsg()} className='justify-self-center self-end bg-fuchsia-800 text-white font-light rounded-xl px-3 py-1 text-sm min-w-max my-1 mr-2 relative'>
-      <div className='relative bg-fuchsia-800 z-50'>{props.content}</div>
+      <div className='relative bg-fuchsia-800 z-50 whitespace-pre-line'>{props.content}</div>
       <MoonIcon className='rotate-45 bg-transparent text-fuchsia-800 w-5 h-5 absolute top-3 -right-2'/>
     </div>
     { selected 

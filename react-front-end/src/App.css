@@ -111,6 +111,28 @@
   border-radius: 20px;
 }
 
+.input-container{
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  grid-template-rows: 1fr;
+}
+
+.msg-text-area::-webkit-scrollbar {
+  width: 5px;
+  background-color:#fff;
+  border: 1px solid hsl(0, 0%, 23%, 0.25);
+  border-radius: 20px;
+}
+
+.msg-text-area::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color:#3b3b3b;
+  border-radius: 20px;
+}
+
+
+
+
 
 
 
