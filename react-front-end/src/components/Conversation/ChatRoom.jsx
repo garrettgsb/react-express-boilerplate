@@ -2,6 +2,9 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import InputArea from './InputArea';
 import MessageBubble from './MessageBubble';
+// WILL NEED TO IMPORT SOCKET.IO HERE
+// WILL NEED TO IMPORT SOCKET.IO HERE
+// WILL NEED TO IMPORT SOCKET.IO HERE
 
 const ChatRoom = (props) => {
   const [messagesHistory, setMessagesHistory] = useState([]);
@@ -12,6 +15,13 @@ const ChatRoom = (props) => {
     const filtered = props.allMessages?.filter(msg => msg.to_user_id === props.selected.id || msg.from_user_id === props.selected.id);
     setMessagesHistory([...filtered]);
   }, [props.allMessages]);
+
+    // SOCKET IO USEEFFECT IN HERE
+  // SOCKET IO USEEFFECT IN HERE
+    // SOCKET IO USEEFFECT IN HERE
+  // SOCKET IO USEEFFECT IN HERE
+  // SOCKET IO USEEFFECT IN HERE
+
 
   // // build msgdata objt to send to message history and eventually post request
   const sendMessage = (msgData) => {
