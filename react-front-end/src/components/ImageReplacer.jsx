@@ -5,7 +5,7 @@ const ImageReplacer = (props) => {
   // Helper to replace image changes
   const imgReplace = (newImg, index) => {
     const newPhotos = [...props.photos];
-    newPhotos[index].f2 = newImg;
+    newPhotos[index].url = newImg;
     props.setNewProfile({...props.newProfile, photos: newPhotos});
   };
 

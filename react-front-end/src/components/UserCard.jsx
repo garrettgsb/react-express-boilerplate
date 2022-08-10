@@ -71,7 +71,7 @@ const UserCard = (props) => {
       <ImageReplacer 
         key={index}
         index={index}
-        url={photo.f2}
+        url={photo.url}
         newProfile={newProfile}
         photos={newProfile.photos}
         setNewProfile={setNewProfile}
@@ -130,7 +130,7 @@ const UserCard = (props) => {
     <article className="user-profile flex flex-col user-card w-full" id={props.id}>
       {props.profile ? profileView : <></>}
       <div className="user-photos-container rounded-t-xl h-3/4">
-        <img src={props.profile ? props.photos[pager].f2 : props.photos[pager]} alt=""/>
+        <img src={props.photos[pager].url} alt=""/>
       </div>
       <div className="h-3/4 flex flex-row justify-between absolute left-0 bg-transparent hover:bg-white/25">
         <button onClick={() => handlePager('prev')}><ChevronLeftIcon className='h-5 w-5 bg-transparent text-white'/></button>

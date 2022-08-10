@@ -9,43 +9,43 @@ const db = require("../db/database");
 router.get("/users/:id/all", (req, res) => {
   const userId = req.params.id;
   const query = `
-    With matching_seen_cte as (
-      SELECT to_user_id
-      FROM matchings
-      WHERE from_user_id = $1 
-      AND like_value is not null
-    ),
-    photos as (
-      SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
-    )
-    SELECT 
-      users.id, users.name, users.email, users.age, users.bio, genders.value AS gender, users.location, users.height_in_cm, users.education, users.occupation, drinks.value AS drinks, exercises.value AS exercises, dating_goals.value as goal, users.is_active, photos
-    FROM 
-      users 
-    LEFT JOIN 
-      matching_seen_cte 
-    ON 
-      users.id = matching_seen_cte.to_user_id
-    LEFT JOIN 
-      photos 
-    ON 
-      users.id = photos.user_id
-    LEFT JOIN genders ON users.gender_id = genders.id
-    LEFT JOIN drinks ON users.drink_id = drinks.id
-    LEFT JOIN exercises ON users.exercise_id = exercises.id
-    LEFT JOIN dating_goals ON users.dating_goal_id = dating_goals.id
-    WHERE 
-      users.id != $1
-    AND users.id not in (
-        select distinct to_user_id
-        from matching_seen_cte)
-    GROUP BY
-      users.id,
-      photos.photos,
-      genders.value,
-      drinks.value,
-      exercises.value,
-      dating_goals.value;
+  With matching_seen_cte as (
+    SELECT to_user_id
+    FROM matchings
+    WHERE from_user_id = $1 
+    AND like_value is not null
+  ),
+  photos as (
+    SELECT user_photos.user_id, array_agg(jsonb_build_object('id', user_photos.id, 'url', user_photos.url)) photos FROM user_photos GROUP BY user_photos.user_id
+  )
+  SELECT 
+    users.id, users.name, users.email, users.age, users.bio, genders.value AS gender, users.location, users.height_in_cm, users.education, users.occupation, drinks.value AS drinks, exercises.value AS exercises, dating_goals.value as goal, users.is_active, photos
+  FROM 
+    users 
+  LEFT JOIN 
+    matching_seen_cte 
+  ON 
+    users.id = matching_seen_cte.to_user_id
+  LEFT JOIN 
+    photos 
+  ON 
+    users.id = photos.user_id
+  LEFT JOIN genders ON users.gender_id = genders.id
+  LEFT JOIN drinks ON users.drink_id = drinks.id
+  LEFT JOIN exercises ON users.exercise_id = exercises.id
+  LEFT JOIN dating_goals ON users.dating_goal_id = dating_goals.id
+  WHERE 
+    users.id != $1
+  AND users.id not in (
+      select distinct to_user_id
+      from matching_seen_cte)
+  GROUP BY
+    users.id,
+    photos.photos,
+    genders.value,
+    drinks.value,
+    exercises.value,
+    dating_goals.value;
   `;
   return db
     .query(query, [userId])
@@ -60,7 +60,7 @@ router.get("/users/:id", (req, res) => {
   const userId = req.params.id;
   const query = `
   WITH photos as (
-    SELECT user_photos.user_id, array_to_json(array_agg(row(user_photos.id, user_photos.url))) AS photos FROM user_photos GROUP BY user_photos.user_id
+    SELECT user_photos.user_id, array_agg(jsonb_build_object('id', user_photos.id, 'url', user_photos.url)) AS photos FROM user_photos GROUP BY user_photos.user_id
   )
   SELECT users.id, users.name, users.email, users.bio, users.age, users.education, users.location, users.height_in_cm, users.occupation, users.is_active, genders.value AS gender, drinks.value AS drinks, exercises.value AS exercises, dating_goals.value AS goal, user_photos.url AS profile_photo, photos
       FROM users
@@ -150,7 +150,7 @@ router.get("/users/:id/matchings", (req, res) => {
       AND A.from_user_id = $1
     ),
     photos as (
-      SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
+      SELECT user_photos.user_id, array_agg(jsonb_build_object('id', user_photos.id, 'url', user_photos.url)) photos FROM user_photos GROUP BY user_photos.user_id
     )
     SELECT
       users.id,
@@ -248,8 +248,8 @@ router.post('/users/:id/edit', (req, res) => {
     db.query(query, [newValue.bio, newValue.location, newValue.education, newValue.occupation, userId])
     .then(() => {
       for (const newPhoto of newPhotoUrl) {
-        const photoId = newPhoto.f1;
-        const newUrl = newPhoto.f2;
+        const photoId = newPhoto.id;
+        const newUrl = newPhoto.url;
         const updatePhotoQuery = `UPDATE user_photos SET url = '${newUrl}' WHERE user_photos.id = ${photoId} AND user_photos.user_id = ${userId};`;
         db.query(updatePhotoQuery).then()
       }
@@ -257,7 +257,7 @@ router.post('/users/:id/edit', (req, res) => {
     .then(() => {
       const getUser = `
       WITH photos as (
-        SELECT user_photos.user_id, array_to_json(array_agg(row(user_photos.id, user_photos.url))) AS photos FROM user_photos GROUP BY user_photos.user_id
+        SELECT user_photos.user_id, array_agg(jsonb_build_object('id', user_photos.id, 'url', user_photos.url)) AS photos FROM user_photos GROUP BY user_photos.user_id
       )
       SELECT users.id, users.name, users.email, users.bio, users.age, users.education, users.location, users.height_in_cm, users.occupation, users.is_active, genders.value AS gender, drinks.value AS drinks, exercises.value AS exercises, dating_goals.value AS goal, user_photos.url AS profile_photo, photos
           FROM users

@@ -7,7 +7,6 @@ import LoginForm from './components/login-form'
 import Nav from "./components/Nav";
 import Matches from "./components/Matches";
 
-
 const App = () => {
   const [state, setState] = useState({});
   const [preferences, setPreferences] = useState({});
@@ -178,7 +177,7 @@ const App = () => {
               </>
         } />
 
-        <Route path='/matches' element={
+        <Route path='users/1/matches' element={
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>

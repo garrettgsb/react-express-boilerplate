@@ -66,6 +66,20 @@
   display: none;
 }
 
+.outer-most-matches-div {
+  height: calc(100vh - 8vh);
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(14, 1fr);
+}
+
+.test-list {
+  grid-area: 2 / 3 / 14 / 5;
+}
+
+.conversation-container {
+  grid-area: 2 / 5 / 14 / 9;
+}
+
 
 
 
