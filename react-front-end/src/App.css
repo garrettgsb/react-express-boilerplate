@@ -56,6 +56,12 @@
   grid-template-rows: 5% repeat(3, 1fr) 5%;
 } 
 
+.user-photos-container > img {
+  object-fit: cover;
+  object-position: top;
+  width: 100%;
+}
+
 .keen-tinder-card {
   grid-area: 2 / 3 / 5 / 5;
   min-width: 0;
