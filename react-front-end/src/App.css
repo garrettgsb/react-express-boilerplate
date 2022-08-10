@@ -78,8 +78,12 @@
   grid-template-rows: repeat(14, 1fr);
 }
 
-.test-list {
-  grid-area: 2 / 3 / 14 / 5;
+.matches-list-header {
+  grid-area: 2 / 3 / 3 / 5;
+}
+
+.matches-bubble-list {
+  grid-area: 3 / 3 / 14 / 5;
 }
 
 .conversation-container {

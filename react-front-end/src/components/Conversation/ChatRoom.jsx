@@ -14,7 +14,7 @@ const ChatRoom = (props) => {
   useEffect(() => {
     const filtered = props.allMessages?.filter(msg => msg.to_user_id === props.selected.id || msg.from_user_id === props.selected.id);
     setMessagesHistory([...filtered]);
-  }, [props.allMessages]);
+  }, [props.allMessages, props.selected]);
 
     // SOCKET IO USEEFFECT IN HERE
   // SOCKET IO USEEFFECT IN HERE
