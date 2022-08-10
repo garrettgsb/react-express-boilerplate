@@ -45,8 +45,8 @@ const ChatRoom = (props) => {
 
   return (
     <>
-    <div className='bg-white chat-room-container flex flex-col justify-end'>
-      <div className="chat-bubble-container bg-white flex flex-col px-4 py-4 justify-end">
+    <div className='bg-white chat-room-container flex flex-col-reverse'>
+      <div className="chat-bubble-container bg-white flex flex-col px-4 py-4">
         {renderedMsgs}
       </div>
     </div>
