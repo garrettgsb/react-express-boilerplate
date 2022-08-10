@@ -88,7 +88,7 @@ router.get("/users/:id/messages", (req, res) => {
   const userId = req.params.id;
   const query = `
     SELECT * FROM messages
-    WHERE from_user_id = $1;
+    WHERE from_user_id = $1 OR to_user_id = $1;
   `;
   return db
     .query(query, [userId])
