@@ -84,6 +84,14 @@
 
 .conversation-container {
   grid-area: 2 / 5 / 14 / 9;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr 50px;
+}
+
+.none-selected {
+  grid-area: 2 / 1 / 3 / 1;
+  justify-self: center;
+  align-self: center;
 }
 
 

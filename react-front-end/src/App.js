@@ -182,7 +182,7 @@ const App = () => {
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
                 <Nav state={state} handleClickLogOut={handleClickLogOut} />
-                <Matches state={state} />
+                <Matches state={state} matches={matches} />
               </>
         } />
 
