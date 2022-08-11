@@ -14,10 +14,10 @@ const ChatRoom = (props) => {
   
 
   // Filter messages based on user Id and who is selected in chat view
-  // useEffect(() => {
-  //   const filtered = props.allMessages?.filter(msg => msg.to_user_id === props.selected.id || msg.from_user_id === props.selected.id);
-  //   setMessagesHistory([...filtered]);
-  // }, [props.allMessages]);
+  useEffect(() => {
+    const filtered = props.allMessages?.filter(msg => msg.to_user_id === props.selected.id || msg.from_user_id === props.selected.id);
+    setMessagesHistory([...filtered]);
+  }, [props.allMessages]);
 
  // SOCKET PART
  const [isConnected, setIsConnected] = useState(socket.connected);
@@ -38,9 +38,11 @@ useEffect(() => {
 });
 
  socket.on("message", (message) => {
+  // We dont need to recieve message from server by socketIO???
+  // In this case we dont need to send it to server either
   console.log("message from socket" ,message)
   setMessagesHistory((prev) => [...prev, message]);
-  console.log("messages after history" , messagesHistory)
+  // console.log("messages after history" , messagesHistory)
   });
 
  return () => {
@@ -53,6 +55,9 @@ useEffect(() => {
 const sendToServer = (data) => {
   console.log("sent to socket", data)
  socket.emit('sendMessage', data);
+ const msgFetchTrigger = props.messageSent;
+        props.setMessageSent(!msgFetchTrigger);
+               setMessage('');
 }
 const sendPing = () => {
   socket.emit('ping');
@@ -68,17 +73,18 @@ const sendPing = () => {
 
   // // build msgdata objt to send to message history and eventually post request
   const sendMessage = (msgData) => {
-    console.log('you clicked to send the msg', msgData);
-    axios.post('/api/users/1/messages/new', msgData)
-    .then((results) => {
-      sendToServer(results.data)
-        console.log('new msg from db', results.data);
-        const msgFetchTrigger = props.messageSent;
-        props.setMessageSent(!msgFetchTrigger);
-               setMessage('');
-      })
-      .then()
-      .catch((error) => console.log('error:', error));
+    sendToServer(msgData)
+    // console.log('you clicked to send the msg', msgData);
+    // axios.post('/api/users/1/messages/new', msgData)
+    // .then((results) => {
+    //   
+    //     console.log('new msg from db', results.data);
+    //     const msgFetchTrigger = props.messageSent;
+    //     props.setMessageSent(!msgFetchTrigger);
+    //            setMessage('');
+    //   })
+    //   .then()
+    //   .catch((error) => console.log('error:', error));
   };
 
   // map over message history and render messages on screen

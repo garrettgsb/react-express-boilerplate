@@ -6,6 +6,7 @@ const PORT = 8080;
 
 
 ////// SOCKETIO
+// const db = require("./db/database");
 const server = require('http').createServer(App);
 const io = require('socket.io')(server);
 io.on("connection", (socket) => {
@@ -19,15 +20,28 @@ io.on("connection", (socket) => {
   })
 
 socket.on("sendMessage", (data) =>{
+  console.log("data from client message", data)
 ///////
 // axios.post('/api/users/1/messages/new', data)
 // then((results) => {
 //     console.log('new msg from db', results.data)})
 //////
 
-  console.log('usermsg after axios', data)
+const query = `
+  INSERT INTO messages
+      (from_user_id, to_user_id, message, message_seen)
+    VALUES 
+      ($1, $2, $3, $4)
+    RETURNING *;
+  `;
 
-socket.emit("message", data)
+return db.query(query, [data.from_user_id, data.to_user_id, data.message, data.message_seen])
+.then((newMsgData) =>socket.emit("message",newMsgData.rows[0]))
+.catch((error) => console.log('error', error));
+
+  // console.log('usermsg after axios', data)
+
+// socket.emit("message", responceData)
 })
 
 })
