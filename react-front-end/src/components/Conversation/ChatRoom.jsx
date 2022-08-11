@@ -14,10 +14,10 @@ const ChatRoom = (props) => {
   
 
   // Filter messages based on user Id and who is selected in chat view
-  useEffect(() => {
-    const filtered = props.allMessages?.filter(msg => msg.to_user_id === props.selected.id || msg.from_user_id === props.selected.id);
-    setMessagesHistory([...filtered]);
-  }, [props.allMessages]);
+  // useEffect(() => {
+  //   const filtered = props.allMessages?.filter(msg => msg.to_user_id === props.selected.id || msg.from_user_id === props.selected.id);
+  //   setMessagesHistory([...filtered]);
+  // }, [props.allMessages]);
 
  // SOCKET PART
  const [isConnected, setIsConnected] = useState(socket.connected);
@@ -39,8 +39,8 @@ useEffect(() => {
 
  socket.on("message", (message) => {
   console.log("message from socket" ,message)
-  setMessagesHistory((message) => [...messagesHistory, message]);
-  console.log("message after history" , messagesHistory)
+  setMessagesHistory((prev) => [...prev, message]);
+  console.log("messages after history" , messagesHistory)
   });
 
  return () => {
@@ -62,15 +62,16 @@ const sendPing = () => {
 
 
 //******************
+//axios work with socketIO, 
  //////////////////////////////
 
 
   // // build msgdata objt to send to message history and eventually post request
   const sendMessage = (msgData) => {
-    sendToServer(msgData)
     console.log('you clicked to send the msg', msgData);
     axios.post('/api/users/1/messages/new', msgData)
-      .then((results) => {
+    .then((results) => {
+      sendToServer(results.data)
         console.log('new msg from db', results.data);
         const msgFetchTrigger = props.messageSent;
         props.setMessageSent(!msgFetchTrigger);
@@ -98,7 +99,7 @@ const sendPing = () => {
   });
 
 
-// REMOVE SOCKET 
+// REMOVE SOCKET PING
 
 
   return (

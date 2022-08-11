@@ -4,6 +4,7 @@ const BodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const PORT = 8080;
 
+
 ////// SOCKETIO
 const server = require('http').createServer(App);
 const io = require('socket.io')(server);
@@ -18,7 +19,14 @@ io.on("connection", (socket) => {
   })
 
 socket.on("sendMessage", (data) =>{
-  console.log('usermsg', data)
+///////
+// axios.post('/api/users/1/messages/new', data)
+// then((results) => {
+//     console.log('new msg from db', results.data)})
+//////
+
+  console.log('usermsg after axios', data)
+
 socket.emit("message", data)
 })
 
