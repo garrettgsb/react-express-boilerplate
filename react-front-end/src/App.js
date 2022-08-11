@@ -6,10 +6,12 @@ import { Routes, Route } from 'react-router-dom';
 import LoginForm from './components/login-form'
 import Nav from "./components/Nav";
 import Matches from "./components/Matches";
+import Preferences from './components/Preferences';
 
 // initial state
 const reset = {
   loggedIn: false,
+  user: {},
   state: {},
   allMessages: [],
   messageSent: false,
@@ -20,6 +22,7 @@ const reset = {
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
   const [state, setState] = useState({});
   const [allMessages, setAllMessages] = useState([]);
   const [messageSent, setMessageSent] = useState(false);
@@ -29,6 +32,7 @@ const App = () => {
 
   const resetStates = () => {
     setLoggedIn(reset.loggedIn);
+    setUser({...reset.user});
     setState({...reset.state});
     setAllMessages([...reset.allMessages]);
     setMessageSent(reset.messageSent);
@@ -48,6 +52,14 @@ const App = () => {
         }
       })
   }, [loggedIn]);
+
+  useEffect(() => {
+    axios.get('/api/users')
+      .then((results) => {
+        setUser({...results.data}) 
+      })
+      .catch((error) => console.log('error', error));
+  }, [loggedIn])
   
   // promise chain for setting initial states
   // Depency: Will likely depend on swiping state
@@ -55,14 +67,12 @@ const App = () => {
     if (loggedIn) {
       Promise.all([
       axios.get('/api/users/all'),
-      axios.get('/api/users'),
       axios.get('/api/users/likedBy')
       ])
       .then((all) => {
         setState({...state, 
           users: all[0].data, 
-          user: all[1].data, 
-          likedBy: all[2].data});
+          likedBy: all[1].data});
       }) 
     }
     // Discusss if we need cleanUp for Effect Hook
@@ -151,7 +161,7 @@ const App = () => {
     console.log('newvalues from newProfileValues', newProfileValues);
     axios.post('/api/users/edit', newProfileValues)
       .then((results) => {
-        const oldProfile = state.user;
+        const oldProfile = user;
         const updatedUser = {...oldProfile, ...results.data[0]};
         console.log('updated user', updatedUser);
         setState({...state, user: [updatedUser]});
@@ -183,7 +193,7 @@ const App = () => {
           !loggedIn 
           ? <LoginForm setLoggedIn={setLoggedIn} /> 
           : <>
-              <Nav state={state} handleClickLogOut={handleClickLogOut}/>
+              <Nav state={state} user={user} handleClickLogOut={handleClickLogOut}/>
               <UserCardContainer 
                 users={state.users}
                 preferences={preferences}
@@ -198,9 +208,9 @@ const App = () => {
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
-                <Nav state={state} handleClickLogOut={handleClickLogOut}/>
+                <Nav state={state} user={user} handleClickLogOut={handleClickLogOut}/>
                 <UserCardContainer 
-                  user={state.user}
+                  user={user}
                   profile={true}
                   editMode={false}
                   updateProfile={updateProfile}
@@ -212,7 +222,7 @@ const App = () => {
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
-                <Nav state={state} handleClickLogOut={handleClickLogOut} />
+                <Nav state={state} user={user} handleClickLogOut={handleClickLogOut} />
                 <UserCardContainer 
                   users={state.users}
                   preferences={preferences}
@@ -227,10 +237,19 @@ const App = () => {
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
-                <Nav state={state} handleClickLogOut={handleClickLogOut} />
-                <Matches state={state} user={state.user} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
+                <Nav state={state} user={user} handleClickLogOut={handleClickLogOut} />
+                <Matches state={state} user={user} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
               </>
         } />
+
+        <Route path='/preferences' element={
+          !loggedIn 
+            ? <LoginForm setLoggedIn={setLoggedIn} /> 
+            : <>
+                <Nav state={state}user={user}  handleClickLogOut={handleClickLogOut} />
+                <Preferences preferences={preferences} user={user} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
+              </>
+        } />       
 
       </Routes>
     </div>
