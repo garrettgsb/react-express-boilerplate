@@ -1,32 +1,10 @@
-import {React, useEffect, useState} from "react";
-import {
-  PlusCircleIcon,
-  UserGroupIcon,
-  HeartIcon,
-  HomeIcon,
-  UserCircleIcon,
-  ChatAlt2Icon,
-  AdjustmentsIcon
-} from "@heroicons/react/outline";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import * as ROUTES from './routes';
-
-// color ------------------------- #8A00A0
-// Kept dropdown in this 
+import {React, useState} from "react";
+import { HomeIcon, ChatAlt2Icon, AdjustmentsIcon } from "@heroicons/react/outline";
+import { Link } from "react-router-dom";
 
 export default function Nav(props) {
   let user;
   const [open, setOpen] = useState(false);
-  // TRY USEEFECT TO SAVE PROPS
-
-  // useEffect(() =>{
-  //   const user = props.state.user[0]
-  // },[props])
 
   props.state.user? user = props.state.user[0] : user = {Name: "", email : "", profile_photo: "" }
   
@@ -39,20 +17,20 @@ export default function Nav(props) {
         </div>
 
         <div className="flex items-center">
-          <Link to={ROUTES.HOME}>
+          <Link to='/'>
           <HomeIcon className="mx-5 h-7 cursor-pointer rounded-full hover:text-[#8A00A0] hover:bg-gray-100" />
           </Link>
 
-          <Link to={ROUTES.MATCHES}>
+          <Link to='/matches'>
           <ChatAlt2Icon className="mx-5 h-7 cursor-pointer rounded-full hover:text-[#8A00A0] hover:bg-gray-100" />
           </Link>
 
-          <Link to={ROUTES.PREF}>
+          <Link to='/preferences'>
           <AdjustmentsIcon className="mx-5 h-7 cursor-pointer rounded-full hover:text-[#8A00A0] hover:bg-gray-100 " />
           </Link>
 
           <button className="mx-5 dropdown-relative" type="button" onClick={() =>{setOpen(!open)}}>
-            <img className="w-7 h-7 rounded-full" src={user.profile_photo} alt="thumbnail"/>
+            <img className="w-7 h-7 rounded-full" src={user ? user.profile_photo : ''} alt="thumbnail"/>
           </button>
 
           <div>
@@ -79,12 +57,12 @@ export default function Nav(props) {
                   </Link>
                 </li>
                 <li>
-                  <Link to='/users/1'>
+                  <Link to='/profile'>
                     <p className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Profile</p>
                   </Link>
                 </li>
                 <li>
-                  <Link to={ROUTES.PREF}>
+                  <Link to='/preferences'>
                     <p className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">Preferences</p>
                   </Link>
                 </li>

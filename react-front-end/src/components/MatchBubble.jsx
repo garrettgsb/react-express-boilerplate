@@ -29,7 +29,7 @@ const MatchBubble = (props) => {
         seen: true
       };
       setMatchSeen({...seen});
-      axios.post('/api/users/1/matchings/update', seen)
+      axios.post('/api/users/matchings/update', seen)
         .then((results) => {
           console.log('updated matching seen info', results.data);
           // const updatedMatchingInfo = {
@@ -51,7 +51,7 @@ const MatchBubble = (props) => {
       };
 
       setLastMsg({...updateMsg});
-      axios.post('/api/users/1/messages/seen', updateMsg)
+      axios.post('/api/users/messages/seen', updateMsg)
         .then((results) => {
           console.log('updated msg', results.data);
           const status = props.messageSent;

@@ -12,7 +12,7 @@ const UserCard = (props) => {
 
   // Helper function to capitalize first letter of user-more-info content
   const formatText = (text) => {
-    const newText = text.toLowerCase().split('').map((letter, index) => {
+    const newText = text?.toLowerCase()?.split('')?.map((letter, index) => {
       if (index === 0) {
         return letter.toUpperCase();
       } else {
