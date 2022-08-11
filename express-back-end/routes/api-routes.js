@@ -101,6 +101,27 @@ router.post('/users/:id/messages/new', (req, res) => {
     .catch((error) => console.log('error', error));
 });
 
+router.post('/users/:id/messages/seen', (req, res) => {
+  const userId = req.params.id;
+  const msgData = req.body;
+  const query = `
+  UPDATE messages
+  SET message_seen = $1
+  WHERE 
+    id = $2
+  AND
+    to_user_id = $3
+  AND
+    from_user_id = $4
+  RETURNING *;
+  `;
+  return db.query(query, [msgData.message_seen, msgData.id, msgData.to_user_id, msgData.from_user_id])
+    .then(({rows: updatedMsgData}) => {
+      res.json(updatedMsgData);
+    })
+    .catch((error) => console.log('error', error));
+});
+
 // Get request for all msgs sent by yourself
 router.get("/users/:id/messages", (req, res) => {
   const userId = req.params.id;
