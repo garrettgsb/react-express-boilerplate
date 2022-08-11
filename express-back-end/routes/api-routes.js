@@ -101,6 +101,7 @@ router.post('/users/:id/messages/new', (req, res) => {
     .catch((error) => console.log('error', error));
 });
 
+// Update message_seen value to true
 router.post('/users/:id/messages/seen', (req, res) => {
   const userId = req.params.id;
   const msgData = req.body;

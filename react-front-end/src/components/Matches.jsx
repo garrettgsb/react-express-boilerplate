@@ -19,12 +19,10 @@ export default function Matches(props) {
       <MatchBubble 
         key={match.id}
         match={match}
-        matchId={match.id}
         matchName={match.name}
         allMessages={props.allMessages}
         photos={match.photos}
         userId={props.state.user[0].id}
-        selected={selected}
         selectHandler={selectHandler}
         messageSent={props.messageSent}
         setMessageSent={props.setMessageSent}

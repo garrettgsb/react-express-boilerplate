@@ -80,20 +80,16 @@ const UserCardContainer = (props) => {
         { userProfile ? userProfile : "Loading" }
       </section>
     );
-  }
-
-  // // Render your profile in edit mode
-  // if (props.profile && props.editMode) {
-  //   return (
-  //     <section className="user-card-container border-8 border-red-500 w-full h-screen place-content-center p-5">
-  //       { userProfile ? userProfile : "Loading" }
-  //     </section>
-  //   )
-  // }
+  };
   
+  console.log('usercards', userCards);
+  // Render other users
   return (
       <section className="user-card-container w-full place-content-center">
-        {userCards ? userCards : "Loading" }
+        {userCards.length > 0 
+          ? userCards
+          : "Loading"
+        }
       </section>
   );
 };

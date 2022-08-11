@@ -1,4 +1,3 @@
-// feature - last msg received with seen_value false needs bubble bold and purple thing and gone when selected
 // feature - when a match happens, it should add to the match list - possibly notify on nav bar too
 import {useState, useEffect} from 'react';
 import moment from 'moment';
@@ -6,7 +5,6 @@ import axios from 'axios';
 
 const MatchBubble = (props) => {
   const [lastMsg, setLastMsg] = useState({});
-  // const [newMatch, setNewMatch] = useState();
 
   // Filter messages based on match's id and grab the last one
   useEffect(() => {
@@ -16,11 +14,13 @@ const MatchBubble = (props) => {
 
   }, [props.allMessages, props.match.id]);
 
+  // Build updated latest msg data, post rqeuest to have seen the message and call selectHandler
   const selectHelper = () => {
     const updateMsg = {
       ...lastMsg,
       message_seen: true
     };
+    setLastMsg({...updateMsg});
     axios.post('/api/users/1/messages/seen', updateMsg)
       .then((results) => {
         console.log('updated msg', results.data);
@@ -48,19 +48,19 @@ const MatchBubble = (props) => {
 
       <div className="match-bubble-info flex flex-col w-full bg-white px-2">
         <div className={`match-bubble-name bg-white text-[0.75rem] 
-          ${!lastMsg.message_seen && lastMsg.from_user_id !== props.userId
+          ${(lastMsg.length < 1 || !lastMsg.message_seen) && lastMsg.from_user_id !== props.userId
             ? 'font-bold' : ''}
         `}>
           {props.matchName}
         </div>
         <div className={`match-bubble-msg bg-white text-gray-400 font-light text-[0.6rem] flex items-center
-          ${!lastMsg.message_seen && lastMsg.from_user_id !== props.userId
+          ${(lastMsg.length < 1 || !lastMsg.message_seen) && lastMsg.from_user_id !== props.userId
             ? 'font-bold' : ''}
         `}>
           <span className='bg-white max-w-max justify-self-start'>
-            { lastMsg 
-              ? lastMsg?.message?.substring(0, 30)
-              : `Say Hi to ${props.matchName}`?.substring(0, 20)
+            { lastMsg.length < 1
+              ? `Say Hi to ${props.matchName}`?.substring(0, 20)
+              :  lastMsg?.message?.substring(0, 30)
             }
           </span> 
           <span className='bg-white max-w-max justify-self-center text-[3px] ml-1'>
@@ -74,7 +74,7 @@ const MatchBubble = (props) => {
           </span>
         </div>
       </div>
-      {!lastMsg.message_seen && lastMsg.from_user_id !== props.userId
+      {(lastMsg.length < 1 || !lastMsg.message_seen) && lastMsg.from_user_id !== props.userId
         ? <div className='bg-white text-fuchsia-800 text-sm'>
             {'\u25CF'}
           </div>
