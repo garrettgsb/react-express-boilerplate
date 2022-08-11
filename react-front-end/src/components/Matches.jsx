@@ -22,7 +22,7 @@ export default function Matches(props) {
         matchName={match.name}
         allMessages={props.allMessages}
         photos={match.photos}
-        userId={props.state.user[0].id}
+        userId={props.user}
         selectHandler={selectHandler}
         messageSent={props.messageSent}
         setMessageSent={props.setMessageSent}

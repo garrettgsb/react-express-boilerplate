@@ -46,8 +46,8 @@ const ChatRoom = (props) => {
         to={msg.to_user_id}
         toName={props.selected.name}
         from={msg.from_user_id}
-        userName={props.user[0].name}
-        userId={props.user[0].id}
+        userName={props.user.name}
+        userId={props.user.id}
         date={msg.date_sent}
       />
     )

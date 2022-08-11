@@ -78,7 +78,7 @@ router.get("/users", (req, res) => {
   return db
     .query(query, [userId])
     .then(({ rows: user }) => {
-      res.json(user);
+      res.json(user[0]);
     })
     .catch((error) => console.log("err:", error));
 });

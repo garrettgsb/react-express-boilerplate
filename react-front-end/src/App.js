@@ -151,7 +151,7 @@ const App = () => {
     console.log('newvalues from newProfileValues', newProfileValues);
     axios.post('/api/users/edit', newProfileValues)
       .then((results) => {
-        const oldProfile = state.user[0];
+        const oldProfile = state.user;
         const updatedUser = {...oldProfile, ...results.data[0]};
         console.log('updated user', updatedUser);
         setState({...state, user: [updatedUser]});
@@ -228,7 +228,7 @@ const App = () => {
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
                 <Nav state={state} handleClickLogOut={handleClickLogOut} />
-                <Matches state={state} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
+                <Matches state={state} user={state.user} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
               </>
         } />
 
