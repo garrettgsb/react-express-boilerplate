@@ -7,23 +7,22 @@ import LoginForm from './components/login-form'
 import Nav from "./components/Nav";
 import Matches from "./components/Matches";
 
-
 const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
   const [state, setState] = useState({});
+  const [allMessages, setAllMessages] = useState([]);
+  const [messageSent, setMessageSent] = useState(false);
   const [preferences, setPreferences] = useState({});
   const [matches, setMatches] = useState([])
   const [swipeHistory, setSwipeHistory] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
-
+  
   // if req.session.user_id exists, set loggedIn to true
   useEffect(() => {
     axios.get('/loggedIn')
       .then((results) => {
         if (results.data) {
-          console.log('logged in');
           setLoggedIn(true);
         } else {
-          console.log('not logged in');
           setLoggedIn(false);
         }
       })
@@ -35,18 +34,27 @@ const App = () => {
     Promise.all([
       axios.get('/api/users/1/all'),
       axios.get('/api/users/1'),
-      axios.get('/api/users/1/messages'),
       axios.get('/api/users/1/likedBy')
     ])
     .then((all) => {
       setState({...state, 
         users: all[0].data, 
         user: all[1].data, 
-        messages: all[2].data, 
-        likedBy: all[3].data});
+        likedBy: all[2].data});
     }) 
+    // Discusss if we need cleanUp for Effect Hook
+    // return () => axios.isCancel()
   }, []);
 
+  // Getting list of all messages
+  useEffect(() => {
+    axios.get('/api/users/1/messages')
+      .then((msgs) => {
+        setAllMessages([...msgs.data])
+      });
+  }, [messageSent]);
+
+  // Getting users current preferences settings
   useEffect(() => {
     axios.get('/api/users/1/preferences')
       .then((results) => {
@@ -54,12 +62,13 @@ const App = () => {
       })
   }, []);
 
-  // Separating matches so it has dependency to update
+  // Getting list of confirmed matches
   useEffect(() => {
     axios.get('/api/users/1/matchings')
       .then((matches) => {
         setMatches([...matches.data]);
       })
+      // return () => axios.isCancel()
   }, [swipeHistory])
 
   // like user - takes in swiped on Ids and like value:boolean
@@ -74,10 +83,8 @@ const App = () => {
         console.log('error', error);
       });
   };
-  // Makes post request when preferences update
 
-  // Update users preferences state
-  // need to pass preference key and new value as obj
+  // Update users preferences
   const updatePreferences = () => {
     const newPref = {
       ...preferences,
@@ -91,7 +98,7 @@ const App = () => {
     .catch(error => console.log(error));
   };
 
-  // block user
+  // block a user
   const blockUser = (blockId) => {
     axios.post('/api/users/1/blocked', { blockId })
       .then((response) => {
@@ -113,16 +120,25 @@ const App = () => {
       })
       .catch((error) => console.log('err:', error));
   }
-  // END OF SIGN OUT
 
   // Updating user profile 
   const updateProfile = (newValues) => {
-    console.log('new profile values in app.js', newValues);
-    // make axios post call
+    const newProfileValues = newValues;
+    console.log('newvalues from newProfileValues', newProfileValues);
+    axios.post('/api/users/1/edit', newProfileValues)
+      .then((results) => {
+        const oldProfile = state.user[0];
+        const updatedUser = {...oldProfile, ...results.data[0]};
+        console.log('updated user', updatedUser);
+        setState({...state, user: [updatedUser]});
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
   };
-  // end of updating user profile
+
   return (
-    <div className="App h-screen overflow-y-hidden">
+    <div className="App">
 
       <Routes>
         <Route path='/' element={
@@ -169,12 +185,12 @@ const App = () => {
               </>
         } />
 
-        <Route path='/matches' element={
+        <Route path='users/1/matches' element={
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
                 <Nav state={state} handleClickLogOut={handleClickLogOut} />
-                <Matches state={state} />
+                <Matches state={state} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
               </>
         } />
 

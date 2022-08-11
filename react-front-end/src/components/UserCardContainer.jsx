@@ -1,4 +1,5 @@
 import UserCard from "./UserCard";
+import NoUsersLeft from './NoUsersLeft';
 
 // Hook credit to @3DJakob on github 
 import TinderCard from 'react-tinder-card';
@@ -76,24 +77,20 @@ const UserCardContainer = (props) => {
   // Render your profile
   if (props.profile && !props.editMode) {
     return (
-      <section className="user-card-container w-full h-screen place-content-center p-5">
+      <section className="user-card-container w-full place-content-center">
         { userProfile ? userProfile : "Loading" }
       </section>
     );
-  }
-
-  // // Render your profile in edit mode
-  // if (props.profile && props.editMode) {
-  //   return (
-  //     <section className="user-card-container border-8 border-red-500 w-full h-screen place-content-center p-5">
-  //       { userProfile ? userProfile : "Loading" }
-  //     </section>
-  //   )
-  // }
+  };
   
+  console.log('usercards', userCards);
+  // Render other users
   return (
-      <section className="user-card-container w-full h-screen place-content-center p-5">
-        {userCards ? userCards : "Loading" }
+      <section className="user-card-container w-full place-content-center">
+        {userCards?.length > 0 
+          ? userCards
+          : <NoUsersLeft user={props.user}/>
+        }
       </section>
   );
 };
