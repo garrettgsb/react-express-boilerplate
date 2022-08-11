@@ -156,8 +156,10 @@ router.get("/users/:id/matchings", (req, res) => {
   const query = `
     WITH matched_users AS (
     SELECT
-      A.from_user_id,
-      A.to_user_id
+    A.from_user_id,
+      A.to_user_id,
+      A.seen,
+      A.id AS seen_ref_id
     FROM
     matchings A, matchings B
     WHERE 
@@ -171,8 +173,10 @@ router.get("/users/:id/matchings", (req, res) => {
       SELECT user_photos.user_id, array_agg(jsonb_build_object('id', user_photos.id, 'url', user_photos.url)) photos FROM user_photos GROUP BY user_photos.user_id
     )
     SELECT
-      users.id,
+    users.id,
       users.name,
+      seen,
+      seen_ref_id,
       photos
     FROM 
       matched_users
