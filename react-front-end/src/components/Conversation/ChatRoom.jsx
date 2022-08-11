@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import InputArea from './InputArea';
 import MessageBubble from './MessageBubble';
+
 ////// divide socetIO part
 import io from 'socket.io-client';
 const socket = io();
@@ -33,13 +34,8 @@ useEffect(() => {
    setIsConnected(false);
  });
 
- socket.on('pong', () => {
-
-   setLastPong(new Date().toISOString());
- });
-
  socket.on("message", (message) => {
-    setMessages((messages) => [...messages, message]);
+  setMessagesHistory((message) => [...messagesHistory, message]);
   });
 
  return () => {
@@ -49,8 +45,8 @@ useEffect(() => {
  };
 }, []);
 
-const sendPing = () => {
- socket.emit('ping');
+const sendPing = (data) => {
+ socket.emit('sendMessage', data);
 }
 
 
@@ -68,9 +64,6 @@ const sendPing = () => {
       .then((results) => {
         console.log('new msg from db', results.data);
         const msgFetchTrigger = props.messageSent;
-        //
-        socket.emit("sendMessage", { message })
-        //
         props.setMessageSent(!msgFetchTrigger);
                setMessage('');
       })
