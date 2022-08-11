@@ -1,38 +1,240 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import UserCardContainer from './components/UserCardContainer';
+import { Routes, Route } from 'react-router-dom';
+import LoginForm from './components/login-form'
+import Nav from "./components/Nav";
+import Matches from "./components/Matches";
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: 'Click the button to load data!'
+// initial state
+const reset = {
+  loggedIn: false,
+  state: {},
+  allMessages: [],
+  messageSent: false,
+  preferences: {},
+  matches: [],
+  swipeHistory: []
+}
+
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [state, setState] = useState({});
+  const [allMessages, setAllMessages] = useState([]);
+  const [messageSent, setMessageSent] = useState(false);
+  const [preferences, setPreferences] = useState({});
+  const [matches, setMatches] = useState([])
+  const [swipeHistory, setSwipeHistory] = useState([]);
+
+  const resetStates = () => {
+    setLoggedIn(reset.loggedIn);
+    setState({...reset.state});
+    setAllMessages([...reset.allMessages]);
+    setMessageSent(reset.messageSent);
+    setPreferences({...reset.preferences});
+    setMatches([...reset.matches]);
+    setSwipeHistory([...reset.swipeHistory]);
+  };
+
+  // if req.session.user_id exists, set loggedIn to true
+  useEffect(() => {
+    axios.get('/loggedIn')
+      .then((results) => {
+        if (results.data) {
+          setLoggedIn(true);
+        } else {
+          setLoggedIn(false);
+        }
+      })
+  }, [loggedIn]);
+  
+  // promise chain for setting initial states
+  // Depency: Will likely depend on swiping state
+  useEffect(() => {
+    if (loggedIn) {
+      Promise.all([
+      axios.get('/api/users/all'),
+      axios.get('/api/users'),
+      axios.get('/api/users/likedBy')
+      ])
+      .then((all) => {
+        setState({...state, 
+          users: all[0].data, 
+          user: all[1].data, 
+          likedBy: all[2].data});
+      }) 
     }
-  }
+    // Discusss if we need cleanUp for Effect Hook
+    // return () => axios.isCancel()
+  }, [loggedIn]);
 
-  fetchData = () => {
-    axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
-
-      console.log(response.data.message) // Just the message
-      this.setState({
-        message: response.data.message
+  // Getting list of all messages
+  useEffect(() => {
+    axios.get('/api/users/messages')
+      .then((msgs) => {
+        setAllMessages([...msgs.data])
       });
-    }) 
+  }, [messageSent, loggedIn]);
+
+  // Getting users current preferences settings
+  useEffect(() => {
+    axios.get('/api/users/preferences')
+      .then((results) => {
+        setPreferences({...results.data});
+      })
+  }, [loggedIn]);
+
+  // Getting list of confirmed matches
+  useEffect(() => {
+    axios.get('/api/users/matchings')
+      .then((matches) => {
+        setMatches([...matches.data]);
+      })
+      // return () => axios.isCancel()
+  }, [swipeHistory, loggedIn])
+
+  // like user - takes in swiped on Ids and like value:boolean
+  const swipeUser = (toId, like) => {
+    console.log("your swiped data in app.js:", {toId, like});
+    axios.post('/api/users/matchings', {toId, like})
+      .then((response) => {
+        const freshSwipe = response.data[0];
+        setSwipeHistory(prev => [...prev, freshSwipe])
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+  };
+
+  // Update users preferences
+  const updatePreferences = () => {
+    const newPref = {
+      ...preferences,
+      location: 'testtt'
+    };
+    console.log('newPref', newPref);
+    axios.post('/api/users/preferences', newPref)
+    .then((results) => {
+      setPreferences({...results.data})
+    })
+    .catch(error => console.log(error));
+  };
+
+  // block a user
+  const blockUser = (blockId) => {
+    axios.post('/api/users/blocked', { blockId })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // SIGN OUT FUNCTION AND BUTTON
+  const handleClickLogOut = (e) => {
+    e.preventDefault();
+    console.log('Logn out clicked');
+    axios.post('/logout')
+      .then((results) => {
+        console.log('rep session', results);
+        setLoggedIn(false);
+        resetStates();
+      })
+      .catch((error) => console.log('err:', error));
   }
 
-  render() {
+  // Updating user profile 
+  const updateProfile = (newValues) => {
+    const newProfileValues = newValues;
+    console.log('newvalues from newProfileValues', newProfileValues);
+    axios.post('/api/users/edit', newProfileValues)
+      .then((results) => {
+        const oldProfile = state.user[0];
+        const updatedUser = {...oldProfile, ...results.data[0]};
+        console.log('updated user', updatedUser);
+        setState({...state, user: [updatedUser]});
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
+  };
+
+  // Render the following if state is empty and loggedIn as a user to wait until fetch is complete
+  // likely have a ne component so it can look real nice for the loading page.
+  if (
+    loggedIn 
+    && Object.keys(state).length < 1 
+    && matches.length < 1
+    && allMessages.length < 1
+    && Object.keys(preferences).length < 1
+    ) {
     return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>        
-      </div>
-    );
+      <div>Loading</div>
+    )
   }
+
+  return (
+    <div className="App">
+
+      <Routes>
+        <Route path='/' element={
+          !loggedIn 
+          ? <LoginForm setLoggedIn={setLoggedIn} /> 
+          : <>
+              <Nav state={state} handleClickLogOut={handleClickLogOut}/>
+              <UserCardContainer 
+                users={state.users}
+                preferences={preferences}
+                likedBy={state.likedBy}
+                swipeUser={swipeUser}
+                profile={false}
+              />
+            </>
+        } />
+
+        <Route path='/profile' element={
+          !loggedIn 
+            ? <LoginForm setLoggedIn={setLoggedIn} /> 
+            : <>
+                <Nav state={state} handleClickLogOut={handleClickLogOut}/>
+                <UserCardContainer 
+                  user={state.user}
+                  profile={true}
+                  editMode={false}
+                  updateProfile={updateProfile}
+                />
+              </>
+        } />
+
+        <Route path='/login' element={
+          !loggedIn 
+            ? <LoginForm setLoggedIn={setLoggedIn} /> 
+            : <>
+                <Nav state={state} handleClickLogOut={handleClickLogOut} />
+                <UserCardContainer 
+                  users={state.users}
+                  preferences={preferences}
+                  likedBy={state.likedBy}
+                  swipeUser={swipeUser}
+                  profile={false}
+                />
+              </>
+        } />
+
+        <Route path='/matches' element={
+          !loggedIn 
+            ? <LoginForm setLoggedIn={setLoggedIn} /> 
+            : <>
+                <Nav state={state} handleClickLogOut={handleClickLogOut} />
+                <Matches state={state} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
+              </>
+        } />
+
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

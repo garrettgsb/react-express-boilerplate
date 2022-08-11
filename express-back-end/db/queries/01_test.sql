@@ -1,0 +1,26 @@
+  --   WITH matched_users AS (
+  --   SELECT
+  --     A.from_user_id,
+  --     A.to_user_id
+  --   FROM
+  --   matchings A, matchings B
+  --   WHERE 
+  --     A.from_user_id = B.to_user_id 
+  --     AND A.to_user_id = B.from_user_id 
+  --     AND A.like_value
+  --     AND B.like_value
+  --     AND A.from_user_id = 1
+  --   ),
+  --   photos as (
+  --     SELECT user_photos.user_id, array_agg(user_photos.url) photos FROM user_photos GROUP BY user_photos.user_id
+  --   )
+  --   SELECT
+  --     users.id,
+  --     users.name,
+  --     photos
+  --   FROM 
+  --     matched_users
+  --   INNER JOIN users 
+  --     ON users.id = matched_users.to_user_id
+  --   LEFT JOIN photos ON users.id = photos.user_id;
+  -- ;
