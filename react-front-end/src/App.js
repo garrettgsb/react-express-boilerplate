@@ -2,10 +2,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import UserCardContainer from './components/UserCardContainer';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import LoginForm from './components/login-form'
 import Nav from "./components/Nav";
 import Matches from "./components/Matches";
+
+// initial state
+const reset = {
+  loggedIn: false,
+  state: {},
+  allMessages: [],
+  messageSent: false,
+  preferences: {},
+  matches: [],
+  swipeHistory: []
+}
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -15,6 +26,16 @@ const App = () => {
   const [preferences, setPreferences] = useState({});
   const [matches, setMatches] = useState([])
   const [swipeHistory, setSwipeHistory] = useState([]);
+
+  const resetStates = () => {
+    setLoggedIn(reset.loggedIn);
+    setState({...reset.state});
+    setAllMessages([...reset.allMessages]);
+    setMessageSent(reset.messageSent);
+    setPreferences({...reset.preferences});
+    setMatches([...reset.matches]);
+    setSwipeHistory([...reset.swipeHistory]);
+  };
 
   // if req.session.user_id exists, set loggedIn to true
   useEffect(() => {
@@ -31,50 +52,52 @@ const App = () => {
   // promise chain for setting initial states
   // Depency: Will likely depend on swiping state
   useEffect(() => {
-    Promise.all([
-      axios.get('/api/users/1/all'),
-      axios.get('/api/users/1'),
-      axios.get('/api/users/1/likedBy')
-    ])
-    .then((all) => {
-      setState({...state, 
-        users: all[0].data, 
-        user: all[1].data, 
-        likedBy: all[2].data});
-    }) 
+    if (loggedIn) {
+      Promise.all([
+      axios.get('/api/users/all'),
+      axios.get('/api/users'),
+      axios.get('/api/users/likedBy')
+      ])
+      .then((all) => {
+        setState({...state, 
+          users: all[0].data, 
+          user: all[1].data, 
+          likedBy: all[2].data});
+      }) 
+    }
     // Discusss if we need cleanUp for Effect Hook
     // return () => axios.isCancel()
-  }, []);
+  }, [loggedIn]);
 
   // Getting list of all messages
   useEffect(() => {
-    axios.get('/api/users/1/messages')
+    axios.get('/api/users/messages')
       .then((msgs) => {
         setAllMessages([...msgs.data])
       });
-  }, [messageSent]);
+  }, [messageSent, loggedIn]);
 
   // Getting users current preferences settings
   useEffect(() => {
-    axios.get('/api/users/1/preferences')
+    axios.get('/api/users/preferences')
       .then((results) => {
         setPreferences({...results.data});
       })
-  }, []);
+  }, [loggedIn]);
 
   // Getting list of confirmed matches
   useEffect(() => {
-    axios.get('/api/users/1/matchings')
+    axios.get('/api/users/matchings')
       .then((matches) => {
         setMatches([...matches.data]);
       })
       // return () => axios.isCancel()
-  }, [swipeHistory])
+  }, [swipeHistory, loggedIn])
 
   // like user - takes in swiped on Ids and like value:boolean
   const swipeUser = (toId, like) => {
     console.log("your swiped data in app.js:", {toId, like});
-    axios.post('/api/users/1/matchings', {toId, like})
+    axios.post('/api/users/matchings', {toId, like})
       .then((response) => {
         const freshSwipe = response.data[0];
         setSwipeHistory(prev => [...prev, freshSwipe])
@@ -91,7 +114,7 @@ const App = () => {
       location: 'testtt'
     };
     console.log('newPref', newPref);
-    axios.post('/api/users/1/preferences', newPref)
+    axios.post('/api/users/preferences', newPref)
     .then((results) => {
       setPreferences({...results.data})
     })
@@ -100,7 +123,7 @@ const App = () => {
 
   // block a user
   const blockUser = (blockId) => {
-    axios.post('/api/users/1/blocked', { blockId })
+    axios.post('/api/users/blocked', { blockId })
       .then((response) => {
         console.log(response);
       })
@@ -117,6 +140,7 @@ const App = () => {
       .then((results) => {
         console.log('rep session', results);
         setLoggedIn(false);
+        resetStates();
       })
       .catch((error) => console.log('err:', error));
   }
@@ -125,7 +149,7 @@ const App = () => {
   const updateProfile = (newValues) => {
     const newProfileValues = newValues;
     console.log('newvalues from newProfileValues', newProfileValues);
-    axios.post('/api/users/1/edit', newProfileValues)
+    axios.post('/api/users/edit', newProfileValues)
       .then((results) => {
         const oldProfile = state.user[0];
         const updatedUser = {...oldProfile, ...results.data[0]};
@@ -136,6 +160,20 @@ const App = () => {
         console.log('error:', error);
       });
   };
+
+  // Render the following if state is empty and loggedIn as a user to wait until fetch is complete
+  // likely have a ne component so it can look real nice for the loading page.
+  if (
+    loggedIn 
+    && Object.keys(state).length < 1 
+    && matches.length < 1
+    && allMessages.length < 1
+    && Object.keys(preferences).length < 1
+    ) {
+    return (
+      <div>Loading</div>
+    )
+  }
 
   return (
     <div className="App">
@@ -156,7 +194,7 @@ const App = () => {
             </>
         } />
 
-        <Route path='/users/1' element={
+        <Route path='/profile' element={
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
@@ -185,7 +223,7 @@ const App = () => {
               </>
         } />
 
-        <Route path='users/1/matches' element={
+        <Route path='/matches' element={
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>

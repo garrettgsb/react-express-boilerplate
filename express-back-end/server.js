@@ -83,8 +83,8 @@ App.post('/login', (req, res) => {
   const {username, password} = req.body;
   validateUser(username, password)
     .then((response) => {
+      console.log('login response', response);
       if (!response) {
-        res.json(response);
         res.redirect('/login');
       } else {
         req.session.user_id = response;

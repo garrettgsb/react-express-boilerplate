@@ -68,6 +68,16 @@
   overflow: scroll;
 }
 
+.no-users-left-container {
+  grid-area: 3 / 2 / 4 / 6;
+  text-align: center;
+}
+
+.no-users-left-container > button {
+  width: 40%;
+  align-self: center;
+}
+
 .keen-tinder-card::-webkit-scrollbar {
   display: none;
 }
@@ -78,14 +88,18 @@
   grid-template-rows: repeat(14, 1fr);
 }
 
-.test-list {
-  grid-area: 2 / 3 / 14 / 5;
+.matches-list-header {
+  grid-area: 2 / 3 / 3 / 5;
+}
+
+.matches-bubble-list {
+  grid-area: 3 / 3 / 14 / 5;
 }
 
 .conversation-container {
   grid-area: 2 / 5 / 14 / 9;
   grid-template-columns: 1fr;
-  grid-template-rows: 50px 1fr 50px;
+  grid-template-rows: 61px 1fr 50px;
 }
 
 .none-selected {
@@ -141,6 +155,7 @@
 .emoji {
   background-color: #fff;
 }
+
 
 
 

@@ -17,7 +17,7 @@ const ChatRoom = (props) => {
   useEffect(() => {
     const filtered = props.allMessages?.filter(msg => msg.to_user_id === props.selected.id || msg.from_user_id === props.selected.id);
     setMessagesHistory([...filtered]);
-  }, [props.allMessages]);
+  }, [props.allMessages, props.selected]);
 
  // SOCKET PART
  const [isConnected, setIsConnected] = useState(socket.connected);
@@ -65,6 +65,7 @@ const sendPing = () => {
   // // build msgdata objt to send to message history and eventually post request
   const sendMessage = (msgData) => {
     sendToServer(msgData)
+
   };
 
   // map over message history and render messages on screen
