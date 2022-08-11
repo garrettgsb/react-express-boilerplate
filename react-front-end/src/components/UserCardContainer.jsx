@@ -1,4 +1,5 @@
 import UserCard from "./UserCard";
+import NoUsersLeft from './NoUsersLeft';
 
 // Hook credit to @3DJakob on github 
 import TinderCard from 'react-tinder-card';
@@ -86,9 +87,9 @@ const UserCardContainer = (props) => {
   // Render other users
   return (
       <section className="user-card-container w-full place-content-center">
-        {userCards.length > 0 
+        {userCards?.length > 0 
           ? userCards
-          : "Loading"
+          : <NoUsersLeft user={props.user}/>
         }
       </section>
   );

@@ -68,6 +68,16 @@
   overflow: scroll;
 }
 
+.no-users-left-container {
+  grid-area: 3 / 2 / 4 / 6;
+  text-align: center;
+}
+
+.no-users-left-container > button {
+  width: 40%;
+  align-self: center;
+}
+
 .keen-tinder-card::-webkit-scrollbar {
   display: none;
 }
@@ -145,6 +155,7 @@
 .emoji {
   background-color: #fff;
 }
+
 
 
 
