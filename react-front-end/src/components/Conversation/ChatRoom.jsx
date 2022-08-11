@@ -38,11 +38,9 @@ useEffect(() => {
 });
 
  socket.on("message", (message) => {
-  // We dont need to recieve message from server by socketIO???
-  // In this case we dont need to send it to server either
-  console.log("message from socket" ,message)
+   console.log("message from socket" ,message)
   setMessagesHistory((prev) => [...prev, message]);
-  // console.log("messages after history" , messagesHistory)
+  
   });
 
  return () => {
@@ -52,6 +50,7 @@ useEffect(() => {
  };
 }, []);
 
+// pass data to SocketIO
 const sendToServer = (data) => {
   console.log("sent to socket", data)
  socket.emit('sendMessage', data);
@@ -63,28 +62,9 @@ const sendPing = () => {
   socket.emit('ping');
 }
 
-
-
-
-//******************
-//axios work with socketIO, 
- //////////////////////////////
-
-
   // // build msgdata objt to send to message history and eventually post request
   const sendMessage = (msgData) => {
     sendToServer(msgData)
-    // console.log('you clicked to send the msg', msgData);
-    // axios.post('/api/users/1/messages/new', msgData)
-    // .then((results) => {
-    //   
-    //     console.log('new msg from db', results.data);
-    //     const msgFetchTrigger = props.messageSent;
-    //     props.setMessageSent(!msgFetchTrigger);
-    //            setMessage('');
-    //   })
-    //   .then()
-    //   .catch((error) => console.log('error:', error));
   };
 
   // map over message history and render messages on screen

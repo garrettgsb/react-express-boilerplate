@@ -5,7 +5,7 @@ const cookieSession = require('cookie-session');
 const PORT = 8080;
 
 
-////// SOCKETIO
+////// SOCKET IO
 // const db = require("./db/database");
 const server = require('http').createServer(App);
 const io = require('socket.io')(server);
@@ -21,11 +21,7 @@ io.on("connection", (socket) => {
 
 socket.on("sendMessage", (data) =>{
   console.log("data from client message", data)
-///////
-// axios.post('/api/users/1/messages/new', data)
-// then((results) => {
-//     console.log('new msg from db', results.data)})
-//////
+
 
 const query = `
   INSERT INTO messages
@@ -39,9 +35,7 @@ return db.query(query, [data.from_user_id, data.to_user_id, data.message, data.m
 .then((newMsgData) =>socket.emit("message",newMsgData.rows[0]))
 .catch((error) => console.log('error', error));
 
-  // console.log('usermsg after axios', data)
 
-// socket.emit("message", responceData)
 })
 
 })
@@ -111,7 +105,4 @@ server.listen(PORT, () => {
  
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
-// App.listen(PORT, () => {
-//   // eslint-disable-next-line no-console
-//   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
-// });
+
