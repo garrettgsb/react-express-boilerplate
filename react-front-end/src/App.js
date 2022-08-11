@@ -15,7 +15,7 @@ const App = () => {
   const [preferences, setPreferences] = useState({});
   const [matches, setMatches] = useState([])
   const [swipeHistory, setSwipeHistory] = useState([]);
-
+  
   // if req.session.user_id exists, set loggedIn to true
   useEffect(() => {
     axios.get('/loggedIn')

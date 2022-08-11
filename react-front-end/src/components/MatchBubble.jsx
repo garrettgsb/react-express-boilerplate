@@ -5,32 +5,65 @@ import axios from 'axios';
 
 const MatchBubble = (props) => {
   const [lastMsg, setLastMsg] = useState({});
+  const [matchSeen, setMatchSeen] = useState({});
 
   // Filter messages based on match's id and grab the last one
   useEffect(() => {
     const filtered = props.allMessages?.filter(msg => msg.to_user_id === props.match.id || msg.from_user_id === props.match.id);
-
     setLastMsg({...filtered[filtered.length - 1]});
 
-  }, [props.allMessages, props.match.id]);
+    const matchSeenInfo = {
+      tableId: props?.match?.seen_ref_id,
+      matchId: props?.match?.id,
+      seen: props?.match?.seen
+    };
+    setMatchSeen({...matchSeenInfo});
+
+  }, [props.allMessages, props.match, props.selected]);
 
   // Build updated latest msg data, post rqeuest to have seen the message and call selectHandler
   const selectHelper = () => {
-    const updateMsg = {
-      ...lastMsg,
-      message_seen: true
+    if (!matchSeen.seen) {
+      const seen = {
+        ...matchSeen,
+        seen: true
+      };
+      setMatchSeen({...seen});
+      axios.post('/api/users/1/matchings/update', seen)
+        .then((results) => {
+          console.log('updated matching seen info', results.data);
+          // const updatedMatchingInfo = {
+          //   tableId: results.data[0].id,
+          //   matchId: results.data[0].to_user_id,
+          //   seen: results.data[0].seen
+          // };
+        })
+        .then(() => {
+          props.selectHandler(props.match);
+        })
+        .catch((error) => console.log('error', error));
     };
-    setLastMsg({...updateMsg});
-    axios.post('/api/users/1/messages/seen', updateMsg)
-      .then((results) => {
-        console.log('updated msg', results.data);
-        const status = props.messageSent;
-        props.setMessageSent(!status);
-      })
-      .then(() => {
-        props.selectHandler(props.match);
-      })
-      .catch((error) => console.log('error', error));
+
+    if (!lastMsg.message_seen && Object.keys(lastMsg).length > 0) {
+      const updateMsg = {
+        ...lastMsg,
+        message_seen: true
+      };
+
+      setLastMsg({...updateMsg});
+      axios.post('/api/users/1/messages/seen', updateMsg)
+        .then((results) => {
+          console.log('updated msg', results.data);
+          const status = props.messageSent;
+          props.setMessageSent(!status);
+        })
+        .then(() => {
+          props.selectHandler(props.match);
+        })
+        .catch((error) => console.log('error', error));
+    };
+
+    props.selectHandler(props.match);
   };
   
   if (!lastMsg) {
@@ -48,14 +81,20 @@ const MatchBubble = (props) => {
 
       <div className="match-bubble-info flex flex-col w-full bg-white px-2">
         <div className={`match-bubble-name bg-white text-[0.75rem] 
-          ${(lastMsg.length < 1 || !lastMsg.message_seen) && lastMsg.from_user_id !== props.userId
-            ? 'font-bold' : ''}
+       ${ !matchSeen.seen
+          ? 'font-bold' 
+          : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId)
+          ? 'font-bold'
+          : ''}
         `}>
           {props.matchName}
         </div>
         <div className={`match-bubble-msg bg-white text-gray-400 font-light text-[0.6rem] flex items-center
-          ${(lastMsg.length < 1 || !lastMsg.message_seen) && lastMsg.from_user_id !== props.userId
-            ? 'font-bold' : ''}
+       ${ !matchSeen.seen
+          ? 'font-bold' 
+          : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId)
+          ? 'font-bold'
+          : ''}
         `}>
           <span className='bg-white max-w-max justify-self-start'>
             { lastMsg.length < 1
@@ -74,11 +113,15 @@ const MatchBubble = (props) => {
           </span>
         </div>
       </div>
-      {(lastMsg.length < 1 || !lastMsg.message_seen) && lastMsg.from_user_id !== props.userId
-        ? <div className='bg-white text-fuchsia-800 text-sm'>
-            {'\u25CF'}
-          </div>
-        : <></>
+      { !matchSeen.seen
+          ? <div className='bg-white text-fuchsia-800 text-sm'>
+              {'\u25CF'}
+            </div>
+          : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId)
+          ? <div className='bg-white text-fuchsia-800 text-sm'>
+              {'\u25CF'}
+            </div>
+          : <></>
       }
     </div>
   )

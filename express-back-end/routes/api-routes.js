@@ -215,7 +215,6 @@ router.get("/users/:id/matchings", (req, res) => {
 });
 
 // Post request on each swipe
-// 8/5 - works
 router.post("/users/:id/matchings", (req, res) => {
   const userId = req.params.id;
   const { toId, like } = req.body;
@@ -223,7 +222,7 @@ router.post("/users/:id/matchings", (req, res) => {
     INSERT INTO matchings
       (from_user_id, to_user_id, like_value, seen, matched_date)
     VALUES 
-      ($1, $2, $3, true, CURRENT_TIMESTAMP)
+      ($1, $2, $3, false, CURRENT_TIMESTAMP)
     RETURNING *;
   `;
   return db
@@ -232,6 +231,26 @@ router.post("/users/:id/matchings", (req, res) => {
       res.json(newMatching);
     })
     .catch((error) => console.log("err:", error));
+});
+
+// Post request to update swipe seen value (only if confirmed match)
+router.post('/users/:id/matchings/update', (req, res) => {
+  const userId = req.params.id;
+  const { seen, tableId, matchId } = req.body;
+  const query = `
+  UPDATE matchings
+  SET seen = $1
+  WHERE 
+    id = $2
+  AND
+    to_user_id = $3
+  RETURNING *;
+  `;
+  return db.query(query, [seen, tableId, matchId])
+    .then(({rows: matchSeen}) => {
+      res.json(matchSeen);
+    })
+    .catch((error) => console.log('err', error));
 });
 
 // get request to get users preferences
