@@ -2,7 +2,6 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import InputArea from './InputArea';
 import MessageBubble from './MessageBubble';
-
 ////// divide socetIO part
 import io from 'socket.io-client';
 const socket = io();
@@ -12,6 +11,7 @@ const socket = io();
 const ChatRoom = (props) => {
   const [messagesHistory, setMessagesHistory] = useState([]);
   const [message, setMessage] = useState('');
+  
 
   // Filter messages based on user Id and who is selected in chat view
   useEffect(() => {
@@ -21,7 +21,7 @@ const ChatRoom = (props) => {
 
  // SOCKET PART
  const [isConnected, setIsConnected] = useState(socket.connected);
-
+ const [lastPong, setLastPong] = useState(null);
 
 ////////
 useEffect(() => {
@@ -33,8 +33,12 @@ useEffect(() => {
  socket.on('disconnect', () => {
    setIsConnected(false);
  });
+ socket.on('pong', () => {
+  setLastPong(new Date().toISOString());
+});
 
  socket.on("message", (message) => {
+  console.log("message from socket" ,message)
   setMessagesHistory((message) => [...messagesHistory, message]);
   });
 
@@ -45,10 +49,13 @@ useEffect(() => {
  };
 }, []);
 
-const sendPing = (data) => {
+const sendToServer = (data) => {
+  console.log("sent to socket", data)
  socket.emit('sendMessage', data);
 }
-
+const sendPing = () => {
+  socket.emit('ping');
+}
 
 
 
@@ -59,8 +66,9 @@ const sendPing = (data) => {
 
   // // build msgdata objt to send to message history and eventually post request
   const sendMessage = (msgData) => {
+    sendToServer(msgData)
     console.log('you clicked to send the msg', msgData);
-    axios.post('/api/users/1/messages/new', msgData)
+    axios.post('/api/users/2221/messages/new', msgData)
       .then((results) => {
         console.log('new msg from db', results.data);
         const msgFetchTrigger = props.messageSent;
@@ -102,6 +110,11 @@ const sendPing = (data) => {
       </div>
     </div>
     <InputArea selected={props.selected} user={props.user} message={message} setMessage={setMessage} sendMessage={sendMessage}/>
+    <div>
+      <p>Connected: { '' + isConnected }</p>
+      <p>Last pong: { lastPong || '-' }</p>
+      <button onClick={ sendPing }>Send ping</button>
+    </div>
     </>
   );
 };
