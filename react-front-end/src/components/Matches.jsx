@@ -26,6 +26,8 @@ export default function Matches(props) {
         userId={props.state.user[0].id}
         selected={selected}
         selectHandler={selectHandler}
+        messageSent={props.messageSent}
+        setMessageSent={props.setMessageSent}
       />
     );
   });
