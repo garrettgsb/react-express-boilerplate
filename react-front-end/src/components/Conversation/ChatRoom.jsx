@@ -26,7 +26,7 @@ const ChatRoom = (props) => {
   // // build msgdata objt to send to message history and eventually post request
   const sendMessage = (msgData) => {
     console.log('you clicked to send the msg', msgData);
-    axios.post('/api/users/1/messages/new', msgData)
+    axios.post('/api/users/messages/new', msgData)
       .then((results) => {
         console.log('new msg from db', results.data);
         const msgFetchTrigger = props.messageSent;

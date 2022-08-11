@@ -6,8 +6,8 @@ const db = require("../db/database");
 
 // Get request for all users
 // users = all users - action taken
-router.get("/users/:id/all", (req, res) => {
-  const userId = req.params.id;
+router.get("/users/all", (req, res) => {
+  const userId = req.session.user_id;
   const query = `
   With matching_seen_cte as (
     SELECT to_user_id
@@ -56,8 +56,8 @@ router.get("/users/:id/all", (req, res) => {
 });
 
 // Get request to get your user object
-router.get("/users/:id", (req, res) => {
-  const userId = req.params.id;
+router.get("/users", (req, res) => {
+  const userId = req.session.user_id;
   const query = `
   WITH photos as (
     SELECT user_photos.user_id, array_agg(jsonb_build_object('id', user_photos.id, 'url', user_photos.url)) AS photos FROM user_photos GROUP BY user_photos.user_id
@@ -84,8 +84,8 @@ router.get("/users/:id", (req, res) => {
 });
 
 // Post request for inserting new message
-router.post('/users/:id/messages/new', (req, res) => {
-  const userId = req.params.id;
+router.post('/users/messages/new', (req, res) => {
+  const userId = req.session.user_id;
   const msgData = req.body;
   const query = `
   INSERT INTO messages
@@ -102,8 +102,8 @@ router.post('/users/:id/messages/new', (req, res) => {
 });
 
 // Update message_seen value to true
-router.post('/users/:id/messages/seen', (req, res) => {
-  const userId = req.params.id;
+router.post('/users/messages/seen', (req, res) => {
+  const userId = req.session.user_id;
   const msgData = req.body;
   const query = `
   UPDATE messages
@@ -124,8 +124,8 @@ router.post('/users/:id/messages/seen', (req, res) => {
 });
 
 // Get request for all msgs sent by yourself
-router.get("/users/:id/messages", (req, res) => {
-  const userId = req.params.id;
+router.get("/users/messages", (req, res) => {
+  const userId = req.session.user_id;
   const query = `
     SELECT * FROM messages
     WHERE from_user_id = $1 OR to_user_id = $1;
@@ -139,8 +139,8 @@ router.get("/users/:id/messages", (req, res) => {
 });
 
 // get request for everyone who liked you
-router.get("/users/:id/likedBy", (req, res) => {
-  const userId = req.params.id;
+router.get("/users/likedBy", (req, res) => {
+  const userId = req.session.user_id;
   const query = `
     SELECT from_user_id FROM matchings
     WHERE to_user_id = $1
@@ -154,8 +154,8 @@ router.get("/users/:id/likedBy", (req, res) => {
     .catch((error) => console.log("err", error));
 });
 
-router.post("/users/:id/blocked", (req, res) => {
-  const userId = req.params.id;
+router.post("/users/blocked", (req, res) => {
+  const userId = req.session.user_id;
   const { blockId } = req.body;
   const query = `
     INSERT INTO block_users
@@ -173,8 +173,8 @@ router.post("/users/:id/blocked", (req, res) => {
 });
 
 // Get request for list of confirmed matches for a user
-router.get("/users/:id/matchings", (req, res) => {
-  const userId = req.params.id;
+router.get("/users/matchings", (req, res) => {
+  const userId = req.session.user_id;
   const query = `
     WITH matched_users AS (
     SELECT
@@ -215,8 +215,8 @@ router.get("/users/:id/matchings", (req, res) => {
 });
 
 // Post request on each swipe
-router.post("/users/:id/matchings", (req, res) => {
-  const userId = req.params.id;
+router.post("/users/matchings", (req, res) => {
+  const userId = req.session.user_id;
   const { toId, like } = req.body;
   const query = `
     INSERT INTO matchings
@@ -234,8 +234,8 @@ router.post("/users/:id/matchings", (req, res) => {
 });
 
 // Post request to update swipe seen value (only if confirmed match)
-router.post('/users/:id/matchings/update', (req, res) => {
-  const userId = req.params.id;
+router.post('/users/matchings/update', (req, res) => {
+  const userId = req.session.user_id;
   const { seen, tableId, matchId } = req.body;
   const query = `
   UPDATE matchings
@@ -254,8 +254,8 @@ router.post('/users/:id/matchings/update', (req, res) => {
 });
 
 // get request to get users preferences
-router.get("/users/:id/preferences", (req, res) => {
-  const userId = req.params.id;
+router.get("/users/preferences", (req, res) => {
+  const userId = req.session.user_id;
   const query = `
     SELECT * FROM preferences
     WHERE user_id = $1;
@@ -268,8 +268,8 @@ router.get("/users/:id/preferences", (req, res) => {
 });
 
 // Post request to update user's preferences in db
-router.post("/users/:id/preferences", (req, res) => {
-  const userId = req.params.id;
+router.post("/users/preferences", (req, res) => {
+  const userId = req.session.user_id;
   const preferences = req.body;
   const query =`
   UPDATE preferences
@@ -294,9 +294,9 @@ router.post("/users/:id/preferences", (req, res) => {
 });
 
 // Post request to update user's information
-router.post('/users/:id/edit', (req, res) => {
+router.post('/users/edit', (req, res) => {
   console.log('work in progress');
-  const userId = req.params.id;
+  const userId = req.session.user_id;
   const newValue = req.body;
   const newPhotoUrl = req.body.photos;
   const query = `
