@@ -6,7 +6,7 @@ export default function Nav(props) {
   let user;
   const [open, setOpen] = useState(false);
 
-  props.state.user? user = props.state.user[0] : user = {Name: "", email : "", profile_photo: "" }
+  props.state.user? user = props.state.user : user = {Name: "", email : "", profile_photo: "" }
   
   return (
     <div className="nav-bar grid drop-shadow border-b big-white sticky top-0 z-50 py-3">
