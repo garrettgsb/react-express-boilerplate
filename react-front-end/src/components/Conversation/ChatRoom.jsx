@@ -40,6 +40,7 @@ useEffect(() => {
  socket.on("message", (message) => {
   console.log("message from socket" ,message)
   setMessagesHistory((message) => [...messagesHistory, message]);
+  console.log("message after history" , messagesHistory)
   });
 
  return () => {
@@ -68,7 +69,7 @@ const sendPing = () => {
   const sendMessage = (msgData) => {
     sendToServer(msgData)
     console.log('you clicked to send the msg', msgData);
-    axios.post('/api/users/2221/messages/new', msgData)
+    axios.post('/api/users/1/messages/new', msgData)
       .then((results) => {
         console.log('new msg from db', results.data);
         const msgFetchTrigger = props.messageSent;
@@ -80,7 +81,7 @@ const sendPing = () => {
   };
 
   // map over message history and render messages on screen
-  const renderedMsgs = messagesHistory?.map((msg) => {
+  const renderedMsgs = messagesHistory?.map((msg, index) => {
     return (
       <MessageBubble 
         key={msg.id}
