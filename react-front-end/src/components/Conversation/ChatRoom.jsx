@@ -2,9 +2,11 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import InputArea from './InputArea';
 import MessageBubble from './MessageBubble';
-// WILL NEED TO IMPORT SOCKET.IO HERE
-// WILL NEED TO IMPORT SOCKET.IO HERE
-// WILL NEED TO IMPORT SOCKET.IO HERE
+////// divide socetIO part
+import io from 'socket.io-client';
+const socket = io();
+//////
+
 
 const ChatRoom = (props) => {
   const [messagesHistory, setMessagesHistory] = useState([]);
@@ -16,11 +18,47 @@ const ChatRoom = (props) => {
     setMessagesHistory([...filtered]);
   }, [props.allMessages]);
 
-    // SOCKET IO USEEFFECT IN HERE
-  // SOCKET IO USEEFFECT IN HERE
-    // SOCKET IO USEEFFECT IN HERE
-  // SOCKET IO USEEFFECT IN HERE
-  // SOCKET IO USEEFFECT IN HERE
+ // SOCKET PART
+ const [isConnected, setIsConnected] = useState(socket.connected);
+
+
+////////
+useEffect(() => {
+ socket.on('connect', () => {
+   console.log(socket.id)
+   setIsConnected(true);
+ });
+
+ socket.on('disconnect', () => {
+   setIsConnected(false);
+ });
+
+ socket.on('pong', () => {
+
+   setLastPong(new Date().toISOString());
+ });
+
+ socket.on("message", (message) => {
+    setMessages((messages) => [...messages, message]);
+  });
+
+ return () => {
+   socket.off('connect');
+   socket.off('disconnect');
+   socket.off('pong');
+ };
+}, []);
+
+const sendPing = () => {
+ socket.emit('ping');
+}
+
+
+
+
+
+//******************
+ //////////////////////////////
 
 
   // // build msgdata objt to send to message history and eventually post request
@@ -30,9 +68,13 @@ const ChatRoom = (props) => {
       .then((results) => {
         console.log('new msg from db', results.data);
         const msgFetchTrigger = props.messageSent;
+        //
+        socket.emit("sendMessage", { message })
+        //
         props.setMessageSent(!msgFetchTrigger);
-        setMessage('');
+               setMessage('');
       })
+      .then()
       .catch((error) => console.log('error:', error));
   };
 
@@ -53,8 +95,14 @@ const ChatRoom = (props) => {
     )
   });
 
+
+// REMOVE SOCKET 
+
+
   return (
     <>
+
+
     <div className='bg-white chat-room-container flex flex-col-reverse'>
       <div className="chat-bubble-container bg-white flex flex-col px-4 py-4">
         {renderedMsgs}

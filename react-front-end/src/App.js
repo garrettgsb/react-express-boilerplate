@@ -6,6 +6,10 @@ import { Routes, Route, Link } from 'react-router-dom';
 import LoginForm from './components/login-form'
 import Nav from "./components/Nav";
 import Matches from "./components/Matches";
+////// divide socetIO part
+import io from 'socket.io-client';
+const socket = io();
+//////
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -15,6 +19,42 @@ const App = () => {
   const [preferences, setPreferences] = useState({});
   const [matches, setMatches] = useState([])
   const [swipeHistory, setSwipeHistory] = useState([]);
+
+  // SOCKET PART
+  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [lastPong, setLastPong] = useState(null);
+
+////////
+useEffect(() => {
+  socket.on('connect', () => {
+    console.log(socket.id)
+    setIsConnected(true);
+  });
+
+  socket.on('disconnect', () => {
+    setIsConnected(false);
+  });
+
+  socket.on('pong', () => {
+    
+    setLastPong(new Date().toISOString());
+  });
+
+  return () => {
+    socket.off('connect');
+    socket.off('disconnect');
+    socket.off('pong');
+  };
+}, []);
+
+const sendPing = () => {
+  socket.emit('ping');
+}
+
+
+
+//******************
+  //////////////////////////////
 
   // if req.session.user_id exists, set loggedIn to true
   useEffect(() => {
@@ -137,6 +177,33 @@ const App = () => {
       });
   };
 
+
+
+  // delete
+  //
+  //
+  //
+  const sendMessage = (msgData) => {
+    console.log('you clicked to send the msg', msgData);
+    axios.post('/api/users/1/messages/new', msgData)
+      .then((results) => {
+        console.log('new msg from db', results.data);
+        const msgFetchTrigger = props.messageSent;
+        //
+        socket.emit("sendMessage", { message })
+        //
+        props.setMessageSent(!msgFetchTrigger);
+               setMessage('');
+      })
+      .then()
+      .catch((error) => console.log('error:', error));
+  };
+  //
+  //
+  //
+  // delete
+  //
+
   return (
     <div className="App">
 
@@ -195,7 +262,14 @@ const App = () => {
         } />
 
       </Routes>
+      <div>
+      <p>Connected: { '' + isConnected }</p>
+      <p>Last pong: { lastPong || '-' }</p>
+      <button onClick={ sendPing }>Send ping</button>
+      <button onClick={ s }>Send ping</button>
     </div>
+    </div>
+    
   );
 }
 

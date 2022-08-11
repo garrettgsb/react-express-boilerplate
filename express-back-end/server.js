@@ -4,6 +4,27 @@ const BodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const PORT = 8080;
 
+////// SOCKETIO
+const server = require('http').createServer(App);
+const io = require('socket.io')(server);
+io.on("connection", (socket) => {
+  socket.on('ping', ()=> {
+    console.log('ping')
+    socket.emit("pong")
+})
+  console.log('A Connection has been made')
+  socket.on('disconnect', ()=> {
+      console.log('A disconnection has been made')
+  })
+
+socket.on("sendMessage", (data) =>{
+  console.log('usermsg', data)
+socket.emit("message", data)
+})
+
+})
+////////
+
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
@@ -64,7 +85,11 @@ App.post('/logout', (req, res) => {
 });
 // END OF LOG OUT
 
-App.listen(PORT, () => {
-  // eslint-disable-next-line no-console
+server.listen(PORT, () => {
+ 
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
+// App.listen(PORT, () => {
+//   // eslint-disable-next-line no-console
+//   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
+// });
