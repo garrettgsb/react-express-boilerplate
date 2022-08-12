@@ -6,7 +6,6 @@ import { Routes, Route } from 'react-router-dom';
 import LoginForm from './components/login-form'
 import Nav from "./components/Nav";
 import Matches from "./components/Matches";
-import Preferences from './components/Preferences';
 
 // initial state
 const reset = {
@@ -16,6 +15,7 @@ const reset = {
   allMessages: [],
   messageSent: false,
   preferences: {},
+  prefOptions: {},
   matches: [],
   swipeHistory: []
 }
@@ -27,6 +27,7 @@ const App = () => {
   const [allMessages, setAllMessages] = useState([]);
   const [messageSent, setMessageSent] = useState(false);
   const [preferences, setPreferences] = useState({});
+  const [prefOptions, setPrefOptions] = useState({});
   const [matches, setMatches] = useState([])
   const [swipeHistory, setSwipeHistory] = useState([]);
 
@@ -37,6 +38,7 @@ const App = () => {
     setAllMessages([...reset.allMessages]);
     setMessageSent(reset.messageSent);
     setPreferences({...reset.preferences});
+    setPrefOptions({...reset.prefOptions});
     setMatches([...reset.matches]);
     setSwipeHistory([...reset.swipeHistory]);
   };
@@ -77,7 +79,7 @@ const App = () => {
     }
     // Discusss if we need cleanUp for Effect Hook
     // return () => axios.isCancel()
-  }, [loggedIn]);
+  }, [loggedIn, preferences]);
 
   // Getting list of all messages
   useEffect(() => {
@@ -94,6 +96,15 @@ const App = () => {
         setPreferences({...results.data});
       })
   }, [loggedIn]);
+
+  // Get all preference options
+  useEffect(() => {
+    axios.get('/api/preferences')
+      .then((results) => {
+        setPrefOptions({...results.data});
+      })
+      .catch((error) => console.log('error', error));
+  }, [])
 
   // Getting list of confirmed matches
   useEffect(() => {
@@ -118,15 +129,13 @@ const App = () => {
   };
 
   // Update users preferences
-  const updatePreferences = () => {
-    const newPref = {
-      ...preferences,
-      location: 'testtt'
-    };
+  const updatePreferences = (newPrefSettings) => {
+    const newPref = {...newPrefSettings};
     console.log('newPref', newPref);
     axios.post('/api/users/preferences', newPref)
     .then((results) => {
-      setPreferences({...results.data})
+      console.log('coming back from api', results.data);
+      setPreferences({...results.data});
     })
     .catch(error => console.log(error));
   };
@@ -245,11 +254,20 @@ const App = () => {
         <Route path='/preferences' element={
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
+            : !Object.keys(preferences).length  ? <>Loading</>
             : <>
-                <Nav state={state}user={user}  handleClickLogOut={handleClickLogOut} />
-                <Preferences preferences={preferences} user={user} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
+                <Nav state={state} user={user} handleClickLogOut={handleClickLogOut}/>
+                <UserCardContainer 
+                  user={user}
+                  prefs={preferences}
+                  prefOptions={prefOptions}
+                  profile={false}
+                  editMode={false}
+                  prefMode={true}
+                  updatePreferences={updatePreferences}
+                />
               </>
-        } />       
+        } />     
 
       </Routes>
     </div>

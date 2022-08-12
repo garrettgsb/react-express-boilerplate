@@ -156,6 +156,38 @@
   background-color: #fff;
 }
 
+.preferences-container {
+  grid-area: 2 / 3 / 5 / 5;
+  min-width: 0;
+  /* overflow-y: scroll; */
+}
+
+.preferences-items {
+  overflow-y: auto;
+}
+
+.preferences-items::-webkit-scrollbar {
+  display: none;
+}
+
+.multi-range-slider {
+  background-color: #fff;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.bar-inner  * {
+  background-color: #86198f !important;
+}
+
+.multi-range-slider .label {
+  background-color: #fff !important;
+}
+
+.multi-range-slider .thumb:active * {
+  background-color: #86198f !important;
+  box-shadow: none;
+}
 
 
 
