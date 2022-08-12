@@ -257,13 +257,39 @@ router.post('/users/matchings/update', (req, res) => {
 router.get("/users/preferences", (req, res) => {
   const userId = req.session.user_id;
   const query = `
-    SELECT * FROM preferences
+    SELECT genders.id AS genders, location, drinks.id AS drinks, exercises.id AS exercises, dating_goals.id AS dating_goals, min_age, max_age,  min_height_in_cm, max_height_in_cm
+    FROM preferences
+    LEFT JOIN genders ON gender_id = genders.id
+    LEFT JOIN drinks ON drink_id = drinks.id
+    LEFT JOIN exercises ON exercise_id = exercises.id
+    LEFT JOIN dating_goals ON dating_goal_id = dating_goals.id
     WHERE user_id = $1;
   `
   return db.query(query, [userId])
     .then(({ rows: userPreferences }) => {
       res.json(userPreferences[0]);
     })
+    .catch((error) => console.log("err:", error));
+});
+
+// get all preference options
+router.get("/preferences", (req, res) => {
+  const promises = [
+    db.query(`SELECT * FROM genders`),
+    db.query(`SELECT * FROM exercises`),
+    db.query(`SELECT * FROM drinks`),
+    db.query(`SELECT * FROM dating_goals`)
+  ]
+
+  Promise.all(promises)
+  .then(all => {
+    console.log("all", all)
+    const genders = all[0].rows
+    const exercises = all[1].rows
+    const drinks = all[2].rows
+    const dating_goals = all[3].rows
+    res.json({genders, exercises, drinks, dating_goals})
+  })
     .catch((error) => console.log("err:", error));
 });
 
@@ -283,10 +309,22 @@ router.post("/users/preferences", (req, res) => {
       exercise_id = $8,
       dating_goal_id =$9 
   WHERE user_id = $10
-  RETURNING *;
+  RETURNING id;
   `;
   return db
-    .query(query, [preferences.min_age, preferences.max_age, preferences.location, preferences.min_height_in_cm, preferences.max_height_in_cm, preferences.gender_id, preferences.drink_id, preferences.exercise_id, preferences.dating_goal_id, userId])
+    .query(query, [preferences.min_age, preferences.max_age, preferences.location, preferences.min_height_in_cm, preferences.max_height_in_cm, preferences.genders, preferences.drinks, preferences.exercises, preferences.dating_goals, userId])
+    .then(() => {
+      const query = `
+        SELECT genders.id AS genders, location, drinks.id AS drinks, exercises.id AS exercises, dating_goals.id AS dating_goals, min_age, max_age,  min_height_in_cm, max_height_in_cm
+        FROM preferences
+        LEFT JOIN genders ON gender_id = genders.id
+        LEFT JOIN drinks ON drink_id = drinks.id
+        LEFT JOIN exercises ON exercise_id = exercises.id
+        LEFT JOIN dating_goals ON dating_goal_id = dating_goals.id
+        WHERE user_id = $1;
+      `;
+      return db.query(query, [userId]);
+    })
     .then(({rows: userPreferences}) => {
       res.json(userPreferences[0]);
     })

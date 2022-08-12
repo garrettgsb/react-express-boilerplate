@@ -1,5 +1,6 @@
 import UserCard from "./UserCard";
 import NoUsersLeft from './NoUsersLeft';
+import Preferences from './Preferences';
 
 // Hook credit to @3DJakob on github 
 import TinderCard from 'react-tinder-card';
@@ -45,6 +46,22 @@ const UserCardContainer = (props) => {
     )
   });
 
+  // Render preferences page
+  if (props.prefMode && (!props.profile && !props.editMode)) {
+    return (
+      <section className="user-card-container w-full place-content-center bg-white">
+        <div className='keen-tinder-card w-full rounded-xl drop-shadow-2xl bg-white'>
+          <Preferences    
+            user={props.user}
+            prefs={props.prefs}
+            prefOptions={props.prefOptions}
+            updatePreferences={props.updatePreferences}
+          />
+        </div>
+      </section>
+    );
+  };
+
   // Render your profile
   if (props.profile && !props.editMode) {
     return (
@@ -76,7 +93,6 @@ const UserCardContainer = (props) => {
     );
   };
   
-  console.log('usercards', userCards);
   // Render other users
   return (
       <section className="user-card-container w-full place-content-center">
