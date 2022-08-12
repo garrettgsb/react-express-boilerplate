@@ -26,7 +26,9 @@ const ChatRoom = (props) => {
 ////////
 useEffect(() => {
  socket.on('connect', () => {
+
    console.log(socket.id)
+
    setIsConnected(true);
  });
 
@@ -38,8 +40,17 @@ useEffect(() => {
 });
 
  socket.on("message", (message) => {
-   console.log("message from socket" ,message)
-  setMessagesHistory((prev) => [...prev, message]);
+//   console.log("props from back of socket", props)
+setMessagesHistory((prev) => [...prev, message]);
+// if (message.to_user_id === props.user[0].id && message.from_user_id === props.selected.id) {
+//      console.log("message from socket1" ,message)
+//   setMessagesHistory((prev) => [...prev, message]);
+// }
+// if (message.from_user_id === props.user[0].id || message.to_user_id === props.selected.id){
+//   console.log("message from socket2" ,message)
+//   setMessagesHistory((prev) => [...prev, message]);
+
+// }
   
   });
 
@@ -69,7 +80,7 @@ const sendPing = () => {
   };
 
   // map over message history and render messages on screen
-  const renderedMsgs = messagesHistory?.map((msg, index) => {
+  const renderedMsgs = messagesHistory?.map((msg) => {
     return (
       <MessageBubble 
         key={msg.id}

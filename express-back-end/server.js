@@ -10,11 +10,15 @@ const PORT = 8080;
 const server = require('http').createServer(App);
 const io = require('socket.io')(server);
 io.on("connection", (socket) => {
+  console.log('A Connection has been made')
+  // const users = [];
+
+
   socket.on('ping', ()=> {
     console.log('ping')
     socket.emit("pong")
 })
-  console.log('A Connection has been made')
+
   socket.on('disconnect', ()=> {
       console.log('A disconnection has been made')
   })
@@ -32,7 +36,7 @@ const query = `
   `;
 
 return db.query(query, [data.from_user_id, data.to_user_id, data.message, data.message_seen])
-.then((newMsgData) =>socket.emit("message",newMsgData.rows[0]))
+.then((newMsgData) =>socket.broadcast.emit("message",newMsgData.rows[0]))
 .catch((error) => console.log('error', error));
 
 
