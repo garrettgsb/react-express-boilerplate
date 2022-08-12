@@ -1,46 +1,50 @@
-const Express = require('express');
+const Express = require("express");
 const App = Express();
-const BodyParser = require('body-parser');
-const cookieSession = require('cookie-session');
+const BodyParser = require("body-parser");
+const cookieSession = require("cookie-session");
 const PORT = 8080;
-
-
+const { Server } = require("socket.io");
 
 ////// SOCKET IO
-// const db = require("./db/database");
-const server = require('http').createServer(App);
-const io = require('socket.io')(server);
 
-const sockets = {};
+const server = require("http").createServer(App);
+const http = App.listen(PORT, () => {
+  console.log(`Server running at port: 8080`);
+});
 
+const clients = {};
 
-io.on("connection", (socket) => {
-  // console.log('A Connection has been made', socket, )
-  
-  socket.on('clientID', (data) => {
-    console.log("data from server", data)
-  //  let clientName = data
-sockets[data] = socket.id
-  })
+const io = new Server(http);
 
+io.on("connection", (client) => {
+   console.log("A Connection has been made", client.id);
+ 
 
-  socket.on('ping', ()=> {
-    console.log('ping')
-    socket.emit("pong")
-})
+  client.on("user", (user) => {
+    client.broadcast.emit('userConnect', user)
+    user.socket_id = client.id;
+    client.user = user;
+    clients[user.id] = user;
+    console.log("clients from server", clients)
+  });
 
-socket.on('disconnect', (data) => {
-  // console.log('Client Disconnected!', sockets[data]);
-  // delete sockets[data];
-})
+  client.on("ping", () => {
+    console.log("ping");
+    client.emit("pong");
+  });
 
+  client.on("disconnect", () => {
+    console.log("Client Disconnected!", client.user);
+    client.broadcast.emit('userDisconnect', client.user)
+    delete clients[client.user.id];
+ 
+  });
 
+  client.on("sendMessage", (data) => {
+    
+    
 
-socket.on("sendMessage", (data) => {
-  console.log("data from client message", data)
-  const id = sockets[data.to_user_id];
-
-const query = `
+    const query = `
   INSERT INTO messages
       (from_user_id, to_user_id, message, message_seen)
     VALUES 
@@ -48,47 +52,42 @@ const query = `
     RETURNING *;
   `;
 
-return db.query(query, [data.from_user_id, data.to_user_id, data.message, data.message_seen])
-.then((newMsgData) => id? socket.to(id).emit("message",newMsgData.rows[0]) : socket.emit("message",newMsgData.rows[0]) )
-.catch((error) => console.log('error', error));
-
-
-})
-
-})
-////////
-
-
-
-server.listen(PORT, () => {
- 
-  console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
+    return (
+      db
+        .query(query, [
+          data.from_user_id,
+          data.to_user_id,
+          data.message,
+          data.message_seen,
+        ])
+        .then((newMsgData) => io.emit("message", newMsgData.rows[0]))
+        .catch((error) => console.log("error", error))
+    );
+  });
 });
-
-
-
-
-
+////////
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
-App.use(Express.static('public'));
-App.use(cookieSession({
-  name: 'session',
-  keys: ['12345'],
-  httpOnly: false
-}));
+App.use(Express.static("public"));
+App.use(
+  cookieSession({
+    name: "session",
+    keys: ["12345"],
+    httpOnly: false,
+  })
+);
 
 // DB queries
 const db = require("./db/database");
 
 // Mount all /api resources
-const apiRoutes = require('./routes/api-routes');
-App.use('/api', apiRoutes);
+const apiRoutes = require("./routes/api-routes");
+App.use("/api", apiRoutes);
 
 // return session.user_id value for checking log in state
-App.get('/loggedIn', (req, res) => {
+App.get("/loggedIn", (req, res) => {
   res.json(req.session.user_id);
 });
 
@@ -96,8 +95,9 @@ App.get('/loggedIn', (req, res) => {
 // Helper - move this to helpers.js later
 const validateUser = (email, pass) => {
   const query = `SELECT id, email, password FROM users;`;
-  return db.query(query)
-    .then(({rows: users}) => {
+  return db
+    .query(query)
+    .then(({ rows: users }) => {
       for (const user of users) {
         if (email === user.email && pass === user.password) {
           return user.id;
@@ -105,29 +105,26 @@ const validateUser = (email, pass) => {
       }
       return false;
     })
-    .catch((error) => console.log('err:', error));
+    .catch((error) => console.log("err:", error));
 };
 
-App.post('/login', (req, res) => {
-  const {username, password} = req.body;
-  validateUser(username, password)
-    .then((response) => {
-      console.log('login response', response);
-      if (!response) {
-        res.redirect('/login');
-      } else {
-        req.session.user_id = response;
-        res.redirect('/');
-      }
-    })
+App.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  validateUser(username, password).then((response) => {
+    console.log("login response", response);
+    if (!response) {
+      res.redirect("/login");
+    } else {
+      req.session.user_id = response;
+      res.redirect("/");
+    }
+  });
 });
 // END OF POST REQ FOR LOGIN
 
 // POST REQUEST FOR LOG OUT
-App.post('/logout', (req, res) => {
+App.post("/logout", (req, res) => {
   req.session = null;
   res.json(req.session);
 });
 // END OF LOG OUT
-
-

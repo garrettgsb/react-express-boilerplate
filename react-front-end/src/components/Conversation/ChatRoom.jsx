@@ -1,17 +1,17 @@
-import {useState, useEffect} from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import InputArea from './InputArea';
 import MessageBubble from './MessageBubble';
 ////// divide socetIO part
 import io from 'socket.io-client';
-const socket = io();
+
 //////
 
 
 const ChatRoom = (props) => {
   const [messagesHistory, setMessagesHistory] = useState([]);
   const [message, setMessage] = useState('');
-  
+  const [socket, setSocket] = useState();
+
 
   // Filter messages based on user Id and who is selected in chat view
   useEffect(() => {
@@ -19,62 +19,55 @@ const ChatRoom = (props) => {
     setMessagesHistory([...filtered]);
   }, [props.allMessages, props.selected]);
 
- // SOCKET PART
- const [isConnected, setIsConnected] = useState(socket.connected);
- const [lastPong, setLastPong] = useState(null);
 
-////////
-useEffect(() => {
-  // const userID = props.user[0].id;
- socket.on('connect', () => {
-  socket.emit('clientID', props.user[0].id)
-   console.log(socket.id)
+  ////////
+  useEffect(() => {
+    const socket = io();
+    setSocket(socket)
+    // const userID = props.user[0].id;
+    socket.on('connect', () => {
+      const data = {id: props.user[0].id, name: props.user[0].name,}
+      socket.emit('user', data)
+    
+    });
 
-   setIsConnected(true);
+    socket.on('disconnect', () => {
+      // socket.emit('clientID3', props.user[0].id)
 
- });
+      // setIsConnected(false);
+    });
 
- socket.on('disconnect', () => {
-  // socket.emit('clientID', props.user[0].id)
-  //     setIsConnected(false);
- });
- socket.on('pong', () => {
-  setLastPong(new Date().toISOString());
-});
+    socket.on("message", (message) => {
+     
+      if (message.from_user_id === props.user[0].id && message.to_user_id === props.selected.id) {
+     
+        setMessagesHistory((prev) => [...prev, message]);
+      }
+      else if (message.from_user_id === props.selected.id && message.to_user_id === props.user[0].id) {
+     
+        setMessagesHistory((prev) => [...prev, message]);
+      }
+     else return
 
- socket.on("message", (message) => {
-//   console.log("props from message", props)
-// setMessagesHistory((prev) => [...prev, message]);
-if (message.from_user_id === props.user[0].id || message.to_user_id === props.user[0].id) {
-     console.log("message from socket1" ,message)
-  setMessagesHistory((prev) => [...prev, message]);
-}
-// if (message.from_user_id === props.user[0].id || message.to_user_id === props.selected.id){
-//   console.log("message from socket2" ,message)
-//   setMessagesHistory((prev) => [...prev, message]);
+    });
 
-// }
-  
-  });
+    return () => {
+     
+      socket.disconnect()
+    
 
- return () => {
-   socket.off('connect');
-   socket.off('disconnect');
-   socket.off('pong');
- };
-}, []);
+    };
+  }, [props.allMessages]);
 
-// pass data to SocketIO
-const sendToServer = (msgData) => {
-  console.log("sent to socket", msgData)
- socket.emit('sendMessage', msgData);
- const msgFetchTrigger = props.messageSent;
-        props.setMessageSent(!msgFetchTrigger);
-               setMessage('');
-}
-const sendPing = () => {
-  socket.emit('ping');
-}
+  // pass data to SocketIO
+  const sendToServer = (msgData) => {
+    // console.log("sent to socket", msgData)
+    socket.emit('sendMessage', msgData);
+    const msgFetchTrigger = props.messageSent;
+    props.setMessageSent(!msgFetchTrigger);
+    setMessage('');
+  }
+
 
   // // build msgdata objt to send to message history and eventually post request
   const sendMessage = (msgData) => {
@@ -85,7 +78,7 @@ const sendPing = () => {
   // map over message history and render messages on screen
   const renderedMsgs = messagesHistory?.map((msg) => {
     return (
-      <MessageBubble 
+      <MessageBubble
         key={msg.id}
         id={msg.id}
         content={msg.message}
@@ -100,24 +93,20 @@ const sendPing = () => {
   });
 
 
-// REMOVE SOCKET PING
+  // REMOVE SOCKET PING
 
 
   return (
     <>
 
 
-    <div className='bg-white chat-room-container flex flex-col-reverse'>
-      <div className="chat-bubble-container bg-white flex flex-col px-4 py-4">
-        {renderedMsgs}
+      <div className='bg-white chat-room-container flex flex-col-reverse'>
+        <div className="chat-bubble-container bg-white flex flex-col px-4 py-4">
+          {renderedMsgs}
+        </div>
       </div>
-    </div>
-    <InputArea selected={props.selected} user={props.user} message={message} setMessage={setMessage} sendMessage={sendMessage}/>
-    <div>
-      <p>Connected: { '' + isConnected }</p>
-      <p>Last pong: { lastPong || '-' }</p>
-      <button onClick={ sendPing }>Send ping</button>
-    </div>
+      <InputArea selected={props.selected} user={props.user} message={message} setMessage={setMessage} sendMessage={sendMessage} />
+    
     </>
   );
 };
