@@ -5,13 +5,23 @@ const cookieSession = require('cookie-session');
 const PORT = 8080;
 
 
+
 ////// SOCKET IO
 // const db = require("./db/database");
 const server = require('http').createServer(App);
 const io = require('socket.io')(server);
+
+const sockets = {};
+
+
 io.on("connection", (socket) => {
-  console.log('A Connection has been made')
-  // const users = [];
+  // console.log('A Connection has been made', socket, )
+  
+  socket.on('clientID', (data) => {
+    console.log("data from server", data)
+  //  let clientName = data
+sockets[data] = socket.id
+  })
 
 
   socket.on('ping', ()=> {
@@ -19,13 +29,16 @@ io.on("connection", (socket) => {
     socket.emit("pong")
 })
 
-  socket.on('disconnect', ()=> {
-      console.log('A disconnection has been made')
-  })
+socket.on('disconnect', (data) => {
+  // console.log('Client Disconnected!', sockets[data]);
+  // delete sockets[data];
+})
 
-socket.on("sendMessage", (data) =>{
+
+
+socket.on("sendMessage", (data) => {
   console.log("data from client message", data)
-
+  const id = sockets[data.to_user_id];
 
 const query = `
   INSERT INTO messages
@@ -36,7 +49,7 @@ const query = `
   `;
 
 return db.query(query, [data.from_user_id, data.to_user_id, data.message, data.message_seen])
-.then((newMsgData) =>socket.broadcast.emit("message",newMsgData.rows[0]))
+.then((newMsgData) => id? socket.to(id).emit("message",newMsgData.rows[0]) : socket.emit("message",newMsgData.rows[0]) )
 .catch((error) => console.log('error', error));
 
 
@@ -44,6 +57,18 @@ return db.query(query, [data.from_user_id, data.to_user_id, data.message, data.m
 
 })
 ////////
+
+
+
+server.listen(PORT, () => {
+ 
+  console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
+});
+
+
+
+
+
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -105,8 +130,4 @@ App.post('/logout', (req, res) => {
 });
 // END OF LOG OUT
 
-server.listen(PORT, () => {
- 
-  console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
-});
 

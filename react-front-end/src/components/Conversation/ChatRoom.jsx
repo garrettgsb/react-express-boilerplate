@@ -25,27 +25,30 @@ const ChatRoom = (props) => {
 
 ////////
 useEffect(() => {
+  // const userID = props.user[0].id;
  socket.on('connect', () => {
-
+  socket.emit('clientID', props.user[0].id)
    console.log(socket.id)
 
    setIsConnected(true);
+
  });
 
  socket.on('disconnect', () => {
-   setIsConnected(false);
+  // socket.emit('clientID', props.user[0].id)
+  //     setIsConnected(false);
  });
  socket.on('pong', () => {
   setLastPong(new Date().toISOString());
 });
 
  socket.on("message", (message) => {
-//   console.log("props from back of socket", props)
-setMessagesHistory((prev) => [...prev, message]);
-// if (message.to_user_id === props.user[0].id && message.from_user_id === props.selected.id) {
-//      console.log("message from socket1" ,message)
-//   setMessagesHistory((prev) => [...prev, message]);
-// }
+//   console.log("props from message", props)
+// setMessagesHistory((prev) => [...prev, message]);
+if (message.from_user_id === props.user[0].id || message.to_user_id === props.user[0].id) {
+     console.log("message from socket1" ,message)
+  setMessagesHistory((prev) => [...prev, message]);
+}
 // if (message.from_user_id === props.user[0].id || message.to_user_id === props.selected.id){
 //   console.log("message from socket2" ,message)
 //   setMessagesHistory((prev) => [...prev, message]);
@@ -62,9 +65,9 @@ setMessagesHistory((prev) => [...prev, message]);
 }, []);
 
 // pass data to SocketIO
-const sendToServer = (data) => {
-  console.log("sent to socket", data)
- socket.emit('sendMessage', data);
+const sendToServer = (msgData) => {
+  console.log("sent to socket", msgData)
+ socket.emit('sendMessage', msgData);
  const msgFetchTrigger = props.messageSent;
         props.setMessageSent(!msgFetchTrigger);
                setMessage('');
