@@ -90,24 +90,27 @@ const MatchBubble = (props) => {
         `}>
           {props.matchName}
         </div>
-        <div className={`match-bubble-msg bg-white text-gray-400 font-light text-[0.6rem] flex items-center
-       ${ !matchSeen.seen
-          ? 'font-bold' 
-          : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId?.id)
-          ? 'font-bold'
-          : ''}
-        `}>
-          <span className='bg-white max-w-max justify-self-start'>
-            { lastMsg.length < 1
+        <div className={`match-bubble-msg bg-white text-gray-400 font-light text-[0.6rem] flex items-center`}>
+          <span className={`bg-white max-w-max justify-self-start
+          ${ !matchSeen.seen
+            ? 'font-bold' 
+            : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId?.id)
+            ? 'font-bold'
+            : ''}
+          `}>
+            { Object.keys(lastMsg).length < 1
               ? `Say Hi to ${props.matchName}`?.substring(0, 20)
               :  lastMsg?.message?.substring(0, 30)
             }
           </span> 
           <span className='bg-white max-w-max justify-self-center text-[3px] ml-1'>
-            {'\u25CF'}
+            { Object.keys(lastMsg).length > 1
+             ? '\u25CF'
+             : ''
+             }
           </span> 
           <span className='bg-white max-w-max3 justify-self-end ml-1'>
-            { lastMsg
+            { Object.keys(lastMsg).length > 0
               ? moment(lastMsg?.date_sent).format('ddd h:mm a')
               : ''
             }
