@@ -1,10 +1,11 @@
 import {React, useState} from "react";
 import { HomeIcon, ChatAlt2Icon, AdjustmentsIcon } from "@heroicons/react/outline";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Nav(props) {
   let user;
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
 
   props.user? user = props.user : user = {Name: "", email : "", profile_photo: "" }
   
@@ -13,7 +14,17 @@ export default function Nav(props) {
               
       <div className="flex justify-between content-center space-x-4">
         <div className="text-3xl myfont text-left cursor-pointer hover:text-[#8A00A0]">
-          KEEN
+        {
+          pathname === '/'
+          ? 'KEEN'
+          : pathname === '/matches'
+          ? 'Matches'
+          : pathname === '/preferences'
+          ? 'Preferences'
+          : pathname === '/profile'
+          ? 'Profile'
+          : ''
+        }
         </div>
 
         <div className="flex items-center">
