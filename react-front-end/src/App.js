@@ -78,9 +78,9 @@ const App = () => {
           likedBy: all[1].data});
       }) 
     }
-    // Discusss if we need cleanUp for Effect Hook
-    // return () => axios.isCancel()
+
   }, [loggedIn, preferences]);
+
 
   // Getting list of all messages
   useEffect(() => {
@@ -115,6 +115,9 @@ const App = () => {
       })
       // return () => axios.isCancel()
   }, [swipeHistory, loggedIn, seenUpdate])
+
+
+  
 
   // like user - takes in swiped on Ids and like value:boolean
   const swipeUser = (toId, like) => {

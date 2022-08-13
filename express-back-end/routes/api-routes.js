@@ -83,24 +83,6 @@ router.get("/users", (req, res) => {
     .catch((error) => console.log("err:", error));
 });
 
-// Post request for inserting new message
-router.post('/users/messages/new', (req, res) => {
-  const userId = req.session.user_id;
-  const msgData = req.body;
-  const query = `
-  INSERT INTO messages
-      (from_user_id, to_user_id, message, message_seen)
-    VALUES 
-      ($1, $2, $3, $4)
-    RETURNING *;
-  `;
-  return db.query(query, [userId, msgData.to_user_id, msgData.message, msgData.message_seen])
-    .then(({rows: newMsgData}) => {
-      res.json(newMsgData);
-    })
-    .catch((error) => console.log('error', error));
-});
-
 // Update message_seen value to true
 router.post('/users/messages/seen', (req, res) => {
   const userId = req.session.user_id;
