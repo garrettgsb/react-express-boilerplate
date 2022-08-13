@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import LoginForm from './components/login-form'
 import Nav from "./components/Nav";
 import Matches from "./components/Matches";
+import CheckUserProfile from "./components/CheckUserProfile";
 
 // initial state
 const reset = {
@@ -273,7 +274,17 @@ const App = () => {
                   updatePreferences={updatePreferences}
                 />
               </>
-        } />     
+        } />  
+
+        <Route path={`/userprofile/:id`} element={
+          !loggedIn 
+          ? <LoginForm setLoggedIn={setLoggedIn} /> 
+          : <>
+            <Nav state={state}user={user}  handleClickLogOut={handleClickLogOut} />
+          <UserProfile
+          matchedUsers={matches}/>
+          </>
+        } />   
 
       </Routes>
     </div>
