@@ -43,7 +43,7 @@ const PreferenceBox = (props) => {
 
   if (!props.editView) {
     return (
-      <div className='flex items-center bg-white justify-between my-3' onClick={selectOption}>
+      <div className='cursor-pointer flex items-center bg-white justify-between my-3' onClick={selectOption}>
         <div>
           <div className="preference-name bg-white font-semibold">
             {

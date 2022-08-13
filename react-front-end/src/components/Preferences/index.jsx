@@ -52,7 +52,7 @@ const Preferences = (props) => {
         <div className="preferences-items py-3 px-5 bg-white flex flex-col border-l border-r border-gray-300">
           {prefBoxes}
         </div>
-        <div onClick={updatePref} className="preferences-header bg-white font-semibold text-lg self-center p-4 rounded-b-xl border border-gray-300 w-full text-center">
+        <div onClick={updatePref} className="preferences-header bg-white font-semibold text-lg self-center p-4 rounded-b-xl border border-gray-300 w-full text-center cursor-pointer">
           Save
         </div>
       </div>
