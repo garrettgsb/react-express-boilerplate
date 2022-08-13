@@ -30,6 +30,7 @@ const App = () => {
   const [prefOptions, setPrefOptions] = useState({});
   const [matches, setMatches] = useState([])
   const [swipeHistory, setSwipeHistory] = useState([]);
+  const [seenUpdate, setSeenUpdate] = useState(false);
 
   const resetStates = () => {
     setLoggedIn(reset.loggedIn);
@@ -113,7 +114,7 @@ const App = () => {
         setMatches([...matches.data]);
       })
       // return () => axios.isCancel()
-  }, [swipeHistory, loggedIn])
+  }, [swipeHistory, loggedIn, seenUpdate])
 
   // like user - takes in swiped on Ids and like value:boolean
   const swipeUser = (toId, like) => {
@@ -247,7 +248,9 @@ const App = () => {
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
                 <Nav state={state} user={user} handleClickLogOut={handleClickLogOut} />
-                <Matches state={state} user={user} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
+                <Matches state={state} user={user} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}
+                seenUpdate={seenUpdate} setSeenUpdate={setSeenUpdate}
+                />
               </>
         } />
 

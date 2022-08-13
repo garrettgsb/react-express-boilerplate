@@ -27,6 +27,8 @@ export default function Matches(props) {
         messageSent={props.messageSent}
         setMessageSent={props.setMessageSent}
         selected={props.selected}
+        seenUpdate={props.seenUpdate} 
+        setSeenUpdate={props.setSeenUpdate}
       />
     );
   });
