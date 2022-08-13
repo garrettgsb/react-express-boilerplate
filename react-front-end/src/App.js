@@ -80,7 +80,7 @@ const App = () => {
       }) 
     }
 
-  }, [loggedIn, preferences]);
+  }, [loggedIn, preferences, matches]);
 
 
   // Getting list of all messages
