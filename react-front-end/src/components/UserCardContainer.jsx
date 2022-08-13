@@ -131,6 +131,7 @@ const UserCardContainer = (props) => {
             editMode={props.editMode}
             updateProfile={props.updateProfile}
             currentProfile={props.user}
+            prefOptions={props.prefOptions}
           />
         </div>
       </section>

@@ -178,7 +178,7 @@ const App = () => {
         const oldProfile = user;
         const updatedUser = {...oldProfile, ...results.data[0]};
         console.log('updated user', updatedUser);
-        setState({...state, user: [updatedUser]});
+        setUser({...updatedUser});
       })
       .catch((error) => {
         console.log('error:', error);
@@ -228,6 +228,7 @@ const App = () => {
                   profile={true}
                   editMode={false}
                   updateProfile={updateProfile}
+                  prefOptions={prefOptions}
                 />
               </>
         } />

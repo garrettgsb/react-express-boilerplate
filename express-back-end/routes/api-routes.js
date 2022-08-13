@@ -343,10 +343,13 @@ router.post('/users/edit', (req, res) => {
     bio = $1,
     location = $2,
     education = $3,
-    occupation = $4
-  WHERE users.id = $5;
+    occupation = $4,
+    drink_id = $5,
+    exercise_id =$6,
+    dating_goal_id = $7
+  WHERE users.id = $8;
   `;
-    db.query(query, [newValue.bio, newValue.location, newValue.education, newValue.occupation, userId])
+    db.query(query, [newValue.bio, newValue.location, newValue.education, newValue.occupation, newValue.drink_id, newValue.exercise_id, newValue.dating_goal_id, userId])
     .then(() => {
       for (const newPhoto of newPhotoUrl) {
         const photoId = newPhoto.id;
