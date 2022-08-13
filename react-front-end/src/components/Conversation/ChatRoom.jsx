@@ -11,6 +11,7 @@ const ChatRoom = (props) => {
   const [messagesHistory, setMessagesHistory] = useState([]);
   const [message, setMessage] = useState('');
   const [socket, setSocket] = useState();
+  const [trigger, setTrigger] = useState()
 
 
   // Filter messages based on user Id and who is selected in chat view
@@ -24,8 +25,7 @@ const ChatRoom = (props) => {
   useEffect(() => {
     const socket = io();
     setSocket(socket)
-    // const userID = props.user[0].id;
-    socket.on('connect', () => {
+      socket.on('connect', () => {
       const data = {id: props.user[0].id, name: props.user[0].name,}
       socket.emit('user', data)
     
@@ -33,18 +33,22 @@ const ChatRoom = (props) => {
 
     socket.on('disconnect', () => {
       // socket.emit('clientID3', props.user[0].id)
-
+setMessagesHistory((prev) => [...prev, message]);
       // setIsConnected(false);
     });
 
     socket.on("message", (message) => {
+      
+      // need to check props.selected.id 
      
-      if (message.from_user_id === props.user[0].id && message.to_user_id === props.selected.id) {
-     
+      
+
+      if (message.from_user_id === props.user[0].id && message.to_user_id === props.selected.id ) {
+     setTrigger(message)
         setMessagesHistory((prev) => [...prev, message]);
       }
       else if (message.from_user_id === props.selected.id && message.to_user_id === props.user[0].id) {
-     
+        setTrigger(message)
         setMessagesHistory((prev) => [...prev, message]);
       }
      else return

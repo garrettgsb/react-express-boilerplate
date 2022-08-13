@@ -2,13 +2,13 @@ const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
-const PORT = 8080;
+// const PORT = 8080;
 const { Server } = require("socket.io");
 
 ////// SOCKET IO
 
 const server = require("http").createServer(App);
-const http = App.listen(PORT, () => {
+const http = App.listen(8080, () => {
   console.log(`Server running at port: 8080`);
 });
 
@@ -36,7 +36,7 @@ io.on("connection", (client) => {
   client.on("disconnect", () => {
     console.log("Client Disconnected!", client.user);
     client.broadcast.emit('userDisconnect', client.user)
-    delete clients[client.user.id];
+    // delete clients[client.user.id];
  
   });
 
