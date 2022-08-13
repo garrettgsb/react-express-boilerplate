@@ -83,7 +83,7 @@ const MatchBubble = (props) => {
         <div className={`match-bubble-name bg-white text-[0.75rem] 
        ${ !matchSeen.seen
           ? 'font-bold' 
-          : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId)
+          : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId?.id)
           ? 'font-bold'
           : ''}
         `}>
@@ -92,7 +92,7 @@ const MatchBubble = (props) => {
         <div className={`match-bubble-msg bg-white text-gray-400 font-light text-[0.6rem] flex items-center
        ${ !matchSeen.seen
           ? 'font-bold' 
-          : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId)
+          : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId?.id)
           ? 'font-bold'
           : ''}
         `}>
@@ -117,7 +117,7 @@ const MatchBubble = (props) => {
           ? <div className='bg-white text-fuchsia-800 text-sm'>
               {'\u25CF'}
             </div>
-          : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId)
+          : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId?.id)
           ? <div className='bg-white text-fuchsia-800 text-sm'>
               {'\u25CF'}
             </div>

@@ -1,5 +1,6 @@
 import UserCard from "./UserCard";
 import NoUsersLeft from './NoUsersLeft';
+import Preferences from './Preferences';
 
 // Hook credit to @3DJakob on github 
 import TinderCard from 'react-tinder-card';
@@ -89,45 +90,53 @@ const UserCardContainer = (props) => {
     )
   });
 
-  // Render User's profile (you)
-  const userProfile = props.user?.map((user) => {
+  // Render preferences page
+  if (props.prefMode && (!props.profile && !props.editMode)) {
     return (
-      <div className="keen-tinder-card w-full rounded-xl drop-shadow-2xl" key={user.id}>
-        <UserCard 
-          key={user.id}
-          id={user.id}
-          name={user.name}
-          age={user.age}
-          bio={user.bio}
-          education={user.education}
-          occupation={user.occupation}
-          location={user.location}
-          goal={user.goal}
-          drinks={user.drinks}
-          exercises={user.exercises}
-          gender={user.gender}
-          height={user.height_in_cm}
-          isActive={user.is_active}
-          photos={user.photos}
-          profile={props.profile}
-          editMode={props.editMode}
-          updateProfile={props.updateProfile}
-          currentProfile={user}
-        />
-      </div>
-    )
-  });
+      <section className="user-card-container w-full place-content-center bg-white">
+        <div className='keen-tinder-card w-full rounded-xl drop-shadow-2xl bg-white'>
+          <Preferences    
+            user={props.user}
+            prefs={props.prefs}
+            prefOptions={props.prefOptions}
+            updatePreferences={props.updatePreferences}
+          />
+        </div>
+      </section>
+    );
+  };
 
   // Render your profile
   if (props.profile && !props.editMode) {
     return (
       <section className="user-card-container w-full place-content-center">
-        { userProfile ? userProfile : "Loading" }
+        <div className="keen-tinder-card w-full rounded-xl drop-shadow-2xl">
+          <UserCard 
+            key={props.user.id}
+            id={props.user.id}
+            name={props.user.name}
+            age={props.user.age}
+            bio={props.user.bio}
+            education={props.user.education}
+            occupation={props.user.occupation}
+            location={props.user.location}
+            goal={props.user.goal}
+            drinks={props.user.drinks}
+            exercises={props.user.exercises}
+            gender={props.user.gender}
+            height={props.user.height_in_cm}
+            isActive={props.user.is_active}
+            photos={props.user.photos}
+            profile={props.profile}
+            editMode={props.editMode}
+            updateProfile={props.updateProfile}
+            currentProfile={props.user}
+          />
+        </div>
       </section>
     );
   };
   
-  console.log('usercards', userCards);
   // Render other users
   return (
       <section className="user-card-container w-full place-content-center">

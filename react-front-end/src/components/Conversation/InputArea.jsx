@@ -9,7 +9,7 @@ const InputArea = (props) => {
   const buildMsgData = () => {
     if (props.message) {
       const msgData = {
-        from_user_id: props.user[0].id,
+        from_user_id: props.user.id,
         message: props.message,
         to_user_id: props.selected.id,
         message_seen: false

@@ -22,7 +22,7 @@ export default function Matches(props) {
         matchName={match.name}
         allMessages={props.allMessages}
         photos={match.photos}
-        userId={props.state.user[0].id}
+        userId={props.user}
         selectHandler={selectHandler}
         messageSent={props.messageSent}
         setMessageSent={props.setMessageSent}
@@ -36,8 +36,8 @@ export default function Matches(props) {
 
   return (
     <div className='outer-most-matches-div grid'>
-      <Conversation selected={selected} user={props.state.user} allMessages={props.allMessages} setAllMessages={props.setAllMessages} messageSent={props.messageSent} setMessageSent={props.setMessageSent}/>
-      <MatchesListHeader user={props.state.user} />
+      <Conversation selected={selected} user={props.user} allMessages={props.allMessages} setAllMessages={props.setAllMessages} messageSent={props.messageSent} setMessageSent={props.setMessageSent}/>
+      <MatchesListHeader user={props.user} />
       <div className="bg-white matches-bubble-list flex flex-col border-l border-t border-b border-gray-300 py-1">
         {match? match : "loading"}
       </div>

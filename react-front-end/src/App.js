@@ -10,29 +10,35 @@ import Matches from "./components/Matches";
 // initial state
 const reset = {
   loggedIn: false,
+  user: {},
   state: {},
   allMessages: [],
   messageSent: false,
   preferences: {},
+  prefOptions: {},
   matches: [],
   swipeHistory: []
 }
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
   const [state, setState] = useState({});
   const [allMessages, setAllMessages] = useState([]);
   const [messageSent, setMessageSent] = useState(false);
   const [preferences, setPreferences] = useState({});
+  const [prefOptions, setPrefOptions] = useState({});
   const [matches, setMatches] = useState([])
   const [swipeHistory, setSwipeHistory] = useState([]);
 
   const resetStates = () => {
     setLoggedIn(reset.loggedIn);
+    setUser({...reset.user});
     setState({...reset.state});
     setAllMessages([...reset.allMessages]);
     setMessageSent(reset.messageSent);
     setPreferences({...reset.preferences});
+    setPrefOptions({...reset.prefOptions});
     setMatches([...reset.matches]);
     setSwipeHistory([...reset.swipeHistory]);
   };
@@ -48,6 +54,14 @@ const App = () => {
         }
       })
   }, [loggedIn]);
+
+  useEffect(() => {
+    axios.get('/api/users')
+      .then((results) => {
+        setUser({...results.data}) 
+      })
+      .catch((error) => console.log('error', error));
+  }, [loggedIn])
   
   // promise chain for setting initial states
   // Depency: Will likely depend on swiping state
@@ -55,17 +69,17 @@ const App = () => {
     if (loggedIn) {
       Promise.all([
       axios.get('/api/users/all'),
-      axios.get('/api/users'),
       axios.get('/api/users/likedBy')
       ])
       .then((all) => {
         setState({...state, 
           users: all[0].data, 
-          user: all[1].data, 
-          likedBy: all[2].data});
+          likedBy: all[1].data});
       }) 
     }
-   }, [loggedIn]);
+
+  }, [loggedIn, preferences]);
+
 
   // Getting list of all messages
   useEffect(() => {
@@ -82,6 +96,15 @@ const App = () => {
         setPreferences({...results.data});
       })
   }, [loggedIn]);
+
+  // Get all preference options
+  useEffect(() => {
+    axios.get('/api/preferences')
+      .then((results) => {
+        setPrefOptions({...results.data});
+      })
+      .catch((error) => console.log('error', error));
+  }, [])
 
   // Getting list of confirmed matches
   useEffect(() => {
@@ -109,15 +132,13 @@ const App = () => {
   };
 
   // Update users preferences
-  const updatePreferences = () => {
-    const newPref = {
-      ...preferences,
-      location: 'testtt'
-    };
+  const updatePreferences = (newPrefSettings) => {
+    const newPref = {...newPrefSettings};
     console.log('newPref', newPref);
     axios.post('/api/users/preferences', newPref)
     .then((results) => {
-      setPreferences({...results.data})
+      console.log('coming back from api', results.data);
+      setPreferences({...results.data});
     })
     .catch(error => console.log(error));
   };
@@ -152,7 +173,7 @@ const App = () => {
     console.log('newvalues from newProfileValues', newProfileValues);
     axios.post('/api/users/edit', newProfileValues)
       .then((results) => {
-        const oldProfile = state.user[0];
+        const oldProfile = user;
         const updatedUser = {...oldProfile, ...results.data[0]};
         console.log('updated user', updatedUser);
         setState({...state, user: [updatedUser]});
@@ -184,7 +205,7 @@ const App = () => {
           !loggedIn 
           ? <LoginForm setLoggedIn={setLoggedIn} /> 
           : <>
-              <Nav state={state} handleClickLogOut={handleClickLogOut}/>
+              <Nav state={state} user={user} handleClickLogOut={handleClickLogOut}/>
               <UserCardContainer 
                 users={state.users}
                 preferences={preferences}
@@ -199,9 +220,9 @@ const App = () => {
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
-                <Nav state={state} handleClickLogOut={handleClickLogOut}/>
+                <Nav state={state} user={user} handleClickLogOut={handleClickLogOut}/>
                 <UserCardContainer 
-                  user={state.user}
+                  user={user}
                   profile={true}
                   editMode={false}
                   updateProfile={updateProfile}
@@ -213,7 +234,7 @@ const App = () => {
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
-                <Nav state={state} handleClickLogOut={handleClickLogOut} />
+                <Nav state={state} user={user} handleClickLogOut={handleClickLogOut} />
                 <UserCardContainer 
                   users={state.users}
                   preferences={preferences}
@@ -228,10 +249,28 @@ const App = () => {
           !loggedIn 
             ? <LoginForm setLoggedIn={setLoggedIn} /> 
             : <>
-                <Nav state={state} handleClickLogOut={handleClickLogOut} />
-                <Matches state={state} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
+                <Nav state={state} user={user} handleClickLogOut={handleClickLogOut} />
+                <Matches state={state} user={user} matches={matches} allMessages={allMessages} setAllMessages={setAllMessages} messageSent={messageSent} setMessageSent={setMessageSent}/>
               </>
         } />
+
+        <Route path='/preferences' element={
+          !loggedIn 
+            ? <LoginForm setLoggedIn={setLoggedIn} /> 
+            : !Object.keys(preferences).length  ? <>Loading</>
+            : <>
+                <Nav state={state} user={user} handleClickLogOut={handleClickLogOut}/>
+                <UserCardContainer 
+                  user={user}
+                  prefs={preferences}
+                  prefOptions={prefOptions}
+                  profile={false}
+                  editMode={false}
+                  prefMode={true}
+                  updatePreferences={updatePreferences}
+                />
+              </>
+        } />     
 
       </Routes>
     </div>
