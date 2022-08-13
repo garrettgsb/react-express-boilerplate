@@ -158,7 +158,7 @@ router.post("/users/blocked", (req, res) => {
 router.get("/users/matchings", (req, res) => {
   const userId = req.session.user_id;
   const query = `
-    WITH matched_users AS (
+  WITH matched_users AS (
     SELECT
     A.from_user_id,
       A.to_user_id,
@@ -177,8 +177,18 @@ router.get("/users/matchings", (req, res) => {
       SELECT user_photos.user_id, array_agg(jsonb_build_object('id', user_photos.id, 'url', user_photos.url)) photos FROM user_photos GROUP BY user_photos.user_id
     )
     SELECT
-    users.id,
+      users.id,
       users.name,
+      users.bio,
+      users.education,
+      users.occupation,
+      users.age,
+      users.gender_id,
+      genders.value,
+      users.height_in_cm,
+      users.location,
+      drinks.value AS drink,
+      dating_goals.value AS dating_goal,
       seen,
       seen_ref_id,
       photos
@@ -186,7 +196,15 @@ router.get("/users/matchings", (req, res) => {
       matched_users
     INNER JOIN users 
       ON users.id = matched_users.to_user_id
-    LEFT JOIN photos ON users.id = photos.user_id;
+    LEFT JOIN photos 
+      ON users.id = photos.user_id
+    LEFT JOIN drinks 
+      ON users.drink_id = drinks.id
+    LEFT JOIN dating_goals 
+      ON users.dating_goal_id = dating_goals.id
+    LEFT JOIN genders
+      ON genders.id = users.gender_id 
+    ;
   `;
   return db
     .query(query, [userId])
