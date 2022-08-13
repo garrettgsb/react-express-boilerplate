@@ -18,7 +18,7 @@ const ChatRoom = (props) => {
   useEffect(() => {
     const filtered = props.allMessages?.filter(msg => msg.to_user_id === props.selected.id || msg.from_user_id === props.selected.id);
     setMessagesHistory([...filtered]);
-  }, [props.allMessages, props.selected]);
+  }, [props.allMessages, props.selected, trigger]);
 
 
   ////////
@@ -26,15 +26,13 @@ const ChatRoom = (props) => {
     const socket = io();
     setSocket(socket)
       socket.on('connect', () => {
-      // const data = {id: props.user.id, name: props.user.name,}
-      // socket.emit('user', data)
+      const data = {id: props.user.id, name: props.user.name,}
+      socket.emit('user', data)
     
     });
 
     socket.on('disconnect', () => {
-      // socket.emit('clientID3', props.user[0].id)
-setMessagesHistory((prev) => [...prev, message]);
-      // setIsConnected(false);
+  
     });
 
     socket.on("message", (message) => {
@@ -44,14 +42,14 @@ setMessagesHistory((prev) => [...prev, message]);
       
 
       if (message.from_user_id === props.user.id && message.to_user_id === props.selected.id ) {
-     setTrigger(message)
         setMessagesHistory((prev) => [...prev, message]);
+    //  setTrigger(message)
       }
       else if (message.from_user_id === props.selected.id && message.to_user_id === props.user.id) {
-        setTrigger(message)
         setMessagesHistory((prev) => [...prev, message]);
+        // setTrigger(message)
       }
-     else return
+    //  else return
 
     });
 
@@ -61,7 +59,7 @@ setMessagesHistory((prev) => [...prev, message]);
     
 
     };
-  }, [props.allMessages]);
+  }, []);
 
   // pass data to SocketIO
   const sendToServer = (msgData) => {

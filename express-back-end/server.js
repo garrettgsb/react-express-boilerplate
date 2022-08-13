@@ -36,7 +36,7 @@ io.on("connection", (client) => {
   client.on("disconnect", () => {
     console.log("Client Disconnected!", client.user);
     client.broadcast.emit('userDisconnect', client.user)
-    // delete clients[client.user.id];
+    delete clients[client.user.id];
  
   });
 
@@ -60,7 +60,7 @@ io.on("connection", (client) => {
           data.message,
           data.message_seen,
         ])
-        .then((newMsgData) => io.emit("message", newMsgData.rows[0]))
+        .then((newMsgData) => io.sockets.emit("message", newMsgData.rows[0]))
         .catch((error) => console.log("error", error))
     );
   });
