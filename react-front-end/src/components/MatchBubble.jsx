@@ -73,10 +73,10 @@ const MatchBubble = (props) => {
     <div className="match-bubble-container bg-white flex w-full px-2 items-center my-1" onClick={() => selectHelper()}>
 
       <div className="match-bubble-img-wrapper bg-white min-w-max">
-          <img src={props.photos[0].url} alt="thumbnail" className="w-6 h-6 rounded-full match-bubble-img object-cover" />
+          <img src={props.photos[0].url} alt="thumbnail" className="w-6 h-6 rounded-full match-bubble-img object-cover cursor-pointer" />
       </div>
 
-      <div className="match-bubble-info flex flex-col w-full bg-white px-2">
+      <div className="match-bubble-info flex flex-col w-full bg-white px-2 cursor-pointer">
         <div className={`match-bubble-name bg-white text-[0.75rem] 
        ${ 
         !matchSeen.seen
