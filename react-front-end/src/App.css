@@ -25,6 +25,10 @@
   grid-area: 4 / 2 / 4 / 5;
 }
 
+.myfont {
+  font-family: 'Lobster', cursive;
+}
+
 .nav-bar {
   height: 8vh;
   grid-template-columns: 90%;

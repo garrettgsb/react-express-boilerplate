@@ -54,6 +54,7 @@ const SelectPreference = (props) => {
     const mappedList = options?.map((options) => {
       return (
         <SelectPreferenceItem 
+          key={options.id}
           id={options.id}
           defaultValue={options.value}
           name={props.name}
