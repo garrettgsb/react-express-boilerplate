@@ -17,6 +17,7 @@ const MatchBubble = (props) => {
       matchId: props?.match?.id,
       seen: props?.match?.seen
     };
+    console.log('props.match.seen', props.match.seen)
     setMatchSeen({...matchSeenInfo});
 
   }, [props.allMessages, props.match, props.selected]);
@@ -28,15 +29,13 @@ const MatchBubble = (props) => {
         ...matchSeen,
         seen: true
       };
+      console.log('seen', seen);
       setMatchSeen({...seen});
       axios.post('/api/users/matchings/update', seen)
         .then((results) => {
           console.log('updated matching seen info', results.data);
-          // const updatedMatchingInfo = {
-          //   tableId: results.data[0].id,
-          //   matchId: results.data[0].to_user_id,
-          //   seen: results.data[0].seen
-          // };
+          const trigger = props.seenUpdate;
+          props.setSeenUpdate(!trigger);
         })
         .then(() => {
           props.selectHandler(props.match);
@@ -72,6 +71,7 @@ const MatchBubble = (props) => {
     )
   }
 
+
   return (
     <div className="match-bubble-container bg-white flex w-full px-2 items-center my-1" onClick={() => selectHelper()}>
 
@@ -81,7 +81,8 @@ const MatchBubble = (props) => {
 
       <div className="match-bubble-info flex flex-col w-full bg-white px-2">
         <div className={`match-bubble-name bg-white text-[0.75rem] 
-       ${ !matchSeen.seen
+       ${ 
+        !matchSeen.seen
           ? 'font-bold' 
           : Object.keys(lastMsg).length > 0 && (!lastMsg.message_seen && lastMsg.from_user_id !== props.userId?.id)
           ? 'font-bold'
