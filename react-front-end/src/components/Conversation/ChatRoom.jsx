@@ -26,8 +26,8 @@ const ChatRoom = (props) => {
     const socket = io();
     setSocket(socket)
       socket.on('connect', () => {
-      const data = {id: props.user[0].id, name: props.user[0].name,}
-      socket.emit('user', data)
+      // const data = {id: props.user.id, name: props.user.name,}
+      // socket.emit('user', data)
     
     });
 
@@ -43,11 +43,11 @@ setMessagesHistory((prev) => [...prev, message]);
      
       
 
-      if (message.from_user_id === props.user[0].id && message.to_user_id === props.selected.id ) {
+      if (message.from_user_id === props.user.id && message.to_user_id === props.selected.id ) {
      setTrigger(message)
         setMessagesHistory((prev) => [...prev, message]);
       }
-      else if (message.from_user_id === props.selected.id && message.to_user_id === props.user[0].id) {
+      else if (message.from_user_id === props.selected.id && message.to_user_id === props.user.id) {
         setTrigger(message)
         setMessagesHistory((prev) => [...prev, message]);
       }
