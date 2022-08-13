@@ -17,7 +17,6 @@ const MatchBubble = (props) => {
       matchId: props?.match?.id,
       seen: props?.match?.seen
     };
-    console.log('props.match.seen', props.match.seen)
     setMatchSeen({...matchSeenInfo});
 
   }, [props.allMessages, props.match, props.selected]);
@@ -29,11 +28,9 @@ const MatchBubble = (props) => {
         ...matchSeen,
         seen: true
       };
-      console.log('seen', seen);
       setMatchSeen({...seen});
       axios.post('/api/users/matchings/update', seen)
         .then((results) => {
-          console.log('updated matching seen info', results.data);
           const trigger = props.seenUpdate;
           props.setSeenUpdate(!trigger);
         })
