@@ -1,7 +1,7 @@
 import React from 'react';
 // import axios from 'axios';
 import './App.css';
-import Courses from './Courses';
+import Courses from './Components/Courses';
 import data from './data';
 
 export default function App() {
