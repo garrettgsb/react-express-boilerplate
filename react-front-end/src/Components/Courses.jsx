@@ -1,15 +1,16 @@
-import React from "react";
+import React from 'react';
+import { Link } from "react-router-dom";
 
 export default function Courses(props) {
-  console.log(props);
   const newData = props.data.map((category)=> {
     return(
       <div>
-        <h1>{category.name}</h1>
+        <Link to={`/course/${category.name.toLowerCase()}`}>{ category.name }</Link>
       </div>
     );
   })
-return (
-  <ul>{newData}</ul>
-);
+
+  return (
+    <ul>{newData}</ul>
+  );
 }
