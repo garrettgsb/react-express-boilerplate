@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS subjects CASCADE;
+
+CREATE TABLE subjects (
+  id SERIAL PRIMARY KEY NOT NULL,
+  chess VARCHAR(55) NOT NULL,
+  cooking VARCHAR(55) NOT NULL,
+  writing VARCHAR(55) NOT NULL,
+  guitar VARCHAR(55) NOT NULL,
+  coding VARCHAR(55) NOT NULL,
+  writing VARCHAR(55) NOT NULL,
+  photography VARCHAR(55) NOT NULL,
+  gardening VARCHAR(55) NOT NULL,
+  knitting VARCHAR(55) NOT NULL,
+  illustration VARCHAR(55) NOT NULL,
+  french VARCHAR(55) NOT NULL
+);
