@@ -1,0 +1,40 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS subjects CASCADE;
+DROP TABLE IF EXISTS resources CASCADE;
+DROP TABLE IF EXISTS steps_to_resources CASCADE;
+DROP TABLE IF EXISTS progress_tracker CASCADE;
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE subjects (
+  id SERIAL PRIMARY KEY NOT NULL,
+  subject_name VARCHAR(55) NOT NULL
+);
+
+CREATE TABLE resources (
+  id SERIAL PRIMARY KEY NOT NULL,
+  step_number INTEGER NOT NULL,
+  step_description VARCHAR(255) NOT NULL,
+  article_url VARCHAR(255),
+  photo_url VARCHAR(255),
+  video_url VARCHAR(255)
+);
+
+CREATE TABLE steps_to_resources (
+  id SERIAL PRIMARY KEY NOT NULL,
+  subjects_id INTEGER REFERENCES subjects(id) ON DELETE CASCADE,
+  resources_id INTEGER REFERENCES resources(id) ON DELETE CASCADE
+);
+
+CREATE TABLE progress_tracker (
+  id SERIAL PRIMARY KEY NOT NULL,
+  users_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  resources_id INTEGER REFERENCES resources(id) ON DELETE CASCADE,
+  steps_complete BOOLEAN DEFAULT FALSE
+);
