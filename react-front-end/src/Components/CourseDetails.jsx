@@ -12,7 +12,7 @@ export default function CourseDetails() {
   return (
     <div>
       <h1>{ name }</h1>
-      <h3>{courseData.links[0]}</h3>
+      <a href={courseData.links[0]}>ss</a>
       <h3>{courseData.descriptions}</h3>
       <h3>{courseData.videos}</h3>
     </div>
