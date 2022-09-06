@@ -12,30 +12,29 @@ import Nav from './Components/Nav';
 import ContactUs from './Components/ContactUs';
 import Footer from './Components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import AdminLogin from './Components/AdminLogin';
 
 export default function App() {
   return (
     <div className="container-fluid">
       <div className='row' >
-        <div className='row h-10 px-0'>
+        <div className='row h-10 px-0 nav1'>
           <Nav />
         </div>
         <div className='row h-80'>
           <Routes>
+            <Route path="/" element={<Courses data={data} />} />
             <Route path="/" element={<Courses data={data} />} />
             <Route path="/course/:name" element={<CourseDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/admin" element={<AdminLogin />} />
           </Routes>
         </div>
-        <div className='navbar fixed-bottom'>
-          <div className='col'>
+        <div className='row h-10 px-0 foot1'>
             <Footer />
-          </div>
         </div>
       </div>
     </div>

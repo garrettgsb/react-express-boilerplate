@@ -148,3 +148,13 @@ html, body {
   color: inherit;
   text-decoration: none;
 }
+
+
+.nav1{
+  margin-left: 0%;
+}
+
+
+#dropdown-basic{
+  background-color: rgb(37, 30, 30);
+}
