@@ -1,12 +1,12 @@
-* {
+/* {
   box-sizing: border-box;
-}
+} */
 
-body{
-  margin: 0;
+/* body{
+  margin: 0; */
   /* margin-bottom: 10%; */
   /* min-height: 100%; */
-}
+/* } */
 
 .nav{
   background: linear-gradient(to left, #f95738, #ee964b);
@@ -17,7 +17,7 @@ body{
   flex-direction: column;
   gap: .5em;
   padding: 0 1rem;
-  padding-top: 5rem;
+  /* padding-top: 5rem; */
   /* padding-bottom: 10rem; */
   font-size: 1.5rem;
   /* margin-top: 70%; */
