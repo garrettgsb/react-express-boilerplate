@@ -11,7 +11,7 @@ module.exports = (db) => {
       res.send(result.rows)
     })
 
-  
+
   })
 
   return router;
