@@ -1,9 +1,38 @@
-/*
-* {
-  box-sizing: border-box;
-}
 
-.home{
-  background-color: red;
+/* * {
+  box-sizing: border-box;
 } */
 
+
+.page-description{
+  background-image: url('https://www.maxpixel.net/static/photo/1x/Hint-Education-Background-Learning-Subject-School-4264032.jpg');
+}
+
+.text-newDataLimit{
+  text-decoration: none;
+  color: #65743a;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: x-large;
+}
+
+.text-newDataLimit:hover{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #394f49;
+}
+
+.fav-categories{
+  display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+}
+
+.text-newData{
+  text-decoration: none;
+  color: #c37d92;
+  font-size: 3rem;
+}
+
+.text-newData:hover{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #394f49;
+}
