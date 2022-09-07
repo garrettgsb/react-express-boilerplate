@@ -26,11 +26,11 @@ App.listen(PORT, () => {
 });
 
 //Separated Routes for Each Resources
-// const usersRoutes = require('./routes/users');
-const homepageRoutes = require('./routes/homepage');
-// const categoriesRoutes = require('./routes/categories');
+const usersRoutes = require('./routes/users');
+const resourcesRoutes = require('./routes/resources');
+const subjectsRoutes = require('./routes/subjects');
 
 //Mount all resource routes
-App.use('/home', homepageRoutes(db));
-// App.use('./users/', usersRoutes(db));
-// App.use('./categories/', categoriesRoutes(db));
+App.use('/', usersRoutes(db));
+App.use('/', resourcesRoutes(db));
+App.use('/', subjectsRoutes(db));
