@@ -12,8 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 
 // function Copyright(props) {
 //   return (
@@ -79,21 +79,21 @@ export default function AdminLogin() {
               id="password"
               autoComplete="current-password"
             />
-
-            <DropdownButton id="dropdown-item-button" title="Select Category">
-              {/* <Dropdown.ItemText>Courses</Dropdown.ItemText> */}
-              <Dropdown.Item as="button">Cooking</Dropdown.Item>
-              <Dropdown.Item as="button">Chess</Dropdown.Item>
-              <Dropdown.Item as="button">Writing</Dropdown.Item>
-              <Dropdown.Item as="button">Guitar</Dropdown.Item>
-              <Dropdown.Item as="button">Coding</Dropdown.Item>
-              <Dropdown.Item as="button">Photography</Dropdown.Item>
-              <Dropdown.Item as="button">Gardening</Dropdown.Item>
-              <Dropdown.Item as="button">Knitting</Dropdown.Item>
-              <Dropdown.Item as="button">Illustration</Dropdown.Item>
-              <Dropdown.Item as="button">French</Dropdown.Item>
-            </DropdownButton>
-
+            <FloatingLabel controlId="floatingSelect" label="Select Category">
+              <Form.Select aria-label="Floating label select example">
+                <option>Open this select menu</option>
+                <option value="1">Cooking</option>
+                <option value="2">Chess</option>
+                <option value="3">Writing</option>
+                <option value="3">Coding</option>
+                <option value="3">Guitar</option>
+                <option value="3">Photography</option>
+                <option value="3">Gardening</option>
+                <option value="3">Knitting</option>
+                <option value="3">Illustration</option>
+                <option value="3">French</option>
+              </Form.Select>
+            </FloatingLabel>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
