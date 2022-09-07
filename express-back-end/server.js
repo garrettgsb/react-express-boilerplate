@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 8080;
 
 // PG database client/connection setup
 const { Pool } = require('pg');
-const dbParams = require('./db');
+const dbParams = require('./db.js');
 const db = new Pool(dbParams);
 db.connect();
 
@@ -26,11 +26,11 @@ App.listen(PORT, () => {
 });
 
 //Separated Routes for Each Resources
-const usersRoutes = require('./routes/users');
+// const usersRoutes = require('./routes/users');
 const homepageRoutes = require('./routes/homepage');
-const categoriesRoutes = require('./routes/categories');
+// const categoriesRoutes = require('./routes/categories');
 
 //Mount all resource routes
 App.use('/home', homepageRoutes(db));
-App.use('./users/', usersRoutes(db));
-App.use('./categories/', categoriesRoutes(db));
+// App.use('./users/', usersRoutes(db));
+// App.use('./categories/', categoriesRoutes(db));
