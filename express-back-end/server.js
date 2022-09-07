@@ -29,8 +29,10 @@ App.listen(PORT, () => {
 const usersRoutes = require('./routes/users');
 const resourcesRoutes = require('./routes/resources');
 const subjectsRoutes = require('./routes/subjects');
+const progresstrackerRoutes = require('./routes/progresstracker');
 
 //Mount all resource routes
 App.use('/', usersRoutes(db));
 App.use('/', resourcesRoutes(db));
 App.use('/', subjectsRoutes(db));
+App.use('/', progresstrackerRoutes(db));
