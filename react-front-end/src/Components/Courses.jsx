@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/courses.css'
@@ -8,20 +8,36 @@ import Col from 'react-bootstrap/Col';
 import PageDescription from './PageDescription';
 import 'react-bootstrap'
 import data from '../data';
+import axios from 'axios'
+
 
 export default function Courses(props) {
-  const newDataLimit = props.data.map((category) => {
+  const [subjects, setSubjects] = useState([]);
+
+  useEffect(()=>{
+    axios.get('/subjects')
+    .then(res =>{
+      console.log(res)
+      setSubjects(res.data)
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }, [])
+
+
+  const newDataLimit = subjects.map((category) => {
     return (
       <div>
-        <Link className='text-newDataLimit' to={`/course/${category.name.toLowerCase()}`}>{category.name}</Link>
+        <Link className='text-newDataLimit' to={`/course/${category.subject_name.toLowerCase()}`}>{category.subject_name}</Link>
 
       </div>
     );
   })
-  const newData = props.data.map((category) => {
+  const newData = subjects.slice(0, 5).map((category) => {
     return (
       <div>
-        <Link className='text-newData' to={`/course/${category.name.toLowerCase()}`}>{category.name}</Link>
+        <Link className='text-newData' to={`/course/${category.subject_name.toLowerCase()}`}>{category.subject_name}</Link>
       </div>
     );
   })
