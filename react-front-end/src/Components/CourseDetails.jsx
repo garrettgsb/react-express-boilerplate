@@ -1,33 +1,33 @@
 // import { Card } from '@mui/material';
 import React, { useEffect, useState } from 'react'
-// import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 export default function CourseDetails(props) {
   const [resources, setResources] = useState([]);
+  const { name } = useParams()
 
   useEffect(() => {
-    axios.get('/resources')
+    axios.get(`/resources/${name}`)
       .then(res => {
         console.log(res)
         setResources(res.data)
       })
   }, [])
 
-  // const { name } = useParams()
   // // console.log(data);
   // const courseData = data.find(course => course.name.toLowerCase() === name.toLowerCase());
 
   // console.log('courseData', courseData);
 
-  const newResources = resources.map(resource => {
+  const newResources = resources.map((resource, id) => {
     return (
-      <div className="card-body">
+      <div className="card-body" key={id}>
         <h5 className="card-title">{resource.step_description}</h5>
         <p className="card-text">{resource.article_url}</p>
         <a href={resource.video_url} className="btn btn-primary">Reference</a>
         <div>
-          <img src={resource.photo_url} alt='img' />
+          <img src={resource.photo_url} alt='' />
         </div>
       </div>
     )

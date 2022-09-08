@@ -8,51 +8,69 @@ function CreateCourse(props) {
   const [article, setArticle] = useState('');
   const [img, setImg] = useState('');
   const [video, setVideo] = useState('');
+  const [step, setStep] = useState();
+
+  // const [post, setPost] = useState(null);
 
   const handleClick = ()=> {
-    axios.post('/resources', {
-      subject: subject,
-      description: description,
-      article: article,
-      img: img,
-      video: video,
+    axios.post('/subjects', {
+      subject: subject
+    }).then((result)=>{
+      axios.post('/resources', {
+        description: description,
+        article: article,
+        img: img,
+        video: video,
+        step: step,
+        id: result.data[0].id
+      })
     })
-    // .then(()={
-
+    // .then((response)=> {
+    //   setPost(response.data);
+    // })
+    // .then((response)=>{
+    //   setPost(response.data);
     // })
   }
+
+  // useEffect(handleClick, []);
 
   return (
     <div>
   {/* <form id="create-course" method="POST" > */}
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Subject Name</label>
-          <input value={subject} onChange={(e)=>setSubject(e.target.value)} name='subject' type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-          {/* <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> */}
+        <div className="mb-3">
+          <label for="exampleInputEmail1" className="form-label">Subject Name</label>
+          <input value={subject} onChange={(e)=>setSubject(e.target.value)} name='subject' type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+          {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
 
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Discription</label>
-          <input value={description} onChange={(e)=>setDescription(e.target.value)} name='description' type="text" class="form-control" id="exampleInputPassword1" />
+
+        <div className="mb-3">
+          <label for="exampleInputPassword1" className="form-label">Step Number</label>
+          <input value={step} onChange={(e)=>setStep(e.target.value)} name='step' type="number" className="form-control" id="exampleInputPassword1" />
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Article Reference</label>
-          <input value={article} onChange={(e)=>setArticle(e.target.value)} name='article' type="url" class="form-control" id="exampleInputPassword1" />
+        <div className="mb-3">
+          <label for="exampleInputPassword1" className="form-label">Description</label>
+          <input value={description} onChange={(e)=>setDescription(e.target.value)} name='description' type="text" className="form-control" id="exampleInputPassword1" />
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Image Reference</label>
-          <input value={img} onChange={(e)=>setImg(e.target.value)} name='img' type="url" class="form-control" id="exampleInputPassword1" />
+        <div className="mb-3">
+          <label for="exampleInputPassword1" className="form-label">Article Reference</label>
+          <input value={article} onChange={(e)=>setArticle(e.target.value)} name='article' type="url" className="form-control" id="exampleInputPassword1" />
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Video Reference</label>
-          <input value={video} onChange={(e)=>setVideo(e.target.value)} name='video' type="text" class="form-control" id="exampleInputPassword1" />
+        <div className="mb-3">
+          <label for="exampleInputPassword1" className="form-label">Image Reference</label>
+          <input value={img} onChange={(e)=>setImg(e.target.value)} name='img' type="url" className="form-control" id="exampleInputPassword1" />
+        </div>
+        <div className="mb-3">
+          <label for="exampleInputPassword1" className="form-label">Video Reference</label>
+          <input value={video} onChange={(e)=>setVideo(e.target.value)} name='video' type="text" className="form-control" id="exampleInputPassword1" />
         </div>
 
-        {/* <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        {/* <div className="mb-3 form-check">
+    <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
+    <label className="form-check-label" for="exampleCheck1">Check me out</label>
   </div> */}
-        <button onClick={handleClick} type="button" class="btn btn-primary">Submit</button>
+        <button onClick={handleClick} type="button" className="btn btn-primary">Submit</button>
     {/* </form> */}
     </div>
   )
