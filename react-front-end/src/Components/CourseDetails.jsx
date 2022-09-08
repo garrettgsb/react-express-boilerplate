@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import data from '../data';
 import axios from 'axios'
 
-export default function CourseDetails() {
+export default function CourseDetails(props) {
   const [resources, setResources] = useState([]);
 
   useEffect(() => {

@@ -34,7 +34,7 @@ export default function Courses(props) {
       </div>
     );
   })
-  const newData = subjects.slice(0, 5).map((category) => {
+  const newData = subjects.slice(0, 4).map((category) => {
     return (
       <div>
         <Link className='text-newData' to={`/course/${category.subject_name.toLowerCase()}`}>{category.subject_name}</Link>

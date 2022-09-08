@@ -29,12 +29,13 @@ html, body {
 
 .site-name{
   padding-left: 1%;
-  font-size:x-large;
+  font-size:30px;
 }
 
 .site-name a{
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-decoration: none;
+  color: #765baf;
 }
 
 
@@ -154,7 +155,6 @@ html, body {
   margin-left: 0%;
 }
 
-
 #dropdown-basic{
-  background-color: rgb(37, 30, 30);
+ background-color: rgb(142, 108, 206);
 }

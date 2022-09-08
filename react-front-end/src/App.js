@@ -13,6 +13,7 @@ import ContactUs from './Components/ContactUs';
 import Footer from './Components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminLogin from './Components/AdminLogin';
+import CreateCourse from './Components/CreateCourse';
 
 export default function App() {
   return (
@@ -24,13 +25,13 @@ export default function App() {
         <div className='row h-80'>
           <Routes>
             <Route path="/" element={<Courses data={data} />} />
-            <Route path="/" element={<Courses data={data} />} />
             <Route path="/course/:name" element={<CourseDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/create-course" element={<CreateCourse />} />
           </Routes>
         </div>
         <div className='row h-10 px-0 foot1'>

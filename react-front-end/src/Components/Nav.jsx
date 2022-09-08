@@ -7,7 +7,6 @@ function Nav() {
     <section className="top-nav">
       <div className='site-name'>
         <a href='/'>LEARNAZ</a>
-
       </div>
       {/* <input id="menu-toggle" type="checkbox" />
       <label className='menu-button-container' for="menu-toggle">
@@ -15,8 +14,8 @@ function Nav() {
       </label> */}
 
       <Dropdown className='dropdown1'>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Dropdown Button
+        <Dropdown.Toggle id="dropdown-basic">
+          Welcome
         </Dropdown.Toggle>
 
         <Dropdown.Menu>

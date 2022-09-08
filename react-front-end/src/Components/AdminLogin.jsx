@@ -103,7 +103,7 @@ export default function AdminLogin() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              href='/'
+              href='/create-course'
             >
               Sign In
             </Button>
