@@ -1,8 +1,6 @@
 // import { Card } from '@mui/material';
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import data from '../data';
+// import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 export default function CourseDetails(props) {
@@ -29,7 +27,7 @@ export default function CourseDetails(props) {
         <p className="card-text">{resource.article_url}</p>
         <a href={resource.video_url} className="btn btn-primary">Reference</a>
         <div>
-          <img src={resource.photo_url} />
+          <img src={resource.photo_url} alt='img' />
         </div>
       </div>
     )

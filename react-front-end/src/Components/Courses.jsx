@@ -7,7 +7,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import PageDescription from './PageDescription';
 import 'react-bootstrap'
-import data from '../data';
 import axios from 'axios'
 
 
@@ -26,17 +25,17 @@ export default function Courses(props) {
   }, [])
 
 
-  const newDataLimit = subjects.map((category) => {
+  const newDataLimit = subjects.map((category, id) => {
     return (
-      <div>
-        <Link className='text-newDataLimit' to={`/course/${category.subject_name.toLowerCase()}`}>{category.subject_name}</Link>
+      <div key={id}>
+        <Link  className='text-newDataLimit' to={`/course/${category.subject_name.toLowerCase()}`}>{category.subject_name}</Link>
 
       </div>
     );
   })
-  const newData = subjects.slice(0, 4).map((category) => {
+  const newData = subjects.slice(0, 4).map((category, id) => {
     return (
-      <div>
+      <div key={id}>
         <Link className='text-newData' to={`/course/${category.subject_name.toLowerCase()}`}>{category.subject_name}</Link>
       </div>
     );
