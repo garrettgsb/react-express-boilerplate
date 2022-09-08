@@ -28,7 +28,7 @@ export default function Courses(props) {
   const newDataLimit = subjects.map((category, id) => {
     return (
       <div key={id}>
-        <Link  className='text-newDataLimit' to={`/course/${category.subject_name.toLowerCase()}`}>{category.subject_name}</Link>
+        <Link  className='text-newDataLimit' to={`/course/${category.subject_name}`}>{category.subject_name}</Link>
 
       </div>
     );
@@ -36,7 +36,7 @@ export default function Courses(props) {
   const newData = subjects.slice(0, 4).map((category, id) => {
     return (
       <div key={id}>
-        <Link className='text-newData' to={`/course/${category.subject_name.toLowerCase()}`}>{category.subject_name}</Link>
+        <Link className='text-newData' to={`/course/${category.subject_name}`}>{category.subject_name}</Link>
       </div>
     );
   })
