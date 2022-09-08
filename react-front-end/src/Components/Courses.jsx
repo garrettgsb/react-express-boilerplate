@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import PageDescription from './PageDescription';
 import 'react-bootstrap'
 import axios from 'axios'
-
+import Steptracker from './Steptracker';
 
 export default function Courses(props) {
   const [subjects, setSubjects] = useState([]);
@@ -44,7 +44,7 @@ export default function Courses(props) {
   return (
     <div className='container'>
       <div className='row'>
-
+        <Steptracker />
         <Container className='container'>
           <Row className='all-categories' >
             <Col xs={2} className='border border-3 side-categories'>
