@@ -8,15 +8,23 @@ module.exports = (db) => {
     });
   });
 
+
+
+  //Ability for students to say I'm done that step
+  //Once students start learning path, highest step is 0
+  //Once they complete the step it will add to highest step
+  //Once they finish every step they get a completion badge
   router.post("/progress", (req, res) => {
-    const params = [req.body['steps_complete']];
+    console.log("server")
+    const params = [req.body.highest_steps]; //req.body from front-end
 
     db.query(`UPDATE progress_tracker
-    SET steps_complete = $1`, params)
+    SET highest_steps = highest_steps + $1
+    WHERE users_id = 2`, params)
     .then((data) => {
-
-    })
-    .catch(error => res.status(500).json({error: error.message}));
+      console.log(data);
+      res.status(200);
+    });
   })
 
   return router;

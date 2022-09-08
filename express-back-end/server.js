@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const BodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080;
-
+const cors = require('cors');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./db.js');
@@ -19,6 +19,8 @@ app.use(cookieSession({
   name: 'session',
   keys: ['polarBear', 'Hello']
 }));
+app.use(cors());
+
 
 // Sample GET route
 app.get('/api/data', (req, res) => res.json({
