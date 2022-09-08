@@ -11,6 +11,7 @@ export default function CourseDetails(props) {
   useEffect(() => {
     axios.get('/resources')
       .then(res => {
+        console.log(res)
         setResources(res.data)
       })
   }, [])

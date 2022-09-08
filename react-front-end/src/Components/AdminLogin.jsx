@@ -79,7 +79,7 @@ export default function AdminLogin() {
               id="password"
               autoComplete="current-password"
             />
-            <FloatingLabel controlId="floatingSelect" label="Select Category">
+            {/* <FloatingLabel controlId="floatingSelect" label="Select Category">
               <Form.Select aria-label="Floating label select example">
                 <option>Open this select menu</option>
                 <option value="1">Cooking</option>
@@ -93,7 +93,7 @@ export default function AdminLogin() {
                 <option value="3">Illustration</option>
                 <option value="3">French</option>
               </Form.Select>
-            </FloatingLabel>
+            </FloatingLabel> */}
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
