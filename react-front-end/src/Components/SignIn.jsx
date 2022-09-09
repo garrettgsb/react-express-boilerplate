@@ -14,6 +14,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios'
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -36,14 +38,19 @@ export default function SignIn(props) {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  let navigate = useNavigate();
 
-  const handleSubmit = (email) => {
+  const handleSubmit = (email, e) => {
+    e.preventDefault();
     if (email === 'alkhaleelisaad@gmail.com') {
       props.setAdmin(true)
     }
     axios.get(`/users/login/${email}`, {
       email: email,
       password: password
+    })
+    .then(()=>{
+      navigate("/", { replace: true });
     })
   };
 
@@ -65,7 +72,7 @@ export default function SignIn(props) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -99,7 +106,8 @@ export default function SignIn(props) {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={(event)=> {handleSubmit(email)}}
+              onClick={(event)=> {handleSubmit(email, event)}}
+
             >
               Sign In
             </Button>

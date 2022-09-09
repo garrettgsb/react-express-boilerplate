@@ -54,15 +54,25 @@ export default function CourseDetails(props) {
         <div>
           <img src={resource.photo_url} alt='' />
         </div>
-        <Steptracker/>
-        <div className='delete'>
-          <button onClick={() => handleDelete(resource.id)} className="btn btn-primary">Delete</button>
-        </div>
-        <div className='edit'>
-          <button onClick={handleEdit} className="btn btn-primary">Edit</button>
-        </div>
+        <Steptracker />
+
+
         <div className='admin-form'>
-          {props.admin && <h1>Hello</h1>}
+          {props.admin &&
+            <div>
+              <div className='delete'>
+                <button onClick={() => handleDelete(resource.id)} className="btn btn-primary">Delete</button>
+              </div>
+              <div className='edit'>
+                <button onClick={handleEdit} className="btn btn-primary">Edit</button>
+              </div>
+              <div>
+                <a href='/create-course'>
+                  <button type='button' className='btn btn-primary'>Add More Resources</button>
+                </a>
+              </div>
+            </div>
+          }
         </div>
       </div>
     )
@@ -70,11 +80,7 @@ export default function CourseDetails(props) {
 
   return (
     <div>
-      <div>
-        <a href='/create-course'>
-          <button type='button' className='btn btn-primary'>Add More Resources</button>
-        </a>
-      </div>
+
       <div>
         {newResources}
       </div>
