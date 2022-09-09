@@ -11,8 +11,8 @@
   "dependencies": {
     "axios": "^0.27.2",
     "body-parser": "^1.18.3",
-    "cors": "^2.8.5",
     "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.16.4",
     "nodemon": "^1.18.7",
