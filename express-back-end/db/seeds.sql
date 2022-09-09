@@ -25,5 +25,5 @@ VALUES (1, 1, 'The physical hardware you stock in your kitchen is equally as imp
 (1, 8, 'A rich, hearty vegetarian lasagna stuffed with spinach, mushrooms, and cheese.', 'https://www.seriouseats.com/ultra-creamy-spinach-and-mushroom-lasagna-recipe', 'https://i.pinimg.com/originals/54/cd/02/54cd02c5b5dd84b0c82c245330c25e39.jpg', 'https://www.youtube.com/watch?v=shTIlV5iDQw');
 
 
-INSERT INTO progress_tracker (users_id, subjects_id, highest_steps)
-VALUES (2, 1, 0);
+INSERT INTO progress_tracker (users_id, resources_id)
+VALUES (2, 1);
