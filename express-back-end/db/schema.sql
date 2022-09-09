@@ -31,6 +31,5 @@ CREATE TABLE resources (
 CREATE TABLE progress_tracker (
   id SERIAL PRIMARY KEY NOT NULL,
   users_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  subjects_id INTEGER REFERENCES subjects(id) ON DELETE CASCADE,
-  highest_steps INTEGER NOT NULL
+  resources_id INTEGER REFERENCES resources(id) ON DELETE CASCADE
 );

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import Steptracker from './Steptracker';
 
 export default function CourseDetails(props) {
   const [resources, setResources] = useState([]);
@@ -53,6 +54,7 @@ export default function CourseDetails(props) {
         <div>
           <img src={resource.photo_url} alt='' />
         </div>
+        <Steptracker/>
         <div className='delete'>
           <button onClick={() => handleDelete(resource.id)} className="btn btn-primary">Delete</button>
         </div>
