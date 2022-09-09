@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import Steptracker from './Steptracker';
 
 export default function CourseDetails(props) {
   const [resources, setResources] = useState([]);
@@ -26,6 +27,7 @@ export default function CourseDetails(props) {
         <h5 className="card-title">{resource.step_description}</h5>
         <p className="card-text">{resource.article_url}</p>
         <a href={resource.video_url} className="btn btn-primary">Reference</a>
+        <Steptracker/>
         <div>
           <img src={resource.photo_url} alt='' />
         </div>
