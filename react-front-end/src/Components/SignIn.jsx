@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios'
+import { useState } from 'react';
 
 
 
@@ -30,15 +32,19 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+export default function SignIn(props) {
 
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = (email) => {
+    if (email === 'alkhaleelisaad@gmail.com') {
+      props.setAdmin(true)
+    }
+    axios.get(`/users/login/${email}`, {
+      email: email,
+      password: password
+    })
   };
 
   return (
@@ -69,6 +75,8 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange = {(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -79,6 +87,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange = {(e) => setPassword(e.target.password)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -89,7 +99,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              href='/'
+              onClick={(event)=> {handleSubmit(email)}}
             >
               Sign In
             </Button>

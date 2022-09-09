@@ -4,11 +4,19 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/:id", (req, res) => {
     console.log('REQ>BODY', req.params)
-    db.query("SELECT * FROM resources JOIN subjects ON subjects_id = subjects.id WHERE subject_name = $1;", [req.params.id])
+    db.query("SELECT resources.* FROM resources JOIN subjects ON subjects_id = subjects.id WHERE subject_name = $1;", [req.params.id])
       .then((result) => {
+        console.log('ROWS FOR', req.params.id, result.rows)
         res.send(result.rows);
       });
   });
+
+  //to have a view on resources route
+  router.get('/', (req, res)=>{
+    db.query('SELECT * FROM resources;').then((result) => {
+      res.send(result.rows);
+    });
+  })
 
   router.post("/", (req, res) => {
     console.log('req.body', req.body)
@@ -22,6 +30,17 @@ module.exports = (db) => {
         console.log('err', err)
       })
   })
-  // });
+
+  router.delete("/:id", (req, res) =>{
+    console.log('deleting', req.params.id)
+    // if (deleting) {
+      const id = req.params.id
+      db.query(`DELETE FROM resources WHERE id = ${id} RETURNING *;`)
+      .then((result) =>{
+        res.send(result.rows);
+      })
+    // }
+  })
+
   return router;
 };

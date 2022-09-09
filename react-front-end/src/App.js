@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import './App.css';
 import Courses from './Components/Courses';
@@ -16,6 +16,7 @@ import AdminLogin from './Components/AdminLogin';
 import CreateCourse from './Components/CreateCourse';
 
 export default function App() {
+  const [admin, setAdmin] = useState(false);
   return (
     <div className="container-fluid">
       <div className='row' >
@@ -25,10 +26,10 @@ export default function App() {
         <div className='row h-80'>
           <Routes>
             <Route path="/" element={<Courses data={data} />} />
-            <Route path="/course/:name" element={<CourseDetails />} />
+            <Route path="/course/:name" element={<CourseDetails admin={admin}/>} />
             <Route path="/about" element={<About />} />
             <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-in" element={<SignIn setAdmin={setAdmin} />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/create-course" element={<CreateCourse />} />
