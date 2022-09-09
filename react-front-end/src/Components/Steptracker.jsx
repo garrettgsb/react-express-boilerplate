@@ -14,7 +14,7 @@ export default function Steptracker() {
         // setHighestStep(true); //true means they clicked it
       });
   };
- 
+
   return (
     <button onClick={handleProgress}>Click me</button>
   )

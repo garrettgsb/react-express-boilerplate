@@ -39,7 +39,7 @@ function CreateCourse(props) {
     <div>
   {/* <form id="create-course" method="POST" > */}
         <div className="mb-3">
-          <label for="exampleInputEmail1" className="form-label">Subject Name</label>
+          <label className="form-label">Subject Name</label>
           <input value={subject} onChange={(e)=>setSubject(e.target.value)} name='subject' type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
           {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
 

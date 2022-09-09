@@ -12,13 +12,6 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     console.log('req.body', req.body)
-    // db.query(`
-    //   INSERT INTO subjects (subject_name)
-    //   VALUES ($1)
-    //   RETURNING *;`, [req.body.subject])
-    //   .then((result) => {
-    //     console.log(result.rows[0])
-    //     const id = result.rows[0].id
     db.query(`INSERT INTO resources (subjects_id, step_number, step_description, article_url, photo_url, video_url)
         VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING *;`, [req.body.id, req.body.step, req.body.description, req.body.article, req.body.img, req.body.video])
