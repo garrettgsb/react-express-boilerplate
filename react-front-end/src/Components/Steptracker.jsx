@@ -6,7 +6,7 @@ export default function Steptracker() {
   const [highestStep, setHighestStep] = useState(0); //false means default
   const handleProgress = () => {
     axios
-      .post('/progress', {
+      .post('/progresstracker/progress', {
         highest_steps: 1,
       })
       .then(() => {
@@ -14,7 +14,7 @@ export default function Steptracker() {
         // setHighestStep(true); //true means they clicked it
       });
   };
- 
+
   return (
     <button onClick={handleProgress}>Click me</button>
   )
