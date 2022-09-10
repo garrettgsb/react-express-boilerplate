@@ -16,22 +16,6 @@ import axios from 'axios'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-
-
-
-// function Copyright(props) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         LEARNAZ.com
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
-
 const theme = createTheme();
 
 export default function SignIn(props) {
@@ -42,16 +26,21 @@ export default function SignIn(props) {
 
   const handleSubmit = (email, e) => {
     e.preventDefault();
+    // axios.get(`/users/login/${email}`, {
+    //   email: email,
+    //   password: password
+    // })
+    // .then((res)=>{
+    //   if (res && res.data && res.data.length > 0) {
+    //     const user = res.data[0];
+    //     props.setAdmin(user.admin)
+    //   }
+    //   navigate("/", { replace: true });
+    // })
     if (email === 'alkhaleelisaad@gmail.com') {
       props.setAdmin(true)
     }
-    axios.get(`/users/login/${email}`, {
-      email: email,
-      password: password
-    })
-    .then(()=>{
-      navigate("/", { replace: true });
-    })
+    navigate("/", { replace: true });
   };
 
   return (
@@ -125,7 +114,6 @@ export default function SignIn(props) {
             </Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
     </ThemeProvider>
   );
