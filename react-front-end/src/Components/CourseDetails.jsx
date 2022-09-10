@@ -65,11 +65,7 @@ export default function CourseDetails(props) {
               <div className='delete'>
                 <button onClick={() => handleDelete(resource.id)} className="btn btn-primary">Delete</button>
               </div>
-              <div>
-                <Link to='/create-course'>
-                  <button type='button' className='btn btn-primary'>Add More Resources</button>
-                </Link>
-              </div>
+
             </div>
           }
         </div>
@@ -83,6 +79,15 @@ export default function CourseDetails(props) {
       <div>
         {newResources}
       </div>
+
+      {props.admin &&
+        <div>
+          <Link to='/create-course'>
+            <button type='button' className='btn btn-primary'>Add More Resources</button>
+          </Link>
+        </div>
+      }
+
 
     </div>
   )
