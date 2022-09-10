@@ -9,9 +9,10 @@ module.exports = (db) => {
   });
 
   router.get("/login/:email", (req, res) => {
-    // console.log('req.params', req.params)
-    req.session.email = req.params.id;
-    res.send('logged in');
+    db.query('SELECT * FROM users WHERE email=$1;', [req.params.email]).then((result) => {
+      req.session.email = req.params.id;
+      res.send(result.rows);
+    });
   });
 
 
