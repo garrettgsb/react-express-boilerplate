@@ -47,7 +47,7 @@ export default function CourseDetails(props) {
       <div className="card-body" key={resource.id}>
         <div>{resource.step_number}</div>
         <h5 className="card-title">{resource.step_description}</h5>
-        <p className="card-text">{resource.article_url}</p>
+        <a href={resource.article_url} className="card-text">Click Article</a>
         <iframe src={resource.video_url}></iframe>
         <div>
           <img src={resource.photo_url} alt='' />

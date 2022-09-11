@@ -80,7 +80,7 @@ export default function SignIn(props) {
               fullWidth
               name="password"
               label="Password"
-              type="password"
+              type="text"
               id="password"
               autoComplete="current-password"
               value={password}
