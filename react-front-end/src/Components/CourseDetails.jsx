@@ -11,8 +11,8 @@ export default function CourseDetails(props) {
   const { name } = useParams()
   console.log("NAME", name)
   const [edit, setEdit] = useState();
-  const [step, setStep] = useState()
-  const [post, setPost] = useState(null)
+  const [step, setStep] = useState();
+  const [post, setPost] = useState(null);
 
   console.log('PROPS', props)
 
@@ -52,8 +52,6 @@ export default function CourseDetails(props) {
           <img src={resource.photo_url} alt='' />
         </div>
         <Steptracker />
-
-
         <div className='admin-form'>
           {props.admin &&
             <div>
@@ -65,7 +63,6 @@ export default function CourseDetails(props) {
               <div className='delete'>
                 <button onClick={() => handleDelete(resource.id)} className="btn btn-primary">Delete</button>
               </div>
-
             </div>
           }
         </div>

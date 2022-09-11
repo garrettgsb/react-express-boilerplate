@@ -35,7 +35,7 @@ export default function Courses(props) {
   const newData = subjects.slice(0, 4).map((category, id) => {
     return (
       <div key={id}>
-        <Link className='text-newData' to={`/course/${category.subject_name}`}>{category.subject_name}</Link>
+        <Link className='text-newData' id='tv' to={`/course/${category.subject_name}`}>{category.subject_name}</Link>
       </div>
     );
   })
@@ -52,7 +52,7 @@ export default function Courses(props) {
               <div className='row px-0 page-description'>
                 <PageDescription />
               </div>
-              <div className='fav-categories'>{newData}</div>
+              <div className='fav-categories' >{newData}</div>
             </Col>
           </Row>
         </Container>
