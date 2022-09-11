@@ -1,0 +1,30 @@
+#complete-step {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 15px;
+  font-family: inherit;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  
+}
+
+#complete-step::before {
+ content: '';
+ width: 0;
+ height: 3em;
+ border-radius: 30em;
+ position: absolute;
+ top: 0;
+ left: 0;
+ background-image: linear-gradient(to right, #eea849 0%, #f46b45 100%);
+ transition: .5s ease;
+ display: block;
+ z-index: -1;
+}
+
+#complete-step:hover::before {
+  width: 9em;
+}
