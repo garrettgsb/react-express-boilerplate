@@ -12,7 +12,13 @@ VALUES ('Cooking'),
 ('Gardening'),
 ('Knitting'),
 ('Illustration'),
-('French');
+('Math'),
+('Physics'),
+('Driving'),
+('Python'),
+('Eating Healthy'),
+('Marketing'),
+('Photography & Video');
 
 INSERT INTO resources (subjects_id, step_number, step_description, article_url, photo_url, video_url)
 VALUES (1, 1, 'The physical hardware you stock in your kitchen is equally as important as the ingredients you choose and the cooking techniques you use. Use the following guides to help you find what you really need in the kitchen.', 'https://www.seriouseats.com/basic-starter-kitchen-equipment', null, 'https://www.youtube.com/embed/5zt6_knK8Ms'),
