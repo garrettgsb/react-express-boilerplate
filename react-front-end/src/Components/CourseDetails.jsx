@@ -1,5 +1,5 @@
 // import { Card } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Steptracker from './Steptracker';
@@ -7,52 +7,41 @@ import { Link } from "react-router-dom";
 
 
 export default function CourseDetails(props) {
-  // const [resources, props.setResources] = useState([]);
   const { name } = useParams()
-  console.log("NAME", name)
-  const [edit, setEdit] = useState();
-  const [step, setStep] = useState();
-  const [post, setPost] = useState(null);
-
-  console.log('PROPS', props)
+  // const [edit, setEdit] = useState();
+  // const [step, setStep] = useState();
 
   useEffect(() => {
     axios.get(`/resources/${name}`)
       .then(res => {
-        console.log('All Resources', res.data)
         props.setResources(res.data)
       })
   }, [])
 
   const handleDelete = (id) => {
-    setStep()
+    // setStep()
     axios.delete(`/resources/${id}`)
       .then(() => {
         props.setResources(props.resources.filter((resource) => {
-          return resource.id != id;
+          return resource.id !== id;
         }))
       })
   }
 
-  // // console.log(data);
-  // const courseData = data.find(course => course.name.toLowerCase() === name.toLowerCase());
-
-  // console.log('courseData', courseData);
-
-
   const newResources = props.resources.map((resource) => {
-    console.log('Resource', resource);
     const pathToResourceEdit = `/edit-resource/${resource.id}`;
     return (
       <div className="card-body" key={resource.id}>
         <div>{resource.step_number}</div>
         <h5 className="card-title">{resource.step_description}</h5>
-        <a href={resource.article_url} className="card-text">Click Article</a>
-        <iframe src={resource.video_url}></iframe>
+        <a href={resource.article_url} className="card-text" target="_blank">Click Article</a>
+        <div>
+          <iframe title="myFrame" src={resource.video_url}></iframe>
+        </div>
         <div>
           <img src={resource.photo_url} alt='' />
         </div>
-        <Steptracker resource_id={resource.id}/>
+        <Steptracker resource_id={resource.id} />
         <div className='admin-form'>
           {props.admin &&
             <div>
@@ -73,20 +62,16 @@ export default function CourseDetails(props) {
 
   return (
     <div>
-
       <div>
         {newResources}
       </div>
-
       {props.admin &&
         <div>
           <Link to='/create-course'>
-            <button type='button' className='btn btn-primary'>Add More Resources</button>
+            <button type='button' className='btn btn-primary'>Add Resources</button>
           </Link>
         </div>
       }
-
-
     </div>
   )
 }

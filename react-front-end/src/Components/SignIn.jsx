@@ -12,7 +12,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +20,7 @@ const theme = createTheme();
 export default function SignIn(props) {
 
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  // const [password, setPassword] = useState('')
   let navigate = useNavigate();
 
   const handleSubmit = (email, e) => {
@@ -80,11 +79,11 @@ export default function SignIn(props) {
               fullWidth
               name="password"
               label="Password"
-              type="text"
+              type="password"
               id="password"
               autoComplete="current-password"
-              value={password}
-              onChange = {(e) => setPassword(e.target.password)}
+              // value={password}
+              // onChange = {(e) => setPassword(e.target.password)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -96,7 +95,6 @@ export default function SignIn(props) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={(event)=> {handleSubmit(email, event)}}
-
             >
               Sign In
             </Button>
@@ -107,7 +105,7 @@ export default function SignIn(props) {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to='/sign-up' href='/sign-up' variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
