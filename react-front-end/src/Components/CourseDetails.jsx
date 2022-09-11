@@ -39,6 +39,7 @@ export default function CourseDetails(props) {
 
   // console.log('courseData', courseData);
 
+
   const newResources = props.resources.map((resource) => {
     console.log('Resource', resource);
     const pathToResourceEdit = `/edit-resource/${resource.id}`;
@@ -51,7 +52,7 @@ export default function CourseDetails(props) {
         <div>
           <img src={resource.photo_url} alt='' />
         </div>
-        <Steptracker />
+        <Steptracker resource_id={resource.id}/>
         <div className='admin-form'>
           {props.admin &&
             <div>

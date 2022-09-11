@@ -2,23 +2,31 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Steptracker() {
-  const [highestStep, setHighestStep] = useState(0); //false means default
+export default function Steptracker(props) {
+  const [highestStep, setHighestStep] = useState(0);
   const handleProgress = () => {
     axios
       .post('/progresstracker/progress', {
-        highest_steps: 1,
+        resource_id: props.resource_id
       })
-      .then(() => {
-        console.log('success!')
-        // setHighestStep(true); //true means they clicked it
-      });
+      .then((res) => {
+
+        if (res.data[0].count == '3') {
+          alert("HURRRAAAAY ALMOST THERE")
+
+        } else if (res.data[0].count == '8'){
+          alert("YOU ARE DONE!")
+        }
+
+        console.log('FROM BE', res.data[0].count)
+        
+      })
+      .catch(err => {
+        console.log('err', err);
+      })
   };
 
   return (
     <button onClick={handleProgress}>Click me</button>
   )
 }
-
-//In the front end, use onclick{handleProgress}
-//{highestStep ? <button/> : <button />}

@@ -32,4 +32,4 @@ VALUES (1, 1, 'The physical hardware you stock in your kitchen is equally as imp
 
 
 INSERT INTO progress_tracker (users_id, resources_id)
-VALUES (2, 1);
+VALUES (2, null);
