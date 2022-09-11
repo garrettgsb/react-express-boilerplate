@@ -12,22 +12,20 @@ import axios from 'axios'
 export default function Courses(props) {
   const [subjects, setSubjects] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     axios.get('/subjects')
-    .then(res =>{
-      console.log(res)
-      setSubjects(res.data)
-    })
-    .catch(err=>{
-      console.log(err);
-    })
+      .then(res => {
+        setSubjects(res.data)
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }, [])
-
-
+  
   const newDataLimit = subjects.map((category, id) => {
     return (
       <div key={id}>
-        <Link  className='text-newDataLimit' to={`/course/${category.subject_name}`}>{category.subject_name}</Link>
+        <Link className='text-newDataLimit' to={`/course/${category.subject_name}`}>{category.subject_name}</Link>
 
       </div>
     );
@@ -52,7 +50,9 @@ export default function Courses(props) {
               <div className='row px-0 page-description'>
                 <PageDescription />
               </div>
-              <div className='fav-categories' >{newData}</div>
+              <div className='fav-categories'>
+                {newData}
+              </div>
             </Col>
           </Row>
         </Container>

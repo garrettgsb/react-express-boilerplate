@@ -21,14 +21,13 @@ html, body {
   justify-content: space-between;
   background-color: #00BAF0;
   background: linear-gradient(to left, #f46b45, #eea849);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #FFF;
   height: 50px;
   padding: 1em;
 }
 
 .site-name{
-  padding-left: 1%;
+  /* padding-left: 1%; */
   font-size:30px;
 }
 
@@ -36,8 +35,8 @@ html, body {
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-decoration: none;
   color: #765baf;
+  font-size: 40px;
 }
-
 
 .menu {
   display: flex;
@@ -150,11 +149,21 @@ html, body {
   text-decoration: none;
 }
 
-
 .nav1{
   margin-left: 0%;
 }
 
 #dropdown-basic{
  background-color: rgb(142, 108, 206);
+ font-size: 1.25rem;
+}
+
+.admin{
+  text-decoration: none;
+  color: inherit;
+  margin-left: 10%;
+}
+
+.admin:hover{
+  background-color: #e47b5e;
 }

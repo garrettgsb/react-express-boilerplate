@@ -2,8 +2,6 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link } from "react-router-dom";
-import axios from 'axios';
-
 
 function Nav() {
 
@@ -20,12 +18,11 @@ function Nav() {
         <Dropdown.Toggle id="dropdown-basic">
           Welcome
         </Dropdown.Toggle>
-        <Dropdown.Menu>
+        <Dropdown.Menu className='drop-down'>
           <Dropdown.Item href="/sign-in">Sign In</Dropdown.Item>
           <Dropdown.Item href="/sign-up">Sign up</Dropdown.Item>
           <Dropdown.Item onClick={ logout }>Sign out</Dropdown.Item>
-          {/* <Dropdown.Item href="/create-course">Admin</Dropdown.Item> */}
-          <Link to='/create-course'>Admin</Link>
+          <Link className='admin' to='/create-course'>Admin</Link>
           <Dropdown.Item href="/contact-us">Contact us</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

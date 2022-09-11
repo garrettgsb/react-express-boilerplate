@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function EditResource(props) {
   const params  = useParams();
-  const [subject, setSubject] = useState('');
+  // const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
   const [article, setArticle] = useState('');
   const [img, setImg] = useState('');
