@@ -44,7 +44,7 @@ export default function CourseDetails(props) {
   // console.log('courseData', courseData);
 
   const newResources = resources.map((resource) => {
-    console.log('Resource', resource)
+    // console.log('Resource', resource)
     return (
       <div className="card-body" key={resource.id}>
         <div>{resource.step_number}</div>
@@ -54,7 +54,7 @@ export default function CourseDetails(props) {
         <div>
           <img src={resource.photo_url} alt='' />
         </div>
-        <Steptracker />
+        <Steptracker resource_id={resource.id}/>
 
 
         <div className='admin-form'>
