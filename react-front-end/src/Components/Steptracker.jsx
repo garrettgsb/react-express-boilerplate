@@ -15,13 +15,11 @@ export default function Steptracker(props) {
       })
       .then((res) => {
 
-        if (res.data[0].count == '3') {
-          message.success("You're ALMOST THERE")
-        } else if (res.data[0].count == '7'){
+        if (res.data[0].count === '3') {
+          message.success("YOU'RE ALMOST THERE. KEEP GOING!")
+        } else if (res.data[0].count === '7'){
           setShowAlert(true)
         }
-
-        console.log('FROM BE', res.data[0].count)
         
       })
       .catch(err => {
@@ -35,7 +33,7 @@ export default function Steptracker(props) {
   return (
     <div>
     <button id='complete-step' onClick={() => {
-      updateText('Step Complete');
+      updateText('Step Completed');
       handleProgress();
     }}>{buttonText}</button>
    
