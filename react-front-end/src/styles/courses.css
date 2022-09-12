@@ -5,7 +5,7 @@
 
 
 .page-description {
-  background-image: url('https://www.maxpixel.net/static/photo/1x/Hint-Education-Background-Learning-Subject-School-4264032.jpg');
+  background: radial-gradient(circle, rgb(177, 142, 142), white);
 }
 
 .text-newDataLimit {
@@ -27,7 +27,7 @@
 .fav-categories {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
   padding: 10%;
 }
@@ -35,7 +35,7 @@
 .text-newData {
   text-decoration: none;
   color: #c37d92;
-  font-size: 3rem;
+  font-size: 4.3rem;
   /* width: 300px; */
 }
 
@@ -48,13 +48,13 @@
 /* ////////// */
 
 #tv {
-  position: relative;
+  /* position: relative; */
   width: 350px;
   height: 550px;
   background: white;
   border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
   color: rgb(192, 98, 98);
-  box-shadow: 20px 20px rgba(0,0,0,.15);
+  box-shadow: 30px 25px rgba(0,0,0,.15);
   transition: all .4s ease;
 }
 #tv:hover {
