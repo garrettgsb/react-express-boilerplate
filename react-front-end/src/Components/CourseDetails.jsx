@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Steptracker from './Steptracker';
 import { Link } from "react-router-dom";
+import '../styles/course-details.css';
 
 
 export default function CourseDetails(props) {
@@ -32,15 +33,24 @@ export default function CourseDetails(props) {
     const pathToResourceEdit = `/edit-resource/${resource.id}`;
     return (
       <div className="card-body" key={resource.id}>
+        <div class="number-description">
         <div>{resource.step_number}</div>
         <h5 className="card-title">{resource.step_description}</h5>
+        </div>
+
+        <div class="article">
         <a href={resource.article_url} className="card-text" target="_blank">Click Article</a>
+        </div>
+
+        <div class="image-video">
         <div>
-          <iframe title="myFrame" src={resource.video_url}></iframe>
+          <iframe width="750" height="500" title="myFrame" src={resource.video_url}></iframe>
         </div>
         <div>
           <img src={resource.photo_url} alt='' />
         </div>
+        </div>
+
         <Steptracker resource_id={resource.id} />
         <div className='admin-form'>
           {props.admin &&
