@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Steptracker from './Steptracker';
 import { Link } from "react-router-dom";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function CourseDetails(props) {
   const { name } = useParams()
@@ -31,32 +31,39 @@ export default function CourseDetails(props) {
   const newResources = props.resources.map((resource) => {
     const pathToResourceEdit = `/edit-resource/${resource.id}`;
     return (
-      <div className="card-body" key={resource.id}>
-        <div>{resource.step_number}</div>
-        <h5 className="card-title">{resource.step_description}</h5>
-        <a href={resource.article_url} className="card-text" target="_blank">Click Article</a>
-        <div>
-          <iframe title="myFrame" src={resource.video_url}></iframe>
-        </div>
-        <div>
-          <img src={resource.photo_url} alt='' />
-        </div>
-        <Steptracker resource_id={resource.id} />
-        <div className='admin-form'>
-          {props.admin &&
-            <div>
-              <div className='edit'>
-                <Link to={pathToResourceEdit}>
-                  <button className="btn btn-primary">Edit</button>
-                </Link>
+      <div className='container-fluid'>
+        <div className='row'>
+          <div className='col-4'>
+            <div key={resource.id}>
+              <div>{resource.step_number}</div>
+              {/* <h5 className="card-title">{resource.step_description}</h5> */}
+              {/* <a href={resource.article_url} className="card-text" target="_blank">Click Article</a> */}
+              <div>
+                <iframe title="myFrame" src={resource.video_url}></iframe>
               </div>
-              <div className='delete'>
-                <button onClick={() => handleDelete(resource.id)} className="btn btn-primary">Delete</button>
+              {/* <div>
+                <img src={resource.photo_url} alt='' />
+              </div> */}
+              {/* <Steptracker resource_id={resource.id} /> */}
+              <div className='admin-form'>
+                {props.admin &&
+                  <div>
+                    <div className='edit'>
+                      <Link to={pathToResourceEdit}>
+                        <button className="btn btn-primary">Edit</button>
+                      </Link>
+                    </div>
+                    <div className='delete'>
+                      <button onClick={() => handleDelete(resource.id)} className="btn btn-primary">Delete</button>
+                    </div>
+                  </div>
+                }
               </div>
             </div>
-          }
+          </div>
         </div>
       </div>
+
     )
   })
 
