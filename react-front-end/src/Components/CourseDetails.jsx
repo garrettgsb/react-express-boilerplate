@@ -4,7 +4,12 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Steptracker from './Steptracker';
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.min.css';
+=======
+import '../styles/course-details.css';
+
+>>>>>>> styles/course-details
 
 export default function CourseDetails(props) {
   const { name } = useParams()
