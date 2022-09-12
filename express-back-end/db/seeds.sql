@@ -18,7 +18,7 @@ VALUES ('Cooking'),
 ('Python'),
 ('Eating Healthy'),
 ('Marketing'),
-('Photography & Video');
+('Video Editing');
 
 INSERT INTO resources (subjects_id, step_number, step_description, article_url, photo_url, video_url)
 VALUES (1, 1, 'The physical hardware you stock in your kitchen is equally as important as the ingredients you choose and the cooking techniques you use. Use the following guides to help you find what you really need in the kitchen.', 'https://www.seriouseats.com/basic-starter-kitchen-equipment', 'https://i0.wp.com/blog.suvie.com/wp-content/uploads/2020/02/spatula3.jpg?fit=500%2C375&ssl=1', 'https://www.youtube-nocookie.com/embed/5zt6_knK8Ms'),

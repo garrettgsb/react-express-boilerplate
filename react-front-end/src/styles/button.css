@@ -8,7 +8,7 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
-  
+
 }
 
 #complete-step::before {
@@ -27,4 +27,8 @@
 
 #complete-step:hover::before {
   width: 9em;
+}
+
+#complete-step.step-complete{
+  background-color: rgb(156, 105, 156);
 }

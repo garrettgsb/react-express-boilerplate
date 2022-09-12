@@ -17,18 +17,15 @@ module.exports = (db) => {
     INSERT INTO progress_tracker (users_id, resources_id)
     VALUES ($1, $2)
     `, [userId, resourceId])
-    .then((data) => {
-      res.status(200);
-    });
-
-    db.query(`
-    SELECT COUNT(resources_id) FROM progress_tracker;
-    `)
-    .then((data) => {
-      console.log("data.rows", data.rows)
-      res.send(data.rows);
-    });
+      .then(() => {
+        db.query(`
+      SELECT COUNT(resources_id) FROM progress_tracker WHERE resources_id = $1 AND users_id = $2;
+      `, [resourceId, userId])
+          .then((data) => {
+            console.log("data.rows", data.rows)
+            res.send(data.rows[0]);
+          });
+      })
   })
-
   return router;
 };
