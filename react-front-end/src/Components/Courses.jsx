@@ -21,7 +21,7 @@ export default function Courses(props) {
         console.log(err);
       })
   }, [])
-  
+
   const newDataLimit = subjects.map((category, id) => {
     return (
       <div key={id}>
@@ -48,7 +48,7 @@ export default function Courses(props) {
             </Col>
             <Col xs={10}>
               <div className='row px-0 page-description'>
-                <PageDescription />
+                <PageDescription className='page-desc' />
               </div>
               <div className='fav-categories'>
                 {newData}

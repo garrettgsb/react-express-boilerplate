@@ -22,7 +22,7 @@ export default function Steptracker(props) {
         }
 
         console.log('FROM BE', res.data[0].count)
-        
+
       })
       .catch(err => {
         console.log('err', err);

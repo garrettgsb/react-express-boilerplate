@@ -3,7 +3,9 @@ import React from 'react'
 function PageDescription() {
   return (
     <div>
-      <h2>Learn from the most inspiring artists, leaders, and icons in the world </h2>
+      <strong>
+        <h2>Knowledge shared is knowledge squared</h2>
+      </strong>
     </div>
   )
 }
