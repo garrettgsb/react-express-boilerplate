@@ -20,13 +20,9 @@ export default function Steptracker(props) {
         } else if (res.data[0].count === '7'){
           setShowAlert(true)
         }
-<<<<<<< HEAD
-        
-=======
 
         console.log('FROM BE', res.data[0].count)
 
->>>>>>> c9809d4762b036415359e209fecca7a67305ea3b
       })
       .catch(err => {
         console.log('err', err);
