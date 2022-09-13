@@ -22,8 +22,10 @@ html, body {
   background-color: #00BAF0;
   background: linear-gradient(to left, #f46b45, #eea849);
   color: #FFF;
-  height: 50px;
+  height: 70px;
   padding: 1em;
+  position: absolute;
+  top: 0;
 }
 
 .site-name{
