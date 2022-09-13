@@ -42,11 +42,10 @@ export default function CourseDetails(props) {
         <div>
         <img className='card-img-top' src={resource.photo_url} alt='' />
         </div>
-          
+
           <div>
           <a href={resource.article_url} className="article-link" target="_blank">Interested To Learn More? Click This Article</a>
           </div>
-
           <div className='video'>
             <iframe className='video2' title="myFrame" src={resource.video_url}></iframe>
           </div>
@@ -76,7 +75,6 @@ export default function CourseDetails(props) {
 
   return (
     <div className='container'>
-      <h1 className='header'>Let's Learn How to Cook!</h1>
       <div className='row'>
         {newResources}
       </div>

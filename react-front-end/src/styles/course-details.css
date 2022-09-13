@@ -72,3 +72,8 @@ div {
   z-index: 1;
   margin-left: 50px;
 }
+
+.card-img-top{
+  height: 500px;
+  width: 90%;
+}
