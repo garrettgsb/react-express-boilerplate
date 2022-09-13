@@ -1,0 +1,79 @@
+.step-and-description{
+  text-align: left;
+  top: 0;
+
+}
+
+
+.article-link {
+  /* text-decoration: none; */
+  color: #0466c8;
+  font-size: large;
+  font-weight: bolder;
+}
+
+div {
+  padding-top: 12px;
+}
+
+
+.video2 {
+  height: 25rem;
+  width: 40rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.edit-and-delete {
+  display: flex;
+  flex-direction: row;
+}
+
+.edit {
+  margin-right: 50px;
+}
+
+.edit-button {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 18px;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.delete-button {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 18px;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.create-button {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 18px;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  margin-left: 50px;
+}
+
+.card-img-top{
+  height: 500px;
+  width: 90%;
+}

@@ -1,19 +1,45 @@
-const Express = require('express');
-const App = Express();
+const express = require('express');
+const app = express();
 const BodyParser = require('body-parser');
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
+const cors = require('cors');
+// PG database client/connection setup
+const { Pool } = require('pg');
+const dbParams = require('./db.js');
+const db = new Pool(dbParams);
+db.connect();
+
 
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static('public'));
+app.use(BodyParser.urlencoded({ extended: false }));
+app.use(BodyParser.json());
+app.use(express.static('public'));
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  keys: ['polarBear', 'Hello']
+}));
+app.use(cors());
+
 
 // Sample GET route
-App.get('/api/data', (req, res) => res.json({
+app.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
-App.listen(PORT, () => {
+app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
+
+//Separated Routes for Each Resources
+const usersRoutes = require('./routes/users');
+const resourcesRoutes = require('./routes/resources');
+const subjectsRoutes = require('./routes/subjects');
+const progresstrackerRoutes = require('./routes/progresstracker');
+
+//Mount all resource routes
+app.use('/users', usersRoutes(db));
+app.use('/resources', resourcesRoutes(db));
+app.use('/subjects', subjectsRoutes(db));
+app.use('/progresstracker', progresstrackerRoutes(db));
