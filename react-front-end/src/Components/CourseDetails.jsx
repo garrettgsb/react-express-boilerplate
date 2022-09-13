@@ -34,13 +34,19 @@ export default function CourseDetails(props) {
     const pathToResourceEdit = `/edit-resource/${resource.id}`;
     return (
       <div key={resource.id} className='card col-sm-12 col-md-6 col-lg-4 p-5'>
-        <img className='card-img-top' src={resource.photo_url} alt='' />
         <div className="card-body">
-          <span className='step-and-description'>
+          <div className='step-and-description'>
             <div className='step display-4'>{resource.step_number}</div>
             <h5 className="description card-title">{resource.step_description}</h5>
-          </span>
-          <a href={resource.article_url} className="article-link" target="_blank">Click Article</a>
+          </div>
+        <div>
+        <img className='card-img-top' src={resource.photo_url} alt='' />
+        </div>
+          
+          <div>
+          <a href={resource.article_url} className="article-link" target="_blank">Interested To Learn More? Click This Article</a>
+          </div>
+
           <div className='video'>
             <iframe className='video2' title="myFrame" src={resource.video_url}></iframe>
           </div>
@@ -51,14 +57,14 @@ export default function CourseDetails(props) {
           </div>
           <div className='admin-form'>
             {props.admin &&
-              <div>
+              <div className='edit-and-delete'>
                 <div className='edit'>
                   <Link to={pathToResourceEdit}>
-                    <button className="btn btn-primary">Edit</button>
+                    <button className="edit-button">Edit</button>
                   </Link>
                 </div>
                 <div className='delete'>
-                  <button onClick={() => handleDelete(resource.id)} className="btn btn-primary">Delete</button>
+                  <button onClick={() => handleDelete(resource.id)} className="delete-button">Delete</button>
                 </div>
               </div>
             }
@@ -70,13 +76,14 @@ export default function CourseDetails(props) {
 
   return (
     <div className='container'>
+      <h1 className='header'>Let's Learn How to Cook!</h1>
       <div className='row'>
         {newResources}
       </div>
       {props.admin &&
         <div>
           <Link to='/create-course'>
-            <button type='button' className='btn btn-primary'>Add Resources</button>
+            <button type='button' className='create-button'>Add Resources</button>
           </Link>
         </div>
       }
