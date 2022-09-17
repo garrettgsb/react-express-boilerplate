@@ -14,24 +14,16 @@ if (process.env.DATABASE_URL) {
 const { Pool } = require("pg");
 const db = new Pool(dbParams);
 
-
 const testFunction = () => {
-  console.log("In test function");
-  console.log("DB:", db);
   return db
-    .query(
-      `SELECT * FROM test_users;`
-    )
+    .query(`SELECT * FROM test_users;`)
     .then((result) => {
-      console.log(result);
-      return;
+      return result.rows;
     })
     .catch((err) => console.error(err.stack));
 };
 
-console.log(dbParams);
-
 module.exports = {
-db,
-testFunction
-}
+  db,
+  testFunction,
+};
