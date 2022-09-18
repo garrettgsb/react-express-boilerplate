@@ -19,7 +19,6 @@ App.get("/api/data", (req, res) =>
   })
 );
 
-backend / database;
 // Sample GET route to test if DB connection is working
 App.get("/test", (req, res) => {
   db.testFunction().then((response) => {
