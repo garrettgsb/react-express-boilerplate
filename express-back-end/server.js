@@ -91,7 +91,15 @@ App.delete("/api/users/:id", (req, res) => {
 
 //Runs
 App.get("/api/runs", (req, res) => {
-  res.send();
+  db.getAllRuns()
+    .then((response) => {
+      const { runs } = response;
+      res.send({ runs });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
 });
 
 App.get("/api/runs/:id", (req, res) => {

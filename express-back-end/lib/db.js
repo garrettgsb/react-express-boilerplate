@@ -75,10 +75,27 @@ const createUser = ({
     .catch((err) => console.error(err.stack));
 };
 
+const getAllRuns = () => {
+  return db
+    .query(`SELECT runs.id, runs.name, runs.description, runs.location, runs.time, runs.date 
+    FROM runs
+    WHERE runs.date >= CURRENT_DATE;`)
+    .then((result) => {
+      const runs = {};
+      result.rows.forEach((row) => {
+        const id = row.id;
+        runs[id] = row;
+      });
+      return { runs };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
 module.exports = {
   db,
   testFunction,
   getAllUsers,
   getUser,
   createUser,
+  getAllRuns,
 };
