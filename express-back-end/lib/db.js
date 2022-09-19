@@ -42,7 +42,7 @@ const getUser = (id) => {
     .query(`SELECT * FROM users
     WHERE users.id = $1;`,[id])
     .then((result) => {
-      const user = result.row;
+      const user = result.rows[0];
       return { user };
     })
     .catch((err) => console.error(err.stack));

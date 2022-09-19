@@ -52,7 +52,16 @@ App.get("/api/users", (req, res) => {
 });
 
 App.get("/api/users/:id", (req, res) => {
-  res.send();
+  const { id } = req.params;
+  db.getUser(id)
+    .then((response) => {
+      const { user } = response;
+      res.send({ user });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
 });
 
 App.post("/api/users/:id", (req, res) => {
