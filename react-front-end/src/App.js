@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './App.css';
+import './index.css';
 import Profile from  './components/Profile.js'
 
 class App extends Component {
