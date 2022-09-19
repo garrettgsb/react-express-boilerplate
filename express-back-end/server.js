@@ -91,15 +91,52 @@ App.delete("/api/users/:id", (req, res) => {
 
 //Runs
 App.get("/api/runs", (req, res) => {
-  res.send();
+  db.getAllRuns()
+    .then((response) => {
+      const { runs } = response;
+      res.send({ runs });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
 });
 
 App.get("/api/runs/:id", (req, res) => {
-  res.send();
+  const { id } = req.params;
+  db.getRun(id)
+    .then((response) => {
+      const { run } = response;
+      res.send({ run });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
 });
 
-App.post("/api/runs/:id", (req, res) => {
-  res.send();
+App.post("/api/runs", (req, res) => {
+  const { name, description, location, distance, time, date, planner_id } =
+    req.body;
+
+  db.createRun({
+    name,
+    description,
+    location,
+    distance,
+    time,
+    date,
+    planner_id,
+  })
+    .then((response) => {
+      const { run } = response;
+      if (!run) res.send({ message: "Run was not created" });
+      res.send({ run });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
 });
 
 App.put("/api/runs/:id", (req, res) => {
@@ -109,6 +146,9 @@ App.put("/api/runs/:id", (req, res) => {
 App.delete("/api/runs/:id", (req, res) => {
   res.send();
 });
+
+// Users runs
+App.get("/api/runs/users/:id", (req, res) => {});
 
 //Register
 App.get("/api/register", (req, res) => {
