@@ -37,8 +37,20 @@ const getAllUsers = () => {
     .catch((err) => console.error(err.stack));
 };
 
+const getUser = (id) => {
+  return db
+    .query(`SELECT * FROM users
+    WHERE users.id = $1;`,[id])
+    .then((result) => {
+      const user = result.row;
+      return { user };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
 module.exports = {
   db,
   testFunction,
   getAllUsers,
+  getUser
 };
