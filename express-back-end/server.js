@@ -103,7 +103,16 @@ App.get("/api/runs", (req, res) => {
 });
 
 App.get("/api/runs/:id", (req, res) => {
-  res.send();
+  const { id } = req.params;
+  db.getRun(id)
+    .then((response) => {
+      const { run } = response;
+      res.send({ run });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
 });
 
 App.post("/api/runs/:id", (req, res) => {

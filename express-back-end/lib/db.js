@@ -91,6 +91,18 @@ const getAllRuns = () => {
     .catch((err) => console.error(err.stack));
 };
 
+const getRun = (id) => {
+  return db
+    .query(`SELECT runs.id, runs.name, runs.description, runs.location, runs.time, runs.date 
+    FROM runs
+    WHERE runs.id = $1;`,[id])
+    .then((result) => {
+      const run = result.rows[0];
+      return { run };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
 module.exports = {
   db,
   testFunction,
@@ -98,4 +110,5 @@ module.exports = {
   getUser,
   createUser,
   getAllRuns,
+  getRun
 };

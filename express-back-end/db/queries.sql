@@ -29,9 +29,14 @@ FROM runs
 WHERE runs.date < CURRENT_DATE; 
 
 -- Get all runs - future
-SELECT runs.name, runs.description, runs.location, runs.time, runs.date 
+SELECT runs.id, runs.name, runs.description, runs.location, runs.time, runs.date 
 FROM runs
 WHERE runs.date >= CURRENT_DATE; 
+
+-- Get specific run based on id
+SELECT runs.id, runs.name, runs.description, runs.location, runs.time, runs.date 
+FROM runs
+WHERE runs.id = 1; 
 
 -- Get all runs for a specific planner
 SELECT users.id AS user_id, runs.name, runs.description, runs.location,
