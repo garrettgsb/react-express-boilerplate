@@ -23,7 +23,22 @@ const testFunction = () => {
     .catch((err) => console.error(err.stack));
 };
 
+const getAllUsers = () => {
+  return db
+    .query(`SELECT * FROM users;`)
+    .then((result) => {
+      const users = {};
+      result.rows.forEach((row) => {
+        const id = row.id;
+        users[id] = row;
+      });
+      return { users };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
 module.exports = {
   db,
   testFunction,
+  getAllUsers,
 };

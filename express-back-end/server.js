@@ -40,7 +40,15 @@ App.get("/", (req, res) => {
 
 //Users
 App.get("/api/users", (req, res) => {
-  res.send();
+  db.getAllUsers()
+    .then((response) => {
+      const { users } = response;
+      res.send({ users });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
 });
 
 App.get("/api/users/:id", (req, res) => {
