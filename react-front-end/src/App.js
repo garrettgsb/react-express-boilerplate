@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import TopBar from "./components/TopBar";
 import axios from "axios";
-import "./App.css";
+import "./App.scss";
 
 function App(props) {
   const [message, setMessage] = useState("");
@@ -19,6 +20,7 @@ function App(props) {
 
   return (
     <div className="App">
+      <TopBar />
       <h1>{message}</h1>
       <button onClick={fetchData}>Fetch Data</button>
     </div>
