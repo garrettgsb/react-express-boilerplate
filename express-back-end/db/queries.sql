@@ -56,3 +56,7 @@ FROM runs
 JOIN users_runs ON runs.id = users_runs.run_id
 JOIN users ON users_runs.runner_id = users.id
 WHERE users_runs.runner_id = 3;
+
+-- Create a run
+INSERT INTO runs (name, description, location, distance, time, date, planner_id)
+VALUES ('Aberfoyle Park','Great running space full of trees.','212, Aberfoyle St., Aberfoyle, ON, L8T 8T5',5,'10:00:00','2022-05-23',1);
