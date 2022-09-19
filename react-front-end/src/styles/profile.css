@@ -12,7 +12,7 @@ main {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 10%;
+  padding: 5%;
   border: 2px solid black;
   margin-top: 10%;
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './index.css';
-import Profile from  './components/Profile.js'
+import Profile from  './components/Profile.js';
+import Nav from './components/Nav.js';
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +27,10 @@ class App extends Component {
 
   render() {
     return (
-     <Profile />
+      <div>
+        <Nav />
+        <Profile />
+      </div>
     );
   }
 }
