@@ -20,7 +20,7 @@ VALUES ('Jane Doe','jane@jane.com','password','111-111-1111','F',21,TRUE,TRUE);
 
 -- READ runs
 -- Get all runs - past and future
-SELECT runs.name, runs.description, runs.location, runs.time, runs.date 
+SELECT runs.id, runs.name, runs.description, runs.location, runs.time, runs.date, runs.planner_id 
 FROM runs;  
 
 -- Get all runs - past
@@ -39,10 +39,10 @@ FROM runs
 WHERE runs.id = 1; 
 
 -- Get all runs for a specific planner
-SELECT users.id AS user_id, runs.name, runs.description, runs.location,
+SELECT runs.id, users.id AS planner_id, runs.name, runs.description, runs.location,
       (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
             ELSE FALSE
-       END) AS future_runs
+       END) AS future_run
 FROM runs
 JOIN users ON runs.planner_id = users.id
 WHERE runs.planner_id = 1;
@@ -51,11 +51,28 @@ WHERE runs.planner_id = 1;
 SELECT users.id AS user_id, runs.name, runs.description, runs.distance, runs.date, users_runs.time, users_runs.rating, 
       (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
             ELSE FALSE
-       END) AS future_runs
+       END) AS future_run
 FROM runs
 JOIN users_runs ON runs.id = users_runs.run_id
 JOIN users ON users_runs.runner_id = users.id
-WHERE users_runs.runner_id = 3;
+WHERE users_runs.runner_id = 1;
+
+-- Get all runs for a specific user - planned or participated in
+SELECT users.id AS user_id, runs.id AS run_id, runs.name, runs.description, runs.distance, runs.date, users_runs.time, users_runs.rating, 
+      (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
+            ELSE FALSE
+       END) AS future_run,
+      (CASE WHEN (users.planner = TRUE AND users.runner = TRUE AND users.id = runs.planner_id AND users_runs.runner_id = users.id) THEN 'B'
+            WHEN (users.planner = TRUE AND users.runner = FALSE AND users.id = runs.planner_id) THEN 'P'
+            WHEN (users.planner = TRUE AND users.runner = TRUE AND users_runs.runner_id = users.id) THEN 'R'
+            WHEN (users.planner = FALSE AND users.runner = TRUE AND users_runs.runner_id = users.id) THEN 'R'
+            ELSE 'NA'
+       END) AS planned_run_both
+FROM users
+FULL OUTER JOIN runs ON users.id = runs.planner_id
+FULL OUTER JOIN users_runs ON users.id = users_runs.runner_id
+GROUP BY users.id, runs.id, users_runs.id
+ORDER BY users.id;
 
 -- Create a run
 INSERT INTO runs (name, description, location, distance, time, date, planner_id)

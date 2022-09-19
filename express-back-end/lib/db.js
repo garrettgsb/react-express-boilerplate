@@ -131,6 +131,23 @@ const createRun = ({
     .catch((err) => console.error(err.stack));
 };
 
+const getRunsForUser = (id) => {
+  return db
+    .query(
+      ``,
+      [id]
+    )
+    .then((result) => {
+      const runs = {};
+      result.rows.forEach((row) => {
+        const id = row.id;
+        runs[id] = row;
+      });
+      return { runs };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
 module.exports = {
   db,
   testFunction,
@@ -139,5 +156,6 @@ module.exports = {
   createUser,
   getAllRuns,
   getRun,
-  createRun
+  createRun,
+  getRunsForUser,
 };
