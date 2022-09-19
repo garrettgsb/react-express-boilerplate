@@ -1,3 +1,6 @@
+-- Reset database 
+-- \i db/schema.sql 
+-- \i db/seeds.sql 
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS runs CASCADE;
 DROP TABLE IF EXISTS users_runs CASCADE;
@@ -30,5 +33,5 @@ CREATE TABLE users_runs (
   time VARCHAR(255) NOT NULL,
   rating INTEGER,
   runner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  run_id INTEGER REFERENCES runs(id) ON DELETE CASCADE,
+  run_id INTEGER REFERENCES runs(id) ON DELETE CASCADE
 );

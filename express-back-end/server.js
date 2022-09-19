@@ -19,76 +19,105 @@ App.get("/api/data", (req, res) =>
   })
 );
 
- backend/database
 // Sample GET route to test if DB connection is working
 App.get("/test", (req, res) => {
   db.testFunction().then((response) => {
     res.send({ response });
   });
+});
 
 // Sample GET route
-App.get('/api/test', (req, res) =>  {
-  res.send({data: "This is working!!!"});
+App.get("/api/test", (req, res) => {
+  res.send({ data: "This is working!!!" });
 });
 
 //Routes
 
 //Home
-App.get('/', (req, res) => {
+App.get("/", (req, res) => {
   res.send();
 });
 
 //Users
-App.get('/api/users', (req, res) => {
+App.get("/api/users", (req, res) => {
+  db.getAllUsers()
+    .then((response) => {
+      const { users } = response;
+      res.send({ users });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
+App.get("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+  db.getUser(id)
+    .then((response) => {
+      const { user } = response;
+      if (!user) res.send({ message: "User was not found" });
+      res.send({ user });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
+App.post("/api/users", (req, res) => {
+  const { name, email, password, phone, gender, age, planner, runner } =
+    req.body;
+
+  db.createUser({ name, email, password, phone, gender, age, planner, runner })
+    .then((response) => {
+      const { user } = response;
+      if (!user) res.send({ message: "User was not created" });
+      res.send({ user });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
+App.put("/api/users/:id", (req, res) => {
   res.send();
 });
 
-App.get('/api/users/:id', (req, res) => {
-  res.send();
-});
-
-App.post('/api/users/:id', (req, res) => {
-  res.send();
-});
-
-App.put('/api/users/:id', (req, res) => {
-  res.send();
-});
-
-App.delete('/api/users/:id', (req, res) => {
+App.delete("/api/users/:id", (req, res) => {
   res.send();
 });
 
 //Runs
-App.get('/api/runs', (req, res) => {
+App.get("/api/runs", (req, res) => {
   res.send();
 });
 
-App.get('/api/runs/:id', (req, res) => {
+App.get("/api/runs/:id", (req, res) => {
   res.send();
 });
 
-App.post('/api/runs/:id', (req, res) => {
+App.post("/api/runs/:id", (req, res) => {
   res.send();
 });
 
-App.put('/api/runs/:id', (req, res) => {
+App.put("/api/runs/:id", (req, res) => {
   res.send();
 });
 
-App.delete('/api/runs/:id', (req, res) => {
+App.delete("/api/runs/:id", (req, res) => {
   res.send();
 });
 
 //Register
-App.get('/api/register', (req, res) => {
+App.get("/api/register", (req, res) => {
   res.send();
 });
 
 //Redirect
-App.get('/api/redirect', (req, res) => {
+App.get("/api/redirect", (req, res) => {
   res.send();
-
 });
 
 App.listen(PORT, () => {
