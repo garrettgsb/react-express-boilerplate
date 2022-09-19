@@ -14,6 +14,10 @@ WHERE users.runner = TRUE;
 SELECT * FROM users 
 WHERE users.planner = TRUE;
 
+-- Create a new user
+INSERT INTO users (name, email, password, phone, gender, age, planner, runner)
+VALUES ('Jane Doe','jane@jane.com','password','111-111-1111','F',21,TRUE,TRUE);
+
 -- READ runs
 -- Get all runs - past and future
 SELECT runs.name, runs.description, runs.location, runs.time, runs.date 
