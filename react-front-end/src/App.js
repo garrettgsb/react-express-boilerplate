@@ -3,6 +3,11 @@ import { useState } from "react";
 import TopBar from "./components/TopBar";
 import axios from "axios";
 import "./App.scss";
+import Home from "./Home";
+import Homes_Rent from "./Homes_Rent";
+import Sell from "./Sell";
+import Homes_Sale from "./Homes_Sale";
+import { Route, Link, Routes } from "react-router-dom";
 
 function App(props) {
   const [message, setMessage] = useState("");
@@ -23,6 +28,12 @@ function App(props) {
       <TopBar />
       <h1>{message}</h1>
       <button onClick={fetchData}>Fetch Data</button>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/homes_rent" element={<Homes_Rent />} />
+        <Route path="/homes_sale" element={<Homes_Sale />} />
+        <Route path="/sell" element={<Sell />} />
+      </Routes>
     </div>
   );
 }
