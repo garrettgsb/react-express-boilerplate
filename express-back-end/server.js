@@ -79,7 +79,8 @@ App.post("/api/users", (req, res) => {
   const { name, email, password, phone, gender, age, planner, runner } =
     req.body;
 
-  db.createUser({ name, email, password, phone, gender, age, planner, runner })
+  const hashedPassword = Bcrypt.hashSync(password, 10);
+  db.createUser({ name, email, hashedPassword, phone, gender, age, planner, runner })
     .then((response) => {
       const { user } = response;
       if (!user) res.send({ message: "User was not created" });
@@ -105,8 +106,8 @@ App.post("/api/login", (req, res) => {
 
   db.getUserByEmail({ email })
     .then(({ user }) => {
+      console.log(user);
       if (Bcrypt.compareSync(password, user.password)) {
-        console.log("Logged in!!!");
         req.session.user = user;
         res.send({ user });
         return;

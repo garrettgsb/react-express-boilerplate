@@ -54,7 +54,7 @@ const getUser = (id) => {
 const createUser = ({
   name,
   email,
-  password,
+  hashedPassword,
   phone,
   gender,
   age,
@@ -66,7 +66,7 @@ const createUser = ({
       `INSERT INTO users (name, email, password, phone, gender, age, planner, runner)
     VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
     RETURNING *;`,
-      [name, email, password, phone, gender, age, planner, runner]
+      [name, email, hashedPassword, phone, gender, age, planner, runner]
     )
     .then((result) => {
       const user = result.rows[0];
