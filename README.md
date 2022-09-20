@@ -36,11 +36,13 @@ And don't forget to update the README!
 
 You might want to look at examples of projects that have used this boilerplate for hints on how to extend it. Here are a few:
 
-* [Later Cart](https://github.com/bonitac/later-cart)
-* [Buddi.io](https://github.com/Danny-Tran/buddi.io)
+- [Later Cart](https://github.com/bonitac/later-cart)
+- [Buddi.io](https://github.com/Danny-Tran/buddi.io)
 
 If you'd like your project added to the list, please shoot me a message.
 
 ## Contact
 
 Please contact me on Slack (@garrettgsb) or Nima at `nima@lighthouselabs.com` if you have any questions, requests, or feedback, or post an issue to this repo. If you are using the boilerplate, I'd love to hear from you as well!
+
+.
