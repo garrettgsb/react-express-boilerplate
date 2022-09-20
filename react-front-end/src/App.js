@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import TopBar from "./components/TopBar";
+import CardItem from "./components/CardItem";
+import Banner from "./components/Banner";
 import axios from "axios";
 import "./App.scss";
 
@@ -21,8 +23,10 @@ function App(props) {
   return (
     <div className="App">
       <TopBar />
+      <Banner />
       <h1>{message}</h1>
       <button onClick={fetchData}>Fetch Data</button>
+      <CardItem />
     </div>
   );
 }
