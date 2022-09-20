@@ -178,6 +178,21 @@ const getRunsForRunner = (id) => {
     .catch((err) => console.error(err.stack));
 };
 
+const joinARun = (runner_id, run_id) => {
+  return db
+    .query(
+      `INSERT INTO users_runs (time, rating, runner_id, run_id)
+      VALUES ('00:00:00', 0, $1, $2)
+      RETURNING *;`,
+      [runner_id, run_id]
+    )
+    .then((result) => {
+      const run = result.rows[0];
+      return { run };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
 module.exports = {
   db,
   testFunction,
@@ -188,5 +203,6 @@ module.exports = {
   getRun,
   createRun,
   getRunsForPlanner,
-  getRunsForRunner
+  getRunsForRunner,
+  joinARun
 };
