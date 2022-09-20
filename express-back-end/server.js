@@ -148,7 +148,35 @@ App.delete("/api/runs/:id", (req, res) => {
 });
 
 // Users runs
-App.get("/api/runs/users/:id", (req, res) => {});
+// Runner
+App.get("/api/runs/runner/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.getRunsForRunner(id)
+    .then((response) => {
+      const { runs } = response;
+      res.send({ runs });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
+// Planner
+App.get("/api/runs/planner/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.getRunsForPlanner(id)
+    .then((response) => {
+      const { runs } = response;
+      res.send({ runs });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
 
 //Register
 App.get("/api/register", (req, res) => {
