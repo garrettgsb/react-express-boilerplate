@@ -9,7 +9,9 @@
     "go": "nodemon server.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "cookie-session": "^2.0.0",
     "dotenv": "^16.0.2",
     "express": "^4.16.4",
     "nodemon": "^1.18.7",

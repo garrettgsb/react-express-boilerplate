@@ -54,7 +54,7 @@ const getUser = (id) => {
 const createUser = ({
   name,
   email,
-  password,
+  hashedPassword,
   phone,
   gender,
   age,
@@ -66,7 +66,21 @@ const createUser = ({
       `INSERT INTO users (name, email, password, phone, gender, age, planner, runner)
     VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
     RETURNING *;`,
-      [name, email, password, phone, gender, age, planner, runner]
+      [name, email, hashedPassword, phone, gender, age, planner, runner]
+    )
+    .then((result) => {
+      const user = result.rows[0];
+      return { user };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
+const getUserByEmail = ({ email }) => {
+  return db
+    .query(
+      `SELECT * FROM users
+      WHERE users.email = $1;`,
+      [email]
     )
     .then((result) => {
       const user = result.rows[0];
@@ -131,10 +145,16 @@ const createRun = ({
     .catch((err) => console.error(err.stack));
 };
 
-const getRunsForUser = (id) => {
+const getRunsForPlanner = (id) => {
   return db
     .query(
-      ``,
+      `SELECT runs.id, users.id AS planner_id, runs.name, runs.description, runs.distance, runs.date,
+        (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
+            ELSE FALSE
+        END) AS future_run
+      FROM runs
+      JOIN users ON runs.planner_id = users.id
+      WHERE runs.planner_id = $1;`,
       [id]
     )
     .then((result) => {
@@ -148,6 +168,60 @@ const getRunsForUser = (id) => {
     .catch((err) => console.error(err.stack));
 };
 
+const getRunsForRunner = (id) => {
+  return db
+    .query(
+      `SELECT runs.id, users.id AS user_id, runs.name, runs.description, runs.distance, runs.date, users_runs.time, users_runs.rating, 
+      (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
+            ELSE FALSE
+       END) AS future_run
+      FROM runs
+      JOIN users_runs ON runs.id = users_runs.run_id
+      JOIN users ON users_runs.runner_id = users.id
+      WHERE users_runs.runner_id = $1;`,
+      [id]
+    )
+    .then((result) => {
+      const runs = {};
+      result.rows.forEach((row) => {
+        const id = row.id;
+        runs[id] = row;
+      });
+      return { runs };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
+const registerForARun = ({runner_id, run_id}) => {
+  return db
+    .query(
+      `INSERT INTO users_runs (time, rating, runner_id, run_id)
+      SELECT '00:00:00', 0, $1, $2
+      WHERE
+      EXISTS (
+            -- only future runs can be joined
+        SELECT *
+        FROM runs
+        WHERE runs.id = $2 AND runs.date >= CURRENT_DATE
+        LIMIT 1
+      ) AND 
+      NOT EXISTS (
+            -- runs can only be joined once
+        SELECT *
+        FROM users_runs
+        WHERE users_runs.run_id = $2 AND users_runs.runner_id = $1
+        LIMIT 1    
+      )
+      RETURNING *;`,
+      [runner_id, run_id]
+    )
+    .then((result) => {
+      const user_run = result.rows[0];
+      return { user_run };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
 module.exports = {
   db,
   testFunction,
@@ -157,5 +231,8 @@ module.exports = {
   getAllRuns,
   getRun,
   createRun,
-  getRunsForUser,
+  getRunsForPlanner,
+  getRunsForRunner,
+  registerForARun,
+  getUserByEmail
 };

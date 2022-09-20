@@ -2,12 +2,22 @@ require("dotenv").config();
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
+const Bcrypt = require("bcryptjs");
+const CookieSession = require("cookie-session");
+
 const PORT = 8080;
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static("public"));
+App.use(
+  CookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+    maxAge: 30 * 60 * 1000, // 30 minutes session
+  })
+);
 
 // Import db
 const db = require("./lib/db");
@@ -69,7 +79,8 @@ App.post("/api/users", (req, res) => {
   const { name, email, password, phone, gender, age, planner, runner } =
     req.body;
 
-  db.createUser({ name, email, password, phone, gender, age, planner, runner })
+  const hashedPassword = Bcrypt.hashSync(password, 10);
+  db.createUser({ name, email, hashedPassword, phone, gender, age, planner, runner })
     .then((response) => {
       const { user } = response;
       if (!user) res.send({ message: "User was not created" });
@@ -87,6 +98,28 @@ App.put("/api/users/:id", (req, res) => {
 
 App.delete("/api/users/:id", (req, res) => {
   res.send();
+});
+
+// User login
+App.post("/api/login", (req, res) => {
+  const { email, password } = req.body;
+
+  db.getUserByEmail({ email })
+    .then(({ user }) => {
+      if (Bcrypt.compareSync(password, user.password)) {
+        req.session.user = user;
+        res.send({ user });
+        return;
+      }
+      res.send({ message: "User not found." });
+    })
+    .catch((e) => res.send(e));
+});
+
+// User logout
+App.post("/api/logout", (req, res) => {
+  req.session.user = null;
+  res.send({ user: null });
 });
 
 //Runs
@@ -148,11 +181,56 @@ App.delete("/api/runs/:id", (req, res) => {
 });
 
 // Users runs
-App.get("/api/runs/users/:id", (req, res) => {});
+// Runner
+App.get("/api/runs/runner/:id", (req, res) => {
+  const { id } = req.params;
 
-//Register
-App.get("/api/register", (req, res) => {
-  res.send();
+  db.getRunsForRunner(id)
+    .then((response) => {
+      const { runs } = response;
+      res.send({ runs });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
+// Planner
+App.get("/api/runs/planner/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.getRunsForPlanner(id)
+    .then((response) => {
+      const { runs } = response;
+      res.send({ runs });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
+// Register for a run
+App.post("/api/register", (req, res) => {
+  const { runner_id, run_id } = req.body;
+
+  db.registerForARun({ runner_id, run_id })
+    .then((response) => {
+      const { user_run } = response;
+
+      if (!user_run)
+        return res.send({
+          message:
+            "You could not be registered for a run. This event was in the past or you are already registers for this run.",
+        });
+
+      res.send({ user_run });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
 });
 
 //Redirect
