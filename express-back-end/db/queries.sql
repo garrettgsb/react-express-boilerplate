@@ -1,4 +1,4 @@
--- READ users
+-- users
 -- Get all users
 SELECT * FROM users;
 
@@ -18,7 +18,9 @@ WHERE users.planner = TRUE;
 INSERT INTO users (name, email, password, phone, gender, age, planner, runner)
 VALUES ('Jane Doe','jane@jane.com','password','111-111-1111','F',21,TRUE,TRUE);
 
--- READ runs
+
+
+-- runs
 -- Get all runs - past and future
 SELECT runs.id, runs.name, runs.description, runs.location, runs.time, runs.date, runs.planner_id 
 FROM runs;  
@@ -47,16 +49,6 @@ FROM runs
 JOIN users ON runs.planner_id = users.id
 WHERE runs.planner_id = 1;
 
--- Get all runs for a specific runner
-SELECT runs.id, users.id AS user_id, runs.name, runs.description, runs.distance, runs.date, users_runs.time, users_runs.rating, 
-      (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
-            ELSE FALSE
-       END) AS future_run
-FROM runs
-JOIN users_runs ON runs.id = users_runs.run_id
-JOIN users ON users_runs.runner_id = users.id
-WHERE users_runs.runner_id = 1;
-
 -- Get all runs for a specific user - planned or participated in NOT FINISHED SO FAR
 -- SELECT users.id AS user_id, runs.id AS run_id, runs.name, runs.description, runs.distance, runs.date, users_runs.time, users_runs.rating, 
 --       (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
@@ -77,3 +69,16 @@ WHERE users_runs.runner_id = 1;
 -- Create a run
 INSERT INTO runs (name, description, location, distance, time, date, planner_id)
 VALUES ('Aberfoyle Park','Great running space full of trees.','212, Aberfoyle St., Aberfoyle, ON, L8T 8T5',5,'10:00:00','2022-05-23',1);
+
+
+
+-- users_runs
+-- Get all runs for a specific runner
+SELECT runs.id, users.id AS user_id, runs.name, runs.description, runs.distance, runs.date, users_runs.time, users_runs.rating, 
+      (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
+            ELSE FALSE
+       END) AS future_run
+FROM users_runs
+JOIN runs ON runs.id = users_runs.run_id
+JOIN users ON users_runs.runner_id = users.id
+WHERE users_runs.runner_id = 1;
