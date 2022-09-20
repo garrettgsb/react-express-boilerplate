@@ -14,7 +14,7 @@ const TopBar = () => {
       className="justify-content-center"
     >
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <FaHome /> Home Finder
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -22,7 +22,7 @@ const TopBar = () => {
           <Nav className="me-auto">
             <Nav.Link href="/homes_sale">Buy</Nav.Link>
             <Nav.Link href="/homes_rent">Rent</Nav.Link>
-            <Nav.Link href="#/sell">Sell</Nav.Link>
+            <Nav.Link href="/sell">Sell</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

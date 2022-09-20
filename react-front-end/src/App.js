@@ -1,14 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import TopBar from "./components/TopBar";
-import CardItem from "./components/CardItem";
-import Banner from "./components/Banner";
 import axios from "axios";
 import "./App.scss";
-import Home from "./Home";
-import Homes_Rent from "./Homes_Rent";
-import Sell from "./Sell";
-import Homes_Sale from "./Homes_Sale";
+import Home from "./components/Home";
+import Homes_Rent from "./components/Homes_Rent";
+import Sell from "./components/Sell";
+import Homes_Sale from "./components/Homes_Sale";
 import { Route, Link, Routes } from "react-router-dom";
 
 function App(props) {
@@ -28,6 +26,7 @@ function App(props) {
   return (
     <div className="App">
       <TopBar />
+      // can take this out later
       <h1>{message}</h1>
       <button onClick={fetchData}>Fetch Data</button>
       <Routes>
