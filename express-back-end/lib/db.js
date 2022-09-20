@@ -131,10 +131,40 @@ const createRun = ({
     .catch((err) => console.error(err.stack));
 };
 
-const getRunsForUser = (id) => {
+const getRunsForPlanner = (id) => {
   return db
     .query(
-      ``,
+      `SELECT runs.id, users.id AS planner_id, runs.name, runs.description, runs.distance, runs.date,
+        (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
+            ELSE FALSE
+        END) AS future_run
+      FROM runs
+      JOIN users ON runs.planner_id = users.id
+      WHERE runs.planner_id = $1;`,
+      [id]
+    )
+    .then((result) => {
+      const runs = {};
+      result.rows.forEach((row) => {
+        const id = row.id;
+        runs[id] = row;
+      });
+      return { runs };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
+const getRunsForRunner = (id) => {
+  return db
+    .query(
+      `SELECT runs.id, users.id AS user_id, runs.name, runs.description, runs.distance, runs.date, users_runs.time, users_runs.rating, 
+      (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
+            ELSE FALSE
+       END) AS future_run
+      FROM runs
+      JOIN users_runs ON runs.id = users_runs.run_id
+      JOIN users ON users_runs.runner_id = users.id
+      WHERE users_runs.runner_id = $1;`,
       [id]
     )
     .then((result) => {
@@ -157,5 +187,6 @@ module.exports = {
   getAllRuns,
   getRun,
   createRun,
-  getRunsForUser,
+  getRunsForPlanner,
+  getRunsForRunner
 };
