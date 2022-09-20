@@ -178,17 +178,32 @@ const getRunsForRunner = (id) => {
     .catch((err) => console.error(err.stack));
 };
 
-const joinARun = (runner_id, run_id) => {
+const joinARun = ({runner_id, run_id}) => {
   return db
     .query(
       `INSERT INTO users_runs (time, rating, runner_id, run_id)
-      VALUES ('00:00:00', 0, $1, $2)
+      SELECT '00:00:00', 0, $1, $2
+      WHERE
+      EXISTS (
+            -- only future runs can be joined
+        SELECT *
+        FROM runs
+        WHERE runs.id = $2 AND runs.date >= CURRENT_DATE
+        LIMIT 1
+      ) AND 
+      NOT EXISTS (
+            -- runs can only be joined once
+        SELECT *
+        FROM users_runs
+        WHERE users_runs.run_id = $2 AND users_runs.runner_id = $1
+        LIMIT 1    
+      )
       RETURNING *;`,
       [runner_id, run_id]
     )
     .then((result) => {
-      const run = result.rows[0];
-      return { run };
+      const user_run = result.rows[0];
+      return { user_run };
     })
     .catch((err) => console.error(err.stack));
 };

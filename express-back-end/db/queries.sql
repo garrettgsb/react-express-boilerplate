@@ -83,6 +83,23 @@ JOIN runs ON runs.id = users_runs.run_id
 JOIN users ON users_runs.runner_id = users.id
 WHERE users_runs.runner_id = 1;
 
--- Join a run
+-- Join a run - only future runs
 INSERT INTO users_runs (time, rating, runner_id, run_id)
-VALUES ('00:00:00', 0, 1, 1);
+      SELECT '00:00:00', 0, 1, 4
+      WHERE
+      EXISTS (
+            -- only future runs can be joined
+        SELECT *
+        FROM runs
+        WHERE runs.id = 4 AND runs.date >= CURRENT_DATE
+        LIMIT 1
+      ) AND 
+      NOT EXISTS (
+            -- runs can only be joined once
+        SELECT *
+        FROM users_runs
+        WHERE users_runs.run_id = 4 AND users_runs.runner_id = 1
+        LIMIT 1    
+      )
+      RETURNING *;
+

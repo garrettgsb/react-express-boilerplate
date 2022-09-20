@@ -178,6 +178,28 @@ App.get("/api/runs/planner/:id", (req, res) => {
     });
 });
 
+// Join a run
+App.post("/api/runs/runner", (req, res) => {
+  const { runner_id, run_id } = req.body;
+
+  db.joinARun({ runner_id, run_id })
+    .then((response) => {
+      const { user_run } = response;
+
+      if (!user_run)
+        return res.send({
+          message:
+            "Run could not be joined. This event was in the past or you are already registers for this run.",
+        });
+
+      res.send({ user_run });
+    })
+    .catch((e) => {
+      console.error(e);
+      res.send(e);
+    });
+});
+
 //Register
 App.get("/api/register", (req, res) => {
   res.send();

@@ -10,7 +10,8 @@ INSERT INTO runs (name, description, location, distance, time, date, planner_id)
 VALUES ('Aberfoyle Park','Great running space full of trees.','212, Aberfoyle St., Aberfoyle, ON, L8T 8T5',5,'10:00:00','2022-05-23',1),
 ('Seaside Park','Beautiful view of the sea.','213, Seaside St., Seaside, BC, K8L 8Y5',5,'10:00:00','2022-12-23',1),
 ('Mountain Park','See mountains while you run.','412, Mountain St., Mountain, AB, O5Y 8F7',5,'09:00:00','2022-08-12',3),
-('Hidden Park','Quaint area far from the city hustle and bustle.','432, Hidden St., Hidden, QC, W4R 5T8',5,'08:00:00','2022-11-10',3);
+('Hidden Park','Quaint area far from the city hustle and bustle.','432, Hidden St., Hidden, QC, W4R 5T8',5,'08:00:00','2022-11-10',3),
+('New Park','New surroundings','432, New St., New, QC, W4R 5T8',5,'08:00:00','2022-8-10',3);
 
 
 -- users_runs
