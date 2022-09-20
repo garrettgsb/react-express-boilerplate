@@ -192,7 +192,7 @@ const getRunsForRunner = (id) => {
     .catch((err) => console.error(err.stack));
 };
 
-const joinARun = ({runner_id, run_id}) => {
+const registerForARun = ({runner_id, run_id}) => {
   return db
     .query(
       `INSERT INTO users_runs (time, rating, runner_id, run_id)
@@ -233,6 +233,6 @@ module.exports = {
   createRun,
   getRunsForPlanner,
   getRunsForRunner,
-  joinARun,
+  registerForARun,
   getUserByEmail
 };
