@@ -75,6 +75,20 @@ const createUser = ({
     .catch((err) => console.error(err.stack));
 };
 
+const getUserByEmail = ({ email }) => {
+  return db
+    .query(
+      `SELECT * FROM users
+      WHERE users.email = $1;`,
+      [email]
+    )
+    .then((result) => {
+      const user = result.rows[0];
+      return { user };
+    })
+    .catch((err) => console.error(err.stack));
+};
+
 const getAllRuns = () => {
   return db
     .query(
@@ -219,5 +233,6 @@ module.exports = {
   createRun,
   getRunsForPlanner,
   getRunsForRunner,
-  joinARun
+  joinARun,
+  getUserByEmail
 };
