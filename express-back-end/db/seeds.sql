@@ -1,9 +1,9 @@
 -- users
 INSERT INTO users (name, email, password, phone, gender, age, planner, runner)
-VALUES ('Jane Doe','jane@jane.com','password','111-111-1111','F',21,TRUE,TRUE),
-('John Doe','john@john.com','password','222-222-2222','M',22,FALSE,TRUE),
-('Bob Roberts','bob@bob.com','password','333-333-3333','M',23,TRUE,FALSE),
-('Lilly Smith','lilly@lilly.com','password','444-444-4444','F',24,FALSE,TRUE);
+VALUES ('Jane Doe','jane@jane.com','$2a$10$r9wYh1lcViQBfeIF13wUs.JSD7jdk.l0XLlBdySc.3FW/Z8dM2Z2e','111-111-1111','F',21,TRUE,TRUE),
+('John Doe','john@john.com','$2a$10$r9wYh1lcViQBfeIF13wUs.JSD7jdk.l0XLlBdySc.3FW/Z8dM2Z2e','222-222-2222','M',22,FALSE,TRUE),
+('Bob Roberts','bob@bob.com','$2a$10$r9wYh1lcViQBfeIF13wUs.JSD7jdk.l0XLlBdySc.3FW/Z8dM2Z2e','333-333-3333','M',23,TRUE,FALSE),
+('Lilly Smith','lilly@lilly.com','$2a$10$r9wYh1lcViQBfeIF13wUs.JSD7jdk.l0XLlBdySc.3FW/Z8dM2Z2e','444-444-4444','F',24,FALSE,TRUE);
 
 -- runs
 INSERT INTO runs (name, description, location, distance, time, date, planner_id)

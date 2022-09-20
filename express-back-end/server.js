@@ -2,12 +2,22 @@ require("dotenv").config();
 const Express = require("express");
 const App = Express();
 const BodyParser = require("body-parser");
+const Bcrypt = require("bcryptjs");
+const CookieSession = require("cookie-session");
+
 const PORT = 8080;
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static("public"));
+App.use(
+  CookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+    maxAge: 30 * 60 * 1000, // 30 minutes session
+  })
+);
 
 // Import db
 const db = require("./lib/db");
@@ -89,6 +99,28 @@ App.delete("/api/users/:id", (req, res) => {
   res.send();
 });
 
+// User login
+App.post("/api/login", (req, res) => {
+  const { email, password } = req.body;
+
+  db.getUserByEmail({ email })
+    .then(({ user }) => {
+      if (Bcrypt.compareSync(password, user.password)) {
+        console.log("Logged in!!!");
+        req.session.user = user;
+        res.send({ user });
+        return;
+      }
+      res.send({ message: "User not found." });
+    })
+    .catch((e) => res.send(e));
+});
+
+// User logout
+App.post("/api/logout", (req, res) => {
+  req.session.user = null;
+  res.send({ user: null });
+});
 
 //Runs
 App.get("/api/runs", (req, res) => {
