@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Profile(props) {
+
+  const [user, setUser] = useState([
+    { id: 1, firstName: 'fake', lastName: 'user', email: 'fake.user@test.ca', role: 'runner', runs: 3},
+    { id: 2, firstName: 'also', lastName: 'fake', email:'also.fake@test.ca', role: 'planner', runs: 5}
+  ]);
+
+  const userTable =  
+      <table className="user-stats">
+        <tbody>
+          {user && user.map(u =>
+        <tr key={u.id}>
+          <td>{u.firstName} {u.lastName} {u.email} </td>
+          <td>{u.runs} runs</td>
+        </tr>)}
+        </tbody>
+      </table>
+  
+
 
   const profilePicture = 
   <img class="profile-pic" src="https://cdn-icons-png.flaticon.com/512/2335/2335153.png"
@@ -19,6 +37,7 @@ export default function Profile(props) {
      
      <section className="profile-stats">
       <h1>Runs</h1>
+      {userTable}
       
      </section>
    </main>
