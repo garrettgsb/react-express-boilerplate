@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import TopBar from "./components/TopBar";
+import CardItem from "./components/CardItem";
+import Banner from "./components/Banner";
 import axios from "axios";
 import "./App.scss";
 import Home from "./Home";

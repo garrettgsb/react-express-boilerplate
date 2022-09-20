@@ -1,3 +1,17 @@
+$primary: #003249;
+$secondary: #5e503f;
+$light: #ccdbdc;
+$warning: #cb997e;
+$dark: #22333b;
+
+$theme-colors: (
+  primary: $primary,
+  secondary: $secondary,
+  warning: $warning,
+  light: $light,
+  dark: $dark,
+);
+
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 .App {
   text-align: center;
