@@ -9,6 +9,7 @@
     "react": "^16.8.6",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^16.8.6",
+    "react-icons": "^4.4.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
@@ -26,6 +27,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8080",
-  "devDependencies": {}
+  "proxy": "http://localhost:8080"
 }
