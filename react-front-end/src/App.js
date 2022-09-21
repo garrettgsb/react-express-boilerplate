@@ -87,9 +87,6 @@ function App(props) {
   return (
     <div className="App">
       <TopBar />
-      // can take this out later
-      <h1>{message}</h1>
-      <button onClick={fetchData}>Fetch Data</button>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/homes_rent" element={<HomesRent />} />
