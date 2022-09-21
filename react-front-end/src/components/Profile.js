@@ -1,22 +1,31 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import AppData from "../hooks/useAppData";
 
 export default function Profile(props) {
 
-  const [user, setUser] = useState([
-    { id: 1, firstName: 'fake', lastName: 'user', email: 'fake.user@test.ca', role: 'runner', runs: 3},
-    { id: 2, firstName: 'also', lastName: 'fake', email:'also.fake@test.ca', role: 'planner', runs: 5}
-  ]);
+   const { state } = AppData;
 
-  const userTable =  
-      <table className="user-stats">
-        <tbody>
-          {user && user.map(u =>
-        <tr key={u.id}>
-          <td>{u.firstName} {u.lastName} {u.email} </td>
-          <td>{u.runs} runs</td>
-        </tr>)}
-        </tbody>
-      </table>
+   const runs = AppData(state);
+
+  console.log(state);
+  console.log(runs);
+
+  // const [user, setUser] = useState([
+  //   { id: 1, firstName: 'fake', lastName: 'user', email: 'fake.user@test.ca', role: 'runner', runs: 3},
+  //   { id: 2, firstName: 'also', lastName: 'fake', email:'also.fake@test.ca', role: 'planner', runs: 5}
+  // ]);
+
+  // const userTable =  
+  //     <table className="user-stats">
+  //       <tbody>
+  //         {user && user.map(u =>
+  //       <tr key={u.id}>
+  //         <td>{u.firstName} {u.lastName} {u.email} </td>
+  //         <td>{u.runs} runs</td>
+  //       </tr>)}
+  //       </tbody>
+  //     </table>
   
 
 
@@ -37,7 +46,7 @@ export default function Profile(props) {
      
      <section className="profile-stats">
       <h1>Runs</h1>
-      {userTable}
+      {/* {userTable} */}
       
      </section>
    </main>
