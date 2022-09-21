@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import AppData from "../hooks/useAppData";
+import Run from "./Run";
 
 export default function Profile(props) {
 
    const { state } = AppData;
-
-   const runs = AppData(state);
+   const { runs } = props;
 
   console.log(state);
   console.log(runs);
@@ -34,7 +34,7 @@ export default function Profile(props) {
    alt="icon-profile"></img>
 
   //create user, stats variables connected to db
-
+  
   return (
    <main className="profile-section">
      <section className="profile-header">
@@ -47,7 +47,6 @@ export default function Profile(props) {
      <section className="profile-stats">
       <h1>Runs</h1>
       {/* {userTable} */}
-      
      </section>
    </main>
   )

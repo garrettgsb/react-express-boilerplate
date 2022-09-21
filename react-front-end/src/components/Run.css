@@ -1,0 +1,17 @@
+.run, .card {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  margin: 1em 0;
+}
+
+.run-image {
+  width: 20rem;
+  padding: 1em;
+}
+
+.run-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
