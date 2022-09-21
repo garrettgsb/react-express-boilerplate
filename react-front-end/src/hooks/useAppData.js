@@ -14,6 +14,7 @@ export default function useAppData() {
   const [users, setUsers] = useState({});
 
   useEffect(() => {
+
     Promise.all([axios.get("/api/runs"), axios.get("/api/runs/runner/1")])
       .then((response) => {
         //console.log(response);
@@ -33,4 +34,7 @@ export default function useAppData() {
     runs,
     runnerRuns,
   };
+
+
+
 }

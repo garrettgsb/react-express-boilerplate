@@ -1,11 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+
 import Run from "./Run";
+
+import useAppData from "../hooks/useAppData";
+
 
 export default function Profile(props) {
   const { runs } = props;
 
   // console.log(runs);
+  // const { users } = useAppData();
+  // const user = useAppData(users.id);
+  // console.log(user)
+
 
   const showRunnersRuns = (runs) => {
     const runsArray = Object.values(runs);

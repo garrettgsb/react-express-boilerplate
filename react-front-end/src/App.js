@@ -1,10 +1,14 @@
+
 import React from "react";
 import axios from "axios";
 import "./index.css";
 import Profile from "./components/Profile.js";
-import Nav from "./components/Nav.js";
 import FindRun from "./components/FindRun";
 import useAppData from "./hooks/useAppData";
+import React, { Component } from 'react';
+import Navigation from './components/Navigation.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default function App() {
   const { runs, runnerRuns } = useAppData();
@@ -21,6 +25,7 @@ export default function App() {
         });
       });
   };
+
 
   return (
     <div>
