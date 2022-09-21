@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import AppData from "../hooks/useAppData";
+import useAppData from "../hooks/useAppData";
 
 export default function Profile(props) {
 
-   const { state } = AppData;
+  // const { users } = useAppData();
+  // const user = useAppData(users.id);
+  // console.log(user)
 
-   const runs = AppData(state);
-
-  console.log(state);
-  console.log(runs);
 
   // const [user, setUser] = useState([
   //   { id: 1, firstName: 'fake', lastName: 'user', email: 'fake.user@test.ca', role: 'runner', runs: 3},
