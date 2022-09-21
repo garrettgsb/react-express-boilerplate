@@ -19,7 +19,7 @@ export default function Run(props) {
           <div className="run-heading">
             <Card.Title>{run.name}</Card.Title>
             {run.future_run && (
-              <span class="material-symbols-rounded">schedule</span>
+              <span className="material-symbols-rounded">schedule</span>
             )}
           </div>
           <Card.Text>{run.description}</Card.Text>

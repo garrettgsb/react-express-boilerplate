@@ -5,7 +5,7 @@ import Run from "./Run";
 export default function Profile(props) {
   const { runs } = props;
 
-  console.log(runs);
+  // console.log(runs);
 
   const showAvailableRuns = (runs) => {
     const runsArray = Object.values(runs);
