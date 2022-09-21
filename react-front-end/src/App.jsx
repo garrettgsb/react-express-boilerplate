@@ -8,6 +8,8 @@ import useAppData from "./hooks/useAppData";
 import React, { Component } from 'react';
 import Navigation from './components/Navigation.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Homepage from "./components/Homepage";
+import Error from "./components/Error";
 
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 
@@ -27,9 +29,22 @@ export default function App() {
       });
   };
 
+  
+
 
   return (
     <div>
+
+
+  <Routes>
+    <Route path="/" element={<Navigation />}></Route>
+      <Route index element={<Homepage />}></Route>
+      <Route path="profile" element={<Profile />}></Route> 
+      {/* catch error urls */}
+      <Route path="*" element={<Error />}></Route> 
+  </Routes>
+  
+   
       <Navigation />
       <Profile runs={runnerRuns} users={users} user={user}/>
       <FindRun runs={runs}/>
