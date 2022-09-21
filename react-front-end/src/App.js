@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 
-import React from "react";
 import axios from "axios";
 import "./index.css";
 import Profile from "./components/Profile.js";
@@ -29,7 +29,7 @@ export default function App() {
 
   return (
     <div>
-      <Nav />
+      <Navigation />
       <Profile runs={runnerRuns}/>
       <FindRun runs={runs}/>
     </div>
