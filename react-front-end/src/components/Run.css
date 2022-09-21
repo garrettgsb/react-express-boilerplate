@@ -6,12 +6,21 @@
 }
 
 .run-image {
-  width: 20rem;
+  width: 15rem;
   padding: 1em;
 }
 
-.run-heading {
+.run-heading, .run-desc {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.run-desc {
+  align-items: flex-end;
+}
+
+.run-desc .btn {
+  height: 3em;
+  width: 6em;
 }

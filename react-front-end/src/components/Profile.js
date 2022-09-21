@@ -10,7 +10,13 @@ export default function Profile(props) {
 
   console.log(state);
   console.log(runs);
-
+  
+  const showAvailableRuns = (runs) => {
+    const runsArray = Object.values(runs);
+    return (
+      runsArray.map((run)=><Run key={run.id} run={run}/>)
+    );
+  }
   // const [user, setUser] = useState([
   //   { id: 1, firstName: 'fake', lastName: 'user', email: 'fake.user@test.ca', role: 'runner', runs: 3},
   //   { id: 2, firstName: 'also', lastName: 'fake', email:'also.fake@test.ca', role: 'planner', runs: 5}
@@ -46,7 +52,7 @@ export default function Profile(props) {
      
      <section className="profile-stats">
       <h1>Runs</h1>
-      {/* {userTable} */}
+      {showAvailableRuns(runs)}
      </section>
    </main>
   )
