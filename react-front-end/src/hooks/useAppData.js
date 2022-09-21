@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 //hook for getting runs
 //hook for logged in user
@@ -8,43 +8,33 @@ import React, { useState, useEffect } from 'react';
 //hook for planner runs
 //axios route change based on user id
 
-
-
 export default function useAppData() {
-
   const [runs, setRuns] = useState({});
-
+  const [runnerRuns, setRunnerRuns] = useState({});
   const [users, setUsers] = useState({});
 
   useEffect(() => {
 
-    Promise.all([
-      axios.get('/api/runs'),
-      axios.get('/api/users')
-    ]).then((response) => {
-      const runs = response[0].data;
-      const users = response[1].data;
+    Promise.all([axios.get("/api/runs"), axios.get("/api/runs/runner/1")])
+      .then((response) => {
+        //console.log(response);
+        const { runs } = response[0].data;
+        const { runnerRuns } = response[1].data;
+        console.log("All available runs", runs);
+        console.log("User ID 1's runs that have participated in:", runnerRuns);
+        setRuns(runs);
+        setRunnerRuns(runnerRuns);
+      })
+      .catch((error) => {
+        console.log(error.response.status);
+      });
+  }, []);
 
-      console.log(runs);
-      console.log(users);
-
-      setRuns({runs});
-      setUsers({users});
-    })
-    .catch((error) => {
-      console.log(error.response.status);
-    })
-  }, [])
+  return {
+    runs,
+    runnerRuns,
+  };
 
 
-
-return {
-  runs,
-  users
-}
 
 }
-
-
-
-  

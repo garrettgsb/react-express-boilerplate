@@ -158,12 +158,12 @@ const getRunsForPlanner = (id) => {
       [id]
     )
     .then((result) => {
-      const runs = {};
+      const plannerRuns = {};
       result.rows.forEach((row) => {
         const id = row.id;
-        runs[id] = row;
+        plannerRuns[id] = row;
       });
-      return { runs };
+      return { plannerRuns };
     })
     .catch((err) => console.error(err.stack));
 };
@@ -182,12 +182,12 @@ const getRunsForRunner = (id) => {
       [id]
     )
     .then((result) => {
-      const runs = {};
+      const runnerRuns = {};
       result.rows.forEach((row) => {
         const id = row.id;
-        runs[id] = row;
+        runnerRuns[id] = row;
       });
-      return { runs };
+      return { runnerRuns };
     })
     .catch((err) => console.error(err.stack));
 };
