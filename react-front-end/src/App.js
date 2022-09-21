@@ -3,6 +3,7 @@ import axios from "axios";
 import "./index.css";
 import Profile from "./components/Profile.js";
 import Nav from "./components/Nav.js";
+import FindRun from "./components/FindRun";
 import useAppData from "./hooks/useAppData";
 
 export default function App() {
@@ -20,10 +21,12 @@ export default function App() {
         });
       });
   };
+
   return (
     <div>
       <Nav />
       <Profile runs={runnerRuns}/>
+      <FindRun runs={runs}/>
     </div>
   );
 }

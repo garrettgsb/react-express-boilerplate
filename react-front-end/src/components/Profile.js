@@ -7,7 +7,7 @@ export default function Profile(props) {
 
   // console.log(runs);
 
-  const showAvailableRuns = (runs) => {
+  const showRunnersRuns = (runs) => {
     const runsArray = Object.values(runs);
     return runsArray.map((run) => (
       <Run key={run.id} run={run} userFlag={true} />
@@ -51,7 +51,7 @@ export default function Profile(props) {
 
       <section className="profile-stats">
         <h1>Runs</h1>
-        {showAvailableRuns(runs)}
+        {showRunnersRuns(runs)}
       </section>
     </main>
   );
