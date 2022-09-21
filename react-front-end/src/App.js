@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './index.css';
 import Profile from  './components/Profile.js';
-import Nav from './components/Nav.js';
+import Navigation from './components/Navigation.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Navigation />
         <Profile />
       </div>
     );
