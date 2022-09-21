@@ -4,6 +4,7 @@ const App = Express();
 const BodyParser = require("body-parser");
 const Bcrypt = require("bcryptjs");
 const CookieSession = require("cookie-session");
+const fs = require("fs");
 
 const PORT = 8080;
 
@@ -146,6 +147,33 @@ App.get("/api/runs/:id", (req, res) => {
       console.error(e);
       res.send(e);
     });
+});
+
+// Get image for run
+App.get("/api/runs/image/:id", (req, res) => {
+  const runID = req.params.id;
+  const path = `./uploads/${runID}.jpeg`;
+  // Checking if the path exists
+  fs.exists(path, function (exists) {
+    if (!exists) {
+      res.writeHead(404, {
+        "Content-Type": "text/plain",
+      });
+      res.end("404 Not Found");
+      return;
+    }
+
+    // Setting the headers
+    res.writeHead(200, {
+      "Content-Type": "image/jpeg",
+    });
+
+    // Reading the file
+    fs.readFile(path, function (err, content) {
+      // Serving the image
+      res.end(content);
+    });
+  });
 });
 
 App.post("/api/runs", (req, res) => {
