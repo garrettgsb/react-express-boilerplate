@@ -5,8 +5,9 @@ import "./index.css";
 import Profile from "./components/Profile.js";
 import FindRun from "./components/FindRun";
 import useAppData from "./hooks/useAppData";
-import React, { Component } from 'react';
+
 import Navigation from './components/Navigation.js';
+import RegisterUser from './components/RegisterUser'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -29,9 +30,10 @@ export default function App() {
 
   return (
     <div>
-      <Nav />
+      <Navigation />
       <Profile runs={runnerRuns}/>
       <FindRun runs={runs}/>
+      <RegisterUser/>
     </div>
   );
 }
