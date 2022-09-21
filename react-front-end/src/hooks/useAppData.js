@@ -17,13 +17,19 @@ export default function useAppData() {
   const [users, setUsers] = useState({});
 
   useEffect(() => {
+
     Promise.all([
-      axios.get('/api/runs')
+      axios.get('/api/runs'),
+      axios.get('/api/users')
     ]).then((response) => {
-      //console.log(response);
       const runs = response[0].data;
+      const users = response[1].data;
+
       console.log(runs);
-       setRuns({runs});
+      console.log(users);
+
+      setRuns({runs});
+      setUsers({users});
     })
     .catch((error) => {
       console.log(error.response.status);
@@ -33,7 +39,8 @@ export default function useAppData() {
 
 
 return {
-  runs
+  runs,
+  users
 }
 
 }
