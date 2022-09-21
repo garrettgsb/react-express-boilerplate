@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 
-import React from "react";
 import axios from "axios";
 import "./index.css";
 import Profile from "./components/Profile.js";
@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default function App() {
-  const { runs, runnerRuns } = useAppData();
+  const { runs, runnerRuns, users, user } = useAppData();
   const fetchData = () => {
     axios
       .get("/api/data") // You can simply make your requests to "/api/whatever you want"
@@ -29,9 +29,10 @@ export default function App() {
 
   return (
     <div>
-      <Nav />
-      <Profile runs={runnerRuns}/>
+      <Navigation />
+      <Profile runs={runnerRuns} users={users} user={user}/>
       <FindRun runs={runs}/>
+
     </div>
   );
 }

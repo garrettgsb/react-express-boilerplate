@@ -8,11 +8,7 @@ import useAppData from "../hooks/useAppData";
 
 export default function Profile(props) {
   const { runs } = props;
-
-  // console.log(runs);
-  // const { users } = useAppData();
-  // const user = useAppData(users.id);
-  // console.log(user)
+  const { user } = props;
 
 
   const showRunnersRuns = (runs) => {
@@ -21,21 +17,8 @@ export default function Profile(props) {
       <Run key={run.id} run={run} userFlag={true} />
     ));
   };
-  // const [user, setUser] = useState([
-  //   { id: 1, firstName: 'fake', lastName: 'user', email: 'fake.user@test.ca', role: 'runner', runs: 3},
-  //   { id: 2, firstName: 'also', lastName: 'fake', email:'also.fake@test.ca', role: 'planner', runs: 5}
-  // ]);
 
-  // const userTable =
-  //     <table className="user-stats">
-  //       <tbody>
-  //         {user && user.map(u =>
-  //       <tr key={u.id}>
-  //         <td>{u.firstName} {u.lastName} {u.email} </td>
-  //         <td>{u.runs} runs</td>
-  //       </tr>)}
-  //       </tbody>
-  //     </table>
+
 
   const profilePicture = (
     <img
@@ -45,16 +28,17 @@ export default function Profile(props) {
     ></img>
   );
 
-  //create user, stats variables connected to db
 
   return (
     <main className="profile-section">
       <section className="profile-header">
         {profilePicture}
-        <h1>Welcome user</h1>
-        <p>
-          You have: Completed 10 runs. For a total of 100 minutes and 100 km.
-        </p>
+        <h1>Welcome {user.name}</h1>
+        <ul>
+          <li>Age: {user.age}</li>
+          <li>Email: {user.email}</li>
+          <li>Phone: {user.phone}</li>
+        </ul>
       </section>
 
       <section className="profile-stats">
