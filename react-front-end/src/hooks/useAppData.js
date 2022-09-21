@@ -21,9 +21,9 @@ export default function useAppData() {
       axios.get('/api/runs')
     ]).then((response) => {
       //console.log(response);
-      const runs = response[0].data;
+      const { runs } = response[0].data;
       console.log(runs);
-       setRuns({runs});
+       setRuns(runs);
     })
     .catch((error) => {
       console.log(error.response.status);
