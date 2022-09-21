@@ -187,8 +187,8 @@ App.get("/api/runs/runner/:id", (req, res) => {
 
   db.getRunsForRunner(id)
     .then((response) => {
-      const { runs } = response;
-      res.send({ runs });
+      const { runnerRuns } = response;
+      res.send({ runnerRuns });
     })
     .catch((e) => {
       console.error(e);
@@ -202,8 +202,8 @@ App.get("/api/runs/planner/:id", (req, res) => {
 
   db.getRunsForPlanner(id)
     .then((response) => {
-      const { runs } = response;
-      res.send({ runs });
+      const { plannerRuns } = response;
+      res.send({ plannerRuns });
     })
     .catch((e) => {
       console.error(e);
