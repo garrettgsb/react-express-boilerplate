@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.1",
     "bootstrap": "^5.2.1",
+    "node-sass": "^7.0.3",
     "react": "^16.8.6",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^16.8.6",
