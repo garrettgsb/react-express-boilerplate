@@ -6,7 +6,7 @@ import Nav from "./components/Nav.js";
 import useAppData from "./hooks/useAppData";
 
 export default function App() {
-  const { runs } = useAppData();
+  const { runs, runnerRuns } = useAppData();
   const fetchData = () => {
     axios
       .get("/api/data") // You can simply make your requests to "/api/whatever you want"
@@ -23,7 +23,7 @@ export default function App() {
   return (
     <div>
       <Nav />
-      <Profile runs={runs}/>
+      <Profile runs={runnerRuns}/>
     </div>
   );
 }

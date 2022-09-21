@@ -14,7 +14,7 @@ export default function Profile(props) {
   const showAvailableRuns = (runs) => {
     const runsArray = Object.values(runs);
     return (
-      runsArray.map((run)=><Run key={run.id} run={run}/>)
+      runsArray.map((run)=><Run key={run.id} run={run} userFlag={true}/>)
     );
   }
   // const [user, setUser] = useState([

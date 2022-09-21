@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Run.css";
 
 export default function Run(props) {
-  const { run } = props;
+  const { run, userFlag } = props;
   const [runImage, setRunImage] = useState(
     "https://cdn-icons-png.flaticon.com/512/366/366998.png"
   );
@@ -26,11 +26,13 @@ export default function Run(props) {
           <div className="run-desc">
             <ListGroup variant="flush">
               <ListGroup.Item>Distance: {run.distance} km</ListGroup.Item>
-              <ListGroup.Item>Address: {run.location}</ListGroup.Item>
+              {!userFlag && (
+                <ListGroup.Item>Address: {run.location}</ListGroup.Item>
+              )}
               <ListGroup.Item>Time: {run.time}</ListGroup.Item>
               <ListGroup.Item>Date: {run.date}</ListGroup.Item>
             </ListGroup>
-            <Button variant="primary">Join</Button>
+            {!userFlag && <Button variant="primary">Join</Button>}
           </div>
         </Card.Body>
       </Card>
