@@ -21,7 +21,7 @@ export default function Profile(props) {
 
 
   const profilePicture = 
-  <img class="profile-pic" src="https://cdn-icons-png.flaticon.com/512/2335/2335153.png"
+  <img className="profile-pic" src="https://cdn-icons-png.flaticon.com/512/2335/2335153.png"
    alt="icon-profile"></img>
 
   //create user, stats variables connected to db
