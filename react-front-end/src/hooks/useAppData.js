@@ -19,7 +19,8 @@ export default function useAppData() {
         //console.log(response);
         const { runs } = response[0].data;
         const { runnerRuns } = response[1].data;
-        console.log(runs);
+        console.log("All available runs", runs);
+        console.log("User ID 1's runs that have participated in:", runnerRuns);
         setRuns(runs);
         setRunnerRuns(runnerRuns);
       })
