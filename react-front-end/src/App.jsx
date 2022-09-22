@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
-
+import React from "react";
 import axios from "axios";
 import "./index.css";
 import Profile from "./components/Profile.js";
 import FindRun from "./components/FindRun";
 import useAppData from "./hooks/useAppData";
-import React, { Component } from 'react';
+
 import Navigation from './components/Navigation.js';
+import RegisterUser from './components/RegisterUser'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Homepage from "./components/Homepage";
 import Error from "./components/Error";
@@ -46,8 +47,12 @@ export default function App() {
   
    
       <Navigation />
+
       <Profile runs={runnerRuns} users={users} user={user}/>
       <FindRun runs={runs}/>
+      <RegisterUser/>
+
+
 
     </div>
   );
