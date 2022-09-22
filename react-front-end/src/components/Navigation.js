@@ -18,16 +18,14 @@ export default function Navigation() {
           >
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/runs">Join A Run</Nav.Link>
-            <Nav.Link href="/signin">Sign In</Nav.Link>
+            <Nav.Link href="/signin" >Sign In</Nav.Link>
             <Nav.Link href="/register">Sign Up</Nav.Link>
             <Nav.Link href="/profile">Profile</Nav.Link>
             <NavDropdown title="More Options" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#">Option 1</NavDropdown.Item>
               <NavDropdown.Item href="#">Option 1</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#">
-                Option 3
-              </NavDropdown.Item>
+              <NavDropdown.Item href="#">Option 3</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

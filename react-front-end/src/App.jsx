@@ -35,10 +35,6 @@ export default function App() {
           {/* <Route path="*" element={<Error />}></Route> */}
         </Routes>
       </Router>
-
-      {/* <Profile runs={runnerRuns} users={users} user={user} /> */}
-      {/* <FindRun runs={runs} /> */}
-      {/* <RegisterUser /> */}
     </div>
   );
 }
