@@ -10,6 +10,7 @@ import RegisterUser from "./components/RegisterUser";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Homepage from "./components/Homepage.jsx";
 import Error from "./components/Error";
+import RegisterRun from "./components/RegisterRun";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
@@ -29,6 +30,7 @@ export default function App() {
           ></Route>
           <Route path="/runs" element={<FindRun runs={runs} />}></Route>
           <Route path="/register" element={<RegisterUser />}></Route>
+          <Route path="/create" element={<RegisterRun />}></Route>
           {/* catch error urls */}
           {/* <Route path="*" element={<Error />}></Route> */}
         </Routes>
