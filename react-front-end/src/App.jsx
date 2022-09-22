@@ -16,11 +16,11 @@ import SignIn from "./components/SignIn";
 
 export default function App() {
   const { runs, runnerRuns, users, user, setUser } = useAppData();
-  console.log(user);
+  
   return (
     <div>
       <Router>
-        <Navigation />
+        <Navigation user={user} setUser={setUser}/>
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route index element={<Homepage />}></Route>
