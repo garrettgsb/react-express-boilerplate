@@ -4,19 +4,25 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/SignInUser.css";
 
 export default function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { user, setUser } = props;
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("/api/login", {email, password})
+      .post("/api/login", { email, password })
       .then((response) => {
-        const { user } = response.data;
+        // const { user }= response.data;
+        // if (!user) console.log("User not found.");
+        setUser(response.data.user);
+        navigate("/profile");
       })
       .catch((error) => {
         console.log(error.response.status);
@@ -53,9 +59,6 @@ export default function SignIn(props) {
         <Button variant="primary" type="submit">
           Sign In
         </Button>
-        <Form.Text as="p" muted>
-          Have an account already? Sign in
-        </Form.Text>
       </Form>
     </>
   );

@@ -34,9 +34,9 @@ export default function useAppData() {
         console.log("all users:", users);
         setUsers(users)
 
-        const { user } = response[3].data;
+        // const { user } = response[3].data;
         console.log("single user:", user);
-        setUser(user)
+        // setUser(user)
       })
       .catch((error) => {
         console.log(error.response.status);
@@ -47,7 +47,8 @@ export default function useAppData() {
     runs,
     runnerRuns,
     users,
-    user
+    user,
+    setUser
   };
 
 
