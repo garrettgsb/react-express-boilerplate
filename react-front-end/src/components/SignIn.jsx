@@ -11,7 +11,7 @@ import "../components/SignInUser.css";
 export default function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, setUser } = props;
+  const { setUser } = props;
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -19,12 +19,17 @@ export default function SignIn(props) {
     axios
       .post("/api/login", { email, password })
       .then((response) => {
-        // const { user }= response.data;
-        // if (!user) console.log("User not found.");
-        setUser(response.data.user);
+        const { user } = response.data;
+        if (!user) {
+          console.log("User not found.");
+          navigate("/");
+          return;
+        }
+        setUser(user);
         navigate("/profile");
       })
       .catch((error) => {
+        navigate("/");
         console.log(error.response.status);
       });
   };

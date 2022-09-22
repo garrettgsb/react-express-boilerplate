@@ -30,7 +30,7 @@ export default function App() {
           ></Route>
           <Route path="/runs" element={<FindRun runs={runs} />}></Route>
           <Route path="/register" element={<RegisterUser />}></Route>
-          <Route path="/signin" element={<SignIn user={user} setUser={setUser}/>}></Route>
+          <Route path="/signin" element={<SignIn setUser={setUser}/>}></Route>
           {/* catch error urls */}
           {/* <Route path="*" element={<Error />}></Route> */}
         </Routes>
