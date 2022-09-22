@@ -5,11 +5,9 @@ import Run from "./Run";
 
 import useAppData from "../hooks/useAppData";
 
-
 export default function Profile(props) {
   const { runs } = props;
   const { user } = props;
-
 
   const showRunnersRuns = (runs) => {
     const runsArray = Object.values(runs);
@@ -18,8 +16,6 @@ export default function Profile(props) {
     ));
   };
 
-
-
   const profilePicture = (
     <img
       className="profile-pic"
@@ -27,7 +23,6 @@ export default function Profile(props) {
       alt="icon-profile"
     ></img>
   );
-
 
   return (
     <main className="profile-section">
