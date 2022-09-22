@@ -8,7 +8,7 @@ import useAppData from "./hooks/useAppData";
 import Navigation from "./components/Navigation.js";
 import RegisterUser from "./components/RegisterUser";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Homepage from "./components/Homepage";
+import Homepage from "./components/Homepage.jsx";
 import Error from "./components/Error";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
