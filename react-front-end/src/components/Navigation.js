@@ -12,7 +12,7 @@ export default function Navigation(props) {
 
   const signOut = () => {
     axios
-      .post("/api/logut")
+      .post("/api/logout")
       .then(() => {
         setUser(null);
         navigate("/");
@@ -43,7 +43,7 @@ export default function Navigation(props) {
                 Sign Out
               </Nav.Link>
             )}
-            <Nav.Link href="/profile">Profile</Nav.Link>
+            {user.id && <Nav.Link href="/profile">Profile</Nav.Link>}
             <NavDropdown title="More Options" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#">Option 1</NavDropdown.Item>
               <NavDropdown.Item href="#">Option 1</NavDropdown.Item>
