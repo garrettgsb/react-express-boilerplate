@@ -40,7 +40,7 @@ function App(props) {
       baths_max: "5",
     },
     headers: {
-      "X-RapidAPI-Key": "", // Left blank for now, will put key in .env file soon. (Key can be found in Google Doc)
+      "X-RapidAPI-Key": process.env.API_KEY,
       "X-RapidAPI-Host": "zillow56.p.rapidapi.com",
     },
   };
@@ -65,7 +65,7 @@ function App(props) {
     url: "https://zillow56.p.rapidapi.com/property",
     params: { zpid: "2061493872" },
     headers: {
-      "X-RapidAPI-Key": "", // Left blank for now, will put key in .env file soon. (Key can be found in Google Doc)
+      "X-RapidAPI-Key": process.env.API_KEY,
       "X-RapidAPI-Host": "zillow56.p.rapidapi.com",
     },
   };
