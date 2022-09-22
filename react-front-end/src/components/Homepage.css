@@ -5,6 +5,16 @@
   flex-direction: column;
   padding: 5%;
   font-size: 45px;
-  background-color: lightsteelblue;
+  border: 1px solid lightgrey
 }
 
+.home-runs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-logo {
+  height: 100px;
+}
