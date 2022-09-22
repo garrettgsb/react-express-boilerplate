@@ -9,6 +9,7 @@
     "react": "^16.8.6",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^6.4.1",
     "react-scripts": "2.1.8",
     "sass": "^1.54.9"
   },
