@@ -8,7 +8,7 @@ export default function Navigation() {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#">WeRun</Navbar.Brand>
+        <Navbar.Brand href="/">WeRun</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -16,21 +16,18 @@ export default function Navigation() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Register</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/profile">Profile</Nav.Link>
             <NavDropdown title="Run" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Run</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
+              <NavDropdown.Item href="/runs">Join A Run</NavDropdown.Item>
+              <NavDropdown.Item href="/register">
+                Register
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action5">
                 Something else here
               </NavDropdown.Item>
             </NavDropdown>
-            {/* <Nav.Link href="#" disabled>
-              Run
-            </Nav.Link> */}
           </Nav> 
         </Navbar.Collapse>
       </Container>
