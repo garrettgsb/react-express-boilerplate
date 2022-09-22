@@ -1,47 +1,11 @@
 import React from "react";
-import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import axios from "axios";
 
-export default function SearchBar() {
-  const [location, setLocation] = useState("");
-  const [beds, setBeds] = useState("0");
-  const [baths, setBaths] = useState("0");
-
-  const fetchData = () => {
-    console.log(location);
-    const options = {
-      method: "GET",
-      url: "https://zillow56.p.rapidapi.com/search",
-      params: {
-        location: location,
-        beds_min: beds,
-        baths_min: baths,
-      },
-      headers: {
-        "X-RapidAPI-Key": process.env.API_KEY,
-        "X-RapidAPI-Host": "zillow56.p.rapidapi.com",
-      },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    fetchData();
-  };
-
+export default function SearchBar(props) {
+  const { submitHandler, setLocation, setBeds, setBaths, setMaxPrice } = props;
   return (
     <div className="ms-2 mt-2 pb-2">
       <Form onSubmit={submitHandler}>
@@ -82,20 +46,29 @@ export default function SearchBar() {
             </Form.Select>
           </Col>
           <Col xs="auto">
-            <Form.Select aria-label="Default select example">
+            <Form.Select
+              aria-label="Default select example"
+              id="homeType"
+              name="homeType"
+            >
               <option>Home type</option>
-              <option value="houses">Houses</option>
-              <option value="apartments/condos">Apartments/Condos</option>
-              <option value="townhomes">Townhomes</option>
+              <option value="house">Houses</option>
+              <option value="apartment">Apartments</option>
+              <option value="townhome">Townhomes</option>
             </Form.Select>
           </Col>
           <Col xs="auto">
-            <Form.Select aria-label="Default select example">
+            <Form.Select
+              aria-label="Default select example"
+              id="price"
+              name="price"
+              onChange={(e) => setMaxPrice(e.target.value)}
+            >
               <option>Max Price</option>
               <option value="2000">$2000</option>
-              <option value="2000">$3000</option>
-              <option value="2000">$4000</option>
-              <option value="2000">$5000</option>
+              <option value="3000">$3000</option>
+              <option value="4000">$4000</option>
+              <option value="5000">$5000</option>
             </Form.Select>
           </Col>
           <Col xs="auto">
