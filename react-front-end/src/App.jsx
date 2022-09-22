@@ -12,6 +12,7 @@ import Homepage from "./components/Homepage";
 import Error from "./components/Error";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import SignIn from "./components/SignIn";
 
 export default function App() {
   const { runs, runnerRuns, users, user } = useAppData();
@@ -29,6 +30,7 @@ export default function App() {
           ></Route>
           <Route path="/runs" element={<FindRun runs={runs} />}></Route>
           <Route path="/register" element={<RegisterUser />}></Route>
+          <Route path="/signin" element={<SignIn />}></Route>
           {/* catch error urls */}
           {/* <Route path="*" element={<Error />}></Route> */}
         </Routes>
