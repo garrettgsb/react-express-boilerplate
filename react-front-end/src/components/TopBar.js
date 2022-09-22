@@ -23,6 +23,8 @@ const TopBar = () => {
             <Nav.Link href="/homes_sale">Buy</Nav.Link>
             <Nav.Link href="/homes_rent">Rent</Nav.Link>
             <Nav.Link href="/sell">Sell</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/register">Register</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
