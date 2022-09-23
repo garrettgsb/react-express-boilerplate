@@ -1,28 +1,32 @@
-const Express = require("express");
-const App = Express();
-const BodyParser = require("body-parser");
-const PORT = 8080;
+const express = require("express");
+const app = express();
+const morgan = require("morgan");
+const cors = require("cors");
+const pool = require("./db");
+const bcrypt = require("bcryptjs");
 
-const { Pool } = require("pg");
-require("dotenv").config();
-const dbParams = require("./lib/db");
-const db = new Pool(dbParams);
+//middleware
+app.use(morgan("dev"));
+app.use(cors());
+app.use(express.json());
 
-// Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static("public"));
+//routes
+app.post("/login", async (req, res) => {
+  const { email, pw } = req.body;
+});
 
-// Sample GET route
-App.get("/api/data", (req, res) =>
-  res.json({
-    message: "Seems to work!",
-  })
-);
+app.post("/register", async (req, res) => {
+  try {
+    const { email, pw } = req.body;
+    const newUser = await pool.query(
+      "INSERT INTO users (email, pw) VALUES($1, $2)",
+      [email, pw]
+    );
+  } catch (error) {
+    console.error(error.message);
+  }
+});
 
-App.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(
-    `Express seems to be listening on port ${PORT} so that's pretty good 👍`
-  );
+app.listen(8080, () => {
+  console.log("Server has started on port 8080");
 });
