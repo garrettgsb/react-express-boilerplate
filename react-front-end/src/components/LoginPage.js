@@ -54,10 +54,6 @@ function LoginPage(props) {
     };
   }, [emailIsValid, passwordIsValid]);
 
-  useEffect(() => {
-    Axios.get("/login");
-  }, []);
-
   const emailChangeHandler = (event) => {
     dispatchEmail({
       type: "USER_INPUT",
@@ -80,7 +76,6 @@ function LoginPage(props) {
   };
 
   const submitHandler = (event) => {
-    // event.preventDefault();
     Axios.post("/login", {
       email: emailState.value,
       password: passwordState.value,
@@ -88,10 +83,6 @@ function LoginPage(props) {
     props.onLogin(emailState.value, passwordState.value);
     navigate("/");
   };
-
-  // const clickHandler = () => {
-  //   Axios.post("/login");
-  // };
 
   return (
     <React.Fragment>
