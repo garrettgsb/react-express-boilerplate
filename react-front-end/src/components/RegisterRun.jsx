@@ -12,14 +12,13 @@ export default function RegisterUser() {
   return (
     <Form className="form-container">
       <div className="form-container-text">
-        <Form.Text as="h3">HELLO!</Form.Text>
+        <Form.Text as="h3">Create a Run</Form.Text>
         <Form.Text as="p">
-          Create an account with us to use weRun and join runs with people from
-          all over Canada.
+          Don't see a run event near you?  Just tell us where and when and the rest is on us.
         </Form.Text>
       </div>
-      <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
-        <Form.Control type="text" placeholder="Firstname / Lastname" />
+      <FloatingLabel controlId="floatingInput" label="Event location" className="mb-3">
+        <Form.Control type="text" placeholder="Location" />
       </FloatingLabel>
       <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
         <Form.Control type="email" placeholder="name@example.com" />
