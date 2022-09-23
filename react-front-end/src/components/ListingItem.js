@@ -3,6 +3,20 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 
 export default function ListingItem(props) {
+  const {
+    bathrooms,
+    bedrooms,
+    homeType,
+    price,
+    streetAddress,
+    city,
+    zipcode,
+    zpid,
+    lotAreaUnit,
+    lotAreaValue,
+  } = props;
+
+  console.log(zpid);
   return (
     <Col className=" listingItem">
       <Card>
@@ -12,10 +26,15 @@ export default function ListingItem(props) {
           src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyamin-mellish-186077.jpg&fm=jpg"
         />
         <Card.Body>
-          <Card.Title>PRICE</Card.Title>
+          <Card.Title>${price}</Card.Title>
           <Card.Text>
-            <p>x bds | x ba | 800sqft</p>
-            <p>address</p>
+            <span className="homeType">Home Type: {homeType} </span>
+            <span>
+              {bedrooms} bds | {bathrooms} ba | {lotAreaValue} {lotAreaUnit}
+            </span>
+            <span>
+              {streetAddress}, {city}, {zipcode}
+            </span>
           </Card.Text>
         </Card.Body>
       </Card>

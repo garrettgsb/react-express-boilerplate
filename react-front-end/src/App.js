@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import TopBar from "./components/TopBar";
-import axios from "axios";
 import "./App.scss";
 import Home from "./components/Home";
 import HomesRent from "./components/HomesRent";
 import Sell from "./components/Sell";
 import HomesSale from "./components/HomesSale";
 import LoginPage from "./components/LoginPage";
-import { Route, Link, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import RegistrationPage from "./components/RegistrationPage";
 
 function App(props) {
@@ -31,7 +30,7 @@ function App(props) {
     setIsLoggedIn(false);
   };
 
-  return (
+return (
     <div className="App">
       <TopBar isLoggedIn={isLoggedIn} onLogout={logoutHandler} />
       <Routes>
