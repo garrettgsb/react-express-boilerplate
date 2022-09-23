@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { FaHome } from "react-icons/fa";
 import "./TopBar.scss";
 
-const TopBar = () => {
+const TopBar = (props) => {
   return (
     <Navbar
       bg="dark"
@@ -23,8 +23,15 @@ const TopBar = () => {
             <Nav.Link href="/homes_sale">Buy</Nav.Link>
             <Nav.Link href="/homes_rent">Rent</Nav.Link>
             <Nav.Link href="/sell">Sell</Nav.Link>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/register">Register</Nav.Link>
+            {!props.isLoggedIn && (
+              <React.Fragment>
+                <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
+              </React.Fragment>
+            )}
+            {props.isLoggedIn && (
+              <Nav.Link onClick={props.onLogout}>Logout</Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
