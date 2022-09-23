@@ -20,8 +20,8 @@ export default function RegisterUser() {
       <FloatingLabel controlId="floatingInput" label="Event location" className="mb-3">
         <Form.Control type="text" placeholder="Location" />
       </FloatingLabel>
-      <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
-        <Form.Control type="email" placeholder="name@example.com" />
+      <FloatingLabel controlId="floatingInput" label="Address" className="mb-3">
+        <Form.Control type="Address" placeholder="123 Maple Street, ON" />
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingPassword"
