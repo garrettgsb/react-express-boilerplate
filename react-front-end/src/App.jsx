@@ -12,31 +12,29 @@ import Homepage from "./components/Homepage.jsx";
 import Error from "./components/Error";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import SignIn from "./components/SignIn";
 
 export default function App() {
-  const { runs, runnerRuns, users, user } = useAppData();
-
+  const { runs, runnerRuns, users, user, setUser } = useAppData();
+  
   return (
     <div>
       <Router>
-        <Navigation />
+        <Navigation user={user} setUser={setUser}/>
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route index element={<Homepage />}></Route>
           <Route
             path="/profile"
-            element={<Profile runs={runnerRuns} users={users} user={user} />}
+            element={<Profile runs={runnerRuns} user={user} />}
           ></Route>
           <Route path="/runs" element={<FindRun runs={runs} />}></Route>
           <Route path="/register" element={<RegisterUser />}></Route>
+          <Route path="/signin" element={<SignIn setUser={setUser}/>}></Route>
           {/* catch error urls */}
           {/* <Route path="*" element={<Error />}></Route> */}
         </Routes>
       </Router>
-
-      {/* <Profile runs={runnerRuns} users={users} user={user} /> */}
-      {/* <FindRun runs={runs} /> */}
-      {/* <RegisterUser /> */}
     </div>
   );
 }
