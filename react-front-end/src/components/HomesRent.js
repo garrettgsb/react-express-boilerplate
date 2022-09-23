@@ -27,7 +27,7 @@ export default function Homes_Rent() {
         status: "forRent",
       },
       headers: {
-        "X-RapidAPI-Key": process.env.API_KEY,
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": "zillow56.p.rapidapi.com",
       },
     };
