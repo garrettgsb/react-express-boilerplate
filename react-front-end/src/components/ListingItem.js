@@ -1,6 +1,7 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import Badge from "react-bootstrap/Badge";
 
 export default function ListingItem(props) {
   const {
@@ -10,6 +11,7 @@ export default function ListingItem(props) {
     price,
     streetAddress,
     city,
+    state,
     zipcode,
     zpid,
     lotAreaUnit,
@@ -17,27 +19,36 @@ export default function ListingItem(props) {
   } = props;
 
   console.log(zpid);
+
+  const formatHomeType = (homeType) => {
+    let result = homeType.split("");
+    return result
+      .map((char) => (char === "_" ? " " : char))
+      .join("")
+      .toLowerCase();
+  };
+
   return (
     <Col className=" listingItem">
-      <Card>
-        <Card.Img
-          className="card_img"
-          variant="top"
-          src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyamin-mellish-186077.jpg&fm=jpg"
-        />
-        <Card.Body>
-          <Card.Title>${price}</Card.Title>
-          <Card.Text>
-            <span className="homeType">Home Type: {homeType} </span>
-            <span>
-              {bedrooms} bds | {bathrooms} ba | {lotAreaValue} {lotAreaUnit}
-            </span>
-            <span>
-              {streetAddress}, {city}, {zipcode}
-            </span>
-          </Card.Text>
-        </Card.Body>
-      </Card>
+      <ListGroup.Item
+        as="li"
+        className="d-flex justify-content-between align-items-start"
+      >
+        <div className="ms-2">
+          <div className="fw-bold d-flex">
+            {streetAddress}, {city}, {state}, {zipcode}
+          </div>
+          <div className="fw-light d-flex">
+            {bedrooms} bds | {bathrooms} ba | {lotAreaValue} {lotAreaUnit}
+          </div>
+          <div className="fw-light d-flex">
+            Home Type: {formatHomeType(homeType)}
+          </div>
+        </div>
+        <Badge bg="primary" pill>
+          ${price}
+        </Badge>
+      </ListGroup.Item>
     </Col>
   );
 }
