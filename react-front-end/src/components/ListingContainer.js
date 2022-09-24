@@ -1,6 +1,7 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
 import ListingItem from "./ListingItem";
+import ListGroup from "react-bootstrap/ListGroup";
 import "./ListingContainer.scss";
 
 export default function ListingContainer(props) {
@@ -15,8 +16,8 @@ export default function ListingContainer(props) {
   console.log(data);
 
   return (
-    <Row lg={2} md={1} className="listingContainer p-0 m-0 d-flex">
-      {dataArray}
+    <Row className="listingContainer p-0 m-0 d-flex">
+      <ListGroup variant="flush">{dataArray}</ListGroup>
     </Row>
   );
 }
