@@ -7,8 +7,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 export default function RegisterUser() {
+
+const datePick = () => {
+    const [startDate, setStartDate] = useState(new Date());
+    return (
+      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+      
+    );
+  }
+
+
   return (
     <Form className="form-container">
       <div className="form-container-text">
@@ -17,18 +30,18 @@ export default function RegisterUser() {
           Don't see a run event near you?  Just tell us where and when and the rest is on us.
         </Form.Text>
       </div>
-      <FloatingLabel controlId="floatingInput" label="Event location" className="mb-3">
+      {/* <FloatingLabel controlId="floatingInput" label="Event Address" className="mb-3">
         <Form.Control type="text" placeholder="Location" />
       </FloatingLabel>
-      <FloatingLabel controlId="floatingInput" label="Address" className="mb-3">
+      <FloatingLabel controlId="floatingInput" label="" className="mb-3">
         <Form.Control type="Address" placeholder="123 Maple Street, ON" />
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingPassword"
-        label="Password"
+        label=""
         className="mb-3"
       >
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control type="" placeholder="Password" />
       </FloatingLabel>
       <Row>
         <Col>
@@ -99,7 +112,8 @@ export default function RegisterUser() {
           type="checkbox"
           id={`inline-checkbox-2`}
         />
-      </Form.Group>
+      </Form.Group> */}
+      {datePick()}
       <Button variant="primary" type="submit">
         Submit
       </Button>
