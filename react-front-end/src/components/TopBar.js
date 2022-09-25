@@ -31,12 +31,10 @@ const TopBar = (props) => {
             <Nav.Link href="/homes_sale">Buy</Nav.Link>
             <Nav.Link href="/homes_rent">Rent</Nav.Link>
             <Nav.Link href="/sell">Sell</Nav.Link>
-            {!currentUser && (
-              <React.Fragment>
-                <Nav.Link href="/login">Login</Nav.Link>
-                <Nav.Link href="/register">Register</Nav.Link>
-              </React.Fragment>
-            )}
+          </Nav>
+          <Nav className="">
+            {!currentUser && <Nav.Link href="/login">Login</Nav.Link>}
+            {!currentUser && <Nav.Link href="/register">Register</Nav.Link>}
             {currentUser && <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
