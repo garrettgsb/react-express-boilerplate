@@ -1,139 +1,65 @@
-import React, { useState, useReducer, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { Form, Button, Card, Alert, Container } from "react-bootstrap";
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import Card from "./UI/Card/Card";
-import classes from "./LoginPage.module.css";
-import Button from "./UI/Button/Button";
-import Axios from "axios";
+export default function LoginPage() {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login, currentUser } = useAuth();
+  const navigate = useNavigate();
 
-const emailReducer = (state, action) => {
-  if (action.type === "USER_INPUT") {
-    return { value: action.val, isValid: action.val.includes("@") };
-  }
-  if (action.type === "INPUT_BLUR") {
-    return { value: state.value, isValid: state.value.includes("@") };
-  }
-  return { value: "", isValid: false };
-};
-
-const passwordReducer = (state, action) => {
-  if (action.type === "USER_INPUT") {
-    return { value: action.val, isValid: action.val.trim().length > 0 };
-  }
-  if (action.type === "INPUT_BLUR") {
-    return { value: state.value, isValid: state.value.trim().length > 0 };
-  }
-  return { value: "", isValid: false };
-};
-
-function LoginPage(props) {
-  let navigate = useNavigate();
-
-  const [formIsValid, setFormIsValid] = useState(false);
-
-  const [emailState, dispatchEmail] = useReducer(emailReducer, {
-    value: "",
-    isValid: null,
-  });
-
-  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
-    value: "",
-    isValid: null,
-  });
-
-  const { isValid: emailIsValid } = emailState;
-  const { isValid: passwordIsValid } = passwordState;
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const identifier = setTimeout(() => {
-      setFormIsValid(emailIsValid && passwordIsValid);
-    }, 500);
+    if (currentUser) {
+      navigate("/");
+    }
+  }, []);
 
-    return () => {
-      clearTimeout(identifier);
-    };
-  }, [emailIsValid, passwordIsValid]);
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  const emailChangeHandler = (event) => {
-    dispatchEmail({
-      type: "USER_INPUT",
-      val: event.target.value,
-    });
-  };
+    try {
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+      setError("Failed to sign in");
+    }
 
-  const passwordChangeHandler = (event) => {
-    dispatchPassword({ type: "USER_INPUT", val: event.target.value });
-
-    setFormIsValid(emailState.isValid && event.target.value.trim().length > 0);
-  };
-
-  const validateEmailHandler = () => {
-    dispatchEmail({ type: "INPUT_BLUR" });
-  };
-
-  const validatePasswordHandler = () => {
-    dispatchEmail({ type: "INPUT_BLUR" });
-  };
-
-  const submitHandler = (event) => {
-    Axios.post("/login", {
-      email: emailState.value,
-      password: passwordState.value,
-    });
-    navigate("/");
-  };
+    setLoading(false);
+  }
 
   return (
-    <React.Fragment>
-      {!props.isLoggedIn && (
-        <Card className={classes.login}>
-          <form onSubmit={submitHandler}>
-            <div
-              className={`${classes.control} ${
-                emailState.isValid === false ? classes.invalid : ""
-              }`}
-            >
-              <label htmlFor="email">E-Mail</label>
-              <input
-                type="text"
-                id="email"
-                value={emailState.value}
-                onChange={emailChangeHandler}
-                onBlur={validateEmailHandler}
-                name="email"
-              />
-            </div>
-            <div
-              className={`${classes.control} ${
-                passwordState.isValid === false ? classes.invalid : ""
-              }`}
-            >
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                value={passwordState.value}
-                onChange={passwordChangeHandler}
-                onBlur={validatePasswordHandler}
-                name="password"
-              />
-            </div>
-            <div className={classes.actions}>
-              <Button
-                type="submit"
-                className={classes.btn}
-                disabled={!formIsValid}
-                onSubmit={submitHandler}
-              >
-                Login
-              </Button>
-            </div>
-          </form>
-        </Card>
-      )}
-      {props.isLoggedIn && <h1>Welcome Back</h1>}
-    </React.Fragment>
+    <>
+      <Card>
+        <Card.Body>
+          <h2 className="text-center mb-4">Log In</h2>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group id="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control type="email" ref={emailRef} required />
+            </Form.Group>
+            <Form.Group id="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" ref={passwordRef} required />
+            </Form.Group>
+
+            <Button disabled={loading} className="w-100" type="submit">
+              Log In
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
+      <div className="w-100 text-center mt-2">
+        Don't have an account? <Link to="/register">Sign up</Link>
+      </div>
+    </>
   );
 }
-
-export default LoginPage;
