@@ -23,6 +23,12 @@ export default function SearchBar(props) {
       homeTypeObj.isCondo = true;
     } else if (e.target.value === "townhome") {
       homeTypeObj.isTownhouse = true;
+    } else if (e.target.value === "all") {
+      homeTypeObj.isSingleFamily = true;
+      homeTypeObj.isMultiFamily = true;
+      homeTypeObj.isApartment = true;
+      homeTypeObj.isCondo = true;
+      homeTypeObj.isTownhouse = true;
     }
     setHomeType(homeTypeObj);
   };
@@ -49,7 +55,8 @@ export default function SearchBar(props) {
               name="beds"
               onChange={(e) => setBeds(e.target.value)}
             >
-              <option value="0">Bedrooms</option>
+              <option>Bedrooms</option>
+              <option value="0">0</option>
               <option value="1">1+</option>
               <option value="2">2+</option>
               <option value="3">3+</option>
@@ -77,7 +84,7 @@ export default function SearchBar(props) {
               name="homeType"
               onChange={changeHandler}
             >
-              <option>Home type</option>
+              <option value="all">Home type</option>
               <option value="house">Houses</option>
               <option value="apartment">Apartments</option>
               <option value="condo">Condos</option>
