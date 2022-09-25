@@ -15,11 +15,20 @@ export default function ModalContent(props) {
     <Modal show={show} onHide={handleClose} size="xl">
       <Modal.Header closeButton>
         <Modal.Title>
-          ${data.price}/month
-          <span className="small ps-3">
-            {data.bedrooms} bd | {data.bathrooms} ba | {data.livingArea}{" "}
-            {data.livingAreaUnitsShort}
-          </span>
+          {data.price > 1 ? `$${data.price}/month` : "Contact Agent"}
+          {data.homeStatus === "FOR_RENT" ? (
+            <span className="small ps-3">
+              {data.bedrooms} bd | {data.bathrooms} ba | {data.livingArea}{" "}
+              {data.livingAreaUnitsShort}
+            </span>
+          ) : (
+            ""
+          )}
+          {data.listingTypeDimension === "New Construction Plan" ? (
+            <span className="small ps-3">New Construction</span>
+          ) : (
+            ""
+          )}
           <div className="small">
             {data.address && data.address.streetAddress}
             {", "}
@@ -28,9 +37,15 @@ export default function ModalContent(props) {
             {data.address && data.address.state}{" "}
             {data.address && data.address.zipcode}
           </div>
-          <span className="small d-block">
-            <strong>For Rent</strong>
-          </span>
+          {data.homeStatus === "FOR_RENT" ? (
+            <span className="small d-block">
+              <strong>For Rent</strong>
+            </span>
+          ) : (
+            <span className="small d-block">
+              <strong>For Sale</strong>
+            </span>
+          )}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -60,7 +75,11 @@ export default function ModalContent(props) {
               </Card>
               <Card>
                 <Card.Body>
-                  <Card.Title>Rental facts and features</Card.Title>
+                  {data.homeStatus === "FOR_RENT" ? (
+                    <Card.Title>Rental facts and features</Card.Title>
+                  ) : (
+                    <Card.Title>Home facts and features</Card.Title>
+                  )}
                   <div>
                     {data.resoFacts &&
                       data.resoFacts.atAGlanceFacts.map((fact) => (
