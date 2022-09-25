@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
 import axios from "axios";
@@ -69,7 +68,7 @@ export default function ListingItem(props) {
   };
 
   return (
-    <Col>
+    <>
       <ListGroup.Item
         onClick={handleShow}
         as="li"
@@ -86,15 +85,19 @@ export default function ListingItem(props) {
             Home Type: {formatHomeType(homeType)}
           </div>
         </div>
-        <Badge bg="primary" pill>
-          ${price}
-        </Badge>
+        {price > 1 ? (
+          <Badge bg="primary" pill>
+            ${price}
+          </Badge>
+        ) : (
+          ""
+        )}
       </ListGroup.Item>
       <ModalContent
         handleClose={handleClose}
         data={reactState.data}
         show={reactState.show}
       />
-    </Col>
+    </>
   );
 }
