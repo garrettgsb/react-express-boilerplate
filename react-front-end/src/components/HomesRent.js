@@ -12,8 +12,14 @@ export default function Homes_Rent() {
   const [location, setLocation] = useState("");
   const [beds, setBeds] = useState("0");
   const [baths, setBaths] = useState("0");
-  const [maxPrice, setMaxPrice] = useState("10000");
   const [data, setData] = useState({});
+  const [homeType, setHomeType] = useState({
+    isSingleFamily: true,
+    isMultiFamily: true,
+    isApartment: true,
+    isCondo: true,
+    isTownhouse: true,
+  });
 
   const fetchData = () => {
     const options = {
@@ -23,7 +29,7 @@ export default function Homes_Rent() {
         location: location,
         beds_min: beds,
         baths_min: baths,
-        price_max: maxPrice,
+        ...homeType,
         status: "forRent",
       },
       headers: {
@@ -54,7 +60,7 @@ export default function Homes_Rent() {
         setBaths={setBaths}
         setBeds={setBeds}
         setLocation={setLocation}
-        setMaxPrice={setMaxPrice}
+        setHomeType={setHomeType}
       />
       <Row className="p-0 m-0 border-top">
         <Col className="mapContainer">
