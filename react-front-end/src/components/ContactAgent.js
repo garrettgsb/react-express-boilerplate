@@ -23,7 +23,7 @@ export default function ContactAgent() {
             <Form.Control type="text" id="phone" name="phone" />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" id="email" name="email" />
           </Form.Group>
