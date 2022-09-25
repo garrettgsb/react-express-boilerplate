@@ -18,10 +18,10 @@ const emailReducer = (state, action) => {
 
 const passwordReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
-    return { value: action.val, isValid: action.val.trim().length > 6 };
+    return { value: action.val, isValid: action.val.trim().length > 0 };
   }
   if (action.type === "INPUT_BLUR") {
-    return { value: state.value, isValid: state.value.trim().length > 6 };
+    return { value: state.value, isValid: state.value.trim().length > 0 };
   }
   return { value: "", isValid: false };
 };
@@ -64,7 +64,7 @@ function RegistrationPage(props) {
   const passwordChangeHandler = (event) => {
     dispatchPassword({ type: "USER_INPUT", val: event.target.value });
 
-    setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
+    setFormIsValid(emailState.isValid && event.target.value.trim().length > 0);
   };
 
   const validateEmailHandler = () => {
@@ -83,8 +83,7 @@ function RegistrationPage(props) {
     }).then((response) => {
       console.log(response);
     });
-    props.onLogin(emailState.value, passwordState.value);
-    navigate("/");
+    navigate("/login");
   };
 
   return (
