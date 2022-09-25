@@ -5,7 +5,28 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
 export default function SearchBar(props) {
-  const { submitHandler, setLocation, setBeds, setBaths, setMaxPrice } = props;
+  const { submitHandler, setLocation, setBeds, setBaths, setHomeType } = props;
+
+  const changeHandler = (e) => {
+    let homeTypeObj = {
+      isSingleFamily: false,
+      isMultiFamily: false,
+      isApartment: false,
+      isCondo: false,
+      isTownhouse: false,
+    };
+    if (e.target.value === "house") {
+      homeTypeObj.isSingleFamily = true;
+    } else if (e.target.value === "apartment") {
+      homeTypeObj.isApartment = true;
+    } else if (e.target.value === "condo") {
+      homeTypeObj.isCondo = true;
+    } else if (e.target.value === "townhome") {
+      homeTypeObj.isTownhouse = true;
+    }
+    setHomeType(homeTypeObj);
+  };
+
   return (
     <div className="ms-2 mt-2 pb-2">
       <Form onSubmit={submitHandler} size="sm">
@@ -54,28 +75,16 @@ export default function SearchBar(props) {
               aria-label="Default select example"
               id="homeType"
               name="homeType"
+              onChange={changeHandler}
             >
               <option>Home type</option>
               <option value="house">Houses</option>
               <option value="apartment">Apartments</option>
+              <option value="condo">Condos</option>
               <option value="townhome">Townhomes</option>
             </Form.Select>
           </Col>
-          <Col xs="auto">
-            <Form.Select
-              size="sm"
-              aria-label="Default select example"
-              id="price"
-              name="price"
-              onChange={(e) => setMaxPrice(e.target.value)}
-            >
-              <option>Max Price</option>
-              <option value="2000">$2000</option>
-              <option value="3000">$3000</option>
-              <option value="4000">$4000</option>
-              <option value="5000">$5000</option>
-            </Form.Select>
-          </Col>
+
           <Col xs="auto">
             <Button type="submit" className="" size="sm">
               Filter
