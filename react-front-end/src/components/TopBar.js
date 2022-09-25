@@ -4,8 +4,16 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { FaHome } from "react-icons/fa";
 import "./TopBar.scss";
+import { useAuth } from "../contexts/AuthContext";
+import { auth } from "../firebase/firebase";
 
 const TopBar = (props) => {
+  const { currentUser } = useAuth();
+
+  const logoutHandler = () => {
+    auth.signOut();
+  };
+
   return (
     <Navbar
       bg="dark"
@@ -23,15 +31,13 @@ const TopBar = (props) => {
             <Nav.Link href="/homes_sale">Buy</Nav.Link>
             <Nav.Link href="/homes_rent">Rent</Nav.Link>
             <Nav.Link href="/sell">Sell</Nav.Link>
-            {!props.isLoggedIn && (
+            {!currentUser && (
               <React.Fragment>
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/register">Register</Nav.Link>
               </React.Fragment>
             )}
-            {props.isLoggedIn && (
-              <Nav.Link onClick={props.onLogout}>Logout</Nav.Link>
-            )}
+            {currentUser && <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>
