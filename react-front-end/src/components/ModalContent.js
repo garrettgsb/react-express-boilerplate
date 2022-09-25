@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/esm/Image";
 import Fact from "./Fact";
+import ContactAgent from "./ContactAgent";
 import "./ModalContent.scss";
 
 export default function ModalContent(props) {
@@ -93,8 +94,7 @@ export default function ModalContent(props) {
                   </div>
                 </Card.Body>
               </Card>
-
-              {data.appliances}
+              <ContactAgent />
             </Col>
           </Row>
         </Container>
