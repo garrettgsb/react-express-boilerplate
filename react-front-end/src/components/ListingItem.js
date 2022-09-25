@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import Badge from "react-bootstrap/Badge";
+import axios from "axios";
+import ModalContent from "./ModalContent";
+import "./ListingItem.scss";
 
 export default function ListingItem(props) {
+  const [reactState, setReactState] = useState({
+    show: false,
+    data: {},
+  });
   const {
     bathrooms,
     bedrooms,
@@ -10,34 +18,83 @@ export default function ListingItem(props) {
     price,
     streetAddress,
     city,
+    state,
     zipcode,
     zpid,
     lotAreaUnit,
     lotAreaValue,
   } = props;
 
-  console.log(zpid);
+  const fetchData = () => {
+    const options = {
+      method: "GET",
+      url: "https://zillow56.p.rapidapi.com/property",
+      params: { zpid: zpid },
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Host": "zillow56.p.rapidapi.com",
+      },
+    };
+
+    axios
+      .request(options)
+      .then((res) => {
+        console.log(res.data);
+        setReactState((prev) => ({
+          ...prev,
+          show: true,
+          data: res.data,
+        }));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const handleClose = () => {
+    setReactState((prev) => ({
+      ...prev,
+      show: false,
+    }));
+  };
+  const handleShow = () => {
+    fetchData();
+  };
+
+  const formatHomeType = (homeType) => {
+    let result = homeType.split("");
+    return result
+      .map((char) => (char === "_" ? " " : char))
+      .join("")
+      .toLowerCase();
+  };
+
   return (
-    <Col className=" listingItem">
-      <Card>
-        <Card.Img
-          className="card_img"
-          variant="top"
-          src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?cs=srgb&dl=pexels-binyamin-mellish-186077.jpg&fm=jpg"
-        />
-        <Card.Body>
-          <Card.Title>${price}</Card.Title>
-          <Card.Text>
-            <span className="homeType">Home Type: {homeType} </span>
-            <span>
-              {bedrooms} bds | {bathrooms} ba | {lotAreaValue} {lotAreaUnit}
-            </span>
-            <span>
-              {streetAddress}, {city}, {zipcode}
-            </span>
-          </Card.Text>
-        </Card.Body>
-      </Card>
+    <Col>
+      <ListGroup.Item
+        onClick={handleShow}
+        as="li"
+        className="listingItem d-flex justify-content-between align-items-start"
+      >
+        <div className="ms-2">
+          <div className="fw-bold d-flex">
+            {streetAddress}, {city}, {state}, {zipcode}
+          </div>
+          <div className="fw-light d-flex">
+            {bedrooms} bds | {bathrooms} ba | {lotAreaValue} {lotAreaUnit}
+          </div>
+          <div className="fw-light d-flex">
+            Home Type: {formatHomeType(homeType)}
+          </div>
+        </div>
+        <Badge bg="primary" pill>
+          ${price}
+        </Badge>
+      </ListGroup.Item>
+      <ModalContent
+        handleClose={handleClose}
+        data={reactState.data}
+        show={reactState.show}
+      />
     </Col>
   );
 }

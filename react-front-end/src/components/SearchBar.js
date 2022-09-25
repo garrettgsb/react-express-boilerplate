@@ -8,10 +8,11 @@ export default function SearchBar(props) {
   const { submitHandler, setLocation, setBeds, setBaths, setMaxPrice } = props;
   return (
     <div className="ms-2 mt-2 pb-2">
-      <Form onSubmit={submitHandler}>
+      <Form onSubmit={submitHandler} size="sm">
         <Row className="align-items-center">
           <Col xs="auto">
             <Form.Control
+              size="sm"
               type="text"
               placeholder="Location"
               id="location"
@@ -21,6 +22,7 @@ export default function SearchBar(props) {
           </Col>
           <Col xs="auto">
             <Form.Select
+              size="sm"
               aria-label="Default select example"
               id="beds"
               name="beds"
@@ -34,6 +36,7 @@ export default function SearchBar(props) {
           </Col>
           <Col xs="auto">
             <Form.Select
+              size="sm"
               aria-label="Default select example"
               id="baths"
               name="baths"
@@ -47,6 +50,7 @@ export default function SearchBar(props) {
           </Col>
           <Col xs="auto">
             <Form.Select
+              size="sm"
               aria-label="Default select example"
               id="homeType"
               name="homeType"
@@ -59,6 +63,7 @@ export default function SearchBar(props) {
           </Col>
           <Col xs="auto">
             <Form.Select
+              size="sm"
               aria-label="Default select example"
               id="price"
               name="price"
@@ -72,7 +77,7 @@ export default function SearchBar(props) {
             </Form.Select>
           </Col>
           <Col xs="auto">
-            <Button type="submit" className="">
+            <Button type="submit" className="" size="sm">
               Filter
             </Button>
           </Col>
