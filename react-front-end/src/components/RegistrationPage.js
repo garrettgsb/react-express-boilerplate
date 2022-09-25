@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Form, Button, Card, Alert, Container } from "react-bootstrap";
+import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function RegistrationPage() {
   const emailRef = useRef();
