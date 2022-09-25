@@ -13,7 +13,6 @@ export default function ListingContainer(props) {
       <ListingItem key={property.zpid} {...property} />
     ));
   }
-  console.log(data);
 
   return (
     <Row className="listingContainer p-0 m-0 d-flex">
