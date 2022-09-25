@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import TopBar from "./components/TopBar";
 import "./App.scss";
 import Home from "./components/Home";
@@ -13,6 +13,7 @@ function App(props) {
   return (
     <div className="App">
       <TopBar />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/homes_rent" element={<HomesRent />} />
