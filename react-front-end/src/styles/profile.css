@@ -1,12 +1,12 @@
 .profile-pic {
-  height: 300px;
+  height: 310px;
   border-radius: 5px;
 }
 
 main {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
 }
 
 .profile-header {
@@ -16,22 +16,61 @@ main {
   flex-direction: row;
   border: 1px solid lightgrey;
   margin: 3em 0;
-  padding: 2em;
+  padding: 1.5em;
   border-radius: 5px;
-  font-family: 'Krub', sans-serif;
+  font-family: "Krub", sans-serif;
+}
+
+.profile-info {
+  width: 63%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .profile-info h1 {
   font-weight: 200;
   font-size: 70px;
+  margin: 0;
+}
+
+.profile-info h4 {
+  font-weight: 200;
+  font-size: 20px;
+  margin: 0;
+  color: gray;
 }
 
 .profile-info p {
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 30px;
+  margin: -20px 0 0 0;
+  text-align: end;
+}
+
+.profile-info .profile-welcome {
+  width: 300px;
+}
+
+.profile-info table {
+  table-layout: fixed;
+  width: 100%;
+  text-align: center;
+}
+
+.profile-info tbody {
+  font-size: 70px;
+}
+
+.profile-info .unit {
   font-size: 30px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.profile-stats button {
+  color: #495057;
+}
+
+.profile-stats button:hover {
+  color: #495057;
+  background-color: rgb(205, 205, 205);
 }

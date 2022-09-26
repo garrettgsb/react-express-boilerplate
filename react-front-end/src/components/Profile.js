@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Run from "./Run";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import Table from "react-bootstrap/Table";
 import "../styles/Profile.css";
 
 export default function Profile(props) {
@@ -27,42 +28,57 @@ export default function Profile(props) {
     let distance = 0,
       minutes = 0,
       count = 0;
-    for (const run in runnerRuns) {
-      if (run.future_run === false) {
-        distance += parseInt(run.distance);
-        minutes += parseInt(run.time);
+    for (const key in runnerRuns) {
+      if (runnerRuns[key].future_run === false) {
+        distance += parseInt(runnerRuns[key].distance);
+        minutes += parseInt(runnerRuns[key].time);
         count += 1;
       }
     }
     setRunData({ distance, minutes, count });
-    console.log("User's run data",runData);
-  }, [runnerRuns]);
+    console.log("User's run data", distance, minutes, count, runnerRuns);
+  }, []);
 
   return (
     <main className="profile-section">
       <section className="profile-header">
         <div className="profile-info">
-          <h1>Welcome!</h1>
-          <p>{user.name}</p>
-          <ul>
-            <li>You have run for {runData.time} minutes and {runData.distance} kilometers.</li>
-            <li>You have attended {runData.count} runs so far.</li>
-          </ul>
+          <div className="profile-welcome">
+            <h1>Welcome!</h1>
+            <p>{user.name}</p>
+          </div>
+          <h4>YOU HAVE:</h4>
+          <Table size="sm">
+            <thead>
+              <tr>
+                <th>RUN FOR</th>
+                <th>COVERED</th>
+                <th>ATTENDED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{runData.minutes}<span className="unit">min</span></td>
+                <td>{runData.distance}<span className="unit">km</span></td>
+                <td>{runData.count}<span className="unit">runs</span></td>
+              </tr>
+            </tbody>
+          </Table>
         </div>
         {profilePicture}
       </section>
 
       <section className="profile-stats">
         <Tabs
-          defaultActiveKey="profile"
-          id="fill-tab-example"
+          defaultActiveKey="attended"
+          id="profile-tab"
           className="mb-3"
           fill
         >
-          <Tab eventKey="home" title="Attended">
+          <Tab eventKey="attended" title="Attended">
             {showRunnersRuns(runnerRuns, "attended")}
           </Tab>
-          <Tab eventKey="profile" title="Planned">
+          <Tab eventKey="planned" title="Planned">
             {showRunnersRuns(plannerRuns, "planned")}
           </Tab>
         </Tabs>
