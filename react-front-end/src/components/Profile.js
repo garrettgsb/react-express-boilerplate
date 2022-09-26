@@ -7,13 +7,12 @@ import Tabs from "react-bootstrap/Tabs";
 import useAppData from "../hooks/useAppData";
 
 export default function Profile(props) {
-  const { runs } = props;
-  const { user } = props;
+  const { runnerRuns, plannerRuns, user } = props;
 
-  const showRunnersRuns = (runs) => {
+  const showRunnersRuns = (runs, type) => {
     const runsArray = Object.values(runs);
     return runsArray.map((run) => (
-      <Run key={run.id} run={run} userFlag={true} />
+      <Run key={run.id} run={run} type={type} />
     ));
   };
 
@@ -46,10 +45,10 @@ export default function Profile(props) {
           fill
         >
           <Tab eventKey="home" title="Attended">
-            {showRunnersRuns(runs)}
+            {showRunnersRuns(runnerRuns, "attended")}
           </Tab>
           <Tab eventKey="profile" title="Planned">
-            {showRunnersRuns(runs)}
+            {showRunnersRuns(plannerRuns, "planned")}
           </Tab>
         </Tabs>
       </section>
