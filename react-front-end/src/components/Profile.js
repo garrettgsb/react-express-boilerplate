@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import Nav from 'react-bootstrap/Nav';
-
 import Run from "./Run";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 
 import useAppData from "../hooks/useAppData";
 
@@ -39,7 +39,19 @@ export default function Profile(props) {
 
       <section className="profile-stats">
         <h1>Runs</h1>
-        {showRunnersRuns(runs)}
+        <Tabs
+          defaultActiveKey="profile"
+          id="fill-tab-example"
+          className="mb-3"
+          fill
+        >
+          <Tab eventKey="home" title="Attended">
+            {showRunnersRuns(runs)}
+          </Tab>
+          <Tab eventKey="profile" title="Planned">
+            {showRunnersRuns(runs)}
+          </Tab>
+        </Tabs>
       </section>
     </main>
   );
