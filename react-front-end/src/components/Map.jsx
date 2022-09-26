@@ -16,7 +16,7 @@ if (!isLoaded) return <div>Loading...</div>
 return (
     <GoogleMap 
         zoom={9}
-        center={{lat: -74, lng: 40.7}} 
+        center={{lat: 43, lng: -80}} 
         mapContainerClassName='map-container'
     ></GoogleMap>
     )
