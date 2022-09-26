@@ -10,15 +10,14 @@ export default function Profile(props) {
 
   const showRunnersRuns = (runs, type) => {
     const runsArray = Object.values(runs);
-    return runsArray.map((run) => (
-      <Run key={run.id} run={run} type={type} />
-    ));
+    return runsArray.map((run) => <Run key={run.id} run={run} type={type} />);
   };
 
   const profilePicture = (
     <img
       className="profile-pic"
-      src="https://cdn-icons-png.flaticon.com/512/2335/2335153.png"
+      src="https://images.pexels.com/photos/3042160/pexels-photo-3042160.jpeg"
+      // src="https://cdn-icons-png.flaticon.com/512/2335/2335153.png"
       alt="icon-profile"
     ></img>
   );
@@ -26,13 +25,16 @@ export default function Profile(props) {
   return (
     <main className="profile-section">
       <section className="profile-header">
+        <div className="profile-info">
+          <h1>Welcome!</h1>
+          <p>{user.name}</p>
+          <ul>
+            <li>Age: {user.age}</li>
+            <li>Email: {user.email}</li>
+            <li>Phone: {user.phone}</li>
+          </ul>
+        </div>
         {profilePicture}
-        <h1>Welcome {user.name}</h1>
-        <ul>
-          <li>Age: {user.age}</li>
-          <li>Email: {user.email}</li>
-          <li>Phone: {user.phone}</li>
-        </ul>
       </section>
 
       <section className="profile-stats">

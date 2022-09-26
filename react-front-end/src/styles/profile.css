@@ -1,6 +1,6 @@
 .profile-pic {
-  height: 200px;
-  margin: 5%;
+  height: 300px;
+  border-radius: 5px;
 }
 
 main {
@@ -10,14 +10,28 @@ main {
 }
 
 .profile-header {
+  width: 60rem;
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 5%;
+  justify-content: space-between;
+  flex-direction: row;
   border: 1px solid lightgrey;
-  margin-top: 5%;
+  margin: 3em 0;
+  padding: 2em;
+  border-radius: 5px;
+  font-family: 'Krub', sans-serif;
+}
+
+.profile-info h1 {
+  font-weight: 200;
+  font-size: 70px;
+}
+
+.profile-info p {
+  font-weight: 600;
+  font-size: 30px;
 }
 
 ul {
   list-style-type: none;
+  padding: 0;
 }
