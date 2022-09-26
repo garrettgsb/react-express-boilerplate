@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Run from "./Run";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -7,6 +7,7 @@ import "../styles/Profile.css";
 
 export default function Profile(props) {
   const { runnerRuns, plannerRuns, user } = props;
+  const [runData, setRunData] = useState({ distance: 0, minutes: 0, count: 0 });
 
   const showRunnersRuns = (runs, type) => {
     const runsArray = Object.values(runs);
@@ -22,6 +23,21 @@ export default function Profile(props) {
     ></img>
   );
 
+  useEffect(() => {
+    let distance = 0,
+      minutes = 0,
+      count = 0;
+    for (const run in runnerRuns) {
+      if (run.future_run === false) {
+        distance += parseInt(run.distance);
+        minutes += parseInt(run.time);
+        count += 1;
+      }
+    }
+    setRunData({ distance, minutes, count });
+    console.log("User's run data",runData);
+  }, [runnerRuns]);
+
   return (
     <main className="profile-section">
       <section className="profile-header">
@@ -29,9 +45,8 @@ export default function Profile(props) {
           <h1>Welcome!</h1>
           <p>{user.name}</p>
           <ul>
-            <li>Age: {user.age}</li>
-            <li>Email: {user.email}</li>
-            <li>Phone: {user.phone}</li>
+            <li>You have run for {runData.time} minutes and {runData.distance} kilometers.</li>
+            <li>You have attended {runData.count} runs so far.</li>
           </ul>
         </div>
         {profilePicture}
