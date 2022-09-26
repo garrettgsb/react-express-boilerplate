@@ -6,7 +6,8 @@
 }
 
 .run-image {
-  width: 15rem;
+  width: auto;
+  height: 15rem;
   padding: 1em;
 }
 
