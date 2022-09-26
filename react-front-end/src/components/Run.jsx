@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -7,9 +7,6 @@ import "../components/Run.css";
 
 export default function Run(props) {
   const { run, type } = props;
-  // const [runImage, setRunImage] = useState(
-  //   "https://cdn-icons-png.flaticon.com/512/366/366998.png"
-  // );
 
   return (
     <>

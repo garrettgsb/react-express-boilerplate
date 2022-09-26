@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React from "react";
 import Run from "./Run";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-
-import useAppData from "../hooks/useAppData";
+import "../styles/Profile.css";
 
 export default function Profile(props) {
   const { runnerRuns, plannerRuns, user } = props;
@@ -37,7 +36,6 @@ export default function Profile(props) {
       </section>
 
       <section className="profile-stats">
-        <h1>Runs</h1>
         <Tabs
           defaultActiveKey="profile"
           id="fill-tab-example"

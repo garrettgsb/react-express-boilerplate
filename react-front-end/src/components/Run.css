@@ -3,12 +3,13 @@
   flex-direction: row;
   gap: 1em;
   margin: 1em 0;
+  border-radius: 140px 0.375rem 0.375rem 140px;
 }
 
 .run-image {
   width: auto;
   height: 17rem;
-  padding: 1em;
+  border-radius: 50%;
 }
 
 .run-heading, .run-desc {
