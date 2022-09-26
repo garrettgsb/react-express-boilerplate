@@ -1,11 +1,11 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import SearchBar from "./SearchBar";
 import Row from "react-bootstrap/Row";
-import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/esm/Container";
 import ListingContainer from "./ListingContainer";
 import axios from "axios";
+import "./HomesRent.scss";
 
 export default function Homes_Sale() {
   const [location, setLocation] = useState("");
@@ -18,6 +18,10 @@ export default function Homes_Sale() {
     isApartment: true,
     isCondo: true,
     isTownhouse: true,
+  });
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLEMAP_API_KEY,
   });
 
   const fetchData = () => {
@@ -63,11 +67,12 @@ export default function Homes_Sale() {
         setHomeType={setHomeType}
       />
       <Row className="p-0 m-0 border-top">
-        {!Object.values(data).length && (
-          <Image
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL8lLj1o8mI7lLHKpC4I5qQUJrf9qLZNhDRA&usqp=CAU"
-            className="w-100"
-          />
+        {!Object.values(data).length && isLoaded && (
+          <GoogleMap
+            zoom={4}
+            center={{ lat: 49, lng: -106 }}
+            mapContainerClassName="map-container"
+          ></GoogleMap>
         )}
 
         <ListingContainer data={data} />
