@@ -31,7 +31,7 @@ export default function SimpleMap(){
       >
         {marker.map(({ lat, lng, id, name }) => {
           return (
-            <Markers key={id} lat={lat} lgn={lng} name={name} />
+            <Markers key={id} lat={lat} lng={lng} name={name} />
           );
         })}
       </GoogleMapReact>
