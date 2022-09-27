@@ -4,7 +4,7 @@ import Run from "./Run";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Table from "react-bootstrap/Table";
-import "../styles/Profile.css";
+import "../styles/profile.css";
 
 export default function Profile(props) {
   const { runnerRuns, plannerRuns, user } = props;
