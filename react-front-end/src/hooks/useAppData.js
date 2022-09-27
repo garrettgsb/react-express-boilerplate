@@ -51,6 +51,31 @@ export default function useAppData() {
       });
   }, []);
 
+  const login = (email, password) => {
+    axios
+      .post("/api/login", { email, password })
+      .then((response) => {
+        const { user } = response.data;
+        setAuth(true);
+        setUser(user);
+      })
+      .catch((error) => {
+        console.log(error.response.status);
+      });
+  };
+
+  const logout = () => {
+    axios
+      .post("/api/logout")
+      .then(() => {
+        setUser({});
+        setAuth(false);
+      })
+      .catch((error) => {
+        console.log(error.response.status);
+      });
+  };
+
   return {
     runs,
     runnerRuns,
@@ -58,5 +83,6 @@ export default function useAppData() {
     user,
     setUser,
     plannerRuns,
+    login,
   };
 }
