@@ -85,7 +85,7 @@ WHERE users_runs.runner_id = 1;
 
 -- Join a run - only future runs
 INSERT INTO users_runs (time, rating, runner_id, run_id)
-      SELECT '00:00:00', 0, 1, 4
+      SELECT 0, 0, 1, 4
       WHERE
       EXISTS (
             -- only future runs can be joined

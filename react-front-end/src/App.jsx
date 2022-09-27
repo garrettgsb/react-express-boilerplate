@@ -15,7 +15,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SignIn from "./components/SignIn";
 
 export default function App() {
-  const { runs, runnerRuns, users, user, setUser } = useAppData();
+  const { runs, runnerRuns, users, user, setUser, plannerRuns } = useAppData();
   
   return (
     <div>
@@ -26,7 +26,7 @@ export default function App() {
           <Route index element={<Homepage />}></Route>
           <Route
             path="/profile"
-            element={<Profile runs={runnerRuns} user={user} />}
+            element={<Profile runnerRuns={runnerRuns} plannerRuns={plannerRuns} user={user} />}
           ></Route>
           <Route path="/runs" element={<FindRun runs={runs} />}></Route>
           <Route path="/register" element={<RegisterUser />}></Route>
