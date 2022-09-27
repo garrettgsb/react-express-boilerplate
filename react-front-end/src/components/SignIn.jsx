@@ -5,13 +5,16 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { userState } from "../hooks/useAppData";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/SignInUser.css";
 
 export default function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = props;
+  // const { setUser } = props;
+  const setUser = useSetRecoilState(userState);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {

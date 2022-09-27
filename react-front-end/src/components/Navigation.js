@@ -5,9 +5,12 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { userState } from "../hooks/useAppData";
 
 export default function Navigation(props) {
-  const { user, setUser } = props;
+  // const { user, setUser } = props;
+  const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
 
   const signOut = () => {

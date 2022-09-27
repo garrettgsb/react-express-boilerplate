@@ -13,24 +13,25 @@ import Error from "./components/Error";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SignIn from "./components/SignIn";
+import { useRecoilValue } from "recoil";
+import { userState } from "./hooks/useAppData";
 
 export default function App() {
-  const { runs, runnerRuns, users, user, setUser, plannerRuns } = useAppData();
-  
+  const { runs, runnerRuns, users, plannerRuns } = useAppData();
   return (
     <div>
       <Router>
-        <Navigation user={user} setUser={setUser}/>
+        <Navigation/>
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route index element={<Homepage />}></Route>
           <Route
             path="/profile"
-            element={<Profile runnerRuns={runnerRuns} plannerRuns={plannerRuns} user={user} />}
+            element={<Profile runnerRuns={runnerRuns} plannerRuns={plannerRuns} />}
           ></Route>
           <Route path="/runs" element={<FindRun runs={runs} />}></Route>
           <Route path="/register" element={<RegisterUser />}></Route>
-          <Route path="/signin" element={<SignIn setUser={setUser}/>}></Route>
+          <Route path="/signin" element={<SignIn />}></Route>
           {/* catch error urls */}
           {/* <Route path="*" element={<Error />}></Route> */}
         </Routes>

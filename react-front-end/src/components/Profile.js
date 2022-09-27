@@ -4,11 +4,14 @@ import Run from "./Run";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Table from "react-bootstrap/Table";
+import { useRecoilValue } from "recoil";
+import { userState } from "../hooks/useAppData";
 import "../styles/profile.css";
 
 export default function Profile(props) {
-  const { runnerRuns, plannerRuns, user } = props;
+  const { runnerRuns, plannerRuns } = props;
   const [runData, setRunData] = useState({ distance: 0, minutes: 0, count: 0 });
+  const user = useRecoilValue(userState);
 
   const showRunnersRuns = (runs, type) => {
     const runsArray = Object.values(runs);
