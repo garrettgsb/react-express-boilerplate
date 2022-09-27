@@ -7,34 +7,21 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../hooks/useAppData";
+import useAppData from "../hooks/useAppData";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/SignInUser.css";
 
 export default function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAppData();
   // const { setUser } = props;
-  const setUser = useSetRecoilState(userState);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("/api/login", { email, password })
-      .then((response) => {
-        const { user } = response.data;
-        if (!user) {
-          console.log("User not found.");
-          navigate("/");
-          return;
-        }
-        setUser(user);
-        navigate("/profile");
-      })
-      .catch((error) => {
-        navigate("/");
-        console.log(error.response.status);
-      });
+    login(email, password);
+    navigate("/profile");
   };
 
   return (

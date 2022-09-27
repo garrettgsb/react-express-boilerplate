@@ -56,7 +56,6 @@ export default function useAppData() {
       .post("/api/login", { email, password })
       .then((response) => {
         const { user } = response.data;
-        setAuth(true);
         setUser(user);
       })
       .catch((error) => {
@@ -69,7 +68,6 @@ export default function useAppData() {
       .post("/api/logout")
       .then(() => {
         setUser({});
-        setAuth(false);
       })
       .catch((error) => {
         console.log(error.response.status);
@@ -81,8 +79,8 @@ export default function useAppData() {
     runnerRuns,
     users,
     user,
-    setUser,
     plannerRuns,
     login,
+    logout
   };
 }

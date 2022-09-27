@@ -7,23 +7,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../hooks/useAppData";
+import useAppData from "../hooks/useAppData";
 
 export default function Navigation(props) {
   // const { user, setUser } = props;
-  const [user, setUser] = useRecoilState(userState);
+  const [user] = useRecoilState(userState);
   const navigate = useNavigate();
+  const { logout } = useAppData();
 
   const signOut = () => {
-    axios
-      .post("/api/logout")
-      .then(() => {
-        setUser(null);
-        navigate("/");
-      })
-      .catch((error) => {
-        navigate("/");
-        console.log(error.response.status);
-      });
+    logout();
+    navigate("/");
   };
 
   return (
