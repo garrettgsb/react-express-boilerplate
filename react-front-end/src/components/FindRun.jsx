@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import Run from "./Run";
+import Map from "./Map";
 
 export default function FindRun(props) {
   const { runs } = props;
@@ -14,6 +15,7 @@ export default function FindRun(props) {
 
   return (
     <>
+      <Map />
       <h1>All available runs you can join:</h1>
       {showAvailableRuns(runs)}
     </>
