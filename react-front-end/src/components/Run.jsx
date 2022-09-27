@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -6,10 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Run.css";
 
 export default function Run(props) {
-  const { run, userFlag } = props;
-  // const [runImage, setRunImage] = useState(
-  //   "https://cdn-icons-png.flaticon.com/512/366/366998.png"
-  // );
+  const { run, type } = props;
 
   return (
     <>
@@ -26,13 +23,13 @@ export default function Run(props) {
           <div className="run-desc">
             <ListGroup variant="flush">
               <ListGroup.Item>Distance: {run.distance} km</ListGroup.Item>
-              {!userFlag && (
+              {type !== "attended" && (
                 <ListGroup.Item>Address: {run.location}</ListGroup.Item>
               )}
               <ListGroup.Item>Time: {run.time}</ListGroup.Item>
               <ListGroup.Item>Date: {run.date}</ListGroup.Item>
             </ListGroup>
-            {!userFlag && <Button variant="primary">Join</Button>}
+            {type === "available" && <Button variant="primary">Join</Button>}
           </div>
         </Card.Body>
       </Card>
