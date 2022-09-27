@@ -7,10 +7,10 @@ import GoogleMapReact from "google-map-react";
 export default function SimpleMap(){
   const defaultProps = {
     center: {
-      lat: 10.99835602,
-      lng: 77.01502627
+      lat: 43,
+      lng: -80
     },
-    zoom: 11
+    zoom: 7
   };
 
   const myKey = process.env.REACT_APP_MAP_API_KEY;
