@@ -7,6 +7,10 @@ import GoogleMapReact from "google-map-react";
 import Markers from "./Markers";
 
 
+const marker = [
+  { id: 1, name: "Calgary", lat: 51.049999, lng: -114.06666 }
+]
+
 export default function SimpleMap(){
   const defaultProps = {
     center: {
@@ -25,6 +29,11 @@ export default function SimpleMap(){
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
+        {marker.map(({ lat, lng, id, name }) => {
+          return (
+            <Markers key={id} lat={lat} lgn={lng} name={name} />
+          );
+        })}
       </GoogleMapReact>
     </div>
   );
