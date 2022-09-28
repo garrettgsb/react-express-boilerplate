@@ -4,7 +4,6 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate, Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-// import { logout } from "../hooks/useAppData";
 import { userState } from "../hooks/useAppData";
 import useAppData from "../hooks/useAppData";
 
@@ -14,8 +13,11 @@ export default function Navigation() {
   const { logout } = useAppData();
 
   const signOut = () => {
-    logout();
-    navigate("/");
+    logout().then((status) => {
+      if (status === null) {
+        navigate("/");
+      }
+    });
   };
 
   return (

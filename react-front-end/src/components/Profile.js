@@ -5,7 +5,6 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Table from "react-bootstrap/Table";
 import "../styles/profile.css";
-import { useLoaderData } from "react-router-dom";
 import { userState,runnerRunsState, plannerRunsState } from "../hooks/useAppData";
 import { useRecoilValue } from "recoil";
 
@@ -13,7 +12,6 @@ export default function Profile() {
   const user = useRecoilValue(userState);
   const runnerRuns = useRecoilValue(runnerRunsState);
   const plannerRuns = useRecoilValue(plannerRunsState);
-  // const { runnerRuns, plannerRuns } = useLoaderData();
   const [runData, setRunData] = useState({ distance: 0, minutes: 0, count: 0 });
 
   const showRunnersRuns = (runs, type) => {

@@ -69,11 +69,12 @@ export default function useAppData() {
   }, [user]);
 
   function login(email, password) {
-    axios
+    return axios
       .post("/api/login", { email, password })
       .then((response) => {
         const { user } = response.data;
         setUser(user);
+        return true;
       })
       .catch((error) => {
         console.log(error);
@@ -81,12 +82,13 @@ export default function useAppData() {
   }
 
   function logout() {
-    axios
+    return axios
       .post("/api/logout")
       .then(() => {
         setUser(null);
         setRunnerRuns(null);
         setPlannerRuns(null);
+        return null;
       })
       .catch((error) => {
         console.log(error);
