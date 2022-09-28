@@ -1,60 +1,100 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-
+import {
+  atom,
+  useSetRecoilState,
+  useRecoilValue,
+  useRecoilState,
+} from "recoil";
 //hook for getting runs
 //hook for logged in user
 //hook for runner only runs
 //hook for planner runs
 //axios route change based on user id
 
+export const userState = atom({
+  key: "userState",
+  default: null,
+});
+
+export const runsState = atom({
+  key: "runsState",
+  default: null,
+});
+
+export const runnerRunsState = atom({
+  key: "runnerRunsState",
+  default: null,
+});
+
+export const plannerRunsState = atom({
+  key: "plannerRunsState",
+  default: null,
+});
+
 export default function useAppData() {
-  const [runs, setRuns] = useState({});
-  const [runnerRuns, setRunnerRuns] = useState({});
-  const [plannerRuns, setPlannerRuns] = useState({});
-  const [users, setUsers] = useState({});
-  const [user, setUser] = useState({});
+  const [runs, setRuns] = useRecoilState(runsState);
+  const [runnerRuns, setRunnerRuns] = useRecoilState(runnerRunsState);
+  const [plannerRuns, setPlannerRuns] = useRecoilState(plannerRunsState);
+  const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {
-
-    Promise.all([
-    axios.get("/api/runs"), 
-    axios.get("/api/runs/runner/1"),
-    axios.get("/api/users"),
-    axios.get("/api/users/1"),
-    axios.get("/api/runs/planner/1")])
+    Promise.all([axios.get("/api/runs")])
       .then((response) => {
-
         const { runs } = response[0].data;
-        const { runnerRuns } = response[1].data;
-        const { plannerRuns } = response[4].data;
-        console.log("All available runs", runs);
-        console.log("User ID 1's runs that have participated in:", runnerRuns);
         setRuns(runs);
-        setRunnerRuns(runnerRuns);
-        setPlannerRuns(plannerRuns);
-
-        const { users } = response[2].data;
-        setUsers(users)
-
-        // const { user } = response[3].data;
-        console.log("single user:", user);
-        // setUser(user)
       })
       .catch((error) => {
-        console.log(error.response.status);
+        console.log(error);
       });
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      Promise.all([
+        axios.get(`/api/runs/runner/${user.id}`),
+        axios.get(`/api/runs/planner/${user.id}`),
+      ])
+        .then((response) => {
+          const { runnerRuns } = response[0].data;
+          const { plannerRuns } = response[1].data;
+          setRunnerRuns(runnerRuns);
+          setPlannerRuns(plannerRuns);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [user]);
+
+  function login(email, password) {
+    axios
+      .post("/api/login", { email, password })
+      .then((response) => {
+        const { user } = response.data;
+        setUser(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function logout() {
+    axios
+      .post("/api/logout")
+      .then(() => {
+        setUser(null);
+        setRunnerRuns(null);
+        setPlannerRuns(null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return {
-    runs,
-    runnerRuns,
-    users,
-    user,
-    setUser,
-    plannerRuns
+    login,
+    logout,
   };
-
-
-
 }

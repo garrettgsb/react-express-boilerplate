@@ -14,6 +14,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^6.4.1",
     "react-scripts": "2.1.8",
+    "recoil": "^0.7.5",
     "sass": "^1.54.9"
   },
   "scripts": {
