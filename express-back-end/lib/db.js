@@ -198,7 +198,7 @@ const registerForARun = ({runner_id, run_id}) => {
   return db
     .query(
       `INSERT INTO users_runs (time, rating, runner_id, run_id)
-      SELECT '00:00:00', 0, $1, $2
+      SELECT '0', 0, $1, $2
       WHERE
       EXISTS (
             -- only future runs can be joined

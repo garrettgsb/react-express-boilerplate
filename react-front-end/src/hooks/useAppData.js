@@ -93,8 +93,21 @@ export default function useAppData() {
       });
   }
 
+  function joinRun(runner_id, run_id) {
+    return axios
+      .post("/api/register", { runner_id, run_id })
+      .then((response) => {
+        const { user_run } = response.data;
+        if (user_run) return true;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return {
     login,
     logout,
+    joinRun,
   };
 }
