@@ -92,7 +92,7 @@ const getUserByEmail = ({ email }) => {
 const getAllRuns = () => {
   return db
     .query(
-      `SELECT runs.id, runs.name, runs.description, runs.location, runs.time, runs.date 
+      `SELECT runs.id, runs.name, runs.description, runs.location, runs.time, runs.date, runs.latitude, runs.longitude 
     FROM runs
     WHERE runs.date >= CURRENT_DATE;`
     )
@@ -130,13 +130,15 @@ const createRun = ({
   time,
   date,
   planner_id,
+  latitude,
+  longitude
 }) => {
   return db
     .query(
-      `INSERT INTO runs (name, description, location, distance, time, date, planner_id)
-    VALUES ($1,$2,$3,$4,$5,$6,$7)
+      `INSERT INTO runs (name, description, location, distance, time, date, planner_id, latitude, longitude)
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
     RETURNING *;`,
-      [name, description, location, distance, time, date, planner_id]
+      [name, description, location, distance, time, date, planner_id, latitude, longitude]
     )
     .then((result) => {
       const run = result.rows[0];

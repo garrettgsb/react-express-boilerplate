@@ -25,7 +25,9 @@ CREATE TABLE runs (
   distance INTEGER NOT NULL,
   time VARCHAR(255) NOT NULL,
   date DATE NOT NULL,
-  planner_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  planner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  latitude DECIMAL(6,5) NOT NULL,
+  longitude DECIMAL(6,5) NOT NULL
 );
 
 CREATE TABLE users_runs (
