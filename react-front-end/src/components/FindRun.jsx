@@ -2,9 +2,12 @@
 import React from "react";
 import Run from "./Run";
 import { useLoaderData } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { runsState } from "../hooks/useAppData";
 
 export default function FindRun() {
-  const { runs } = useLoaderData();
+  // const { runs } = useLoaderData();
+  const runs = useRecoilValue(runsState);
 
   const showAvailableRuns = (runs, type) => {
     const runsArray = Object.values(runs);

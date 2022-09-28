@@ -5,7 +5,7 @@ import FindRun from "./components/FindRun";
 import RegisterUser from "./components/RegisterUser";
 import Homepage from "./components/Homepage.jsx";
 import SignIn from "./components/SignIn";
-import App, { runsLoader, usersRunsLoader } from "./App";
+import App from "./App";
 
 import {
   createRoutesFromElements,
@@ -18,14 +18,11 @@ export const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index element={<Homepage />} />
       <Route
-        path="/profile/:id"
+        path="/profile"
         element={<Profile />}
-        loader={async ({ params }) => {
-          const { id } = params;
-          return usersRunsLoader(id);
-        }}
+      
       />
-      <Route path="/runs" element={<FindRun />} loader={runsLoader} />
+      <Route path="/runs" element={<FindRun />}  />
       <Route path="/register" element={<RegisterUser />} />
       <Route path="/signin" element={<SignIn />} />
     </Route>
