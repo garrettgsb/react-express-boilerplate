@@ -5,7 +5,11 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Table from "react-bootstrap/Table";
 import "../styles/profile.css";
-import { userState,runnerRunsState, plannerRunsState } from "../hooks/useAppData";
+import {
+  userState,
+  runnerRunsState,
+  plannerRunsState,
+} from "../hooks/useAppData";
 import { useRecoilValue } from "recoil";
 
 export default function Profile() {
@@ -40,7 +44,7 @@ export default function Profile() {
       }
     }
     setRunData({ distance, minutes, count });
-  }, []);
+  }, [runnerRuns]);
 
   return (
     <main className="profile-section">

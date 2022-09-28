@@ -19,8 +19,10 @@ export default function SignIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email, password);
-    navigate(`/profile`);
+    login(email, password)
+    .then((status)=>{
+      status && navigate(`/profile`);
+    })
   };
 
   return (
