@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Homepage.css";
 import logo from "./logo.png";
 import Button from "react-bootstrap/Button"
+import { Link } from "react-router-dom";
 
 export default function Homepage() {
   
@@ -25,9 +26,10 @@ export default function Homepage() {
         <div className="home-plan">
           <img className="map-logo" src="https://cdn-icons-png.flaticon.com/512/2953/2953336.png" alt="run-icon" />
           <p>Create a run</p>
-          <Button variant="primary" type="submit">
+          <Link to="/create"><Button variant="primary" type="submit">
              Create
           </Button>
+          </Link>
         </div>
       </div>
 
