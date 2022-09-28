@@ -8,6 +8,18 @@ import Navigation from "./components/Navigation.js";
 import { Outlet } from "react-router-dom";
 import { atom, useSetRecoilState, useRecoilValue } from "recoil";
 
+import RegisterRun from "./components/RegisterRun";
+
+import Map from "./components/Map";
+
+
+
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+import SignIn from "./components/SignIn";
+
+require("dotenv").config();
+
 
 export default function App() {
   return (
