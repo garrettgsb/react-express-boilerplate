@@ -4,14 +4,15 @@ import Run from "./Run";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Table from "react-bootstrap/Table";
-import { useRecoilValue } from "recoil";
-import { userState } from "../hooks/useAppData";
 import "../styles/profile.css";
+import { useLoaderData } from "react-router-dom";
+import { userState } from "../hooks/useAppData";
+import { useRecoilValue } from "recoil";
 
-export default function Profile(props) {
-  const { runnerRuns, plannerRuns } = props;
-  const [runData, setRunData] = useState({ distance: 0, minutes: 0, count: 0 });
+export default function Profile() {
   const user = useRecoilValue(userState);
+  const { runnerRuns, plannerRuns } = useLoaderData();
+  const [runData, setRunData] = useState({ distance: 0, minutes: 0, count: 0 });
 
   const showRunnersRuns = (runs, type) => {
     const runsArray = Object.values(runs);
@@ -39,7 +40,6 @@ export default function Profile(props) {
       }
     }
     setRunData({ distance, minutes, count });
-    console.log("User's run data", distance, minutes, count, runnerRuns);
   }, []);
 
   return (
@@ -48,7 +48,7 @@ export default function Profile(props) {
         <div className="profile-info">
           <div className="profile-welcome">
             <h1>Welcome!</h1>
-            <p>{user.name}</p>
+            {user && <p>{user.name}</p>}
           </div>
           <h4>YOU HAVE:</h4>
           <Table size="sm">
@@ -61,9 +61,18 @@ export default function Profile(props) {
             </thead>
             <tbody>
               <tr>
-                <td>{runData.minutes}<span className="unit">min</span></td>
-                <td>{runData.distance}<span className="unit">km</span></td>
-                <td>{runData.count}<span className="unit">runs</span></td>
+                <td>
+                  {runData.minutes}
+                  <span className="unit">min</span>
+                </td>
+                <td>
+                  {runData.distance}
+                  <span className="unit">km</span>
+                </td>
+                <td>
+                  {runData.count}
+                  <span className="unit">runs</span>
+                </td>
               </tr>
             </tbody>
           </Table>
@@ -79,10 +88,10 @@ export default function Profile(props) {
           fill
         >
           <Tab eventKey="attended" title="Attended">
-            {showRunnersRuns(runnerRuns, "attended")}
+            {runnerRuns && showRunnersRuns(runnerRuns, "attended")}
           </Tab>
           <Tab eventKey="planned" title="Planned">
-            {showRunnersRuns(plannerRuns, "planned")}
+            {plannerRuns && showRunnersRuns(plannerRuns, "planned")}
           </Tab>
         </Tabs>
       </section>

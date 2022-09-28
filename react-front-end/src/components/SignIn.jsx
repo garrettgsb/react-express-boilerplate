@@ -1,27 +1,28 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
+import { login } from "../hooks/useAppData";
 import { userState } from "../hooks/useAppData";
-import useAppData from "../hooks/useAppData";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/SignInUser.css";
 
-export default function SignIn(props) {
+
+export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAppData();
-  // const { setUser } = props;
+  const setUser = useSetRecoilState(userState);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email, password);
-    navigate("/profile");
+    login(email, password).then(({ user }) => {
+      setUser(user);
+      navigate(`/profile/${user.id}`);
+    });
   };
 
   return (

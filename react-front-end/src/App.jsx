@@ -1,41 +1,30 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import axios from "axios";
+// import { router } from "./AppRouter";
 import "./index.css";
-import Profile from "./components/Profile.js";
-import FindRun from "./components/FindRun";
-import useAppData from "./hooks/useAppData";
-import Navigation from "./components/Navigation.js";
-import RegisterUser from "./components/RegisterUser";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Homepage from "./components/Homepage.jsx";
-import Error from "./components/Error";
+import { getRuns, getUsersRuns, login, logout } from "./hooks/useAppData";
+import Navigation from "./components/Navigation.js";
+import { Outlet } from "react-router-dom";
+import { atom, useSetRecoilState, useRecoilValue } from "recoil";
 
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import SignIn from "./components/SignIn";
-import { useRecoilValue } from "recoil";
-import { userState } from "./hooks/useAppData";
+export async function runsLoader() {
+  const { runs } = await getRuns();
+  return { runs };
+}
+
+export async function usersRunsLoader(id) {
+  const { runnerRuns, plannerRuns } = await getUsersRuns(id);
+  return { runnerRuns, plannerRuns };
+}
+
+
 
 export default function App() {
-  const { runs, runnerRuns, users, plannerRuns } = useAppData();
   return (
     <div>
-      <Router>
-        <Navigation/>
-        <Routes>
-          <Route path="/" element={<Homepage />}></Route>
-          <Route index element={<Homepage />}></Route>
-          <Route
-            path="/profile"
-            element={<Profile runnerRuns={runnerRuns} plannerRuns={plannerRuns} />}
-          ></Route>
-          <Route path="/runs" element={<FindRun runs={runs} />}></Route>
-          <Route path="/register" element={<RegisterUser />}></Route>
-          <Route path="/signin" element={<SignIn />}></Route>
-          {/* catch error urls */}
-          {/* <Route path="*" element={<Error />}></Route> */}
-        </Routes>
-      </Router>
+      <Navigation />
+      <Outlet />
     </div>
   );
 }

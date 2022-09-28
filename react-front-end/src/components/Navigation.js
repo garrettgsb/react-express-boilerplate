@@ -2,28 +2,28 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { logout } from "../hooks/useAppData";
 import { userState } from "../hooks/useAppData";
-import useAppData from "../hooks/useAppData";
 
-export default function Navigation(props) {
-  // const { user, setUser } = props;
-  const [user] = useRecoilState(userState);
+export default function Navigation() {
+  const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
-  const { logout } = useAppData();
 
   const signOut = () => {
-    logout();
-    navigate("/");
+    logout().then(() => {
+      setUser(null);
+      navigate("/");
+    });
   };
 
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="/">WeRun</Navbar.Brand>
+        <Link className="navbar-brand" to="/">
+          WeRun
+        </Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -31,22 +31,32 @@ export default function Navigation(props) {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/runs">Join A Run</Nav.Link>
-            {!user.id && <Nav.Link href="/signin">Sign In</Nav.Link>}
-            {!user.id && <Nav.Link href="/register">Sign Up</Nav.Link>}
-            {user.id && (
-              <Nav.Link href="/signout" onClick={signOut}>
-                Sign Out
-              </Nav.Link>
+            <Link className="nav-link" to="/">
+              Home
+            </Link>
+            <Link className="nav-link" to="/runs">
+              Join A Run
+            </Link>
+            {user === null && (
+              <Link className="nav-link" to="/signin">
+                Sign In
+              </Link>
             )}
-            {user.id && <Nav.Link href="/profile">Profile</Nav.Link>}
-            <NavDropdown title="More Options" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#">Option 1</NavDropdown.Item>
-              <NavDropdown.Item href="#">Option 1</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#">Option 3</NavDropdown.Item>
-            </NavDropdown>
+            {user === null && (
+              <Link className="nav-link" to="/register">
+                Sign Up
+              </Link>
+            )}
+            {user !== null && (
+              <Link className="nav-link" to="#" onClick={signOut}>
+                Sign Out
+              </Link>
+            )}
+            {user !== null && (
+              <Link className="nav-link" to="/profile/:id">
+                Profile
+              </Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

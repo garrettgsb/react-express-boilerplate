@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { RecoilRoot } from "recoil";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./AppRouter";
 
 ReactDOM.render(
   <RecoilRoot>
-    <App />{" "}
+    <RouterProvider router={router} />
   </RecoilRoot>,
   document.getElementById("root")
 );
