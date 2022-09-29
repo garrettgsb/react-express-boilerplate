@@ -15,6 +15,7 @@
     "react-router-dom": "^6.4.1",
     "react-scripts": "2.1.8",
     "recoil": "^0.7.5",
+    "recoil-persist": "^4.2.0",
     "sass": "^1.54.9"
   },
   "scripts": {
