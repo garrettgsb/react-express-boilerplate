@@ -2,16 +2,29 @@
 import React  from "react";
 import "../components/Map.css";
 import GoogleMapReact from "google-map-react";
+import { useLoaderData } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { runsState } from "../hooks/useAppData";
 
 
 import Markers from "./Markers";
 
 
-const marker = [
-  { id: 1, name: "Calgary", lat: 51.049999, lng: -114.06666 }
-]
+
 
 export default function SimpleMap(){
+
+  const marker = useRecoilValue(runsState);
+  console.log(marker)
+
+
+  const showMarkers = (marker) => {
+    const runsArray = Object.values(marker);
+    
+    return runsArray.map((run) => <Markers key={run.id} name={run.name}  lat={run.latitude} lng={run.longitude} />);
+  };
+
+
   const defaultProps = {
     center: {
       lat: 43,
@@ -29,11 +42,12 @@ export default function SimpleMap(){
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        {marker.map(({ lat, lng, id, name }) => {
+      {showMarkers(marker)}
+         {/* {marker.map(({ latitude, longitude, id, name }) => {
           return (
-            <Markers key={id} lat={lat} lng={lng} name={name} />
+            <Markers key={id} latitude={latitude} longitude={longitude} name={name} />
           );
-        })}
+        })}  */}
       </GoogleMapReact>
     </div>
   );
