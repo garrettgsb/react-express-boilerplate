@@ -106,6 +106,7 @@ export default function useAppData() {
   }
 
   function canJoinRun(run_id) {
+    if (!runnerRuns) return true;
     const runExists = runnerRuns[run_id];
     if (runExists) return false;
     return true;

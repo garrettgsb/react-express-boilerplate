@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Run from "./Run";
 import Map from "./Map";
+import JoiningStatus from "./JoiningStatus";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userState, runsState } from "../hooks/useAppData";
 import useAppData from "../hooks/useAppData";
+
 
 export default function FindRun() {
   // const { runs } = useLoaderData();
@@ -13,6 +15,7 @@ export default function FindRun() {
   const user = useRecoilValue(userState);
   const { joinRun, canJoinRun } = useAppData();
   const navigate = useNavigate();
+  const [joinButtonPressed, setJoinButtonPressed] = useState(false);
 
   const join = (user_id, run_id) =>{
     // Check if joining is possible
@@ -24,7 +27,10 @@ export default function FindRun() {
     // Join if possible
     joinRun(user_id, run_id)
     .then((response)=>{
-      response && navigate("/profile");
+      if(response) {
+        setJoinButtonPressed(true);
+        // navigate("/profile");
+      } 
     })
   }
 
@@ -37,7 +43,7 @@ export default function FindRun() {
           run={run}
           type={type}
           join={() => join(user.id, run.id)}
-          canJoinRun={()=>canJoinRun(run.id)}
+          canJoinRun={canJoinRun}
         />
       );
     });
@@ -45,9 +51,10 @@ export default function FindRun() {
 
   return (
     <>
-      <Map />
+      {/* <Map /> */}
       <h1>All available runs you can join:</h1>
       {showAvailableRuns(runs, "available")}
+      <JoiningStatus joinButtonPressed={joinButtonPressed} setJoinButtonPressed={setJoinButtonPressed}/>
     </>
   );
 }

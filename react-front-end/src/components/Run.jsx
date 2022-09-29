@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -8,6 +8,7 @@ import JoinButton from "./JoinButton";
 
 export default function Run(props) {
   const { run, type, canJoinRun, join } = props;
+  const [joinStatus, setJoinStatus] = useState(canJoinRun(run.id) || false);
 
   return (
     <>
@@ -31,7 +32,7 @@ export default function Run(props) {
               <ListGroup.Item>Date: {run.date}</ListGroup.Item>
             </ListGroup>
             {/* {type === "available" && <Button variant="primary" onClick={join}>Join</Button>} */}
-            <JoinButton runType={type} canJoinRun={canJoinRun} join={join}/>
+            <JoinButton runType={type} joinStatus={joinStatus} join={join}/>
           </div>
         </Card.Body>
       </Card>
