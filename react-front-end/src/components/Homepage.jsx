@@ -19,9 +19,9 @@ export default function Homepage() {
         <div className="home-join">
           <img className="map-logo" src="https://cdn-icons-png.flaticon.com/512/819/819865.png" alt="map-icon" />
           <p>Find a run near you </p>
-          <Button variant="primary" type="submit">
+          <Link to="/runs"><Button variant="primary" type="submit">
             Find
-          </Button>
+          </Button></Link>
         </div>
         <div className="home-plan">
           <img className="map-logo" src="https://cdn-icons-png.flaticon.com/512/2953/2953336.png" alt="run-icon" />
