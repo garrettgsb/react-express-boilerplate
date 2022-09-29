@@ -7,10 +7,10 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userState, runsState } from "../hooks/useAppData";
 import useAppData from "../hooks/useAppData";
+import "../components/FindRun.css";
 
 
 export default function FindRun() {
-  // const { runs } = useLoaderData();
   const runs = useRecoilValue(runsState);
   const user = useRecoilValue(userState);
   const { joinRun, canJoinRun } = useAppData();
@@ -51,7 +51,7 @@ export default function FindRun() {
 
   return (
     <>
-      {/* <Map /> */}
+      <Map />
       <h1>All available runs you can join:</h1>
       {showAvailableRuns(runs, "available")}
       <JoiningStatus joinButtonPressed={joinButtonPressed} setJoinButtonPressed={setJoinButtonPressed}/>
