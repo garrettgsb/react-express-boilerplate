@@ -12,7 +12,7 @@ export default function JoiningStatus(props) {
       let timer = setTimeout(() => {
         setJoinButtonPressed(false);
         navigate("/profile");
-      }, 5000);
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [joinButtonPressed]);
