@@ -7,30 +7,40 @@ import {
   useRecoilValue,
   useRecoilState,
 } from "recoil";
+import { recoilPersist } from 'recoil-persist'
+
 //hook for getting runs
 //hook for logged in user
 //hook for runner only runs
 //hook for planner runs
 //axios route change based on user id
 
+// Used to persist global app state after manual refreshes.
+// See key in local storage for browser
+const { persistAtom } = recoilPersist();
+
 export const userState = atom({
   key: "userState",
   default: null,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const runsState = atom({
   key: "runsState",
   default: null,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const runnerRunsState = atom({
   key: "runnerRunsState",
   default: null,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const plannerRunsState = atom({
   key: "plannerRunsState",
   default: null,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export default function useAppData() {
