@@ -8,8 +8,6 @@ import {
   useRecoilState,
 } from "recoil";
 import { recoilPersist } from "recoil-persist";
-import { mg } from "./useMailgun";
-
 
 //hook for getting runs
 //hook for logged in user
@@ -119,20 +117,7 @@ export default function useAppData() {
       .post("/api/register", { runner_id, run_id })
       .then((response) => {
         const { user_run } = response.data;
-        //
-
-        const data = {
-          from: "Excited User <me@samples.mailgun.org>",
-          to: "snehakm.art@gmail.com",
-          subject: "Hello",
-          text: "Testing some Mailgun awesomness!",
-        };
-        if (user_run)
-          mg.messages().send(data, function (error, body) {
-            console.log(body);
-          });
-
-        //
+        
         if (user_run) return true;
       })
       .catch((error) => {
