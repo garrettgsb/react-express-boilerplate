@@ -7,7 +7,7 @@ import { useRecoilValue } from "recoil";
 import { runsState } from "../hooks/useAppData";
 
 
-import Markers from "./Markers";
+import Markers, { handleActiveMarker } from "./Markers";
 
 
 
@@ -17,18 +17,57 @@ export default function SimpleMap(){
   const marker = useRecoilValue(runsState);
   console.log(marker)
 
+  
+
 
   const showMarkers = (marker) => {
     const runsArray = Object.values(marker);
     
-    return runsArray.map((run) => <Markers key={run.id} name={run.name}  lat={run.latitude} lng={run.longitude} />);
+    return runsArray.map((run) => <Markers
+     key={run.id}
+     name={run.name}
+     lat={run.latitude}
+     lng={run.longitude}
+    //  text = {"1"}
+     //onClick={() => handleActiveMarker(run.id)} 
+     />);
   };
 
+  // const location = async () =>  {
+  //   const result = await navigator.geolocation.getCurrentPosition((position) => {
+  //   const latitude = position.coords.latitude;
+  //   const longitude = position.coords.longitude;
+
+  //   console.log(latitude);
+  //   });
+  //   console.log(result)
+  // }
+
+  // console.log(location())
+
+  // navigator.geolocation.getCurrentPosition(function(position){
+  //   const latitude = position.coords.latitude
+  //   resolve({latitude});
+  // })
+  // .then(response => console.log(response))
+
+  var lat,lon;
+  var promise1 = new Promise(function(resolve, reject) {
+    navigator.geolocation.getCurrentPosition(function(pos){
+        lat = pos.coords.latitude
+        lon = pos.coords.longitude
+        resolve({lat,lon});
+    }) 
+})
+
+promise1.then(function(value) {
+      console.log(value.lat,value.lon)  
+});
 
   const defaultProps = {
     center: {
-      lat: 43,
-      lng: -80
+      lat: lat || 10,
+      lng: lon || 10
     },
     zoom: 7
   };
@@ -42,12 +81,7 @@ export default function SimpleMap(){
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-      {showMarkers(marker)}
-         {/* {marker.map(({ latitude, longitude, id, name }) => {
-          return (
-            <Markers key={id} latitude={latitude} longitude={longitude} name={name} />
-          );
-        })}  */}
+        {showMarkers(marker)}
       </GoogleMapReact>
     </div>
   );
