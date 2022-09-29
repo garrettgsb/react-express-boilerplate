@@ -7,7 +7,7 @@ import {
   useRecoilValue,
   useRecoilState,
 } from "recoil";
-import { recoilPersist } from 'recoil-persist'
+import { recoilPersist } from "recoil-persist";
 
 //hook for getting runs
 //hook for logged in user
@@ -105,6 +105,12 @@ export default function useAppData() {
       });
   }
 
+  function canJoinRun(run_id) {
+    const runExists = runnerRuns[run_id];
+    if (runExists) return false;
+    return true;
+  }
+
   function joinRun(runner_id, run_id) {
     return axios
       .post("/api/register", { runner_id, run_id })
@@ -121,5 +127,6 @@ export default function useAppData() {
     login,
     logout,
     joinRun,
+    canJoinRun
   };
 }
