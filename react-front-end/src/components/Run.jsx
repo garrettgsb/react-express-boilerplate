@@ -4,9 +4,10 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Run.css";
+import JoinButton from "./JoinButton";
 
 export default function Run(props) {
-  const { run, type, join } = props;
+  const { run, type, canJoinRun, join } = props;
 
   return (
     <>
@@ -29,7 +30,8 @@ export default function Run(props) {
               <ListGroup.Item>Time: {run.time}</ListGroup.Item>
               <ListGroup.Item>Date: {run.date}</ListGroup.Item>
             </ListGroup>
-            {type === "available" && <Button variant="primary" onClick={join}>Join</Button>}
+            {/* {type === "available" && <Button variant="primary" onClick={join}>Join</Button>} */}
+            <JoinButton runType={type} canJoinRun={canJoinRun} join={join}/>
           </div>
         </Card.Body>
       </Card>
