@@ -8,7 +8,7 @@ export default function JoinButton(props) {
 
   // Disable button if user has already joined the run
   useEffect(() => {
-    if(!canJoinRun()) {
+    if(!canJoinRun) {
       setText("Already joined");
       setStatus(true);
     }
