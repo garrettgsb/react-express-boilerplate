@@ -37,7 +37,7 @@ export default function FindRun() {
           run={run}
           type={type}
           join={() => join(user.id, run.id)}
-          canJoinRun={canJoinRun(run.id)}
+          canJoinRun={()=>canJoinRun(run.id)}
         />
       );
     });
