@@ -9,7 +9,6 @@ import { userState, runsState } from "../hooks/useAppData";
 import useAppData from "../hooks/useAppData";
 import "../components/FindRun.css";
 
-
 export default function FindRun() {
   const runs = useRecoilValue(runsState);
   const user = useRecoilValue(userState);
@@ -17,7 +16,7 @@ export default function FindRun() {
   const navigate = useNavigate();
   const [joinButtonPressed, setJoinButtonPressed] = useState(false);
 
-  const join = (user_id, run_id) =>{
+  const join = (user_id, run_id) => {
     // Check if joining is possible
     if (!canJoinRun(run_id)) {
       console.log("You cannot join this run.");
@@ -25,14 +24,13 @@ export default function FindRun() {
       return;
     }
     // Join if possible
-    joinRun(user_id, run_id)
-    .then((response)=>{
-      if(response) {
+    joinRun(user_id, run_id).then((response) => {
+      if (response) {
         setJoinButtonPressed(true);
         // navigate("/profile");
-      } 
-    })
-  }
+      }
+    });
+  };
 
   const showAvailableRuns = (runs, type) => {
     const runsArray = Object.values(runs);
@@ -51,10 +49,15 @@ export default function FindRun() {
 
   return (
     <>
-      <Map />
-      <h1>All available runs you can join:</h1>
-      {showAvailableRuns(runs, "available")}
-      <JoiningStatus joinButtonPressed={joinButtonPressed} setJoinButtonPressed={setJoinButtonPressed}/>
+      <section id="find-run-page">
+        <Map />
+        <h1>All available runs you can join:</h1>
+        {showAvailableRuns(runs, "available")}
+      </section>
+      <JoiningStatus
+        joinButtonPressed={joinButtonPressed}
+        setJoinButtonPressed={setJoinButtonPressed}
+      />
     </>
   );
 }

@@ -19,12 +19,26 @@ export default function JoiningStatus(props) {
 
   return (
     <>
-      <Modal className="joining-status-modal" show={joinButtonPressed} backdrop="static" keyboard={false}>
+      <Modal
+        className="joining-status-modal"
+        size="lg"
+        show={joinButtonPressed}
+        backdrop="static"
+        keyboard={false}
+      >
         <Modal.Header className="joining-status-header">
           <Modal.Title>THANK YOU FOR JOINING A RUN!</Modal.Title>
         </Modal.Header>
         <Modal.Body className="joining-status-message">
-        You will now be directed to your profile page. You will recieve an email confirmation with the address of the run and other relevant information! Reach out to us for more information at hello@werun.com.
+          <p>
+            You will now be directed to your profile page. You will recieve an
+            email confirmation with the address of the run and other relevant
+            information!
+          </p>
+          <p>
+            Reach out to us for more information at
+            hello@werun.com.
+          </p>
           <Spinner className="status-spinner" animation="border" />
         </Modal.Body>
       </Modal>

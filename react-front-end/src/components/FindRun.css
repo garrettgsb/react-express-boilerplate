@@ -1,0 +1,37 @@
+#find-run-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  margin-top: 2em;
+}
+
+.joining-status-header {
+  align-self: center;
+}
+
+.joining-status-header .modal-title {
+  font-family: "Krub", sans-serif;
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.joining-status-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.joining-status-message p {
+  font-size: 18px;
+  padding: 0 2em;
+  text-align: center;
+  margin: 0;
+}
+
+.status-spinner {
+  width: 5em;
+  height: 5em;
+  margin-bottom: 2em;
+}
