@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Run.css";
 
 export default function Run(props) {
-  const { run, type, joinRun } = props;
+  const { run, type, join } = props;
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function Run(props) {
               <ListGroup.Item>Time: {run.time}</ListGroup.Item>
               <ListGroup.Item>Date: {run.date}</ListGroup.Item>
             </ListGroup>
-            {type === "available" && <Button variant="primary" onClick={joinRun}>Join</Button>}
+            {type === "available" && <Button variant="primary" onClick={join}>Join</Button>}
           </div>
         </Card.Body>
       </Card>

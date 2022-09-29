@@ -21,7 +21,7 @@ export default function FindRun() {
       navigate("/");
       return;
     }
-    // Join if posible
+    // Join if possible
     joinRun(user_id, run_id)
     .then((response)=>{
       response && navigate("/profile");
@@ -36,7 +36,7 @@ export default function FindRun() {
           key={run.id}
           run={run}
           type={type}
-          joinRun={() => join(user.id, run.id)}
+          join={() => join(user.id, run.id)}
           canJoinRun={()=>canJoinRun(run.id)}
         />
       );
