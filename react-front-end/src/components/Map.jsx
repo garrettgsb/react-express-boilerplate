@@ -7,7 +7,7 @@ import { useRecoilValue } from "recoil";
 import { runsState } from "../hooks/useAppData";
 
 
-import Markers, { handleActiveMarker } from "./Markers";
+import  Markers from "./Markers";
 
 
 
@@ -17,7 +17,18 @@ export default function SimpleMap(){
   const marker = useRecoilValue(runsState);
   console.log(marker)
 
-  
+  // const InfoWindow = (marker) => {
+  //   const runsArray = Object.values(marker);
+
+  //   return runsArray.map((run) => 
+  //   <InfoWindow
+  //   key={run.id}
+  //   name={run.name}
+  //   text={run.description}
+  //   />
+  //   )
+  // }
+  // console.log(InfoWindow());
 
 
   const showMarkers = (marker) => {
@@ -31,7 +42,7 @@ export default function SimpleMap(){
      text={run.id}
      tooltip={run.name}
     //  text={run.name}
-     //onClick={() => handleActiveMarker(run.id)} 
+    //  onClick={() => <div className="info" text={run.name}/>} 
      />);
   };
 
@@ -71,8 +82,8 @@ export default function SimpleMap(){
   
   const defaultProps = {
     center: {
-      lat:  10,
-      lng:  10
+      lat:  43.6532,
+      lng:  -79.3832
     },
     zoom: 7
   };
@@ -84,7 +95,12 @@ export default function SimpleMap(){
   return (
     <div style={{ height: '80vh', width: '80%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: myKey }}
+        bootstrapURLKeys={{
+            key: myKey,
+            language: 'en',
+            region: 'can',
+            libraries: ['places']
+           }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         yesIWantToUseGoogleMapApiInternals

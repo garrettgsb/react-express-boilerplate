@@ -30,7 +30,7 @@ const datePick = () => {
           Don't see a run event near you?  Just tell us where and when and the rest is on us.
         </Form.Text>
       </div>
-      {/* <FloatingLabel controlId="floatingInput" label="Event Address" className="mb-3">
+      <FloatingLabel controlId="floatingInput" label="Event Address" className="mb-3">
         <Form.Control type="text" placeholder="Location" />
       </FloatingLabel>
       <FloatingLabel controlId="floatingInput" label="" className="mb-3">
@@ -112,7 +112,7 @@ const datePick = () => {
           type="checkbox"
           id={`inline-checkbox-2`}
         />
-      </Form.Group> */}
+      </Form.Group>
       {datePick()}
       <Button variant="primary" type="submit">
         Submit
