@@ -28,7 +28,9 @@ export default function SimpleMap(){
      name={run.name}
      lat={run.latitude}
      lng={run.longitude}
-    //  text = {"1"}
+     text={run.id}
+     tooltip={run.name}
+    //  text={run.name}
      //onClick={() => handleActiveMarker(run.id)} 
      />);
   };
@@ -51,26 +53,31 @@ export default function SimpleMap(){
   // })
   // .then(response => console.log(response))
 
-  var lat,lon;
-  var promise1 = new Promise(function(resolve, reject) {
-    navigator.geolocation.getCurrentPosition(function(pos){
-        lat = pos.coords.latitude
-        lon = pos.coords.longitude
-        resolve({lat,lon});
-    }) 
-})
+//   let lat = "";
+//   let lon = "";
 
-promise1.then(function(value) {
-      console.log(value.lat,value.lon)  
-});
+//   const promise = new Promise(function(resolve, reject) {
+//     navigator.geolocation.getCurrentPosition(function(pos){
+//         lat = pos.coords.latitude
+//         lon = pos.coords.longitude
+//         resolve({lat,lon});
+//     }) 
+// })
 
+// promise.then(function(value) {
+//       console.log(value.lat,value.lon)  
+// });
+
+  
   const defaultProps = {
     center: {
-      lat: lat || 10,
-      lng: lon || 10
+      lat:  10,
+      lng:  10
     },
     zoom: 7
   };
+
+
 
   const myKey = process.env.REACT_APP_MAP_API_KEY;
 
@@ -80,6 +87,7 @@ promise1.then(function(value) {
         bootstrapURLKeys={{ key: myKey }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
+        yesIWantToUseGoogleMapApiInternals
       >
         {showMarkers(marker)}
       </GoogleMapReact>
