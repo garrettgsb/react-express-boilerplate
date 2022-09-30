@@ -11,16 +11,18 @@ import {
   plannerRunsState,
 } from "../hooks/useAppData";
 import { useRecoilValue } from "recoil";
+import useAppData from "../hooks/useAppData";
 
 export default function Profile() {
   const user = useRecoilValue(userState);
   const runnerRuns = useRecoilValue(runnerRunsState);
   const plannerRuns = useRecoilValue(plannerRunsState);
+  const { joinRun, canJoinRun } = useAppData();
   const [runData, setRunData] = useState({ distance: 0, minutes: 0, count: 0 });
 
   const showRunnersRuns = (runs, type) => {
     const runsArray = Object.values(runs);
-    return runsArray.map((run) => <Run key={run.id} run={run} type={type} />);
+    return runsArray.map((run) => <Run key={run.id} run={run} type={type} join={joinRun} canJoinRun={canJoinRun}/>);
   };
 
   const profilePicture = (
