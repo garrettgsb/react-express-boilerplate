@@ -187,12 +187,12 @@ App.get("/api/runs/image/:id", (req, res) => {
 
 // Add new image when creating a new run
 App.post(
-  "/api/image",
+  "/api/image/:runID",
   BodyParser.raw({ type: ["image/jpeg", "image/png"], limit: "5mb" }),
   (req, res) => {
+    const { runID } = req.params;
     try {
-      // console.log("Image data", req.body);
-      fs.writeFile("./uploads/image.png", req.body, (error) => {
+      fs.writeFile(`./uploads/${runID}.jpeg`, req.body, (error) => {
         if (error) {
           throw error;
         }
@@ -215,6 +215,8 @@ App.post("/api/runs", (req, res) => {
     distance,
     time,
     date,
+    latitude: 43.952347,
+    longitude: -79.431323,
     planner_id,
   })
     .then((response) => {

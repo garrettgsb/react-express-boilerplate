@@ -125,19 +125,37 @@ export default function useAppData() {
       });
   }
 
-  function createRun(user_id, file) {
-    console.log(user_id);
-    axios({
-      method: "post",
-      url: "/api/image",
-      data: file,
-      headers: {
-        "Content-Type": "image/jpeg",
-      },
-    }).then((response) => {
-      // handle success
-      console.log(response.data);
-    });
+  async function createRun(
+    planner_id,
+    name,
+    description,
+    location,
+    distance,
+    time,
+    date,
+    file
+  ) {
+    console.log(planner_id, name, description, location, distance, time, date);
+    try {
+      const createRunResponse = await axios({
+        method: "post",
+        url: "/api/runs",
+        data: { planner_id, name, description, location, distance, time, date },
+      });
+      const { run } = createRunResponse.data;
+      const addImageResponse = await axios({
+        method: "post",
+        url: `/api/image/${run.id}`,
+        data: file,
+        headers: {
+          "Content-Type": "image/jpeg",
+        },
+      });
+      if (addImageResponse.status !== 200) return false;
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return {
@@ -145,6 +163,6 @@ export default function useAppData() {
     logout,
     joinRun,
     canJoinRun,
-    createRun
+    createRun,
   };
 }

@@ -44,14 +44,14 @@ export default function RegisterRun() {
   const distanceSelector = () => {
     return (
       <div className="mb-3">
-        {["2k", "5k", "10k"].map((label) => {
+        {[2, 5, 10].map((label) => {
           return (
             <Form.Check
               key={label}
               inline
               type="radio"
               id={`inline-radio-1`}
-              label={label}
+              label={`${label}k`}
               value={label}
               onChange={(e) => setDistance(e.target.value)}
             />
@@ -61,9 +61,10 @@ export default function RegisterRun() {
     );
   };
 
-  const create = (e) => {
+  const create = async (e) => {
     e.preventDefault();
-    createRun(user.id, name, description, location, distance, time, date, file);
+    const status = await createRun(user.id, name, description, location, distance, time, date, file);
+    if (status) navigate("/profile");
   };
 
   return (
