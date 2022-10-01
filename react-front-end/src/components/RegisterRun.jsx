@@ -15,26 +15,33 @@ import useAppData from "../hooks/useAppData";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function RegisterRun() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
+  const [distance, setDistance] = useState("");
+  const [time, setTime] = useState(
+    `${new Date().getHours()}:${new Date().getMinutes()}`
+  );
+  const [date, setDate] = useState(new Date());
   const [file, setFile] = useState("");
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const { createRun } = useAppData();
 
   const datePick = () => {
-    const [startDate, setStartDate] = useState(new Date());
     return (
       <Form.Group controlId="date" className="mb-3">
         <Form.Label>Date</Form.Label>
         <DatePicker
           className="date-picker"
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          selected={date}
+          onChange={(date) => setDate(date)}
         />
       </Form.Group>
     );
   };
 
-  const distance = () => {
+  const distanceSelector = () => {
     return (
       <div className="mb-3">
         {["2k", "5k", "10k"].map((label) => {
@@ -42,10 +49,11 @@ export default function RegisterRun() {
             <Form.Check
               key={label}
               inline
-              name="group1"
               type="radio"
               id={`inline-radio-1`}
               label={label}
+              value={label}
+              onChange={(e) => setDistance(e.target.value)}
             />
           );
         })}
@@ -55,7 +63,7 @@ export default function RegisterRun() {
 
   const create = (e) => {
     e.preventDefault();
-    createRun(user.id, file);
+    createRun(user.id, name, description, location, distance, time, date, file);
   };
 
   return (
@@ -68,22 +76,38 @@ export default function RegisterRun() {
         </Form.Text>
       </div>
       <FloatingLabel controlId="name" label="Name" className="mb-3">
-        <Form.Control type="text" placeholder="Name" />
+        <Form.Control
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </FloatingLabel>
       <FloatingLabel
         controlId="description"
         label="Description"
         className="mb-3"
       >
-        <Form.Control as="textarea" type="text" placeholder="Description" />
+        <Form.Control
+          as="textarea"
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
       </FloatingLabel>
       <FloatingLabel controlId="location" label="Address" className="mb-3">
-        <Form.Control type="text" placeholder="Address" />
+        <Form.Control
+          type="text"
+          placeholder="Address"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
       </FloatingLabel>
 
       <Form.Group controlId="distance" className="mb-3">
         <Form.Label>Distance</Form.Label>
-        {distance()}
+        {distanceSelector()}
       </Form.Group>
 
       <Row>
@@ -91,7 +115,12 @@ export default function RegisterRun() {
         <Col>
           <Form.Group controlId="time" className="mb-3">
             <Form.Label>Time</Form.Label>
-            <Form.Control type="time" placeholder="Time" />
+            <Form.Control
+              type="time"
+              placeholder="Time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+            />
           </Form.Group>
         </Col>
       </Row>

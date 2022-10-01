@@ -191,7 +191,7 @@ App.post(
   BodyParser.raw({ type: ["image/jpeg", "image/png"], limit: "5mb" }),
   (req, res) => {
     try {
-      console.log("Image data", req.body);
+      // console.log("Image data", req.body);
       fs.writeFile("./uploads/image.png", req.body, (error) => {
         if (error) {
           throw error;

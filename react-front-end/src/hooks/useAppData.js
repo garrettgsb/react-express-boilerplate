@@ -126,6 +126,7 @@ export default function useAppData() {
   }
 
   function createRun(user_id, file) {
+    console.log(user_id);
     axios({
       method: "post",
       url: "/api/image",
