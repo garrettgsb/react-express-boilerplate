@@ -5,6 +5,7 @@ import GoogleMapReact from "google-map-react";
 import { useLoaderData } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { runsState } from "../hooks/useAppData";
+import getUserCoords from "../hooks/getUserCoords";
 
 
 import  Markers from "./Markers";
@@ -46,38 +47,6 @@ export default function SimpleMap(){
      />);
   };
 
-  // const location = async () =>  {
-  //   const result = await navigator.geolocation.getCurrentPosition((position) => {
-  //   const latitude = position.coords.latitude;
-  //   const longitude = position.coords.longitude;
-
-  //   console.log(latitude);
-  //   });
-  //   console.log(result)
-  // }
-
-  // console.log(location())
-
-  // navigator.geolocation.getCurrentPosition(function(position){
-  //   const latitude = position.coords.latitude
-  //   resolve({latitude});
-  // })
-  // .then(response => console.log(response))
-
-//   let lat = "";
-//   let lon = "";
-
-//   const promise = new Promise(function(resolve, reject) {
-//     navigator.geolocation.getCurrentPosition(function(pos){
-//         lat = pos.coords.latitude
-//         lon = pos.coords.longitude
-//         resolve({lat,lon});
-//     }) 
-// })
-
-// promise.then(function(value) {
-//       console.log(value.lat,value.lon)  
-// });
 
   
   const defaultProps = {
