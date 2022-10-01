@@ -10,112 +10,79 @@ import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-
 export default function RegisterUser() {
-
-const datePick = () => {
+  const datePick = () => {
     const [startDate, setStartDate] = useState(new Date());
     return (
-      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-      
+      <Form.Group controlId="date" className="mb-3">
+        <Form.Label>Date</Form.Label>
+        <DatePicker
+          className="date-picker"
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+        />
+      </Form.Group>
     );
-  }
+  };
 
+  const distance = () => {
+    return (
+      <div className="mb-3">
+        {["2k", "5k", "10k"].map((label) => {
+          return (
+            <Form.Check
+              key={label}
+              inline
+              name="group1"
+              type="radio"
+              id={`inline-radio-1`}
+              label={label}
+            />
+          );
+        })}
+      </div>
+    );
+  };
 
   return (
     <Form className="form-container">
       <div className="form-container-text">
         <Form.Text as="h3">Create a Run</Form.Text>
         <Form.Text as="p">
-          Don't see a run event near you?  Just tell us where and when and the rest is on us.
+          Don't see a run event near you? Just tell us where and when and the
+          rest is on us.
         </Form.Text>
       </div>
-      <FloatingLabel controlId="floatingInput" label="Event Address" className="mb-3">
-        <Form.Control type="text" placeholder="Location" />
+      <FloatingLabel controlId="name" label="Name" className="mb-3">
+        <Form.Control type="text" placeholder="Name" />
       </FloatingLabel>
-      <FloatingLabel controlId="floatingInput" label="" className="mb-3">
-        <Form.Control type="Address" placeholder="123 Maple Street, ON" />
+      <FloatingLabel controlId="description" label="Description" className="mb-3">
+        <Form.Control as="textarea" type="text" placeholder="Description" />
       </FloatingLabel>
-      <FloatingLabel
-        controlId="floatingPassword"
-        label=""
-        className="mb-3"
-      >
-        <Form.Control type="" placeholder="Password" />
+      <FloatingLabel controlId="location" label="Address" className="mb-3">
+        <Form.Control type="text" placeholder="Address" />
       </FloatingLabel>
+
+      <Form.Group controlId="distance" className="mb-3">
+        <Form.Label>Distance</Form.Label>
+        {distance()}
+      </Form.Group>
+
       <Row>
+        <Col>{datePick()}</Col>
         <Col>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Phone"
-            className="mb-3"
-          >
-            <Form.Control type="text" placeholder="Phone" />
-          </FloatingLabel>
-        </Col>
-        <Col>
-          <FloatingLabel controlId="floatingInput" label="Age" className="mb-3">
-            <Form.Control type="text" placeholder="Age" />
-          </FloatingLabel>{" "}
+          <Form.Group controlId="time" className="mb-3">
+            <Form.Label>Time</Form.Label>
+            <Form.Control type="time" placeholder="Time" />
+          </Form.Group>
         </Col>
       </Row>
-
-      <Form.Text id="profileHelpBlock" muted>
-        Gender:
-      </Form.Text>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox" aria-describedby="profileHelpBlock">
-        <Form.Check
-          inline
-          label="he/Him"
-          name="group1"
-          type="radio"
-          id={`inline-radio-1`}
-        />
-        <Form.Check
-          inline
-          label="she/Her"
-          name="group1"
-          type="radio"
-          id={`inline-radio-2`}
-        />
-        <Form.Check
-          inline
-          label="they/Them"
-          name="group1"
-          type="radio"
-          id={`inline-radio-3`}
-        />
-        <Form.Check
-          inline
-          label="I prefer not to say"
-          name="group1"
-          type="radio"
-          id={`inline-radio-4`}
-        />
+      <Form.Group controlId="formFileLg" className="mb-3">
+        <Form.Label>Upload an image</Form.Label>
+        <Form.Control type="file" />
       </Form.Group>
-
-      <Form.Text id="profileHelpBlock" muted>
-        Pick atleast 1:
-      </Form.Text>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox" aria-describedby="profileHelpBlock">
-        <Form.Check
-          inline
-          label="Runner"
-          name="group2"
-          type="checkbox"
-          id={`inline-checkbox-1`}
-        />
-        <Form.Check
-          inline
-          label="Planner"
-          name="group2"
-          type="checkbox"
-          id={`inline-checkbox-2`}
-        />
-      </Form.Group>
-      {datePick()}
       <Button variant="primary" type="submit">
-        Submit
+        Create
       </Button>
     </Form>
   );
