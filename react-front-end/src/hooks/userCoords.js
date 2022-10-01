@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { userCoordinatesAtom } from "./getUserCoords";
 
 const options = {
-  enableHighAccuracy: false,
+  enableHighAccuracy: true,
   timeout: 5000,
   maximumAge: 0,
 };
