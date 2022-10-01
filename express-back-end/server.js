@@ -81,7 +81,16 @@ App.post("/api/users", (req, res) => {
     req.body;
 
   const hashedPassword = Bcrypt.hashSync(password, 10);
-  db.createUser({ name, email, hashedPassword, phone, gender, age, planner, runner })
+  db.createUser({
+    name,
+    email,
+    hashedPassword,
+    phone,
+    gender,
+    age,
+    planner,
+    runner,
+  })
     .then((response) => {
       const { user } = response;
       if (!user) res.send({ message: "User was not created" });
@@ -175,6 +184,25 @@ App.get("/api/runs/image/:id", (req, res) => {
     });
   });
 });
+
+// Add new image when creating a new run
+App.post(
+  "/api/image",
+  BodyParser.raw({ type: ["image/jpeg", "image/png"], limit: "5mb" }),
+  (req, res) => {
+    try {
+      console.log("Image data", req.body);
+      fs.writeFile("./uploads/image.png", req.body, (error) => {
+        if (error) {
+          throw error;
+        }
+      });
+      res.sendStatus(200);
+    } catch (error) {
+      res.sendStatus(500);
+    }
+  }
+);
 
 App.post("/api/runs", (req, res) => {
   const { name, description, location, distance, time, date, planner_id } =
