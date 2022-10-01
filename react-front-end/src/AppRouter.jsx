@@ -8,6 +8,7 @@ import SignIn from "./components/SignIn";
 import RegisterRun from "./components/RegisterRun";
 import Map from "./components/Map";
 import App from "./App";
+import DefaultMap from "./components/DefaultMap.jsx";
 
 import {
   createRoutesFromElements,
@@ -24,7 +25,7 @@ export const router = createBrowserRouter(
       <Route path="/register" element={<RegisterUser />} />
       <Route path="/create" element={<RegisterRun />}/>
       <Route path="/signin" element={<SignIn />} />
-      <Route path="/map" element={<Map />}/>
+      <Route path="/map" element={<DefaultMap />}/>
     </Route>
   )
 );
