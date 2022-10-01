@@ -1,9 +1,14 @@
 import { atom } from "recoil";
 
+
 const userCoordinatesAtom = atom({
   key: "userCoordinatesAtom",
   default: { lat: null, lng: null},
 });
+export default userCoordinatesAtom;
+
+
+
 
 
 // const getUserCoords = ({ setCenter }) => {
@@ -28,5 +33,5 @@ const userCoordinatesAtom = atom({
 
 // };
 
-// export default getUserCoords;
-export default userCoordinatesAtom;
+//export default getUserCoords;
+//export default userCoordinatesAtom;

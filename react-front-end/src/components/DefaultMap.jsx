@@ -7,9 +7,23 @@ import "../components/Map.css";
 
 
 const DefaultMap = ({ center, zoom }) => {
+  // const getMapOptions = () => {
+  //   return {
+  //     disableDefaultUI: true,
+  //     mapTypeControl: true,
+  //     streetViewControl: true,
+  //     styles: [
+  //       {
+  //         featureType: "poi",
+  //         elementType: "labels",
+  //         stylers: [{ visibility: "on" }],
+  //       },
+  //     ],
+  //   };
+  // };
+
 
   const marker = useRecoilValue(runsState);
-  console.log(marker)
 
 
   const showMarkers = (marker) => {
@@ -31,18 +45,25 @@ const DefaultMap = ({ center, zoom }) => {
 
   return (
     <>
+    <div style={{ height: '80vh', width: '80%' }}>
     <GoogleMapReact
     bootstrapURLKeys={{
       key: myKey
      }}
     defaultCenter={center}
     defaultZoom={zoom}
-    yesIWantToUseGoogleMapApiInternals
+    //yesIWantToUseGoogleMapApiInternals
+    //options={getMapOptions}
     >
-    
+    <Markers 
+      lat={center.lat}
+      lng={center.lng}
+      text="Me"
+      />
     {showMarkers(marker)}
 
     </GoogleMapReact>
+    </div>
     </>
   );
 };
