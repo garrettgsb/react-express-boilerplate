@@ -18,10 +18,10 @@ export default function RegisterUser() {
           all over Canada.
         </Form.Text>
       </div>
-      <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
+      <FloatingLabel controlId="name" label="Name" className="mb-3">
         <Form.Control type="text" placeholder="Firstname / Lastname" />
       </FloatingLabel>
-      <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
+      <FloatingLabel controlId="email" label="Email" className="mb-3">
         <Form.Control type="email" placeholder="name@example.com" />
       </FloatingLabel>
       <FloatingLabel
@@ -34,7 +34,7 @@ export default function RegisterUser() {
       <Row>
         <Col>
           <FloatingLabel
-            controlId="floatingInput"
+            controlId="phone"
             label="Phone"
             className="mb-3"
           >
@@ -42,7 +42,7 @@ export default function RegisterUser() {
           </FloatingLabel>
         </Col>
         <Col>
-          <FloatingLabel controlId="floatingInput" label="Age" className="mb-3">
+          <FloatingLabel controlId="age" label="Age" className="mb-3">
             <Form.Control type="text" placeholder="Age" />
           </FloatingLabel>{" "}
         </Col>
