@@ -1,18 +1,26 @@
-.run, .card {
+.run {
   display: flex;
   flex-direction: row;
   gap: 1em;
   margin: 1em 0;
-  border-radius: 140px 0.375rem 0.375rem 140px;
+  border-radius: 169px 0.375rem 0.375rem 169px;
+  width: 70rem;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  font-family: "Krub", sans-serif;
 }
 
 .run-image {
   width: auto;
-  height: 17rem;
+  height: 21rem;
   border-radius: 50%;
 }
 
-.run-heading, .run-desc {
+.run-body {
+  padding: 2em;
+}
+
+.run-heading,
+.run-desc {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
