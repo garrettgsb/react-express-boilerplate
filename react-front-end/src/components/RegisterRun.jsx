@@ -8,114 +8,132 @@ import "../components/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userState, runsState } from "../hooks/useAppData";
+import useAppData from "../hooks/useAppData";
 import "react-datepicker/dist/react-datepicker.css";
 
+export default function RegisterRun() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
+  const [distance, setDistance] = useState("");
+  const [time, setTime] = useState(
+    `${new Date().getHours()}:${new Date().getMinutes()}`
+  );
+  const [date, setDate] = useState(new Date());
+  const [file, setFile] = useState("");
+  const user = useRecoilValue(userState);
+  const navigate = useNavigate();
+  const { createRun } = useAppData();
 
-export default function RegisterUser() {
-
-const datePick = () => {
-    const [startDate, setStartDate] = useState(new Date());
+  const datePick = () => {
     return (
-      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-      
+      <Form.Group controlId="date" className="mb-3">
+        <Form.Label>Date</Form.Label>
+        <DatePicker
+          className="date-picker"
+          selected={date}
+          onChange={(date) => setDate(date)}
+        />
+      </Form.Group>
     );
-  }
+  };
 
+  const distanceSelector = () => {
+    return (
+      <div className="mb-3">
+        {[2, 5, 10].map((label) => {
+          return (
+            <Form.Check
+              key={label}
+              inline
+              type="radio"
+              id={`inline-radio-1`}
+              label={`${label}k`}
+              value={label}
+              onChange={(e) => setDistance(e.target.value)}
+            />
+          );
+        })}
+      </div>
+    );
+  };
+
+  const create = async (e) => {
+    e.preventDefault();
+    const status = await createRun(user.id, name, description, location, distance, time, date, file);
+    if (status) navigate("/profile");
+  };
 
   return (
-    <Form className="form-container">
+    <Form className="form-container" encType="multipart/form-data">
       <div className="form-container-text">
         <Form.Text as="h3">Create a Run</Form.Text>
         <Form.Text as="p">
-          Don't see a run event near you?  Just tell us where and when and the rest is on us.
+          Don't see a run event near you? Just tell us where and when and the
+          rest is on us.
         </Form.Text>
       </div>
-      <FloatingLabel controlId="floatingInput" label="Event Address" className="mb-3">
-        <Form.Control type="text" placeholder="Location" />
-      </FloatingLabel>
-      <FloatingLabel controlId="floatingInput" label="" className="mb-3">
-        <Form.Control type="Address" placeholder="123 Maple Street, ON" />
+      <FloatingLabel controlId="name" label="Name" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </FloatingLabel>
       <FloatingLabel
-        controlId="floatingPassword"
-        label=""
+        controlId="description"
+        label="Description"
         className="mb-3"
       >
-        <Form.Control type="" placeholder="Password" />
+        <Form.Control
+          as="textarea"
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
       </FloatingLabel>
+      <FloatingLabel controlId="location" label="Address" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Address"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+      </FloatingLabel>
+
+      <Form.Group controlId="distance" className="mb-3">
+        <Form.Label>Distance</Form.Label>
+        {distanceSelector()}
+      </Form.Group>
+
       <Row>
+        <Col>{datePick()}</Col>
         <Col>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Phone"
-            className="mb-3"
-          >
-            <Form.Control type="text" placeholder="Phone" />
-          </FloatingLabel>
-        </Col>
-        <Col>
-          <FloatingLabel controlId="floatingInput" label="Age" className="mb-3">
-            <Form.Control type="text" placeholder="Age" />
-          </FloatingLabel>{" "}
+          <Form.Group controlId="time" className="mb-3">
+            <Form.Label>Time</Form.Label>
+            <Form.Control
+              type="time"
+              placeholder="Time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+            />
+          </Form.Group>
         </Col>
       </Row>
-
-      <Form.Text id="profileHelpBlock" muted>
-        Gender:
-      </Form.Text>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox" aria-describedby="profileHelpBlock">
-        <Form.Check
-          inline
-          label="he/Him"
-          name="group1"
-          type="radio"
-          id={`inline-radio-1`}
-        />
-        <Form.Check
-          inline
-          label="she/Her"
-          name="group1"
-          type="radio"
-          id={`inline-radio-2`}
-        />
-        <Form.Check
-          inline
-          label="they/Them"
-          name="group1"
-          type="radio"
-          id={`inline-radio-3`}
-        />
-        <Form.Check
-          inline
-          label="I prefer not to say"
-          name="group1"
-          type="radio"
-          id={`inline-radio-4`}
+      <Form.Group controlId="formFileLg" className="mb-3">
+        <Form.Label>Upload an image</Form.Label>
+        <Form.Control
+          type="file"
+          onChange={(e) => setFile(e.target.files[0])}
         />
       </Form.Group>
-
-      <Form.Text id="profileHelpBlock" muted>
-        Pick atleast 1:
-      </Form.Text>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox" aria-describedby="profileHelpBlock">
-        <Form.Check
-          inline
-          label="Runner"
-          name="group2"
-          type="checkbox"
-          id={`inline-checkbox-1`}
-        />
-        <Form.Check
-          inline
-          label="Planner"
-          name="group2"
-          type="checkbox"
-          id={`inline-checkbox-2`}
-        />
-      </Form.Group>
-      {datePick()}
-      <Button variant="primary" type="submit">
-        Submit
+      <Button variant="primary" type="submit" onClick={(e) => create(e)}>
+        Create
       </Button>
     </Form>
   );

@@ -117,7 +117,7 @@ export default function useAppData() {
       .post("/api/register", { runner_id, run_id })
       .then((response) => {
         const { user_run } = response.data;
-        
+
         if (user_run) return true;
       })
       .catch((error) => {
@@ -125,10 +125,43 @@ export default function useAppData() {
       });
   }
 
+  async function createRun(
+    planner_id,
+    name,
+    description,
+    location,
+    distance,
+    time,
+    date,
+    file
+  ) {
+    try {
+      const createRunResponse = await axios({
+        method: "post",
+        url: "/api/runs",
+        data: { planner_id, name, description, location, distance, time, date },
+      });
+      const { run } = createRunResponse.data;
+      const addImageResponse = await axios({
+        method: "post",
+        url: `/api/image/${run.id}`,
+        data: file,
+        headers: {
+          "Content-Type": "image/jpeg",
+        },
+      });
+      if (addImageResponse.status !== 200) return false;
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return {
     login,
     logout,
     joinRun,
     canJoinRun,
+    createRun,
   };
 }
