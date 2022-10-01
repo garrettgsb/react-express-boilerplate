@@ -8,9 +8,18 @@ import "../components/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userState, runsState } from "../hooks/useAppData";
+import useAppData from "../hooks/useAppData";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function RegisterUser() {
+export default function RegisterRun() {
+  const [file, setFile] = useState("");
+  const user = useRecoilValue(userState);
+  const navigate = useNavigate();
+  const { createRun } = useAppData();
+
   const datePick = () => {
     const [startDate, setStartDate] = useState(new Date());
     return (
@@ -44,8 +53,13 @@ export default function RegisterUser() {
     );
   };
 
+  const create = (e) => {
+    e.preventDefault();
+    createRun(user.id, file);
+  };
+
   return (
-    <Form className="form-container">
+    <Form className="form-container" encType="multipart/form-data">
       <div className="form-container-text">
         <Form.Text as="h3">Create a Run</Form.Text>
         <Form.Text as="p">
@@ -56,7 +70,11 @@ export default function RegisterUser() {
       <FloatingLabel controlId="name" label="Name" className="mb-3">
         <Form.Control type="text" placeholder="Name" />
       </FloatingLabel>
-      <FloatingLabel controlId="description" label="Description" className="mb-3">
+      <FloatingLabel
+        controlId="description"
+        label="Description"
+        className="mb-3"
+      >
         <Form.Control as="textarea" type="text" placeholder="Description" />
       </FloatingLabel>
       <FloatingLabel controlId="location" label="Address" className="mb-3">
@@ -79,9 +97,12 @@ export default function RegisterUser() {
       </Row>
       <Form.Group controlId="formFileLg" className="mb-3">
         <Form.Label>Upload an image</Form.Label>
-        <Form.Control type="file" />
+        <Form.Control
+          type="file"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" onClick={(e) => create(e)}>
         Create
       </Button>
     </Form>

@@ -117,7 +117,7 @@ export default function useAppData() {
       .post("/api/register", { runner_id, run_id })
       .then((response) => {
         const { user_run } = response.data;
-        
+
         if (user_run) return true;
       })
       .catch((error) => {
@@ -125,10 +125,25 @@ export default function useAppData() {
       });
   }
 
+  function createRun(user_id, file) {
+    axios({
+      method: "post",
+      url: "/api/image",
+      data: file,
+      headers: {
+        "Content-Type": "image/jpeg",
+      },
+    }).then((response) => {
+      // handle success
+      console.log(response.data);
+    });
+  }
+
   return {
     login,
     logout,
     joinRun,
     canJoinRun,
+    createRun
   };
 }

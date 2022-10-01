@@ -1,0 +1,40 @@
+// import React, { useState } from "react";
+// import axios from "axios";
+// import "./App.css";
+
+// export default function App() {
+//   const [file, setFile] = useState("");
+//   const [imagePath, setImagePath] = useState("");
+
+//   const sendData = (e) => {
+//     e.preventDefault();
+//     axios({
+//       method: "post",
+//       url: "/api/image",
+//       data: file,
+//       headers: {
+//         "Content-Type": "image/jpeg",
+//       },
+//     })
+//       .then((response) => {
+//         // handle success
+//         console.log(response.data);
+//       });
+//   };
+
+//   return (
+//     <>
+//       <form id="fs-frm" acceptCharset="utf-8" encType="multipart/form-data">
+//         <label htmlFor="upload"> Your file:</label>
+//         <input
+//           type="file"
+//           name="file"
+//           onChange={(e) => setFile(e.target.files[0])}
+//         />
+//         <button onClick={(e) => sendData(e)}>Submit</button>
+//       </form>
+//       <button onClick={(e) => setImagePath(`/api/runs/image/${2}`)}>Get Image</button>
+//       <img src={imagePath}></img>
+//     </>
+//   );
+// }
