@@ -30,7 +30,11 @@
   align-items: flex-end;
 }
 
-.run-desc .btn {
+.join-button {
   height: 3em;
   width: 10em;
+}
+
+.join-button:hover {
+  font-weight: 800;
 }
