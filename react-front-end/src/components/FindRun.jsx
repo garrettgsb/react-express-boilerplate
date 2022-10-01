@@ -54,10 +54,10 @@ export default function FindRun() {
         <h1>All available runs you can join:</h1>
         {showAvailableRuns(runs, "available")}
       </section>
-      <JoiningStatus
+      {user && <JoiningStatus
         joinButtonPressed={joinButtonPressed}
         setJoinButtonPressed={setJoinButtonPressed}
-      />
+      />}
     </>
   );
 }
