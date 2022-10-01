@@ -1,5 +1,5 @@
 //import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-import React  from "react";
+import React, { useEffect, useState }  from "react";
 import "../components/Map.css";
 import GoogleMapReact from "google-map-react";
 import { useLoaderData } from "react-router-dom";
@@ -10,50 +10,25 @@ import getUserCoords from "../hooks/getUserCoords";
 
 import  Markers from "./Markers";
 
-
+import DefaultMap from "./DefaultMap";
 
 
 export default function SimpleMap(){
 
-  const marker = useRecoilValue(runsState);
-  console.log(marker)
+  
 
-  // const InfoWindow = (marker) => {
-  //   const runsArray = Object.values(marker);
+  const [center, setCenter] = useState({lat: 43.6532, lng: -79.3832})
+  const zoom = 10;
 
-  //   return runsArray.map((run) => 
-  //   <InfoWindow
-  //   key={run.id}
-  //   name={run.name}
-  //   text={run.description}
-  //   />
-  //   )
-  // }
-  // console.log(InfoWindow());
-
-
-  const showMarkers = (marker) => {
-    const runsArray = Object.values(marker);
-    
-    return runsArray.map((run) => <Markers
-     key={run.id}
-     name={run.name}
-     lat={run.latitude}
-     lng={run.longitude}
-     text={run.id}
-     tooltip={run.name}
-    //  text={run.name}
-    //  onClick={() => <div className="info" text={run.name}/>} 
-     />);
-  };
-
-
+  useEffect(() => {
+    getUserCoords({ setCenter });
+  }, [center]);
+  
   
   const defaultProps = {
-    center: {
-      lat:  43.6532,
-      lng:  -79.3832
-    },
+    center: {center},
+      // lat:  43.6532,
+      // lng:  -79.3832
     zoom: 7
   };
 
