@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,16 +11,16 @@ export default function Run(props) {
 
   return (
     <>
-      <Card style={{ width: "60rem" }} className="run">
-        <Card.Img className="run-image" src={`/api/runs/image/${run.id}`} />
-        <Card.Body>
+      <section className="run">
+        <img className="run-image" src={`/api/runs/image/${run.id}`}></img>
+        <div className="run-body">
           <div className="run-heading">
-            <Card.Title>{run.name}</Card.Title>
+            <h3>{run.name}</h3>
             {run.future_run && (
               <span className="material-symbols-rounded">schedule</span>
             )}
           </div>
-          <Card.Text>{run.description}</Card.Text>
+          <p>{run.description}</p>
           <div className="run-desc">
             <ListGroup variant="flush">
               <ListGroup.Item>Distance: {run.distance} km</ListGroup.Item>
@@ -30,11 +30,10 @@ export default function Run(props) {
               <ListGroup.Item>Time: {run.time}</ListGroup.Item>
               <ListGroup.Item>Date: {run.date}</ListGroup.Item>
             </ListGroup>
-            {/* {type === "available" && <Button variant="primary" onClick={join}>Join</Button>} */}
-            <JoinButton runType={type} joinStatus={joinStatus} join={join}/>
+            <JoinButton runType={type} joinStatus={joinStatus} join={join} />
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </section>
     </>
   );
 }

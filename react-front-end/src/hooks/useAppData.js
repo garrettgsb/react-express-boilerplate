@@ -175,6 +175,8 @@ export default function useAppData() {
       });
       const { user } = registerUserResponse.data;
       if (registerUserResponse.status !== 200) return false;
+
+      setUser(user);
       return true;
     } catch (error) {
       console.log(error);

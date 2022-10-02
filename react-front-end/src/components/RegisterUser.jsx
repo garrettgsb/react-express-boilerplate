@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useNavigate } from "react-router-dom";
+import useAppData from "../hooks/useAppData";
 
 export default function RegisterUser() {
   const [name, setName] = useState("");
@@ -17,6 +19,8 @@ export default function RegisterUser() {
   const [gender, setGender] = useState("");
   const [runner, setRunner] = useState("");
   const [planner, setPlanner] = useState("");
+  const { registerUser } = useAppData();
+  const navigate = useNavigate();
 
   const genderSelector = () => {
     return (
@@ -48,7 +52,22 @@ export default function RegisterUser() {
       </>
     );
   };
-  
+
+  const submit = async (e) => {
+    e.preventDefault();
+    const status = await registerUser(
+      name,
+      email,
+      password,
+      phone,
+      age,
+      gender,
+      runner,
+      planner
+    );
+    if (status) navigate("/profile");
+  };
+
   return (
     <Form className="form-container">
       <div className="form-container-text">
@@ -88,11 +107,7 @@ export default function RegisterUser() {
       </FloatingLabel>
       <Row>
         <Col>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Phone"
-            className="mb-3"
-          >
+          <FloatingLabel controlId="phone" label="Phone" className="mb-3">
             <Form.Control
               type="text"
               placeholder="Phone"
@@ -137,7 +152,7 @@ export default function RegisterUser() {
           id={`inline-checkbox-2`}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" onClick={(e) => submit(e)}>
         Submit
       </Button>
     </Form>
