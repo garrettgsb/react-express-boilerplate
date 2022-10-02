@@ -74,3 +74,23 @@ main {
   color: #495057;
   background-color: rgb(205, 205, 205);
 }
+
+.empty-runs-container {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+}
+
+.empty-runs-container h3{
+  font-weight: 300;
+  text-align: center;
+}
+
+.empty-runs-container .empty-runs-button {
+  width: 20rem;
+  height: 7rem;
+  color: white;
+  font-size: 30px;
+}
