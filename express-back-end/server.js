@@ -79,7 +79,7 @@ App.get("/api/users/:id", (req, res) => {
 App.post("/api/users", (req, res) => {
   const { name, email, password, phone, gender, age, planner, runner } =
     req.body;
-
+  console.log(name, email, password, phone, gender, age, planner, runner);
   const hashedPassword = Bcrypt.hashSync(password, 10);
   db.createUser({
     name,
