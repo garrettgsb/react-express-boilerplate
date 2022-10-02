@@ -17,8 +17,8 @@ export default function RegisterUser() {
   const [phone, setPhone] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
-  const [runner, setRunner] = useState("");
-  const [planner, setPlanner] = useState("");
+  const [runner, setRunner] = useState(false);
+  const [planner, setPlanner] = useState(false);
   const { registerUser } = useAppData();
   const navigate = useNavigate();
 
@@ -40,6 +40,7 @@ export default function RegisterUser() {
                   inline
                   key={label}
                   label={label}
+                  name="group1"
                   type="radio"
                   id={`inline-radio-${index}`}
                   value={label}
@@ -51,6 +52,10 @@ export default function RegisterUser() {
         </Form.Group>
       </>
     );
+  };
+
+  const handleOnChange = (setIsChecked) => {
+    setIsChecked((prev)=>!prev);
   };
 
   const submit = async (e) => {
@@ -142,14 +147,16 @@ export default function RegisterUser() {
           label="Runner"
           type="checkbox"
           id={`inline-checkbox-1`}
-          value="Runner"
-          onChange={(e) => setRunner(true)}
+          checked={runner}
+          onChange={() => handleOnChange(setRunner)}
         />
         <Form.Check
           inline
           label="Planner"
           type="checkbox"
           id={`inline-checkbox-2`}
+          checked={planner}
+          onChange={() => handleOnChange(setPlanner)}
         />
       </Form.Group>
       <Button variant="primary" type="submit" onClick={(e) => submit(e)}>
