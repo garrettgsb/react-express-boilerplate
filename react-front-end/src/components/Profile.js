@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Run from "./Run";
 import EmptyRuns from "./EmptyRuns";
+import ProfileActions from "./ProfileActions";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Table from "react-bootstrap/Table";
@@ -23,8 +24,16 @@ export default function Profile() {
 
   const showRunnersRuns = (runs, type) => {
     const runsArray = Object.values(runs);
-    if (runsArray.length === 0) return <EmptyRuns type={type}/>
-    return runsArray.map((run) => <Run key={run.id} run={run} type={type} join={joinRun} canJoinRun={canJoinRun}/>);
+    if (runsArray.length === 0) return <EmptyRuns type={type} />;
+    return runsArray.map((run) => (
+      <Run
+        key={run.id}
+        run={run}
+        type={type}
+        join={joinRun}
+        canJoinRun={canJoinRun}
+      />
+    ));
   };
 
   const profilePicture = (
@@ -55,8 +64,11 @@ export default function Profile() {
       <section className="profile-header">
         <div className="profile-info">
           <div className="profile-welcome">
-            <h1>Welcome!</h1>
-            {user && <p>{user.name}</p>}
+            <div>
+              <h1>Welcome!</h1>
+              {user && <p>{user.name}</p>}
+            </div>
+            <ProfileActions/>
           </div>
           <h4>YOU HAVE:</h4>
           <Table size="sm">

@@ -48,8 +48,26 @@ main {
   text-align: end;
 }
 
-.profile-info .profile-welcome {
-  width: 300px;
+
+.profile-welcome {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.profile-welcome .profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1em;
+  padding: 0px;
+}
+
+.profile-welcome .profile-actions span {
+  font-size: 35px;
+}
+
+.profile-actions:hover {
+  cursor: pointer;
 }
 
 .profile-info table {
