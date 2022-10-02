@@ -34,4 +34,5 @@ const Markers = ({ text, tooltip, $hover }) => {
   );
 };
 
+
 export default Markers;
