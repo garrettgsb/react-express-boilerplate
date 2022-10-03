@@ -1,7 +1,7 @@
 import React from "react";
 import "../components/Map.css";
-import { useRecoilValue} from "recoil";
-import userCoordinatesAtom from "../hooks/getUserCoords";
+import { useRecoilValue } from "recoil";
+import { userCoordinatesAtom } from "../hooks/userCoords";
 
 import DefaultMap from "./DefaultMap";
 

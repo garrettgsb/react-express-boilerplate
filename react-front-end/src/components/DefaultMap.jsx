@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 import Markers from "./Markers";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { runsState } from "../hooks/useAppData";
 import "../components/Map.css";
+import { userCoordinatesAtom } from "../hooks/userCoords";
 
 const DefaultMap = ({ center, zoom }) => {
   const runs = useRecoilValue(runsState);
+  const [currentLocation, setCurrentLocation] =
+    useRecoilState(userCoordinatesAtom);
 
   const showMarkers = (runs) => {
     const runsArray = Object.values(runs);
@@ -26,7 +29,15 @@ const DefaultMap = ({ center, zoom }) => {
   };
 
   const myKey = process.env.REACT_APP_MAP_API_KEY;
-
+  useEffect(() => {
+    function getLocation() {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setCurrentLocation({ lat: latitude, lng: longitude });
+      });
+    }
+    getLocation();
+  }, []);
   return (
     <>
       <div style={{ height: "80vh", width: "80%" }}>
@@ -34,10 +45,9 @@ const DefaultMap = ({ center, zoom }) => {
           bootstrapURLKeys={{
             key: myKey,
           }}
-          defaultCenter={center}
+          defaultCenter={{ lat: 43.6532, lng: -79.3832 }}
+          center={currentLocation}
           defaultZoom={zoom}
-          //yesIWantToUseGoogleMapApiInternals
-          //options={getMapOptions}
         >
           <Markers lat={center.lat} lng={center.lng} text="Me" />
           {showMarkers(runs)}
