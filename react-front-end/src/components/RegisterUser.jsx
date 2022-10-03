@@ -126,8 +126,8 @@ export default function RegisterUser() {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        {/* <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        <Form.Control.Feedback type="invalid">Enter your name.</Form.Control.Feedback> */}
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Enter your name.</Form.Control.Feedback>
       </FloatingLabel>
       <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
         <Form.Control
@@ -138,6 +138,7 @@ export default function RegisterUser() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Enter a valid email address.</Form.Control.Feedback>
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingPassword"
@@ -151,6 +152,8 @@ export default function RegisterUser() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <Form.Control.Feedback>Cool password!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Enter a valid password.</Form.Control.Feedback>
       </FloatingLabel>
       <Row>
         <Col>
@@ -162,6 +165,8 @@ export default function RegisterUser() {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
+            <Form.Control.Feedback>Got it!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">Enter a valid phone number.</Form.Control.Feedback>
           </FloatingLabel>
         </Col>
         <Col>
@@ -173,6 +178,8 @@ export default function RegisterUser() {
               value={age}
               onChange={(e) => setAge(e.target.value)}
             />
+            <Form.Control.Feedback>You're getting old..</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">Enter a valid age.</Form.Control.Feedback>
           </FloatingLabel>{" "}
         </Col>
       </Row>
