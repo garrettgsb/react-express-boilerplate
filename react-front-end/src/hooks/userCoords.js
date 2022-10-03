@@ -9,26 +9,22 @@ const options = {
   maximumAge: 0,
 };
 
-
 const userLocation = () => {
+  const [userCoords, setUserCoords] = useSetRecoilState(userCoordinatesAtom);
 
-    const setUserCoords = useSetRecoilState(userCoordinatesAtom);
+  useEffect(() => {
+    const success = (pos) => {
+      let crd = pos.coords;
+      console.log(crd);
+      setUserCoords({ lat: crd.latitude, lng: crd.longitude });
+    };
 
-  
-    useEffect(() => {
-      const success = (pos) => {
-        let crd = pos.coords;
-        setUserCoords({ lat: crd.latitude, lng: crd.longitude });
-      }
-  
-      const error = (err) => {
-        console.warn(`There was an error:${err.code}, ${err.message}`)
-      }
-  
+    const error = (err) => {
+      console.warn(`There was an error:${err.code}, ${err.message}`);
+    };
 
-      return navigator.geolocation.getCurrentPosition(success, error, options);    
-    }, [setUserCoords]);
+    return navigator.geolocation.getCurrentPosition(success, error, options);
+  }, []);
+};
 
-  };
-  
-  export default userLocation;
+export default userLocation;
