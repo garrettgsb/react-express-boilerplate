@@ -27,15 +27,48 @@ export default function RegisterUser() {
   
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
+  const handleSubmit = async (e) => {
+
+    const form = e.currentTarget;
     if(form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
     }
 
-    setValidated(true);
-  };
+    //setValidated(true);
+
+    //if (setValidated(true)) { 
+
+    const status = registerUser(
+      name,
+      email,
+      password,
+      phone,
+      age,
+      gender,
+      runner,
+      planner
+    );
+
+    if (status && setValidated(true)) navigate("/profile");
+    }
+  
+
+  // const submit = async (e) => {
+  //   e.preventDefault();
+  //   const status = await registerUser(
+  //     name,
+  //     email,
+  //     password,
+  //     phone,
+  //     age,
+  //     gender,
+  //     runner,
+  //     planner
+  //   );
+   
+  //   if (status) navigate("/profile");
+  // };
   
   
   const genderSelector = () => {
@@ -74,31 +107,12 @@ export default function RegisterUser() {
     setIsChecked((prev)=>!prev);
   };
 
-  const submit = async (e) => {
-    e.preventDefault();
-    const status = await registerUser(
-      name,
-      email,
-      password,
-      phone,
-      age,
-      gender,
-      runner,
-      planner
-    );
-
-    //  if(!email.status) {
-
-    //  }
-   
-    if (status) navigate("/profile");
-  };
+ 
 
   return (
-     <Form className="form-container" validated={validated} onSubmit={handleSubmit}>
-    {/* //<Form className="form-container"> */}
+     <Form className="form-container" validated={validated}>
       <div className="form-container-text">
-        <Form.Text as="h3">HELLO!</Form.Text>
+        <Form.Text as="h3">HI THERE, RUNNER!</Form.Text>
         <Form.Text as="p">
           Create an account with us to use weRun and join runs with people from
           all over Canada.
