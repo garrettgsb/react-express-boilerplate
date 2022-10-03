@@ -7,8 +7,72 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useNavigate } from "react-router-dom";
+import useAppData from "../hooks/useAppData";
 
 export default function RegisterUser() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [runner, setRunner] = useState(false);
+  const [planner, setPlanner] = useState(false);
+  const { registerUser } = useAppData();
+  const navigate = useNavigate();
+
+  const genderSelector = () => {
+    return (
+      <>
+        <Form.Text id="profileHelpBlock" muted>
+          Gender:
+        </Form.Text>
+        <Form.Group
+          className="mb-3"
+          controlId="formBasicCheckbox"
+          aria-describedby="profileHelpBlock"
+        >
+          {["he/Him", "she/Her", "they/Them", "I prefer not to say"].map(
+            (label, index) => {
+              return (
+                <Form.Check
+                  inline
+                  key={label}
+                  label={label}
+                  name="group1"
+                  type="radio"
+                  id={`inline-radio-${index}`}
+                  value={label}
+                  onChange={(e) => setGender(e.target.value)}
+                />
+              );
+            }
+          )}
+        </Form.Group>
+      </>
+    );
+  };
+
+  const handleOnChange = (setIsChecked) => {
+    setIsChecked((prev)=>!prev);
+  };
+
+  const submit = async (e) => {
+    e.preventDefault();
+    const status = await registerUser(
+      name,
+      email,
+      password,
+      phone,
+      age,
+      gender,
+      runner,
+      planner
+    );
+    if (status) navigate("/profile");
+  };
+
   return (
     <Form className="form-container">
       <div className="form-container-text">
@@ -18,90 +82,84 @@ export default function RegisterUser() {
           all over Canada.
         </Form.Text>
       </div>
-      <FloatingLabel controlId="name" label="Name" className="mb-3">
-        <Form.Control type="text" placeholder="Firstname / Lastname" />
+      <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Firstname / Lastname"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </FloatingLabel>
-      <FloatingLabel controlId="email" label="Email" className="mb-3">
-        <Form.Control type="email" placeholder="name@example.com" />
+      <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
+        <Form.Control
+          type="email"
+          placeholder="name@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingPassword"
         label="Password"
         className="mb-3"
       >
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </FloatingLabel>
       <Row>
         <Col>
-          <FloatingLabel
-            controlId="phone"
-            label="Phone"
-            className="mb-3"
-          >
-            <Form.Control type="text" placeholder="Phone" />
+          <FloatingLabel controlId="phone" label="Phone" className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="Phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
           </FloatingLabel>
         </Col>
         <Col>
-          <FloatingLabel controlId="age" label="Age" className="mb-3">
-            <Form.Control type="text" placeholder="Age" />
+          <FloatingLabel controlId="floatingInput" label="Age" className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="Age"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+            />
           </FloatingLabel>{" "}
         </Col>
       </Row>
 
-      <Form.Text id="profileHelpBlock" muted>
-        Gender:
-      </Form.Text>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox" aria-describedby="profileHelpBlock">
-        <Form.Check
-          inline
-          label="he/Him"
-          name="group1"
-          type="radio"
-          id={`inline-radio-1`}
-        />
-        <Form.Check
-          inline
-          label="she/Her"
-          name="group1"
-          type="radio"
-          id={`inline-radio-2`}
-        />
-        <Form.Check
-          inline
-          label="they/Them"
-          name="group1"
-          type="radio"
-          id={`inline-radio-3`}
-        />
-        <Form.Check
-          inline
-          label="I prefer not to say"
-          name="group1"
-          type="radio"
-          id={`inline-radio-4`}
-        />
-      </Form.Group>
-
+      {genderSelector()}
       <Form.Text id="profileHelpBlock" muted>
         Pick atleast 1:
       </Form.Text>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox" aria-describedby="profileHelpBlock">
+      <Form.Group
+        className="mb-3"
+        controlId="formBasicCheckbox"
+        aria-describedby="profileHelpBlock"
+      >
         <Form.Check
           inline
           label="Runner"
-          name="group2"
           type="checkbox"
           id={`inline-checkbox-1`}
+          checked={runner}
+          onChange={() => handleOnChange(setRunner)}
         />
         <Form.Check
           inline
           label="Planner"
-          name="group2"
           type="checkbox"
           id={`inline-checkbox-2`}
+          checked={planner}
+          onChange={() => handleOnChange(setPlanner)}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" onClick={(e) => submit(e)}>
         Submit
       </Button>
     </Form>

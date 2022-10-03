@@ -157,11 +157,38 @@ export default function useAppData() {
     }
   }
 
+  async function registerUser(
+    name,
+    email,
+    password,
+    phone,
+    age,
+    gender,
+    runner,
+    planner
+  ) {
+    try {
+      const registerUserResponse = await axios({
+        method: "post",
+        url: "/api/users",
+        data: { name, email, password, phone, age, gender, runner, planner },
+      });
+      const { user } = registerUserResponse.data;
+      if (registerUserResponse.status !== 200) return false;
+
+      setUser(user);
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return {
     login,
     logout,
     joinRun,
     canJoinRun,
     createRun,
+    registerUser
   };
 }
