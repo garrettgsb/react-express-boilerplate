@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 import useAppData from "../hooks/useAppData";
+import Feedback from 'react-bootstrap/Feedback';
 
 export default function RegisterUser() {
   const [name, setName] = useState("");
@@ -22,6 +23,21 @@ export default function RegisterUser() {
   const { registerUser } = useAppData();
   const navigate = useNavigate();
 
+  //validate form
+  
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if(form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+  
+  
   const genderSelector = () => {
     return (
       <>
@@ -70,11 +86,17 @@ export default function RegisterUser() {
       runner,
       planner
     );
+
+    //  if(!email.status) {
+
+    //  }
+   
     if (status) navigate("/profile");
   };
 
   return (
-    <Form className="form-container">
+     <Form className="form-container" validated={validated} onSubmit={handleSubmit}>
+    {/* //<Form className="form-container"> */}
       <div className="form-container-text">
         <Form.Text as="h3">HELLO!</Form.Text>
         <Form.Text as="p">
@@ -84,19 +106,24 @@ export default function RegisterUser() {
       </div>
       <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
         <Form.Control
+          required
           type="text"
           placeholder="Firstname / Lastname"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        {/* <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Enter your name.</Form.Control.Feedback> */}
       </FloatingLabel>
       <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
         <Form.Control
+          required
           type="email"
           placeholder="name@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingPassword"
@@ -104,6 +131,7 @@ export default function RegisterUser() {
         className="mb-3"
       >
         <Form.Control
+          required
           type="password"
           placeholder="Password"
           value={password}
@@ -114,6 +142,7 @@ export default function RegisterUser() {
         <Col>
           <FloatingLabel controlId="phone" label="Phone" className="mb-3">
             <Form.Control
+              required
               type="text"
               placeholder="Phone"
               value={phone}
@@ -124,6 +153,7 @@ export default function RegisterUser() {
         <Col>
           <FloatingLabel controlId="floatingInput" label="Age" className="mb-3">
             <Form.Control
+              required
               type="text"
               placeholder="Age"
               value={age}
@@ -159,7 +189,7 @@ export default function RegisterUser() {
           onChange={() => handleOnChange(setPlanner)}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" onClick={(e) => submit(e)}>
+      <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
         Submit
       </Button>
     </Form>
