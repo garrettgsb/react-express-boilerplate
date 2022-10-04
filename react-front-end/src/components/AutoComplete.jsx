@@ -1,14 +1,33 @@
-//import AutoComplete from "react-google-autocomplete";
+import Autocomplete from "react-google-autocomplete";
 import React from "react";
+import Form from "react-bootstrap/Form";
 
-
+export default function AutoComplete() {
+  const myKey = process.env.REACT_APP_MAP_API_KEY;
+  return (
+    <>
+      <Form>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>Enter an address</Form.Label>
+          <Form.Control type="text" placeholder="Address" />
+        </Form.Group>
+      </Form>
+      <Autocomplete
+        apiKey={myKey}
+        onPlaceSelected={(place) => {
+          console.log(place);
+        }}
+      />
+    </>
+  );
+}
 
 // import usePlacesAutocomplete, {
 //     getGeocode,
 //     getLatLng,
 // } from "use-places-autocomplete";
 // import useOnclickOutside from "react-cool-onclickoutside";
-  
+
 //   const PlacesAutocomplete = () => {
 //     const {
 //       ready,
@@ -27,12 +46,12 @@ import React from "react";
 //       // the searched suggestions by calling this method
 //       clearSuggestions();
 //     });
-  
+
 //     const handleInput = (e) => {
 //       // Update the keyword of the input element
 //       setValue(e.target.value);
 //     };
-  
+
 //     const handleSelect =
 //       ({ description }) =>
 //       () => {
@@ -40,28 +59,28 @@ import React from "react";
 //         // by setting the second parameter to "false"
 //         setValue(description, false);
 //         clearSuggestions();
-  
+
 //         // Get latitude and longitude via utility functions
 //         getGeocode({ address: description }).then((results) => {
 //           const { lat, lng } = getLatLng(results[0]);
 //           console.log("📍 Coordinates: ", { lat, lng });
 //         });
 //       };
-  
+
 //     const renderSuggestions = () =>
 //       data.map((suggestion) => {
 //         const {
 //           place_id,
 //           structured_formatting: { main_text, secondary_text },
 //         } = suggestion;
-  
+
 //         return (
 //           <li key={place_id} onClick={handleSelect(suggestion)}>
 //             <strong>{main_text}</strong> <small>{secondary_text}</small>
 //           </li>
 //         );
 //       });
-  
+
 //     return (
 //       <div ref={ref}>
 //         <input
@@ -75,7 +94,6 @@ import React from "react";
 //       </div>
 //     );
 //   };
-
 
 // export default PlacesAutocomplete;
 //   // return (

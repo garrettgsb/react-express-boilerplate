@@ -13,6 +13,7 @@
     "react-bootstrap": "^2.5.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^16.8.6",
+    "react-google-autocomplete": "^2.7.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "2.1.8",
     "recoil": "^0.7.5",
