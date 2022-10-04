@@ -280,7 +280,7 @@ App.post("/api/register", (req, res) => {
       if (!user_run)
         return res.send({
           message:
-            "You could not be registered for a run. This event was in the past or you are already registers for this run.",
+            "You could not be registered for a run. This event was in the past or you are already registered for this run.",
         });
 
       res.send({ user_run });
