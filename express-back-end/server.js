@@ -7,13 +7,6 @@ const CookieSession = require("cookie-session");
 const fs = require("fs");
 
 
-//twilio
-const newUserMessage = require('./twilio.js');
-const twilio = require("twilio");
-const accountNumber = process.env.TWILIO_ACCTNUM;
-const authToken = process.env.TWILIO_TOKEN;
-
-const client = new twilio(accountNumber, authToken);
 
 //port
 const PORT = 8080;
