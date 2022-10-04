@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 import useAppData from "../hooks/useAppData";
+import Feedback from 'react-bootstrap/Feedback';
 
 export default function RegisterUser() {
   const [name, setName] = useState("");
@@ -22,6 +23,57 @@ export default function RegisterUser() {
   const { registerUser } = useAppData();
   const navigate = useNavigate();
 
+  //validate form
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = async (e) => {
+
+    const form = e.currentTarget;
+    
+
+
+    
+    if(form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    //setValidated(true);
+
+    //if (setValidated(true)) { 
+
+    const status = registerUser(
+      name,
+      email,
+      password,
+      phone,
+      age,
+      gender,
+      runner,
+      planner
+    );
+
+    if (status && setValidated(true)) navigate("/profile");
+    }
+  
+
+  // const submit = async (e) => {
+  //   e.preventDefault();
+  //   const status = await registerUser(
+  //     name,
+  //     email,
+  //     password,
+  //     phone,
+  //     age,
+  //     gender,
+  //     runner,
+  //     planner
+  //   );
+   
+  //   if (status) navigate("/profile");
+  // };
+  
+  
   const genderSelector = () => {
     return (
       <>
@@ -37,6 +89,7 @@ export default function RegisterUser() {
             (label, index) => {
               return (
                 <Form.Check
+                  required
                   inline
                   key={label}
                   label={label}
@@ -58,25 +111,12 @@ export default function RegisterUser() {
     setIsChecked((prev)=>!prev);
   };
 
-  const submit = async (e) => {
-    e.preventDefault();
-    const status = await registerUser(
-      name,
-      email,
-      password,
-      phone,
-      age,
-      gender,
-      runner,
-      planner
-    );
-    if (status) navigate("/profile");
-  };
+ 
 
   return (
-    <Form className="form-container">
+     <Form className="form-container" validated={validated}>
       <div className="form-container-text">
-        <Form.Text as="h3">HELLO!</Form.Text>
+        <Form.Text as="h3">HI THERE, RUNNER!</Form.Text>
         <Form.Text as="p">
           Create an account with us to use weRun and join runs with people from
           all over Canada.
@@ -84,19 +124,25 @@ export default function RegisterUser() {
       </div>
       <FloatingLabel controlId="floatingInput" label="Name" className="mb-3">
         <Form.Control
+          required
           type="text"
           placeholder="Firstname / Lastname"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Enter your name.</Form.Control.Feedback>
       </FloatingLabel>
       <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
         <Form.Control
+          required
           type="email"
           placeholder="name@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Enter a valid email address.</Form.Control.Feedback>
       </FloatingLabel>
       <FloatingLabel
         controlId="floatingPassword"
@@ -104,31 +150,40 @@ export default function RegisterUser() {
         className="mb-3"
       >
         <Form.Control
+          required
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <Form.Control.Feedback>Cool password!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Enter a valid password.</Form.Control.Feedback>
       </FloatingLabel>
       <Row>
         <Col>
           <FloatingLabel controlId="phone" label="Phone" className="mb-3">
             <Form.Control
+              required
               type="text"
               placeholder="Phone"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
+            <Form.Control.Feedback>Got it!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">Enter a valid phone number.</Form.Control.Feedback>
           </FloatingLabel>
         </Col>
         <Col>
           <FloatingLabel controlId="floatingInput" label="Age" className="mb-3">
             <Form.Control
+              required
               type="text"
               placeholder="Age"
               value={age}
               onChange={(e) => setAge(e.target.value)}
             />
+            <Form.Control.Feedback>You're getting old..</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">Enter a valid age.</Form.Control.Feedback>
           </FloatingLabel>{" "}
         </Col>
       </Row>
@@ -159,7 +214,7 @@ export default function RegisterUser() {
           onChange={() => handleOnChange(setPlanner)}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" onClick={(e) => submit(e)}>
+      <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
         Submit
       </Button>
     </Form>
