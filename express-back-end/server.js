@@ -6,6 +6,15 @@ const Bcrypt = require("bcryptjs");
 const CookieSession = require("cookie-session");
 const fs = require("fs");
 
+
+//twilio
+const twilio = require("twilio")
+const accountNumber = process.env.TWILIO_ACCTNUM;
+const authToken = process.env.TWILIO_TOKEN;
+
+const client = new twilio(accountNumber, authToken);
+
+//port
 const PORT = 8080;
 
 // Express Configuration
