@@ -8,6 +8,7 @@ const fs = require("fs");
 
 
 //twilio
+import newUserMessage from "./twilio";
 const twilio = require("twilio")
 const accountNumber = process.env.TWILIO_ACCTNUM;
 const authToken = process.env.TWILIO_TOKEN;
