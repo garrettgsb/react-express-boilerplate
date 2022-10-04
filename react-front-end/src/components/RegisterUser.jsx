@@ -24,12 +24,15 @@ export default function RegisterUser() {
   const navigate = useNavigate();
 
   //validate form
-  
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = async (e) => {
 
     const form = e.currentTarget;
+    
+
+
+    
     if(form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
@@ -86,6 +89,7 @@ export default function RegisterUser() {
             (label, index) => {
               return (
                 <Form.Check
+                  required
                   inline
                   key={label}
                   label={label}

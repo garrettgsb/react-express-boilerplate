@@ -28,11 +28,29 @@ export default function RegisterRun() {
   const navigate = useNavigate();
   const { createRun } = useAppData();
 
+
+  //form validate
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = async (e) => {
+
+    const form = e.currentTarget;
+    
+    if(form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
+    }
+  
+
+
   const datePick = () => {
     return (
       <Form.Group controlId="date" className="mb-3">
         <Form.Label>Date</Form.Label>
         <DatePicker
+          required
           className="date-picker"
           selected={date}
           onChange={(date) => setDate(date)}
@@ -47,6 +65,7 @@ export default function RegisterRun() {
         {[2, 5, 10].map((label) => {
           return (
             <Form.Check
+              required
               key={label}
               inline
               type="radio"
@@ -67,8 +86,10 @@ export default function RegisterRun() {
     if (status) navigate("/profile");
   };
 
+
+
   return (
-    <Form className="form-container" encType="multipart/form-data">
+    <Form className="form-container" encType="multipart/form-data" validated={validated}>
       <div className="form-container-text">
         <Form.Text as="h3">Create a Run</Form.Text>
         <Form.Text as="p">
@@ -78,11 +99,14 @@ export default function RegisterRun() {
       </div>
       <FloatingLabel controlId="name" label="Name" className="mb-3">
         <Form.Control
+          required
           type="text"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Enter a name for the run.</Form.Control.Feedback>
       </FloatingLabel>
       <FloatingLabel
         controlId="description"
@@ -90,20 +114,26 @@ export default function RegisterRun() {
         className="mb-3"
       >
         <Form.Control
+          required
           as="textarea"
           type="text"
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Write a short description including directions, necessary information, etc.</Form.Control.Feedback>
       </FloatingLabel>
       <FloatingLabel controlId="location" label="Address" className="mb-3">
         <Form.Control
+          required
           type="text"
           placeholder="Address"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Enter a valid address.</Form.Control.Feedback>
       </FloatingLabel>
 
       <Form.Group controlId="distance" className="mb-3">
@@ -117,22 +147,28 @@ export default function RegisterRun() {
           <Form.Group controlId="time" className="mb-3">
             <Form.Label>Time</Form.Label>
             <Form.Control
+              required
               type="time"
               placeholder="Time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
             />
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">Enter a valid time.</Form.Control.Feedback>
           </Form.Group>
         </Col>
       </Row>
       <Form.Group controlId="formFileLg" className="mb-3">
         <Form.Label>Upload an image</Form.Label>
         <Form.Control
+          required
           type="file"
           onChange={(e) => setFile(e.target.files[0])}
         />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">Upload an image for this run.</Form.Control.Feedback>
       </Form.Group>
-      <Button variant="primary" type="submit" onClick={(e) => create(e)}>
+      <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
         Create
       </Button>
     </Form>
