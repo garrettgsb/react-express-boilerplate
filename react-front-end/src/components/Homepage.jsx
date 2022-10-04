@@ -43,7 +43,6 @@ export default function Homepage() {
           </Link>
         </div>
       </div>
-      <AutoComplete/>
     </div>
   );
 }
