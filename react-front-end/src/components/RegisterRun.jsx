@@ -40,7 +40,13 @@ export default function RegisterRun() {
       e.preventDefault();
       e.stopPropagation();
     }
-    
+    if(form.checkValidity() === true) {
+    const create = async (e) => {
+      e.preventDefault();
+      const status = await createRun(user.id, name, description, location, distance, time, date, file);
+      if (status) navigate("/profile");
+    }
+    };
     }
   
 
@@ -80,11 +86,7 @@ export default function RegisterRun() {
     );
   };
 
-  const create = async (e) => {
-    e.preventDefault();
-    const status = await createRun(user.id, name, description, location, distance, time, date, file);
-    if (status) navigate("/profile");
-  };
+ 
 
 
 
