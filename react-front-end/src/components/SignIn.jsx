@@ -34,6 +34,7 @@ export default function SignIn() {
         </div>
         <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
           <Form.Control
+            required
             type="email"
             placeholder="name@example.com"
             value={email}
@@ -46,6 +47,7 @@ export default function SignIn() {
           className="mb-3"
         >
           <Form.Control
+            required
             type="password"
             placeholder="Password"
             value={password}
