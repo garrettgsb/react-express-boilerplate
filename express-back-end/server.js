@@ -5,6 +5,7 @@ const BodyParser = require("body-parser");
 const Bcrypt = require("bcryptjs");
 const CookieSession = require("cookie-session");
 const fs = require("fs");
+const sendUserText = require('./twilio');
 
 
 
@@ -84,6 +85,9 @@ App.post("/api/users", (req, res) => {
     req.body;
   
   const hashedPassword = Bcrypt.hashSync(password, 10);
+
+  const newUserMessage = "Welcome to WeRun! Your account has been created. Join your first run now and put on your running shoes!";
+
   db.createUser({
     name,
     email,
@@ -96,6 +100,8 @@ App.post("/api/users", (req, res) => {
   })
     .then((response) => {
       const { user } = response;
+      sendUserText(user.phone, newUserMessage);
+      res.send({message: "Account created successfully! You will shortly receive a text message to confirm.", data: user});
       if (!user) res.send({ message: "User was not created" });
       res.send({ user });
     })
