@@ -11,21 +11,20 @@
   background-color: #d83b01;
   border-radius: 50%;
   color: #fff;
-  height: 2.5em;
+  height: 3em;
   position: relative;
-  width: 2.5em;
-
-  border: 1px solid transparent;
+  width: 3em;
 }
 
 .circleText {
   text-align: center;
-  height: 50%;
+  font-size: 15px;
+  font-weight: 500;
   left: 50%;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: 100%;
 }
 
 .hover {
