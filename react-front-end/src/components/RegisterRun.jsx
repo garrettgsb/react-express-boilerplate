@@ -61,8 +61,8 @@ export default function RegisterRun() {
     description: "",
     location: "",
     distance: "",
-    time: "",
-    date: "",
+    time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+    date: new Date(),
     file: "" })
     navigate('/profile');
   } 
@@ -75,6 +75,7 @@ export default function RegisterRun() {
         <Form.Label>Date</Form.Label>
         <DatePicker
           required
+          name="date"
           className="date-picker"
           selected={date}
           onChange={(date) => setDate(date)}
@@ -122,6 +123,7 @@ export default function RegisterRun() {
           required
           type="text"
           placeholder="Name"
+          name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -137,6 +139,7 @@ export default function RegisterRun() {
           required
           as="textarea"
           type="text"
+          name="description"
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -148,6 +151,7 @@ export default function RegisterRun() {
         <Form.Control
           required
           type="text"
+          name="location"
           placeholder="Address"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
@@ -169,6 +173,7 @@ export default function RegisterRun() {
             <Form.Control
               required
               type="time"
+              name="time"
               placeholder="Time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
@@ -182,6 +187,7 @@ export default function RegisterRun() {
         <Form.Label>Upload an image</Form.Label>
         <Form.Control
           required
+          name="file"
           type="file"
           onChange={(e) => setFile(e.target.files[0])}
         />
