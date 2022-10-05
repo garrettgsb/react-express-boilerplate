@@ -92,7 +92,7 @@ const getUserByEmail = ({ email }) => {
 const getAllRuns = () => {
   return db
     .query(
-      `SELECT runs.id, runs.name, runs.description, runs.location, TO_CHAR(runs.time, 'HH:MM AM') as time, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, runs.distance, runs.latitude, runs.longitude 
+      `SELECT runs.id, runs.name, runs.description, runs.location, TO_CHAR(runs.time, 'HH:MI AM') as time, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, runs.distance, runs.latitude, runs.longitude 
     FROM runs
     WHERE runs.date >= CURRENT_DATE;`
     )
@@ -150,7 +150,7 @@ const createRun = ({
 const getRunsForPlanner = (id) => {
   return db
     .query(
-      `SELECT runs.id, users.id AS planner_id, runs.name, runs.description, runs.distance, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date,
+      `SELECT runs.id, users.id AS planner_id, runs.name, runs.description, runs.distance, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, TO_CHAR(runs.time, 'HH:MI AM') as time, runs.location,
         (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
             ELSE FALSE
         END) AS future_run

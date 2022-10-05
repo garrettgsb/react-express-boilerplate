@@ -29,7 +29,7 @@ export default function Run(props) {
             <ListGroup variant="flush">
               <ListGroup.Item>Distance: {run.distance} km</ListGroup.Item>
               {type !== "attended" && (
-                <ListGroup.Item>Address: {run.location}</ListGroup.Item>
+                <ListGroup.Item>Where: {run.location}</ListGroup.Item>
               )}
               <ListGroup.Item>Time: {run.time}</ListGroup.Item>
               <ListGroup.Item>When: {run.date}</ListGroup.Item>
