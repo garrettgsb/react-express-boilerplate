@@ -44,6 +44,16 @@ padding-top:0.2em;
     margin-right: auto;
 }
 
+.run-heading .material-symbols-rounded{
+  font-size: 30px;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+  color: #d83a01c3;
+}
+
 .run-desc {
   align-items: flex-end;
 }

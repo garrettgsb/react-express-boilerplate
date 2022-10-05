@@ -12,7 +12,7 @@ export default function Run(props) {
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      Scheduled on {run.date}!
+      Event on {run.date}!
     </Tooltip>
   );
 
@@ -26,7 +26,7 @@ export default function Run(props) {
         ></img>
         <div className="run-body">
           <div className="run-heading">
-            {type !== "attended" && (
+            {type === "available" && (
               <span id={`run-${run.id}`} className="run-id">
                 {run.id}
               </span>
