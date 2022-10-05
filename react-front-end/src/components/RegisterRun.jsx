@@ -76,9 +76,12 @@ export default function RegisterRun() {
         <DatePicker
           required
           name="date"
+          key={label}
+          label={label}
+          value={label}
           className="date-picker"
-          selected={date}
-          onChange={(date) => setDate(date)}
+          selected={runData.date === label}
+          onChange={handleChange}
         />
       </Form.Group>
     );
@@ -112,7 +115,7 @@ export default function RegisterRun() {
 
 
   return (
-    <Form className="form-container" encType="multipart/form-data" validated={validated}>
+    <Form className="form-container" encType="multipart/form-data" validated={validated} onSubmit={handleSubmit}>
       <div className="form-container-text">
         <Form.Text as="h3">Create a Run</Form.Text>
         <Form.Text as="p">
@@ -126,8 +129,8 @@ export default function RegisterRun() {
           type="text"
           placeholder="Name"
           name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={runData.name}
+          onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">Enter a name for the run.</Form.Control.Feedback>
@@ -143,8 +146,8 @@ export default function RegisterRun() {
           type="text"
           name="description"
           placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={runData.description}
+          onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">Write a short description including directions, necessary information, etc.</Form.Control.Feedback>
@@ -155,8 +158,8 @@ export default function RegisterRun() {
           type="text"
           name="location"
           placeholder="Address"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
+          value={runData.location}
+          onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">Enter a valid address.</Form.Control.Feedback>
@@ -177,8 +180,8 @@ export default function RegisterRun() {
               type="time"
               name="time"
               placeholder="Time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
+              value={runData.time}
+              onChange={handleChange}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">Enter a valid time.</Form.Control.Feedback>
@@ -191,12 +194,12 @@ export default function RegisterRun() {
           required
           name="file"
           type="file"
-          onChange={(e) => setFile(e.target.files[0])}
+          onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">Upload an image for this run.</Form.Control.Feedback>
       </Form.Group>
-      <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
+      <Button variant="primary" type="submit">
         Create
       </Button>
     </Form>
