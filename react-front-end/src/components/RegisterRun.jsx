@@ -97,7 +97,9 @@ export default function RegisterRun() {
               id={`inline-radio-1`}
               label={`${label}k`}
               value={label}
-              onChange={(e) => setDistance(e.target.value)}
+              name="distance"
+              checked={runData.distance === label}
+              onChange={handleChange}
             />
           );
         })}
