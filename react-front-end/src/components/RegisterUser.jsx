@@ -12,14 +12,37 @@ import useAppData from "../hooks/useAppData";
 import Feedback from 'react-bootstrap/Feedback';
 
 export default function RegisterUser() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [runner, setRunner] = useState(false);
-  const [planner, setPlanner] = useState(false);
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    age: "",
+    runner: false,
+    planner: false
+  }); 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+  };
+
+  //use onchange in form input, pass to db 
+  
+
+  const handleOnChange = (setIsChecked) => {
+    setIsChecked((prev)=>!prev);
+  };
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [age, setAge] = useState("");
+  // const [gender, setGender] = useState("");
+  // const [runner, setRunner] = useState(false);
+  // const [planner, setPlanner] = useState(false);
   const { registerUser } = useAppData();
   const navigate = useNavigate();
 
@@ -29,10 +52,7 @@ export default function RegisterUser() {
   const handleSubmit = async (e) => {
 
     const form = e.currentTarget;
-    
-
-
-    
+      
     if(form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
@@ -96,8 +116,8 @@ export default function RegisterUser() {
                   name="group1"
                   type="radio"
                   id={`inline-radio-${index}`}
-                  value={label}
-                  onChange={(e) => setGender(e.target.value)}
+                  value={userData.gender}
+                  onChange={(e) => setUserData(e.target.value)}
                 />
               );
             }
@@ -107,9 +127,7 @@ export default function RegisterUser() {
     );
   };
 
-  const handleOnChange = (setIsChecked) => {
-    setIsChecked((prev)=>!prev);
-  };
+ 
 
  
 
@@ -127,8 +145,8 @@ export default function RegisterUser() {
           required
           type="text"
           placeholder="Firstname / Lastname"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={userData.name}
+          onChange={(e) => setUserData(e.target.value)}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">Enter your name.</Form.Control.Feedback>
@@ -138,8 +156,8 @@ export default function RegisterUser() {
           required
           type="email"
           placeholder="name@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={userData.email}
+          onChange={(e) => setUserData(e.target.value)}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">Enter a valid email address.</Form.Control.Feedback>
@@ -153,8 +171,8 @@ export default function RegisterUser() {
           required
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={userData.password}
+          onChange={(e) => setUserData(e.target.value)}
         />
         <Form.Control.Feedback>Cool password!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">Enter a valid password.</Form.Control.Feedback>
@@ -166,8 +184,8 @@ export default function RegisterUser() {
               required
               type="text"
               placeholder="Phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={userData.phone}
+              onChange={(e) => setUserData(e.target.value)}
             />
             <Form.Control.Feedback>Got it!</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">Enter a valid phone number.</Form.Control.Feedback>
@@ -179,8 +197,8 @@ export default function RegisterUser() {
               required
               type="text"
               placeholder="Age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
+              value={userData.age}
+              onChange={(e) => setUserData(e.target.value)}
             />
             <Form.Control.Feedback>You're getting old..</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">Enter a valid age.</Form.Control.Feedback>
@@ -202,15 +220,15 @@ export default function RegisterUser() {
           label="Runner"
           type="checkbox"
           id={`inline-checkbox-1`}
-          checked={runner}
-          onChange={() => handleOnChange(setRunner)}
+          checked={userData.runner}
+          onChange={() => setUserData(true)}
         />
         <Form.Check
           inline
           label="Planner"
           type="checkbox"
           id={`inline-checkbox-2`}
-          checked={planner}
+          checked={userData.planner}
           onChange={() => handleOnChange(setPlanner)}
         />
       </Form.Group>
