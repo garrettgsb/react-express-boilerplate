@@ -4,10 +4,6 @@ import Tooltip from "react-bootstrap/Tooltip";
 import "./Marker.css";
 
 const Markers = ({ id, $hover, description, distance, date }) => {
-  const handleClick = () => {
-    console.log(`You clicked on ${description}`);
-  };
-
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       <p>
@@ -24,11 +20,15 @@ const Markers = ({ id, $hover, description, distance, date }) => {
       delay={{ show: 100, hide: 100 }}
       overlay={renderTooltip}
     >
-      <div className={$hover ? "circle hover" : "circle"} onClick={handleClick}>
-        <span className="circleText" title={description}>
-          {id}
-        </span>
-      </div>
+      <a href={`#run-${id}`}>
+        <div
+          className={$hover ? "circle hover" : "circle"}
+        >
+          <span className="circleText" title={description}>
+            {id}
+          </span>
+        </div>
+      </a>
     </OverlayTrigger>
   );
 };
