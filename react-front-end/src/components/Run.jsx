@@ -18,7 +18,11 @@ export default function Run(props) {
         ></img>
         <div className="run-body">
           <div className="run-heading">
-            {type !== "attended" && <span id={`run-${run.id}`} className="run-id">{run.id}</span>}
+            {type !== "attended" && (
+              <span id={`run-${run.id}`} className="run-id">
+                {run.id}
+              </span>
+            )}
             <h3>{run.name}</h3>
             {run.future_run && (
               <span className="material-symbols-rounded">schedule</span>
@@ -31,7 +35,9 @@ export default function Run(props) {
               {type !== "attended" && (
                 <ListGroup.Item>Where: {run.location}</ListGroup.Item>
               )}
-              <ListGroup.Item>Time: {run.time}</ListGroup.Item>
+              <ListGroup.Item>
+                Time: {type === "attended" ? `${run.time} min` : `${run.time}`}
+              </ListGroup.Item>
               <ListGroup.Item>When: {run.date}</ListGroup.Item>
             </ListGroup>
             <JoinButton runType={type} joinStatus={joinStatus} join={join} />
