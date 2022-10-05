@@ -22,14 +22,9 @@ export default function RegisterUser() {
     planner: false
   }); 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({
-      ...userData,
-      [name]: value,
-    });
-  };
-
-  //use onchange in form input, pass to db 
+    setUserData({...userData, [e.target.name]: e.target.value });
+  }
+  //pass handlechange func to form input, send to db 
   
 
   const handleOnChange = (setIsChecked) => {
