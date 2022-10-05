@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Run.css";
@@ -9,12 +9,24 @@ import Tooltip from "react-bootstrap/Tooltip";
 export default function Run(props) {
   const { run, type, canJoinRun, join } = props;
   const [joinStatus, setJoinStatus] = useState(canJoinRun(run.id) || false);
+  const [time, setTime] = useState(run.time);
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       Event on {run.date}!
     </Tooltip>
   );
+
+  useEffect(() => {
+    if (time === 0) {
+      setTime(
+        "You are scheduled to run this event. No time has been recorded yet."
+      );
+    }
+    if (time !== 0 && type === "attended") {
+      setTime((prev) => prev + " min");
+    }
+  }, []);
 
   return (
     <>
@@ -50,7 +62,7 @@ export default function Run(props) {
                 <ListGroup.Item>Where: {run.location}</ListGroup.Item>
               )}
               <ListGroup.Item>
-                Time: {type === "attended" ? `${run.time} min` : `${run.time}`}
+                Time: {time}
               </ListGroup.Item>
               <ListGroup.Item>When: {run.date}</ListGroup.Item>
             </ListGroup>
