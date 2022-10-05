@@ -214,7 +214,7 @@ App.post(
 );
 
 App.post("/api/runs", (req, res) => {
-  const { name, description, location, distance, time, date, planner_id } =
+  const { name, description, location, distance, time, date, lat, lng, planner_id } =
     req.body;
 
   db.createRun({
@@ -224,8 +224,8 @@ App.post("/api/runs", (req, res) => {
     distance,
     time,
     date,
-    latitude: 43.952347,
-    longitude: -79.431323,
+    latitude: lat,
+    longitude: lng,
     planner_id,
   })
     .then((response) => {
