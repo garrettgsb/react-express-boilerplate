@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/SignInUser.css";
 
 export default function SignIn() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAppData();
@@ -29,11 +30,12 @@ export default function SignIn() {
     <>
       <Form className="form-container sign-in" onSubmit={handleSubmit}>
         <div className="form-container-text">
-          <Form.Text as="h3">HELLO!</Form.Text>
+          <Form.Text as="h3">WELCOME BACK, RUNNER!</Form.Text>
           <Form.Text as="p">Sign in to see all your running events.</Form.Text>
         </div>
         <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
           <Form.Control
+            required
             type="email"
             placeholder="name@example.com"
             value={email}
@@ -46,6 +48,7 @@ export default function SignIn() {
           className="mb-3"
         >
           <Form.Control
+            required
             type="password"
             placeholder="Password"
             value={password}

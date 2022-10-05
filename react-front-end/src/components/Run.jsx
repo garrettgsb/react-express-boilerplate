@@ -11,7 +11,9 @@ export default function Run(props) {
   return (
     <>
       <section className="run">
-        <img alt="Shows running space" className="run-image" src={`/api/runs/image/${run.id}`}></img>
+
+        <img className="run-image" src={`/api/runs/image/${run.id}`} alt="running event location"></img>
+
         <div className="run-body">
           <div className="run-heading">
             <h3>{run.name}</h3>
