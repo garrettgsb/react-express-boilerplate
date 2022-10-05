@@ -24,7 +24,7 @@ const Markers = ({ id, $hover, description, distance, date }) => {
         <div
           className={$hover ? "circle hover" : "circle"}
         >
-          <span className="circleText" title={description}>
+          <span className="circleText">
             {id}
           </span>
         </div>
