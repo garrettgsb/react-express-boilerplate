@@ -10,7 +10,7 @@ const Markers = ({ id, $hover, description, distance, date }) => {
         {description}
         {distance && ` (${distance}k)`}
       </p>
-      <p>{date && `Date: ${date.slice(0, 10)}`}</p>
+      <p>{date && `Date: ${date}`}</p>
     </Tooltip>
   );
 

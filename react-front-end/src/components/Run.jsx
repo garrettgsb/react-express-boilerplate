@@ -32,7 +32,7 @@ export default function Run(props) {
                 <ListGroup.Item>Address: {run.location}</ListGroup.Item>
               )}
               <ListGroup.Item>Time: {run.time}</ListGroup.Item>
-              <ListGroup.Item>Date: {run.date.slice(0, 10)}</ListGroup.Item>
+              <ListGroup.Item>When: {run.date}</ListGroup.Item>
             </ListGroup>
             <JoinButton runType={type} joinStatus={joinStatus} join={join} />
           </div>
