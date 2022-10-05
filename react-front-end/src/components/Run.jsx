@@ -11,11 +11,13 @@ export default function Run(props) {
   return (
     <>
       <section className="run">
+
         <img
           alt="Shows running space"
           className="run-image"
           src={`/api/runs/image/${run.id}`}
         ></img>
+
         <div className="run-body">
           <div className="run-heading">
             {type !== "attended" && <span id={`run-${run.id}`} className="run-id">{run.id}</span>}

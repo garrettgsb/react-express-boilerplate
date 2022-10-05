@@ -27,7 +27,7 @@ export default function ProfileActions(props) {
           overlay={renderTooltip}
         >
           <span
-            class="material-symbols-rounded"
+            className="material-symbols-rounded"
             onClick={() => handleClick("/create")}
             onMouseEnter={()=>setAction("Plan A Run")}
           >

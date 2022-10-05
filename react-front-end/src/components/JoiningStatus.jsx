@@ -31,8 +31,8 @@ export default function JoiningStatus(props) {
         </Modal.Header>
         <Modal.Body className="joining-status-message">
           <p>
-            You will now be directed to your profile page. You will recieve an
-            email confirmation with the address of the run and other relevant
+            You will now be directed to your profile page. You will receive a
+            text message confirming the address of the run and other relevant
             information!
           </p>
           <p>
