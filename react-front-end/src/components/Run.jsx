@@ -3,10 +3,18 @@ import ListGroup from "react-bootstrap/ListGroup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Run.css";
 import JoinButton from "./JoinButton";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 export default function Run(props) {
   const { run, type, canJoinRun, join } = props;
   const [joinStatus, setJoinStatus] = useState(canJoinRun(run.id) || false);
+
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Scheduled on {run.date}!
+    </Tooltip>
+  );
 
   return (
     <>
@@ -25,7 +33,13 @@ export default function Run(props) {
             )}
             <h3>{run.name}</h3>
             {run.future_run && (
-              <span className="material-symbols-rounded">schedule</span>
+              <OverlayTrigger
+                placement="left"
+                delay={{ show: 250, hide: 50 }}
+                overlay={renderTooltip}
+              >
+                <span className="material-symbols-rounded">calendar_month</span>
+              </OverlayTrigger>
             )}
           </div>
           <p>{run.description}</p>
