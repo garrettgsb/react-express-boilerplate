@@ -13,17 +13,17 @@ const DefaultMap = ({ center, zoom }) => {
 
   const showMarkers = (runs) => {
     const runsArray = Object.values(runs);
-
+    console.log(runsArray);
     return runsArray.map((run) => (
       <Markers
         key={run.id}
+        id={run.id}
         name={run.name}
+        description={run.name}
+        distance={"5k"}
+        date={run.date}
         lat={run.latitude}
         lng={run.longitude}
-        text={run.id}
-        tooltip={run.name}
-        //  text={run.name}
-        //  onClick={() => <div className="info" text={run.name}/>}
       />
     ));
   };
@@ -49,7 +49,7 @@ const DefaultMap = ({ center, zoom }) => {
           center={currentLocation}
           defaultZoom={zoom}
         >
-          <Markers lat={center.lat} lng={center.lng} text="Me" />
+          <Markers lat={center.lat} lng={center.lng} id="Me" description="You are here!"/>
           {showMarkers(runs)}
         </GoogleMapReact>
       </div>

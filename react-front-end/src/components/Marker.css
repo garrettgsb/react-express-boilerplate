@@ -31,3 +31,13 @@
 .hover {
   background-color: #0078d4;
 }
+
+#button-tooltip .tooltip-inner{
+  max-width: 400px;
+}
+
+#button-tooltip p {
+  margin: 0px;
+  font-size: 18px;
+  text-align: start;
+}
