@@ -13,7 +13,6 @@ const DefaultMap = ({ center, zoom }) => {
 
   const showMarkers = (runs) => {
     const runsArray = Object.values(runs);
-    console.log(runsArray);
     return runsArray.map((run) => (
       <Markers
         key={run.id}
@@ -40,7 +39,7 @@ const DefaultMap = ({ center, zoom }) => {
   }, []);
   return (
     <>
-      <div style={{ height: "80vh", width: "80%" }}>
+      <div style={{ height: "80vh", width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: myKey,
@@ -49,7 +48,12 @@ const DefaultMap = ({ center, zoom }) => {
           center={currentLocation}
           defaultZoom={zoom}
         >
-          <Markers lat={center.lat} lng={center.lng} id="Me" description="You are here!"/>
+          <Markers
+            lat={center.lat}
+            lng={center.lng}
+            id="Me"
+            description="You are here!"
+          />
           {showMarkers(runs)}
         </GoogleMapReact>
       </div>
