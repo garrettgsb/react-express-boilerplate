@@ -157,7 +157,7 @@ export default function useAppData() {
     }
   }
 
-  async function registerUser(
+  async function registerUser({
     name,
     email,
     password,
@@ -166,12 +166,20 @@ export default function useAppData() {
     gender,
     runner,
     planner
-  ) {
+    }) {
     try {
       const registerUserResponse = await axios({
         method: "post",
         url: "/api/users",
-        data: { name, email, password, phone, age, gender, runner, planner },
+        data: { 
+          name, 
+          email, 
+          password, 
+          phone, 
+          age, 
+          gender, 
+          runner, 
+          planner },
       });
       const { user } = registerUserResponse.data;
       if (registerUserResponse.status !== 200) return false;

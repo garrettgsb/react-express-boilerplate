@@ -7,11 +7,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import useAppData from "../hooks/useAppData";
 import Feedback from 'react-bootstrap/Feedback';
 
 export default function RegisterUser() {
+  const { registerUser } = useAppData();
+
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -24,70 +26,39 @@ export default function RegisterUser() {
   const handleChange = (e) => {
     setUserData({...userData, [e.target.name]: e.target.value });
   }
-  //pass handlechange func to form input, send to db 
-  
 
-  const handleOnChange = (setIsChecked) => {
-    setIsChecked((prev)=>!prev);
-  };
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [phone, setPhone] = useState("");
-  // const [age, setAge] = useState("");
-  // const [gender, setGender] = useState("");
-  // const [runner, setRunner] = useState(false);
-  // const [planner, setPlanner] = useState(false);
-  const { registerUser } = useAppData();
+  const handleCheckboxChange = (e) => {
+    const prev = userData[e.target.name]
+    setUserData({...userData, [e.target.name]: !prev });
+  }
+
+  const [validated, setValidated] = useState(false);
   const navigate = useNavigate();
 
-  //validate form
-  const [validated, setValidated] = useState(false);
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     const form = e.currentTarget;
       
-    if(form.checkValidity() === false) {
+     if(form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
-    }
+     }
 
-    //setValidated(true);
-
-    //if (setValidated(true)) { 
-
-    const status = registerUser(
-      name,
-      email,
-      password,
-      phone,
-      age,
-      gender,
-      runner,
-      planner
-    );
-
-    if (status && setValidated(true)) navigate("/profile");
-    }
+    setValidated(true);
   
+    registerUser(userData);
+    setUserData({    
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    age: "",
+    runner: false,
+    planner: false })
+    navigate('/profile');
+  }
 
-  // const submit = async (e) => {
-  //   e.preventDefault();
-  //   const status = await registerUser(
-  //     name,
-  //     email,
-  //     password,
-  //     phone,
-  //     age,
-  //     gender,
-  //     runner,
-  //     planner
-  //   );
-   
-  //   if (status) navigate("/profile");
-  // };
-  
   
   const genderSelector = () => {
     return (
@@ -96,9 +67,11 @@ export default function RegisterUser() {
           Gender:
         </Form.Text>
         <Form.Group
+          name="gender"
           className="mb-3"
           controlId="formBasicCheckbox"
           aria-describedby="profileHelpBlock"
+          
         >
           {["he/Him", "she/Her", "they/Them", "I prefer not to say"].map(
             (label, index) => {
@@ -108,11 +81,12 @@ export default function RegisterUser() {
                   inline
                   key={label}
                   label={label}
-                  name="group1"
+                  name="gender"
                   type="radio"
                   id={`inline-radio-${index}`}
-                  value={userData.gender}
-                  onChange={(e) => setUserData(e.target.value)}
+                  value={label}
+                  checked={userData.gender === label}
+                  onChange={handleChange}
                 />
               );
             }
@@ -127,7 +101,7 @@ export default function RegisterUser() {
  
 
   return (
-     <Form className="form-container" validated={validated}>
+     <Form className="form-container" validated={validated} onSubmit={handleSubmit}>
       <div className="form-container-text">
         <Form.Text as="h3">HI THERE, RUNNER!</Form.Text>
         <Form.Text as="p">
@@ -140,8 +114,9 @@ export default function RegisterUser() {
           required
           type="text"
           placeholder="Firstname / Lastname"
+          name="name"
           value={userData.name}
-          onChange={(e) => setUserData(e.target.value)}
+          onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">Enter your name.</Form.Control.Feedback>
@@ -149,10 +124,11 @@ export default function RegisterUser() {
       <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
         <Form.Control
           required
+          name="email"
           type="email"
           placeholder="name@example.com"
           value={userData.email}
-          onChange={(e) => setUserData(e.target.value)}
+          onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">Enter a valid email address.</Form.Control.Feedback>
@@ -165,9 +141,10 @@ export default function RegisterUser() {
         <Form.Control
           required
           type="password"
+          name="password"
           placeholder="Password"
           value={userData.password}
-          onChange={(e) => setUserData(e.target.value)}
+          onChange={handleChange}
         />
         <Form.Control.Feedback>Cool password!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">Enter a valid password.</Form.Control.Feedback>
@@ -179,8 +156,9 @@ export default function RegisterUser() {
               required
               type="text"
               placeholder="Phone"
+              name="phone"
               value={userData.phone}
-              onChange={(e) => setUserData(e.target.value)}
+              onChange={handleChange}
             />
             <Form.Control.Feedback>Got it!</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">Enter a valid phone number.</Form.Control.Feedback>
@@ -192,8 +170,9 @@ export default function RegisterUser() {
               required
               type="text"
               placeholder="Age"
+              name="age"
               value={userData.age}
-              onChange={(e) => setUserData(e.target.value)}
+              onChange={handleChange}
             />
             <Form.Control.Feedback>You're getting old..</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">Enter a valid age.</Form.Control.Feedback>
@@ -213,21 +192,26 @@ export default function RegisterUser() {
         <Form.Check
           inline
           label="Runner"
+          //value="runner"
           type="checkbox"
           id={`inline-checkbox-1`}
+          name="runner"
           checked={userData.runner}
-          onChange={() => setUserData(true)}
+          onChange={handleCheckboxChange}
         />
         <Form.Check
           inline
           label="Planner"
           type="checkbox"
           id={`inline-checkbox-2`}
+          name="planner"
+          // value=""
           checked={userData.planner}
-          onChange={() => handleOnChange(setPlanner)}
+          onChange={handleCheckboxChange}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
+      {/* <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}> */}
+      <Button variant="primary" type="submit">
         Submit
       </Button>
     </Form>
