@@ -173,7 +173,7 @@ const getRunsForPlanner = (id) => {
 const getRunsForRunner = (id) => {
   return db
     .query(
-      `SELECT runs.id, users.id AS user_id, runs.name, runs.description, runs.distance, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, users_runs.time, users_runs.rating, 
+      `SELECT runs.id, users.id AS user_id, runs.name, runs.description, runs.distance, runs.location, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, users_runs.time, users_runs.rating, 
       (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
             ELSE FALSE
        END) AS future_run

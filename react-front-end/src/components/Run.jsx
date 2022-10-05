@@ -58,12 +58,8 @@ export default function Run(props) {
           <div className="run-desc">
             <ListGroup variant="flush">
               <ListGroup.Item>Distance: {run.distance} km</ListGroup.Item>
-              {type !== "attended" && (
-                <ListGroup.Item>Where: {run.location}</ListGroup.Item>
-              )}
-              <ListGroup.Item>
-                Time: {time}
-              </ListGroup.Item>
+              <ListGroup.Item>Where: {run.location}</ListGroup.Item>
+              <ListGroup.Item>Time: {time}</ListGroup.Item>
               <ListGroup.Item>When: {run.date}</ListGroup.Item>
             </ListGroup>
             <JoinButton runType={type} joinStatus={joinStatus} join={join} />
