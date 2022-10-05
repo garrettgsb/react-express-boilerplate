@@ -19,7 +19,7 @@ const DefaultMap = ({ center, zoom }) => {
         id={run.id}
         name={run.name}
         description={run.name}
-        distance={"5k"}
+        distance={run.distance}
         date={run.date}
         lat={run.latitude}
         lng={run.longitude}
