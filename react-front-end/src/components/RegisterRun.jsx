@@ -20,8 +20,8 @@ export default function RegisterRun() {
     description: "",
     location: "",
     distance: "",
-    time: "",
-    date: "",
+    time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+    date: new Date(),
     file: ""
   });
   // const [name, setName] = useState("");
