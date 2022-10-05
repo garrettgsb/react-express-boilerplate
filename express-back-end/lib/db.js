@@ -92,7 +92,7 @@ const getUserByEmail = ({ email }) => {
 const getAllRuns = () => {
   return db
     .query(
-      `SELECT runs.id, runs.name, runs.description, runs.location, runs.time, runs.date, runs.latitude, runs.longitude 
+      `SELECT runs.id, runs.name, runs.description, runs.location, runs.time, runs.date, runs.distance, runs.latitude, runs.longitude 
     FROM runs
     WHERE runs.date >= CURRENT_DATE;`
     )
