@@ -15,39 +15,57 @@ import useAppData from "../hooks/useAppData";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function RegisterRun() {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
-  const [distance, setDistance] = useState("");
-  const [time, setTime] = useState(
-    `${new Date().getHours()}:${new Date().getMinutes()}`
-  );
-  const [date, setDate] = useState(new Date());
-  const [file, setFile] = useState("");
+  const [runData, setRunData] = useState({
+    name: "",
+    description: "",
+    location: "",
+    distance: "",
+    time: "",
+    date: "",
+    file: ""
+  });
+  // const [name, setName] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [location, setLocation] = useState("");
+  // const [distance, setDistance] = useState("");
+  // const [time, setTime] = useState(
+  //   `${new Date().getHours()}:${new Date().getMinutes()}`
+  // );
+  // const [date, setDate] = useState(new Date());
+  // const [file, setFile] = useState("");
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const { createRun } = useAppData();
+
+  const handleChange = (e) => {
+    setRunData({...runData, [e.target.name]: e.target.value });
+  }
+
+  const handleCheckboxChange = (e) => {
+    const prev = runData[e.target.name]
+    setRunData({...runData, [e.target.name]: !prev})
+  }
 
 
   //form validate
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const form = e.currentTarget;
-    
-    if(form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    if(form.checkValidity() === true) {
-    const create = async (e) => {
-      e.preventDefault();
-      const status = await createRun(user.id, name, description, location, distance, time, date, file);
-      if (status) navigate("/profile");
-    }
-    };
-    }
+    setValidated(true)
+
+    createRun(runData);
+    setRunData({    
+    name: "",
+    description: "",
+    location: "",
+    distance: "",
+    time: "",
+    date: "",
+    file: "" })
+    navigate('/profile');
+  } 
   
 
 

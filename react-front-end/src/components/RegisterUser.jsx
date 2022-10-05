@@ -38,7 +38,7 @@ export default function RegisterUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const form = e.currentTarget;
+    const form = e.target;
       
      if(form.checkValidity() === false) {
       e.preventDefault();
@@ -101,7 +101,7 @@ export default function RegisterUser() {
  
 
   return (
-     <Form className="form-container" validated={validated} onSubmit={handleSubmit}>
+     <Form className="form-container" novalidate validated={validated} onSubmit={handleSubmit}>
       <div className="form-container-text">
         <Form.Text as="h3">HI THERE, RUNNER!</Form.Text>
         <Form.Text as="p">
