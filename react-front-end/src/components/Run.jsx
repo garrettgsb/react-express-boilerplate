@@ -18,7 +18,7 @@ export default function Run(props) {
         ></img>
         <div className="run-body">
           <div className="run-heading">
-            {type !== "attended" && <span className="run-id">{run.id}</span>}
+            {type !== "attended" && <span id={`${run.id}`} className="run-id">{run.id}</span>}
             <h3>{run.name}</h3>
             {run.future_run && (
               <span className="material-symbols-rounded">schedule</span>
