@@ -3,12 +3,12 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate, Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userState } from "../hooks/useAppData";
 import useAppData from "../hooks/useAppData";
 
 export default function Navigation() {
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const { logout } = useAppData();
 

@@ -5,7 +5,11 @@ const BodyParser = require("body-parser");
 const Bcrypt = require("bcryptjs");
 const CookieSession = require("cookie-session");
 const fs = require("fs");
+const sendUserText = require('./twilio');
 
+
+
+//port
 const PORT = 8080;
 
 // Express Configuration
@@ -81,6 +85,9 @@ App.post("/api/users", (req, res) => {
     req.body;
   
   const hashedPassword = Bcrypt.hashSync(password, 10);
+
+  const newUserMessage = "Welcome to WeRun! Your account has been created. Join your first run now and put on your running shoes!";
+
   db.createUser({
     name,
     email,
@@ -93,6 +100,8 @@ App.post("/api/users", (req, res) => {
   })
     .then((response) => {
       const { user } = response;
+      sendUserText(user.phone, newUserMessage);
+      res.send({message: "Account created successfully! You will shortly receive a text message to confirm.", data: user});
       if (!user) res.send({ message: "User was not created" });
       res.send({ user });
     })
@@ -205,7 +214,7 @@ App.post(
 );
 
 App.post("/api/runs", (req, res) => {
-  const { name, description, location, distance, time, date, planner_id } =
+  const { name, description, location, distance, time, date, lat, lng, planner_id } =
     req.body;
 
   db.createRun({
@@ -215,8 +224,8 @@ App.post("/api/runs", (req, res) => {
     distance,
     time,
     date,
-    latitude: 43.952347,
-    longitude: -79.431323,
+    latitude: lat,
+    longitude: lng,
     planner_id,
   })
     .then((response) => {
@@ -280,7 +289,7 @@ App.post("/api/register", (req, res) => {
       if (!user_run)
         return res.send({
           message:
-            "You could not be registered for a run. This event was in the past or you are already registers for this run.",
+            "You could not be registered for a run. This event was in the past or you are already registered for this run.",
         });
 
       res.send({ user_run });

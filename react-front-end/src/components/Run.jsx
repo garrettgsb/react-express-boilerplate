@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Run.css";
@@ -12,7 +11,9 @@ export default function Run(props) {
   return (
     <>
       <section className="run">
+
         <img className="run-image" src={`/api/runs/image/${run.id}`} alt="running event location"></img>
+
         <div className="run-body">
           <div className="run-heading">
             <h3>{run.name}</h3>
