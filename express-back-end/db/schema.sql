@@ -23,7 +23,7 @@ CREATE TABLE runs (
   description VARCHAR(255) NOT NULL,
   location VARCHAR(255) NOT NULL,
   distance INTEGER NOT NULL,
-  time VARCHAR(255) NOT NULL,
+  time TIME NOT NULL,
   date DATE NOT NULL,
   planner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   latitude DECIMAL(8,6) NOT NULL,
