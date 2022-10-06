@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Homepage.css";
-import logo from "./logo.png";
+import logo from "./logo3.svg";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import AutoComplete from "./AutoComplete";
@@ -10,9 +10,11 @@ export default function Homepage() {
   return (
     <div>
       <div className="home-intro">
+        <div>
+          <h2>Welcome to WeRun</h2>
+          <p>We help you get connected to runs near you.</p>
+        </div>
         <img src={logo} className="logo" alt="logo" />
-        <p>Welcome to WeRun</p>
-        <p>We help you get connected to runs near you.</p>
       </div>
 
       <div className="home-runs">

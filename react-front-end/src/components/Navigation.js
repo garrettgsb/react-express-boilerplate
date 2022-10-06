@@ -6,6 +6,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userState } from "../hooks/useAppData";
 import useAppData from "../hooks/useAppData";
+import "./Navigation.css";
+import logo from "./logo2.png";
 
 export default function Navigation() {
   const user = useRecoilValue(userState);
@@ -24,7 +26,11 @@ export default function Navigation() {
     <Navbar bg="light" expand="lg">
       <Container fluid>
         <Link className="navbar-brand" to="/">
-          WeRun
+          <img
+            src={logo}
+            className="logo d-inline-block align-top"
+            alt="logo"
+          />
         </Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
