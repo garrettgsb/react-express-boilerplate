@@ -26,6 +26,34 @@
   justify-content: space-between;
 }
 
+.run-heading .run-id {
+/* background-color: rgba(0, 0, 0, 0.73); */
+background-color: #d83a01c3;
+color: white;
+font-size: 1.5rem;
+font-weight: 800;
+margin: -0.3em 0.5em 0 0;
+width: 2em;
+height: 2em;
+border-radius: 50%;
+text-align: center;
+padding-top:0.2em;
+}
+
+.run-heading h3 {
+    margin-right: auto;
+}
+
+.run-heading .material-symbols-rounded{
+  font-size: 30px;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+  color: #d83a01c3;
+}
+
 .run-desc {
   align-items: flex-end;
 }

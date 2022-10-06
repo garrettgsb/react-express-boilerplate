@@ -1,34 +1,12 @@
 import { atom } from "recoil";
-import { useSetRecoilState } from "recoil";
-import { useEffect } from "react";
-import { userCoordinatesAtom } from "./getUserCoords";
+import { recoilPersist } from "recoil-persist";
 
-const options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0,
-};
+const { persistAtom } = recoilPersist();
+
+export const userCoordinatesAtom = atom({
+  key: "userCoordinatesAtom",
+  default: { lat: 43.6532, lng: -79.3832 },
+  effects_UNSTABLE: [persistAtom],
+});
 
 
-const userLocation = () => {
-
-    const setUserCoords = useSetRecoilState(userCoordinatesAtom);
-
-  
-    useEffect(() => {
-      const success = (pos) => {
-        let crd = pos.coords;
-        setUserCoords({ lat: crd.latitude, lng: crd.longitude });
-      }
-  
-      const error = (err) => {
-        console.warn(`There was an error:${err.code}, ${err.message}`)
-      }
-  
-
-      return navigator.geolocation.getCurrentPosition(success, error, options);    
-    }, [setUserCoords]);
-
-  };
-  
-  export default userLocation;

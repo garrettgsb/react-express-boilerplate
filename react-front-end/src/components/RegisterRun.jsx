@@ -13,8 +13,10 @@ import { useRecoilValue } from "recoil";
 import { userState, runsState } from "../hooks/useAppData";
 import useAppData from "../hooks/useAppData";
 import "react-datepicker/dist/react-datepicker.css";
+import AutoComplete from "./AutoComplete";
 
 export default function RegisterRun() {
+
   const [runData, setRunData] = useState({
     name: "",
     description: "",
@@ -24,18 +26,24 @@ export default function RegisterRun() {
     date: new Date(),
     file: ""
   });
-  // const [name, setName] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [location, setLocation] = useState("");
-  // const [distance, setDistance] = useState("");
-  // const [time, setTime] = useState(
-  //   `${new Date().getHours()}:${new Date().getMinutes()}`
-  // );
-  // const [date, setDate] = useState(new Date());
-  // const [file, setFile] = useState("");
+
+  
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [placeName, setPlaceName] = useState("");
+  const [address, setAddress] = useState("");
+  const [coords, setCoords] = useState({ lat: "", lng: "" });
+  const [distance, setDistance] = useState("");
+  const [time, setTime] = useState(
+    `${new Date().getHours()}:${new Date().getMinutes()}`
+  );
+  const [date, setDate] = useState(new Date());
+  const [file, setFile] = useState("");
+
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const { createRun } = useAppData();
+
 
   const handleChange = (e) => {
     setRunData({...runData, [e.target.name]: e.target.value });
@@ -67,6 +75,37 @@ export default function RegisterRun() {
     navigate('/profile');
   } 
   
+
+
+  //form validate
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = async (e) => {
+    const form = e.currentTarget;
+
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (form.checkValidity() === true) {
+      const create = async (e) => {
+        e.preventDefault();
+        const status = await createRun(
+          user.id,
+          name,
+          description,
+          address,
+          distance,
+          time,
+          date,
+          coords.lat,
+          coords.lng,
+          file
+        );
+        if (status) navigate("/profile");
+      };
+    }
+  };
 
 
   const datePick = () => {
@@ -112,12 +151,10 @@ export default function RegisterRun() {
     );
   };
 
- 
-
-
-
   return (
+
     <Form className="form-container" encType="multipart/form-data" validated={validated} onSubmit={handleSubmit}>
+
       <div className="form-container-text">
         <Form.Text as="h3">Create a Run</Form.Text>
         <Form.Text as="p">
@@ -135,7 +172,9 @@ export default function RegisterRun() {
           onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        <Form.Control.Feedback type="invalid">Enter a name for the run.</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">
+          Enter a name for the run.
+        </Form.Control.Feedback>
       </FloatingLabel>
       <FloatingLabel
         controlId="description"
@@ -152,19 +191,27 @@ export default function RegisterRun() {
           onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        <Form.Control.Feedback type="invalid">Write a short description including directions, necessary information, etc.</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">
+          Write a short description including directions, necessary information,
+          etc.
+        </Form.Control.Feedback>
       </FloatingLabel>
-      <FloatingLabel controlId="location" label="Address" className="mb-3">
-        <Form.Control
-          required
-          type="text"
-          name="location"
-          placeholder="Address"
-          value={runData.location}
-          onChange={handleChange}
+
+      <FloatingLabel
+        controlId="location"
+        label="Where will this run be held?"
+        className="mb-3"
+      >
+        <AutoComplete
+          setAddress={setAddress}
+          setPlaceName={setPlaceName}
+          setCoords={setCoords}
+
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        <Form.Control.Feedback type="invalid">Enter a valid address.</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">
+          Enter a valid address.
+        </Form.Control.Feedback>
       </FloatingLabel>
 
       <Form.Group controlId="distance" className="mb-3">
@@ -186,7 +233,9 @@ export default function RegisterRun() {
               onChange={handleChange}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-            <Form.Control.Feedback type="invalid">Enter a valid time.</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">
+              Enter a valid time.
+            </Form.Control.Feedback>
           </Form.Group>
         </Col>
       </Row>
@@ -199,7 +248,9 @@ export default function RegisterRun() {
           onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        <Form.Control.Feedback type="invalid">Upload an image for this run.</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">
+          Upload an image for this run.
+        </Form.Control.Feedback>
       </Form.Group>
       <Button variant="primary" type="submit">
         Create
