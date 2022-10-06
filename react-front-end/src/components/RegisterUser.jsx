@@ -31,6 +31,7 @@ export default function RegisterUser() {
     const prev = userData[e.target.name]
     setUserData({...userData, [e.target.name]: !prev });
   }
+  
 
   const [validated, setValidated] = useState(false);
   const navigate = useNavigate();

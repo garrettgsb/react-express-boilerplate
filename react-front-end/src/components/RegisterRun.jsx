@@ -45,7 +45,7 @@ export default function RegisterRun() {
     const prev = runData[e.target.name]
     setRunData({...runData, [e.target.name]: !prev})
   }
-
+  
 
   //form validate
   const [validated, setValidated] = useState(false);
@@ -76,12 +76,14 @@ export default function RegisterRun() {
         <DatePicker
           required
           name="date"
-          key={label}
-          label={label}
-          value={label}
-          className="date-picker"
-          selected={runData.date === label}
+          selected={runData.date === "date"}
           onChange={handleChange}
+          // key={date}
+          // label={label}
+          // value={label}
+          // className="date-picker"
+          // selected={runData.date === label}
+          // onChange={handleChange}
         />
       </Form.Group>
     );
