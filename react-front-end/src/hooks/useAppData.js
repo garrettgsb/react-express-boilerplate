@@ -125,7 +125,7 @@ export default function useAppData() {
       });
   }
 
-  async function createRun(
+  async function createRun({
     planner_id,
     name,
     description,
@@ -134,7 +134,7 @@ export default function useAppData() {
     time,
     date,
     file
-  ) {
+    }) {
     try {
       const createRunResponse = await axios({
         method: "post",
