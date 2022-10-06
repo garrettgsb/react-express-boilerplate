@@ -16,6 +16,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import AutoComplete from "./AutoComplete";
 
 export default function RegisterRun() {
+
+  const [runData, setRunData] = useState({
+    name: "",
+    description: "",
+    location: "",
+    distance: "",
+    time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+    date: new Date(),
+    file: ""
+  });
+
+  
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [placeName, setPlaceName] = useState("");
@@ -27,9 +39,43 @@ export default function RegisterRun() {
   );
   const [date, setDate] = useState(new Date());
   const [file, setFile] = useState("");
+
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const { createRun } = useAppData();
+
+
+  const handleChange = (e) => {
+    setRunData({...runData, [e.target.name]: e.target.value });
+  }
+
+  const handleCheckboxChange = (e) => {
+    const prev = runData[e.target.name]
+    setRunData({...runData, [e.target.name]: !prev})
+  }
+  
+
+  //form validate
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setValidated(true)
+
+    createRun(runData);
+    setRunData({    
+    name: "",
+    description: "",
+    location: "",
+    distance: "",
+    time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+    date: new Date(),
+    file: "" })
+    navigate('/profile');
+  } 
+  
+
 
   //form validate
   const [validated, setValidated] = useState(false);
@@ -61,15 +107,22 @@ export default function RegisterRun() {
     }
   };
 
+
   const datePick = () => {
     return (
       <Form.Group controlId="date" className="mb-3">
         <Form.Label>Date</Form.Label>
         <DatePicker
           required
-          className="date-picker"
-          selected={date}
-          onChange={(date) => setDate(date)}
+          name="date"
+          selected={runData.date === "date"}
+          onChange={handleChange}
+          // key={date}
+          // label={label}
+          // value={label}
+          // className="date-picker"
+          // selected={runData.date === label}
+          // onChange={handleChange}
         />
       </Form.Group>
     );
@@ -88,7 +141,9 @@ export default function RegisterRun() {
               id={`inline-radio-1`}
               label={`${label}k`}
               value={label}
-              onChange={(e) => setDistance(e.target.value)}
+              name="distance"
+              checked={runData.distance === label}
+              onChange={handleChange}
             />
           );
         })}
@@ -97,11 +152,9 @@ export default function RegisterRun() {
   };
 
   return (
-    <Form
-      className="form-container"
-      encType="multipart/form-data"
-      validated={validated}
-    >
+
+    <Form className="form-container" encType="multipart/form-data" validated={validated} onSubmit={handleSubmit}>
+
       <div className="form-container-text">
         <Form.Text as="h3">Create a Run</Form.Text>
         <Form.Text as="p">
@@ -114,8 +167,9 @@ export default function RegisterRun() {
           required
           type="text"
           placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="name"
+          value={runData.name}
+          onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">
@@ -131,9 +185,10 @@ export default function RegisterRun() {
           required
           as="textarea"
           type="text"
+          name="description"
           placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={runData.description}
+          onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">
@@ -141,6 +196,7 @@ export default function RegisterRun() {
           etc.
         </Form.Control.Feedback>
       </FloatingLabel>
+
       <FloatingLabel
         controlId="location"
         label="Where will this run be held?"
@@ -150,6 +206,7 @@ export default function RegisterRun() {
           setAddress={setAddress}
           setPlaceName={setPlaceName}
           setCoords={setCoords}
+
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">
@@ -170,9 +227,10 @@ export default function RegisterRun() {
             <Form.Control
               required
               type="time"
+              name="time"
               placeholder="Time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
+              value={runData.time}
+              onChange={handleChange}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">
@@ -185,15 +243,16 @@ export default function RegisterRun() {
         <Form.Label>Upload an image</Form.Label>
         <Form.Control
           required
+          name="file"
           type="file"
-          onChange={(e) => setFile(e.target.files[0])}
+          onChange={handleChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">
           Upload an image for this run.
         </Form.Control.Feedback>
       </Form.Group>
-      <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>
+      <Button variant="primary" type="submit">
         Create
       </Button>
     </Form>
