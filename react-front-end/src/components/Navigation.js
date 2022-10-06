@@ -23,7 +23,7 @@ export default function Navigation() {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar id="navigation" bg="light" expand="lg">
       <Container fluid>
         <Link className="navbar-brand" to="/">
           <img
