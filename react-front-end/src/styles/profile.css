@@ -89,13 +89,23 @@ main {
   font-size: 30px;
 }
 
+.profile-stats {
+  font-family: "Krub", sans-serif;
+}
 .profile-stats button {
+  font-weight: 500;
   color: #495057;
 }
 
 .profile-stats button:hover {
-  color: #495057;
-  background-color: rgb(205, 205, 205);
+  color: white;
+  background-color: #3e363e;
+}
+
+.runs-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .empty-runs-container {

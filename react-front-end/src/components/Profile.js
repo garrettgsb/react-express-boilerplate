@@ -68,7 +68,7 @@ export default function Profile() {
               <h1>Welcome!</h1>
               {user && <p>{user.name}</p>}
             </div>
-            <ProfileActions/>
+            <ProfileActions />
           </div>
           <h4>YOU HAVE:</h4>
           <Table size="sm">
@@ -108,10 +108,14 @@ export default function Profile() {
           fill
         >
           <Tab eventKey="attended" title="Attended">
-            {runnerRuns && showRunnersRuns(runnerRuns, "attended")}
+            <section className="runs-tab">
+              {runnerRuns && showRunnersRuns(runnerRuns, "attended")}
+            </section>
           </Tab>
           <Tab eventKey="planned" title="Planned">
-            {plannerRuns && showRunnersRuns(plannerRuns, "planned")}
+            <section className="runs-tab">
+              {plannerRuns && showRunnersRuns(plannerRuns, "planned")}
+            </section>
           </Tab>
         </Tabs>
       </section>
