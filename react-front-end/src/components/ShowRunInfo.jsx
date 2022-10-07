@@ -15,9 +15,9 @@ export default function ShowRunInfo({ runName = "Gargoyle Park" }) {
 
   return (
     <>
-      {/* <RouteMap center={center} zoom={zoom}  from={from} to={to}/> */}
+      <RouteMap zoom={zoom} from={from} to={to} />
 
-      <Button variant="primary" onClick={handleShow}>
+      {/* <Button variant="primary" onClick={handleShow}>
         Show route
       </Button>
 
@@ -40,7 +40,7 @@ export default function ShowRunInfo({ runName = "Gargoyle Park" }) {
             Close
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </>
   );
 }

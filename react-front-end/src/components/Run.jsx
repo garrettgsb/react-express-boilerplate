@@ -5,11 +5,13 @@ import "../components/Run.css";
 import JoinButton from "./JoinButton";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Run(props) {
   const { run, type, canJoinRun, join } = props;
   const [joinStatus, setJoinStatus] = useState(canJoinRun(run.id) || false);
   const [time, setTime] = useState(run.time);
+  const navigate = useNavigate();
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
@@ -52,7 +54,7 @@ export default function Run(props) {
                 delay={{ show: 250, hide: 50 }}
                 overlay={renderTooltip}
               >
-                <span className="material-symbols-rounded">calendar_month</span>
+                <span className="material-symbols-rounded" onClick={()=>navigate("/run-info")}>calendar_month</span>
               </OverlayTrigger>
             )}
           </div>
