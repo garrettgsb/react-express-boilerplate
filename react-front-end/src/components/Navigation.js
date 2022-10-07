@@ -28,7 +28,7 @@ export default function Navigation() {
         <Link className="navbar-brand" to="/">
           <img
             src={logo}
-            className="logo d-inline-block align-top"
+            className="d-inline-block align-top"
             alt="logo"
           />
         </Link>
