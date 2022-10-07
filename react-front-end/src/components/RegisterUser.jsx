@@ -10,8 +10,12 @@ import Col from "react-bootstrap/Col";
 import { Navigate, useNavigate } from "react-router-dom";
 import useAppData from "../hooks/useAppData";
 import Feedback from "react-bootstrap/Feedback";
+import CreateAccountStatus from "./CreateAccountStatus";
 
 export default function RegisterUser() {
+  //create account status
+  const [buttonPressed, setButtonPressed] = useState(false);
+
   const { registerUser } = useAppData();
 
   const [userData, setUserData] = useState({
@@ -45,19 +49,18 @@ export default function RegisterUser() {
       e.stopPropagation();
     }
 
-    setValidated(true);
-
     registerUser(userData);
-    setUserData({
-      name: "",
-      email: "",
-      password: "",
-      phone: "",
-      age: "",
-      runner: false,
-      planner: false,
-    });
-    navigate("/profile");
+    //  setUserData({
+    //  name: "",
+    //  email: "",
+    //  password: "",
+    //  phone: "",
+    //  age: "",
+    //  runner: false,
+    //  planner: false })
+
+    setValidated(true);
+    if (validated) navigate("/profile");
   };
 
   const genderSelector = () => {
@@ -99,7 +102,7 @@ export default function RegisterUser() {
     <div className="forms">
       <Form
         className="form-container"
-        novalidate
+        noValidate
         validated={validated}
         onSubmit={handleSubmit}
       >
@@ -227,7 +230,10 @@ export default function RegisterUser() {
             onChange={handleCheckboxChange}
           />
         </Form.Group>
-        {/* <Button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}> */}
+        <CreateAccountStatus
+          buttonPressed={buttonPressed}
+          setButtonPressed={setButtonPressed}
+        />
         <Button variant="primary" type="submit">
           Submit
         </Button>

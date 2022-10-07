@@ -16,29 +16,21 @@ import "react-datepicker/dist/react-datepicker.css";
 import AutoComplete from "./AutoComplete";
 
 export default function RegisterRun() {
+  const user = useRecoilValue(userState);
+
   const [runData, setRunData] = useState({
+    planner_id: user.id,
     name: "",
     description: "",
-    location: "",
     distance: "",
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     date: new Date(),
     file: "",
   });
-
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
   const [placeName, setPlaceName] = useState("");
   const [address, setAddress] = useState("");
   const [coords, setCoords] = useState({ lat: "", lng: "" });
-  const [distance, setDistance] = useState("");
-  const [time, setTime] = useState(
-    `${new Date().getHours()}:${new Date().getMinutes()}`
-  );
-  const [date, setDate] = useState(new Date());
-  const [file, setFile] = useState("");
 
-  const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const { createRun } = useAppData();
 
@@ -55,21 +47,18 @@ export default function RegisterRun() {
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (e) => {
+    const form = e.currentTarget;
+    console.log("check validity", e.target.reportValidity());
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     e.preventDefault();
-
+    createRun(runData, placeName, address, coords);
     setValidated(true);
+    if (validated) navigate("/map");
 
-    createRun(runData);
-    setRunData({
-      name: "",
-      description: "",
-      location: "",
-      distance: "",
-      time: `${new Date().getHours()}:${new Date().getMinutes()}`,
-      date: new Date(),
-      file: "",
-    });
-    navigate("/profile");
+    console.log("check validate:", validated);
   };
 
   const datePick = () => {
@@ -79,14 +68,9 @@ export default function RegisterRun() {
         <DatePicker
           required
           name="date"
-          selected={runData.date === "date"}
-          onChange={handleChange}
-          // key={date}
-          // label={label}
-          // value={label}
-          // className="date-picker"
-          // selected={runData.date === label}
-          // onChange={handleChange}
+          selected={runData.date}
+          onChange={(date) => setRunData({ ...runData, date: date })}
+          key={runData.date}
         />
       </Form.Group>
     );
@@ -106,7 +90,7 @@ export default function RegisterRun() {
               label={`${label}k`}
               value={label}
               name="distance"
-              checked={runData.distance === label}
+              checked={runData.distance}
               onChange={handleChange}
             />
           );
