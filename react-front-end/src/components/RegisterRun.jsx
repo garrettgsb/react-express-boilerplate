@@ -45,7 +45,7 @@ export default function RegisterRun() {
   const handleCheckboxChange = (e) => {
     const prev = runData[e.target.name];
     setRunData({ ...runData, [e.target.name]: !prev });
-
+  }
 
   //form validate
   const [validated, setValidated] = useState(false);
@@ -64,6 +64,7 @@ export default function RegisterRun() {
     setValidated(true)
     if (validated) 
     navigate('/map')
+    //prevent default on btn
 
     console.log("check validate:", validated)
 
