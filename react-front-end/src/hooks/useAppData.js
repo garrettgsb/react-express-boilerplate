@@ -193,6 +193,7 @@ export default function useAppData() {
           planner },
       });
       const { user } = registerUserResponse.data;
+      console.log(registerUserResponse);
       if (registerUserResponse.status !== 200) return false;
 
       setUser(user);

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -19,7 +19,7 @@ export default function RegisterRun() {
   const user = useRecoilValue(userState);
 
   const [runData, setRunData] = useState({
-    planner_id: user.id,
+    planner_id: "",
     name: "",
     description: "",
     distance: "",
@@ -28,9 +28,9 @@ export default function RegisterRun() {
     file: "",
     lat: "",
     lng: "",
-    address: ""
+    address: "",
   });
-  
+
   const [address, setAddress] = useState("");
   const [coords, setCoords] = useState({ lat: "", lng: "" });
 
@@ -44,19 +44,12 @@ export default function RegisterRun() {
   const handleCheckboxChange = (e) => {
     const prev = runData[e.target.name];
     setRunData({ ...runData, [e.target.name]: !prev });
-
-  }
-
-
-
   };
-
 
   //form validate
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
 
     //form validity
@@ -64,22 +57,18 @@ export default function RegisterRun() {
     // if (form.checkValidity() === false) {
     //   e.preventDefault();
     //   e.stopPropagation();
-    // } 
+    // }
     //send data
-    console.log(runData)
-    createRun({...runData}, {address: address}, coords.lat, coords.lng);
-  
+    console.log(runData);
+    createRun({ ...runData }, { address: address }, coords.lat, coords.lng);
+
     // setValidated(true)
-    // if (validated) 
-    navigate('/profile')
+    // if (validated)
+    navigate("/profile");
     //prevent default on btn
 
     //console.log("check validate:", validated)
-
-    
-      
-    }
-
+  };
 
   const datePick = () => {
     return (
@@ -97,7 +86,6 @@ export default function RegisterRun() {
   };
 
   const distanceSelector = () => {
-    
     return (
       <div className="mb-3">
         {[2, 5, 10].map((label, index) => {
@@ -119,68 +107,132 @@ export default function RegisterRun() {
     );
   };
 
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+    if (user) {
+      setRunData({ ...runData, planner_id: user.id });
+    }
+  }, []);
+
   return (
     <div className="forms">
       <Form
         className="form-container"
         encType="multipart/form-data"
+        noValidate
         validated={validated}
         onSubmit={handleSubmit}
       >
+        <div className="form-container-text">
+          <Form.Text as="h3">Create a Run</Form.Text>
+          <Form.Text as="p">
+            Don't see a run event near you? Just tell us where and when and the
+            rest is on us.
+          </Form.Text>
+        </div>
+        <FloatingLabel controlId="name" label="Name" className="mb-3">
+          <Form.Control
+            required
+            type="text"
+            placeholder="Name"
+            name="name"
+            value={runData.name}
+            onChange={handleChange}
+          />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            Enter a name for the run.
+          </Form.Control.Feedback>
+        </FloatingLabel>
+        <FloatingLabel
+          controlId="description"
+          label="Description"
+          className="mb-3"
+        >
+          <Form.Control
+            required
+            as="textarea"
+            type="text"
+            name="description"
+            placeholder="Description"
+            value={runData.description}
+            onChange={handleChange}
+          />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            Write a short description including directions, necessary
+            information, etc.
+          </Form.Control.Feedback>
+        </FloatingLabel>
 
-        <AutoComplete
-          setAddress={(address, lat, lng) => setRunData((prev)=>{ return {...prev, address: address, lat:lat, lng: lng}})}
-        />
-        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        <Form.Control.Feedback type="invalid">
-          Enter a valid address.
-        </Form.Control.Feedback>
-      </FloatingLabel>
+        <FloatingLabel
+          controlId="location"
+          label="Where will this run be held?"
+          className="mb-3"
+        >
+          <AutoComplete
+            setAddress={(address, lat, lng) =>
+              setRunData((prev) => {
+                return { ...prev, address: address, lat: lat, lng: lng };
+              })
+            }
+          />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            Enter a valid address.
+          </Form.Control.Feedback>
+        </FloatingLabel>
 
-      <Form.Group controlId="distance" className="mb-3">
-        <Form.Label>Distance</Form.Label>
-        {distanceSelector()}
-      </Form.Group>
+        <Form.Group controlId="distance" className="mb-3">
+          <Form.Label>Distance</Form.Label>
+          {distanceSelector()}
+        </Form.Group>
 
-      <Row>
-        <Col>{datePick()}</Col>
-        <Col>
-          <Form.Group controlId="time" className="mb-3">
-            <Form.Label>Time</Form.Label>
-            <Form.Control
-              required
-              key={runData.time}
-              type="time"
-              name="time"
-              placeholder="Time"
-              value={runData.time}
-              //onChange={(time) => console.log(time.target.value)}
-              onChange={(event) => setRunData({...runData, time: event.target.value})}
-            />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-            <Form.Control.Feedback type="invalid">
-              Enter a valid time.
-            </Form.Control.Feedback>
-          </Form.Group>
-        </Col>
-      </Row>
-      <Form.Group controlId="formFileLg" className="mb-3">
-        <Form.Label>Upload an image</Form.Label>
-        <Form.Control
-          required
-          name="file"
-          type="file"
-          onChange={(e) => setRunData({...runData, file: e.target.files[0]})}
-        />
-        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        <Form.Control.Feedback type="invalid">
-          Upload an image for this run.
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Create
-      </Button>
-    </Form>
-
+        <Row>
+          <Col>{datePick()}</Col>
+          <Col>
+            <Form.Group controlId="time" className="mb-3">
+              <Form.Label>Time</Form.Label>
+              <Form.Control
+                required
+                key={runData.time}
+                type="time"
+                name="time"
+                placeholder="Time"
+                value={runData.time}
+                //onChange={(time) => console.log(time.target.value)}
+                onChange={(event) =>
+                  setRunData({ ...runData, time: event.target.value })
+                }
+              />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                Enter a valid time.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+        </Row>
+        <Form.Group controlId="formFileLg" className="mb-3">
+          <Form.Label>Upload an image</Form.Label>
+          <Form.Control
+            required
+            name="file"
+            type="file"
+            onChange={(e) =>
+              setRunData({ ...runData, file: e.target.files[0] })
+            }
+          />
+          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            Upload an image for this run.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Create
+        </Button>
+      </Form>
+    </div>
   );
 }

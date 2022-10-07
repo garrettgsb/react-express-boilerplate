@@ -5,9 +5,7 @@ const BodyParser = require("body-parser");
 const Bcrypt = require("bcryptjs");
 const CookieSession = require("cookie-session");
 const fs = require("fs");
-const sendUserText = require('./twilio');
-
-
+const sendUserText = require("./twilio");
 
 //port
 const PORT = 8080;
@@ -83,10 +81,11 @@ App.get("/api/users/:id", (req, res) => {
 App.post("/api/users", (req, res) => {
   const { name, email, password, phone, gender, age, planner, runner } =
     req.body;
-  
+
   const hashedPassword = Bcrypt.hashSync(password, 10);
 
-  const newUserMessage = "Welcome to WeRun! Your account has been created. Join your first run now and put on your running shoes!";
+  const newUserMessage =
+    "Welcome to WeRun! Your account has been created. Join your first run now and put on your running shoes!";
 
   db.createUser({
     name,
@@ -100,10 +99,13 @@ App.post("/api/users", (req, res) => {
   })
     .then((response) => {
       const { user } = response;
-      sendUserText(user.phone, newUserMessage);
-      res.send({message: "Account created successfully! You will shortly receive a text message to confirm.", data: user});
       if (!user) res.send({ message: "User was not created" });
-      res.send({ user });
+      sendUserText(user.phone, newUserMessage);
+      res.send({
+        message:
+          "Account created successfully! You will shortly receive a text message to confirm.",
+        user: user,
+      });
     })
     .catch((e) => {
       console.error(e);
@@ -214,8 +216,17 @@ App.post(
 );
 
 App.post("/api/runs", (req, res) => {
-  const { name, description, location, distance, time, date, lat, lng, planner_id } =
-    req.body;
+  const {
+    name,
+    description,
+    location,
+    distance,
+    time,
+    date,
+    lat,
+    lng,
+    planner_id,
+  } = req.body;
 
   db.createRun({
     name,
