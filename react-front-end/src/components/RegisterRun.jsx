@@ -24,21 +24,16 @@ export default function RegisterRun() {
     planner_id: user.id,
     name: "",
     description: "",
-    location: "",
     distance: "",
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     date: new Date(),
-    file: ""
+    file: "",
+ 
   });
-  //console.log("time:",new Date().getHours())
   
   const [placeName, setPlaceName] = useState("");
   const [address, setAddress] = useState("");
   const [coords, setCoords] = useState({ lat: "", lng: "" });
-  //const [time, setTime] = useState(
-  //  `${new Date().getHours()}:${new Date().getMinutes()}`
-  //);
-  //const [date, setDate] = useState(new Date());
 
   const navigate = useNavigate();
   const { createRun } = useAppData();
@@ -66,17 +61,10 @@ export default function RegisterRun() {
       e.stopPropagation();
     } 
     e.preventDefault();
-    createRun(runData);
-    // setRunData({    
-    // name: "",
-    // description: "",
-    // location: "",
-    // distance: "",
-    // time: `${new Date().getHours()}:${new Date().getMinutes()}`,
-    // date: new Date(),
-    // file: "" })
+    createRun(runData, placeName, address, coords);
     setValidated(true)
-    if (validated && navigate('/profile'))
+    if (validated) 
+    navigate('/defaultmap')
 
     console.log("check validate:", validated)
 

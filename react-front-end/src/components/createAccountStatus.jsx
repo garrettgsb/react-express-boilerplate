@@ -4,25 +4,25 @@ import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
 
 export default function createAccountStatus(props) {
-  const { joinButtonPressed, setJoinButtonPressed } = props;
+  const { buttonPressed, setButtonPressed } = props;
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (joinButtonPressed === true) {
+    if (buttonPressed === true) {
       let timer = setTimeout(() => {
-        setJoinButtonPressed(false);
+        setButtonPressed(false);
         navigate("/profile");
       }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [joinButtonPressed]);
+  }, [buttonPressed]);
 
   return (
     <>
       <Modal
         className="joining-status-modal"
         size="lg"
-        show={joinButtonPressed}
+        show={buttonPressed}
         backdrop="static"
         keyboard={false}
       >

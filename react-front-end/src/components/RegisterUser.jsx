@@ -14,8 +14,8 @@ import createAccountStatus from "./createAccountStatus";
 
 export default function RegisterUser() {
   //create account status
-  const [joinButtonPressed, setJoinButtonPressed] = useState(false);
-
+  const [buttonPressed, setButtonPressed] = useState(false);
+ 
   const { registerUser } = useAppData();
 
   const [userData, setUserData] = useState({
@@ -106,7 +106,7 @@ export default function RegisterUser() {
  
 
   return (
-     <Form className="form-container" novalidate validated={validated} onSubmit={handleSubmit}>
+     <Form className="form-container" noValidate validated={validated} onSubmit={handleSubmit}>
       <div className="form-container-text">
         <Form.Text as="h3">HI THERE, RUNNER!</Form.Text>
         <Form.Text as="p">
@@ -215,11 +215,7 @@ export default function RegisterUser() {
           onChange={handleCheckboxChange}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        <createAccountStatus
-          joinButtonPressed={joinButtonPressed}
-          setJoinButtonPressed={setJoinButtonPressed}
-          />
+      <Button variant="primary" type="submit" onClick={() => setButtonPressed(true)}>
         Submit
       </Button>
     </Form>
