@@ -40,7 +40,8 @@
   margin-top: 1em;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 1em;
   flex-direction: row;
   font-size: 50px;
   font-weight: 100;
@@ -56,10 +57,11 @@
   border: 1px solid lightgray;
   text-align: center;
   padding-top: 20px;
+  box-shadow: 0 0 2px lightgrey;
 }
 
 .home-actions a:hover {
-  background-color: #3e363e3b;
+  background-color: #3e363e10;
   transition: 0.5s;
 }
 
