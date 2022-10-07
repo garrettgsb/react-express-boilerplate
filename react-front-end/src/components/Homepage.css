@@ -50,11 +50,11 @@
   text-decoration: none;
   background-color: #3e363e3b;
   width: 15rem;
-  height: 15rem;
+  height: 13rem;
   border-radius: 0.375rem;
   border: 1px solid lightgray;
   text-align: center;
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 .home-actions a:hover {
