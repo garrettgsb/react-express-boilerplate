@@ -3,7 +3,7 @@
 }
 
 .profile-pic {
-  height: 310px;
+  height: 330px;
   border-radius: 5px;
 }
 
@@ -14,9 +14,9 @@ main {
 }
 
 .profile-header {
-  width: 60rem;
+  width: 70rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: row;
   border: 1px solid lightgrey;
   margin: 3em 0;
@@ -29,7 +29,7 @@ main {
   width: 63%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 25px;
 }
 
 .profile-info h1 {
@@ -78,6 +78,7 @@ main {
   table-layout: fixed;
   width: 100%;
   text-align: center;
+  margin: 0;
 }
 
 .profile-info tbody {
