@@ -17,6 +17,7 @@ import AutoComplete from "./AutoComplete";
 
 export default function RegisterRun() {
 
+
   const user = useRecoilValue(userState);
 
 
@@ -28,9 +29,7 @@ export default function RegisterRun() {
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     date: new Date(),
     file: "",
- 
   });
-  
   const [placeName, setPlaceName] = useState("");
   const [address, setAddress] = useState("");
   const [coords, setCoords] = useState({ lat: "", lng: "" });
@@ -38,21 +37,21 @@ export default function RegisterRun() {
   const navigate = useNavigate();
   const { createRun } = useAppData();
 
-
   const handleChange = (e) => {
-    setRunData({...runData, [e.target.name]: e.target.value });
-  }
+    setRunData({ ...runData, [e.target.name]: e.target.value });
+  };
 
-  // const handleCheckboxChange = (e) => {
-  //   const prev = runData[e.target.name]
-  //   setRunData({...runData, [e.target.name]: e.target.v})
-  // }
+
+  const handleCheckboxChange = (e) => {
+    const prev = runData[e.target.name];
+    setRunData({ ...runData, [e.target.name]: !prev });
 
 
   //form validate
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (e) => {
+
     
     const form = e.currentTarget;
     console.log("check validity", e.target.reportValidity());
@@ -71,7 +70,6 @@ export default function RegisterRun() {
     
       
     }
-
 
   const datePick = () => {
     return (
@@ -114,7 +112,9 @@ export default function RegisterRun() {
 
   return (
 
+
     <Form className="form-container" encType="multipart/form-data" noValidate validated={validated} onSubmit={handleSubmit}>
+
 
       <div className="form-container-text">
         <Form.Text as="h3">Create a Run</Form.Text>
@@ -167,7 +167,6 @@ export default function RegisterRun() {
           setAddress={setAddress}
           setPlaceName={setPlaceName}
           setCoords={setCoords}
-
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">

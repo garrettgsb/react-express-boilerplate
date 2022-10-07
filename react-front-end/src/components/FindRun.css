@@ -4,6 +4,26 @@
   align-items: center;
   gap: 1em;
   margin-top: 2em;
+  font-family: "Krub", sans-serif;
+}
+
+#available-runs {
+  color: #3e363ebc;
+  width: 100%;
+  padding: 1em 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#available-runs h2 {
+  font-size: 50px;
+  font-weight: 800;
+}
+
+#available-runs p {
+  font-size: 20px;
+  font-weight: 300;
 }
 
 .joining-status-header {
