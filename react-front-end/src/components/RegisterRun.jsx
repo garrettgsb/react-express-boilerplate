@@ -16,29 +16,24 @@ import "react-datepicker/dist/react-datepicker.css";
 import AutoComplete from "./AutoComplete";
 
 export default function RegisterRun() {
+
+
+  const user = useRecoilValue(userState);
+
+
   const [runData, setRunData] = useState({
+    planner_id: user.id,
     name: "",
     description: "",
-    location: "",
     distance: "",
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     date: new Date(),
     file: "",
   });
-
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
   const [placeName, setPlaceName] = useState("");
   const [address, setAddress] = useState("");
   const [coords, setCoords] = useState({ lat: "", lng: "" });
-  const [distance, setDistance] = useState("");
-  const [time, setTime] = useState(
-    `${new Date().getHours()}:${new Date().getMinutes()}`
-  );
-  const [date, setDate] = useState(new Date());
-  const [file, setFile] = useState("");
 
-  const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const { createRun } = useAppData();
 
@@ -46,31 +41,35 @@ export default function RegisterRun() {
     setRunData({ ...runData, [e.target.name]: e.target.value });
   };
 
+
   const handleCheckboxChange = (e) => {
     const prev = runData[e.target.name];
     setRunData({ ...runData, [e.target.name]: !prev });
-  };
+
 
   //form validate
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (e) => {
+
+    
+    const form = e.currentTarget;
+    console.log("check validity", e.target.reportValidity());
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    } 
     e.preventDefault();
+    createRun(runData, placeName, address, coords);
+    setValidated(true)
+    if (validated) 
+    navigate('/map')
 
-    setValidated(true);
+    console.log("check validate:", validated)
 
-    createRun(runData);
-    setRunData({
-      name: "",
-      description: "",
-      location: "",
-      distance: "",
-      time: `${new Date().getHours()}:${new Date().getMinutes()}`,
-      date: new Date(),
-      file: "",
-    });
-    navigate("/profile");
-  };
+    
+      
+    }
 
   const datePick = () => {
     return (
@@ -79,14 +78,10 @@ export default function RegisterRun() {
         <DatePicker
           required
           name="date"
-          selected={runData.date === "date"}
-          onChange={handleChange}
-          // key={date}
-          // label={label}
-          // value={label}
-          // className="date-picker"
-          // selected={runData.date === label}
-          // onChange={handleChange}
+          selected={runData.date}
+          onChange={(date) => setRunData({...runData, date: date})}
+          key={runData.date}
+     
         />
       </Form.Group>
     );
@@ -106,7 +101,7 @@ export default function RegisterRun() {
               label={`${label}k`}
               value={label}
               name="distance"
-              checked={runData.distance === label}
+              checked={runData.distance}
               onChange={handleChange}
             />
           );
@@ -116,12 +111,11 @@ export default function RegisterRun() {
   };
 
   return (
-    <Form
-      className="form-container"
-      encType="multipart/form-data"
-      validated={validated}
-      onSubmit={handleSubmit}
-    >
+
+
+    <Form className="form-container" encType="multipart/form-data" noValidate validated={validated} onSubmit={handleSubmit}>
+
+
       <div className="form-container-text">
         <Form.Text as="h3">Create a Run</Form.Text>
         <Form.Text as="p">
@@ -192,11 +186,13 @@ export default function RegisterRun() {
             <Form.Label>Time</Form.Label>
             <Form.Control
               required
+              key={runData.time}
               type="time"
               name="time"
               placeholder="Time"
               value={runData.time}
-              onChange={handleChange}
+              //onChange={(time) => console.log(time.target.value)}
+              onChange={(event) => setRunData({...runData, time: event.target.value})}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">
