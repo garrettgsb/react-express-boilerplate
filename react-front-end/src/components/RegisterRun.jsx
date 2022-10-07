@@ -60,10 +60,10 @@ export default function RegisterRun() {
       e.stopPropagation();
     } 
     e.preventDefault();
-    createRun(runData, placeName, address, coords);
+    createRun({...runData}, address,{...coords});
     setValidated(true)
     if (validated) 
-    navigate('/map')
+    navigate('/profile')
     //prevent default on btn
 
     console.log("check validate:", validated)
@@ -102,7 +102,7 @@ export default function RegisterRun() {
               label={`${label}k`}
               value={label}
               name="distance"
-              checked={runData.distance}
+              checked={runData.distance === label}
               onChange={handleChange}
             />
           );
