@@ -28,8 +28,8 @@
   
 }
 
-.map-info a {
-  text-decoration: none;
+.map-info p a {
+  color: #3e363e;
 }
 
 .map-info .material-symbols-rounded {
