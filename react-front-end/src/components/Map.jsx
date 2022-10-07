@@ -2,7 +2,7 @@ import React from "react";
 import "../components/Map.css";
 import { useRecoilValue } from "recoil";
 import { userCoordinatesAtom } from "../hooks/userCoords";
-
+import { Link } from "react-router-dom";
 import DefaultMap from "./DefaultMap";
 
 export default function SimpleMap() {
@@ -24,6 +24,7 @@ export default function SimpleMap() {
               expand_more
             </span>
           </a>
+          <p>Can't find a run near you? Plan one <Link to="/create">here</Link>.</p>
         </section>
         <DefaultMap center={center} zoom={zoom} />
       </div>
