@@ -1,9 +1,16 @@
+.forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5em;
+}
+
 .form-container {
   width: 40rem;
   border-radius: 0.375rem;
   border: 1px solid rgba(0, 0, 0, 0.175);
   padding: 1em;
-  margin: 1em;
+  align-self: center;
 }
 
 .form-container-text {

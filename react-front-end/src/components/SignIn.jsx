@@ -27,7 +27,7 @@ export default function SignIn() {
   };
 
   return (
-    <>
+    <div className="forms">
       <Form className="form-container sign-in" onSubmit={handleSubmit}>
         <div className="form-container-text">
           <Form.Text as="h3">WELCOME BACK, RUNNER!</Form.Text>
@@ -59,6 +59,6 @@ export default function SignIn() {
           Sign In
         </Button>
       </Form>
-    </>
+    </div>
   );
 }
