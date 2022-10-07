@@ -51,13 +51,15 @@ export default function FindRun() {
     <>
       <section id="find-run-page">
         <Map />
-        <h1>All available runs you can join:</h1>
+        <h1 id="available-runs" >All available runs you can join:</h1>
         {showAvailableRuns(runs, "available")}
       </section>
-      {user && <JoiningStatus
-        joinButtonPressed={joinButtonPressed}
-        setJoinButtonPressed={setJoinButtonPressed}
-      />}
+      {user && (
+        <JoiningStatus
+          joinButtonPressed={joinButtonPressed}
+          setJoinButtonPressed={setJoinButtonPressed}
+        />
+      )}
     </>
   );
 }
