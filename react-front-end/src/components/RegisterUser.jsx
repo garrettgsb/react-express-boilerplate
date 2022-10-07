@@ -50,18 +50,22 @@ export default function RegisterUser() {
       e.stopPropagation();
      }
 
+     registerUser(userData);
+    //  setUserData({    
+    //  name: "",
+    //  email: "",
+    //  password: "",
+    //  phone: "",
+    //  age: "",
+    //  runner: false,
+    //  planner: false })
+
     setValidated(true);
-  
-    registerUser(userData);
-    setUserData({    
-    name: "",
-    email: "",
-    password: "",
-    phone: "",
-    age: "",
-    runner: false,
-    planner: false })
+    if(validated)
     navigate('/profile');
+  
+  
+    
   }
 
   

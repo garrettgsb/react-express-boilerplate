@@ -64,7 +64,7 @@ export default function RegisterRun() {
     createRun(runData, placeName, address, coords);
     setValidated(true)
     if (validated) 
-    navigate('/defaultmap')
+    navigate('/map')
 
     console.log("check validate:", validated)
 
