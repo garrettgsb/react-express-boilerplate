@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Homepage.css";
-import logo from "./logo.png";
+import logo from "./logo3.svg";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import AutoComplete from "./AutoComplete";
@@ -9,39 +9,24 @@ import AutoComplete from "./AutoComplete";
 export default function Homepage() {
   return (
     <div>
-      <div className="home-intro">
-        <img src={logo} className="logo" alt="logo" />
-        <p>Welcome to WeRun</p>
-        <p>We help you get connected to runs near you.</p>
-      </div>
-
-      <div className="home-runs">
-        <div className="home-join">
-          <img
-            className="map-logo"
-            src="https://cdn-icons-png.flaticon.com/512/819/819865.png"
-            alt="map-icon"
-          />
-          <p>Find a run near you </p>
-          <Link to="/runs">
-            <Button variant="primary" type="submit">
+      <div className="home">
+        <div>
+          <div className="home-intro">
+            <h2>Welcome to weRun!</h2>
+            <p>We organise free, weekly, timed, community events all over Canada. Get connected to runs near you today. Bring a buddy!</p>
+          </div>
+          <div className="home-actions">
+            <Link className="home-join" to="/runs">
               Find
-            </Button>
-          </Link>
+              <p>Search for local running events</p>
+            </Link>
+            <Link className="home-plan" to="/create">
+              Plan
+              <p>Create a new running event</p>
+            </Link>
+          </div>
         </div>
-        <div className="home-plan">
-          <img
-            className="map-logo"
-            src="https://cdn-icons-png.flaticon.com/512/2953/2953336.png"
-            alt="run-icon"
-          />
-          <p>Create a run</p>
-          <Link to="/create">
-            <Button variant="primary" type="submit">
-              Create
-            </Button>
-          </Link>
-        </div>
+        <img src={logo} className="logo" alt="logo" />
       </div>
     </div>
   );

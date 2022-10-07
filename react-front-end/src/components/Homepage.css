@@ -1,36 +1,71 @@
-.home-intro {
+.home {
+  height: 92vh;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 5%;
-  font-size: 35px;
-  border: 1px solid lightgrey
-}
-
-.home-runs {
-  display: flex;
+  justify-content: space-between;
   flex-direction: row;
+  padding: 2em;
+  font-family: "Krub", sans-serif;
+  border: 1px solid lightgrey;
+  color: #3e363e;
+}
+
+.home .home-intro {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.home h2 {
+  font-size: 90px;
+  font-weight: 100;
+  text-align: center;
+}
+
+.home p {
+  font-size: 20px;
+  font-weight: 200;
+  text-align: center;
+  max-width: 86%;
+}
+
+.logo {
+  width: 75%;
+  padding-right: 2em;
+}
+
+.home-actions {
+  margin-top: 1em;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  gap: 1em;
+  flex-direction: row;
+  font-size: 50px;
+  font-weight: 100;
 }
 
-.map-logo {
-  height: 100px;
+.home-actions a {
+  color: #3e363e;
+  text-decoration: none;
+  background-color: #3e363e22;
+  width: 15rem;
+  height: 13rem;
+  border-radius: 0.375rem;
+  border: 1px solid lightgray;
+  text-align: center;
+  padding-top: 20px;
+  box-shadow: 0 0 2px lightgrey;
 }
 
-.home-join {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10%;
+.home-actions a:hover {
+  background-color: #3e363e10;
+  transition: 0.5s;
 }
 
-.home-plan {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10%;
-
+.home-actions a p {
+  font-size: 25px;
+  max-width: 100%;
 }

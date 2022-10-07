@@ -16,7 +16,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import AutoComplete from "./AutoComplete";
 
 export default function RegisterRun() {
-
   const [runData, setRunData] = useState({
     name: "",
     description: "",
@@ -24,10 +23,9 @@ export default function RegisterRun() {
     distance: "",
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     date: new Date(),
-    file: ""
+    file: "",
   });
 
-  
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [placeName, setPlaceName] = useState("");
@@ -44,16 +42,14 @@ export default function RegisterRun() {
   const navigate = useNavigate();
   const { createRun } = useAppData();
 
-
   const handleChange = (e) => {
-    setRunData({...runData, [e.target.name]: e.target.value });
-  }
+    setRunData({ ...runData, [e.target.name]: e.target.value });
+  };
 
   const handleCheckboxChange = (e) => {
-    const prev = runData[e.target.name]
-    setRunData({...runData, [e.target.name]: !prev})
-  }
-  
+    const prev = runData[e.target.name];
+    setRunData({ ...runData, [e.target.name]: !prev });
+  };
 
   //form validate
   const [validated, setValidated] = useState(false);
@@ -61,52 +57,20 @@ export default function RegisterRun() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setValidated(true)
+    setValidated(true);
 
     createRun(runData);
-    setRunData({    
-    name: "",
-    description: "",
-    location: "",
-    distance: "",
-    time: `${new Date().getHours()}:${new Date().getMinutes()}`,
-    date: new Date(),
-    file: "" })
-    navigate('/profile');
-  } 
-  
-
-
-  //form validate
-  const [validated, setValidated] = useState(false);
-
-  const handleSubmit = async (e) => {
-    const form = e.currentTarget;
-
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    if (form.checkValidity() === true) {
-      const create = async (e) => {
-        e.preventDefault();
-        const status = await createRun(
-          user.id,
-          name,
-          description,
-          address,
-          distance,
-          time,
-          date,
-          coords.lat,
-          coords.lng,
-          file
-        );
-        if (status) navigate("/profile");
-      };
-    }
+    setRunData({
+      name: "",
+      description: "",
+      location: "",
+      distance: "",
+      time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+      date: new Date(),
+      file: "",
+    });
+    navigate("/profile");
   };
-
 
   const datePick = () => {
     return (
@@ -152,9 +116,12 @@ export default function RegisterRun() {
   };
 
   return (
-
-    <Form className="form-container" encType="multipart/form-data" validated={validated} onSubmit={handleSubmit}>
-
+    <Form
+      className="form-container"
+      encType="multipart/form-data"
+      validated={validated}
+      onSubmit={handleSubmit}
+    >
       <div className="form-container-text">
         <Form.Text as="h3">Create a Run</Form.Text>
         <Form.Text as="p">
@@ -206,7 +173,6 @@ export default function RegisterRun() {
           setAddress={setAddress}
           setPlaceName={setPlaceName}
           setCoords={setCoords}
-
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">
