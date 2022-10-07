@@ -47,6 +47,10 @@ export default function RegisterRun() {
     setRunData({ ...runData, [e.target.name]: !prev });
   }
 
+  const handleRadioButton = (e) => {
+    setRunData({...runData, [e.target.selected]: e.target.value })
+  }
+
   //form validate
   const [validated, setValidated] = useState(false);
 
@@ -102,8 +106,8 @@ export default function RegisterRun() {
               label={`${label}k`}
               value={label}
               name="distance"
-              checked={runData.distance === label}
-              onChange={handleChange}
+              checked={runData.distance}
+              onChange={handleRadioButton}
             />
           );
         })}
