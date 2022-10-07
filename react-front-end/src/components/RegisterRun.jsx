@@ -16,10 +16,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import AutoComplete from "./AutoComplete";
 
 export default function RegisterRun() {
-
-
   const user = useRecoilValue(userState);
-
 
   const [runData, setRunData] = useState({
     planner_id: user.id,
@@ -44,18 +41,22 @@ export default function RegisterRun() {
     setRunData({ ...runData, [e.target.name]: e.target.value });
   };
 
-
   const handleCheckboxChange = (e) => {
     const prev = runData[e.target.name];
     setRunData({ ...runData, [e.target.name]: !prev });
+
   }
 
-  console.log(runData.file)
+
+
+  };
+
 
   //form validate
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
 
     //form validity
@@ -79,6 +80,7 @@ export default function RegisterRun() {
       
     }
 
+
   const datePick = () => {
     return (
       <Form.Group controlId="date" className="mb-3">
@@ -87,9 +89,8 @@ export default function RegisterRun() {
           required
           name="date"
           selected={runData.date}
-          onChange={(date) => setRunData({...runData, date: date})}
+          onChange={(date) => setRunData({ ...runData, date: date })}
           key={runData.date}
-     
         />
       </Form.Group>
     );
@@ -119,58 +120,14 @@ export default function RegisterRun() {
   };
 
   return (
-
-
-    <Form className="form-container" encType="multipart/form-data" noValidate validated={validated} onSubmit={handleSubmit}>
-
-
-      <div className="form-container-text">
-        <Form.Text as="h3">Create a Run</Form.Text>
-        <Form.Text as="p">
-          Don't see a run event near you? Just tell us where and when and the
-          rest is on us.
-        </Form.Text>
-      </div>
-      <FloatingLabel controlId="name" label="Name" className="mb-3">
-        <Form.Control
-          required
-          type="text"
-          placeholder="Name"
-          name="name"
-          value={runData.name}
-          onChange={handleChange}
-        />
-        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        <Form.Control.Feedback type="invalid">
-          Enter a name for the run.
-        </Form.Control.Feedback>
-      </FloatingLabel>
-      <FloatingLabel
-        controlId="description"
-        label="Description"
-        className="mb-3"
+    <div className="forms">
+      <Form
+        className="form-container"
+        encType="multipart/form-data"
+        validated={validated}
+        onSubmit={handleSubmit}
       >
-        <Form.Control
-          required
-          as="textarea"
-          type="text"
-          name="description"
-          placeholder="Description"
-          value={runData.description}
-          onChange={handleChange}
-        />
-        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        <Form.Control.Feedback type="invalid">
-          Write a short description including directions, necessary information,
-          etc.
-        </Form.Control.Feedback>
-      </FloatingLabel>
 
-      <FloatingLabel
-        controlId="location"
-        label="Where will this run be held?"
-        className="mb-3"
-      >
         <AutoComplete
           setAddress={(address, lat, lng) => setRunData((prev)=>{ return {...prev, address: address, lat:lat, lng: lng}})}
         />
@@ -224,5 +181,6 @@ export default function RegisterRun() {
         Create
       </Button>
     </Form>
+
   );
 }
