@@ -30,3 +30,7 @@
   border-radius: 0.378rem;
   border: 1px solid rgba(0, 0, 0, 0.175);
 }
+
+.sign-in {
+  width: 25rem;
+}
