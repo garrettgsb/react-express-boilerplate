@@ -15,6 +15,7 @@ import {
 import { useRecoilValue } from "recoil";
 import useAppData from "../hooks/useAppData";
 
+
 export default function Profile() {
   const user = useRecoilValue(userState);
   const runnerRuns = useRecoilValue(runnerRunsState);
@@ -39,8 +40,7 @@ export default function Profile() {
   const profilePicture = (
     <img
       className="profile-pic"
-      src="https://images.pexels.com/photos/3042160/pexels-photo-3042160.jpeg"
-      // src="https://cdn-icons-png.flaticon.com/512/2335/2335153.png"
+      src="https://images.pexels.com/photos/3042160/pexels-photo-3042160.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
       alt="icon-profile"
     ></img>
   );
