@@ -11,7 +11,8 @@ import { useNavigate, Link } from "react-router-dom";
 export default function Run(props) {
   const { run, type, canJoinRun, join } = props;
   const [joinStatus, setJoinStatus] = useState(canJoinRun(run.id) || false);
-  const [time, setTime] = useState(run.time);
+  const [time, setTime] = useState("");
+  const [eventTime, setEventTime] = useState("");
   const navigate = useNavigate();
 
   const [showInfoModal, setShowInfoModal] = useState(false);
@@ -31,13 +32,14 @@ export default function Run(props) {
   );
 
   useEffect(() => {
-    if (time === 0) {
-      setTime(
-        "You are scheduled to run this event. No time has been recorded yet."
-      );
+    if (run.time !== 0 && type === "attended") {
+      setTime(`Recorded Time: ${run.time} min`);
     }
-    if (time !== 0 && type === "attended") {
-      setTime((prev) => prev + " min");
+    if (run.future_run) {
+      setEventTime(`${run.date} at ${run.event_time}`);
+    }
+    if (!run.future_run) {
+      setEventTime(`Was on ${run.date} at ${run.event_time}`);
     }
   }, []);
 
@@ -77,10 +79,10 @@ export default function Run(props) {
           <p>{run.description}</p>
           <div className="run-desc">
             <ListGroup variant="flush">
-              <ListGroup.Item>Distance: {run.distance} km</ListGroup.Item>
+              <ListGroup.Item>When: {eventTime}</ListGroup.Item>
               <ListGroup.Item>Where: {run.location}</ListGroup.Item>
-              <ListGroup.Item>Time: {time}</ListGroup.Item>
-              <ListGroup.Item>When: {run.date}</ListGroup.Item>
+              <ListGroup.Item>Distance: {run.distance} km</ListGroup.Item>
+              {time && <ListGroup.Item>{time}</ListGroup.Item>}
             </ListGroup>
             <JoinButton runType={type} joinStatus={joinStatus} join={join} />
           </div>
