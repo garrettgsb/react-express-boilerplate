@@ -43,8 +43,12 @@
   gap: 2em;
 }
 
+.run-path .run-info-image {
+  width: 3em;
+  height: 3em;
+}
+
 #run-path {
   border-radius: 2rem;
-  /* border: 1px solid #3e363e95; */
   box-shadow: 0 0 3px #3e363ea8;
 }

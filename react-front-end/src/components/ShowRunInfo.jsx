@@ -9,7 +9,7 @@ export default function ShowRunInfo({ run, show, handleClose }) {
   const zoom = 10;
   const from = { lat: 43.4952921, lng: -79.9715306 };
   const to = { lat: 43.5058059, lng: -79.964735 };
-
+ 
   return (
     <>
       <Modal
