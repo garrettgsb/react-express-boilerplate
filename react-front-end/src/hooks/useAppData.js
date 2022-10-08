@@ -135,6 +135,9 @@ export default function useAppData() {
     date,
     lat,
     lng,
+    address_to,
+    lat_to,
+    lng_to,
     file
     }) {
       console.log("Data:", planner_id,
@@ -145,7 +148,10 @@ export default function useAppData() {
       time,
       date,
       lat,
-      lng)
+      lng,
+      address_to,
+      lat_to,
+      lng_to)
     try {
       const createRunResponse = await axios({
         method: "post",
