@@ -5,6 +5,7 @@ import "../components/Run.css";
 import JoinButton from "./JoinButton";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Badge from "react-bootstrap/Badge";
 import ShowRunInfo from "./ShowRunInfo";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -60,21 +61,27 @@ export default function Run(props) {
               </span>
             )}
             <h3>{run.name}</h3>
-            {run.future_run && (
-              <OverlayTrigger
-                placement="left"
-                delay={{ show: 250, hide: 50 }}
-                overlay={renderTooltip}
+
+            <OverlayTrigger
+              placement="left"
+              delay={{ show: 250, hide: 50 }}
+              overlay={renderTooltip}
+            >
+              {/* <span
+                className="material-symbols-rounded"
+                onClick={handleShowInfoModal}
               >
-                <span
-                  className="material-symbols-rounded"
-                  onClick={handleShowInfoModal}
-                >
-                  {/* calendar_month */}
-                  info
-                </span>
-              </OverlayTrigger>
-            )}
+               
+                info
+              </span> */}
+              <button
+                type="button"
+                className="detail-button"
+                onClick={handleShowInfoModal}
+              >
+                Details
+              </button>
+            </OverlayTrigger>
           </div>
           <p>{run.description}</p>
           <div className="run-desc">
