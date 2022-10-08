@@ -34,7 +34,7 @@ export default function Run(props) {
 
   useEffect(() => {
     if (run.time !== 0 && type === "attended") {
-      setTime(`Recorded Time: ${run.time} min`);
+      setTime(`${run.time} min`);
     }
     if (run.future_run) {
       setEventTime(`${run.date} at ${run.event_time}`);
@@ -86,9 +86,9 @@ export default function Run(props) {
           <p>{run.description}</p>
           <div className="run-desc">
             <ListGroup variant="flush">
-              <ListGroup.Item>When: {eventTime}</ListGroup.Item>
-              <ListGroup.Item>Distance: {run.distance} km</ListGroup.Item>
-              {time && <ListGroup.Item>{time}</ListGroup.Item>}
+              <ListGroup.Item><strong>When:</strong> {eventTime}</ListGroup.Item>
+              <ListGroup.Item><strong>Distance:</strong> {run.distance} km</ListGroup.Item>
+              {time && <ListGroup.Item><strong>Recorded Time:</strong> {time}</ListGroup.Item>}
             </ListGroup>
             <JoinButton runType={type} joinStatus={joinStatus} join={join} />
           </div>

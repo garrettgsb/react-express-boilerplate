@@ -47,23 +47,23 @@
 }
 
 .run-heading .run-id {
-background-color: #d83a01c3;
-color: white;
-font-size: 1.5rem;
-font-weight: 800;
-margin: -0.3em 0.5em 0 0;
-width: 2em;
-height: 2em;
-border-radius: 50%;
-text-align: center;
-padding-top:0.2em;
+  background-color: #d83a01c3;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: -0.3em 0.5em 0 0;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  text-align: center;
+  padding-top: 0.2em;
 }
 
 .run-heading h3 {
-    margin-right: auto;
+  margin-right: auto;
 }
 
-.run-heading .detail-button{
+.run-heading .detail-button {
   background-color: #d83a01c3;
   color: white;
   height: 2em;
@@ -75,6 +75,8 @@ padding-top:0.2em;
 
 .run-heading .detail-button:hover {
   cursor: pointer;
+  background-color: #3e363e;
+  transition: 0.5s;
 }
 
 .join-button {
@@ -92,6 +94,7 @@ padding-top:0.2em;
 .join-button:hover {
   font-weight: 800;
   background-color: #d83a01ee;
+  transition: 0.5s;
 }
 
 .join-button[disabled] {
