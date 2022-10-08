@@ -134,11 +134,14 @@ const createRun = ({
   planner_id,
   latitude,
   longitude,
+  location_to,
+  latitude_to,
+  longitude_to,
 }) => {
   return db
     .query(
-      `INSERT INTO runs (name, description, location, distance, time, date, planner_id, latitude, longitude)
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+      `INSERT INTO runs (name, description, location, distance, time, date, planner_id, latitude, longitude, location_to, latitude_to, longitude_to)
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
     RETURNING *;`,
       [
         name,
@@ -150,6 +153,9 @@ const createRun = ({
         planner_id,
         latitude,
         longitude,
+        location_to,
+        latitude_to,
+        longitude_to,
       ]
     )
     .then((result) => {

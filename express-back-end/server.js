@@ -226,11 +226,25 @@ App.post("/api/runs", (req, res) => {
     lat,
     lng,
     planner_id,
-    address_to,
-    lat_to,
-    lng_to
+    location_to,
+    latitude_to,
+    longitude_to,
   } = req.body;
-
+  console.log(
+    "Run data received in server",
+    name,
+    description,
+    location,
+    distance,
+    time,
+    date,
+    lat,
+    lng,
+    planner_id,
+    location_to,
+    latitude_to,
+    longitude_to,
+  );
   db.createRun({
     name,
     description,
@@ -240,6 +254,9 @@ App.post("/api/runs", (req, res) => {
     date,
     latitude: lat,
     longitude: lng,
+    location_to,
+    latitude_to,
+    longitude_to,
     planner_id,
   })
     .then((response) => {

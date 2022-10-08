@@ -156,7 +156,7 @@ export default function useAppData() {
       const createRunResponse = await axios({
         method: "post",
         url: "/api/runs",
-        data: { planner_id, name, description, location: address, distance, time, date, lat, lng, location_to: address_to, lat_to: lat_to, lng_to: lng_to },
+        data: { planner_id, name, description, location: address, distance, time, date, lat, lng, location_to: address_to, latitude_to: lat_to, longitude_to: lng_to },
       });
       const { run } = createRunResponse.data;
       const addImageResponse = await axios({
