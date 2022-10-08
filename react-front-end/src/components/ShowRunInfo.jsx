@@ -9,7 +9,7 @@ export default function ShowRunInfo({ run, show, handleClose }) {
   const zoom = 10;
   const from = { lat: run.latitude, lng: run.longitude };
   const to = { lat: run.latitude_to, lng: run.longitude_to };
- 
+
   return (
     <>
       <Modal
@@ -33,10 +33,11 @@ export default function ShowRunInfo({ run, show, handleClose }) {
           <div className="run-info">
             <RouteMap zoom={zoom} from={from} to={to} />
             <ListGroup variant="flush">
-              <ListGroup.Item>On DASH at DASH</ListGroup.Item>
-              <ListGroup.Item>From: Location A</ListGroup.Item>
-              <ListGroup.Item>To: Location A</ListGroup.Item>
-              <ListGroup.Item>Distance: </ListGroup.Item>
+              <ListGroup.Item as="h4">Details & Route</ListGroup.Item>
+              <ListGroup.Item>
+                On {run.date} at {run.time}
+              </ListGroup.Item>
+              <ListGroup.Item>Distance: {run.distance}km</ListGroup.Item>
             </ListGroup>
           </div>
         </Modal.Body>
