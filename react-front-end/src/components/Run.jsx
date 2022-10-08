@@ -18,16 +18,15 @@ export default function Run(props) {
 
   const handleCloseInfoModal = () => {
     setShowInfoModal(false);
-    // navigate("/profile");
   };
   const handleShowInfoModal = () => {
     setShowInfoModal(true);
-    // navigate("/run-info");
   };
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      Event on {run.date}!
+      <p>Event on: {run.date}</p>
+      <p>Click for more</p>
     </Tooltip>
   );
 
@@ -69,7 +68,8 @@ export default function Run(props) {
                   className="material-symbols-rounded"
                   onClick={handleShowInfoModal}
                 >
-                  calendar_month
+                  {/* calendar_month */}
+                  info
                 </span>
               </OverlayTrigger>
             )}

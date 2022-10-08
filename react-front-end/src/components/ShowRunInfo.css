@@ -1,7 +1,14 @@
-.route-modal-header .modal-title {
+.run-modal {
+  color: #3e363e;
   font-family: "Krub", sans-serif;
+}
+
+.route-modal-header .modal-title {
   font-size: 35px;
-  font-weight: 400;
+  color: #3e363e;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
 }
 
 .route-modal-message {
@@ -9,11 +16,26 @@
   flex-direction: column;
   align-items: center;
   gap: 1em;
+  width: 100%;
+  padding: 1em 3em;
 }
 
 .route-modal-message p {
   font-size: 20px;
-  padding: 0 2em;
-  text-align: center;
+  font-weight: 200;
+  text-align: start;
   margin: 0;
+}
+
+.route-modal-message .run-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 2em;
+}
+
+#run-path {
+  border-radius: 2rem;
+  border: 2px solid #3e363e;
 }

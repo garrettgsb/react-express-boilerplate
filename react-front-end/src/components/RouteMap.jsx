@@ -66,10 +66,8 @@ const RouteMap = ({ zoom, from, to }) => {
       <div
         id="run-path"
         style={{
-          height: "600px",
-          width: "600px",
-          borderRadius: "2rem",
-          border: "10px solid lightgray",
+          height: "400px",
+          width: "400px",
         }}
       >
         <GoogleMapReact

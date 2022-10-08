@@ -54,6 +54,10 @@ padding-top:0.2em;
   color: #d83a01c3;
 }
 
+.run-heading .material-symbols-rounded:hover {
+  cursor: pointer;
+}
+
 .run-desc {
   align-items: flex-end;
 }

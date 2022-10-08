@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import RouteMap from "./RouteMap";
+import ListGroup from "react-bootstrap/ListGroup";
 import "./ShowRunInfo.css";
 
 export default function ShowRunInfo({ run, show, handleClose }) {
@@ -12,6 +13,7 @@ export default function ShowRunInfo({ run, show, handleClose }) {
   return (
     <>
       <Modal
+        className="run-modal"
         show={show}
         onHide={handleClose}
         size="lg"
@@ -26,11 +28,17 @@ export default function ShowRunInfo({ run, show, handleClose }) {
             {run.name}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <p className="route-modal-message">
-            {run.description}
-          </p>
-          <RouteMap zoom={zoom} from={from} to={to} />
+        <Modal.Body className="route-modal-message">
+          <p>{run.description}</p>
+          <div className="run-info">
+            <RouteMap zoom={zoom} from={from} to={to} />
+            <ListGroup variant="flush">
+              <ListGroup.Item>On DASH at DASH</ListGroup.Item>
+              <ListGroup.Item>From: Location A</ListGroup.Item>
+              <ListGroup.Item>To: Location A</ListGroup.Item>
+              <ListGroup.Item>Distance: </ListGroup.Item>
+            </ListGroup>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleClose}>Close</Button>
