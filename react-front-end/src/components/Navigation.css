@@ -6,3 +6,12 @@
   width: 2em;
   height: 2em;
 }
+
+.nav-link {
+  height: 100%;
+}
+
+.nav-link:hover {
+  background-color: #d83a01c3;
+  color: white;
+}
