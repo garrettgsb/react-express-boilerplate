@@ -14,6 +14,7 @@ import CreateAccountStatus from "./CreateAccountStatus";
 
 export default function RegisterUser() {
   //create account status
+  
   const [buttonPressed, setButtonPressed] = useState(false);
 
   const { registerUser } = useAppData();
@@ -42,25 +43,18 @@ export default function RegisterUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const form = e.target;
+    // const form = e.target;
 
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+    // if (form.checkValidity() === false) {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    // }
 
     registerUser(userData);
-    //  setUserData({
-    //  name: "",
-    //  email: "",
-    //  password: "",
-    //  phone: "",
-    //  age: "",
-    //  runner: false,
-    //  planner: false })
 
-    setValidated(true);
-    if (validated) navigate("/profile");
+    // setValidated(true);
+    // if (validated) 
+    navigate("/profile");
   };
 
   const genderSelector = () => {

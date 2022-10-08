@@ -4,19 +4,20 @@ import Form from "react-bootstrap/Form";
 
 export default function AutoComplete(props) {
   const myKey = process.env.REACT_APP_MAP_API_KEY;
-  const { setPlaceName, setAddress, setCoords } = props;
+  const { setAddress, setCoords } = props;
   // const [placeName, setPlaceName] = useState("");
   // const [address, setAddress] = useState("");
   // const [coords, setCoords] = useState({ lat: "", lng: "" });
   const { ref: locationRef } = usePlacesWidget({
     apiKey: myKey,
     onPlaceSelected: (place) => {
-      setAddress(place.formatted_address);
-      setPlaceName(place.name);
-      setCoords({
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng(),
-      });
+      setAddress(place.formatted_address, place.geometry.location.lat(),
+      place.geometry.location.lng() );
+      console.log("This is the place address:", place.formatted_address)
+      // setCoords(
+      //   place.geometry.location.lat(),
+      //   place.geometry.location.lng(),
+      // );
     },
     options: {
       types: ["park"],

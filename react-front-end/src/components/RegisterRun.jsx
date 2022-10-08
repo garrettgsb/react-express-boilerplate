@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -19,15 +19,18 @@ export default function RegisterRun() {
   const user = useRecoilValue(userState);
 
   const [runData, setRunData] = useState({
-    planner_id: user.id,
+    planner_id: "",
     name: "",
     description: "",
     distance: "",
     time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     date: new Date(),
     file: "",
+    lat: "",
+    lng: "",
+    address: "",
   });
-  const [placeName, setPlaceName] = useState("");
+
   const [address, setAddress] = useState("");
   const [coords, setCoords] = useState({ lat: "", lng: "" });
 
@@ -47,18 +50,24 @@ export default function RegisterRun() {
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (e) => {
-    const form = e.currentTarget;
-    console.log("check validity", e.target.reportValidity());
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
     e.preventDefault();
-    createRun(runData, placeName, address, coords);
-    setValidated(true);
-    if (validated) navigate("/map");
 
-    console.log("check validate:", validated);
+    //form validity
+    // const form = e.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    // }
+    //send data
+    console.log(runData);
+    createRun({ ...runData }, { address: address }, coords.lat, coords.lng);
+
+    // setValidated(true)
+    // if (validated)
+    navigate("/profile");
+    //prevent default on btn
+
+    //console.log("check validate:", validated)
   };
 
   const datePick = () => {
@@ -79,18 +88,17 @@ export default function RegisterRun() {
   const distanceSelector = () => {
     return (
       <div className="mb-3">
-        {[2, 5, 10].map((label) => {
+        {[2, 5, 10].map((label, index) => {
           return (
             <Form.Check
               required
               key={label}
               inline
               type="radio"
-              id={`inline-radio-1`}
+              id={`inline-radio-1-${index}`}
               label={`${label}k`}
               value={label}
               name="distance"
-              checked={runData.distance}
               onChange={handleChange}
             />
           );
@@ -99,11 +107,21 @@ export default function RegisterRun() {
     );
   };
 
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+    if (user) {
+      setRunData({ ...runData, planner_id: user.id });
+    }
+  }, []);
+
   return (
     <div className="forms">
       <Form
         className="form-container"
         encType="multipart/form-data"
+        noValidate
         validated={validated}
         onSubmit={handleSubmit}
       >
@@ -155,9 +173,11 @@ export default function RegisterRun() {
           className="mb-3"
         >
           <AutoComplete
-            setAddress={setAddress}
-            setPlaceName={setPlaceName}
-            setCoords={setCoords}
+            setAddress={(address, lat, lng) =>
+              setRunData((prev) => {
+                return { ...prev, address: address, lat: lat, lng: lng };
+              })
+            }
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           <Form.Control.Feedback type="invalid">
@@ -177,11 +197,15 @@ export default function RegisterRun() {
               <Form.Label>Time</Form.Label>
               <Form.Control
                 required
+                key={runData.time}
                 type="time"
                 name="time"
                 placeholder="Time"
                 value={runData.time}
-                onChange={handleChange}
+                //onChange={(time) => console.log(time.target.value)}
+                onChange={(event) =>
+                  setRunData({ ...runData, time: event.target.value })
+                }
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
@@ -196,7 +220,9 @@ export default function RegisterRun() {
             required
             name="file"
             type="file"
-            onChange={handleChange}
+            onChange={(e) =>
+              setRunData({ ...runData, file: e.target.files[0] })
+            }
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           <Form.Control.Feedback type="invalid">

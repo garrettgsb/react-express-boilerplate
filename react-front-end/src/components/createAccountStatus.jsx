@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
 
-export default function createAccountStatus(props) {
+export default function CreateAccountStatus(props) {
   const { buttonPressed, setButtonPressed } = props;
   const navigate = useNavigate();
 
