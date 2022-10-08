@@ -35,15 +35,17 @@ export default function FindRun() {
   const showAvailableRuns = (runs, type) => {
     const runsArray = Object.values(runs);
     return runsArray.map((run) => {
-      return (
-        <Run
-          key={run.id}
-          run={run}
-          type={type}
-          join={() => join(user.id, run.id)}
-          canJoinRun={canJoinRun}
-        />
-      );
+      if (run.future_run) {
+        return (
+          <Run
+            key={run.id}
+            run={run}
+            type={type}
+            join={() => join(user.id, run.id)}
+            canJoinRun={canJoinRun}
+          />
+        );
+      }
     });
   };
 
@@ -51,16 +53,7 @@ export default function FindRun() {
     <>
       <section id="find-run-page">
         <Map />
-        <section id="available-runs">
-          <h2>Available right now</h2>
-          <p>
-            Our runs are about being inclusive, community and wellbeing. Our
-            mission is for people to feel part of a real local community brought
-            together by physical activity, as well as our national weRun family
-            across Canada. If you can't find an event near you, you can register
-            with weRun and plan your own.
-          </p>
-        </section>
+        <h1>All available runs you can join:</h1>
         {showAvailableRuns(runs, "available")}
       </section>
       {user && (
