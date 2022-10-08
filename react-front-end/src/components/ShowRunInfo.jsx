@@ -35,7 +35,7 @@ export default function ShowRunInfo({ run, show, handleClose }) {
             <ListGroup variant="flush">
               <ListGroup.Item as="h4">Details & Route</ListGroup.Item>
               <ListGroup.Item>
-                On {run.date} at {run.time}
+                On {run.date} at {run.event_time}
               </ListGroup.Item>
               <ListGroup.Item>Distance: {run.distance}km</ListGroup.Item>
             </ListGroup>
