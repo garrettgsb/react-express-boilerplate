@@ -92,7 +92,7 @@ const getUserByEmail = ({ email }) => {
 const getAllRuns = () => {
   return db
     .query(
-      `SELECT runs.id, runs.name, runs.description, runs.location, TO_CHAR(runs.time, 'HH:MI AM') as event_time, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, runs.distance, runs.latitude, runs.longitude, runs.latitude_to, runs.longitude_to,
+      `SELECT runs.id, runs.name, runs.description, runs.location, TO_CHAR(runs.time, 'HH:MI AM') as event_time, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, runs.distance, runs.latitude, runs.longitude, runs.location_to, runs.latitude_to, runs.longitude_to,
       (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
         ELSE FALSE
       END) AS future_run
@@ -162,7 +162,7 @@ const createRun = ({
 const getRunsForPlanner = (id) => {
   return db
     .query(
-      `SELECT runs.id, users.id AS planner_id, runs.name, runs.description, runs.distance, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, TO_CHAR(runs.time, 'HH:MI AM') as event_time, runs.location,runs.latitude, runs.longitude, runs.latitude_to, runs.longitude_to,
+      `SELECT runs.id, users.id AS planner_id, runs.name, runs.description, runs.distance, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, TO_CHAR(runs.time, 'HH:MI AM') as event_time, runs.location,runs.latitude, runs.longitude, runs.location_to, runs.latitude_to, runs.longitude_to,
         (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
             ELSE FALSE
         END) AS future_run
@@ -185,7 +185,7 @@ const getRunsForPlanner = (id) => {
 const getRunsForRunner = (id) => {
   return db
     .query(
-      `SELECT runs.id, users.id AS user_id, runs.name, runs.description, runs.distance, runs.location, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, users_runs.time, users_runs.rating, runs.latitude, runs.longitude, runs.latitude_to, runs.longitude_to, TO_CHAR(runs.time, 'HH:MI AM') AS event_time,
+      `SELECT runs.id, users.id AS user_id, runs.name, runs.description, runs.distance, runs.location, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, users_runs.time, users_runs.rating, runs.latitude, runs.longitude, runs.location_to, runs.latitude_to, runs.longitude_to, TO_CHAR(runs.time, 'HH:MI AM') AS event_time,
       (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
             ELSE FALSE
        END) AS future_run

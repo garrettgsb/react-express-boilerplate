@@ -80,7 +80,8 @@ export default function Run(props) {
           <div className="run-desc">
             <ListGroup variant="flush">
               <ListGroup.Item>When: {eventTime}</ListGroup.Item>
-              <ListGroup.Item>Where: {run.location}</ListGroup.Item>
+              <ListGroup.Item>Start: {run.location}</ListGroup.Item>
+              <ListGroup.Item>Finish: {run.location_to}</ListGroup.Item>
               <ListGroup.Item>Distance: {run.distance} km</ListGroup.Item>
               {time && <ListGroup.Item>{time}</ListGroup.Item>}
             </ListGroup>

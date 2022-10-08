@@ -226,6 +226,9 @@ App.post("/api/runs", (req, res) => {
     lat,
     lng,
     planner_id,
+    address_to,
+    lat_to,
+    lng_to
   } = req.body;
 
   db.createRun({
