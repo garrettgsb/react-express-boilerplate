@@ -92,9 +92,11 @@ const getUserByEmail = ({ email }) => {
 const getAllRuns = () => {
   return db
     .query(
-      `SELECT runs.id, runs.name, runs.description, runs.location, TO_CHAR(runs.time, 'HH:MI AM') as time, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, runs.distance, runs.latitude, runs.longitude 
-    FROM runs
-    WHERE runs.date >= CURRENT_DATE;`
+      `SELECT runs.id, runs.name, runs.description, runs.location, TO_CHAR(runs.time, 'HH:MI AM') as event_time, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, runs.distance, runs.latitude, runs.longitude, 
+      (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
+        ELSE FALSE
+      END) AS future_run
+      FROM runs;`
     )
     .then((result) => {
       const runs = {};
