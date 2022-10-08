@@ -41,6 +41,7 @@
   height: 2.3em;
   border-radius: 0.378rem;
   border: 1px solid rgba(0, 0, 0, 0.175);
+  padding-left: 0.75rem;
 }
 
 .sign-in {

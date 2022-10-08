@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Stack from 'react-bootstrap/Stack';
+import Stack from "react-bootstrap/Stack";
 import DatePicker from "react-datepicker";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -32,7 +32,7 @@ export default function RegisterRun() {
     address: "",
     lat_to: "",
     lng_to: "",
-    address_to: ""
+    address_to: "",
   });
 
   const [address, setAddress] = useState("");
@@ -76,9 +76,10 @@ export default function RegisterRun() {
 
   const datePick = () => {
     return (
-      <Form.Group controlId="date" className="mb-3">
+      <Form.Group controlId="date" className="mb-3" style={{width: "100%"}}>
         <Form.Label>Date</Form.Label>
         <DatePicker
+        className="date-picker"
           required
           name="date"
           selected={runData.date}
@@ -171,41 +172,49 @@ export default function RegisterRun() {
           </Form.Control.Feedback>
         </FloatingLabel>
 
-        {/* From */}
-        <FloatingLabel controlId="location" label="From..." className="mb-3">
-          <AutoComplete
-            setAddress={(address, lat, lng) =>
-              setRunData((prev) => {
-                return { ...prev, address: address, lat: lat, lng: lng };
-              })
-            }
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          <Form.Control.Feedback type="invalid">
-            Enter a valid address.
-          </Form.Control.Feedback>
-        </FloatingLabel>
-
-        {/* To */}
-        <FloatingLabel controlId="location" label="To..." className="mb-3">
-          <AutoComplete
-            setAddress={(address, lat, lng) =>
-              setRunData((prev) => {
-                return {
-                  ...prev,
-                  address_to: address,
-                  lat_to: lat,
-                  lng_to: lng,
-                };
-              })
-            }
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          <Form.Control.Feedback type="invalid">
-            Enter a valid address.
-          </Form.Control.Feedback>
-        </FloatingLabel>
-
+        <Row>
+          <Col>
+            {/* From */}
+            <FloatingLabel
+              controlId="location"
+              label="From..."
+              className="mb-3"
+            >
+              <AutoComplete
+                setAddress={(address, lat, lng) =>
+                  setRunData((prev) => {
+                    return { ...prev, address: address, lat: lat, lng: lng };
+                  })
+                }
+              />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                Enter a valid address.
+              </Form.Control.Feedback>
+            </FloatingLabel>
+          </Col>
+          <Col>
+            {/* To */}
+            <FloatingLabel controlId="location" label="To..." className="mb-3">
+              <AutoComplete
+                setAddress={(address, lat, lng) =>
+                  setRunData((prev) => {
+                    return {
+                      ...prev,
+                      address_to: address,
+                      lat_to: lat,
+                      lng_to: lng,
+                    };
+                  })
+                }
+              />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                Enter a valid address.
+              </Form.Control.Feedback>
+            </FloatingLabel>
+          </Col>
+        </Row>
         <Form.Group controlId="distance" className="mb-3">
           <Form.Label>Distance</Form.Label>
           {distanceSelector()}

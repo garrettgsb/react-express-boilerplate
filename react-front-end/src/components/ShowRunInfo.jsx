@@ -16,7 +16,7 @@ export default function ShowRunInfo({ run, show, handleClose }) {
         className="run-modal"
         show={show}
         onHide={handleClose}
-        size="lg"
+        size="xl"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -37,6 +37,8 @@ export default function ShowRunInfo({ run, show, handleClose }) {
               <ListGroup.Item>
                 On {run.date} at {run.event_time}
               </ListGroup.Item>
+              <ListGroup.Item>Start: {run.location}</ListGroup.Item>
+              <ListGroup.Item>Finish: {run.location_to}</ListGroup.Item>
               <ListGroup.Item>Distance: {run.distance}km</ListGroup.Item>
             </ListGroup>
           </div>
