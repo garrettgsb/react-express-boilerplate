@@ -4,7 +4,6 @@ import "../components/Homepage.css";
 import logo from "./logo3.svg";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import AutoComplete from "./AutoComplete";
 
 export default function Homepage() {
   return (
@@ -17,11 +16,11 @@ export default function Homepage() {
           </div>
           <div className="home-actions">
             <Link className="home-join" to="/runs">
-              Find
+              <div className="underline">Find</div>
               <p>Search for local running events</p>
             </Link>
             <Link className="home-plan" to="/create">
-              Plan
+              <div className="underline">Plan</div>
               <p>Create a new running event</p>
             </Link>
           </div>
