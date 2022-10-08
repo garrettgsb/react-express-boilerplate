@@ -18,7 +18,6 @@ const RouteMap = ({ zoom, from, to }) => {
         mapTypeId: maps.MapTypeId.ROADMAP,
         disableDefaultUI: true,
       });
-      console.log("Loaded!!!!!!!!");
 
       let directionsDisplay = new maps.DirectionsRenderer();
       let directionsService = new maps.DirectionsService();
@@ -37,7 +36,8 @@ const RouteMap = ({ zoom, from, to }) => {
       });
       directionsDisplay.setPanel(document.getElementById("run-path"));
     }
-    maps.event.addDomListener(window, "load", initialize);
+    // maps.event.addDomListener(window, "load", initialize);
+    initialize();
     function calculateAndDisplayRoute(
       start,
       end,
@@ -81,13 +81,6 @@ const RouteMap = ({ zoom, from, to }) => {
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         />
-        {/* <GoogleMapReact
-          bootstrapURLKeys={{
-            key: myKey,
-          }}
-          onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-          yesIWantToUseGoogleMapApiInternals
-        /> */}
       </div>
     </>
   );

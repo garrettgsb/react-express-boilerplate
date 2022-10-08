@@ -5,6 +5,7 @@ import "../components/Run.css";
 import JoinButton from "./JoinButton";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import ShowRunInfo from "./ShowRunInfo";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function Run(props) {
@@ -12,6 +13,17 @@ export default function Run(props) {
   const [joinStatus, setJoinStatus] = useState(canJoinRun(run.id) || false);
   const [time, setTime] = useState(run.time);
   const navigate = useNavigate();
+
+  const [showInfoModal, setShowInfoModal] = useState(false);
+
+  const handleCloseInfoModal = () => {
+    setShowInfoModal(false);
+    // navigate("/profile");
+  };
+  const handleShowInfoModal = () => {
+    setShowInfoModal(true);
+    // navigate("/run-info");
+  };
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
@@ -33,7 +45,6 @@ export default function Run(props) {
   return (
     <>
       <section className="run">
-
         <img
           alt="Shows running space"
           className="run-image"
@@ -54,7 +65,12 @@ export default function Run(props) {
                 delay={{ show: 250, hide: 50 }}
                 overlay={renderTooltip}
               >
-                <span className="material-symbols-rounded" onClick={()=>navigate("/run-info")}>calendar_month</span>
+                <span
+                  className="material-symbols-rounded"
+                  onClick={handleShowInfoModal}
+                >
+                  calendar_month
+                </span>
               </OverlayTrigger>
             )}
           </div>
@@ -70,6 +86,11 @@ export default function Run(props) {
           </div>
         </div>
       </section>
+      <ShowRunInfo
+        run={run}
+        show={showInfoModal}
+        handleClose={handleCloseInfoModal}
+      />
     </>
   );
 }
