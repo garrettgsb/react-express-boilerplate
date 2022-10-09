@@ -17,6 +17,7 @@ export default function CreateAccountStatus(props) {
     }
   }, [buttonPressed]);
 
+
   return (
     <>
       <Modal
