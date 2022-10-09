@@ -127,7 +127,6 @@ export default function Profile() {
           </Tab>
         </Tabs>
       </section>
-      {/* <PlannerShow show={show} handleClose={handleClose} handleShow={handleShow}/> */}
     </main>
   );
 }
