@@ -45,6 +45,8 @@ export default function Navigation() {
             <Link className="nav-link" to="/runs">
               Join A Run
             </Link>
+          </Nav>
+          <Nav pullRight>
             {user === null && (
               <Link className="nav-link" to="/signin">
                 Sign In
@@ -55,19 +57,18 @@ export default function Navigation() {
                 Sign Up
               </Link>
             )}
-            </Nav>
-            <Nav pullRight>
+
             {user !== null && (
-                <Link className="nav-link" to="/profile">
-                  Profile
-                </Link>
-              )}
-              {user !== null && (
-                <Link className="nav-link" to="#" onClick={signOut}>
-                  Sign Out
-                </Link>
-              )}
-           
+              <Link className="nav-link" to="/profile">
+                Profile
+              </Link>
+            )}
+            {user !== null && (
+              <Link className="nav-link" to="#" onClick={signOut}>
+                Sign Out
+              </Link>
+            )}
+
           </Nav>
         </Navbar.Collapse>
       </Container>
