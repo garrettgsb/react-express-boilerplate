@@ -45,26 +45,11 @@ export default function RegisterRun() {
     setRunData({ ...runData, [e.target.name]: e.target.value });
   };
 
-  //Validate form
-  const [validated, setValidated] = useState(false);
-
+ //Submit to database
   const handleSubmit = (e) => {
     e.preventDefault();
-
-
-    // const form = e.currentTarget;
-    // if (form.checkValidity() === false) {
-    //   e.preventDefault();
-    //   e.stopPropagation();
-    // }
-    
-
-    // setValidated(true)
-    // if (validated)
     createRun({ ...runData });
     navigate("/profile");
-
-
   };
 
   const datePick = () => {
@@ -119,8 +104,6 @@ export default function RegisterRun() {
       <Form
         className="form-container"
         encType="multipart/form-data"
-        //noValidate
-        validated={validated}
         onSubmit={handleSubmit}
       >
         <div className="form-container-text">
