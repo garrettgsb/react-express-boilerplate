@@ -27,8 +27,8 @@ export default function Profile() {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
 
   const showRunnersRuns = (runs, type) => {
     const runsArray = Object.values(runs);
