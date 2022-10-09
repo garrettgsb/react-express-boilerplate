@@ -5,16 +5,13 @@ import "../components/Run.css";
 import JoinButton from "./JoinButton";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import Badge from "react-bootstrap/Badge";
 import ShowRunInfo from "./ShowRunInfo";
-import { useNavigate, Link } from "react-router-dom";
 
 export default function Run(props) {
   const { run, type, canJoinRun, join } = props;
   const [joinStatus, setJoinStatus] = useState(canJoinRun(run.id) || false);
   const [time, setTime] = useState("");
   const [eventTime, setEventTime] = useState("");
-  const navigate = useNavigate();
 
   const [showInfoModal, setShowInfoModal] = useState(false);
 

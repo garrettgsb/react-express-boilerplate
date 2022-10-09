@@ -25,7 +25,7 @@ const sendUserText = (phone, message) => {
     to: phone,
     from: process.env.TWILIO_PHONENUM
   })
-  .then(message => console.log(message.sid));
+  .then(message => console.log("A message was sent to the user's phone number, message.sid is:",message.sid));
 };
 
 module.exports = sendUserText;

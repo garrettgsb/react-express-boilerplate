@@ -20,7 +20,7 @@ export default function SimpleMap() {
             below.
           </p>
           <a href="#available-runs">
-            <span class="material-symbols-rounded">
+            <span className="material-symbols-rounded">
               expand_more
             </span>
           </a>
