@@ -1,5 +1,5 @@
 import { usePlacesWidget } from "react-google-autocomplete";
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 
 export default function AutoComplete(props) {
@@ -27,6 +27,7 @@ export default function AutoComplete(props) {
         required
         type="text"
         ref={locationRef}
+        placeholder="something"
         autoComplete="text"
       />
     </>

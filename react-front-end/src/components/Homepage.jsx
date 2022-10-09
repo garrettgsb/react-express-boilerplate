@@ -2,9 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Homepage.css";
 import logo from "./logo3.svg";
-import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import AutoComplete from "./AutoComplete";
 
 export default function Homepage() {
   return (

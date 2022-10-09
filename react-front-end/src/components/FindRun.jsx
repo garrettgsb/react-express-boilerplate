@@ -35,9 +35,8 @@ export default function FindRun() {
   const showAvailableRuns = (runs, type) => {
     const runsArray = Object.values(runs);
     return runsArray.map((run) => {
-      if (run.future_run) {
         return (
-          <Run
+          run.future_run && <Run
             key={run.id}
             run={run}
             type={type}
@@ -45,7 +44,6 @@ export default function FindRun() {
             canJoinRun={canJoinRun}
           />
         );
-      }
     });
   };
 
