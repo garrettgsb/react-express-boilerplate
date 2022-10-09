@@ -15,6 +15,8 @@ import {
 import { useRecoilValue } from "recoil";
 import useAppData from "../hooks/useAppData";
 import profilePhoto from './profile-photo.jpeg';
+import PlannerShow from './PlannerShow.jsx';
+import { Button } from "bootstrap";
 
 export default function Profile() {
   const user = useRecoilValue(userState);
@@ -22,6 +24,11 @@ export default function Profile() {
   const plannerRuns = useRecoilValue(plannerRunsState);
   const { joinRun, canJoinRun } = useAppData();
   const [runData, setRunData] = useState({ distance: 0, minutes: 0, count: 0 });
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const showRunnersRuns = (runs, type) => {
     const runsArray = Object.values(runs);
@@ -120,6 +127,7 @@ export default function Profile() {
           </Tab>
         </Tabs>
       </section>
+      <PlannerShow show={show} handleClose={handleClose} handleShow={handleShow}/>
     </main>
   );
 }
