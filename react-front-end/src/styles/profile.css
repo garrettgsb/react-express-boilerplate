@@ -141,9 +141,10 @@ main {
    flex-direction: row;
   }
   .profile-pic {
-   height: 100px;
+    display: none;
+   /* height: 100px;
    width: 100px;
-   margin: 5px;
+   margin: 5px; */
   }
  
   .profile-info tbody {
@@ -154,5 +155,25 @@ main {
     font-size: 20px;
   }
 
+  .profile-stats {
+    display: flex;
+    flex-direction: column;
+   
+  }
+
+  .run {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 0;
+  }
+
+  .run-image {
+    height: 100px;
+    width: 100px;
+    
+  }
+
+ 
  
 }
