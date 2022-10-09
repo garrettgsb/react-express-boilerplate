@@ -55,16 +55,19 @@ export default function Navigation() {
                 Sign Up
               </Link>
             )}
+            </Nav>
+            <Nav pullRight>
             {user !== null && (
-              <Link className="nav-link" to="#" onClick={signOut}>
-                Sign Out
-              </Link>
-            )}
-            {user !== null && (
-              <Link className="nav-link" to="/profile">
-                Profile
-              </Link>
-            )}
+                <Link className="nav-link" to="/profile">
+                  Profile
+                </Link>
+              )}
+              {user !== null && (
+                <Link className="nav-link" to="#" onClick={signOut}>
+                  Sign Out
+                </Link>
+              )}
+           
           </Nav>
         </Navbar.Collapse>
       </Container>

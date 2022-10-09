@@ -5,13 +5,13 @@
 }
 
 .navbar-brand img {
-  width: 2em;
-  height: 2em;
+  width: 2.5em;
+  height: 2.5em;
+
 }
 
 .nav-link {
-  padding: 1em;
-
+  padding: 1em 1.5em;
 }
 
 .nav-link:hover {
@@ -19,3 +19,4 @@
   color: white;
   transition: all 0.5s;
 }
+
