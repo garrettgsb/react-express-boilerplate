@@ -57,17 +57,17 @@ export default function RegisterRun() {
     e.preventDefault();
 
     //form validity
-    // const form = e.currentTarget;
-    // if (form.checkValidity() === false) {
-    //   e.preventDefault();
-    //   e.stopPropagation();
-    // }
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     //send data
     console.log(runData);
     createRun({ ...runData }, { address: address }, coords.lat, coords.lng);
 
-    // setValidated(true)
-    // if (validated)
+    setValidated(true)
+    if (validated)
     navigate("/profile");
     //prevent default on btn
 
