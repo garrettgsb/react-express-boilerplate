@@ -226,8 +226,11 @@ App.post("/api/runs", (req, res) => {
     lat,
     lng,
     planner_id,
+    location_to,
+    latitude_to,
+    longitude_to,
   } = req.body;
-
+ 
   db.createRun({
     name,
     description,
@@ -237,6 +240,9 @@ App.post("/api/runs", (req, res) => {
     date,
     latitude: lat,
     longitude: lng,
+    location_to,
+    latitude_to,
+    longitude_to,
     planner_id,
   })
     .then((response) => {

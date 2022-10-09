@@ -5,33 +5,48 @@ import "../components/Run.css";
 import JoinButton from "./JoinButton";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Badge from "react-bootstrap/Badge";
+import ShowRunInfo from "./ShowRunInfo";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Run(props) {
   const { run, type, canJoinRun, join } = props;
   const [joinStatus, setJoinStatus] = useState(canJoinRun(run.id) || false);
-  const [time, setTime] = useState(run.time);
+  const [time, setTime] = useState("");
+  const [eventTime, setEventTime] = useState("");
+  const navigate = useNavigate();
+
+  const [showInfoModal, setShowInfoModal] = useState(false);
+
+  const handleCloseInfoModal = () => {
+    setShowInfoModal(false);
+  };
+  const handleShowInfoModal = () => {
+    setShowInfoModal(true);
+  };
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      Event on {run.date}!
+      <p>Event on: {run.date}</p>
+      <p>Click for more</p>
     </Tooltip>
   );
 
   useEffect(() => {
-    if (time === 0) {
-      setTime(
-        "You are scheduled to run this event. No time has been recorded yet."
-      );
+    if (run.time !== 0 && type === "attended") {
+      setTime(`${run.time} min`);
     }
-    if (time !== 0 && type === "attended") {
-      setTime((prev) => prev + " min");
+    if (run.future_run) {
+      setEventTime(`${run.date} at ${run.event_time}`);
+    }
+    if (!run.future_run) {
+      setEventTime(`Was on ${run.date} at ${run.event_time}`);
     }
   }, []);
 
   return (
     <>
       <section className="run">
-
         <img
           alt="Shows running space"
           className="run-image"
@@ -46,28 +61,44 @@ export default function Run(props) {
               </span>
             )}
             <h3>{run.name}</h3>
-            {run.future_run && (
-              <OverlayTrigger
-                placement="left"
-                delay={{ show: 250, hide: 50 }}
-                overlay={renderTooltip}
+
+            <OverlayTrigger
+              placement="left"
+              delay={{ show: 250, hide: 50 }}
+              overlay={renderTooltip}
+            >
+              {/* <span
+                className="material-symbols-rounded"
+                onClick={handleShowInfoModal}
               >
-                <span className="material-symbols-rounded">calendar_month</span>
-              </OverlayTrigger>
-            )}
+               
+                info
+              </span> */}
+              <button
+                type="button"
+                className="detail-button"
+                onClick={handleShowInfoModal}
+              >
+                Details
+              </button>
+            </OverlayTrigger>
           </div>
           <p>{run.description}</p>
           <div className="run-desc">
             <ListGroup variant="flush">
-              <ListGroup.Item>Distance: {run.distance} km</ListGroup.Item>
-              <ListGroup.Item>Where: {run.location}</ListGroup.Item>
-              <ListGroup.Item>Time: {time}</ListGroup.Item>
-              <ListGroup.Item>When: {run.date}</ListGroup.Item>
+              <ListGroup.Item><strong>When:</strong> {eventTime}</ListGroup.Item>
+              <ListGroup.Item><strong>Distance:</strong> {run.distance} km</ListGroup.Item>
+              {time && <ListGroup.Item><strong>Recorded Time:</strong> {time}</ListGroup.Item>}
             </ListGroup>
             <JoinButton runType={type} joinStatus={joinStatus} join={join} />
           </div>
         </div>
       </section>
+      <ShowRunInfo
+        run={run}
+        show={showInfoModal}
+        handleClose={handleCloseInfoModal}
+      />
     </>
   );
 }

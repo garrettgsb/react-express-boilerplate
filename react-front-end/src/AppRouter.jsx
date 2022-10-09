@@ -15,6 +15,7 @@ import {
   createBrowserRouter,
   Route,
 } from "react-router-dom";
+import ShowRunInfo from "./components/ShowRunInfo.jsx";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ export const router = createBrowserRouter(
       <Route path="/create" element={<RegisterRun />}/>
       <Route path="/signin" element={<SignIn />} />
       <Route path="/map" element={<DefaultMap />}/>
+      <Route path="/run-info" element={<ShowRunInfo />} />
     </Route>
   )
 );

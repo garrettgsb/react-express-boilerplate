@@ -7,6 +7,7 @@
   width: 70rem;
   border: 1px solid rgba(0, 0, 0, 0.125);
   font-family: "Krub", sans-serif;
+  box-shadow: 0 0 5px lightgrey;
 }
 
 .run-image {
@@ -17,45 +18,65 @@
 
 .run-body {
   padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1em;
 }
 
-.run-heading,
-.run-desc {
+.run-body p {
+  margin: 0;
+}
+
+.run-heading {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
+.run-desc {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  height: 9em;
+}
+
+.run-desc .list-group-item {
+  padding-left: 0;
+}
+
 .run-heading .run-id {
-/* background-color: rgba(0, 0, 0, 0.73); */
-background-color: #d83a01c3;
-color: white;
-font-size: 1.5rem;
-font-weight: 800;
-margin: -0.3em 0.5em 0 0;
-width: 2em;
-height: 2em;
-border-radius: 50%;
-text-align: center;
-padding-top:0.2em;
+  background-color: #d83a01c3;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: -0.3em 0.5em 0 0;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  text-align: center;
+  padding-top: 0.2em;
 }
 
 .run-heading h3 {
-    margin-right: auto;
+  margin-right: auto;
 }
 
-.run-heading .material-symbols-rounded{
-  font-size: 30px;
-  font-variation-settings:
-  'FILL' 1,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48;
-  color: #d83a01c3;
+.run-heading .detail-button {
+  background-color: #d83a01c3;
+  color: white;
+  height: 2em;
+  border-radius: 0.375rem;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
 }
 
-.run-desc {
-  align-items: flex-end;
+.run-heading .detail-button:hover {
+  cursor: pointer;
+  background-color: #3e363e;
+  transition: 0.5s;
 }
 
 .join-button {
@@ -67,11 +88,13 @@ padding-top:0.2em;
   color: white;
   border-radius: 0.375rem;
   font-weight: 800;
+  align-self: flex-end;
 }
 
 .join-button:hover {
   font-weight: 800;
   background-color: #d83a01ee;
+  transition: 0.5s;
 }
 
 .join-button[disabled] {

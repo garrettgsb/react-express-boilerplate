@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import useAppData from "../hooks/useAppData";
 import { userState } from "../hooks/useAppData";
@@ -28,7 +28,7 @@ export default function SignIn() {
 
   return (
     <div className="forms">
-      <Form className="form-container sign-in" onSubmit={handleSubmit}>
+      <Form className="form-container sign-in text-center" onSubmit={handleSubmit}>
         <div className="form-container-text">
           <Form.Text as="h3">WELCOME BACK, RUNNER!</Form.Text>
           <Form.Text as="p">Sign in to see all your running events.</Form.Text>
@@ -58,6 +58,7 @@ export default function SignIn() {
         <Button variant="primary" type="submit">
           Sign In
         </Button>
+        <Form.Text as="div" className="text-center mb-2 mt-4">Don't have an account? Create one <Link to="/register">here</Link>.</Form.Text>
       </Form>
     </div>
   );

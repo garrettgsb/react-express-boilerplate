@@ -53,5 +53,6 @@
 .map {
   border-radius: 1rem;
   overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.263);
   box-shadow: 0 0 5px lightgrey;
 }

@@ -92,9 +92,11 @@ const getUserByEmail = ({ email }) => {
 const getAllRuns = () => {
   return db
     .query(
-      `SELECT runs.id, runs.name, runs.description, runs.location, TO_CHAR(runs.time, 'HH:MI AM') as time, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, runs.distance, runs.latitude, runs.longitude 
-    FROM runs
-    WHERE runs.date >= CURRENT_DATE;`
+      `SELECT runs.id, runs.name, runs.description, runs.location, TO_CHAR(runs.time, 'HH:MI AM') as event_time, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, runs.distance, runs.latitude, runs.longitude, runs.location_to, runs.latitude_to, runs.longitude_to,
+      (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
+        ELSE FALSE
+      END) AS future_run
+      FROM runs;`
     )
     .then((result) => {
       const runs = {};
@@ -131,14 +133,30 @@ const createRun = ({
   date,
   planner_id,
   latitude,
-  longitude
+  longitude,
+  location_to,
+  latitude_to,
+  longitude_to,
 }) => {
   return db
     .query(
-      `INSERT INTO runs (name, description, location, distance, time, date, planner_id, latitude, longitude)
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+      `INSERT INTO runs (name, description, location, distance, time, date, planner_id, latitude, longitude, location_to, latitude_to, longitude_to)
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
     RETURNING *;`,
-      [name, description, location, distance, time, date, planner_id, latitude, longitude]
+      [
+        name,
+        description,
+        location,
+        distance,
+        time,
+        date,
+        planner_id,
+        latitude,
+        longitude,
+        location_to,
+        latitude_to,
+        longitude_to,
+      ]
     )
     .then((result) => {
       const run = result.rows[0];
@@ -150,7 +168,7 @@ const createRun = ({
 const getRunsForPlanner = (id) => {
   return db
     .query(
-      `SELECT runs.id, users.id AS planner_id, runs.name, runs.description, runs.distance, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, TO_CHAR(runs.time, 'HH:MI AM') as time, runs.location,
+      `SELECT runs.id, users.id AS planner_id, runs.name, runs.description, runs.distance, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, TO_CHAR(runs.time, 'HH:MI AM') as event_time, runs.location,runs.latitude, runs.longitude, runs.location_to, runs.latitude_to, runs.longitude_to,
         (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
             ELSE FALSE
         END) AS future_run
@@ -173,7 +191,7 @@ const getRunsForPlanner = (id) => {
 const getRunsForRunner = (id) => {
   return db
     .query(
-      `SELECT runs.id, users.id AS user_id, runs.name, runs.description, runs.distance, runs.location, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, users_runs.time, users_runs.rating, 
+      `SELECT runs.id, users.id AS user_id, runs.name, runs.description, runs.distance, runs.location, TO_CHAR(runs.date, 'DDth Mon, YYYY') as date, users_runs.time, users_runs.rating, runs.latitude, runs.longitude, runs.location_to, runs.latitude_to, runs.longitude_to, TO_CHAR(runs.time, 'HH:MI AM') AS event_time,
       (CASE WHEN runs.date >= CURRENT_DATE THEN TRUE
             ELSE FALSE
        END) AS future_run
@@ -194,7 +212,7 @@ const getRunsForRunner = (id) => {
     .catch((err) => console.error(err.stack));
 };
 
-const registerForARun = ({runner_id, run_id}) => {
+const registerForARun = ({ runner_id, run_id }) => {
   return db
     .query(
       `INSERT INTO users_runs (time, rating, runner_id, run_id)
@@ -236,5 +254,5 @@ module.exports = {
   getRunsForPlanner,
   getRunsForRunner,
   registerForARun,
-  getUserByEmail
+  getUserByEmail,
 };
