@@ -18,7 +18,13 @@ export default function PlannerShow() {
         <Modal.Header closeButton>
           <Modal.Title>Planner Info</Modal.Title>
         </Modal.Header>
-        <Modal.Body>There are people joining this run.</Modal.Body>
+        <Modal.Body>
+          There are people joining this run.
+          <p>
+            
+          </p>
+          
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
