@@ -17,6 +17,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import AutoComplete from "./AutoComplete";
 
 export default function RegisterRun() {
+
+  //Get user and update form state
   const user = useRecoilValue(userState);
 
   const [runData, setRunData] = useState({
@@ -35,8 +37,6 @@ export default function RegisterRun() {
     address_to: "",
   });
 
-  const [address, setAddress] = useState("");
-  const [coords, setCoords] = useState({ lat: "", lng: "" });
 
   const navigate = useNavigate();
   const { createRun } = useAppData();
@@ -45,41 +45,34 @@ export default function RegisterRun() {
     setRunData({ ...runData, [e.target.name]: e.target.value });
   };
 
-  const handleCheckboxChange = (e) => {
-    const prev = runData[e.target.name];
-    setRunData({ ...runData, [e.target.name]: !prev });
-  };
-
-  //form validate
+  //Validate form
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //form validity
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    //send data
-    console.log(runData);
-    createRun({ ...runData }, { address: address }, coords.lat, coords.lng);
 
-    setValidated(true)
-    if (validated)
+    // const form = e.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    // }
+    
+
+    // setValidated(true)
+    // if (validated)
+    createRun({ ...runData });
     navigate("/profile");
-    //prevent default on btn
 
-    //console.log("check validate:", validated)
+
   };
 
   const datePick = () => {
     return (
-      <Form.Group controlId="date" className="mb-3" style={{width: "100%"}}>
+      <Form.Group controlId="date" className="mb-3" style={{ width: "100%" }}>
         <Form.Label>Date</Form.Label>
         <DatePicker
-        className="date-picker"
+          className="date-picker"
           required
           name="date"
           selected={runData.date}
@@ -126,7 +119,7 @@ export default function RegisterRun() {
       <Form
         className="form-container"
         encType="multipart/form-data"
-        noValidate
+        //noValidate
         validated={validated}
         onSubmit={handleSubmit}
       >
@@ -174,7 +167,6 @@ export default function RegisterRun() {
 
         <Row>
           <Col>
-            {/* From */}
             <FloatingLabel
               controlId="location"
               label="From..."
@@ -194,7 +186,6 @@ export default function RegisterRun() {
             </FloatingLabel>
           </Col>
           <Col>
-            {/* To */}
             <FloatingLabel controlId="location" label="To..." className="mb-3">
               <AutoComplete
                 setAddress={(address, lat, lng) =>
@@ -232,7 +223,6 @@ export default function RegisterRun() {
                 name="time"
                 placeholder="Time"
                 value={runData.time}
-                //onChange={(time) => console.log(time.target.value)}
                 onChange={(event) =>
                   setRunData({ ...runData, time: event.target.value })
                 }
