@@ -23,6 +23,7 @@ main {
   padding: 1.5em;
   border-radius: 5px;
   font-family: "Krub", sans-serif;
+  box-shadow: 0 0 5px lightgrey;
 }
 
 .profile-info {
@@ -46,10 +47,11 @@ main {
 }
 
 .profile-info p {
-  font-weight: 700;
-  font-size: 30px;
-  margin: -20px 0 0 0;
+  font-weight: 600;
+  font-size: 35px;
+  margin: -20px -10px 0 0;
   text-align: end;
+  color: #d83b01;
 }
 
 
