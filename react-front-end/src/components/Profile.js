@@ -14,7 +14,7 @@ import {
 } from "../hooks/useAppData";
 import { useRecoilValue } from "recoil";
 import useAppData from "../hooks/useAppData";
-
+import profilePhoto from './profile-photo.jpeg';
 
 export default function Profile() {
   const user = useRecoilValue(userState);
@@ -40,7 +40,8 @@ export default function Profile() {
   const profilePicture = (
     <img
       className="profile-pic"
-      src="https://images.pexels.com/photos/3042160/pexels-photo-3042160.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      src={profilePhoto}
+      //src="https://images.pexels.com/photos/3042160/pexels-photo-3042160.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
       alt="icon-profile"
     ></img>
   );
