@@ -69,6 +69,7 @@ export default function FindRun() {
         <JoiningStatus
           joinButtonPressed={joinButtonPressed}
           setJoinButtonPressed={setJoinButtonPressed}
+          text="JOINING"
         />
       )}
     </>
