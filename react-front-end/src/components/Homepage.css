@@ -58,6 +58,9 @@
   text-align: center;
   padding-top: 20px;
   box-shadow: 0 0 2px lightgrey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home-actions a:hover {
@@ -81,3 +84,39 @@
   text-decoration-color: darkgrey;
 }
 
+@media screen and (max-width: 600px) {
+  .home {
+    height: 100%;
+    flex-direction: column-reverse;
+    gap: 2em;
+    padding-bottom: 3em;
+  }
+
+  .logo {
+    width: 100%;
+    padding-right: 0;
+  }
+  .home .home-intro h2 {
+    width: 70%;
+  }
+  .home h2 {
+    font-size: 60px;
+  }
+
+  .home-actions {
+    gap: 0.5em;
+    font-size: 40px;
+  }
+
+  .home-actions a {
+    width: 40vw;
+    height: 20vh;
+    font-weight: 500;
+  }
+
+  .home-actions a p {
+    margin-top: 0.5em;
+    font-size: 18px;
+    max-width: 80%;
+  }
+}
