@@ -18,6 +18,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import AutoComplete from "./AutoComplete";
 
 export default function RegisterRun() {
+
+  //Get user and update form state
   const user = useRecoilValue(userState);
   const [joinButtonPressed, setJoinButtonPressed] = useState(false);
 
@@ -37,8 +39,6 @@ export default function RegisterRun() {
     address_to: "",
   });
 
-  const [address, setAddress] = useState("");
-  const [coords, setCoords] = useState({ lat: "", lng: "" });
 
   const navigate = useNavigate();
   const { createRun } = useAppData();
@@ -47,14 +47,7 @@ export default function RegisterRun() {
     setRunData({ ...runData, [e.target.name]: e.target.value });
   };
 
-  const handleCheckboxChange = (e) => {
-    const prev = runData[e.target.name];
-    setRunData({ ...runData, [e.target.name]: !prev });
-  };
-
-  //form validate
-  const [validated, setValidated] = useState(false);
-
+ //Submit to database
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -70,14 +63,15 @@ export default function RegisterRun() {
     response && setJoinButtonPressed(true);
     // setValidated(true)
     // if (validated)
+
   };
 
   const datePick = () => {
     return (
-      <Form.Group controlId="date" className="mb-3" style={{width: "100%"}}>
+      <Form.Group controlId="date" className="mb-3" style={{ width: "100%" }}>
         <Form.Label>Date</Form.Label>
         <DatePicker
-        className="date-picker"
+          className="date-picker"
           required
           name="date"
           selected={runData.date}
@@ -124,8 +118,6 @@ export default function RegisterRun() {
       <Form
         className="form-container"
         encType="multipart/form-data"
-        noValidate
-        validated={validated}
         onSubmit={handleSubmit}
       >
         <div className="form-container-text">
@@ -172,7 +164,6 @@ export default function RegisterRun() {
 
         <Row>
           <Col>
-            {/* From */}
             <FloatingLabel
               controlId="location"
               label="From..."
@@ -192,7 +183,6 @@ export default function RegisterRun() {
             </FloatingLabel>
           </Col>
           <Col>
-            {/* To */}
             <FloatingLabel controlId="location" label="To..." className="mb-3">
               <AutoComplete
                 setAddress={(address, lat, lng) =>
@@ -230,7 +220,6 @@ export default function RegisterRun() {
                 name="time"
                 placeholder="Time"
                 value={runData.time}
-                //onChange={(time) => console.log(time.target.value)}
                 onChange={(event) =>
                   setRunData({ ...runData, time: event.target.value })
                 }

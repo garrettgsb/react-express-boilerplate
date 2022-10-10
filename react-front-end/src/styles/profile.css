@@ -129,3 +129,58 @@ main {
   color: white;
   font-size: 30px;
 }
+
+
+@media screen and (max-width: 600px) {
+
+  .profile-header {
+   width: 95%;
+   height: 20%;
+   flex-wrap: wrap;
+   font-size: 10px;
+   flex-direction: row;
+  }
+  .profile-pic {
+   height: 150px;
+   width: 150px;
+   margin: 5px;
+  }
+ 
+  .profile-info tbody {
+    font-size: 20px;
+  }
+
+  .profile-info .unit {
+    font-size: 20px;
+  }
+
+  .profile-info h1 {
+    font-size: 50px;
+  }
+
+  .profile-stats {
+    display: flex;
+    flex-direction: column;
+   
+  }
+
+  .run {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    padding-left: 10px;
+  }
+
+  .run-image {
+    height: 150px;
+    width: 150px;
+    margin-left: 10%;
+    margin-top: 5%;
+    padding: 0
+  }
+
+  
+
+ 
+ 
+}

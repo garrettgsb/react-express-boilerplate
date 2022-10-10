@@ -13,7 +13,6 @@ import Feedback from "react-bootstrap/Feedback";
 import CreateAccountStatus from "./CreateAccountStatus";
 
 export default function RegisterUser() {
-  //create account status
   
   const [buttonPressed, setButtonPressed] = useState(false);
 
@@ -37,23 +36,11 @@ export default function RegisterUser() {
     setUserData({ ...userData, [e.target.name]: !prev });
   };
 
-  const [validated, setValidated] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // const form = e.target;
-
-    // if (form.checkValidity() === false) {
-    //   e.preventDefault();
-    //   e.stopPropagation();
-    // }
-
     registerUser(userData);
-
-    // setValidated(true);
-    // if (validated) 
     navigate("/profile");
   };
 
@@ -96,8 +83,6 @@ export default function RegisterUser() {
     <div className="forms">
       <Form
         className="form-container"
-        noValidate
-        validated={validated}
         onSubmit={handleSubmit}
       >
         <div className="form-container-text">
