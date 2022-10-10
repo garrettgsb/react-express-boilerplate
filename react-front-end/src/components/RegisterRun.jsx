@@ -59,7 +59,7 @@ export default function RegisterRun() {
     // }
     //send data
     console.log(runData);
-    const response = createRun({ ...runData }, { address: address }, coords.lat, coords.lng);
+    const response = createRun({ ...runData });
     response && setJoinButtonPressed(true);
     // setValidated(true)
     // if (validated)
