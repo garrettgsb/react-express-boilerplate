@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/Homepage.css";
 import logo from "./logo3.svg";
+import squareLogo from "./weRun-rect.svg";
 import { Link } from "react-router-dom";
 
 export default function Homepage() {
@@ -11,7 +12,10 @@ export default function Homepage() {
         <div>
           <div className="home-intro">
             <h2>Welcome to weRun!</h2>
-            <p>We organise free, weekly, timed, community events all over Canada. Get connected to runs near you today. Bring a buddy!</p>
+            <p>
+              We organise free, weekly, timed, community events all over Canada.
+              Get connected to runs near you today. Bring a buddy!
+            </p>
           </div>
           <div className="home-actions">
             <Link className="home-join" to="/runs">
@@ -24,7 +28,10 @@ export default function Homepage() {
             </Link>
           </div>
         </div>
-        <img src={logo} className="logo" alt="logo" />
+        <div className="logo-container">
+          <img src={logo} className="logo" alt="logo" />
+          <img src={squareLogo} className="square-logo" alt="logo" />
+        </div>
       </div>
     </div>
   );
