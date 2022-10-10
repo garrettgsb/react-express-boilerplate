@@ -8,6 +8,7 @@ import "../components/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Stack from "react-bootstrap/Stack";
+import JoiningStatus from "./JoiningStatus";
 import DatePicker from "react-datepicker";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -20,6 +21,7 @@ export default function RegisterRun() {
 
   //Get user and update form state
   const user = useRecoilValue(userState);
+  const [joinButtonPressed, setJoinButtonPressed] = useState(false);
 
   const [runData, setRunData] = useState({
     planner_id: "",
@@ -48,8 +50,20 @@ export default function RegisterRun() {
  //Submit to database
   const handleSubmit = (e) => {
     e.preventDefault();
-    createRun({ ...runData });
-    navigate("/profile");
+
+    //form validity
+    // const form = e.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    // }
+    //send data
+    console.log(runData);
+    const response = createRun({ ...runData }, { address: address }, coords.lat, coords.lng);
+    response && setJoinButtonPressed(true);
+    // setValidated(true)
+    // if (validated)
+
   };
 
   const datePick = () => {
@@ -236,6 +250,11 @@ export default function RegisterRun() {
           Create
         </Button>
       </Form>
+      <JoiningStatus
+          joinButtonPressed={joinButtonPressed}
+          setJoinButtonPressed={setJoinButtonPressed}
+          text="PLANNING"
+        />
     </div>
   );
 }
