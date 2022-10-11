@@ -55,7 +55,7 @@ export default function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FloatingLabel>
-        <Button variant="primary" type="submit">
+        <Button variant="custom" type="submit" className="btn">
           Sign In
         </Button>
         <Form.Text as="div" className="text-center mb-2 mt-4">Don't have an account? Create one <Link to="/register">here</Link>.</Form.Text>

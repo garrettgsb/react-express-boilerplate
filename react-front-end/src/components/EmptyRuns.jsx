@@ -33,8 +33,8 @@ export default function EmptyRuns(props) {
       <Container className="empty-runs-container">
         <h3>{type.headingText}</h3>
         <Button
-          className="empty-runs-button"
-          variant="primary"
+          className="btn"
+          variant="custom"
           onClick={handleClick}
         >
           {type.action}

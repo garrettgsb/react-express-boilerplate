@@ -47,3 +47,28 @@
 .sign-in {
   width: 25rem;
 }
+
+.btn {
+  
+    height: 3em;
+    width: 7em;
+    background-color: #d83a01c3;
+    border: none;
+    box-shadow: 0 0 5px lightgrey;
+    color: white;
+    border-radius: 0.375rem;
+    font-weight: 800;
+    align-self: flex-end;
+  }
+  
+  .btn:hover {
+    font-weight: 800;
+    background-color: #d83a01ee;
+    transition: 0.5s;
+  }
+  
+  .btn[disabled] {
+    background-color: #3e363e64;
+    font-weight: 300;
+  }
+  

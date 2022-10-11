@@ -213,7 +213,7 @@ export default function RegisterUser() {
           buttonPressed={buttonPressed}
           setButtonPressed={setButtonPressed}
         />
-        <Button variant="primary" type="submit">
+        <Button variant="custom" type="submit" className="btn">
           Submit
         </Button>
       </Form>

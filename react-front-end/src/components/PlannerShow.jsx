@@ -10,7 +10,7 @@ export default function PlannerShow() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="custom" onClick={handleShow} className="btn">
         Planner Info
       </Button>
 

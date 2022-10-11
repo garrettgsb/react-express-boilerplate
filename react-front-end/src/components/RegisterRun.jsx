@@ -246,7 +246,7 @@ export default function RegisterRun() {
             Upload an image for this run.
           </Form.Control.Feedback>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="custom" type="submit" className="btn">
           Create
         </Button>
       </Form>
