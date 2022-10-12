@@ -1,21 +1,16 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/RegisterUser.css";
+import "../styles/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAppData from "../hooks/useAppData";
-import Feedback from "react-bootstrap/Feedback";
-import CreateAccountStatus from "./CreateAccountStatus";
 
 export default function RegisterUser() {
   
-  const [buttonPressed, setButtonPressed] = useState(false);
-
   const { registerUser } = useAppData();
 
   const [userData, setUserData] = useState({
@@ -191,7 +186,6 @@ export default function RegisterUser() {
           <Form.Check
             inline
             label="Runner"
-            //value="runner"
             type="checkbox"
             id={`inline-checkbox-1`}
             name="runner"
@@ -204,15 +198,11 @@ export default function RegisterUser() {
             type="checkbox"
             id={`inline-checkbox-2`}
             name="planner"
-            // value=""
             checked={userData.planner}
             onChange={handleCheckboxChange}
           />
         </Form.Group>
-        <CreateAccountStatus
-          buttonPressed={buttonPressed}
-          setButtonPressed={setButtonPressed}
-        />
+       
         <Button variant="custom" type="submit" className="btn">
           Submit
         </Button>

@@ -1,21 +1,18 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
-import Profile from "./components/Profile.js";
+import Profile from "./components/Profile";
 import FindRun from "./components/FindRun";
 import RegisterUser from "./components/RegisterUser";
 import Homepage from "./components/Homepage.jsx";
 import SignIn from "./components/SignIn";
 import RegisterRun from "./components/RegisterRun";
-import Map from "./components/Map";
 import App from "./App";
-import DefaultMap from "./components/DefaultMap.jsx";
 
 import {
   createRoutesFromElements,
   createBrowserRouter,
   Route,
 } from "react-router-dom";
-import ShowRunInfo from "./components/ShowRunInfo.jsx";
+import ShowRunInfo from "./components/ShowRunInfo";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,7 +23,6 @@ export const router = createBrowserRouter(
       <Route path="/register" element={<RegisterUser />} />
       <Route path="/create" element={<RegisterRun />}/>
       <Route path="/signin" element={<SignIn />} />
-      <Route path="/map" element={<DefaultMap />}/>
       <Route path="/run-info" element={<ShowRunInfo />} />
     </Route>
   )

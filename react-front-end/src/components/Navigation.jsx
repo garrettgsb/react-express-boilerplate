@@ -6,8 +6,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userState } from "../hooks/useAppData";
 import useAppData from "../hooks/useAppData";
-import "./Navigation.css";
-import logo from "./logo2.png";
+import "../styles/Navigation.css";
+import logo from "../images/main-logo.png";
 
 export default function Navigation() {
   const user = useRecoilValue(userState);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { userState } from "../hooks/useAppData";
+import { userState } from "../../hooks/useAppData";
 import { useNavigate } from "react-router-dom";
 
 export default function JoinButton(props) {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/Run.css";
+import "../../styles/Run.css";
 import JoinButton from "./JoinButton";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import ShowRunInfo from "./ShowRunInfo";
+import ShowRunInfo from "../ShowRunInfo";
 
 export default function Run(props) {
   const { run, type, canJoinRun, join } = props;
@@ -64,13 +64,6 @@ export default function Run(props) {
               delay={{ show: 250, hide: 50 }}
               overlay={renderTooltip}
             >
-              {/* <span
-                className="material-symbols-rounded"
-                onClick={handleShowInfoModal}
-              >
-               
-                info
-              </span> */}
               <button
                 type="button"
                 className="detail-button"

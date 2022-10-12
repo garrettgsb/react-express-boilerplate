@@ -1,7 +1,7 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
 import { useRecoilState } from "recoil";
-import { userCoordinatesAtom } from "../hooks/userCoords";
+import { userCoordinatesAtom } from "../../hooks/userCoords";
 
 const RouteMap = ({ zoom, from, to }) => {
   useRecoilState(userCoordinatesAtom);
@@ -36,7 +36,6 @@ const RouteMap = ({ zoom, from, to }) => {
       });
       directionsDisplay.setPanel(document.getElementById("run-path"));
     }
-    // maps.event.addDomListener(window, "load", initialize);
     initialize();
     function calculateAndDisplayRoute(
       start,
