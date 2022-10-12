@@ -17,7 +17,7 @@ This screenshot shows a map that centers on the user's current location to allow
 
 This screenshot shows the marker for a run and details of the run.
 
-!["run-join"]()
+!["run-join"](https://github.com/mariannebourcier/werun/blob/master/docs/images/joiningStatus.png?raw=true)
 This screenshot shows what happens when a user hits the join button for a run. The user will also receive a text message confirming their attendance to the event.
 
 !["available-runs"](https://github.com/mariannebourcier/werun/blob/master/docs/images/availableRuns.png?raw=true)
