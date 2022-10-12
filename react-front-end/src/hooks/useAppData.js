@@ -1,19 +1,11 @@
-/* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   atom,
-  useSetRecoilState,
-  useRecoilValue,
   useRecoilState,
 } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
-//hook for getting runs
-//hook for logged in user
-//hook for runner only runs
-//hook for planner runs
-//axios route change based on user id
 
 // Used to persist global app state after manual refreshes.
 // See key in local storage for browser
@@ -140,18 +132,6 @@ export default function useAppData() {
     lng_to,
     file
     }) {
-      console.log("Data:", planner_id,
-      name,
-      description,
-      address,
-      distance,
-      time,
-      date,
-      lat,
-      lng,
-      address_to,
-      lat_to,
-      lng_to)
     try {
       const createRunResponse = await axios({
         method: "post",
