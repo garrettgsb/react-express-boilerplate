@@ -7,7 +7,7 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../hooks/useAppData";
 import useAppData from "../hooks/useAppData";
 import "../styles/Navigation.css";
-import logo from "./logo2.png";
+import logo from "../images/main-logo.png";
 
 export default function Navigation() {
   const user = useRecoilValue(userState);

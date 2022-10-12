@@ -1,8 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Homepage.css";
-import logo from "./logo3.svg";
-import squareLogo from "./weRun-rect.svg";
+import logo from "../images/large-logo.svg";
+import squareLogo from "../images/rectangle-logo.svg";
 import { Link } from "react-router-dom";
 
 export default function Homepage() {

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
-import logo from "./logo2.png";
+import logo from "../images/main-logo.png";
 
 export default function JoiningStatus(props) {
   const { joinButtonPressed, setJoinButtonPressed } = props;

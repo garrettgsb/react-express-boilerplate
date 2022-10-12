@@ -14,7 +14,7 @@ import {
 } from "../hooks/useAppData";
 import { useRecoilValue } from "recoil";
 import useAppData from "../hooks/useAppData";
-import profilePhoto from './profile-photo.jpeg';
+import profilePhoto from '../images/profile-photo.jpeg';
 import { Button } from "bootstrap";
 
 export default function Profile() {
