@@ -7,8 +7,6 @@
     "bootstrap": "^5.2.1",
     "dotenv": "^16.0.2",
     "google-map-react": "^2.2.0",
-    "mailgun-js": "^0.22.0",
-    "node-sass": "^7.0.3",
     "react": "^16.8.6",
     "react-bootstrap": "^2.5.0",
     "react-datepicker": "^4.8.0",
@@ -17,8 +15,7 @@
     "react-router-dom": "^6.4.1",
     "react-scripts": "2.1.8",
     "recoil": "^0.7.5",
-    "recoil-persist": "^4.2.0",
-    "sass": "^1.54.9"
+    "recoil-persist": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

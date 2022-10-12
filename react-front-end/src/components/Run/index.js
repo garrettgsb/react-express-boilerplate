@@ -64,13 +64,6 @@ export default function Run(props) {
               delay={{ show: 250, hide: 50 }}
               overlay={renderTooltip}
             >
-              {/* <span
-                className="material-symbols-rounded"
-                onClick={handleShowInfoModal}
-              >
-               
-                info
-              </span> */}
               <button
                 type="button"
                 className="detail-button"

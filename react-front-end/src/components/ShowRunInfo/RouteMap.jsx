@@ -36,7 +36,6 @@ const RouteMap = ({ zoom, from, to }) => {
       });
       directionsDisplay.setPanel(document.getElementById("run-path"));
     }
-    // maps.event.addDomListener(window, "load", initialize);
     initialize();
     function calculateAndDisplayRoute(
       start,

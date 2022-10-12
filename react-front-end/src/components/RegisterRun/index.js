@@ -7,12 +7,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Stack from "react-bootstrap/Stack";
 import JoiningStatus from "../JoiningStatus";
 import DatePicker from "react-datepicker";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { userState, runsState } from "../../hooks/useAppData";
+import { userState } from "../../hooks/useAppData";
 import useAppData from "../../hooks/useAppData";
 import "react-datepicker/dist/react-datepicker.css";
 import AutoComplete from "./AutoComplete";
@@ -57,10 +56,11 @@ export default function RegisterRun() {
     //   e.preventDefault();
     //   e.stopPropagation();
     // }
+
     //send data
-    console.log(runData);
     const response = createRun({ ...runData });
     response && setJoinButtonPressed(true);
+    
     // setValidated(true)
     // if (validated)
 
