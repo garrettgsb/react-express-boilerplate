@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import RouteMap from "./RouteMap";
 import ListGroup from "react-bootstrap/ListGroup";
-import "./ShowRunInfo.css";
+import "./styles/ShowRunInfo.css";
 
 export default function ShowRunInfo({ run, show, handleClose }) {
   const zoom = 10;

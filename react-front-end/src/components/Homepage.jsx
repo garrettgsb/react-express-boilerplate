@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/Homepage.css";
+import "../components/styles/Homepage.css";
 import logo from "./logo3.svg";
 import squareLogo from "./weRun-rect.svg";
 import { Link } from "react-router-dom";

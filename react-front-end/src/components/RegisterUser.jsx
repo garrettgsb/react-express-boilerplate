@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/RegisterUser.css";
+import "../components/styles/RegisterUser.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Navigate, useNavigate } from "react-router-dom";
