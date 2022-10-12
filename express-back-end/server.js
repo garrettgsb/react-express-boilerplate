@@ -24,25 +24,6 @@ App.use(
 // Import db
 const db = require("./lib/db");
 
-// Sample GET route
-App.get("/api/data", (req, res) =>
-  res.json({
-    message: "Seems to work!",
-  })
-);
-
-// Sample GET route to test if DB connection is working
-App.get("/test", (req, res) => {
-  db.testFunction().then((response) => {
-    res.send({ response });
-  });
-});
-
-// Sample GET route
-App.get("/api/test", (req, res) => {
-  res.send({ data: "This is working!!!" });
-});
-
 //Routes
 
 //Home
@@ -316,13 +297,8 @@ App.post("/api/register", (req, res) => {
     });
 });
 
-//Redirect
-App.get("/api/redirect", (req, res) => {
-  res.send();
-});
 
 App.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(
     `Express seems to be listening on port ${PORT} so that's pretty good 👍`
   );
