@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import Profile from "./components/Profile.js";
+import Profile from "./components/Profile";
 import FindRun from "./components/FindRun";
 import RegisterUser from "./components/RegisterUser";
 import Homepage from "./components/Homepage.jsx";
