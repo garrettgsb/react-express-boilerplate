@@ -7,7 +7,6 @@ const CookieSession = require("cookie-session");
 const fs = require("fs");
 const sendUserText = require("./twilio");
 
-//port
 const PORT = 8080;
 
 // Express Configuration
