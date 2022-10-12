@@ -1,7 +1,7 @@
 import React from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import "../styles/Marker.css";
+import "../../styles/Marker.css";
 
 const Markers = ({ id, $hover, description, distance, date }) => {
   const renderTooltip = (props) => (

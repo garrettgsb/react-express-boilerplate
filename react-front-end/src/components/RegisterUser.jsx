@@ -10,7 +10,6 @@ import Col from "react-bootstrap/Col";
 import { Navigate, useNavigate } from "react-router-dom";
 import useAppData from "../hooks/useAppData";
 import Feedback from "react-bootstrap/Feedback";
-import CreateAccountStatus from "./CreateAccountStatus";
 
 export default function RegisterUser() {
   
@@ -209,10 +208,7 @@ export default function RegisterUser() {
             onChange={handleCheckboxChange}
           />
         </Form.Group>
-        <CreateAccountStatus
-          buttonPressed={buttonPressed}
-          setButtonPressed={setButtonPressed}
-        />
+       
         <Button variant="custom" type="submit" className="btn">
           Submit
         </Button>

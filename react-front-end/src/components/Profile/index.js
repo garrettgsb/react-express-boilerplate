@@ -1,20 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import Run from "./Run";
+import Run from "../Run";
 import EmptyRuns from "./EmptyRuns";
 import ProfileActions from "./ProfileActions";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Table from "react-bootstrap/Table";
-import "../styles/Profile.css";
+import "../../styles/Profile.css";
 import {
   userState,
   runnerRunsState,
   plannerRunsState,
-} from "../hooks/useAppData";
+} from "../../hooks/useAppData";
 import { useRecoilValue } from "recoil";
-import useAppData from "../hooks/useAppData";
-import profilePhoto from '../images/profile-photo.jpeg';
+import useAppData from "../../hooks/useAppData";
+import profilePhoto from '../../images/profile-photo.jpeg';
 import { Button } from "bootstrap";
 
 export default function Profile() {

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import GoogleMapReact from "google-map-react";
-import Markers from "../Markers";
+import Markers from "./Markers";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { runsState } from "../../hooks/useAppData";
 import "../../styles/Map.css";

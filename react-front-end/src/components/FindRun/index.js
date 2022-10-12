@@ -1,13 +1,12 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import Run from "./Run";
-import Map from "./Map";
-import JoiningStatus from "./JoiningStatus";
+import Run from "../Run";
+import Map from "../Map";
+import JoiningStatus from "../JoiningStatus";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { userState, runsState } from "../hooks/useAppData";
-import useAppData from "../hooks/useAppData";
-import "../styles/FindRun.css";
+import { userState, runsState } from "../../hooks/useAppData";
+import useAppData from "../../hooks/useAppData";
+import "../../styles/FindRun.css";
 
 export default function FindRun() {
   const runs = useRecoilValue(runsState);

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/Run.css";
+import "../../styles/Run.css";
 import JoinButton from "./JoinButton";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import ShowRunInfo from "./ShowRunInfo";
+import ShowRunInfo from "../ShowRunInfo";
 
 export default function Run(props) {
   const { run, type, canJoinRun, join } = props;

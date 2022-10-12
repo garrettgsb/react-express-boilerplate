@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import Profile from "./components/Profile";
 import FindRun from "./components/FindRun";
@@ -13,7 +12,7 @@ import {
   createBrowserRouter,
   Route,
 } from "react-router-dom";
-import ShowRunInfo from "./components/ShowRunInfo.jsx";
+import ShowRunInfo from "./components/ShowRunInfo";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
