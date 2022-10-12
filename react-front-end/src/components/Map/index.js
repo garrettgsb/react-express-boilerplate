@@ -1,11 +1,12 @@
 import React from "react";
-import "../styles/Map.css";
+import "../../styles/Map.css";
 import { useRecoilValue } from "recoil";
-import { userCoordinatesAtom } from "../hooks/userCoords";
+import { userCoordinatesAtom } from "../../hooks/userCoords";
 import { Link } from "react-router-dom";
 import DefaultMap from "./DefaultMap";
 
-export default function SimpleMap() {
+
+export default function Map() {
   const center = useRecoilValue(userCoordinatesAtom);
   const zoom = 10;
 
