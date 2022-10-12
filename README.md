@@ -7,20 +7,35 @@ This app uses React and Bootstrap on the front-end and Express, PostgreSQL and N
 
 ## Screenshots
 
-!["name"](link)
+!["homepage"](https://github.com/mariannebourcier/werun/blob/master/docs/images/homepage.png?raw=true)
 This screenshot shows the homepage for WeRun.
 
-!["name"](link)
-This screenshot shows the user's profile once they are signed in to their account. 
-
-!["name"](link)
+!["map"](https://github.com/mariannebourcier/werun/blob/master/docs/images/joinARun.png?raw=true)
 This screenshot shows a map that centers on the user's current location to allow them to find runs near them more easily. 
 
-!["name"](link)
-This screenshot shows more information about the selected run, such as the run route, time and date.
+!["hover-marker"](https://github.com/mariannebourcier/werun/blob/master/docs/images/markerHoverInfo.png?raw=true)
+This screenshot shows the marker for a run and details of the run.
 
-!["name"](link)
-This screenshot shows the process of creating a new run under a user's account.
+!["available-runs"](https://github.com/mariannebourcier/werun/blob/master/docs/images/availableRuns.png?raw=true)
+This screenshot shows which runs are available to join.
+
+!["createrun"](https://github.com/mariannebourcier/werun/blob/master/docs/images/createRunAutocomplete.png?raw=true)
+This screenshot shows the run creation page where users can find the exact location for their run.
+
+!["run"](https://github.com/mariannebourcier/werun/blob/master/docs/images/runCreated.png?raw=true)
+This screenshot shows the new run that was created under the user's profile planned tab.
+
+!["run-details"](https://github.com/mariannebourcier/werun/blob/master/docs/images/runCreatedDetails.png?raw=true)
+This screenshot shows the new run's additional details such as the exact route, time and date.
+
+!["profile"](https://github.com/mariannebourcier/werun/blob/master/docs/images/fullProfile.png?raw=true)
+This screenshot shows the user's profile with their running statistics as well as a planned and attended tab for them to keep track of their events.
+
+!["signin"](https://github.com/mariannebourcier/werun/blob/master/docs/images/signIn.png?raw=true)
+This screenshot shows the sign in page.
+
+!["signup"](https://github.com/mariannebourcier/werun/blob/master/docs/images/signUp.png?raw=true)
+This screenshot shows the sign up page.
 
 
 ## Dependencies
@@ -76,3 +91,17 @@ Missing .env file: You need a .env file with your own credentials to be able to 
 1. Open the express-back-end folder using the ```cd express-back-end``` command in the terminal.
 2. Install all dependencies using ```npm install``` in the terminal.
 3. Type the ```npm start``` command. 
+
+
+
+
+### Future Features
+- A button on the planner tab to notify runners of any changes related to the running event, such as cancelation or time change.
+- A way for runners to record and track their time, possibly using an API from Fitbit, Strava or Apple Health.
+- Allowing users to change their profile picture.
+
+### Known Issues
+- The profile picture is a static image from the server.
+- The location selection for runs does not calculate automatically the distance between point A and point B yet.
+- This application hasn't been tested on other browsers besides Google Chrome yet. 
+
