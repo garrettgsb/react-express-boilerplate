@@ -43,6 +43,11 @@
   gap: 2em;
 }
 
+.run-modal .btn:hover {
+  background-color: white;
+  color: black;
+}
+
 .run-path .run-info-image {
   width: 3em;
   height: 3em;
