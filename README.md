@@ -13,8 +13,12 @@ This screenshot shows the homepage for WeRun.
 !["map"](https://github.com/mariannebourcier/werun/blob/master/docs/images/joinARun.png?raw=true)
 This screenshot shows a map that centers on the user's current location to allow them to find runs near them more easily. 
 
-!["hover-marker"](https://github.com/mariannebourcier/werun/blob/master/docs/images/markerHoverInfo.png?raw=true)
+<img src="https://github.com/mariannebourcier/werun/blob/master/docs/images/markerHoverInfo.png?raw=true" alt="marker-hover" width="50%">
+
 This screenshot shows the marker for a run and details of the run.
+
+!["run-join"]()
+This screenshot shows what happens when a user hits the join button for a run. The user will also receive a text message confirming their attendance to the event.
 
 !["available-runs"](https://github.com/mariannebourcier/werun/blob/master/docs/images/availableRuns.png?raw=true)
 This screenshot shows which runs are available to join.
@@ -31,10 +35,12 @@ This screenshot shows the new run's additional details such as the exact route, 
 !["profile"](https://github.com/mariannebourcier/werun/blob/master/docs/images/fullProfile.png?raw=true)
 This screenshot shows the user's profile with their running statistics as well as a planned and attended tab for them to keep track of their events.
 
-!["signin"](https://github.com/mariannebourcier/werun/blob/master/docs/images/signIn.png?raw=true)
+<img src="https://github.com/mariannebourcier/werun/blob/master/docs/images/signIn.png?raw=true" width="50%" alt="signin">
+
 This screenshot shows the sign in page.
 
-!["signup"](https://github.com/mariannebourcier/werun/blob/master/docs/images/signUp.png?raw=true)
+<img src="https://github.com/mariannebourcier/werun/blob/master/docs/images/signUp.png?raw=true" width="50%" alt="signin">
+
 This screenshot shows the sign up page.
 
 
