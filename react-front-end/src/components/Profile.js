@@ -6,7 +6,7 @@ import ProfileActions from "./ProfileActions";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Table from "react-bootstrap/Table";
-import "../styles/profile.css";
+import "../styles/Profile.css";
 import {
   userState,
   runnerRunsState,

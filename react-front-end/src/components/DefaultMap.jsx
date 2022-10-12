@@ -3,7 +3,7 @@ import GoogleMapReact from "google-map-react";
 import Markers from "./Markers";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { runsState } from "../hooks/useAppData";
-import "../components/styles/Map.css";
+import "../styles/Map.css";
 import { userCoordinatesAtom } from "../hooks/userCoords";
 
 const DefaultMap = ({ center, zoom }) => {

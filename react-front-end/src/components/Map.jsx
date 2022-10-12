@@ -1,5 +1,5 @@
 import React from "react";
-import "../components/styles/Map.css";
+import "../styles/Map.css";
 import { useRecoilValue } from "recoil";
 import { userCoordinatesAtom } from "../hooks/userCoords";
 import { Link } from "react-router-dom";

@@ -8,7 +8,7 @@ import { useSetRecoilState } from "recoil";
 import useAppData from "../hooks/useAppData";
 import { userState } from "../hooks/useAppData";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../components/styles/RegisterUser.css";
+import "../styles/RegisterUser.css";
 
 export default function SignIn() {
 
