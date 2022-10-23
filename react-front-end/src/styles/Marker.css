@@ -1,0 +1,34 @@
+
+.circle {
+  background-color: #d83b01;
+  border-radius: 50%;
+  color: #fff;
+  height: 3em;
+  position: relative;
+  width: 3em;
+}
+
+.circleText {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.hover {
+  background-color: #0078d4;
+}
+
+#button-tooltip .tooltip-inner{
+  max-width: 400px;
+}
+
+#button-tooltip p {
+  margin: 0px;
+  font-size: 18px;
+  text-align: start;
+}

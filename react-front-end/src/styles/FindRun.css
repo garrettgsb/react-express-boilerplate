@@ -1,0 +1,58 @@
+#find-run-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  margin-top: 2em;
+  font-family: "Krub", sans-serif;
+  padding-bottom: 3em;
+}
+
+#available-runs {
+  color: #3e363ebc;
+  width: 100%;
+  padding: 1em 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#available-runs h2 {
+  font-size: 50px;
+  font-weight: 800;
+}
+
+#available-runs p {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.joining-status-header {
+  align-self: center;
+}
+
+.joining-status-header .modal-title {
+  font-family: "Krub", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.joining-status-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.joining-status-message p {
+  font-size: 18px;
+  padding: 0 2em;
+  text-align: center;
+  margin: 0;
+}
+
+.status-spinner {
+  width: 5em;
+  height: 5em;
+  margin-bottom: 2em;
+}

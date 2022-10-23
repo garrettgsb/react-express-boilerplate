@@ -1,0 +1,22 @@
+#navigation {
+  font-family: "Krub", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-brand img {
+  width: 2em;
+  height: 2em;
+
+}
+
+.nav-link {
+  padding: 1em;
+}
+
+.nav-link:hover {
+  background-color: #d83a01c3;
+  color: white;
+  transition: all 0.5s;
+}
+

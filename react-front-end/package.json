@@ -4,9 +4,18 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.1",
+    "bootstrap": "^5.2.1",
+    "dotenv": "^16.0.2",
+    "google-map-react": "^2.2.0",
     "react": "^16.8.6",
+    "react-bootstrap": "^2.5.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "react-google-autocomplete": "^2.7.0",
+    "react-router-dom": "^6.4.1",
+    "react-scripts": "2.1.8",
+    "recoil": "^0.7.5",
+    "recoil-persist": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

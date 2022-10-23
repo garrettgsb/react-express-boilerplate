@@ -1,0 +1,188 @@
+.profile-section {
+  padding-bottom: 3em;
+}
+
+.profile-pic {
+  height: 330px;
+  border-radius: 5px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-header {
+  width: 70rem;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  border: 1px solid lightgrey;
+  margin: 3em 0;
+  padding: 1.5em;
+  border-radius: 5px;
+  font-family: "Krub", sans-serif;
+  box-shadow: 0 0 5px lightgrey;
+}
+
+.profile-info {
+  width: 63%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.profile-info h1 {
+  font-weight: 200;
+  font-size: 70px;
+  margin: 0;
+}
+
+.profile-info h4 {
+  font-weight: 200;
+  font-size: 20px;
+  margin: 0;
+  color: gray;
+}
+
+.profile-info p {
+  font-weight: 600;
+  font-size: 35px;
+  margin: -20px -10px 0 0;
+  text-align: end;
+  color: #d83b01;
+}
+
+
+.profile-welcome {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.profile-welcome .profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1em;
+  padding: 0px;
+}
+
+.profile-welcome .profile-actions span {
+  font-size: 35px;
+}
+
+.profile-actions:hover {
+  cursor: pointer;
+}
+
+.profile-info table {
+  table-layout: fixed;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+.profile-info tbody {
+  font-size: 70px;
+}
+
+.profile-info .unit {
+  font-size: 30px;
+}
+
+.profile-stats {
+  font-family: "Krub", sans-serif;
+}
+.profile-stats button {
+  font-weight: 500;
+  color: #495057;
+}
+
+.profile-stats button:hover {
+  color: white;
+  background-color: #3e363e;
+}
+
+.runs-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.empty-runs-container {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+}
+
+.empty-runs-container h3{
+  font-weight: 300;
+  text-align: center;
+}
+
+.empty-runs-container .btn {
+  width: 20rem;
+  height: 7rem;
+  color: white;
+  font-size: 30px;
+  align-self: center;
+  border-radius: 0.5rem;
+}
+
+.empty-runs-container .btn:hover {
+  border: 0.5px solid #3e363e;
+}
+
+
+@media screen and (max-width: 600px) {
+
+  .profile-header {
+   width: 95%;
+   height: 20%;
+   flex-wrap: wrap;
+   font-size: 10px;
+   flex-direction: row;
+  }
+  .profile-pic {
+   height: 150px;
+   width: 150px;
+   margin: 5px;
+  }
+ 
+  .profile-info tbody {
+    font-size: 20px;
+  }
+
+  .profile-info .unit {
+    font-size: 20px;
+  }
+
+  .profile-info h1 {
+    font-size: 50px;
+  }
+
+  .profile-stats {
+    display: flex;
+    flex-direction: column;
+   
+  }
+
+  .run {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    padding-left: 10px;
+  }
+
+  .run-image {
+    height: 150px;
+    width: 150px;
+    margin-left: 10%;
+    margin-top: 5%;
+    padding: 0
+  }
+ 
+}

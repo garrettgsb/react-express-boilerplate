@@ -1,0 +1,59 @@
+.run-modal {
+  color: #3e363e;
+  font-family: "Krub", sans-serif;
+}
+
+.route-modal-header {
+  background-color: #d83a01c3;
+}
+
+.route-modal-header .modal-title {
+  font-size: 35px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
+.route-modal-header .btn-close {
+  color: white;
+}
+
+.route-modal-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+  padding: 1em 3em;
+}
+
+.route-modal-message p {
+  font-size: 20px;
+  font-weight: 200;
+  text-align: start;
+  margin: 0;
+}
+
+.route-modal-message .run-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 2em;
+}
+
+.run-modal .btn:hover {
+  background-color: white;
+  color: black;
+}
+
+.run-path .run-info-image {
+  width: 3em;
+  height: 3em;
+}
+
+#run-path {
+  border-radius: 2rem;
+  box-shadow: 0 0 3px #3e363ea8;
+}
