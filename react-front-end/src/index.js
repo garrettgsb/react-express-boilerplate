@@ -1,9 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import App from './App';
 import Login from './pages/Login';
+import Navbar from './pages/components/Navbar';
+import Dashboard from './pages/Dashboard';
+import Program from './pages/Program';
+import Workout from './pages/Workout';
+import Exercise from './pages/Exercise';
+
 import {
     createBrowserRouter,
     RouterProvider,
@@ -12,12 +19,30 @@ import {
 
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <App />
+    path: "/",
+    element: <App />,
+    children: [
+        {
+        path: '/dashboard',
+        element: <Dashboard />
+        },
+        {
+        path: '/program',
+        element: <Program />
+        },
+        {
+        path: '/workout',
+        element: <Workout />
+        },
+        {
+        path: '/exercise',
+        element: <Exercise />
+        }
+    ]
     },
     {
-      path: "/login",
-      element: <Login />
+    path: "/login",
+    element: <Login />
     }
 ])
 
