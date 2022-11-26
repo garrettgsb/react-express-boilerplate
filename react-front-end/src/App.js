@@ -54,8 +54,8 @@ export default function App() {
   const mouseDown = (event) => {
     setDrawing(true);
     const { clientX, clientY } = event;
-    const element = createElement(clientX, clientY, clientX, clientY, elementType);
-    setElements(prevState => [...prevState, element]);
+    const downElement = createElement(clientX, clientY, clientX, clientY, elementType);
+    setElements(prevState => [...prevState, downElement]);
   };
 
   const mouseMove = (event) => {
