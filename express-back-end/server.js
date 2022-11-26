@@ -15,5 +15,5 @@ App.get('/api/data', (req, res) => res.json({
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
+  console.log(`Express listening on port ${PORT}`);
 });
