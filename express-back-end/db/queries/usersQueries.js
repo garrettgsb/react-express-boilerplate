@@ -1,4 +1,4 @@
-const db = require('../connection').db;
+const db = require('../index');
 
 const getUserWithEmail = (email) => {
   return db

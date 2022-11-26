@@ -6,5 +6,5 @@ VALUES
 (1, 4, 3, 10, 115, 3, 'Maintain neutral back and send hips back.'),
 (1, 5, 3, 8, 45, 2, 'Tuck elbows at 45 degree angle and lean forward slightly.'),
 (1, 6, 3, 10, 55, 2, 'Allow full contraction at the top and stretch at the bottom; do not bounce.'),
-(1, 7, 3, 10, 55, 2, 'Focus on supinating wrists and squeezing the biceps.'),
+(1, 7, 3, 10, 55, 2, 'Focus on supinating wrists and squeezing the biceps.');
 

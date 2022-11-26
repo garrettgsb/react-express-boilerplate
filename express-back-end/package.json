@@ -6,11 +6,17 @@
   "author": "garrettgsb",
   "license": "MIT",
   "scripts": {
-    "go": "nodemon server.js"
+    "go": "nodemon server.js",
+    "db:reset": "node ./db/reset.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "nodemon": "^1.18.7"
+    "nodemon": "^1.18.7",
+    "pg": "^8.8.0",
+    "pg-native": "^3.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3"
   }
 }
