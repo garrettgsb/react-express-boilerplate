@@ -6,7 +6,7 @@ CREATE TABLE exercise_selections (
   exercise_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE, 
   sets INTEGER,
   reps INTEGER,
-  load FLOAT,
+  load REAL,
   rest_period INTEGER,
   duration INTEGER,
   notes TEXT
