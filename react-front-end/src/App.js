@@ -1,14 +1,14 @@
 import React, { useLayoutEffect, useState } from 'react';
-import rough from 'roughjs/bundled/rough.esm'
+import rough from 'roughjs/bundled/rough.esm';
 import useApplicationData from "./hooks/useApplicationData";
 import axios from 'axios';
 import './App.css';
 
 const generator = rough.generator();
 
-function createElemenet(x1, y1, x2, y2) {
-  const roughElement = generator.line(x1, y1, x2 , y2);
-  return {x1, y1, x2, y2, roughElement} 
+function createElement(x1, y1, x2, y2, type) {
+  const roughElement = type === "line" ? generator.line(x1, y1, x2, y2) : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
+  return { x1, y1, x2, y2, roughElement };
 }
 
 export default function App() {
@@ -31,54 +31,82 @@ export default function App() {
   //     });
   //   }) 
   // }
-    const [elements, setElements] = useState([]);
-    const [drawing, setDrawing] = useState(false);
 
-    useLayoutEffect(()=> {
-      const canvas = document.getElementById('curtaindraw')
-      const context = canvas.getContext('2d')
-      context.clearRect(0, 0, canvas.width, canvas.height)
-      const roughCanvas = rough.canvas(canvas)
 
-      const rect = generator.rectangle(10, 10, 200, 200)
-      const line = generator.line(10, 10, 200, 200)
-      roughCanvas.draw(rect)
-      roughCanvas.draw(line)
-      console.log('this is useLayoutEffect-a-mania brother')
-    })
+  const [elements, setElements] = useState([]);
+  const [drawing, setDrawing] = useState(false);
+  const [elementType, setElementType] = useState("line");
 
-    const handleMouseDown = (event) => {
-      setDrawing(true); 
+  useLayoutEffect(() => {
+    const canvas = document.getElementById('curtaindraw');
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
-      const {clientX, clientY} = event; 
+    const roughCanvas = rough.canvas(canvas);
 
-      const element = createElemenet(clientX, clientY, clientX, clientY);
-      setElements(prevState => [...prevState, element]);
-    };
+    // const rect = generator.rectangle(10, 10, 200, 200);
+    // const line = generator.line(10, 10, 200, 200);
+    // roughCanvas.draw(rect);
 
-    const handleMouseMove = (event) => {
-      if(!drawing) return; 
+    elements.forEach(({ roughElement }) => roughCanvas.draw(roughElement));
+    // roughCanvas.draw(line);
+  }, [elements]);
 
-      const { clientX, clientY } = event; 
-      console.log(clientX, clientY);
-    };
+  const mouseDown = (event) => {
+    setDrawing(true);
+    const { clientX, clientY } = event;
+    const downElement = createElement(clientX, clientY, clientX, clientY, elementType);
+    setElements(prevState => [...prevState, downElement]);
+  };
 
-    const handleMouseUp = () => {
-      setDrawing(false);
+  const mouseMove = (event) => {
+    if (!drawing) {
+      return;
     }
 
- 
-    return (
-      <canvas 
-      id="curtaindraw"
-      // style={{backgroundColor: "blue"}}
-      width={window.innerWidth}
-      height={window.innerHeight}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}>
+    const { clientX, clientY } = event;
+    const index = elements.length - 1;
+    const { x1, y1 } = elements[index];
+    const moveElement = createElement(x1, y1, clientX, clientY, elementType);
+
+    const elementsCopy = [...elements];
+    elementsCopy[index] = moveElement;
+    setElements(elementsCopy);
+    // console.log(clientX, clientY);
+  };
+  const mouseUp = (event) => {
+    setDrawing(false);
+  };
+
+  return (
+    <div>
+      <div style={{ position: "fixed" }}>
+        <input
+          type="radio"
+          id="line"
+          value="line"
+          checked={elementType === "line"}
+          onChange={() => setElementType("line")} />
+        <label htmlFor="line">Line</label>
+        <input
+          type="radio"
+          id="rectangle"
+          value="rectangle"
+          checked={elementType === "rectangle"}
+          onChange={() => setElementType("rectangle")} />
+        <label htmlFor="rectangle">Rectangle</label>
+      </div>
+      <canvas
+        id='curtaindraw'
+        // style={{backgroundColor: 'blue'}}
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onMouseDown={mouseDown}
+        onMouseMove={mouseMove}
+        onMouseUp={mouseUp}>
         Canvas
       </canvas>
-    );
+    </div>
+  );
 
 }
