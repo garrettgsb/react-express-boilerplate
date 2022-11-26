@@ -1,38 +1,53 @@
-import React, { Component } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
+import rough from 'roughjs/bundled/rough.esm'
+import useApplicationData from "./hooks/useApplicationData";
 import axios from 'axios';
 import './App.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: 'Click the button to load data!'
-    }
-  }
+const generator = rough.generator();
 
-  fetchData = () => {
-    axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
+export default function App() {
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     message: 'Click the button to load data!'
+  //   }
+  // }
 
-      console.log(response.data.message) // Just the message
-      this.setState({
-        message: response.data.message
-      });
-    }) 
-  }
+  // fetchData = () => {
+  //   axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
+  //   .then((response) => {
+  //     // handle success
+  //     console.log(response.data) // The entire response from the Rails API
 
-  render() {
+  //     console.log(response.data.message) // Just the message
+  //     this.setState({
+  //       message: response.data.message
+  //     });
+  //   }) 
+  // }
+
+    useLayoutEffect(()=> {
+      const canvas = document.getElementById('curtaindraw')
+      const context = canvas.getContext('2d')
+      const roughCanvas = rough.canvas(canvas)
+
+
+      const rect = generator.rectangle(10, 10, 200, 200)
+      const line = generator.line(10, 10, 200, 200)
+      roughCanvas.draw(rect)
+      roughCanvas.draw(line)
+      console.log('this is useLayoutEffect-a-mania brother')
+    },[])
+
+ 
     return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>        
-      </div>
+      <canvas 
+      id="curtaindraw"
+      // style={{backgroundColor: "blue"}}
+      width={window.innerWidth}
+      height={window.innerHeight}>
+      </canvas>
     );
-  }
-}
 
-export default App;
+}
