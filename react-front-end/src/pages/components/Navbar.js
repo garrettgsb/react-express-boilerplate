@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Router, useNavigate } from 'react-router-dom';
 import { Box, Drawer, AppBar, CssBaseline, Toolbar, List, Typography, Divider, ListItemButton, ListSubheader, ListItemIcon, ListItemText, Collapse } from '@mui/material'
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material'
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
@@ -102,3 +102,13 @@ export default function Navbar() {
 }
 
 
+// const handleClick = (id) => {
+//   Router.goto(`/programs/${id}`)
+// }
+
+
+
+// <element onClick={() => {handleClick(id)}}>
+
+
+// </element>
