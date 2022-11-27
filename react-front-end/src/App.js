@@ -7,7 +7,7 @@ import Header from './pages/components/Header';
 import Navbar from './pages/components/Navbar';
 
 import ResponsiveDrawer from './pages/components/ResponsiveDrawer';
-import Workout from './pages/Workout';
+
 
 // // ISOLATED COMPONENT TESTING SECTION
 // import from './pages/components/';
