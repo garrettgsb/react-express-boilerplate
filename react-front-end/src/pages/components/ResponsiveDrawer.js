@@ -23,14 +23,14 @@ import {
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
-import Header from "./Header";
+
 
 const drawerWidth = 240;
 
 // MOCK DATA
 const NavbarData = [
   {
-    title: "Progress",
+    title: "Dashboard",
     // icon: <InsightsIcon/>,
     link: "/dashboard",
   },
@@ -109,19 +109,21 @@ function ResponsiveDrawer(props) {
           <ListItemIcon>
             <EqualizerIcon />
           </ListItemIcon>
-          <ListItemText primary={NavbarData[0].title} />
+          <ListItemText primary={'Dashboard'} />
         </ListItemButton>
 
         <ListItemButton onClick={handleClick}>
           <ListItemIcon>
             <FitnessCenterIcon />
           </ListItemIcon>
-          <ListItemText primary={NavbarData[1].title} />
+          <ListItemText primary={'Programs'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
 
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
+
+            {/* ARRAY OF PROGRAMS */}
             {Programs.map((program) => (
               <ListItemButton key={program.key} sx={{ pl: 4 }}>
                 <ListItemIcon>
@@ -130,6 +132,7 @@ function ResponsiveDrawer(props) {
                 <ListItemText primary={program.name} />
               </ListItemButton>
             ))}
+
           </List>
         </Collapse>
       </List>

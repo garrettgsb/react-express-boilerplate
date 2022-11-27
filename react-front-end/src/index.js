@@ -9,7 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Program from "./pages/Program";
 import Workout from "./pages/Workout";
 import Exercise from "./pages/Exercise";
-import Navbar from "./pages/components/Navbar";
+
 
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 

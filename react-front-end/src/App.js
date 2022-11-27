@@ -3,8 +3,6 @@ import axios from 'axios';
 import { Outlet } from 'react-router-dom';
 
 import './App.css';
-import Header from './pages/components/Header';
-import Navbar from './pages/components/Navbar';
 
 import ResponsiveDrawer from './pages/components/ResponsiveDrawer';
 
@@ -44,8 +42,6 @@ export default function App() {
   
   return (
     <>
-      {/* <Navbar />
-      <Outlet /> */}
       <ResponsiveDrawer >
         <Outlet />
       </ResponsiveDrawer>
