@@ -61,7 +61,7 @@ export default function Workout(props) {
             component="img"
             height="140"
             image={exercise.image}
-            alt="green iguana"
+            alt="exercise"
           />
         </Card>
         <Card variant="outlined">
@@ -70,7 +70,7 @@ export default function Workout(props) {
             component="img"
             height="140"
             image={exercise.image}
-            alt="green iguana"
+            alt="exercise"
           />
         </Card>
       </Stack>
