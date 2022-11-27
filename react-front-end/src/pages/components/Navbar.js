@@ -1,14 +1,45 @@
 import * as React from 'react';
 
-
 import { Box, Drawer, AppBar, CssBaseline, Toolbar, List, Typography, Divider, ListItemButton, ListSubheader, ListItemIcon, ListItemText, Collapse } from '@mui/material'
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material'
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
-import { NavbarData, Programs } from './NavbarData';
 import Header from './Header';
 
 const drawerWidth = 240;
+
+
+// MOCK DATA
+const NavbarData = [
+  {
+    title: "Progress",
+    // icon: <InsightsIcon/>,
+    link: "/dashboard"
+  },
+  {
+    title: "Program",
+    // icon: <InsightsIcon/>,
+    link: "/program"
+  },
+
+];
+
+const Programs = [
+  {
+    key: 1,
+    name: 'Full Body'
+  },
+  {
+    key: 2,
+    name: 'Bro Split'
+  },
+  {
+    key: 3,
+    name: 'Upper Lower'
+  },
+]
+
+
 
 
 export default function Navbar() {
