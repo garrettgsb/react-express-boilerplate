@@ -15,8 +15,7 @@ import Avatar from '@mui/material/Avatar'
 
 export default function Header() {
     return (
-    //   <Box sx={{ flexGrow: 1 }}>
-    //     <AppBar position="static">
+
           <Toolbar>
             {/* <IconButton
               size="large"
@@ -33,7 +32,6 @@ export default function Header() {
             <Avatar alt="Jason Ling" src="images/pikachu.png" />
             <Button color="inherit">Logout</Button>
           </Toolbar>
-    //     </AppBar>
-    //   </Box>
+
     );
   }
