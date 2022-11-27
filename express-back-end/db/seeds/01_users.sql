@@ -1,0 +1,1 @@
+INSERT INTO users (name, password, avatar_url) VALUES ('Bob Ross', 'password', 'https://i.imgur.com/nJaqFQv.png');
