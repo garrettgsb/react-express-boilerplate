@@ -44,15 +44,15 @@ const NavbarData = [
 
 const Programs = [
   {
-    key: 1,
+    id: 1,
     name: "Full Body",
   },
   {
-    key: 2,
+    id: 2,
     name: "Bro Split",
   },
   {
-    key: 3,
+    id: 3,
     name: "Upper Lower",
   },
 ];
@@ -76,6 +76,11 @@ function ResponsiveDrawer(props) {
   const onClickEvent = () => {
     navigate('/dashboard')
   }
+
+  const onClickProgram = (id) => {
+    navigate(`/program/${id}`)
+  }
+
 
   const header = (
     <AppBar
@@ -132,7 +137,7 @@ function ResponsiveDrawer(props) {
 
             {/* ARRAY OF PROGRAMS */}
             {Programs.map((program) => (
-              <ListItemButton key={program.key} sx={{ pl: 4 }}>
+              <ListItemButton key={program.id} sx={{ pl: 4 }} onClick={() => onClickProgram(program.id)}>
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
@@ -200,6 +205,7 @@ function ResponsiveDrawer(props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
+        <Toolbar />
         {props.children}
       </Box>
     </Box>
