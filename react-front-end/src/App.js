@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import './App.css';
 import Header from './pages/components/Header';
 import Navbar from './pages/components/Navbar';
+
 import ResponsiveDrawer from './pages/components/ResponsiveDrawer';
 import Workout from './pages/Workout';
 
@@ -17,6 +18,9 @@ import Workout from './pages/Workout';
  
 //   )
 // }
+
+
+import Workout from './pages/Workout';
 
 
 const exercises = [{
