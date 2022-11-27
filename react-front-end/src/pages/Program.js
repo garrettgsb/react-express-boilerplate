@@ -27,7 +27,7 @@ export default function Program() {
   return (
     <>
       <Toolbar />
-      <Typography variant="h2" gutterBottom>
+      <Typography variant="h3" gutterBottom>
         This is Program page
       </Typography>
       <Stack
@@ -38,11 +38,11 @@ export default function Program() {
       >
         {/* Array of Workout Cards - to be made into separate component */}
         <Card variant="outlined">
-          <Typography variant="h3">{workout.name}</Typography>
+          <Typography variant="h4">{workout.name}</Typography>
           <Typography variant="p">{workout.description}</Typography>
         </Card>
         <Card variant="outlined">
-          <Typography variant="h3">{workout.name}</Typography>
+          <Typography variant="h4">{workout.name}</Typography>
           <Typography variant="p">{workout.description}</Typography>
         </Card>
       </Stack>
