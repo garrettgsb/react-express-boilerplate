@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import MenuIcon from "@mui/icons-material/Menu";
-
 import {
   Avatar,
   Button,
@@ -10,9 +8,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import EqualizerIcon from "@mui/icons-material/Equalizer";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Appbar(props) {
   return (

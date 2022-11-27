@@ -1,16 +1,10 @@
 import * as React from "react";
 
 import {
-  Avatar,
-  Button,
   Box,
   Drawer,
-  AppBar,
   CssBaseline,
-  Toolbar,
   List,
-  IconButton,
-  Typography,
   Divider,
   ListItemButton,
   ListSubheader,
@@ -19,7 +13,6 @@ import {
   Collapse,
 } from "@mui/material";
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
-import MenuIcon from "@mui/icons-material/Menu";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import Appbar from "./Appbar";
