@@ -6,10 +6,6 @@ import './App.css';
 
 const generator = rough.generator();
 
-function createElement(x1, y1, x2, y2, type) {
-  const roughElement = type === "line" ? generator.line(x1, y1, x2, y2) : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
-  return { x1, y1, x2, y2, roughElement };
-}
 
 export default function App() {
   // constructor(props) {
@@ -32,6 +28,17 @@ export default function App() {
   //   }) 
   // }
 
+  function createElement(x1, y1, x2, y2, type) {
+    switch (type) {
+      case "line":
+      case "rectangle":
+        const roughElement = type === "line" 
+        ? generator.line(x1, y1, x2, y2) 
+        : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
+        return { x1, y1, x2, y2, roughElement };
+      case "pencil":
+    }
+  }
 
   const [elements, setElements] = useState([]);
   const [drawing, setDrawing] = useState(false);
@@ -44,6 +51,7 @@ export default function App() {
 
     const roughCanvas = rough.canvas(canvas);
 
+
     // const rect = generator.rectangle(10, 10, 200, 200);
     // const line = generator.line(10, 10, 200, 200);
     // roughCanvas.draw(rect);
@@ -51,6 +59,7 @@ export default function App() {
     elements.forEach(({ roughElement }) => roughCanvas.draw(roughElement));
     // roughCanvas.draw(line);
   }, [elements]);
+
 
   const mouseDown = (event) => {
     setDrawing(true);
@@ -74,6 +83,7 @@ export default function App() {
     setElements(elementsCopy);
     // console.log(clientX, clientY);
   };
+
   const mouseUp = (event) => {
     setDrawing(false);
   };
@@ -95,6 +105,13 @@ export default function App() {
           checked={elementType === "rectangle"}
           onChange={() => setElementType("rectangle")} />
         <label htmlFor="rectangle">Rectangle</label>
+        <input
+          type="radio"
+          id="pencil"
+          value="pencil"
+          checked={elementType === "pencil"}
+          onChange={() => setElementType("pencil")} />
+        <label htmlFor="pencil">Pencil</label>
       </div>
       <canvas
         id='curtaindraw'
