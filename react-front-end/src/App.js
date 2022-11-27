@@ -9,6 +9,7 @@ const generator = rough.generator();
 
 const average = (a, b) => (a + b) / 2
 
+
 function getSvgPathFromStroke(points, closed = true) {
   const len = points.length
 
@@ -115,6 +116,10 @@ export default function App() {
   const [action, setAction] = useState('none');
   const [tool, setTool] = useState("line");
   const [selectedElement, setSelectedElement] = useState(null)
+
+  const clear = () => {
+    setElements([])
+  }
 
   useLayoutEffect(() => {
     const canvas = document.getElementById('curtaindraw');
@@ -229,6 +234,8 @@ export default function App() {
           checked={tool === "pencil"}
           onChange={() => setTool("pencil")} />
         <label htmlFor="pencil">Pencil</label>
+        <button onClick={clear}>Clear</button>
+        <button>Save</button>
       </div>
       <canvas
         id='curtaindraw'
