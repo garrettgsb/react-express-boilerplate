@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './App.css';
 import { Outlet } from 'react-router-dom';
+
+import './App.css';
 import Header from './pages/components/Header';
 import Navbar from './pages/components/Navbar';
-
-
+import ResponsiveDrawer from './pages/components/ResponsiveDrawer';
 import Workout from './pages/Workout';
+
+// // ISOLATED COMPONENT TESTING SECTION
+// import from './pages/components/';
+
+// export default function App() {
+//   return (
+//     // INSERT COMPONENT TO BE TESTED BELOW
+ 
+//   )
+// }
+
 
 const exercises = [{
   name: "Bench press",
@@ -27,14 +38,14 @@ const exercises = [{
 
 export default function App() {
   
-  
-  
   return (
-
-    <div>
-      <Navbar />
-      <Outlet />
+    <>
+      {/* <Navbar />
+      <Outlet /> */}
+      <ResponsiveDrawer >
+        <Outlet />
+      </ResponsiveDrawer>
       {/* <Workout exercises= {exercises} /> */}
-    </div>
+    </>
   )
 }
