@@ -23,6 +23,7 @@ import {
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
+import { useNavigate } from "react-router-dom";
 
 
 const drawerWidth = 240;
@@ -58,10 +59,12 @@ const Programs = [
 
 function ResponsiveDrawer(props) {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const [mobileOpen, setMobileOpen] = React.useState(true);
 
   // Expanding list item state and click handler
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -69,6 +72,10 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const onClickEvent = () => {
+    navigate('/dashboard')
+  }
 
   const header = (
     <AppBar
@@ -88,7 +95,7 @@ function ResponsiveDrawer(props) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 100 }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 100 }} onClick={onClickEvent}>
           Workout Tracker
         </Typography>
         <Avatar alt="Jason Ling" src="images/pikachu.png" />
@@ -105,7 +112,7 @@ function ResponsiveDrawer(props) {
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        <ListItemButton>
+        <ListItemButton onClick={onClickEvent}>
           <ListItemIcon>
             <EqualizerIcon />
           </ListItemIcon>
