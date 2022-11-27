@@ -1,22 +1,37 @@
 import * as React from 'react';
-
-
+import { useNavigate } from 'react-router-dom';
 import { Box, Drawer, AppBar, CssBaseline, Toolbar, List, Typography, Divider, ListItemButton, ListSubheader, ListItemIcon, ListItemText, Collapse } from '@mui/material'
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material'
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import { NavbarData, Programs } from './NavbarData';
 import Header from './Header';
+import Dashboard from '../Dashboard';
 
 const drawerWidth = 240;
 
 
 export default function Navbar() {
+  const navigate = useNavigate();
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
       setOpen(!open);
+  };
+
+  // const onClickEvent = (title) => {
+  //   switch( title) :
+  //    case ('Progress') {
+  //       navigate('/dashboard')
+  //    }
+  //    case ('Program' ) {
+  //       navigae
+  //    }
+  // };
+
+  const onClickEvent = () => {
+    navigate('/dashboard');
   };
 
   return (
@@ -45,7 +60,7 @@ export default function Navbar() {
               <ListItemIcon>
                   <EqualizerIcon />
               </ListItemIcon>
-              <ListItemText primary={NavbarData[0].title} />
+              <ListItemText primary={NavbarData[0].title} onClick={onClickEvent}/>
           </ListItemButton>
 
           <ListItemButton onClick={handleClick}>
@@ -77,11 +92,9 @@ export default function Navbar() {
     </Drawer>
 
 
-    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+    <Box component="main"  sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Typography paragraph>
-        Content.
-        </Typography>
+        {/* <Dashboard /> */}
 
     </Box>
     </Box>

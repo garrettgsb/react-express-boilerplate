@@ -4,8 +4,6 @@ import './App.css';
 import { Outlet } from 'react-router-dom';
 import Header from './pages/components/Header';
 import Navbar from './pages/components/Navbar';
-
-
 import Workout from './pages/Workout';
 
 const exercises = [{
