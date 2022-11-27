@@ -3,71 +3,78 @@ import rough from 'roughjs/bundled/rough.esm';
 import useApplicationData from "./hooks/useApplicationData";
 import axios from 'axios';
 import './App.css';
-import getStroke from "perfect-freehand"
+import getStroke from "perfect-freehand";
 
 const generator = rough.generator();
 
-const average = (a, b) => (a + b) / 2
+const average = (a, b) => (a + b) / 2;
 
 
 function getSvgPathFromStroke(points, closed = true) {
-  const len = points.length
+  const len = points.length;
 
   if (len < 4) {
-    return ``
+    return ``;
   }
 
-  let a = points[0]
-  let b = points[1]
-  const c = points[2]
+  let a = points[0];
+  let b = points[1];
+  const c = points[2];
 
   let result = `M${a[0].toFixed(2)},${a[1].toFixed(2)} Q${b[0].toFixed(2)},${b[1].toFixed(
     2
-  )} ${average(b[0], c[0]).toFixed(2)},${average(b[1], c[1]).toFixed(2)} T`
+  )} ${average(b[0], c[0]).toFixed(2)},${average(b[1], c[1]).toFixed(2)} T`;
 
   for (let i = 2, max = len - 1; i < max; i++) {
-    a = points[i]
-    b = points[i + 1]
-    result += `${average(a[0], b[0]).toFixed(2)},${average(a[1], b[1]).toFixed(2)} `
+    a = points[i];
+    b = points[i + 1];
+    result += `${average(a[0], b[0]).toFixed(2)},${average(a[1], b[1]).toFixed(2)} `;
   }
 
   if (closed) {
-    result += 'Z'
+    result += 'Z';
   }
 
-  return result
+  return result;
 }
 
 function createElement(id, x1, y1, x2, y2, type) {
-  switch(type){
+  switch (type) {
     case "line":
     case "rectangle":
-      const roughElement = type === "line" 
-      ? generator.line(x1, y1, x2, y2) 
-      : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
+      const roughElement = type === "line"
+        ? generator.line(x1, y1, x2, y2)
+        : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
       return { id, x1, y1, x2, y2, type, roughElement };
+    case "circle":
+      const circElement = generator.circle(x1, y1, 50);
+      return { id, x1, y1, x2, y2, type, circElement };
     case "pencil":
-      return { id, type, points: [{x: x1, y: y1}] };
-    default: throw new Error(`Type not recognised: ${type}`)
+      return { id, type, points: [{ x: x1, y: y1 }] };
+    default: throw new Error(`Type not recognised: ${type}`);
   }
 }
 
 const drawElement = (roughCanvas, context, element) => {
-  switch(element.type){
+  switch (element.type) {
     case "line":
     case "rectangle":
-      roughCanvas.draw(element.roughElement)
+      roughCanvas.draw(element.roughElement);
+      break;
+    case "circle":
+      roughCanvas.draw(element.circElement)
       break;
     case "pencil":
       context.fillStyle = "orange";
-      const outlinePoints = getStroke(element.points)
-      const pathData = getSvgPathFromStroke(outlinePoints)
-      const myPath = new Path2D(pathData)
-      context.fill(myPath)
+      const outlinePoints = getStroke(element.points);
+      const pathData = getSvgPathFromStroke(outlinePoints);
+      const myPath = new Path2D(pathData);
+      context.fill(myPath);
       break;
-    default: throw new Error(`Type not recognised: ${element.type}`)
+    default: throw new Error(`Type not recognised: ${element.type}`);
   }
-}
+};
+
 const isWithinElement = (x, y, element) => {
   const { type, x1, x2, y1, y2 } = element;
   if (type === 'rectangle') {
@@ -115,11 +122,11 @@ export default function App() {
   const [elements, setElements] = useState([]);
   const [action, setAction] = useState('none');
   const [tool, setTool] = useState("line");
-  const [selectedElement, setSelectedElement] = useState(null)
+  const [selectedElement, setSelectedElement] = useState(null);
 
   const clear = () => {
-    setElements([])
-  }
+    setElements([]);
+  };
 
   useLayoutEffect(() => {
     const canvas = document.getElementById('curtaindraw');
@@ -130,8 +137,9 @@ export default function App() {
 
 
     // const rect = generator.rectangle(10, 10, 200, 200);
+    // const circ = generator.circle(80, 80, 80, {fill: 'red', fillStyle: 'solid'});
     // const line = generator.line(10, 10, 200, 200);
-    // roughCanvas.draw(rect);
+    // roughCanvas.draw(circ);
 
     elements.forEach(element => drawElement(roughCanvas, context, element));
     // roughCanvas.draw(line);
@@ -146,28 +154,30 @@ export default function App() {
         const moveElement = createElement(id, x1, y1, x2, y2, type);
         elementsCopy[id] = moveElement;
         break;
+      case "circle":
+        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
       case "pencil":
-        elementsCopy[id].points = [...elementsCopy[id].points, {x: x2, y: y2}];
+        elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
         break;
       default:
-        throw new Error (`Type not recognised: ${type}`)
+        throw new Error(`Type not recognised: ${type}`);
     }
-    
+
     setElements(elementsCopy);
-  }
+  };
 
   const mouseDown = (event) => {
     const { clientX, clientY } = event;
     if (tool === "selection") {
       const element = getElementAtPosition(clientX, clientY, elements);
       if (element) {
-        const offsetX = clientX - element.x1
-        const offsetY = clientY - element.y1
-        setSelectedElement({...element, offsetX, offsetY})
+        const offsetX = clientX - element.x1;
+        const offsetY = clientY - element.y1;
+        setSelectedElement({ ...element, offsetX, offsetY });
         setAction("moving");
       }
     } else {
-      const id = elements.length
+      const id = elements.length;
       const downElement = createElement(id, clientX, clientY, clientX, clientY, tool);
       setElements(prevState => [...prevState, downElement]);
       setAction("drawing");
@@ -178,7 +188,7 @@ export default function App() {
     const { clientX, clientY } = event;
 
     if (tool === "selection") {
-      event.target.style.cursor = getElementAtPosition(clientX, clientY, elements) ? "move" : "default"
+      event.target.style.cursor = getElementAtPosition(clientX, clientY, elements) ? "move" : "default";
     }
 
 
@@ -189,12 +199,12 @@ export default function App() {
 
     } else if (action === "moving") {
 
-      const {id, x1, x2, y1, y2, type, offsetX, offsetY} = selectedElement
+      const { id, x1, x2, y1, y2, type, offsetX, offsetY } = selectedElement;
       const width = x2 - x1;
       const height = y2 - y1;
       const offX1 = clientX - offsetX;
       const offY1 = clientY - offsetY;
-      updateElement(id, offX1, offY1, offX1 + width, offY1 + height, type)
+      updateElement(id, offX1, offY1, offX1 + width, offY1 + height, type);
     }
   };
 
@@ -227,6 +237,13 @@ export default function App() {
           checked={tool === "rectangle"}
           onChange={() => setTool("rectangle")} />
         <label htmlFor="rectangle">Rectangle</label>
+        <input
+          type="radio"
+          id="circle"
+          value="circle"
+          checked={tool === "circle"}
+          onChange={() => setTool("circle")} />
+        <label htmlFor="pencil">Circle</label>
         <input
           type="radio"
           id="pencil"
