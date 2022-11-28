@@ -128,6 +128,12 @@ export default function App() {
     setElements([]);
   };
 
+  const undo = () => {
+    const elementsCopy = [...elements]
+    elementsCopy.pop()
+    setElements(elementsCopy)
+  }
+
   useLayoutEffect(() => {
     const canvas = document.getElementById('curtaindraw');
     const context = canvas.getContext('2d');
@@ -251,6 +257,7 @@ export default function App() {
           checked={tool === "pencil"}
           onChange={() => setTool("pencil")} />
         <label htmlFor="pencil">Pencil</label>
+        <button onClick={undo}>Undo</button>
         <button onClick={clear}>Clear</button>
         <button>Save</button>
       </div>
