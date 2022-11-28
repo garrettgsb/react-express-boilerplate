@@ -155,7 +155,7 @@ function ResponsiveDrawer(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}
+    <Box sx={{ display: "flex", height: "100vh"}}
     >
       <CssBaseline />
       {header}
@@ -204,6 +204,9 @@ function ResponsiveDrawer(props) {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
+          overflow: 'auto',
+          // flex: 1,
+          // maxheight: '100%'
         }}
 
       >
