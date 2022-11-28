@@ -38,6 +38,15 @@ function getSvgPathFromStroke(points, closed = true) {
   return result;
 }
 
+const getRadiusDistance = (x1, y1, x2, y2) => {
+  const base = x2 - x1;
+  const height = y2 - y1;
+  // A² + B² = C² for our case this is height² + base² = distance²
+  // This means distance === square root of height² + base²
+  const distance = Math.sqrt(Math.pow(base, 2) + Math.pow(height, 2));
+  return distance
+};
+
 function createElement(id, x1, y1, x2, y2, type, fill) {
   switch (type) {
     case "line":
@@ -53,7 +62,9 @@ function createElement(id, x1, y1, x2, y2, type, fill) {
       }
     case "circle":
       {
-        const elementDetails = generator.circle(x1, y1, 50, {
+        const radius = getRadiusDistance(x1, y1, x2, y2)
+        const diameter = radius*2
+        const elementDetails = generator.circle(x1, y1, diameter, {
           fill: fill, // transparent default
           fillStyle: 'solid' // solid fill default
         });
@@ -99,6 +110,10 @@ const isWithinElement = (x, y, element) => {
     const c = { x, y };
     const offset = distance(a, b) - (distance(a, c) + distance(b, c));
     return Math.abs(offset) < 1;
+  } else if (type === 'circle') {
+    const circleRadius = getRadiusDistance(x1, y1, x2, y2)
+    const cursorRadius = getRadiusDistance(x1, y1, x, y)
+    return cursorRadius <= circleRadius
   }
 };
 
