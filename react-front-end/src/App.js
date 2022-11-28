@@ -38,20 +38,20 @@ function getSvgPathFromStroke(points, closed = true) {
   return result;
 }
 
-function createElement(id, x1, y1, x2, y2, type) {
+function createElement(id, x1, y1, x2, y2, type, fill) {
   switch (type) {
     case "line":
     case "rectangle":
       const roughElement = type === "line"
         ? generator.line(x1, y1, x2, y2)
         : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
-          fill: null, // transparent default
+          fill: fill, // transparent default
           fillStyle: 'solid' // solid fill default
         });
       return { id, x1, y1, x2, y2, type, roughElement };
     case "circle":
       const circElement = generator.circle(x1, y1, 50, {
-        fill: null, // transparent default
+        fill: fill, // transparent default
         fillStyle: 'solid' // solid fill default
       });
       return { id, x1, y1, x2, y2, type, circElement };
@@ -147,7 +147,7 @@ export default function App() {
 
     const roughCanvas = rough.canvas(canvas);
 
-
+    // test shapes:
     // const rect = generator.rectangle(10, 10, 200, 200);
     // const circ = generator.circle(80, 80, 80, {fill: 'red', fillStyle: 'solid'});
     // const line = generator.line(10, 10, 200, 200);
@@ -192,12 +192,11 @@ export default function App() {
     } else if (tool === "fill") {
       const element = getElementAtPosition(clientX, clientY, elements);
       if (element) {
-        // const index = element.id
-        // let elementsCopy = [...elements]
-        // elementsCopy[index].roughElement.options.fillStyle = 'red'
-        // console.log(elementsCopy[index].roughElement.options.fill)
-        // console.log(element)
-        // setElements(elementsCopy)
+        let elementsCopy = [...elements]
+        const index = element.id
+        const newColorElement = createElement(element.id, element.x1, element.y1, element.x2, element.y2, element.type, 'red')
+        elementsCopy[index] = newColorElement
+        setElements(elementsCopy)
       }
     } else {
       const id = elements.length;
