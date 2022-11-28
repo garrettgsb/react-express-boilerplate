@@ -104,8 +104,7 @@ export default function Program() {
 
   }, [params.id])
 
-  //if edit is true, make the program to be able to edit with using inline editing
-  //and show the garbage bin next to the each workout card.
+
 
   return (
     <>
