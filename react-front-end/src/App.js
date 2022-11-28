@@ -249,7 +249,7 @@ export default function App() {
           value="circle"
           checked={tool === "circle"}
           onChange={() => setTool("circle")} />
-        <label htmlFor="pencil">Circle</label>
+        <label htmlFor="circle">Circle</label>
         <input
           type="radio"
           id="pencil"
