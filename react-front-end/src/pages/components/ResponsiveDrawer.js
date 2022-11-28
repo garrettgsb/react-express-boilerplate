@@ -155,7 +155,8 @@ function ResponsiveDrawer(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }}
+    >
       <CssBaseline />
       {header}
 
@@ -204,6 +205,7 @@ function ResponsiveDrawer(props) {
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
+
       >
         <Toolbar />
         {props.children}
