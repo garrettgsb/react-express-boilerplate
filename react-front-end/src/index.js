@@ -23,7 +23,7 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/program",
+        path: "/program/:id",
         element: <Program />,
       },
       {
