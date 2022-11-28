@@ -11,15 +11,13 @@ import {
   ListItemIcon,
   ListItemText,
   Collapse,
+  Toolbar,
 } from "@mui/material";
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
+
 import Appbar from "./Appbar";
-
-
-
-
 
 const drawerWidth = 240;
 
@@ -56,30 +54,28 @@ export default function ResponsiveDrawer(props) {
   const { window } = props;
 
   const navigate = useNavigate();
-  const [mobileOpen, setMobileOpen] = React.useState(true);
-
-
-  // Expanding list item state and click handler
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
 
   // Toggling drawer state and menu button click handler
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(true);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  // Expanding list item state and click handler
+  const [open, setOpen] = React.useState(false);
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
+  // Main logo click handler
   const onClickEvent = () => {
-    navigate('/dashboard')
-  }
+    navigate("/dashboard");
+  };
 
+  // Program navigation click handler
   const onClickProgram = (id) => {
-    navigate(`/program/${id}`)
-  }
+    navigate(`/program/${id}`);
+  };
 
   const drawerItems = (
     <div>
@@ -108,7 +104,11 @@ export default function ResponsiveDrawer(props) {
           <List component="div" disablePadding>
             {/* ARRAY OF PROGRAMS */}
             {Programs.map((program) => (
-              <ListItemButton key={program.id} sx={{ pl: 4 }} onClick={() => onClickProgram(program.id)}>
+              <ListItemButton
+                key={program.id}
+                sx={{ pl: 4 }}
+                onClick={() => onClickProgram(program.id)}
+              >
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
@@ -125,8 +125,7 @@ export default function ResponsiveDrawer(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex", height: "100vh"}}
-    >
+    <Box sx={{ display: "flex", height: "100vh" }}>
       <CssBaseline />
 
       <Appbar
@@ -134,6 +133,7 @@ export default function ResponsiveDrawer(props) {
         handleDrawerToggle={handleDrawerToggle}
         setMobileOpen={setMobileOpen}
         mobileOpen={mobileOpen}
+        onClickEvent={onClickEvent}
       />
 
       <Box
@@ -180,11 +180,10 @@ export default function ResponsiveDrawer(props) {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          overflow: 'auto',
+          overflow: "auto",
           // flex: 1,
           // maxheight: '100%'
         }}
-
       >
         <Toolbar />
         {props.children}

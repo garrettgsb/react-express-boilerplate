@@ -29,7 +29,12 @@ export default function Appbar(props) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 100 }}>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 100 }}
+          onClick={props.onClickEvent}
+        >
           Workout Tracker
         </Typography>
         <Avatar alt="Jason Ling" src="images/pikachu.png" />
