@@ -7,7 +7,6 @@ import {
   List,
   Divider,
   ListItemButton,
-  ListSubheader,
   ListItemIcon,
   ListItemText,
   Collapse,
@@ -50,7 +49,6 @@ const Programs = [
 
 export default function ResponsiveDrawer(props) {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
 
   // Expanding list item state and click handler
   const [open, setOpen] = React.useState(true);
@@ -58,6 +56,8 @@ export default function ResponsiveDrawer(props) {
     setOpen(!open);
   };
 
+  // Toggling drawer state and menu button click handler
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
