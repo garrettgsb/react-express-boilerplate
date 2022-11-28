@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Divider, Card, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardMedia,
+  Collapse,
+  Divider,
+  IconButton,
+  CardActions,
+  CardContent,
+  Typography,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { styled } from "@mui/material/styles";
 
 const exercise = {
   id: 1,
@@ -22,40 +34,90 @@ const exerciseAttributes = {
   notes: "Imagine sitting on a low stool and keep knees pointed outwards.",
 };
 
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
 export default function ExerciseCard(props) {
+  // state and click handler for card expansion
+  const [expanded, setExpanded] = useState(false);
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
   return (
     <Card
       sx={{
-        display: "flex",
-        justifyContent: "space-around",
-        alignItems: "center",
+        maxWidth: 1200,
       }}
     >
-      <div className="exercise__attribute">
-        <Typography variant="h4">{exercise.name}</Typography>
-      </div>
-      <Divider orientation="vertical" variant="middle" flexItem />
-      <div className="exercise__attribute">
-        <Typography variant="h4">{exerciseAttributes.sets}</Typography>
-        <Typography variant="h6">SETS</Typography>
-      </div>
-      <Divider orientation="vertical" variant="middle" flexItem />
-      <div className="exercise__attribute">
-        <Typography variant="h4">{exerciseAttributes.reps}</Typography>
-        <Typography variant="h6">REPS</Typography>
-      </div>
-      <Divider orientation="vertical" variant="middle" flexItem />
-      <div>
-        <Typography variant="h4">{exerciseAttributes.load}</Typography>
-        <Typography variant="h6">lbs</Typography>
-      </div>
-      <Divider orientation="vertical" variant="middle" flexItem />
-      <div className="exercise__attribute">
-        <Typography variant="h4">
-          {exerciseAttributes.rest_period} min
-        </Typography>
-        <Typography variant="h6">rest</Typography>
-      </div>
+      <CardContent
+        sx={{
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+        }}
+      >
+        <div className="exercise__attribute">
+          <Typography variant="h5">{exercise.name}</Typography>
+        </div>
+        <Divider orientation="vertical" variant="middle" flexItem />
+        <div className="exercise__attribute">
+          <Typography variant="h5">{exerciseAttributes.sets}</Typography>
+          <Typography variant="p">SETS</Typography>
+        </div>
+        <Divider orientation="vertical" variant="middle" flexItem />
+        <div className="exercise__attribute">
+          <Typography variant="h5">{exerciseAttributes.reps}</Typography>
+          <Typography variant="p">REPS</Typography>
+        </div>
+        <Divider orientation="vertical" variant="middle" flexItem />
+        <div>
+          <Typography variant="h5">{exerciseAttributes.load}</Typography>
+          <Typography variant="p">lbs</Typography>
+        </div>
+        <Divider orientation="vertical" variant="middle" flexItem />
+        <div className="exercise__attribute">
+          <Typography variant="h5">
+            {exerciseAttributes.rest_period} min
+          </Typography>
+          <Typography variant="p">rest</Typography>
+        </div>
+        <CardActions>
+          <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </CardActions>
+      </CardContent>
+
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Box sx={{ display: "flex" }}>
+          <CardMedia
+            component="img"
+            sx={{ width: "40%", height: 200 }}
+            image="https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="exercise"
+          />
+          <CardContent>
+            <Typography variant="h5">Instructions</Typography>
+            <Typography variant="p">{exercise.instructions}</Typography>
+            <Typography variant="h5">Notes</Typography>
+            <Typography variant="p">{exerciseAttributes.notes}</Typography>
+          </CardContent>
+        </Box>
+      </Collapse>
     </Card>
   );
 }
