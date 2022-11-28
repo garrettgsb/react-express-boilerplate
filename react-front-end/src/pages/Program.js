@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
-import ProgramCard from "./components/ProgramCard";
 import WorkoutCard from "./components/WorkoutCard";
+import {Button} from "@mui/material";
+import ProgramCard from "./components/ProgramCard";
 
 //Mockdata
 const Programs = [
@@ -20,7 +21,7 @@ const Programs = [
     id: 2,
     user_id: 1,
     name: "Bro Split",
-    description: "Three workouts per week targetting all major muscle groups",
+    description: "2 workouts per week targetting bro split",
     start_date: "2022-10-01",
     end_date: "2022-11-30",
     public: true,
@@ -30,7 +31,7 @@ const Programs = [
     id: 3,
     user_id: 1,
     name: "Upper Lower",
-    description: "Three workouts per week targetting all major muscle groups",
+    description: "1 workouts per week targetting upper lower",
     start_date: "2022-10-01",
     end_date: "2022-11-30",
     public: true,
@@ -84,6 +85,7 @@ export default function Program() {
   const params = useParams();
   const [program, setProgram] = useState({});
   const [workout, setWorkout] = useState([]);
+  const [edit, setEdit] = useState(false);
 
   useEffect(()=>{
 
@@ -102,12 +104,12 @@ export default function Program() {
 
   }, [params.id])
 
+  //if edit is true, make the program to be able to edit with using inline editing
+  //and show the garbage bin next to the each workout card.
+
   return (
     <>
-      {/* <Toolbar /> */}
-      {/* <Typography variant="h3" gutterBottom>
-        This is Program page
-      </Typography> */}
+
       <Stack
         direction="column"
         justifyContent="flex-start"
@@ -116,14 +118,19 @@ export default function Program() {
       >
 
         {
-          program ? <ProgramCard key={program.id} program={program} /> : null
+          program ? <ProgramCard program={program} edit={edit}/> : null
         }
+
+        {edit ? 
+          <Button variant="contained" onClick={() => setEdit(false)}>Save</Button> :
+          <Button variant="contained" onClick={() => setEdit(true)}>Edit</Button> 
+          }
 
         {/* Array of Workout Cards - to be made into separate component */}
         {
           workout.map(item => {
             return (
-              workout ? <WorkoutCard key={item.id} workout={item} /> : null
+              workout ? <WorkoutCard key={item.id} workout={item} edit={edit}/> : null
             )
           })
         }

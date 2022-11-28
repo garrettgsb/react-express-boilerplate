@@ -1,15 +1,18 @@
 import React from "react";
-import { Card, Item, Stack, Toolbar, Typography } from "@mui/material";
+
+export default function ProgramCard ({program, edit}) {
 
 
-export default function ProgramCard ({program}) {
+  
   return (
     <div>
 
-      <p>{program.name}</p>
-      {/* <span>{program.description}</span> */}
+      {edit ?
+
+        <input value={program.name}/> :
+
+        <p>{program.name}</p>}
 
     </div>
-
   )
 }
