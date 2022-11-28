@@ -42,19 +42,19 @@ function createElement(id, x1, y1, x2, y2, type, fill) {
   switch (type) {
     case "line":
     case "rectangle":
-      const roughElement = type === "line"
+      {const elementDetails = type === "line"
         ? generator.line(x1, y1, x2, y2)
         : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
           fill: fill, // transparent default
           fillStyle: 'solid' // solid fill default
         });
-      return { id, x1, y1, x2, y2, type, roughElement };
+      return { id, x1, y1, x2, y2, type, elementDetails };}
     case "circle":
-      const circElement = generator.circle(x1, y1, 50, {
+      {const elementDetails = generator.circle(x1, y1, 50, {
         fill: fill, // transparent default
         fillStyle: 'solid' // solid fill default
       });
-      return { id, x1, y1, x2, y2, type, circElement };
+      return { id, x1, y1, x2, y2, type, elementDetails };}
     case "pencil":
       return { id, type, points: [{ x: x1, y: y1 }] };
     default: throw new Error(`Type not recognised: ${type}`);
@@ -65,10 +65,10 @@ const drawElement = (roughCanvas, context, element) => {
   switch (element.type) {
     case "line":
     case "rectangle":
-      roughCanvas.draw(element.roughElement);
+      roughCanvas.draw(element.elementDetails);
       break;
     case "circle":
-      roughCanvas.draw(element.circElement);
+      roughCanvas.draw(element.elementDetails);
       break;
     case "pencil":
       context.fillStyle = "orange";
@@ -157,17 +157,19 @@ export default function App() {
     // roughCanvas.draw(line);
   }, [elements]);
 
-  const updateElement = (id, x1, y1, x2, y2, type) => {
+  const updateElement = (id, x1, y1, x2, y2, type, element) => {
     const elementsCopy = [...elements];
+
+    const { fill } = element && element.elementDetails ? element.elementDetails.options : ""
 
     switch (type) {
       case "line":
       case "rectangle":
-        const moveElement = createElement(id, x1, y1, x2, y2, type);
+        const moveElement = createElement(id, x1, y1, x2, y2, type, fill);
         elementsCopy[id] = moveElement;
         break;
       case "circle":
-        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
+        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type, fill);
         break;
       case "pencil":
         elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
@@ -184,6 +186,7 @@ export default function App() {
     if (tool === "selection") {
       const element = getElementAtPosition(clientX, clientY, elements);
       if (element) {
+        console.log(element)
         const offsetX = clientX - element.x1;
         const offsetY = clientY - element.y1;
         setSelectedElement({ ...element, offsetX, offsetY });
@@ -221,7 +224,7 @@ export default function App() {
     if (action === "drawing") {
       const index = elements.length - 1;
       const { x1, y1 } = elements[index];
-      updateElement(index, x1, y1, clientX, clientY, tool);
+      updateElement(index, x1, y1, clientX, clientY, tool, selectedElement);
 
     } else if (action === "moving") {
 
@@ -230,7 +233,7 @@ export default function App() {
       const height = y2 - y1;
       const offX1 = clientX - offsetX;
       const offY1 = clientY - offsetY;
-      updateElement(id, offX1, offY1, offX1 + width, offY1 + height, type);
+      updateElement(id, offX1, offY1, offX1 + width, offY1 + height, type, selectedElement);
     }
   };
 
