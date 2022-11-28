@@ -1,21 +1,13 @@
 import * as React from "react";
-
-import MenuIcon from "@mui/icons-material/Menu";
+import { useNavigate } from "react-router-dom";
 
 import {
-  Avatar,
-  Button,
   Box,
   Drawer,
-  AppBar,
   CssBaseline,
-  Toolbar,
   List,
-  IconButton,
-  Typography,
   Divider,
   ListItemButton,
-  ListSubheader,
   ListItemIcon,
   ListItemText,
   Collapse,
@@ -23,13 +15,16 @@ import {
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
-import { useNavigate } from "react-router-dom";
+import Appbar from "./Appbar";
+
+
+
 
 
 const drawerWidth = 240;
 
 // MOCK DATA
-const NavbarData = [
+const navbarData = [
   {
     title: "Dashboard",
     // icon: <InsightsIcon/>,
@@ -57,10 +52,12 @@ const Programs = [
   },
 ];
 
-function ResponsiveDrawer(props) {
+export default function ResponsiveDrawer(props) {
   const { window } = props;
+
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(true);
+
 
   // Expanding list item state and click handler
   const [open, setOpen] = React.useState(false);
@@ -69,9 +66,12 @@ function ResponsiveDrawer(props) {
     setOpen(!open);
   };
 
+  // Toggling drawer state and menu button click handler
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
 
   const onClickEvent = () => {
     navigate('/dashboard')
@@ -80,34 +80,6 @@ function ResponsiveDrawer(props) {
   const onClickProgram = (id) => {
     navigate(`/program/${id}`)
   }
-
-
-  const header = (
-    <AppBar
-      position="fixed"
-      sx={{
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
-        ml: { sm: `${drawerWidth}px` },
-      }}
-    >
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: "none" } }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 100 }} onClick={onClickEvent}>
-          Workout Tracker
-        </Typography>
-        <Avatar alt="Jason Ling" src="images/pikachu.png" />
-        <Button color="inherit">Logout</Button>
-      </Toolbar>
-    </AppBar>
-  );
 
   const drawerItems = (
     <div>
@@ -121,20 +93,19 @@ function ResponsiveDrawer(props) {
           <ListItemIcon>
             <EqualizerIcon />
           </ListItemIcon>
-          <ListItemText primary={'Dashboard'} />
+          <ListItemText primary={"Dashboard"} />
         </ListItemButton>
 
         <ListItemButton onClick={handleClick}>
           <ListItemIcon>
             <FitnessCenterIcon />
           </ListItemIcon>
-          <ListItemText primary={'Programs'} />
+          <ListItemText primary={"Programs"} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
 
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-
             {/* ARRAY OF PROGRAMS */}
             {Programs.map((program) => (
               <ListItemButton key={program.id} sx={{ pl: 4 }} onClick={() => onClickProgram(program.id)}>
@@ -144,7 +115,6 @@ function ResponsiveDrawer(props) {
                 <ListItemText primary={program.name} />
               </ListItemButton>
             ))}
-
           </List>
         </Collapse>
       </List>
@@ -158,7 +128,13 @@ function ResponsiveDrawer(props) {
     <Box sx={{ display: "flex", height: "100vh"}}
     >
       <CssBaseline />
-      {header}
+
+      <Appbar
+        drawerWidth={drawerWidth}
+        handleDrawerToggle={handleDrawerToggle}
+        setMobileOpen={setMobileOpen}
+        mobileOpen={mobileOpen}
+      />
 
       <Box
         component="nav"
@@ -216,5 +192,3 @@ function ResponsiveDrawer(props) {
     </Box>
   );
 }
-
-export default ResponsiveDrawer;

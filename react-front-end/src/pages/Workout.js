@@ -1,13 +1,7 @@
 import React from "react";
-import Exercise from "./Exercise";
-import {
-  Card,
-  CardMedia,
-  Item,
-  Stack,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import ExerciseCard from "./components/ExerciseCard";
+
+import { Card, CardMedia, Stack, Toolbar, Typography } from "@mui/material";
 
 const exercise = {
   id: 1,
@@ -30,18 +24,6 @@ const exerciseAttributes = {
 };
 
 export default function Workout(props) {
-  // const mappedExercises = props.exercises.map((exercise) => {
-  //     return <Exercise
-  //     key={exercise.id}
-  //     name={exercise.name}
-  //     muscle={exercise.muscle}
-  //     equipment={exercise.equipment}
-  //     difficulty={exercise.difficulty}
-  //     instruction={exercise.instruction}
-
-  //     />;
-  // });
-
   return (
     <>
       <Toolbar />
@@ -54,25 +36,8 @@ export default function Workout(props) {
         alignItems="stretch"
         spacing={2}
       >
-        {/* Array of Workout Cards - to be made into separate component */}
-        <Card variant="outlined">
-          <Typography variant="h4">{exercise.name}</Typography>
-          <CardMedia
-            component="img"
-            height="140"
-            image={exercise.image}
-            alt="green iguana"
-          />
-        </Card>
-        <Card variant="outlined">
-          <Typography variant="h4">{exercise.name}</Typography>
-          <CardMedia
-            component="img"
-            height="140"
-            image={exercise.image}
-            alt="green iguana"
-          />
-        </Card>
+        {/* Array of Exercise Cards */}
+        <ExerciseCard />
       </Stack>
     </>
   );
