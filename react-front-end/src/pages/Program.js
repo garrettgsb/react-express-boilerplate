@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
-import { Card, Item, Stack, Toolbar, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
+import ProgramCard from "./components/ProgramCard";
 
 //Mockdata
 const Programs = [
@@ -36,18 +37,6 @@ const Programs = [
   },
 ];
 
-const programListItems = Programs.map((program) => {
-  return (
-    <div>
-
-      <p>{program.name}</p>
-      <p>{program.description}</p>
-      <p>{program.start_date}</p>
-      <p>{program.end_date}</p>
-
-    </div>
-  )
-})
 // MOCK DATA
 const program = {
   id: 1,
@@ -72,14 +61,27 @@ const workout = {
 
 export default function Program() {
   const params = useParams();
+  const [program, setProgram] = useState({})
+
+  useEffect(()=>{
+  //we need to filter the program first. 
+  const result = Programs.find((item) => {
+    if(item.id == params.id){
+      return item
+    }
+  })
+  //we find the right item and set program with that.
+  setProgram(result)
+  }, [params.id])
+  //everytime [params.id] changes, the code inside of useEffect will run. 
 
   return (
     <>
-      <Toolbar />
+      {/* <Toolbar /> */}
       <span>{`This is Program page for program ${params.id}`} </span>
-      <Typography variant="h3" gutterBottom>
+      {/* <Typography variant="h3" gutterBottom>
         This is Program page
-      </Typography>
+      </Typography> */}
       <Stack
         direction="column"
         justifyContent="flex-start"
@@ -87,36 +89,20 @@ export default function Program() {
         spacing={2}
       >
         {/* Array of Workout Cards - to be made into separate component */}
-        <Card variant="outlined">
+
+        {
+          program ? <ProgramCard key={program.id} program={program} /> : null
+        }
+
+        {/* <Card variant="outlined">
           <Typography variant="h4">{workout.name}</Typography>
           <Typography variant="p">{workout.description}</Typography>
         </Card>
         <Card variant="outlined">
           <Typography variant="h4">{workout.name}</Typography>
           <Typography variant="p">{workout.description}</Typography>
-        </Card>
+        </Card> */}
       </Stack>
     </>
   );
 }
-
-// const dayListItems = days.map(day => {
-
-//   return (
-
-//       <DayListItem 
-//           key={day.id}
-//           name={day.name}
-//           spots={day.spots}
-//           selected={day.name === props.day}
-//           setDay={props.setDay}
-//       />
-  
-//   )
-// });
-
-// return (
-//   <ul>
-//       {dayListItems}
-//   </ul>
-// );
