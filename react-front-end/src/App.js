@@ -42,19 +42,23 @@ function createElement(id, x1, y1, x2, y2, type, fill) {
   switch (type) {
     case "line":
     case "rectangle":
-      {const elementDetails = type === "line"
-        ? generator.line(x1, y1, x2, y2)
-        : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
+      {
+        const elementDetails = type === "line"
+          ? generator.line(x1, y1, x2, y2)
+          : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
+            fill: fill, // transparent default
+            fillStyle: 'solid' // solid fill default
+          });
+        return { id, x1, y1, x2, y2, type, elementDetails };
+      }
+    case "circle":
+      {
+        const elementDetails = generator.circle(x1, y1, 50, {
           fill: fill, // transparent default
           fillStyle: 'solid' // solid fill default
         });
-      return { id, x1, y1, x2, y2, type, elementDetails };}
-    case "circle":
-      {const elementDetails = generator.circle(x1, y1, 50, {
-        fill: fill, // transparent default
-        fillStyle: 'solid' // solid fill default
-      });
-      return { id, x1, y1, x2, y2, type, elementDetails };}
+        return { id, x1, y1, x2, y2, type, elementDetails };
+      }
     case "pencil":
       return { id, type, points: [{ x: x1, y: y1 }] };
     default: throw new Error(`Type not recognised: ${type}`);
@@ -160,7 +164,7 @@ export default function App() {
   const updateElement = (id, x1, y1, x2, y2, type, element) => {
     const elementsCopy = [...elements];
 
-    const { fill } = element && element.elementDetails ? element.elementDetails.options : ""
+    const { fill } = element && element.elementDetails ? element.elementDetails.options : "";
 
     switch (type) {
       case "line":
@@ -186,7 +190,7 @@ export default function App() {
     if (tool === "selection") {
       const element = getElementAtPosition(clientX, clientY, elements);
       if (element) {
-        console.log(element)
+        console.log(element);
         const offsetX = clientX - element.x1;
         const offsetY = clientY - element.y1;
         setSelectedElement({ ...element, offsetX, offsetY });
@@ -195,11 +199,11 @@ export default function App() {
     } else if (tool === "fill") {
       const element = getElementAtPosition(clientX, clientY, elements);
       if (element) {
-        let elementsCopy = [...elements]
-        const index = element.id
-        const newColorElement = createElement(element.id, element.x1, element.y1, element.x2, element.y2, element.type, 'red')
-        elementsCopy[index] = newColorElement
-        setElements(elementsCopy)
+        let elementsCopy = [...elements];
+        const index = element.id;
+        const newColorElement = createElement(element.id, element.x1, element.y1, element.x2, element.y2, element.type, 'red');
+        elementsCopy[index] = newColorElement;
+        setElements(elementsCopy);
       }
     } else {
       const id = elements.length;
