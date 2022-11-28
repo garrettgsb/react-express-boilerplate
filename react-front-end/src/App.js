@@ -44,10 +44,16 @@ function createElement(id, x1, y1, x2, y2, type) {
     case "rectangle":
       const roughElement = type === "line"
         ? generator.line(x1, y1, x2, y2)
-        : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
+        : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
+          fill: null, // transparent default
+          fillStyle: 'solid' // solid fill default
+        });
       return { id, x1, y1, x2, y2, type, roughElement };
     case "circle":
-      const circElement = generator.circle(x1, y1, 50);
+      const circElement = generator.circle(x1, y1, 50, {
+        fill: null, // transparent default
+        fillStyle: 'solid' // solid fill default
+      });
       return { id, x1, y1, x2, y2, type, circElement };
     case "pencil":
       return { id, type, points: [{ x: x1, y: y1 }] };
@@ -62,7 +68,7 @@ const drawElement = (roughCanvas, context, element) => {
       roughCanvas.draw(element.roughElement);
       break;
     case "circle":
-      roughCanvas.draw(element.circElement)
+      roughCanvas.draw(element.circElement);
       break;
     case "pencil":
       context.fillStyle = "orange";
@@ -83,7 +89,7 @@ const isWithinElement = (x, y, element) => {
     const minY = Math.min(y1, y2);
     const maxY = Math.max(y1, y2);
     return x >= minX && x <= maxX && y >= minY && y <= maxY;
-  } else {
+  } else if (type === 'line') {
     const a = { x: x1, y: y1 };
     const b = { x: x2, y: y2 };
     const c = { x, y };
@@ -129,10 +135,10 @@ export default function App() {
   };
 
   const undo = () => {
-    const elementsCopy = [...elements]
-    elementsCopy.pop()
-    setElements(elementsCopy)
-  }
+    const elementsCopy = [...elements];
+    elementsCopy.pop();
+    setElements(elementsCopy);
+  };
 
   useLayoutEffect(() => {
     const canvas = document.getElementById('curtaindraw');
@@ -181,6 +187,12 @@ export default function App() {
         const offsetY = clientY - element.y1;
         setSelectedElement({ ...element, offsetX, offsetY });
         setAction("moving");
+      }
+    } else if (tool === "fill") {
+      const element = getElementAtPosition(clientX, clientY, elements);
+      if (element) {
+        console.log(element.roughElement.options.fill)
+        console.log(element.roughElement.options.fillStyle)
       }
     } else {
       const id = elements.length;
@@ -257,6 +269,13 @@ export default function App() {
           checked={tool === "pencil"}
           onChange={() => setTool("pencil")} />
         <label htmlFor="pencil">Pencil</label>
+        <input
+          type="radio"
+          id="fill"
+          value="fill"
+          checked={tool === "fill"}
+          onChange={() => setTool("fill")} />
+        <label htmlFor="fill">Fill</label>
         <button onClick={undo}>Undo</button>
         <button onClick={clear}>Clear</button>
         <button>Save</button>
