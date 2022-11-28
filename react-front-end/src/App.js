@@ -168,6 +168,7 @@ export default function App() {
         break;
       case "circle":
         elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
+        break;
       case "pencil":
         elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
         break;
@@ -191,8 +192,12 @@ export default function App() {
     } else if (tool === "fill") {
       const element = getElementAtPosition(clientX, clientY, elements);
       if (element) {
-        console.log(element.roughElement.options.fill)
-        console.log(element.roughElement.options.fillStyle)
+        // const index = element.id
+        // let elementsCopy = [...elements]
+        // elementsCopy[index].roughElement.options.fillStyle = 'red'
+        // console.log(elementsCopy[index].roughElement.options.fill)
+        // console.log(element)
+        // setElements(elementsCopy)
       }
     } else {
       const id = elements.length;
@@ -207,6 +212,10 @@ export default function App() {
 
     if (tool === "selection") {
       event.target.style.cursor = getElementAtPosition(clientX, clientY, elements) ? "move" : "default";
+    }
+
+    if (tool === "fill") {
+      event.target.style.cursor = getElementAtPosition(clientX, clientY, elements) ? "pointer" : "default";
     }
 
 
