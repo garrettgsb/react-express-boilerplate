@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import { Outlet } from 'react-router-dom';
@@ -17,7 +17,30 @@ const exercise = {
 }
 
 export default function App() {
-  
+  const [programs, setPrograms] = useState([])
+  const [workouts, setWorkouts] = useState([])
+  const [exerciseSelections, setExerciseSelections] = useState([])
+  const [exercises, setExercises] = useState([])
+
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/program')
+      .then((result) => {
+        setPrograms(result.data);
+      }),
+    axios.get('http://localhost:8080/workout')
+      .then((result) => {
+        setWorkouts(result.data);
+      }),
+    axios.get('http://localhost:8080/program/exercise')
+      .then((result) => {
+        setExerciseSelections(result.data);
+      }),
+      axios.get('http://localhost:8080/program/exercise/:id')
+      .then((result) => {
+        setExercises(result.data);
+      })
+  }, []);
   
   
   return (
