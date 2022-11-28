@@ -57,6 +57,8 @@ function createElement(id, x1, y1, x2, y2, type) {
       return { id, x1, y1, x2, y2, type, circElement };
     case "pencil":
       return { id, type, points: [{ x: x1, y: y1 }] };
+    case "eraser":
+      return { id, type, points: [{ x: x1, y: y1 }] };
     default: throw new Error(`Type not recognised: ${type}`);
   }
 }
@@ -64,18 +66,30 @@ function createElement(id, x1, y1, x2, y2, type) {
 const drawElement = (roughCanvas, context, element) => {
   switch (element.type) {
     case "line":
+      context.globalCompositeOperation="source-over";
     case "rectangle":
+      context.globalCompositeOperation="source-over";
       roughCanvas.draw(element.roughElement);
       break;
     case "circle":
+      context.globalCompositeOperation="source-over";
       roughCanvas.draw(element.circElement);
       break;
     case "pencil":
-      context.fillStyle = "orange";
+      context.globalCompositeOperation="source-over";
       const outlinePoints = getStroke(element.points);
       const pathData = getSvgPathFromStroke(outlinePoints);
       const myPath = new Path2D(pathData);
+      context.fillStyle = "orange";
       context.fill(myPath);
+      break;
+    case "eraser":
+      context.globalCompositeOperation="destination-out";
+      context.lineWidth = 5;
+      const eraserPoints = getStroke(element.points);
+      const eraserData = getSvgPathFromStroke(eraserPoints);
+      const eraserPath = new Path2D(eraserData);
+      context.fill(eraserPath);
       break;
     default: throw new Error(`Type not recognised: ${element.type}`);
   }
@@ -170,6 +184,9 @@ export default function App() {
         elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
         break;
       case "pencil":
+        elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
+        break;
+      case "eraser":
         elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
         break;
       default:
@@ -278,6 +295,13 @@ export default function App() {
           checked={tool === "pencil"}
           onChange={() => setTool("pencil")} />
         <label htmlFor="pencil">Pencil</label>
+        <input
+          type="radio"
+          id="eraser"
+          value="eraser"
+          checked={tool === "eraser"}
+          onChange={() => setTool("eraser")} />
+        <label htmlFor="eraser">Eraser</label>
         <input
           type="radio"
           id="fill"
