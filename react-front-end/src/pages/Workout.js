@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import ExerciseCard from "./components/ExerciseCard";
+import AddIcon from "@mui/icons-material/Add";
 
-import { Card, CardMedia, Stack, Toolbar, Typography } from "@mui/material";
+import {
+  Card,
+  CardMedia,
+  Fab,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 
 const exercise = {
   id: 1,
@@ -24,6 +32,8 @@ const exerciseAttributes = {
 };
 
 export default function Workout(props) {
+  const [edit, setEdit] = useState(false);
+
   return (
     <>
       <Toolbar />
@@ -38,6 +48,11 @@ export default function Workout(props) {
       >
         {/* Array of Exercise Cards */}
         <ExerciseCard />
+        {edit && (
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        )}
       </Stack>
     </>
   );
