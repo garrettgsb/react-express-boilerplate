@@ -3,6 +3,7 @@ import ExerciseCard from "./components/ExerciseCard";
 import AddIcon from "@mui/icons-material/Add";
 
 import {
+  Button,
   Card,
   CardMedia,
   Fab,
@@ -33,6 +34,14 @@ const exerciseAttributes = {
 
 export default function Workout(props) {
   const [edit, setEdit] = useState(false);
+  const switchEdit = () => {
+    setEdit(!edit);
+  };
+
+  const saveEdits = () => {
+    // Send request and then
+    switchEdit();
+  };
 
   return (
     <>
@@ -40,7 +49,16 @@ export default function Workout(props) {
       <Typography variant="h4" gutterBottom>
         This is Workout page
       </Typography>
-
+      {!edit && (
+        <Button variant="outlined" size="medium" onClick={switchEdit}>
+          Edit
+        </Button>
+      )}
+      {edit && (
+        <Button variant="contained" size="medium" onClick={saveEdits}>
+          Save
+        </Button>
+      )}
       <Stack
         direction="column"
         justifyContent="flex-start"
@@ -50,7 +68,7 @@ export default function Workout(props) {
         minWidth={520}
       >
         {/* Array of Exercise Cards */}
-        <ExerciseCard />
+        <ExerciseCard editMode={edit} />
 
         {/* When in edit state, render Add button */}
         {edit && (
