@@ -38,32 +38,32 @@ function getSvgPathFromStroke(points, closed = true) {
   return result;
 }
 
-function createElement(id, x1, y1, x2, y2, type) {
+function createElement(id, x1, y1, x2, y2, type, color, brushSize) {
   switch (type) {
     case "line":
     case "rectangle":
       const roughElement = type === "line"
-        ? generator.line(x1, y1, x2, y2)
+        ? generator.line(x1, y1, x2, y2, { stroke: color, strokeWidth: brushSize})
         : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
-          fill: null, // transparent default
-          fillStyle: 'solid' // solid fill default
+          stroke: color,
+          fill: color,
         });
       return { id, x1, y1, x2, y2, type, roughElement };
     case "circle":
       const circElement = generator.circle(x1, y1, 50, {
-        fill: null, // transparent default
-        fillStyle: 'solid' // solid fill default
+        stroke: color,
+        fill: color,
       });
       return { id, x1, y1, x2, y2, type, circElement };
     case "pencil":
-      return { id, type, points: [{ x: x1, y: y1 }] };
+      return { id, type, points: [{ x: x1, y: y1 }], color, brushSize };
     case "eraser":
-      return { id, type, points: [{ x: x1, y: y1 }] };
+      return { id, type, points: [{ x: x1, y: y1 }], brushSize };
     default: throw new Error(`Type not recognised: ${type}`);
   }
 }
 
-const drawElement = (roughCanvas, context, element) => {
+const drawElement = (roughCanvas, context, element, color) => {
   switch (element.type) {
     case "line":
       context.globalCompositeOperation="source-over";
@@ -77,16 +77,16 @@ const drawElement = (roughCanvas, context, element) => {
       break;
     case "pencil":
       context.globalCompositeOperation="source-over";
-      const outlinePoints = getStroke(element.points);
+      context.fillStyle = element.color;
+      const outlinePoints = getStroke(element.points, { size: element.brushSize} );
       const pathData = getSvgPathFromStroke(outlinePoints);
       const myPath = new Path2D(pathData);
-      context.fillStyle = "orange";
       context.fill(myPath);
       break;
     case "eraser":
       context.globalCompositeOperation="destination-out";
-      context.lineWidth = 5;
-      const eraserPoints = getStroke(element.points);
+      context.lineWidth = 500;
+      const eraserPoints = getStroke(element.points, { size: element.brushSize});
       const eraserData = getSvgPathFromStroke(eraserPoints);
       const eraserPath = new Path2D(eraserData);
       context.fill(eraserPath);
@@ -142,6 +142,8 @@ export default function App() {
   const [elements, setElements] = useState([]);
   const [action, setAction] = useState('none');
   const [tool, setTool] = useState("line");
+  const [color, setColor] = React.useState("red");
+  const [brushSize, setSize] = useState(25);
   const [selectedElement, setSelectedElement] = useState(null);
 
   const clear = () => {
@@ -167,7 +169,7 @@ export default function App() {
     // const line = generator.line(10, 10, 200, 200);
     // roughCanvas.draw(circ);
 
-    elements.forEach(element => drawElement(roughCanvas, context, element));
+    elements.forEach(element => drawElement(roughCanvas, context, element, color));
     // roughCanvas.draw(line);
   }, [elements]);
 
@@ -177,11 +179,11 @@ export default function App() {
     switch (type) {
       case "line":
       case "rectangle":
-        const moveElement = createElement(id, x1, y1, x2, y2, type);
+        const moveElement = createElement(id, x1, y1, x2, y2, type, color, brushSize);
         elementsCopy[id] = moveElement;
         break;
       case "circle":
-        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
+        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type, color, brushSize);
         break;
       case "pencil":
         elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
@@ -218,10 +220,14 @@ export default function App() {
       }
     } else {
       const id = elements.length;
-      const downElement = createElement(id, clientX, clientY, clientX, clientY, tool);
+      const downElement = createElement(id, clientX, clientY, clientX, clientY, tool, color, brushSize);
       setElements(prevState => [...prevState, downElement]);
       setAction("drawing");
     }
+  };
+
+  const changeBrushSize = event => {
+    setSize(event.target.value);
   };
 
   const mouseMove = (event) => {
@@ -311,6 +317,25 @@ export default function App() {
         <label htmlFor="fill">Fill</label>
         <button onClick={undo}>Undo</button>
         <button onClick={clear}>Clear</button>
+        <div style={{ display: "inline-block", marginLeft: "2rem" }}>
+          <label>
+            Red
+            <input type="radio" checked={color === "red"} onChange={() => setColor("red")} />
+          </label>
+          <label>
+            Green
+            <input type="radio" checked={color === "green"} onChange={() => setColor("green")} />
+          </label>
+          <label>
+            Blue
+            <input type="radio" checked={color === "blue"} onChange={() => setColor("blue")} />
+          </label>
+        </div>
+        <li class="option"> 
+          Brush Size
+          <input type="range" id= "size-slider" min="1" max="70" defaultValue="25" onChange={(event) => changeBrushSize(event) }></input>
+          <h2>{brushSize}px</h2>
+        </li>
         <button>Save</button>
       </div>
       <canvas
@@ -325,5 +350,4 @@ export default function App() {
       </canvas>
     </div>
   );
-
 }
