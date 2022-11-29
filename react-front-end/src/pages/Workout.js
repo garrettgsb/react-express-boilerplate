@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ExerciseCard from "./components/ExerciseCard";
+import EditSharpIcon from "@mui/icons-material/EditSharp";
+import SaveSharpIcon from "@mui/icons-material/SaveSharp";
 import AddIcon from "@mui/icons-material/Add";
 
 import {
@@ -33,11 +35,13 @@ const exerciseAttributes = {
 };
 
 export default function Workout(props) {
+  // State and handler for toggling editing "mode"
   const [edit, setEdit] = useState(false);
   const switchEdit = () => {
     setEdit(!edit);
   };
 
+  // Function to save changes and return to viewing "mode"
   const saveEdits = () => {
     // Send request and then
     switchEdit();
@@ -50,12 +54,22 @@ export default function Workout(props) {
         This is Workout page
       </Typography>
       {!edit && (
-        <Button variant="outlined" size="medium" onClick={switchEdit}>
+        <Button
+          variant="outlined"
+          size="medium"
+          startIcon={<EditSharpIcon />}
+          onClick={switchEdit}
+        >
           Edit
         </Button>
       )}
       {edit && (
-        <Button variant="contained" size="medium" onClick={saveEdits}>
+        <Button
+          variant="contained"
+          size="medium"
+          startIcon={<SaveSharpIcon />}
+          onClick={saveEdits}
+        >
           Save
         </Button>
       )}
