@@ -51,6 +51,8 @@ export default function Workout(props) {
       >
         {/* Array of Exercise Cards */}
         <ExerciseCard />
+
+        {/* When in edit state, render Add button */}
         {edit && (
           <Fab
             color="primary"
