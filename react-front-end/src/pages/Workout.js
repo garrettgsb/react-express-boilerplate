@@ -36,7 +36,7 @@ const exerciseAttributes = {
 
 export default function Workout(props) {
   // State and handler for toggling editing "mode"
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(true);
   const switchEdit = () => {
     setEdit(!edit);
   };

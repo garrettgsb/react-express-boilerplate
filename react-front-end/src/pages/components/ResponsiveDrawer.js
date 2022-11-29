@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import {
   Box,
@@ -104,16 +104,14 @@ export default function ResponsiveDrawer(props) {
           <List component="div" disablePadding>
             {/* ARRAY OF PROGRAMS */}
             {Programs.map((program) => (
-              <ListItemButton
-                key={program.id}
-                sx={{ pl: 4 }}
-                onClick={() => onClickProgram(program.id)}
-              >
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary={program.name} />
-              </ListItemButton>
+              <Link to={`/program/${program.id}`} className={"programListItem"}>
+                <ListItemButton key={program.id} sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary={program.name} />
+                </ListItemButton>
+              </Link>
             ))}
           </List>
         </Collapse>
