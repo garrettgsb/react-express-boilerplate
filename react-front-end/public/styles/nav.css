@@ -8,7 +8,7 @@
   background-color: rgb(160, 40, 40);
   height: 100px;
   width: 100vw;
-  border: 3px solid black
+  border: 3px solid black;
 }
 
 .nav div.nav_links {
@@ -33,13 +33,13 @@
   margin-right: 2em;
 }
 
-div.user_nav {
+div.nav_user {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.user_nav img {
+.nav_user img {
   display: flex;
   height: 50px;
   margin-right: 1em;
@@ -51,7 +51,7 @@ div.user_nav {
   border-radius: 0.5em;
   font-size: 24px;
   padding: 0.5em;
-  background-color: rgb(100,0,0);
+  background-color: rgb(100, 0, 0);
   margin-left: 2em;
 }
 
@@ -61,7 +61,7 @@ div.user_nav {
   border-radius: 0.5em;
   font-size: 24px;
   padding: 0.5em;
-  background-color: rgb(100,0,0);
+  background-color: rgb(100, 0, 0);
 }
 
 .nav_acc {
@@ -70,53 +70,7 @@ div.user_nav {
   border-radius: 0.5em;
   font-size: 24px;
   padding: 0.5em;
-  background-color: rgb(100,0,0);
+  background-color: rgb(100, 0, 0);
 }
 
-
-
-.main_page {
-  display: flex;
-  height: 85vh;
-  background-color: rgb(190, 90, 90);
-}
-
-.canvas_section {
-  display: flex;
-  min-width: 1500px;
-  min-height: 700px;
-  height: auto;
-  width: auto;
-  border: 2px solid black;
-  background-color: white;
-  margin: 25px;
-  align-items: center;
-  justify-content: center;
-}
-
-.save_edit_btns {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.save_edit_btns button{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  font-size: 24px;
-  margin-bottom: 1em;
-  border: 2px solid black;
-  border-radius: 0.5em;
-  align-items: center;
-  padding: 0.5em 1em 0.5em 1em;
-  background-color: rgb(100,0,0);
-  color: rgb(210,210,210);
-}
-
-.sidebar {
-  display: flex;
-  width: 200px;
-  border: 3px solid black;
-  border-top: none;
-}
+/*# sourceMappingURL=nav.css.map */

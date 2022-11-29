@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import axios from 'axios';
-import './App.css';
 import Layout from "./pages/Layout";
 import AccountPage from './pages/AccountPage';
 import CanvasPage from './pages/CanvasPage';

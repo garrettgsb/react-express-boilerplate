@@ -1,5 +1,5 @@
 import React from "react";
-
+import './styles/canvas.css'
 export default function CanvasPage() {
   return(
     <main className="main_page">
