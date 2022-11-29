@@ -3,6 +3,7 @@ import axios from "axios";
 import { Outlet } from "react-router-dom";
 
 import "./App.css";
+import Workout from "./pages/Workout";
 
 import ResponsiveDrawer from "./pages/components/ResponsiveDrawer";
 
@@ -16,26 +17,7 @@ import ResponsiveDrawer from "./pages/components/ResponsiveDrawer";
 //   )
 // }
 
-import Workout from "./pages/Workout";
 
-const exercises = [
-  {
-    name: "Bench press",
-    type: "Strength",
-    muscle: "Chest",
-    equipment: "Barbell",
-    difficulty: "Beginner",
-    instruction: "Lay down on the bench and grab the bar and pushhhhh",
-  },
-  {
-    name: "Shoulder press",
-    type: "Strength",
-    muscle: "Shoulder",
-    equipment: "Dumbbell",
-    difficulty: "Beginner",
-    instruction: "Sit on the bench and grab the weights and push up",
-  },
-];
 
 export default function App() {
   const [programs, setPrograms] = useState([]);

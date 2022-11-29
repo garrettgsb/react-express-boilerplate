@@ -23,34 +23,6 @@ import Appbar from "./Appbar";
 
 const drawerWidth = 240;
 
-// MOCK DATA
-const navbarData = [
-  {
-    title: "Dashboard",
-    // icon: <InsightsIcon/>,
-    link: "/dashboard",
-  },
-  {
-    title: "Program",
-    // icon: <InsightsIcon/>,
-    link: "/program",
-  },
-];
-
-// const Programs = [
-//   {
-//     id: 1,
-//     name: "Full Body",
-//   },
-//   {
-//     id: 2,
-//     name: "Bro Split",
-//   },
-//   {
-//     id: 3,
-//     name: "Upper Lower",
-//   },
-// ];
 
 export default function ResponsiveDrawer(props) {
   const { window } = props;
