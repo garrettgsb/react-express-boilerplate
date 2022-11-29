@@ -38,23 +38,38 @@ function getSvgPathFromStroke(points, closed = true) {
   return result;
 }
 
-function createElement(id, x1, y1, x2, y2, type, color, brushSize) {
+const getRadiusDistance = (x1, y1, x2, y2) => {
+  const base = x2 - x1;
+  const height = y2 - y1;
+  // A² + B² = C² for our case this is height² + base² = distance²
+  // This means distance === square root of height² + base²
+  const distance = Math.sqrt(Math.pow(base, 2) + Math.pow(height, 2));
+  return distance;
+};
+
+function createElement(id, x1, y1, x2, y2, type, color, brushSize, fill) {
   switch (type) {
     case "line":
     case "rectangle":
-      const roughElement = type === "line"
-        ? generator.line(x1, y1, x2, y2, { stroke: color, strokeWidth: brushSize})
-        : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
-          stroke: color,
-          fill: color,
-        });
-      return { id, x1, y1, x2, y2, type, roughElement };
+      {
+        const elementDetails = type === "line"
+          ? generator.line(x1, y1, x2, y2, { stroke: color, strokeWidth: brushSize})
+          : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
+            stroke: color,
+            fill: fill,
+          });
+        return { id, x1, y1, x2, y2, type, elementDetails, color };
+      }
     case "circle":
-      const circElement = generator.circle(x1, y1, 50, {
-        stroke: color,
-        fill: color,
-      });
-      return { id, x1, y1, x2, y2, type, circElement };
+      {
+        const radius = getRadiusDistance(x1, y1, x2, y2);
+        const diameter = radius * 2;
+        const elementDetails = generator.circle(x1, y1, diameter, {
+          stroke: color,
+          fill: fill,
+        });
+        return { id, x1, y1, x2, y2, type, elementDetails, color };
+      }
     case "pencil":
       return { id, type, points: [{ x: x1, y: y1 }], color, brushSize };
     case "eraser":
@@ -69,11 +84,11 @@ const drawElement = (roughCanvas, context, element, color) => {
       context.globalCompositeOperation="source-over";
     case "rectangle":
       context.globalCompositeOperation="source-over";
-      roughCanvas.draw(element.roughElement);
+      roughCanvas.draw(element.elementDetails);
       break;
     case "circle":
       context.globalCompositeOperation="source-over";
-      roughCanvas.draw(element.circElement);
+      roughCanvas.draw(element.elementDetails);
       break;
     case "pencil":
       context.globalCompositeOperation="source-over";
@@ -109,13 +124,19 @@ const isWithinElement = (x, y, element) => {
     const c = { x, y };
     const offset = distance(a, b) - (distance(a, c) + distance(b, c));
     return Math.abs(offset) < 1;
+  } else if (type === 'circle') {
+    const circleRadius = getRadiusDistance(x1, y1, x2, y2);
+    const cursorRadius = getRadiusDistance(x1, y1, x, y);
+    return cursorRadius <= circleRadius;
   }
 };
 
 const distance = (a, b) => Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
 
 const getElementAtPosition = (x, y, elements) => {
-  return elements.find(element => isWithinElement(x, y, element));
+  // reverse the elements array so that it gets last created element instead of first
+  const reverseElements = [...elements].reverse();
+  return reverseElements.find(element => isWithinElement(x, y, element));
 };
 
 export default function App() {
@@ -163,7 +184,7 @@ export default function App() {
 
     const roughCanvas = rough.canvas(canvas);
 
-
+    // test shapes:
     // const rect = generator.rectangle(10, 10, 200, 200);
     // const circ = generator.circle(80, 80, 80, {fill: 'red', fillStyle: 'solid'});
     // const line = generator.line(10, 10, 200, 200);
@@ -173,8 +194,10 @@ export default function App() {
     // roughCanvas.draw(line);
   }, [elements]);
 
-  const updateElement = (id, x1, y1, x2, y2, type) => {
+  const updateElement = (id, x1, y1, x2, y2, type, element) => {
     const elementsCopy = [...elements];
+
+    const { fill } = element && element.elementDetails ? element.elementDetails.options : "";
 
     switch (type) {
       case "line":
@@ -203,6 +226,7 @@ export default function App() {
     if (tool === "selection") {
       const element = getElementAtPosition(clientX, clientY, elements);
       if (element) {
+        console.log(element);
         const offsetX = clientX - element.x1;
         const offsetY = clientY - element.y1;
         setSelectedElement({ ...element, offsetX, offsetY });
@@ -211,12 +235,11 @@ export default function App() {
     } else if (tool === "fill") {
       const element = getElementAtPosition(clientX, clientY, elements);
       if (element) {
-        // const index = element.id
-        // let elementsCopy = [...elements]
-        // elementsCopy[index].roughElement.options.fillStyle = 'red'
-        // console.log(elementsCopy[index].roughElement.options.fill)
-        // console.log(element)
-        // setElements(elementsCopy)
+        let elementsCopy = [...elements];
+        const index = element.id;
+        const newColorElement = createElement(element.id, element.x1, element.y1, element.x2, element.y2, element.type, element.color, brushSize, color); // replace 'red' with colour state
+        elementsCopy[index] = newColorElement;
+        setElements(elementsCopy);
       }
     } else {
       const id = elements.length;
@@ -245,7 +268,7 @@ export default function App() {
     if (action === "drawing") {
       const index = elements.length - 1;
       const { x1, y1 } = elements[index];
-      updateElement(index, x1, y1, clientX, clientY, tool);
+      updateElement(index, x1, y1, clientX, clientY, tool, selectedElement);
 
     } else if (action === "moving") {
 
@@ -254,7 +277,7 @@ export default function App() {
       const height = y2 - y1;
       const offX1 = clientX - offsetX;
       const offY1 = clientY - offsetY;
-      updateElement(id, offX1, offY1, offX1 + width, offY1 + height, type);
+      updateElement(id, offX1, offY1, offX1 + width, offY1 + height, type, selectedElement);
     }
   };
 
@@ -318,6 +341,10 @@ export default function App() {
         <button onClick={undo}>Undo</button>
         <button onClick={clear}>Clear</button>
         <div style={{ display: "inline-block", marginLeft: "2rem" }}>
+          <label>
+            Black
+            <input type="radio" checked={color === "black"} onChange={() => setColor("black")} />
+          </label>
           <label>
             Red
             <input type="radio" checked={color === "red"} onChange={() => setColor("red")} />
