@@ -2,6 +2,7 @@ import * as React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
 
 import {
   Box,
@@ -71,6 +72,7 @@ export default function ResponsiveDrawer(props) {
             <FitnessCenterIcon />
           </ListItemIcon>
           <ListItemText primary={"Programs"} />
+          <AddIcon />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
 

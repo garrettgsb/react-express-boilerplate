@@ -42,14 +42,15 @@ export default function App() {
   const [workouts, setWorkouts] = useState([]);
   const [exerciseSelections, setExerciseSelections] = useState([]);
   const [exercises, setExercises] = useState([]);
-
+  // const [program, setProgram] = useState({});
+  // const [workout, setWorkout] = useState([]);
 
   // When App initially loads, fetch data and store in state
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/programs")
       .then((result) => {
-        // console.log("result.data:", result.data);
+        console.log("minha result.data:", result.data);
         setPrograms(result.data);
       })
       .catch((e) => {
@@ -75,32 +76,29 @@ export default function App() {
         console.log(e);
       });
 
-    axios
-      .get("http://localhost:8080/api/exercises/1")
-    axios.get("http://localhost:8080/api/program").then((result) => {
-      setPrograms(result.data);
-    });
-    axios.get("http://localhost:8080/api/workout").then((result) => {
-      setWorkouts(result.data);
-    });
-    axios.get("http://localhost:8080/api/program/exercise").then((result) => {
-      setExerciseSelections(result.data);
-    });
+    // axios.get("http://localhost:8080/api/programs").then((result) => {
+    //   console.log("programs:", result.data)
+    //   setPrograms(result.data);
+    // });
+    // axios.get("http://localhost:8080/api/workouts").then((result) => {
+    //   setWorkouts(result.data);
+    // });
+    // axios.get("http://localhost:8080/api/exerciseselections").then((result) => {
+    //   setExerciseSelections(result.data);
+    // });
     axios
       .get("http://localhost:8080/api/program/exercise/:id")
       .then((result) => {
         // console.log("result of setexercises:", result.data);
         setExercises(result.data);
-      })
+      });
   }, []);
-  
-  
+
   return (
     <>
       <ResponsiveDrawer programs={programs} setPrograms={setPrograms}>
         <Outlet />
       </ResponsiveDrawer>
-
     </>
-  )
+  );
 }
