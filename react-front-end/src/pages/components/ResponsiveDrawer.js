@@ -137,7 +137,7 @@ export default function ResponsiveDrawer(props) {
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+        aria-label="workout app navigation"
       >
         <Drawer
           container={container}
