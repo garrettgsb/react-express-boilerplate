@@ -62,11 +62,7 @@ export default function ExerciseCard(props) {
   };
 
   return (
-    <Card
-      sx={{
-        maxWidth: 1200,
-      }}
-    >
+    <Card>
       {/* Initially visible info: exercise name, attributes and expand button */}
       <CardContent
         sx={{
@@ -117,14 +113,16 @@ export default function ExerciseCard(props) {
         <Box sx={{ display: "flex" }}>
           <CardMedia
             component="img"
-            sx={{ width: "40%", height: 200 }}
+            sx={{ width: "40%", height: 225 }}
             image="https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt="exercise"
           />
           <CardContent>
             <Typography variant="h5">Instructions</Typography>
             <Typography variant="p">{exercise.instructions}</Typography>
-            <Typography variant="h5">Notes</Typography>
+            <Typography variant="h5" pt={"0.5em"}>
+              Notes
+            </Typography>
             <Typography variant="p">{exerciseAttributes.notes}</Typography>
           </CardContent>
         </Box>
