@@ -45,17 +45,17 @@ export default function App() {
 
   // When App initially loads, fetch data and store in state
   useEffect(() => {
-    axios.get("http://localhost:8080/api/program").then((result) => {
+    axios.get("http://localhost:8080/api/programs").then((result) => {
       setPrograms(result.data);
     });
-    axios.get("http://localhost:8080/api/workout").then((result) => {
+    axios.get("http://localhost:8080/api/workouts").then((result) => {
       setWorkouts(result.data);
     });
-    axios.get("http://localhost:8080/api/program/exercise").then((result) => {
+    axios.get("http://localhost:8080/api/exerciseselections").then((result) => {
       setExerciseSelections(result.data);
     });
     axios
-      .get("http://localhost:8080/api/program/exercise/:id")
+      .get("http://localhost:8080/api/programs/exercises/:id")
       .then((result) => {
         setExercises(result.data);
       });
