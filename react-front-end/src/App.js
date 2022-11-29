@@ -44,7 +44,7 @@ const getRadiusDistance = (x1, y1, x2, y2) => {
   // A² + B² = C² for our case this is height² + base² = distance²
   // This means distance === square root of height² + base²
   const distance = Math.sqrt(Math.pow(base, 2) + Math.pow(height, 2));
-  return distance
+  return distance;
 };
 
 function createElement(id, x1, y1, x2, y2, type, fill) {
@@ -62,8 +62,8 @@ function createElement(id, x1, y1, x2, y2, type, fill) {
       }
     case "circle":
       {
-        const radius = getRadiusDistance(x1, y1, x2, y2)
-        const diameter = radius*2
+        const radius = getRadiusDistance(x1, y1, x2, y2);
+        const diameter = radius * 2;
         const elementDetails = generator.circle(x1, y1, diameter, {
           fill: fill, // transparent default
           fillStyle: 'solid' // solid fill default
@@ -111,9 +111,9 @@ const isWithinElement = (x, y, element) => {
     const offset = distance(a, b) - (distance(a, c) + distance(b, c));
     return Math.abs(offset) < 1;
   } else if (type === 'circle') {
-    const circleRadius = getRadiusDistance(x1, y1, x2, y2)
-    const cursorRadius = getRadiusDistance(x1, y1, x, y)
-    return cursorRadius <= circleRadius
+    const circleRadius = getRadiusDistance(x1, y1, x2, y2);
+    const cursorRadius = getRadiusDistance(x1, y1, x, y);
+    return cursorRadius <= circleRadius;
   }
 };
 
@@ -121,7 +121,7 @@ const distance = (a, b) => Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y
 
 const getElementAtPosition = (x, y, elements) => {
   // reverse the elements array so that it gets last created element instead of first
-  const reverseElements = [...elements].reverse()
+  const reverseElements = [...elements].reverse();
   return reverseElements.find(element => isWithinElement(x, y, element));
 };
 
@@ -150,6 +150,7 @@ export default function App() {
   const [action, setAction] = useState('none');
   const [tool, setTool] = useState("line");
   const [selectedElement, setSelectedElement] = useState(null);
+  const [colour, setColour] = useState("black");
 
   const clear = () => {
     setElements([]);
