@@ -86,7 +86,7 @@ const drawElement = (roughCanvas, context, element) => {
       roughCanvas.draw(element.elementDetails);
       break;
     case "pencil":
-      context.fillStyle = "orange";
+      context.fillStyle = "orange"; // replace "orange" with colour state
       const outlinePoints = getStroke(element.points);
       const pathData = getSvgPathFromStroke(outlinePoints);
       const myPath = new Path2D(pathData);
@@ -218,7 +218,7 @@ export default function App() {
       if (element) {
         let elementsCopy = [...elements];
         const index = element.id;
-        const newColorElement = createElement(element.id, element.x1, element.y1, element.x2, element.y2, element.type, 'red');
+        const newColorElement = createElement(element.id, element.x1, element.y1, element.x2, element.y2, element.type, 'red'); // replace 'red' with colour state
         elementsCopy[index] = newColorElement;
         setElements(elementsCopy);
       }
