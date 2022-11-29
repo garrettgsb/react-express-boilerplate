@@ -120,7 +120,9 @@ const isWithinElement = (x, y, element) => {
 const distance = (a, b) => Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
 
 const getElementAtPosition = (x, y, elements) => {
-  return elements.find(element => isWithinElement(x, y, element));
+  // reverse the elements array so that it gets last created element instead of first
+  const reverseElements = [...elements].reverse()
+  return reverseElements.find(element => isWithinElement(x, y, element));
 };
 
 export default function App() {
