@@ -1,5 +1,8 @@
 import React from "react";
 import './styles/canvas.css'
+import Canvas from "../components/Canvas";
+let canvasH = 700;
+let canvasW = 1500;
 export default function CanvasPage() {
   return(
     <main className="main_page">
@@ -7,7 +10,10 @@ export default function CanvasPage() {
         <label>TOOLS GO HERE</label>
       </article>
       <section className="canvas_section">
-        <label>CANVAS GOES HERE</label>
+        <Canvas 
+          height={canvasH}
+          width={canvasW}
+        />
       </section>
       <section className="save_edit_btns">
         <button>SAVE</button>

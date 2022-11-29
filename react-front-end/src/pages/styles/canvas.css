@@ -1,7 +1,7 @@
 .canvas_section {
   display: flex;
-  min-width: 1500px;
-  min-height: 700px;
+  max-width: 1500px;
+  max-height: 700px;
   height: auto;
   width: auto;
   border: 2px solid black;
