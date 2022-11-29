@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+import * as React from "react";
+import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 
@@ -47,9 +47,9 @@ export default function ResponsiveDrawer(props) {
   };
 
   // Program navigation click handler
-  const onClickProgram = (id) => {
-    navigate(`/program/${id}`);
-  };
+  // const onClickProgram = (id) => {
+  //   navigate(`/program/${id}`);
+  // };
   
   const drawerItems = (
     <div>
@@ -78,16 +78,18 @@ export default function ResponsiveDrawer(props) {
           <List component="div" disablePadding>
             {/* ARRAY OF PROGRAMS */}
             {props.programs.map((program) => (
-              <ListItemButton
-                key={program.id}
-                sx={{ pl: 4 }}
-                onClick={() => onClickProgram(program.id)}
-              >
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary={program.name} />
-              </ListItemButton>
+              <Link to={`/program/${program.id}`} className={"programListItem"}>
+                <ListItemButton
+                  key={program.id}
+                  sx={{ pl: 4 }}
+                >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary={program.name} />
+                </ListItemButton>
+                </Link>
+
             ))}
           </List>
         </Collapse>
