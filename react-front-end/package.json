@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.1",
+    "node-sass": "^8.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^6.4.3",
     "react-scripts": "2.1.8"
   },
   "scripts": {
@@ -23,5 +25,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "sass": "^1.56.1"
+  }
 }

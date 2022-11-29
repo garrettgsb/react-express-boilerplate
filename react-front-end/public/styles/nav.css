@@ -1,0 +1,76 @@
+.App {
+  text-align: center;
+  background-color: rgb(190, 90, 90);
+}
+
+.nav {
+  display: flex;
+  background-color: rgb(160, 40, 40);
+  height: 100px;
+  width: 100vw;
+  border: 3px solid black;
+}
+
+.nav div.nav_links {
+  display: flex;
+  width: 90vw;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav_btns {
+  display: flex;
+  flex-direction: row;
+  margin-left: 5em;
+}
+
+.nav_loggedin {
+  display: flex;
+  font-size: 24px;
+  margin-right: 2em;
+}
+
+div.nav_user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav_user img {
+  display: flex;
+  height: 50px;
+  margin-right: 1em;
+}
+
+.nav_new {
+  display: flex;
+  border: 2px solid black;
+  border-radius: 0.5em;
+  font-size: 24px;
+  padding: 0.5em;
+  background-color: rgb(100, 0, 0);
+  margin-left: 2em;
+}
+
+.nav_home {
+  display: flex;
+  border: 2px solid black;
+  border-radius: 0.5em;
+  font-size: 24px;
+  padding: 0.5em;
+  background-color: rgb(100, 0, 0);
+}
+
+.nav_acc {
+  display: flex;
+  border: 2px solid black;
+  border-radius: 0.5em;
+  font-size: 24px;
+  padding: 0.5em;
+  background-color: rgb(100, 0, 0);
+}
+
+/*# sourceMappingURL=nav.css.map */
