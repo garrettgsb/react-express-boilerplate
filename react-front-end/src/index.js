@@ -8,8 +8,6 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Program from "./pages/Program";
 import Workout from "./pages/Workout";
-import Exercise from "./pages/Exercise";
-
 
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
@@ -29,10 +27,6 @@ const router = createBrowserRouter([
       {
         path: "/workout",
         element: <Workout />,
-      },
-      {
-        path: "/exercise",
-        element: <Exercise />,
       },
     ],
   },

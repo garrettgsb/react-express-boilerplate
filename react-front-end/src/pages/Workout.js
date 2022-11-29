@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import ExerciseCard from "./components/ExerciseCard";
+import EditSharpIcon from "@mui/icons-material/EditSharp";
+import SaveSharpIcon from "@mui/icons-material/SaveSharp";
+import AddIcon from "@mui/icons-material/Add";
 
-import { Card, CardMedia, Stack, Toolbar, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardMedia,
+  Fab,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 
 const exercise = {
   id: 1,
@@ -24,20 +35,66 @@ const exerciseAttributes = {
 };
 
 export default function Workout(props) {
+  // State and handler for toggling editing "mode"
+  const [edit, setEdit] = useState(false);
+  const switchEdit = () => {
+    setEdit(!edit);
+  };
+
+  // Function to save changes and return to viewing "mode"
+  const saveEdits = () => {
+    // Send request and then
+    switchEdit();
+  };
+
   return (
     <>
       <Toolbar />
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         This is Workout page
       </Typography>
+      {!edit && (
+        <Button
+          variant="outlined"
+          size="medium"
+          startIcon={<EditSharpIcon />}
+          onClick={switchEdit}
+        >
+          Edit
+        </Button>
+      )}
+      {edit && (
+        <Button
+          variant="contained"
+          size="medium"
+          startIcon={<SaveSharpIcon />}
+          onClick={saveEdits}
+        >
+          Save
+        </Button>
+      )}
       <Stack
         direction="column"
         justifyContent="flex-start"
         alignItems="stretch"
         spacing={2}
+        maxWidth={1200}
+        minWidth={520}
       >
         {/* Array of Exercise Cards */}
-        <ExerciseCard />
+        <ExerciseCard editMode={edit} />
+
+        {/* When in edit state, render Add button */}
+        {edit && (
+          <Fab
+            color="primary"
+            aria-label="add"
+            size={"medium"}
+            sx={{ alignSelf: "center" }}
+          >
+            <AddIcon />
+          </Fab>
+        )}
       </Stack>
     </>
   );
