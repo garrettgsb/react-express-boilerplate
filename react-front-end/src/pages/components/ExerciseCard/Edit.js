@@ -9,6 +9,7 @@ import {
   IconButton,
   CardActions,
   CardContent,
+  TextField,
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -62,9 +63,27 @@ export default function ExerciseCard(props) {
     setExpanded(!expanded);
   };
 
+  // State and change handler for NAME
+  const [name, setName] = useState("exerc name here");
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  // State and change handler for SETS
+  const [sets, setSets] = useState(3);
+  const handleSetsChange = (event) => {
+    setSets(event.target.value);
+  };
+
+  // State and change handler for REPS
+  const [reps, setReps] = useState(10);
+  const handleRepsChange = (event) => {
+    setReps(event.target.value);
+  };
+
   return (
     <Card>
-      {/* Initially visible info: exercise name, attributes and expand button */}
+      {/* Main content: exercise name, attributes and expand button */}
       <CardContent
         sx={{
           display: "flex",
@@ -73,17 +92,41 @@ export default function ExerciseCard(props) {
         }}
       >
         <ExerciseAttribute>
-          <Typography variant="h5">EDITING.......</Typography>
+          <TextField
+            id="standard-required"
+            helperText="Name"
+            variant="standard"
+            onChange={handleNameChange}
+            value={name}
+          />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">{exerciseAttributes.sets}</Typography>
-          <Typography variant="p">SETS</Typography>
+          <TextField
+            id="standard-number"
+            helperText="SETS"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="standard"
+            onChange={handleSetsChange}
+            value={sets}
+          />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">{exerciseAttributes.reps}</Typography>
-          <Typography variant="p">REPS</Typography>
+          <TextField
+            id="standard-number"
+            helperText="REPS"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="standard"
+            onChange={handleRepsChange}
+            value={reps}
+          />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
