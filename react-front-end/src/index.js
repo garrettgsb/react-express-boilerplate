@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         element: <Program />,
       },
       {
-        path: "/workout",
+        path: "/workout/:id",
         element: <Workout />,
       },
     ],
