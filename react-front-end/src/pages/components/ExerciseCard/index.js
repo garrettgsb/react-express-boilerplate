@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import Show from "./Show";
+import Edit from "./Edit";
 
-import { Divider, Card, Typography } from "@mui/material";
-
+// MOCK DATA
 const exercise = {
   id: 1,
   name: "Back Squat",
@@ -23,39 +24,5 @@ const exerciseAttributes = {
 };
 
 export default function ExerciseCard(props) {
-  return (
-    <Card
-      sx={{
-        display: "flex",
-        justifyContent: "space-around",
-        alignItems: "center",
-      }}
-    >
-      <div className="exercise__attribute">
-        <Typography variant="h4">{exercise.name}</Typography>
-      </div>
-      <Divider orientation="vertical" variant="middle" flexItem />
-      <div className="exercise__attribute">
-        <Typography variant="h4">{exerciseAttributes.sets}</Typography>
-        <Typography variant="h6">SETS</Typography>
-      </div>
-      <Divider orientation="vertical" variant="middle" flexItem />
-      <div className="exercise__attribute">
-        <Typography variant="h4">{exerciseAttributes.reps}</Typography>
-        <Typography variant="h6">REPS</Typography>
-      </div>
-      <Divider orientation="vertical" variant="middle" flexItem />
-      <div>
-        <Typography variant="h4">{exerciseAttributes.load}</Typography>
-        <Typography variant="h6">lbs</Typography>
-      </div>
-      <Divider orientation="vertical" variant="middle" flexItem />
-      <div className="exercise__attribute">
-        <Typography variant="h4">
-          {exerciseAttributes.rest_period} min
-        </Typography>
-        <Typography variant="h6">rest</Typography>
-      </div>
-    </Card>
-  );
+  return props.editMode ? <Edit /> : <Show />;
 }
