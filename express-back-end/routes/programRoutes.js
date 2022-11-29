@@ -41,7 +41,9 @@ router.get('/:id', (req, res) => {
 
 //UPDATE - put
 router.put('/:id', (req, res) => {
-  programQueries.updateProgram(req.body)
+  id = req.params.id
+  updates = req.body
+  programQueries.updateProgram(id, updates)
   .then(result => {
     res.json(result);
   })

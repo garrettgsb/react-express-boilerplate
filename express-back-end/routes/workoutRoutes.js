@@ -41,7 +41,9 @@ router.get('/:id', (req, res) => {
 
 //UPDATE - put
 router.put('/:id', (req, res) => {
-  workoutQueries.updateWorkOuts(req.body)
+  id = req.params.id
+  info = req.body
+  workoutQueries.updateWorkOuts(id, info)
   .then(result => {
     res.json(result);
   })
