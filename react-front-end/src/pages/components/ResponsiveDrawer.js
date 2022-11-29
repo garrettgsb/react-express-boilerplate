@@ -1,5 +1,7 @@
-import * as React from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 import {
   Box,
@@ -35,24 +37,24 @@ const navbarData = [
   },
 ];
 
-const Programs = [
-  {
-    id: 1,
-    name: "Full Body",
-  },
-  {
-    id: 2,
-    name: "Bro Split",
-  },
-  {
-    id: 3,
-    name: "Upper Lower",
-  },
-];
+// const Programs = [
+//   {
+//     id: 1,
+//     name: "Full Body",
+//   },
+//   {
+//     id: 2,
+//     name: "Bro Split",
+//   },
+//   {
+//     id: 3,
+//     name: "Upper Lower",
+//   },
+// ];
 
 export default function ResponsiveDrawer(props) {
   const { window } = props;
-
+  const params = useParams();
   const navigate = useNavigate();
 
   // Toggling drawer state and menu button click handler
@@ -76,7 +78,7 @@ export default function ResponsiveDrawer(props) {
   const onClickProgram = (id) => {
     navigate(`/program/${id}`);
   };
-
+  
   const drawerItems = (
     <div>
       <Divider />
@@ -103,7 +105,7 @@ export default function ResponsiveDrawer(props) {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {/* ARRAY OF PROGRAMS */}
-            {Programs.map((program) => (
+            {props.programs.map((program) => (
               <ListItemButton
                 key={program.id}
                 sx={{ pl: 4 }}
