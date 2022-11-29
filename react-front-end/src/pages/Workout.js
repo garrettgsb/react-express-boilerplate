@@ -37,19 +37,27 @@ export default function Workout(props) {
   return (
     <>
       <Toolbar />
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         This is Workout page
       </Typography>
+
       <Stack
         direction="column"
         justifyContent="flex-start"
         alignItems="stretch"
         spacing={2}
+        maxWidth={1200}
+        minWidth={520}
       >
         {/* Array of Exercise Cards */}
         <ExerciseCard />
         {edit && (
-          <Fab color="primary" aria-label="add">
+          <Fab
+            color="primary"
+            aria-label="add"
+            size={"medium"}
+            sx={{ alignSelf: "center" }}
+          >
             <AddIcon />
           </Fab>
         )}
