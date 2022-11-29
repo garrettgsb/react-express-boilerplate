@@ -1,32 +1,23 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-export default function ProgramCard ({program, edit}) {
-
-  const [name, setName] = useState(name)
-
-  const handleSubmit = event => {
-    event.preventDefault();
-}
+export default function ProgramCard(props) {
+  const handleOnChange = (event) => {
+    props.setProgram({ ...props.program, name: event.target.value });
+  };
 
   return (
     <div>
-
-      {edit ?
-
-        <form autoComplete="off" onSubmit={handleSubmit}>
-          <input
-              className="appointment__create-input text--semi-bold"
-              name="name"
-              type="text"
-              placeholder={program.name}
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              data-testid="student-name-input" 
-          />
-        </form>  :
-
-        <p>{program.name}</p>}
-
+      {props.edit ? (
+        <input
+          name="name"
+          type="text"
+          placeholder={props.program.name}
+          value={props.name}
+          onChange={handleOnChange}
+        />
+      ) : (
+        <p>{props.program.name}</p>
+      )}
     </div>
-  )
+  );
 }
