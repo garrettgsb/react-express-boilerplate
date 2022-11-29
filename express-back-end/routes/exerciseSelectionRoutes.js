@@ -1,14 +1,14 @@
 const Express = require('express');
-const workoutQueries = require('../db/queries/workoutsQueries');
+const exerciseSelectionQueries = require('../db/queries/exerciseSelectionQueries');
 const router = Express.Router();
 
-// create the routes for the workout used 1 as a demo to show the data that would be represented if a user was login
+// create the routes for the exercise used 1 as a demo to show the data that would be represented if a user was login
 
-//CRUD REST API WORKOUTS ROUTES
+//CRUD REST API EXERCISES SELECTION ROUTES
 
 // CREATE - post
 router.post('/', (req, res) => {
-  workoutQueries.addWorkouts(req.body)
+  exerciseSelectionQueries.addExerciseSelection(req.body)
     .then(result => {
       res.json(result);
     })
@@ -17,9 +17,9 @@ router.post('/', (req, res) => {
     })
 });
 
-// READ - get User workouts
+// READ - get all by Workout 
 router.get('/', (req, res) => {
-  workoutQueries.getWorkoutByProgramId(1)
+  exerciseSelectionQueries.getExerciseSelectionByWorkoutId(1)
     .then(result => {
       res.json(result);
     })
@@ -28,9 +28,9 @@ router.get('/', (req, res) => {
     })
 });
 
-// READ - get Individual
+// READ - get workout by id
 router.get('/:id', (req, res) => {
-  workoutQueries.getWorkoutById(req.params.id)
+  exerciseSelectionQueries.getExerciseSelectionById(req.params.id)
     .then(result => {
       res.json(result);
     })
@@ -39,9 +39,9 @@ router.get('/:id', (req, res) => {
     })
 });
 
-//UPDATE - put
+// UPDATE - put
 router.put('/:id', (req, res) => {
-  workoutQueries.updateWorkOuts(req.body)
+  exerciseSelectionQueries.updateExerciseSelection(req.body)
   .then(result => {
     res.json(result);
   })
@@ -50,9 +50,10 @@ router.put('/:id', (req, res) => {
   })
 });
 
+
 //DELETE - delete
-router.get('/:id', (req, res) => {
-  workoutQueries.deleteWorkout(req.params.id)
+router.delete('/:id', (req, res) => {
+  exerciseSelectionQueries.deleteExerciseSelection(req.params.id)
     .then(result => {
       res.json(result);
     })

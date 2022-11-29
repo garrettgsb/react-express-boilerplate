@@ -22,6 +22,17 @@ const db = require("../index");
     });
 };
 
+const getWorkoutById = (id) => {
+  return db
+    .query(`SELECT * FROM workouts WHERE id=$1;`, [id])
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      err.message;
+    });
+};
+
  const addWorkouts = (workouts) => {
   return db
     .query(
@@ -42,6 +53,21 @@ const db = require("../index");
     });
 };
 
+const updateWorkOuts = async (id, workOutsInfo) => {
+  const setColumns = Object.keys(workOutsInfo).map((property, index) => `${property}=$${index + 2}`).join(', ')
+
+  const queryDef = {
+      text: `
+    UPDATE workouts
+    SET ${setColumns}
+    WHERE id = $1 RETURNING *`,
+      values: [id, ...Object.values(workOutsInfo)],
+  };
+  const data = await db.query(queryDef);
+  return data.rows[0];
+};
+
+
  const deleteWorkout = (id) => {
   return db
     .query(`DELETE FROM workouts WHERE id=$1`,[id])
@@ -55,6 +81,8 @@ const db = require("../index");
 
 module.exports = {
   getWorkouts,
+  getWorkoutById,
+  updateWorkOuts,
   getWorkoutByProgramId,
   addWorkouts,
   deleteWorkout

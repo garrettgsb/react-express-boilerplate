@@ -11,11 +11,22 @@ const getExerciseSelection = () => {
     });
 };
 
-const getExerciseSelectionById = (workout_id) => {
+const getExerciseSelectionByWorkoutId = (workout_id) => {
   return db
     .query(`SELECT * FROM exercise_selections WHERE workout_id=$1;`, [
       workout_id,
     ])
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((err) => {
+      err.message;
+    });
+};
+
+const getExerciseSelectionById = (id) => {
+  return db
+    .query(`SELECT * FROM exercise_selections WHERE id=$1;`, [id])
     .then((result) => {
       return result.rows[0];
     })
@@ -47,6 +58,20 @@ const addExerciseSelection = (exercise_selections) => {
     });
 };
 
+const updateExerciseSelection = async (id, exerciseInfo) => {
+  const setColumns = Object.keys(exerciseInfo).map((property, index) => `${property}=$${index + 2}`).join(', ')
+
+  const queryDef = {
+      text: `
+    UPDATE exercise_selections
+    SET ${setColumns}
+    WHERE id = $1 RETURNING *`,
+      values: [id, ...Object.values(exerciseInfo)],
+  };
+  const data = await db.query(queryDef);
+  return data.rows[0];
+};
+
 const deleteExerciseSelection = (id) => {
   return db
     .query(`DELETE FROM exercise_selections WHERE id=$1`, [id])
@@ -61,6 +86,8 @@ const deleteExerciseSelection = (id) => {
 module.exports = {
   getExerciseSelection,
   getExerciseSelectionById,
+  getExerciseSelectionByWorkoutId,
+  updateExerciseSelection,
   addExerciseSelection,
-  deleteExerciseSelection
+  deleteExerciseSelection,
 };

@@ -11,6 +11,17 @@ const getPrograms = () => {
     });
 };
 
+const getProgramWithId = (Id) => {
+  return db
+    .query(`SELECT * FROM programs WHERE id=$1;`, [Id])
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      err.message;
+    });
+};
+
 const getProgramWithUserId = (userId) => {
   return db
     .query(`SELECT * FROM programs WHERE user_id=$1;`, [userId])
@@ -43,6 +54,21 @@ const addPrograms = (programs) => {
     });
 };
 
+
+const updatePrograms = async (id, programInfo) => {
+  const setColumns = Object.keys(programInfo).map((property, index) => `${property}=$${index + 2}`).join(', ')
+
+  const queryDef = {
+      text: `
+    UPDATE programs
+    SET ${setColumns}
+    WHERE id = $1 RETURNING *`,
+      values: [id, ...Object.values(programInfo)],
+  };
+  const data = await db.query(queryDef);
+  return data.rows[0];
+};
+
 const deleteProgram = (id) => {
   return db
     .query(`DELETE FROM program WHERE id=$1`, [id])
@@ -57,6 +83,8 @@ const deleteProgram = (id) => {
 module.exports = {
   getPrograms,
   getProgramWithUserId,
+  getProgramWithId,
+  updatePrograms,
   addPrograms,
   deleteProgram
 };
