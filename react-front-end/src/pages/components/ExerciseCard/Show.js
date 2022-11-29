@@ -94,7 +94,7 @@ export default function ExerciseCard(props) {
           <Typography variant="h5">
             {exerciseAttributes.rest_period} min
           </Typography>
-          <Typography variant="p">rest</Typography>
+          <Typography variant="p">REST</Typography>
         </ExerciseAttribute>
         <CardActions>
           <ExpandMore
