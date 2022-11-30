@@ -3,6 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
+import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import EqualizerIcon from "@mui/icons-material/Equalizer";
 
 import {
   Box,
@@ -16,9 +19,6 @@ import {
   Collapse,
   Toolbar,
 } from "@mui/material";
-import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import EqualizerIcon from "@mui/icons-material/Equalizer";
 
 import Appbar from "./Appbar";
 
@@ -72,7 +72,11 @@ export default function ResponsiveDrawer(props) {
             <FitnessCenterIcon />
           </ListItemIcon>
           <ListItemText primary={"Programs"} />
-          <AddIcon />
+
+          <Link to={"/program/new"}>
+            <AddIcon />
+          </Link>
+
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
 

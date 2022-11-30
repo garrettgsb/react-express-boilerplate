@@ -10,6 +10,7 @@ import axios from "axios";
 
 export default function Program() {
   const params = useParams();
+
   const [programs, setPrograms] = useState([]);
   const [program, setProgram] = useState({});
   const [workout, setWorkout] = useState([]);
@@ -23,7 +24,6 @@ export default function Program() {
     axios
     .get(`http://localhost:8080/api/programs/${programId}`)
     .then((result) => {
-      console.log("program data", result.data)
         setProgram(result.data.program || {});
       })
       .catch((e) => {
