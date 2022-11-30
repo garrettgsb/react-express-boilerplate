@@ -5,6 +5,7 @@ import Layout from "./pages/Layout";
 import AccountPage from './pages/AccountPage';
 import CanvasPage from './pages/CanvasPage';
 import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route index element={<HomePage />} />
           <Route path="canvas" element={<CanvasPage />} />
           <Route path="account" element={<AccountPage />} />
+          <Route path="login" element={<LoginPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
