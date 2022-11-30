@@ -1,5 +1,6 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 import {
   Box,
@@ -22,59 +23,63 @@ import Appbar from "./Appbar";
 const drawerWidth = 240;
 
 // MOCK DATA
-const navbarData = [
-  {
-    title: "Dashboard",
-    // icon: <InsightsIcon/>,
-    link: "/dashboard",
-  },
-  {
-    title: "Program",
-    // icon: <InsightsIcon/>,
-    link: "/program",
-  },
-];
+// const navbarData = [
+//   {
+//     title: "Dashboard",
+//     // icon: <InsightsIcon/>,
+//     link: "/dashboard",
+//   },
+//   {
+//     title: "Program",
+//     // icon: <InsightsIcon/>,
+//     link: "/program",
+//   },
+// ];
 
-const Programs = [
-  {
-    id: 1,
-    name: "Full Body",
-  },
-  {
-    id: 2,
-    name: "Bro Split",
-  },
-  {
-    id: 3,
-    name: "Upper Lower",
-  },
-];
+// const Programs = [
+//   {
+//     id: 1,
+//     name: "Full Body",
+//   },
+//   {
+//     id: 2,
+//     name: "Bro Split",
+//   },
+//   {
+//     id: 3,
+//     name: "Upper Lower",
+//   },
+// ];
 
 export default function ResponsiveDrawer(props) {
-  const { window } = props;
+  // Define state to store programs
+  const [programs, setPrograms] = useState([]);
 
-  const navigate = useNavigate();
+  // Initial fetching of programs
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/programs").then((result) => {
+      setPrograms(result.data);
+    });
+  }, []);
+
+  // console.log(programs);
 
   // Toggling drawer state and menu button click handler
-  const [mobileOpen, setMobileOpen] = React.useState(true);
+  const [mobileOpen, setMobileOpen] = useState(true);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   // Expanding list item state and click handler
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(!open);
   };
 
+  const navigate = useNavigate();
   // Main logo click handler
   const onClickEvent = () => {
     navigate("/dashboard");
-  };
-
-  // Program navigation click handler
-  const onClickProgram = (id) => {
-    navigate(`/program/${id}`);
   };
 
   const drawerItems = (
@@ -102,8 +107,8 @@ export default function ResponsiveDrawer(props) {
 
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            {/* ARRAY OF PROGRAMS */}
-            {Programs.map((program) => (
+            {/* ARRAY OF PROGRAMS MAPPED FROM STATE WHICH RECEIVES DB DATA */}
+            {programs.map((program) => (
               <Link to={`/program/${program.id}`} className={"programListItem"}>
                 <ListItemButton key={program.id} sx={{ pl: 4 }}>
                   <ListItemIcon>
@@ -119,6 +124,7 @@ export default function ResponsiveDrawer(props) {
     </div>
   );
 
+  const { window } = props;
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
