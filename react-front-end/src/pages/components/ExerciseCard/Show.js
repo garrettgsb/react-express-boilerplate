@@ -96,6 +96,7 @@ export default function ExerciseCard(props) {
           </Typography>
           <Typography variant="p">REST</Typography>
         </ExerciseAttribute>
+        {/* Expand/collapse details chevron */}
         <CardActions>
           <ExpandMore
             expand={expanded}
@@ -113,7 +114,7 @@ export default function ExerciseCard(props) {
         <Box sx={{ display: "flex" }}>
           <CardMedia
             component="img"
-            sx={{ width: "40%", height: 225 }}
+            sx={{ width: "40%", height: "auto" }}
             image="https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt="exercise"
           />
