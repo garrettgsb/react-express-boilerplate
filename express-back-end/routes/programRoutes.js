@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
   programQueries.getProgramWithUserId(1)
   .then(programs => {
-    res.json({programs});
+    res.json(programs);
   })
   .catch(err => {
     err.message;

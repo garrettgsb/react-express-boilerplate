@@ -46,10 +46,7 @@ export default function ResponsiveDrawer(props) {
     event.stopPropagation();
   }
 
-  // Program navigation click handler
-  // const onClickProgram = (id) => {
-  //   navigate(`/program/${id}`);
-  // };
+
   
   const drawerItems = (
     <div>
