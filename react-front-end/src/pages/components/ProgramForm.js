@@ -77,8 +77,8 @@ export default function ProgramForm() {
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-            label="End_date"
-            value={programFormData.start_date}
+            label="End Date"
+            value={programFormData.end_date}
             onChange={(event) => {
               setProgramFormData({
                 ...programFormData,
