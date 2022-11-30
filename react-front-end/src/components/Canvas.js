@@ -226,9 +226,13 @@ export default function Canvas(props) {
   };
 
   const mouseDown = (event) => {
+    const canvas = document.getElementById('curtaindraw');
     const { clientX, clientY } = event;
+    const xCoord = clientX - canvas.getBoundingClientRect().left;
+    const yCoord = clientY - canvas.getBoundingClientRect().top; 
+
     if (tool === "selection") {
-      const element = getElementAtPosition(clientX, clientY, elements);
+      const element = getElementAtPosition(xCoord, yCoord, elements);
       if (element) {
         console.log(element);
         const offsetX = clientX - element.x1;
@@ -237,7 +241,7 @@ export default function Canvas(props) {
         setAction("moving");
       }
     } else if (tool === "fill") {
-      const element = getElementAtPosition(clientX, clientY, elements);
+      const element = getElementAtPosition(xCoord, yCoord, elements);
       if (element) {
         let elementsCopy = [...elements];
         const index = element.id;
@@ -247,7 +251,7 @@ export default function Canvas(props) {
       }
     } else {
       const id = elements.length;
-      const downElement = createElement(id, clientX, clientY, clientX, clientY, tool, color, brushSize);
+      const downElement = createElement(id, xCoord, yCoord, xCoord, yCoord, tool, color, brushSize);
       setElements(prevState => [...prevState, downElement]);
       setAction("drawing");
     }
@@ -258,21 +262,24 @@ export default function Canvas(props) {
   };
 
   const mouseMove = (event) => {
+    const canvas = document.getElementById('curtaindraw');
     const { clientX, clientY } = event;
+    const xCoord = clientX - canvas.getBoundingClientRect().left;
+    const yCoord = clientY - canvas.getBoundingClientRect().top; 
 
     if (tool === "selection") {
-      event.target.style.cursor = getElementAtPosition(clientX, clientY, elements) ? "move" : "default";
+      event.target.style.cursor = getElementAtPosition(xCoord, yCoord, elements) ? "move" : "default";
     }
 
     if (tool === "fill") {
-      event.target.style.cursor = getElementAtPosition(clientX, clientY, elements) ? "pointer" : "default";
+      event.target.style.cursor = getElementAtPosition(xCoord, yCoord, elements) ? "pointer" : "default";
     }
 
 
     if (action === "drawing") {
       const index = elements.length - 1;
       const { x1, y1 } = elements[index];
-      updateElement(index, x1, y1, clientX, clientY, tool, selectedElement, color, brushSize);
+      updateElement(index, x1, y1, xCoord, yCoord, tool, selectedElement, color, brushSize);
 
     } else if (action === "moving") {
       const { id, x1, x2, y1, y2, type, offsetX, offsetY } = selectedElement;

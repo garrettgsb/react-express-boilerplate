@@ -12,7 +12,7 @@ export default function CanvasPage() {
       <section className="canvas_section">
         <Canvas 
           height={canvasH}
-          width={canvasW}
+          width={canvasW}          
         />
       </section>
       <section className="save_edit_btns">
