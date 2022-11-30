@@ -7,6 +7,7 @@ import {
   Collapse,
   Divider,
   IconButton,
+  InputAdornment,
   CardActions,
   CardContent,
   TextField,
@@ -81,6 +82,24 @@ export default function ExerciseCard(props) {
     setReps(event.target.value);
   };
 
+  // State and change handler for LOAD
+  const [load, setLoad] = useState(50);
+  const handleLoadChange = (event) => {
+    setLoad(event.target.value);
+  };
+
+  // State and change handler for REST
+  const [rest, setRest] = useState(2);
+  const handleRestChange = (event) => {
+    setRest(event.target.value);
+  };
+
+  // State and change handler for Notes
+  const [notes, setNotes] = useState("notes go here");
+  const handleNotesChange = (event) => {
+    setNotes(event.target.value);
+  };
+
   return (
     <Card>
       {/* Main content: exercise name, attributes and expand button */}
@@ -98,6 +117,7 @@ export default function ExerciseCard(props) {
             variant="standard"
             onChange={handleNameChange}
             value={name}
+            sx={{ maxWidth: "80%" }}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
@@ -112,6 +132,7 @@ export default function ExerciseCard(props) {
             variant="standard"
             onChange={handleSetsChange}
             value={sets}
+            sx={{ maxWidth: "30%" }}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
@@ -126,20 +147,44 @@ export default function ExerciseCard(props) {
             variant="standard"
             onChange={handleRepsChange}
             value={reps}
+            sx={{ maxWidth: "50%" }}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">{exerciseAttributes.load}</Typography>
-          <Typography variant="p">lbs</Typography>
+          <TextField
+            id="standard-number"
+            helperText="lbs"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="standard"
+            onChange={handleLoadChange}
+            value={load}
+            sx={{ maxWidth: "50%" }}
+            inputProps={{ step: 5 }}
+          />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">
-            {exerciseAttributes.rest_period} min
-          </Typography>
-          <Typography variant="p">rest</Typography>
+          <TextField
+            id="standard-number"
+            helperText="REST"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="standard"
+            onChange={handleRestChange}
+            value={rest}
+            sx={{ maxWidth: "50%" }}
+            InputProps={{
+              endAdornment: <InputAdornment position="end">min</InputAdornment>,
+            }}
+          />
         </ExerciseAttribute>
+        {/* Expand/collapse details chevron */}
         <CardActions>
           <ExpandMore
             expand={expanded}
@@ -149,6 +194,7 @@ export default function ExerciseCard(props) {
           >
             <ExpandMoreIcon />
           </ExpandMore>
+          {/* Garbage can button */}
         </CardActions>
         <IconButton aria-label="delete" size="large" color="error">
           <DeleteIcon />
@@ -160,7 +206,7 @@ export default function ExerciseCard(props) {
         <Box sx={{ display: "flex" }}>
           <CardMedia
             component="img"
-            sx={{ width: "40%", height: 225 }}
+            sx={{ width: "40%", height: "auto" }}
             image="https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt="exercise"
           />
@@ -170,7 +216,14 @@ export default function ExerciseCard(props) {
             <Typography variant="h5" pt={"0.5em"}>
               Notes
             </Typography>
-            <Typography variant="p">{exerciseAttributes.notes}</Typography>
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              multiline
+              fullWidth
+              value={notes}
+              onChange={handleNotesChange}
+            />
           </CardContent>
         </Box>
       </Collapse>
