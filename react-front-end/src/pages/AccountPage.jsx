@@ -1,6 +1,11 @@
-import React from "react";
+import { AuthContext } from '../App'
+import React, {Navigate} from "react";
 import './styles/account.css'
-export default function AccountPage() {
+
+export default function AccountPage(props) {
+
+  const token = React.useContext(AuthContext);
+
   return(
     <main className="main_page">
       <article className="sidebar">

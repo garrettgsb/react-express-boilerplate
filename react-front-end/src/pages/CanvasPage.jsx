@@ -1,9 +1,14 @@
-import React from "react";
+import { AuthContext } from '../App'
+import React, {Navigate} from "react";
 import './styles/canvas.css'
 import Canvas from "../components/Canvas";
 let canvasH = 700;
 let canvasW = 1500;
-export default function CanvasPage() {
+
+export default function CanvasPage(props) {
+
+  const token = React.useContext(AuthContext);
+
   return(
     <main className="main_page">
       <article className="sidebar">

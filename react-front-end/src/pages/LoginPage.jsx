@@ -1,9 +1,12 @@
 import React from "react";
 import './styles/home.css';
 import { Link } from "react-router-dom";
-export default function HomePage() {
+
+export default function LoginPage(props) {
+
+  //Submit Button: onClick, make API Call then on success, props.setToken
+
   return (
-    
     <main className="main_page">
       <section className="main_section">
           <form>
