@@ -32,14 +32,15 @@ const getProgramWithUserId = (userId) => {
       err.message;
     });
 };
-
+// (user_id, name, description, start_date, end_date, public, author)
 const addPrograms = (programs) => {
   return db
     .query(
-      `INSERT INTO programs (user_id, name, start_date, end_date, public, author) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
+      `INSERT INTO programs (user_id, name, description, start_date, end_date, public, author) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
       [
         programs.user_id,
         programs.name,
+        programs.description,
         programs.start_date,
         programs.end_date,
         programs.public,
