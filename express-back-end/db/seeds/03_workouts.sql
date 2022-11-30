@@ -5,4 +5,3 @@ VALUES
 (1, 'Friday', 'https://images.pexels.com/photos/4162451/pexels-photo-4162451.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Friday night we at the GYM.', 120);
 
 
-
