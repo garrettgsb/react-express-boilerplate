@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState} from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
@@ -107,7 +107,6 @@ export default function ResponsiveDrawer(props) {
     </div>
   );
 
-  const { window } = props;
   const container =
     window !== undefined ? () => window().document.body : undefined;
 

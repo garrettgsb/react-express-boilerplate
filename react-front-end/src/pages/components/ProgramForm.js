@@ -111,7 +111,9 @@ export default function ProgramForm() {
 
 //useState should be in the app.js //
 
-//const addProgram = () => {
-//axios post (with the right route)
-//.then (props.setPrograms(returned data)) //res.data.programs (console.log what's the data look like first)
+// const addProgram = () => {
+// axios post (with the right route)
+// .then (props.setPrograms(returned data)) 
+// }
+//res.data.programs (console.log what's the data look like first)
 // }

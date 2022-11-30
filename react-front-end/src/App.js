@@ -6,10 +6,10 @@ import ResponsiveDrawer from "./pages/components/ResponsiveDrawer";
 
 
 export default function App() {
-  // const [programs, setPrograms] = useState([]);
-  // const [workouts, setWorkouts] = useState([]);
-  // const [exerciseSelections, setExerciseSelections] = useState([]);
-  // const [exercises, setExercises] = useState([]);
+  const [programs, setPrograms] = useState([]);
+  const [workouts, setWorkouts] = useState([]);
+  const [exerciseSelections, setExerciseSelections] = useState([]);
+  const [exercises, setExercises] = useState([]);
 
 
   // When App initially loads, fetch data and store in state

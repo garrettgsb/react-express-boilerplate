@@ -8,5 +8,5 @@ CREATE TABLE programs (
   start_date DATE,
   end_date DATE,
   public BOOLEAN DEFAULT true,
-  author VARCHAR(255) DEFAULT ""
+  author VARCHAR(255) DEFAULT 'Jason "Chad" Ling'
 )
