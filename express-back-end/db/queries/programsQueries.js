@@ -13,9 +13,9 @@ const getPrograms = () => {
 
 const getProgramWithId = (Id) => {
   return db
-    .query(`SELECT * FROM programs WHERE id=$1;`, [Id])
+    .query(`SELECT * FROM programs WHERE id = $1;`, [Id])
     .then((result) => {
-      return result.rows;
+      return result.rows[0];
     })
     .catch((err) => {
       err.message;
@@ -24,7 +24,7 @@ const getProgramWithId = (Id) => {
 
 const getProgramWithUserId = (userId) => {
   return db
-    .query(`SELECT * FROM programs WHERE user_id=$1;`, [userId])
+    .query(`SELECT * FROM programs WHERE user_id = $1;`, [userId])
     .then((result) => {
       return result.rows;
     })
@@ -32,14 +32,15 @@ const getProgramWithUserId = (userId) => {
       err.message;
     });
 };
-
+// (user_id, name, description, start_date, end_date, public, author)
 const addPrograms = (programs) => {
   return db
     .query(
-      `INSERT INTO programs (user_id, name, start_date, end_date, public, author) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
+      `INSERT INTO programs (user_id, name, description, start_date, end_date, public, author) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
       [
         programs.user_id,
         programs.name,
+        programs.description,
         programs.start_date,
         programs.end_date,
         programs.public,

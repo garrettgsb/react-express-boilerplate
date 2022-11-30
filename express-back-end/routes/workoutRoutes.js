@@ -18,8 +18,9 @@ router.post('/', (req, res) => {
 });
 
 // READ - get User workouts
-router.get('/', (req, res) => {
-  workoutQueries.getWorkoutByProgramId(1)
+router.get('/programs/:id', (req, res) => {
+  const programId = req.params.id
+  workoutQueries.getWorkoutByProgramId(programId)
     .then(result => {
       res.json(result);
     })
