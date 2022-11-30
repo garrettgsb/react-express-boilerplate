@@ -6,8 +6,6 @@ import { Button } from "@mui/material";
 import ProgramCard from "./components/ProgramCard";
 import axios from "axios";
 
-
-
 export default function Program() {
   const params = useParams();
 
