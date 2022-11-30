@@ -28,7 +28,6 @@ const drawerWidth = 240;
 export default function ResponsiveDrawer(props) {
   const { window } = props;
   const params = useParams();
-  const navigate = useNavigate();
 
   // Toggling drawer state and menu button click handler
   const [mobileOpen, setMobileOpen] = React.useState(true);
@@ -42,10 +41,7 @@ export default function ResponsiveDrawer(props) {
     setOpen(!open);
   };
 
-  // Main logo click handler
-  const onClickEvent = () => {
-    navigate("/dashboard");
-  };
+
 
   // Program navigation click handler
   // const onClickProgram = (id) => {
@@ -60,12 +56,14 @@ export default function ResponsiveDrawer(props) {
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        <ListItemButton onClick={onClickEvent}>
-          <ListItemIcon>
-            <EqualizerIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Dashboard"} />
-        </ListItemButton>
+        <Link to="/dashboard" className={"programListItem"} >
+          <ListItemButton>
+            <ListItemIcon>
+              <EqualizerIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Dashboard"} />
+          </ListItemButton>
+        </Link>
 
         <ListItemButton onClick={handleClick}>
           <ListItemIcon>
@@ -73,7 +71,7 @@ export default function ResponsiveDrawer(props) {
           </ListItemIcon>
           <ListItemText primary={"Programs"} />
 
-          <Link to={"/program/new"}>
+          <Link to={"/program/new"} onClick={() => {setMobileOpen(false)}}>
             <AddIcon />
           </Link>
 
@@ -115,7 +113,6 @@ export default function ResponsiveDrawer(props) {
         handleDrawerToggle={handleDrawerToggle}
         setMobileOpen={setMobileOpen}
         mobileOpen={mobileOpen}
-        onClickEvent={onClickEvent}
       />
 
       <Box
