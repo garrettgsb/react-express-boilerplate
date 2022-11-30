@@ -5,9 +5,8 @@ export default function ProgramCard(props) {
     props.setProgram([{ ...props.program, name: event.target.value }]);
   };
 
-  console.log("program data", props.program.name)
+  // console.log("program data", props.program.name);
   // console.log("program card !!!!", props.program[0].name)
-
   return (
     <div>
       {props.edit ? (
@@ -19,7 +18,12 @@ export default function ProgramCard(props) {
           onChange={handleOnChange}
         />
       ) : (
-        <p>{props.program.name}</p>
+        <>
+          <p>Program name : {props.program.name}</p>
+          <p>Note : {props.program.description}</p>
+          <p>Start date : {props.program.start_date ? props.program.start_date.substring(0,10) : ""}</p>
+          <p>End date : {props.program.end_date ? props.program.end_date.substring(0,10) : ""}</p>
+        </>
       )}
     </div>
   );
