@@ -201,11 +201,7 @@ export default function ExerciseCard(props) {
           >
             <ExpandMoreIcon />
           </ExpandMore>
-          {/* Garbage can button */}
         </CardActions>
-        <IconButton aria-label="delete" size="large" color="error">
-          <DeleteIcon />
-        </IconButton>
       </CardContent>
 
       {/* Expandable section containing image, instructions and notes */}
@@ -249,6 +245,10 @@ export default function ExerciseCard(props) {
                   Save
                 </Button>
               )}
+              {/* Garbage can button */}
+              <IconButton aria-label="delete" size="large" color="error">
+                <DeleteIcon />
+              </IconButton>
             </CardActions>
           </Box>
         </Box>
