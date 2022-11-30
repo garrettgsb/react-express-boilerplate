@@ -42,6 +42,9 @@ export default function ResponsiveDrawer(props) {
   };
 
 
+  const handleEvent = (event) => {
+    event.stopPropagation();
+  }
 
   // Program navigation click handler
   // const onClickProgram = (id) => {
@@ -71,7 +74,7 @@ export default function ResponsiveDrawer(props) {
           </ListItemIcon>
           <ListItemText primary={"Programs"} />
 
-          <Link to={"/program/new"} onClick={() => {setMobileOpen(false)}}>
+          <Link to={"/program/new"} onClick={(e) => {handleEvent(e)}} >
             <AddIcon />
           </Link>
 
