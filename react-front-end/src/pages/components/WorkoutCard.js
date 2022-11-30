@@ -1,24 +1,42 @@
 import React from "react";
-import { Card, CardMedia, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
 
-export default function WorkoutCard({ workout }) {
-  // console.log("workoutname", workout.name);
-  // console.log("workout", workout);
+import {
+  Card,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
+export default function WorkoutCard (props) {
+
+  //   // Program navigation click handler
+  //   // const onClickProgram = (id) => {
+  //   //   navigate(`/program/${id}`);
+  //   // };
+
+  // const onClickWorkout = (id) => {
+  //   navigate(``)
+  // }
+
 
   return (
-    <Link to={`/workout/${workout.id}`} className={"workoutListItem"}>
+    <Link to={`/workout/${props.workout.id}`} className={"workoutListItem"}>
       <Card variant="outlined">
-        <Typography variant="h4">{workout.name}</Typography>
-        <Typography variant="p">{workout.description}</Typography>
-        <Typography variant="p">{workout.duration}</Typography>
-        <CardMedia
-          component="img"
-          height="140"
-          image={workout.image}
-          alt={workout.name}
-        />
+            <Typography variant="h4">{props.workout.name}</Typography>
+            <Typography variant="p">{props.workout.description}</Typography>
+            <Typography variant="p">{props.workout.duration}</Typography>
+            {props.edit ? <DeleteIcon variant="h4" onClick={props.delete}/> : ""}
+            <CardMedia
+              component="img"
+              height="140"
+              image={props.workout.image}
+              alt={props.workout.name}
+            />
+
       </Card>
     </Link>
-  );
+  )
 }
+

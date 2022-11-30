@@ -1,6 +1,12 @@
-import React, { useState, useEffect } from "react";
+import * as React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import axios from 'axios';
+import { useParams } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
+import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import EqualizerIcon from "@mui/icons-material/Equalizer";
+
 
 import {
   Box,
@@ -14,55 +20,15 @@ import {
   Collapse,
   Toolbar,
 } from "@mui/material";
-import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import EqualizerIcon from "@mui/icons-material/Equalizer";
 
 import Appbar from "./Appbar";
 
 const drawerWidth = 240;
 
-// MOCK DATA
-// const navbarData = [
-//   {
-//     title: "Dashboard",
-//     // icon: <InsightsIcon/>,
-//     link: "/dashboard",
-//   },
-//   {
-//     title: "Program",
-//     // icon: <InsightsIcon/>,
-//     link: "/program",
-//   },
-// ];
-
-// const Programs = [
-//   {
-//     id: 1,
-//     name: "Full Body",
-//   },
-//   {
-//     id: 2,
-//     name: "Bro Split",
-//   },
-//   {
-//     id: 3,
-//     name: "Upper Lower",
-//   },
-// ];
-
 export default function ResponsiveDrawer(props) {
-  // Define state to store programs
-  const [programs, setPrograms] = useState([]);
+  const { window } = props;
+  const params = useParams();
 
-  // Initial fetching of programs
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/programs").then((result) => {
-      setPrograms(result.data);
-    });
-  }, []);
-
-  // console.log(programs);
 
   // Toggling drawer state and menu button click handler
   const [mobileOpen, setMobileOpen] = useState(true);
@@ -82,6 +48,10 @@ export default function ResponsiveDrawer(props) {
     navigate("/dashboard");
   };
 
+  const handleEvent = (event) => {
+    event.stopPropagation();
+  }
+
   const drawerItems = (
     <div>
       <Divider />
@@ -90,33 +60,46 @@ export default function ResponsiveDrawer(props) {
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        <ListItemButton onClick={onClickEvent}>
-          <ListItemIcon>
-            <EqualizerIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Dashboard"} />
-        </ListItemButton>
+        <Link to="/dashboard" className={"programListItem"} >
+          <ListItemButton>
+            <ListItemIcon>
+              <EqualizerIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Dashboard"} />
+          </ListItemButton>
+        </Link>
 
         <ListItemButton onClick={handleClick}>
           <ListItemIcon>
             <FitnessCenterIcon />
           </ListItemIcon>
           <ListItemText primary={"Programs"} />
+
+          <Link to={"/program/new"}>
+            <AddIcon onClick={(e) => {handleEvent(e)}}/>
+          </Link>
+
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
 
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            {/* ARRAY OF PROGRAMS MAPPED FROM STATE WHICH RECEIVES DB DATA */}
-            {programs.map((program) => (
+
+            {/* ARRAY OF PROGRAMS */}
+            {props.programs.map((program) => (
+
               <Link to={`/program/${program.id}`} className={"programListItem"}>
-                <ListItemButton key={program.id} sx={{ pl: 4 }}>
+                <ListItemButton
+                  key={program.id}
+                  sx={{ pl: 4 }}
+                >
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
                   <ListItemText primary={program.name} />
                 </ListItemButton>
-              </Link>
+                </Link>
+
             ))}
           </List>
         </Collapse>
@@ -137,7 +120,6 @@ export default function ResponsiveDrawer(props) {
         handleDrawerToggle={handleDrawerToggle}
         setMobileOpen={setMobileOpen}
         mobileOpen={mobileOpen}
-        onClickEvent={onClickEvent}
       />
 
       <Box
