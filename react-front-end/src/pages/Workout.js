@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 
+// MOCK DATA
 const exercise = {
   id: 1,
   name: "Back Squat",
@@ -33,6 +34,8 @@ const exerciseAttributes = {
   rest_period: 3,
   notes: "Imagine sitting on a low stool and keep knees pointed outwards.",
 };
+
+// DATA FETCHING
 
 export default function Workout(props) {
   // State and handler for toggling editing "mode"
@@ -65,7 +68,7 @@ export default function Workout(props) {
         <ExerciseCard />
         <ExerciseCard />
 
-        {/* When in edit state, render Add button */}
+        {/* When in edit workout state, render Add button */}
         {editWorkout && (
           <Fab
             color="primary"

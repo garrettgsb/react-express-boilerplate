@@ -38,28 +38,28 @@ const exercises = [
 ];
 
 export default function App() {
-  const [programs, setPrograms] = useState([]);
-  const [workouts, setWorkouts] = useState([]);
-  const [exerciseSelections, setExerciseSelections] = useState([]);
-  const [exercises, setExercises] = useState([]);
+  // const [programs, setPrograms] = useState([]);
+  // const [workouts, setWorkouts] = useState([]);
+  // const [exerciseSelections, setExerciseSelections] = useState([]);
+  // const [exercises, setExercises] = useState([]);
 
   // When App initially loads, fetch data and store in state
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/programs").then((result) => {
-      setPrograms(result.data);
-    });
-    axios.get("http://localhost:8080/api/workouts").then((result) => {
-      setWorkouts(result.data);
-    });
-    axios.get("http://localhost:8080/api/exerciseselections").then((result) => {
-      setExerciseSelections(result.data);
-    });
-    axios
-      .get("http://localhost:8080/api/programs/exercises/:id")
-      .then((result) => {
-        setExercises(result.data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("http://localhost:8080/api/programs").then((result) => {
+  //     setPrograms(result.data);
+  //   });
+  //   axios.get("http://localhost:8080/api/workouts").then((result) => {
+  //     setWorkouts(result.data);
+  //   });
+  //   axios.get("http://localhost:8080/api/exerciseselections").then((result) => {
+  //     setExerciseSelections(result.data);
+  //   });
+  //   axios
+  //     .get("http://localhost:8080/api/programs/exercises/:id")
+  //     .then((result) => {
+  //       setExercises(result.data);
+  //     });
+  // }, []);
 
   return (
     <>

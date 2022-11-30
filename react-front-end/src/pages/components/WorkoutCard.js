@@ -3,8 +3,8 @@ import { Card, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function WorkoutCard({ workout }) {
-  console.log("workoutname", workout.name);
-  console.log("workout", workout);
+  // console.log("workoutname", workout.name);
+  // console.log("workout", workout);
 
   return (
     <Link to={`/workout/${workout.id}`} className={"workoutListItem"}>
