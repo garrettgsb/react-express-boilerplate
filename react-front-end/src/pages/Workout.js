@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 
+// MOCK DATA
 const exercise = {
   id: 1,
   name: "Back Squat",
@@ -34,58 +35,41 @@ const exerciseAttributes = {
   notes: "Imagine sitting on a low stool and keep knees pointed outwards.",
 };
 
+// DATA FETCHING
+
 export default function Workout(props) {
   // State and handler for toggling editing "mode"
-  const [edit, setEdit] = useState(true);
-  const switchEdit = () => {
-    setEdit(!edit);
+  const [editWorkout, setEdit] = useState(false);
+  const toggleEdit = () => {
+    setEdit(!editWorkout);
   };
 
   // Function to save changes and return to viewing "mode"
   const saveEdits = () => {
     // Send request and then
-    switchEdit();
+    toggleEdit();
   };
 
   return (
     <>
-      <Toolbar />
       <Typography variant="h4" gutterBottom>
         This is Workout page
       </Typography>
-      {!edit && (
-        <Button
-          variant="outlined"
-          size="medium"
-          startIcon={<EditSharpIcon />}
-          onClick={switchEdit}
-        >
-          Edit
-        </Button>
-      )}
-      {edit && (
-        <Button
-          variant="contained"
-          size="medium"
-          startIcon={<SaveSharpIcon />}
-          onClick={saveEdits}
-        >
-          Save
-        </Button>
-      )}
+
       <Stack
         direction="column"
         justifyContent="flex-start"
         alignItems="stretch"
-        spacing={2}
+        spacing={4}
         maxWidth={1200}
         minWidth={520}
       >
         {/* Array of Exercise Cards */}
-        <ExerciseCard editMode={edit} />
+        <ExerciseCard />
+        <ExerciseCard />
 
-        {/* When in edit state, render Add button */}
-        {edit && (
+        {/* When in edit workout state, render Add button */}
+        {editWorkout && (
           <Fab
             color="primary"
             aria-label="add"
@@ -94,6 +78,26 @@ export default function Workout(props) {
           >
             <AddIcon />
           </Fab>
+        )}
+        {!editWorkout && (
+          <Button
+            variant="outlined"
+            size="medium"
+            startIcon={<EditSharpIcon />}
+            onClick={toggleEdit}
+          >
+            Edit
+          </Button>
+        )}
+        {editWorkout && (
+          <Button
+            variant="contained"
+            size="medium"
+            startIcon={<SaveSharpIcon />}
+            onClick={saveEdits}
+          >
+            Save
+          </Button>
         )}
       </Stack>
     </>

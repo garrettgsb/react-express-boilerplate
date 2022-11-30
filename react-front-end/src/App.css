@@ -1,3 +1,4 @@
-.programListItem {
+.programListItem,
+.workoutListItem {
   all: unset;
 }

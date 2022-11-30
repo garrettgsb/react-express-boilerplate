@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import {
   Box,
+  Button,
   Card,
   CardMedia,
   Collapse,
@@ -12,7 +13,9 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import EditSharpIcon from "@mui/icons-material/EditSharp";
 import { styled } from "@mui/material/styles";
+import SaveSharp from "@mui/icons-material/SaveSharp";
 
 // MOCK DATA
 const exercise = {
@@ -96,6 +99,7 @@ export default function ExerciseCard(props) {
           </Typography>
           <Typography variant="p">REST</Typography>
         </ExerciseAttribute>
+        {/* Expand/collapse details chevron */}
         <CardActions>
           <ExpandMore
             expand={expanded}
@@ -110,21 +114,40 @@ export default function ExerciseCard(props) {
 
       {/* Expandable section containing image, instructions and notes */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <Box sx={{ display: "flex" }}>
+        <Box display="flex">
           <CardMedia
             component="img"
-            sx={{ width: "40%", height: 225 }}
+            sx={{ width: "40%", height: "auto" }}
             image="https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt="exercise"
           />
-          <CardContent>
-            <Typography variant="h5">Instructions</Typography>
-            <Typography variant="p">{exercise.instructions}</Typography>
-            <Typography variant="h5" pt={"0.5em"}>
-              Notes
-            </Typography>
-            <Typography variant="p">{exerciseAttributes.notes}</Typography>
-          </CardContent>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+          >
+            <CardContent>
+              <Typography variant="h5">Instructions</Typography>
+              <Typography variant="p">{exercise.instructions}</Typography>
+              <Typography variant="h5" pt={"0.5em"}>
+                Notes
+              </Typography>
+              <Typography variant="p">{exerciseAttributes.notes}</Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+              {!props.edit && (
+                <Button
+                  variant="outlined"
+                  size="small"
+                  startIcon={<EditSharpIcon />}
+                  onClick={props.toggleEdit}
+                  sx={{ ml: "auto" }}
+                >
+                  Edit
+                </Button>
+              )}
+            </CardActions>
+          </Box>
         </Box>
       </Collapse>
     </Card>

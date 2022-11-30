@@ -30,6 +30,7 @@ const router = createBrowserRouter([
         element: <ProgramForm />,
       },
       {
+
         path: "/workout/:id",
         element: <Workout />,
       },

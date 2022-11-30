@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
+
 
 import {
   Box,
@@ -24,29 +25,33 @@ import Appbar from "./Appbar";
 
 const drawerWidth = 240;
 
-
 export default function ResponsiveDrawer(props) {
   const { window } = props;
   const params = useParams();
 
+
   // Toggling drawer state and menu button click handler
-  const [mobileOpen, setMobileOpen] = React.useState(true);
+  const [mobileOpen, setMobileOpen] = useState(true);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   // Expanding list item state and click handler
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(!open);
   };
 
+  const navigate = useNavigate();
+  // Main logo click handler
+  const onClickEvent = () => {
+    navigate("/dashboard");
+  };
 
   const handleEvent = (event) => {
     event.stopPropagation();
   }
 
-  
   const drawerItems = (
     <div>
       <Divider />
@@ -79,8 +84,10 @@ export default function ResponsiveDrawer(props) {
 
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
+
             {/* ARRAY OF PROGRAMS */}
             {props.programs.map((program) => (
+
               <Link to={`/program/${program.id}`} className={"programListItem"}>
                 <ListItemButton
                   key={program.id}
@@ -100,6 +107,7 @@ export default function ResponsiveDrawer(props) {
     </div>
   );
 
+  const { window } = props;
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -117,7 +125,7 @@ export default function ResponsiveDrawer(props) {
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+        aria-label="workout app navigation"
       >
         <Drawer
           container={container}

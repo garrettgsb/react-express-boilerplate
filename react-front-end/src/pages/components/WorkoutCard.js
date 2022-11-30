@@ -1,10 +1,11 @@
 import React from "react";
+
 import {
   Card,
   CardMedia,
   Typography,
 } from "@mui/material";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
@@ -21,19 +22,21 @@ export default function WorkoutCard (props) {
 
 
   return (
+    <Link to={`/workout/${props.workout.id}`} className={"workoutListItem"}>
+      <Card variant="outlined">
+            <Typography variant="h4">{props.workout.name}</Typography>
+            <Typography variant="p">{props.workout.description}</Typography>
+            <Typography variant="p">{props.workout.duration}</Typography>
+            {props.edit ? <DeleteIcon variant="h4" onClick={props.delete}/> : ""}
+            <CardMedia
+              component="img"
+              height="140"
+              image={props.workout.image}
+              alt={props.workout.name}
+            />
 
-    <Card variant="outlined">
-          <Typography variant="h4">{props.workout.name}</Typography>
-          <Typography variant="p">{props.workout.description}</Typography>
-          <Typography variant="p">{props.workout.duration}</Typography>
-          {props.edit ? <DeleteIcon variant="h4" onClick={props.delete}/> : ""}
-          <CardMedia
-            component="img"
-            height="140"
-            image={props.workout.image}
-            alt={props.workout.name}
-          />
-
-    </Card>
+      </Card>
+    </Link>
   )
 }
+
