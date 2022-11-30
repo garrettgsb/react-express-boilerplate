@@ -18,6 +18,7 @@ export default function App() {
     axios
       .get("http://localhost:8080/api/programs")
       .then((result) => {
+        console.log("programs:", result.data)
         setPrograms(result.data);
       })
       .catch((e) => {
