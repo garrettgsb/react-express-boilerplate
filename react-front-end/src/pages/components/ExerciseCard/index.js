@@ -24,5 +24,14 @@ const exerciseAttributes = {
 };
 
 export default function ExerciseCard(props) {
-  return props.editMode ? <Edit /> : <Show />;
+  const [edit, setEdit] = useState(false);
+  const toggleEdit = () => {
+    setEdit(!edit);
+  };
+
+  return edit ? (
+    <Edit edit={edit} toggleEdit={toggleEdit} />
+  ) : (
+    <Show edit={edit} toggleEdit={toggleEdit} />
+  );
 }

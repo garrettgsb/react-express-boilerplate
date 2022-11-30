@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import {
   Box,
+  Button,
   Card,
   CardMedia,
   Collapse,
@@ -15,6 +16,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SaveSharpIcon from "@mui/icons-material/SaveSharp";
 import { styled } from "@mui/material/styles";
 
 // MOCK DATA
@@ -98,6 +100,11 @@ export default function ExerciseCard(props) {
   const [notes, setNotes] = useState("notes go here");
   const handleNotesChange = (event) => {
     setNotes(event.target.value);
+  };
+
+  const saveEdits = () => {
+    // Send request and then
+    props.toggleEdit();
   };
 
   return (
@@ -210,21 +217,40 @@ export default function ExerciseCard(props) {
             image="https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt="exercise"
           />
-          <CardContent>
-            <Typography variant="h5">Instructions</Typography>
-            <Typography variant="p">{exercise.instructions}</Typography>
-            <Typography variant="h5" pt={"0.5em"}>
-              Notes
-            </Typography>
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              multiline
-              fullWidth
-              value={notes}
-              onChange={handleNotesChange}
-            />
-          </CardContent>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+          >
+            <CardContent>
+              <Typography variant="h5">Instructions</Typography>
+              <Typography variant="p">{exercise.instructions}</Typography>
+              <Typography variant="h5" pt={"0.5em"}>
+                Notes
+              </Typography>
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                multiline
+                fullWidth
+                value={notes}
+                onChange={handleNotesChange}
+              />
+            </CardContent>
+            <CardActions>
+              {props.edit && (
+                <Button
+                  variant="contained"
+                  size="small"
+                  startIcon={<SaveSharpIcon />}
+                  onClick={saveEdits}
+                  sx={{ ml: "auto" }}
+                >
+                  Save
+                </Button>
+              )}
+            </CardActions>
+          </Box>
         </Box>
       </Collapse>
     </Card>
