@@ -70,8 +70,8 @@ export default function ResponsiveDrawer(props) {
           </ListItemIcon>
           <ListItemText primary={"Programs"} />
 
-          <Link to={"/program/new"} onClick={(e) => {handleEvent(e)}} >
-            <AddIcon />
+          <Link to={"/program/new"}>
+            <AddIcon onClick={(e) => {handleEvent(e)}}/>
           </Link>
 
           {open ? <ExpandLess /> : <ExpandMore />}
