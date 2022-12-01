@@ -48,7 +48,6 @@ const addPrograms = (program) => {
       ]
     )
     .then((result) => {
-      console.log("result of queries!!!!!", result.rows);
       return result.rows;
     })
     .catch((err) => {
