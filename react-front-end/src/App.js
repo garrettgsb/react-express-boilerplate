@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import axios from 'axios';
 import Layout from "./pages/Layout";
@@ -10,7 +10,11 @@ import LoginPage from './pages/LoginPage';
 export const AuthContext = React.createContext(null);
 
 export default function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user])
 
   return (
     <BrowserRouter>
