@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { useParams } from "react-router-dom";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
@@ -27,7 +27,6 @@ const drawerWidth = 240;
 export default function ResponsiveDrawer(props) {
   const params = useParams();
 
-
   // Toggling drawer state and menu button click handler
   const [mobileOpen, setMobileOpen] = useState(true);
   const handleDrawerToggle = () => {
@@ -48,7 +47,7 @@ export default function ResponsiveDrawer(props) {
 
   const handleEvent = (event) => {
     event.stopPropagation();
-  }
+  };
 
   const drawerItems = (
     <div>
@@ -58,7 +57,7 @@ export default function ResponsiveDrawer(props) {
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        <Link to="/dashboard" className={"programListItem"} >
+        <Link to="/dashboard" className={"programListItem"}>
           <ListItemButton>
             <ListItemIcon>
               <EqualizerIcon />
@@ -74,7 +73,11 @@ export default function ResponsiveDrawer(props) {
           <ListItemText primary={"Programs"} />
 
           <Link to={"/program/new"}>
-            <AddIcon onClick={(e) => {handleEvent(e)}}/>
+            <AddIcon
+              onClick={(e) => {
+                handleEvent(e);
+              }}
+            />
           </Link>
 
           {open ? <ExpandLess /> : <ExpandMore />}
@@ -82,22 +85,20 @@ export default function ResponsiveDrawer(props) {
 
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-
             {/* ARRAY OF PROGRAMS */}
             {props.programs.map((program) => (
-
-              <Link to={`/program/${program.id}`} className={"programListItem"}>
-                <ListItemButton
-                  key={program.id}
-                  sx={{ pl: 4 }}
-                >
+              <Link
+                to={`/program/${program.id}`}
+                className={"programListItem"}
+                key={program.id}
+              >
+                <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
                   <ListItemText primary={program.name} />
                 </ListItemButton>
-                </Link>
-
+              </Link>
             ))}
           </List>
         </Collapse>
