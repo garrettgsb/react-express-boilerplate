@@ -1,16 +1,5 @@
 const db = require("../index");
 
-const getExercises = () => {
-  return db
-    .query(`SELECT * FROM exercises;`)
-    .then((result) => {
-      return result.rows;
-    })
-    .catch((err) => {
-      err.message;
-    });
-};
-
 const getExerciseById = (Id) => {
   return db
     .query(`SELECT * FROM exercises WHERE id=$1;`, [Id])
@@ -22,24 +11,16 @@ const getExerciseById = (Id) => {
     });
 };
 
-const getExercisesByWorkOutId = (options) => {
+// General query: selects all or by workout id
+const getExercises = (options) => {
   let queryString = "SELECT * FROM exercises";
+  const queryParams = [];
   if (options.workoutId) {
     queryString += " WHERE workout_id=$1";
+    queryParams.push(options.workoutId);
   }
   return db
-    .query(queryString, [options.workoutId])
-    .then((result) => {
-      return result.rows;
-    })
-    .catch((err) => {
-      err.message;
-    });
-};
-
-const getExercisesByWorkOutId2 = (Id) => {
-  return db
-    .query(`SELECT * FROM exercises WHERE workout_id=$1;`, [Id])
+    .query(queryString, queryParams)
     .then((result) => {
       return result.rows;
     })
@@ -107,7 +88,7 @@ module.exports = {
   getExerciseById,
   getExercises,
   updateExercises,
-  getExercisesByWorkOutId,
+  getExercises,
   addExercise,
   deleteExercise,
 };

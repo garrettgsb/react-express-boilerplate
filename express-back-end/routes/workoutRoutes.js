@@ -19,10 +19,24 @@ router.post("/", (req, res) => {
     });
 });
 
+// Replace with route + query that accepts optional query params (see below)
 // READ - get all
 router.get("/", (req, res) => {
   workoutQueries
     .getWorkouts()
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      err.message;
+    });
+});
+
+// Refactor to use optional query parameters
+// READ - get workout by id
+router.get("/:id", (req, res) => {
+  workoutQueries
+    .getWorkoutById(req.params.id)
     .then((result) => {
       res.json(result);
     })
@@ -36,31 +50,6 @@ router.get("/programs/:id", (req, res) => {
   const programId = req.params.id;
   workoutQueries
     .getWorkoutByProgramId(programId)
-    .then((result) => {
-      res.json(result);
-    })
-    .catch((err) => {
-      err.message;
-    });
-});
-
-// READ - get exercises by workout id
-// router.get("/:id/exercises", (req, res) => {
-//   const workoutId = req.params.id;
-//   exerciseQueries
-//     .getExercisesByWorkOutId(workoutId)
-//     .then((result) => {
-//       res.json(result);
-//     })
-//     .catch((err) => {
-//       err.message;
-//     });
-// });
-
-// READ - get workout by id
-router.get("/:id", (req, res) => {
-  workoutQueries
-    .getWorkoutById(req.params.id)
     .then((result) => {
       res.json(result);
     })

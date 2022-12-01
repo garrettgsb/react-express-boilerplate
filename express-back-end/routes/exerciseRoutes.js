@@ -18,23 +18,10 @@ router.post("/", (req, res) => {
     });
 });
 
-// READ - get all
-// router.get("/", (req, res) => {
-//   exerciseQueries
-//     .getExercises()
-//     .then((result) => {
-//       res.json(result);
-//     })
-//     .catch((err) => {
-//       err.message;
-//     });
-// });
-
-// READ - get (supports optional parameters)
+// READ - get all or by optional workoutId= query parameter
 router.get("/", (req, res) => {
-  console.log(req.query);
   exerciseQueries
-    .getExercisesByWorkOutId(req.query)
+    .getExercises(req.query)
     .then((result) => {
       res.json(result);
     })
@@ -44,16 +31,16 @@ router.get("/", (req, res) => {
 });
 
 // READ - get exercise by id
-router.get("/:id", (req, res) => {
-  exerciseQueries
-    .getExerciseById(req.params.id)
-    .then((result) => {
-      res.json(result);
-    })
-    .catch((err) => {
-      err.message;
-    });
-});
+// router.get("/:id", (req, res) => {
+//   exerciseQueries
+//     .getExerciseById(req.params.id)
+//     .then((result) => {
+//       res.json(result);
+//     })
+//     .catch((err) => {
+//       err.message;
+//     });
+// });
 
 // UPDATE - put
 router.put("/:id", (req, res) => {

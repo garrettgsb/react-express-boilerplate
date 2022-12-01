@@ -11,7 +11,7 @@ const getWorkouts = () => {
     });
 };
 
-const getWorkoutByProgramId = (program_id) => {
+const getWorkoutsByProgramId = (program_id) => {
   return db
     .query(`SELECT * FROM workouts WHERE program_id=$1;`, [program_id])
     .then((result) => {
@@ -84,7 +84,7 @@ module.exports = {
   getWorkouts,
   getWorkoutById,
   updateWorkOuts,
-  getWorkoutByProgramId,
+  getWorkoutsByProgramId,
   addWorkouts,
   deleteWorkout,
 };
