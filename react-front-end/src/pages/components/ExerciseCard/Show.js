@@ -15,7 +15,6 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import EditSharpIcon from "@mui/icons-material/EditSharp";
 import { styled } from "@mui/material/styles";
-import SaveSharp from "@mui/icons-material/SaveSharp";
 
 // Styled component necessary for expandable portion of card
 const ExpandMore = styled((props) => {

@@ -10,7 +10,7 @@ import Program from "./pages/Program";
 import Workout from "./pages/Workout";
 import ProgramForm from "./pages/components/ProgramForm";
 
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,6 @@ const router = createBrowserRouter([
         element: <ProgramForm />,
       },
       {
-
         path: "/workout/:id",
         element: <Workout />,
       },

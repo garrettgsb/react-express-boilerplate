@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
@@ -25,8 +23,6 @@ import Appbar from "./Appbar";
 const drawerWidth = 240;
 
 export default function ResponsiveDrawer(props) {
-  const params = useParams();
-
   // Toggling drawer state and menu button click handler
   const [mobileOpen, setMobileOpen] = useState(true);
   const handleDrawerToggle = () => {
@@ -39,11 +35,11 @@ export default function ResponsiveDrawer(props) {
     setOpen(!open);
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // Main logo click handler
-  const onClickEvent = () => {
-    navigate("/dashboard");
-  };
+  // const onClickEvent = () => {
+  //   navigate("/dashboard");
+  // };
 
   const handleEvent = (event) => {
     event.stopPropagation();
