@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Program from "./pages/Program";
 import Workout from "./pages/Workout";
-import ProgramForm from "./pages/components/ProgramForm";
+import ProgramForm from "./pages/components/ProgramCard/ProgramForm";
 
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 

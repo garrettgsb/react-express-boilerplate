@@ -3,11 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
 import WorkoutCard from "./components/WorkoutCard";
 import { Button } from "@mui/material";
-import ProgramCard from "./components/ProgramCard";
+import ProgramCard from "./components/ProgramCard/ProgramCard";
 import { usePrograms } from "../App";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Confirm from "./components/Confirm";
+import Confirm from "./components/ProgramCard/Confirm";
 
 export default function Program() {
   const { getAndSetPrograms } = usePrograms();

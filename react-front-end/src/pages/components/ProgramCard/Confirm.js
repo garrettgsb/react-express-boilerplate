@@ -19,9 +19,7 @@ export default function Confirm(props) {
 
   return (
     <div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Open alert dialog
-      </Button> */}
+
       <Dialog
         open={props.confirmOpen}
         onClose={handleClose}
@@ -43,6 +41,7 @@ export default function Confirm(props) {
           </Button>
         </DialogActions>
       </Dialog>
+      
     </div>
   );
 }
