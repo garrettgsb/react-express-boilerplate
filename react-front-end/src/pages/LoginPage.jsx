@@ -6,25 +6,31 @@ import axios from 'axios';
 export default function LoginPage(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
   const user = React.useContext(AuthContext);
 
   //Submit Button: onClick, make API Call then on success, onClick={props.setToken(id from API call)}
 
   const login = () => {
-    // console.log('hey');
+
     axios.post('/api/login', {
       name: username,
       password: password
     })
-    .then(function (response) {
-      console.log(response.data);
-      props.setUser([response.data]);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    // props.setUser({});
+      .then(function(response) {
+
+        console.log('This is the response data:', response.data);
+        if (!response.data) {
+          setError(`Username or password are incorrect`)
+          throw new Error(`Username or password are incorrect`);
+        }
+        setError(null)
+        props.setUser(response.data);
+      })
+      .catch(function(e) {
+        console.log(e);
+      });
   };
 
   return (
@@ -33,16 +39,17 @@ export default function LoginPage(props) {
         <div>
           <label>
             <p>Username:</p>
-            <input type="text" name="name" placeholder={'Username'} value={username} onChange={(e) => {setUsername(e.target.value)}}/>
+            <input type="text" name="name" placeholder={'Username'} value={username} onChange={(e) => { setUsername(e.target.value); }} />
           </label>
           <label>
             <p>Password:</p>
-            <input type="password" name="password" placeholder={'Password'} value={password} onChange={(e) => {setPassword(e.target.value)}}/>
+            <input type="password" name="password" placeholder={'Password'} value={password} onChange={(e) => { setPassword(e.target.value); }} />
           </label>
           <div>
-            <button  onClick={login}>Login</button>
+            <button onClick={login}>Login</button>
           </div>
         </div>
+        <div>{error && <p>Username or password are incorrect</p>}</div>
       </section>
     </main>
   );

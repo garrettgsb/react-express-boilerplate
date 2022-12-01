@@ -10,6 +10,7 @@ export default function Nav(props) {
         <div className="nav_btns">
           <Link to="/" className="nav_home" style={{color: 'rgb(50,50,50)', textDecoration: 'none' }}>Home</Link>
           <Link to="/canvas" className="nav_new" style={{color: 'rgb(50,50,50)', textDecoration: 'none' }}>Create New</Link>
+          <Link to="/login" className="nav_new" style={{color: 'rgb(50,50,50)', textDecoration: 'none' }}>Login</Link>
         </div>
         <div className="nav_user">
           <label className="nav_loggedin">

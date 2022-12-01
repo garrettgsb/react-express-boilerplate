@@ -19,7 +19,10 @@ App.post('/api/login', (req, res) => {
     .then((users) => {
       return users[0];
     }).then((user) => {
-      delete user.password
+      // console.log(user);
+      if (user && user.password) {
+        delete user.password;
+      }
       return res.json(
         user
       );
