@@ -1,11 +1,11 @@
 import { AuthContext } from '../App'
-import React, {Navigate} from "react";
+import React from "react";
 import './styles/home.css';
 import { Link } from "react-router-dom";
 
 export default function HomePage(props) {
 
-  const token = React.useContext(AuthContext);
+  const user = React.useContext(AuthContext);
 
   return (
     <main className="main_page">
@@ -13,7 +13,7 @@ export default function HomePage(props) {
 
       </article>
       <section className="main_section">
-        <label className="title">CurtainDraw </label>
+        <label className="title">CurtainDraw {user}</label>
         <Link to="/canvas" className="new_canvas" style={{ color: 'rgb(50,50,50)', textDecoration: 'none' }}>Create New</Link>
         <div className="examples">
           <div className="ex1"></div>

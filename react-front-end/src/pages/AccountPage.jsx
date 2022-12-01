@@ -1,10 +1,10 @@
 import { AuthContext } from '../App'
-import React, {Navigate} from "react";
+import React from "react";
 import './styles/account.css'
 
 export default function AccountPage(props) {
 
-  const token = React.useContext(AuthContext);
+  const user = React.useContext(AuthContext);
 
   return(
     <main className="main_page">

@@ -2,6 +2,7 @@ import React from "react";
 import '../pages/styles/nav.css'
 import { Link } from "react-router-dom";
 export default function Nav(props) {
+  
   return (
     <nav className="nav">
       <img src="curtaindrawlogo.png" className="mainlogo"/>

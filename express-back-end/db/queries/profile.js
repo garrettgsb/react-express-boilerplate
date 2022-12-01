@@ -1,5 +1,3 @@
-
-
 const db = require('../connection');
 
 const getUsers = () => {
@@ -12,20 +10,25 @@ const getUsers = () => {
 
 const getUserById = (userId) => {
   return db.query(`SELECT * FROM users
-  WHERE id = ${userId} ;
-  `)
+  WHERE id = ${userId};`)
     .then(data => {
       console.log("Get User From Id DB Query Completed: ", data.rows);
       return data.rows;
     });
 };
 
-const getUserByLogin = (name, password) => {
-  return db.query (`SELECT * FROM users
-  WHERE ${name} = users.name AND ${password} = users.password
-  RETURNING *`)
-}
-
+const getUserByLogin = (argName, argPassword) => {
+  console.log(`LOOK HERE: `, argName, argPassword, typeof argName, typeof argPassword)
+  
+  return db.query(`SELECT * FROM users
+  WHERE users.name = $1 AND users.password = $2;`, [argName, argPassword])
+    .then(data => {
+      console.log("Get User From Login DB Query Completed: ", data.rows);
+      return data.rows;
+    }).catch(err => {
+      return err.message;
+    });
+};
 
 const getDrawingsByUserId = (userId) => {
   return db.query(`SELECT drawings.*
@@ -50,3 +53,5 @@ const getTotalDrawings = (userId) => {
       return data.rows;
     });
 };
+
+module.exports = { getUsers, getUserById, getUserByLogin, getDrawingsByUserId, getTotalDrawings };

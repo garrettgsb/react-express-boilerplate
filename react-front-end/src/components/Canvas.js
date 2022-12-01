@@ -1,7 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
 import rough from 'roughjs/bundled/rough.esm';
-import useApplicationData from "../hooks/useApplicationData";
-import axios from 'axios';
 
 import getStroke from "perfect-freehand";
 
@@ -84,6 +82,7 @@ const drawElement = (roughCanvas, context, element, color) => {
   switch (element.type) {
     case "line":
       context.globalCompositeOperation="source-over";
+      // DO NOT PUT BREAK HERE
     case "rectangle":
       context.globalCompositeOperation="source-over";
       roughCanvas.draw(element.elementDetails);
@@ -205,6 +204,7 @@ export default function Canvas(props) {
       case "line":
         const lineElement = createElement(id, x1, y1, x2, y2, type, elementColor, elementBrushSize, fill);
         elementsCopy[id] = lineElement;
+        break
       case "rectangle":
         const moveElement = createElement(id, x1, y1, x2, y2, type, elementColor, elementBrushSize, fill);
         elementsCopy[id] = moveElement;
