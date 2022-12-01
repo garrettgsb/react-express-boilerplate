@@ -9,11 +9,11 @@ export default function App() {
   const [workouts, setWorkouts] = useState([]);
 
   const getAndSetPrograms = () => {
-    console.log("getAndSetPrograms was called");
+    // console.log("getAndSetPrograms was called");
     axios
       .get("/api/programs")
       .then((result) => {
-        console.log("programs:", result.data);
+        // console.log("programs:", result.data);
         setPrograms(result.data);
       })
       .catch((e) => {
@@ -25,7 +25,7 @@ export default function App() {
     axios
       .get("/api/workouts")
       .then((result) => {
-        console.log("workouts:", result.data);
+        // console.log("workouts:", result.data);
         setWorkouts(result.data);
       })
       .catch((e) => {
