@@ -37,28 +37,32 @@ section.user img {
 
 label.user_name {
   display: flex;
-  font-size: 64px;
+  font-size: 72px;
   border-bottom: 5px solid black;
+  font-family: 'Lobster';
 }
 
 desc {
   display: flex;
   margin-top: 1em;
   width: 500px;
-  font-size: 16px;
+  font-size: 18px;
   word-wrap: break-word;
+  font-family: 'Caveat';
 }
 
 label.location {
   display: flex;
   margin-top: 1em;
-  font-size: 20px;
+  font-size: 24px;
+  font-family: 'Caveat';
 }
 
 label.total_projects {
   display: flex;
   margin-top: 1em;
-  font-size: 20px;
+  font-size: 24px;
+  font-family: 'Caveat';
 }
 
 .user_images {
