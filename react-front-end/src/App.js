@@ -11,7 +11,7 @@ export default function App() {
   const getAndSetPrograms = () => {
     console.log("getAndSetPrograms was called");
     axios
-      .get("http://localhost:8080/api/programs")
+      .get("/api/programs")
       .then((result) => {
         console.log("programs:", result.data);
         setPrograms(result.data);
@@ -23,7 +23,7 @@ export default function App() {
 
   const getAndSetWorkouts = () => {
     axios
-      .get("http://localhost:8080/api/workouts")
+      .get("/api/workouts")
       .then((result) => {
         console.log("workouts:", result.data);
         setWorkouts(result.data);

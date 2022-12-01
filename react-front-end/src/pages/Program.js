@@ -21,7 +21,7 @@ export default function Program() {
     const programId = params.id;
 
     axios
-      .get(`http://localhost:8080/api/programs/${programId}`)
+      .get(`/api/programs/${programId}`)
       .then((result) => {
         setProgram(result.data.program || {});
       })
@@ -30,7 +30,7 @@ export default function Program() {
       });
 
     axios
-      .get(`http://localhost:8080/api/workouts/programs/${programId}`)
+      .get(`/api/workouts/programs/${programId}`)
       .then((result) => {
         setWorkout(result.data);
       })

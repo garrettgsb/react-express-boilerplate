@@ -37,9 +37,7 @@ const addPrograms = (program) => {
   return db
     .query(
       `INSERT INTO programs (user_id, name, description, start_date, end_date, public, author) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
-      id,
       [
-
         program.user_id,
         program.name,
         program.description,
@@ -47,11 +45,10 @@ const addPrograms = (program) => {
         program.end_date,
         program.public,
         program.author,
-
       ]
     )
     .then((result) => {
-      console.log("result of queries!!!!!", result.rows)
+      console.log("result of queries!!!!!", result.rows);
       return result.rows;
     })
     .catch((err) => {

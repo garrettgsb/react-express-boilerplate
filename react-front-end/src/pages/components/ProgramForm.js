@@ -19,7 +19,6 @@ export default function ProgramForm() {
   const [endDate, setEndDate] = useState("");
   const navigate = useNavigate();
 
-
   const addProgram = () => {
     const newProgramFormData = {
       ...programFormData,
@@ -29,17 +28,16 @@ export default function ProgramForm() {
     };
 
     axios
-      .post("http://localhost:8080/api/programs", newProgramFormData)
+      .post("/api/programs", newProgramFormData)
       .then((result) => {
         setPrograms([...programs, result.data[0]]);
-        
+
         navigate(`/program/${result.data[0].id}`);
       })
       .catch((e) => {
         console.log(e);
       });
   };
-
 
   return (
     <>

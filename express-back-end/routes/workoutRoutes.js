@@ -49,7 +49,7 @@ router.get("/:id", (req, res) => {
 router.get("/programs/:id", (req, res) => {
   const programId = req.params.id;
   workoutQueries
-    .getWorkoutByProgramId(programId)
+    .getWorkoutsByProgramId(programId)
     .then((result) => {
       res.json(result);
     })
