@@ -37,7 +37,9 @@ const addPrograms = (program) => {
   return db
     .query(
       `INSERT INTO programs (user_id, name, description, start_date, end_date, public, author) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
+      id,
       [
+
         program.user_id,
         program.name,
         program.description,
@@ -45,6 +47,7 @@ const addPrograms = (program) => {
         program.end_date,
         program.public,
         program.author,
+
       ]
     )
     .then((result) => {
@@ -56,16 +59,17 @@ const addPrograms = (program) => {
     });
 };
 
-
 const updatePrograms = async (id, programInfo) => {
-  const setColumns = Object.keys(programInfo).map((property, index) => `${property}=$${index + 2}`).join(', ')
+  const setColumns = Object.keys(programInfo)
+    .map((property, index) => `${property}=$${index + 2}`)
+    .join(", ");
 
   const queryDef = {
-      text: `
+    text: `
     UPDATE programs
     SET ${setColumns}
     WHERE id = $1 RETURNING *`,
-      values: [id, ...Object.values(programInfo)],
+    values: [id, ...Object.values(programInfo)],
   };
   const data = await db.query(queryDef);
   return data.rows[0];
@@ -88,5 +92,5 @@ module.exports = {
   getProgramWithId,
   updatePrograms,
   addPrograms,
-  deleteProgram
+  deleteProgram,
 };
