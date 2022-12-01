@@ -7,10 +7,11 @@ import './styles/app.css'
 const Layout = (props) => {
 
   const user = React.useContext(AuthContext);
+  const setUser = props.setUser
 
   return (
     <>
-      <Nav />
+      <Nav setUser={setUser}/>
       <Outlet />
     </>
   );

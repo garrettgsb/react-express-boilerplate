@@ -16,7 +16,7 @@ export default function App() {
     <BrowserRouter>
       <AuthContext.Provider value={user}>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Layout setUser={setUser}/>}>
             <Route index element={<HomePage />} />
             <Route path="canvas" element={<CanvasPage  />} />
             <Route path="account" element={<AccountPage />} />

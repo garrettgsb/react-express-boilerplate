@@ -20,7 +20,6 @@ export default function HomePage(props) {
           <div className="ex1"></div>
           <div className="ex2"></div>
           <div className="ex3"></div>
-          <div className="ex4"></div>
         </div>
       </section>
     </main>
