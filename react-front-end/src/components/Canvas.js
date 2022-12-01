@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useState } from 'react';
 import rough from 'roughjs/bundled/rough.esm';
-
+import useApplicationData from "../hooks/useApplicationData";
+import axios from 'axios';
+import Toolbar from './Toolbar';
 import getStroke from "perfect-freehand";
 
 const generator = rough.generator();
@@ -297,94 +299,34 @@ export default function Canvas(props) {
   };
 
   return (
-    <div>
-      <div style={{ position: "fixed" }}>
-        <input
-          type="radio"
-          id="selection"
-          value="selection"
-          checked={tool === "selection"}
-          onChange={() => setTool("selection")} />
-        <label htmlFor="line">Selection</label>
-        <input
-          type="radio"
-          id="line"
-          value="line"
-          checked={tool === "line"}
-          onChange={() => setTool("line")} />
-        <label htmlFor="line">Line</label>
-        <input
-          type="radio"
-          id="rectangle"
-          value="rectangle"
-          checked={tool === "rectangle"}
-          onChange={() => setTool("rectangle")} />
-        <label htmlFor="rectangle">Rectangle</label>
-        <input
-          type="radio"
-          id="circle"
-          value="circle"
-          checked={tool === "circle"}
-          onChange={() => setTool("circle")} />
-        <label htmlFor="circle">Circle</label>
-        <input
-          type="radio"
-          id="pencil"
-          value="pencil"
-          checked={tool === "pencil"}
-          onChange={() => setTool("pencil")} />
-        <label htmlFor="pencil">Pencil</label>
-        <input
-          type="radio"
-          id="eraser"
-          value="eraser"
-          checked={tool === "eraser"}
-          onChange={() => setTool("eraser")} />
-        <label htmlFor="eraser">Eraser</label>
-        <input
-          type="radio"
-          id="fill"
-          value="fill"
-          checked={tool === "fill"}
-          onChange={() => setTool("fill")} />
-        <label htmlFor="fill">Fill</label>
-        <button onClick={undo}>Undo</button>
-        <button onClick={clear}>Clear</button>
-        <div style={{ display: "inline-block", marginLeft: "2rem" }}>
-          <label>
-            Black
-            <input type="radio" checked={color === "black"} onChange={() => setColor("black")} />
-          </label>
-          <label>
-            Red
-            <input type="radio" checked={color === "red"} onChange={() => setColor("red")} />
-          </label>
-          <label>
-            Green
-            <input type="radio" checked={color === "green"} onChange={() => setColor("green")} />
-          </label>
-          <label>
-            Blue
-            <input type="radio" checked={color === "blue"} onChange={() => setColor("blue")} />
-          </label>
-        </div>
-        <li class="option"> 
-          Brush Size
-          <input type="range" id= "size-slider" min="1" max="70" defaultValue="25" onChange={(event) => changeBrushSize(event) }></input>
-          <h2>{brushSize}px</h2>
-        </li>
-        <button>Save</button>
-      </div>
-      <canvas
-        id='curtaindraw'
-        // style={{backgroundColor: 'blue'}}
-        width={props.width}
-        height={props.height}
-        onMouseDown={mouseDown}
-        onMouseMove={mouseMove}
-        onMouseUp={mouseUp}>
-        Canvas
-      </canvas>
-    </div>
-  );
+    <main className="main_page">
+      <article className="sidebar">
+        <Toolbar 
+          tool={tool}
+          color={color}
+          brushSize={brushSize}
+          undo={undo}
+          clear={clear}
+          setTool={setTool}
+          setColor={setColor}
+          changeBrushSize={changeBrushSize} 
+        />
+      </article>
+      <section className="canvas_section">
+        <canvas
+          id='curtaindraw'
+          style={{
+            border: '3px solid black',
+            backgroundColor: 'white'
+          }}
+          //style={{backgroundColor: 'blue'}}
+          width={props.width}
+          height={props.height}
+          onMouseDown={mouseDown}
+          onMouseMove={mouseMove}
+          onMouseUp={mouseUp}>
+        </canvas>
+      </section>
+    </main>
+  )
 }
