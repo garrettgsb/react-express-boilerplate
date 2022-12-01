@@ -12,6 +12,11 @@ export default function Confirm(props) {
     props.setConfirmOpen(false);
   };
 
+  const confirmDelete = () => {
+    handleClose();
+    props.confirmDeleteProgram()
+  }
+
   return (
     <div>
       {/* <Button variant="outlined" onClick={handleClickOpen}>
@@ -33,7 +38,7 @@ export default function Confirm(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={confirmDelete} autoFocus>
             Confirm
           </Button>
         </DialogActions>

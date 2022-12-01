@@ -74,7 +74,7 @@ const updatePrograms = async (id, programInfo) => {
 
 const deleteProgram = (id) => {
   return db
-    .query(`DELETE FROM program WHERE id=$1`, [id])
+    .query(`DELETE FROM programs WHERE id=$1`, [id])
     .then((result) => {
       return result.rows;
     })

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
 import WorkoutCard from "./components/WorkoutCard";
 import { Button } from "@mui/material";
 import ProgramCard from "./components/ProgramCard";
 import { usePrograms } from "../App";
 import axios from "axios";
-import DeleteIcon from '@mui/icons-material/Delete';
-import Confirm from './components/Confirm';
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import Confirm from "./components/Confirm";
 
 export default function Program() {
   const { getAndSetPrograms } = usePrograms();
   const params = useParams();
+  const navigate = useNavigate();
 
   const [programs, setPrograms] = useState([]);
   const [program, setProgram] = useState({});
@@ -29,12 +29,11 @@ export default function Program() {
   const handleDelete = () => {
     setDeleteProgram(true);
     handleClickOpen();
-  }
+  };
 
+  const programId = params.id;
 
   useEffect(() => {
-    const programId = params.id;
-
     axios
       .get(`/api/programs/${programId}`)
       .then((result) => {
@@ -52,19 +51,6 @@ export default function Program() {
       .catch((e) => {
         console.log(e);
       });
-
-    // const findProgram = programs.find((item) => {
-    //   if (item.id == params.id) {
-    //     return item;
-    //   }
-    // });
-
-    // const findWorkout = Workouts.filter((workout) => {
-    //   return workout.program_id == params.id;
-    // });
-
-    // setProgram(findProgram);
-    // setWorkout(findWorkout);
   }, [params.id]);
 
   const saveProgram = () => {
@@ -79,6 +65,18 @@ export default function Program() {
     setProgramEdit(false);
   };
 
+
+  const confirmDeleteProgram = () => {
+    axios
+      .delete(`/api/programs/${programId}`)
+      .then(() => {
+        getAndSetPrograms();
+        navigate("/dashboard");
+      })
+      .catch((e) => console.log(e));
+  };
+
+  
   return (
     <>
       <Stack
@@ -88,33 +86,39 @@ export default function Program() {
         spacing={2}
       >
         {program ? (
-          <ProgramCard program={program} edit={editProgram} setProgram={setProgram} />
+          <ProgramCard
+            program={program}
+            edit={editProgram}
+            setProgram={setProgram}
+          />
         ) : null}
 
         {editProgram ? (
           <>
-          <Button variant="contained" onClick={saveProgram}>
-            Save
-          </Button>
-          <DeleteIcon onClick={handleDelete}/>
+            <Button variant="contained" onClick={saveProgram}>
+              Save
+            </Button>
+            <DeleteIcon onClick={handleDelete} />
           </>
-
         ) : (
           <Button variant="contained" onClick={() => setProgramEdit(true)}>
             Edit
           </Button>
         )}
 
-        {deleteProgram ? <Confirm confirmOpen={confirmOpen} setConfirmOpen={setConfirmOpen}/> : ""}
+        {deleteProgram ? (
+          <Confirm
+            confirmOpen={confirmOpen}
+            setConfirmOpen={setConfirmOpen}
+            confirmDeleteProgram={confirmDeleteProgram}
+          />
+        ) : (
+          ""
+        )}
 
         {/* Array of Workout Cards - to be made into separate component */}
         {workout.map((item) => {
-          return workout ? (
-            <WorkoutCard
-              key={item.id}
-              workout={item}
-            />
-          ) : null;
+          return workout ? <WorkoutCard key={item.id} workout={item} /> : null;
         })}
       </Stack>
     </>
