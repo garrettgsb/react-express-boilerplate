@@ -13,7 +13,7 @@ export default function HomePage(props) {
 
       </article>
       <section className="main_section">
-        <label className="title">CurtainDraw {user}</label>
+        <label className="title">CurtainDraw</label>
         <Link to="/canvas" className="new_canvas" style={{ color: 'rgb(50,50,50)', textDecoration: 'none' }}>Create New</Link>
         <div className="examples">
           <div className="ex1"></div>

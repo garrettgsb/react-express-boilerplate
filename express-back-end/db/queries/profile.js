@@ -18,8 +18,6 @@ const getUserById = (userId) => {
 };
 
 const getUserByLogin = (argName, argPassword) => {
-  console.log(`LOOK HERE: `, argName, argPassword, typeof argName, typeof argPassword)
-  
   return db.query(`SELECT * FROM users
   WHERE users.name = $1 AND users.password = $2;`, [argName, argPassword])
     .then(data => {

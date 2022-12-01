@@ -19,7 +19,7 @@ export default function LoginPage(props) {
     })
     .then(function (response) {
       console.log(response.data);
-      props.setUser(response.data);
+      props.setUser([response.data]);
     })
     .catch(function (error) {
       console.log(error);
