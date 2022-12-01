@@ -22,6 +22,32 @@ const getExerciseById = (Id) => {
     });
 };
 
+const getExercisesByWorkOutId = (options) => {
+  let queryString = "SELECT * FROM exercises";
+  if (options.workoutId) {
+    queryString += " WHERE workout_id=$1";
+  }
+  return db
+    .query(queryString, [options.workoutId])
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      err.message;
+    });
+};
+
+const getExercisesByWorkOutId2 = (Id) => {
+  return db
+    .query(`SELECT * FROM exercises WHERE workout_id=$1;`, [Id])
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      err.message;
+    });
+};
+
 const addExercise = (exercises) => {
   return db
     .query(
@@ -81,6 +107,7 @@ module.exports = {
   getExerciseById,
   getExercises,
   updateExercises,
+  getExercisesByWorkOutId,
   addExercise,
   deleteExercise,
 };

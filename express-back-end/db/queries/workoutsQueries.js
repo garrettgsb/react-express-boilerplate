@@ -2,7 +2,7 @@ const db = require("../index");
 
 const getWorkouts = () => {
   return db
-    .query(`SELECT * FROM workouts;`)
+    .query(`SELECT * FROM workouts`)
     .then((result) => {
       return result.rows;
     })

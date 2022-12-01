@@ -19,9 +19,22 @@ router.post("/", (req, res) => {
 });
 
 // READ - get all
+// router.get("/", (req, res) => {
+//   exerciseQueries
+//     .getExercises()
+//     .then((result) => {
+//       res.json(result);
+//     })
+//     .catch((err) => {
+//       err.message;
+//     });
+// });
+
+// READ - get (supports optional parameters)
 router.get("/", (req, res) => {
+  console.log(req.query);
   exerciseQueries
-    .getExercises()
+    .getExercisesByWorkOutId(req.query)
     .then((result) => {
       res.json(result);
     })
@@ -33,7 +46,7 @@ router.get("/", (req, res) => {
 // READ - get exercise by id
 router.get("/:id", (req, res) => {
   exerciseQueries
-    .getExerciseById(1)
+    .getExerciseById(req.params.id)
     .then((result) => {
       res.json(result);
     })
