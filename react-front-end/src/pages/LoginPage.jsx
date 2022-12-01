@@ -1,12 +1,13 @@
 import { AuthContext } from '../App';
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import './styles/home.css';
 import axios from 'axios';
 
 export default function LoginPage(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const user = React.useContext(AuthContext);
 
@@ -22,11 +23,11 @@ export default function LoginPage(props) {
 
         console.log('This is the response data:', response.data);
         if (!response.data) {
-          setError(`Username or password are incorrect`)
+          setMessage(`Username or password are incorrect`)
           throw new Error(`Username or password are incorrect`);
         }
-        setError(null)
         props.setUser(response.data);
+        setMessage(`Successful log in!`)
       })
       .catch(function(e) {
         console.log(e);
@@ -49,7 +50,7 @@ export default function LoginPage(props) {
             <button onClick={login}>Login</button>
           </div>
         </div>
-        <div>{error && <p>Username or password are incorrect</p>}</div>
+        <div>{message && <p>{message}</p>}</div>
       </section>
     </main>
   );

@@ -14,8 +14,9 @@ export default function HomePage(props) {
       </article>
       <section className="main_section">
         <label className="title">CurtainDraw</label>
-        {/* <div>Welcome back, {user.name}!</div> */}
+        {user && <div>Welcome back, {user.name}!</div>}
         <Link to="/canvas" className="new_canvas" style={{ color: 'rgb(50,50,50)', textDecoration: 'none' }}>Create New</Link>
+
         <div className="examples">
           <div className="ex1"></div>
           <div className="ex2"></div>
