@@ -33,22 +33,25 @@ const getProgramWithUserId = (userId) => {
     });
 };
 // (user_id, name, description, start_date, end_date, public, author)
-const addPrograms = (programs) => {
+const addPrograms = (program) => {
   return db
     .query(
       `INSERT INTO programs (user_id, name, description, start_date, end_date, public, author) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
       id,
       [
-        programs.UserId,
-        programs.name,
-        programs.description,
-        programs.start_date,
-        programs.end_date,
-        programs.public,
-        programs.author,
+
+        program.user_id,
+        program.name,
+        program.description,
+        program.start_date,
+        program.end_date,
+        program.public,
+        program.author,
+
       ]
     )
     .then((result) => {
+      console.log("result of queries!!!!!", result.rows)
       return result.rows;
     })
     .catch((err) => {

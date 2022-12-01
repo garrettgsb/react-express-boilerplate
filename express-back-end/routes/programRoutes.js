@@ -5,11 +5,15 @@ const router = Express.Router();
 // create the routes for the programs used 1 as a demo to show the data that would be represented if a user was login
 
 //CRUD REST API PROGRAM ROUTES
-// App.use('/api/programs', programRouter);
+// App.use('/api/programs/', programRouter);
+
 // CREATE - post
+
 router.post('/', (req, res) => {
-  programQueries.addPrograms(req.body)
+  // console.log("req.body _____________:", req.body) //{with right information}
+  programQueries.addPrograms(req.body) 
     .then(result => {
+      // console.log("result in the router post", result)
       res.json(result);
     })
     .catch(err => {
