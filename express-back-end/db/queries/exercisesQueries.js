@@ -1,6 +1,6 @@
 const db = require("../index");
 
- const getExercises = () => {
+const getExercises = () => {
   return db
     .query(`SELECT * FROM exercises;`)
     .then((result) => {
@@ -11,7 +11,7 @@ const db = require("../index");
     });
 };
 
- const getExerciseId = (Id) => {
+const getExerciseById = (Id) => {
   return db
     .query(`SELECT * FROM exercises WHERE id=$1;`, [Id])
     .then((result) => {
@@ -22,18 +22,24 @@ const db = require("../index");
     });
 };
 
- const addExercise = (exercises) => {
+const addExercise = (exercises) => {
   return db
     .query(
-      `INSERT INTO exercises (name, type, muscle, equipment, difficulty, image, instructions) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
-      [
+      `INSERT INTO exercises (workout_id, name, type, muscle, equipment, difficulty, image, instructions, sets, reps, load, rest_period, duration, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *;`[
+        (exercises.workout_id,
         exercises.name,
         exercises.type,
         exercises.muscle,
         exercises.equipment,
         exercises.difficulty,
         exercises.image,
-        exercises.instructions
+        exercises.instructions,
+        exercises.sets,
+        exercises.reps,
+        exercises.load,
+        exercises.rest_period,
+        exercises.duration,
+        exercises.notes)
       ]
     )
     .then((result) => {
@@ -44,20 +50,37 @@ const db = require("../index");
     });
 };
 
- const deleteExercise = (id) => {
+const updateExercises = async (id, exerciseInfo) => {
+  const setColumns = Object.keys(exerciseInfo)
+    .map((property, index) => `${property}=$${index + 2}`)
+    .join(", ");
+
+  const queryDef = {
+    text: `
+    UPDATE exercises
+    SET ${setColumns}
+    WHERE id = $1 RETURNING *`,
+    values: [id, ...Object.values(exerciseInfo)],
+  };
+  const data = await db.query(queryDef);
+  return data.rows[0];
+};
+
+const deleteExercise = (id) => {
   return db
-    .query(`DELETE FROM exercise WHERE id=$1`,[id])
+    .query(`DELETE FROM exercise WHERE id=$1`, [id])
     .then((result) => {
       return result.rows;
     })
     .catch((err) => {
       err.message;
-    })
-}
+    });
+};
 
 module.exports = {
-  getExerciseId,
+  getExerciseById,
   getExercises,
+  updateExercises,
   addExercise,
-  deleteExercise
-}
+  deleteExercise,
+};
