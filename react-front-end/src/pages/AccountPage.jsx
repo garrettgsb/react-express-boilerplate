@@ -3,9 +3,6 @@ import './styles/account.css'
 export default function AccountPage() {
   return(
     <main className="main_page">
-      <article className="sidebar">
-        
-      </article>
       <section className="main_section">
         <section className="user">
           <img src="user_placeholder.png" />
