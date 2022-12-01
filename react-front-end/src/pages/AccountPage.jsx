@@ -8,10 +8,11 @@ export default function AccountPage(props) {
 
   return(
     <main className="main_page">
-      <article className="sidebar">     
-      </article>
+    
       {!user && <p>Please <a href="/login">Log in</a></p>}
       {user && <section className="main_section">
+      
+      <section className="main_section">
         <section className="user">
           <img src={user.avatar_url}/>
           <div className="user_info">

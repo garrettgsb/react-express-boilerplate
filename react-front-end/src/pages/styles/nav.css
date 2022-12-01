@@ -26,6 +26,7 @@
   margin-right: auto;
   justify-content: space-between;
   align-items: center;
+  font-family: 'Caveat';
 }
 
 .nav_btns {
@@ -36,10 +37,11 @@
 
 .nav_loggedin {
   display: flex;
-  font-size: 24px;
+  font-size: 28px;
   margin-right: 1em;
   padding-bottom: 0.5em;
   border-bottom: 3px solid black;
+  font-family: 'Lobster';
 }
 
 div.nav_user {
