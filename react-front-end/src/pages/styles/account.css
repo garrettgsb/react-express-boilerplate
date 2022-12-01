@@ -25,6 +25,8 @@ section.user {
 section.user img {
   display: flex;
   height: 400px;
+  border-radius: 20em;
+  border: 3px solid black;
 }
 
 .user_info {
