@@ -75,5 +75,7 @@ div.nav_user {
 }
 .nav_user img {
   display: flex;
-  height: 60px;
+  height: 70px;
+  border-radius: 2em;
+  border: 2px solid black;
 }
