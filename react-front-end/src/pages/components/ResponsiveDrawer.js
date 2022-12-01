@@ -7,7 +7,6 @@ import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 
-
 import {
   Box,
   Drawer,
@@ -26,7 +25,6 @@ import Appbar from "./Appbar";
 const drawerWidth = 240;
 
 export default function ResponsiveDrawer(props) {
-  const { window } = props;
   const params = useParams();
 
 
@@ -107,6 +105,7 @@ export default function ResponsiveDrawer(props) {
     </div>
   );
 
+  const { window } = props;
   const container =
     window !== undefined ? () => window().document.body : undefined;
 

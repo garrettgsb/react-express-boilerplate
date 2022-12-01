@@ -4,9 +4,11 @@ import { Stack } from "@mui/material";
 import WorkoutCard from "./components/WorkoutCard";
 import { Button } from "@mui/material";
 import ProgramCard from "./components/ProgramCard";
+import { usePrograms } from "../App";
 import axios from "axios";
 
 export default function Program() {
+  const { getAndSetPrograms } = usePrograms();
   const params = useParams();
 
   const [programs, setPrograms] = useState([]);
@@ -15,13 +17,12 @@ export default function Program() {
 
   const [edit, setEdit] = useState(false);
 
-
   useEffect(() => {
-    const programId = params.id
+    const programId = params.id;
 
     axios
-    .get(`http://localhost:8080/api/programs/${programId}`)
-    .then((result) => {
+      .get(`http://localhost:8080/api/programs/${programId}`)
+      .then((result) => {
         setProgram(result.data.program || {});
       })
       .catch((e) => {
@@ -64,6 +65,7 @@ export default function Program() {
   };
 
   const deleteWorkout = () => {
+    //axios.delete.then(() => getAndSetPrograms()))
     console.log("delete is clicked!!");
   };
 

@@ -1,22 +1,45 @@
 import React, { useState } from "react";
 import { Button, Box, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import { Link, useNavigate } from "react-router-dom";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import axios from "axios";
+import { usePrograms } from "../../App";
 
 export default function ProgramForm() {
   const [programFormData, setProgramFormData] = useState({
-    programName: "",
+    name: "",
     description: "",
-    start_date: "",
-    end_date: "",
   });
 
+  const { programs, setPrograms } = usePrograms();
+
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const navigate = useNavigate();
+
+
   const addProgram = () => {
-    console.log("addprogram is clicked!!!");
+    const newProgramFormData = {
+      ...programFormData,
+      start_date: startDate,
+      end_date: endDate,
+      user_id: 1,
+    };
+
+    axios
+      .post("http://localhost:8080/api/programs", newProgramFormData)
+      .then((result) => {
+        setPrograms([...programs, result.data[0]]);
+        
+        navigate(`/program/${result.data[0].id}`);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
+
 
   return (
     <>
@@ -36,11 +59,11 @@ export default function ProgramForm() {
           name="programName"
           type="text"
           placeholder="Enter Program Name"
-          value={programFormData.programName}
+          value={programFormData.name}
           onChange={(event) =>
             setProgramFormData({
               ...programFormData,
-              programName: event.target.value,
+              name: event.target.value,
             })
           }
         />
@@ -64,12 +87,9 @@ export default function ProgramForm() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Start Date"
-            value={programFormData.start_date}
-            onChange={(event) => {
-              setProgramFormData({
-                ...programFormData,
-                start_date: event.renderInput,
-              })
+            value={startDate}
+            onChange={(newValue) => {
+              setStartDate(newValue);
             }}
             renderInput={(params) => <TextField {...params} />}
           />
@@ -78,17 +98,13 @@ export default function ProgramForm() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="End Date"
-            value={programFormData.end_date}
-            onChange={(event) => {
-              setProgramFormData({
-                ...programFormData,
-                end_date: event.renderInput,
-              })
+            value={endDate}
+            onChange={(newValue) => {
+              setEndDate(newValue);
             }}
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
-        
       </Box>
 
       <Box sx={{ "& button": { m: 1 } }}>
@@ -97,23 +113,16 @@ export default function ProgramForm() {
             Cancel
           </Button>
         </Link>
-        <Button variant="contained" color="success" size="small">
+
+        <Button
+          variant="contained"
+          color="success"
+          size="small"
+          onClick={addProgram}
+        >
           Save
         </Button>
       </Box>
     </>
   );
 }
-
-
-
-
-
-//useState should be in the app.js //
-
-// const addProgram = () => {
-// axios post (with the right route)
-// .then (props.setPrograms(returned data)) 
-// }
-//res.data.programs (console.log what's the data look like first)
-// }
