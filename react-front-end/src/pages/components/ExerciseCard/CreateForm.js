@@ -13,11 +13,12 @@ import {
   CardActions,
   CardContent,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import DeleteIcon from "@mui/icons-material/Delete";
 import SaveSharpIcon from "@mui/icons-material/SaveSharp";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { styled } from "@mui/material/styles";
 import Axios from "axios";
 
@@ -47,25 +48,25 @@ export default function ExerciseCard(props) {
   const exerciseId = props.id;
 
   // State for NAME
-  const [name, setName] = useState(props.name || "");
+  const [name, setName] = useState("");
 
   // State for SETS
-  const [sets, setSets] = useState(props.sets || "");
+  const [sets, setSets] = useState("");
 
   // State for REPS
-  const [reps, setReps] = useState(props.reps || "");
+  const [reps, setReps] = useState("");
 
   // State for LOAD
-  const [load, setLoad] = useState(props.load || "");
+  const [load, setLoad] = useState("");
 
   // State for REST
-  const [rest, setRest] = useState(props.rest_period || "");
+  const [rest, setRest] = useState("");
 
   // State for Instructions
-  const [instructions, setInstructions] = useState(props.instructions || "");
+  const [instructions, setInstructions] = useState("");
 
   // State for Notes
-  const [notes, setNotes] = useState(props.notes || "");
+  const [notes, setNotes] = useState("");
 
   const navigate = useNavigate();
   const submitForm = () => {
@@ -82,10 +83,9 @@ export default function ExerciseCard(props) {
       instructions,
     };
 
-    // Send request to update
+    // Send request to create ---------------------------------------------
     Axios.put(`/api/exercises/${exerciseId}`, exerciseData)
       .then((response) => {
-        // setExpanded(false);
         // Refresh current page
         navigate(0);
       })
@@ -94,23 +94,11 @@ export default function ExerciseCard(props) {
       });
   };
 
-  const deleteExercise = () => {
-    // Send request to delete
-    Axios.delete(`/api/exercises/${exerciseId}`)
-      .then((response) => {
-        // Refresh current page
-        navigate(0);
-      })
-      .catch((e) => console.log(e));
-  };
-
   // state and click handler for card expansion
   const [expanded, setExpanded] = useState(true);
   const handleExpandClick = () => {
-    if (props.edit) {
-      props.toggleEdit(false);
-    }
     setExpanded(!expanded);
+    props.setAdding(false);
   };
 
   return (
@@ -205,7 +193,13 @@ export default function ExerciseCard(props) {
             aria-expanded={expanded}
             aria-label="show more"
           >
-            <ExpandMoreIcon />
+            {props.edit ? (
+              <Tooltip title="Cancel" arrow>
+                <CloseRoundedIcon />
+              </Tooltip>
+            ) : (
+              <ExpandMoreIcon />
+            )}
           </ExpandMore>
         </CardActions>
       </CardContent>
@@ -261,16 +255,6 @@ export default function ExerciseCard(props) {
               >
                 SAVE
               </Button>
-
-              {/* Garbage can button */}
-              <IconButton
-                aria-label="delete"
-                size="large"
-                color="error"
-                onClick={deleteExercise}
-              >
-                <DeleteIcon />
-              </IconButton>
             </CardActions>
           </Box>
         </Box>
