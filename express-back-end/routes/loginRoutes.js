@@ -31,7 +31,6 @@ router.post('/', (req, res) => {
       if (!user) {
         res.status(401).json()
       } else {
-        req.session.id = user.id;
         return res.json(user)
       }
     })

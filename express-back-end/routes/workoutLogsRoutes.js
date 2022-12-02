@@ -8,7 +8,6 @@ const router = Express.Router();
 router.get('/', (req,res) => {
   workoutLogQueries.getWorkOutLogsByUserId(1)
     .then(result => {
-      console.log("Here",result);
       res.json(result);
     })
     .catch(err => {
