@@ -6,7 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function WorkoutCard(props) {
 
-
+  
   return (
     <Link to={`/workout/${props.workout.id}`} className={"workoutListItem"}>
       
