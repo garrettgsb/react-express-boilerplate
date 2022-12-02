@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
 import WorkoutCard from "./components/WorkoutCard";
-import { Button } from "@mui/material";
+import { Button, Fab } from "@mui/material";
 import ProgramCard from "./components/ProgramCard/ProgramCard";
 import { usePrograms } from "../App";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from '@mui/icons-material/Add';
 import Confirm from "./components/ProgramCard/Confirm";
 
 export default function Program() {
@@ -65,7 +66,6 @@ export default function Program() {
     setEditMode(false);
   };
 
-
   const confirmDeleteProgram = () => {
     axios
       .delete(`/api/programs/${programId}`)
@@ -77,10 +77,8 @@ export default function Program() {
   };
 
   const handleEditMode = () => {
-    setEditMode(false)
-  }
-
-
+    setEditMode(false);
+  };
 
   return (
     <>
@@ -126,6 +124,12 @@ export default function Program() {
         {workout.map((item) => {
           return workout ? <WorkoutCard key={item.id} workout={item} /> : null;
         })}
+
+        <Fab color="primary" aria-label="add">
+          <AddIcon />
+        </Fab>
+
+
       </Stack>
     </>
   );
