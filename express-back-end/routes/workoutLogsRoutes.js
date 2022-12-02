@@ -1,13 +1,14 @@
 const Express = require('express');
-const dashboardQueries = require('../db/queries/usersQueries');
+const workoutLogQueries = require('../db/queries/workoutLogQueries');
 const router = Express.Router();
 
-// create the routes for the dashboard
+// create the routes for the workout logs
 
 
 router.get('/', (req,res) => {
-  dashboardQueries.getUserWithEmail('god@amongmen.ca')
+  workoutLogQueries.getWorkOutLogsByUserId(1)
     .then(result => {
+      console.log("Here",result);
       res.json(result);
     })
     .catch(err => {
@@ -15,10 +16,10 @@ router.get('/', (req,res) => {
     })
 });
 
-router.put('/', (req,res) => {
-  dashboardQueries.updateUsers(1, req.body)
+router.post('/', (req,res) => {
+  workoutLogQueries.addWorkoutLogs(req.body)
     .then(result => {
-      res.json(result[0]);
+      res.json(result);
     })
     .catch(err => {
       err.message;

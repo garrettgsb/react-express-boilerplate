@@ -44,8 +44,25 @@ const db = require("../index");
     });
 };
 
+const updateUsers = async (id, userInfo) => {
+  const setColumns = Object.keys(userInfo)
+    .map((property, index) => `${property}=$${index + 2}`)
+    .join(", ");
+
+  const queryDef = {
+    text: `
+    UPDATE users
+    SET ${setColumns}
+    WHERE id = $1 RETURNING *`,
+    values: [id, ...Object.values(userInfo)],
+  };
+  const data = await db.query(queryDef);
+  return data.rows[0];
+};
+
 module.exports = {
   getUsers,
   getUserWithEmail,
   addUser,
+  updateUsers
 }
