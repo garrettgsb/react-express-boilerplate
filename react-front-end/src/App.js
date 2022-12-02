@@ -1,94 +1,76 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Outlet } from "react-router-dom";
-
+import { Outlet, useOutletContext } from "react-router-dom";
 import "./App.css";
-
 import ResponsiveDrawer from "./pages/components/ResponsiveDrawer";
-
-// // ISOLATED COMPONENT TESTING SECTION
-// import from './pages/components/';
-
-// export default function App() {
-//   return (
-//     // INSERT COMPONENT TO BE TESTED BELOW
-
-//   )
-// }
-
-import Workout from "./pages/Workout";
-
-const exercises = [
-  {
-    name: "Bench press",
-    type: "Strength",
-    muscle: "Chest",
-    equipment: "Barbell",
-    difficulty: "Beginner",
-    instruction: "Lay down on the bench and grab the bar and pushhhhh",
-  },
-  {
-    name: "Shoulder press",
-    type: "Strength",
-    muscle: "Shoulder",
-    equipment: "Dumbbell",
-    difficulty: "Beginner",
-    instruction: "Sit on the bench and grab the weights and push up",
-  },
-];
 
 export default function App() {
   const [programs, setPrograms] = useState([]);
   const [workouts, setWorkouts] = useState([]);
-  const [exerciseSelections, setExerciseSelections] = useState([]);
-  const [exercises, setExercises] = useState([]);
-  const [dashboards, setDashboards] = useState([]);
-  const [cookies, setCookies] = useState();
 
-  useEffect(() => {
+  const getAndSetPrograms = () => {
     axios
-      .get("http://localhost:8080/api/programs")
+      .get("/api/programs")
       .then((result) => {
         setPrograms(result.data);
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch((e) => {
+        console.log(e);
       });
+  };
 
+  const getAndSetWorkouts = () => {
     axios
-      .get("http://localhost:8080/api/workouts")
+      .get("/api/workouts")
       .then((result) => {
         setWorkouts(result.data);
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch((e) => {
+        console.log(e);
       });
+  };
+  // const [exerciseSelections, setExerciseSelections] = useState([]);
+  // const [exercises, setExercises] = useState([]);
 
-    axios
-      .get("http://localhost:8080/api/exerciseselections")
-      .then((result) => {
-        setExerciseSelections(result.data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  // When App initially loads, fetch data and store in state
 
-    axios
-      .get("http://localhost:8080/api/dashboard")
-      .then((result) => {
-        setDashboards(result.data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  useEffect(() => {
+    getAndSetPrograms();
+    getAndSetWorkouts();
+    // axios
+    //   .get("http://localhost:8080/api/exerciseselections")
+    //   .then((result) => {
+    //     // console.log("result of exerciseselections:", result.data);
+    //     setExerciseSelections(result.data);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
+
+    // axios
+    //   .get("http://localhost:8080/api/program/exercise/:id")
+    //   .then((result) => {
+    //     // console.log("result of setexercises:", result.data);
+    //     setExercises(result.data);
+    //   });
   }, []);
 
   return (
     <>
-      <ResponsiveDrawer>
-        <Outlet />
+      <ResponsiveDrawer programs={programs} setPrograms={setPrograms}>
+        <Outlet
+          context={{
+            programs,
+            setPrograms,
+            getAndSetPrograms,
+            getAndSetWorkouts,
+          }}
+        />
       </ResponsiveDrawer>
-      {/* <Workout exercises= {exercises} /> */}
     </>
   );
+}
+
+export function usePrograms() {
+  return useOutletContext();
 }
