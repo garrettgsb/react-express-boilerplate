@@ -126,6 +126,15 @@ export default function ExerciseCard(props) {
       });
   };
 
+  const deleteExercise = () => {
+    // Send request to delete
+    Axios.delete(`/api/exercises/${exerciseId}`)
+      .then((response) => {
+        navigate(0);
+      })
+      .catch((e) => console.log(e));
+  };
+
   // state and click handler for card expansion
   const [expanded, setExpanded] = useState(true);
   const handleExpandClick = () => {
@@ -282,7 +291,12 @@ export default function ExerciseCard(props) {
                 </Button>
               )}
               {/* Garbage can button */}
-              <IconButton aria-label="delete" size="large" color="error">
+              <IconButton
+                aria-label="delete"
+                size="large"
+                color="error"
+                onClick={deleteExercise}
+              >
                 <DeleteIcon />
               </IconButton>
             </CardActions>
