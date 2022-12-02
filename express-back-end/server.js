@@ -29,6 +29,11 @@ App.post('/api/login', (req, res) => {
     });
 });
 
+App.post('/api/drawing', (req, res) => {
+  const drawingURL = req.body.image;
+  dbQueries.saveDrawing(1, drawingURL)
+})
+
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express listening on port ${PORT}...`);

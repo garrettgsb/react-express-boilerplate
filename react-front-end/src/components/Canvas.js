@@ -150,18 +150,6 @@ export default function Canvas(props) {
   //   }
   // }
 
-  // fetchData = () => {
-  //   axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-  //   .then((response) => {
-  //     // handle success
-  //     console.log(response.data) // The entire response from the Rails API
-
-  //     console.log(response.data.message) // Just the message
-  //     this.setState({
-  //       message: response.data.message
-  //     });
-  //   }) 
-  // }
 
   const [elements, setElements] = useState([]);
   const [action, setAction] = useState('none');
@@ -298,6 +286,14 @@ export default function Canvas(props) {
     setSelectedElement(null);
   };
 
+  const saveImage = () => {
+    const canvas = document.getElementById('curtaindraw');
+    const dataURL = canvas.toDataURL();
+    axios.post('/api/drawing', {
+      image: dataURL 
+    })
+  }
+
   return (
     <main className="main_page">
       <article className="sidebar">
@@ -309,6 +305,7 @@ export default function Canvas(props) {
           clear={clear}
           setTool={setTool}
           setColor={setColor}
+          save={saveImage}
           changeBrushSize={changeBrushSize} 
         />
       </article>

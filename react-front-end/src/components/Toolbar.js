@@ -124,7 +124,7 @@ export default function Toolbar(props) {
       <div className="tool_buttons">
         <button onClick={props.undo}>Undo</button>
         <button onClick={props.clear}>Clear</button>
-        <button>Save</button>
+        <button onClick={props.save}>Save</button>
       </div> 
 
     </div>

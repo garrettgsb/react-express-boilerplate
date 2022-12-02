@@ -52,4 +52,14 @@ const getTotalDrawings = (userId) => {
     });
 };
 
-module.exports = { getUsers, getUserById, getUserByLogin, getDrawingsByUserId, getTotalDrawings };
+const saveDrawing = (userId, drawing) => {
+  
+  return db.query(`UPDATE drawings
+  SET user_id = ${userId}, img_url = ${drawing}
+  RETURNING *;`)
+  .then(data => {
+    return data.rows;
+  });
+}
+
+module.exports = { getUsers, getUserById, getUserByLogin, getDrawingsByUserId, getTotalDrawings, saveDrawing };
