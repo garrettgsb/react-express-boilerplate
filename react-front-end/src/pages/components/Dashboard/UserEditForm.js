@@ -43,7 +43,8 @@ export const UserEditForm = (props) => {
       const goal_weight = Number(goalWeight);
       Axios.put(`http://localhost:8080/api/dashboard`, { goal, current_weight, goal_weight })
         .then((result) => {
-          useNavigate('/dashboard');
+          props.getDashboard()
+          props.showState(false);
         })
         .catch((err) => {
           console.log(err.message);

@@ -13,9 +13,15 @@ export default function Dashboard() {
   const [dashboard, setDashboard] = useState([]);
   const [userEdit, setUserEdit] = useState(false);
   const navigate = useNavigate();
+  const [data, setData] = useState([])
 
   // Grabs info from api and checks if user is login, if not than redirected to login
   useEffect(() => {
+    getDashboard()
+    getHeatmap()
+  }, []);
+
+  const getDashboard = (() => {
     Axios.get("http://localhost:8080/api/dashboard")
       .then((result) => {
         setDashboard(result.data);
@@ -26,7 +32,16 @@ export default function Dashboard() {
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
+  }) 
+const getHeatmap = (() => {
+  Axios.get("http://localhost:8080/api/workoutlogs")
+  .then((result) => {
+    setData(result.data);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+});
 
   // Check to see if User reached their goal weight
   const reachGoal = function () {
@@ -37,6 +52,21 @@ export default function Dashboard() {
         dashboard.current_weight - dashboard.goal_weight
       )} lbs away from reaching your goal`;
     }
+  };
+
+  // Button function to for Heatmap
+  const WorkoutSubmitHandler = (event) => {
+    const day = new Date().toISOString().split('T')[0];
+    const user_id = 1;
+    const value = 1;
+    Axios.post("http://localhost:8080/api/workoutlogs",
+     { user_id , value , day })
+      .then((result) => {
+        getHeatmap()
+      })
+      .catch((err) => {
+        console.log(err.message);
+      })
   };
 
   return (
@@ -53,7 +83,7 @@ export default function Dashboard() {
       >
         Edit
       </button>
-      <UserEditForm show={userEdit} />
+      <UserEditForm show={userEdit} showState={setUserEdit} getDashboard={getDashboard} />
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
@@ -108,13 +138,17 @@ export default function Dashboard() {
                 </CardContent>
                 <Box m="20px">
                   <Box height="75vh">
-                    <Heatmap />
+                    <Heatmap data={data} setData={setData} Heatmap={getHeatmap} />
                   </Box>
                 </Box>
               </Card>
             </Paper>
           </Grid>
         </Grid>
+        <button  onClick={() => {
+        WorkoutSubmitHandler()
+        }}
+        >Already WorkedOut?</button>
       </Container>
     </>
   );

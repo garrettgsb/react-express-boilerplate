@@ -2,23 +2,25 @@ import React, {useEffect, useState} from "react";
 import { ResponsiveCalendar } from "@nivo/calendar";
 import Axios from "axios";
 
-export const Heatmap = () => {
-  const [data, setData] = useState([])
+export const Heatmap = (props) => {
+ 
 
 
-  useEffect(() => {
-    Axios.get("http://localhost:8080/api/workoutlogs")
-      .then((result) => {
-        setData(result.data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+  // useEffect(() => {
+  //   Axios.get("http://localhost:8080/api/workoutlogs")
+  //     .then((result) => {
+  //       setData(result.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // }, []);
+
+
 
   return (
     <ResponsiveCalendar
-      data={data}
+      data={props.data}
       from="2022-01-01"
       to="2022-12-25"
       emptyColor="#eeeeee"
