@@ -1,25 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
 import WorkoutCard from "./components/WorkoutCard";
 import { Button } from "@mui/material";
-import ProgramCard from "./components/ProgramCard";
+import ProgramCard from "./components/ProgramCard/ProgramCard";
 import { usePrograms } from "../App";
 import axios from "axios";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Confirm from "./components/ProgramCard/Confirm";
 
 export default function Program() {
   const { getAndSetPrograms } = usePrograms();
   const params = useParams();
+  const navigate = useNavigate();
 
   const [programs, setPrograms] = useState([]);
   const [program, setProgram] = useState({});
   const [workout, setWorkout] = useState([]);
 
-  const [edit, setEdit] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [deleteProgram, setDeleteProgram] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setConfirmOpen(true);
+  };
+
+  const handleDelete = () => {
+    setDeleteProgram(true);
+    handleClickOpen();
+  };
+
+  const programId = params.id;
 
   useEffect(() => {
-    const programId = params.id;
-
     axios
       .get(`/api/programs/${programId}`)
       .then((result) => {
@@ -37,20 +51,7 @@ export default function Program() {
       .catch((e) => {
         console.log(e);
       });
-
-    // const findProgram = programs.find((item) => {
-    //   if (item.id == params.id) {
-    //     return item;
-    //   }
-    // });
-
-    // const findWorkout = Workouts.filter((workout) => {
-    //   return workout.program_id == params.id;
-    // });
-
-    // setProgram(findProgram);
-    // setWorkout(findWorkout);
-  }, [params.id]);
+  }, [program]);
 
   const saveProgram = () => {
     const indexOfProgram = programs.findIndex((item) => {
@@ -61,13 +62,25 @@ export default function Program() {
     ProgramsDefaultCopy[indexOfProgram] = program;
 
     setPrograms(ProgramsDefaultCopy);
-    setEdit(false);
+    setEditMode(false);
   };
 
-  const deleteWorkout = () => {
-    //axios.delete.then(() => getAndSetPrograms()))
-    console.log("delete is clicked!!");
+
+  const confirmDeleteProgram = () => {
+    axios
+      .delete(`/api/programs/${programId}`)
+      .then(() => {
+        getAndSetPrograms();
+        navigate("/dashboard");
+      })
+      .catch((e) => console.log(e));
   };
+
+  const handleEditMode = () => {
+    setEditMode(false)
+  }
+
+
 
   return (
     <>
@@ -78,29 +91,40 @@ export default function Program() {
         spacing={2}
       >
         {program ? (
-          <ProgramCard program={program} edit={edit} setProgram={setProgram} />
+          <ProgramCard
+            program={program}
+            setProgram={setProgram}
+            edit={editMode}
+            handleEditMode={handleEditMode}
+          />
         ) : null}
 
-        {edit ? (
-          <Button variant="contained" onClick={saveProgram}>
-            Save
-          </Button>
+        {editMode ? (
+          <>
+            {/* <Button variant="contained" onClick={saveProgram}>
+              Save
+            </Button> */}
+            <DeleteIcon onClick={handleDelete} />
+          </>
         ) : (
-          <Button variant="contained" onClick={() => setEdit(true)}>
+          <Button variant="contained" onClick={() => setEditMode(true)}>
             Edit
           </Button>
         )}
 
+        {deleteProgram ? (
+          <Confirm
+            confirmOpen={confirmOpen}
+            setConfirmOpen={setConfirmOpen}
+            confirmDeleteProgram={confirmDeleteProgram}
+          />
+        ) : (
+          ""
+        )}
+
         {/* Array of Workout Cards - to be made into separate component */}
         {workout.map((item) => {
-          return workout ? (
-            <WorkoutCard
-              key={item.id}
-              workout={item}
-              edit={edit}
-              delete={deleteWorkout}
-            />
-          ) : null;
+          return workout ? <WorkoutCard key={item.id} workout={item} /> : null;
         })}
       </Stack>
     </>
