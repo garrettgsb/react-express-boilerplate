@@ -15,9 +15,6 @@ export default function ProgramCard(props) {
   const [endDate, setEndDate] = useState("");
   const navigate = useNavigate();
 
-  // const handleOnChange = (event) => {
-  //   props.setProgram([{ ...props.program, name: event.target.value }]);
-  // };
 
   //if it has value & one of the dependency is changed, it sets data. 
   useEffect(() => {
@@ -43,12 +40,6 @@ export default function ProgramCard(props) {
     props.program.end_date,
   ]);
 
-  // const saveEditedProgram = () => {
-  //   axios.put(`/api/programs/${}`)
-  //   .then(() => {
-  //     getAndSetPrograms();
-  //   })
-  // }
 
   const editProgram = () => {
     const requestData = {

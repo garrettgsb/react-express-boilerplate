@@ -51,7 +51,7 @@ export default function Program() {
       .catch((e) => {
         console.log(e);
       });
-  }, [params.id]);
+  }, [program]);
 
   const saveProgram = () => {
     const indexOfProgram = programs.findIndex((item) => {
