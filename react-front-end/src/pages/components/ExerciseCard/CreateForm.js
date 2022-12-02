@@ -13,11 +13,12 @@ import {
   CardActions,
   CardContent,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import DeleteIcon from "@mui/icons-material/Delete";
 import SaveSharpIcon from "@mui/icons-material/SaveSharp";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { styled } from "@mui/material/styles";
 import Axios from "axios";
 
@@ -41,67 +42,34 @@ const ExerciseAttribute = styled("div")({
 });
 
 export default function ExerciseCard(props) {
-  // State and handler for all exercise attributes
-  // const [exerciseAttributes, setExerciseAttributes] = useState({
-  //   name: props.name || "",
-  //   sets: props.sets || null,
-  //   reps: props.reps || null,
-  //   load: props.load || null,
-  //   rest: props.rest || null,
-  //   notes: props.notes || null,
-  //   image: props.image || null,
-  //   instructions: props.instructions || null,
-  // });
-
   // Capture workout id
   const workoutId = useParams().id;
   // Capture exercise id
   const exerciseId = props.id;
 
-  // State and change handler for NAME
-  const [name, setName] = useState(props.name || "");
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
+  // State for NAME
+  const [name, setName] = useState("");
 
-  // State and change handler for SETS
-  const [sets, setSets] = useState(props.sets || null);
-  const handleSetsChange = (event) => {
-    setSets(event.target.value);
-  };
+  // State for SETS
+  const [sets, setSets] = useState("");
 
-  // State and change handler for REPS
-  const [reps, setReps] = useState(props.reps || null);
-  const handleRepsChange = (event) => {
-    setReps(event.target.value);
-  };
+  // State for REPS
+  const [reps, setReps] = useState("");
 
-  // State and change handler for LOAD
-  const [load, setLoad] = useState(props.load || null);
-  const handleLoadChange = (event) => {
-    setLoad(event.target.value);
-  };
+  // State for LOAD
+  const [load, setLoad] = useState("");
 
-  // State and change handler for REST
-  const [rest, setRest] = useState(props.rest_period || null);
-  const handleRestChange = (event) => {
-    setRest(event.target.value);
-  };
+  // State for REST
+  const [rest, setRest] = useState("");
 
-  // State and change handler for Notes
-  const [notes, setNotes] = useState(props.notes || null);
-  const handleNotesChange = (event) => {
-    setNotes(event.target.value);
-  };
+  // State for Instructions
+  const [instructions, setInstructions] = useState("");
 
-  // State and change handler for Instructions
-  const [instructions, setInstructions] = useState(props.instructions || null);
-  const handleInstructionsChange = (event) => {
-    setInstructions(event.target.value);
-  };
+  // State for Notes
+  const [notes, setNotes] = useState("");
 
   const navigate = useNavigate();
-  const saveEdits = () => {
+  const submitForm = () => {
     // Assemble exercise data object
     const exerciseData = {
       id: exerciseId,
@@ -115,7 +83,7 @@ export default function ExerciseCard(props) {
       instructions,
     };
 
-    // Send request to update
+    // Send request to create ---------------------------------------------
     Axios.put(`/api/exercises/${exerciseId}`, exerciseData)
       .then((response) => {
         // Refresh current page
@@ -126,22 +94,11 @@ export default function ExerciseCard(props) {
       });
   };
 
-  const deleteExercise = () => {
-    // Send request to delete
-    Axios.delete(`/api/exercises/${exerciseId}`)
-      .then((response) => {
-        navigate(0);
-      })
-      .catch((e) => console.log(e));
-  };
-
   // state and click handler for card expansion
   const [expanded, setExpanded] = useState(true);
   const handleExpandClick = () => {
     setExpanded(!expanded);
-    if (props.edit) {
-      props.toggleEdit(false);
-    }
+    props.setAdding(false);
   };
 
   return (
@@ -159,7 +116,7 @@ export default function ExerciseCard(props) {
             id="standard-required"
             helperText="Name"
             variant="standard"
-            onChange={handleNameChange}
+            onChange={(e) => setName(e.target.value)}
             value={name}
             sx={{ maxWidth: "80%" }}
           />
@@ -174,7 +131,7 @@ export default function ExerciseCard(props) {
               shrink: true,
             }}
             variant="standard"
-            onChange={handleSetsChange}
+            onChange={(e) => setSets(e.target.value)}
             value={sets}
             sx={{ maxWidth: "30%" }}
           />
@@ -189,7 +146,7 @@ export default function ExerciseCard(props) {
               shrink: true,
             }}
             variant="standard"
-            onChange={handleRepsChange}
+            onChange={(e) => setReps(e.target.value)}
             value={reps}
             sx={{ maxWidth: "50%" }}
           />
@@ -204,7 +161,7 @@ export default function ExerciseCard(props) {
               shrink: true,
             }}
             variant="standard"
-            onChange={handleLoadChange}
+            onChange={(e) => setLoad(e.target.value)}
             value={load}
             sx={{ maxWidth: "50%" }}
             inputProps={{ step: 5 }}
@@ -220,7 +177,7 @@ export default function ExerciseCard(props) {
               shrink: true,
             }}
             variant="standard"
-            onChange={handleRestChange}
+            onChange={(e) => setRest(e.target.value)}
             value={rest}
             sx={{ maxWidth: "50%" }}
             InputProps={{
@@ -236,7 +193,13 @@ export default function ExerciseCard(props) {
             aria-expanded={expanded}
             aria-label="show more"
           >
-            <ExpandMoreIcon />
+            {props.edit ? (
+              <Tooltip title="Cancel" arrow>
+                <CloseRoundedIcon />
+              </Tooltip>
+            ) : (
+              <ExpandMoreIcon />
+            )}
           </ExpandMore>
         </CardActions>
       </CardContent>
@@ -244,12 +207,16 @@ export default function ExerciseCard(props) {
       {/* Expandable section containing image, instructions and notes */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Box display="flex">
-          <CardMedia
-            component="img"
-            sx={{ width: "40%", height: "auto" }}
-            image={props.image || null}
-            alt="exercise"
-          />
+          {props.image ? (
+            <CardMedia
+              component="img"
+              sx={{ width: "40%", height: "auto" }}
+              image={props.image}
+              alt="exercise"
+            />
+          ) : (
+            "image form here"
+          )}
           <Box
             display="flex"
             flexDirection="column"
@@ -264,7 +231,7 @@ export default function ExerciseCard(props) {
                 multiline
                 fullWidth
                 value={instructions}
-                onChange={handleInstructionsChange}
+                onChange={(e) => setInstructions(e.target.value)}
               />
               <Typography variant="h5" pt={"0.5em"}>
                 Notes
@@ -275,30 +242,19 @@ export default function ExerciseCard(props) {
                 multiline
                 fullWidth
                 value={notes}
-                onChange={handleNotesChange}
+                onChange={(e) => setNotes(e.target.value)}
               />
             </CardContent>
             <CardActions>
-              {props.edit && (
-                <Button
-                  variant="contained"
-                  size="small"
-                  startIcon={<SaveSharpIcon />}
-                  onClick={saveEdits}
-                  sx={{ ml: "auto" }}
-                >
-                  Save
-                </Button>
-              )}
-              {/* Garbage can button */}
-              <IconButton
-                aria-label="delete"
-                size="large"
-                color="error"
-                onClick={deleteExercise}
+              <Button
+                variant="contained"
+                size="small"
+                startIcon={<SaveSharpIcon />}
+                onClick={submitForm}
+                sx={{ ml: "auto" }}
               >
-                <DeleteIcon />
-              </IconButton>
+                SAVE
+              </Button>
             </CardActions>
           </Box>
         </Box>
