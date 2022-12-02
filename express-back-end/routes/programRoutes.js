@@ -20,8 +20,8 @@ router.post('/', (req, res) => {
 // READ - get all by user
 router.get('/', (req, res) => {
   programQueries.getProgramWithUserId(1)
-    .then(result => {
-      res.json(result);
+    .then(programs => {
+      res.json({programs});
     })
     .catch(err => {
       err.message;
@@ -30,9 +30,9 @@ router.get('/', (req, res) => {
 
 // READ - get by 
 router.get('/:id', (req, res) => {
-  programQueries.getProgramWithId()
-    .then(result => {
-      res.json(result);
+  programQueries.getProgramWithId(req.params.id)
+    .then(program => {
+      res.json({program});
     })
     .catch(err => {
       err.message;

@@ -17,7 +17,7 @@ const getExerciseSelectionByWorkoutId = (workout_id) => {
       workout_id,
     ])
     .then((result) => {
-      return result.rows[0];
+      return result.rows;
     })
     .catch((err) => {
       err.message;

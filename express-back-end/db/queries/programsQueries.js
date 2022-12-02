@@ -15,7 +15,7 @@ const getProgramWithId = (Id) => {
   return db
     .query(`SELECT * FROM programs WHERE id=$1;`, [Id])
     .then((result) => {
-      return result.rows;
+      return result.rows[0];
     })
     .catch((err) => {
       err.message;
