@@ -42,21 +42,45 @@ export default function App() {
   const [workouts, setWorkouts] = useState([]);
   const [exerciseSelections, setExerciseSelections] = useState([]);
   const [exercises, setExercises] = useState([]);
-
+  const [dashboards, setDashboards] = useState([]);
+  const [cookies, setCookies] = useState();
 
   useEffect(() => {
-    Promise.all([
-      axios.get("http://localhost:8080/api/programs"),
-      axios.get("http://localhost:8080/api/workouts"),
-      axios.get("http://localhost:8080/api/exercises"),
-      axios.get("http://localhost:8080/api/exerciseselections"),
-    ]).then((all) => {
-      console.log('here', all);
-      setPrograms(all[0].data);
-      setWorkouts(all[1].data);
-      setExercises(all[2].data);
-      setExerciseSelections(all[3].data);
-    });
+    axios
+      .get("http://localhost:8080/api/programs")
+      .then((result) => {
+        setPrograms(result.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    axios
+      .get("http://localhost:8080/api/workouts")
+      .then((result) => {
+        setWorkouts(result.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    axios
+      .get("http://localhost:8080/api/exerciseselections")
+      .then((result) => {
+        setExerciseSelections(result.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    axios
+      .get("http://localhost:8080/api/dashboard")
+      .then((result) => {
+        setDashboards(result.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, []);
 
   return (
