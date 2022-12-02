@@ -4,7 +4,8 @@ import ExerciseCard from "./components/ExerciseCard";
 import AddIcon from "@mui/icons-material/Add";
 import { Fab, Stack, Typography } from "@mui/material";
 import Axios from "axios";
-import Edit from "./components/ExerciseCard/Form";
+import EditForm from "./components/ExerciseCard/EditForm";
+import CreateForm from "./components/ExerciseCard/CreateForm";
 
 export default function Workout(props) {
   const [exercises, setExercises] = useState([]);
@@ -77,7 +78,7 @@ export default function Workout(props) {
 
         {/* Render new exercise form when in addingExercise state */}
         {adding && (
-          <Edit
+          <EditForm
             edit
             adding={adding}
             exercises={exercises}

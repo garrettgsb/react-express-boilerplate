@@ -13,11 +13,13 @@ import {
   CardActions,
   CardContent,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveSharpIcon from "@mui/icons-material/SaveSharp";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { styled } from "@mui/material/styles";
 import Axios from "axios";
 
@@ -41,64 +43,31 @@ const ExerciseAttribute = styled("div")({
 });
 
 export default function ExerciseCard(props) {
-  // State and handler for all exercise attributes
-  // const [exerciseAttributes, setExerciseAttributes] = useState({
-  //   name: props.name || "",
-  //   sets: props.sets || '',
-  //   reps: props.reps || '',
-  //   load: props.load || '',
-  //   rest: props.rest || '',
-  //   notes: props.notes || '',
-  //   image: props.image || '',
-  //   instructions: props.instructions || '',
-  // });
-
   // Capture workout id
   const workoutId = useParams().id;
   // Capture exercise id
   const exerciseId = props.id;
 
-  // State and change handler for NAME
+  // State for NAME
   const [name, setName] = useState(props.name || "");
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
 
-  // State and change handler for SETS
+  // State for SETS
   const [sets, setSets] = useState(props.sets || "");
-  const handleSetsChange = (event) => {
-    setSets(event.target.value);
-  };
 
-  // State and change handler for REPS
+  // State for REPS
   const [reps, setReps] = useState(props.reps || "");
-  const handleRepsChange = (event) => {
-    setReps(event.target.value);
-  };
 
-  // State and change handler for LOAD
+  // State for LOAD
   const [load, setLoad] = useState(props.load || "");
-  const handleLoadChange = (event) => {
-    setLoad(event.target.value);
-  };
 
-  // State and change handler for REST
+  // State for REST
   const [rest, setRest] = useState(props.rest_period || "");
-  const handleRestChange = (event) => {
-    setRest(event.target.value);
-  };
 
-  // State and change handler for Notes
-  const [notes, setNotes] = useState(props.notes || "");
-  const handleNotesChange = (event) => {
-    setNotes(event.target.value);
-  };
-
-  // State and change handler for Instructions
+  // State for Instructions
   const [instructions, setInstructions] = useState(props.instructions || "");
-  const handleInstructionsChange = (event) => {
-    setInstructions(event.target.value);
-  };
+
+  // State for Notes
+  const [notes, setNotes] = useState(props.notes || "");
 
   const navigate = useNavigate();
   const submitForm = () => {
@@ -118,7 +87,6 @@ export default function ExerciseCard(props) {
     // Send request to update
     Axios.put(`/api/exercises/${exerciseId}`, exerciseData)
       .then((response) => {
-        // setExpanded(false);
         // Refresh current page
         navigate(0);
       })
@@ -131,6 +99,7 @@ export default function ExerciseCard(props) {
     // Send request to delete
     Axios.delete(`/api/exercises/${exerciseId}`)
       .then((response) => {
+        // Refresh current page
         navigate(0);
       })
       .catch((e) => console.log(e));
@@ -139,10 +108,10 @@ export default function ExerciseCard(props) {
   // state and click handler for card expansion
   const [expanded, setExpanded] = useState(true);
   const handleExpandClick = () => {
-    setExpanded(!expanded);
     if (props.edit) {
-      props.toggleEdit(false);
+      props.setEdit(false);
     }
+    setExpanded(!expanded);
   };
 
   return (
@@ -175,7 +144,7 @@ export default function ExerciseCard(props) {
               shrink: true,
             }}
             variant="standard"
-            onChange={handleSetsChange}
+            onChange={(e) => setSets(e.target.value)}
             value={sets}
             sx={{ maxWidth: "30%" }}
           />
@@ -190,7 +159,7 @@ export default function ExerciseCard(props) {
               shrink: true,
             }}
             variant="standard"
-            onChange={handleRepsChange}
+            onChange={(e) => setReps(e.target.value)}
             value={reps}
             sx={{ maxWidth: "50%" }}
           />
@@ -205,7 +174,7 @@ export default function ExerciseCard(props) {
               shrink: true,
             }}
             variant="standard"
-            onChange={handleLoadChange}
+            onChange={(e) => setLoad(e.target.value)}
             value={load}
             sx={{ maxWidth: "50%" }}
             inputProps={{ step: 5 }}
@@ -221,7 +190,7 @@ export default function ExerciseCard(props) {
               shrink: true,
             }}
             variant="standard"
-            onChange={handleRestChange}
+            onChange={(e) => setRest(e.target.value)}
             value={rest}
             sx={{ maxWidth: "50%" }}
             InputProps={{
@@ -237,7 +206,13 @@ export default function ExerciseCard(props) {
             aria-expanded={expanded}
             aria-label="show more"
           >
-            <ExpandMoreIcon />
+            {props.edit ? (
+              <Tooltip title="Cancel" arrow>
+                <CloseRoundedIcon />
+              </Tooltip>
+            ) : (
+              <ExpandMoreIcon />
+            )}
           </ExpandMore>
         </CardActions>
       </CardContent>
@@ -253,7 +228,7 @@ export default function ExerciseCard(props) {
               alt="exercise"
             />
           ) : (
-            "no image found"
+            "image form here"
           )}
           <Box
             display="flex"
@@ -269,7 +244,7 @@ export default function ExerciseCard(props) {
                 multiline
                 fullWidth
                 value={instructions}
-                onChange={handleInstructionsChange}
+                onChange={(e) => setInstructions(e.target.value)}
               />
               <Typography variant="h5" pt={"0.5em"}>
                 Notes
@@ -280,7 +255,7 @@ export default function ExerciseCard(props) {
                 multiline
                 fullWidth
                 value={notes}
-                onChange={handleNotesChange}
+                onChange={(e) => setNotes(e.target.value)}
               />
             </CardContent>
             <CardActions>
