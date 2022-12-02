@@ -37,7 +37,6 @@ export default function Workout(props) {
       });
   }, []);
 
-  // console.log(exercises);
 
   // State and handler for toggling editing "mode"
   const [editWorkout, setEdit] = useState(false);
