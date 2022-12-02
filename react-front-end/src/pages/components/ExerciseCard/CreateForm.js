@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import {
   Box,
   Button,
   Card,
-  CardMedia,
   Collapse,
   Divider,
   IconButton,
   InputAdornment,
+  Link,
   CardActions,
   CardContent,
   TextField,
   Tooltip,
-  Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SaveSharpIcon from "@mui/icons-material/SaveSharp";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import CameraAltRoundedIcon from "@mui/icons-material/CameraAltRounded";
 import { styled } from "@mui/material/styles";
 import Axios from "axios";
 
@@ -47,20 +47,25 @@ export default function ExerciseCard(props) {
   // Capture exercise id
   const exerciseId = props.id;
 
-  // State for NAME
+  // States for NAME field
   const [name, setName] = useState("");
+  const [nameError, setNameError] = useState(false);
 
-  // State for SETS
+  // States for SETS field
   const [sets, setSets] = useState("");
+  const [setsError, setSetsError] = useState(false);
 
-  // State for REPS
+  // States for REPS field
   const [reps, setReps] = useState("");
+  const [repsError, setRepsError] = useState(false);
 
-  // State for LOAD
+  // States for LOAD field
   const [load, setLoad] = useState("");
+  const [loadError, setLoadError] = useState(false);
 
-  // State for REST
+  // States for REST field
   const [rest, setRest] = useState("");
+  const [restError, setRestError] = useState(false);
 
   // State for Instructions
   const [instructions, setInstructions] = useState("");
@@ -68,11 +73,40 @@ export default function ExerciseCard(props) {
   // State for Notes
   const [notes, setNotes] = useState("");
 
-  const navigate = useNavigate();
-  const submitForm = () => {
+  // State for Image URL
+  const [imageURL, setImageURL] = useState("");
+
+  const resetAllErrors = () => {
+    setNameError(false);
+    setSetsError(false);
+    setRepsError(false);
+    setLoadError(false);
+    setRestError(false);
+  };
+
+  const submitCreateForm = () => {
+    resetAllErrors();
+    if (!name) {
+      setNameError("Name - required");
+    }
+    if (!sets) {
+      setSetsError("SETS - required");
+    }
+    if (!reps) {
+      setRepsError("REPS - required");
+    }
+    if (!load) {
+      setLoadError("lbs - required");
+    }
+    if (!rest) {
+      setRestError("REST - required");
+    }
+    if (!name || !sets || !reps || !load || !rest) {
+      return;
+    }
+
     // Assemble exercise data object
     const exerciseData = {
-      id: exerciseId,
       workout_id: workoutId,
       name,
       sets,
@@ -81,16 +115,20 @@ export default function ExerciseCard(props) {
       rest_period: rest,
       notes,
       instructions,
+      image: imageURL,
     };
 
-    // Send request to create ---------------------------------------------
-    Axios.put(`/api/exercises/${exerciseId}`, exerciseData)
+    // Send request to create
+    Axios.post(`/api/exercises`, exerciseData)
       .then((response) => {
-        // Refresh current page
-        navigate(0);
+        // Build new exercises state with newest at the end
+        let newState = [...props.exercises, exerciseData];
+        props.setAdding(false);
+        // Set new Workout page state to trigger re-render
+        props.setExercises(newState);
       })
       .catch((e) => {
-        console.log(e);
+        console.log("Error: ", e);
       });
   };
 
@@ -114,18 +152,19 @@ export default function ExerciseCard(props) {
         <ExerciseAttribute>
           <TextField
             id="standard-required"
-            helperText="Name"
+            helperText={nameError ? nameError : "Name"}
             variant="standard"
             onChange={(e) => setName(e.target.value)}
             value={name}
-            sx={{ maxWidth: "80%" }}
+            sx={{ maxWidth: "80%", overflow: "visible" }}
+            error={nameError}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
           <TextField
             id="standard-number"
-            helperText="SETS"
+            helperText={setsError ? setsError : "SETS"}
             type="number"
             InputLabelProps={{
               shrink: true,
@@ -134,13 +173,15 @@ export default function ExerciseCard(props) {
             onChange={(e) => setSets(e.target.value)}
             value={sets}
             sx={{ maxWidth: "30%" }}
+            inputProps={{ min: 1 }}
+            error={setsError}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
           <TextField
             id="standard-number"
-            helperText="REPS"
+            helperText={repsError ? repsError : "REPS"}
             type="number"
             InputLabelProps={{
               shrink: true,
@@ -149,13 +190,15 @@ export default function ExerciseCard(props) {
             onChange={(e) => setReps(e.target.value)}
             value={reps}
             sx={{ maxWidth: "50%" }}
+            inputProps={{ min: 1 }}
+            error={repsError}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
           <TextField
             id="standard-number"
-            helperText="lbs"
+            helperText={loadError ? loadError : "lbs"}
             type="number"
             InputLabelProps={{
               shrink: true,
@@ -164,14 +207,15 @@ export default function ExerciseCard(props) {
             onChange={(e) => setLoad(e.target.value)}
             value={load}
             sx={{ maxWidth: "50%" }}
-            inputProps={{ step: 5 }}
+            inputProps={{ step: 5, min: 0 }}
+            error={loadError}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
           <TextField
             id="standard-number"
-            helperText="REST"
+            helperText={restError ? restError : "REST"}
             type="number"
             InputLabelProps={{
               shrink: true,
@@ -180,9 +224,11 @@ export default function ExerciseCard(props) {
             onChange={(e) => setRest(e.target.value)}
             value={rest}
             sx={{ maxWidth: "50%" }}
+            inputProps={{ min: 0 }}
             InputProps={{
               endAdornment: <InputAdornment position="end">min</InputAdornment>,
             }}
+            error={restError}
           />
         </ExerciseAttribute>
         {/* Expand/collapse details chevron */}
@@ -194,7 +240,7 @@ export default function ExerciseCard(props) {
             aria-label="show more"
           >
             {props.edit ? (
-              <Tooltip title="Cancel" arrow>
+              <Tooltip title="Cancel" arrow placement="right">
                 <CloseRoundedIcon />
               </Tooltip>
             ) : (
@@ -207,16 +253,6 @@ export default function ExerciseCard(props) {
       {/* Expandable section containing image, instructions and notes */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Box display="flex">
-          {props.image ? (
-            <CardMedia
-              component="img"
-              sx={{ width: "40%", height: "auto" }}
-              image={props.image}
-              alt="exercise"
-            />
-          ) : (
-            "image form here"
-          )}
           <Box
             display="flex"
             flexDirection="column"
@@ -224,25 +260,49 @@ export default function ExerciseCard(props) {
             width="100%"
           >
             <CardContent>
-              <Typography variant="h5">Instructions</Typography>
               <TextField
                 id="outlined-basic"
                 variant="outlined"
+                label={"Instructions"}
                 multiline
                 fullWidth
                 value={instructions}
                 onChange={(e) => setInstructions(e.target.value)}
+                sx={{ mb: "2rem" }}
               />
-              <Typography variant="h5" pt={"0.5em"}>
-                Notes
-              </Typography>
               <TextField
                 id="outlined-basic"
                 variant="outlined"
+                label={"Notes"}
                 multiline
                 fullWidth
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
+                sx={{ mb: "2rem" }}
+              />
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                label={"Image URL"}
+                multiline
+                fullWidth
+                value={imageURL}
+                onChange={(e) => setImageURL(e.target.value)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Link
+                        href="https://www.pexels.com/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Tooltip title="Pexels.com" arrow placement="right">
+                          <CameraAltRoundedIcon />
+                        </Tooltip>
+                      </Link>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </CardContent>
             <CardActions>
@@ -250,7 +310,7 @@ export default function ExerciseCard(props) {
                 variant="contained"
                 size="small"
                 startIcon={<SaveSharpIcon />}
-                onClick={submitForm}
+                onClick={submitCreateForm}
                 sx={{ ml: "auto" }}
               >
                 SAVE

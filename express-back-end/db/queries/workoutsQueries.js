@@ -2,7 +2,7 @@ const db = require("../index");
 
 const getWorkouts = () => {
   return db
-    .query(`SELECT * FROM workouts`)
+    .query(`SELECT * FROM workouts ORDER BY created_at;`)
     .then((result) => {
       return result.rows;
     })
@@ -13,7 +13,7 @@ const getWorkouts = () => {
 
 const getWorkoutsByProgramId = (program_id) => {
   return db
-    .query(`SELECT * FROM workouts WHERE program_id=$1;`, [program_id])
+    .query(`SELECT * FROM workouts WHERE program_id=$1 ORDER BY created_at;`, [program_id])
     .then((result) => {
       return result.rows;
     })
@@ -38,7 +38,7 @@ const addWorkouts = (workouts) => {
     .query(
       `INSERT INTO workouts (program_id, name, image, description, duration) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
       [
-        workouts.programId,
+        workouts.program_id,
         workouts.name,
         workouts.image,
         workouts.description,

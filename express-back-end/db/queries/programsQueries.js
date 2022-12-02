@@ -2,7 +2,7 @@ const db = require("../index");
 
 const getPrograms = () => {
   return db
-    .query(`SELECT * FROM programs;`)
+    .query(`SELECT * FROM programs ORDER BY created_at;`)
     .then((result) => {
       return result.rows;
     })
@@ -24,7 +24,9 @@ const getProgramWithId = (Id) => {
 
 const getProgramWithUserId = (userId) => {
   return db
-    .query(`SELECT * FROM programs WHERE user_id = $1;`, [userId])
+    .query(`SELECT * FROM programs WHERE user_id = $1 ORDER BY created_at;`, [
+      userId,
+    ])
     .then((result) => {
       return result.rows;
     })
@@ -32,6 +34,7 @@ const getProgramWithUserId = (userId) => {
       err.message;
     });
 };
+
 // (user_id, name, description, start_date, end_date, public, author)
 const addPrograms = (program) => {
   return db

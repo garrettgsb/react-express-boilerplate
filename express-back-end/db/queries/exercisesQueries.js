@@ -33,8 +33,9 @@ const getExercises = (options) => {
 const addExercise = (exercises) => {
   return db
     .query(
-      `INSERT INTO exercises (workout_id, name, type, muscle, equipment, difficulty, image, instructions, sets, reps, load, rest_period, duration, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *;`[
-        (exercises.workout_id,
+      `INSERT INTO exercises (workout_id, name, type, muscle, equipment, difficulty, image, instructions, sets, reps, load, rest_period, duration, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *;`,
+      [
+        exercises.workout_id,
         exercises.name,
         exercises.type,
         exercises.muscle,
@@ -47,7 +48,7 @@ const addExercise = (exercises) => {
         exercises.load,
         exercises.rest_period,
         exercises.duration,
-        exercises.notes)
+        exercises.notes,
       ]
     )
     .then((result) => {
