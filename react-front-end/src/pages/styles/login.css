@@ -18,19 +18,17 @@ label.title{
   display: flex;
   font-size: 100px;
   margin: 1em 0 1em 0;
-  font-family: 'Lobster';
 }
 
 .new_canvas {
   display: flex;
-  font-size: 38px;
-  font-family: 'Caveat';
+  font-size: 32px;
   width: 300px;
   border: 2px solid black;
   border-radius: 0.5em;
   justify-content: center;
   padding: 1em 0 1em 0;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
   background-color: rgb(170,160,90);
 }
 
@@ -38,26 +36,16 @@ div.examples {
   display: flex;
   flex-direction: row;
 }
-
 div.examples div{
   display: flex;
   height: 200px;
   width: 300px;
-  border: 3px solid black;
-  background-color: white;
+  border: 1px solid black;
   margin: 2em;
-  justify-content: center;
 }
 
-div.examples img{
+.login-wrapper {
   display: flex;
-  height: 200px;
-  width: 300px;
-}
-
-div.examples label{
-  display: flex;
-  position: absolute;
-  font-size: 20px;
-  font-family: 'Caveat';
+  flex-direction: column;
+  align-items: center;
 }
