@@ -12,6 +12,7 @@ import Confirm from "./components/ProgramCard/Confirm";
 import WorkoutForm from "./components/WorkoutCard/WorkoutForm";
 
 export default function Program() {
+  console.log("rendered!!!")
   const { getAndSetPrograms } = usePrograms();
   const params = useParams();
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function Program() {
   const [workout, setWorkout] = useState([]);
 
   const [programEditMode, setProgramEditMode] = useState(false);
-  const [workoutEditMode, setWorkoutEditMode] = useState(false);
+  const [workoutCreateMode, setWorkoutCreateMode] = useState(false);
   const [deleteProgram, setDeleteProgram] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
@@ -37,36 +38,26 @@ export default function Program() {
   const programId = params.id;
 
   useEffect(() => {
-    axios
-      .get(`/api/programs/${programId}`)
-      .then((result) => {
-        setProgram(result.data.program || {});
-      })
-      .catch((e) => {
-        console.log(e);
-      });
 
     axios
-      .get(`/api/workouts/programs/${programId}`)
-      .then((result) => {
-        setWorkout(result.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [program]);
-
-  const saveProgram = () => {
-    const indexOfProgram = programs.findIndex((item) => {
-      return item.id === program.id;
+    .get(`/api/programs/${programId}`)
+    .then((result) => {
+      setProgram(result.data.program || {});
+    })
+    .catch((e) => {
+      console.log(e);
     });
 
-    const ProgramsDefaultCopy = [...programs];
-    ProgramsDefaultCopy[indexOfProgram] = program;
+    axios
+    .get(`/api/workouts/programs/${programId}`)
+    .then((result) => {
+      setWorkout(result.data);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+  }, [programId])
 
-    setPrograms(ProgramsDefaultCopy);
-    setProgramEditMode(false);
-  };
 
   const confirmDeleteProgram = () => {
     axios
@@ -83,7 +74,7 @@ export default function Program() {
   };
 
   const handleWorkoutEditMode = () => {
-    setWorkoutEditMode(true);
+    setWorkoutCreateMode(true);
   };
 
   return (
@@ -132,7 +123,7 @@ export default function Program() {
         })}
 
 
-        {workoutEditMode ? (
+        {workoutCreateMode ? (
           <WorkoutForm />
         ) : (
           <Fab

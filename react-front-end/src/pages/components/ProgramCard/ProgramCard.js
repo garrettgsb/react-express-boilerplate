@@ -8,7 +8,7 @@ import ProgramForm from "./ProgramForm";
 import Program from "../../Program";
 
 export default function ProgramCard(props) {
-  const { programs, setPrograms, getAndSetPrograms } = usePrograms();
+  const { getAndSetPrograms } = usePrograms();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
