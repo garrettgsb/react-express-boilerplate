@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ExerciseCard from "./components/ExerciseCard";
-import EditSharpIcon from "@mui/icons-material/EditSharp";
-import SaveSharpIcon from "@mui/icons-material/SaveSharp";
 import AddIcon from "@mui/icons-material/Add";
-
-import { Button, Fab, Stack, Typography } from "@mui/material";
-import axios from "axios";
+import { Fab, Stack, Typography } from "@mui/material";
+import Axios from "axios";
+import Edit from "./components/ExerciseCard/Form";
 
 export default function Workout(props) {
   const [exercises, setExercises] = useState([]);
@@ -16,8 +14,7 @@ export default function Workout(props) {
   const workoutId = useParams().id;
   useEffect(() => {
     // Fetch exercises that belong to current workout
-    axios
-      .get(`/api/exercises?workoutId=${workoutId}`)
+    Axios.get(`/api/exercises?workoutId=${workoutId}`)
       .then((result) => {
         // Store in state
         setExercises(result.data);
@@ -26,10 +23,9 @@ export default function Workout(props) {
         console.log(e);
       });
     // Fetch current workout info
-    axios
-      .get(`/api/workouts/${workoutId}`)
+    Axios.get(`/api/workouts/${workoutId}`)
       .then((result) => {
-        // Store in variable (not expected to change)
+        // Store in state
         setWorkoutData(result.data[0]);
       })
       .catch((e) => {
@@ -37,18 +33,15 @@ export default function Workout(props) {
       });
   }, []);
 
-  // console.log(exercises);
-
   // State and handler for toggling editing "mode"
-  const [editWorkout, setEdit] = useState(false);
-  const toggleEdit = () => {
-    setEdit(!editWorkout);
+  const [adding, setAdding] = useState(false);
+  const toggleAdding = () => {
+    setAdding(!adding);
   };
 
   // Function to save changes and return to viewing "mode"
   const saveEdits = () => {
     // Send request and then
-    toggleEdit();
   };
 
   return (
@@ -70,36 +63,26 @@ export default function Workout(props) {
           <ExerciseCard {...exercise} key={exercise.id} />
         ))}
 
-        {/* When in edit workout state, render Add button */}
-        {editWorkout && (
+        {/* Render Add button unless in addingExercise state */}
+        {!adding && (
           <Fab
-            color="primary"
             aria-label="add"
-            size={"medium"}
+            size="medium"
             sx={{ alignSelf: "center" }}
+            onClick={toggleAdding}
           >
             <AddIcon />
           </Fab>
         )}
-        {!editWorkout && (
-          <Button
-            variant="outlined"
-            size="medium"
-            startIcon={<EditSharpIcon />}
-            onClick={toggleEdit}
-          >
-            Edit
-          </Button>
-        )}
-        {editWorkout && (
-          <Button
-            variant="contained"
-            size="medium"
-            startIcon={<SaveSharpIcon />}
-            onClick={saveEdits}
-          >
-            Save
-          </Button>
+
+        {/* Render new exercise form when in addingExercise state */}
+        {adding && (
+          <Edit
+            edit
+            adding={adding}
+            exercises={exercises}
+            setExercises={setExercises}
+          />
         )}
       </Stack>
     </>

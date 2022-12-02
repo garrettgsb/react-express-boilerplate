@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Show from "./Show";
-import Edit from "./Edit";
+import Edit from "./Form";
 
 export default function ExerciseCard(props) {
   // console.log("this is the prop in ECard", props);

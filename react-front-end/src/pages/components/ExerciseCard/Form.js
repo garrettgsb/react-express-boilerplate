@@ -44,13 +44,13 @@ export default function ExerciseCard(props) {
   // State and handler for all exercise attributes
   // const [exerciseAttributes, setExerciseAttributes] = useState({
   //   name: props.name || "",
-  //   sets: props.sets || null,
-  //   reps: props.reps || null,
-  //   load: props.load || null,
-  //   rest: props.rest || null,
-  //   notes: props.notes || null,
-  //   image: props.image || null,
-  //   instructions: props.instructions || null,
+  //   sets: props.sets || '',
+  //   reps: props.reps || '',
+  //   load: props.load || '',
+  //   rest: props.rest || '',
+  //   notes: props.notes || '',
+  //   image: props.image || '',
+  //   instructions: props.instructions || '',
   // });
 
   // Capture workout id
@@ -65,43 +65,43 @@ export default function ExerciseCard(props) {
   };
 
   // State and change handler for SETS
-  const [sets, setSets] = useState(props.sets || null);
+  const [sets, setSets] = useState(props.sets || "");
   const handleSetsChange = (event) => {
     setSets(event.target.value);
   };
 
   // State and change handler for REPS
-  const [reps, setReps] = useState(props.reps || null);
+  const [reps, setReps] = useState(props.reps || "");
   const handleRepsChange = (event) => {
     setReps(event.target.value);
   };
 
   // State and change handler for LOAD
-  const [load, setLoad] = useState(props.load || null);
+  const [load, setLoad] = useState(props.load || "");
   const handleLoadChange = (event) => {
     setLoad(event.target.value);
   };
 
   // State and change handler for REST
-  const [rest, setRest] = useState(props.rest_period || null);
+  const [rest, setRest] = useState(props.rest_period || "");
   const handleRestChange = (event) => {
     setRest(event.target.value);
   };
 
   // State and change handler for Notes
-  const [notes, setNotes] = useState(props.notes || null);
+  const [notes, setNotes] = useState(props.notes || "");
   const handleNotesChange = (event) => {
     setNotes(event.target.value);
   };
 
   // State and change handler for Instructions
-  const [instructions, setInstructions] = useState(props.instructions || null);
+  const [instructions, setInstructions] = useState(props.instructions || "");
   const handleInstructionsChange = (event) => {
     setInstructions(event.target.value);
   };
 
   const navigate = useNavigate();
-  const saveEdits = () => {
+  const submitForm = () => {
     // Assemble exercise data object
     const exerciseData = {
       id: exerciseId,
@@ -118,6 +118,7 @@ export default function ExerciseCard(props) {
     // Send request to update
     Axios.put(`/api/exercises/${exerciseId}`, exerciseData)
       .then((response) => {
+        // setExpanded(false);
         // Refresh current page
         navigate(0);
       })
@@ -159,7 +160,7 @@ export default function ExerciseCard(props) {
             id="standard-required"
             helperText="Name"
             variant="standard"
-            onChange={handleNameChange}
+            onChange={(e) => setName(e.target.value)}
             value={name}
             sx={{ maxWidth: "80%" }}
           />
@@ -244,12 +245,16 @@ export default function ExerciseCard(props) {
       {/* Expandable section containing image, instructions and notes */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Box display="flex">
-          <CardMedia
-            component="img"
-            sx={{ width: "40%", height: "auto" }}
-            image={props.image || null}
-            alt="exercise"
-          />
+          {props.image ? (
+            <CardMedia
+              component="img"
+              sx={{ width: "40%", height: "auto" }}
+              image={props.image}
+              alt="exercise"
+            />
+          ) : (
+            "no image found"
+          )}
           <Box
             display="flex"
             flexDirection="column"
@@ -279,17 +284,16 @@ export default function ExerciseCard(props) {
               />
             </CardContent>
             <CardActions>
-              {props.edit && (
-                <Button
-                  variant="contained"
-                  size="small"
-                  startIcon={<SaveSharpIcon />}
-                  onClick={saveEdits}
-                  sx={{ ml: "auto" }}
-                >
-                  Save
-                </Button>
-              )}
+              <Button
+                variant="contained"
+                size="small"
+                startIcon={<SaveSharpIcon />}
+                onClick={submitForm}
+                sx={{ ml: "auto" }}
+              >
+                SAVE
+              </Button>
+
               {/* Garbage can button */}
               <IconButton
                 aria-label="delete"
