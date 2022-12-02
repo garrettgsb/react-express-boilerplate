@@ -31,23 +31,23 @@ router.get("/", (req, res) => {
 });
 
 // READ - get exercise by id
-// router.get("/:id", (req, res) => {
-//   exerciseQueries
-//     .getExerciseById(req.params.id)
-//     .then((result) => {
-//       res.json(result);
-//     })
-//     .catch((err) => {
-//       err.message;
-//     });
-// });
+router.get("/:id", (req, res) => {
+  exerciseQueries
+    .getExerciseById(req.params.id)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      err.message;
+    });
+});
 
 // UPDATE - put
 router.put("/:id", (req, res) => {
   const id = req.params.id;
   const info = req.body;
   exerciseQueries
-    .updateExercises(id, info)
+    .updateExercise(id, info)
     .then((result) => {
       res.json(result);
     })

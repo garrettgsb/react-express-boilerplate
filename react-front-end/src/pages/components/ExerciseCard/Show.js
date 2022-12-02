@@ -38,9 +38,6 @@ const ExerciseAttribute = styled("div")({
 export default function ExerciseCard(props) {
   // state and click handler for card expansion
   const [expanded, setExpanded] = useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
     <Card>
@@ -79,7 +76,7 @@ export default function ExerciseCard(props) {
         <CardActions>
           <ExpandMore
             expand={expanded}
-            onClick={handleExpandClick}
+            onClick={() => setExpanded(!expanded)}
             aria-expanded={expanded}
             aria-label="show more"
           >
@@ -91,16 +88,19 @@ export default function ExerciseCard(props) {
       {/* Expandable section containing image, instructions and notes */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Box display="flex">
-          <CardMedia
-            component="img"
-            sx={{ width: "40%", height: "auto" }}
-            image={props.image}
-            alt="exercise"
-          />
+          {props.image && (
+            <CardMedia
+              component="img"
+              sx={{ width: "40%", height: "auto" }}
+              image={props.image}
+              alt="exercise"
+            />
+          )}
           <Box
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
+            width="100%"
           >
             <CardContent>
               <Typography variant="h5">Instructions</Typography>
@@ -116,7 +116,7 @@ export default function ExerciseCard(props) {
                   variant="outlined"
                   size="small"
                   startIcon={<EditSharpIcon />}
-                  onClick={props.toggleEdit}
+                  onClick={() => props.setEdit(!props.edit)}
                   sx={{ ml: "auto" }}
                 >
                   Edit

@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS exercises CASCADE;
+  DROP TABLE IF EXISTS exercises CASCADE;
 
 CREATE TABLE exercises (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -15,5 +15,6 @@ CREATE TABLE exercises (
   load REAL,
   rest_period INTEGER,
   duration INTEGER,
-  notes TEXT
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CLOCK_TIMESTAMP()
 )
