@@ -134,6 +134,7 @@ export default function ExerciseCard(props) {
             onChange={(e) => setSets(e.target.value)}
             value={sets}
             sx={{ maxWidth: "30%" }}
+            inputProps={{ min: 1 }}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
@@ -149,6 +150,7 @@ export default function ExerciseCard(props) {
             onChange={(e) => setReps(e.target.value)}
             value={reps}
             sx={{ maxWidth: "50%" }}
+            inputProps={{ min: 1 }}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
@@ -164,7 +166,7 @@ export default function ExerciseCard(props) {
             onChange={(e) => setLoad(e.target.value)}
             value={load}
             sx={{ maxWidth: "50%" }}
-            inputProps={{ step: 5 }}
+            inputProps={{ step: 5, min: 0 }}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
@@ -180,6 +182,7 @@ export default function ExerciseCard(props) {
             onChange={(e) => setRest(e.target.value)}
             value={rest}
             sx={{ maxWidth: "50%" }}
+            inputProps={{ min: 0 }}
             InputProps={{
               endAdornment: <InputAdornment position="end">min</InputAdornment>,
             }}
