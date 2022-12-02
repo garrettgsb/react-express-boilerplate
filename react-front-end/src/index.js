@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Program from "./pages/Program";
 import Workout from "./pages/Workout";
-import ProgramForm from "./pages/components/ProgramForm";
+import AddProgram from "./pages/components/ProgramCard/AddProgram";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/program/new",
-        element: <ProgramForm />,
+        element: <AddProgram />,
       },
       {
         path: "/workout/:id",

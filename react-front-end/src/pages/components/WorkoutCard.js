@@ -8,7 +8,6 @@ import {
 import { useParams, useNavigate, Link } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-
 export default function WorkoutCard (props) {
 
   //   // Program navigation click handler
@@ -27,7 +26,7 @@ export default function WorkoutCard (props) {
             <Typography variant="h4">{props.workout.name}</Typography>
             <Typography variant="p">{props.workout.description}</Typography>
             <Typography variant="p">{props.workout.duration}</Typography>
-            {props.edit ? <DeleteIcon variant="h4" onClick={props.delete}/> : ""}
+            {/* {props.edit ? <DeleteIcon variant="h4" onClick={props.delete}/> : ""} */}
             <CardMedia
               component="img"
               height="140"
