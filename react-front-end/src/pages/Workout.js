@@ -4,7 +4,6 @@ import ExerciseCard from "./components/ExerciseCard";
 import AddIcon from "@mui/icons-material/Add";
 import { Fab, Stack, Typography } from "@mui/material";
 import Axios from "axios";
-import EditForm from "./components/ExerciseCard/EditForm";
 import CreateForm from "./components/ExerciseCard/CreateForm";
 
 export default function Workout(props) {
