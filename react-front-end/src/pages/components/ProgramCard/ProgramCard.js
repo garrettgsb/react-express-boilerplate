@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Button, Box, TextField } from "@mui/material";
 import axios from "axios";
 import { usePrograms } from "../../../App";
+import AddProgram from "./AddProgram";
+import ProgramForm from "./ProgramForm";
+import Program from "../../Program";
 
 export default function ProgramCard(props) {
 
@@ -23,20 +26,18 @@ export default function ProgramCard(props) {
       {props.edit ? (
 
 
+        // <TextField
+        //   id="standard-basic"
+        //   label="Program name"
+        //   variant="standard"
+        //   name="name"
+        //   type="text"
+        //   placeholder={props.program.name}
+        //   value={props.program.name}
+        //   onChange={handleOnChange}
+        // />
 
-        <TextField
-          id="standard-basic"
-          label="Program name"
-          variant="standard"
-          name="name"
-          type="text"
-          placeholder={props.program.name}
-          value={props.program.name}
-          onChange={handleOnChange}
-        />
-
-
-
+        <ProgramForm />
 
 
 

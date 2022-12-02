@@ -1,47 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Box, TextField } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import axios from "axios";
-import { usePrograms } from "../../../App";
 
-export default function ProgramForm() {
-  const [programFormData, setProgramFormData] = useState({
-    name: "",
-    description: "",
-  });
 
-  const { programs, setPrograms } = usePrograms();
-
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const navigate = useNavigate();
-
-  const addProgram = () => {
-    const newProgramFormData = {
-      ...programFormData,
-      start_date: startDate,
-      end_date: endDate,
-      user_id: 1,
-    };
-
-    axios
-      .post("/api/programs", newProgramFormData)
-      .then((result) => {
-        setPrograms([...programs, result.data[0]]);
-
-        navigate(`/program/${result.data[0].id}`);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
+export default function ProgramForm(props) {
   return (
     <>
-      <h1>Add program</h1>
       <Box
         component="form"
         sx={{
@@ -57,14 +23,10 @@ export default function ProgramForm() {
           name="programName"
           type="text"
           placeholder="Enter Program Name"
-          value={programFormData.name}
-          onChange={(event) =>
-            setProgramFormData({
-              ...programFormData,
-              name: event.target.value,
-            })
-          }
+          value={props.name}
+          onChange={props.nameCallback}
         />
+
         <TextField
           id="standard-textarea"
           label="Description"
@@ -73,22 +35,15 @@ export default function ProgramForm() {
           name="Description"
           type="text"
           placeholder="Enter Description"
-          value={programFormData.description}
-          onChange={(event) =>
-            setProgramFormData({
-              ...programFormData,
-              description: event.target.value,
-            })
-          }
+          value={props.description}
+          onChange={props.descriptionCallback}
         />
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Start Date"
-            value={startDate}
-            onChange={(newValue) => {
-              setStartDate(newValue);
-            }}
+            value={props.startDate}
+            onChange={props.startDateCallback}
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
@@ -96,31 +51,27 @@ export default function ProgramForm() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="End Date"
-            value={endDate}
-            onChange={(newValue) => {
-              setEndDate(newValue);
-            }}
+            value={props.endDate}
+            onChange={props.endDateCallback}
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
       </Box>
 
       <Box sx={{ "& button": { m: 1 } }}>
-        <Link to="/dashboard" className={"programListItem"}>
-          <Button color="secondary" size="small">
-            Cancel
-          </Button>
-        </Link>
+        <Button color="secondary" size="small" onClick={props.cancel}>
+          Cancel
+        </Button>
 
         <Button
           variant="contained"
           color="success"
           size="small"
-          onClick={addProgram}
+          onClick={props.save}
         >
           Save
         </Button>
       </Box>
     </>
-  );
+  )
 }

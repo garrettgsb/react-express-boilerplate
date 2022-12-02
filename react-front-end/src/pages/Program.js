@@ -95,9 +95,9 @@ export default function Program() {
 
         {editProgram ? (
           <>
-            <Button variant="contained" onClick={saveProgram}>
+            {/* <Button variant="contained" onClick={saveProgram}>
               Save
-            </Button>
+            </Button> */}
             <DeleteIcon onClick={handleDelete} />
           </>
         ) : (
