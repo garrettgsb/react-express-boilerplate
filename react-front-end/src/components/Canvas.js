@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { Profiler, useLayoutEffect, useState } from 'react';
 import rough from 'roughjs/bundled/rough.esm';
 import useApplicationData from "../hooks/useApplicationData";
 import axios from 'axios';

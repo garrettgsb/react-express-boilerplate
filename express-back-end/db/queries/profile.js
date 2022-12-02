@@ -54,11 +54,15 @@ const getTotalDrawings = (userId) => {
 
 const saveDrawing = (userId, drawing) => {
   
-  return db.query(`UPDATE drawings
-  SET user_id = ${userId}, img_url = ${drawing}
-  RETURNING *;`)
+  return db.query(`
+  INSERT INTO drawings(user_id,img_url)
+  VALUES($1,$2)
+  RETURNING *;`,[userId,drawing])
   .then(data => {
     return data.rows;
+  })
+  .catch(err => {
+    return err.message;
   });
 }
 
