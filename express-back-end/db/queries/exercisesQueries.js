@@ -76,7 +76,7 @@ const updateExercise = async (id, exerciseInfo) => {
 
 const deleteExercise = (id) => {
   return db
-    .query(`DELETE FROM exercise WHERE id=$1`, [id])
+    .query(`DELETE FROM exercises WHERE id=$1`, [id])
     .then((result) => {
       return result.rows;
     })
