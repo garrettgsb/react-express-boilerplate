@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
-import WorkoutCard from "./components/WorkoutCard";
+import WorkoutCard from "./components/WorkoutCard/WorkoutCard";
 import { Button, Fab } from "@mui/material";
 import ProgramCard from "./components/ProgramCard/ProgramCard";
 import { usePrograms } from "../App";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import Confirm from "./components/ProgramCard/Confirm";
+import WorkoutForm from "./components/WorkoutCard/WorkoutForm";
 
 export default function Program() {
   const { getAndSetPrograms } = usePrograms();
@@ -19,7 +20,8 @@ export default function Program() {
   const [program, setProgram] = useState({});
   const [workout, setWorkout] = useState([]);
 
-  const [editMode, setEditMode] = useState(false);
+  const [programEditMode, setProgramEditMode] = useState(false);
+  const [workoutEditMode, setWorkoutEditMode] = useState(false);
   const [deleteProgram, setDeleteProgram] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
@@ -63,7 +65,7 @@ export default function Program() {
     ProgramsDefaultCopy[indexOfProgram] = program;
 
     setPrograms(ProgramsDefaultCopy);
-    setEditMode(false);
+    setProgramEditMode(false);
   };
 
   const confirmDeleteProgram = () => {
@@ -76,8 +78,12 @@ export default function Program() {
       .catch((e) => console.log(e));
   };
 
-  const handleEditMode = () => {
-    setEditMode(false);
+  const handleProgramEditMode = () => {
+    setProgramEditMode(false);
+  };
+
+  const handleWorkoutEditMode = () => {
+    setWorkoutEditMode(true);
   };
 
   return (
@@ -92,12 +98,12 @@ export default function Program() {
           <ProgramCard
             program={program}
             setProgram={setProgram}
-            edit={editMode}
-            handleEditMode={handleEditMode}
+            edit={programEditMode}
+            handleEditMode={handleProgramEditMode}
           />
         ) : null}
 
-        {editMode ? (
+        {programEditMode ? (
           <>
             {/* <Button variant="contained" onClick={saveProgram}>
               Save
@@ -105,7 +111,7 @@ export default function Program() {
             <DeleteIcon onClick={handleDelete} />
           </>
         ) : (
-          <Button variant="contained" onClick={() => setEditMode(true)}>
+          <Button variant="contained" onClick={() => setProgramEditMode(true)}>
             Edit
           </Button>
         )}
@@ -125,11 +131,19 @@ export default function Program() {
           return workout ? <WorkoutCard key={item.id} workout={item} /> : null;
         })}
 
-        <Fab color="primary" aria-label="add">
-          <AddIcon />
-        </Fab>
 
-
+        {workoutEditMode ? (
+          <WorkoutForm />
+        ) : (
+          <Fab
+            color="primary"
+            aria-label="add"
+            sx={{ alignSelf: "center" }}
+            size="medium"
+          >
+            <AddIcon onClick={handleWorkoutEditMode} />
+          </Fab>
+        )}
       </Stack>
     </>
   );
