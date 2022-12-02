@@ -101,6 +101,7 @@ export default function ExerciseCard(props) {
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
+            width="100%"
           >
             <CardContent>
               <Typography variant="h5">Instructions</Typography>

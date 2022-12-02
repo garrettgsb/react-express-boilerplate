@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   Box,
@@ -18,6 +19,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveSharpIcon from "@mui/icons-material/SaveSharp";
 import { styled } from "@mui/material/styles";
+import Axios from "axios";
 
 // Styled component necessary for expandable portion of card
 const ExpandMore = styled((props) => {
@@ -39,11 +41,22 @@ const ExerciseAttribute = styled("div")({
 });
 
 export default function ExerciseCard(props) {
-  // state and click handler for card expansion
-  const [expanded, setExpanded] = useState(true);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  // State and handler for all exercise attributes
+  // const [exerciseAttributes, setExerciseAttributes] = useState({
+  //   name: props.name || "",
+  //   sets: props.sets || null,
+  //   reps: props.reps || null,
+  //   load: props.load || null,
+  //   rest: props.rest || null,
+  //   notes: props.notes || null,
+  //   image: props.image || null,
+  //   instructions: props.instructions || null,
+  // });
+
+  // Capture workout id
+  const workoutId = useParams().id;
+  // Capture exercise id
+  const exerciseId = props.id;
 
   // State and change handler for NAME
   const [name, setName] = useState(props.name || "");
@@ -81,9 +94,45 @@ export default function ExerciseCard(props) {
     setNotes(event.target.value);
   };
 
+  // State and change handler for Instructions
+  const [instructions, setInstructions] = useState(props.instructions || null);
+  const handleInstructionsChange = (event) => {
+    setInstructions(event.target.value);
+  };
+
+  const navigate = useNavigate();
   const saveEdits = () => {
-    // Send request and then
-    props.toggleEdit();
+    // Assemble exercise data object
+    const exerciseData = {
+      id: exerciseId,
+      workout_id: workoutId,
+      name,
+      sets,
+      reps,
+      load,
+      rest_period: rest,
+      notes,
+      instructions,
+    };
+
+    // Send request to update
+    Axios.put(`/api/exercises/${exerciseId}`, exerciseData)
+      .then((response) => {
+        // Refresh current page
+        navigate(0);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  // state and click handler for card expansion
+  const [expanded, setExpanded] = useState(true);
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+    if (props.edit) {
+      props.toggleEdit(false);
+    }
   };
 
   return (
@@ -185,7 +234,7 @@ export default function ExerciseCard(props) {
 
       {/* Expandable section containing image, instructions and notes */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <Box sx={{ display: "flex" }}>
+        <Box display="flex">
           <CardMedia
             component="img"
             sx={{ width: "40%", height: "auto" }}
@@ -196,10 +245,18 @@ export default function ExerciseCard(props) {
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
+            width="100%"
           >
             <CardContent>
               <Typography variant="h5">Instructions</Typography>
-              <Typography variant="p">{props.instructions || null}</Typography>
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                multiline
+                fullWidth
+                value={instructions}
+                onChange={handleInstructionsChange}
+              />
               <Typography variant="h5" pt={"0.5em"}>
                 Notes
               </Typography>
