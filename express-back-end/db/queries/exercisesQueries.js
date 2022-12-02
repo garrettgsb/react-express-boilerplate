@@ -19,6 +19,7 @@ const getExercises = (options) => {
     queryString += " WHERE workout_id=$1";
     queryParams.push(options.workoutId);
   }
+  queryString += " ORDER BY created_at";
   return db
     .query(queryString, queryParams)
     .then((result) => {
@@ -57,7 +58,7 @@ const addExercise = (exercises) => {
     });
 };
 
-const updateExercises = async (id, exerciseInfo) => {
+const updateExercise = async (id, exerciseInfo) => {
   const setColumns = Object.keys(exerciseInfo)
     .map((property, index) => `${property}=$${index + 2}`)
     .join(", ");
@@ -87,7 +88,7 @@ const deleteExercise = (id) => {
 module.exports = {
   getExerciseById,
   getExercises,
-  updateExercises,
+  updateExercise,
   getExercises,
   addExercise,
   deleteExercise,
