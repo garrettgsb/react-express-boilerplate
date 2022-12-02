@@ -10,7 +10,6 @@ export const Heatmap = () => {
     Axios.get("http://localhost:8080/api/workoutlogs")
       .then((result) => {
         setData(result.data);
-        console.log(result.data)
       })
       .catch((err) => {
         console.log(err.message);

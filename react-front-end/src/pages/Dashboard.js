@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { Calendar } from "./components/Dashboard/Calendar";
 import { Grid, Paper, Container, Box } from "@mui/material";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Heatmap } from "./components/Dashboard/Heatmap";
+import { UserEditForm } from "./components/Dashboard/UserEditForm";
+
 
 export default function Dashboard() {
   const [dashboard, setDashboard] = useState([]);
+  const [userEdit, setUserEdit] = useState(false);
   const navigate = useNavigate();
 
   // Grabs info from api and checks if user is login, if not than redirected to login
@@ -32,17 +32,23 @@ export default function Dashboard() {
   // Check to see if User reached their goal weight
   const reachGoal = function () {
     if (dashboard.current_weight - dashboard.goal_weight === 0) {
-      return "You reached your goal weight!!! congrats";
+      return "Congratulations on reaching your achievement";
     } else {
       return `You are currently ${Math.abs(
         dashboard.current_weight - dashboard.goal_weight
-      )} lbs away from your goal!`;
+      )} lbs away from reaching your goal`;
     }
   };
 
   return (
     <>
       <h1>Welcome to your Dashboard {dashboard.first_name} </h1>
+      <button onClick={() => { if(userEdit) {
+        setUserEdit(false)
+      }else {
+        setUserEdit(true)
+      }}}>Edit</button>
+      <UserEditForm show={userEdit} />
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
@@ -50,19 +56,12 @@ export default function Dashboard() {
               <Card elevation={3}>
                 <CardContent>
                   <Typography variant="h5" component="div">
-                    Goal:
+                    Goal: {dashboard.goal}
                   </Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {dashboard.goal}
-                  </Typography>
-                  <Typography variant="body2">
                     {reachGoal()}
-                    <br />
                   </Typography>
                 </CardContent>
-                <CardActions>
-                  <Button size="small">Edit</Button>
-                </CardActions>
               </Card>
             </Paper>
           </Grid>
@@ -77,9 +76,6 @@ export default function Dashboard() {
                     {dashboard.current_weight} lbs
                   </Typography>
                 </CardContent>
-                <CardActions>
-                  <Button size="small">Edit</Button>
-                </CardActions>
               </Card>
             </Paper>
           </Grid>
@@ -94,26 +90,9 @@ export default function Dashboard() {
                     {dashboard.goal_weight} lbs
                   </Typography>
                 </CardContent>
-                <CardActions>
-                  <Button size="small">Edit</Button>
-                </CardActions>
               </Card>
             </Paper>
           </Grid>
-          {/* <Grid item xs={12} md={4}>
-            <Paper>
-              <Card elevation={3}>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    Calendar
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    <Calendar />
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Paper>
-          </Grid> */}
           <Grid item xs={12} md={12}>
             <Paper>
               <Card elevation={3}>
