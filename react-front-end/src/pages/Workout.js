@@ -36,9 +36,6 @@ export default function Workout(props) {
 
   // State and handler for toggling editing "mode"
   const [adding, setAdding] = useState(false);
-  const toggleAdding = () => {
-    setAdding(!adding);
-  };
 
   // Function to save changes and return to viewing "mode"
   const saveEdits = () => {
@@ -70,7 +67,7 @@ export default function Workout(props) {
             aria-label="add"
             size="medium"
             sx={{ alignSelf: "center" }}
-            onClick={toggleAdding}
+            onClick={setAdding}
           >
             <AddIcon />
           </Fab>
@@ -78,9 +75,10 @@ export default function Workout(props) {
 
         {/* Render new exercise form when in addingExercise state */}
         {adding && (
-          <EditForm
+          <CreateForm
             edit
             adding={adding}
+            setAdding={setAdding}
             exercises={exercises}
             setExercises={setExercises}
           />
