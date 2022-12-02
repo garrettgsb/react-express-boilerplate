@@ -1,99 +1,87 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ExerciseCard from "./components/ExerciseCard";
-import EditSharpIcon from "@mui/icons-material/EditSharp";
-import SaveSharpIcon from "@mui/icons-material/SaveSharp";
 import AddIcon from "@mui/icons-material/Add";
-
-import {
-  Button,
-  Card,
-  CardMedia,
-  Fab,
-  Stack,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-
-const exercise = {
-  id: 1,
-  name: "Back Squat",
-  image:
-    "https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  instructions:
-    "Get under the bar, unrack and take a step back. Stay over the safety bars with your feet shoulder-width apart and toes pointing outward slightly.  Breathe into your stomach and with your core engaged, slowly lower your body by bending the knees until your quads are parallel to the floor. Keep your chest up and back straight.",
-};
-
-const exerciseAttributes = {
-  id: 1,
-  workout_id: 1,
-  exercise_id: 1,
-  sets: 3,
-  reps: 6,
-  load: 225,
-  rest_period: 3,
-  notes: "Imagine sitting on a low stool and keep knees pointed outwards.",
-};
+import { Fab, Stack, Typography } from "@mui/material";
+import Axios from "axios";
+import EditForm from "./components/ExerciseCard/EditForm";
+import CreateForm from "./components/ExerciseCard/CreateForm";
 
 export default function Workout(props) {
+  const [exercises, setExercises] = useState([]);
+  const [workoutData, setWorkoutData] = useState([]);
+
+  // Capture current workout id
+  const workoutId = useParams().id;
+  useEffect(() => {
+    // Fetch exercises that belong to current workout
+    Axios.get(`/api/exercises?workoutId=${workoutId}`)
+      .then((result) => {
+        // Store in state
+        setExercises(result.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    // Fetch current workout info
+    Axios.get(`/api/workouts/${workoutId}`)
+      .then((result) => {
+        // Store in state
+        setWorkoutData(result.data[0]);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   // State and handler for toggling editing "mode"
-  const [edit, setEdit] = useState(false);
-  const switchEdit = () => {
-    setEdit(!edit);
-  };
+  const [adding, setAdding] = useState(false);
 
   // Function to save changes and return to viewing "mode"
   const saveEdits = () => {
     // Send request and then
-    switchEdit();
   };
 
   return (
     <>
-      <Toolbar />
       <Typography variant="h4" gutterBottom>
-        This is Workout page
+        {workoutData.name}
       </Typography>
-      {!edit && (
-        <Button
-          variant="outlined"
-          size="medium"
-          startIcon={<EditSharpIcon />}
-          onClick={switchEdit}
-        >
-          Edit
-        </Button>
-      )}
-      {edit && (
-        <Button
-          variant="contained"
-          size="medium"
-          startIcon={<SaveSharpIcon />}
-          onClick={saveEdits}
-        >
-          Save
-        </Button>
-      )}
+
       <Stack
         direction="column"
         justifyContent="flex-start"
         alignItems="stretch"
-        spacing={2}
+        spacing={6}
         maxWidth={1200}
-        minWidth={520}
+        minWidth={500}
       >
         {/* Array of Exercise Cards */}
-        <ExerciseCard editMode={edit} />
+        {exercises.map((exercise) => (
+          <ExerciseCard {...exercise} key={exercise.id} />
+        ))}
 
-        {/* When in edit state, render Add button */}
-        {edit && (
+        {/* Render Add button unless in addingExercise state */}
+        {!adding && (
           <Fab
-            color="primary"
             aria-label="add"
-            size={"medium"}
+            size="medium"
             sx={{ alignSelf: "center" }}
+            onClick={setAdding}
           >
             <AddIcon />
           </Fab>
+        )}
+
+        {/* Render new exercise form when in addingExercise state */}
+        {adding && (
+          <CreateForm
+            edit
+            adding={adding}
+            setAdding={setAdding}
+            exercises={exercises}
+            setExercises={setExercises}
+          />
         )}
       </Stack>
     </>

@@ -7,6 +7,6 @@ CREATE TABLE programs (
   description TEXT,
   start_date DATE,
   end_date DATE,
-  public BOOLEAN,
-  author VARCHAR(255)
+  public BOOLEAN DEFAULT true,
+  author VARCHAR(255) DEFAULT 'Jason "Chad" Ling'
 )

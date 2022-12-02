@@ -1,133 +1,131 @@
-import React, {useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
-import ProgramCard from "./components/ProgramCard";
 import WorkoutCard from "./components/WorkoutCard";
-
-//Mockdata
-const Programs = [
-  {
-    id: 1,
-    user_id: 1,
-    name: "Full Body",
-    description: "Three workouts per week targetting all major muscle groups",
-    start_date: "2022-10-01",
-    end_date: "2022-11-30",
-    public: true,
-    author: 'Jason "Chad" Ling',
-  },
-  {
-    id: 2,
-    user_id: 1,
-    name: "Bro Split",
-    description: "Three workouts per week targetting all major muscle groups",
-    start_date: "2022-10-01",
-    end_date: "2022-11-30",
-    public: true,
-    author: 'Jason "Chad" Ling',
-  },
-  {
-    id: 3,
-    user_id: 1,
-    name: "Upper Lower",
-    description: "Three workouts per week targetting all major muscle groups",
-    start_date: "2022-10-01",
-    end_date: "2022-11-30",
-    public: true,
-    author: 'Jason "Chad" Ling',
-  },
-];
-
-// MOCK DATA
-const program = {
-  id: 1,
-  user_id: 1,
-  name: "Full Body",
-  description: "Three workouts per week targetting all major muscle groups",
-  start_date: "2022-10-01",
-  end_date: "2022-11-30",
-  public: true,
-  author: 'Jason "Chad" Ling',
-};
-
-const Workouts = [
-  {
-  id: 1,
-  program_id: 1,
-  name: "Monday",
-  image:
-    "https://images.pexels.com/photos/17840/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  description: "First full body workout of the week, to start off strong.",
-  duration: 150,
-  },
-  {
-    id: 2,
-    program_id: 1,
-    name: "Tuesday",
-    image:
-      "https://images.pexels.com/photos/17840/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    description: "Second full body workout of the week, to start off strong.",
-    duration: 150,
-  },
-  {
-    id: 3,
-    program_id: 3,
-    name: "Friday",
-    image:
-      "https://images.pexels.com/photos/17840/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    description: "Friday workout!!! let's go!!!!!!",
-    duration: 150,
-  }
-];
+import { Button } from "@mui/material";
+import ProgramCard from "./components/ProgramCard/ProgramCard";
+import { usePrograms } from "../App";
+import axios from "axios";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Confirm from "./components/ProgramCard/Confirm";
 
 export default function Program() {
+  const { getAndSetPrograms } = usePrograms();
   const params = useParams();
+  const navigate = useNavigate();
+
+  const [programs, setPrograms] = useState([]);
   const [program, setProgram] = useState({});
   const [workout, setWorkout] = useState([]);
 
-  useEffect(()=>{
+  const [editMode, setEditMode] = useState(false);
+  const [deleteProgram, setDeleteProgram] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const findProgram = Programs.find((item) => {
-    if(item.id == params.id){
-      return item
-    }
-  })
+  const handleClickOpen = () => {
+    setConfirmOpen(true);
+  };
 
-  const findWorkout = Workouts.filter(workout => {
-    return workout.program_id == params.id
-  })
+  const handleDelete = () => {
+    setDeleteProgram(true);
+    handleClickOpen();
+  };
 
-  setProgram(findProgram)
-  setWorkout(findWorkout)
+  const programId = params.id;
 
-  }, [params.id])
+  useEffect(() => {
+    axios
+      .get(`/api/programs/${programId}`)
+      .then((result) => {
+        setProgram(result.data.program || {});
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    axios
+      .get(`/api/workouts/programs/${programId}`)
+      .then((result) => {
+        setWorkout(result.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [program]);
+
+  const saveProgram = () => {
+    const indexOfProgram = programs.findIndex((item) => {
+      return item.id === program.id;
+    });
+
+    const ProgramsDefaultCopy = [...programs];
+    ProgramsDefaultCopy[indexOfProgram] = program;
+
+    setPrograms(ProgramsDefaultCopy);
+    setEditMode(false);
+  };
+
+
+  const confirmDeleteProgram = () => {
+    axios
+      .delete(`/api/programs/${programId}`)
+      .then(() => {
+        getAndSetPrograms();
+        navigate("/dashboard");
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const handleEditMode = () => {
+    setEditMode(false)
+  }
+
+
 
   return (
     <>
-      {/* <Toolbar /> */}
-      {/* <Typography variant="h3" gutterBottom>
-        This is Program page
-      </Typography> */}
       <Stack
         direction="column"
         justifyContent="flex-start"
         alignItems="stretch"
         spacing={2}
       >
+        {program ? (
+          <ProgramCard
+            program={program}
+            setProgram={setProgram}
+            edit={editMode}
+            handleEditMode={handleEditMode}
+          />
+        ) : null}
 
-        {
-          program ? <ProgramCard key={program.id} program={program} /> : null
-        }
+        {editMode ? (
+          <>
+            {/* <Button variant="contained" onClick={saveProgram}>
+              Save
+            </Button> */}
+            <DeleteIcon onClick={handleDelete} />
+          </>
+        ) : (
+          <Button variant="contained" onClick={() => setEditMode(true)}>
+            Edit
+          </Button>
+        )}
+
+        {deleteProgram ? (
+          <Confirm
+            confirmOpen={confirmOpen}
+            setConfirmOpen={setConfirmOpen}
+            confirmDeleteProgram={confirmDeleteProgram}
+          />
+        ) : (
+          ""
+        )}
 
         {/* Array of Workout Cards - to be made into separate component */}
-        {
-          workout.map(item => {
-            return (
-              workout ? <WorkoutCard key={item.id} workout={item} /> : null
-            )
-          })
-        }
-
+        {workout.map((item) => {
+          return workout ? <WorkoutCard key={item.id} workout={item} /> : null;
+        })}
       </Stack>
     </>
   );
