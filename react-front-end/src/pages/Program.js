@@ -18,7 +18,7 @@ export default function Program() {
   const [program, setProgram] = useState({});
   const [workout, setWorkout] = useState([]);
 
-  const [editProgram, setProgramEdit] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const [deleteProgram, setDeleteProgram] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
@@ -62,7 +62,7 @@ export default function Program() {
     ProgramsDefaultCopy[indexOfProgram] = program;
 
     setPrograms(ProgramsDefaultCopy);
-    setProgramEdit(false);
+    setEditMode(false);
   };
 
 
@@ -76,7 +76,12 @@ export default function Program() {
       .catch((e) => console.log(e));
   };
 
-  
+  const handleEditMode = () => {
+    setEditMode(false)
+  }
+
+
+
   return (
     <>
       <Stack
@@ -88,12 +93,13 @@ export default function Program() {
         {program ? (
           <ProgramCard
             program={program}
-            edit={editProgram}
             setProgram={setProgram}
+            edit={editMode}
+            handleEditMode={handleEditMode}
           />
         ) : null}
 
-        {editProgram ? (
+        {editMode ? (
           <>
             {/* <Button variant="contained" onClick={saveProgram}>
               Save
@@ -101,7 +107,7 @@ export default function Program() {
             <DeleteIcon onClick={handleDelete} />
           </>
         ) : (
-          <Button variant="contained" onClick={() => setProgramEdit(true)}>
+          <Button variant="contained" onClick={() => setEditMode(true)}>
             Edit
           </Button>
         )}

@@ -66,10 +66,12 @@ export default function ProgramCard(props) {
       .catch((e) => {
         console.log(e)
       })
+
+      props.handleEditMode();
   };
 
   const handleCancel = () => {
-    navigate("/dashboard");
+    props.handleEditMode();
   };
 
   const nameCallback = (event) => {
