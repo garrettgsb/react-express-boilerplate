@@ -10,7 +10,7 @@ import Program from "./pages/Program";
 import Workout from "./pages/Workout";
 import AddProgram from "./pages/components/ProgramCard/AddProgram";
 
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,6 @@ const router = createBrowserRouter([
         element: <AddProgram />,
       },
       {
-
         path: "/workout/:id",
         element: <Workout />,
       },

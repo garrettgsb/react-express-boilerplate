@@ -19,27 +19,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import SaveSharpIcon from "@mui/icons-material/SaveSharp";
 import { styled } from "@mui/material/styles";
 
-// MOCK DATA
-const exercise = {
-  id: 1,
-  name: "Back Squat",
-  image:
-    "https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  instructions:
-    "Get under the bar, unrack and take a step back. Stay over the safety bars with your feet shoulder-width apart and toes pointing outward slightly. Breathe into your stomach and with your core engaged, slowly lower your body by bending the knees until your quads are parallel to the floor. Keep your chest up and back straight.",
-};
-
-const exerciseAttributes = {
-  id: 1,
-  workout_id: 1,
-  exercise_id: 1,
-  sets: 3,
-  reps: 6,
-  load: 225,
-  rest_period: 3,
-  notes: "Imagine sitting on a low stool and keep knees pointed outwards.",
-};
-
 // Styled component necessary for expandable portion of card
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -67,37 +46,37 @@ export default function ExerciseCard(props) {
   };
 
   // State and change handler for NAME
-  const [name, setName] = useState("exerc name here");
+  const [name, setName] = useState(props.name || "");
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
 
   // State and change handler for SETS
-  const [sets, setSets] = useState(3);
+  const [sets, setSets] = useState(props.sets || null);
   const handleSetsChange = (event) => {
     setSets(event.target.value);
   };
 
   // State and change handler for REPS
-  const [reps, setReps] = useState(10);
+  const [reps, setReps] = useState(props.reps || null);
   const handleRepsChange = (event) => {
     setReps(event.target.value);
   };
 
   // State and change handler for LOAD
-  const [load, setLoad] = useState(50);
+  const [load, setLoad] = useState(props.load || null);
   const handleLoadChange = (event) => {
     setLoad(event.target.value);
   };
 
   // State and change handler for REST
-  const [rest, setRest] = useState(2);
+  const [rest, setRest] = useState(props.rest_period || null);
   const handleRestChange = (event) => {
     setRest(event.target.value);
   };
 
   // State and change handler for Notes
-  const [notes, setNotes] = useState("notes go here");
+  const [notes, setNotes] = useState(props.notes || null);
   const handleNotesChange = (event) => {
     setNotes(event.target.value);
   };
@@ -210,7 +189,7 @@ export default function ExerciseCard(props) {
           <CardMedia
             component="img"
             sx={{ width: "40%", height: "auto" }}
-            image="https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            image={props.image || null}
             alt="exercise"
           />
           <Box
@@ -220,7 +199,7 @@ export default function ExerciseCard(props) {
           >
             <CardContent>
               <Typography variant="h5">Instructions</Typography>
-              <Typography variant="p">{exercise.instructions}</Typography>
+              <Typography variant="p">{props.instructions || null}</Typography>
               <Typography variant="h5" pt={"0.5em"}>
                 Notes
               </Typography>

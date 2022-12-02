@@ -15,28 +15,6 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import EditSharpIcon from "@mui/icons-material/EditSharp";
 import { styled } from "@mui/material/styles";
-import SaveSharp from "@mui/icons-material/SaveSharp";
-
-// MOCK DATA
-const exercise = {
-  id: 1,
-  name: "Back Squat",
-  image:
-    "https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  instructions:
-    "Get under the bar, unrack and take a step back. Stay over the safety bars with your feet shoulder-width apart and toes pointing outward slightly. Breathe into your stomach and with your core engaged, slowly lower your body by bending the knees until your quads are parallel to the floor. Keep your chest up and back straight.",
-};
-
-const exerciseAttributes = {
-  id: 1,
-  workout_id: 1,
-  exercise_id: 1,
-  sets: 3,
-  reps: 6,
-  load: 225,
-  rest_period: 3,
-  notes: "Imagine sitting on a low stool and keep knees pointed outwards.",
-};
 
 // Styled component necessary for expandable portion of card
 const ExpandMore = styled((props) => {
@@ -74,32 +52,30 @@ export default function ExerciseCard(props) {
           alignItems: "center",
         }}
       >
-        <ExerciseAttribute>
-          <Typography variant="h5">{exercise.name}</Typography>
+        <ExerciseAttribute sx={{ width: "15%" }}>
+          <Typography variant="h5">{props.name}</Typography>
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">{exerciseAttributes.sets}</Typography>
+          <Typography variant="h5">{props.sets}</Typography>
           <Typography variant="p">SETS</Typography>
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">{exerciseAttributes.reps}</Typography>
+          <Typography variant="h5">{props.reps}</Typography>
           <Typography variant="p">REPS</Typography>
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">{exerciseAttributes.load}</Typography>
+          <Typography variant="h5">{props.load}</Typography>
           <Typography variant="p">lbs</Typography>
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">
-            {exerciseAttributes.rest_period} min
-          </Typography>
+          <Typography variant="h5">{props.rest_period} min</Typography>
           <Typography variant="p">REST</Typography>
         </ExerciseAttribute>
-        {/* Expand/collapse details chevron */}
+        {/* Expand/collapse card chevron \/ */}
         <CardActions>
           <ExpandMore
             expand={expanded}
@@ -118,7 +94,7 @@ export default function ExerciseCard(props) {
           <CardMedia
             component="img"
             sx={{ width: "40%", height: "auto" }}
-            image="https://images.pexels.com/photos/371049/pexels-photo-371049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            image={props.image}
             alt="exercise"
           />
           <Box
@@ -128,11 +104,11 @@ export default function ExerciseCard(props) {
           >
             <CardContent>
               <Typography variant="h5">Instructions</Typography>
-              <Typography variant="p">{exercise.instructions}</Typography>
+              <Typography variant="p">{props.instructions}</Typography>
               <Typography variant="h5" pt={"0.5em"}>
                 Notes
               </Typography>
-              <Typography variant="p">{exerciseAttributes.notes}</Typography>
+              <Typography variant="p">{props.notes}</Typography>
             </CardContent>
             <CardActions disableSpacing>
               {!props.edit && (

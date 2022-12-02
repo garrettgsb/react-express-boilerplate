@@ -10,14 +10,27 @@ import axios from "axios";
 
 export default function Workout(props) {
   const [exercises, setExercises] = useState([]);
+  const [workoutData, setWorkoutData] = useState([]);
 
-  // DATA FETCHING
+  // Capture current workout id
   const workoutId = useParams().id;
   useEffect(() => {
+    // Fetch exercises that belong to current workout
     axios
       .get(`/api/exercises?workoutId=${workoutId}`)
       .then((result) => {
+        // Store in state
         setExercises(result.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    // Fetch current workout info
+    axios
+      .get(`/api/workouts/${workoutId}`)
+      .then((result) => {
+        // Store in variable (not expected to change)
+        setWorkoutData(result.data[0]);
       })
       .catch((e) => {
         console.log(e);
@@ -40,20 +53,21 @@ export default function Workout(props) {
   return (
     <>
       <Typography variant="h4" gutterBottom>
-        This is Workout page
+        {workoutData.name}
       </Typography>
 
       <Stack
         direction="column"
         justifyContent="flex-start"
         alignItems="stretch"
-        spacing={4}
+        spacing={6}
         maxWidth={1200}
-        minWidth={520}
+        minWidth={500}
       >
         {/* Array of Exercise Cards */}
-        <ExerciseCard />
-        <ExerciseCard />
+        {exercises.map((exercise) => (
+          <ExerciseCard {...exercise} key={exercise.id} />
+        ))}
 
         {/* When in edit workout state, render Add button */}
         {editWorkout && (

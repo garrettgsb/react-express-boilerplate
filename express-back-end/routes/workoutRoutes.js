@@ -45,7 +45,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// READ - get User workouts
+// READ - get workouts by program id
 router.get("/programs/:id", (req, res) => {
   const programId = req.params.id;
   workoutQueries
