@@ -1,6 +1,6 @@
 const db = require("../index");
 
- const getUsers = () => {
+const getUsers = () => {
   return db
     .query(`SELECT * FROM users;`)
     .then((result) => {
@@ -11,7 +11,7 @@ const db = require("../index");
     });
 };
 
- const getUserWithEmail = (email) => {
+const getUserWithEmail = (email) => {
   return db
     .query(`SELECT * FROM users WHERE email=$1;`, [email])
     .then((result) => {
@@ -22,7 +22,7 @@ const db = require("../index");
     });
 };
 
- const addUser = (user) => {
+const addUser = (user) => {
   return db
     .query(
       `INSERT INTO users (first_name, last_name, email, password_digest, goal, current_weight, goal_weight) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
@@ -44,25 +44,39 @@ const db = require("../index");
     });
 };
 
-const updateUsers = async (id, userInfo) => {
-  const setColumns = Object.keys(userInfo)
-    .map((property, index) => `${property}=$${index + 2}`)
-    .join(", ");
+// const updateUsers = async (id, userInfo) => {
+//   const setColumns = Object.keys(userInfo)
+//     .map((property, index) => `${property}=$${index + 2}`)
+//     .join(", ");
 
-  const queryDef = {
-    text: `
-    UPDATE users
-    SET ${setColumns}
-    WHERE id = $1 RETURNING *`,
-    values: [id, ...Object.values(userInfo)],
-  };
-  const data = await db.query(queryDef);
-  return data.rows[0];
+//   const queryDef = {
+//     text: `
+//     UPDATE users
+//     SET ${setColumns}
+//     WHERE id = $1 RETURNING *`,
+//     values: [id, ...Object.values(userInfo)],
+//   };
+//   const data = await db.query(queryDef);
+//   return data.rows[0];
+// };
+
+const updateUsers = (user) => {
+  return db
+    .query(
+      `UPDATE users SET goal=$1, current_weight=$2, goal_weight=$3 WHERE id=1 RETURNING *;`,
+      [user.goal, user.current_weight, user.goal_weight]
+    )
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      err.message;
+    });
 };
 
 module.exports = {
   getUsers,
   getUserWithEmail,
   addUser,
-  updateUsers
-}
+  updateUsers,
+};

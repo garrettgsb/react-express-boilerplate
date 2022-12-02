@@ -39,9 +39,11 @@ export const UserEditForm = (props) => {
       setGoalWeightError(true);
     }
     if (goal && currentWeight && goalWeight) {
-      Axios.put(`/api/dashboard`, { goal, currentWeight, goalWeight })
+      const current_weight = Number(currentWeight);
+      const goal_weight = Number(goalWeight);
+      Axios.put(`http://localhost:8080/api/dashboard`, { goal, current_weight, goal_weight })
         .then((result) => {
-          useNavigate(0);
+          useNavigate('/dashboard');
         })
         .catch((err) => {
           console.log(err.message);
@@ -68,24 +70,29 @@ export const UserEditForm = (props) => {
         <TextField
           className={classes.field}
           onChange={(e) => setGoal(e.target.value)}
+          id="goal"
+          name="goal"
           label="Goal"
           variant="outlined"
           color="secondary"
-          fullWidth
+          type="text"
           required
+          fullWidth
+          value={goal}
           error={goalError}
         />
         <TextField
           className={classes.field}
           onChange={(e) => setCurrentWeight(e.target.value)}
           label="Current Weight"
+          id="current_weight"
+          name="current_weight"
+          required
           variant="outlined"
           color="secondary"
           type="number"
-          multiline
-          rows={4}
+          value={currentWeight}
           fullWidth
-          required
           error={currentWeightError}
         />
         <TextField
@@ -93,12 +100,13 @@ export const UserEditForm = (props) => {
           onChange={(e) => setGoalWeight(e.target.value)}
           label="Goal Weight"
           variant="outlined"
+          required
+          id="goal_weight"
+          name="goal_weight"
           color="secondary"
           type="number"
-          multiline
-          rows={4}
+          value={goalWeight}
           fullWidth
-          required
           error={goalWeightError}
         />
 

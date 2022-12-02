@@ -15,10 +15,11 @@ router.get('/', (req,res) => {
     })
 });
 
-router.put('/', (req,res) => {
-  dashboardQueries.updateUsers(1, req.body)
+router.put('/', (req, res) => {
+  console.log("details", req.body)
+  dashboardQueries.updateUsers(req.body)
     .then(result => {
-      res.json(result[0]);
+      res.json(result);
     })
     .catch(err => {
       err.message;

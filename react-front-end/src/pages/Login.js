@@ -22,10 +22,9 @@ export default function Login() {
   const navigate = useNavigate();
 
   const SubmitHandler = (event) => {
-    const config = {withCredentials: true, headers: {'Content-Type': 'application/json'} }
     event.preventDefault();
     Axios.post("http://localhost:8080/api/login",
-     { email, password }, config)
+     { email, password })
       .then((result) => {
         if (result.statusText === "OK") {
           Cookies.set("Jason", "Ling")

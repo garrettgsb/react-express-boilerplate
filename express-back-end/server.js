@@ -3,19 +3,13 @@ const App = Express();
 const BodyParser = require("body-parser");
 const cors = require("cors");
 const PORT = 8080;
-const cookieSession = require('cookie-session')
+
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static("public"));
 App.use(cors());
-// App.use(function(req, res, next){
-//   res.header("Content-Type", "application/json;charset=UTF-8")
-//   res.header("Access-Control-Allow-Credentials", true)
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,Accept")
-//   next()
-// })
 
 const programRouter = require("./routes/programRoutes");
 const dashboardRouter = require("./routes/dashboardRoutes");

@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import { Heatmap } from "./components/Dashboard/Heatmap";
 import { UserEditForm } from "./components/Dashboard/UserEditForm";
 
-
 export default function Dashboard() {
   const [dashboard, setDashboard] = useState([]);
   const [userEdit, setUserEdit] = useState(false);
@@ -43,11 +42,17 @@ export default function Dashboard() {
   return (
     <>
       <h1>Welcome to your Dashboard {dashboard.first_name} </h1>
-      <button onClick={() => { if(userEdit) {
-        setUserEdit(false)
-      }else {
-        setUserEdit(true)
-      }}}>Edit</button>
+      <button
+        onClick={() => {
+          if (userEdit) {
+            setUserEdit(false);
+          } else {
+            setUserEdit(true);
+          }
+        }}
+      >
+        Edit
+      </button>
       <UserEditForm show={userEdit} />
       <Container>
         <Grid container spacing={3}>
@@ -101,11 +106,11 @@ export default function Dashboard() {
                     Name for tracking user going to the gym
                   </Typography>
                 </CardContent>
-                  <Box m="20px">
-                    <Box height="75vh">
-                      <Heatmap />
-                    </Box>
+                <Box m="20px">
+                  <Box height="75vh">
+                    <Heatmap />
                   </Box>
+                </Box>
               </Card>
             </Paper>
           </Grid>
