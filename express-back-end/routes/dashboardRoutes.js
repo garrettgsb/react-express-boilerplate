@@ -16,7 +16,6 @@ router.get('/', (req,res) => {
 });
 
 router.put('/', (req, res) => {
-  console.log("details", req.body)
   dashboardQueries.updateUsers(req.body)
     .then(result => {
       res.json(result);
