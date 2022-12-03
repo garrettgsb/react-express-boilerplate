@@ -25,13 +25,13 @@ export default function Program() {
   const [deleteProgram, setDeleteProgram] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleConfirmOpen = () => {
     setConfirmOpen(true);
   };
 
   const handleDelete = () => {
     setDeleteProgram(true);
-    handleClickOpen();
+    handleConfirmOpen();
   };
 
   const programId = params.id;
@@ -120,10 +120,10 @@ export default function Program() {
           <Confirm
             confirmOpen={confirmOpen}
             setConfirmOpen={setConfirmOpen}
-            confirmDeleteProgram={confirmDeleteProgram}
+            confirmDelete={confirmDeleteProgram}
           />
         ) : (
-          ""
+          null
         )}
 
         {/* Array of Workout Cards - to be made into separate component */}

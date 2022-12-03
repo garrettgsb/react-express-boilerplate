@@ -10,6 +10,7 @@ import Axios from "axios";
 import { usePrograms } from "../../../App";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Confirm from "../ProgramCard/Confirm";
 
 // props = create, cancleCreate, edit, cancelEdit
 
@@ -21,6 +22,8 @@ export default function WorkoutForm(props) {
     duration: props.workout ? props.workout.duration : null,
     image: props.workout ? props.workout.image : "",
   });
+
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const nameCallback = (event) => {
     return setState({ ...state, name: event.target.value });
@@ -64,9 +67,25 @@ export default function WorkoutForm(props) {
       .catch((e) => console.log(e));
   };
 
-  const deleteWorkout = () => {
-    console.log("delete button clicked!!!!");
+
+  const handleDelete = () => {
+    Axios.delete(`/api/workouts/${props.workout.id}`)
+    .then((result) => {
+      props.cancelEdit();
+      props.getWorkout();
+    })
+    .catch((e) => console.log(e));
   };
+
+
+  const handleConfirmOpen = () => {
+    setConfirmOpen(true);
+  };
+
+  // const handleDelete = () => {
+  //   setDeleteProgram(true);
+  //   handleConfirmOpen();
+  // };
 
   return (
     <>
@@ -131,7 +150,8 @@ export default function WorkoutForm(props) {
             Save
           </Button>
 
-          {props.edit ? <DeleteIcon onClick={deleteWorkout}/> : null}
+          {props.edit ? <DeleteIcon onClick={() => {setConfirmOpen(true)}}/> : null}
+          {confirmOpen ? <Confirm confirmOpen={confirmOpen} setConfirmOpen={setConfirmOpen} confirmDelete={handleDelete}/> : null}
         </Box>
       </Card>
     </>

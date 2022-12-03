@@ -14,7 +14,7 @@ export default function Confirm(props) {
 
   const confirmDelete = () => {
     handleClose();
-    props.confirmDeleteProgram()
+    props.confirmDelete()
   }
 
   return (
