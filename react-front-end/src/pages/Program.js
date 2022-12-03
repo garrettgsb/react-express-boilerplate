@@ -124,6 +124,7 @@ export default function Program() {
             confirmOpen={confirmOpen}
             setConfirmOpen={setConfirmOpen}
             confirmDelete={confirmDeleteProgram}
+            resource={"program"}
           />
         ) : null}
 

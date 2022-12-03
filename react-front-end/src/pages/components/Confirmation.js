@@ -27,12 +27,14 @@ export default function Confirmation(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Confirm message"}</DialogTitle>
-        <DialogContent>
+        <DialogTitle id="alert-dialog-title">
+          {`Are you sure you want to delete this ${props.resource}?`}
+        </DialogTitle>
+        {/* <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Are you sure you want to delete it?
           </DialogContentText>
-        </DialogContent>
+        </DialogContent> */}
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={confirmDelete} autoFocus>
