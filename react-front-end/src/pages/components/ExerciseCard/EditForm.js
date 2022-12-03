@@ -16,12 +16,14 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveSharpIcon from "@mui/icons-material/SaveSharp";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { styled } from "@mui/material/styles";
 import Axios from "axios";
+import Confirm from "../ProgramCard/Confirm";
 
 // Styled component necessary for expandable portion of card
 const ExpandMore = styled((props) => {
@@ -74,6 +76,9 @@ export default function ExerciseCard(props) {
   // State for Notes
   const [notes, setNotes] = useState(props.notes || "");
 
+  // State for deletion confirmation dialog
+  const [dialogOpen, setDialogOpen] = useState(true);
+
   const resetAllErrors = () => {
     setNameError(false);
     setSetsError(false);
@@ -83,7 +88,7 @@ export default function ExerciseCard(props) {
   };
 
   const navigate = useNavigate();
-  const submitForm = () => {
+  const submitEditForm = () => {
     resetAllErrors();
     if (!name) {
       setNameError("Name - required");
@@ -148,179 +153,184 @@ export default function ExerciseCard(props) {
   };
 
   return (
-    <Card>
-      {/* Main content: exercise name, attributes and expand button */}
-      <CardContent
-        sx={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-        }}
-      >
-        <ExerciseAttribute>
-          <TextField
-            id="standard-required"
-            helperText={nameError ? nameError : "Name"}
-            variant="standard"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            error={nameError}
-            sx={{ maxWidth: "80%" }}
-          />
-        </ExerciseAttribute>
-        <Divider orientation="vertical" variant="middle" flexItem />
-        <ExerciseAttribute>
-          <TextField
-            id="standard-number"
-            helperText={setsError ? setsError : "SETS"}
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="standard"
-            onChange={(e) => setSets(e.target.value)}
-            value={sets}
-            sx={{ maxWidth: "30%" }}
-            inputProps={{ min: 1 }}
-            error={setsError}
-          />
-        </ExerciseAttribute>
-        <Divider orientation="vertical" variant="middle" flexItem />
-        <ExerciseAttribute>
-          <TextField
-            id="standard-number"
-            helperText={repsError ? repsError : "REPS"}
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="standard"
-            onChange={(e) => setReps(e.target.value)}
-            value={reps}
-            sx={{ maxWidth: "50%" }}
-            inputProps={{ min: 1 }}
-            error={repsError}
-          />
-        </ExerciseAttribute>
-        <Divider orientation="vertical" variant="middle" flexItem />
-        <ExerciseAttribute>
-          <TextField
-            id="standard-number"
-            helperText={loadError ? loadError : "lbs"}
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="standard"
-            onChange={(e) => setLoad(e.target.value)}
-            value={load}
-            sx={{ maxWidth: "50%" }}
-            inputProps={{ step: 5, min: 0 }}
-            error={loadError}
-          />
-        </ExerciseAttribute>
-        <Divider orientation="vertical" variant="middle" flexItem />
-        <ExerciseAttribute>
-          <TextField
-            id="standard-number"
-            helperText={restError ? restError : "REST"}
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="standard"
-            onChange={(e) => setRest(e.target.value)}
-            value={rest}
-            sx={{ maxWidth: "50%" }}
-            inputProps={{ min: 0 }}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">min</InputAdornment>,
-            }}
-            error={restError}
-          />
-        </ExerciseAttribute>
-        {/* Expand/collapse details chevron */}
-        <CardActions>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            {props.edit ? (
-              <Tooltip title="Cancel" arrow placement="right">
-                <CloseRoundedIcon />
-              </Tooltip>
-            ) : (
-              <ExpandMoreIcon />
-            )}
-          </ExpandMore>
-        </CardActions>
-      </CardContent>
-
-      {/* Expandable section containing image, instructions and notes */}
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <Box display="flex">
-          {props.image && (
-            <CardMedia
-              component="img"
-              sx={{ width: "40%", height: "auto" }}
-              image={props.image}
-              alt="exercise"
+    <>
+      <Confirm />
+      <Card>
+        {/* Main content: exercise name, attributes and expand button */}
+        <CardContent
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
+        >
+          <ExerciseAttribute>
+            <TextField
+              id="standard-required"
+              helperText={nameError ? nameError : "Name"}
+              variant="standard"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              error={nameError}
+              sx={{ maxWidth: "80%" }}
             />
-          )}
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-between"
-            width="100%"
-          >
-            <CardContent>
-              <Typography variant="h5">Instructions</Typography>
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                multiline
-                fullWidth
-                value={instructions}
-                onChange={(e) => setInstructions(e.target.value)}
-              />
-              <Typography variant="h5" pt={"0.5em"}>
-                Notes
-              </Typography>
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                multiline
-                fullWidth
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-              />
-            </CardContent>
-            <CardActions>
-              <Button
-                variant="contained"
-                size="small"
-                startIcon={<SaveSharpIcon />}
-                onClick={submitForm}
-                sx={{ ml: "auto" }}
-              >
-                SAVE
-              </Button>
+          </ExerciseAttribute>
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <ExerciseAttribute>
+            <TextField
+              id="standard-number"
+              helperText={setsError ? setsError : "SETS"}
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(e) => setSets(e.target.value)}
+              value={sets}
+              sx={{ maxWidth: "30%" }}
+              inputProps={{ min: 1 }}
+              error={setsError}
+            />
+          </ExerciseAttribute>
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <ExerciseAttribute>
+            <TextField
+              id="standard-number"
+              helperText={repsError ? repsError : "REPS"}
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(e) => setReps(e.target.value)}
+              value={reps}
+              sx={{ maxWidth: "50%" }}
+              inputProps={{ min: 1 }}
+              error={repsError}
+            />
+          </ExerciseAttribute>
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <ExerciseAttribute>
+            <TextField
+              id="standard-number"
+              helperText={loadError ? loadError : "lbs"}
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(e) => setLoad(e.target.value)}
+              value={load}
+              sx={{ maxWidth: "50%" }}
+              inputProps={{ step: 5, min: 0 }}
+              error={loadError}
+            />
+          </ExerciseAttribute>
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <ExerciseAttribute>
+            <TextField
+              id="standard-number"
+              helperText={restError ? restError : "REST"}
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="standard"
+              onChange={(e) => setRest(e.target.value)}
+              value={rest}
+              sx={{ maxWidth: "50%" }}
+              inputProps={{ min: 0 }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">min</InputAdornment>
+                ),
+              }}
+              error={restError}
+            />
+          </ExerciseAttribute>
+          {/* Expand/collapse details chevron */}
+          <CardActions>
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              {props.edit ? (
+                <Tooltip title="Cancel" arrow placement="right">
+                  <CloseRoundedIcon />
+                </Tooltip>
+              ) : (
+                <ExpandMoreIcon />
+              )}
+            </ExpandMore>
+          </CardActions>
+        </CardContent>
 
-              {/* Garbage can button */}
-              <IconButton
-                aria-label="delete"
-                size="large"
-                color="error"
-                onClick={deleteExercise}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </CardActions>
+        {/* Expandable section containing image, instructions and notes */}
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Box display="flex">
+            {props.image && (
+              <CardMedia
+                component="img"
+                sx={{ width: "40%", height: "auto" }}
+                image={props.image}
+                alt="exercise"
+              />
+            )}
+            <Box
+              display="flex"
+              flexDirection="column"
+              justifyContent="space-between"
+              width="100%"
+            >
+              <CardContent>
+                <Typography variant="h5">Instructions</Typography>
+                <TextField
+                  id="outlined-basic"
+                  variant="outlined"
+                  multiline
+                  fullWidth
+                  value={instructions}
+                  onChange={(e) => setInstructions(e.target.value)}
+                />
+                <Typography variant="h5" pt={"0.5em"}>
+                  Notes
+                </Typography>
+                <TextField
+                  id="outlined-basic"
+                  variant="outlined"
+                  multiline
+                  fullWidth
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                />
+              </CardContent>
+              <CardActions>
+                <Button
+                  variant="contained"
+                  size="small"
+                  startIcon={<SaveSharpIcon />}
+                  onClick={submitEditForm}
+                  sx={{ ml: "auto" }}
+                >
+                  SAVE
+                </Button>
+
+                {/* Garbage can button */}
+                <IconButton
+                  aria-label="delete"
+                  size="large"
+                  color="error"
+                  onClick={deleteExercise}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </CardActions>
+            </Box>
           </Box>
-        </Box>
-      </Collapse>
-    </Card>
+        </Collapse>
+      </Card>
+    </>
   );
 }
