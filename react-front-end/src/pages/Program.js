@@ -51,7 +51,7 @@ export default function Program() {
       .catch((e) => {
         console.log(e);
       });
-  }, [program]);
+  }, [programId]);
 
   const saveProgram = () => {
     const indexOfProgram = programs.findIndex((item) => {
@@ -65,7 +65,6 @@ export default function Program() {
     setEditMode(false);
   };
 
-
   const confirmDeleteProgram = () => {
     axios
       .delete(`/api/programs/${programId}`)
@@ -77,10 +76,8 @@ export default function Program() {
   };
 
   const handleEditMode = () => {
-    setEditMode(false)
-  }
-
-
+    setEditMode(false);
+  };
 
   return (
     <>
