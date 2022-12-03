@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   Card,
-  CardMedia,
   Collapse,
   Divider,
   IconButton,
@@ -15,7 +14,6 @@ import {
   CardContent,
   TextField,
   Tooltip,
-  Zoom,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SaveSharpIcon from "@mui/icons-material/SaveSharp";
@@ -103,7 +101,6 @@ export default function ExerciseCard(props) {
     if (!rest) {
       setRestError("REST - required");
     }
-    // if (nameError || setsError || repsError || loadError || restError) {
     if (!name || !sets || !reps || !load || !rest) {
       return;
     }
