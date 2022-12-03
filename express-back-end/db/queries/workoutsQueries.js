@@ -46,7 +46,6 @@ const addWorkouts = (workouts) => {
       ]
     )
     .then((result) => {
-      console.log("workout queries:", result.rows)
       return result.rows;
     })
     .catch((err) => {

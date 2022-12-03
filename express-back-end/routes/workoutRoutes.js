@@ -12,7 +12,6 @@ router.post("/", (req, res) => {
   workoutQueries
     .addWorkouts(req.body)
     .then((result) => {
-      console.log("workout routes:", result)
       res.json(result);
     })
     .catch((err) => {

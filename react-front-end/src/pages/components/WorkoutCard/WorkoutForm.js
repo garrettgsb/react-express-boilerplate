@@ -13,8 +13,6 @@ import {useNavigate} from "react-router-dom";
 // props = create, cancleCreate, edit, cancelEdit
 
 export default function WorkoutForm(props) {
-  const { workouts, setWorkouts, getAndSetWorkouts } = usePrograms();
-  const navigate = useNavigate();
 
   const [state, setState] = useState({
     name: props.workout ? props.workout.name : "",
