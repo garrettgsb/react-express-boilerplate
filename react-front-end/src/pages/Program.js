@@ -8,7 +8,7 @@ import { usePrograms } from "../App";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import Confirmation from "./components/ProgramCard/Confirmation";
+import Confirmation from "./components/Confirmation";
 import WorkoutForm from "./components/WorkoutCard/WorkoutForm";
 
 export default function Program() {

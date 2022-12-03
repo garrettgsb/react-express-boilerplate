@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import { Button, Box, TextField } from "@mui/material";
 import Axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Confirmation from "../ProgramCard/Confirmation";
+import Confirmation from "../Confirmation";
 
 //A form for creating, editing workout
 export default function WorkoutForm(props) {
