@@ -1,0 +1,34 @@
+.canvas_section {
+  display: flex;
+  min-width: 1500px;
+  min-height: 700px;
+  height: auto;
+  width: auto;
+  border: 2px solid black;
+  background-color: white;
+  margin: 25px;
+  align-items: center;
+  justify-content: center;
+}
+
+.save_edit_btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.save_edit_btns button {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 24px;
+  margin-bottom: 1em;
+  border: 2px solid black;
+  border-radius: 0.5em;
+  align-items: center;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: rgb(100, 0, 0);
+  color: rgb(210, 210, 210);
+}
+
+/*# sourceMappingURL=canvas.css.map */

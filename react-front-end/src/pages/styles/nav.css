@@ -1,0 +1,81 @@
+.App {
+  text-align: center;
+  background-color: rgb(190, 90, 90);
+}
+
+.nav {
+  display: flex;
+  background-color: rgb(160, 40, 40);
+  height: 100px;
+  box-sizing: border-box;
+  border: 3px solid black;
+}
+
+.nav .mainlogo {
+  display: flex;
+  height: 80px;
+  margin-top: 0.5em;
+  margin-left: 1em;
+}
+
+.nav div.nav_links {
+  display: flex;
+  width: 90vw;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Caveat';
+}
+
+.nav_btns {
+  display: flex;
+  flex-direction: row;
+  margin-left: 5em;
+}
+
+.nav_loggedin {
+  display: flex;
+  font-size: 28px;
+  margin-right: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 3px solid black;
+  font-family: 'Lobster';
+}
+
+div.nav_user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav_new {
+  display: flex;
+  border: 2px solid black;
+  border-radius: 0.5em;
+  font-size: 24px;
+  padding: 0.5em;
+  background-color: rgb(170, 160, 90);
+  margin-left: 2em;
+}
+
+.nav_home {
+  display: flex;
+  border: 2px solid black;
+  border-radius: 0.5em;
+  font-size: 24px;
+  padding: 0.5em;
+  background-color: rgb(170, 160, 90);
+}
+
+.nav_acc {
+  display: flex;
+  font-size: 24px;
+}
+.nav_user img {
+  display: flex;
+  height: 70px;
+  border-radius: 2em;
+  border: 2px solid black;
+}

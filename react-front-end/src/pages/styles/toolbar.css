@@ -1,0 +1,67 @@
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tools {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+  font-size: 18px;
+  font-family: 'Caveat';
+}
+
+.tools div{
+  display: flex;
+  width: 150px;
+  justify-content: space-between;
+  margin: 0.2em 0 0.2em 0;
+}
+
+.colors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.colors label{
+  display: flex;
+  width: 150px;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 18px;
+  font-family: 'Caveat';
+}
+
+.tool_buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+}
+
+.tool_buttons button{
+  display: flex;
+  width: 180px;
+  justify-content: center;
+  margin: 0.5em 0 0.5em 0;
+  font-size: 18px;
+  font-family: 'Caveat';
+}
+
+.brush_option {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  align-items: center;
+  margin: 2em 0 2em 0;
+  font-size: 24px;
+  font-family: 'Caveat';
+}
+
+#size-slider {
+  display: flex;
+  width: 160px;
+}

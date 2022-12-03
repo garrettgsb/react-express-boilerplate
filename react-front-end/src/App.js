@@ -1,38 +1,33 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+//import axios from 'axios';
+import Layout from "./pages/Layout";
+import AccountPage from './pages/AccountPage';
+import CanvasPage from './pages/CanvasPage';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: 'Click the button to load data!'
-    }
-  }
+export const AuthContext = React.createContext(null);
 
-  fetchData = () => {
-    axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
+export default function App() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
 
-      console.log(response.data.message) // Just the message
-      this.setState({
-        message: response.data.message
-      });
-    }) 
-  }
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user])
 
-  render() {
-    return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>        
-      </div>
-    );
-  }
+  return (
+    <BrowserRouter>
+      <AuthContext.Provider value={user}>
+        <Routes>
+          <Route path="/" element={<Layout setUser={setUser}/>}>
+            <Route index element={<HomePage />} />
+            <Route path="canvas" element={<CanvasPage  />} />
+            <Route path="account" element={<AccountPage />} />
+            <Route path="login" element={<LoginPage setUser={setUser}/>}  />
+          </Route>
+        </Routes>
+      </AuthContext.Provider>
+    </BrowserRouter>
+  );
 }
-
-export default App;
