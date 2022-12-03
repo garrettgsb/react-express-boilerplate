@@ -19,7 +19,6 @@ export default function Program() {
   // const [programs, setPrograms] = useState([]);
   const [program, setProgram] = useState({});
   const [workout, setWorkout] = useState([]);
-
   const [programEditMode, setProgramEditMode] = useState(false);
   const [workoutCreateMode, setWorkoutCreateMode] = useState(false);
   const [deleteProgram, setDeleteProgram] = useState(false);
@@ -35,7 +34,7 @@ export default function Program() {
   };
 
   const programId = params.id;
-  
+
   useEffect(() => {
     getProgram();
     getWorkout();
@@ -83,7 +82,7 @@ export default function Program() {
 
   const cancelWorkoutCreateMode = () => {
     setWorkoutCreateMode(false);
-  }
+  };
 
   return (
     <>
@@ -122,17 +121,23 @@ export default function Program() {
             setConfirmOpen={setConfirmOpen}
             confirmDelete={confirmDeleteProgram}
           />
-        ) : (
-          null
-        )}
+        ) : null}
 
         {/* Array of Workout Cards - to be made into separate component */}
         {workout.map((item) => {
-          return workout ? <WorkoutCard key={item.id} workout={item} getWorkout={getWorkout}/> : null;
+          return workout ? (
+            <WorkoutCard key={item.id} workout={item} getWorkout={getWorkout} />
+          ) : null;
         })}
 
         {workoutCreateMode ? (
-          <WorkoutForm create={workoutCreateMode} cancelCreate={cancelWorkoutCreateMode} key={'create'} programId={programId} getWorkout={getWorkout} />
+          <WorkoutForm
+            create={workoutCreateMode}
+            cancelCreate={cancelWorkoutCreateMode}
+            key={"create"}
+            programId={programId}
+            getWorkout={getWorkout}
+          />
         ) : (
           <Fab
             color="primary"
