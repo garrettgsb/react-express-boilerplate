@@ -6,5 +6,6 @@ CREATE TABLE workouts (
   name VARCHAR(255),
   image VARCHAR(255),
   description TEXT,
-  duration INTEGER
+  duration INTEGER,
+  created_at TIMESTAMP DEFAULT CLOCK_TIMESTAMP()
 )

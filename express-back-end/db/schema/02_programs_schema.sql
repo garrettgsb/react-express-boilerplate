@@ -8,5 +8,6 @@ CREATE TABLE programs (
   start_date DATE,
   end_date DATE,
   public BOOLEAN DEFAULT true,
-  author VARCHAR(255) DEFAULT 'Jason "Chad" Ling'
+  author VARCHAR(255) DEFAULT 'Jason "Chad" Ling',
+  created_at TIMESTAMP DEFAULT CLOCK_TIMESTAMP()
 )
