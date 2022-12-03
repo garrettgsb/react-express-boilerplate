@@ -1,14 +1,34 @@
-import React from "react";
+import React, {useState} from "react";
 import Card from "@mui/material/Card";
 import { Button, Box, TextField } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import { Description } from "@mui/icons-material";
 
 
+// props = create, cancleCreate, edit, cancelEdit
 
-export default function WorkoutForm() {
+export default function WorkoutForm(props) {
+
+  const [state, setState] = useState({
+    name: "",
+    description: "",
+    duration: null,
+    image: ""
+  });
+
+  const handleCancel = () => {
+    return props.edit ? props.cancelEdit() : props.cancelCreate() 
+  }
+
+  // const nameCallback = (event) => {
+  //   return props.edit ? setState({...state, name: event.target.value} ) 
+
+  // }
+    
+
   return (
     <>
       <Card sx={{ maxWidth: 400 }}>
@@ -59,7 +79,7 @@ export default function WorkoutForm() {
         />
 
         <Box sx={{ "& button": { m: 1 } }}>
-          <Button color="secondary" size="small">
+          <Button color="secondary" size="small" onClick={handleCancel}>
             Cancel
           </Button>
 

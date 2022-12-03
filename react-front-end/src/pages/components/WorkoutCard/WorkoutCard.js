@@ -15,16 +15,23 @@ import WorkoutForm from "./WorkoutForm";
 export default function WorkoutCard(props) {
   const [editWorkoutMode, setEditWorkoutMode] = useState(false);
 
+  const cancelEdit = () => {
+    setEditWorkoutMode(false)
+  }
+
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(`/workout/${props.workout.id}`);
+  }
+
   return (
     <>
       {editWorkoutMode ? (
-        <WorkoutForm edit={editWorkoutMode}/>
+        <WorkoutForm edit={editWorkoutMode} cancelEdit={cancelEdit}/>
       ) : (
         <>
-          <Link
-            to={`/workout/${props.workout.id}`}
-            className={"workoutListItem"}
-          >
+          <div className="workoutListItem" onClick={handleNavigate}>
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
@@ -47,7 +54,8 @@ export default function WorkoutCard(props) {
                 <Button
                   variant="outlined"
                   startIcon={<EditIcon />}
-                  onClick={() => {
+                  onClick={(event) => {
+                    event.stopPropagation();
                     setEditWorkoutMode(true);
                   }}
                 >
@@ -55,7 +63,7 @@ export default function WorkoutCard(props) {
                 </Button>
               </CardActionArea>
             </Card>
-          </Link>
+          </div>
         </>
       )}
     </>

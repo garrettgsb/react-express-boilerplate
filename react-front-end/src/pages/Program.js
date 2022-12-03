@@ -82,6 +82,10 @@ export default function Program() {
     setWorkoutCreateMode(true);
   };
 
+  const cancelWorkoutCreateMode = () => {
+    setWorkoutCreateMode(false);
+  }
+
   return (
     <>
       <Stack
@@ -129,7 +133,7 @@ export default function Program() {
         })}
 
         {workoutCreateMode ? (
-          <WorkoutForm create={workoutCreateMode} />
+          <WorkoutForm create={workoutCreateMode} cancelCreate={cancelWorkoutCreateMode}/>
         ) : (
           <Fab
             color="primary"
