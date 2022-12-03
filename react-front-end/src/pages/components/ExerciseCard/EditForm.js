@@ -23,7 +23,7 @@ import SaveSharpIcon from "@mui/icons-material/SaveSharp";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { styled } from "@mui/material/styles";
 import Axios from "axios";
-import Confirm from "../ProgramCard/Confirm";
+import Confirmation from "../Confirmation";
 
 // Styled component necessary for expandable portion of card
 const ExpandMore = styled((props) => {
@@ -154,7 +154,7 @@ export default function ExerciseCard(props) {
 
   return (
     <>
-      <Confirm />
+      <Confirmation />
       <Card>
         {/* Main content: exercise name, attributes and expand button */}
         <CardContent
