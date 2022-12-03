@@ -29,31 +29,13 @@ export default function App() {
         console.log(e);
       });
   };
-  
-  // const [exerciseSelections, setExerciseSelections] = useState([]);
-  // const [exercises, setExercises] = useState([]);
+
 
   // When App initially loads, fetch data and store in state
-
   useEffect(() => {
     getAndSetPrograms();
     getAndSetWorkouts();
-    // axios
-    //   .get("http://localhost:8080/api/exerciseselections")
-    //   .then((result) => {
-    //     // console.log("result of exerciseselections:", result.data);
-    //     setExerciseSelections(result.data);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
 
-    // axios
-    //   .get("http://localhost:8080/api/program/exercise/:id")
-    //   .then((result) => {
-    //     // console.log("result of setexercises:", result.data);
-    //     setExercises(result.data);
-    //   });
   }, []);
 
   return (
