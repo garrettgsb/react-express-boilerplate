@@ -38,7 +38,7 @@ const addWorkouts = (workouts) => {
     .query(
       `INSERT INTO workouts (program_id, name, image, description, duration) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
       [
-        workouts.programId,
+        workouts.program_id,
         workouts.name,
         workouts.image,
         workouts.description,
