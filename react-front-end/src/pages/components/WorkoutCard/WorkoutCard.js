@@ -8,19 +8,23 @@ import {
   CardActionArea,
   Button,
 } from "@mui/material";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import WorkoutForm from "./WorkoutForm";
 
+//Show a workout card
 export default function WorkoutCard(props) {
+  //State for editWorkoutMode
   const [editWorkoutMode, setEditWorkoutMode] = useState(false);
 
+  //Set editWorkoutMode to false
   const cancelEdit = () => {
     setEditWorkoutMode(false)
   }
 
   const navigate = useNavigate();
 
+  //Redirect to workout pages
   const handleNavigate = () => {
     navigate(`/workout/${props.workout.id}`);
   }

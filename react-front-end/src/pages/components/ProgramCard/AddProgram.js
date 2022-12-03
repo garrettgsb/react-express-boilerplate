@@ -5,18 +5,24 @@ import { usePrograms } from "../../../App";
 import ProgramForm from "./ProgramForm";
 
 export default function AddProgram() {
+  //State for name and description
   const [addProgramData, setAddProgramData] = useState({
     name: "",
     description: "",
   });
 
-  const { programs, setPrograms, getAndSetPrograms } = usePrograms();
+  //Use a UseOutletContext from App.js
+  const { getAndSetPrograms } = usePrograms();
 
+  //State for startdate
   const [startDate, setStartDate] = useState("");
+  //State for enddate
   const [endDate, setEndDate] = useState("");
+
   const navigate = useNavigate();
 
   const addProgram = () => {
+    //Assemble program data object
     const newProgramFormData = {
       ...addProgramData,
       start_date: startDate,
@@ -24,6 +30,7 @@ export default function AddProgram() {
       user_id: 1,
     };
 
+    //Send a request to post
     axios
       .post("/api/programs", newProgramFormData)
       .then((result) => {
@@ -35,10 +42,12 @@ export default function AddProgram() {
       });
   };
 
+  //Redirect to the homepage
   const handleCancel = () => {
     navigate("/dashboard");
   };
 
+  //Setstate for name
   const addName = (event) => {
     setAddProgramData({
       ...addProgramData,
@@ -46,6 +55,7 @@ export default function AddProgram() {
     });
   };
 
+  //Setstate for description
   const addDescription = (event) => {
     setAddProgramData({
       ...addProgramData,
@@ -53,10 +63,12 @@ export default function AddProgram() {
     });
   };
 
+  //Setstate for startdate
   const addStartDate = (newValue) => {
     setStartDate(newValue);
   };
 
+  //Setstate for enddate
   const addEndDate = (newValue) => {
     setEndDate(newValue);
   };

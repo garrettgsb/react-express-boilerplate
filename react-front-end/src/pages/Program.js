@@ -8,7 +8,7 @@ import { usePrograms } from "../App";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import Confirm from "./components/ProgramCard/Confirm";
+import Confirmation from "./components/ProgramCard/Confirmation";
 import WorkoutForm from "./components/WorkoutCard/WorkoutForm";
 
 export default function Program() {
@@ -117,7 +117,7 @@ export default function Program() {
         )}
 
         {deleteProgram ? (
-          <Confirm
+          <Confirmation
             confirmOpen={confirmOpen}
             setConfirmOpen={setConfirmOpen}
             confirmDelete={confirmDeleteProgram}

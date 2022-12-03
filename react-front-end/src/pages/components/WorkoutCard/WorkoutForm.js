@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import { Button, Box, TextField } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-import { Delete, Description } from "@mui/icons-material";
 import Axios from "axios";
-import { usePrograms } from "../../../App";
-import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Confirm from "../ProgramCard/Confirm";
+import Confirmation from "../ProgramCard/Confirmation";
 
-// props = create, cancleCreate, edit, cancelEdit
-
+//A form for creating, editing workout
 export default function WorkoutForm(props) {
+  //Assemble workout data object.
+  //If it's editing, there is a workout
+  //If it's creating, there is no workout
   const [state, setState] = useState({
     name: props.workout ? props.workout.name : "",
     program_id: props.workout ? props.workout.program_id : props.programId,
@@ -23,32 +18,40 @@ export default function WorkoutForm(props) {
     image: props.workout ? props.workout.image : "",
   });
 
+  //State for Confirm modal.
   const [confirmOpen, setConfirmOpen] = useState(false);
 
+  //Setstate for Name
   const nameCallback = (event) => {
     return setState({ ...state, name: event.target.value });
   };
 
+  //Setstate for Duration
   const durationCallback = (event) => {
     return setState({ ...state, duration: event.target.value });
   };
 
+  //Setstate for image
   const imageCallback = (event) => {
     return setState({ ...state, image: event.target.value });
   };
 
+  //Setstate for description
   const descriptionCallback = (event) => {
     return setState({ ...state, description: event.target.value });
   };
 
+  //Handle Save workout 
   const saveWorkout = () => {
     return props.edit ? editWorkout() : createWorkout();
   };
 
+  //Handle cancel 
   const handleCancel = () => {
     return props.edit ? props.cancelEdit() : props.cancelCreate();
   };
 
+  //Send a request to put workout 
   const editWorkout = () => {
     Axios.put(`/api/workouts/${props.workout.id}`, state)
       .then((result) => {
@@ -58,6 +61,7 @@ export default function WorkoutForm(props) {
       .catch((e) => console.log(e));
   };
 
+  //Send a request to create workout
   const createWorkout = () => {
     Axios.post(`/api/workouts`, state)
       .then((result) => {
@@ -67,7 +71,7 @@ export default function WorkoutForm(props) {
       .catch((e) => console.log(e));
   };
 
-
+  //Send a request to delete workout 
   const handleDelete = () => {
     Axios.delete(`/api/workouts/${props.workout.id}`)
     .then((result) => {
@@ -76,16 +80,6 @@ export default function WorkoutForm(props) {
     })
     .catch((e) => console.log(e));
   };
-
-
-  const handleConfirmOpen = () => {
-    setConfirmOpen(true);
-  };
-
-  // const handleDelete = () => {
-  //   setDeleteProgram(true);
-  //   handleConfirmOpen();
-  // };
 
   return (
     <>
@@ -151,7 +145,7 @@ export default function WorkoutForm(props) {
           </Button>
 
           {props.edit ? <DeleteIcon onClick={() => {setConfirmOpen(true)}}/> : null}
-          {confirmOpen ? <Confirm confirmOpen={confirmOpen} setConfirmOpen={setConfirmOpen} confirmDelete={handleDelete}/> : null}
+          {confirmOpen ? <Confirmation confirmOpen={confirmOpen} setConfirmOpen={setConfirmOpen} confirmDelete={handleDelete}/> : null}
         </Box>
       </Card>
     </>
