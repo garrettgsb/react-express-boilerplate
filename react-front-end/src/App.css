@@ -2,3 +2,7 @@
 .workoutListItem {
   all: unset;
 }
+
+.MuiFormHelperText-root {
+  white-space: nowrap;
+}

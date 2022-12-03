@@ -24,7 +24,9 @@ const getProgramWithId = (Id) => {
 
 const getProgramWithUserId = (userId) => {
   return db
-    .query(`SELECT * FROM programs WHERE user_id = $1 ORDER BY created_at;`, [userId])
+    .query(`SELECT * FROM programs WHERE user_id = $1 ORDER BY created_at;`, [
+      userId,
+    ])
     .then((result) => {
       return result.rows;
     })

@@ -4,7 +4,6 @@ import ExerciseCard from "./components/ExerciseCard";
 import AddIcon from "@mui/icons-material/Add";
 import { Fab, Stack, Typography } from "@mui/material";
 import Axios from "axios";
-import EditForm from "./components/ExerciseCard/EditForm";
 import CreateForm from "./components/ExerciseCard/CreateForm";
 
 export default function Workout(props) {
@@ -33,13 +32,8 @@ export default function Workout(props) {
       });
   }, []);
 
-  // State and handler for toggling editing "mode"
+  // State for toggling Create new exercise form
   const [adding, setAdding] = useState(false);
-
-  // Function to save changes and return to viewing "mode"
-  const saveEdits = () => {
-    // Send request and then
-  };
 
   return (
     <>

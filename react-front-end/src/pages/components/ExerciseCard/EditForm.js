@@ -50,18 +50,23 @@ export default function ExerciseCard(props) {
 
   // State for NAME
   const [name, setName] = useState(props.name || "");
+  const [nameError, setNameError] = useState(false);
 
   // State for SETS
   const [sets, setSets] = useState(props.sets || "");
+  const [setsError, setSetsError] = useState(false);
 
   // State for REPS
   const [reps, setReps] = useState(props.reps || "");
+  const [repsError, setRepsError] = useState(false);
 
   // State for LOAD
   const [load, setLoad] = useState(props.load || "");
+  const [loadError, setLoadError] = useState(false);
 
   // State for REST
   const [rest, setRest] = useState(props.rest_period || "");
+  const [restError, setRestError] = useState(false);
 
   // State for Instructions
   const [instructions, setInstructions] = useState(props.instructions || "");
@@ -69,8 +74,36 @@ export default function ExerciseCard(props) {
   // State for Notes
   const [notes, setNotes] = useState(props.notes || "");
 
+  const resetAllErrors = () => {
+    setNameError(false);
+    setSetsError(false);
+    setRepsError(false);
+    setLoadError(false);
+    setRestError(false);
+  };
+
   const navigate = useNavigate();
   const submitForm = () => {
+    resetAllErrors();
+    if (!name) {
+      setNameError("Name - required");
+    }
+    if (!sets) {
+      setSetsError("SETS - required");
+    }
+    if (!reps) {
+      setRepsError("REPS - required");
+    }
+    if (!load) {
+      setLoadError("lbs - required");
+    }
+    if (!rest) {
+      setRestError("REST - required");
+    }
+    if (!name || !sets || !reps || !load || !rest) {
+      return;
+    }
+
     // Assemble exercise data object
     const exerciseData = {
       id: exerciseId,
@@ -127,10 +160,11 @@ export default function ExerciseCard(props) {
         <ExerciseAttribute>
           <TextField
             id="standard-required"
-            helperText="Name"
+            helperText={nameError ? nameError : "Name"}
             variant="standard"
             onChange={(e) => setName(e.target.value)}
             value={name}
+            error={nameError}
             sx={{ maxWidth: "80%" }}
           />
         </ExerciseAttribute>
@@ -138,7 +172,7 @@ export default function ExerciseCard(props) {
         <ExerciseAttribute>
           <TextField
             id="standard-number"
-            helperText="SETS"
+            helperText={setsError ? setsError : "SETS"}
             type="number"
             InputLabelProps={{
               shrink: true,
@@ -147,13 +181,15 @@ export default function ExerciseCard(props) {
             onChange={(e) => setSets(e.target.value)}
             value={sets}
             sx={{ maxWidth: "30%" }}
+            inputProps={{ min: 1 }}
+            error={setsError}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
           <TextField
             id="standard-number"
-            helperText="REPS"
+            helperText={repsError ? repsError : "REPS"}
             type="number"
             InputLabelProps={{
               shrink: true,
@@ -162,13 +198,15 @@ export default function ExerciseCard(props) {
             onChange={(e) => setReps(e.target.value)}
             value={reps}
             sx={{ maxWidth: "50%" }}
+            inputProps={{ min: 1 }}
+            error={repsError}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
           <TextField
             id="standard-number"
-            helperText="lbs"
+            helperText={loadError ? loadError : "lbs"}
             type="number"
             InputLabelProps={{
               shrink: true,
@@ -177,14 +215,15 @@ export default function ExerciseCard(props) {
             onChange={(e) => setLoad(e.target.value)}
             value={load}
             sx={{ maxWidth: "50%" }}
-            inputProps={{ step: 5 }}
+            inputProps={{ step: 5, min: 0 }}
+            error={loadError}
           />
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
           <TextField
             id="standard-number"
-            helperText="REST"
+            helperText={restError ? restError : "REST"}
             type="number"
             InputLabelProps={{
               shrink: true,
@@ -193,9 +232,11 @@ export default function ExerciseCard(props) {
             onChange={(e) => setRest(e.target.value)}
             value={rest}
             sx={{ maxWidth: "50%" }}
+            inputProps={{ min: 0 }}
             InputProps={{
               endAdornment: <InputAdornment position="end">min</InputAdornment>,
             }}
+            error={restError}
           />
         </ExerciseAttribute>
         {/* Expand/collapse details chevron */}
@@ -207,7 +248,7 @@ export default function ExerciseCard(props) {
             aria-label="show more"
           >
             {props.edit ? (
-              <Tooltip title="Cancel" arrow>
+              <Tooltip title="Cancel" arrow placement="right">
                 <CloseRoundedIcon />
               </Tooltip>
             ) : (
@@ -220,15 +261,13 @@ export default function ExerciseCard(props) {
       {/* Expandable section containing image, instructions and notes */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Box display="flex">
-          {props.image ? (
+          {props.image && (
             <CardMedia
               component="img"
               sx={{ width: "40%", height: "auto" }}
               image={props.image}
               alt="exercise"
             />
-          ) : (
-            "image form here"
           )}
           <Box
             display="flex"
