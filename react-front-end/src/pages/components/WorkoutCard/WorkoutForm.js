@@ -5,15 +5,15 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { Description } from "@mui/icons-material";
+import { Delete, Description } from "@mui/icons-material";
 import Axios from "axios";
 import { usePrograms } from "../../../App";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 // props = create, cancleCreate, edit, cancelEdit
 
 export default function WorkoutForm(props) {
-
   const [state, setState] = useState({
     name: props.workout ? props.workout.name : "",
     program_id: props.workout ? props.workout.program_id : props.programId,
@@ -21,10 +21,6 @@ export default function WorkoutForm(props) {
     duration: props.workout ? props.workout.duration : null,
     image: props.workout ? props.workout.image : "",
   });
-
-  const handleCancel = () => {
-    return props.edit ? props.cancelEdit() : props.cancelCreate();
-  };
 
   const nameCallback = (event) => {
     return setState({ ...state, name: event.target.value });
@@ -43,28 +39,34 @@ export default function WorkoutForm(props) {
   };
 
   const saveWorkout = () => {
-    return props.edit ? editWorkout() : createWorkout()
-  }
+    return props.edit ? editWorkout() : createWorkout();
+  };
+
+  const handleCancel = () => {
+    return props.edit ? props.cancelEdit() : props.cancelCreate();
+  };
 
   const editWorkout = () => {
     Axios.put(`/api/workouts/${props.workout.id}`, state)
-    .then((result) => {
-      props.cancelEdit();
-      props.getWorkout();
-      
-    })
-    .catch((e) => console.log(e))
-  }
-  
+      .then((result) => {
+        props.cancelEdit();
+        props.getWorkout();
+      })
+      .catch((e) => console.log(e));
+  };
+
   const createWorkout = () => {
     Axios.post(`/api/workouts`, state)
-    .then((result) => {
-      props.cancelCreate();
-      props.getWorkout();
-    })
-    .catch((e) => console.log(e))
-  }
+      .then((result) => {
+        props.cancelCreate();
+        props.getWorkout();
+      })
+      .catch((e) => console.log(e));
+  };
 
+  const deleteWorkout = () => {
+    console.log("delete button clicked!!!!");
+  };
 
   return (
     <>
@@ -128,6 +130,8 @@ export default function WorkoutForm(props) {
           >
             Save
           </Button>
+
+          {props.edit ? <DeleteIcon onClick={deleteWorkout}/> : null}
         </Box>
       </Card>
     </>
