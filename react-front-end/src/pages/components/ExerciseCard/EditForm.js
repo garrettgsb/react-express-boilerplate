@@ -210,7 +210,7 @@ export default function ExerciseCard(props) {
             aria-label="show more"
           >
             {props.edit ? (
-              <Tooltip title="Cancel" arrow>
+              <Tooltip title="Cancel" arrow placement="right">
                 <CloseRoundedIcon />
               </Tooltip>
             ) : (
@@ -223,15 +223,13 @@ export default function ExerciseCard(props) {
       {/* Expandable section containing image, instructions and notes */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Box display="flex">
-          {props.image ? (
+          {props.image && (
             <CardMedia
               component="img"
               sx={{ width: "40%", height: "auto" }}
               image={props.image}
               alt="exercise"
             />
-          ) : (
-            "image form here"
           )}
           <Box
             display="flex"

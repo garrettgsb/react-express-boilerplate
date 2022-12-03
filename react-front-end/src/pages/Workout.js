@@ -33,13 +33,8 @@ export default function Workout(props) {
       });
   }, []);
 
-  // State and handler for toggling editing "mode"
+  // State for toggling Create new exercise form
   const [adding, setAdding] = useState(false);
-
-  // Function to save changes and return to viewing "mode"
-  const saveEdits = () => {
-    // Send request and then
-  };
 
   return (
     <>
