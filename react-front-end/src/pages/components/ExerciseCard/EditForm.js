@@ -77,7 +77,7 @@ export default function ExerciseCard(props) {
   const [notes, setNotes] = useState(props.notes || "");
 
   // State for deletion confirmation dialog
-  const [dialogOpen, setDialogOpen] = useState(true);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const resetAllErrors = () => {
     setNameError(false);
@@ -154,7 +154,6 @@ export default function ExerciseCard(props) {
 
   return (
     <>
-      <Confirmation />
       <Card>
         {/* Main content: exercise name, attributes and expand button */}
         <CardContent
@@ -322,10 +321,19 @@ export default function ExerciseCard(props) {
                   aria-label="delete"
                   size="large"
                   color="error"
-                  onClick={deleteExercise}
+                  // onClick={deleteExercise}
+                  onClick={() => setConfirmOpen(true)}
                 >
                   <DeleteIcon />
                 </IconButton>
+                {confirmOpen && (
+                  <Confirmation
+                    confirmOpen={confirmOpen}
+                    setConfirmOpen={setConfirmOpen}
+                    confirmDelete={deleteExercise}
+                    resource={"exercise"}
+                  />
+                )}
               </CardActions>
             </Box>
           </Box>

@@ -41,17 +41,17 @@ export default function WorkoutForm(props) {
     return setState({ ...state, description: event.target.value });
   };
 
-  //Handle Save workout 
+  //Handle Save workout
   const saveWorkout = () => {
     return props.edit ? editWorkout() : createWorkout();
   };
 
-  //Handle cancel 
+  //Handle cancel
   const handleCancel = () => {
     return props.edit ? props.cancelEdit() : props.cancelCreate();
   };
 
-  //Send a request to put workout 
+  //Send a request to put workout
   const editWorkout = () => {
     Axios.put(`/api/workouts/${props.workout.id}`, state)
       .then((result) => {
@@ -71,14 +71,14 @@ export default function WorkoutForm(props) {
       .catch((e) => console.log(e));
   };
 
-  //Send a request to delete workout 
+  //Send a request to delete workout
   const handleDelete = () => {
     Axios.delete(`/api/workouts/${props.workout.id}`)
-    .then((result) => {
-      props.cancelEdit();
-      props.getWorkout();
-    })
-    .catch((e) => console.log(e));
+      .then((result) => {
+        props.cancelEdit();
+        props.getWorkout();
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -144,8 +144,21 @@ export default function WorkoutForm(props) {
             Save
           </Button>
 
-          {props.edit ? <DeleteIcon onClick={() => {setConfirmOpen(true)}}/> : null}
-          {confirmOpen ? <Confirmation confirmOpen={confirmOpen} setConfirmOpen={setConfirmOpen} confirmDelete={handleDelete}/> : null}
+          {props.edit ? (
+            <DeleteIcon
+              onClick={() => {
+                setConfirmOpen(true);
+              }}
+            />
+          ) : null}
+          {confirmOpen ? (
+            <Confirmation
+              confirmOpen={confirmOpen}
+              setConfirmOpen={setConfirmOpen}
+              confirmDelete={handleDelete}
+              resource={"workout"}
+            />
+          ) : null}
         </Box>
       </Card>
     </>
