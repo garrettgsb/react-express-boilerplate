@@ -35,7 +35,7 @@ export default function Program() {
   };
 
   const programId = params.id;
-  
+
   useEffect(() => {
     getProgram();
     getWorkout();
@@ -61,21 +61,6 @@ export default function Program() {
       .catch((e) => {
         console.log(e);
       });
-<<<<<<< HEAD
-  }, [programId]);
-
-  const saveProgram = () => {
-    const indexOfProgram = programs.findIndex((item) => {
-      return item.id === program.id;
-    });
-
-    const ProgramsDefaultCopy = [...programs];
-    ProgramsDefaultCopy[indexOfProgram] = program;
-
-    setPrograms(ProgramsDefaultCopy);
-    setEditMode(false);
-=======
->>>>>>> master
   };
 
   const confirmDeleteProgram = () => {
@@ -88,11 +73,10 @@ export default function Program() {
       .catch((e) => console.log(e));
   };
 
-<<<<<<< HEAD
-  const handleEditMode = () => {
-    setEditMode(false);
-  };
-=======
+  // const handleEditMode = () => {
+  //   setEditMode(false);
+  // };
+
   const handleProgramEditMode = () => {
     setProgramEditMode(false);
   };
@@ -103,8 +87,7 @@ export default function Program() {
 
   const cancelWorkoutCreateMode = () => {
     setWorkoutCreateMode(false);
-  }
->>>>>>> master
+  };
 
   return (
     <>
@@ -143,17 +126,23 @@ export default function Program() {
             setConfirmOpen={setConfirmOpen}
             confirmDelete={confirmDeleteProgram}
           />
-        ) : (
-          null
-        )}
+        ) : null}
 
         {/* Array of Workout Cards - to be made into separate component */}
         {workout.map((item) => {
-          return workout ? <WorkoutCard key={item.id} workout={item} getWorkout={getWorkout}/> : null;
+          return workout ? (
+            <WorkoutCard key={item.id} workout={item} getWorkout={getWorkout} />
+          ) : null;
         })}
 
         {workoutCreateMode ? (
-          <WorkoutForm create={workoutCreateMode} cancelCreate={cancelWorkoutCreateMode} key={'create'} programId={programId} getWorkout={getWorkout} />
+          <WorkoutForm
+            create={workoutCreateMode}
+            cancelCreate={cancelWorkoutCreateMode}
+            key={"create"}
+            programId={programId}
+            getWorkout={getWorkout}
+          />
         ) : (
           <Fab
             color="primary"
