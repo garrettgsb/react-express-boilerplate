@@ -9,7 +9,7 @@ import CheckIcon from '@mui/icons-material/Check';
 
 export const Calendar = () => {
   const [value, setValue] = useState(new Date());
-  const [workOutDays, setWorkOutDays] = useState([]);
+  const [workOutDays, setWorkOutDays] = useState([1,2,3]);
 
 
   return (
@@ -25,7 +25,6 @@ export const Calendar = () => {
           const isSelected =
             !DayComponentProps.outsideCurrentMonth &&
             workOutDays.indexOf(day.getDate()) >= 0;
-
           return (
             <Badge
               key={day.toString()}
