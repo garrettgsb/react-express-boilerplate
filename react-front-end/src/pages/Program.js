@@ -1,39 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
-import WorkoutCard from "./components/WorkoutCard";
-import { Button } from "@mui/material";
+import WorkoutCard from "./components/WorkoutCard/WorkoutCard";
+import { Button, Fab } from "@mui/material";
 import ProgramCard from "./components/ProgramCard/ProgramCard";
 import { usePrograms } from "../App";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Confirm from "./components/ProgramCard/Confirm";
+import AddIcon from "@mui/icons-material/Add";
+import Confirmation from "./components/Confirmation";
+import WorkoutForm from "./components/WorkoutCard/WorkoutForm";
 
 export default function Program() {
   const { getAndSetPrograms } = usePrograms();
   const params = useParams();
   const navigate = useNavigate();
 
-  const [programs, setPrograms] = useState([]);
+  // const [programs, setPrograms] = useState([]);
   const [program, setProgram] = useState({});
   const [workout, setWorkout] = useState([]);
 
-  const [editMode, setEditMode] = useState(false);
+  const [programEditMode, setProgramEditMode] = useState(false);
+  const [workoutCreateMode, setWorkoutCreateMode] = useState(false);
   const [deleteProgram, setDeleteProgram] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleConfirmOpen = () => {
     setConfirmOpen(true);
   };
 
   const handleDelete = () => {
     setDeleteProgram(true);
-    handleClickOpen();
+    handleConfirmOpen();
   };
 
   const programId = params.id;
-
+  
   useEffect(() => {
+    getProgram();
+    getWorkout();
+  }, [programId]);
+
+  const getProgram = () => {
     axios
       .get(`/api/programs/${programId}`)
       .then((result) => {
@@ -42,7 +50,9 @@ export default function Program() {
       .catch((e) => {
         console.log(e);
       });
+  };
 
+  const getWorkout = () => {
     axios
       .get(`/api/workouts/programs/${programId}`)
       .then((result) => {
@@ -51,6 +61,7 @@ export default function Program() {
       .catch((e) => {
         console.log(e);
       });
+<<<<<<< HEAD
   }, [programId]);
 
   const saveProgram = () => {
@@ -63,6 +74,8 @@ export default function Program() {
 
     setPrograms(ProgramsDefaultCopy);
     setEditMode(false);
+=======
+>>>>>>> master
   };
 
   const confirmDeleteProgram = () => {
@@ -75,9 +88,23 @@ export default function Program() {
       .catch((e) => console.log(e));
   };
 
+<<<<<<< HEAD
   const handleEditMode = () => {
     setEditMode(false);
   };
+=======
+  const handleProgramEditMode = () => {
+    setProgramEditMode(false);
+  };
+
+  const handleWorkoutEditMode = () => {
+    setWorkoutCreateMode(true);
+  };
+
+  const cancelWorkoutCreateMode = () => {
+    setWorkoutCreateMode(false);
+  }
+>>>>>>> master
 
   return (
     <>
@@ -91,12 +118,13 @@ export default function Program() {
           <ProgramCard
             program={program}
             setProgram={setProgram}
-            edit={editMode}
-            handleEditMode={handleEditMode}
+            edit={programEditMode}
+            handleEditMode={handleProgramEditMode}
+            getProgram={getProgram}
           />
         ) : null}
 
-        {editMode ? (
+        {programEditMode ? (
           <>
             {/* <Button variant="contained" onClick={saveProgram}>
               Save
@@ -104,25 +132,38 @@ export default function Program() {
             <DeleteIcon onClick={handleDelete} />
           </>
         ) : (
-          <Button variant="contained" onClick={() => setEditMode(true)}>
+          <Button variant="contained" onClick={() => setProgramEditMode(true)}>
             Edit
           </Button>
         )}
 
         {deleteProgram ? (
-          <Confirm
+          <Confirmation
             confirmOpen={confirmOpen}
             setConfirmOpen={setConfirmOpen}
-            confirmDeleteProgram={confirmDeleteProgram}
+            confirmDelete={confirmDeleteProgram}
           />
         ) : (
-          ""
+          null
         )}
 
         {/* Array of Workout Cards - to be made into separate component */}
         {workout.map((item) => {
-          return workout ? <WorkoutCard key={item.id} workout={item} /> : null;
+          return workout ? <WorkoutCard key={item.id} workout={item} getWorkout={getWorkout}/> : null;
         })}
+
+        {workoutCreateMode ? (
+          <WorkoutForm create={workoutCreateMode} cancelCreate={cancelWorkoutCreateMode} key={'create'} programId={programId} getWorkout={getWorkout} />
+        ) : (
+          <Fab
+            color="primary"
+            aria-label="add"
+            sx={{ alignSelf: "center" }}
+            size="medium"
+          >
+            <AddIcon onClick={handleWorkoutEditMode} />
+          </Fab>
+        )}
       </Stack>
     </>
   );

@@ -9,7 +9,6 @@ import CreateForm from "./components/ExerciseCard/CreateForm";
 export default function Workout(props) {
   const [exercises, setExercises] = useState([]);
   const [workoutData, setWorkoutData] = useState([]);
-
   // Capture current workout id
   const workoutId = useParams().id;
   useEffect(() => {
