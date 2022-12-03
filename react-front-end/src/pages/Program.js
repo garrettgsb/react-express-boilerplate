@@ -12,12 +12,12 @@ import Confirm from "./components/ProgramCard/Confirm";
 import WorkoutForm from "./components/WorkoutCard/WorkoutForm";
 
 export default function Program() {
-  console.log("rendered!!!")
+  console.log("rendered!!!");
   const { getAndSetPrograms } = usePrograms();
   const params = useParams();
   const navigate = useNavigate();
 
-  const [programs, setPrograms] = useState([]);
+  // const [programs, setPrograms] = useState([]);
   const [program, setProgram] = useState({});
   const [workout, setWorkout] = useState([]);
 
@@ -38,26 +38,31 @@ export default function Program() {
   const programId = params.id;
 
   useEffect(() => {
+    getProgram();
+    getWorkout();
+  }, [programId]);
 
+  const getProgram = () => {
     axios
-    .get(`/api/programs/${programId}`)
-    .then((result) => {
-      setProgram(result.data.program || {});
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+      .get(`/api/programs/${programId}`)
+      .then((result) => {
+        setProgram(result.data.program || {});
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
+  const getWorkout = () => {
     axios
-    .get(`/api/workouts/programs/${programId}`)
-    .then((result) => {
-      setWorkout(result.data);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-  }, [programId])
-
+      .get(`/api/workouts/programs/${programId}`)
+      .then((result) => {
+        setWorkout(result.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   const confirmDeleteProgram = () => {
     axios
@@ -91,6 +96,7 @@ export default function Program() {
             setProgram={setProgram}
             edit={programEditMode}
             handleEditMode={handleProgramEditMode}
+            getProgram={getProgram}
           />
         ) : null}
 
@@ -122,9 +128,8 @@ export default function Program() {
           return workout ? <WorkoutCard key={item.id} workout={item} /> : null;
         })}
 
-
         {workoutCreateMode ? (
-          <WorkoutForm />
+          <WorkoutForm create={workoutCreateMode} />
         ) : (
           <Fab
             color="primary"

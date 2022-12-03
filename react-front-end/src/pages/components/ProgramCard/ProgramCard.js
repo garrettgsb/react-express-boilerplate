@@ -59,6 +59,7 @@ export default function ProgramCard(props) {
       })
 
       props.handleEditMode();
+      props.getProgram();
   };
 
   const handleCancel = () => {

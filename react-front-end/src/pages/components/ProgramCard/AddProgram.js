@@ -10,7 +10,7 @@ export default function AddProgram() {
     description: "",
   });
 
-  const { programs, setPrograms } = usePrograms();
+  const { programs, setPrograms, getAndSetPrograms } = usePrograms();
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -27,8 +27,7 @@ export default function AddProgram() {
     axios
       .post("/api/programs", newProgramFormData)
       .then((result) => {
-        setPrograms([...programs, result.data[0]]);
-
+        getAndSetPrograms();
         navigate(`/program/${result.data[0].id}`);
       })
       .catch((e) => {
