@@ -28,7 +28,7 @@ export default function WorkoutCard(props) {
   return (
     <>
       {editWorkoutMode ? (
-        <WorkoutForm edit={editWorkoutMode} cancelEdit={cancelEdit}/>
+        <WorkoutForm edit={editWorkoutMode} cancelEdit={cancelEdit} workout={props.workout} getWorkout={props.getWorkout}/>
       ) : (
         <>
           <div className="workoutListItem" onClick={handleNavigate}>

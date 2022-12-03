@@ -12,6 +12,7 @@ router.post("/", (req, res) => {
   workoutQueries
     .addWorkouts(req.body)
     .then((result) => {
+      console.log("workout routes:", result)
       res.json(result);
     })
     .catch((err) => {
@@ -61,7 +62,7 @@ router.get("/programs/:id", (req, res) => {
 //UPDATE - put
 router.put("/:id", (req, res) => {
   workoutQueries
-    .updateWorkOuts(req.body)
+    .updateWorkOuts(req.params.id, req.body)
     .then((result) => {
       res.json(result);
     })

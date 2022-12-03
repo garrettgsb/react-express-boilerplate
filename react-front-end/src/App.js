@@ -29,6 +29,7 @@ export default function App() {
         console.log(e);
       });
   };
+  
   // const [exerciseSelections, setExerciseSelections] = useState([]);
   // const [exercises, setExercises] = useState([]);
 
@@ -63,6 +64,8 @@ export default function App() {
             programs,
             setPrograms,
             getAndSetPrograms,
+            workouts,
+            setWorkouts,
             getAndSetWorkouts,
           }}
         />

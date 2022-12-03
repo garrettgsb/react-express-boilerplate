@@ -12,7 +12,6 @@ import Confirm from "./components/ProgramCard/Confirm";
 import WorkoutForm from "./components/WorkoutCard/WorkoutForm";
 
 export default function Program() {
-  console.log("rendered!!!");
   const { getAndSetPrograms } = usePrograms();
   const params = useParams();
   const navigate = useNavigate();
@@ -36,7 +35,7 @@ export default function Program() {
   };
 
   const programId = params.id;
-
+  
   useEffect(() => {
     getProgram();
     getWorkout();
@@ -129,11 +128,11 @@ export default function Program() {
 
         {/* Array of Workout Cards - to be made into separate component */}
         {workout.map((item) => {
-          return workout ? <WorkoutCard key={item.id} workout={item} /> : null;
+          return workout ? <WorkoutCard key={item.id} workout={item} getWorkout={getWorkout}/> : null;
         })}
 
         {workoutCreateMode ? (
-          <WorkoutForm create={workoutCreateMode} cancelCreate={cancelWorkoutCreateMode}/>
+          <WorkoutForm create={workoutCreateMode} cancelCreate={cancelWorkoutCreateMode} key={'create'} programId={programId} getWorkout={getWorkout} />
         ) : (
           <Fab
             color="primary"
