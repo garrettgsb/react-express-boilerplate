@@ -72,7 +72,6 @@ export default function ExerciseCard(props) {
   const submitForm = () => {
     // Assemble exercise data object
     const exerciseData = {
-      id: exerciseId,
       workout_id: workoutId,
       name,
       sets,
@@ -83,14 +82,17 @@ export default function ExerciseCard(props) {
       instructions,
     };
 
-    // Send request to create ---------------------------------------------
-    Axios.put(`/api/exercises/${exerciseId}`, exerciseData)
+    // Send request to create
+    Axios.post(`/api/exercises`, exerciseData)
       .then((response) => {
-        // Refresh current page
-        navigate(0);
+        // Build new exercises state with newest at the end
+        let newState = [...props.exercises, exerciseData];
+        props.setAdding(false);
+        // Set new Workout page state to trigger re-render
+        props.setExercises(newState);
       })
       .catch((e) => {
-        console.log(e);
+        console.log("Error: ", e);
       });
   };
 
