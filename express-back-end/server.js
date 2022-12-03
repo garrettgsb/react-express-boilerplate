@@ -34,6 +34,15 @@ App.post('/api/drawing', (req, res) => {
   dbQueries.saveDrawing(1, drawingURL)
 })
 
+App.post('/api/user', (req, res) => {
+  const userID = req.body.user_id;
+  dbQueries.getDrawingsByUserId(userID)
+  .then((drawings) => {
+    console.log(drawings)
+    res.send(drawings);
+  })
+})
+
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express listening on port ${PORT}...`);

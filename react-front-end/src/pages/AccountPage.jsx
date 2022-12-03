@@ -1,6 +1,8 @@
 import { AuthContext } from '../App'
 import React from "react";
 import './styles/account.css'
+import Axios from 'axios';
+import UserImgs from '../components/userimgs';
 
 export default function AccountPage(props) {
 
@@ -21,14 +23,9 @@ export default function AccountPage(props) {
             <label className="total_projects">Total Projects: 0</label>
           </div>
         </section>
-        <section className="user_images">
-          <div className="img1"></div>
-          <div className="img2"></div>
-          <div className="img3"></div>
-          <div className="img4"></div>
-          <div className="img5"></div>
-          <div className="img6"></div>
-        </section>
+        <UserImgs
+          user={user}
+        />
       </section>}
     </main>
   )

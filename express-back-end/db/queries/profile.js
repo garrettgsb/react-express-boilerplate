@@ -29,11 +29,12 @@ const getUserByLogin = (argName, argPassword) => {
 };
 
 const getDrawingsByUserId = (userId) => {
-  return db.query(`SELECT drawings.*
+  console.log(userId)
+  return db.query(`
+  SELECT drawings.*
   FROM drawings
   JOIN users on user_id = users.id
-  WHERE user_id = ${userId}
-  RETURNING *`)
+  WHERE user_id = $1;`, [userId])
     .then(data => {
       console.log("Drawings by User ID DB Query Completed: ", data.rows);
       return data.rows;
