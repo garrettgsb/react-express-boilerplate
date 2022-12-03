@@ -34,6 +34,7 @@ const getProgramWithUserId = (userId) => {
       err.message;
     });
 };
+
 // (user_id, name, description, start_date, end_date, public, author)
 const addPrograms = (program) => {
   return db

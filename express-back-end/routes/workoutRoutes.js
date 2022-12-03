@@ -61,7 +61,7 @@ router.get("/programs/:id", (req, res) => {
 //UPDATE - put
 router.put("/:id", (req, res) => {
   workoutQueries
-    .updateWorkOuts(req.body)
+    .updateWorkOuts(req.params.id, req.body)
     .then((result) => {
       res.json(result);
     })
@@ -71,7 +71,7 @@ router.put("/:id", (req, res) => {
 });
 
 //DELETE - delete
-router.get("/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   workoutQueries
     .deleteWorkout(req.params.id)
     .then((result) => {
