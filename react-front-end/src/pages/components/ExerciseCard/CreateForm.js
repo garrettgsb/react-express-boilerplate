@@ -84,7 +84,7 @@ export default function ExerciseCard(props) {
     setRestError(false);
   };
 
-  const submitForm = () => {
+  const submitCreateForm = () => {
     resetAllErrors();
     if (!name) {
       setNameError("Name - required");
@@ -310,7 +310,7 @@ export default function ExerciseCard(props) {
                 variant="contained"
                 size="small"
                 startIcon={<SaveSharpIcon />}
-                onClick={submitForm}
+                onClick={submitCreateForm}
                 sx={{ ml: "auto" }}
               >
                 SAVE
