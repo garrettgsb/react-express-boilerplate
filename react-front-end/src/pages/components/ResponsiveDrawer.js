@@ -159,7 +159,7 @@ export default function ResponsiveDrawer(props) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: 2,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           overflow: "auto",
           flex: 1,

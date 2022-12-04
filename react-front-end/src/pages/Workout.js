@@ -47,7 +47,7 @@ export default function Workout(props) {
         alignItems="stretch"
         spacing={6}
         maxWidth={1200}
-        minWidth={500}
+        minWidth={380}
       >
         {/* Array of Exercise Cards */}
         {exercises.map((exercise) => (
