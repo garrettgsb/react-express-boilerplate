@@ -25,7 +25,7 @@ export default function Workout(props) {
     Axios.get(`/api/workouts/${workoutId}`)
       .then((result) => {
         // Store in state
-        setWorkoutData(result.data[0]);
+        setWorkoutData(result.data);
       })
       .catch((e) => {
         console.log(e);

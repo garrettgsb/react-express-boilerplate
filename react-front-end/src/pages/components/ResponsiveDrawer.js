@@ -35,11 +35,11 @@ export default function ResponsiveDrawer(props) {
     setOpen(!open);
   };
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // Main logo click handler
-  // const onClickEvent = () => {
-  //   navigate("/dashboard");
-  // };
+  const onClickEvent = () => {
+    navigate("/dashboard");
+  };
 
   const handleEvent = (event) => {
     event.stopPropagation();
@@ -82,7 +82,7 @@ export default function ResponsiveDrawer(props) {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {/* ARRAY OF PROGRAMS */}
-            {/* {props.programs.map((program) => (
+            {props.programs.map((program) => (
               <Link
                 to={`/program/${program.id}`}
                 className={"programListItem"}
@@ -95,7 +95,7 @@ export default function ResponsiveDrawer(props) {
                   <ListItemText primary={program.name} />
                 </ListItemButton>
               </Link>
-            ))} */}
+            ))}
           </List>
         </Collapse>
       </List>
