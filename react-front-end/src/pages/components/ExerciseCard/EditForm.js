@@ -238,11 +238,11 @@ export default function ExerciseCard(props) {
               onChange={(e) => setRest(e.target.value)}
               value={rest}
               sx={{ maxWidth: "50%" }}
-              inputProps={{ min: 0 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">min</InputAdornment>
                 ),
+                inputProps: { min: 0 },
               }}
               error={restError}
             />
