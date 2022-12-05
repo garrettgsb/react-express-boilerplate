@@ -26,7 +26,7 @@ const getWorkoutById = (id) => {
   return db
     .query(`SELECT * FROM workouts WHERE id=$1;`, [id])
     .then((result) => {
-      return result.rows;
+      return result.rows[0];
     })
     .catch((err) => {
       err.message;
