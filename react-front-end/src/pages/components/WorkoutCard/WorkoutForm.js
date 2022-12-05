@@ -4,6 +4,8 @@ import { Button, Box, TextField } from "@mui/material";
 import Axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Confirmation from "../Confirmation";
+import SaveSharpIcon from "@mui/icons-material/SaveSharp";
+import CloseIcon from "@mui/icons-material/Close";
 
 //A form for creating, editing workout
 export default function WorkoutForm(props) {
@@ -131,14 +133,21 @@ export default function WorkoutForm(props) {
         />
 
         <Box sx={{ "& button": { m: 1 } }}>
-          <Button color="secondary" size="small" onClick={handleCancel}>
+          <Button
+            color="secondary"
+            size="small"
+            sx={{ ml: "auto" }}
+            // startIcon={<CloseIcon />}
+            onClick={handleCancel}
+          >
             Cancel
           </Button>
 
           <Button
             variant="contained"
-            color="success"
             size="small"
+            startIcon={<SaveSharpIcon />}
+            sx={{ ml: "auto" }}
             onClick={saveWorkout}
           >
             Save
@@ -146,6 +155,8 @@ export default function WorkoutForm(props) {
 
           {props.edit ? (
             <DeleteIcon
+              size="large"
+              color="error"
               onClick={() => {
                 setConfirmOpen(true);
               }}

@@ -6,6 +6,7 @@ import {
   Typography,
   CardContent,
   CardActionArea,
+  CardActions,
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -19,20 +20,25 @@ export default function WorkoutCard(props) {
 
   //Set editWorkoutMode to false
   const cancelEdit = () => {
-    setEditWorkoutMode(false)
-  }
+    setEditWorkoutMode(false);
+  };
 
   const navigate = useNavigate();
 
   //Redirect to workout pages
   const handleNavigate = () => {
     navigate(`/workout/${props.workout.id}`);
-  }
+  };
 
   return (
     <>
       {editWorkoutMode ? (
-        <WorkoutForm edit={editWorkoutMode} cancelEdit={cancelEdit} workout={props.workout} getWorkout={props.getWorkout}/>
+        <WorkoutForm
+          edit={editWorkoutMode}
+          cancelEdit={cancelEdit}
+          workout={props.workout}
+          getWorkout={props.getWorkout}
+        />
       ) : (
         <>
           <div className="workoutListItem" onClick={handleNavigate}>
@@ -55,16 +61,20 @@ export default function WorkoutCard(props) {
                     {props.workout.description}
                   </Typography>
                 </CardContent>
-                <Button
-                  variant="outlined"
-                  startIcon={<EditIcon />}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    setEditWorkoutMode(true);
-                  }}
-                >
-                  Edit
-                </Button>
+                <CardActions disableSpacing>
+                  <Button
+                    variant="outlined"
+                    startIcon={<EditIcon />}
+                    size="small"
+                    sx={{ ml: "auto" }}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setEditWorkoutMode(true);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                </CardActions>
               </CardActionArea>
             </Card>
           </div>

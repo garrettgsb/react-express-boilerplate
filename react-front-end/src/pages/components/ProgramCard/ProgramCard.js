@@ -2,6 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { usePrograms } from "../../../App";
 import ProgramForm from "./ProgramForm";
+import {
+  Box,
+  Button,
+  Card,
+  CardMedia,
+  Collapse,
+  Divider,
+  IconButton,
+  CardActions,
+  CardContent,
+  Typography,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 export default function ProgramCard(props) {
   //Get a useOutletContext from App.js
@@ -15,7 +29,7 @@ export default function ProgramCard(props) {
   //State for enddate
   const [endDate, setEndDate] = useState("");
 
-  //If it has a value && one of the dependency is changed, it sets data. 
+  //If it has a value && one of the dependency is changed, it sets data.
   useEffect(() => {
     if (props.program.name) {
       setName(props.program.name);
@@ -39,7 +53,6 @@ export default function ProgramCard(props) {
     props.program.end_date,
   ]);
 
-  
   const editProgram = () => {
     //Assemble program data object
     const requestData = {
@@ -49,19 +62,20 @@ export default function ProgramCard(props) {
       end_date: endDate,
       user_id: 1,
     };
-      //Send a request to put
-      axios.put(`/api/programs/${props.program.id}`, requestData)
+    //Send a request to put
+    axios
+      .put(`/api/programs/${props.program.id}`, requestData)
       .then(() => {
         getAndSetPrograms();
       })
       .catch((e) => {
-        console.log(e)
-      })
+        console.log(e);
+      });
 
-      //Set the editMode to false
-      props.handleEditMode();
-      //Get the lastest updated program list 
-      props.getProgram();
+    //Set the editMode to false
+    props.handleEditMode();
+    //Get the lastest updated program list
+    props.getProgram();
   };
 
   //Set the editmode to false
@@ -106,20 +120,57 @@ export default function ProgramCard(props) {
         />
       ) : (
         <>
-          <p>Program name : {props.program.name}</p>
-          <p>Note : {props.program.description}</p>
-          <p>
-            Start date :{" "}
-            {props.program.start_date
-              ? props.program.start_date.substring(0, 10)
-              : ""}
-          </p>
-          <p>
-            End date :{" "}
-            {props.program.end_date
-              ? props.program.end_date.substring(0, 10)
-              : ""}
-          </p>
+          <Card>
+            <Box
+              display="flex"
+              flexDirection="row"
+              justifyContent="space-between"
+              width="100%"
+            >
+              <CardContent>
+                <Typography variant="h5">{props.program.name}</Typography>
+                <Typography variant="p">
+                  Start date :{" "}
+                  {props.program.start_date
+                    ? props.program.start_date.substring(0, 10)
+                    : ""}
+                </Typography>
+                <Divider orientation="vertical" variant="middle" flexItem />
+                <Typography variant="p">
+                  End date :{" "}
+                  {props.program.end_date
+                    ? props.program.end_date.substring(0, 10)
+                    : ""}
+                </Typography>
+                <Divider orientation="vertical" variant="middle" flexItem />
+                <Typography variant="p">
+                  Note : {props.program.description}
+                </Typography>
+                <Divider orientation="vertical" variant="middle" flexItem />
+              </CardContent>
+            </Box>
+            {props.edit ? (
+              <>
+                <DeleteIcon
+                  size="large"
+                  color="error"
+                  onClick={props.handleDelete}
+                />
+              </>
+            ) : (
+              <CardActions disableSpacing>
+                <Button
+                  variant="outlined"
+                  startIcon={<EditIcon />}
+                  size="small"
+                  sx={{ ml: "auto" }}
+                  onClick={() => props.setEditMode(true)}
+                >
+                  Edit
+                </Button>
+              </CardActions>
+            )}
+          </Card>
         </>
       )}
     </>

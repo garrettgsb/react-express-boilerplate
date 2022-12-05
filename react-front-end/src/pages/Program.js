@@ -6,7 +6,6 @@ import { Button, Fab } from "@mui/material";
 import ProgramCard from "./components/ProgramCard/ProgramCard";
 import { usePrograms } from "../App";
 import axios from "axios";
-import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Confirmation from "./components/Confirmation";
 import WorkoutForm from "./components/WorkoutCard/WorkoutForm";
@@ -101,23 +100,12 @@ export default function Program() {
             program={program}
             setProgram={setProgram}
             edit={programEditMode}
+            setEditMode={setProgramEditMode}
             handleEditMode={handleProgramEditMode}
             getProgram={getProgram}
+            handleDelete={handleDelete}
           />
         ) : null}
-
-        {programEditMode ? (
-          <>
-            {/* <Button variant="contained" onClick={saveProgram}>
-              Save
-            </Button> */}
-            <DeleteIcon onClick={handleDelete} />
-          </>
-        ) : (
-          <Button variant="contained" onClick={() => setProgramEditMode(true)}>
-            Edit
-          </Button>
-        )}
 
         {deleteProgram ? (
           <Confirmation
