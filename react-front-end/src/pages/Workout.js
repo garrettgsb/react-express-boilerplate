@@ -9,23 +9,20 @@ import CreateForm from "./components/ExerciseCard/CreateForm";
 export default function Workout(props) {
   const [exercises, setExercises] = useState([]);
   const [workoutData, setWorkoutData] = useState([]);
+
   // Capture current workout id
   const workoutId = useParams().id;
   useEffect(() => {
-    // Fetch exercises that belong to current workout
-    Axios.get(`/api/exercises?workoutId=${workoutId}`)
-      .then((result) => {
+    Promise.all([
+      // Fetch exercises that belong to current workout
+      Axios.get(`/api/exercises?workoutId=${workoutId}`),
+      // Fetch current workout info
+      Axios.get(`/api/workouts/${workoutId}`),
+    ])
+      .then((all) => {
         // Store in state
-        setExercises(result.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    // Fetch current workout info
-    Axios.get(`/api/workouts/${workoutId}`)
-      .then((result) => {
-        // Store in state
-        setWorkoutData(result.data[0]);
+        setExercises(all[0].data);
+        setWorkoutData(all[1].data);
       })
       .catch((e) => {
         console.log(e);
@@ -40,7 +37,6 @@ export default function Workout(props) {
       <Typography variant="h4" gutterBottom>
         {workoutData.name}
       </Typography>
-
       <Stack
         direction="column"
         justifyContent="flex-start"
