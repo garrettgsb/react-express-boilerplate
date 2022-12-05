@@ -47,38 +47,52 @@ export default function ExerciseCard(props) {
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
+          pl: 1,
+          pr: 1,
+          fontSize: { xs: "1rem", sm: "1.5rem" },
         }}
       >
         <ExerciseAttribute sx={{ width: "15%" }}>
-          <Typography variant="h5">{props.name}</Typography>
+          <Typography variant="h5" fontSize={{ xs: "1rem", sm: "1.5rem" }}>
+            {props.name}
+          </Typography>
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">{props.sets}</Typography>
+          <Typography variant="h5" fontSize={{ xs: "1rem", sm: "1.5rem" }}>
+            {props.sets}
+          </Typography>
           <Typography variant="p">SETS</Typography>
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">{props.reps}</Typography>
+          <Typography variant="h5" fontSize={{ xs: "1rem", sm: "1.5rem" }}>
+            {props.reps}
+          </Typography>
           <Typography variant="p">REPS</Typography>
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">{props.load}</Typography>
+          <Typography variant="h5" fontSize={{ xs: "1rem", sm: "1.5rem" }}>
+            {props.load}
+          </Typography>
           <Typography variant="p">lbs</Typography>
         </ExerciseAttribute>
         <Divider orientation="vertical" variant="middle" flexItem />
         <ExerciseAttribute>
-          <Typography variant="h5">{props.rest_period} min</Typography>
+          <Typography variant="h5" fontSize={{ xs: "1rem", sm: "1.5rem" }}>
+            {props.rest_period} min
+          </Typography>
           <Typography variant="p">REST</Typography>
         </ExerciseAttribute>
         {/* Expand/collapse card chevron \/ */}
-        <CardActions>
+        <CardActions disableSpacing="true" sx={{ p: 0 }}>
           <ExpandMore
             expand={expanded}
             onClick={() => setExpanded(!expanded)}
             aria-expanded={expanded}
             aria-label="show more"
+            sx={{ p: 0 }}
           >
             <ExpandMoreIcon />
           </ExpandMore>
