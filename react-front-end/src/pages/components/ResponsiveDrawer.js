@@ -35,11 +35,11 @@ export default function ResponsiveDrawer(props) {
     setOpen(!open);
   };
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // Main logo click handler
-  // const onClickEvent = () => {
-  //   navigate("/dashboard");
-  // };
+  const onClickEvent = () => {
+    navigate("/dashboard");
+  };
 
   const handleEvent = (event) => {
     event.stopPropagation();

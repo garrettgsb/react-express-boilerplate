@@ -3,6 +3,8 @@ import { Button, Box, TextField } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import SaveSharpIcon from "@mui/icons-material/SaveSharp";
+
 
 //ProgramForm for creating and editing program
 export default function ProgramForm(props) {
@@ -65,8 +67,10 @@ export default function ProgramForm(props) {
 
         <Button
           variant="contained"
-          color="success"
+          // color="success"
           size="small"
+          sx={{ ml: "auto" }}
+          startIcon={<SaveSharpIcon />}
           onClick={props.save}
         >
           Save
@@ -75,3 +79,4 @@ export default function ProgramForm(props) {
     </>
   )
 }
+
