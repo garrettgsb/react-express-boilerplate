@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import Card from "@mui/material/Card";
-import { Button, Box, TextField } from "@mui/material";
+import {
+  Button,
+  Box,
+  TextField,
+  CardActions,
+  CardContent,
+  Typography,
+} from "@mui/material";
 import Axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Confirmation from "../Confirmation";
+import SaveSharpIcon from "@mui/icons-material/SaveSharp";
+import CloseIcon from "@mui/icons-material/Close";
 
 //A form for creating, editing workout
 export default function WorkoutForm(props) {
@@ -83,83 +92,103 @@ export default function WorkoutForm(props) {
 
   return (
     <>
-      <Card sx={{ maxWidth: 400 }}>
-        <TextField
-          id="standard-basic"
-          label="Workout Name"
-          variant="standard"
-          name="Workout name"
-          type="text"
-          placeholder={state.name}
-          multiline
-          value={state.name}
-          onChange={nameCallback}
-        />
+      <Card>
+        <CardContent
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
+        >
+          <CardContent>
+            <Typography variant="h5">Workout title</Typography>
 
-        <TextField
-          id="standard-basic"
-          label="Duration"
-          variant="standard"
-          name="Workout duration"
-          type="text"
-          placeholder={state.duration}
-          value={state.duration}
-          onChange={durationCallback}
-        />
-
-        <TextField
-          id="standard-basic"
-          label="URL"
-          variant="standard"
-          name="Workout URL"
-          type="text"
-          placeholder={state.image}
-          multiline
-          value={state.image}
-          onChange={imageCallback}
-        />
-        <TextField
-          id="standard-basic"
-          label="Description"
-          variant="standard"
-          name="Workout description"
-          type="text"
-          placeholder={state.description}
-          multiline
-          value={state.description}
-          onChange={descriptionCallback}
-        />
-
-        <Box sx={{ "& button": { m: 1 } }}>
-          <Button color="secondary" size="small" onClick={handleCancel}>
-            Cancel
-          </Button>
-
-          <Button
-            variant="contained"
-            color="success"
-            size="small"
-            onClick={saveWorkout}
-          >
-            Save
-          </Button>
-
-          {props.edit ? (
-            <DeleteIcon
-              onClick={() => {
-                setConfirmOpen(true);
-              }}
+            <TextField
+              id="standard-basic"
+              label="Workout Name"
+              variant="standard"
+              name="Workout name"
+              type="text"
+              placeholder={state.name}
+              multiline
+              value={state.name}
+              onChange={nameCallback}
             />
-          ) : null}
-          {confirmOpen ? (
-            <Confirmation
-              confirmOpen={confirmOpen}
-              setConfirmOpen={setConfirmOpen}
-              confirmDelete={handleDelete}
-              resource={"workout"}
+
+            <TextField
+              id="standard-basic"
+              label="Duration"
+              variant="standard"
+              name="Workout duration"
+              type="text"
+              placeholder={state.duration}
+              value={state.duration}
+              onChange={durationCallback}
             />
-          ) : null}
-        </Box>
+
+            <TextField
+              id="standard-basic"
+              label="URL"
+              variant="standard"
+              name="Workout URL"
+              type="text"
+              placeholder={state.image}
+              multiline
+              value={state.image}
+              onChange={imageCallback}
+            />
+            <TextField
+              id="standard-basic"
+              label="Description"
+              variant="standard"
+              name="Workout description"
+              type="text"
+              placeholder={state.description}
+              multiline
+              value={state.description}
+              onChange={descriptionCallback}
+            />
+            <CardActions disableSpacing>
+              <Button
+                color="secondary"
+                size="small"
+                sx={{ ml: "auto" }}
+                // startIcon={<CloseIcon />}
+                onClick={handleCancel}
+              >
+                Cancel
+              </Button>
+
+              <Button
+                variant="contained"
+                size="small"
+                startIcon={<SaveSharpIcon />}
+                sx={{ ml: "auto" }}
+                onClick={saveWorkout}
+              >
+                Save
+              </Button>
+
+              {props.edit ? (
+                <DeleteIcon
+                  size="large"
+                  color="error"
+                  onClick={() => {
+                    setConfirmOpen(true);
+                  }}
+                />
+              ) : null}
+              {confirmOpen ? (
+                <Confirmation
+                  confirmOpen={confirmOpen}
+                  setConfirmOpen={setConfirmOpen}
+                  confirmDelete={handleDelete}
+                  resource={"workout"}
+                />
+              ) : null}
+            </CardActions>
+          </CardContent>
+        </CardContent>
       </Card>
     </>
   );

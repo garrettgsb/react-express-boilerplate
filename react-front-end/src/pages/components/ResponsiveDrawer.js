@@ -35,11 +35,11 @@ export default function ResponsiveDrawer(props) {
     setOpen(!open);
   };
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // Main logo click handler
-  // const onClickEvent = () => {
-  //   navigate("/dashboard");
-  // };
+  const onClickEvent = () => {
+    navigate("/dashboard");
+  };
 
   const handleEvent = (event) => {
     event.stopPropagation();
@@ -119,7 +119,7 @@ export default function ResponsiveDrawer(props) {
 
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="workout app navigation"
       >
         <Drawer
@@ -131,7 +131,7 @@ export default function ResponsiveDrawer(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", sm: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -144,7 +144,7 @@ export default function ResponsiveDrawer(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", sm: "none", md: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -159,11 +159,11 @@ export default function ResponsiveDrawer(props) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: 2,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           overflow: "auto",
-          // flex: 1,
-          // maxheight: '100%'
+          flex: 1,
+          maxheight: "100%",
         }}
       >
         <Toolbar />

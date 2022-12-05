@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "nodemon": "^1.18.7",

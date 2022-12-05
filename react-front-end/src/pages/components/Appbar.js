@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   Avatar,
@@ -13,18 +13,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Appbar(props) {
   const navigate = useNavigate();
-  
-  const handleClick = () => {
-    navigate('/dashboard')
-  }
 
+  const handleClick = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <AppBar
       position="fixed"
       sx={{
-        width: { sm: `calc(100% - ${props.drawerWidth}px)` },
-        ml: { sm: `${props.drawerWidth}px` },
+        width: { md: `calc(100% - ${props.drawerWidth}px)` },
+        ml: { md: `${props.drawerWidth}px` },
       }}
     >
       <Toolbar>
@@ -33,18 +32,22 @@ export default function Appbar(props) {
           aria-label="open drawer"
           edge="start"
           onClick={props.handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: "none" } }}
+          sx={{ mr: 2, display: { md: "none" } }}
         >
           <MenuIcon />
         </IconButton>
 
-          <Typography variant="h6" component="div" sx={{ flexGrow: 100 }} onClick={handleClick}>
-            Workout Tracker
-          </Typography>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 100 }}
+          onClick={handleClick}
+        >
+          Workout Tracker
+        </Typography>
 
         <Avatar alt="Jason Ling" src="images/pikachu.png" />
         <Button color="inherit">Logout</Button>
-
       </Toolbar>
     </AppBar>
   );
