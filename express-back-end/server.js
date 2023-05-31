@@ -1,6 +1,7 @@
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
+const knex = require('./db/index.js');
 const PORT = 8080;
 
 // Express Configuration
@@ -9,6 +10,11 @@ App.use(BodyParser.json());
 App.use(Express.static('public'));
 
 // Sample GET route
+App.get('/', (req, res) => {
+  knex.raw("SELECT 1").then(() => {
+    console.log("PostgreSQL connected");
+  })
+});
 App.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
 }));

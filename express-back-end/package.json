@@ -6,11 +6,15 @@
   "author": "garrettgsb",
   "license": "MIT",
   "scripts": {
-    "go": "nodemon server.js"
+    "go": "nodemon server.js",
+    "db:reset": "node bin/resetdb.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^16.1.0",
     "express": "^4.16.4",
-    "nodemon": "^1.18.7"
+    "knex": "^2.4.2",
+    "nodemon": "^2.0.22",
+    "pg": "^8.11.0"
   }
 }
