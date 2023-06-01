@@ -1,5 +1,6 @@
 const Express = require('express');
 const App = Express();
+const routes = require('./routes');
 const BodyParser = require('body-parser');
 const knex = require('./db/index.js');
 const PORT = 8080;
@@ -8,6 +9,8 @@ const PORT = 8080;
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
+
+App.use('/api', routes);
 
 // Sample GET route
 App.get('/', (req, res) => {
