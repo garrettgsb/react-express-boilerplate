@@ -1,0 +1,103 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS categories CASCADE;
+DROP TABLE IF EXISTS stories CASCADE;
+DROP TABLE IF EXISTS tags CASCADE;
+DROP TABLE IF EXISTS story_categories CASCADE;
+DROP TABLE IF EXISTS saved_stories CASCADE;
+DROP TABLE IF EXISTS subscriptions CASCADE;
+DROP TABLE IF EXISTS likes CASCADE;
+DROP TABLE IF EXISTS comments CASCADE;
+DROP TABLE IF EXISTS notifications CASCADE;
+DROP TABLE IF EXISTS messages CASCADE;
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  profile_picture VARCHAR(255),
+  bio VARCHAR(255),
+  created_date TIMESTAMP
+);
+
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE stories (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) NOT NULL ON DELETE CASCADE,
+  title VARCHAR(255) NOT NULL,
+  content VARCHAR(255),
+  status VARCHAR(255) NOT NULL,
+  type VARCHAR(255) NOT NULL,
+  view_count INTEGER DEFAULT NOT NULL 0,
+  created_date TIMESTAMP,
+  published_date TIMESTAMP,
+  last_modified_date TIMESTAMP
+);
+
+CREATE TABLE tags (
+  id SERIAL PRIMARY KEY NOT NULL,
+  story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE,
+  name VARCHAR(255),
+  created_date TIMESTAMP
+);
+
+CREATE TABLE story_categories (
+  id SERIAL PRIMARY KEY NOT NULL,
+  story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE,
+  category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE
+);
+
+CREATE TABLE saved_stories (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE,
+  created_date TIMESTAMP
+);
+
+CREATE TABLE subscriptions (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user1 INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  user2 INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
+  tags_id INTEGER REFERENCES tags(id) ON DELETE CASCADE,
+  created_date timestamp
+);
+
+CREATE TABLE likes (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE,
+  comments_id INTEGER REFERENCES comments(id) ON DELETE CASCADE,
+  created_date timestamp 
+);
+
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  story_id INTEGER REFERENCES story_id(id) ON DELETE CASCADE,
+  content VARCHAR(255) NOT NULL,
+  created_date timestamp
+);
+
+CREATE TABLE notifications (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user1 INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  user2 INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  notification_type VARCHAR(255) NOT NULL,
+  story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE,
+  is_read BOOLEAN NOT NULL DEFAULT FALSE,
+  created_date timestamp
+);
+
+CREATE TABLE messages (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user1 INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  user2 INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  message_content VARCHAR(255) NOT NULL,
+  is_read BOOLEAN NOT NULL DEFAULT FALSE,
+  created_date timestamp
+);
