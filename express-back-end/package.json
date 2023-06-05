@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "go": "nodemon server.js",
-    "db:reset": "node bin/resetdb.js"
+    "db:migrate": "knex migrate:latest",
+    "db:seed": "knex seed:run"
+
   },
   "dependencies": {
     "body-parser": "^1.18.3",

@@ -13,11 +13,11 @@ App.use(Express.static('public'));
 App.use('/api', routes);
 
 // Sample GET route
-App.get('/', (req, res) => {
-  knex.raw("SELECT 1").then(() => {
-    console.log("PostgreSQL connected");
-  })
-});
+// App.get('/', (req, res) => {
+//   knex.raw("SELECT 1").then(() => {
+//     console.log("PostgreSQL connected");
+//   })
+// });
 App.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
 }));
