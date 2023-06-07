@@ -5,18 +5,26 @@ const { Users } = require('../models')
 // GET /api/users
 router.get('/', (req, res) => {
   Users.findAll()
-    .then(users => res.send(users))
+    .then(user => {
+      const data = {
+        user,
+        message: 'Get all user'
+      }
+      res.send(data)
+    })
     .catch((err) => console.log('err:', err))
 });
 
 // POST /api/users
 router.post('/', (req, res) => {
-  const props = req.body.user
-
+  const props = req.body
   Users.create(props)
-    .then(users => res.send(users))
+    .then(user => res.json({
+        ok: true,
+        message: 'User created',
+        user
+      }))
     .catch((err) => console.log('err:', err))
-  // res.json({ message: 'You\'ve sent a POST request to /api/users' });
 });
 
 // GET /api/users/:id
@@ -25,14 +33,12 @@ router.get('/:id', (req, res) => {
   Users.findById(userId)
     .then(users => res.send(users))
     .catch((err) => console.log('err:', err))
-  // res.json({ message: `You\'ve sent a GET request to /api/users/${userId}` });
 });
 
 // PUT /api/users/:id
 router.put('/:id', (req, res) => {
   const userId = req.params.id;
   const props = req.body.user
-  console.log(req.body.user)
 
   Users.update(userId, props)
     .then(users => res.send(users))
