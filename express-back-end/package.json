@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.18.3",
     "dotenv": "^16.1.0",
@@ -19,5 +20,8 @@
     "knex": "^2.4.2",
     "nodemon": "^2.0.22",
     "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
   }
 }
