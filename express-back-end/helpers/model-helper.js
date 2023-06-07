@@ -6,7 +6,7 @@ module.exports = ({
   timeout = 1000
 }) => {
   const create = props => {
-    delete props.id // not allowed to set `id`
+    delete props?.id // not allowed to set `id`
 
     return knex.insert(props)
       .returning(selectableProps)
