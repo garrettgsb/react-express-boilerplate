@@ -1,53 +1,75 @@
-const Express = require('express');
+const Express = require("express");
 const router = Express.Router();
-const { Users } = require('../models')
+const { Users, Stories } = require("../models");
 
-// GET /api/users
-router.get('/', (req, res) => {
+// Handle user login
+router.get("/login/:id", (req, res) => {
+  console.log(req.params.id);
+  const email = req.params.id;
+  Users.find({ email })
+    .then((user) => {
+      console.log(user);
+      res.send(user);
+    })
+    .catch((err) => console.log("err:", err));
+});
+
+// GET all users
+router.get("/", (req, res) => {
   Users.findAll()
-    .then(users => res.send(users))
-    .catch((err) => console.log('err:', err))
+    .then((users) => res.send(users))
+    .catch((err) => console.log("err:", err));
 });
 
-// POST /api/users
-router.post('/', (req, res) => {
-  const props = req.body.user
+// GET a user by id
+router.get("/:id", (req, res) => {
+  console.log(req.params.id);
+  const id = req.params.id;
+  Users.findById(id)
+    .then((user) => {
+      console.log(user);
+      res.send(user);
+    })
+    .catch((err) => console.log("err:", err));
 
-  Users.create(props)
-    .then(users => res.send(users))
-    .catch((err) => console.log('err:', err))
-  // res.json({ message: 'You\'ve sent a POST request to /api/users' });
-});
-
-// GET /api/users/:id
-router.get('/:id', (req, res) => {
-  const userId = req.params.id;
-  Users.findById(userId)
-    .then(users => res.send(users))
-    .catch((err) => console.log('err:', err))
+  //     const stories = Stories.find({ user_id: user[0].id }).then((stories) => {
+  //       console.log(stories);
+  //       res.send(stories);
+  //     });
+  //   })
+  //   .catch((err) => console.log("err:", err));
   // res.json({ message: `You\'ve sent a GET request to /api/users/${userId}` });
 });
 
-// PUT /api/users/:id
-router.put('/:id', (req, res) => {
+// GET stories of a user by id
+router.get("/:id/stories", (req, res) => {
   const userId = req.params.id;
-  const props = req.body.user
-  console.log(req.body.user)
-
-  Users.update(userId, props)
-    .then(users => res.send(users))
-    .catch((err) => console.log('err:', err))
-  // res.json({ message: `You\'ve sent a PUT request to /api/users/${userId}` });
+  Stories.find({ user_id: userId })
+    .then((stories) => {
+      console.log(stories);
+      res.send(stories);
+    })
+    .catch((err) => console.log("err:", err));
 });
 
-// DELETE /api/users/:id
-router.delete('/:id', (req, res) => {
+// UPDATE a user by id
+router.put("/:id", (req, res) => {
+  const userId = req.params.id;
+  const props = req.body.user;
+  console.log(req.body);
+
+  Users.update(userId, props)
+    .then((users) => res.send(users))
+    .catch((err) => console.log("err:", err));
+});
+
+// DELETE a user by id
+router.delete("/:id", (req, res) => {
   const userId = req.params.id;
 
   Users.destroy(userId)
-    .then(users => res.send(users))
-    .catch((err) => console.log('err:', err))
-  // res.json({ message: `You\'ve sent a DELETE request to /api/users/${userId}` });
+    .then((users) => res.send(users))
+    .catch((err) => console.log("err:", err));
 });
 
 module.exports = router;
