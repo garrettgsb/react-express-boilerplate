@@ -1,20 +1,10 @@
 const createModel = require('../helpers/model-helper')
 
-const name = 'Stories'
-const tableName = 'stories'
+const name = 'StoryCategories'
+const tableName = 'story_categories'
 
 const selectableProps = [
-  'id',
-  'user_id',
-  'category_id',
-  'title',
-  'content',
-  'status',
-  'type',
-  'view_count',
-  'created_at',
-  'published_date',
-  'updated_at',
+  'story_id'
 ]
 
 module.exports = knex => {

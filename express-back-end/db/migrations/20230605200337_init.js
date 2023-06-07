@@ -20,6 +20,8 @@ exports.up = function(knex) {
       table.increments('id').primary();
       table.integer('user_id').unsigned().notNullable();
       table.foreign('user_id').references('id').inTable('users').onDelete('cascade').onUpdate('CASCADE');
+      table.integer('category_id').unsigned().notNullable();
+      table.foreign('category_id').references('id').inTable('categories').onDelete('cascade').onUpdate('CASCADE');
       table.string('title');
       table.text('content');
       table.string('status').defaultTo('draft');

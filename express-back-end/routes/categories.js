@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Categories } = require('../models')
+const { Categories, StoryCategories } = require('../models')
 
 // GET /api/categories
 router.get('/', (req, res) => {
@@ -9,10 +9,10 @@ router.get('/', (req, res) => {
   .catch((err) => console.log('err:', err))
 });
 
-//GET /api/categories/:id
+//GET all stories under categoryid: /api/categories/:id 
 router.get('/:id', (req, res) => {
   const categoryId = req.params.id;
-  Categories.findById(categoryId)
+  StoryCategories.findById(categoryId)
   .then(categories => res.send(categories))
   .catch((err) => console.log('err:', err))
 });
