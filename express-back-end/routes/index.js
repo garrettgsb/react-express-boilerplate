@@ -5,5 +5,6 @@ const router = express.Router();
 router.use('/stories', require('./stories'));
 router.use('/users', require('./users'));
 router.use('/categories', require('./categories'));
+router.use('/story-categories', require('./story_categories'));
 
 module.exports = router;

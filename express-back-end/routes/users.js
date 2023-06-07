@@ -17,8 +17,14 @@ router.get("/login/:id", (req, res) => {
 // GET all users
 router.get("/", (req, res) => {
   Users.findAll()
-    .then((users) => res.send(users))
-    .catch((err) => console.log("err:", err));
+    .then(user => {
+      const data = {
+        user,
+        message: 'Get all user'
+      }
+      res.send(data)
+    })
+    .catch((err) => console.log('err:', err))
 });
 
 // GET a user by id
@@ -31,14 +37,6 @@ router.get("/:id", (req, res) => {
       res.send(user);
     })
     .catch((err) => console.log("err:", err));
-
-  //     const stories = Stories.find({ user_id: user[0].id }).then((stories) => {
-  //       console.log(stories);
-  //       res.send(stories);
-  //     });
-  //   })
-  //   .catch((err) => console.log("err:", err));
-  // res.json({ message: `You\'ve sent a GET request to /api/users/${userId}` });
 });
 
 // GET stories of a user by id

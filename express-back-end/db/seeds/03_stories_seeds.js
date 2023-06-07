@@ -12,7 +12,8 @@ exports.seed = knex => knex(Stories.tableName).del()
   })
   .then(userId => [
     {
-      user_id: userId,
+      user_id: 1,
+      category_id: 1,
       title: faker.word.words(2),
       content: faker.lorem.paragraph(1) ,
       status: 'published',
@@ -23,7 +24,8 @@ exports.seed = knex => knex(Stories.tableName).del()
       updated_at: knex.fn.now()
     },
     {
-      user_id: userId,
+      user_id: 1,
+      category_id: 2,
       title: faker.word.words(2),
       content: faker.lorem.paragraph(1) ,
       status: 'draft',
@@ -34,7 +36,8 @@ exports.seed = knex => knex(Stories.tableName).del()
       updated_at: knex.fn.now()
     },
     {
-      user_id: userId,
+      user_id: 2,
+      category_id: 3,
       title: faker.word.words(2),
       content: faker.lorem.paragraph(1) ,
       status: 'draft',
@@ -45,7 +48,8 @@ exports.seed = knex => knex(Stories.tableName).del()
       updated_at: knex.fn.now()
     },
     {
-      user_id: userId,
+      user_id: 2,
+      category_id: 1,
       title: faker.word.words(2),
       content: faker.lorem.paragraph(1) ,
       status: 'draft',

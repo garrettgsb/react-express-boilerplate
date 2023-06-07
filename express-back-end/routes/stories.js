@@ -1,13 +1,22 @@
 const Express = require('express');
 const router = Express.Router();
+const { Stories, StoryCategories } = require('../models')
 const { Users, Stories } = require('../models');
 
-// GET all stories
+// GET all stories ------ /api/stories
 router.get('/', (req, res) => {
-  res.json({ message: 'You\'ve sent a GET request to /api/stories' });
+  Stories.findAll()
+    .then(story => {
+      const data = {
+        story,
+        message: 'Get all story'
+      }
+      res.send(data)
+    })
+    .catch((err) => console.log('err:', err))
 });
 
-// GET a single story by id
+// GET a single story by id ------ /api/stories/:id
 router.get('/:id', (req, res) => {
   const storyId = req.params.id;
   Stories.findById(storyId)
@@ -18,7 +27,7 @@ router.get('/:id', (req, res) => {
     .catch((err) => console.log('err:', err));
 });
 
-// UPDATE a story by id
+// UPDATE a story by id -----  /api/stories/:id
 router.put('/:id', (req, res) => {
   const storyId = req.params.id;
   const props = req.body.story;
@@ -31,23 +40,34 @@ router.put('/:id', (req, res) => {
     .catch((err) => console.log('err:', err));
 });
 
-// POST /api/stories
+// POST a new story -----   /api/stories
 router.post('/', (req, res) => {
-  res.json({ message: 'You\'ve sent a POST request to /api/stories' });
+  const props = req.body
+  Stories.create(props)
+    .then(story => {
+      const params = {
+        story_id: story.id,
+        category_id: story.category_id
+      }
+      StoryCategories.create(params)
+      res.json({
+        ok: true,
+        message: 'Stories created',
+        story
+      })
+    })
+    .catch((err) => console.log('err:', err))
+
+  
 });
 
 
-
-// PUT /api/stories/:id
-router.put('/:id', (req, res) => {
-  const storyId = req.params.id;
-  res.json({ message: `You\'ve sent a PUT request to /api/stories/${storyId}` });
-});
-
-// DELETE /api/stories/:id
+// DELETE a story   ------   /api/stories/:id
 router.delete('/:id', (req, res) => {
   const storyId = req.params.id;
-  res.json({ message: `You\'ve sent a DELETE request to /api/stories/${storyId}` });
+  Stories.destroy(storyId)
+    .then(story => res.send(story))
+    .catch((err) => console.log('err:', err))
 });
 
 module.exports = router;

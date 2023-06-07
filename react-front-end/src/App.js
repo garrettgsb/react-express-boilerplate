@@ -9,19 +9,21 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: "Click the button to load data!",
+      categories: [],
       user: {},
     };
   }
 
   fetchTest = () => {
     axios
-      .get("/api/data") // You can simply make your requests to "/api/whatever you want"
+      .get("/api/categories") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
         // handle success
         console.log(response.data); // The entire response from the Rails API
 
-        console.log(response.data.message); // Just the message
+        this.setState({
+          categories: response.data
+        });
       });
   };
 
@@ -55,9 +57,30 @@ class App extends Component {
   fetchData = async () => {
     const { user } = this.props.auth0;
     try {
-      const response = await axios.get(`/api/users/login/${user.email}`);
-      const userData = response.data;
-      return userData;
+
+      /**
+       * Check the user is it's registered on our database
+       * if not register then query the user
+       */
+      const getUsers = await axios.get(`/api/users`)
+      const filteredUser = getUsers.data.user.find((u) => u.email === user.email)
+      if(!filteredUser) {
+        const params = {
+          username: user.nickname,
+          password: user.sub,
+          email: user.email,
+          profile_pic: user.picture,
+          bio: ''
+        }
+        const postedUsers = await axios.post(`/api/users`, params);
+        await axios.get(`/api/users/${postedUsers.data.user[0].id}`);
+      } else {
+        await axios.get(`/api/users/${filteredUser.id}`);
+      }
+      
+      const categories = await axios.get(`/api/categories`);
+      const userData = categories.data;
+      console.log(userData);
     } catch (error) {
       console.error(error);
     }
@@ -67,7 +90,12 @@ class App extends Component {
     const { isAuthenticated, logout } = this.props.auth0;
     return (
       <div className="App">
-        <h1>{this.state.message}</h1>
+        <h1>Categories</h1>
+        {
+          this.state.categories.map((c) => 
+            <p>{c.name}</p>
+          )
+        }
         <button onClick={this.fetchTest}>Fetch Data</button>
         {isAuthenticated ? (
           <div>
