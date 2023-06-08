@@ -2,7 +2,7 @@ const Express = require("express");
 const router = Express.Router();
 const { Users, Stories } = require("../models");
 
-// Handle user login
+// Handle user login  ---- /api/users/login/:id
 router.get("/login/:id", (req, res) => {
   console.log(req.params.id);
   const email = req.params.id;
@@ -14,8 +14,8 @@ router.get("/login/:id", (req, res) => {
     .catch((err) => console.log("err:", err));
 });
 
-// GET all users
-router.get("/", (req, res) => {
+// GET all users ---- /api/users
+router.get('/', (req, res) => {
   Users.findAll()
     .then(user => {
       const data = {
@@ -27,19 +27,17 @@ router.get("/", (req, res) => {
     .catch((err) => console.log('err:', err))
 });
 
-// GET a user by id
+// GET a user by id ---- /api/users/:id
 router.get("/:id", (req, res) => {
-  console.log(req.params.id);
   const id = req.params.id;
   Users.findById(id)
     .then((user) => {
-      console.log(user);
       res.send(user);
     })
     .catch((err) => console.log("err:", err));
 });
 
-// GET stories of a user by id
+// GET stories of a user by id ---- /api/users/:id/stories
 router.get("/:id/stories", (req, res) => {
   const userId = req.params.id;
   Stories.find({ user_id: userId })
@@ -50,15 +48,15 @@ router.get("/:id/stories", (req, res) => {
     .catch((err) => console.log("err:", err));
 });
 
-// UPDATE a user by id
-router.put("/:id", (req, res) => {
+// UPDATE a user by id  ---- /api/users/:id
+router.put('/:id', (req, res) => {
   const userId = req.params.id;
-  const props = req.body.user;
-  console.log(req.body);
+  const props = req.body.user
 
   Users.update(userId, props)
-    .then((users) => res.send(users))
-    .catch((err) => console.log("err:", err));
+    .then(users => res.send(users))
+    .catch((err) => console.log('err:', err))
+  // res.json({ message: `You\'ve sent a PUT request to /api/users/${userId}` });
 });
 
 // DELETE a user by id
