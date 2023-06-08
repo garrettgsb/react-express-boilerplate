@@ -57,7 +57,7 @@ class App extends Component {
     try {
       // Check if the user is registered in our database
       const getUsers = await axios.get(`/api/users`);
-      const filteredUser = getUsers.data.users.find((u) => u.email === user.email);
+      const filteredUser = getUsers.data.user.find((u) => u.email === user.email);
   
       if (!filteredUser) {
         // User is not registered, perform registration

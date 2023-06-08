@@ -3,7 +3,8 @@ module.exports = ({
   name = 'name',
   tableName = 'tablename',
   selectableProps = [],
-  timeout = 1000
+  timeout = 1000,
+  newSelectableProps = [],
 }) => {
   const create = props => {
     delete props?.id // not allowed to set `id`
@@ -51,10 +52,18 @@ module.exports = ({
     .where({ id })
     .timeout(timeout)
 
+  const joinTbl = (val) => knex.select(newSelectableProps)
+    .from(tableName)
+    .join('stories', 'stories.id', '=', 'story_categories.story_id')
+    .join('categories', 'categories.id', '=', 'story_categories.category_id')
+    .where({'story_categories.category_id': val})
+    .timeout(timeout)
+
   return {
     name,
     tableName,
     selectableProps,
+    newSelectableProps,
     timeout,
     create,
     findAll,
@@ -62,6 +71,7 @@ module.exports = ({
     findOne,
     findById,
     update,
-    destroy
+    destroy,
+    joinTbl
   }
 }
