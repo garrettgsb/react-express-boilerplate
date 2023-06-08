@@ -59,6 +59,18 @@ router.put('/:id', (req, res) => {
   // res.json({ message: `You\'ve sent a PUT request to /api/users/${userId}` });
 });
 
+// POST a new user  ---- /api/users
+router.post('/', (req, res) => {
+  const props = req.body
+  Users.create(props)
+    .then(user => res.json({
+        ok: true,
+        message: 'User created',
+        user
+      }))
+    .catch((err) => console.log('err:', err))
+});
+
 // DELETE a user by id
 router.delete("/:id", (req, res) => {
   const userId = req.params.id;
