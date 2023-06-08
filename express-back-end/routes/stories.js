@@ -1,7 +1,6 @@
 const Express = require('express');
 const router = Express.Router();
-const { Stories, StoryCategories } = require('../models')
-const { Users, Stories } = require('../models');
+const { Users, Stories, StoryCategories } = require('../models')
 
 // GET all stories ------ /api/stories
 router.get('/', (req, res) => {
