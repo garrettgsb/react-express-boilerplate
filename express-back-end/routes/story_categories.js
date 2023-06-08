@@ -15,12 +15,4 @@ router.get('/', (req, res) => {
     .catch((err) => console.log('err:', err))
 });
 
-// GET /api/story-categories/:categoryId
-router.get('/:id', (req, res) => {
-  const category_id = req.params.id;
-  StoryCategories.joinTbl(category_id)
-    .then(sc => res.send(sc))
-    .catch((err) => console.log('err:', err))
-});
-
 module.exports = router;
