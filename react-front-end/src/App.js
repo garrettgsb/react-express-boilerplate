@@ -19,8 +19,7 @@ class App extends Component {
       .get("/api/categories") // You can simply make your requests to "/api/whatever you want"
       .then((response) => {
         // handle success
-        console.log(response.data); // The entire response from the Rails API
-
+        // console.log(response.data); // The entire response from the Rails API
         this.setState({
           categories: response.data
         });
@@ -45,8 +44,7 @@ class App extends Component {
       if (isAuthenticated) {
         console.log("User is authenticated");
         this.fetchData().then((response) => {
-          this.setState({ user: response[0] });
-          console.log(this.state.user_id);
+          this.setState({ user: response });
         });
       } else {
         console.log("User is not authenticated");
@@ -57,32 +55,35 @@ class App extends Component {
   fetchData = async () => {
     const { user } = this.props.auth0;
     try {
-
-      /**
-       * Check the user is it's registered on our database
-       * if not register then query the user
-       */
-      const getUsers = await axios.get(`/api/users`)
-      const filteredUser = getUsers.data.users.find((u) => u.email === user.email)
-      if(!filteredUser) {
+      // Check if the user is registered in our database
+      const getUsers = await axios.get(`/api/users`);
+      const filteredUser = getUsers.data.users.find((u) => u.email === user.email);
+  
+      if (!filteredUser) {
+        // User is not registered, perform registration
         const params = {
           username: user.nickname,
           password: user.sub,
           email: user.email,
           profile_pic: user.picture,
           bio: ''
-        }
+        };
+  
+        // Register the user
         const postedUsers = await axios.post(`/api/users`, params);
-        await axios.get(`/api/users/${postedUsers.data.users[0].id}`);
+        const response = await axios.get(`/api/users/${postedUsers.data.user.id}`);
+        console.log(response);
+        return response.data[0];
       } else {
-        await axios.get(`/api/users/${filteredUser.id}`);
+        // User is already registered
+        const response = await axios.get(`/api/users/${filteredUser.id}`);
+        console.log(response);
+        return response.data[0];
       }
-      
-      const categories = await axios.get(`/api/categories`);
-      const userData = categories.data;
-      console.log(userData);
     } catch (error) {
       console.error(error);
+      // Throw the error to propagate it to the caller
+      throw error;
     }
   };
 
@@ -104,6 +105,9 @@ class App extends Component {
             >
               Logout
             </button>
+          <p>
+            {this.state.user.id}
+          </p>
           </div>
         ) : (
           <div>
