@@ -17,9 +17,9 @@ router.get("/login/:id", (req, res) => {
 // GET all users ---- /api/users
 router.get('/', (req, res) => {
   Users.findAll()
-    .then(user => {
+    .then(users => {
       const data = {
-        user,
+        users,
         message: 'Get all user'
       }
       res.send(data)

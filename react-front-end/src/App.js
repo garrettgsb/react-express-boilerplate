@@ -63,7 +63,7 @@ class App extends Component {
        * if not register then query the user
        */
       const getUsers = await axios.get(`/api/users`)
-      const filteredUser = getUsers.data.user.find((u) => u.email === user.email)
+      const filteredUser = getUsers.data.users.find((u) => u.email === user.email)
       if(!filteredUser) {
         const params = {
           username: user.nickname,
@@ -73,7 +73,7 @@ class App extends Component {
           bio: ''
         }
         const postedUsers = await axios.post(`/api/users`, params);
-        await axios.get(`/api/users/${postedUsers.data.user[0].id}`);
+        await axios.get(`/api/users/${postedUsers.data.users[0].id}`);
       } else {
         await axios.get(`/api/users/${filteredUser.id}`);
       }
