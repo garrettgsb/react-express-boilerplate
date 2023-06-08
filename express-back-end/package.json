@@ -8,7 +8,8 @@
   "scripts": {
     "go": "nodemon server.js",
     "db:migrate": "knex migrate:latest",
-    "db:seed": "knex seed:run"
+    "db:seed": "knex seed:run",
+    "db:rollback": "knex migrate:rollback"
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
