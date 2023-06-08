@@ -1,6 +1,6 @@
 const Express = require('express');
 const router = Express.Router();
-const { Users, Stories, StoryCategories } = require('../models')
+const { Stories, StoryCategories } = require('../models')
 
 // GET all stories ------ /api/stories
 router.get('/', (req, res) => {
@@ -55,11 +55,8 @@ router.post('/', (req, res) => {
         story
       })
     })
-    .catch((err) => console.log('err:', err))
-
-  
+    .catch((err) => console.log('err:', err))  
 });
-
 
 // DELETE a story   ------   /api/stories/:id
 router.delete('/:id', (req, res) => {

@@ -12,15 +12,7 @@ router.get('/', (req, res) => {
 // GET a single category by id ---- /api/categories/:id
 router.get('/:id', (req, res) => {
   const categoryId = req.params.id;
-  Categories.findById(categoryId)
-  .then(categories => res.send(categories))
-  .catch((err) => console.log('err:', err))
-});
-
-//GET all stories for a category ---- /api/categories/:id 
-router.get('/:id/stories', (req, res) => {
-  const categoryId = req.params.id;
-  StoryCategories.joinTbl(categoryId)
+  StoryCategories.getAllStoriesByCategoryId(categoryId)
     .then(sc => res.send(sc))
     .catch((err) => console.log('err:', err))
 });

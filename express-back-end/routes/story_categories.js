@@ -19,11 +19,9 @@ router.get("/", (req, res) => {
 // GET all entries for a category from story_categories ---- /api/story-categories/:id
 router.get("/:id", (req, res) => {
   const category_id = req.params.id;
-  StoryCategories.find({ category_id })
-    .then((entries) => {
-      res.send(entries);
-    })
-    .catch((err) => console.log("err:", err));
+  StoryCategories.getAllStoriesByCategoryId(category_id)
+    .then(sc => res.send(sc))
+    .catch((err) => console.log('err:', err))
 });
 
 module.exports = router;

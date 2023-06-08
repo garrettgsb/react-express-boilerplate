@@ -1,4 +1,3 @@
-const { faker } = require('@faker-js/faker');
 const { StoryCategories } = require('../../models');
 
 exports.seed = knex => knex(StoryCategories.tableName).del()

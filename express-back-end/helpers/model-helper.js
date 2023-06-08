@@ -52,11 +52,17 @@ module.exports = ({
     .where({ id })
     .timeout(timeout)
 
-  const joinTbl = (val) => knex.select(newSelectableProps)
+  const getAllStoriesByCategoryId = (val) => knex.select(newSelectableProps)
     .from(tableName)
     .join('stories', 'stories.id', '=', 'story_categories.story_id')
     .join('categories', 'categories.id', '=', 'story_categories.category_id')
     .where({'story_categories.category_id': val})
+    .timeout(timeout)
+
+  const getAllSavedStoriesbyUserId = (val) => knex.select(newSelectableProps)
+    .from(tableName)
+    .join('stories', 'stories.id', '=', 'saved_stories.story_id')
+    .where({'saved_stories.user_id': val})
     .timeout(timeout)
 
   return {
@@ -72,6 +78,7 @@ module.exports = ({
     findById,
     update,
     destroy,
-    joinTbl
+    getAllStoriesByCategoryId,
+    getAllSavedStoriesbyUserId
   }
 }

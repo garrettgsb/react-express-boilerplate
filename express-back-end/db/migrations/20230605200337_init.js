@@ -19,9 +19,9 @@ exports.up = function(knex) {
     .createTable('stories', function (table) {
       table.increments('id').primary();
       table.integer('user_id').unsigned().notNullable();
-      table.foreign('user_id').references('id').inTable('users').onDelete('cascade').onUpdate('CASCADE');
+      table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
       table.integer('category_id').unsigned().notNullable();
-      table.foreign('category_id').references('id').inTable('categories').onDelete('cascade').onUpdate('CASCADE');
+      table.foreign('category_id').references('id').inTable('categories').onDelete('CASCADE').onUpdate('CASCADE');
       table.string('title');
       table.text('content');
       table.string('status').defaultTo('draft');
@@ -35,7 +35,7 @@ exports.up = function(knex) {
     .createTable('tags', function (table) {
       table.increments('id').primary();
       table.integer('story_id').unsigned().notNullable();
-      table.foreign('story_id').references('id').inTable('stories').onDelete('cascade').onUpdate('CASCADE');
+      table.foreign('story_id').references('id').inTable('stories').onDelete('CASCADE').onUpdate('CASCADE');
       table.string('name');
       table.timestamp('created_at').defaultTo(knex.fn.now());
     })
@@ -44,16 +44,16 @@ exports.up = function(knex) {
       table.increments('id').primary();
       table.integer('story_id').unsigned().notNullable();
       table.integer('category_id').unsigned().notNullable();
-      table.foreign('story_id').references('id').inTable('stories').onDelete('cascade').onUpdate('CASCADE');
-      table.foreign('category_id').references('id').inTable('categories').onDelete('cascade').onUpdate('CASCADE');
+      table.foreign('story_id').references('id').inTable('stories').onDelete('CASCADE').onUpdate('CASCADE');
+      table.foreign('category_id').references('id').inTable('categories').onDelete('CASCADE').onUpdate('CASCADE');
     })
 
     .createTable('saved_stories', function (table) {
       table.increments('id').primary();
+      table.integer('user_id').unsigned().notNullable();
       table.integer('story_id').unsigned().notNullable();
-      table.integer('category_id').unsigned().notNullable();
-      table.foreign('story_id').references('id').inTable('stories').onDelete('cascade').onUpdate('CASCADE');
-      table.foreign('category_id').references('id').inTable('categories').onDelete('cascade').onUpdate('CASCADE');
+      table.foreign('story_id').references('id').inTable('stories').onDelete('CASCADE').onUpdate('CASCADE');
+      table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
       table.timestamp('created_at').defaultTo(knex.fn.now());
     })
 
@@ -63,7 +63,7 @@ exports.up = function(knex) {
       table.integer('user2').unsigned();
       table.integer('category_id').unsigned();
       table.integer('tags_id').unsigned();
-      table.foreign('user1').references('id').inTable('users').onDelete('cascade').onUpdate('CASCADE');
+      table.foreign('user1').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
       table.foreign('user2').references('id').inTable('users');
       table.foreign('category_id').references('id').inTable('categories');
       table.foreign('tags_id').references('id').inTable('tags');
@@ -74,8 +74,8 @@ exports.up = function(knex) {
       table.increments('id').primary();
       table.integer('user_id').unsigned().notNullable();
       table.integer('story_id').unsigned().notNullable();
-      table.foreign('user_id').references('id').inTable('users').onDelete('cascade').onUpdate('CASCADE');
-      table.foreign('story_id').references('id').inTable('stories').onDelete('cascade').onUpdate('CASCADE');
+      table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+      table.foreign('story_id').references('id').inTable('stories').onDelete('CASCADE').onUpdate('CASCADE');
       table.text('content');
       table.timestamp('created_at').defaultTo(knex.fn.now());
     })
@@ -85,7 +85,7 @@ exports.up = function(knex) {
       table.integer('user_id').unsigned().notNullable();
       table.integer('story_id').unsigned();
       table.integer('comments_id').unsigned();
-      table.foreign('user_id').references('id').inTable('users').onDelete('cascade').onUpdate('CASCADE');
+      table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
       table.foreign('story_id').references('id').inTable('stories');
       table.foreign('comments_id').references('id').inTable('comments');
       table.timestamp('created_at').defaultTo(knex.fn.now());
@@ -96,7 +96,7 @@ exports.up = function(knex) {
       table.integer('user1').unsigned().notNullable();
       table.integer('user2').unsigned();
       table.integer('story_id').unsigned();
-      table.foreign('user1').references('id').inTable('users').onDelete('cascade').onUpdate('CASCADE');
+      table.foreign('user1').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
       table.foreign('user2').references('id').inTable('users');
       table.foreign('story_id').references('id').inTable('stories');
       table.string('notification_type');
@@ -110,8 +110,8 @@ exports.up = function(knex) {
       table.integer('user2').unsigned().notNullable();;
       table.integer('story_id').unsigned();
       
-      table.foreign('user1').references('id').inTable('users').onDelete('cascade').onUpdate('CASCADE');
-      table.foreign('user2').references('id').inTable('users').onDelete('cascade').onUpdate('CASCADE');
+      table.foreign('user1').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+      table.foreign('user2').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
       table.foreign('story_id').references('id').inTable('stories');
       table.text('message_content');
       table.boolean('is_read').defaultTo(false);
@@ -119,17 +119,30 @@ exports.up = function(knex) {
     })
 };
 
+const tables = [
+  'users',
+  'categories',
+  'stories',
+  'tags',
+  'story_categories',
+  'saved_stories',
+  'subscriptions',
+  'comments',
+  'likes',
+  'notifications',
+  'messages'
+]
+
 exports.down = function(knex) {
-  return knex.schema
-    .dropTableIfExists("users")
-    .dropTableIfExists("categories")
-    .dropTableIfExists("stories")
-    .dropTableIfExists("tags")
-    .dropTableIfExists("story_categories")
-    .dropTableIfExists("saved_stories")
-    .dropTableIfExists("subscriptions")
-    .dropTableIfExists("comments")
-    .dropTableIfExists("likes")
-    .dropTableIfExists("notifications")
-    .dropTableIfExists("messages")
+  return Promise.all(tables.map(async function (table) {
+    try {
+      console.log(table, 'down start')
+      await knex.raw(`DROP TABLE IF EXISTS "${table}" CASCADE`)
+      console.log(table, 'down finish')
+    } catch (err) {
+      console.error(err.detail)
+    }
+
+    return true
+  }))
 };

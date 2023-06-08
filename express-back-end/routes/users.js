@@ -1,6 +1,6 @@
 const Express = require("express");
 const router = Express.Router();
-const { Users, Stories } = require("../models");
+const { Users, Stories, SavedStories } = require("../models");
 
 // Handle user login  ---- /api/users/login/:id
 router.get("/login/:id", (req, res) => {
@@ -42,7 +42,35 @@ router.get("/:id/stories", (req, res) => {
   const userId = req.params.id;
   Stories.find({ user_id: userId })
     .then((stories) => {
-      console.log(stories);
+      res.send(stories);
+    })
+    .catch((err) => console.log("err:", err));
+});
+
+router.get("/:id/saved-stories", (req, res) => {
+  const userId = req.params.id;
+  SavedStories.getAllSavedStoriesbyUserId(userId )
+    .then((stories) => {
+      res.send(stories);
+    })
+    .catch((err) => console.log("err:", err));
+});
+
+router.post("/:id/saved-stories", (req, res) => {
+  const props = req.body
+  SavedStories.create(props )
+    .then((stories) => {
+      res.send(stories);
+    })
+    .catch((err) => console.log("err:", err));
+});
+
+router.put("/:userId/saved-stories/:id", (req, res) => {
+  const id = req.params.id;
+  const props = req.body.user
+
+  SavedStories.update(id, props )
+    .then((stories) => {
       res.send(stories);
     })
     .catch((err) => console.log("err:", err));
@@ -56,7 +84,6 @@ router.put('/:id', (req, res) => {
   Users.update(userId, props)
     .then(users => res.send(users))
     .catch((err) => console.log('err:', err))
-  // res.json({ message: `You\'ve sent a PUT request to /api/users/${userId}` });
 });
 
 // POST a new user  ---- /api/users
