@@ -1,7 +1,19 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { Component } from "react";
+import axios from "axios";
+import "./App.css";
+import MoviesListRow from "./components/MoviesListRow";
 
+export default function App(props) {
+  return (
+    <>
+      <div className="App">
+        <h1> Hello World!</h1>
+      </div>
+      <MoviesListRow />
+    </>
+  );
+}
+/*
 class App extends Component {
   constructor(props) {
     super(props)
@@ -36,3 +48,4 @@ class App extends Component {
 }
 
 export default App;
+*/
