@@ -2,14 +2,19 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 import MoviesListRow from "./components/MoviesListRow";
+import tmdb_api_requests from "./TMDB_API_Requests";
 
 export default function App(props) {
+  console.log(tmdb_api_requests.action_movies_url);
   return (
     <>
       <div className="App">
         <h1> Hello World!</h1>
       </div>
-      <MoviesListRow />
+      <MoviesListRow
+        genre_Url={tmdb_api_requests.action_movies_url}
+        title="Action"
+      />
     </>
   );
 }
