@@ -5,7 +5,6 @@ import MoviesListRow from "./components/MoviesListRow";
 import tmdb_api_requests from "./TMDB_API_Requests";
 
 export default function App(props) {
-  console.log(tmdb_api_requests.action_movies_url);
   return (
     <>
       <div className="App">

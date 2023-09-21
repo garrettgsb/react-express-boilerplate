@@ -1,16 +1,15 @@
 .movies_row {
   margin-left: 20px;
   font-weight: bold;
-  font-size: 1.2rem;
-  padding: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 5x;
 }
 .movies_row_posters {
   display: flex;
-  overflow: hidden; 
-  overflow-x: scroll; 
   padding: 20px;
+  overflow: hidden;
+  overflow-x: auto;
 }
-
 .movies_row_posters::-webkit-scrollbar {
   display: none;
 }
@@ -25,5 +24,5 @@
 }
 
 .movie_poster:hover {
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
