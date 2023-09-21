@@ -9,12 +9,35 @@ export default function App(props) {
   return (
     <>
       <div className="App">
-        <h1> Hello World!</h1>
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.top_rated_url}
+          title="Top Rated"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.action_movies_url}
+          title="Action"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.adventure_movies_url}
+          title="Adventure"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.comedy_movies_url}
+          title="Comedy"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.horror_movies_url}
+          title="Horror"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.animation_movies_url}
+          title="Animation"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.thriller_movies_url}
+          title="Thriller"
+        />
       </div>
-      <MoviesListRow
-        genre_Url={tmdb_api_requests.action_movies_url}
-        title="Action"
-      />
     </>
   );
 }

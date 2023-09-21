@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./MoviesListRow.css";
+
 const poster_baseUrl = "https://image.tmdb.org/t/p/original";
 
 function MoviesListRow(props) {
