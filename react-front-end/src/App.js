@@ -33,7 +33,7 @@ class App extends Component {
     .then((response) => {
       // handle success
       console.log(response.data) // The entire response from the Rails API
-
+      console.log(__dirname + '/react-front-end/views')
       console.log(response.data.message) // Just the message
       this.setState({
         message: response.data.message
