@@ -1,43 +1,22 @@
 import React, { Component } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
-import MoviesListRow from "./components/MoviesListRow";
-import tmdb_api_requests from "./TMDB_API_Requests";
+import RegistrationForm from "./pages/registration";
+import Navbar from "./pages/navbar";
+import Layout from "./pages/Movie";
 
 export default function App(props) {
   return (
-    <>
-      <div className="App">
-        <MoviesListRow
-          genre_Url={tmdb_api_requests.top_rated_url}
-          title="Top Rated"
-        />
-        <MoviesListRow
-          genre_Url={tmdb_api_requests.action_movies_url}
-          title="Action"
-        />
-        <MoviesListRow
-          genre_Url={tmdb_api_requests.adventure_movies_url}
-          title="Adventure"
-        />
-        <MoviesListRow
-          genre_Url={tmdb_api_requests.comedy_movies_url}
-          title="Comedy"
-        />
-        <MoviesListRow
-          genre_Url={tmdb_api_requests.horror_movies_url}
-          title="Horror"
-        />
-        <MoviesListRow
-          genre_Url={tmdb_api_requests.animation_movies_url}
-          title="Animation"
-        />
-        <MoviesListRow
-          genre_Url={tmdb_api_requests.thriller_movies_url}
-          title="Thriller"
-        />
-      </div>
-    </>
+    <BrowserRouter>
+      <Navbar />
+
+      <Routes>
+      <Route index element={<Layout />} />
+      <Route path="/home" element={<Layout />} />
+      <Route path="/register" element={<RegistrationForm />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 /*
