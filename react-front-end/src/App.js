@@ -1,7 +1,46 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { Component } from "react";
+import axios from "axios";
+import "./App.css";
+import MoviesListRow from "./components/MoviesListRow";
+import tmdb_api_requests from "./TMDB_API_Requests";
 
+export default function App(props) {
+  return (
+    <>
+      <div className="App">
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.top_rated_url}
+          title="Top Rated"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.action_movies_url}
+          title="Action"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.adventure_movies_url}
+          title="Adventure"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.comedy_movies_url}
+          title="Comedy"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.horror_movies_url}
+          title="Horror"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.animation_movies_url}
+          title="Animation"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.thriller_movies_url}
+          title="Thriller"
+        />
+      </div>
+    </>
+  );
+}
+/*
 class App extends Component {
   constructor(props) {
     super(props)
@@ -36,3 +75,4 @@ class App extends Component {
 }
 
 export default App;
+*/
