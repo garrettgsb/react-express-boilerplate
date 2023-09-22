@@ -16,25 +16,27 @@ export default function App(props) {
           genre_Url={tmdb_api_requests.action_movies_url}
           title="Action"
         />
+
         <MoviesListRow
-          genre_Url={tmdb_api_requests.adventure_movies_url}
-          title="Adventure"
+          genre_Url={tmdb_api_requests.animation_movies_url}
+          title="Animation"
+        />
+
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.science_fiction_movies_url}
+          title="Sci-Fi"
         />
         <MoviesListRow
-          genre_Url={tmdb_api_requests.comedy_movies_url}
-          title="Comedy"
+          genre_Url={tmdb_api_requests.thriller_movies_url}
+          title="Thriller"
         />
         <MoviesListRow
           genre_Url={tmdb_api_requests.horror_movies_url}
           title="Horror"
         />
         <MoviesListRow
-          genre_Url={tmdb_api_requests.animation_movies_url}
-          title="Animation"
-        />
-        <MoviesListRow
-          genre_Url={tmdb_api_requests.thriller_movies_url}
-          title="Thriller"
+          genre_Url={tmdb_api_requests.history_movies_url}
+          title="History"
         />
       </div>
     </>
