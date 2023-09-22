@@ -3,7 +3,7 @@ const baseUrl = "https://api.themoviedb.org/3";
 
 const tmdb_api_requests = {
   action_movies_url: `${baseUrl}/discover/movie?api_key=${APIKEY}&with_genres=28`,
-  history_movies_url: `${baseUrl}/discover/movie?api_key=${APIKEY}&with_genres=36`,
+  war_movies_url: `${baseUrl}/discover/movie?api_key=${APIKEY}&with_genres=10752`,
   science_fiction_movies_url: `${baseUrl}/discover/movie?api_key=${APIKEY}&with_genres=878`,
   animation_movies_url: `${baseUrl}/discover/movie?api_key=${APIKEY}&with_genres=16`,
   horror_movies_url: `${baseUrl}/discover/movie?api_key=${APIKEY}&with_genres=27`,
