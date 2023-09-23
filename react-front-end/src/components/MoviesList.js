@@ -29,12 +29,12 @@ function MoviesList() {
           title="Thriller"
         />
         <MoviesListRow
-          genre_Url={tmdb_api_requests.horror_movies_url}
-          title="Horror"
-        />
-        <MoviesListRow
           genre_Url={tmdb_api_requests.war_movies_url}
           title="War"
+        />
+        <MoviesListRow
+          genre_Url={tmdb_api_requests.horror_movies_url}
+          title="Horror"
         />
       </div>
     </>
