@@ -11,6 +11,10 @@ function MoviesList() {
           title="Top Rated"
         />
         <MoviesListRow
+          genre_Url={tmdb_api_requests.trending_url}
+          title="Trending Now"
+        />
+        <MoviesListRow
           genre_Url={tmdb_api_requests.action_movies_url}
           title="Action"
         />
