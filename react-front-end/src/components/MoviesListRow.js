@@ -25,7 +25,7 @@ function MoviesListRow(props) {
           <img
             key={movie.id}
             className="movie_poster"
-            src={`${poster_baseUrl}${movie.backdrop_path}`}
+            src={`${poster_baseUrl}${movie.poster_path}`}
             alt={movie.name}
           />
         ))}
