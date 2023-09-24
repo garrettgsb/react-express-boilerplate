@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
+import MoviesList from "./components/MoviesList";
+import Banner from "./components/Banner";
 import RegistrationForm from "./pages/registration";
 import Navbar from "./pages/navbar";
 import Layout from "./pages/Movie";
@@ -12,14 +14,15 @@ export default function App(props) {
   return (
     <BrowserRouter>
       <Navbar />
-
+      <Banner />
+      <MoviesList />
       <Routes>
       <Route index element={<Layout />} />
       <Route path="/home" element={<Layout />} />
       <Route path="/register" element={<RegistrationForm />} />
       </Routes>
     </BrowserRouter>
-  );
+ );
 }
 /*
 class App extends Component {
