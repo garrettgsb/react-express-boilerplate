@@ -16,8 +16,8 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <a href="/about" className="btn btn-light">
-            About
+          <a href="/login" className="btn btn-light">
+            Login
           </a>
         </li>
         <li className="nav-item">

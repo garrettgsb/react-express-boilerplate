@@ -25,15 +25,6 @@ App.get('/api/data', (req, res) => {
 });
 
 // Handling registration POST request
-App.post('/register', (req, res) => {
-  const { username, email, password } = req.body;
-  
-  // Implement your registration logic here
-  // For example, you can store the user data in a database
-
-  // Send a response to the user
-  res.send('Registration Successful');
-});
 
 App.listen(PORT, () => {
   console.log(`Express is listening on port ${PORT}`);

@@ -7,6 +7,7 @@ import Banner from "./components/Banner";
 import RegistrationForm from "./pages/registration";
 import Navbar from "./pages/navbar";
 import Layout from "./pages/Movie";
+import LoginForm from "./pages/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
@@ -20,6 +21,7 @@ export default function App(props) {
       <Route index element={<Layout />} />
       <Route path="/home" element={<Layout />} />
       <Route path="/register" element={<RegistrationForm />} />
+      <Route path="/login" element={<LoginForm/>} />
       </Routes>
     </BrowserRouter>
  );
