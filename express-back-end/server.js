@@ -5,7 +5,7 @@ const PORT = 8080;
 
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
-App.use(Express.static("public"));
+App.use(Express.static('public'));
 
 App.get("/api/data", (req, res) => {
   res.json({
