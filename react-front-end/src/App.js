@@ -1,17 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
 import "./App.css";
-import MoviesList from "./components/MoviesList";
-import Banner from "./components/Banner";
 import RegistrationForm from "./components/registration";
 import Navbar from "./components/navbar";
 import LoginForm from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import Home from "./components/Home";
+import MovieDetails from "./components/MovieDetails";
 
-export default function App(props) {
+export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
@@ -20,6 +18,7 @@ export default function App(props) {
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="movie/:id" element={<MovieDetails />}></Route>
       </Routes>
     </BrowserRouter>
   );
