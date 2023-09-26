@@ -1,6 +1,6 @@
-const Express = require("express");
+const Express = require('express');
 const App = Express();
-const BodyParser = require("body-parser");
+const BodyParser = require('body-parser');
 const PORT = 8080;
 
 App.use(BodyParser.urlencoded({ extended: false }));
