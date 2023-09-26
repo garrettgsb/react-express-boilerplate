@@ -55,7 +55,8 @@ function MovieDetails() {
             <div className="movie__rating">
               <span className="movie__voteCount">
                 {currentMovieDetails
-                  ? +currentMovieDetails.vote_count + " votes"
+                  ? "Rating: " +
+                    currentMovieDetails.vote_average.toString().substr(0, 3)
                   : ""}
               </span>
             </div>
@@ -84,7 +85,7 @@ function MovieDetails() {
             <div>{currentMovieDetails ? currentMovieDetails.overview : ""}</div>
           </div>
           <div className="movie__buttons">
-            <button className="movie__button">Add to Favourites</button>
+            <button className="movie__button">+ Watchlist</button>
             <button className="movie__button">Watch Trailer</button>
           </div>
         </div>
