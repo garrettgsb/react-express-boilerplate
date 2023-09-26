@@ -10,6 +10,7 @@ const tmdb_api_requests = {
   thriller_movies_url: `${baseUrl}/discover/movie?api_key=${APIKEY}&with_genres=53&include_adult=false`,
   top_rated_url: `${baseUrl}/movie/top_rated?api_key=${APIKEY}&language=en-US&include_adult=false`,
   trending_url: `${baseUrl}/trending/all/week?api_key=${APIKEY}&language=en-US&include_adult=false`,
+  genre_list: `${baseUrl}/genre/movie/list?api_key=${APIKEY}&language=en-US&include_adult=false`,
 };
 
 export default tmdb_api_requests;

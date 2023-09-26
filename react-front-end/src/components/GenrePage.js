@@ -30,7 +30,7 @@ function GenrePage(props) {
     }
     
     getAllMoviesOfGenre()
-  }, [props.url]);
+  }, [searchParams]);
   
   const poster_baseUrl = "https://image.tmdb.org/t/p/original";
   return (

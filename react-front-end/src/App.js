@@ -9,6 +9,7 @@ import Navbar from "./components/navbar";
 import LoginForm from "./components/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import GenrePage from "./components/GenrePage";
 
 export default function App(props) {
   return (
@@ -20,6 +21,7 @@ export default function App(props) {
       <Route path="/home" element={<MoviesList />} />
       <Route path="/register" element={<RegistrationForm />} />
       <Route path="/login" element={<LoginForm/>} />
+      <Route path="/genre" element={<GenrePage url="/"/>} />
       </Routes>
     </BrowserRouter>
  );
