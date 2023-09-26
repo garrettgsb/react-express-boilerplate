@@ -94,3 +94,6 @@
   color: #000;
   transition: all 0.2s;
 }
+.movie__voteCount {
+  margin-left: 10px;
+}

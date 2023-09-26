@@ -53,10 +53,13 @@ function MovieDetails() {
               {currentMovieDetails ? currentMovieDetails.tagline : ""}
             </div>
             <div className="movie__rating">
+              {currentMovieDetails
+                ? "Rating: " +
+                  currentMovieDetails.vote_average.toString().substr(0, 3)
+                : ""}
               <span className="movie__voteCount">
                 {currentMovieDetails
-                  ? "Rating: " +
-                    currentMovieDetails.vote_average.toString().substr(0, 3)
+                  ? " Votes: " + currentMovieDetails.vote_count
                   : ""}
               </span>
             </div>
