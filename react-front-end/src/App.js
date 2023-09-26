@@ -1,16 +1,28 @@
 import React, { Component } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
-import MoviesList from "./components/MoviesList";
+import MoviesList from "./components/MoviesList"
 import Banner from "./components/Banner";
+import RegistrationForm from "./components/registration";
+import Navbar from "./components/navbar";
+import LoginForm from "./components/Login";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 export default function App(props) {
   return (
-    <>
-      <Banner />
-      <MoviesList />
-    </>
-  );
+    <BrowserRouter>
+      <Navbar />
+      <Banner /> 
+      <Routes>
+      <Route index element={<MoviesList />} />
+      <Route path="/home" element={<MoviesList />} />
+      <Route path="/register" element={<RegistrationForm />} />
+      <Route path="/login" element={<LoginForm/>} />
+      </Routes>
+    </BrowserRouter>
+ );
 }
 /*
 class App extends Component {
@@ -26,7 +38,7 @@ class App extends Component {
     .then((response) => {
       // handle success
       console.log(response.data) // The entire response from the Rails API
-
+      console.log(__dirname + '/react-front-end/views')
       console.log(response.data.message) // Just the message
       this.setState({
         message: response.data.message
