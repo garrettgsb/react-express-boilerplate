@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./MoviesListRow.css";
+import { Link } from "react-router-dom";
 
 const poster_baseUrl = "https://image.tmdb.org/t/p/original";
 
@@ -22,12 +23,17 @@ function MoviesListRow(props) {
       {props.title}
       <div className="movies_row_posters">
         {movies.map((movie) => (
-          <img
-            key={movie.id}
-            className="movie_poster"
-            src={`${poster_baseUrl}${movie.poster_path}`}
-            alt={movie.name}
-          />
+          <Link
+            to={`/movie/${movie.id}`}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <img
+              key={movie.id}
+              className="movie_poster"
+              src={`${poster_baseUrl}${movie.poster_path}`}
+              alt={movie.name}
+            />
+          </Link>
         ))}
       </div>
     </div>
