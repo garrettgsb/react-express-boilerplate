@@ -4,6 +4,7 @@ import "./App.css";
 import RegistrationForm from "./components/registration";
 import Navbar from "./components/navbar";
 import LoginForm from "./components/Login";
+import GenrePage from "./components/GenrePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import Home from "./components/Home";
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="movie/:id" element={<MovieDetails />}></Route>
+        <Route path="/genre" element={<GenrePage url="/"/>} />
       </Routes>
     </BrowserRouter>
   );
