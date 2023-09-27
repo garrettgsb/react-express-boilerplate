@@ -47,10 +47,12 @@ function MoviesListRow(props) {
                 <div className="movie_card_description">
                   {movie ? movie.overview.slice(0, 120) + "..." : ""}
                 </div>
-                <div className="overlay_watchlist">
-                  <span className="watchlist_text">Watchlist</span>
-                  <i class="bi bi-heart-fill heart"></i>
-                </div>
+                {props.isLoggedIn && (
+                  <div className="overlay_watchlist">
+                    <span className="watchlist_text">Watchlist</span>
+                    <i class="bi bi-heart-fill heart"></i>
+                  </div>
+                )}
               </div>
             </div>
           </Link>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import RegistrationForm from "./components/registration";
@@ -11,16 +11,20 @@ import Home from "./components/Home";
 import MovieDetails from "./components/MovieDetails";
 
 export default function App() {
+  const [loggedIn, setLoggedIn] = useState(true);
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        <Route index element={<Home isLoggedIn={loggedIn} />} />
+        <Route path="/home" element={<Home isLoggedIn={loggedIn} />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="movie/:id" element={<MovieDetails />}></Route>
-        <Route path="/genre" element={<GenrePage url="/"/>} />
+        <Route
+          path="movie/:id"
+          element={<MovieDetails isLoggedIn={loggedIn} />}
+        ></Route>
+        <Route path="/genre" element={<GenrePage url="/" />} />
       </Routes>
     </BrowserRouter>
   );
