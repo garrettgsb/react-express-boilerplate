@@ -7,8 +7,6 @@ import { useSearchParams } from 'react-router-dom';
 // import MoviesList from "./MoviesList";
 // import MoviesListRow from "./MoviesListRow";
 
-const APIKEY = "d01e999f8dded44697df8754a29f9c29";
-
 
 function GenrePage(props) {
   const [searchParams] = useSearchParams();
