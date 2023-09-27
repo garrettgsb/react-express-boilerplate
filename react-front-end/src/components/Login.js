@@ -1,33 +1,61 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your authentication logic here
+  
+    // Prepare data to send to the server
+    const data = {
+      email,
+      password,
+    };
+  
+  const config = {
+    headers : {
+      'Content-type': 'application/json'
+    }
+  }
+
+    try {
+      const response = await axios.post('/login', data, config);
+  
+      if (response.status === 200) {
+        // Authentication successful, you can perform actions here
+        console.log('Authentication successful');
+      } else {
+        // Authentication failed, handle error and display a message to the user
+        console.error('Authentication failed');
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.error('An error occurred:', error);
+    }
   };
+  
 
   return (
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="email">Email</label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={username}
+            id="email"
+            name="email"
+            value={email}
             onChange={handleUsernameChange}
             className="form-control"
           />
