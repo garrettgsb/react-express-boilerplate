@@ -41,11 +41,15 @@ function MoviesListRow(props) {
                   {movie ? movie.release_date : ""}
                   <span className="movie_card_rating">
                     {movie ? movie.vote_average : ""}
-                    <i className="fas fa-star" />
+                    <i class="bi bi-star-fill vote_star"></i>
                   </span>
                 </div>
                 <div className="movie_card_description">
                   {movie ? movie.overview.slice(0, 120) + "..." : ""}
+                </div>
+                <div className="overlay_watchlist">
+                  <span className="watchlist_text">Watchlist</span>
+                  <i class="bi bi-heart-fill heart"></i>
                 </div>
               </div>
             </div>
