@@ -97,3 +97,10 @@
 .movie__voteCount {
   margin-left: 10px;
 }
+.movie__recommendations {
+  width: 100%;
+  position: relative;
+  color: white;
+  object-fit: contain;
+  bottom: 100px;
+}

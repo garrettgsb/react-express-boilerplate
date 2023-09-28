@@ -12,11 +12,16 @@ function MoviesListRow(props) {
     async function fetchMoviesDataByGenre() {
       const request = await axios.get(props.genre_Url);
       setMovies(request.data.results);
-      console.log(request.data.results);
       return request;
     }
     fetchMoviesDataByGenre();
   }, [props.genre_Url]);
+
+  useEffect(() => {
+    if (props.movieToExclude) {
+      setMovies(movies.filter((x) => x.id !== props.movieToExclude));
+    }
+  }, [props.movieToExclude]);
 
   return (
     <div className="movies_row">
@@ -26,6 +31,7 @@ function MoviesListRow(props) {
           <Link
             to={`/movie/${movie.id}`}
             style={{ textDecoration: "none", color: "white" }}
+            state={{ genre_url: `${props.genre_Url}` }}
           >
             <div className="movie_card">
               <img

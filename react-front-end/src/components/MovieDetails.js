@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./MovieDetails.css";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import tmdb_api_requests from "../TMDB_API_Requests";
+import MoviesListRow from "./MoviesListRow";
 
 function MovieDetails(props) {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
@@ -19,6 +20,9 @@ function MovieDetails(props) {
     console.log(request.data);
     return request;
   }
+  const location = useLocation(); //to get params from Link
+  const { genre_url } = location.state;
+
   return (
     <div className="movie">
       <div className="movie__intro">
@@ -94,6 +98,14 @@ function MovieDetails(props) {
             <button className="movie__button">Watch Trailer</button>
           </div>
         </div>
+      </div>
+      <div className="movie__recommendations">
+        <MoviesListRow
+          genre_Url={genre_url}
+          title="You might also like"
+          isLoggedIn={props.isLoggedIn}
+          movieToExclude={currentMovieDetails ? currentMovieDetails.id : ""}
+        />
       </div>
     </div>
   );
