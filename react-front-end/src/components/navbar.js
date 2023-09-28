@@ -7,6 +7,7 @@ import { createSearchParams, useNavigate, Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [genres, setGenres] = useState([]);
+  const [searchString, setSearchString] = useState('')
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,15 +22,27 @@ const Navbar = () => {
   }, []);
 
   const handleChange = (event) => {
-    console.log(event.target.value);
     let id = getId(event.target.value)
-    console.log(id)
 
     navigate({
       pathname: '/genre',
-      search: `?${createSearchParams({name: event.target.value, id: id})}`,
+      search: `?${createSearchParams({ name: event.target.value, id: id })}`,
     })
   };
+
+  const handleSearch = (event) => {
+    console.log("this is searchevent" + event.target.value);
+    setSearchString(event.target.value)
+  }
+
+  const handleSearchSubmit = (event) => {
+    console.log("this is search string: " + searchString);
+    event.preventDefault();
+    navigate({
+      pathname: '/search',
+      search: `?${createSearchParams({ query: searchString})}`,
+    })
+  }
 
   const getId = (name) => {
     let result = 0;
@@ -75,6 +88,11 @@ const Navbar = () => {
             <option value={genre.name} id={genre.id}> {genre.name} </option>
           ))}
         </select>
+      </div>
+      <div className="search-bar">
+        <form onSubmit={handleSearchSubmit}>
+          <input placeholder="Search" onChange={handleSearch}></input>
+        </form>
       </div>
     </nav>
   );
