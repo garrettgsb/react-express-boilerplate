@@ -87,6 +87,7 @@
   outline: none;
   padding: 0.5rem 2rem;
   background-color: #aba7a7b4;
+  color: white;
 }
 
 .movie__button:hover {
@@ -96,4 +97,14 @@
 }
 .movie__voteCount {
   margin-left: 10px;
+}
+.movie__recommendations {
+  width: 100%;
+  position: relative;
+  color: white;
+  object-fit: contain;
+  bottom: 100px;
+}
+.icon {
+  margin-right: 0.5rem;
 }
