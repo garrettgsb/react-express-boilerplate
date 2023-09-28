@@ -95,7 +95,26 @@ function MovieDetails(props) {
             {props.isLoggedIn && (
               <button className="movie__button">+ Watchlist</button>
             )}
-            <button className="movie__button">Watch Trailer</button>
+            <button className="movie__button">
+              <span>
+                <i className="bi bi-film icon" />
+                Trailer
+              </span>
+            </button>
+            {currentMovieDetails && currentMovieDetails.homepage && (
+              <button className="movie__button">
+                <a
+                  href={currentMovieDetails.homepage}
+                  target="_blank"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  <span>
+                    <i className="bi bi-link icon" />
+                    Website
+                  </span>
+                </a>
+              </button>
+            )}
           </div>
         </div>
       </div>
