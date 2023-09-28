@@ -4,7 +4,7 @@ import "./MovieDetails.css";
 import { useParams } from "react-router-dom";
 import tmdb_api_requests from "../TMDB_API_Requests";
 
-function MovieDetails() {
+function MovieDetails(props) {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
   const { id } = useParams();
   useEffect(() => {
@@ -88,7 +88,9 @@ function MovieDetails() {
             <div>{currentMovieDetails ? currentMovieDetails.overview : ""}</div>
           </div>
           <div className="movie__buttons">
-            <button className="movie__button">+ Watchlist</button>
+            {props.isLoggedIn && (
+              <button className="movie__button">+ Watchlist</button>
+            )}
             <button className="movie__button">Watch Trailer</button>
           </div>
         </div>

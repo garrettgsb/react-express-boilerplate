@@ -13,8 +13,7 @@
 .movies_row_posters::-webkit-scrollbar {
   display: none;
 }
-
-.movie_poster {
+.movie_card {
   object-fit: contain;
   display: inline-block;
   transition: transform 0.2s;
@@ -29,22 +28,63 @@
   border: 1px solid rgb(99, 99, 99);
 }
 
-.movie_poster:hover {
+.movie_card:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
-.movie_poster:hover .overlay {
+.movie_card_img {
+  height: 200px;
+}
+.movie_card_overlay {
+  position: absolute;
+  padding: 0 1rem 2rem 1rem;
+  bottom: 0px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-end;
+  background-image: linear-gradient(rgb(0, 0, 0, 0), rgb(0, 0, 0, 1));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.movie_card_overlay:hover {
   opacity: 1;
 }
 
-.overlay {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.8);
-  width: 100%;
-  transition: 0.5s ease;
-  opacity: 0;
-  bottom: 0;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;
+.movie_card_title {
+  font-weight: 900;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.movie_card_runtime {
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.movie_card_rating {
+  float: right;
+}
+
+.movie_card_description {
+  font-style: italic;
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.vote_star {
+  color: gold;
+  margin-left: 2px;
+}
+
+.heart {
+  color: red;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.watchlist_text {
+  font-size: 1rem;
 }

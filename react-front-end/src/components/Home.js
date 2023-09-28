@@ -2,11 +2,11 @@ import React from "react";
 import Banner from "./Banner";
 import MoviesList from "./MoviesList";
 
-function Home() {
+function Home(props) {
   return (
     <div>
       <Banner />
-      <MoviesList />
+      <MoviesList isLoggedIn={props.isLoggedIn} />
     </div>
   );
 }
