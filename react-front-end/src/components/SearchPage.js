@@ -5,19 +5,17 @@ import tmdb_api_requests from "../TMDB_API_Requests";
 import { useSearchParams } from 'react-router-dom';
 
 const APIKEY = tmdb_api_requests.apikey;
-function GenrePage(props) {
+function SearchPage(props) {
   const [searchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
-  const [name, setName] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
 
   useEffect(() => {
     async function getAllMoviesOfGenre() {
-
-      const genreId = Object.fromEntries([...searchParams]).id;
-      const genreName = Object.fromEntries([...searchParams]).name;
-      setName(genreName)
-      const request = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&with_genres=${genreId}&include_adult=false&page=3`)
+      const query = Object.fromEntries([...searchParams]).query;
+      setSearchQuery(query)
+      const request = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${query}&include_adult=false&language=en-US&page=1`)
      
       setMovies(request.data.results);
       return request
@@ -29,7 +27,7 @@ function GenrePage(props) {
   const poster_baseUrl = "https://image.tmdb.org/t/p/original";
   return (
     <div className="movies_row_grid">
-      {name}
+      Showing Results for: "{searchQuery}"
       <div className="movies_row_posters_grid">
         {movies.map((movie) => (
           <img
@@ -43,4 +41,4 @@ function GenrePage(props) {
     </div>);
 }
 
-export default GenrePage;
+export default SearchPage;
