@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import Home from "./components/Home";
 import MovieDetails from "./components/MovieDetails";
+import SearchPage from "./components/SearchPage";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -24,7 +25,10 @@ export default function App() {
           path="movie/:id"
           element={<MovieDetails isLoggedIn={loggedIn} />}
         ></Route>
-        <Route path="/genre" element={<GenrePage url="/" />} />
+        <Route path="/genre" element={<GenrePage />} />
+        <Route path="/search" element={<SearchPage />} />
+
+
       </Routes>
     </BrowserRouter>
   );
