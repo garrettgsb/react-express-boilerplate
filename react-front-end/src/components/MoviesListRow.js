@@ -25,6 +25,7 @@ function MoviesListRow(props) {
       setMovies(movies.filter((x) => x.id !== props.movieToExclude));
     }
   }, [props.movieToExclude]);
+
   const handleClick = function (event, movie) {
     let classList = Array.from(event.target.classList);
     if (classList.includes("add_watchlist")) {
@@ -34,16 +35,13 @@ function MoviesListRow(props) {
       //call to remove from watchlist
       props.handleRemoveWatchlistClick(movie);
     } else {
+      //navigate to movie details page
       navigate(`/movie/${movie.id}`, {
         state: { genre_url: `${props.genre_Url}` },
       });
     }
-    //if()//dont go to details page if on home page
   };
-  const handleMovieDetail = function (id, event) {
-    console.log("movie details click", event.target);
-    //navigate(`/movie/${id}`, { state: { genre_url: `${props.genre_Url}` } });
-  };
+
   return (
     <div className="movies_row">
       {props.title}
