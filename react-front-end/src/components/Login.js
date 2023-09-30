@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 
+
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +34,7 @@ const LoginForm = () => {
   
       if (response.status === 200) {
         // Authentication successful, you can perform actions here
-        console.log('Authentication successful');
+        console.log('Authentication successful', data);
       } else {
         // Authentication failed, handle error and display a message to the user
         console.error('Authentication failed');

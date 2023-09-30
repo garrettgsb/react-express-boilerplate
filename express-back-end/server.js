@@ -4,7 +4,7 @@ const BodyParser = require('body-parser');
 const PORT = 8080;
 
 App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
+App.use(BodyParser.json());"name":"test"}
 App.use(Express.static('public'));
 const cookieSession = require('cookie-session')
 App.use(cookieSession ({
@@ -14,12 +14,13 @@ App.use(cookieSession ({
 }))
 //Routes for each thing
 const loginRoutes = require('./routes/login')
-App.get("/", (req, res) => {
-  const templateVars = {
+
+App.get("/api/userData", (req, res) => {
+  const userData = {
     id: req.session.id,
     name: req.session.name
   }
-  res.send(templateVars)
+  res.json(userData)
 })
 App.get("/api/data", (req, res) => {
   res.json({
@@ -28,6 +29,8 @@ App.get("/api/data", (req, res) => {
 });
 
 App.use(loginRoutes)
+
+
 
 // Handling registration POST request
 
