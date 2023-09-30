@@ -2,9 +2,9 @@ import React from "react";
 
 function RemoveWatchlist() {
   return (
-    <div>
-      <span className="watchlist_text">Watchlist</span>
-      <i class="bi bi-trash3"></i>
+    <div class="remove_watchlist">
+      <span className="watchlist_text remove_watchlist">Watchlist</span>
+      <i class="bi bi-trash3 remove_watchlist"></i>
     </div>
   );
 }

@@ -32,6 +32,17 @@ export default function App() {
     saveToStorage(newWatchlist);
   };
 
+  const isMovieAddedToWatchlist = function (movie) {
+    if (watchlist && watchlist.length > 0 && movie) {
+      for (var i = 0; i < watchlist.length; i++) {
+        if (watchlist[i].id === movie.id) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -43,7 +54,7 @@ export default function App() {
               isLoggedIn={loggedIn}
               handleAddWatchlistClick={addMovieToWatchlist}
               handleRemoveWatchlistClick={removeMovieFromWatchlist}
-              watchlist={watchlist}
+              isMovieAddedToWatchlist={isMovieAddedToWatchlist}
             />
           }
         />
@@ -54,7 +65,7 @@ export default function App() {
               isLoggedIn={loggedIn}
               handleAddWatchlistClick={addMovieToWatchlist}
               handleRemoveWatchlistClick={removeMovieFromWatchlist}
-              watchlist={watchlist}
+              isMovieAddedToWatchlist={isMovieAddedToWatchlist}
             />
           }
         />
@@ -67,7 +78,7 @@ export default function App() {
               isLoggedIn={loggedIn}
               handleAddWatchlistClick={addMovieToWatchlist}
               handleRemoveWatchlistClick={removeMovieFromWatchlist}
-              watchlist={watchlist}
+              isMovieAddedToWatchlist={isMovieAddedToWatchlist}
             />
           }
         ></Route>

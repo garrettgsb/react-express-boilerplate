@@ -2,9 +2,9 @@ import React from "react";
 
 function AddWatchlist() {
   return (
-    <div>
-      <span className="watchlist_text">Watchlist</span>
-      <i class="bi bi-heart-fill heart"></i>
+    <div class="add_watchlist">
+      <span className="watchlist_text add_watchlist">Watchlist</span>
+      <i class="bi bi-heart-fill heart add_watchlist"></i>
     </div>
   );
 }

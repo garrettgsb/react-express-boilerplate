@@ -24,16 +24,6 @@ function MovieDetails(props) {
   const location = useLocation(); //to get params from Link
   const { genre_url } = location.state;
 
-  const isMovieAddedToWatchlist = function (movie) {
-    if (props.watchlist && props.watchlist.length > 0 && movie) {
-      for (var i = 0; i < props.watchlist.length; i++) {
-        if (props.watchlist[i].id === movie.id) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
   const handleWatchlistClick = function (isAdded) {
     if (isAdded) props.handleAddWatchlistClick(currentMovieDetails);
     else props.handleRemoveWatchlistClick(currentMovieDetails);
@@ -109,7 +99,7 @@ function MovieDetails(props) {
           <div className="movie__buttons">
             {props.isLoggedIn && (
               <span>
-                {isMovieAddedToWatchlist(currentMovieDetails) ? (
+                {props.isMovieAddedToWatchlist(currentMovieDetails) ? (
                   <button
                     className="movie__button"
                     onClick={() => handleWatchlistClick(false)}
@@ -160,6 +150,7 @@ function MovieDetails(props) {
           title="You might also like"
           isLoggedIn={props.isLoggedIn}
           movieToExclude={currentMovieDetails ? currentMovieDetails.id : ""}
+          isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
       </div>
     </div>

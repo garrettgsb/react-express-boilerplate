@@ -10,7 +10,7 @@ function Home(props) {
         isLoggedIn={props.isLoggedIn}
         handleAddWatchlistClick={props.handleAddWatchlistClick}
         handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
-        watchlist={props.watchlist}
+        isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
       />
     </div>
   );

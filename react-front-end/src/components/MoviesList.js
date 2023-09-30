@@ -3,6 +3,7 @@ import MoviesListRow from "./MoviesListRow";
 import tmdb_api_requests from "../TMDB_API_Requests";
 
 function MoviesList(props) {
+  console.log(props);
   return (
     <>
       <div className="App">
@@ -12,6 +13,7 @@ function MoviesList(props) {
           isLoggedIn={props.isLoggedIn}
           handleAddWatchlistClick={props.handleAddWatchlistClick}
           handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
+          isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
         <MoviesListRow
           genre_Url={tmdb_api_requests.trending_url}
@@ -19,6 +21,7 @@ function MoviesList(props) {
           isLoggedIn={props.isLoggedIn}
           handleAddWatchlistClick={props.handleAddWatchlistClick}
           handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
+          isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
         <MoviesListRow
           genre_Url={tmdb_api_requests.action_movies_url}
@@ -26,6 +29,7 @@ function MoviesList(props) {
           isLoggedIn={props.isLoggedIn}
           handleAddWatchlistClick={props.handleAddWatchlistClick}
           handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
+          isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
 
         <MoviesListRow
@@ -34,6 +38,7 @@ function MoviesList(props) {
           isLoggedIn={props.isLoggedIn}
           handleAddWatchlistClick={props.handleAddWatchlistClick}
           handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
+          isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
 
         <MoviesListRow
@@ -42,6 +47,7 @@ function MoviesList(props) {
           isLoggedIn={props.isLoggedIn}
           handleAddWatchlistClick={props.handleAddWatchlistClick}
           handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
+          isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
         <MoviesListRow
           genre_Url={tmdb_api_requests.thriller_movies_url}
@@ -49,6 +55,7 @@ function MoviesList(props) {
           isLoggedIn={props.isLoggedIn}
           handleAddWatchlistClick={props.handleAddWatchlistClick}
           handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
+          isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
         <MoviesListRow
           genre_Url={tmdb_api_requests.war_movies_url}
@@ -56,6 +63,7 @@ function MoviesList(props) {
           isLoggedIn={props.isLoggedIn}
           handleAddWatchlistClick={props.handleAddWatchlistClick}
           handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
+          isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
         <MoviesListRow
           genre_Url={tmdb_api_requests.horror_movies_url}
@@ -63,7 +71,7 @@ function MoviesList(props) {
           isLoggedIn={props.isLoggedIn}
           handleAddWatchlistClick={props.handleAddWatchlistClick}
           handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
-          watchlist={props.watchlist}
+          isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
       </div>
     </>
