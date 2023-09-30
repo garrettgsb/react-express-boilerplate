@@ -13,22 +13,66 @@ import SearchPage from "./components/SearchPage";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(true);
+  const [watchlist, setWatchlist] = useState([{ id: 278 }]);
+
+  const saveToStorage = (items) => {};
+
+  const addMovieToWatchlist = (movie) => {
+    const newWatchlist = [...watchlist, movie];
+    setWatchlist(newWatchlist);
+    saveToStorage(newWatchlist);
+  };
+
+  const removeMovieFromWatchlist = (movie) => {
+    const newWatchlist = watchlist.filter(
+      (favourite) => favourite.id !== movie.id
+    );
+
+    setWatchlist(newWatchlist);
+    saveToStorage(newWatchlist);
+  };
+
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route index element={<Home isLoggedIn={loggedIn} />} />
-        <Route path="/home" element={<Home isLoggedIn={loggedIn} />} />
+        <Route
+          index
+          element={
+            <Home
+              isLoggedIn={loggedIn}
+              handleAddWatchlistClick={addMovieToWatchlist}
+              handleRemoveWatchlistClick={removeMovieFromWatchlist}
+              watchlist={watchlist}
+            />
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <Home
+              isLoggedIn={loggedIn}
+              handleAddWatchlistClick={addMovieToWatchlist}
+              handleRemoveWatchlistClick={removeMovieFromWatchlist}
+              watchlist={watchlist}
+            />
+          }
+        />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route
           path="movie/:id"
-          element={<MovieDetails isLoggedIn={loggedIn} />}
+          element={
+            <MovieDetails
+              isLoggedIn={loggedIn}
+              handleAddWatchlistClick={addMovieToWatchlist}
+              handleRemoveWatchlistClick={removeMovieFromWatchlist}
+              watchlist={watchlist}
+            />
+          }
         ></Route>
         <Route path="/genre" element={<GenrePage />} />
         <Route path="/search" element={<SearchPage />} />
-
-
       </Routes>
     </BrowserRouter>
   );

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./MoviesListRow.css";
 import { Link } from "react-router-dom";
+import AddWatchlist from "./AddWatchlist";
+import RemoveWatchlist from "./RemoveWatchlist";
 
 const poster_baseUrl = "https://image.tmdb.org/t/p/original";
 
@@ -22,6 +24,11 @@ function MoviesListRow(props) {
       setMovies(movies.filter((x) => x.id !== props.movieToExclude));
     }
   }, [props.movieToExclude]);
+
+  const isMovieAddedToWatchlist = function (movie) {
+    if (props.watchlist) return props.watchlist.includes(movie);
+    return false;
+  };
 
   return (
     <div className="movies_row">
@@ -55,8 +62,15 @@ function MoviesListRow(props) {
                 </div>
                 {props.isLoggedIn && (
                   <div className="overlay_watchlist">
-                    <span className="watchlist_text">Watchlist</span>
-                    <i class="bi bi-heart-fill heart"></i>
+                    {isMovieAddedToWatchlist(movie) ? (
+                      <RemoveWatchlist
+                        onClick={() => props.handleRemoveWatchlistClick(movie)}
+                      />
+                    ) : (
+                      <AddWatchlist
+                        onClick={() => props.handleAddWatchlistClick(movie)}
+                      />
+                    )}
                   </div>
                 )}
               </div>
