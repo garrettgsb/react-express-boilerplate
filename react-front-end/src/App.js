@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useRoutes } from "react-router-dom";
 import "./App.css";
 import RegistrationForm from "./components/registration";
 import Navbar from "./components/navbar";
@@ -11,6 +11,7 @@ import Home from "./components/Home";
 import MovieDetails from "./components/MovieDetails";
 import SearchPage from "./components/SearchPage";
 import axios from "axios";
+import WatchlistDetails from "./components/WatchlistDetails";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -20,30 +21,34 @@ export default function App() {
     //call API to update DB
     const watchlistURL = `/api/watchlist/${operation}/${movie_id}`;
     if (watchlistURL) {
-      axios.post(watchlistURL).then((result) => {
-        setWatchlist(result.data.watchlist);
-      });
+      axios.post(watchlistURL);
     }
   };
 
   const addMovieToWatchlist = (movie) => {
-    // const newWatchlist = [...watchlist, movie.id];
+    const newWatchlist = [...watchlist, { id: movie.id }];
+    setWatchlist(newWatchlist);
     saveToStorage(movie.id, "add");
   };
 
   const removeMovieFromWatchlist = (movie) => {
-    // const newWatchlist = watchlist.filter(
-    //   (favourite) => favourite.id !== movie.id
-    // );
+    const newWatchlist = watchlist.filter(
+      (favourite) => favourite.id != movie.id
+    );
+    setWatchlist(newWatchlist);
     saveToStorage(movie.id, "delete");
   };
 
   useEffect(() => {
-    const watchlistURL = `/api/watchlist`;
-    axios.get(watchlistURL).then((result) => {
-      setWatchlist(result.data.watchlist);
-    });
-  }, [watchlist]);
+    async function fetchWatchlist() {
+      const watchlistURL = `/api/watchlist`;
+      await axios.get(watchlistURL).then((result) => {
+        setWatchlist(result.data.watchlist);
+        return result.data.watchlist;
+      });
+    }
+    fetchWatchlist();
+  }, []);
 
   const isMovieAddedToWatchlist = function (movie) {
     if (watchlist && watchlist.length > 0 && movie) {
@@ -58,7 +63,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar loggedIn={loggedIn} />
       <Routes>
         <Route
           index
@@ -97,6 +102,10 @@ export default function App() {
         ></Route>
         <Route path="/genre" element={<GenrePage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route
+          path="/my_watchlist"
+          element={<WatchlistDetails watchlist={watchlist} />}
+        />
       </Routes>
     </BrowserRouter>
   );

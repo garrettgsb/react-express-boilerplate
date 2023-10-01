@@ -151,6 +151,8 @@ function MovieDetails(props) {
           title="You might also like"
           isLoggedIn={props.isLoggedIn}
           movieToExclude={currentMovieDetails ? currentMovieDetails.id : ""}
+          handleAddWatchlistClick={props.handleAddWatchlistClick}
+          handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
           isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
       </div>
