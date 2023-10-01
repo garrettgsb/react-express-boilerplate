@@ -7,6 +7,7 @@ import MoviesListRow from "./MoviesListRow";
 
 function MovieDetails(props) {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
+
   const { id } = useParams();
   useEffect(() => {
     getCurrentMovieDetails();
@@ -17,11 +18,15 @@ function MovieDetails(props) {
   async function getCurrentMovieDetails() {
     const request = await axios.get(url);
     setCurrentMovieDetails(request.data);
-    console.log(request.data);
     return request;
   }
   const location = useLocation(); //to get params from Link
   const { genre_url } = location.state;
+
+  const handleWatchlistClick = function (isAdded) {
+    if (isAdded) props.handleAddWatchlistClick(currentMovieDetails);
+    else props.handleRemoveWatchlistClick(currentMovieDetails);
+  };
 
   return (
     <div className="movie">
@@ -93,24 +98,45 @@ function MovieDetails(props) {
           </div>
           <div className="movie__buttons">
             {props.isLoggedIn && (
-              <button className="movie__button">+ Watchlist</button>
+              <span>
+                {props.isMovieAddedToWatchlist(currentMovieDetails) ? (
+                  <button
+                    className="movie__button"
+                    onClick={() => handleWatchlistClick(false)}
+                  >
+                    Watchlist
+                    <span>
+                      <i className="bi bi-trash3 icon"></i>
+                    </span>
+                  </button>
+                ) : (
+                  <button
+                    className="movie__button"
+                    onClick={() => handleWatchlistClick(true)}
+                  >
+                    Watchlist
+                    <span>
+                      <i className="bi bi-heart-fill heart icon"></i>
+                    </span>
+                  </button>
+                )}
+              </span>
             )}
             <button className="movie__button">
               <span>
-                <i className="bi bi-film icon" />
                 Trailer
+                <i className="bi bi-film icon" />
               </span>
             </button>
             {currentMovieDetails && currentMovieDetails.homepage && (
               <button className="movie__button">
                 <a
                   href={currentMovieDetails.homepage}
-                  target="_blank"
                   style={{ textDecoration: "none", color: "white" }}
                 >
                   <span>
-                    <i className="bi bi-link icon" />
                     Website
+                    <i className="bi bi-link icon" />
                   </span>
                 </a>
               </button>
@@ -124,6 +150,9 @@ function MovieDetails(props) {
           title="You might also like"
           isLoggedIn={props.isLoggedIn}
           movieToExclude={currentMovieDetails ? currentMovieDetails.id : ""}
+          handleAddWatchlistClick={props.handleAddWatchlistClick}
+          handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
+          isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
         />
       </div>
     </div>

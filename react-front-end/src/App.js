@@ -10,25 +10,102 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import Home from "./components/Home";
 import MovieDetails from "./components/MovieDetails";
 import SearchPage from "./components/SearchPage";
+import axios from "axios";
+import WatchlistDetails from "./components/WatchlistDetails";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(true);
+  const [watchlist, setWatchlist] = useState([]);
+
+  const saveToStorage = (movie_id, operation) => {
+    //call API to update DB
+    const watchlistURL = `/api/watchlist/${operation}/${movie_id}`;
+    if (watchlistURL) {
+      axios.post(watchlistURL);
+    }
+  };
+
+  const addMovieToWatchlist = (movie) => {
+    const newWatchlist = [...watchlist, { id: movie.id }];
+    setWatchlist(newWatchlist);
+    saveToStorage(movie.id, "add");
+  };
+
+  const removeMovieFromWatchlist = (movie) => {
+    const newWatchlist = watchlist.filter(
+      (favourite) => favourite.id !== movie.id
+    );
+    setWatchlist(newWatchlist);
+    saveToStorage(movie.id, "delete");
+  };
+
+  useEffect(() => {
+    async function fetchWatchlist() {
+      const watchlistURL = `/api/watchlist`;
+      await axios.get(watchlistURL).then((result) => {
+        setWatchlist(result.data.watchlist);
+        return result.data.watchlist;
+      });
+    }
+    fetchWatchlist();
+  }, []);
+
+  const isMovieAddedToWatchlist = function (movie) {
+    if (watchlist && watchlist.length > 0 && movie) {
+      for (var i = 0; i < watchlist.length; i++) {
+        if (watchlist[i].id === movie.id) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar loggedIn={loggedIn} />
       <Routes>
-        <Route index element={<Home isLoggedIn={loggedIn} />} />
-        <Route path="/home" element={<Home isLoggedIn={loggedIn} />} />
+        <Route
+          index
+          element={
+            <Home
+              isLoggedIn={loggedIn}
+              handleAddWatchlistClick={addMovieToWatchlist}
+              handleRemoveWatchlistClick={removeMovieFromWatchlist}
+              isMovieAddedToWatchlist={isMovieAddedToWatchlist}
+            />
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <Home
+              isLoggedIn={loggedIn}
+              handleAddWatchlistClick={addMovieToWatchlist}
+              handleRemoveWatchlistClick={removeMovieFromWatchlist}
+              isMovieAddedToWatchlist={isMovieAddedToWatchlist}
+            />
+          }
+        />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route
           path="movie/:id"
-          element={<MovieDetails isLoggedIn={loggedIn} />}
+          element={
+            <MovieDetails
+              isLoggedIn={loggedIn}
+              handleAddWatchlistClick={addMovieToWatchlist}
+              handleRemoveWatchlistClick={removeMovieFromWatchlist}
+              isMovieAddedToWatchlist={isMovieAddedToWatchlist}
+            />
+          }
         ></Route>
         <Route path="/genre" element={<GenrePage />} />
         <Route path="/search" element={<SearchPage />} />
-
-
+        <Route
+          path="/my_watchlist"
+          element={<WatchlistDetails watchlist={watchlist} />}
+        />
       </Routes>
     </BrowserRouter>
   );

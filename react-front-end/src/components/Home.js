@@ -6,7 +6,12 @@ function Home(props) {
   return (
     <div>
       <Banner />
-      <MoviesList isLoggedIn={props.isLoggedIn} />
+      <MoviesList
+        isLoggedIn={props.isLoggedIn}
+        handleAddWatchlistClick={props.handleAddWatchlistClick}
+        handleRemoveWatchlistClick={props.handleRemoveWatchlistClick}
+        isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
+      />
     </div>
   );
 }
