@@ -4,36 +4,31 @@ import axios from "axios";
 
 function WatchlistDetails(props) {
   const poster_baseUrl = "https://image.tmdb.org/t/p/original";
-  const [movies, setMovies] = useState([]);
+
   const [watchlist_movies, setWatchlistMovies] = useState([]);
 
+  async function getCurrentMovieDetails(url) {
+    const request = await axios.get(url);
+    return request.data;
+  }
   useEffect(() => {
-    async function fetchAllMoviesData() {
-      const request = await axios.get(tmdb_api_requests.all_movies_url);
-      setMovies(request.data.results);
-      return request;
-    }
-    fetchAllMoviesData().then((result) => {
-      const all_movies = result.data.results;
-      console.log(props.watchlist);
-      if (all_movies && props.watchlist) {
-        props.watchlist.map((movie) => {
-          setWatchlistMovies(
-            ...watchlist_movies,
-            Array.from(all_movies).filter((x) => x.id === movie.id)[0]
-          );
-          return watchlist_movies;
-        });
-        console.log("watchlist movies: ", watchlist_movies);
-      }
+    const newWatchlist = [];
+    Array.from(props.watchlist).forEach((movie) => {
+      let url = `${tmdb_api_requests.baseUrl}/movie/${movie.id}?api_key=${tmdb_api_requests.apikey}&language=en-US&include_adult=false`;
+
+      getCurrentMovieDetails(url).then((result) => {
+        newWatchlist.push(result);
+      });
     });
+    console.log(newWatchlist);
+    setWatchlistMovies(newWatchlist);
   }, []);
 
   return (
     <div className="movies_row_grid">
       My Watchlist
       <div className="movies_row_posters_grid">
-        {props.watchlist.map((movie) => (
+        {watchlist_movies.map((movie) => (
           <img
             key={movie.id}
             className="movie_poster_grid"

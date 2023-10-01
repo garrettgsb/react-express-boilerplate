@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, useRoutes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import RegistrationForm from "./components/registration";
 import Navbar from "./components/navbar";
@@ -33,7 +33,7 @@ export default function App() {
 
   const removeMovieFromWatchlist = (movie) => {
     const newWatchlist = watchlist.filter(
-      (favourite) => favourite.id != movie.id
+      (favourite) => favourite.id !== movie.id
     );
     setWatchlist(newWatchlist);
     saveToStorage(movie.id, "delete");
@@ -53,7 +53,7 @@ export default function App() {
   const isMovieAddedToWatchlist = function (movie) {
     if (watchlist && watchlist.length > 0 && movie) {
       for (var i = 0; i < watchlist.length; i++) {
-        if (watchlist[i].id == movie.id) {
+        if (watchlist[i].id === movie.id) {
           return true;
         }
       }

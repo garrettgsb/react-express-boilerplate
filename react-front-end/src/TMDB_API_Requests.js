@@ -11,7 +11,6 @@ const tmdb_api_requests = {
   top_rated_url: `${baseUrl}/movie/top_rated?api_key=${APIKEY}&language=en-US&include_adult=false`,
   trending_url: `${baseUrl}/trending/all/week?api_key=${APIKEY}&language=en-US&include_adult=false`,
   genre_list: `${baseUrl}/genre/movie/list?api_key=${APIKEY}&language=en-US&include_adult=false`,
-  all_movies_url: `${baseUrl}/discover/movie?api_key=${APIKEY}&language=en-US&include_adult=false`,
   apikey: APIKEY,
   baseUrl: baseUrl,
 };
