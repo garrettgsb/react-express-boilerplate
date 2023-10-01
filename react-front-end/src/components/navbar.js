@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Navbar.css";
 import { createSearchParams, useNavigate, Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [genres, setGenres] = useState([]);
   const [searchString, setSearchString] = useState("");
   const navigate = useNavigate();
@@ -96,6 +96,13 @@ const Navbar = () => {
       <span className="nav-item user-data">
           {userData.name} is logged in.
         </span>
+        {props.loggedIn && (
+          <li className="nav-item">
+            <Link to="/my_watchlist" className="btn btn-light">
+              My Watchlist
+            </Link>
+          </li>
+        )}
     </nav>
   ) : (
     <nav className="navbar navbar-light bg-light">
@@ -116,12 +123,13 @@ const Navbar = () => {
             Login
           </a>
         </li>
+    
       </ul>
       <div className="navbar_dropdown">
         <select onChange={handleChange}>
           <option selected="selected">Choose a genre</option>
           {genres.map((genre) => (
-            <option value={genre.name} id={genre.id}>
+            <option value={genre.name} id={genre.id} key={genre.id}>
               {" "}
               {genre.name}{" "}
             </option>
