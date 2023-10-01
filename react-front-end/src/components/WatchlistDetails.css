@@ -1,8 +1,7 @@
-.movies_row {
-  margin-left: 20px;
+.movies_list {
   font-weight: bold;
   font-size: 1.2rem;
-  margin-bottom: 5x;
+  background-color: black;
 }
 .movies_posters {
   padding: 20px;

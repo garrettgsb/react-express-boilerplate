@@ -45,7 +45,7 @@ function WatchlistDetails(props) {
   };
 
   return (
-    <div className="movies_row">
+    <div className="movies_list">
       My Watchlist
       <div className="movies_posters">
         {watchlist_movies.map((movie) => (
