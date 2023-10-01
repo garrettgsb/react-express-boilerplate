@@ -10,17 +10,20 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import Home from "./components/Home";
 import MovieDetails from "./components/MovieDetails";
 import SearchPage from "./components/SearchPage";
+import axios from "axios";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(true);
-  const [watchlist, setWatchlist] = useState([{ id: 278 }]);
+  const [watchlist, setWatchlist] = useState([]);
 
-  const saveToStorage = (items) => {};
+  const saveToStorage = (movie_id) => {
+    //call API to update DB
+  };
 
   const addMovieToWatchlist = (movie) => {
-    const newWatchlist = [...watchlist, movie];
+    const newWatchlist = [...watchlist, movie.id];
     setWatchlist(newWatchlist);
-    saveToStorage(newWatchlist);
+    saveToStorage(movie.id);
   };
 
   const removeMovieFromWatchlist = (movie) => {
@@ -29,13 +32,20 @@ export default function App() {
     );
 
     setWatchlist(newWatchlist);
-    saveToStorage(newWatchlist);
+    saveToStorage(movie.id);
   };
+
+  useEffect(() => {
+    const watchlistURL = `/api/watchlist`;
+    axios.get(watchlistURL).then((result) => {
+      setWatchlist(result.data.watchlist);
+    });
+  }, []);
 
   const isMovieAddedToWatchlist = function (movie) {
     if (watchlist && watchlist.length > 0 && movie) {
       for (var i = 0; i < watchlist.length; i++) {
-        if (watchlist[i].id === movie.id) {
+        if (watchlist[i].id == movie.id) {
           return true;
         }
       }

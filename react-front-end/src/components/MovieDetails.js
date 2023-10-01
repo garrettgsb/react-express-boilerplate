@@ -28,6 +28,7 @@ function MovieDetails(props) {
     if (isAdded) props.handleAddWatchlistClick(currentMovieDetails);
     else props.handleRemoveWatchlistClick(currentMovieDetails);
   };
+
   return (
     <div className="movie">
       <div className="movie__intro">

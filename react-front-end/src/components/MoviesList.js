@@ -3,7 +3,6 @@ import MoviesListRow from "./MoviesListRow";
 import tmdb_api_requests from "../TMDB_API_Requests";
 
 function MoviesList(props) {
-  console.log(props);
   return (
     <>
       <div className="App">
