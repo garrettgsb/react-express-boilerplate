@@ -53,6 +53,7 @@ function MoviesListRow(props) {
           //   state={{ genre_url: `${props.genre_Url}` }}
           // >
           <div
+            key={movie.id}
             className="movie_card"
             onClick={(event) => handleClick(event, movie)}
           >
@@ -69,7 +70,7 @@ function MoviesListRow(props) {
                 {movie ? movie.release_date : ""}
                 <span className="movie_card_rating">
                   {movie ? movie.vote_average : ""}
-                  <i class="bi bi-star-fill vote_star"></i>
+                  <i className="bi bi-star-fill vote_star"></i>
                 </span>
               </div>
               <div className="movie_card_description">

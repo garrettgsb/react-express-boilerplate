@@ -85,7 +85,7 @@ const Navbar = (props) => {
         <select onChange={handleChange}>
           <option selected="selected">Choose a genre</option>
           {genres.map((genre) => (
-            <option value={genre.name} id={genre.id}>
+            <option value={genre.name} id={genre.id} key={genre.id}>
               {" "}
               {genre.name}{" "}
             </option>

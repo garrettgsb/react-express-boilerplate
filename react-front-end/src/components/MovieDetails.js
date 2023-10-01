@@ -18,7 +18,6 @@ function MovieDetails(props) {
   async function getCurrentMovieDetails() {
     const request = await axios.get(url);
     setCurrentMovieDetails(request.data);
-    console.log(request.data);
     return request;
   }
   const location = useLocation(); //to get params from Link
@@ -107,7 +106,7 @@ function MovieDetails(props) {
                   >
                     Watchlist
                     <span>
-                      <i class="bi bi-trash3 icon"></i>
+                      <i className="bi bi-trash3 icon"></i>
                     </span>
                   </button>
                 ) : (
@@ -117,7 +116,7 @@ function MovieDetails(props) {
                   >
                     Watchlist
                     <span>
-                      <i class="bi bi-heart-fill heart icon"></i>
+                      <i className="bi bi-heart-fill heart icon"></i>
                     </span>
                   </button>
                 )}
