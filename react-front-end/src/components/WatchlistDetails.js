@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import tmdb_api_requests from "../TMDB_API_Requests";
 import axios from "axios";
-import "./MoviesListRow.css";
+import "./WatchlistDetails.css";
 import RemoveWatchlist from "./RemoveWatchlist";
 
 function WatchlistDetails(props) {
@@ -47,7 +47,7 @@ function WatchlistDetails(props) {
   return (
     <div className="movies_row">
       My Watchlist
-      <div className="movies_row_posters">
+      <div className="movies_posters">
         {watchlist_movies.map((movie) => (
           <div key={movie.id} className="movie_card">
             <img
