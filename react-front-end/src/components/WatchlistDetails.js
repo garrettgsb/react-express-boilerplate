@@ -11,17 +11,24 @@ function WatchlistDetails(props) {
     const request = await axios.get(url);
     return request.data;
   }
-  useEffect(() => {
+  async function getAllMovieDetails() {
     const newWatchlist = [];
-    Array.from(props.watchlist).forEach((movie) => {
-      let url = `${tmdb_api_requests.baseUrl}/movie/${movie.id}?api_key=${tmdb_api_requests.apikey}&language=en-US&include_adult=false`;
+    if (props.watchlist) {
+      for (const movie of props.watchlist) {
+        let url = `${tmdb_api_requests.baseUrl}/movie/${movie.id}?api_key=${tmdb_api_requests.apikey}&language=en-US&include_adult=false`;
 
-      getCurrentMovieDetails(url).then((result) => {
-        newWatchlist.push(result);
-      });
-    });
-    console.log(newWatchlist);
-    setWatchlistMovies(newWatchlist);
+        const results = await getCurrentMovieDetails(url);
+        newWatchlist.push(results);
+      }
+      setWatchlistMovies(newWatchlist);
+    }
+  }
+
+  useEffect(() => {
+    async function getData() {
+      await getAllMovieDetails();
+    }
+    getData();
   }, []);
 
   return (
