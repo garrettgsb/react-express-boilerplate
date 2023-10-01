@@ -16,23 +16,26 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(true);
   const [watchlist, setWatchlist] = useState([]);
 
-  const saveToStorage = (movie_id) => {
+  const saveToStorage = (movie_id, operation) => {
     //call API to update DB
+    const watchlistURL = `/api/watchlist/${operation}/${movie_id}`;
+    if (watchlistURL) {
+      axios.post(watchlistURL).then((result) => {
+        setWatchlist(result.data.watchlist);
+      });
+    }
   };
 
   const addMovieToWatchlist = (movie) => {
-    const newWatchlist = [...watchlist, movie.id];
-    setWatchlist(newWatchlist);
-    saveToStorage(movie.id);
+    // const newWatchlist = [...watchlist, movie.id];
+    saveToStorage(movie.id, "add");
   };
 
   const removeMovieFromWatchlist = (movie) => {
-    const newWatchlist = watchlist.filter(
-      (favourite) => favourite.id !== movie.id
-    );
-
-    setWatchlist(newWatchlist);
-    saveToStorage(movie.id);
+    // const newWatchlist = watchlist.filter(
+    //   (favourite) => favourite.id !== movie.id
+    // );
+    saveToStorage(movie.id, "delete");
   };
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export default function App() {
     axios.get(watchlistURL).then((result) => {
       setWatchlist(result.data.watchlist);
     });
-  }, []);
+  }, [watchlist]);
 
   const isMovieAddedToWatchlist = function (movie) {
     if (watchlist && watchlist.length > 0 && movie) {
