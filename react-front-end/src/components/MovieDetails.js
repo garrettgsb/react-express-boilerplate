@@ -4,15 +4,28 @@ import "./MovieDetails.css";
 import { useLocation, useParams } from "react-router-dom";
 import tmdb_api_requests from "../TMDB_API_Requests";
 import MoviesListRow from "./MoviesListRow";
+import Youtube from 'react-youtube';
+import movieTrailer from 'movie-trailer'
 
 function MovieDetails(props) {
   const [currentMovieDetails, setCurrentMovieDetails] = useState();
-
+  const [currentMovieTrailer, setCurrentMovieTrailer] = useState("");
   const { id } = useParams();
+
   useEffect(() => {
     getCurrentMovieDetails();
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if(typeof currentMovieDetails !== "undefined"){
+      const { fireFunction } = location.state;
+      if(fireFunction){
+        handleWatchTrailerClick(currentMovieDetails.original_title);
+      }
+      window.scrollTo(0,10000)
+    }
+  }, [currentMovieDetails]);
 
   const url = `${tmdb_api_requests.baseUrl}/movie/${id}?api_key=${tmdb_api_requests.apikey}&language=en-US`;
   async function getCurrentMovieDetails() {
@@ -20,6 +33,7 @@ function MovieDetails(props) {
     setCurrentMovieDetails(request.data);
     return request;
   }
+
   const location = useLocation(); //to get params from Link
   const { genre_url } = location.state;
 
@@ -27,6 +41,12 @@ function MovieDetails(props) {
     if (isAdded) props.handleAddWatchlistClick(currentMovieDetails);
     else props.handleRemoveWatchlistClick(currentMovieDetails);
   };
+
+  const handleWatchTrailerClick = async function(movie) {
+    await movieTrailer(movie, {id:true})
+    .then(response => {setCurrentMovieTrailer(response)})
+    .catch((error) => console.log(error))
+  }
 
   return (
     <div className="movie">
@@ -122,7 +142,10 @@ function MovieDetails(props) {
                 )}
               </span>
             )}
-            <button className="movie__button">
+            <button 
+              className="movie__button"
+              onClick={() => handleWatchTrailerClick(currentMovieDetails.original_title)}
+              >
               <span>
                 Trailer
                 <i className="bi bi-film icon" />
@@ -144,6 +167,7 @@ function MovieDetails(props) {
           </div>
         </div>
       </div>
+      {currentMovieTrailer && <Youtube className="youtube-component" videoId = {currentMovieTrailer} opts= {{height: "390", width: 640,  playerVars: { autoplay: 1,}}}/>}
       <div className="movie__recommendations">
         <MoviesListRow
           genre_Url={genre_url}
@@ -160,3 +184,4 @@ function MovieDetails(props) {
 }
 
 export default MovieDetails;
+

@@ -13,8 +13,6 @@ const Navbar = (props) => {
   useEffect(() => {
     async function fetchMoviesDataByGenre() {
       const request = await axios.get(tmdb_api_requests.genre_list);
-      console.log("genres fetched:");
-      console.log(request.data.genres);
       setGenres(request.data.genres);
       return request;
     }
