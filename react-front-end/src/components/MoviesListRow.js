@@ -80,7 +80,7 @@ function MoviesListRow(props) {
                 <div className="overlay_watchlist">
                   {props.isMovieAddedToWatchlist(movie) ? (
                     <RemoveWatchlist
-                      onClick={(event) => handleClick(event, movie)}
+                    // onClick={(event) => handleClick(event, movie)}
                     />
                   ) : (
                     <AddWatchlist

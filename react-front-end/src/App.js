@@ -104,7 +104,12 @@ export default function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route
           path="/my_watchlist"
-          element={<WatchlistDetails watchlist={watchlist} />}
+          element={
+            <WatchlistDetails
+              watchlist={watchlist}
+              handleRemoveWatchlistClick={removeMovieFromWatchlist}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>
