@@ -8,6 +8,7 @@
   display: flex;
   padding: 20px;
   overflow: hidden;
+  overflow: auto;
   overflow-x: auto;
 }
 .movies_row_posters::-webkit-scrollbar {
@@ -26,6 +27,7 @@
   height: 200px;
   z-index: 0;
   border: 1px solid rgb(99, 99, 99);
+  color: white;
 }
 
 .movie_card:hover {
