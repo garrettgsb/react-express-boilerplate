@@ -23,7 +23,6 @@ function MovieDetails(props) {
       if (fireFunction) {
         handleWatchTrailerClick(currentMovieDetails.original_title);
       }
-      window.scrollTo(0, 0);
     }
   }, [currentMovieDetails]);
 
@@ -43,6 +42,7 @@ function MovieDetails(props) {
   };
 
   const handleWatchTrailerClick = async function (movie) {
+    window.scrollTo(0, 10000);
     await movieTrailer(movie, { id: true })
       .then((response) => {
         setCurrentMovieTrailer(response);
