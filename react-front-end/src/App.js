@@ -108,7 +108,10 @@ export default function App() {
             element={
               <WatchlistDetails
                 watchlist={watchlist}
+                handleAddWatchlistClick={addMovieToWatchlist}
                 handleRemoveWatchlistClick={removeMovieFromWatchlist}
+                isLoggedIn={loggedIn}
+                isMovieAddedToWatchlist={isMovieAddedToWatchlist}
               />
             }
           />
