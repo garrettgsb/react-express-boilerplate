@@ -2,14 +2,18 @@ const express = require("express");
 const router = express.Router();
 const loginQuery = require("../db/queries/get_user_by_email");
 
+
+
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
   loginQuery.getUserWithEmail(email)
     .then((user) => {
       if (!user) {
+        res.status(400)
         return res.json({ error: "no user with that id" });
       }
       if (password !== user[0].password) {
+        res.status(400)
         return res.json({ error: "Incorrect Password" });
       }
 
@@ -32,5 +36,4 @@ router.post('/login', (req, res) => {
     });
 });
 
-console.log()
 module.exports = router;

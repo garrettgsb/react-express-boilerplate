@@ -65,7 +65,7 @@ export default function App() {
     <BrowserRouter>
       <Navbar loggedIn={loggedIn} />
       <Routes>
-        <Route
+        <Route path="/"
           index
           element={
             <Home

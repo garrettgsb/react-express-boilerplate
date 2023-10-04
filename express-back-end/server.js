@@ -14,8 +14,13 @@ App.use(cookieSession ({
 }))
 //Routes for each thing
 const loginRoutes = require('./routes/login')
+const watchlistRoutes = require('./routes/watchlist')
+const logoutRoutes = require('./routes/logout')
 
-App.get("/api/userData", (req, res) => {
+//Middleware
+const auth = require('./middlewares/auth')
+
+App.get("/api/userData", auth.isAuthorized, (req, res) => {
   const userData = {
     id: req.session.id,
     name: req.session.name
@@ -31,6 +36,7 @@ App.get("/api/data", (req, res) => {
 App.use(loginRoutes);
 App.use("/api/watchlist", watchlistRoutes); // base route for watchlist APIs
 
+App.use(logoutRoutes)
 
 
 // Handling registration POST request

@@ -3,24 +3,19 @@ import tmdb_api_requests from "../TMDB_API_Requests";
 import axios from "axios";
 import "./Navbar.css";
 import { createSearchParams, useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../AuthContext"; // Import the useAuth hook
+
 
 const Navbar = (props) => {
   const [genres, setGenres] = useState([]);
   const [searchString, setSearchString] = useState("");
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // Fetch user data when the component mounts
-    axios
-      .get("/api/userData")
-      .then((response) => {
-        setUserData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
-  }, []);
+  const { isLoggedIn, authUserData , logout} = useAuth();
+
+
 
   useEffect(() => {
     async function fetchMoviesDataByGenre() {
@@ -66,7 +61,9 @@ const Navbar = (props) => {
     return result;
   };
   console.log(userData, "userData from nav");
-  return Object.keys(userData).length > 0 ? (
+  console.log(authUserData, "authUserData")
+   
+  return isLoggedIn ? (
     <nav className="navbar navbar-light bg-light">
       <div className="navbar_title">Cineflix</div>
       <ul className="nav">
@@ -94,7 +91,7 @@ const Navbar = (props) => {
         </form>
       </div>
       <span className="nav-item user-data">
-          {userData.name} is logged in.
+          {authUserData.name} is logged in.
         </span>
         {props.loggedIn && (
           <li className="nav-item">
@@ -103,6 +100,7 @@ const Navbar = (props) => {
             </Link>
           </li>
         )}
+      <button onClick={logout}>Log out</button>
     </nav>
   ) : (
     <nav className="navbar navbar-light bg-light">
