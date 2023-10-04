@@ -63,55 +63,57 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Navbar loggedIn={loggedIn} />
-      <Routes>
-        <Route
-          index
-          element={
-            <Home
-              isLoggedIn={loggedIn}
-              handleAddWatchlistClick={addMovieToWatchlist}
-              handleRemoveWatchlistClick={removeMovieFromWatchlist}
-              isMovieAddedToWatchlist={isMovieAddedToWatchlist}
-            />
-          }
-        />
-        <Route
-          path="/home"
-          element={
-            <Home
-              isLoggedIn={loggedIn}
-              handleAddWatchlistClick={addMovieToWatchlist}
-              handleRemoveWatchlistClick={removeMovieFromWatchlist}
-              isMovieAddedToWatchlist={isMovieAddedToWatchlist}
-            />
-          }
-        />
-        <Route path="/register" element={<RegistrationForm />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route
-          path="movie/:id"
-          element={
-            <MovieDetails
-              isLoggedIn={loggedIn}
-              handleAddWatchlistClick={addMovieToWatchlist}
-              handleRemoveWatchlistClick={removeMovieFromWatchlist}
-              isMovieAddedToWatchlist={isMovieAddedToWatchlist}
-            />
-          }
-        ></Route>
-        <Route path="/genre" element={<GenrePage />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route
-          path="/my_watchlist"
-          element={
-            <WatchlistDetails
-              watchlist={watchlist}
-              handleRemoveWatchlistClick={removeMovieFromWatchlist}
-            />
-          }
-        />
-      </Routes>
+      <div className="App">
+        <Navbar loggedIn={loggedIn} />
+        <Routes>
+          <Route
+            index
+            element={
+              <Home
+                isLoggedIn={loggedIn}
+                handleAddWatchlistClick={addMovieToWatchlist}
+                handleRemoveWatchlistClick={removeMovieFromWatchlist}
+                isMovieAddedToWatchlist={isMovieAddedToWatchlist}
+              />
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <Home
+                isLoggedIn={loggedIn}
+                handleAddWatchlistClick={addMovieToWatchlist}
+                handleRemoveWatchlistClick={removeMovieFromWatchlist}
+                isMovieAddedToWatchlist={isMovieAddedToWatchlist}
+              />
+            }
+          />
+          <Route path="/register" element={<RegistrationForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route
+            path="movie/:id"
+            element={
+              <MovieDetails
+                isLoggedIn={loggedIn}
+                handleAddWatchlistClick={addMovieToWatchlist}
+                handleRemoveWatchlistClick={removeMovieFromWatchlist}
+                isMovieAddedToWatchlist={isMovieAddedToWatchlist}
+              />
+            }
+          ></Route>
+          <Route path="/genre" element={<GenrePage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route
+            path="/my_watchlist"
+            element={
+              <WatchlistDetails
+                watchlist={watchlist}
+                handleRemoveWatchlistClick={removeMovieFromWatchlist}
+              />
+            }
+          />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }

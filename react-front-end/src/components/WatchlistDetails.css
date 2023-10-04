@@ -2,6 +2,9 @@
   font-weight: bold;
   font-size: 1.2rem;
   background-color: black;
+  height: 100vh;
+  padding-top: 70px;
+  padding-left: 20px;
 }
 .movies_posters {
   padding: 20px;
