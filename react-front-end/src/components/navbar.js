@@ -29,12 +29,10 @@ const Navbar = (props) => {
   };
 
   const handleSearch = (event) => {
-    console.log("this is searchevent" + event.target.value);
     setSearchString(event.target.value);
   };
 
   const handleSearchSubmit = (event) => {
-    console.log("this is search string: " + searchString);
     event.preventDefault();
     navigate({
       pathname: "/search",
