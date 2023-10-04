@@ -78,7 +78,7 @@ const Navbar = (props) => {
       <div className="navbar__right__items">
         <div className="navbar_dropdown">
           <select onChange={handleChange} className="select_genre">
-            <option selected="selected">Choose a genre</option>
+            <option selected="selected">Filter by Genre</option>
             {genres.map((genre) => (
               <option value={genre.name} id={genre.id} key={genre.id}>
                 {" "}
@@ -91,7 +91,7 @@ const Navbar = (props) => {
           <form onSubmit={handleSearchSubmit}>
             <input
               className="search_box"
-              placeholder="Search"
+              placeholder="Search..."
               onChange={handleSearch}
             ></input>
           </form>

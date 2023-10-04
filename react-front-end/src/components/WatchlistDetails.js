@@ -29,6 +29,7 @@ function WatchlistDetails(props) {
       await getAllMovieDetails();
     }
     getData();
+    window.scrollTo(0, 0);
   }, []);
 
   const handleRemoveClick = function (movie) {

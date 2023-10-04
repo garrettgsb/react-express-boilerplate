@@ -101,8 +101,28 @@ export default function App() {
               />
             }
           ></Route>
-          <Route path="/genre" element={<GenrePage />} />
-          <Route path="/search" element={<SearchPage />} />
+          <Route
+            path="/genre"
+            element={
+              <GenrePage
+                isLoggedIn={loggedIn}
+                handleAddWatchlistClick={addMovieToWatchlist}
+                handleRemoveWatchlistClick={removeMovieFromWatchlist}
+                isMovieAddedToWatchlist={isMovieAddedToWatchlist}
+              />
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <SearchPage
+                isLoggedIn={loggedIn}
+                handleAddWatchlistClick={addMovieToWatchlist}
+                handleRemoveWatchlistClick={removeMovieFromWatchlist}
+                isMovieAddedToWatchlist={isMovieAddedToWatchlist}
+              />
+            }
+          />
           <Route
             path="/my_watchlist"
             element={

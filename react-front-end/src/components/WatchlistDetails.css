@@ -1,8 +1,8 @@
 .movies_list {
   font-weight: bold;
   font-size: 1.2rem;
-  background-color: black;
-  height: 100vh;
+  background-color: #141414;
+  height: 400vh;
   padding-top: 70px;
   padding-left: 20px;
 }

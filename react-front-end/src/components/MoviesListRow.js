@@ -26,6 +26,7 @@ function MoviesListRow(props) {
       <div className="movies_row_posters">
         {movies.map((movie) => (
           <MovieCard
+            key={movie.id}
             movie={movie}
             isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
             isLoggedIn={props.isLoggedIn}
