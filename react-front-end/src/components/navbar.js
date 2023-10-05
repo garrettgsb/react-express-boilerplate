@@ -29,12 +29,10 @@ const Navbar = (props) => {
   };
 
   const handleSearch = (event) => {
-    console.log("this is searchevent" + event.target.value);
     setSearchString(event.target.value);
   };
 
   const handleSearchSubmit = (event) => {
-    console.log("this is search string: " + searchString);
     event.preventDefault();
     navigate({
       pathname: "/search",
@@ -53,47 +51,49 @@ const Navbar = (props) => {
   };
 
   return (
-    <nav className="navbar navbar-light bg-light">
-      <div className="navbar_title">Cineflix</div>
-      <ul className="nav">
-        <li className="nav-item">
-          <Link to="/home" className="btn btn-light">
-            Home
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/register" className="btn btn-light">
-            Register
-          </Link>
-        </li>
-        <li className="nav-item">
-          <a href="/login" className="btn btn-light">
-            Login
-          </a>
-        </li>
+    <nav className="nav">
+      <Link className="logo" to="/" style={{ textDecoration: "none" }}>
+        <span>CINEFLIX</span>
+      </Link>
+      <div className="navbar__left__items">
+        <Link to="/home" style={{ textDecoration: "none" }}>
+          <span> Home </span>
+        </Link>
+        <Link to="/register" style={{ textDecoration: "none" }}>
+          <span>Register</span>
+        </Link>
+
+        <Link href="/login" style={{ textDecoration: "none" }}>
+          <span> Login</span>
+        </Link>
+
         {props.loggedIn && (
-          <li className="nav-item">
-            <Link to="/my_watchlist" className="btn btn-light">
-              My Watchlist
-            </Link>
-          </li>
+          <Link to="/my_watchlist" style={{ textDecoration: "none" }}>
+            <span> My Watchlist</span>
+          </Link>
         )}
-      </ul>
-      <div className="navbar_dropdown">
-        <select onChange={handleChange}>
-          <option selected="selected">Choose a genre</option>
-          {genres.map((genre) => (
-            <option value={genre.name} id={genre.id} key={genre.id}>
-              {" "}
-              {genre.name}{" "}
-            </option>
-          ))}
-        </select>
       </div>
-      <div className="search-bar">
-        <form onSubmit={handleSearchSubmit}>
-          <input placeholder="Search" onChange={handleSearch}></input>
-        </form>
+      <div className="navbar__right__items">
+        <div className="navbar_dropdown">
+          <select onChange={handleChange} className="select_genre">
+            <option selected="selected">Filter by Genre</option>
+            {genres.map((genre) => (
+              <option value={genre.name} id={genre.id} key={genre.id}>
+                {" "}
+                {genre.name}{" "}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="search-bar">
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              className="search_box"
+              placeholder="Search..."
+              onChange={handleSearch}
+            ></input>
+          </form>
+        </div>
       </div>
     </nav>
   );

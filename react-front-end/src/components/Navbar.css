@@ -1,0 +1,51 @@
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  align-items: center;
+  display: flex;
+  border-radius: 0;
+  justify-content: space-between;
+  color: white;
+  background-color: #141414;
+  z-index: 10000 !important;
+  height: 50px;
+}
+.navbar__left__items,
+.navbar__right__items {
+  display: flex;
+  align-items: center;
+}
+.navbar_dropdown {
+  margin-right: 50px;
+  margin-left: 20px;
+  color: black;
+}
+.search-bar {
+  color: black;
+  margin-right: 20px;
+}
+
+.logo > span {
+  left: 10px;
+  font-size: 2rem;
+  text-decoration: none;
+  color: gold;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: 900;
+}
+a > span {
+  margin: 0 30px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: white;
+}
+a > span:hover {
+  color: lemonchiffon;
+  text-decoration: none;
+}
+.select_genre,
+.search_box {
+  height: 20px;
+  width: 150px;
+}

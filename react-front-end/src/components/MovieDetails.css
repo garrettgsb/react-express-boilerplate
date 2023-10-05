@@ -16,7 +16,7 @@
   width: 100%;
   height: 400px;
   object-fit: cover;
-  object-position: 0 20%;
+  object-position: 0 10%;
 }
 
 .movie__detail {
@@ -24,9 +24,8 @@
   width: 80%;
   display: flex;
   position: relative;
-  /* bottom: 230px; */
+  bottom: 230px;
   /* bottom: 150px; */
-
 }
 
 .movie__detailLeft {
@@ -47,7 +46,7 @@
   justify-content: space-between;
 }
 
-.movie__detailRightTop>div {
+.movie__detailRightTop > div {
   text-shadow: 0px 0px 5px #000000;
   margin-bottom: 0.5rem;
 }
@@ -81,7 +80,10 @@
   position: relative;
   align-items: center;
 }
-
+.movie__button > a > span {
+  padding: 0;
+  margin: 0;
+}
 .movie__button {
   border: none;
   border-radius: 0.3vw;
@@ -107,6 +109,7 @@
 .movie__recommendations {
   width: 100%;
   position: relative;
+  bottom: 200px;
   color: white;
   object-fit: contain;
   margin-top: 50px;
@@ -117,6 +120,8 @@
 }
 
 .youtube-component {
+  position: relative;
+  bottom: 230px;
   margin-bottom: 50px;
   margin-top: 100px;
 }

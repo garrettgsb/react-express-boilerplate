@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import tmdb_api_requests from "../TMDB_API_Requests";
 import axios from "axios";
 import "./WatchlistDetails.css";
-import RemoveWatchlist from "./RemoveWatchlist";
+import MovieCard from "./MovieCard";
 
 function WatchlistDetails(props) {
-  const poster_baseUrl = "https://image.tmdb.org/t/p/original";
   const [watchlist_movies, setWatchlistMovies] = useState([]);
 
   async function getCurrentMovieDetails(url) {
@@ -30,18 +29,16 @@ function WatchlistDetails(props) {
       await getAllMovieDetails();
     }
     getData();
+    window.scrollTo(0, 0);
   }, []);
 
-  const handleClick = function (event, movie) {
-    let classList = Array.from(event.target.classList);
-    if (classList.includes("remove_watchlist")) {
-      //call to remove from watchlist
-      props.handleRemoveWatchlistClick(movie);
-      const newWatchlist = watchlist_movies.filter(
-        (favourite) => favourite.id !== movie.id
-      );
-      setWatchlistMovies(newWatchlist);
-    }
+  const handleRemoveClick = function (movie) {
+    //call to remove from watchlist
+    props.handleRemoveWatchlistClick(movie);
+    const newWatchlist = watchlist_movies.filter(
+      (favourite) => favourite.id !== movie.id
+    );
+    setWatchlistMovies(newWatchlist);
   };
 
   return (
@@ -49,34 +46,14 @@ function WatchlistDetails(props) {
       My Watchlist
       <div className="movies_posters">
         {watchlist_movies.map((movie) => (
-          <div key={movie.id} className="movie_card">
-            <img
-              className="movie_card_img"
-              src={`${poster_baseUrl}${movie.poster_path}`}
-              alt={movie.name}
-            />
-            <div className="movie_card_overlay">
-              <div className="movie_card_title">
-                {movie ? movie.original_title : ""}
-              </div>
-              <div className="movie_card_runtime">
-                {movie ? movie.release_date : ""}
-                <span className="movie_card_rating">
-                  {movie ? movie.vote_average : ""}
-                  <i className="bi bi-star-fill vote_star"></i>
-                </span>
-              </div>
-              <div className="movie_card_description">
-                {movie ? movie.overview.slice(0, 120) + "..." : ""}
-              </div>
-              <div
-                className="overlay_watchlist"
-                onClick={(event) => handleClick(event, movie)}
-              >
-                <RemoveWatchlist />
-              </div>
-            </div>
-          </div>
+          <MovieCard
+            movie={movie}
+            isMovieAddedToWatchlist={props.isMovieAddedToWatchlist}
+            isLoggedIn={props.isLoggedIn}
+            handleAddWatchlistClick={props.handleAddWatchlistClick}
+            handleRemoveWatchlistClick={handleRemoveClick}
+            genre_Url={tmdb_api_requests.trending_url}
+          />
         ))}
       </div>
     </div>
