@@ -1,3 +1,6 @@
+//Add dotenv so my can read the .env file.
+require('dotenv').config()
+
 const APIKEY = process.env.REACT_APP_TMDB_API_KEY;
 const baseUrl = "https://api.themoviedb.org/3";
 

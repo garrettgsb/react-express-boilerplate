@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 
 const LoginForm = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleUsernameChange = (e) => {
+  const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
@@ -15,25 +19,28 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Prepare data to send to the server
     const data = {
       email,
       password,
     };
-  
-  const config = {
-    headers : {
-      'Content-type': 'application/json'
-    }
-  }
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
     try {
       const response = await axios.post('/login', data, config);
-  
+      console.log(response)
+    
       if (response.status === 200) {
-        // Authentication successful, you can perform actions here
-        console.log('Authentication successful');
+        // Authentication successful
+        console.log('Authentication successful', data);
+        await login() // Update the authentication state
+        navigate('/home');
       } else {
         // Authentication failed, handle error and display a message to the user
         console.error('Authentication failed');
@@ -43,7 +50,6 @@ const LoginForm = () => {
       console.error('An error occurred:', error);
     }
   };
-  
 
   return (
     <div>
@@ -56,7 +62,7 @@ const LoginForm = () => {
             id="email"
             name="email"
             value={email}
-            onChange={handleUsernameChange}
+            onChange={handleEmailChange}
             className="form-control"
           />
         </div>

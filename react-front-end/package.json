@@ -7,6 +7,7 @@
     "axios": "^0.18.1",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
+    "dotenv": "^16.3.1",
     "movie-trailer": "^3.1.0",
     "react": "^16.8.6",
     "react-scripts": "2.1.8",
