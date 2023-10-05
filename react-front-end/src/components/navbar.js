@@ -10,8 +10,6 @@ const Navbar = (props) => {
   const [genres, setGenres] = useState([]);
   const [searchString, setSearchString] = useState("");
   const navigate = useNavigate();
-  const [userData, setUserData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
 
   const { isLoggedIn, authUserData , logout} = useAuth();
 
@@ -20,8 +18,6 @@ const Navbar = (props) => {
   useEffect(() => {
     async function fetchMoviesDataByGenre() {
       const request = await axios.get(tmdb_api_requests.genre_list);
-      console.log("genres fetched:");
-      console.log(request.data.genres);
       setGenres(request.data.genres);
       return request;
     }
@@ -38,12 +34,10 @@ const Navbar = (props) => {
   };
 
   const handleSearch = (event) => {
-    console.log("this is searchevent" + event.target.value);
     setSearchString(event.target.value);
   };
 
   const handleSearchSubmit = (event) => {
-    console.log("this is search string: " + searchString);
     event.preventDefault();
     navigate({
       pathname: "/search",
@@ -60,88 +54,91 @@ const Navbar = (props) => {
     });
     return result;
   };
-  console.log(userData, "userData from nav");
+
   console.log(authUserData, "authUserData")
    
   return isLoggedIn ? (
-    <nav className="navbar navbar-light bg-light">
-      <div className="navbar_title">Cineflix</div>
-      <ul className="nav">
-        <li className="nav-item">
-          <Link to="/home" className="btn btn-light">
-            Home
-          </Link>
-        </li>
+    <nav className="nav">
+      <Link className="logo" to="/" style={{ textDecoration: "none" }}>
+        <span>CINEFLIX</span>
+      </Link>
+      <div className="navbar__left__items">
+      <span>Hello! {authUserData.name}</span>
 
-      </ul>
-      <div className="navbar_dropdown">
-        <select onChange={handleChange}>
-          <option selected="selected">Choose a genre</option>
-          {genres.map((genre) => (
-            <option value={genre.name} id={genre.id}>
-              {" "}
-              {genre.name}{" "}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="search-bar">
-        <form onSubmit={handleSearchSubmit}>
-          <input placeholder="Search" onChange={handleSearch}></input>
-        </form>
-      </div>
-      <span className="nav-item user-data">
-          {authUserData.name} is logged in.
-        </span>
         {props.loggedIn && (
-          <li className="nav-item">
-            <Link to="/my_watchlist" className="btn btn-light">
-              My Watchlist
-            </Link>
-          </li>
+          <Link to="/my_watchlist" style={{ textDecoration: "none" }}>
+            <span> My Watchlist</span>
+          </Link>
         )}
-      <button onClick={logout}>Log out</button>
-    </nav>
-  ) : (
-    <nav className="navbar navbar-light bg-light">
-      <div className="navbar_title">Cineflix</div>
-      <ul className="nav">
-        <li className="nav-item">
-          <Link to="/home" className="btn btn-light">
-            Home
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/register" className="btn btn-light">
-            Register
-          </Link>
-        </li>
-        <li className="nav-item">
-          <a href="/login" className="btn btn-light">
-            Login
-          </a>
-        </li>
-    
-      </ul>
-      <div className="navbar_dropdown">
-        <select onChange={handleChange}>
-          <option selected="selected">Choose a genre</option>
-          {genres.map((genre) => (
-            <option value={genre.name} id={genre.id} key={genre.id}>
-              {" "}
-              {genre.name}{" "}
-            </option>
-          ))}
-        </select>
       </div>
-      <div className="search-bar">
-        <form onSubmit={handleSearchSubmit}>
-          <input placeholder="Search" onChange={handleSearch}></input>
-        </form>
+      <div className="navbar__right__items">
+        <div className="navbar_dropdown">
+          <select onChange={handleChange} className="select_genre">
+            <option selected="selected">Filter by Genre</option>
+            {genres.map((genre) => (
+              <option value={genre.name} id={genre.id} key={genre.id}>
+                {" "}
+                {genre.name}{" "}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="search-bar">
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              className="search_box"
+              placeholder="Search..."
+              onChange={handleSearch}
+            ></input>
+          </form>
+        </div>
       </div>
-      <div></div>
+      <button onClick={logout}> Log Out</button>
     </nav>
-  );
+  ) :
+  (<nav className="nav">
+  <Link className="logo" to="/" style={{ textDecoration: "none" }}>
+    <span>CINEFLIX</span>
+  </Link>
+  <div className="navbar__left__items">
+    <Link to="/register" style={{ textDecoration: "none" }}>
+      <span>Register</span>
+    </Link>
+
+    <Link to="/login" style={{ textDecoration: "none" }}>
+      <span> Login</span>
+    </Link>
+
+    {props.loggedIn && (
+      <Link to="/my_watchlist" style={{ textDecoration: "none" }}>
+        <span> My Watchlist</span>
+      </Link>
+    )}
+  </div>
+  <div className="navbar__right__items">
+    <div className="navbar_dropdown">
+      <select onChange={handleChange} className="select_genre">
+        <option selected="selected">Filter by Genre</option>
+        {genres.map((genre) => (
+          <option value={genre.name} id={genre.id} key={genre.id}>
+            {" "}
+            {genre.name}{" "}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div className="search-bar">
+      <form onSubmit={handleSearchSubmit}>
+        <input
+          className="search_box"
+          placeholder="Search..."
+          onChange={handleSearch}
+        ></input>
+      </form>
+    </div>
+  </div>
+  <div></div>
+</nav>)
 };
 
 export default Navbar;

@@ -1,5 +1,5 @@
 .banner {
-  background-position: center center;
+  background-position: center top;
   background-size: cover;
   color: #fff;
   height: 448px;
@@ -10,7 +10,7 @@
 .banner_contents {
   height: 190px;
   margin-left: 30px;
-  padding-top: 140px;
+  padding-top: 170px;
 }
 
 .banner_title {
