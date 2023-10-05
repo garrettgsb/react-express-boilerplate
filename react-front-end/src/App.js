@@ -13,12 +13,11 @@ import SearchPage from "./components/SearchPage";
 import axios from "axios";
 import WatchlistDetails from "./components/WatchlistDetails";
 import emailjs from "@emailjs/browser";
+import { useAuth } from "./AuthContext"; // Import the useAuth hook
 
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
   const [watchlist, setWatchlist] = useState([]);
-  const [user, setUser] = useState("Guest");
-
+  const { isLoggedIn, authUserData } = useAuth();
   //save watchlist to DB
   const saveToStorage = (movie_id, operation) => {
     //call API to update DB
@@ -31,13 +30,13 @@ export default function App() {
   //send email notification when movie added or removed from watchlist
   const sendEmailnotification = function (movie_name, isAdd) {
     var templateParams = {
-      to_name: `${user}`,
+      to_name: `${authUserData.name}`,
       movie_name: `${movie_name}`,
     };
     let template_id = process.env.REACT_APP_EMAILJS_ADD_WATCHLIST_TEMPLATE_ID;
     if (!isAdd)
       template_id = process.env.REACT_APP_EMAILJS_REMOVE_WATCHLIST_TEMPLATE_ID;
-    console.log(template_id);
+
     emailjs
       .send(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
@@ -58,7 +57,7 @@ export default function App() {
     const newWatchlist = [...watchlist, { id: movie.id }];
     setWatchlist(newWatchlist);
     saveToStorage(movie.id, "add");
-    if (loggedIn) sendEmailnotification(movie.title, true);
+    if (isLoggedIn) sendEmailnotification(movie.title, true);
   };
   //remove movie from watchlist
   const removeMovieFromWatchlist = (movie) => {
@@ -67,7 +66,7 @@ export default function App() {
     );
     setWatchlist(newWatchlist);
     saveToStorage(movie.id, "delete");
-    if (loggedIn) sendEmailnotification(movie.title, false);
+    if (isLoggedIn) sendEmailnotification(movie.title, false);
   };
 
   useEffect(() => {
@@ -96,13 +95,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar loggedIn={loggedIn} />
+        <Navbar />
         <Routes>
           <Route
             index
             element={
               <Home
-                isLoggedIn={loggedIn}
+                isLoggedIn={isLoggedIn}
                 handleAddWatchlistClick={addMovieToWatchlist}
                 handleRemoveWatchlistClick={removeMovieFromWatchlist}
                 isMovieAddedToWatchlist={isMovieAddedToWatchlist}
@@ -113,7 +112,7 @@ export default function App() {
             path="/home"
             element={
               <Home
-                isLoggedIn={loggedIn}
+                isLoggedIn={isLoggedIn}
                 handleAddWatchlistClick={addMovieToWatchlist}
                 handleRemoveWatchlistClick={removeMovieFromWatchlist}
                 isMovieAddedToWatchlist={isMovieAddedToWatchlist}
@@ -126,7 +125,7 @@ export default function App() {
             path="movie/:id"
             element={
               <MovieDetails
-                isLoggedIn={loggedIn}
+                isLoggedIn={isLoggedIn}
                 handleAddWatchlistClick={addMovieToWatchlist}
                 handleRemoveWatchlistClick={removeMovieFromWatchlist}
                 isMovieAddedToWatchlist={isMovieAddedToWatchlist}
@@ -137,7 +136,7 @@ export default function App() {
             path="/genre"
             element={
               <GenrePage
-                isLoggedIn={loggedIn}
+                isLoggedIn={isLoggedIn}
                 handleAddWatchlistClick={addMovieToWatchlist}
                 handleRemoveWatchlistClick={removeMovieFromWatchlist}
                 isMovieAddedToWatchlist={isMovieAddedToWatchlist}
@@ -148,7 +147,7 @@ export default function App() {
             path="/search"
             element={
               <SearchPage
-                isLoggedIn={loggedIn}
+                isLoggedIn={isLoggedIn}
                 handleAddWatchlistClick={addMovieToWatchlist}
                 handleRemoveWatchlistClick={removeMovieFromWatchlist}
                 isMovieAddedToWatchlist={isMovieAddedToWatchlist}
@@ -162,7 +161,7 @@ export default function App() {
                 watchlist={watchlist}
                 handleAddWatchlistClick={addMovieToWatchlist}
                 handleRemoveWatchlistClick={removeMovieFromWatchlist}
-                isLoggedIn={loggedIn}
+                isLoggedIn={isLoggedIn}
                 isMovieAddedToWatchlist={isMovieAddedToWatchlist}
               />
             }
