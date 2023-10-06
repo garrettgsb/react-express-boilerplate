@@ -5,7 +5,7 @@ const router  = express.Router();
 router.get('/api/logout', (req, res) => {
   req.session = null;
   console.log("test from logout")
-  res.send(200)
+  res.sendStatus(200)
 });
 
 module.exports = router;

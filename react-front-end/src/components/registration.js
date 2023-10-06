@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Registration.css';
-import axios from 'axios'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
+
+
 const RegistrationForm = () => {
+  const { isLoggedIn, login } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
     passwordConfirm: ''
   });
+
+  useEffect(()=> {
+    if(isLoggedIn) {
+      navigate('/home')
+    }
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,9 +29,8 @@ const RegistrationForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Form Working?")
 
     // Check if the passwords match
     if (formData.password !== formData.passwordConfirm) {
@@ -27,23 +38,32 @@ const RegistrationForm = () => {
       return;
     }
 
-    // Now you can proceed with registration logic
+
     console.log('Registration data:', formData);
-    axios.post('/register', {
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-      passwordConfirm: formData.passwordConfirm,
-    })
-    .then((response) => {
-      // Handle the registration success (e.g., redirect to login page)
-      console.log('User registered successfully');
-      // You can add redirection logic here
-    })
-    .catch((error) => {
-      // Handle registration error (e.g., display an error message)
+
+    try {
+      const response = await axios.post('/register', {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        passwordConfirm: formData.passwordConfirm,
+      });
+      
+      if (response.status === 200) {
+        // Authentication successful
+        console.log('Authentication successful', response);
+        await login() // Update the authentication state
+        navigate('/home');
+      }
+      else {
+        // Authentication failed, handle error and display a message to the user
+        console.error('Authentication failed');
+      }
+    } catch (error) {
+      alert("Email Already Exists")
       console.error('Registration error:', error);
-    });  };
+    }
+  };
 
   return (
     <div className='registration'>
