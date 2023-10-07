@@ -16,7 +16,7 @@ App.use(cookieSession ({
 const loginRoutes = require('./routes/login')
 const watchlistRoutes = require('./routes/watchlist')
 const logoutRoutes = require('./routes/logout')
-
+const register = require('./routes/signup')
 //Middleware
 const auth = require('./middlewares/auth')
 
@@ -38,6 +38,7 @@ App.use("/api/watchlist", watchlistRoutes); // base route for watchlist APIs
 
 App.use(logoutRoutes)
 
+App.use(register)
 
 // Handling registration POST request
 
