@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   if (!req.session || !req.session.id) {
     res.render("signup", { id: null });
   } else {
-    res.redirect("/user");@gmail.com
+    res.redirect("/user");
   }
 });
 
