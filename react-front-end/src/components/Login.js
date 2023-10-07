@@ -54,7 +54,7 @@ const LoginForm = () => {
         console.error('Authentication failed');
       }
     } catch (error) {
-      // Handle network errors or other exceptions
+      alert("Either email not registered or password is incorrect.")
       console.error('An error occurred:', error);
     }
   };
