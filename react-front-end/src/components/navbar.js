@@ -5,15 +5,12 @@ import "./Navbar.css";
 import { createSearchParams, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../AuthContext"; // Import the useAuth hook
 
-
 const Navbar = (props) => {
   const [genres, setGenres] = useState([]);
   const [searchString, setSearchString] = useState("");
   const navigate = useNavigate();
 
-  const { isLoggedIn, authUserData , logout} = useAuth();
-
-
+  const { isLoggedIn, authUserData, logout } = useAuth();
 
   useEffect(() => {
     async function fetchMoviesDataByGenre() {
@@ -55,17 +52,15 @@ const Navbar = (props) => {
     return result;
   };
 
-  console.log(authUserData, "authUserData")
-   
   return isLoggedIn ? (
     <nav className="nav">
       <Link className="logo" to="/" style={{ textDecoration: "none" }}>
         <span>CINEFLIX</span>
       </Link>
       <div className="navbar__left__items">
-      <span>Hello! {authUserData.name}</span>
+        <span>Hello! {authUserData.name}</span>
 
-        {props.loggedIn && (
+        {isLoggedIn && (
           <Link to="/my_watchlist" style={{ textDecoration: "none" }}>
             <span> My Watchlist</span>
           </Link>
@@ -95,50 +90,51 @@ const Navbar = (props) => {
       </div>
       <button onClick={logout}> Log Out</button>
     </nav>
-  ) :
-  (<nav className="nav">
-  <Link className="logo" to="/" style={{ textDecoration: "none" }}>
-    <span>CINEFLIX</span>
-  </Link>
-  <div className="navbar__left__items">
-    <Link to="/register" style={{ textDecoration: "none" }}>
-      <span>Register</span>
-    </Link>
-
-    <Link to="/login" style={{ textDecoration: "none" }}>
-      <span> Login</span>
-    </Link>
-
-    {props.loggedIn && (
-      <Link to="/my_watchlist" style={{ textDecoration: "none" }}>
-        <span> My Watchlist</span>
+  ) : (
+    <nav className="nav">
+      <Link className="logo" to="/" style={{ textDecoration: "none" }}>
+        <span>CINEFLIX</span>
       </Link>
-    )}
-  </div>
-  <div className="navbar__right__items">
-    <div className="navbar_dropdown">
-      <select onChange={handleChange} className="select_genre">
-        <option selected="selected">Filter by Genre</option>
-        {genres.map((genre) => (
-          <option value={genre.name} id={genre.id} key={genre.id}>
-            {" "}
-            {genre.name}{" "}
-          </option>
-        ))}
-      </select>
-    </div>
-    <div className="search-bar">
-      <form onSubmit={handleSearchSubmit}>
-        <input
-          className="search_box"
-          placeholder="Search..."
-          onChange={handleSearch}
-        ></input>
-      </form>
-    </div>
-  </div>
-  <div></div>
-</nav>)
+      <div className="navbar__left__items">
+        <Link to="/register" style={{ textDecoration: "none" }}>
+          <span>Register</span>
+        </Link>
+
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          <span> Login</span>
+        </Link>
+
+        {isLoggedIn && (
+          <Link to="/my_watchlist" style={{ textDecoration: "none" }}>
+            <span> My Watchlist</span>
+          </Link>
+        )}
+      </div>
+      <div className="navbar__right__items">
+        <div className="navbar_dropdown">
+          <select onChange={handleChange} className="select_genre">
+            <option selected="selected">Filter by Genre</option>
+            {genres.map((genre) => (
+              <option value={genre.name} id={genre.id} key={genre.id}>
+                {" "}
+                {genre.name}{" "}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="search-bar">
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              className="search_box"
+              placeholder="Search..."
+              onChange={handleSearch}
+            ></input>
+          </form>
+        </div>
+      </div>
+      <div></div>
+    </nav>
+  );
 };
 
 export default Navbar;
