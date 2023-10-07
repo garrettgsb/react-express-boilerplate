@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
     return res.sendStatus(400)
   }
   signupQuery
-    .addUser(email, username, password, passwordConfirm)
+    .addUser(username, email, password, passwordConfirm)
     .then((user) => {
       if (!user) {
         return res.send({error: "addUser error"});
