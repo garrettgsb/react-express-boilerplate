@@ -93,7 +93,7 @@ const Navbar = (props) => {
           </form>
         </div>
       </div>
-      <button onClick={logout}> Log Out</button>
+      <button onClick={logout} class = "btn btn-warning"> Log Out</button>
     </nav>
   ) :
   (<nav className="nav">
