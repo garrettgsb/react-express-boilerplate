@@ -49,3 +49,7 @@ a > span:hover {
   height: 20px;
   width: 150px;
 }
+
+span {
+  font-size: 13px
+}

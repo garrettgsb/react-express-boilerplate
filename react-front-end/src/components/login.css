@@ -1,4 +1,4 @@
-.registration{
+.login {
   display: flex;
   flex-direction: column;
   padding-top: 250px;
@@ -8,11 +8,22 @@
   background-image: url("https://miro.medium.com/v2/resize:fit:1400/1*5lyavS59mazOFnb55Z6znQ.png");
   background-attachment: fixed;
   background-size: cover;
+  
 }
-.forms{
+.forms {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
   width: 250%;
-  background-color: rgba(170, 28, 28, 0.582)
+  background-color: rgba(0, 0, 0, 0.582)
 }
+
+
+
+.title{
+ display: flex;
+ justify-content: center;
+ text-align: center;
+}
+
