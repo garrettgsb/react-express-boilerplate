@@ -1,38 +1,36 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './App.css';
+import "./style/App.css";
+import React from "react";
+import data from "./data.json";
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: 'Click the button to load data!'
-    }
-  }
 
-  fetchData = () => {
-    axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
+function App() {
 
-      console.log(response.data.message) // Just the message
-      this.setState({
-        message: response.data.message
-      });
-    }) 
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>        
+  function handleStartClick() { }
+  function handleInstructionsClick() { }
+  return (
+    <div className="div-style">
+      <h1>Quize.Js!</h1>  
+      <button className="rectangle-button" onClick={handleStartClick}>
+        START
+      </button>
+      <button className="rectangle-button" onClick={handleInstructionsClick}>
+        INSTRUCTIONS
+      </button>
+      <div className="score-box">
+        <h2>High Score</h2>
+        <div className="score-columns">
+          {data.highScores.map((score, index) => (
+            <div key={index} className="score-row">
+              <span className="player-name">{score.name}</span>
+              <span className="player-score">{score.score}</span>
+            </div>
+          ))}
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+
 
 export default App;
