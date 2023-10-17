@@ -1,6 +1,7 @@
 import "./style/App.css";
 import React from "react";
 import data from "./data.json";
+import Quiz from "./asset/quizjs.png";
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
   function handleInstructionsClick() { }
   return (
     <div className="div-style">
-      <h1>Quize.Js!</h1>  
+      <img src={Quiz} alt="quizjs"/> 
       <button className="rectangle-button" onClick={handleStartClick}>
         START
       </button>
