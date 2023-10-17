@@ -1,7 +1,7 @@
 import "./style/App.css";
 import React from "react";
 import data from "./data.json";
-import Quiz from "./asset/quizjs.png";
+import Quiz from "./asset/THELOGO.png";
 
 
 function App() {
