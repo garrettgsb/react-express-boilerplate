@@ -59,3 +59,144 @@ B. Right
 C. It doesn't roll, roosters don't lay eggs (Correct Answer)
 D. Down
 `Hint: Focus on the unique situation described and its implications.`
+Question 11: How can a man go eight days without sleep?
+A. He sleeps at night
+B. He takes power naps
+C. He sleeps during the day
+D. He only sleeps at night (Correct Answer)
+`Hint: It's not about sleeping patterns but a clever trick with days.`
+Question 12: What has an endless supply of letters but starts empty?
+A. Mailbox
+B. Alphabet
+C. Post Office
+D. Mailman (Correct Answer)
+`Hint: It's not about paper or mail but a fundamental concept.`
+Question 13: What has a heart that doesn't beat?
+A. Clock
+B. Person
+C. Deer
+D. Artichoke (Correct Answer)
+`Hint: It's not a living thing but is often found on walls.`
+Question 14: What has a neck but no head?
+A. Giraffe
+B. Bottle
+C. Shirt
+D. Bottle (Correct Answer)
+`Hint: Think about a container with a long neck.`
+Question 15: What is as light as a feather yet the strongest person can't hold it for more than a few minutes?
+A. Air
+B. Breath
+C. Laughter (Correct Answer)
+D. Hope
+`Hint: It's not tangible but involves a momentary experience.`
+Question 16: What is full of holes but still holds water?
+A. Sponge
+B. Net
+C. Strainer (Correct Answer)
+D. Cloud
+`Hint: It's not a physical object but something you might use in the kitchen.`
+Question 17: What has a face and two hands but no arms or legs?
+A. Clock (Correct Answer)
+B. Mirror
+C. Sun
+D. Compass
+`Hint: You look at it daily to know the time.`
+Question 18: What has a head, a tail, is brown, and has no legs?
+A. Snake
+B. Stick (Correct Answer)
+C. Cigar
+D. Worm
+`Hint: It's not a living creature but often found outdoors.`
+Question 19: What has one eye but can't see?
+A. Cyclops
+B. Needle (Correct Answer)
+C. Camera
+D. Telescope
+`Hint: It's a tool for crafting.`
+Question 20: The more you take, the more you leave behind. What am I?
+A. Footsteps (Correct Answer)
+B. Breath
+C. Mist
+D. Echo
+`Hint: It's about your journey and interactions.`
+Question 21: What belongs to you but is used more by others?
+A. Your name
+B. Your car
+C. Your time
+D. Your money (Correct Answer)
+`Hint: It's a resource you invest and spend.`
+Question 22: I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?
+A. Echo (Correct Answer)
+B. Music
+C. Whisper
+D. Thunder
+`Hint: It's about the invisible impact of nature.`
+Question 23: I am taken from a mine, and shut up in a wooden case, from which I am never released, and yet I am used by almost every person. What am I?
+A. Gold
+B. Diamond
+C. Pencil lead (Correct Answer)
+D. Coal
+`Hint: It's about graphite and writing.`
+Question 24: What can be cracked, made, told, and played?
+A. Joke
+B. Code
+C. Egg (Correct Answer)
+D. Record
+`Hint: You find me in a house.`
+Question 25: I am always hungry. I must always be fed. The finger I lick will soon turn red. What am I?
+A. Dog
+B. Fire (Correct Answer)
+C. Cat
+D. Baby
+`Hint: More I am fed the bigger I get.`
+Question 26: What can travel around the world while staying in a corner?
+A. Stamp
+B. Earth
+C. A stamp (Correct Answer)
+D. Satellite
+`Hint: People collect me.`
+Question 27: If a cat is black and a cat is white, what kind of cat doesn't exist?
+A. Gray cat (Correct Answer)
+B. Invisible cat
+C. Rainbow cat
+D. Striped cat
+`Hint: It's a play on colors.`
+Question 28: What has cities but no houses, forests but no trees, and rivers but no water?
+A. Map (Correct Answer)
+B. Book
+C. Globe
+D. Dictionary
+`Hint: It's a representation.`
+Question 29: What is always in front of you but can't be seen?
+
+A. Future
+B. Past
+C. Present (Correct Answer)
+D. Memory
+Hint: It's a moment in time.
+
+Question 30: What has teeth but can't bite?
+
+A. Zipper (Correct Answer)
+B. Comb
+C. Saw
+D. Key
+Hint: It's used in clothing.
+
+Question 31: What can run but never walks, has a mouth but never talks?
+
+A. Wind
+B. River
+C. Clock (Correct Answer)
+D. Fire
+Hint: It helps you keep time.
+
+Question 32: What has keys but can't open locks?
+
+A. Keyboard
+B. Typewriter
+C. Piano (Correct Answer)
+D. Calculator
+Hint: It's a musical instrument of sorts.
+
+## Round two
