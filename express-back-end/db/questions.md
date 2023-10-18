@@ -168,35 +168,67 @@ C. Globe
 D. Dictionary
 `Hint: It's a representation.`
 Question 29: What is always in front of you but can't be seen?
-
 A. Future
 B. Past
 C. Present (Correct Answer)
 D. Memory
-Hint: It's a moment in time.
-
+`Hint: It's a moment in time.`
 Question 30: What has teeth but can't bite?
-
 A. Zipper (Correct Answer)
 B. Comb
 C. Saw
 D. Key
-Hint: It's used in clothing.
-
+`Hint: It's used in clothing.`
 Question 31: What can run but never walks, has a mouth but never talks?
-
 A. Wind
 B. River
 C. Clock (Correct Answer)
 D. Fire
-Hint: It helps you keep time.
-
+`Hint: It helps you keep time.`
 Question 32: What has keys but can't open locks?
-
 A. Keyboard
 B. Typewriter
 C. Piano (Correct Answer)
 D. Calculator
-Hint: It's a musical instrument of sorts.
+`Hint: It's a musical instrument of sorts.`
 
 ## Round two
+Question 1: What do you call a group of wolves?
+A. A herd
+B. A School
+C. A pack (Correct Answer)
+D. A flock
+`Hint: Think about their behavior`
+Question 2: What gas do humans exhale when they breathe out?
+A. Oxygen
+B. Carbon Dioxide (Correct Answer)
+C. Nitrogen
+D. Helium 
+`Hint: Part of the respiration process.`
+Question: What gas do plants absorb from the air?
+Question: What's 2 + 2?
+Question: What's the chemical symbol for gold?
+Question: What's the chemical symbol for water?
+Question: What's the largest planet in our solar system?
+Question: What's the smallest even prime number?
+Question: What's the smallest prime number?
+Question: What's the capital of Japan?
+Question: What's the chemical symbol for oxygen?
+Question: What's the largest planet in our solar system?
+Question: What's the smallest prime number?
+Question: What's the capital of Australia?
+Question: What is the chemical symbol for oxygen?
+Question: What is the chemical symbol for water?
+Question: What gas do humans exhale when they breathe out?
+What gas do plants absorb from the air?
+How many sides does a triangle have?
+How many planets are there in our solar system?
+Which gas do plants absorb from the air?
+How many continents are there on Earth?
+How many sides does a hexagon have?
+Who wrote "Romeo and Juliet"?
+How many years are in a decade?
+What's the opposite of "empty"?
+How many sides does a triangle have?
+What's the smallest prime number?
+What is the square root of 16?
