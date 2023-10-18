@@ -1,14 +1,19 @@
 import "./style/App.css";
-import React from "react";
-import Home from "./components/home.js"
-// import data from "./data.json";
-// import Quiz from "./asset/THELOGO.png";
-
+import React from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Home from './components/home';
+import Instruction from './components/instruction';
 
 function App() {
   return (
-    <Home />
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/instructions" element={<Instruction />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
+
