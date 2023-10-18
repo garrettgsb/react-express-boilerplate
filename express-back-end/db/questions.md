@@ -206,29 +206,112 @@ C. Nitrogen
 D. Helium 
 `Hint: Part of the respiration process.`
 Question: What gas do plants absorb from the air?
+A. Carbon Dioxide (Correct Answer)
+B. Oxygen
+C. Nitrogen
+D. Helium
+`Hint: As essential gas.`
 Question: What's 2 + 2?
+A. 4 (Correct Answer)
+B. 3
+C. 5
+D. 6
+`Hint: Simple addition.`
 Question: What's the chemical symbol for gold?
+A. Go
+B. Ag
+C. Au
+D. Gd
+`Hint: Remember your periodic table`
 Question: What's the chemical symbol for water?
+A. CH4
+B. O2
+C. CO2
+D. H2O
+`Hint: Two parts hydrogen one part oxygen`
 Question: What's the largest planet in our solar system?
+A. Mars
+B. Earth
+C. Jupiter (Correct Answer)
+D. Saturn
+
 Question: What's the smallest even prime number?
+A. 2 (Correct Answer)
+B. 1
+C. 3
+D. 4
+`Hint: A unique characteristic.`
 Question: What's the smallest prime number?
+A. 1
+B. 3
+C. 2 (Correct Answer)
+D. 4
+`Hint: Prime and simple.`
 Question: What's the capital of Japan?
+A. Tokyo (Correct Answer)
+B. Beijing
+C. Seoul
+D. Bangkok
+`Hint: The land of the rising sun.`
 Question: What's the chemical symbol for oxygen?
-Question: What's the largest planet in our solar system?
-Question: What's the smallest prime number?
+A. H2O
+B. O2 (Correct Answer)
+C. CO2
+D. O 
+`Hint: An essential gas.`
 Question: What's the capital of Australia?
-Question: What is the chemical symbol for oxygen?
-Question: What is the chemical symbol for water?
-Question: What gas do humans exhale when they breathe out?
-What gas do plants absorb from the air?
-How many sides does a triangle have?
-How many planets are there in our solar system?
-Which gas do plants absorb from the air?
-How many continents are there on Earth?
-How many sides does a hexagon have?
-Who wrote "Romeo and Juliet"?
-How many years are in a decade?
-What's the opposite of "empty"?
-How many sides does a triangle have?
-What's the smallest prime number?
-What is the square root of 16?
+A. Canberra (Correct Answer)
+B. Sydney
+C. Melbourne
+D. Brisbane
+`Hint: Not a coastal city.`
+Question: How many planets are there in our solar system?
+A. 7
+B. 9
+C. 10
+D. 8 (Correct Answer)
+`Hint: Include Pluto if you must.`
+Question: How many continents are there on Earth?
+A. 5
+B. 6
+C. 7 (Correct Answer)
+D. 10
+`Hint: Remember your geography lessons.`
+Question: How many sides does a hexagon have?
+A. 5
+B. 7
+C. 6 (Correct Answer)
+D. 8
+`Hint: It's in the name.`
+Question: Who wrote "Romeo and Juliet"?
+A. William Shakespeare (Correct Answer)
+B. Charles Dickens
+C. Jane Austen
+D. Mark Twain
+`Hint: Classic playwright.`
+Question: How many years are in a decade?
+A. 5
+B. 20
+C. 10 (Correct Answer)
+D. 100
+`Hint: A portion of a century.`
+Question: What's the opposite of "empty"?
+A. Half
+B. Full (Correct Answer)
+C. Light
+D. Dense
+`Hint: Think about containers.`
+Question: How many sides does a triangle have?
+A. 4
+B. 3 (Correct Answer)
+C. 5
+D. 6
+`Hint: Classic geometry.`
+Question: What is the square root of 16?
+A. 4 (Correct Answer)
+B. 8
+C. 2
+D. 64
+`Hint: A perfect square.`
+
+## Round three
