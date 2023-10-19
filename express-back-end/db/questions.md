@@ -267,10 +267,10 @@ D. A flock
 Question 2 
 The marker does not want it, the buyer does not use it, and the user does not see it.
 A. Coffin (Correct Answer)
-B.
-C.
-D.
-`Hint:`
+B. Notebook
+C. Pen
+D. Desk
+`Hint: Think about the context and purpose of the item mentioned.`
 
 Question 3
 What gas do plants absorb from the air?
@@ -290,11 +290,11 @@ D. 6
 
 Question 5
 Break it and it is better, immediately set, and harder to break again. What am I?
-A.
-B.
+A. Glass
+B. Bone
 C. A record (Correct Answer)
-D.
-`Hint:`
+D. Mirror
+`Hint: Consider the context of something breaking and becoming better.`
 
 Question 6
 What's the chemical symbol for water?
@@ -325,16 +325,16 @@ What is 147 apples plus 68 oranges?
 A. A lot of fruit
 B. 215 fruits 
 C. 147 apples and 68 oranges (Correct Answer)
-D.
-`Hint:`
+D. Fruit salad
+`Hint: Consider the composition of the question and its straightforwardness.`
 
 Question 10
 If you give me food I will grow. If you give me water I will die. Who or what am I?
-A.
-B.
-C.
+A. Plant
+B. Animal
+C. Rock
 D. Fire (Correct Answer)
-`Hint:`
+`Hint: Think about elements that need food to sustain and grow, and those that perish when exposed to water.`
 
 Question 11
 What's the chemical symbol for oxygen?
@@ -346,11 +346,11 @@ D. O
 
 Question 12
 The more you have of it, the less you see. What is it?
-A.
-B.
+A. Light
+B. Vision
 C. Darkness (Correct Answer)
-D.
-`Hint:`
+D. Knowledge
+`Hint: Think about a condition where the absence of something allows another to become more apparent.`
 
 Question 13
 How many planets are there in our solar system?
@@ -362,11 +362,11 @@ D. 8 (Correct Answer)
 
 Question 14
 What is so fragile that when you say its name you break it?
-A.
-B.
-C.
+A. Mirror
+B. Glass
+C. Feather
 D. Silence (Correct Answer)
-`Hint:`
+`Hint: Consider the impact of sound on a particular concept.`
 
 Question 15
 How many sides does a hexagon have?
@@ -419,10 +419,10 @@ D. 64
 Question 21
 What orchestral device is not blown, bowed, plucked or struck?
 A. The conductor's baton
-B.
-C. 
-D. 
-`Hint:`
+B. Triangle
+C. Cello
+D. Trombone
+`Hint: Think about who directs the performance without directly interacting with the instruments.`
 ## Round three
 Question 1
 What is the meaning of life, the universe, and everything?
