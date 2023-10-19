@@ -106,7 +106,7 @@ D. Artichoke (Correct Answer)
 Question 14
 What has a neck but no head?
 A. Giraffe
-B. Bottle
+B. Turtle Neck Sweater
 C. Shirt
 D. Bottle (Correct Answer)
 `Hint: Think about a container with a long neck.`
@@ -121,9 +121,9 @@ D. Hope
 
 Question 16
 What is full of holes but still holds water?
-A. Sponge
+A. Sponge (Correct Answer)
 B. Net
-C. Strainer (Correct Answer)
+C. Strainer 
 D. Cloud
 `Hint: It's not a physical object but something you might use in the kitchen.`
 
@@ -181,13 +181,13 @@ A. Gold
 B. Diamond
 C. Pencil lead (Correct Answer)
 D. Coal
-`Hint: It's about graphite and writing.`
+`Hint: You draw with it.`
 
 Question 24
 What can be cracked, made, told, and played?
-A. Joke
+A. Joke (Correct Answer)
 B. Code
-C. Egg (Correct Answer)
+C. Egg 
 D. Record
 `Hint: You find me in a house.`
 
@@ -201,7 +201,7 @@ D. Baby
 
 Question 26
 What can travel around the world while staying in a corner?
-A. Stamp
+A. The flu
 B. Earth
 C. A stamp (Correct Answer)
 D. Satellite
@@ -265,12 +265,12 @@ D. A flock
 `Hint: Think about their behavior`
 
 Question 2 
-What gas do humans exhale when they breathe out?
-A. Oxygen
-B. Carbon Dioxide (Correct Answer)
-C. Nitrogen
-D. Helium 
-`Hint: Part of the respiration process.`
+
+A.
+B.
+C.
+D.
+`Hint:`
 
 Question 3
 What gas do plants absorb from the air?
@@ -289,12 +289,12 @@ D. 6
 `Hint: Simple addition.`
 
 Question 5
-What's the chemical symbol for gold?
-A. Go
-B. Ag
-C. Au
-D. Gd
-`Hint: Remember your periodic table`
+
+A.
+B.
+C.
+D.
+`Hint:`
 
 Question 6
 What's the chemical symbol for water?
@@ -321,20 +321,20 @@ D. 4
 `Hint: A unique characteristic.`
 
 Question 9
-What's the smallest prime number?
-A. 1
-B. 3
-C. 2 (Correct Answer)
-D. 4
-`Hint: Prime and simple.`
+
+A.
+B.
+C.
+D.
+`Hint:`
 
 Question 10
-What's the capital of Japan?
-A. Tokyo (Correct Answer)
-B. Beijing
-C. Seoul
-D. Bangkok
-`Hint: The land of the rising sun.`
+
+A.
+B.
+C.
+D.
+`Hint:`
 
 Question 11
 What's the chemical symbol for oxygen?
@@ -345,12 +345,12 @@ D. O
 `Hint: An essential gas.`
 
 Question 12
-What's the capital of Australia?
-A. Canberra (Correct Answer)
-B. Sydney
-C. Melbourne
-D. Brisbane
-`Hint: Not a coastal city.`
+
+A.
+B.
+C.
+D.
+`Hint:`
 
 Question 13
 How many planets are there in our solar system?
@@ -361,12 +361,12 @@ D. 8 (Correct Answer)
 `Hint: Include Pluto if you must.`
 
 Question 14
-How many continents are there on Earth?
-A. 5
-B. 6
-C. 7 (Correct Answer)
-D. 10
-`Hint: Remember your geography lessons.`
+
+A.
+B.
+C.
+D.
+`Hint:`
 
 Question 15
 How many sides does a hexagon have?
@@ -416,6 +416,13 @@ C. 2
 D. 64
 `Hint: A perfect square.`
 
+Question 21
+
+A.
+B.
+C. 
+D. 
+`Hint:`
 ## Round three
 Question 1
 What is the meaning of life, the universe, and everything?
@@ -426,20 +433,20 @@ D. A mystery (Correct Answer)
 `Hint: The answer is as elusive as the question.`
 
 Question 2
-How many dimensions are there in string theory?
-A. 10
-B. 11 (Correct Answer)
-C. 4
-D. Infinity
-`Hint: It's more than you can perceive.`
+July 4th is the day that Americans celebrate "Independence Day." Do the british have a fourth of July in England?
+A. Yes, they do but it's on the first 
+B. Of course, they do (Correct Answer)
+C. Yes, but it's called "Dependence Day"
+D. Yes, and it's a celebration of American independence
+`Hint: Think about the literal interpretation of the question`
 
 Question 3
-What is the Riemann Hypothesis concerned with?
-A. Geometry
-B. Number theory (Correct Answer)
-C. Quantum mechanics
-D. Abstract art
-`Hint: It's not about shapes, but numbers and patterns.`
+Which would be worth more, a pound of $10 pure gold coins of half a pound of $20 pure gold coins, or would they be worth the same amount?
+A. A pound of gold is always worth more than a half pound of gold
+B. A pound of $10 pure gold coins
+C. A half pound of $20 pure gold coins
+D. Both would be worth the same amount
+`Hint: Think about the market value of gold`
 
 Question 4
 Who is Schrödinger's cat?
@@ -450,76 +457,76 @@ D. A cat with nine lives
 `Hint: It's both alive and not alive, depending on your perspective.`
 
 Question 5
-What is dark matter made of?
-A. Protons and neutrons
-B. Exotic particles (Correct Answer)
-C. Antimatter
-D. Shadows`
-`Hint: It's not your everyday matter.`
+Even if they were starving, first peoples living in the Arctic never ate penguin eggs. Why not?
+A. They do not like penguin eggs
+B. They make you sick
+C. There are not any penguins in the Arctic (Correct Answer)
+D. Hard to find
+`Hint: The answer lies in the geographical distribution of penguins.`
 
 Question 6
-What is the halting problem in computer science?
-A. A bug in code
-B. An undecidable problem (Correct Answer)
-C. A slow computer
-D. A mathematical theorem
-`Hint: It's a problem that can't be solved, even by the smartest computers.`
+Four men were in a boat on a lake. The boat capsized and all four men sank and to the bottom of the lake, yet not a single man got wet! Why? 
+A. They all got wet not just one single man
+B. Because they were wearing scuba gear
+C. They were still in the boat
+D. Because they were all married (Correct Answer)
+`Hint: Think about the wording of single man`
 
 Question 7
-Who formulated Gödel's incompleteness theorems?
-A. Albert Einstein
-B. Kurt Gödel (Correct Answer)
-C. Alan Turing
-D. Isaac Newton
-`Hint: The guy who found the holes in formal systems.`
+If you divide thirty by half and add ten, what is the answer?
+A. 70 (Correct Answer)
+B. 12
+C. 25
+D. 60
+`Hint: When dividing by fractions, you must invert and multiply.`
 
 Question 8
-What is the smallest prime number with two digits?
-A. 11
-B. 13 (Correct Answer)
-C. 17
-D. 19
-`Hint: It's a teen prime.`
+Forward I am heavy, backward I am not. What am I?
+A. Weight
+B. Light
+C. The word ton (Correct Answer)
+D. Gravity
+`Hint: Play on words`
 
 Question 9
-What is the significance of Planck's constant?
-A. Speed of light
-B. Quantum of action (Correct Answer)
-C. Gravitational constant
-D. Time dilation
-`Hint: It's a fundamental constant, but what's its action?`
+How many squares on a chessboard?
+A. 64 single squares
+B. total of 204 square (Correct Answer)
+C. 36 square made of 9 single squares
+D. 9 squares made of 36 single squares
+`Hint: Add all squares including one of the whole board`
 
 Question 10
-What is the name of the unsolvable problem in algorithmics?
-A. NP-hard problem
-B. The halting problem (Correct Answer)
-C. P vs NP problem
-D. The traveling salesman problem
-`Hint: Algorithms can't predict its outcome.`
+How many 3-cent stamps are in a dozen?
+A. 4
+B. 3
+C. 12 (Correct Answer)
+D. 36
+`Hint: Think about how many stamps not the amount it cost`
 
 Question 11
-Who proposed the Many-Worlds Interpretation in quantum mechanics?
-A. Niels Bohr
-B. Max Planck
-C. Hugh Everett III (Correct Answer)
-D. Richard Feynman
-`Hint: Some say there's a world where this hint makes sense.`
+How many cubic meters of dirt are in a hole 6 meters long, 2 meters wide, and 1 meter deep?
+A. 9 meters
+B. 1 
+C. 2
+D. None (Correct Answer)
+`Hint: Think about the nature of a hole and what it represents in terms of space and volume.`
 
 Question 12
-What is the Goldbach Conjecture concerned with?
-A. Prime numbers
-B. Odd numbers
-C. Even numbers (Correct Answer)
-D. Fibonacci sequence
-`Hint: Even numbers have a unique way of expressing themselves.`
+In the following series, which numbers can be evenly divided by two? 1 2 3 4 5 6 7 8 9 
+A. All even numbers
+B. All of them (Correct Answer)
+C. All odd numbers
+D. None of them 
+`Hint: What type of numbers can be cut in half.`
 
 Question 13
-In mathematics, what is the Butterfly Effect?
-A. Chaos theory (Correct Answer)
-B. Butterfly's trajectory
-C. Prime number distribution
-D. Strange attractors
-`Hint: It flaps its wings, and chaos ensues.`
+I have a foot on each end, and one in the middle. What am I?
+A. A yard stick (Correct Answer)
+B. A ruler
+C. A person
+D. A ladder
+`Hint: Consider objects that have a measurement component and are associated with length.`
 
 Question 14
 What is the mathematical concept behind the game of Sudoku?
@@ -530,89 +537,89 @@ D. Probability
 `Hint: No Latin was harmed in the making of this concept.`
 
 Question 15
-What is the twin prime conjecture?
-A. Consecutive prime numbers
-B. Primes with only two factors (Correct Answer)
-C. Primes with a twin
-D. Sum of twin primes
-`Hint: Twins, but not identical.`
+Which one of the three would see most clearly in total darkness? A leopard, a bat, or an owl? 
+A. leopard
+B. bat
+C. None (Correct Answer)
+D. owl
+`Hint:When it's pitch black, all eyes are in the same boat.`
 
 Question 16
-Who developed the concept of non-Euclidean geometry?
-A. Euclid
-B. Gauss
-C. Lobachevsky and Bolyai (Correct Answer)
-D. Pythagoras
-`Hint: It's a geometry that Euclid might not approve of.`
+How can half of 12 be 7? 
+A. Upper half of the Roman numeral for 12 looks like the number for seven (Correct Answer)
+B. If you add 5 to half of 12, you get 7
+C. In a special numbering system, half of 12 is indeed 7
+D. It's a mathematical illusion, half of 12 is not really 7
+`Hint: Explore the world of numerals.`
 
 Question 17
-What is the Hodge conjecture related to in mathematics?
-A. Topology
-B. Algebraic cycles (Correct Answer)
-C. Complex analysis
-D. Geometric shapes
-`Hint: It's not about bikes, but cycles in algebraic geometry.`
+Mr. and Mrs. Clatter have five perfectly healthy children. Half of them are boys. How is that possible?
+A. The family has a mix of boys and girls, but only half are mentioned
+B. They adopted some of the children
+C. Mrs. Clatter has a twin sister who also has children
+D. The other half are also boys (Correct Answer)
+`Hint: Consider the information given carefully and think about the total number of children.`
 
 Question 18
-What is the Poincaré conjecture, famously proved by Grigori Perelman?
-A. Topology (Correct Answer)
-B. Number theory
-C. Differential equations
-D. Chaos theory
-`Hint: It's about the shape of our universe.`
+If you were to step into a sealed room filled with 100% methane gas and strike a match, what would happen? 
+A. It would explode
+B. The match would burn briefly and then extinguish
+C. To the match and the room nothing, the match cannot spark without oxygen (Correct Answer)
+D. The room would catch fire but not explode
+`Hint: Think about what fire needs to exist and how it interacts with different environments.`
 
 Question 19
-What is the significance of Gödel's second incompleteness theorem?
-A. Proves the consistency of arithmetic
-B. Shows the limitations of formal systems (Correct Answer)
-C. Solves Fermat's Last Theorem
-D. Establishes the existence of irrational numbers
-`Hint: Even arithmetic has its limits.`
+Therein lies the secret. For you see, there is a seven-letter word in the English language that contains eight words without rearranging any of its letters. What is the word?
+A. Wordplay
+B. Puzzled
+C. Therein (Correct Answer)
+D. Mystery
+`Hint: Pay attention to the wording of the question`
 
 Question 20
-What is the primary application of the Fast Fourier Transform (FFT)?
-A. Image compression
-B. Signal processing (Correct Answer)
-C. Cryptography
-D. Database indexing
-`Hint: It's a fast way to transform signals, not breakfast.`
+How can you physically stand behind your father while he is standing behind you?
+A. Mirror
+B. back to back (Correct Answer)
+C. Hologram
+D. Shadow
+`Hint: Think about spatial relationships and ways people can be positioned relative to each other.`
 
 Question 21
-What does the Banach-Tarski Paradox state?
-A. A ball can be decomposed into a finite number of non-overlapping balls.
-B. A sphere can be split into two identical spheres (Correct Answer)
-C. Every bounded set has a least upper bound
-D. Infinity is not a number
-`Hint: Magic tricks in the realm of mathematics.`
+How many mistakes can you find in the following sentence? This sentence containes four misstakes.
+A. Three (Correct Answer)
+B. One
+C. Four
+D. Two
+`Hint: One of the mistakes is the claim made in the sentence`
 
 Question 22
-What is the Ramanujan-Hardy number, 1729, famous for?
-A. Prime number
-B. Taxi-cab number (Correct Answer)
-C. Fibonacci number
-D. Euler's number
-`Hint: It took a cab to become famous.`
+What five-letter word becomes shorter when you add two letters to it?
+A. Brief
+B. Short (Correct Answer)
+C. Snappy
+D. Little
+`Hint: It's a play on words and the nature of the word itself.`
 
 Question 23
-What is the significance of the Lindemann-Weierstrass theorem?
-A. Transcendental numbers (Correct Answer)
-B. Quadratic residues
-C. Fermat's Last Theorem
-D. Perfect numbers
-`Hint: Numbers that transcend the algebraic realm.`
+If you were to take two cucumbers from three cucumbers, how many would you have?
+A. One
+B. Five
+C. Two (Correct Answer)
+D. Three
+`Hint: Think about the action mentioned in the question.`
 
 Question 24
-Who is known for the ABC Conjecture in number theory?
-A. Andrew Wiles
-B. Shinichi Mochizuki
-C. Sophie Germain
-D. Joseph Oesterlé and David Masser (Correct Answer)
-`Hint: It's not as easy as ABC.`
+Professor Quantum has two coins that total 30 cents. Since one of the coins is not a nickel what are the two coins?
+A. Two dimes
+B. Two fifteen cent coins
+C. A quarter and a nickel (Correct Answer)
+D. Quarter and half a dime
+`Hint: Read the question very carefully.`
 
 Question 25
-What does the Collatz conjecture propose?
-A. Every even number is a sum of two primes
-B. Every positive integer reaches 1 after a specific sequence (Correct Answer)
-C. There are infinitely many prime pairs
-D. There is a prime number between every pair of consecutive squares
-`Hint: Sequences that always lead to unity, but not necessarily unity of mathematicians.`
+
+A.
+B.
+C.
+D.
+`Hint:`
