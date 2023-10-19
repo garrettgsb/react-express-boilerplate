@@ -17,7 +17,7 @@ D. 3
 
 Question 3
 What has keys but can't open locks?
-A. Piano
+A. A door
 B. Keyboard
 C. Typewriter
 D. Piano (Correct Answer)
@@ -114,8 +114,8 @@ D. Bottle (Correct Answer)
 Question 15
 What is as light as a feather yet the strongest person can't hold it for more than a few minutes?
 A. Air
-B. Breath
-C. Laughter (Correct Answer)
+B. Breath (Correct Answer)
+C. Laughter 
 D. Hope
 `Hint: It's not tangible but involves a momentary experience.`
 
@@ -138,10 +138,10 @@ D. Compass
 Question 18
 What has a head, a tail, is brown, and has no legs?
 A. Snake
-B. Stick (Correct Answer)
+B. Stick 
 C. Cigar
-D. Worm
-`Hint: It's not a living creature but often found outdoors.`
+D. Worm (Correct Answer)
+`Hint: It's often found outdoors.`
 
 Question 19
 What has one eye but can't see?
@@ -161,10 +161,10 @@ D. Echo
 
 Question 21
 What belongs to you but is used more by others?
-A. Your name
+A. Your name (Correct Answer)
 B. Your car
 C. Your time
-D. Your money (Correct Answer)
+D. Your money 
 `Hint: It's a resource you invest and spend.`
 
 Question 22
@@ -225,9 +225,9 @@ D. Dictionary
 
 Question 29
 What is always in front of you but can't be seen?
-A. Future
+A. Future (Correct Answer)
 B. Past
-C. Present (Correct Answer)
+C. Present 
 D. Memory
 `Hint: It's a moment in time.`
 
@@ -248,12 +248,12 @@ D. Fire
 `Hint: It helps you keep time.`
 
 Question 32
-What has keys but can't open locks?
-A. Keyboard
-B. Typewriter
-C. Piano (Correct Answer)
-D. Calculator
-`Hint: It's a musical instrument of sorts.`
+What is the absolute last thing both men and women take off before getting into bed?
+A. Hat
+B. Shoes
+C. Socks
+D. Their feet off the floor (Correct Answer)
+`Hint: Think literally`
 
 ## Round two
 Question 1
@@ -265,8 +265,8 @@ D. A flock
 `Hint: Think about their behavior`
 
 Question 2 
-
-A.
+The marker does not want it, the buyer does not use it, and the user does not see it.
+A. Coffin (Correct Answer)
 B.
 C.
 D.
@@ -289,10 +289,10 @@ D. 6
 `Hint: Simple addition.`
 
 Question 5
-
+Break it and it is better, immediately set, and harder to break again. What am I?
 A.
 B.
-C.
+C. A record (Correct Answer)
 D.
 `Hint:`
 
@@ -321,19 +321,19 @@ D. 4
 `Hint: A unique characteristic.`
 
 Question 9
-
-A.
-B.
-C.
+What is 147 apples plus 68 oranges?
+A. A lot of fruit
+B. 215 fruits 
+C. 147 apples and 68 oranges (Correct Answer)
 D.
 `Hint:`
 
 Question 10
-
+If you give me food I will grow. If you give me water I will die. Who or what am I?
 A.
 B.
 C.
-D.
+D. Fire (Correct Answer)
 `Hint:`
 
 Question 11
@@ -345,10 +345,10 @@ D. O
 `Hint: An essential gas.`
 
 Question 12
-
+The more you have of it, the less you see. What is it?
 A.
 B.
-C.
+C. Darkness (Correct Answer)
 D.
 `Hint:`
 
@@ -361,11 +361,11 @@ D. 8 (Correct Answer)
 `Hint: Include Pluto if you must.`
 
 Question 14
-
+What is so fragile that when you say its name you break it?
 A.
 B.
 C.
-D.
+D. Silence (Correct Answer)
 `Hint:`
 
 Question 15
@@ -417,8 +417,8 @@ D. 64
 `Hint: A perfect square.`
 
 Question 21
-
-A.
+What orchestral device is not blown, bowed, plucked or struck?
+A. The conductor's baton
 B.
 C. 
 D. 
@@ -617,9 +617,9 @@ D. Quarter and half a dime
 `Hint: Read the question very carefully.`
 
 Question 25
-
-A.
-B.
-C.
-D.
-`Hint:`
+Many people consider it amazing, and just their luck, that things are always in the last place you look for them. What is wrong with this belief?
+A. It's a universal truth
+B. Once you find something, you don't look elsewhere (Correct Answer)
+C. It's a statistical anomaly
+D. It's a self-fulfilling prophecy
+`Hint: Consider the logic of the statement.`
