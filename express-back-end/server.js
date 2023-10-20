@@ -32,10 +32,6 @@ app.get('/api/questions', (req, res) => {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
     })
-    .finally(() => {
-      // Always close the connection after queries
-      database.destroy();
-    });
 });
 
 // highscores
@@ -53,10 +49,6 @@ app.get('/api/high-scores', (req, res) => {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
     })
-    .finally(() => {
-      // Always close the connection after queries
-      database.destroy();
-    });
 });
 
 app.listen(PORT, () => {
