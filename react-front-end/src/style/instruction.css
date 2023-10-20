@@ -24,4 +24,10 @@
   padding: 100px;
   margin-top: 20px; /* Adjust the margin as needed */
   height: 300px;
+  background-color: yellow;
+}
+
+.how-to-play {
+  font-size: larger;
+  font-weight: bold;
 }
