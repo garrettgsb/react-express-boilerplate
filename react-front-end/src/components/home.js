@@ -1,8 +1,9 @@
 import "../style/App.css";
-import React from 'react';
-import HighScores from './HighScores';
+import React from "react";
+import Leaderboard from "./Leaderboard";
 import Quiz from "../asset/THELOGO.png";
 import { useNavigate } from "react-router-dom";
+
 
 function Home() {
 
@@ -21,7 +22,7 @@ function Home() {
       <button className="rectangle-button" onClick={handleInstructionsClick}>
         INSTRUCTIONS
       </button>
-      <HighScores />
+      <Leaderboard />
     </div>
   );
 }
