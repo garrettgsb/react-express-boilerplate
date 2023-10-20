@@ -1,11 +1,8 @@
 import "../style/App.css";
-import React, { useState, useEffect } from 'react';
-import data from "../data.json";
+import React from 'react';
 import HighScores from './HighScores';
 import Quiz from "../asset/THELOGO.png";
 import { useNavigate } from "react-router-dom";
-
-
 
 function Home() {
 

@@ -16,8 +16,6 @@ function HighScores() {
       .catch(error => console.error('Error fetching high scores:', error));
   }, []);
 
-  console.log('High Scores State:', highScores); // Add this log to see the state
-
   return (
     <div className="score-box">
       <div className="score-columns">
@@ -33,6 +31,3 @@ function HighScores() {
 }
 
 export default HighScores;
-
-
-
