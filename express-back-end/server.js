@@ -17,7 +17,7 @@ app.get('/api/data', (req, res) => res.json({
   message: 'Seems to work!',
 }));
 
-// Sample GET route for questions
+// questions
 app.get('/api/questions', (req, res) => {
   database
     .select('*')
@@ -26,6 +26,27 @@ app.get('/api/questions', (req, res) => {
       // Process the rows
       console.log(rows);
       res.json({ questions: rows });
+    })
+    .catch(error => {
+      // Handle errors
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    })
+    .finally(() => {
+      // Always close the connection after queries
+      database.destroy();
+    });
+});
+
+// highscores
+app.get('/api/high-scores', (req, res) => {
+  database
+    .select('*')
+    .from('game')
+    .then(rows => {
+      // Process the rows
+      console.log(rows);
+      res.json({ games: rows });
     })
     .catch(error => {
       // Handle errors
