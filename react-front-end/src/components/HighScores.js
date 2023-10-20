@@ -9,11 +9,12 @@ function HighScores() {
       .then(response => response.json())
       .then(data => {
         console.log('API Response:', data);
-        setHighScores(data.games);
+        // Sort the high scores in descending order based on the 'score' property
+        const sortedHighScores = data.games.sort((a, b) => b.score - a.score);
+        setHighScores(sortedHighScores);
       })
       .catch(error => console.error('Error fetching high scores:', error));
   }, []);
-  
 
   console.log('High Scores State:', highScores); // Add this log to see the state
 
@@ -29,8 +30,9 @@ function HighScores() {
       </div>
     </div>
   );
-}  
+}
 
 export default HighScores;
+
 
 
