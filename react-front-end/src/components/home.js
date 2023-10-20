@@ -13,19 +13,17 @@ function Home() {
     navigate("instructions")
    }
 
-  return (
+   return (
     <div className="div-style">
       <img src={Quiz} alt="quizjs" />
       <button className="rectangle-button" onClick={handleStartClick}>
         START
       </button>
-      <button
-        className="rectangle-button" onClick={handleInstructionsClick}>
+      <button className="rectangle-button" onClick={handleInstructionsClick}>
         INSTRUCTIONS
       </button>
       <Leaderboard />
     </div>
   );
 }
-
 export default Home;
