@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const shuffleArray = (array) => {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+};
+
 const QuizComponent = () => {
   const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentRound, setCurrentRound] = useState(1);
   const [lives, setLives] = useState(5);
   const [showHint, setShowHint] = useState(false);
+  const [score, setScore] = useState(0);
 
   const questions = [
     'What is the capital of France?',
@@ -28,20 +38,20 @@ const QuizComponent = () => {
 
   const answers = [
     ['Berlin', 'Paris', 'Madrid', 'London'],
-    ['William Shakespeare', 'Charles Dickens', 'Jane Austen', 'Mark Twain'],
+    ['Charles Dickens', 'William Shakespeare', 'Jane Austen', 'Mark Twain'],
     ['Mars', 'Jupiter', 'Saturn', 'Earth'],
-    ['2', 'Fish (Correct Answer)', '42', '√(-1)'],
-    ['0', '1 (Correct Answer)', '2', '3'],
-    ['A door', 'Keyboard', 'Typewriter', 'Piano (Correct Answer)'],
-    ['Apple', 'Banana', 'Orange (Correct Answer)', 'Grape'],
-    ['0', '1 (Correct Answer)', '2', 'Infinite'],
-    ['In the U.S.', 'In Canada', 'Nowhere, survivors are alive (Correct Answer)', 'In an international cemetery'],
-    ['Towel (Correct Answer)', 'Sponge', 'Soap', 'Raincoat'],
-    ['Venus', 'Jupiter', 'Mars (Correct Answer)', 'Saturn'],
-    ['The letter "M" (Correct Answer)', 'The letter "E"', 'The letter "O"', 'The letter "N"'],
-    ['Left', 'Right', 'It doesn\'t roll, roosters don\'t lay eggs (Correct Answer)', 'Down'],
-    ['He sleeps at night', 'He takes power naps', 'He sleeps during the day', 'He only sleeps at night (Correct Answer)'],
-    ['Mailbox', 'Alphabet', 'Post Office', 'Mailman (Correct Answer)'],
+    ['2', 'Fish', '42', '√(-1)'],
+    ['0', '1', '2', '3'],
+    ['A door', 'Piano', 'Typewriter', 'keyboard'],
+    ['Apple', 'Orange', 'Banana', 'Grape'],
+    ['0', '1', '2', 'Infinite'],
+    ['In the U.S.', 'Nowhere, survivors are alive', 'In Canada', 'In an international cemetery'],
+    ['Sponge', 'Towel', 'Soap', 'Raincoat'],
+    ['Venus', 'Mars', 'Jupiter', 'Saturn'],
+    ['The letter "E"', 'The letter "M"', 'The letter "O"', 'The letter "N"'],
+    ['Left', 'It doesn\'t roll, roosters don\'t lay eggs', 'Right', 'Down'],
+    ['He sleeps at night', 'He only sleeps at night', 'He sleeps during the day', 'He takes power naps'],
+    ['Mailbox', 'Mailman', 'Post Office', 'Alphabet'],
   ];
 
   const hints = [
@@ -62,17 +72,28 @@ const QuizComponent = () => {
     "It's not about paper or mail but a fundamental concept.",
   ];
 
+  // Shuffle the answers for each question
+  const shuffledAnswers = answers.map((answerSet) => shuffleArray(answerSet));
+
+  const correct = answers[currentQuestionIndex][1];
+  const [hintUsed, setHintUsed] = useState(false);
+
   const handleAnswerClick = (selectedAnswer) => {
-    if (selectedAnswer === answers[currentQuestionIndex][1]) {
+    if (selectedAnswer === correct) {
       console.log('Correct answer!');
+      setScore((prevScore) => prevScore + 20);
     } else {
       console.log('Wrong answer!');
       setLives((prevLives) => prevLives - 1);
+      setScore((prevScore) => prevScore);
     }
     handleNextClick();
   };
   const handleHintClick = () => {
-    setShowHint(true);
+
+    setHintUsed(true); // Set hintUsed to true when the hint is clicked
+    setShowHint(true); // Show the hint
+
   };
 
   const handleNextClick = () => {
@@ -81,8 +102,13 @@ const QuizComponent = () => {
       console.log('Quiz completed!');
       navigate('/congrads');
     } else {
+      if (hintUsed && correct) {
+        // Award points only if the hint was used and the answer is correct
+        setScore((prevScore) => prevScore - 10);
+      }
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setShowHint(false); // Reset the hint display when moving to the next question
+      setHintUsed(false); 
 
       if (currentQuestionIndex % 5 === 4) {
         // Move to the next round after every 5 questions
@@ -101,11 +127,11 @@ const QuizComponent = () => {
 
   return (
     <div>
-      <h1>Quiz Time!</h1>
+     <h1>Quiz Time!</h1>
       <p>Round {currentRound}</p>
       <p>{questions[currentQuestionIndex]}</p>
       <ul>
-        {answers[currentQuestionIndex].map((answer, index) => (
+        {shuffledAnswers[currentQuestionIndex].map((answer, index) => (
           <li key={index}>
             <button onClick={() => handleAnswerClick(answer)}>
               {getAnswerLabel(index)}. {answer}
@@ -114,6 +140,7 @@ const QuizComponent = () => {
         ))}
       </ul>
       <p>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
+      <p>Score: {score}</p>
       {showHint && <p>Hint: {hints[currentQuestionIndex]}</p>}
       <button onClick={handleHintClick}>Hint</button>
     </div>
