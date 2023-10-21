@@ -10,7 +10,7 @@ StartDateTime TIMESTAMP
 
 CREATE TABLE Question (
   id SERIAL PRIMARY KEY,
-  GameID INTEGER NULL
+  GameID INTEGER NULL,
 Question VARCHAR(255),
 RoundNumber INTEGER,
 Hint VARCHAR(255),
@@ -19,6 +19,6 @@ OptionB VARCHAR(255),
 OptionC VARCHAR(255),
 OptionD VARCHAR(255),
 Correct_Option VARCHAR(1),
-Created_At DATETIME,
+Created_At TIMESTAMP,
 FOREIGN KEY (GameID) REFERENCES Game(id)
 );
