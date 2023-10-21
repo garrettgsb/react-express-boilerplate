@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../style/quiz.css";
 import Quiz from "../asset/THELOGO.png";
+import Dude from "../asset/dude.png";
 
 const shuffleArray = (array) => {
   const shuffledArray = [...array];
@@ -79,15 +80,25 @@ const QuizComponent = () => {
 
   const correct = answers[currentQuestionIndex][1];
   const [hintUsed, setHintUsed] = useState(false);
+  const [showDudeImage, setShowDudeImage] = useState(false);
 
   const handleAnswerClick = (selectedAnswer) => {
     if (selectedAnswer === correct) {
       console.log('Correct answer!');
       setScore((prevScore) => prevScore + 20);
+      setShowDudeImage(true);
+
+    // Set a timeout to hide the dude image and move to the next question
+    setTimeout(() => {
+      setShowDudeImage(false);
+      // handleNextClick();
+    }, 800);
+
     } else {
       console.log('Wrong answer!');
       setLives((prevLives) => prevLives - 1);
       setScore((prevScore) => prevScore);
+      setShowDudeImage(false);
     }
     handleNextClick();
   };
@@ -130,6 +141,7 @@ const QuizComponent = () => {
   return (
     <div className='container'>
         <img className='logo' src={Quiz} alt="quizjs" />
+       
         <div className='game'>
       <p className='round'>Round {currentRound}</p>
       <p className='questions'>{questions[currentQuestionIndex]}</p>
@@ -140,8 +152,10 @@ const QuizComponent = () => {
               {getAnswerLabel(index)}. {answer}
             </button>
           </li>
+          
         ))}
       </ul>
+      {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
       <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
       <p className='score'>Score: {score}</p>
       {showHint && <p className='hint'>Hint: {hints[currentQuestionIndex]}</p>}
