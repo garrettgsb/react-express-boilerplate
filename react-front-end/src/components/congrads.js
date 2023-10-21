@@ -1,7 +1,21 @@
-import React from "react";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Congrads = () => {
-return <h1>yay you completed the quiz!!!</h1>
+const Congrats = () => {
+  const navigate = useNavigate();
+
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
+  return (
+    <div>
+      <h1>Congratulations!</h1>
+      <p>You've completed the quiz!</p>
+  
+      <button onClick={handleBackToHome}>Back to Home</button>
+    </div>
+  );
 };
 
-export default Congrads;
+export default Congrats;
