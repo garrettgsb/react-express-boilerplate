@@ -11,7 +11,7 @@ describe("Leaderboard", () => {
     const { container } = render(<Leaderboard />);
     await waitForElement(() => getAllByText(container, "Player 1"))
 
-    expect(getByText(container, "Player 1")).toBeInTheDocument()
+    expect(getByText(container, "PlayerOne")).toBeInTheDocument()
 
   });
 
