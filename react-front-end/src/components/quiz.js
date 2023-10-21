@@ -129,23 +129,23 @@ const QuizComponent = () => {
 
   return (
     <div className='container'>
-        <img src={Quiz} alt="quizjs" />
+        <img className='logo' src={Quiz} alt="quizjs" />
         <div className='game'>
-      <p>Round {currentRound}</p>
-      <p>{questions[currentQuestionIndex]}</p>
-      <ul>
+      <p className='round'>Round {currentRound}</p>
+      <p className='questions'>{questions[currentQuestionIndex]}</p>
+      <ul className='answers'>
         {shuffledAnswers[currentQuestionIndex].map((answer, index) => (
           <li key={index}>
-            <button onClick={() => handleAnswerClick(answer)}>
+            <button className='buttons' onClick={() => handleAnswerClick(answer)}>
               {getAnswerLabel(index)}. {answer}
             </button>
           </li>
         ))}
       </ul>
-      <p>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
-      <p>Score: {score}</p>
-      {showHint && <p>Hint: {hints[currentQuestionIndex]}</p>}
-      🤨<button onClick={handleHintClick}>Hint</button>
+      <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
+      <p className='score'>Score: {score}</p>
+      {showHint && <p className='hint'>Hint: {hints[currentQuestionIndex]}</p>}
+     <button className='h-button' onClick={handleHintClick}>🤨Hint</button>
       </div>
     </div>
   );
