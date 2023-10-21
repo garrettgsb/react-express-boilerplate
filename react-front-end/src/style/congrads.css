@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background: linear-gradient(to right, #75088E, #610576);
+}
+
+.title {
+font-size: 100px;
+}
+
+.on {
+  font-size: 50px;
+}
+
+.completing {
+  font-size: 50px;
+}
+
+.myForm {
+  width: 300px;
+  margin: auto;
+}
+
+.myForm input {
+  /* Style for form inputs (adjust as needed) */
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.myForm button {
+  /* Style for the submit button */
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: yellow; /* Add your desired background color */
+  color: black;
+  border: none;
+  border-radius: 4px;
+}
+
+.myForm button:hover {
+  /* Style for button on hover (optional) */
+  background-color: blue;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: bold;
+}
