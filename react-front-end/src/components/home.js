@@ -9,7 +9,9 @@ import { useNavigate } from "react-router-dom";
 function Home() {
 
   const navigate = useNavigate();
-  function handleStartClick() { }
+  function handleStartClick() { 
+    navigate("/game");
+  }
   function handleInstructionsClick() {
     navigate("instructions")
    }
