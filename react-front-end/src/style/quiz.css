@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background: linear-gradient(to right, #9c0fbb, #770890);
+}
+
+.game {
+  width: 300px; /* Set the width as needed */
+  height: 400px; /* Set the height as needed */
+  background-color: white;
+  border: 2px solid black;
+  padding: 20px; /* Add padding as needed */
+  box-sizing: border-box; /* Include padding and border in the total width and height */
+}

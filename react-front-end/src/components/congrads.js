@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import "../style/congrads.css";
+
 import { useNavigate } from 'react-router-dom';
+import "../style/congrads.css";
 import Quiz from "../asset/THELOGO.png";
 
 const Congrats = () => {

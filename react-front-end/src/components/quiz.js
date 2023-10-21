@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "../style/quiz.css";
+import Quiz from "../asset/THELOGO.png";
 
 const shuffleArray = (array) => {
   const shuffledArray = [...array];
@@ -126,8 +128,9 @@ const QuizComponent = () => {
   };
 
   return (
-    <div>
-     <h1>Quiz Time!</h1>
+    <div className='container'>
+        <img src={Quiz} alt="quizjs" />
+        <div className='game'>
       <p>Round {currentRound}</p>
       <p>{questions[currentQuestionIndex]}</p>
       <ul>
@@ -142,7 +145,8 @@ const QuizComponent = () => {
       <p>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
       <p>Score: {score}</p>
       {showHint && <p>Hint: {hints[currentQuestionIndex]}</p>}
-      <button onClick={handleHintClick}>Hint</button>
+      🤨<button onClick={handleHintClick}>Hint</button>
+      </div>
     </div>
   );
 };

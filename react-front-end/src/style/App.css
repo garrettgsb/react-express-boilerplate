@@ -58,7 +58,7 @@
 }
 
 .div-style {
-  background-color: purple;
+  background: linear-gradient(to right, #9c0fbb, #770890);
   height: 100vh;
   display: flex;
   justify-content: center;
