@@ -92,7 +92,7 @@ const QuizComponent = () => {
     setTimeout(() => {
       setShowDudeImage(false);
       // handleNextClick();
-    }, 800);
+    }, 1500);
 
     } else {
       console.log('Wrong answer!');

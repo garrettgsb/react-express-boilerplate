@@ -9,7 +9,7 @@ function Home() {
 
   const navigate = useNavigate();
   function handleStartClick() { 
-    navigate("/game");
+    navigate("/quiz");
   }
   function handleInstructionsClick() {
     navigate("instructions")

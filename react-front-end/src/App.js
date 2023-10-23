@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/instructions" element={<Instruction />} />
-        <Route path="/game" element={<QuizComponent />} />
+        <Route path="/quiz" element={<QuizComponent />} />
         <Route path="/congrads" element={<Congrads />} />
       </Routes>
     </BrowserRouter>
