@@ -8,7 +8,9 @@ import HighScores from "./HighScores";
 function Home() {
 
   const navigate = useNavigate();
-  function handleStartClick() { }
+  function handleStartClick() { 
+    navigate("/quiz");
+  }
   function handleInstructionsClick() {
     navigate("instructions")
    }
