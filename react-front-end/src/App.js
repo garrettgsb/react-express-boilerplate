@@ -4,6 +4,8 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Home from './components/home';
 import Game from "./components/game";
 import Instruction from './components/instruction';
+import QuizComponent from './components/quiz';
+import Congrads from "./components/congrads";
 
 function App() {
   return (
@@ -11,7 +13,8 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/instructions" element={<Instruction />} />
-        <Route path="/game" element={<Game />} />
+        <Route path="/quiz" element={<QuizComponent />} />
+        <Route path="/congrads" element={<Congrads />} />
       </Routes>
     </BrowserRouter>
   );
