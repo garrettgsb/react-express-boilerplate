@@ -56,7 +56,7 @@ function Game() {
         setShowHint(false);
         setShowResult(false);
       } else {
-        navigate("/leaderboard", { state: {score} });
+        navigate("/HighestScore", { state: {score} });
       }
     }
   };
