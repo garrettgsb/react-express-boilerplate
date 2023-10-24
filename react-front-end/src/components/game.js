@@ -12,23 +12,52 @@ function Game() {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(0);
+  const [showHint, setShowHint] = useState(false);
   const [showResult, setShowResult] = useState(false);
-  
+  const [score, setScore] = useState(0);
+  const totalLives = 5;
+  const [remainingLives, setRemainingLives] = useState (totalLives)
+
   const handleAnswerSelect = (answer) => {
     setSelectedAnswer(answer);
   };
 
   const checkAnswer = () => {
+    if (selectedAnswer === mockData.questions[currentQuestion].correctAnswer) {
+      if (showHint) {
+        setScore(score + 10);
+      } else {
+        setScore(score + 20);
+      }
+    } else {
+      if (remainingLives > 0) {
+        setRemainingLives(remainingLives - 1);
+      } else {
+        navigate("/home");
+      }
+    }
     setShowResult(true);
+  };
+
+  const showQuestionHint = () => {
+    setShowHint(true);
   };
 
   const nextQuestion = () => {
     if (currentQuestion < mockData.questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(0);
+      setShowHint(false);
       setShowResult(false);
     } else {
-      
+      if (remainingLives > 0) {
+        setCurrentQuestion(0);
+        setSelectedAnswer(0);
+        setShowHint(false);
+        setShowResult(false);
+      } else {
+        navigate("/leaderboard", { state: {score} });
+      }
     }
   };
 
@@ -50,6 +79,10 @@ function Game() {
           </div>
         ))}
       </div>
+      <button className="hint-button" onClick={showQuestionHint}>
+        Hint
+      </button>
+      {showHint && <div className="hint">{mockData.questions[currentQuestion].hint}</div>}
       {showResult && (
         <div className={`result ${selectedAnswer === mockData.questions[currentQuestion].correctAnswer ? "correct" : "wrong"}`}>
           {selectedAnswer === mockData.questions[currentQuestion].correctAnswer ? "Correct!" : "Wrong!"}
@@ -61,6 +94,7 @@ function Game() {
       <button className="next-button" onClick={nextQuestion}>
         Next
       </button>
+      <div className="lives">Lives: {remainingLives}</div>
     </div>
   );
 }
