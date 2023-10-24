@@ -4,15 +4,6 @@ import "../style/quiz.css";
 import Quiz from "../asset/THELOGO.png";
 import Dude from "../asset/dude.png";
 
-const shuffleArray = (array) => {
-  const shuffledArray = [...array];
-  for (let i = shuffledArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-  }
-  return shuffledArray;
-};
-
 const QuizComponent = () => {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
@@ -34,11 +25,19 @@ const QuizComponent = () => {
 
   const handleAnswerClick = (selectedAnswer) => {
     const correctOption = questions[currentQuestionIndex].correct_option;
+    // console log for debugging
+console.log('correct option:', correctOption);
 
-    if (selectedAnswer === correctOption) {
-      console.log('Correct answer!');
-      setScore((prevScore) => prevScore + 20);
-      setShowDudeImage(true);
+  // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
+  const correctIndex = correctOption.charCodeAt(0) - 'A'.charCodeAt(0);
+ // console log for debugging
+console.log('correct index:', correctIndex);
+
+  if (selectedAnswer === correctIndex) {
+    // Handle correct answer logic
+    console.log('Correct answer!');
+    setScore((prevScore) => prevScore + 20);
+    setShowDudeImage(true);
 
       // Set a timeout to hide the dude image and move to the next question
       setTimeout(() => {
@@ -92,13 +91,12 @@ const QuizComponent = () => {
     return <p>Loading...</p>;
   }
 
+
+
+
+
+  
   const currentQuestion = questions[currentQuestionIndex];
-  const shuffledAnswers = shuffleArray([
-    currentQuestion.optiona,
-    currentQuestion.optionb,
-    currentQuestion.optionc,
-    currentQuestion.optiond,
-  ]);
 
   return (
     <div className='container'>
@@ -108,13 +106,28 @@ const QuizComponent = () => {
         <p className='round'>Round {currentRound}</p>
         <p className='questions'>{currentQuestion.question}</p>
         <ul className='answers'>
-          {shuffledAnswers.map((answer, index) => (
-            <li key={index}>
-              <button className='buttons' onClick={() => handleAnswerClick(getAnswerLabel(index))}>
-                {getAnswerLabel(index)}. {answer}
-              </button>
-            </li>
-          ))}
+        <li>
+            <button className='buttons' onClick={() => handleAnswerClick(0)}>
+              A. {currentQuestion.optiona}
+            </button>
+          </li>
+          <li>
+            <button className='buttons' onClick={() => handleAnswerClick(1)}>
+              B. {currentQuestion.optionb}
+            </button>
+          </li>
+          <li>
+            <button className='buttons' onClick={() => handleAnswerClick(2)}>
+              C. {currentQuestion.optionc}
+            </button>
+          </li>
+          <li>
+            <button className='buttons' onClick={() => handleAnswerClick(3)}>
+              D. {currentQuestion.optiond}
+            </button>
+          </li>
+        
+         
         </ul>
         {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
         <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
