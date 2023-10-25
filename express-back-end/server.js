@@ -27,6 +27,8 @@ app.get('/api/questions', (req, res) => {
   database
     .select('*')
     .from('question')
+    .orderByRaw('RANDOM()')
+    .limit(15)
     .then(rows => {
       // Process the rows
       console.log(rows);

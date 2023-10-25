@@ -15,13 +15,29 @@ const QuizComponent = () => {
   const [hintUsed, setHintUsed] = useState(false);
   const [showDudeImage, setShowDudeImage] = useState(false);
 
-  useEffect(() => {
-    // Fetch questions from the API
-    fetch('http://localhost:8080/api/questions')
-      .then(response => response.json())
-      .then(data => setQuestions(data.questions))
-      .catch(error => console.error('Error fetching questions:', error));
-  }, []);
+// Function to shuffle an array
+// const shuffleArray = (array) => {
+//   const shuffled = array.slice();
+//   for (let i = shuffled.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+//   }
+//   return shuffled;
+// };
+
+
+useEffect(() => {
+  // Fetch questions
+  fetch('http://localhost:8080/api/questions')
+    .then(response => response.json())
+    .then(data => {
+      // Shuffle the array of questions
+      // const shuffledQuestions = shuffleArray(data.questions);
+      setQuestions(data.questions);
+    })
+    .catch(error => console.error('Error fetching questions:', error));
+}, []);
+
 
   const handleAnswerClick = (selectedAnswer) => {
     const correctOption = questions[currentQuestionIndex].correct_option;
