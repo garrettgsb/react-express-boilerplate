@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "../style/congrads.css";
 import Quiz from "../asset/THELOGO.png";
 
-const Congrats = () => {
+const Congrats = ({ onLeaderboardUpdate }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleBackToHome = () => {
     navigate('/');
@@ -13,13 +13,30 @@ const Congrats = () => {
 
     // State variables for form fields
     const [name, setName] = useState('');
+
+    // Access the score from the location state
+  const score = location.state && location.state.score;
   
     // Function to handle form submission
     const handleSubmit = (event) => {
       event.preventDefault();
       // Perform actions with form data (e.g., send to server)
-      console.log('Submitted:', { name });
+      console.log('Submitted:', { name, score });
+      onLeaderboardUpdate();
+
+       // Navigate to the home page
+    navigate('/');
     };
+
+    // For demonstration purposes, store data locally
+
+    const leaderboardData = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    leaderboardData.push({ name, score: score });
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboardData));
+
+
+   
+
   return (
     <div className='container'>
       <h1 className='title'>Congratulations!</h1>

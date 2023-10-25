@@ -15,24 +15,12 @@ const QuizComponent = () => {
   const [hintUsed, setHintUsed] = useState(false);
   const [showDudeImage, setShowDudeImage] = useState(false);
 
-// Function to shuffle an array
-// const shuffleArray = (array) => {
-//   const shuffled = array.slice();
-//   for (let i = shuffled.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-//   }
-//   return shuffled;
-// };
-
 
 useEffect(() => {
   // Fetch questions
   fetch('http://localhost:8080/api/questions')
     .then(response => response.json())
     .then(data => {
-      // Shuffle the array of questions
-      // const shuffledQuestions = shuffleArray(data.questions);
       setQuestions(data.questions);
     })
     .catch(error => console.error('Error fetching questions:', error));
@@ -78,7 +66,7 @@ console.log('correct index:', correctIndex);
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
       console.log('Quiz completed!');
-      navigate('/congrads');
+      navigate('/congrads', { state: { score } }); // pass the score as state
     } else {
       if (hintUsed && questions[currentQuestionIndex].correct_option) {
         // Award points only if the hint was used and the answer is correct
