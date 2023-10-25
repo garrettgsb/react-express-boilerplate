@@ -4,6 +4,11 @@ const bodyParser = require('body-parser');
 const knex = require('knex');
 const config = require('./knexfile')[process.env.NODE_ENV || 'development'];
 const database = knex(config);
+const cors = require("cors");
+
+app.use(cors(
+  { origin: "http://localhost:3000" }
+));
 
 const PORT = 8080;
 
@@ -22,6 +27,8 @@ app.get('/api/questions', (req, res) => {
   database
     .select('*')
     .from('question')
+    .orderByRaw('RANDOM()')
+    .limit(15)
     .then(rows => {
       // Process the rows
       console.log(rows);
