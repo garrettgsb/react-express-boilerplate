@@ -5,6 +5,12 @@ const knex = require('knex');
 const config = require('./knexfile')[process.env.NODE_ENV || 'development'];
 const database = knex(config);
 
+const cors = require("cors");
+
+app.use(cors(
+  { origin: "http://localhost:3002" }
+));
+
 const PORT = 8080;
 
 // Express Configuration

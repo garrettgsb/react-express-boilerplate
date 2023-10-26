@@ -5,7 +5,7 @@ function HighScores() {
 
   useEffect(() => {
     // Fetch high scores from the server
-    fetch('/api/high-scores')
+    fetch('http://localhost:8080/api/high-scores')
       .then(response => response.json())
       .then(data => {
         console.log('API Response:', data);
