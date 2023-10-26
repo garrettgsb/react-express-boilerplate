@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background: linear-gradient(to right, #9c0fbb, #770890);
+}
+
+.game {
+  width: 500px; /* Set the width as needed */
+  height: 750px; /* Set the height as needed */
+  background-color: white;
+  border: 2px solid black;
+  padding: 5px;
+  box-sizing: border-box; /* Include padding and border in the total width and height */
+}
+
+.logo {
+  width: 400px;
+}
+
+.round {
+  font-size: 30px;
+}
+
+.questions {
+  font-size: 40px;
+}
+
+.answers {
+  font-size: 30px;
+}
+
+.buttons {
+  font-size: 30px;
+}
+
+.lives {
+  font-size: 30px;
+}
+
+.score {
+  font-size: 30px;
+}
+
+.hint {
+  font-size: 20px;
+}
+
+.h-button {
+  font-size: 30px;
+}
+
+.dude {
+  width: 200px;
+  
+}
