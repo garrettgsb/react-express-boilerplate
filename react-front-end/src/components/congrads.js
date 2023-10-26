@@ -1,5 +1,5 @@
 // congrads.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import "../style/congrads.css";
 import Quiz from "../asset/THELOGO.png";
@@ -7,8 +7,17 @@ import Quiz from "../asset/THELOGO.png";
 const Congrats = ({ onLeaderboardUpdate, setHighScores }) => {
   const navigate = useNavigate();
   const location = useLocation();
-
+const [completionTime, setCompletionTime] = useState(null);
   
+useEffect(() => {
+  if (location.state) {
+    const startTime = location.state.startTime;
+    const endTime = new Date();
+    const timeDifference = endTime - startTime;
+    setCompletionTime(timeDifference);
+  }
+}, [location.state]);
+
   const handleBackToHome = () => {
     navigate('/');
   };
@@ -25,6 +34,7 @@ const Congrats = ({ onLeaderboardUpdate, setHighScores }) => {
       event.preventDefault();
       // Perform actions with form data (e.g., send to server)
       console.log('Submitted:', { name, score });
+     
       // Send data to the server
       try {
         const response = await fetch('/api/high-scores', {
@@ -71,6 +81,9 @@ console.log('Response Body:', responseBody);
       <h2 className='completing'>COMPLETING</h2>
       <img className="logo" src={Quiz} alt="quizjs" />
       <h1>Your final score: {score}</h1>
+      {completionTime && (
+        <h2>Time taken to complete the quiz: {formatTime(completionTime)}</h2>
+      )}
       <form className='myForm' onSubmit={handleSubmit}>
 
       {submissionMessage && <h2>{submissionMessage}</h2>}
@@ -88,6 +101,13 @@ console.log('Response Body:', responseBody);
       <button onClick={handleBackToHome}>Back to Home</button>
     </div>
   );
+};
+
+// Helper function to format milliseconds into a readable time format
+const formatTime = (milliseconds) => {
+  const seconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(seconds / 60);
+  return `${minutes} minutes and ${seconds % 60} seconds`;
 };
 
 export default Congrats;

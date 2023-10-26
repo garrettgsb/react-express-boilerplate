@@ -15,7 +15,7 @@ const QuizComponent = () => {
   const [score, setScore] = useState(0);
   const [hintUsed, setHintUsed] = useState(false);
   const [showDudeImage, setShowDudeImage] = useState(false);
-
+  const [startTime, setStartTime] = useState(null);
 
 useEffect(() => {
   // Fetch questions
@@ -27,6 +27,10 @@ useEffect(() => {
     .catch(error => console.error('Error fetching questions:', error));
 }, []);
 
+useEffect(() => {
+  // record start time
+setStartTime(new Date());
+}, []);
 
   const handleAnswerClick = (selectedAnswer) => {
     const correctOption = questions[currentQuestionIndex].correct_option;
@@ -66,8 +70,9 @@ console.log('correct index:', correctIndex);
   const handleNextClick = () => {
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
-      console.log('Quiz completed!');
-      navigate('/congrads', { state: { score } }); // pass the score as state
+      console.log('Quiz completed! Remaining lives:', lives);
+      submitRemainingLives();
+      navigate('/congrads', { state: { score, lives, startTime } }); // pass the score as state
     } else {
       if (hintUsed && questions[currentQuestionIndex].correct_option) {
         // Award points only if the hint was used and the answer is correct
@@ -85,6 +90,26 @@ console.log('correct index:', correctIndex);
         // All lives are gone, navigate to the home page
         navigate('/');
       }
+    }
+  };
+
+  const submitRemainingLives = async () => {
+    try {
+      const response = await fetch('/api/high-scores', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ score, lives }),
+      });
+  
+      if (response.ok) {
+        console.log('Remaining lives submitted successfully');
+      } else {
+        console.error('Failed to submit remaining lives');
+      }
+    } catch (error) {
+      console.error('Error submitting remaining lives:', error);
     }
   };
 
