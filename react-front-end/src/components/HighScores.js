@@ -1,3 +1,4 @@
+// highscores.js
 import React, { useState, useEffect } from 'react';
 
 function HighScores() {
@@ -9,8 +10,13 @@ function HighScores() {
       .then(response => response.json())
       .then(data => {
         console.log('API Response:', data);
+        
+        // Filter out entries with null names
+        const filteredHighScores = data.games.filter(score => score.nickname !== null);
+        
         // Sort the high scores in descending order based on the 'score' property
-        const sortedHighScores = data.games.sort((a, b) => b.score - a.score);
+        const sortedHighScores = filteredHighScores.sort((a, b) => b.score - a.score);
+        
         setHighScores(sortedHighScores);
       })
       .catch(error => console.error('Error fetching high scores:', error));

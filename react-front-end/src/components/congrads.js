@@ -1,9 +1,10 @@
+// congrads.js
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import "../style/congrads.css";
 import Quiz from "../asset/THELOGO.png";
 
-const Congrats = ({ onLeaderboardUpdate }) => {
+const Congrats = ({ onLeaderboardUpdate, setHighScores }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,25 +19,38 @@ const Congrats = ({ onLeaderboardUpdate }) => {
   const score = location.state && location.state.score;
   
     // Function to handle form submission
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
       event.preventDefault();
       // Perform actions with form data (e.g., send to server)
       console.log('Submitted:', { name, score });
-      onLeaderboardUpdate();
+      // Send data to the server
+      try {
+        const response = await fetch('/api/high-scores', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, score }),
+        });
+    
+        if (response.ok) {
+          console.log('Score submitted successfully');
+          // Optionally, you can update the state or perform other actions here
+          onLeaderboardUpdate();
+          navigate('/');
+        } else {
+          console.error('Failed to submit score');
+        }
+      } catch (error) {
+        console.error('Error submitting score:', error);
+      }
 
-       // Navigate to the home page
-    navigate('/');
     };
-
     // For demonstration purposes, store data locally
 
-    const leaderboardData = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    leaderboardData.push({ name, score: score });
-    localStorage.setItem('leaderboard', JSON.stringify(leaderboardData));
-
-
-   
-
+    // const leaderboardData = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    // leaderboardData.push({ name, score: score });
+    // localStorage.setItem('leaderboard', JSON.stringify(leaderboardData));
   return (
     <div className='container'>
       <h1 className='title'>Congratulations!</h1>
