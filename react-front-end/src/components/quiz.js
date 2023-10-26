@@ -1,9 +1,10 @@
 // quiz.js
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../style/quiz.css";
 import Quiz from "../asset/THELOGO.png";
 import Dude from "../asset/dude.png";
+import Dude2 from "../asset/thumbs-down.png";
 
 const QuizComponent = () => {
   const navigate = useNavigate();
@@ -15,49 +16,48 @@ const QuizComponent = () => {
   const [score, setScore] = useState(0);
   const [hintUsed, setHintUsed] = useState(false);
   const [showDudeImage, setShowDudeImage] = useState(false);
+  const [showDude2Image, setShowDude2Image] = useState(false);
   const [startTime, setStartTime] = useState(null);
 
-useEffect(() => {
-  // Fetch questions
-  fetch('http://localhost:8080/api/questions')
-    .then(response => response.json())
-    .then(data => {
-      setQuestions(data.questions);
-    })
-    .catch(error => console.error('Error fetching questions:', error));
-}, []);
+  useEffect(() => {
+    // Fetch questions
+    fetch("http://localhost:8080/api/questions")
+      .then((response) => response.json())
+      .then((data) => {
+        setQuestions(data.questions);
+      })
+      .catch((error) => console.error("Error fetching questions:", error));
+  }, []);
 
-useEffect(() => {
-  // record start time
-setStartTime(new Date());
-}, []);
+  useEffect(() => {
+    // record start time
+    setStartTime(new Date());
+  }, []);
 
   const handleAnswerClick = (selectedAnswer) => {
     const correctOption = questions[currentQuestionIndex].correct_option;
     // console log for debugging
-console.log('correct option:', correctOption);
+    console.log("correct option:", correctOption);
 
-  // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
-  const correctIndex = correctOption.charCodeAt(0) - 'A'.charCodeAt(0);
- // console log for debugging
-console.log('correct index:', correctIndex);
+    // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
+    const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0);
+    // console log for debugging
+    console.log("correct index:", correctIndex);
 
-  if (selectedAnswer === correctIndex) {
-    // Handle correct answer logic
-    console.log('Correct answer!');
-    setScore((prevScore) => prevScore + 20);
-    setShowDudeImage(true);
+    if (selectedAnswer === correctIndex) {
+      // Handle correct answer logic
+      console.log("Correct answer!");
+      setScore((prevScore) => prevScore + 20);
+      setShowDudeImage(true);
+      setShowDude2Image(false);
+      handleNextClick();
 
-      // Set a timeout to hide the dude image and move to the next question
-      setTimeout(() => {
-        setShowDudeImage(false);
-        handleNextClick();
-      }, 1500);
     } else {
-      console.log('Wrong answer!');
+      console.log("Wrong answer!");
       setLives((prevLives) => prevLives - 1);
       setScore((prevScore) => prevScore);
       setShowDudeImage(false);
+      setShowDude2Image(true);
       handleNextClick();
     }
   };
@@ -70,9 +70,9 @@ console.log('correct index:', correctIndex);
   const handleNextClick = () => {
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
-      console.log('Quiz completed! Remaining lives:', lives);
+      console.log("Quiz completed! Remaining lives:", lives);
       submitRemainingLives();
-      navigate('/congrads', { state: { score, lives, startTime } }); // pass the score as state
+      navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
     } else {
       if (hintUsed && questions[currentQuestionIndex].correct_option) {
         // Award points only if the hint was used and the answer is correct
@@ -88,89 +88,83 @@ console.log('correct index:', correctIndex);
       }
       if (lives === 0) {
         // All lives are gone, navigate to the home page
-        navigate('/');
+        navigate("/");
       }
     }
   };
 
   const submitRemainingLives = async () => {
     try {
-      const response = await fetch('/api/high-scores', {
-        method: 'POST',
+      const response = await fetch("/api/high-scores", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ score, lives }),
       });
-  
+
       if (response.ok) {
-        console.log('Remaining lives submitted successfully');
+        console.log("Remaining lives submitted successfully");
       } else {
-        console.error('Failed to submit remaining lives');
+        console.error("Failed to submit remaining lives");
       }
     } catch (error) {
-      console.error('Error submitting remaining lives:', error);
+      console.error("Error submitting remaining lives:", error);
     }
   };
 
-  const getAnswerLabel = (index) => {
-    return String.fromCharCode(65 + index);
-  };
+  // const getAnswerLabel = (index) => {
+  //   return String.fromCharCode(65 + index);
+  // };
 
   if (questions.length === 0) {
     return <p>Loading...</p>;
   }
 
-
-
-
-
-  
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className='container'>
-      <img className='logo' src={Quiz} alt="quizjs" />
+    <div className="container">
+      <img className="logo" src={Quiz} alt="quizjs" />
 
-      <div className='game'>
-        <p className='round'>Round {currentRound}</p>
-        <p className='questions'>{currentQuestion.question}</p>
-        <ul className='answers'>
-        <li>
-            <button className='buttons' onClick={() => handleAnswerClick(0)}>
+      <div className="game">
+        <p className="round">Round {currentRound}</p>
+        <p className="questions">{currentQuestion.question}</p>
+        <ul className="answers">
+          <li>
+            <button className="buttons" onClick={() => handleAnswerClick(0)}>
               A. {currentQuestion.optiona}
             </button>
           </li>
           <li>
-            <button className='buttons' onClick={() => handleAnswerClick(1)}>
+            <button className="buttons" onClick={() => handleAnswerClick(1)}>
               B. {currentQuestion.optionb}
             </button>
           </li>
           <li>
-            <button className='buttons' onClick={() => handleAnswerClick(2)}>
+            <button className="buttons" onClick={() => handleAnswerClick(2)}>
               C. {currentQuestion.optionc}
             </button>
           </li>
           <li>
-            <button className='buttons' onClick={() => handleAnswerClick(3)}>
+            <button className="buttons" onClick={() => handleAnswerClick(3)}>
               D. {currentQuestion.optiond}
             </button>
           </li>
-        
-         
         </ul>
-        {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
-        <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
-        <p className='score'>Score: {score}</p>
-        {showHint && <p className='hint'>Hint: {currentQuestion.hint}</p>}
-        <button className='h-button' onClick={handleHintClick}>🤨Hint</button>
+        {showDudeImage && <img className="dude" src={Dude} alt="Dude" />}
+        {showDude2Image && <img className="dude2" src={Dude2} alt="Dude2" />}
+        <p className="lives">
+          Lives: {Array.from({ length: lives }, (_, index) => "❤️").join(" ")}
+        </p>
+        <p className="score">Score: {score}</p>
+        {showHint && <p className="hint">Hint: {currentQuestion.hint}</p>}
+        <button className="h-button" onClick={handleHintClick}>
+          🤨Hint
+        </button>
       </div>
     </div>
   );
 };
 
 export default QuizComponent;
-
-
-
-
