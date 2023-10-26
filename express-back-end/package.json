@@ -6,6 +6,7 @@
   "author": "garrettgsb",
   "license": "MIT",
   "scripts": {
+    "start": "node server.js",
     "go": "nodemon server.js",
     "reset-db": "node reset-database.js"
   },

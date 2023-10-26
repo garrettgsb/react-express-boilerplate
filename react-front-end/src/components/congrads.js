@@ -8,11 +8,13 @@ const Congrats = ({ onLeaderboardUpdate, setHighScores }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  
   const handleBackToHome = () => {
     navigate('/');
   };
 
     // State variables for form fields
+    const [submissionMessage, setSubmissionMessage] = useState('');
     const [name, setName] = useState('');
 
     // Access the score from the location state
@@ -32,16 +34,27 @@ const Congrats = ({ onLeaderboardUpdate, setHighScores }) => {
           },
           body: JSON.stringify({ name, score }),
         });
-    
+
+    // the status and status text
+console.log('Response Status:', response.status);
+console.log('Response Status Text:', response.statusText);
+
+// convert the response body to JSON
+const responseBody = await response.json();
+console.log('Response Body:', responseBody);
+
         if (response.ok) {
+          setSubmissionMessage('Your score has been submitted successfully');
           console.log('Score submitted successfully');
           // Optionally, you can update the state or perform other actions here
           onLeaderboardUpdate();
-          navigate('/');
+         
         } else {
+          setSubmissionMessage('Failed to submit score');
           console.error('Failed to submit score');
         }
       } catch (error) {
+        setSubmissionMessage('Error submitting score');
         console.error('Error submitting score:', error);
       }
 
@@ -56,8 +69,12 @@ const Congrats = ({ onLeaderboardUpdate, setHighScores }) => {
       <h1 className='title'>Congratulations!</h1>
       <h2 className='on'>ON</h2>
       <h2 className='completing'>COMPLETING</h2>
-      <img src={Quiz} alt="quizjs" />
+      <img className="logo" src={Quiz} alt="quizjs" />
+      <h1>Your final score: {score}</h1>
       <form className='myForm' onSubmit={handleSubmit}>
+
+      {submissionMessage && <h2>{submissionMessage}</h2>}
+
           <label className='name'>
           Enter your nickname here!!
           <input

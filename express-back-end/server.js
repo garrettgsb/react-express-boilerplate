@@ -43,8 +43,7 @@ app.get('/api/questions', (req, res) => {
 });
 
 // highscores
-app.route('/api/high-scores')
-  .get((req, res) => {
+app.get('/api/high-scores', (req, res) => {
     database
       .select('*')
       .from('game')
@@ -57,12 +56,13 @@ app.route('/api/high-scores')
         res.status(500).json({ error: 'Internal Server Error' });
       });
   })
-  .post(async (req, res) => {
+  app.post('/api/high-scores', async (req, res) => {
     const { name, score } = req.body;
+    console.log('req body:', req.body);
     try {
       // Insert the new score into the 'game' table
-      const [newScoreId] = await database('game').insert({ nickname: name, score });
-      console.log('New score added with ID:', newScoreId);
+      const [newScore] = await database('game').insert({ nickname: name, score }).returning('*');
+      console.log('New score added with ID:', newScore.id);
       res.status(200).json({ success: true });
     } catch (error) {
       console.error('Error adding new score:', error);
@@ -73,4 +73,3 @@ app.route('/api/high-scores')
 app.listen(PORT, () => {
   console.log(`Express seems to be listening on port ${PORT} 👍`);
 });
-
