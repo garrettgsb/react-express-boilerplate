@@ -15,6 +15,11 @@ const QuizComponent = () => {
   const [score, setScore] = useState(0);
   const [hintUsed, setHintUsed] = useState(false);
   const [showDudeImage, setShowDudeImage] = useState(false);
+  
+  
+  const timerDuration = 300; // 5 minutes in seconds
+  const [timer, setTimer] = useState(timerDuration);
+
 
 
 useEffect(() => {
@@ -26,6 +31,22 @@ useEffect(() => {
     })
     .catch(error => console.error('Error fetching questions:', error));
 }, []);
+
+
+  // Timer logic
+  useEffect(() => {
+    if (lives > 0 && timer > 0) {
+      const interval = setInterval(() => {
+        setTimer(prevTimer => prevTimer - 1);
+      }, 1000);
+
+      return () => {
+        clearInterval(interval);
+      };
+    } else {
+      navigate('/');
+    }
+  }, [lives, timer, navigate]);
 
 
   const handleAnswerClick = (selectedAnswer) => {
@@ -137,6 +158,7 @@ console.log('correct index:', correctIndex);
         {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
         <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
         <p className='score'>Score: {score}</p>
+        <p className='timer'>Time Left: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}</p> // show timer
         {showHint && <p className='hint'>Hint: {currentQuestion.hint}</p>}
         <button className='h-button' onClick={handleHintClick}>🤨Hint</button>
       </div>
