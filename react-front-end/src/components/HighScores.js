@@ -17,7 +17,10 @@ function HighScores() {
         // Sort the high scores in descending order based on the 'score' property
         const sortedHighScores = filteredHighScores.sort((a, b) => b.score - a.score);
         
-        setHighScores(sortedHighScores);
+        // Take only the top 20 high scores
+        const top20HighScores = sortedHighScores.slice(0, 20);
+        
+        setHighScores(top20HighScores);
       })
       .catch(error => console.error('Error fetching high scores:', error));
   }, []);
@@ -37,3 +40,4 @@ function HighScores() {
 }
 
 export default HighScores;
+
