@@ -14,20 +14,51 @@
 }
 
 .instruction-image {
-  margin-bottom: 100px;
+  width: 1000px;
+
 }
+
 
 .instruction-container {
   width: 600px; /* Adjust the width as needed */
   border: 10px solid black;
-  text-align: center;
+  /* text-align: center; */
   padding: 100px;
-  margin-top: 20px; /* Adjust the margin as needed */
-  height: 300px;
+  margin-top: 20px;
+  height: 500px; 
   background-color: yellow;
 }
 
+.welcome {
+  position: relative;
+  bottom: 90px;
+}
 .how-to-play {
-  font-size: larger;
+display: flex;
+justify-content: center;
+
+flex-direction: column;
+position: relative;
+bottom: 90px;
+}
+
+.div-style {
+  background: linear-gradient(to right, #9c0fbb, #770890);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.description {
+font-size: large;
+}
+
+.after {
+  font-size: large;
+  }
+
+.bold {
   font-weight: bold;
 }
