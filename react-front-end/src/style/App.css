@@ -57,11 +57,19 @@
   text-align: right;
 }
 
-.div-style {
+.home {
   background: linear-gradient(to right, #9c0fbb, #770890);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+img {
+  width: 500px
+}
+
+.dude-container {
+ 
 }
