@@ -10,7 +10,6 @@ module.exports = {
       password : process.env.DB_PASS,
       database : 'quiz_app',
       port     : process.env.DB_PORT,
-      // ssl      : process.env.DB_SSL,
     },
     migrations: {
       directory: './db/migrations',

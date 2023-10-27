@@ -10,7 +10,6 @@ function Leaderboard() {
           <div key={index} className="score-row" data-testid="row">
             <span className="player-name" data-testid="name">{score.name}</span>
             <span className="player-score" data-testid="score">{score.score}</span>
-            <span className="player-time" data-testid="time">{score.time}</span>
           </div>
         ))}
       </div>

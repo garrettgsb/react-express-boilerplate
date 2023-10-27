@@ -15,14 +15,11 @@
 
 .instruction-image {
   width: 1000px;
-
 }
 
-
 .instruction-container {
-  width: 600px; /* Adjust the width as needed */
+  width: 600px;
   border: 10px solid black;
-  /* text-align: center; */
   padding: 100px;
   margin-top: 20px;
   height: 500px; 

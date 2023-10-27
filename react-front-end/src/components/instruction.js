@@ -3,8 +3,6 @@ import React from "react";
 import InstructionImage from "../asset/instruction.png";
 import { useNavigate } from "react-router-dom";
 
-
-
 function Instruction() {
 
   const navigate = useNavigate();
@@ -12,12 +10,18 @@ function Instruction() {
   function handleBackClick() {
     navigate("/")
   }
+
+  function handleStartClick() { 
+    navigate("/quiz");
+  }
+
   return (
     <div className="div-style">
       <div className="center-top">
         <img src={InstructionImage} alt="quizjs" className="instruction-image" />
       </div>
       <div className="instruction-container">
+        
         <h1 className="welcome">Welcome to QuizJS</h1>
         <div className="how-to-play">
 <p className="description">QuizJS is a series of questions that defy conventional thinking and logic. Test your wit against a series of fun, unexpected, and absurd questions!
@@ -40,12 +44,11 @@ function Instruction() {
 <li>Use hints strategically for bonus points</li>
 <p className="after">After the Quiz enter in a nick name then hit back to home to see your highscore on the leaderboard.</p>
 
-
 </div>
       </div>
       <div class="button-container">
         <button className="rectangle-button" id="start-button" onClick={handleBackClick}>Go Back</button>
-        <button className="rectangle-button" id="menu-button">Play</button>
+        <button className="rectangle-button" id="menu-button" onClick={handleStartClick}>Play</button>
       </div>
     </div>
   );

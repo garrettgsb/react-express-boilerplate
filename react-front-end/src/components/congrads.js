@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import "../style/congrads.css";
 import Quiz from "../asset/THELOGO.png";
-
 const Congrats = ({ onLeaderboardUpdate, setHighScores }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -68,12 +67,7 @@ console.log('Response Body:', responseBody);
         console.error('Error submitting score:', error);
       }
 
-    };
-    // For demonstration purposes, store data locally
-
-    // const leaderboardData = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    // leaderboardData.push({ name, score: score });
-    // localStorage.setItem('leaderboard', JSON.stringify(leaderboardData));
+        };
   return (
     <div className='container'>
       <h1 className='title'>Congratulations!</h1>

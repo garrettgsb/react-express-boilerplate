@@ -48,17 +48,14 @@
 }
 
 .player-name {
-  /* width: 50%; */
   text-align: left;
 }
 
 .player-score {
-  /* width: 40%; */
   text-align: right;
 }
 
 .home {
-  background: linear-gradient(to right, #9c0fbb, #770890);
   height: 100vh;
   display: flex;
   justify-content: center;

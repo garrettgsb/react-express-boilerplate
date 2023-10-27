@@ -34,15 +34,6 @@ const QuizComponent = () => {
     setStartTime(new Date());
   }, []);
 
-  const selectRandomQuestion = (round) => {
-    // Filter questions for the given round
-    const roundQuestions = questions.filter((question) => question.round === round);
-
-    // Select a random question from the filtered array
-    const randomIndex = Math.floor(Math.random() * roundQuestions.length);
-    return roundQuestions[randomIndex];
-  };
-
   const handleAnswerClick = (selectedAnswer) => {
     const correctOption = questions[currentQuestionIndex].correct_option;
     // console log for debugging
@@ -95,12 +86,7 @@ const QuizComponent = () => {
         // Move to the next round after every 5 questions
         setCurrentRound((prevRound) => prevRound + 1);
       }
-         // Select a random question for the next round
-         const nextQuestion = selectRandomQuestion(currentRound + 1);
 
-         // Update the state with the new question
-         setQuestions((prevQuestions) => [...prevQuestions, nextQuestion]);
-         
       if (lives === 0) {
         // All lives are gone, navigate to the home page
         navigate("/");
@@ -127,10 +113,6 @@ const QuizComponent = () => {
       console.error("Error submitting remaining lives:", error);
     }
   };
-
-  // const getAnswerLabel = (index) => {
-  //   return String.fromCharCode(65 + index);
-  // };
 
   if (questions.length === 0) {
     return <p>Loading...</p>;
