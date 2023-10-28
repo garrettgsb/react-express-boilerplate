@@ -9,6 +9,10 @@ function Instruction() {
 
   const navigate = useNavigate();
 
+  function handleStartClick() { 
+    navigate("/quiz");
+  }
+
   function handleBackClick() {
     navigate("/")
   }
@@ -26,7 +30,7 @@ So what are you waiting for go and get that high score!!
       </div>
       <div class="button-container">
         <button className="rectangle-button" id="start-button" onClick={handleBackClick}>Go Back</button>
-        <button className="rectangle-button" id="menu-button">Play</button>
+        <button className="rectangle-button" id="menu-button" onClick={handleStartClick}>Play</button>
       </div>
     </div>
   );

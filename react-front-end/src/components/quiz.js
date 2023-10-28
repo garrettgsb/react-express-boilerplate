@@ -15,34 +15,66 @@ const QuizComponent = () => {
   const [score, setScore] = useState(0);
   const [hintUsed, setHintUsed] = useState(false);
   const [showDudeImage, setShowDudeImage] = useState(false);
+  const [options, setOptions] = useState([])
 
+  const optionLabel = {
+    0: "A",
+    1: "B",
+    2: "C",
+    3: "D"
+  }
 
-useEffect(() => {
-  // Fetch questions
-  fetch('http://localhost:8080/api/questions')
-    .then(response => response.json())
-    .then(data => {
-      setQuestions(data.questions);
-    })
-    .catch(error => console.error('Error fetching questions:', error));
-}, []);
+  useEffect(() => {
+    // Fetch questions
+    fetch('http://localhost:8080/api/questions')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.questions)
+        setOptions([data.questions[currentQuestionIndex].optiona, data.questions[currentQuestionIndex].optionb, data.questions[currentQuestionIndex].optionc, data.questions[currentQuestionIndex].optiond])
+        setQuestions(data.questions);
+      })
+      .catch(error => console.error('Error fetching questions:', error));
+  }, []);
 
+  useEffect(() => {
+    if (questions.length > 0) {
+      setOptions([questions[currentQuestionIndex].optiona, questions[currentQuestionIndex].optionb, questions[currentQuestionIndex].optionc, questions[currentQuestionIndex].optiond])
+    }
+  }, [currentQuestionIndex])
+
+  const handleSkipClick = () => {
+    setCurrentQuestionIndex(prevIndex => prevIndex + 1)
+    if (currentQuestionIndex % 5 === 4) {
+      // Move to the next round after every 5 questions
+      setCurrentRound((prevRound) => prevRound + 1);
+    }
+  }
+
+  const handleFiftyClick = () => { }
+  
+  const handleSwitchClick = () => {
+    setCurrentQuestionIndex(prevIndex => prevIndex + 1)
+    if (currentQuestionIndex % 5 === 4) {
+      // Move to the next round after every 5 questions
+      setCurrentRound((prevRound) => prevRound + 1);
+    }
+  }
 
   const handleAnswerClick = (selectedAnswer) => {
     const correctOption = questions[currentQuestionIndex].correct_option;
     // console log for debugging
-console.log('correct option:', correctOption);
+    console.log('correct option:', correctOption);
 
-  // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
-  const correctIndex = correctOption.charCodeAt(0) - 'A'.charCodeAt(0);
- // console log for debugging
-console.log('correct index:', correctIndex);
+    // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
+    const correctIndex = correctOption.charCodeAt(0) - 'A'.charCodeAt(0);
+    // console log for debugging
+    console.log('correct index:', correctIndex);
 
-  if (selectedAnswer === correctIndex) {
-    // Handle correct answer logic
-    console.log('Correct answer!');
-    setScore((prevScore) => prevScore + 20);
-    setShowDudeImage(true);
+    if (selectedAnswer === correctIndex) {
+      // Handle correct answer logic
+      console.log('Correct answer!');
+      setScore((prevScore) => prevScore + 20);
+      setShowDudeImage(true);
 
       // Set a timeout to hide the dude image and move to the next question
       setTimeout(() => {
@@ -100,46 +132,60 @@ console.log('correct index:', correctIndex);
 
 
 
-  
+
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
     <div className='container'>
       <img className='logo' src={Quiz} alt="quizjs" />
 
-      <div className='game'>
-        <p className='round'>Round {currentRound}</p>
-        <p className='questions'>{currentQuestion.question}</p>
-        <ul className='answers'>
-        <li>
-            <button className='buttons' onClick={() => handleAnswerClick(0)}>
-              A. {currentQuestion.optiona}
-            </button>
-          </li>
-          <li>
-            <button className='buttons' onClick={() => handleAnswerClick(1)}>
-              B. {currentQuestion.optionb}
-            </button>
-          </li>
-          <li>
-            <button className='buttons' onClick={() => handleAnswerClick(2)}>
-              C. {currentQuestion.optionc}
-            </button>
-          </li>
-          <li>
-            <button className='buttons' onClick={() => handleAnswerClick(3)}>
-              D. {currentQuestion.optiond}
-            </button>
-          </li>
-        
-         
-        </ul>
-        {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
-        <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
-        <p className='score'>Score: {score}</p>
-        {showHint && <p className='hint'>Hint: {currentQuestion.hint}</p>}
-        <button className='h-button' onClick={handleHintClick}>🤨Hint</button>
-      </div>
+      {currentQuestionIndex > questions.length - 1 ? <span>No More questions</span> :
+
+        <div className='game'>
+          <p className='round'>Round {currentRound}</p>
+          <p className='questions'>{currentQuestion.question}</p>
+          <ul className='answers'>
+            {options.map((option, index) => {
+              return (
+                <li>
+                  <button className='buttons' onClick={() => handleAnswerClick(index)}>
+                    {optionLabel[index]}.{option}
+                  </button>
+                </li>)
+            })}
+            {/* <li>
+              <button className='buttons' onClick={() => handleAnswerClick(0)}>
+                A. {currentQuestion.optiona}
+              </button>
+            </li>
+            <li>
+              <button className='buttons' onClick={() => handleAnswerClick(1)}>
+                B. {currentQuestion.optionb}
+              </button>
+            </li>
+            <li>
+              <button className='buttons' onClick={() => handleAnswerClick(2)}>
+                C. {currentQuestion.optionc}
+              </button>
+            </li>
+            <li>
+              <button className='buttons' onClick={() => handleAnswerClick(3)}>
+                D. {currentQuestion.optiond}
+              </button>
+            </li> */}
+
+
+          </ul>
+          {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
+          <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
+          <p className='score'>Score: {score}</p>
+          {showHint && <p className='hint'>Hint: {currentQuestion.hint}</p>}
+          <button className='h-button' onClick={handleHintClick}>🤨Hint</button>
+          <button className='s-button' onClick={handleSkipClick}>Skip</button>
+          <button className='fifty-fifty-button' onClick={handleFiftyClick}>50/50</button>
+          <button className='switch-button' onClick={handleSwitchClick}>Next Question</button>
+        </div>
+      }
     </div>
   );
 };
