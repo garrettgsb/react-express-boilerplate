@@ -20,8 +20,9 @@ const QuizComponent = () => {
   const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {
+  
     // Fetch questions
-    fetch("http://localhost:8080/api/questions")
+    fetch(`http://localhost:8080/api/questions/${currentRound}`)
       .then((response) => response.json())
       .then((data) => {
         setQuestions(data.questions);
@@ -35,6 +36,7 @@ const QuizComponent = () => {
   }, []);
 
   const handleAnswerClick = (selectedAnswer) => {
+    console.log('currentRound', currentRound)
     const correctOption = questions[currentQuestionIndex].correct_option;
     // console log for debugging
     console.log("correct option:", correctOption);
