@@ -26,9 +26,10 @@ const QuizComponent = () => {
       .then((response) => response.json())
       .then((data) => {
         setQuestions(data.questions);
+        setCurrentQuestionIndex(0);
       })
       .catch((error) => console.error("Error fetching questions:", error));
-  }, []);
+  }, [currentRound]);
 
   useEffect(() => {
     // record start time

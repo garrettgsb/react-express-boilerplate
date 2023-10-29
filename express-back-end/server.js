@@ -31,7 +31,7 @@ app.get('/api/questions/:round', (req, res) => {
     .from('question')
     .where('roundnumber', req.params.round)
     .orderByRaw('RANDOM()')
-    .limit(5)
+    .limit(15)
     .then(rows => {
       // Process the rows
       if (!rows.length) {
