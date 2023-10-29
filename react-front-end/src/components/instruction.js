@@ -34,19 +34,16 @@ function Instruction() {
 <li>Correct Answer with Hint: +10 points</li>
 <li>Incorrect Answer: Lose 1 life, 0 points</li>
 <li>Skip the Question: 0 points, no lives lost</li>
-<li>50:50 eliminates 2 wrong answers: 10 points</li>
-<li>Switch the Question</li>
-<p className="bold">Scoring:</p>
-<li>Accumulate points for each correct answer</li>
-<li>Use hints strategically for bonus points</li>
+<li>50:50: eliminates 2 wrong answers, 10 points</li>
+<li>Swap: no lives lost or points just your Question get switched</li>
 <p className="bold">Lives:</p>
 <li>Lose a life for each incorrect answer</li>
-<li>Use hints strategically for bonus points</li>
+<li>Use hints, skip, 50:50, and swap when stuck</li>
 <p className="after">After the Quiz enter in a nick name then hit back to home to see your highscore on the leaderboard.</p>
 
 </div>
       </div>
-      <div class="button-container">
+      <div className="button-container">
         <button className="rectangle-button" id="start-button" onClick={handleBackClick}>Go Back</button>
         <button className="rectangle-button" id="menu-button" onClick={handleStartClick}>Play</button>
       </div>
