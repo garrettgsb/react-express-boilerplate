@@ -23,10 +23,14 @@ const QuizComponent = () => {
   
     // Fetch questions
     fetch(`http://localhost:8080/api/questions/${currentRound}`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         setQuestions(data.questions);
-        setCurrentQuestionIndex(0);
       })
       .catch((error) => console.error("Error fetching questions:", error));
   }, [currentRound]);
