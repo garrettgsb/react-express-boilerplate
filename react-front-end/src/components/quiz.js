@@ -74,12 +74,16 @@ const QuizComponent = () => {
     setShowHint(true); // Show the hint
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
       console.log("Quiz completed! Remaining lives:", lives);
-      submitRemainingLives();
-      navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
+  
+      try {
+        await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
+      } catch (error) {
+        console.error("Error navigating to /congrads:", error);
+      }
     } else {
       if (hintUsed && questions[currentQuestionIndex].correct_option) {
         // Award points only if the hint was used and the answer is correct
@@ -88,38 +92,23 @@ const QuizComponent = () => {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setShowHint(false); // Reset the hint display when moving to the next question
       setHintUsed(false);
-
+  
       if (currentQuestionIndex % 5 === 4) {
         // Move to the next round after every 5 questions
         setCurrentRound((prevRound) => prevRound + 1);
       }
-
+  
       if (lives === 0) {
         // All lives are gone, navigate to the home page
-        navigate("/");
+        try {
+          await navigate("/");
+        } catch (error) {
+          console.error("Error navigating to /:", error);
+        }
       }
     }
   };
-
-  const submitRemainingLives = async () => {
-    try {
-      const response = await fetch("/api/high-scores", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ score, lives }),
-      });
-
-      if (response.ok) {
-        console.log("Remaining lives submitted successfully");
-      } else {
-        console.error("Failed to submit remaining lives");
-      }
-    } catch (error) {
-      console.error("Error submitting remaining lives:", error);
-    }
-  };
+  
 
   if (questions.length === 0) {
     return <p>Loading...</p>;
