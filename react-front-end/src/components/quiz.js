@@ -164,7 +164,7 @@ const QuizComponent = () => {
         <p className="score">Score: {score}</p>
         {showHint && <p className="hint">Hint: {currentQuestion.hint}</p>}
         <button className="h-button" onClick={handleHintClick}>
-          🤨Hint
+          Hint
         </button>
       </div>
     </div>
