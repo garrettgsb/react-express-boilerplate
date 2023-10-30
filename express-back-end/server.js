@@ -102,17 +102,22 @@ app.get('/api/high-scores', (req, res) => {
     const { nickname } = req.body;
   console.log('req.body:', req.body);
 
+ // Trim leading and trailing whitespace
+ const trimmedNickname = nickname.trim();
 
   // Check if the nickname is empty or contains only whitespace
-  if (!nickname || /^\s*$/.test(nickname)) {
+  if (!trimmedNickname || /^\s*$/.test(trimmedNickname)) {
     return res.status(400).json({ error: 'Nickname cannot be empty or contain only whitespace' });
   }
 
-    if (nickname.length > 20) {
+    // Check if the nickname contains only numbers and characters A-Z (case-insensitive)
+    if (!/^[0-9A-Z]+$/i.test(trimmedNickname)) {
+      return res.status(400).json({ error: 'Nickname must contain only numbers and characters A-Z' });
+    }
+
+    if (trimmedNickname.length > 20) {
       return res.status(400).json({ error: 'Nickname is too long' });
     }
-  
-    // You can add more validation checks here based on your requirements
   
     // If the nickname passes all validations, respond with success
     res.json({ success: true });

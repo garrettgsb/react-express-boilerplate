@@ -50,10 +50,27 @@ const validateNickname = async (nickname) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+ // Trim leading and trailing whitespace
+    const trimmedName = name.trim();
+
     // Client-side validation for nickname
-    if (name.length < 3 || name.length > 20) {
+    if (trimmedName.length < 3 || trimmedName.length > 20) {
       setNicknameError('Nickname must be between 3 and 20 characters');
       return;
+    } else {
+      setNicknameError('');
+    }
+
+    if (!/^[0-9A-Z]+$/i.test(trimmedName)) {
+      setNicknameError('Nickname must contain only numbers and characters A-Z');
+      return
+    } else {
+      setNicknameError('');
+    }
+
+if (!name || /^\s*$/.test(trimmedName)) {
+      setNicknameError('Nickname cannot be empty or contain only whitespace');
+      return
     } else {
       setNicknameError('');
     }
@@ -89,6 +106,7 @@ const nicknameValidation = await validateNickname(name);
         console.log('Score submitted successfully');
         // Optionally, you can update the state or perform other actions here
         onLeaderboardUpdate();
+        navigate('/');
       } else {
         setSubmissionMessage('Failed to submit score');
         console.error('Failed to submit score');
