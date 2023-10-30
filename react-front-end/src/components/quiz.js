@@ -15,7 +15,9 @@ const QuizComponent = () => {
   const [score, setScore] = useState(0);
   const [hintUsed, setHintUsed] = useState(false);
   const [showDudeImage, setShowDudeImage] = useState(false);
-  const [options, setOptions] = useState([])
+  const [options, setOptions] = useState([]);
+  const [fiftyOptions, setFiftyOptions] = useState([]);
+  const [clickFifty, setClickFifty] = useState(false);
 
   const optionLabel = {
     0: "A",
@@ -39,6 +41,7 @@ const QuizComponent = () => {
   useEffect(() => {
     if (questions.length > 0) {
       setOptions([questions[currentQuestionIndex].optiona, questions[currentQuestionIndex].optionb, questions[currentQuestionIndex].optionc, questions[currentQuestionIndex].optiond])
+      setClickFifty(false);
     }
   }, [currentQuestionIndex])
 
@@ -50,14 +53,24 @@ const QuizComponent = () => {
     }
   }
 
-  const handleFiftyClick = () => { }
-  
+  const handleFiftyClick = () => {
+    const question = questions[currentQuestionIndex]
+    const correctIndex = Object.keys(optionLabel)
+      .find(key => optionLabel[key] === question.correct_option);
+    const newOption = []
+    newOption.push(options[correctIndex])
+    let random = Math.floor(Math.random() * 4)
+    while (random === +correctIndex) {
+      random = Math.floor(Math.random() * 4)
+    }
+
+    newOption.push(options[random])
+    setFiftyOptions(newOption)
+    setClickFifty(true);
+  }
+
   const handleSwitchClick = () => {
     setCurrentQuestionIndex(prevIndex => prevIndex + 1)
-    if (currentQuestionIndex % 5 === 4) {
-      // Move to the next round after every 5 questions
-      setCurrentRound((prevRound) => prevRound + 1);
-    }
   }
 
   const handleAnswerClick = (selectedAnswer) => {
@@ -149,31 +162,10 @@ const QuizComponent = () => {
               return (
                 <li>
                   <button className='buttons' onClick={() => handleAnswerClick(index)}>
-                    {optionLabel[index]}.{option}
+                    {optionLabel[index]}.{clickFifty ? fiftyOptions.includes(option) ? option : "" : option}
                   </button>
                 </li>)
             })}
-            {/* <li>
-              <button className='buttons' onClick={() => handleAnswerClick(0)}>
-                A. {currentQuestion.optiona}
-              </button>
-            </li>
-            <li>
-              <button className='buttons' onClick={() => handleAnswerClick(1)}>
-                B. {currentQuestion.optionb}
-              </button>
-            </li>
-            <li>
-              <button className='buttons' onClick={() => handleAnswerClick(2)}>
-                C. {currentQuestion.optionc}
-              </button>
-            </li>
-            <li>
-              <button className='buttons' onClick={() => handleAnswerClick(3)}>
-                D. {currentQuestion.optiond}
-              </button>
-            </li> */}
-
 
           </ul>
           {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
@@ -182,8 +174,8 @@ const QuizComponent = () => {
           {showHint && <p className='hint'>Hint: {currentQuestion.hint}</p>}
           <button className='h-button' onClick={handleHintClick}>🤨Hint</button>
           <button className='s-button' onClick={handleSkipClick}>Skip</button>
-          <button className='fifty-fifty-button' onClick={handleFiftyClick}>50/50</button>
-          <button className='switch-button' onClick={handleSwitchClick}>Next Question</button>
+          <button disabled={options.length < 4} className='fifty-fifty-button' onClick={handleFiftyClick}>50/50</button>
+          <button className='switch-button' onClick={handleSwitchClick}>Swap</button>
         </div>
       }
     </div>
