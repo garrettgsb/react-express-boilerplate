@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import HighScores from "./HighScores";
 import { useState, useEffect } from "react";
 import Brandon from "../asset/brandon.png";
+import { handleAudio, sounds } from "./SoundHelper";
 
 function Home() {
   const [highScores, setHighScores] = useState([]);
@@ -24,10 +25,12 @@ function Home() {
 
   function handleStartClick() { 
     navigate("/quiz");
+    handleAudio(sounds.click1)
   }
   function handleInstructionsClick() {
     navigate("instructions")
-   }
+    handleAudio(sounds.click1)
+  }
 
    return (
     
@@ -39,10 +42,14 @@ function Home() {
         <img src={Quiz} alt="quizjs" />
       </div>
       <div className="dude-container">
-      <button className="rectangle-button" onClick={handleStartClick}>
+      <button className="rectangle-button" 
+        onClick={handleStartClick} 
+        onMouseEnter={() => {handleAudio(sounds.hover1)}}>
         START
       </button>
-      <button className="rectangle-button" onClick={handleInstructionsClick}>
+      <button className="rectangle-button" 
+        onClick={handleInstructionsClick}
+        onMouseEnter={() => {handleAudio(sounds.hover1)}}>
         INSTRUCTIONS
       </button>
      
