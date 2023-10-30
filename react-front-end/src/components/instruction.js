@@ -7,6 +7,10 @@ function Instruction() {
 
   const navigate = useNavigate();
 
+  function handleStartClick() { 
+    navigate("/quiz");
+  }
+
   function handleBackClick() {
     navigate("/")
   }
