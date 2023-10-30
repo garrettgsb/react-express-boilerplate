@@ -27,8 +27,11 @@ function Instruction() {
 <p className="description">QuizJS is a series of questions that defy conventional thinking and logic. Test your wit against a series of fun, unexpected, and absurd questions!
 </p>
 <p className="bold">Starting Lives:</p>
+<ul>
 <li>You begin the game with 5 lives</li>
+</ul>
 <p className="bold">Answering Questions:</p>
+<ul>
 <li>Each Question provides 4 choices</li>
 <li>Correct Answer: +20 points</li>
 <li>Correct Answer with Hint: +10 points</li>
@@ -36,9 +39,12 @@ function Instruction() {
 <li>Skip the Question: 0 points, no lives lost</li>
 <li>50:50: eliminates 2 wrong answers, 10 points</li>
 <li>Swap: no lives lost or points just your Question get switched</li>
+</ul>
 <p className="bold">Lives:</p>
+<ul>
 <li>Lose a life for each incorrect answer</li>
 <li>Use hints, skip, 50:50, and swap when stuck</li>
+</ul>
 <p className="after">After the Quiz enter in a nick name then hit back to home to see your highscore on the leaderboard.</p>
 
 </div>
