@@ -24,15 +24,22 @@ app.get('/api/data', (req, res) => res.json({
 }));
 
 // questions
-app.get('/api/questions', (req, res) => {
+app.get('/api/questions/:round', (req, res) => {
+  console.log('req.param.round', req.params.round)
   database
     .select('*')
     .from('question')
+    .where('roundnumber', req.params.round)
     .orderByRaw('RANDOM()')
     .limit(15)
     .then(rows => {
       // Process the rows
-      console.log(rows);
+      if (!rows.length) {
+        return res.statusMessage(404).json({
+          error: 'No questions for the given round'
+        })
+      }
+      // console.log(rows);
       res.json({ questions: rows });
     })
     .catch(error => {
