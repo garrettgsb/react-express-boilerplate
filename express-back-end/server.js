@@ -104,7 +104,7 @@ app.get('/api/high-scores', (req, res) => {
 
 
   // Check if the nickname is empty or contains only whitespace
-  if (nickname || " ") {
+  if (!nickname || /^\s*$/.test(nickname)) {
     return res.status(400).json({ error: 'Nickname cannot be empty or contain only whitespace' });
   }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import "../style/congrads.css";
 import Quiz from "../asset/THELOGO.png";
+import 'whatwg-fetch';
 
 const Congrats = ({ onLeaderboardUpdate }) => {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ const validateNickname = async (nickname) => {
     }
 
 // Validate the nickname on the server
-const nicknameValidation = await validateNickname();
+const nicknameValidation = await validateNickname(name);
 
   // Check server-side validation result
   if (!nicknameValidation.success) {
