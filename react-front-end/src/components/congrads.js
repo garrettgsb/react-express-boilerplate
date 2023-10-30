@@ -142,7 +142,6 @@ const nicknameValidation = await validateNickname(name);
 
         <button className='submit' type="submit">Submit</button>
       </form>
-      <button onClick={() => navigate('/')}>Back to Home</button>
     </div>
   );
 };
