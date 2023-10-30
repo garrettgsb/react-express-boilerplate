@@ -1,9 +1,10 @@
 // quiz.js
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../style/quiz.css";
 import Quiz from "../asset/THELOGO.png";
 import Dude from "../asset/dude.png";
+import Dude2 from "../asset/thumbs-down.png";
 
 const QuizComponent = () => {
   const navigate = useNavigate();
@@ -27,29 +28,27 @@ const QuizComponent = () => {
   }
 
   useEffect(() => {
-    // Fetch questions
-    fetch('http://localhost:8080/api/questions')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data.questions)
-        setOptions([data.questions[currentQuestionIndex].optiona, data.questions[currentQuestionIndex].optionb, data.questions[currentQuestionIndex].optionc, data.questions[currentQuestionIndex].optiond])
-        setQuestions(data.questions);
-      })
-      .catch(error => console.error('Error fetching questions:', error));
-  }, []);
-
-  useEffect(() => {
-    if (questions.length > 0) {
+    if (questions.length > 0 && currentQuestionIndex < questions.length) {
       setOptions([questions[currentQuestionIndex].optiona, questions[currentQuestionIndex].optionb, questions[currentQuestionIndex].optionc, questions[currentQuestionIndex].optiond])
       setClickFifty(false);
     }
   }, [currentQuestionIndex])
 
-  const handleSkipClick = () => {
+  const handleSkipClick = async () => {
     setCurrentQuestionIndex(prevIndex => prevIndex + 1)
     if (currentQuestionIndex % 5 === 4) {
       // Move to the next round after every 5 questions
       setCurrentRound((prevRound) => prevRound + 1);
+    }
+    if (currentQuestionIndex === questions.length - 1) {
+      // Quiz completed
+      console.log("Quiz completed! Remaining lives:", lives);
+
+      try {
+        await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
+      } catch (error) {
+        console.error("Error navigating to /congrads:", error);
+      }
     }
   }
 
@@ -72,8 +71,33 @@ const QuizComponent = () => {
   const handleSwitchClick = () => {
     setCurrentQuestionIndex(prevIndex => prevIndex + 1)
   }
+  const [showDude2Image, setShowDude2Image] = useState(false);
+  const [startTime, setStartTime] = useState(null);
+
+  useEffect(() => {
+
+    // Fetch questions
+    fetch(`http://localhost:8080/api/questions/${currentRound}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setQuestions(data.questions);
+        setOptions([data.questions[currentQuestionIndex].optiona, data.questions[currentQuestionIndex].optionb, data.questions[currentQuestionIndex].optionc, data.questions[currentQuestionIndex].optiond])
+      })
+      .catch((error) => console.error("Error fetching questions:", error));
+  }, [currentRound]);
+
+  useEffect(() => {
+    // record start time
+    setStartTime(new Date());
+  }, []);
 
   const handleAnswerClick = (selectedAnswer) => {
+    console.log('currentRound', currentRound)
     const correctOption = questions[currentQuestionIndex].correct_option;
     // console log for debugging
     console.log('correct option:', correctOption);
@@ -85,21 +109,31 @@ const QuizComponent = () => {
 
     if (selectedAnswer === correctIndex) {
       // Handle correct answer logic
-      console.log('Correct answer!');
-      setScore((prevScore) => prevScore + 20);
-      setShowDudeImage(true);
+      console.log("Correct answer!");
+      if (hintUsed || clickFifty) {
+        setScore((prevScore) => prevScore + 10);
+      } else {
+        setScore((prevScore) => prevScore + 20);
+      }
 
-      // Set a timeout to hide the dude image and move to the next question
+      setShowDudeImage(true);
+      setShowDude2Image(false);
       setTimeout(() => {
         setShowDudeImage(false);
         handleNextClick();
       }, 1500);
+
     } else {
-      console.log('Wrong answer!');
+      console.log("Wrong answer!");
       setLives((prevLives) => prevLives - 1);
       setScore((prevScore) => prevScore);
       setShowDudeImage(false);
-      handleNextClick();
+      setShowDude2Image(true);
+      setScore((prevScore) => prevScore - 10);
+      setTimeout(() => {
+        setShowDude2Image(false);
+        handleNextClick();
+      }, 1500);
     }
   };
 
@@ -108,16 +142,18 @@ const QuizComponent = () => {
     setShowHint(true); // Show the hint
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
-      console.log('Quiz completed!');
-      navigate('/congrads', { state: { score } }); // pass the score as state
-    } else {
-      if (hintUsed && questions[currentQuestionIndex].correct_option) {
-        // Award points only if the hint was used and the answer is correct
-        setScore((prevScore) => prevScore - 10);
+      console.log("Quiz completed! Remaining lives:", lives);
+
+      try {
+        await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
+      } catch (error) {
+        console.error("Error navigating to /congrads:", error);
       }
+    } else {
+
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setShowHint(false); // Reset the hint display when moving to the next question
       setHintUsed(false);
@@ -126,16 +162,18 @@ const QuizComponent = () => {
         // Move to the next round after every 5 questions
         setCurrentRound((prevRound) => prevRound + 1);
       }
+
       if (lives === 0) {
         // All lives are gone, navigate to the home page
-        navigate('/');
+        try {
+          await navigate("/");
+        } catch (error) {
+          console.error("Error navigating to /:", error);
+        }
       }
     }
   };
 
-  const getAnswerLabel = (index) => {
-    return String.fromCharCode(65 + index);
-  };
 
   if (questions.length === 0) {
     return <p>Loading...</p>;
@@ -149,41 +187,38 @@ const QuizComponent = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className='container'>
-      <img className='logo' src={Quiz} alt="quizjs" />
+    <div className="container">
+      <img className="logo" src={Quiz} alt="quizjs" />
 
-      {currentQuestionIndex > questions.length - 1 ? <span>No More questions</span> :
+      {/* {currentQuestionIndex > questions.length - 1 ? <span>No More questions</span> : */}
 
-        <div className='game'>
-          <p className='round'>Round {currentRound}</p>
-          <p className='questions'>{currentQuestion.question}</p>
-          <ul className='answers'>
-            {options.map((option, index) => {
-              return (
-                <li>
-                  <button className='buttons' onClick={() => handleAnswerClick(index)}>
-                    {optionLabel[index]}.{clickFifty ? fiftyOptions.includes(option) ? option : "" : option}
-                  </button>
-                </li>)
-            })}
+      <div className='game'>
+        <p className='round'>Round {currentRound}</p>
+        <p className='questions'>{currentQuestion.question}</p>
+        <ul className='answers'>
+          {options.map((option, index) => {
+            return (
+              <li>
+                <button className='buttons' onClick={() => handleAnswerClick(index)}>
+                  {optionLabel[index]}.{clickFifty ? fiftyOptions.includes(option) ? option : "" : option}
+                </button>
+              </li>)
+          })}
 
-          </ul>
-          {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
-          <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
-          <p className='score'>Score: {score}</p>
-          {showHint && <p className='hint'>Hint: {currentQuestion.hint}</p>}
-          <button className='h-button' onClick={handleHintClick}>🤨Hint</button>
-          <button className='s-button' onClick={handleSkipClick}>Skip</button>
-          <button disabled={options.length < 4} className='fifty-fifty-button' onClick={handleFiftyClick}>50/50</button>
-          <button className='switch-button' onClick={handleSwitchClick}>Swap</button>
-        </div>
-      }
+        </ul>
+        {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
+        {showDude2Image && <img className="dude2" src={Dude2} alt="Dude2" />}
+        <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
+        <p className='score'>Score: {score}</p>
+        {showHint && <p className='hint'>Hint: {currentQuestion.hint}</p>}
+        <button className='h-button' onClick={handleHintClick}>🤨Hint</button>
+        <button className='s-button' onClick={handleSkipClick}>Skip</button>
+        <button disabled={options.length < 4} className='fifty-fifty-button' onClick={handleFiftyClick}>50/50</button>
+        <button className='switch-button' onClick={handleSwitchClick}>Swap</button>
+      </div>
+      {/* } */}
     </div>
   );
 };
 
 export default QuizComponent;
-
-
-
-

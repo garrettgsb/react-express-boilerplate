@@ -4,6 +4,7 @@ import Quiz from "../asset/THELOGO.png";
 import { useNavigate } from "react-router-dom";
 import HighScores from "./HighScores";
 import { useState, useEffect } from "react";
+import Brandon from "../asset/brandon.png";
 
 function Home() {
   const [highScores, setHighScores] = useState([]);
@@ -29,15 +30,26 @@ function Home() {
    }
 
    return (
+    
     <div className="div-style">
-      <img src={Quiz} alt="quizjs" />
+    
+       
+      <div className="home">
+      <div className="logo-container">
+        <img src={Quiz} alt="quizjs" />
+      </div>
+      <div className="dude-container">
       <button className="rectangle-button" onClick={handleStartClick}>
         START
       </button>
       <button className="rectangle-button" onClick={handleInstructionsClick}>
         INSTRUCTIONS
       </button>
+     
+        <img className="dude" src={Brandon} alt="brandon" />
+      </div>
       <HighScores highScores={highScores} />
+    </div>
     </div>
   );
 }
