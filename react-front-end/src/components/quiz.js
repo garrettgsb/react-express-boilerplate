@@ -118,10 +118,10 @@ const QuizComponent = () => {
 
       setShowDudeImage(true);
       setShowDude2Image(false);
-      setTimeout(() => {
-        setShowDudeImage(false);
+      // setTimeout(() => {
+      //   setShowDudeImage(false);
         handleNextClick();
-      }, 1500);
+      // }, 1500);
 
     } else {
       console.log("Wrong answer!");
@@ -130,10 +130,10 @@ const QuizComponent = () => {
       setShowDudeImage(false);
       setShowDude2Image(true);
       setScore((prevScore) => prevScore - 10);
-      setTimeout(() => {
-        setShowDude2Image(false);
+      // setTimeout(() => {
+      //   setShowDude2Image(false);
         handleNextClick();
-      }, 1500);
+      // }, 1500);
     }
   };
 
@@ -196,27 +196,24 @@ const QuizComponent = () => {
         <p className='round'>Round {currentRound}</p>
         <p className='questions'>{currentQuestion.question}</p>
         <ul className='answers'>
-          {options.map((option, index) => {
-            return (
-              <li>
-                <button className='buttons' onClick={() => handleAnswerClick(index)}>
-                  {optionLabel[index]}.{clickFifty ? fiftyOptions.includes(option) ? option : "" : option}
-                </button>
-              </li>)
-          })}
-
-        </ul>
+  {options.map((option, index) => (
+    <li key={index}>
+      <button className='buttons' onClick={() => handleAnswerClick(index)}>
+        {optionLabel[index]}.{clickFifty ? fiftyOptions.includes(option) ? option : "" : option}
+      </button>
+    </li>
+  ))}
+</ul>
         {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
         {showDude2Image && <img className="dude2" src={Dude2} alt="Dude2" />}
         <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
         <p className='score'>Score: {score}</p>
         {showHint && <p className='hint'>Hint: {currentQuestion.hint}</p>}
-        <button className='h-button' onClick={handleHintClick}>🤨Hint</button>
+        <button className='h-button' onClick={handleHintClick}>Hint</button>
         <button className='s-button' onClick={handleSkipClick}>Skip</button>
         <button disabled={options.length < 4} className='fifty-fifty-button' onClick={handleFiftyClick}>50/50</button>
         <button className='switch-button' onClick={handleSwitchClick}>Swap</button>
       </div>
-      {/* } */}
     </div>
   );
 };

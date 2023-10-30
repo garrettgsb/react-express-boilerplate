@@ -77,6 +77,53 @@ app.get('/api/high-scores', (req, res) => {
     }
   });
 
+  // Validations for nickname
+  app.get('/validate-nickname', (req, res) => {
+    const { nickname } = req.query;
+  
+    database
+      .select('nickname')
+      .from('game')
+      .where('nickname', nickname)
+      .then(rows => {
+        if (rows.length > 0) {
+          return res.status(400).json({ error: 'Nickname already exists' });
+        }
+        res.json({ success: true });
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      });
+  });
+  
+
+  app.post('/validate-nickname', (req, res) => {
+    const { nickname } = req.body;
+  console.log('req.body:', req.body);
+
+ // Trim leading and trailing whitespace
+ const trimmedNickname = nickname.trim();
+
+  // Check if the nickname is empty or contains only whitespace
+  if (!trimmedNickname || /^\s*$/.test(trimmedNickname)) {
+    return res.status(400).json({ error: 'Nickname cannot be empty or contain only whitespace' });
+  }
+
+    // Check if the nickname contains only numbers and characters A-Z (case-insensitive)
+    if (!/^[0-9A-Z]+$/i.test(trimmedNickname)) {
+      return res.status(400).json({ error: 'Nickname must contain only numbers and characters A-Z' });
+    }
+
+    if (trimmedNickname.length > 20) {
+      return res.status(400).json({ error: 'Nickname is too long' });
+    }
+  
+    // If the nickname passes all validations, respond with success
+    res.json({ success: true });
+  });
+  
+
 app.listen(PORT, () => {
   console.log(`Express seems to be listening on port ${PORT} 👍`);
 });
