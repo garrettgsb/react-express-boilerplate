@@ -21,6 +21,21 @@ const QuizComponent = () => {
   const [fiftyOptions, setFiftyOptions] = useState([]);
   const [clickFifty, setClickFifty] = useState(false);
 
+
+  const timerDuration = 300; // 5 minutes in seconds
+  const [timer, setTimer] = useState(timerDuration);
+
+  useEffect(() => {
+    const timerInterval = setInterval(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      }
+    }, 1000);
+
+    return () => clearInterval(timerInterval);
+  }, [timer]);
+
+
   const optionLabel = {
     0: "A",
     1: "B",
@@ -28,9 +43,7 @@ const QuizComponent = () => {
     3: "D",
   };
 
-  const timerDuration = 300; // 5 minutes in seconds
-  const [timer, setTimer] = useState(timerDuration);
-  
+
   useEffect(() => {
     if (questions.length > 0 && currentQuestionIndex < questions.length) {
       setOptions([
@@ -246,7 +259,6 @@ const QuizComponent = () => {
           Time Left: {Math.floor(timer / 60)}:
           {(timer % 60).toString().padStart(2, "0")}
         </p>{" "}
-        // show timer
         {showHint && <p className="hint">Hint: {currentQuestion.hint}</p>}
         <button className="h-button" onClick={handleHintClick}>
           Hint
