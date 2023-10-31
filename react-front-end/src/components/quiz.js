@@ -5,6 +5,7 @@ import "../style/quiz.css";
 import Quiz from "../asset/THELOGO.png";
 import Dude from "../asset/dude.png";
 import Dude2 from "../asset/thumbs-down.png";
+import Dude3 from "../asset/thinking-dude.png";
 
 const QuizComponent = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const QuizComponent = () => {
   const [showHint, setShowHint] = useState(false);
   const [score, setScore] = useState(0);
   const [hintUsed, setHintUsed] = useState(false);
-  const [showDudeImage, setShowDudeImage] = useState(false);
+  const [showDudeImage, setShowDudeImage] = useState(false); // thumbs up 
   const [options, setOptions] = useState([]);
   const [fiftyOptions, setFiftyOptions] = useState([]);
   const [clickFifty, setClickFifty] = useState(false);
@@ -71,7 +72,8 @@ const QuizComponent = () => {
   const handleSwitchClick = () => {
     setCurrentQuestionIndex(prevIndex => prevIndex + 1)
   }
-  const [showDude2Image, setShowDude2Image] = useState(false);
+  const [showDude2Image, setShowDude2Image] = useState(false); // thumbs down 
+  const [showDude3Image, setShowDude3Image] = useState(true); // thinking face
   const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {
@@ -107,34 +109,47 @@ const QuizComponent = () => {
     // console log for debugging
     console.log('correct index:', correctIndex);
 
+    let lastScore = 0;
+
     if (selectedAnswer === correctIndex) {
       // Handle correct answer logic
       console.log("Correct answer!");
+
+
       if (hintUsed || clickFifty) {
         setScore((prevScore) => prevScore + 10);
+        lastScore = 10
       } else {
         setScore((prevScore) => prevScore + 20);
+        lastScore = 20
       }
 
       setShowDudeImage(true);
       setShowDude2Image(false);
-      // setTimeout(() => {
-      //   setShowDudeImage(false);
-        handleNextClick();
-      // }, 1500);
+      setShowDude3Image(false);
+
+      setTimeout(() => {
+        setShowDudeImage(false);
+        setShowDude3Image(true);
+        handleNextClick(lastScore);
+      }, 1500);
 
     } else {
       console.log("Wrong answer!");
       setLives((prevLives) => prevLives - 1);
-      setScore((prevScore) => prevScore);
+      // setScore((prevScore) => prevScore);
       setShowDudeImage(false);
       setShowDude2Image(true);
+      setShowDude3Image(false);
       setScore((prevScore) => prevScore - 10);
-      // setTimeout(() => {
-      //   setShowDude2Image(false);
-        handleNextClick();
-      // }, 1500);
-    }
+lastScore = -10
+      setTimeout(() => {
+        setShowDude2Image(false);
+        setShowDude3Image(true);
+        handleNextClick(lastScore);
+      }, 1500);
+    } 
+    
   };
 
   const handleHintClick = () => {
@@ -142,13 +157,16 @@ const QuizComponent = () => {
     setShowHint(true); // Show the hint
   };
 
-  const handleNextClick = async () => {
+  const handleNextClick = async (lastScore) => {
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
       console.log("Quiz completed! Remaining lives:", lives);
 
       try {
-        await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
+        // setScore((prevScore) => prevScore);
+        console.log('score:', score)
+        console.log('last score:', lastScore);
+        await navigate("/congrads", { state: { score: score + lastScore, lives, startTime } }); // pass the score as state
       } catch (error) {
         console.error("Error navigating to /congrads:", error);
       }
@@ -206,6 +224,7 @@ const QuizComponent = () => {
 </ul>
         {showDudeImage && <img className='dude' src={Dude} alt='Dude' />}
         {showDude2Image && <img className="dude2" src={Dude2} alt="Dude2" />}
+        {showDude3Image && <img className="dude3" src={Dude3} alt="Dude3" />}
         <p className='lives'>Lives: {Array.from({ length: lives }, (_, index) => '❤️').join(' ')}</p>
         <p className='score'>Score: {score}</p>
         {showHint && <p className='hint'>Hint: {currentQuestion.hint}</p>}
