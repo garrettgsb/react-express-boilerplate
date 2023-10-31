@@ -29,6 +29,7 @@
 .welcome {
   position: relative;
   bottom: 90px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .how-to-play {
 display: flex;
@@ -59,4 +60,28 @@ font-size: large;
 .bold {
   font-weight: bold;
   font-size: large;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.rectangle-button {
+  width: 150px;
+  height: 50px;
+  background-color: #ffff00;
+  color: #000000;
+  border: 8px solid #000000;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: "Pixelify Sans", sans-serif;
+  margin: 10px;
+  cursor: pointer;
+}
+
+p {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+li {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: larger;
 }

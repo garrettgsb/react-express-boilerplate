@@ -11,6 +11,11 @@
   cursor: pointer;
 }
 
+div-style {
+  background: linear-gradient(to right, #9c0fbb, #770890);
+
+}
+
 .rectangle-button:hover {
   background-color: #e0e000;
 }
@@ -63,7 +68,37 @@
   flex-direction: column;
 }
 
-img {
-  width: 500px
+.quiz {
+  width: 500px;
+  padding-left: 500px;
 }
 
+.dude-container {
+  display: flex;
+ align-items: center;
+ padding-left: 500px;
+}
+
+.start {
+  display: flex;
+  padding-left: 490px;
+}
+
+.dude {
+padding-left: 20px;
+}
+
+.top-page {
+  display: flex;
+}
+
+.des {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.des h2 {
+  margin: 10px 0; /* Adjust the margin as needed for spacing */
+}

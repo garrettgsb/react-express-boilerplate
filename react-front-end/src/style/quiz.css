@@ -10,11 +10,11 @@
 }
 
 .game {
-  width: 50%;
+  width: 80%;
   height: 80%;
   background-color: white;
   border: 2px solid black;
-  padding: 5px;
+  padding: 10px 25px;
   box-sizing: border-box;
 }
 
@@ -58,6 +58,7 @@
 .buttons:hover {
   border: 2px yellow solid;
   background-color: yellow;
+  cursor: pointer; 
 }
 
 

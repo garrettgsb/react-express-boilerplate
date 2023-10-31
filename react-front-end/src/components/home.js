@@ -32,32 +32,50 @@ function Home() {
     handleAudio(sounds.click1)
   }
 
-   return (
-    
+
+  return (
     <div className="div-style">
-    
-       
       <div className="home">
-      <div className="logo-container">
-        <img src={Quiz} alt="quizjs" />
+        <div className="logo-container">
+
+        </div>
+        <div className="content-container">
+          <div className="top-page">
+          <img className="quiz" src={Quiz} alt="quizjs" />
+          <div className="des">
+          <h2>QuizJS is a series of questions that defy conventional thinking and logic.</h2>
+          <h2>Test your wit against a series of fun, unexpected, and absurd questions!</h2>
+          </div>
+          </div>
+          <div className="dude-container">
+            <HighScores highScores={highScores} className="high-scores-container" />
+            <img className="dude" src={Brandon} alt="brandon" />
+          </div>
+          <div className="start">
+            <button
+              className="rectangle-button"
+              onClick={handleInstructionsClick}
+              onMouseEnter={() => {
+                handleAudio(sounds.hover1);
+              }}
+            >
+              INSTRUCTIONS
+            </button>
+            <button
+              className="rectangle-button"
+              onClick={handleStartClick}
+              onMouseEnter={() => {
+                handleAudio(sounds.hover1);
+              }}
+            >
+              START
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="dude-container">
-      <button className="rectangle-button" 
-        onClick={handleStartClick} 
-        onMouseEnter={() => {handleAudio(sounds.hover1)}}>
-        START
-      </button>
-      <button className="rectangle-button" 
-        onClick={handleInstructionsClick}
-        onMouseEnter={() => {handleAudio(sounds.hover1)}}>
-        INSTRUCTIONS
-      </button>
-     
-        <img className="dude" src={Brandon} alt="brandon" />
-      </div>
-      <HighScores highScores={highScores} />
-    </div>
     </div>
   );
+  
+    
 }
 export default Home;
