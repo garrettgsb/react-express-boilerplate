@@ -20,6 +20,8 @@ const QuizComponent = () => {
   const [options, setOptions] = useState([]);
   const [fiftyOptions, setFiftyOptions] = useState([]);
   const [clickFifty, setClickFifty] = useState(false);
+  const [clickSwap, setClickSwap] = useState(false);
+  const [numberOfquestionsPerRound, setNumberOfQuestionsPerRound] = useState(0);
 
 
   const timerDuration = 300; // 5 minutes in seconds
@@ -46,31 +48,33 @@ const QuizComponent = () => {
 
   useEffect(() => {
     if (questions.length > 0 && currentQuestionIndex < questions.length) {
-      setOptions([
+      const opts = [
         questions[currentQuestionIndex].optiona,
         questions[currentQuestionIndex].optionb,
         questions[currentQuestionIndex].optionc,
         questions[currentQuestionIndex].optiond,
-      ]);
-      setClickFifty(false);
+      ]
+      setOptions(opts);
+      setFiftyOptions(opts);
     }
   }, [currentQuestionIndex]);
 
   const handleSkipClick = async () => {
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    if (currentQuestionIndex % 5 === 4) {
-      // Move to the next round after every 5 questions
-      setCurrentRound((prevRound) => prevRound + 1);
-    }
-    if (currentQuestionIndex === questions.length - 1) {
-      // Quiz completed
-      console.log("Quiz completed! Remaining lives:", lives);
-
+    if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
       try {
         await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
       } catch (error) {
         console.error("Error navigating to /congrads:", error);
       }
+    }
+    else if (numberOfquestionsPerRound % 5 === 4) {
+      setCurrentRound((prevRound) => prevRound + 1);
+      setNumberOfQuestionsPerRound(0);
+      setClickFifty(false);
+      setClickSwap(false);
+    } else {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setNumberOfQuestionsPerRound((prevIndex) => prevIndex + 1);
     }
   };
 
@@ -91,8 +95,18 @@ const QuizComponent = () => {
     setClickFifty(true);
   };
 
-  const handleSwitchClick = () => {
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  const handleSwapClick = () => {
+    if (numberOfquestionsPerRound + 1 % 5 === 4) {
+      setCurrentRound((prevRound) => prevRound + 1);
+      setCurrentQuestionIndex(0);
+      setNumberOfQuestionsPerRound(0);
+      setClickFifty(false);
+      setClickSwap(false);
+    } else {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setClickSwap(true);
+    }
+
   };
   const [showDude2Image, setShowDude2Image] = useState(false); // thumbs down
   const [showDude3Image, setShowDude3Image] = useState(true); // thinking face
@@ -109,12 +123,15 @@ const QuizComponent = () => {
       })
       .then((data) => {
         setQuestions(data.questions);
-        setOptions([
+        const opts = [
           data.questions[currentQuestionIndex].optiona,
           data.questions[currentQuestionIndex].optionb,
           data.questions[currentQuestionIndex].optionc,
           data.questions[currentQuestionIndex].optiond,
-        ]);
+        ]
+        setOptions(opts);
+        setFiftyOptions(opts);
+        setCurrentQuestionIndex(0);
       })
       .catch((error) => console.error("Error fetching questions:", error));
   }, [currentRound]);
@@ -125,6 +142,7 @@ const QuizComponent = () => {
   }, []);
 
   const handleAnswerClick = (selectedAnswer) => {
+    setNumberOfQuestionsPerRound((prevIndex) => prevIndex + 1);
     console.log("currentRound", currentRound);
     const correctOption = questions[currentQuestionIndex].correct_option;
     // console log for debugging
@@ -181,28 +199,26 @@ const QuizComponent = () => {
   };
 
   const handleNextClick = async (lastScore) => {
-    if (currentQuestionIndex === questions.length - 1) {
-      // Quiz completed
-      console.log("Quiz completed! Remaining lives:", lives);
-
+    if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
       try {
-        // setScore((prevScore) => prevScore);
-        console.log("score:", score);
-        console.log("last score:", lastScore);
         await navigate("/congrads", {
           state: { score: score + lastScore, lives, startTime },
-        }); // pass the score as state
+        }); 
       } catch (error) {
         console.error("Error navigating to /congrads:", error);
       }
     } else {
+      setNumberOfQuestionsPerRound ((prevIndex) => prevIndex + 1);
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setShowHint(false); // Reset the hint display when moving to the next question
       setHintUsed(false);
 
-      if (currentQuestionIndex % 5 === 4) {
+      if (numberOfquestionsPerRound % 5 === 4) {
         // Move to the next round after every 5 questions
         setCurrentRound((prevRound) => prevRound + 1);
+        setNumberOfQuestionsPerRound(0);
+        setClickFifty(false);
+        setClickSwap(false);
       }
 
       if (lives === 0) {
@@ -239,7 +255,7 @@ const QuizComponent = () => {
                 onClick={() => handleAnswerClick(index)}
               >
                 {optionLabel[index]}.
-                {clickFifty
+                {fiftyOptions.length === 2
                   ? fiftyOptions.includes(option)
                     ? option
                     : ""
@@ -267,13 +283,13 @@ const QuizComponent = () => {
           Skip
         </button>
         <button
-          disabled={options.length < 4}
+          disabled={options.length < 4 || clickFifty}
           className="fifty-fifty-button"
           onClick={handleFiftyClick}
         >
           50/50
         </button>
-        <button className="switch-button" onClick={handleSwitchClick}>
+        <button disabled={clickSwap} className="switch-button" onClick={handleSwapClick}>
           Swap
         </button>
       </div>
