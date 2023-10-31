@@ -20,7 +20,8 @@ const QuizComponent = () => {
   const [options, setOptions] = useState([]);
   const [fiftyOptions, setFiftyOptions] = useState([]);
   const [clickFifty, setClickFifty] = useState(false);
-
+  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
+  const [totalQuestions, setTotalQuestions] = useState(0);
 
   const timerDuration = 300; // 5 minutes in seconds
   const [timer, setTimer] = useState(timerDuration);
@@ -34,9 +35,6 @@ const QuizComponent = () => {
 
     return () => clearInterval(timerInterval);
   }, [timer]);
-
-  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
-  const [totalQuestions, setTotalQuestions] = useState(0);
   
   const optionLabel = {
     0: "A",
@@ -224,12 +222,11 @@ const QuizComponent = () => {
   return (
     <div className="container">
       <img className="logo" src={Quiz} alt="quizjs" />
-
-      {/* {currentQuestionIndex > questions.length - 1 ? <span>No More questions</span> : */}
-
       <div className="game">
         <p className="round">Round {currentRound}</p>
+        <p className='question-number'>{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
         <p className="questions">{currentQuestion.question}</p>
+<div className="middle">
         <ul className="answers">
           {options.map((option, index) => (
             <li key={index}>
@@ -250,6 +247,7 @@ const QuizComponent = () => {
         {showDudeImage && <img className="dude" src={Dude} alt="Dude" />}
         {showDude2Image && <img className="dude2" src={Dude2} alt="Dude2" />}
         {showDude3Image && <img className="dude3" src={Dude3} alt="Dude3" />}
+        </div>
         <p className="lives">
           Lives: {Array.from({ length: lives }, (_, index) => "❤️").join(" ")}
         </p>
