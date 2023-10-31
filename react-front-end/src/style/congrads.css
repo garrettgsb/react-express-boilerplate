@@ -25,26 +25,23 @@ font-size: 100px;
 }
 
 .myForm input {
-  /* Style for form inputs (adjust as needed) */
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .myForm button {
-  /* Style for the submit button */
   width: 100%;
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
-  background-color: yellow; /* Add your desired background color */
+  background-color: yellow;
   color: black;
   border: none;
   border-radius: 4px;
 }
 
 .myForm button:hover {
-  /* Style for button on hover (optional) */
   background-color: blue;
 }
 

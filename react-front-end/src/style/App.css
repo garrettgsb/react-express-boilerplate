@@ -48,20 +48,22 @@
 }
 
 .player-name {
-  /* width: 50%; */
   text-align: left;
 }
 
 .player-score {
-  /* width: 40%; */
   text-align: right;
 }
 
-.div-style {
-  background: linear-gradient(to right, #9c0fbb, #770890);
+.home {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+
+img {
+  width: 500px
+}
+

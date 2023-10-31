@@ -10,12 +10,12 @@
 }
 
 .game {
-  width: 500px; /* Set the width as needed */
-  height: 750px; /* Set the height as needed */
+  width: 500px;
+  height: 750px;
   background-color: white;
   border: 2px solid black;
   padding: 5px;
-  box-sizing: border-box; /* Include padding and border in the total width and height */
+  box-sizing: border-box;
 }
 
 .logo {
@@ -54,7 +54,29 @@
   font-size: 30px;
 }
 
+.s-button {
+  font-size: 30px;
+}
+
+.fifty-fifty-button {
+  font-size: 30px;
+}
+
+.switch-button {
+  font-size: 30px;
+}
+
 .dude {
   width: 200px;
+  
+}
+
+.dude2 {
+  width: 200px;
+  
+}
+
+.dude3 {
+  width: 170px;
   
 }

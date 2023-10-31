@@ -4,12 +4,20 @@ require('dotenv').config();
 // other dependencies
 const fs = require('fs');
 const chalk = require('chalk');
-const db = require('../db/connection');
+// PG database client/connection setup
+const { Pool } = require('pg');
 
-// PG connection setup
-// const connectionString = process.env.DATABASE_URL ||
-//   `postgresql://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?sslmode=disable`;
-// const client = new Client();
+const dbParams = {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
+};
+
+const db = new Pool(dbParams);
+
+db.connect();
 
 // Loads the schema files from db/schema
 const runSchemaFiles = async () => {
