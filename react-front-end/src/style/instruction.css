@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100vh;
+  height: 100%;
 }
 
 .center-top {
@@ -41,7 +41,7 @@ bottom: 90px;
 
 .div-style {
   background: linear-gradient(to right, #9c0fbb, #770890);
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
