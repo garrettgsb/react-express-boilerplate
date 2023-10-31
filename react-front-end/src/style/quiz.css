@@ -19,8 +19,6 @@
 }
 
 
-
-
 .logo {
   width: 400px;
 }
@@ -37,8 +35,17 @@
   font-size: 40px;
 }
 
+
+.middle {
+  display: flex;
+  align-items: center;
+}
+
 .answers {
   font-size: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .buttons {
