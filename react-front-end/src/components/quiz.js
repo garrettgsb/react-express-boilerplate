@@ -35,7 +35,9 @@ const QuizComponent = () => {
     return () => clearInterval(timerInterval);
   }, [timer]);
 
-
+  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
+  const [totalQuestions, setTotalQuestions] = useState(0);
+  
   const optionLabel = {
     0: "A",
     1: "B",
@@ -109,12 +111,8 @@ const QuizComponent = () => {
       })
       .then((data) => {
         setQuestions(data.questions);
-        setOptions([
-          data.questions[currentQuestionIndex].optiona,
-          data.questions[currentQuestionIndex].optionb,
-          data.questions[currentQuestionIndex].optionc,
-          data.questions[currentQuestionIndex].optiond,
-        ]);
+        setTotalQuestions(data.questions.length);
+        setOptions([data.questions[currentQuestionIndex].optiona, data.questions[currentQuestionIndex].optionb, data.questions[currentQuestionIndex].optionc, data.questions[currentQuestionIndex].optiond])
       })
       .catch((error) => console.error("Error fetching questions:", error));
   }, [currentRound]);
@@ -197,6 +195,7 @@ const QuizComponent = () => {
       }
     } else {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setCurrentQuestionNumber((prevNumber) => prevNumber + 1);
       setShowHint(false); // Reset the hint display when moving to the next question
       setHintUsed(false);
 
