@@ -28,6 +28,9 @@ const QuizComponent = () => {
     3: "D",
   };
 
+  const timerDuration = 300; // 5 minutes in seconds
+  const [timer, setTimer] = useState(timerDuration);
+  
   useEffect(() => {
     if (questions.length > 0 && currentQuestionIndex < questions.length) {
       setOptions([
