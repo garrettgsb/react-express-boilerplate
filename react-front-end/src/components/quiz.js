@@ -20,7 +20,9 @@ const QuizComponent = () => {
   const [options, setOptions] = useState([]);
   const [fiftyOptions, setFiftyOptions] = useState([]);
   const [clickFifty, setClickFifty] = useState(false);
-
+  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
+  const [totalQuestions, setTotalQuestions] = useState(0);
+  
   const optionLabel = {
     0: "A",
     1: "B",
@@ -88,6 +90,7 @@ const QuizComponent = () => {
       })
       .then((data) => {
         setQuestions(data.questions);
+        setTotalQuestions(data.questions.length);
         setOptions([data.questions[currentQuestionIndex].optiona, data.questions[currentQuestionIndex].optionb, data.questions[currentQuestionIndex].optionc, data.questions[currentQuestionIndex].optiond])
       })
       .catch((error) => console.error("Error fetching questions:", error));
@@ -163,7 +166,7 @@ lastScore = -10
       console.log("Quiz completed! Remaining lives:", lives);
 
       try {
-        // setScore((prevScore) => prevScore);
+  
         console.log('score:', score)
         console.log('last score:', lastScore);
         await navigate("/congrads", { state: { score: score + lastScore, lives, startTime } }); // pass the score as state
@@ -173,6 +176,7 @@ lastScore = -10
     } else {
 
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setCurrentQuestionNumber((prevNumber) => prevNumber + 1);
       setShowHint(false); // Reset the hint display when moving to the next question
       setHintUsed(false);
 
@@ -208,10 +212,9 @@ lastScore = -10
     <div className="container">
       <img className="logo" src={Quiz} alt="quizjs" />
 
-      {/* {currentQuestionIndex > questions.length - 1 ? <span>No More questions</span> : */}
-
       <div className='game'>
         <p className='round'>Round {currentRound}</p>
+        <p className='question-number'>{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
         <p className='questions'>{currentQuestion.question}</p>
         <ul className='answers'>
   {options.map((option, index) => (
