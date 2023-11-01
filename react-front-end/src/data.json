@@ -1,0 +1,19 @@
+{
+  "highScores": [
+    { "name": "Player 1", "score": 100, "time": 1000 },
+    { "name": "Player 2", "score": 85, "time": 1000 },
+    { "name": "Player 3", "score": 33, "time": 1000 },
+    { "name": "Player 4", "score": 50, "time": 1000 },
+    { "name": "Player 5", "score": 76, "time": 1000 },
+    { "name": "Player 6", "score": 79, "time": 1000 },
+    { "name": "Player 7", "score": 79, "time": 999 },
+    { "name": "Player 8", "score": 76, "time": 998 },
+    { "name": "Player 9", "score": 76, "time": 1001 },
+    { "name": "Player 10", "score": 76, "time": 1000 },
+    { "name": "Player 11", "score": 101, "time": 999 },
+    { "name": "Player 12", "score": 101, "time": 999 },
+    { "name": "Player 13", "score": 100, "time": 995 },
+    { "name": "Player 14", "score": 76, "time": 1000 },
+    { "name": "Player 15", "score": 76, "time": 1000 }
+  ]
+}
