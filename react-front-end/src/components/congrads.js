@@ -54,8 +54,8 @@ const validateNickname = async (nickname) => {
     const trimmedName = name.trim();
 
     // Client-side validation for nickname
-    if (trimmedName.length < 3 || trimmedName.length > 20) {
-      setNicknameError('Nickname must be between 3 and 20 characters');
+    if (trimmedName.length < 3 || trimmedName.length > 12) {
+      setNicknameError('Nickname must be between 3 and 12 characters');
       return;
     } else {
       setNicknameError('');
