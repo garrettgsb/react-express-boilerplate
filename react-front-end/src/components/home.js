@@ -1,4 +1,5 @@
 import "../style/App.css";
+import "../style/home.css";
 import React from "react";
 import Quiz from "../asset/THELOGO.png";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,7 @@ import HighScores from "./HighScores";
 import { useState, useEffect } from "react";
 import Brandon from "../asset/brandon.png";
 import { handleAudio, sounds } from "./SoundHelper";
+import 'animate.css';
 
 function Home() {
   const [highScores, setHighScores] = useState([]);
@@ -41,10 +43,10 @@ function Home() {
         </div>
         <div className="content-container">
           <div className="top-page">
-          <img className="quiz" src={Quiz} alt="quizjs" />
+          <img className="animate__animated animate__backInDown" src={Quiz} alt="quizjs" />
           <div className="des">
-          <h2>QuizJS is a series of questions that defy conventional thinking and logic.</h2>
-          <h2>Test your wit against a series of fun, unexpected, and absurd questions!</h2>
+          <h1>QuizJS is a series of questions that defy conventional thinking and logic.</h1>
+          <h1>Test your wit against a series of fun, unexpected, and absurd questions!</h1>
           </div>
           </div>
           <div className="dude-container">

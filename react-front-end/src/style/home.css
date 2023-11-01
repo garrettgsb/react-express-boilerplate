@@ -1,0 +1,119 @@
+.content-container {
+  margin-right: 150px;
+}
+
+.rectangle-button {
+  width: 300px;
+  height: 100px;
+  background-color: #ffff00;
+  color: #000000;
+  border: 8px solid #000000;
+  border-radius: 5px;
+  font-size: 30px;
+  font-family: "Pixelify Sans", sans-serif;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.rectangle-button:hover {
+  background-color: #e0e000;
+}
+
+.score-box {
+  background-color: #ffff00;
+  color: #000000;
+  border: 8px solid #000000;
+  border-radius: 5px;
+  width: 800px;
+  padding: 40px;
+  font-family: "YourFontFamily", sans-serif;
+  font-size: 18px;
+  text-align: center;
+}
+
+.score-columns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 350px;
+  gap: 5px;
+}
+
+.score-column {
+  width: 30%;
+}
+
+
+
+.player-name {
+  text-align: left;
+}
+
+.player-score {
+  text-align: right;
+  padding: 0 5px;
+}
+
+.home {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+img {
+  width: 500px;
+  padding-left: 500px;
+}
+.dude-container {
+  display: flex;
+ align-items: center;
+ padding-left: 500px;
+}
+
+.start {
+  display: flex;
+  padding-left: 490px;
+}
+
+.dude {
+padding-left: 20px;
+}
+
+.top-page {
+  display: flex;
+
+}
+
+.des {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.des h2 {
+  margin: 10px 0; /* Adjust the margin as needed for spacing */
+}
+
+.score-row {
+width: 180px;
+}
+
+.list {
+  padding: 0;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.score {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1em;
+
+}
