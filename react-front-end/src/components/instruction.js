@@ -1,7 +1,7 @@
 import "../style/instruction.css";
 import React from "react";
-import InstructionImage from "../asset/instruction.png";
 import { useNavigate } from "react-router-dom";
+import Header from "./header"
 
 function Instruction() {
 
@@ -22,7 +22,7 @@ function Instruction() {
   return (
     <div className="div-style">
       <div className="center-top">
-        <img src={InstructionImage} alt="quizjs" className="instruction-image" />
+        <Header page="instructions"/>
       </div>
       <div className="instruction-container">
         

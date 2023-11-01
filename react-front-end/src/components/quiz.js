@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/quiz.css";
-import Quiz from "../asset/THELOGO.png";
 import Dude from "../asset/dude.png";
 import Dude2 from "../asset/thumbs-down.png";
 import Dude3 from "../asset/thinking-dude.png";
+import Header from "./header";
 
 const QuizComponent = () => {
   const navigate = useNavigate();
@@ -221,7 +221,7 @@ const QuizComponent = () => {
 
   return (
     <div className="container">
-      <img className="logo" src={Quiz} alt="quizjs" />
+      <Header page="quiz"/>
       <div className="game"> 
         <p className="round">Round {currentRound}</p>
         <p className='question-number'>{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
@@ -251,7 +251,7 @@ const QuizComponent = () => {
         <p className="lives">
           Lives: {Array.from({ length: lives }, (_, index) => "❤️").join(" ")}
         </p>
-        <p className="score">Score: {score}</p>
+        <p className="your-score">Score: {score}</p>
         <p className="timer">
           Time Left: {Math.floor(timer / 60)}:
           {(timer % 60).toString().padStart(2, "0")}

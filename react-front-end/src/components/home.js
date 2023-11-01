@@ -1,14 +1,14 @@
 import "../style/App.css";
 import "../style/home.css";
 import React from "react";
-import Quiz from "../asset/THELOGO.png";
+
 import { useNavigate } from "react-router-dom";
 import HighScores from "./HighScores";
 import { useState, useEffect } from "react";
 import Brandon from "../asset/brandon.png";
 import { handleAudio, sounds } from "./SoundHelper";
 import 'animate.css';
-
+import Header from "./header";
 function Home() {
   const [highScores, setHighScores] = useState([]);
   const navigate = useNavigate();
@@ -37,18 +37,10 @@ function Home() {
 
   return (
     <div className="div-style">
+      <Header page="home"/>
       <div className="home">
-        <div className="logo-container">
-
-        </div>
         <div className="content-container">
-          <div className="top-page">
-          <img className="animate__animated animate__backInDown" src={Quiz} alt="quizjs" />
-          <div className="des">
-          <h1>QuizJS is a series of questions that defy conventional thinking and logic.</h1>
-          <h1>Test your wit against a series of fun, unexpected, and absurd questions!</h1>
-          </div>
-          </div>
+
           <div className="dude-container">
             <HighScores highScores={highScores} className="high-scores-container" />
             <img className="dude" src={Brandon} alt="brandon" />
