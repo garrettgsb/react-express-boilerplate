@@ -1,3 +1,4 @@
+import "@csstools/normalize.css"
 import "./style/App.css";
 import React from 'react';
 import { useState } from "react";
