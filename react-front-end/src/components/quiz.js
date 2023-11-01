@@ -251,7 +251,7 @@ const QuizComponent = () => {
         <p className="lives">
           Lives: {Array.from({ length: lives }, (_, index) => "❤️").join(" ")}
         </p>
-        <p className="score">Score: {score}</p>
+        <p className="your-score">Score: {score}</p>
         <p className="timer">
           Time Left: {Math.floor(timer / 60)}:
           {(timer % 60).toString().padStart(2, "0")}

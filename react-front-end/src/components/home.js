@@ -38,15 +38,17 @@ function Home() {
   return (
     <div className="div-style">
       <div className="home">
-        <div className="logo-container">
-
-        </div>
         <div className="content-container">
           <div className="top-page">
-          <img className="animate__animated animate__backInDown" src={Quiz} alt="quizjs" />
-          <div className="des">
-          <h1>QuizJS is a series of questions that defy conventional thinking and logic.</h1>
-          <h1>Test your wit against a series of fun, unexpected, and absurd questions!</h1>
+            <div className="quizjs">
+            <img className="animate__animated animate__backInDown" src={Quiz} alt="quizjs" />
+            <div className="des-container">
+            <div className="des">
+           <h1>QuizJS is a series of questions that defy conventional thinking and logic.</h1>
+           <h1>Test your wit against a series of fun, unexpected, and absurd questions!</h1>
+            </div>
+            </div>
+       
           </div>
           </div>
           <div className="dude-container">
