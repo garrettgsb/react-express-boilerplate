@@ -222,7 +222,7 @@ const QuizComponent = () => {
   return (
     <div className="container">
       <img className="logo" src={Quiz} alt="quizjs" />
-      <div className="game">
+      <div className="game"> 
         <p className="round">Round {currentRound}</p>
         <p className='question-number'>{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
         <p className="questions">{currentQuestion.question}</p>
