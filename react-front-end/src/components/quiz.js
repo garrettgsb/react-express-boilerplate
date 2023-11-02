@@ -71,6 +71,7 @@ useEffect(() => {
 
   const handleSkipClick = async () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    setCurrentQuestionNumber((prevNumber) => prevNumber + 1);
     if (currentQuestionIndex % 5 === 4) {
       // Move to the next round after every 5 questions
       setCurrentRound((prevRound) => prevRound + 1);
