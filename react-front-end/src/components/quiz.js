@@ -38,7 +38,7 @@ const QuizComponent = () => {
   }, [timer]);
 
 useEffect(() => {
-  if (timer === 0 && lives === 0) {
+  if (timer === 0 && lives === 1) {
     setGameOver(true);
   }
 }, [timer]);
@@ -198,7 +198,7 @@ useEffect(() => {
         setCurrentRound((prevRound) => prevRound + 1);
       }
 
-      if (lives === 0) {
+      if (lives === 1) {
         setGameOver(true);
       }
     }
@@ -215,6 +215,7 @@ useEffect(() => {
     setGameOver(false);
     setTimer(timerDuration); // Reset the timer to its initial value
     setCurrentQuestionIndex(0); // Reset the current question index to 0 or any other initial value
+    setCurrentQuestionNumber(1);
     setCurrentRound(1); // Reset the current round to 1 or any other initial value
     setLives(5); // Reset the lives to their initial value
     setShowHint(false); // Reset the hint display
