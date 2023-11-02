@@ -182,7 +182,6 @@ const QuizComponent = () => {
       console.log("Quiz completed! Remaining lives:", lives);
 
       try {
-        // setScore((prevScore) => prevScore);
         console.log("score:", score);
         console.log("last score:", lastScore);
         await navigate("/congrads", {

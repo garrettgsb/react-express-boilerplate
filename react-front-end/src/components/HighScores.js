@@ -16,7 +16,10 @@ function HighScores() {
         
         // Sort the high scores in descending order based on the 'score' property
         const sortedHighScores = filteredHighScores.sort((a, b) => b.score - a.score);
-        
+
+        // sort the high scores by time
+        // logic here...
+
         // Take only the top 20 high scores
         const top20HighScores = sortedHighScores.slice(0, 20);
         

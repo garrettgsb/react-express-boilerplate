@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../style/congrads.css";
-import 'whatwg-fetch';
-import Header from "./header"
+import "whatwg-fetch";
+import Header from "./header";
 
 const Congrats = ({ onLeaderboardUpdate }) => {
   const navigate = useNavigate();
@@ -19,118 +19,119 @@ const Congrats = ({ onLeaderboardUpdate }) => {
   }, [location.state]);
 
   // State variables for form fields
-  const [submissionMessage, setSubmissionMessage] = useState('');
-  const [name, setName] = useState('');
-  const [nicknameError, setNicknameError] = useState('');
+  const [submissionMessage, setSubmissionMessage] = useState("");
+  const [name, setName] = useState("");
+  const [nicknameError, setNicknameError] = useState("");
 
   // Access the score from the location state
   const score = location.state && location.state.score;
 
-// Function to validate the nickname
-const validateNickname = async (nickname) => {
-  try {
-    const response = await fetch('/validate-nickname', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ nickname }),
-    });
+  // Function to validate the nickname
+  const validateNickname = async (nickname) => {
+    try {
+      const response = await fetch("/validate-nickname", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ nickname }),
+      });
 
-    // Process the server response
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error('Error validating nickname:', error);
-    return { success: false, error: 'Failed to validate nickname' };
-  }
-};
+      // Process the server response
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error("Error validating nickname:", error);
+      return { success: false, error: "Failed to validate nickname" };
+    }
+  };
 
   // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
- // Trim leading and trailing whitespace
+    // Trim leading and trailing whitespace
     const trimmedName = name.trim();
 
     // Client-side validation for nickname
     if (trimmedName.length < 3 || trimmedName.length > 12) {
-      setNicknameError('Nickname must be between 3 and 12 characters');
+      setNicknameError("Nickname must be between 3 and 12 characters");
       return;
     } else {
-      setNicknameError('');
+      setNicknameError("");
     }
 
     if (!/^[0-9A-Z]+$/i.test(trimmedName)) {
-      setNicknameError('Nickname must contain only numbers and characters A-Z');
-      return
+      setNicknameError("Nickname must contain only numbers and characters A-Z");
+      return;
     } else {
-      setNicknameError('');
+      setNicknameError("");
     }
 
-if (!name || /^\s*$/.test(trimmedName)) {
-      setNicknameError('Nickname cannot be empty or contain only whitespace');
-      return
+    if (!name || /^\s*$/.test(trimmedName)) {
+      setNicknameError("Nickname cannot be empty or contain only whitespace");
+      return;
     } else {
-      setNicknameError('');
+      setNicknameError("");
     }
 
-// Validate the nickname on the server
-const nicknameValidation = await validateNickname(name);
+    // Validate the nickname on the server
+    const nicknameValidation = await validateNickname(name);
 
-  // Check server-side validation result
-  if (!nicknameValidation.success) {
-    // Handle validation error, show error message to the user
-    console.error('Nickname validation failed:', nicknameValidation.error);
-    // Update state or show error message to the user
-    setNicknameError('Nickname validation failed');
-    return;
-  }
-  
-    // Perform actions with form data (e.g., send to server)
-    console.log('Submitted:', { name, score });
+    // Check server-side validation result
+    if (!nicknameValidation.success) {
+      // Handle validation error, show error message to the user
+      console.error("Nickname validation failed:", nicknameValidation.error);
+      // Update state or show error message to the user
+      setNicknameError("Nickname validation failed");
+      return;
+    }
+
+    console.log("Submitted:", { name, score });
 
     // Send data to the server
     try {
-      const response = await fetch('/api/high-scores', {
-        method: 'POST',
+      const response = await fetch("/api/high-scores", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, score }),
+        body: JSON.stringify({ name, score }), // add completionTime here
       });
 
       // Handling the server response
       if (response.ok) {
-        setSubmissionMessage('Your score has been submitted successfully');
-        console.log('Score submitted successfully');
+        setSubmissionMessage("Your score has been submitted successfully");
+        console.log("Score submitted successfully");
         // Optionally, you can update the state or perform other actions here
         onLeaderboardUpdate();
-        navigate('/');
+        navigate("/");
       } else {
-        setSubmissionMessage('Failed to submit score');
-        console.error('Failed to submit score');
+        setSubmissionMessage("Failed to submit score");
+        console.error("Failed to submit score");
       }
     } catch (error) {
-      setSubmissionMessage('Error submitting score');
-      console.error('Error submitting score:', error);
+      setSubmissionMessage("Error submitting score");
+      console.error("Error submitting score:", error);
     }
   };
 
+  console.log("time:", completionTime);
+
   return (
-    <div className='container'>
-      <h1 className='title'>Congratulations!</h1>
-      <h2 className='on'>ON</h2>
-      <h2 className='completing'>COMPLETING</h2>
-      <Header page="congrads"/>
+    <div className="container">
+      <h1 className="title">Congratulations!</h1>
+      <h2 className="on">ON</h2>
+      <h2 className="completing">COMPLETING</h2>
+      <Header page="congrads" />
       <h1>Your final score: {score}</h1>
       {completionTime && (
         <h2>Time taken to complete the quiz: {formatTime(completionTime)}</h2>
       )}
-      <form className='myForm' onSubmit={handleSubmit}>
+      <form className="myForm" onSubmit={handleSubmit}>
         {submissionMessage && <h2>{submissionMessage}</h2>}
-        
-        <label className='name'>
+
+        <label className="name">
           Enter your nickname here:
           <input
             type="text"
@@ -140,7 +141,9 @@ const nicknameValidation = await validateNickname(name);
           {nicknameError && <p className="error">{nicknameError}</p>}
         </label>
 
-        <button className='submit' type="submit">Submit</button>
+        <button className="submit" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
@@ -154,4 +157,3 @@ const formatTime = (milliseconds) => {
 };
 
 export default Congrats;
-
