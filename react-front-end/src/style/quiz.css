@@ -74,24 +74,36 @@ img {
   font-size: 30px;
 }
 
+.powerUpButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+
 .hint {
-  font-size: 20px;
+  font-size: 30px;
+  font-style: italic;
 }
 
 .h-button {
   font-size: 30px;
+  font-style: italic;
 }
 
 .s-button {
   font-size: 30px;
+  font-style: italic;
 }
 
 .fifty-fifty-button {
   font-size: 30px;
+  font-style: italic;
 }
 
 .switch-button {
   font-size: 30px;
+  font-style: italic;
 }
 
 .dude {

@@ -20,10 +20,11 @@ const QuizComponent = () => {
   const [options, setOptions] = useState([]);
   const [fiftyOptions, setFiftyOptions] = useState([]);
   const [clickFifty, setClickFifty] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
   const [totalQuestions, setTotalQuestions] = useState(0);
 
-  const timerDuration = 300; // 5 minutes in seconds
+  const timerDuration = 20; // in seconds
   const [timer, setTimer] = useState(timerDuration);
 
   useEffect(() => {
@@ -35,7 +36,8 @@ const QuizComponent = () => {
 
     return () => clearInterval(timerInterval);
   }, [timer]);
-  
+
+
   const optionLabel = {
     0: "A",
     1: "B",
@@ -94,6 +96,7 @@ const QuizComponent = () => {
   const handleSwitchClick = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
+  
   const [showDude2Image, setShowDude2Image] = useState(false); // thumbs down
   const [showDude3Image, setShowDude3Image] = useState(true); // thinking face
   const [startTime, setStartTime] = useState(null);
@@ -201,13 +204,17 @@ const QuizComponent = () => {
         setCurrentRound((prevRound) => prevRound + 1);
       }
 
+      // if (lives === 0) {
+      //   // All lives are gone, navigate to the home page
+      //   try {
+      //     await navigate("/");
+      //   } catch (error) {
+      //     console.error("Error navigating to /:", error);
+      //   }
+      // }
+
       if (lives === 0) {
-        // All lives are gone, navigate to the home page
-        try {
-          await navigate("/");
-        } catch (error) {
-          console.error("Error navigating to /:", error);
-        }
+        setGameOver(true);
       }
     }
   };
@@ -218,10 +225,34 @@ const QuizComponent = () => {
 
   const currentQuestion = questions[currentQuestionIndex];
 
+
+  const handlePlayAgain = () => {
+    setGameOver(false);
+    setTimer(timerDuration); // Reset the timer to its initial value
+    setCurrentQuestionIndex(0); // Reset the current question index to 0 or any other initial value
+    setCurrentRound(1); // Reset the current round to 1 or any other initial value
+    setLives(5); // Reset the lives to their initial value
+    setShowHint(false); // Reset the hint display
+    setScore(0); // Reset the score to 0 or any other initial value
+    setHintUsed(false); // Reset the hintUsed flag
+    setShowDudeImage(false); 
+    setOptions([]); // Reset the options
+    setFiftyOptions([]); 
+    setClickFifty(false);
+    setStartTime(new Date()); 
+  };
+
+  const handleHomePage = () => {
+    navigate("/");
+  };
+
   return (
     <div className="container">
-      <Header page="quiz"/>
-      <div className="game"> 
+      <img className="logo" src={Quiz} alt="quizjs" />
+
+      {/* {currentQuestionIndex > questions.length - 1 ? <span>No More questions</span> : */}
+
+      <div className="game">
         <p className="round">Round {currentRound}</p>
         <p className='question-number'>{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
         <p className="questions">{currentQuestion.question}</p>
@@ -256,6 +287,7 @@ const QuizComponent = () => {
           {(timer % 60).toString().padStart(2, "0")}
         </p>{" "}
         {showHint && <p className="hint">Hint: {currentQuestion.hint}</p>}
+        <div className="powerUpButtons">
         <button className="h-button" onClick={handleHintClick}>
           Hint
         </button>
@@ -272,7 +304,18 @@ const QuizComponent = () => {
         <button className="switch-button" onClick={handleSwitchClick}>
           Swap
         </button>
-      </div>
+          </div>
+      </div>}
+    
+      {gameOver && (
+        <div className="game-over-popup">
+          <h1>Game Over!</h1>
+          <div className="game-over-buttons">
+            <button onClick={handlePlayAgain}>Play Again</button>
+            <button onClick={handleHomePage}>Main Page</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
