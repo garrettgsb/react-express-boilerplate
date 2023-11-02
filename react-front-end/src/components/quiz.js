@@ -5,6 +5,7 @@ import "../style/quiz.css";
 import Dude from "../asset/dude.png";
 import Dude2 from "../asset/thumbs-down.png";
 import Dude3 from "../asset/thinking-dude.png";
+import Quiz from "../asset/THELOGO.png";
 import Header from "./header";
 
 const QuizComponent = () => {
@@ -24,7 +25,7 @@ const QuizComponent = () => {
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
   const [totalQuestions, setTotalQuestions] = useState(0);
 
-  const timerDuration = 20; // in seconds
+  const timerDuration = 300; // in seconds
   const [timer, setTimer] = useState(timerDuration);
 
   useEffect(() => {
@@ -36,6 +37,15 @@ const QuizComponent = () => {
 
     return () => clearInterval(timerInterval);
   }, [timer]);
+
+
+  
+useEffect(() => {
+  if (timer === 0 && lives === 0) {
+    setGameOver(true);
+  }
+}, [timer]);
+
 
 
   const optionLabel = {
@@ -92,6 +102,9 @@ const QuizComponent = () => {
     setFiftyOptions(newOption);
     setClickFifty(true);
   };
+
+
+
 
   const handleSwitchClick = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -247,12 +260,11 @@ const QuizComponent = () => {
   };
 
   return (
+   
     <div className="container">
-      <img className="logo" src={Quiz} alt="quizjs" />
+      <Header page="quiz"/>
 
-      {/* {currentQuestionIndex > questions.length - 1 ? <span>No More questions</span> : */}
-
-      <div className="game">
+      {!gameOver && <div className="game">
         <p className="round">Round {currentRound}</p>
         <p className='question-number'>{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
         <p className="questions">{currentQuestion.question}</p>
