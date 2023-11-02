@@ -5,7 +5,6 @@ import "../style/quiz.css";
 import Dude from "../asset/dude.png";
 import Dude2 from "../asset/thumbs-down.png";
 import Dude3 from "../asset/thinking-dude.png";
-import Quiz from "../asset/THELOGO.png";
 import Header from "./header";
 
 const QuizComponent = () => {
@@ -21,11 +20,13 @@ const QuizComponent = () => {
   const [options, setOptions] = useState([]);
   const [fiftyOptions, setFiftyOptions] = useState([]);
   const [clickFifty, setClickFifty] = useState(false);
+
+
   const [gameOver, setGameOver] = useState(false);
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
   const [totalQuestions, setTotalQuestions] = useState(0);
 
-  const timerDuration = 300; // in seconds
+  const timerDuration = 300; // five minute timer
   const [timer, setTimer] = useState(timerDuration);
 
   useEffect(() => {
