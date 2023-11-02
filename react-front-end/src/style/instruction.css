@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.center-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height : 20%;
+}
+
+.instruction-image {
+  width: 1000px;
+}
+
+.instruction-container {
+  width: 600px;
+  border: 10px solid black;
+  padding: 100px;
+  margin-top: 20px;
+  height: 500px; 
+  background-color: yellow;
+}
+
+.welcome {
+  position: relative;
+  bottom: 90px;
+}
+.how-to-play {
+display: flex;
+justify-content: center;
+
+flex-direction: column;
+position: relative;
+bottom: 90px;
+}
+
+.div-style {
+  background: linear-gradient(to right, #9c0fbb, #770890);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.description {
+font-size: large;
+}
+
+.after {
+  font-size: large;
+  }
+
+.bold {
+  font-weight: bold;
+  font-size: large;
+}
