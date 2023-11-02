@@ -115,7 +115,7 @@ app.get('/api/high-scores', (req, res) => {
       return res.status(400).json({ error: 'Nickname must contain only numbers and characters A-Z' });
     }
 
-    if (trimmedNickname.length > 20) {
+    if (trimmedNickname.length > 12) {
       return res.status(400).json({ error: 'Nickname is too long' });
     }
   

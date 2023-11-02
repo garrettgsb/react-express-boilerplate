@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import "../style/App.css";
 import InstructionImage from "../asset/instruction.png";
 import Quiz from "../asset/THELOGO.png";
 import 'animate.css';
@@ -60,7 +61,7 @@ function header(props) {
   if (props.page === "congrads") {
     return (
       <div className="top-page">
-        <div className="quizjs">
+        <div className="logo">
           <img className="logo" src={Quiz} alt="quizjs" />
         </div>
       </div>

@@ -20,10 +20,11 @@ const QuizComponent = () => {
   const [options, setOptions] = useState([]);
   const [fiftyOptions, setFiftyOptions] = useState([]);
   const [clickFifty, setClickFifty] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
   const [totalQuestions, setTotalQuestions] = useState(0);
 
-  const timerDuration = 300; // 5 minutes in seconds
+  const timerDuration = 300; // five minute timer
   const [timer, setTimer] = useState(timerDuration);
 
   useEffect(() => {
@@ -35,14 +36,19 @@ const QuizComponent = () => {
 
     return () => clearInterval(timerInterval);
   }, [timer]);
-  
+
+useEffect(() => {
+  if (timer === 0 && lives === 0) {
+    setGameOver(true);
+  }
+}, [timer]);
+
   const optionLabel = {
     0: "A",
     1: "B",
     2: "C",
     3: "D",
   };
-
 
   useEffect(() => {
     if (questions.length > 0 && currentQuestionIndex < questions.length) {
@@ -58,13 +64,14 @@ const QuizComponent = () => {
 
   const handleSkipClick = async () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    setCurrentQuestionNumber((prevNumber) => prevNumber + 1);
     if (currentQuestionIndex % 5 === 4) {
       // Move to the next round after every 5 questions
       setCurrentRound((prevRound) => prevRound + 1);
     }
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
-      console.log("Quiz completed! Remaining lives:", lives);
+      console.log("Quiz completed!");
 
       try {
         await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
@@ -94,6 +101,7 @@ const QuizComponent = () => {
   const handleSwitchClick = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
+  
   const [showDude2Image, setShowDude2Image] = useState(false); // thumbs down
   const [showDude3Image, setShowDude3Image] = useState(true); // thinking face
   const [startTime, setStartTime] = useState(null);
@@ -121,21 +129,14 @@ const QuizComponent = () => {
   }, []);
 
   const handleAnswerClick = (selectedAnswer) => {
-    console.log("currentRound", currentRound);
     const correctOption = questions[currentQuestionIndex].correct_option;
-    // console log for debugging
-    console.log("correct option:", correctOption);
 
     // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
-    const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0);
-    // console log for debugging
-    console.log("correct index:", correctIndex);
+    const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0)
 
     let lastScore = 0;
 
     if (selectedAnswer === correctIndex) {
-      // Handle correct answer logic
-      console.log("Correct answer!");
 
       if (hintUsed || clickFifty) {
         setScore((prevScore) => prevScore + 10);
@@ -155,9 +156,7 @@ const QuizComponent = () => {
         handleNextClick(lastScore);
       }, 1500);
     } else {
-      console.log("Wrong answer!");
       setLives((prevLives) => prevLives - 1);
-      // setScore((prevScore) => prevScore);
       setShowDudeImage(false);
       setShowDude2Image(true);
       setShowDude3Image(false);
@@ -179,12 +178,9 @@ const QuizComponent = () => {
   const handleNextClick = async (lastScore) => {
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
-      console.log("Quiz completed! Remaining lives:", lives);
+      console.log("Quiz completed!");
 
       try {
-        // setScore((prevScore) => prevScore);
-        console.log("score:", score);
-        console.log("last score:", lastScore);
         await navigate("/congrads", {
           state: { score: score + lastScore, lives, startTime },
         }); // pass the score as state
@@ -203,12 +199,7 @@ const QuizComponent = () => {
       }
 
       if (lives === 0) {
-        // All lives are gone, navigate to the home page
-        try {
-          await navigate("/");
-        } catch (error) {
-          console.error("Error navigating to /:", error);
-        }
+        setGameOver(true);
       }
     }
   };
@@ -219,10 +210,33 @@ const QuizComponent = () => {
 
   const currentQuestion = questions[currentQuestionIndex];
 
+
+  const handlePlayAgain = () => {
+    setGameOver(false);
+    setTimer(timerDuration); // Reset the timer to its initial value
+    setCurrentQuestionIndex(0); // Reset the current question index to 0 or any other initial value
+    setCurrentRound(1); // Reset the current round to 1 or any other initial value
+    setLives(5); // Reset the lives to their initial value
+    setShowHint(false); // Reset the hint display
+    setScore(0); // Reset the score to 0 or any other initial value
+    setHintUsed(false); // Reset the hintUsed flag
+    setShowDudeImage(false); 
+    setOptions([]); // Reset the options
+    setFiftyOptions([]); 
+    setClickFifty(false);
+    setStartTime(new Date()); 
+  };
+
+  const handleHomePage = () => {
+    navigate("/");
+  };
+
   return (
+   
     <div className="container">
       <Header page="quiz"/>
-      <div className="game"> 
+
+      {!gameOver && <div className="game">
         <p className="round">Round {currentRound}</p>
         <p className='question-number'>{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
         <p className="questions">{currentQuestion.question}</p>
@@ -257,6 +271,7 @@ const QuizComponent = () => {
           {(timer % 60).toString().padStart(2, "0")}
         </p>{" "}
         {showHint && <p className="hint">Hint: {currentQuestion.hint}</p>}
+        <div className="powerUpButtons">
         <button className="h-button" onClick={handleHintClick}>
           Hint
         </button>
@@ -273,7 +288,18 @@ const QuizComponent = () => {
         <button className="switch-button" onClick={handleSwitchClick}>
           Swap
         </button>
-      </div>
+          </div>
+      </div>}
+    
+      {gameOver && (
+        <div className="game-over-popup">
+          <h1>Game Over!</h1>
+          <div className="game-over-buttons">
+            <button onClick={handlePlayAgain}>Play Again</button>
+            <button onClick={handleHomePage}>Main Page</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

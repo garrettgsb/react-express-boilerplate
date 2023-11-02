@@ -16,7 +16,7 @@ photo of congrads page
 
 ## Getting Started
 
-1. Create database in PostgreSQL called quiz_app_
+1. Create database in PostgreSQL called quiz_app
 2. Create the `.env` by using `.env.example` in the back-end folder
 3. Update the .env file with your correct local information 
   - username: `labber` 

@@ -15,7 +15,6 @@
 
 .instruction-image {
   width: 1000px;
-/* margin-right: 500px; */
 }
 
 .instruction-container {
@@ -35,7 +34,6 @@
 .how-to-play {
 display: flex;
 justify-content: center;
-
 flex-direction: column;
 position: relative;
 bottom: 90px;
