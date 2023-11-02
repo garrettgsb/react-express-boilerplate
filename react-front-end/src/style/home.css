@@ -1,5 +1,5 @@
 .content-container {
-  margin-right: 150px;
+  /* margin-right: 150px; */
 }
 
 .rectangle-button {
@@ -36,7 +36,7 @@
 }
 
 .home {
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,12 +54,12 @@
 .dude-container {
   display: flex;
  align-items: center;
- padding-left: 500px;
+ /* padding-left: 500px; */
 }
 
 .start {
   display: flex;
-  padding-left: 490px;
+  /* padding-left: 490px; */
 }
 
 .dude {
@@ -79,8 +79,7 @@ justify-content: center;
 }
 
 .des h1 {
-  margin: 10px 0; /* Adjust the margin as needed for spacing */
-/* max-width: 20%; */
+  margin: 10px 0;
 }
 
 .player-name {
@@ -94,7 +93,6 @@ justify-content: center;
 
 .score-columns {
   display: flex;
-  /* justify-content: space-between; */
   margin-top: 20px;
   flex-direction: column;
   flex-wrap: wrap;

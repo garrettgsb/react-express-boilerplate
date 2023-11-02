@@ -24,7 +24,7 @@ const QuizComponent = () => {
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
   const [totalQuestions, setTotalQuestions] = useState(0);
 
-  const timerDuration = 20; // in seconds
+  const timerDuration = 300; // five minute timer
   const [timer, setTimer] = useState(timerDuration);
 
   useEffect(() => {
@@ -37,6 +37,11 @@ const QuizComponent = () => {
     return () => clearInterval(timerInterval);
   }, [timer]);
 
+useEffect(() => {
+  if (timer === 0 && lives === 0) {
+    setGameOver(true);
+  }
+}, [timer]);
 
   const optionLabel = {
     0: "A",
@@ -44,7 +49,6 @@ const QuizComponent = () => {
     2: "C",
     3: "D",
   };
-
 
   useEffect(() => {
     if (questions.length > 0 && currentQuestionIndex < questions.length) {
@@ -60,13 +64,14 @@ const QuizComponent = () => {
 
   const handleSkipClick = async () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    setCurrentQuestionNumber((prevNumber) => prevNumber + 1);
     if (currentQuestionIndex % 5 === 4) {
       // Move to the next round after every 5 questions
       setCurrentRound((prevRound) => prevRound + 1);
     }
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
-      console.log("Quiz completed! Remaining lives:", lives);
+      console.log("Quiz completed!");
 
       try {
         await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
@@ -124,21 +129,14 @@ const QuizComponent = () => {
   }, []);
 
   const handleAnswerClick = (selectedAnswer) => {
-    console.log("currentRound", currentRound);
     const correctOption = questions[currentQuestionIndex].correct_option;
-    // console log for debugging
-    console.log("correct option:", correctOption);
 
     // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
-    const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0);
-    // console log for debugging
-    console.log("correct index:", correctIndex);
+    const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0)
 
     let lastScore = 0;
 
     if (selectedAnswer === correctIndex) {
-      // Handle correct answer logic
-      console.log("Correct answer!");
 
       if (hintUsed || clickFifty) {
         setScore((prevScore) => prevScore + 10);
@@ -158,9 +156,7 @@ const QuizComponent = () => {
         handleNextClick(lastScore);
       }, 1500);
     } else {
-      console.log("Wrong answer!");
       setLives((prevLives) => prevLives - 1);
-      // setScore((prevScore) => prevScore);
       setShowDudeImage(false);
       setShowDude2Image(true);
       setShowDude3Image(false);
@@ -182,12 +178,9 @@ const QuizComponent = () => {
   const handleNextClick = async (lastScore) => {
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
-      console.log("Quiz completed! Remaining lives:", lives);
+      console.log("Quiz completed!");
 
       try {
-        // setScore((prevScore) => prevScore);
-        console.log("score:", score);
-        console.log("last score:", lastScore);
         await navigate("/congrads", {
           state: { score: score + lastScore, lives, startTime },
         }); // pass the score as state
@@ -204,15 +197,6 @@ const QuizComponent = () => {
         // Move to the next round after every 5 questions
         setCurrentRound((prevRound) => prevRound + 1);
       }
-
-      // if (lives === 0) {
-      //   // All lives are gone, navigate to the home page
-      //   try {
-      //     await navigate("/");
-      //   } catch (error) {
-      //     console.error("Error navigating to /:", error);
-      //   }
-      // }
 
       if (lives === 0) {
         setGameOver(true);
@@ -248,12 +232,11 @@ const QuizComponent = () => {
   };
 
   return (
+   
     <div className="container">
-      <img className="logo" src={Quiz} alt="quizjs" />
+      <Header page="quiz"/>
 
-      {/* {currentQuestionIndex > questions.length - 1 ? <span>No More questions</span> : */}
-
-      <div className="game">
+      {!gameOver && <div className="game">
         <p className="round">Round {currentRound}</p>
         <p className='question-number'>{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
         <p className="questions">{currentQuestion.question}</p>
