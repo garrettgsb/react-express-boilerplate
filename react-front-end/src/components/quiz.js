@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/quiz.css";
-import Quiz from "../asset/THELOGO.png";
 import Dude from "../asset/dude.png";
 import Dude2 from "../asset/thumbs-down.png";
 import Dude3 from "../asset/thinking-dude.png";
+import Header from "./header";
 
 const QuizComponent = () => {
   const navigate = useNavigate();
@@ -21,7 +21,8 @@ const QuizComponent = () => {
   const [fiftyOptions, setFiftyOptions] = useState([]);
   const [clickFifty, setClickFifty] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-
+  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
+  const [totalQuestions, setTotalQuestions] = useState(0);
 
   const timerDuration = 20; // in seconds
   const [timer, setTimer] = useState(timerDuration);
@@ -36,12 +37,6 @@ const QuizComponent = () => {
     return () => clearInterval(timerInterval);
   }, [timer]);
 
-  useEffect(() => {
-    if (timer === 0) {
-      
-      setGameOver(true);
-    }
-  }, [timer]);
 
   const optionLabel = {
     0: "A",
@@ -117,12 +112,8 @@ const QuizComponent = () => {
       })
       .then((data) => {
         setQuestions(data.questions);
-        setOptions([
-          data.questions[currentQuestionIndex].optiona,
-          data.questions[currentQuestionIndex].optionb,
-          data.questions[currentQuestionIndex].optionc,
-          data.questions[currentQuestionIndex].optiond,
-        ]);
+        setTotalQuestions(data.questions.length);
+        setOptions([data.questions[currentQuestionIndex].optiona, data.questions[currentQuestionIndex].optionb, data.questions[currentQuestionIndex].optionc, data.questions[currentQuestionIndex].optiond])
       })
       .catch((error) => console.error("Error fetching questions:", error));
   }, [currentRound]);
@@ -205,6 +196,7 @@ const QuizComponent = () => {
       }
     } else {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setCurrentQuestionNumber((prevNumber) => prevNumber + 1);
       setShowHint(false); // Reset the hint display when moving to the next question
       setHintUsed(false);
 
@@ -261,9 +253,11 @@ const QuizComponent = () => {
 
       {/* {currentQuestionIndex > questions.length - 1 ? <span>No More questions</span> : */}
 
-      {!gameOver && <div className="game"> 
+      <div className="game">
         <p className="round">Round {currentRound}</p>
+        <p className='question-number'>{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
         <p className="questions">{currentQuestion.question}</p>
+<div className="middle">
         <ul className="answers">
           {options.map((option, index) => (
             <li key={index}>
@@ -284,10 +278,11 @@ const QuizComponent = () => {
         {showDudeImage && <img className="dude" src={Dude} alt="Dude" />}
         {showDude2Image && <img className="dude2" src={Dude2} alt="Dude2" />}
         {showDude3Image && <img className="dude3" src={Dude3} alt="Dude3" />}
+        </div>
         <p className="lives">
           Lives: {Array.from({ length: lives }, (_, index) => "❤️").join(" ")}
         </p>
-        <p className="score">Score: {score}</p>
+        <p className="your-score">Score: {score}</p>
         <p className="timer">
           Time Left: {Math.floor(timer / 60)}:
           {(timer % 60).toString().padStart(2, "0")}

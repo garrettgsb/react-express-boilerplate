@@ -1,12 +1,14 @@
 import "../style/App.css";
+import "../style/home.css";
 import React from "react";
-import Quiz from "../asset/THELOGO.png";
+
 import { useNavigate } from "react-router-dom";
 import HighScores from "./HighScores";
 import { useState, useEffect } from "react";
 import Brandon from "../asset/brandon.png";
 import { handleAudio, sounds } from "./SoundHelper";
-
+import 'animate.css';
+import Header from "./header";
 function Home() {
   const [highScores, setHighScores] = useState([]);
   const navigate = useNavigate();
@@ -32,32 +34,42 @@ function Home() {
     handleAudio(sounds.click1)
   }
 
-   return (
-    
+
+  return (
     <div className="div-style">
-    
-       
+      <Header page="home"/>
       <div className="home">
-      <div className="logo-container">
-        <img src={Quiz} alt="quizjs" />
+        <div className="content-container">
+
+          <div className="dude-container">
+            <HighScores highScores={highScores} className="high-scores-container" />
+            <img className="dude" src={Brandon} alt="brandon" />
+          </div>
+          <div className="start">
+            <button
+              className="rectangle-button"
+              onClick={handleInstructionsClick}
+              onMouseEnter={() => {
+                handleAudio(sounds.hover1);
+              }}
+            >
+              INSTRUCTIONS
+            </button>
+            <button
+              className="rectangle-button"
+              onClick={handleStartClick}
+              onMouseEnter={() => {
+                handleAudio(sounds.hover1);
+              }}
+            >
+              START
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="dude-container">
-      <button className="rectangle-button" 
-        onClick={handleStartClick} 
-        onMouseEnter={() => {handleAudio(sounds.hover1)}}>
-        START
-      </button>
-      <button className="rectangle-button" 
-        onClick={handleInstructionsClick}
-        onMouseEnter={() => {handleAudio(sounds.hover1)}}>
-        INSTRUCTIONS
-      </button>
-     
-        <img className="dude" src={Brandon} alt="brandon" />
-      </div>
-      <HighScores highScores={highScores} />
-    </div>
     </div>
   );
+  
+    
 }
 export default Home;

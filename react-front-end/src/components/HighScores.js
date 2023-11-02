@@ -1,6 +1,6 @@
 // highscores.js
 import React, { useState, useEffect } from 'react';
-
+import "../style/home.css";
 function HighScores() {
   const [highScores, setHighScores] = useState([]);
 
@@ -30,8 +30,12 @@ function HighScores() {
       <div className="score-columns">
         {highScores.map((score, index) => (
           <div key={index} className="score-row">
+            <ul className='list'>
+            <li className='score'>
             <span className="player-name">{score.nickname}</span>
             <span className="player-score">{score.score}</span>
+            </li>
+            </ul>
           </div>
         ))}
       </div>

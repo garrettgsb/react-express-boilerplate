@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import "../style/congrads.css";
-import Quiz from "../asset/THELOGO.png";
 import 'whatwg-fetch';
+import Header from "./header"
 
 const Congrats = ({ onLeaderboardUpdate }) => {
   const navigate = useNavigate();
@@ -122,7 +122,7 @@ const nicknameValidation = await validateNickname(name);
       <h1 className='title'>Congratulations!</h1>
       <h2 className='on'>ON</h2>
       <h2 className='completing'>COMPLETING</h2>
-      <img className="logo" src={Quiz} alt="quizjs" />
+      <Header page="congrads"/>
       <h1>Your final score: {score}</h1>
       {completionTime && (
         <h2>Time taken to complete the quiz: {formatTime(completionTime)}</h2>
