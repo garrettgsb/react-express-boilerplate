@@ -3,10 +3,10 @@ import React from 'react';
 import { useState } from "react";
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Home from './components/home';
-import Game from "./components/game";
 import Instruction from './components/instruction';
 import QuizComponent from './components/quiz';
 import Congrads from "./components/congrads";
+import GameOver from "./components/gameover";
 
 function App() {
 
