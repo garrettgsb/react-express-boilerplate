@@ -41,7 +41,7 @@ function header(props) {
   if (props.page === "congrads") {
     return (
       <div className="top-page">
-        <div className="quizjs">
+        <div className="logo">
           <img className="logo" src={Quiz} alt="quizjs" />
         </div>
       </div>

@@ -20,8 +20,6 @@ const QuizComponent = () => {
   const [options, setOptions] = useState([]);
   const [fiftyOptions, setFiftyOptions] = useState([]);
   const [clickFifty, setClickFifty] = useState(false);
-
-
   const [gameOver, setGameOver] = useState(false);
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
   const [totalQuestions, setTotalQuestions] = useState(0);
@@ -39,15 +37,11 @@ const QuizComponent = () => {
     return () => clearInterval(timerInterval);
   }, [timer]);
 
-
-  
 useEffect(() => {
   if (timer === 0 && lives === 0) {
     setGameOver(true);
   }
 }, [timer]);
-
-
 
   const optionLabel = {
     0: "A",
@@ -55,7 +49,6 @@ useEffect(() => {
     2: "C",
     3: "D",
   };
-
 
   useEffect(() => {
     if (questions.length > 0 && currentQuestionIndex < questions.length) {
@@ -78,7 +71,7 @@ useEffect(() => {
     }
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
-      console.log("Quiz completed! Remaining lives:", lives);
+      console.log("Quiz completed!");
 
       try {
         await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
@@ -104,9 +97,6 @@ useEffect(() => {
     setFiftyOptions(newOption);
     setClickFifty(true);
   };
-
-
-
 
   const handleSwitchClick = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -139,21 +129,14 @@ useEffect(() => {
   }, []);
 
   const handleAnswerClick = (selectedAnswer) => {
-    console.log("currentRound", currentRound);
     const correctOption = questions[currentQuestionIndex].correct_option;
-    // console log for debugging
-    console.log("correct option:", correctOption);
 
     // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
-    const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0);
-    // console log for debugging
-    console.log("correct index:", correctIndex);
+    const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0)
 
     let lastScore = 0;
 
     if (selectedAnswer === correctIndex) {
-      // Handle correct answer logic
-      console.log("Correct answer!");
 
       if (hintUsed || clickFifty) {
         setScore((prevScore) => prevScore + 10);
@@ -173,9 +156,7 @@ useEffect(() => {
         handleNextClick(lastScore);
       }, 1500);
     } else {
-      console.log("Wrong answer!");
       setLives((prevLives) => prevLives - 1);
-      // setScore((prevScore) => prevScore);
       setShowDudeImage(false);
       setShowDude2Image(true);
       setShowDude3Image(false);
@@ -197,11 +178,9 @@ useEffect(() => {
   const handleNextClick = async (lastScore) => {
     if (currentQuestionIndex === questions.length - 1) {
       // Quiz completed
-      console.log("Quiz completed! Remaining lives:", lives);
+      console.log("Quiz completed!");
 
       try {
-        console.log("score:", score);
-        console.log("last score:", lastScore);
         await navigate("/congrads", {
           state: { score: score + lastScore, lives, startTime },
         }); // pass the score as state
@@ -218,15 +197,6 @@ useEffect(() => {
         // Move to the next round after every 5 questions
         setCurrentRound((prevRound) => prevRound + 1);
       }
-
-      // if (lives === 0) {
-      //   // All lives are gone, navigate to the home page
-      //   try {
-      //     await navigate("/");
-      //   } catch (error) {
-      //     console.error("Error navigating to /:", error);
-      //   }
-      // }
 
       if (lives === 0) {
         setGameOver(true);
