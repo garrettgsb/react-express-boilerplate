@@ -10,4 +10,8 @@ const sounds = {
   hover1: Select_008
 }
 
-export { handleAudio, sounds };
+function muteButton() {
+
+}
+
+export { handleAudio, sounds, muteButton };

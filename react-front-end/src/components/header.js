@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from 'react'
 import InstructionImage from "../asset/instruction.png";
 import Quiz from "../asset/THELOGO.png";
 import 'animate.css';
+import SoundOn from "../asset/Sound_on.png";
+import SoundOff from "../asset/Sound_off.png";
+
+const [volume, setVolume] = useState(true)
 
 function header(props) {
+
+  function muteButton() {
+    if (volume === true) {
+      return <img src={SoundOn} alt="sound on" className="mute-button" />
+    }
+    if (volume === false) {
+      return <img src={SoundOff} alt="sound off" className="mute-button" />
+    }
+    //{muteButton()}
+  }
+
 
   if (props.page === "home") {
     return (
@@ -17,13 +32,18 @@ function header(props) {
           <h1>Test your wit against a series of fun, unexpected, and absurd questions!</h1>
         </div>
       </div>
+
     </div>
     )
   }
 
   if (props.page === "instructions") {
     return (
-      <img src={InstructionImage} alt="quizjs" className="instruction-image" />
+      <div className="top-page">
+        <div className="quizjs">
+          <img src={InstructionImage} alt="quizjs" className="instruction-image" />
+        </div>
+      </div>
     )
   }
 
