@@ -22,11 +22,49 @@ const QuizComponent = () => {
   const [clickFifty, setClickFifty] = useState(false);
   const [clickSwap, setClickSwap] = useState(false);
   const [numberOfquestionsPerRound, setNumberOfQuestionsPerRound] = useState(0);
-
-
+  const [showDude2Image, setShowDude2Image] = useState(false); // thumbs down
+  const [showDude3Image, setShowDude3Image] = useState(true); // thinking face
+  const [startTime, setStartTime] = useState(null);
   const timerDuration = 300; // 5 minutes in seconds
   const [timer, setTimer] = useState(timerDuration);
 
+
+  const optionLabel = {
+    0: "A",
+    1: "B",
+    2: "C",
+    3: "D",
+  };
+
+  useEffect(() => {
+    // Fetch questions
+    fetch(`http://localhost:8080/api/questions/${currentRound}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setQuestions(data.questions);
+        const opts = [
+          data.questions[currentQuestionIndex].optiona,
+          data.questions[currentQuestionIndex].optionb,
+          data.questions[currentQuestionIndex].optionc,
+          data.questions[currentQuestionIndex].optiond,
+        ]
+        setOptions(opts);
+        setFiftyOptions(opts);
+        setCurrentQuestionIndex(0);
+      })
+      .catch((error) => console.error("Error fetching questions:", error));
+  }, [currentRound]);
+
+  useEffect(() => {
+    // record start time
+    setStartTime(new Date());
+  }, []);
+ 
   useEffect(() => {
     const timerInterval = setInterval(() => {
       if (timer > 0) {
@@ -36,14 +74,6 @@ const QuizComponent = () => {
 
     return () => clearInterval(timerInterval);
   }, [timer]);
-
-
-  const optionLabel = {
-    0: "A",
-    1: "B",
-    2: "C",
-    3: "D",
-  };
 
 
   useEffect(() => {
@@ -59,24 +89,28 @@ const QuizComponent = () => {
     }
   }, [currentQuestionIndex]);
 
-  const handleSkipClick = async () => {
-    if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
-      try {
-        await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
-      } catch (error) {
-        console.error("Error navigating to /congrads:", error);
-      }
-    }
-    else if (numberOfquestionsPerRound % 5 === 4) {
-      setCurrentRound((prevRound) => prevRound + 1);
-      setNumberOfQuestionsPerRound(0);
-      setClickFifty(false);
-      setClickSwap(false);
-    } else {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      setNumberOfQuestionsPerRound((prevIndex) => prevIndex + 1);
-    }
-  };
+  // const handleSkipClick = async () => {
+  //   if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
+  //     try {
+  //       await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
+  //     } catch (error) {
+  //       console.error("Error navigating to /congrads:", error);
+  //     }
+  //   }
+  //   else if (numberOfquestionsPerRound % 5 === 4) {
+  //     setCurrentRound((prevRound) => prevRound + 1);
+  //     setNumberOfQuestionsPerRound(0);
+  //     setClickFifty(false);
+  //     setClickSwap(false);
+  //     setHintUsed(false);
+  //     setShowHint(false);
+  //   } else {
+  //     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  //     setNumberOfQuestionsPerRound((prevIndex) => prevIndex + 1);
+  //     setHintUsed(false);
+  //     setShowHint(false);
+  //   }
+  // };
 
   const handleFiftyClick = () => {
     const question = questions[currentQuestionIndex];
@@ -108,57 +142,16 @@ const QuizComponent = () => {
     }
 
   };
-  const [showDude2Image, setShowDude2Image] = useState(false); // thumbs down
-  const [showDude3Image, setShowDude3Image] = useState(true); // thinking face
-  const [startTime, setStartTime] = useState(null);
-
-  useEffect(() => {
-    // Fetch questions
-    fetch(`http://localhost:8080/api/questions/${currentRound}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setQuestions(data.questions);
-        const opts = [
-          data.questions[currentQuestionIndex].optiona,
-          data.questions[currentQuestionIndex].optionb,
-          data.questions[currentQuestionIndex].optionc,
-          data.questions[currentQuestionIndex].optiond,
-        ]
-        setOptions(opts);
-        setFiftyOptions(opts);
-        setCurrentQuestionIndex(0);
-      })
-      .catch((error) => console.error("Error fetching questions:", error));
-  }, [currentRound]);
-
-  useEffect(() => {
-    // record start time
-    setStartTime(new Date());
-  }, []);
-
+ 
   const handleAnswerClick = (selectedAnswer) => {
-    setNumberOfQuestionsPerRound((prevIndex) => prevIndex + 1);
-    console.log("currentRound", currentRound);
     const correctOption = questions[currentQuestionIndex].correct_option;
-    // console log for debugging
-    console.log("correct option:", correctOption);
 
     // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
     const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0);
-    // console log for debugging
-    console.log("correct index:", correctIndex);
-
     let lastScore = 0;
 
     if (selectedAnswer === correctIndex) {
       // Handle correct answer logic
-      console.log("Correct answer!");
-
       if (hintUsed || clickFifty) {
         setScore((prevScore) => prevScore + 10);
         lastScore = 10;
@@ -177,9 +170,7 @@ const QuizComponent = () => {
         handleNextClick(lastScore);
       }, 1500);
     } else {
-      console.log("Wrong answer!");
       setLives((prevLives) => prevLives - 1);
-      // setScore((prevScore) => prevScore);
       setShowDudeImage(false);
       setShowDude2Image(true);
       setShowDude3Image(false);
@@ -201,33 +192,31 @@ const QuizComponent = () => {
   const handleNextClick = async (lastScore) => {
     if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
       try {
-        await navigate("/congrads", {
-          state: { score: score + lastScore, lives, startTime },
-        }); 
+        await navigate("/congrads", { state: { score: score + lastScore, lives, startTime } }); // pass the score as state
       } catch (error) {
         console.error("Error navigating to /congrads:", error);
       }
-    } else {
-      setNumberOfQuestionsPerRound ((prevIndex) => prevIndex + 1);
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      setShowHint(false); // Reset the hint display when moving to the next question
+    }
+    else if (numberOfquestionsPerRound % 5 === 4) {
+      setCurrentRound((prevRound) => prevRound + 1);
+      setNumberOfQuestionsPerRound(0);
+      setClickFifty(false);
+      setClickSwap(false);
       setHintUsed(false);
+      setShowHint(false);
+    } else {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setNumberOfQuestionsPerRound((prevIndex) => prevIndex + 1);
+      setHintUsed(false);
+      setShowHint(false);
+    }
 
-      if (numberOfquestionsPerRound % 5 === 4) {
-        // Move to the next round after every 5 questions
-        setCurrentRound((prevRound) => prevRound + 1);
-        setNumberOfQuestionsPerRound(0);
-        setClickFifty(false);
-        setClickSwap(false);
-      }
-
-      if (lives === 0) {
-        // All lives are gone, navigate to the home page
-        try {
-          await navigate("/");
-        } catch (error) {
-          console.error("Error navigating to /:", error);
-        }
+    if (lives === 0) {
+      // All lives are gone, navigate to the home page
+      try {
+        await navigate("/");
+      } catch (error) {
+        console.error("Error navigating to /:", error);
       }
     }
   };
@@ -241,9 +230,6 @@ const QuizComponent = () => {
   return (
     <div className="container">
       <img className="logo" src={Quiz} alt="quizjs" />
-
-      {/* {currentQuestionIndex > questions.length - 1 ? <span>No More questions</span> : */}
-
       <div className="game">
         <p className="round">Round {currentRound}</p>
         <p className="questions">{currentQuestion.question}</p>
@@ -279,7 +265,7 @@ const QuizComponent = () => {
         <button className="h-button" onClick={handleHintClick}>
           Hint
         </button>
-        <button className="s-button" onClick={handleSkipClick}>
+        <button className="s-button" onClick={handleNextClick}>
           Skip
         </button>
         <button
