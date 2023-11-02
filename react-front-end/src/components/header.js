@@ -1,4 +1,5 @@
 import React from "react";
+import "../style/App.css";
 import InstructionImage from "../asset/instruction.png";
 import Quiz from "../asset/THELOGO.png";
 import 'animate.css';
