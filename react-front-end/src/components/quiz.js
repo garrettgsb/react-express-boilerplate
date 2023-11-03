@@ -25,6 +25,7 @@ const QuizComponent = () => {
   const [totalQuestions, setTotalQuestions] = useState(0);
 
   const timerDuration = 300; // five minute timer
+
   const [clickSwap, setClickSwap] = useState(false);
   const [numberOfquestionsPerRound, setNumberOfQuestionsPerRound] = useState(0);
   const [showDude2Image, setShowDude2Image] = useState(false); // thumbs down
@@ -73,17 +74,24 @@ const QuizComponent = () => {
     const timerInterval = setInterval(() => {
       if (timer > 0) {
         setTimer(timer - 1);
+      } else {
+    setGameOver(true);
       }
     }, 1000);
 
     return () => clearInterval(timerInterval);
   }, [timer]);
 
-  useEffect(() => {
-    if (timer === 0 && lives === 1) {
-      setGameOver(true);
-    }
-  }, [timer]);
+console.log('the timer is:', timer);
+if (timer === 0) {
+  console.log('time finished');
+  // setGameOver(true);
+}
+  // useEffect(() => {
+  //   if (timer === 0 && lives === 1) {
+  //     setGameOver(true);
+  //   }
+  // }, [timer]);
 
   useEffect(() => {
     if (questions.length > 0 && currentQuestionIndex < questions.length) {
@@ -199,13 +207,13 @@ const QuizComponent = () => {
       setShowHint(false);
     }
 
-    if (lives === 1) {
+    if (lives === 1 && timerDuration === 0) {
       // All lives are gone, navigate to the home page
       setGameOver(true);
       try {
         await navigate("/quiz");
       } catch (error) {
-        console.error("Error navigating to /:", error);
+        console.error("Error navigating to /quiz:", error);
       }
     }
   };
