@@ -1,25 +1,23 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import "../style/App.css";
 import InstructionImage from "../asset/instruction.png";
 import Quiz from "../asset/THELOGO.png";
 import 'animate.css';
 import SoundOn from "../asset/Sound_on.png";
 import SoundOff from "../asset/Sound_off.png";
-
-const [volume, setVolume] = useState(true)
+import { AppContext } from './AppContext';
 
 function header(props) {
 
-  function muteButton() {
-    if (volume === true) {
-      return <img src={SoundOn} alt="sound on" className="mute-button" />
-    }
-    if (volume === false) {
-      return <img src={SoundOff} alt="sound off" className="mute-button" />
-    }
-    //{muteButton()}
-  }
+  const { state, toggleMute } = useContext(AppContext)
 
+  function VolumeButton() {
+    return (state.isMute) ? 
+      <img className="mute-button" src={SoundOn} alt="sound on" 
+    onClick={toggleMute} /> 
+    : <img className="mute-button" src={SoundOff} alt="sound off" 
+    onClick={toggleMute} />
+  }
 
   if (props.page === "home") {
     return (
@@ -33,7 +31,7 @@ function header(props) {
           <h1>Test your wit against a series of fun, unexpected, and absurd questions!</h1>
         </div>
       </div>
-
+      <VolumeButton />
     </div>
     )
   }

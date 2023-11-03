@@ -4,14 +4,16 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import HighScores from "./HighScores";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Brandon from "../asset/brandon.png";
 import { handleAudio, sounds } from "./SoundHelper";
+import { AppContext } from "./AppContext";
 import 'animate.css';
 import Header from "./header";
 function Home() {
   const [highScores, setHighScores] = useState([]);
   const navigate = useNavigate();
+  const { state } = useContext(AppContext)
 
   useEffect(() => {
     // Fetch high scores from the server
@@ -27,13 +29,13 @@ function Home() {
 
   function handleStartClick() { 
     navigate("/quiz");
-    handleAudio(sounds.click1)
+    handleAudio(state.isMute, sounds.click1)
   }
   function handleInstructionsClick() {
-    navigate("instructions")
-    handleAudio(sounds.click1)
+    console.log(state.isMute)
+    navigate("instructions");
+    handleAudio(state.isMute, sounds.click1)
   }
-
 
   return (
     <div className="div-style">
@@ -50,7 +52,7 @@ function Home() {
               className="rectangle-button"
               onClick={handleInstructionsClick}
               onMouseEnter={() => {
-                handleAudio(sounds.hover1);
+
               }}
             >
               INSTRUCTIONS
@@ -59,7 +61,7 @@ function Home() {
               className="rectangle-button"
               onClick={handleStartClick}
               onMouseEnter={() => {
-                handleAudio(sounds.hover1);
+
               }}
             >
               START
