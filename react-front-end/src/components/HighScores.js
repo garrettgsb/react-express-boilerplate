@@ -4,6 +4,34 @@ import "../style/home.css";
 function HighScores() {
   const [highScores, setHighScores] = useState([]);
 
+  const updateNickname = async () => {
+    const idToUpdate = 16; // Replace with the actual ID you want to update
+    const newNickname = 'Smartie'; // Replace with the new nickname
+  
+    try {
+      const response = await fetch(`http://localhost:8080/api/high-scores/${idToUpdate}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nickname: newNickname }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log('Nickname updated successfully');
+      } else {
+        console.error('Error updating nickname:', data.error);
+      }
+    } catch (error) {
+      console.error('Error updating nickname:', error);
+    }
+  };
+  
+  updateNickname();
+  
+
   useEffect(() => {
     // Fetch high scores from the server
     fetch("http://localhost:8080/api/high-scores")

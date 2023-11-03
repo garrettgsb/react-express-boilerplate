@@ -14,6 +14,7 @@ const Congrats = ({ onLeaderboardUpdate }) => {
       const startTime = location.state.startTime;
       const endTime = new Date();
       const timeDifference = endTime - startTime;
+      console.log('time difference:', timeDifference);
       setCompletionTime(timeDifference);
     }
   }, [location.state]);
@@ -25,9 +26,6 @@ const Congrats = ({ onLeaderboardUpdate }) => {
 
   // Access the score from the location state
   const score = location.state && location.state.score;
-
-    // Access the time from the location state
-    const time = location.state && location.state.time;
 
   // Function to validate the nickname
   const validateNickname = async (nickname) => {
@@ -90,7 +88,7 @@ const Congrats = ({ onLeaderboardUpdate }) => {
       return;
     }
 
-    console.log("Submitted:", { name, score });
+    console.log("Submitted:", { name, score, completionTime });
 
     // Send data to the server
     try {
@@ -99,7 +97,7 @@ const Congrats = ({ onLeaderboardUpdate }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, score, time }), // add completionTime here
+        body: JSON.stringify({ name, score, completionTime }), // add completionTime here
       });
 
       // Handling the server response

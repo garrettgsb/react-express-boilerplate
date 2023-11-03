@@ -26,7 +26,6 @@
   border-radius: 5px;
   width: 800px;
   padding: 40px;
-  font-family: "YourFontFamily", sans-serif;
   font-size: 18px;
   text-align: center;
 }
@@ -84,6 +83,8 @@ justify-content: center;
 
 .player-name {
   text-align: left;
+  width: 75%;
+  margin-left: 0.5em;
 }
 
 .player-score {
@@ -97,12 +98,13 @@ justify-content: center;
   flex-direction: column;
   flex-wrap: wrap;
   max-height: 350px;
+  margin-left: -2em;
 }
 
 .score-row {
 width: 180px;
 display: flex;
-
+margin-right: 2.5em;
 }
 
 .list { 
@@ -110,16 +112,14 @@ display: flex;
   display: grid;
   gap: 1em;
   grid-template-columns: 1fr 1fr 1fr;
-  display: flex;
-  justify-content: space-between;
 }
 
 .score { 
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-width: 100%;
-
+width: 190px;
+/* margin-right: 5em; */
 }
 
 .des-container {
