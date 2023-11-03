@@ -82,17 +82,6 @@ const QuizComponent = () => {
     return () => clearInterval(timerInterval);
   }, [timer]);
 
-console.log('the timer is:', timer);
-if (timer === 0) {
-  console.log('time finished');
-  // setGameOver(true);
-}
-  // useEffect(() => {
-  //   if (timer === 0 && lives === 1) {
-  //     setGameOver(true);
-  //   }
-  // }, [timer]);
-
   useEffect(() => {
     if (questions.length > 0 && currentQuestionIndex < questions.length) {
       const opts = [
@@ -207,15 +196,19 @@ if (timer === 0) {
       setShowHint(false);
     }
 
-    if (lives === 1 && timerDuration === 0) {
-      // All lives are gone, navigate to the home page
-      setGameOver(true);
-      try {
-        await navigate("/quiz");
-      } catch (error) {
-        console.error("Error navigating to /quiz:", error);
-      }
-    }
+if (lives === 1) {
+  setGameOver(true);
+  navigate('/quiz');
+}
+    // if (lives === 1 && timerDuration === 0) {
+    //   // All lives are gone, navigate to the home page
+    //   setGameOver(true);
+    //   try {
+    //     await navigate("/quiz");
+    //   } catch (error) {
+    //     console.error("Error navigating to /quiz:", error);
+    //   }
+    // }
   };
 
   if (questions.length === 0) {
