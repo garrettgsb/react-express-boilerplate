@@ -1,14 +1,17 @@
 // quiz.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/quiz.css";
 import Dude from "../asset/dude.png";
 import Dude2 from "../asset/thumbs-down.png";
 import Dude3 from "../asset/thinking-dude.png";
 import Header from "./header";
+import { AppContext } from './AppContext';
+import { handleAudio, sounds } from "./SoundHelper";
 
 const QuizComponent = () => {
   const navigate = useNavigate();
+  const { state } = useContext(AppContext)
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentRound, setCurrentRound] = useState(1);
@@ -111,6 +114,7 @@ const QuizComponent = () => {
     newOption.push(options[random]);
     setFiftyOptions(newOption);
     setClickFifty(true);
+    handleAudio(state.isMute, sounds.fifty)
   };
 
   const handleSwapClick = () => {
@@ -124,6 +128,7 @@ const QuizComponent = () => {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setClickSwap(true);
     }
+    handleAudio(state.isMute, sounds.swap)
   };
 
   const handleAnswerClick = (selectedAnswer) => {
@@ -153,6 +158,7 @@ const QuizComponent = () => {
         setShowDude3Image(true);
       }, 1500);
       handleNextClick();
+      handleAudio(state.isMute, sounds.correct)
     } else {
       setLives((prevLives) => prevLives - 1);
       setShowDudeImage(false);
@@ -164,14 +170,20 @@ const QuizComponent = () => {
         setShowDude3Image(true);
       }, 1500);
       handleNextClick();
+      handleAudio(state.isMute, sounds.incorrect)
     }
   };
 
   const handleHintClick = () => {
     setHintUsed(true); // Set hintUsed to true when the hint is clicked
     setShowHint(true); // Show the hint
+    handleAudio(state.isMute, sounds.hint)
   };
 
+  const handleSkipClick = () => {
+    handleNextClick();
+    handleAudio(state.isMute, sounds.skip)
+  }
 
   // useEffect to navigate when finishQuiz is true
   useEffect(() => {
@@ -257,6 +269,7 @@ if (lives === 1) {
                     <button
                       className="buttons"
                       onClick={() => handleAnswerClick(index)}
+                      onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
                     >
                       {optionLabel[index]}.
                       {fiftyOptions.length === 2
@@ -287,16 +300,21 @@ if (lives === 1) {
             </p>{" "}
             {showHint && <p className="hint">Hint: {currentQuestion.hint}</p>}
             <div className="powerUpButtons">
-              <button className="h-button" onClick={handleHintClick}>
+              <button className="h-button" onClick={handleHintClick}
+                onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
+              >
                 Hint
               </button>
-              <button className="s-button" onClick={handleNextClick}>
+              <button className="s-button" onClick={handleSkipClick}
+                onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
+              >
                 Skip
               </button>
               <button
                 disabled={options.length < 4 || clickFifty}
                 className="fifty-fifty-button"
                 onClick={handleFiftyClick}
+                onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
               >
                 50/50
               </button>
@@ -304,6 +322,7 @@ if (lives === 1) {
                 disabled={clickSwap}
                 className="switch-button"
                 onClick={handleSwapClick}
+                onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
               >
                 Swap
               </button>

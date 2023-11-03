@@ -6,12 +6,12 @@
   height: 100vh;
 }
 
-.center-top {
+/*.center-top {
   display: flex;
   justify-content: center;
   align-items: center;
   height : 20%;
-}
+}*/
 
 .instruction-image {
   width: 1000px;
@@ -31,12 +31,13 @@
   bottom: 90px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+
 .how-to-play {
-display: flex;
-justify-content: center;
-flex-direction: column;
-position: relative;
-bottom: 90px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  bottom: 90px;
 }
 
 .div-style {
@@ -49,12 +50,12 @@ bottom: 90px;
 }
 
 .description {
-font-size: large;
+  font-size: large;
 }
 
 .after {
   font-size: large;
-  }
+}
 
 .bold {
   font-weight: bold;
