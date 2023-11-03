@@ -1,0 +1,127 @@
+img {
+
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  background: linear-gradient(to right, #9c0fbb, #770890);
+}
+
+.game {
+  width: 80%;
+  height: 80%;
+  background-color: white;
+
+  padding: 10px 25px;
+  box-sizing: border-box;
+}
+
+
+.logo {
+  width: 400px;
+
+}
+
+.round {
+  font-size: 30px;
+}
+
+.question-number {
+  font-size: 30px;
+}
+
+.questions {
+  font-size: 40px;
+}
+
+
+.middle {
+  display: flex;
+  align-items: center;
+}
+
+.answers {
+  font-size: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.buttons {
+  font-size: 30px;
+  border: 3px black solid; 
+  margin-bottom: 0.5em;
+  background-color: yellow;
+}
+
+.buttons:hover {
+  border: 2px yellow solid;
+  background-color: yellow;
+  cursor: pointer; 
+}
+
+
+.lives {
+  font-size: 30px;
+}
+
+.your-score {
+  font-size: 30px;
+}
+
+.powerUpButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+
+.hint {
+  font-size: 30px;
+  font-style: italic;
+}
+
+.h-button {
+  font-size: 30px;
+  font-style: italic;
+}
+
+.s-button {
+  font-size: 30px;
+  font-style: italic;
+}
+
+.fifty-fifty-button {
+  font-size: 30px;
+  font-style: italic;
+}
+
+.switch-button {
+  font-size: 30px;
+  font-style: italic;
+}
+
+.dude {
+  width: 200px;
+  
+}
+
+.dude2 {
+  width: 200px;
+  
+}
+
+.dude3 {
+  width: 170px;
+  
+}
+
+.timer {
+  color: red;
+  font-size: 40px;
+}
