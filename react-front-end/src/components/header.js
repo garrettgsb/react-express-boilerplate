@@ -13,10 +13,14 @@ function header(props) {
 
   function VolumeButton() {
     return (state.isMute) ? 
-      <img className="mute-button" src={SoundOn} alt="sound on" 
-    onClick={toggleMute} /> 
-    : <img className="mute-button" src={SoundOff} alt="sound off" 
-    onClick={toggleMute} />
+      <div className="mute-button-container">
+        <img className="mute-button" src={SoundOn} alt="sound on" 
+        onClick={toggleMute} /> 
+      </div>
+    : <div className="mute-button-container">
+        <img className="mute-button" src={SoundOff} alt="sound off" 
+        onClick={toggleMute} />
+      </div>
   }
 
   if (props.page === "home") {
