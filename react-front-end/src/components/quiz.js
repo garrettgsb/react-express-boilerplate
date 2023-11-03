@@ -32,6 +32,7 @@ const QuizComponent = () => {
   const [showDude3Image, setShowDude3Image] = useState(true); // thinking face
   const [startTime, setStartTime] = useState(null);
   const [timer, setTimer] = useState(timerDuration);
+  const [finishQuiz, setFinishQuiz] = useState(false);
 
   const optionLabel = {
     0: "A",
@@ -131,16 +132,16 @@ const QuizComponent = () => {
     // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
     const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0);
 
-    let lastScore = 0;
+    
 
     if (selectedAnswer === correctIndex) {
       // Handle correct answer logic
       if (hintUsed || clickFifty) {
         setScore((prevScore) => prevScore + 10);
-        lastScore = 10;
+
       } else {
         setScore((prevScore) => prevScore + 20);
-        lastScore = 20;
+  
       }
 
       setShowDudeImage(true);
@@ -151,18 +152,18 @@ const QuizComponent = () => {
         setShowDudeImage(false);
         setShowDude3Image(true);
       }, 1500);
-      handleNextClick(lastScore);
+      handleNextClick();
     } else {
       setLives((prevLives) => prevLives - 1);
       setShowDudeImage(false);
       setShowDude2Image(true);
       setShowDude3Image(false);
-      lastScore = -10;
+   
       setTimeout(() => {
         setShowDude2Image(false);
         setShowDude3Image(true);
       }, 1500);
-      handleNextClick(lastScore);
+      handleNextClick();
     }
   };
 
@@ -171,15 +172,24 @@ const QuizComponent = () => {
     setShowHint(true); // Show the hint
   };
 
-  const handleNextClick = async () => {
-    if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
+
+  // useEffect to navigate when finishQuiz is true
+  useEffect(() => {
+    if (finishQuiz) {
       try {
-        await navigate("/congrads", {
-          state: { score: score, lives, startTime },
-        }); // pass the score as state
+        navigate("/congrads", { state: { score, lives, startTime } });
       } catch (error) {
         console.error("Error navigating to /congrads:", error);
       }
+    }
+  }, [finishQuiz, navigate, score]);
+
+
+
+  const handleNextClick = async () => {
+    if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
+      setFinishQuiz(true);
+
     } else if (numberOfquestionsPerRound % 5 === 4) {
       setCurrentRound((prevRound) => prevRound + 1);
       setCurrentQuestionNumber((prevNumber) => prevNumber + 1);
