@@ -1,7 +1,3 @@
-img {
-
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -60,7 +56,7 @@ img {
 }
 
 .buttons:hover {
-  border: 2px yellow solid;
+  border: 3px yellow solid;
   background-color: yellow;
   cursor: pointer; 
 }
