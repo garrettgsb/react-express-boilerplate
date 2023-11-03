@@ -29,14 +29,14 @@ function header(props) {
         <div className="quizjs">
           <img className="animate__animated animate__backInDown" src={Quiz} alt="quizjs" />
         </div>
-      <div className="des-container">
-        <div className="des">
-          <h1>QuizJS is a series of questions that defy conventional thinking and logic.</h1>
-          <h1>Test your wit against a series of fun, unexpected, and absurd questions!</h1>
+        <div className="des-container">
+          <div className="des">
+            <h1>QuizJS is a series of questions that defy conventional thinking and logic.</h1>
+            <h1>Test your wit against a series of fun, unexpected, and absurd questions!</h1>
+          </div>
         </div>
+        <VolumeButton />
       </div>
-      <VolumeButton />
-    </div>
     )
   }
 
@@ -56,6 +56,7 @@ function header(props) {
         <div className="quizjs">
           <img className="logo" src={Quiz} alt="quizjs" />
         </div>
+        <VolumeButton />
       </div>
     )
   }
