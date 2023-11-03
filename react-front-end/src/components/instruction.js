@@ -1,22 +1,28 @@
 import "../style/instruction.css";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./header"
+import { handleAudio, sounds } from "./SoundHelper";
+import { AppContext } from "./AppContext";
 
 function Instruction() {
 
   const navigate = useNavigate();
+  const { state } = useContext(AppContext)
 
   function handleStartClick() { 
     navigate("/quiz");
+    handleAudio(state.isMute, sounds.click)
   }
 
   function handleBackClick() {
     navigate("/")
+    handleAudio(state.isMute, sounds.click)
   }
 
   function handleStartClick() { 
     navigate("/quiz");
+    handleAudio(state.isMute, sounds.click)
   }
 
   return (
@@ -54,8 +60,14 @@ function Instruction() {
 </div>
       </div>
       <div className="button-container">
-        <button className="rectangle-button" id="start-button" onClick={handleBackClick}>Go Back</button>
-        <button className="rectangle-button" id="menu-button" onClick={handleStartClick}>Play</button>
+        <button className="rectangle-button" id="start-button"
+          onClick={handleBackClick}
+          onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
+        >Go Back</button>
+        <button className="rectangle-button" id="menu-button"
+          onClick={handleStartClick}
+          onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
+        >Play</button>
       </div>
     </div>
   );

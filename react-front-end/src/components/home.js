@@ -29,12 +29,12 @@ function Home() {
 
   function handleStartClick() { 
     navigate("/quiz");
-    handleAudio(state.isMute, sounds.click1)
+    handleAudio(state.isMute, sounds.click)
   }
   function handleInstructionsClick() {
     console.log(state.isMute)
     navigate("instructions");
-    handleAudio(state.isMute, sounds.click1)
+    handleAudio(state.isMute, sounds.click)
   }
 
   return (
@@ -52,7 +52,7 @@ function Home() {
               className="rectangle-button"
               onClick={handleInstructionsClick}
               onMouseEnter={() => {
-
+                handleAudio(state.isMute, sounds.hover)
               }}
             >
               INSTRUCTIONS
@@ -61,7 +61,7 @@ function Home() {
               className="rectangle-button"
               onClick={handleStartClick}
               onMouseEnter={() => {
-
+                handleAudio(state.isMute, sounds.hover)
               }}
             >
               START

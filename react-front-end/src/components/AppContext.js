@@ -14,7 +14,7 @@ function reducer(state, action) {
 }
 
 const initialState = {
-  isMute: false
+  isMute: true
 }
 
 export const AppContext = createContext();
