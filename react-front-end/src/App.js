@@ -7,7 +7,7 @@ import Home from './components/home';
 import Instruction from './components/instruction';
 import QuizComponent from './components/quiz';
 import Congrads from "./components/congrads";
-import GameOver from "./components/gameover";
+
 
 function App() {
 

@@ -51,31 +51,56 @@ app.get('/api/questions/:round', (req, res) => {
 
 // highscores
 app.get('/api/high-scores', (req, res) => {
-    database
-      .select('*')
-      .from('game')
-      .then(rows => {
-        console.log(rows);
-        res.json({ games: rows });
-      })
-      .catch(error => {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-      });
-  })
-  app.post('/api/high-scores', async (req, res) => {
-    const { name, score } = req.body;
-    console.log('req body:', req.body);
-    try {
-      // Insert the new score into the 'game' table
-      const [newScore] = await database('game').insert({ nickname: name, score }).returning('*');
-      console.log('New score added with ID:', newScore.id);
+  database
+
+    .select('id', 'nickname', 'score', 'completiontime')
+    .from('game')
+    .orderBy([
+      { column: 'score', order: 'desc' },
+      { column: 'completiontime', order: 'asc' }
+    ])
+    .then(rows => {
+      console.log(rows);
+      res.json({ games: rows });
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    });
+});
+
+app.post('/api/high-scores', async (req, res) => {
+  const { name, score, completionTime } = req.body;
+  console.log('req body:', req.body);
+  try {
+    // Insert the new score into the 'game' table
+    const [newScore] = await database('game').insert({ nickname: name, score, completiontime: completionTime }).returning('*');
+    console.log('New score added with ID:', newScore.id);
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error adding new score:', error);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+  }
+});
+
+// Endpoint to update a nickname
+app.put('/api/high-scores/:id', async (req, res) => {
+  const { id } = req.params;
+  const { nickname } = req.body;
+
+  try {
+    const updatedRows = await database('game').where({ id }).update({ nickname });
+
+    if (updatedRows > 0) {
       res.status(200).json({ success: true });
-    } catch (error) {
-      console.error('Error adding new score:', error);
-      res.status(500).json({ error: 'Internal Server Error', details: error.message });
+    } else {
+      res.status(404).json({ error: 'Nickname not found' });
     }
-  });
+  } catch (error) {
+    console.error('Error updating nickname:', error);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+  }
+});
 
   // Validations for nickname
   app.get('/validate-nickname', (req, res) => {
