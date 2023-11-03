@@ -42,7 +42,6 @@ function Home() {
       <Header page="home"/>
       <div className="home">
         <div className="content-container">
-
           <div className="dude-container">
             <HighScores highScores={highScores} className="high-scores-container" />
             <img className="dude" src={Brandon} alt="brandon" />

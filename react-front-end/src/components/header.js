@@ -6,6 +6,7 @@ import 'animate.css';
 import SoundOn from "../asset/Sound_on.png";
 import SoundOff from "../asset/Sound_off.png";
 import { AppContext } from './AppContext';
+import "../style/header.css";
 
 function header(props) {
 
@@ -25,6 +26,7 @@ function header(props) {
 
   if (props.page === "home") {
     return (
+    <div className="top-page-container">
       <div className="top-page">
         <div className="quizjs">
           <img className="animate__animated animate__backInDown" src={Quiz} alt="quizjs" />
@@ -37,14 +39,16 @@ function header(props) {
         </div>
         <VolumeButton />
       </div>
+    </div>
     )
   }
 
   if (props.page === "instructions") {
     return (
-      <div className="top-page">
-        <div className="quizjs">
+      <div className="top-page-container">
+        <div className="top-page">
           <img src={InstructionImage} alt="quizjs" className="instruction-image" />
+          <VolumeButton /> 
         </div>
       </div>
     )
@@ -52,11 +56,13 @@ function header(props) {
 
   if (props.page === "quiz") {
     return (
-      <div className="top-page">
-        <div className="quizjs">
-          <img className="logo" src={Quiz} alt="quizjs" />
+      <div className="top-page-container">
+        <div className="top-page">
+          <div className="quizjs">
+            <img className="logo" src={Quiz} alt="quizjs" />
+          </div>
+          <VolumeButton />
         </div>
-        <VolumeButton />
       </div>
     )
   }

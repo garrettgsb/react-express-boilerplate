@@ -41,18 +41,14 @@
   align-items: center;
   flex-direction: column;
 }
-.quizjs {
-  display: flex;
-  }
 
 .quizjs img {
-  display: flex;
   max-height: 200px;
-  }
+}
 
 .dude-container {
   display: flex;
- align-items: center;
+  align-items: center;
  /* padding-left: 500px; */
 }
 
@@ -62,12 +58,11 @@
 }
 
 .dude {
-padding-left: 20px;
+  padding-left: 20px;
 }
 
-.top-page {
-  display: flex;
-justify-content: center;
+.des-container {
+  min-width: 500px;
 }
 
 .des {
@@ -102,9 +97,9 @@ justify-content: center;
 }
 
 .score-row {
-width: 180px;
-display: flex;
-margin-right: 2.5em;
+  width: 180px;
+  display: flex;
+  margin-right: 2.5em;
 }
 
 .list { 
@@ -118,7 +113,7 @@ margin-right: 2.5em;
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-width: 190px;
+  width: 190px;
 /* margin-right: 5em; */
 }
 
