@@ -53,7 +53,7 @@ app.get('/api/questions/:round', (req, res) => {
 app.get('/api/high-scores', (req, res) => {
   database
 
-    .select('nickname', 'score', 'completiontime')
+    .select('id', 'nickname', 'score', 'completiontime')
     .from('game')
     .orderBy([
       { column: 'score', order: 'desc' },
@@ -83,6 +83,24 @@ app.post('/api/high-scores', async (req, res) => {
   }
 });
 
+// Endpoint to update a nickname
+app.put('/api/high-scores/:id', async (req, res) => {
+  const { id } = req.params;
+  const { nickname } = req.body;
+
+  try {
+    const updatedRows = await database('game').where({ id }).update({ nickname });
+
+    if (updatedRows > 0) {
+      res.status(200).json({ success: true });
+    } else {
+      res.status(404).json({ error: 'Nickname not found' });
+    }
+  } catch (error) {
+    console.error('Error updating nickname:', error);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+  }
+});
 
   // Validations for nickname
   app.get('/validate-nickname', (req, res) => {

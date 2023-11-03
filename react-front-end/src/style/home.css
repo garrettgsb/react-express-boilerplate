@@ -98,12 +98,13 @@ justify-content: center;
   flex-direction: column;
   flex-wrap: wrap;
   max-height: 350px;
+  margin-left: -2em;
 }
 
 .score-row {
 width: 180px;
 display: flex;
-margin-right: 1em;
+margin-right: 2.5em;
 }
 
 .list { 
