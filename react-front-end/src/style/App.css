@@ -1,13 +1,5 @@
 div-style {
   background: linear-gradient(to right, #9c0fbb, #770890);
-display: flex;
-justify-content: center;
-}
-
-.top-page {
-  padding-right: 160px;
-}
-
-.logo {
-  padding-left: 60px;
+  display: flex;
+  justify-content: center;
 }
