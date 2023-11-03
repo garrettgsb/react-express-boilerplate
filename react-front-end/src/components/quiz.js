@@ -200,15 +200,7 @@ if (lives === 1) {
   setGameOver(true);
   navigate('/quiz');
 }
-    // if (lives === 1 && timerDuration === 0) {
-    //   // All lives are gone, navigate to the home page
-    //   setGameOver(true);
-    //   try {
-    //     await navigate("/quiz");
-    //   } catch (error) {
-    //     console.error("Error navigating to /quiz:", error);
-    //   }
-    // }
+
   };
 
   if (questions.length === 0) {
