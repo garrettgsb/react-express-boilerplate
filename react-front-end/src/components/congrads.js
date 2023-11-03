@@ -14,6 +14,7 @@ const Congrats = ({ onLeaderboardUpdate }) => {
       const startTime = location.state.startTime;
       const endTime = new Date();
       const timeDifference = endTime - startTime;
+      console.log('time difference:', timeDifference);
       setCompletionTime(timeDifference);
     }
   }, [location.state]);
@@ -25,9 +26,6 @@ const Congrats = ({ onLeaderboardUpdate }) => {
 
   // Access the score from the location state
   const score = location.state && location.state.score;
-
-    // Access the time from the location state
-    // const time = location.state && location.state.time;
 
   // Function to validate the nickname
   const validateNickname = async (nickname) => {

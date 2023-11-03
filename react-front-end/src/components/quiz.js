@@ -158,6 +158,7 @@ const QuizComponent = () => {
 
     // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
     const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0);
+
     let lastScore = 0;
 
     if (selectedAnswer === correctIndex) {
@@ -177,20 +178,22 @@ const QuizComponent = () => {
       setTimeout(() => {
         setShowDudeImage(false);
         setShowDude3Image(true);
-        handleNextClick(lastScore);
+ 
       }, 1500);
+      handleNextClick(lastScore);
     } else {
       setLives((prevLives) => prevLives - 1);
       setShowDudeImage(false);
       setShowDude2Image(true);
       setShowDude3Image(false);
-      setScore((prevScore) => prevScore - 10);
+      // setScore((prevScore) => prevScore - 10);
       lastScore = -10;
       setTimeout(() => {
         setShowDude2Image(false);
         setShowDude3Image(true);
-        handleNextClick(lastScore);
+ 
       }, 1500);
+      handleNextClick(lastScore);
     }
   };
 
@@ -199,16 +202,17 @@ const QuizComponent = () => {
     setShowHint(true); // Show the hint
   };
 
-  const handleNextClick = async (lastScore) => {
+  const handleNextClick = async () => {
     if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
       try {
-        await navigate("/congrads", { state: { score: score + lastScore, lives, startTime } }); // pass the score as state
+        await navigate("/congrads", { state: { score: score, lives, startTime } }); // pass the score as state
       } catch (error) {
         console.error("Error navigating to /congrads:", error);
       }
     }
     else if (numberOfquestionsPerRound % 5 === 4) {
       setCurrentRound((prevRound) => prevRound + 1);
+      setCurrentQuestionNumber((prevNumber) => prevNumber + 1);
       setNumberOfQuestionsPerRound(0);
       setClickFifty(false);
       setClickSwap(false);
