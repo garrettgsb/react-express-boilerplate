@@ -210,7 +210,8 @@ if (lives === 1) {
   setGameOver(true);
   navigate('/quiz');
 }
-
+console.log('score:', score);
+console.log('lives:', lives);
   };
 
   if (questions.length === 0) {
@@ -247,7 +248,9 @@ if (lives === 1) {
       {!gameOver && (
         <div className="game">
           <div className="game">
-            <p className="round">Round {currentRound}</p>
+            <span className="round">
+            <p className="animate__animated animate__backInDown">Round {currentRound}</p>
+            </span>
             <p className="question-number">{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
             <p className="questions">{currentQuestion.question}</p>
             <div className="middle">

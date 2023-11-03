@@ -121,11 +121,14 @@ const Congrats = ({ onLeaderboardUpdate }) => {
 
   return (
     <div className="container">
+      <div className="top">
       <h1 className="title">Congratulations!</h1>
       <h2 className="on">ON</h2>
       <h2 className="completing">COMPLETING</h2>
       <Header page="congrads" />
-      <h1>Your final score: {score}</h1>
+      </div>
+      <div className="bottom">
+      <h1 className="final-score">Your final score: {score}</h1>
       {completionTime && (
         <h2>Time taken to complete the quiz: {formatTime(completionTime)}</h2>
       )}
@@ -133,8 +136,8 @@ const Congrats = ({ onLeaderboardUpdate }) => {
         {submissionMessage && <h2>{submissionMessage}</h2>}
 
         <label className="name">
-          Enter your nickname here:
-          <input
+          Enter your nickname:
+          <input className="text"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -146,6 +149,7 @@ const Congrats = ({ onLeaderboardUpdate }) => {
           Submit
         </button>
       </form>
+      </div>
     </div>
   );
 };

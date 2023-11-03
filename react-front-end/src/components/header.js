@@ -3,6 +3,7 @@ import "../style/App.css";
 import InstructionImage from "../asset/instruction.png";
 import Quiz from "../asset/THELOGO.png";
 import 'animate.css';
+import Brandon from "../asset/brandon.png";
 
 function header(props) {
 
@@ -42,7 +43,10 @@ function header(props) {
     return (
       <div className="top-page">
         <div className="logo">
-          <img className="logo" src={Quiz} alt="quizjs" />
+
+        <img className="dude" src={Brandon} alt="dude" />
+          <img className="quiz" src={Quiz} alt="quizjs" />
+        
         </div>
       </div>
     )
