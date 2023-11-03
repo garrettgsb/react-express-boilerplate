@@ -1,20 +1,5 @@
 div-style {
   background: linear-gradient(to right, #9c0fbb, #770890);
-display: flex;
-justify-content: center;
-}
-
-.top-page {
-  padding-right: 160px;
-}
-
-.logo {
   display: flex;
-margin-right: 300px;
-width: 350px;
-height: 350px;
-}
-
-.quiz {
-height: 200px;
+  justify-content: center;
 }
