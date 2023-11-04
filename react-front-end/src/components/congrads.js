@@ -132,7 +132,7 @@ const Congrats = ({ onLeaderboardUpdate }) => {
       <div className="bottom">
       <h1 className="final-score">Your final score: {score}</h1>
       {completionTime && (
-        <h2>Time taken to complete the quiz: {formatTime(completionTime)}</h2>
+        <p>Time taken to complete the quiz: {formatTime(completionTime)}</p>
       )}
       <form className="myForm" onSubmit={handleSubmit}>
         {submissionMessage && <h2>{submissionMessage}</h2>}
