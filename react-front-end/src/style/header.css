@@ -2,34 +2,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  padding-right: 115px;
+  margin: 20px;
 }
 
 .top-page-container {
   padding-left: 96px;
   display: flex;
   justify-content: center;
-  /* padding-top: 50px; */
 }
 
 .top-page-container:has(.des-container) {
-  padding-right: 190px;
+  padding-right: 220px;
 }
 
 .mute-button-container {
   display: flex;
   height: 96px;
   width: 96px;
-}
-
-.logo {
-  display: flex;
-margin-right: 300px;
-width: 350px;
-height: 350px;
-}
-
-.quiz {
-height: 200px;
 }
