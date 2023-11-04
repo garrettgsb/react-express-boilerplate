@@ -30,7 +30,6 @@ justify-content: center;
   margin: auto;
   display: flex;
   flex-direction: column;
-  margin-left: 42px;
 }
 
 .myForm input {

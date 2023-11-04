@@ -48,14 +48,14 @@ function Home() {
           </div>
           <div className="start">
             <button
-              className="rectangle-button"
+              className="start-button"
               onClick={handleInstructionsClick}
               onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
             >
               INSTRUCTIONS
             </button>
             <button
-              className="rectangle-button"
+              className="info-button"
               onClick={handleStartClick}
               onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
             >
