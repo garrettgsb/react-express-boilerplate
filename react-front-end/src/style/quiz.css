@@ -170,9 +170,10 @@
 
 .game-over-popup h1 {
   font-size: 50px;
-  color: white;
+  color: rgb(242, 242, 234);
   margin-bottom: 20px;
   text-align: center; 
+  font-family: 'Playpen Sans', cursive;
 }
 
 
