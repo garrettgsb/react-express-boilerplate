@@ -70,7 +70,7 @@
 .bold {
   font-weight: bold;
   font-size: large;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  font-family: 'Playpen Sans', cursive;
 }
 
 .rectangle-button {
@@ -92,8 +92,8 @@ p {
 }
 
 li {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: larger;
+  font-size: large;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .boxes {
