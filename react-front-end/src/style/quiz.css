@@ -8,7 +8,7 @@
 }
 
 .game {
-  width: 80%;
+  width: 60%;
   height: 80%;
   background-color: white;
   padding: 15px 15px;
@@ -22,22 +22,24 @@
 }
 
 .round {
-  font-size: 30px;
+  font-size: 20px;
   height: 10px;
 }
 
 .question-number {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .questions {
-  font-size: 40px;
+  font-size: 30px;
 }
 
 
 .middle {
   display: flex;
   align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .answers {
@@ -78,27 +80,27 @@
 
 
 .hint {
-  font-size: 30px;
+  font-size: 20px;
   font-style: italic;
 }
 
 .h-button {
-  font-size: 30px;
+  font-size: 20px;
   font-style: italic;
 }
 
 .s-button {
-  font-size: 30px;
+  font-size: 20px;
   font-style: italic;
 }
 
 .fifty-fifty-button {
-  font-size: 30px;
+  font-size: 20px;
   font-style: italic;
 }
 
 .switch-button {
-  font-size: 30px;
+  font-size: 20px;
   font-style: italic;
 }
 
@@ -119,7 +121,7 @@
 
 .timer {
   color: red;
-  font-size: 40px;
+  font-size: 25px;
 }
 
 .game-over-popup h1 {

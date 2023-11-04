@@ -257,7 +257,6 @@ if (lives === 1) {
       <Header page="quiz" />
 
       {!gameOver && (
-        <div className="game">
           <div className="game">
             <p className="round">Round {currentRound}</p>
             <p className="question-number">{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
@@ -328,7 +327,6 @@ if (lives === 1) {
               </button>
             </div>
           </div>
-        </div>
       )}
 
       {gameOver && (

@@ -54,7 +54,8 @@
 
 .start {
   display: flex;
-  /* padding-left: 490px; */
+  width: 80%;
+  justify-content: space-around;
 }
 
 .dude {
