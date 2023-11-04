@@ -275,7 +275,7 @@ console.log('lives:', lives);
                       onClick={() => handleAnswerClick(index)}
                       onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
                     >
-                      {optionLabel[index]}.
+                      {optionLabel[index]}.&nbsp;
                       {fiftyOptions.length === 2
                         ? fiftyOptions.includes(option)
                           ? option

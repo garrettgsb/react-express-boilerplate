@@ -14,26 +14,26 @@
   width: 400px;
   border: 10px solid black;
   padding: 100px;
-  margin-top: 20px;
-  height: 500px; 
-  background-color: yellow;
-display: flex;
-flex-direction: column;
-max-width: 400px;
-margin: 20px;
-}
-
-.box-two {
-  width: 400px;
-  border: 10px solid black;
-  padding: 100px;
-  margin-top: 20px;
   height: 500px; 
   background-color: yellow;
   display: flex;
   flex-direction: column;
   max-width: 400px;
   margin: 20px;
+  margin-top: 0px;
+}
+
+.box-two {
+  width: 400px;
+  border: 10px solid black;
+  padding: 100px;
+  height: 500px; 
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 20px;
+  margin-top: 0px;
 }
 
 .welcome {
@@ -101,4 +101,5 @@ li {
   flex-direction: row;
   justify-content: space-between;
   margin: 20px;
+
 }
