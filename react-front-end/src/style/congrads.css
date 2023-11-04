@@ -5,6 +5,7 @@
   justify-content: flex-start;
   height: 100vh;
   background: linear-gradient(to right, #75088E, #610576);
+  font-family: 'Playpen Sans', cursive;
 }
 
 .title {
