@@ -79,12 +79,9 @@
 
 .player-name {
   text-align: left;
-<<<<<<< HEAD
   font-family: 'Playpen Sans', cursive;
-=======
   width: 75%;
   margin-left: 0.5em;
->>>>>>> master
 }
 
 .player-score {

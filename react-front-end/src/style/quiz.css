@@ -11,11 +11,7 @@
   width: 60%;
   height: 80%;
   background-color: white;
-<<<<<<< HEAD
-  padding: 10px 25px;
-=======
   padding: 20px 20px;
->>>>>>> master
   box-sizing: border-box;
 }
 
@@ -26,7 +22,6 @@
 }
 
 .round {
-<<<<<<< HEAD
   font-size: 30px;
   font-family: 'Playpen Sans', cursive;
 }
@@ -39,7 +34,6 @@
 .questions {
   font-size: 40px;
   font-family: 'Playpen Sans', cursive;
-=======
   font-size: 20px;
   height: 10px;
 }
@@ -50,7 +44,6 @@
 
 .questions {
   font-size: 30px;
->>>>>>> master
 }
 
 
@@ -101,7 +94,6 @@
 
 
 .hint {
-<<<<<<< HEAD
   font-size: 30px;
   /* font-style: italic; */
   font-family: 'Playpen Sans', cursive;
@@ -129,7 +121,6 @@
   font-size: 30px;
   /* font-style: italic; */
   font-family: 'Playpen Sans', cursive;
-=======
   font-size: 20px;
   font-style: italic;
 }
@@ -152,7 +143,6 @@
 .switch-button {
   font-size: 20px;
   font-style: italic;
->>>>>>> master
 }
 
 .dude {
@@ -172,12 +162,9 @@
 
 .timer {
   color: red;
-<<<<<<< HEAD
   font-size: 40px;
   font-family: 'Playpen Sans', cursive;
-=======
   font-size: 25px;
->>>>>>> master
 }
 
 .game-over-popup h1 {
@@ -193,6 +180,7 @@
   border: 5px black solid; 
   margin-bottom: 0.5em;
   background-color: yellow;
+  font-family: "Pixelify Sans", sans-serif;
 }
 
 .game-over-buttons button:hover {
