@@ -48,7 +48,7 @@ function header(props) {
     return (
       <div className="top-page-container">
         <div className="top-page">
-          <img src={InstructionImage} alt="quizjs" className="instruction-image" />
+          <img src={InstructionImage} alt="instructions" className="instruction-image" />
           <VolumeButton /> 
         </div>
       </div>
@@ -60,7 +60,7 @@ function header(props) {
       <div className="top-page-container">
         <div className="top-page">
           <div className="quizjs">
-            <img className="logo" src={Quiz} alt="quizjs" />
+            <img className="quizjs-image" src={Quiz} alt="quizjs" />
           </div>
           <VolumeButton />
         </div>
