@@ -134,3 +134,11 @@
 .des-container {
   max-width: 500px;
 }
+
+.board {
+  font-family: 'Playpen Sans', cursive;
+}
+
+.content-container {
+  padding-top: 95px;
+}

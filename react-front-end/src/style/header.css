@@ -10,6 +10,7 @@
   padding-left: 96px;
   display: flex;
   justify-content: center;
+  /* padding-top: 50px; */
 }
 
 .top-page-container:has(.des-container) {
