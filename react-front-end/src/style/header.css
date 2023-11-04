@@ -19,3 +19,18 @@
   height: 96px;
   width: 96px;
 }
+
+.top-page {
+  padding-right: 160px;
+}
+
+.logo {
+  display: flex;
+margin-right: 300px;
+width: 350px;
+height: 350px;
+}
+
+.quiz {
+height: 200px;
+}

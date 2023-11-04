@@ -1,10 +1,5 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  height: 100vh;
-  background: linear-gradient(to right, #75088E, #610576);
+margin-top: 20px;
 }
 
 .title {
@@ -33,10 +28,13 @@ justify-content: center;
 .myForm {
   width: 300px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  margin-left: 42px;
 }
 
 .myForm input {
-  width: 100%;
+  width: 84%;
   padding: 10px;
   margin-bottom: 10px;
 }

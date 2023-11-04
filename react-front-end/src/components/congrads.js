@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../style/congrads.css";
+import "../style/App.css";
 import "whatwg-fetch";
 import Header from "./header";
 
@@ -120,6 +121,7 @@ const Congrats = ({ onLeaderboardUpdate }) => {
   console.log("time:", completionTime);
 
   return (
+    <div className="div-style">
     <div className="container">
       <div className="top">
       <h1 className="title">Congratulations!</h1>
@@ -150,6 +152,7 @@ const Congrats = ({ onLeaderboardUpdate }) => {
         </button>
       </form>
       </div>
+    </div>
     </div>
   );
 };

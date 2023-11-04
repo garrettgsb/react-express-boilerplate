@@ -254,7 +254,7 @@ console.log('lives:', lives);
   };
 
   return (
-    <div className="container">
+    <div className="quiz-container">
       <Header page="quiz" />
 
       {!gameOver && (
