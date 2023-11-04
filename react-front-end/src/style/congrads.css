@@ -9,14 +9,20 @@
 
 .title {
 font-size: 100px;
+height: 0.3em;
+color: white;
 }
 
 .on {
   font-size: 50px;
+  height: 0.1em;
+  color: white;
 }
 
 .completing {
   font-size: 50px;
+  height: 0.1em;
+  color: white;
 }
 
 .myForm {
@@ -26,12 +32,13 @@ font-size: 100px;
 
 .myForm input {
   width: 100%;
-  padding: 10px;
   margin-bottom: 10px;
+  font-size: 25px;
+  padding: 1px;
 }
 
 .myForm button {
-  width: 100%;
+  width: 102%;
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
@@ -39,10 +46,11 @@ font-size: 100px;
   color: black;
   border: none;
   border-radius: 4px;
+  
 }
 
 .myForm button:hover {
-  background-color: blue;
+  background-color: rgb(214, 214, 89);
 }
 
 .name {

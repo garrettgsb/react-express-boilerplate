@@ -133,7 +133,7 @@ const Congrats = ({ onLeaderboardUpdate }) => {
         {submissionMessage && <h2>{submissionMessage}</h2>}
 
         <label className="name">
-          Enter your nickname here:
+          Enter your nickname:
           <input
             type="text"
             value={name}
