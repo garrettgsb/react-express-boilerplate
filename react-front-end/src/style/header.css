@@ -2,6 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  padding-right: 115px;
 }
 
 .top-page-container {
@@ -18,10 +20,6 @@
   display: flex;
   height: 96px;
   width: 96px;
-}
-
-.top-page {
-  padding-right: 115px;
 }
 
 .logo {
