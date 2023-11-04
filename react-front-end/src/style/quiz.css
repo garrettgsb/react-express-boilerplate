@@ -18,7 +18,7 @@
 
 .logo {
   width: 400px;
-
+  margin-top: 20px;
 }
 
 .round {
@@ -49,13 +49,13 @@
 
 .buttons {
   font-size: 30px;
-  border: 3px black solid; 
+  border: 5px black solid; 
   margin-bottom: 0.5em;
   background-color: yellow;
 }
 
 .buttons:hover {
-  border: 3px yellow solid;
+  border: 5px yellow solid;
   background-color: yellow;
   cursor: pointer; 
 }
@@ -119,4 +119,30 @@
 .timer {
   color: red;
   font-size: 40px;
+}
+
+.game-over-popup h1 {
+  font-size: 50px;
+  color: white;
+  margin-bottom: 20px;
+  text-align: center; 
+}
+
+
+.game-over-buttons button {
+  font-size: 30px;
+  border: 5px black solid; 
+  margin-bottom: 0.5em;
+  background-color: yellow;
+}
+
+.game-over-buttons button:hover {
+  border: 5px yellow solid;
+  background-color: yellow;
+  cursor: pointer; 
+}
+
+.game-over-buttons {
+  display: flex;
+  gap: 30px;
 }
