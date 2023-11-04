@@ -26,7 +26,6 @@
   border-radius: 5px;
   width: 800px;
   padding: 40px;
-  font-family: "YourFontFamily", sans-serif;
   font-size: 18px;
   text-align: center;
 }
@@ -42,33 +41,29 @@
   align-items: center;
   flex-direction: column;
 }
-.quizjs {
-  display: flex;
-  }
 
 .quizjs img {
-  display: flex;
   max-height: 200px;
-  }
+}
 
 .dude-container {
   display: flex;
- align-items: center;
+  align-items: center;
  /* padding-left: 500px; */
 }
 
 .start {
   display: flex;
-  /* padding-left: 490px; */
+  width: 80%;
+  justify-content: space-around;
 }
 
 .dude {
-padding-left: 20px;
+  padding-left: 20px;
 }
 
-.top-page {
-  display: flex;
-justify-content: center;
+.des-container {
+  min-width: 500px;
 }
 
 .des {
@@ -84,7 +79,12 @@ justify-content: center;
 
 .player-name {
   text-align: left;
+<<<<<<< HEAD
   font-family: 'Playpen Sans', cursive;
+=======
+  width: 75%;
+  margin-left: 0.5em;
+>>>>>>> master
 }
 
 .player-score {
@@ -99,12 +99,13 @@ justify-content: center;
   flex-direction: column;
   flex-wrap: wrap;
   max-height: 350px;
+  margin-left: -2em;
 }
 
 .score-row {
-width: 180px;
-display: flex;
-
+  width: 180px;
+  display: flex;
+  margin-right: 2.5em;
 }
 
 .list { 
@@ -112,16 +113,14 @@ display: flex;
   display: grid;
   gap: 1em;
   grid-template-columns: 1fr 1fr 1fr;
-  display: flex;
-  justify-content: space-between;
 }
 
 .score { 
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-width: 100%;
-
+  width: 190px;
+/* margin-right: 5em; */
 }
 
 .des-container {

@@ -4,14 +4,16 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import HighScores from "./HighScores";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Brandon from "../asset/brandon.png";
 import { handleAudio, sounds } from "./SoundHelper";
+import { AppContext } from "./AppContext";
 import 'animate.css';
 import Header from "./header";
 function Home() {
   const [highScores, setHighScores] = useState([]);
   const navigate = useNavigate();
+  const { state } = useContext(AppContext)
 
   useEffect(() => {
     // Fetch high scores from the server
@@ -27,20 +29,19 @@ function Home() {
 
   function handleStartClick() { 
     navigate("/quiz");
-    handleAudio(sounds.click1)
+    handleAudio(state.isMute, sounds.click)
   }
   function handleInstructionsClick() {
-    navigate("instructions")
-    handleAudio(sounds.click1)
+    console.log(state.isMute)
+    navigate("instructions");
+    handleAudio(state.isMute, sounds.click)
   }
-
 
   return (
     <div className="div-style">
       <Header page="home"/>
       <div className="home">
         <div className="content-container">
-
           <div className="dude-container">
             <HighScores highScores={highScores} className="high-scores-container" />
             <img className="dude" src={Brandon} alt="brandon" />
@@ -49,18 +50,14 @@ function Home() {
             <button
               className="rectangle-button"
               onClick={handleInstructionsClick}
-              onMouseEnter={() => {
-                handleAudio(sounds.hover1);
-              }}
+              onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
             >
               INSTRUCTIONS
             </button>
             <button
               className="rectangle-button"
               onClick={handleStartClick}
-              onMouseEnter={() => {
-                handleAudio(sounds.hover1);
-              }}
+              onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
             >
               START
             </button>

@@ -3,15 +3,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100vh;
+  height: 100%;
 }
 
-.center-top {
+/*.center-top {
   display: flex;
   justify-content: center;
   align-items: center;
   height : 20%;
-}
+}*/
 
 .instruction-image {
   width: 1000px;
@@ -31,17 +31,18 @@
   bottom: 90px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+
 .how-to-play {
-display: flex;
-justify-content: center;
-flex-direction: column;
-position: relative;
-bottom: 90px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  bottom: 90px;
 }
 
 .div-style {
   background: linear-gradient(to right, #9c0fbb, #770890);
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,12 +50,12 @@ bottom: 90px;
 }
 
 .description {
-font-size: large;
+  font-size: large;
 }
 
 .after {
   font-size: large;
-  }
+}
 
 .bold {
   font-weight: bold;

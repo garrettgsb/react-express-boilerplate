@@ -1,14 +1,17 @@
 // quiz.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/quiz.css";
 import Dude from "../asset/dude.png";
 import Dude2 from "../asset/thumbs-down.png";
 import Dude3 from "../asset/thinking-dude.png";
 import Header from "./header";
+import { AppContext } from './AppContext';
+import { handleAudio, sounds } from "./SoundHelper";
 
 const QuizComponent = () => {
   const navigate = useNavigate();
+  const { state } = useContext(AppContext)
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentRound, setCurrentRound] = useState(1);
@@ -23,15 +26,16 @@ const QuizComponent = () => {
   const [gameOver, setGameOver] = useState(false);
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
   const [totalQuestions, setTotalQuestions] = useState(0);
-  
+
   const timerDuration = 300; // five minute timer
+
   const [clickSwap, setClickSwap] = useState(false);
   const [numberOfquestionsPerRound, setNumberOfQuestionsPerRound] = useState(0);
   const [showDude2Image, setShowDude2Image] = useState(false); // thumbs down
   const [showDude3Image, setShowDude3Image] = useState(true); // thinking face
   const [startTime, setStartTime] = useState(null);
   const [timer, setTimer] = useState(timerDuration);
-
+  const [finishQuiz, setFinishQuiz] = useState(false);
 
   const optionLabel = {
     0: "A",
@@ -57,7 +61,7 @@ const QuizComponent = () => {
           data.questions[currentQuestionIndex].optionb,
           data.questions[currentQuestionIndex].optionc,
           data.questions[currentQuestionIndex].optiond,
-        ]
+        ];
         setOptions(opts);
         setFiftyOptions(opts);
         setCurrentQuestionIndex(0);
@@ -74,16 +78,12 @@ const QuizComponent = () => {
     const timerInterval = setInterval(() => {
       if (timer > 0) {
         setTimer(timer - 1);
+      } else {
+    setGameOver(true);
       }
     }, 1000);
 
     return () => clearInterval(timerInterval);
-  }, [timer]);
-
-  useEffect(() => {
-    if (timer === 0 && lives === 0) {
-      setGameOver(true);
-    }
   }, [timer]);
 
   useEffect(() => {
@@ -93,34 +93,11 @@ const QuizComponent = () => {
         questions[currentQuestionIndex].optionb,
         questions[currentQuestionIndex].optionc,
         questions[currentQuestionIndex].optiond,
-      ]
+      ];
       setOptions(opts);
       setFiftyOptions(opts);
     }
   }, [currentQuestionIndex]);
-
-  // const handleSkipClick = async () => {
-  //   if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
-  //     try {
-  //       await navigate("/congrads", { state: { score, lives, startTime } }); // pass the score as state
-  //     } catch (error) {
-  //       console.error("Error navigating to /congrads:", error);
-  //     }
-  //   }
-  //   else if (numberOfquestionsPerRound % 5 === 4) {
-  //     setCurrentRound((prevRound) => prevRound + 1);
-  //     setNumberOfQuestionsPerRound(0);
-  //     setClickFifty(false);
-  //     setClickSwap(false);
-  //     setHintUsed(false);
-  //     setShowHint(false);
-  //   } else {
-  //     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-  //     setNumberOfQuestionsPerRound((prevIndex) => prevIndex + 1);
-  //     setHintUsed(false);
-  //     setShowHint(false);
-  //   }
-  // };
 
   const handleFiftyClick = () => {
     const question = questions[currentQuestionIndex];
@@ -137,10 +114,11 @@ const QuizComponent = () => {
     newOption.push(options[random]);
     setFiftyOptions(newOption);
     setClickFifty(true);
+    handleAudio(state.isMute, sounds.fifty)
   };
 
   const handleSwapClick = () => {
-    if (numberOfquestionsPerRound + 1 % 5 === 4) {
+    if (numberOfquestionsPerRound + (1 % 5) === 4) {
       setCurrentRound((prevRound) => prevRound + 1);
       setCurrentQuestionIndex(0);
       setNumberOfQuestionsPerRound(0);
@@ -150,7 +128,7 @@ const QuizComponent = () => {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setClickSwap(true);
     }
-
+    handleAudio(state.isMute, sounds.swap)
   };
 
   const handleAnswerClick = (selectedAnswer) => {
@@ -158,16 +136,17 @@ const QuizComponent = () => {
 
     // Map the correct option to the corresponding index (A->0, B->1, C->2, D->3)
     const correctIndex = correctOption.charCodeAt(0) - "A".charCodeAt(0);
-    let lastScore = 0;
+
+    
 
     if (selectedAnswer === correctIndex) {
       // Handle correct answer logic
       if (hintUsed || clickFifty) {
         setScore((prevScore) => prevScore + 10);
-        lastScore = 10;
+
       } else {
         setScore((prevScore) => prevScore + 20);
-        lastScore = 20;
+  
       }
 
       setShowDudeImage(true);
@@ -177,38 +156,55 @@ const QuizComponent = () => {
       setTimeout(() => {
         setShowDudeImage(false);
         setShowDude3Image(true);
-        handleNextClick(lastScore);
       }, 1500);
+      handleNextClick();
+      handleAudio(state.isMute, sounds.correct)
     } else {
       setLives((prevLives) => prevLives - 1);
       setShowDudeImage(false);
       setShowDude2Image(true);
       setShowDude3Image(false);
-      setScore((prevScore) => prevScore - 10);
-      lastScore = -10;
+   
       setTimeout(() => {
         setShowDude2Image(false);
         setShowDude3Image(true);
-        handleNextClick(lastScore);
       }, 1500);
+      handleNextClick();
+      handleAudio(state.isMute, sounds.incorrect)
     }
   };
 
   const handleHintClick = () => {
     setHintUsed(true); // Set hintUsed to true when the hint is clicked
     setShowHint(true); // Show the hint
+    handleAudio(state.isMute, sounds.hint)
   };
 
-  const handleNextClick = async (lastScore) => {
-    if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
+  const handleSkipClick = () => {
+    handleNextClick();
+    handleAudio(state.isMute, sounds.skip)
+  }
+
+  // useEffect to navigate when finishQuiz is true
+  useEffect(() => {
+    if (finishQuiz) {
       try {
-        await navigate("/congrads", { state: { score: score + lastScore, lives, startTime } }); // pass the score as state
+        navigate("/congrads", { state: { score, lives, startTime } });
       } catch (error) {
         console.error("Error navigating to /congrads:", error);
       }
     }
-    else if (numberOfquestionsPerRound % 5 === 4) {
+  }, [finishQuiz, navigate, score]);
+
+
+
+  const handleNextClick = async () => {
+    if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
+      setFinishQuiz(true);
+
+    } else if (numberOfquestionsPerRound % 5 === 4) {
       setCurrentRound((prevRound) => prevRound + 1);
+      setCurrentQuestionNumber((prevNumber) => prevNumber + 1);
       setNumberOfQuestionsPerRound(0);
       setClickFifty(false);
       setClickSwap(false);
@@ -222,15 +218,11 @@ const QuizComponent = () => {
       setShowHint(false);
     }
 
-    if (lives === 0) {
-      // All lives are gone, navigate to the home page
-      setGameOver(true);
-      try {
-        await navigate("/");
-      } catch (error) {
-        console.error("Error navigating to /:", error);
-      }
-    }
+if (lives === 1) {
+  setGameOver(true);
+  navigate('/quiz');
+}
+
   };
 
   if (questions.length === 0) {
@@ -239,11 +231,11 @@ const QuizComponent = () => {
 
   const currentQuestion = questions[currentQuestionIndex];
 
-
   const handlePlayAgain = () => {
     setGameOver(false);
     setTimer(timerDuration); // Reset the timer to its initial value
     setCurrentQuestionIndex(0); // Reset the current question index to 0 or any other initial value
+    setCurrentQuestionNumber(1);
     setCurrentRound(1); // Reset the current round to 1 or any other initial value
     setLives(5); // Reset the lives to their initial value
     setShowHint(false); // Reset the hint display
@@ -261,66 +253,81 @@ const QuizComponent = () => {
   };
 
   return (
-
     <div className="container">
       <Header page="quiz" />
 
-      {!gameOver && <div className="game">
-        {/* <img className="logo" src={Quiz} alt="quizjs" /> */}
-        <div className="game">
-          <p className="round">Round {currentRound}</p>
-          <p className='question-number'>{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
-          <p className="questions">{currentQuestion.question}</p>
-          <div className="middle">
-            <ul className="answers">
-              {options.map((option, index) => (
-                <li key={index}>
-                  <button
-                    className="buttons"
-                    onClick={() => handleAnswerClick(index)}
-                  >
-                    {optionLabel[index]}.
-                    {fiftyOptions.length === 2
-                      ? fiftyOptions.includes(option)
-                        ? option
-                        : ""
-                      : option}
-                  </button>
-                </li>
-              ))}
-            </ul>
-            {showDudeImage && <img className="dude" src={Dude} alt="Dude" />}
-            {showDude2Image && <img className="dude2" src={Dude2} alt="Dude2" />}
-            {showDude3Image && <img className="dude3" src={Dude3} alt="Dude3" />}
+      {!gameOver && (
+          <div className="game">
+            <p className="round">Round {currentRound}</p>
+            <p className="question-number">{`Question: ${currentQuestionNumber}/${totalQuestions}`}</p>
+            <p className="questions">{currentQuestion.question}</p>
+            <div className="middle">
+              <ul className="answers">
+                {options.map((option, index) => (
+                  <li key={index}>
+                    <button
+                      className="buttons"
+                      onClick={() => handleAnswerClick(index)}
+                      onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
+                    >
+                      {optionLabel[index]}.
+                      {fiftyOptions.length === 2
+                        ? fiftyOptions.includes(option)
+                          ? option
+                          : ""
+                        : option}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              {showDudeImage && <img className="dude" src={Dude} alt="Dude" />}
+              {showDude2Image && (
+                <img className="dude2" src={Dude2} alt="Dude2" />
+              )}
+              {showDude3Image && (
+                <img className="dude3" src={Dude3} alt="Dude3" />
+              )}
+            </div>
+            <p className="lives">
+              Lives:{" "}
+              {Array.from({ length: lives }, (_, index) => "❤️").join(" ")}
+            </p>
+            <p className="your-score">Score: {score}</p>
+            <p className="timer">
+              Time Left: {Math.floor(timer / 60)}:
+              {(timer % 60).toString().padStart(2, "0")}
+            </p>{" "}
+            {showHint && <p className="hint">Hint: {currentQuestion.hint}</p>}
+            <div className="powerUpButtons">
+              <button className="h-button" onClick={handleHintClick}
+                onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
+              >
+                Hint
+              </button>
+              <button className="s-button" onClick={handleSkipClick}
+                onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
+              >
+                Skip
+              </button>
+              <button
+                disabled={options.length < 4 || clickFifty}
+                className="fifty-fifty-button"
+                onClick={handleFiftyClick}
+                onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
+              >
+                50/50
+              </button>
+              <button
+                disabled={clickSwap}
+                className="switch-button"
+                onClick={handleSwapClick}
+                onMouseEnter={() => {handleAudio(state.isMute, sounds.hover)}}
+              >
+                Swap
+              </button>
+            </div>
           </div>
-          <p className="lives">
-            Lives: {Array.from({ length: lives }, (_, index) => "❤️").join(" ")}
-          </p>
-          <p className="your-score">Score: {score}</p>
-          <p className="timer">
-            Time Left: {Math.floor(timer / 60)}:
-            {(timer % 60).toString().padStart(2, "0")}
-          </p>{" "}
-          {showHint && <p className="hint">Hint: {currentQuestion.hint}</p>}
-          <div className="powerUpButtons">
-            <button className="h-button" onClick={handleHintClick}>
-              Hint
-            </button>
-            <button className="s-button" onClick={handleNextClick}>
-              Skip
-            </button>
-            <button
-              disabled={options.length < 4 || clickFifty}
-              className="fifty-fifty-button"
-              onClick={handleFiftyClick}
-            >
-              50/50
-            </button>
-            <button disabled={clickSwap} className="switch-button" onClick={handleSwapClick}>
-              Swap
-            </button>
-          </div>
-        </div></div>}
+      )}
 
       {gameOver && (
         <div className="game-over-popup">
