@@ -26,6 +26,7 @@ const QuizComponent = () => {
   const [gameOver, setGameOver] = useState(false);
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
   const [totalQuestions, setTotalQuestions] = useState(0);
+  const [swapCount, setSwapCount] = useState(0);
 
   const timerDuration = 300; // five minute timer
 
@@ -127,6 +128,7 @@ const QuizComponent = () => {
     } else {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setClickSwap(true);
+      setSwapCount(swapCount + 1);
     }
     handleAudio(state.isMute, sounds.swap)
   };
@@ -336,6 +338,9 @@ console.log('lives:', lives);
         <div className="game-over-popup">
           <h1>Game Over!</h1>
           <div className="game-over-buttons">
+            <div>
+              Total swap used: {swapCount}
+            </div>
             <button onClick={handlePlayAgain}>Play Again</button>
             <button onClick={handleHomePage}>Main Page</button>
           </div>
