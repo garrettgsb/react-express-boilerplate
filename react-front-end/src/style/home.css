@@ -84,11 +84,13 @@ justify-content: center;
 
 .player-name {
   text-align: left;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .player-score {
   text-align: right;
   padding: 0 5px;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .score-columns {
