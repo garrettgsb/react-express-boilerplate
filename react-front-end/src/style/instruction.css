@@ -74,13 +74,13 @@
 }
 
 .rectangle-button {
-  width: 150px;
-  height: 50px;
+  width: 250px;
+  height: 80px;
   background-color: #ffff00;
   color: #000000;
   border: 8px solid #000000;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 30px;
   font-family: "Pixelify Sans", sans-serif;
   margin: 10px;
   cursor: pointer;
