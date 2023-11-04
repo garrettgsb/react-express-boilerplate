@@ -5,6 +5,7 @@
   justify-content: flex-start;
   height: 100%;
   background: linear-gradient(to right, #75088E, #610576);
+  font-family: 'Playpen Sans', cursive;
 }
 
 .title {
@@ -46,7 +47,7 @@ color: white;
   color: black;
   border: none;
   border-radius: 4px;
-  
+  font-family: "Pixelify Sans", sans-serif;
 }
 
 .myForm button:hover {

@@ -79,6 +79,7 @@
 
 .player-name {
   text-align: left;
+  font-family: 'Playpen Sans', cursive;
   width: 75%;
   margin-left: 0.5em;
 }
@@ -86,6 +87,7 @@
 .player-score {
   text-align: right;
   padding: 0 5px;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .score-columns {
