@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../style/congrads.css";
+import "../style/App.css";
 import "whatwg-fetch";
 import Header from "./header";
 
@@ -120,12 +121,16 @@ const Congrats = ({ onLeaderboardUpdate }) => {
   console.log("time:", completionTime);
 
   return (
+    <div className="div-style">
     <div className="container">
+      <div className="top">
       <h1 className="title">Congratulations!</h1>
       <h2 className="on">ON</h2>
       <h2 className="completing">COMPLETING</h2>
       <Header page="congrads" />
-      <h1>Your final score: {score}</h1>
+      </div>
+      <div className="bottom">
+      <h1 className="final-score">Your final score: {score}</h1>
       {completionTime && (
         <h2>Time taken to complete the quiz: {formatTime(completionTime)}</h2>
       )}
@@ -146,6 +151,8 @@ const Congrats = ({ onLeaderboardUpdate }) => {
           Submit
         </button>
       </form>
+      </div>
+    </div>
     </div>
   );
 };

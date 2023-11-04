@@ -1,8 +1,17 @@
-.content-container {
-  /* margin-right: 150px; */
+.start-button {
+  width: 300px;
+  height: 100px;
+  background-color: #ffff00;
+  color: #000000;
+  border: 8px solid #000000;
+  border-radius: 5px;
+  font-size: 30px;
+  font-family: "Pixelify Sans", sans-serif;
+  margin: 10px;
+  cursor: pointer;
 }
 
-.rectangle-button {
+.info-button {
   width: 300px;
   height: 100px;
   background-color: #ffff00;
@@ -25,7 +34,9 @@
   border: 8px solid #000000;
   border-radius: 5px;
   width: 800px;
-  padding: 40px;
+  padding-bottom: 20px;
+  padding-left: 110px;
+  padding-right: 110px;
   font-size: 18px;
   text-align: center;
 }
@@ -96,13 +107,13 @@
   flex-direction: column;
   flex-wrap: wrap;
   max-height: 350px;
-  margin-left: -2em;
+  margin-left: -5em;
 }
 
 .score-row {
   width: 180px;
   display: flex;
-  margin-right: 2.5em;
+  margin-right: 4.5em;
 }
 
 .list { 
@@ -122,4 +133,12 @@
 
 .des-container {
   max-width: 500px;
+}
+
+.board {
+  font-family: 'Playpen Sans', cursive;
+}
+
+.content-container {
+  padding-top: 95px;
 }

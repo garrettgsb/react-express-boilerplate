@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: flex-start;
   height: 100%;
-  background: linear-gradient(to right, #75088E, #610576);
   font-family: 'Playpen Sans', cursive;
 }
 
@@ -29,6 +28,8 @@ color: white;
 .myForm {
   width: 300px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .myForm input {
@@ -57,4 +58,8 @@ color: white;
 .name {
   font-size: 25px;
   font-weight: bold;
+}
+
+.text {
+  width: 20px;
 }

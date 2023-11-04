@@ -65,6 +65,7 @@ function HighScores() {
 
   return (
     <div className="score-box">
+      <h2 className="board">leaderboard</h2>
       <div className="score-columns">
         {highScores.map((score, index) => (
           <div key={index} className="score-row">

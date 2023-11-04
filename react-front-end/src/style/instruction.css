@@ -6,24 +6,34 @@
   height: 100%;
 }
 
-/*.center-top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height : 20%;
-}*/
-
 .instruction-image {
   width: 1000px;
 }
 
 .instruction-container {
-  width: 600px;
+  width: 400px;
   border: 10px solid black;
   padding: 100px;
   margin-top: 20px;
   height: 500px; 
   background-color: yellow;
+display: flex;
+flex-direction: column;
+max-width: 400px;
+margin: 20px;
+}
+
+.box-two {
+  width: 400px;
+  border: 10px solid black;
+  padding: 100px;
+  margin-top: 20px;
+  height: 500px; 
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 20px;
 }
 
 .welcome {
@@ -84,4 +94,11 @@ p {
 li {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: larger;
+}
+
+.boxes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
 }
