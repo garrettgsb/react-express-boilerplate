@@ -258,7 +258,6 @@ console.log('lives:', lives);
       <Header page="quiz" />
 
       {!gameOver && (
-        <div className="game">
           <div className="game">
             <span className="round">
             <p className="animate__animated animate__backInDown">Round {currentRound}</p>
@@ -331,7 +330,6 @@ console.log('lives:', lives);
               </button>
             </div>
           </div>
-        </div>
       )}
 
       {gameOver && (

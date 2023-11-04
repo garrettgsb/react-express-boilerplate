@@ -139,7 +139,7 @@ const Congrats = ({ onLeaderboardUpdate }) => {
 
         <label className="name">
           Enter your nickname:
-          <input className="text"
+          <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}

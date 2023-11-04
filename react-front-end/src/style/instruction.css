@@ -52,7 +52,7 @@ margin: 20px;
 
 .div-style {
   background: linear-gradient(to right, #9c0fbb, #770890);
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -65,8 +65,8 @@
 
 .start {
   display: flex;
-justify-content: center;
-margin-right: 240px;
+  width: 80%;
+  justify-content: space-around;
 }
 
 .dude {
@@ -90,6 +90,7 @@ margin-right: 240px;
 
 .player-name {
   text-align: left;
+  font-family: 'Playpen Sans', cursive;
   width: 75%;
   margin-left: 0.5em;
 }
@@ -97,6 +98,7 @@ margin-right: 240px;
 .player-score {
   text-align: right;
   padding: 0 5px;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .score-columns {
