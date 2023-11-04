@@ -28,14 +28,17 @@ img {
 
 .round {
   font-size: 30px;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .question-number {
   font-size: 30px;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .questions {
   font-size: 40px;
+  font-family: 'Playpen Sans', cursive;
 }
 
 
@@ -49,7 +52,6 @@ img {
   list-style: none;
   padding: 0;
   margin: 0;
-
 }
 
 .buttons {
@@ -57,6 +59,7 @@ img {
   border: 3px black solid; 
   margin-bottom: 0.5em;
   background-color: yellow;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .buttons:hover {
@@ -68,10 +71,12 @@ img {
 
 .lives {
   font-size: 30px;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .your-score {
   font-size: 30px;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .powerUpButtons{
@@ -83,27 +88,32 @@ img {
 
 .hint {
   font-size: 30px;
-  font-style: italic;
+  /* font-style: italic; */
+  font-family: 'Playpen Sans', cursive;
 }
 
 .h-button {
   font-size: 30px;
-  font-style: italic;
+  /* font-style: italic; */
+  font-family: 'Playpen Sans', cursive;
 }
 
 .s-button {
   font-size: 30px;
-  font-style: italic;
+  /* font-style: italic; */
+  font-family: 'Playpen Sans', cursive;
 }
 
 .fifty-fifty-button {
   font-size: 30px;
-  font-style: italic;
+  /* font-style: italic; */
+  font-family: 'Playpen Sans', cursive;
 }
 
 .switch-button {
   font-size: 30px;
-  font-style: italic;
+  /* font-style: italic; */
+  font-family: 'Playpen Sans', cursive;
 }
 
 .dude {
@@ -124,4 +134,5 @@ img {
 .timer {
   color: red;
   font-size: 40px;
+  font-family: 'Playpen Sans', cursive;
 }
