@@ -41,7 +41,7 @@ const QuizComponent = () => {
   const [timer, setTimer] = useState(timerDuration);
   const [finishQuiz, setFinishQuiz] = useState(false);
 
-
+  const [finishTime, setFinishTime] = useState(null)
 
   const optionLabel = {
     0: "A",
@@ -190,12 +190,17 @@ const QuizComponent = () => {
     handleNextClick();
     handleAudio(state.isMute, sounds.skip);
   };
+  const createFinishTime = () => {
+    const endTime = new Date();
+    setFinishTime(formatTime(endTime - startTime))
+  }
 
   // useEffect to navigate when finishQuiz is true
   useEffect(() => {
     if (finishQuiz) {
       try {
-        navigate("/congrads", { state: { score, lives, startTime } });
+        navigate("/congrads", { state: { score, lives, finishTime, hintCount,
+          swapCount, fiftyCount, skipCount, startTime } });
       } catch (error) {
         console.error("Error navigating to /congrads:", error);
       }
@@ -204,6 +209,7 @@ const QuizComponent = () => {
 
   const handleNextClick = async () => {
     if (currentRound === 3 && numberOfquestionsPerRound + 1 === 5) {
+      createFinishTime();
       setFinishQuiz(true);
     } else if (numberOfquestionsPerRound % 5 === 4) {
       setCurrentRound((prevRound) => prevRound + 1);
@@ -222,6 +228,7 @@ const QuizComponent = () => {
     }
 
     if (lives === 1) {
+      const timeDifference = createFinishTime();
       setGameOver(true);
       navigate("/quiz");
     }
@@ -355,7 +362,7 @@ const QuizComponent = () => {
           <h1>Game Over!</h1>
           <div className="game-over-buttons">
             <div>Final Score: {score}</div>
-            <p>Time taken to complete the quiz: {formatTime()}</p>
+            <p>Time taken to complete the quiz: {finishTime}</p>
             <div>Total hints used: {hintCount}</div>
             <div>Total swap used: {swapCount}</div>
             <div>Total 50:50 used: {fiftyCount}</div>
