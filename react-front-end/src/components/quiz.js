@@ -360,16 +360,13 @@ const QuizComponent = () => {
       {gameOver && (
         <div className="game-over-popup">
           <h1>Game Over!</h1>
-          <ul>
-          <li>Final Score: {score}</li>
-            <li>Time taken to complete the quiz: {finishTime}</li>
-            <li>Total hints used: {hintCount}</li>
-            <li>Total swap used: {swapCount}</li>
-            <li>Total 50:50 used: {fiftyCount}</li>
-            <li>Total skip used: {skipCount}</li>
-            </ul>
           <div className="game-over-buttons">
-        
+            <div>Final Score: {score}</div>
+            <p>Time taken to complete the quiz: {finishTime}</p>
+            <div>Total hints used: {hintCount}</div>
+            <div>Total swap used: {swapCount}</div>
+            <div>Total 50:50 used: {fiftyCount}</div>
+            <div>Total skip used: {skipCount}</div>
             <button onClick={handlePlayAgain}>Play Again</button>
             <button onClick={handleHomePage}>Main Page</button>
           </div>
