@@ -14,7 +14,7 @@
   width: 400px;
   border: 10px solid black;
   padding: 100px;
-  height: 500px; 
+  height: 500px;
   background-color: yellow;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,7 @@
   width: 400px;
   border: 10px solid black;
   padding: 100px;
-  height: 500px; 
+  height: 500px;
   background-color: yellow;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,7 @@
 .welcome {
   position: relative;
   bottom: 90px;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'Playpen Sans', cursive;
 }
 
 .how-to-play {
