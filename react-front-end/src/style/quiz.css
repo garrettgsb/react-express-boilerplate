@@ -16,7 +16,6 @@
   box-sizing: border-box;
 }
 
-
 .quizjs-image {
   width: 400px;
   margin-top: 20px;
@@ -24,17 +23,17 @@
 
 .round {
   font-size: 30px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
 }
 
 .question-number {
   font-size: 30px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
 }
 
 .questions {
   font-size: 40px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
   font-size: 20px;
   height: 10px;
 }
@@ -46,7 +45,6 @@
 .questions {
   font-size: 30px;
 }
-
 
 .middle {
   display: flex;
@@ -65,58 +63,56 @@
 
 .buttons {
   font-size: 30px;
-  border: 5px black solid; 
+  border: 5px black solid;
   margin-bottom: 0.5em;
   background-color: rgb(245, 245, 241);
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
 }
 
 .buttons:hover {
-  background-color: #9c0fbb;
-  cursor: pointer; 
+  background-color: #F6DF1E;
+  cursor: pointer;
 }
-
 
 .lives {
   font-size: 30px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
 }
 
 .your-score {
   font-size: 30px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
 }
 
-.powerUpButtons{
+.powerUpButtons {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
-
 .hint {
   font-size: 30px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
 }
 
 .h-button {
   font-size: 30px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
 }
 
 .s-button {
   font-size: 30px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
 }
 
 .fifty-fifty-button {
   font-size: 30px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
 }
 
 .switch-button {
   font-size: 30px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
   font-size: 20px;
   font-style: italic;
 }
@@ -143,23 +139,20 @@
 
 .dude {
   width: 200px;
-  
 }
 
 .dude2 {
   width: 200px;
-  
 }
 
 .dude3 {
   width: 170px;
-  
 }
 
 .timer {
   color: red;
   font-size: 40px;
-  font-family: 'Playpen Sans', cursive;
+  font-family: "Playpen Sans", cursive;
   font-size: 25px;
 }
 
@@ -167,33 +160,38 @@
   font-size: 50px;
   color: rgb(242, 242, 234);
   margin-bottom: 20px;
-  text-align: center; 
-  font-family: 'Playpen Sans', cursive;
+  text-align: center;
+  font-family: "Playpen Sans", cursive;
 }
 
-.game-over-popup p {
+.game-over-popup li {
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  list-style-type: none;
+  font-size: 30px;
 }
 
 .game-over-buttons button {
   font-size: 30px;
-  border: 5px black solid; 
+  border: 5px black solid;
   margin-bottom: 0.5em;
   background-color: yellow;
   font-family: "Pixelify Sans", sans-serif;
+  margin-left: 170px;
+  margin-top: 20px;
 }
 
 .game-over-buttons button:hover {
   border: 5px yellow solid;
   background-color: yellow;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .game-over-buttons {
   display: flex;
   gap: 30px;
 }
+ 

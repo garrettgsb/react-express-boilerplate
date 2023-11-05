@@ -55,17 +55,17 @@ function HighScores() {
           }
         });
 
-        // Take only the top 20 high scores
-        const top20HighScores = sortedHighScores.slice(0, 20);
+        // Take only the top 24 high scores
+        const topHighScores = sortedHighScores.slice(0, 24);
 
-        setHighScores(top20HighScores);
+        setHighScores(topHighScores);
       })
       .catch((error) => console.error("Error fetching high scores:", error));
   }, []);
 
   return (
     <div className="score-box">
-      <h2 className="board">leaderboard</h2>
+      <h2 className="board">Leaderboard</h2>
       <div className="score-columns">
         {highScores.map((score, index) => (
           <div key={index} className="score-row">

@@ -8,14 +8,13 @@ import Header from "./header";
 const Congrats = ({ onLeaderboardUpdate }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [completionTime, setCompletionTime] = useState(null);
 
+  const [completionTime, setCompletionTime] = useState(null);
   useEffect(() => {
     if (location.state) {
       const startTime = location.state.startTime;
       const endTime = new Date();
       const timeDifference = endTime - startTime;
-      console.log('time difference:', timeDifference);
       setCompletionTime(timeDifference);
     }
   }, [location.state]);
@@ -27,6 +26,12 @@ const Congrats = ({ onLeaderboardUpdate }) => {
 
   // Access the score from the location state
   const score = location.state && location.state.score;
+  const lives = location.state && location.state.lives;
+  const finishTime = location.state && location.state.finishTime;
+  const hintCount = location.state && location.state.hintCount;
+  const swapCount = location.state && location.state.swapCount;
+  const fiftyCount = location.state && location.state.fiftyCount;
+  const skipCount = location.state && location.state.skipCount;
 
   // Function to validate the nickname
   const validateNickname = async (nickname) => {
@@ -130,10 +135,18 @@ const Congrats = ({ onLeaderboardUpdate }) => {
       <Header page="congrads" />
       </div>
       <div className="bottom">
-      <h1 className="final-score">Your final score: {score}</h1>
-      {completionTime && (
-        <h2>Time taken to complete the quiz: {formatTime(completionTime)}</h2>
-      )}
+<div className="stats-box">
+        <h1>Your game stats:</h1>
+        <ul className="stats">
+          <li className="final-score">Your final score: {score}</li>
+          <li className="final-lives">Your final lives: {lives}</li>
+          <li className="final-hints">Amount of hints used: {hintCount}</li>
+          <li className="final-swap">Amount of swaps used: {swapCount}</li>
+          <li className="final-fifty">Amount of 50:50s used: {fiftyCount}</li>
+          <li className="final-skip">Amount of skips used: {skipCount}</li>
+          <li className="final-time">Completion Time: {finishTime}</li>
+        </ul>
+        </div>
       <form className="myForm" onSubmit={handleSubmit}>
         {submissionMessage && <h2>{submissionMessage}</h2>}
 
@@ -155,13 +168,6 @@ const Congrats = ({ onLeaderboardUpdate }) => {
     </div>
     </div>
   );
-};
-
-// Helper function to format milliseconds into a readable time format
-const formatTime = (milliseconds) => {
-  const seconds = Math.floor(milliseconds / 1000);
-  const minutes = Math.floor(seconds / 60);
-  return `${minutes} minutes and ${seconds % 60} seconds`;
 };
 
 export default Congrats;
