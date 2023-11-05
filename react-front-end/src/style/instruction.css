@@ -70,7 +70,7 @@ p {
   font-weight: bold;
 }
 
-li {
+.boxes li {
   margin: 12px 0px 12px;
   font-size: large;
   font-family: 'Playpen Sans', cursive;
