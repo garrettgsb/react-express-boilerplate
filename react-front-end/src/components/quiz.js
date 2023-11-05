@@ -270,7 +270,7 @@ const QuizComponent = () => {
       {!gameOver && (
         <div className="game">
           <span className="round">
-            <p className="animate__animated animate__backInDown">
+            <p>
               Round {currentRound}
             </p>
           </span>

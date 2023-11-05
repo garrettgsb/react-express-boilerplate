@@ -135,16 +135,18 @@ const Congrats = ({ onLeaderboardUpdate }) => {
       <Header page="congrads" />
       </div>
       <div className="bottom">
+<div className="stats-box">
         <h1>Your game stats:</h1>
-        <ul>
+        <ul className="stats">
           <li className="final-score">Your final score: {score}</li>
           <li className="final-lives">Your final lives: {lives}</li>
           <li className="final-hints">Amount of hints used: {hintCount}</li>
-          <li className="final-swap">Your remaining a: {swapCount}</li>
-          <li className="final-fifty">Your remaining a: {fiftyCount}</li>
-          <li className="final-skip">Your remaining a: {skipCount}</li>
+          <li className="final-swap">Amount of swaps used: {swapCount}</li>
+          <li className="final-fifty">Amount of 50:50s used: {fiftyCount}</li>
+          <li className="final-skip">Amount of skips used: {skipCount}</li>
           <li className="final-time">Completion Time: {finishTime}</li>
         </ul>
+        </div>
       <form className="myForm" onSubmit={handleSubmit}>
         {submissionMessage && <h2>{submissionMessage}</h2>}
 

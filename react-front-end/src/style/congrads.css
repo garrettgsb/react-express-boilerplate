@@ -64,3 +64,14 @@ color: white;
   width: 20px;
 }
 
+.stats {
+  list-style-type: none;
+}
+
+.bottom {
+  padding-bottom: 40px;
+}
+
+.stats-box {
+margin-bottom: 45px;
+}
