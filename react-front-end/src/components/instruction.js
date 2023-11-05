@@ -33,7 +33,7 @@ function Instruction() {
           <div className="how-to-play">
             <p className="bold">Starting Lives:</p>
             <ul>
-              <li>You begin the game with 5 lives ❤️❤️❤️❤️❤️</li>
+              <li>You begin the game with 5 lives ❤️</li>
             </ul>
             <p className="bold">Answering Questions:</p>
             <ul>
