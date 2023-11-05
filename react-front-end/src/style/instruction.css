@@ -14,40 +14,19 @@
   width: 400px;
   border: 10px solid black;
   padding: 100px;
-  height: 500px;
+  padding-right: 80px;
+  padding-top: 0px;
+  height: 420px;
   background-color: yellow;
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 500px;
   margin: 20px;
   margin-top: 0px;
 }
 
-.box-two {
-  width: 400px;
-  border: 10px solid black;
-  padding: 100px;
-  height: 500px;
-  background-color: yellow;
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  margin: 20px;
-  margin-top: 0px;
-}
-
-.welcome {
-  position: relative;
-  bottom: 90px;
+.instruction-header {
   font-family: 'Playpen Sans', cursive;
-}
-
-.how-to-play {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  bottom: 90px;
 }
 
 .div-style {
@@ -91,7 +70,8 @@ p {
   font-weight: bold;
 }
 
-li {
+.boxes li {
+  margin: 12px 0px 12px;
   font-size: large;
   font-family: 'Playpen Sans', cursive;
 }
@@ -102,4 +82,13 @@ li {
   justify-content: space-between;
   margin: 20px;
 
+}
+
+.boxes ul {
+    padding-inline-start: 25px;
+  margin: 0px;
+}
+
+.boxes h2 {
+  margin: 0px;
 }
