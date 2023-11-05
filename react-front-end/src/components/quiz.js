@@ -36,6 +36,10 @@ const QuizComponent = () => {
   const [startTime, setStartTime] = useState(null);
   const [timer, setTimer] = useState(timerDuration);
   const [finishQuiz, setFinishQuiz] = useState(false);
+  const [hintCount, setHintCount] = useState(0);
+  const [skipCount, setSkipCount] = useState(0);
+  const [fiftyfiftyCount, setFiftyfiftyCount] = useState(0);
+  const [swapCount, setSwapCount] = useState(0);
 
   const optionLabel = {
     0: "A",
@@ -114,6 +118,7 @@ const QuizComponent = () => {
     newOption.push(options[random]);
     setFiftyOptions(newOption);
     setClickFifty(true);
+    setFiftyfiftyCount((prevCount) => prevCount + 1);
     handleAudio(state.isMute, sounds.fifty)
   };
 
@@ -128,6 +133,7 @@ const QuizComponent = () => {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setClickSwap(true);
     }
+    setSwapCount((prevCount) => prevCount + 1);
     handleAudio(state.isMute, sounds.swap)
   };
 
@@ -177,11 +183,13 @@ const QuizComponent = () => {
   const handleHintClick = () => {
     setHintUsed(true); // Set hintUsed to true when the hint is clicked
     setShowHint(true); // Show the hint
+    setHintCount((prevCount) => prevCount + 1);
     handleAudio(state.isMute, sounds.hint)
   };
 
   const handleSkipClick = () => {
     handleNextClick();
+    setSkipCount((prevCount) => prevCount + 1);
     handleAudio(state.isMute, sounds.skip)
   }
 
@@ -335,6 +343,10 @@ console.log('lives:', lives);
       {gameOver && (
         <div className="game-over-popup">
           <h1>Game Over!</h1>
+          <p>Hint Used: {hintCount} times</p>
+          <p>Skip Used: {skipCount} times</p>
+          <p>50/50 Used: {fiftyfiftyCount} times</p>
+          <p>Swap Used: {swapCount} times</p>
           <div className="game-over-buttons">
             <button onClick={handlePlayAgain}>Play Again</button>
             <button onClick={handleHomePage}>Main Page</button>

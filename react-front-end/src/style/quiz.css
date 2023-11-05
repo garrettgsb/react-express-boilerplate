@@ -175,6 +175,13 @@
   text-align: center; 
 }
 
+.game-over-popup p {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .game-over-buttons button {
   font-size: 30px;
