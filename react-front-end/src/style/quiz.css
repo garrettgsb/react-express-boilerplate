@@ -14,6 +14,7 @@
   background-color: rgb(255, 255, 255);
   padding: 20px 20px;
   box-sizing: border-box;
+  border-radius: 15px
 }
 
 .quizjs-image {
@@ -67,6 +68,7 @@
   margin-bottom: 0.5em;
   background-color: rgb(245, 245, 241);
   font-family: "Playpen Sans", cursive;
+  border-radius: 10px;
 }
 
 .buttons:hover {
@@ -96,45 +98,47 @@
 }
 
 .h-button {
-  font-size: 30px;
-  font-family: "Playpen Sans", cursive;
-}
-
-.s-button {
-  font-size: 30px;
-  font-family: "Playpen Sans", cursive;
-}
-
-.fifty-fifty-button {
-  font-size: 30px;
-  font-family: "Playpen Sans", cursive;
-}
-
-.switch-button {
-  font-size: 30px;
-  font-family: "Playpen Sans", cursive;
   font-size: 20px;
   font-style: italic;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 5px 5px 5px #c9bebe;
 }
-
-.h-button {
-  font-size: 20px;
-  font-style: italic;
+.h-button:hover {
+  cursor: pointer;
 }
 
 .s-button {
   font-size: 20px;
   font-style: italic;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 5px 5px 5px #c9bebe;
+}
+.s-button:hover {
+  cursor: pointer;
 }
 
 .fifty-fifty-button {
   font-size: 20px;
   font-style: italic;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 5px 5px 5px #c9bebe;
+}
+.fifty-fifty-button:hover {
+  cursor: pointer;
 }
 
 .switch-button {
   font-size: 20px;
   font-style: italic;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 5px 5px 5px #c9bebe;
+}
+.switch-button:hover {
+  cursor: pointer;
 }
 
 .dude {
@@ -193,6 +197,10 @@
 .game-over-buttons {
   display: flex;
   gap: 30px;
+<<<<<<< HEAD
+}
+=======
   padding-right: 150px;
 }
  
+>>>>>>> master
