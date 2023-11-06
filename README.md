@@ -3,16 +3,19 @@
 ## Final Product
 
 ### Home Page
-photo of home page
+![home](react-front-end/src/asset/home.png)
 
 ### Instruction Page
-photo of instruction page
+![info](react-front-end/src/asset/info.png)
 
 ### Quiz Page
-photo of quiz page
+![quiz](react-front-end/src/asset/quiz.png)
+
+### Game Over Page
+![gameover](react-front-end/src/asset/gameover.png)
 
 ### Congrads Page
-photo of congrads page
+![congrads](react-front-end/src/asset/congrads.png)
 
 ## Getting Started
 
@@ -31,7 +34,7 @@ photo of congrads page
 ## Navigating the app
 
 ### Home page
-- On the home page you see the top 20 high scores
+- On the home page you see the top 24 high scores
 - You can hit play to start the quiz or look at the Instructions page
 
 ### Instructions page
@@ -40,13 +43,14 @@ photo of congrads page
 ### Quiz page
 - This page is the game it's self
 - Here you answer questions, earn points, and use hints if you stuck
-- You score is being recorded as you go along
-- How long you take to complete the quiz is also being recorded
+- You score and game stats are being recorded as you go along
+- you have a 5 min time limit to finish the quiz
 
 ### Congrads Page
-- This is where you will see your score and final time
+- This is where you will see your score, final time and other game stats
 - You enter in a nickname 
 - if you scored high enough your score will be added to the leader board
+- after submiting your nickname you will be sent back to the home page
 
 ## How to Reset the database
 
@@ -56,11 +60,15 @@ photo of congrads page
 
 ## Dependencies
 
+- normalize.css 12.0.0
+- animation.css 4.1.1
 - axios: 0.18.1
+- postcss-normalize 10.0.1
 - react: 16.8.6
 - react-dom: 16.8.6
 - react-router-dom: 6.17.0
 - react-scripts: 2.1.8
+- sanitize.css 13.0.0
 - body-parser: 1.20.2
 - chalk: 4.1.2
 - cors: 2.8.5
