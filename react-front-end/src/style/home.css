@@ -1,0 +1,144 @@
+.start-button {
+  width: 300px;
+  height: 100px;
+  background-color: #ffff00;
+  color: #000000;
+  border: 8px solid #000000;
+  border-radius: 5px;
+  font-size: 30px;
+  font-family: "Pixelify Sans", sans-serif;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.info-button {
+  width: 300px;
+  height: 100px;
+  background-color: #ffff00;
+  color: #000000;
+  border: 8px solid #000000;
+  border-radius: 5px;
+  font-size: 30px;
+  font-family: "Pixelify Sans", sans-serif;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.rectangle-button:hover {
+  background-color: #e0e000;
+}
+
+.score-box {
+  background-color: #ffff00;
+  color: #000000;
+  border: 8px solid #000000;
+  border-radius: 5px;
+  width: 800px;
+  padding-bottom: 20px;
+  padding-left: 110px;
+  padding-right: 110px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.score-column {
+  width: 30%;
+}
+
+.home {
+  /* height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.quizjs img {
+  max-height: 200px;
+}
+
+.dude-container {
+  display: flex;
+  align-items: center;
+ /* padding-left: 500px; */
+}
+
+.start {
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
+}
+
+.dude {
+  padding-left: 20px;
+}
+
+.des-container {
+  min-width: 500px;
+}
+
+.des {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.des h1 {
+  margin: 10px 0;
+}
+
+.player-name {
+  text-align: left;
+  font-family: 'Playpen Sans', cursive;
+  width: 75%;
+  margin-left: 0.5em;
+}
+
+.player-score {
+  text-align: right;
+  padding: 0 5px;
+  font-family: 'Playpen Sans', cursive;
+}
+
+.score-columns {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 350px;
+  margin-left: -5em;
+}
+
+.score-row {
+  width: 180px;
+  display: flex;
+  margin-right: 4.5em;
+}
+
+.list { 
+  padding: 0;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.score { 
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  width: 190px;
+/* margin-right: 5em; */
+}
+
+.des-container {
+  max-width: 500px;
+}
+
+.board {
+  font-family: 'Playpen Sans', cursive;
+}
+
+.content-container {
+  margin-top: 95px;
+}

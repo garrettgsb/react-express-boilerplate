@@ -1,0 +1,13 @@
+
+.choice {
+  background-color: #eee;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.choice.selected {
+  background-color: #ffff00;
+  color: #fff;
+}

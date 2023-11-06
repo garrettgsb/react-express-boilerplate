@@ -1,0 +1,22 @@
+.top-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.top-page-container {
+  padding-left: 96px;
+  display: flex;
+  justify-content: center;
+}
+
+.top-page-container:has(.des-container) {
+  padding-right: 220px;
+}
+
+.mute-button-container {
+  display: flex;
+  height: 96px;
+  width: 96px;
+}
