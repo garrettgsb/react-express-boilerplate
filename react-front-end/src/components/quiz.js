@@ -50,8 +50,7 @@ const QuizComponent = () => {
     3: "D",
   };
 
-  useEffect(() => {
-    // Fetch questions
+  const fetchQuestions = () => {
     fetch(`http://localhost:8080/api/questions/${currentRound}`)
       .then((response) => {
         if (!response.ok) {
@@ -73,6 +72,11 @@ const QuizComponent = () => {
         setCurrentQuestionIndex(0);
       })
       .catch((error) => console.error("Error fetching questions:", error));
+  }
+
+  useEffect(() => {
+    // Fetch questions
+    fetchQuestions();
   }, [currentRound]);
 
   useEffect(() => {
@@ -199,8 +203,12 @@ const QuizComponent = () => {
   useEffect(() => {
     if (finishQuiz) {
       try {
-        navigate("/congrads", { state: { score, lives, finishTime, hintCount,
-          swapCount, fiftyCount, skipCount, startTime } });
+        navigate("/congrads", {
+          state: {
+            score, lives, finishTime, hintCount,
+            swapCount, fiftyCount, skipCount, startTime
+          }
+        });
       } catch (error) {
         console.error("Error navigating to /congrads:", error);
       }
@@ -257,6 +265,7 @@ const QuizComponent = () => {
     setFiftyOptions([]);
     setClickFifty(false);
     setStartTime(new Date());
+    fetchQuestions();
   };
 
   const handleHomePage = () => {
@@ -361,11 +370,11 @@ const QuizComponent = () => {
         <div className="game-over-popup">
           <h1>Game Over!</h1>
           <li>Final Score: {score}</li>
-            <li>Time taken to complete the quiz: {finishTime}</li>
-            <li>Total hints used: {hintCount}</li>
-            <li>Total swap used: {swapCount}</li>
-            <li>Total 50:50 used: {fiftyCount}</li>
-            <li>Total skip used: {skipCount}</li>
+          <li>Time taken to complete the quiz: {finishTime}</li>
+          <li>Total hints used: {hintCount}</li>
+          <li>Total swap used: {swapCount}</li>
+          <li>Total 50:50 used: {fiftyCount}</li>
+          <li>Total skip used: {skipCount}</li>
           <div className="game-over-buttons">
             <button onClick={handlePlayAgain}>Play Again</button>
             <button onClick={handleHomePage}>Main Page</button>
