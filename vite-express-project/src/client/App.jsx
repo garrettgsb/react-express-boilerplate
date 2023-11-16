@@ -1,32 +1,44 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
+import supabase from "../config/supabaseClient.js";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [fetchError, setFetchError] = useState(null);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data, error } = await supabase.from("users").select();
+
+        if (error) {
+          setFetchError("Could not fetch data");
+          setData(null);
+          console.log(error.message);
+        } else {
+          setFetchError(null);
+          setData(data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR!
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div>
+      {fetchError && <p>{fetchError}</p>}
+      {data && (
+        <ul>
+          {data.map((user) => (
+            <li key={user.id}>
+              `{`ID: ${user.id} - Name: ${user.name} - User Bio: ${user.bio}`}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
