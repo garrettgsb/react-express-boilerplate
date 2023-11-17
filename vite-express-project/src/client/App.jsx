@@ -21,7 +21,9 @@ function App() {
 
   return (
     <>
+
       <NavBar openModal={openModal} />
+
       <Routes>
         <Route exact path="/" element={<LandingRoute openModal={openModal} />}/>
         <Route exact path="/myprofile" element={<MyProfile />} />
@@ -37,6 +39,7 @@ function App() {
     //   <Footer />
     //
     // </>
+
   );
 }
 
