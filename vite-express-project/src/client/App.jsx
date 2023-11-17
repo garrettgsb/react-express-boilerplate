@@ -20,6 +20,7 @@ function App() {
 
   return (
     <>
+
   <NavBar openModal={openModal} />
       <Routes>
         <Route exact path="/" element={<LandingRoute />} />
@@ -34,6 +35,7 @@ function App() {
     //   <Footer />
     //   {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
     // </>
+
   );
 }
 
