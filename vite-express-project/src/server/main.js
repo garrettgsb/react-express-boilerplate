@@ -2,23 +2,13 @@ const express = require("express");
 const ViteExpress = require("vite-express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-require("dotenv").config({
-  path: "/Users/sunny/lighthouse/LHL-Final/LHL-Final-Project/vite-express-project/.env.local",
-});
-
-const supabaseUrl = process.env.VITE_SUPABASE_URL;
-const supabaseKey = process.env.VITE_SUPABASE_KEY;
-
-const { createClient } = require("@supabase/supabase-js");
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = require("../config/supabaseClient");
 
 // Express app setup
 const app = express();
 
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
-
-
 
 // Route handling
 
