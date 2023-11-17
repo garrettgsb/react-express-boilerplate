@@ -1,20 +1,33 @@
-// import supabase from "../config/supabaseClient.js";
 import { useEffect, useState } from "react";
-import './App.css'
-import NavBar from './components/NavBar'
-import Footer from './components/Footer';
-import Landing from './routes/LandingRoute';
-import { AuthProvider } from "./hooks/AuthContext";
+import "./App.css";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import Landing from "./routes/LandingRoute";
+import SignupModal from "./components/SignupModal";
 
 function App() {
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
   return (
-    <AuthProvider>
-      <NavBar />
-      <Landing />
+
+    <>
+      <NavBar openModal={openModal} />
+      <Landing openModal={openModal} />
       <Footer />
-    </AuthProvider>
+      {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
+    </>
+
   );
 }
 
-export default App
+export default App;

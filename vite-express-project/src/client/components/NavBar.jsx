@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 import { useAuth } from "../hooks/AuthContext";
 
-export default function NavBar() {
+export default function NavBar({ openModal }) {
   const { isLoggedIn, login, logout } = useAuth();
 
   const navigation = [
@@ -42,7 +43,7 @@ export default function NavBar() {
               onClick={() => login()}
               className="font-subHeading bg-transparent hover:bg-buttonHover text-button font-semibold hover:text-white py-2 px-4 border border-button hover:border-transparent rounded">
               Log in
-            </button>
+            </button onClick={openModal} >
             <button className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded">
               Register
             </button>
@@ -52,4 +53,5 @@ export default function NavBar() {
         </div>
       </nav>
   )
+
 }
