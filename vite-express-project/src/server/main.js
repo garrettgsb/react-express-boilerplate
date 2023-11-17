@@ -2,15 +2,32 @@ const express = require("express");
 const ViteExpress = require("vite-express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const session = require('express-session');
 const supabase = require("../config/supabaseClient");
 
 // Express app setup
 const app = express();
 
 app.use(express.json()); // Parse JSON bodies
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: '123456',
+  resave: false,
+  saveUninitialized: false 
+}));
 
 // Route handling
+
+//testing routes
+
+app.get('/test/set-session-id', (req, res) => {
+  req.session.userId = '3'; // Set a custom user ID to the session for testing
+  res.send('Session ID set for testing');
+});
+
+app.get('/api/myprofile', (req, res) => {
+  res.send(req.session.userId);
+});
 
 //Route handling for users
 
@@ -33,11 +50,12 @@ app.get("/user", async (req, res) => {
 
 // gets user by id from users table in supabase
 app.get("/api/users/:id", async (req, res) => {
+
   try {
     const { data, error } = await supabase
       .from("users")
       .select("*")
-      .eq("id", req.params.id);
+      .eq("id", req.params.id );
 
     if (error) {
       console.error("Supabase Insert Error:", error);

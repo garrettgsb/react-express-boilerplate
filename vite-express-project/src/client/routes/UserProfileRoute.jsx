@@ -27,7 +27,7 @@ function convertRate(cents) {
   return dollars.toFixed(2);
 }
 
-export default function MyProfile() {
+export default function UserProfile() {
   const { id } = useParams();
   const [user, setUser] = useState({});
 
@@ -36,7 +36,8 @@ export default function MyProfile() {
       try {
         const response = await fetch(`/api/users/${id}`);
         const data = await response.json();
-        setUser(data);
+        setUser(data[0]);
+        console.log(data);
       }
       catch (error) {
         console.error(error);
@@ -46,9 +47,12 @@ export default function MyProfile() {
   }
   , [id]);
 
+ 
+
 
 
   return(
+    
     <div className="m-10 flex flex-col justify-center">
       <header className="font-subHeading text-xl text-accent flex justify-between p-5">
           My Profile
@@ -67,11 +71,11 @@ export default function MyProfile() {
         </div>
 
         <div className="w-80 grid grid-cols-1 content-around">
-          <h2 className="font-heading text-3xl">{user.name}</h2>
+          <h2 className="font-heading text-3xl">{user.name} {console.log(user)}</h2>
           <p className="text-textSecondary">
             {user.bio}
           </p>
-          <span className="text-accent">Rate: ${convertRate(user.rate)} / hour</span>
+          <span className="text-accent">Rate: ${convertRate(user.wage)} / hour</span>
         </div>        
       </main>
         

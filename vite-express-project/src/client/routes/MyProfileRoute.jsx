@@ -1,23 +1,26 @@
-const user = {
-  id: 1,
-  username: "John123",
-  name: "John Smith",
-  email: "test@test.com",
-  bio: "I find inspiration in the simplest moments of life,translating them into captivating visuals that tell unique stories. My journey as an artist is a continuous exploration of new techniques and expressions, driven by a deep love for the craft.",
-  rate: 5000,
-  profile_picture:"./public/images/user_1.jpg",
-  location: "Saanich",
-  images: ["./public/images/art_1.jpg",
-           "./public/images/art_2.jpg",
-           "./public/images/art_3.jpg",
-           "./public/images/art_4.jpg",
-           "./public/images/art_5.jpg",
-           "./public/images/art_6.jpg"
-          ],
-};
+// const user = {
+//   id: 1,
+//   username: "John123",
+//   name: "John Smith",
+//   email: "test@test.com",
+//   bio: "I find inspiration in the simplest moments of life,translating them into captivating visuals that tell unique stories. My journey as an artist is a continuous exploration of new techniques and expressions, driven by a deep love for the craft.",
+//   rate: 5000,
+//   profile_picture:"./public/images/user_1.jpg",
+//   location: "Saanich",
+//   images: ["./public/images/art_1.jpg",
+//            "./public/images/art_2.jpg",
+//            "./public/images/art_3.jpg",
+//            "./public/images/art_4.jpg",
+//            "./public/images/art_5.jpg",
+//            "./public/images/art_6.jpg"
+//           ],
+// };
 
 // above is mock data
 // data will be fetched from /api/users/${userId]}
+
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 function convertRate(cents) {
   const dollars = cents / 100;
@@ -25,6 +28,26 @@ function convertRate(cents) {
 }
 
 export default function MyProfile() {
+
+    const { id } = useParams();
+    const [user, setUser] = useState({images: []});
+  
+    useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const response = await fetch(`/api/users/3`); //change to ${id} when ready
+          const data = await response.json();
+          setUser(data[0]);
+          console.log(data);
+        }
+        catch (error) {
+          console.error(error);
+        }
+      }
+      fetchUser();
+    }
+    , [id]);
+
   return(
     <div className="m-10 flex flex-col justify-center">
       <header className="font-subHeading text-xl text-accent flex justify-between p-5">
@@ -48,19 +71,20 @@ export default function MyProfile() {
           <p className="text-textSecondary">
             {user.bio}
           </p>
-          <span className="text-accent">Rate: ${convertRate(user.rate)} / hour</span>
+          <span className="text-accent">Rate: ${convertRate(user.wage)} / hour</span>
         </div>        
       </main>
         
 
       <h2 className="font-heading text-2xl m-5 pt-5">My Projects</h2>
-      <div className="carousel rounded-box">  
-        {user.images.map((image, index) => (
-            <div className="carousel-item">
-              <img key={index} src={image} alt={`Image ${index + 1}`} className="w-72 h-72" />
+      
+     <div className="carousel rounded-box">  
+        { user.images.map((image, index) => (
+            <div className="carousel-item" key={image}>
+              <img key={[index]} src={image} alt={`Image ${index + 1}`} className="w-72 h-72" />
             </div>
           ))}
-      </div>
+      </div> 
 
     </div>
   )
