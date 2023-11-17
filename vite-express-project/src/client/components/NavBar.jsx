@@ -1,17 +1,13 @@
 import { useState } from "react";
+import { useAuth } from "../hooks/AuthContext";
 
 export default function NavBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, login, logout } = useAuth();
 
   const navigation = [
     { name: 'Find Artists', href: '#' },
     { name: 'Find Gigs', href: '#' },
   ]
-  
-  // Toggle the isLoggedIn state when a user logs in or out
-  const handleLoginToggle = () => {
-    setIsLoggedIn((prevIsLoggedIn) => !prevIsLoggedIn);
-  }
 
   return (
       <nav className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 pb-1.5 h-10"> {/* Fix the class name here */}
@@ -30,12 +26,11 @@ export default function NavBar() {
         {isLoggedIn ? (
           <>
             {/* When the user is logged in */}
-            <button 
-              className="font-subHeading bg-transparent hover:bg-buttonHover text-button font-semibold hover:text-white py-2 px-4 border border-button hover:border-transparent rounded">
-              Profile
+            <button>
+              MY Profile
             </button>
             <button
-              onClick={() => handleLoginToggle()} 
+              onClick={() => logout()} 
               className="font-subHeading bg-transparent hover:bg-buttonHover text-button font-semibold hover:text-white py-2 px-4 border border-button hover:border-transparent rounded">
               Logout
             </button>
@@ -44,7 +39,7 @@ export default function NavBar() {
           <>
             {/* When the user is NOT logged in */}
             <button
-              onClick={() => handleLoginToggle()}
+              onClick={() => login()}
               className="font-subHeading bg-transparent hover:bg-buttonHover text-button font-semibold hover:text-white py-2 px-4 border border-button hover:border-transparent rounded">
               Log in
             </button>
