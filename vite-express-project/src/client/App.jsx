@@ -26,6 +26,7 @@ function App() {
       <Footer />
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
     </>
+
   );
 }
 
