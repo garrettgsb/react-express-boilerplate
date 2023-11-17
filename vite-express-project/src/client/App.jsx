@@ -1,10 +1,13 @@
-import "./App.css";
 import supabase from "../config/supabaseClient.js";
 import { useEffect, useState } from "react";
+import './App.css'
+import NavBar from './components/NavBar'
+import Footer from './components/Footer';
+import Landing from './routes/LandingRoute';
 
 function App() {
-  const [fetchError, setFetchError] = useState(null);
-  const [data, setData] = useState(null);
+   const [fetchError, setFetchError] = useState(null);
+   const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,21 +29,14 @@ function App() {
 
     fetchData();
   }, []);
-
+  
   return (
-    <div>
-      {fetchError && <p>{fetchError}</p>}
-      {data && (
-        <ul>
-          {data.map((user) => (
-            <li key={user.id}>
-              `{`ID: ${user.id} - Name: ${user.name} - User Bio: ${user.bio}`}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <>
+      <NavBar />
+      <Landing />
+      <Footer />
+    </>
   );
 }
 
-export default App;
+export default App
