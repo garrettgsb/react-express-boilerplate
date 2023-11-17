@@ -1,10 +1,9 @@
-import { createClient } from "@supabase/supabase-js";
+// const { createClient } = require('@supabase/supabase-js');
+// require('dotenv').config({ path: '.env.local' });
 
-// Create a single supabase client for interacting with your database
+// const supabaseUrl = process.env.SUPABASE_URL;
+// const supabaseKey = process.env.SUPABASE_KEY;
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+// const supabase = createClient(supabaseUrl, supabaseKey);
 
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-export default supabase;
+// export default supabase;

@@ -1,21 +1,11 @@
-import SignupModal from "./SignupModal";
-import { useState } from "react";
+import React from "react";
 
 const navigation = [
   { name: "Find Artists", href: "#" },
   { name: "Find Gigs", href: "#" },
 ];
 
-export default function NavBar() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+export default function NavBar({ openModal }) {
 
   return (
     <nav className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4pb-1.5 h-10">
@@ -44,7 +34,6 @@ export default function NavBar() {
           Register
         </button>
       </div>
-      {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
     </nav>
   );
 }
