@@ -32,7 +32,7 @@ app.get("/user", async (req, res) => {
 });
 
 // gets user by id from users table in supabase
-app.get("/users/:id", async (req, res) => {
+app.get("/api/users/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("users")
@@ -52,11 +52,11 @@ app.get("/users/:id", async (req, res) => {
 });
 
 // Adds a new user to users table in supabase
-app.post("/users", async (req, res) => {
+app.post("/api/users", async (req, res) => {
   handleTableInsertion(req, res, supabase, "users");
 });
 
-app.put("/users/:id", async (req, res) => {
+app.put("/api/users/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("users")
@@ -75,7 +75,7 @@ app.put("/users/:id", async (req, res) => {
   }
 });
 
-app.delete("/users/:id", async (req, res) => {
+app.delete("/api/users/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("users")
@@ -95,7 +95,7 @@ app.delete("/users/:id", async (req, res) => {
 });
 
 // Route handling for projects
-app.get("/projects", async (req, res) => {
+app.get("/api/projects", async (req, res) => {
   try {
     const { data, error } = await supabase.from("projects").select("*");
 
@@ -111,7 +111,7 @@ app.get("/projects", async (req, res) => {
   }
 });
 
-app.get("/projects/:id", async (req, res) => {
+app.get("/api/projects/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("projects")
@@ -130,7 +130,7 @@ app.get("/projects/:id", async (req, res) => {
   }
 });
 
-app.post("/projects", async (req, res) => {
+app.post("/api/projects", async (req, res) => {
   try {
     const { data, error } = await supabase.from("projects").insert(req.body);
 
@@ -146,7 +146,7 @@ app.post("/projects", async (req, res) => {
   }
 });
 
-app.put("/projects/:id", async (req, res) => {
+app.put("/api/projects/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("projects")
@@ -165,7 +165,7 @@ app.put("/projects/:id", async (req, res) => {
   }
 });
 
-app.delete("/projects/:id", async (req, res) => {
+app.delete("/api/projects/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("projects")
