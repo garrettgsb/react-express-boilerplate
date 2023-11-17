@@ -1,9 +1,8 @@
 import { useState } from "react";
-// import { useAuth } from "../hooks/AuthContext";
+import { useAuth } from "../hooks/AuthContext";
 
 export default function NavBar({ openModal }) {
-  // const { isLoggedIn, login, logout } = useAuth();
-  const isLoggedIn = true;
+const { isLoggedIn, login, logout } = useAuth();
 
   const navigation = [
     { name: "Find Artists", href: "#" },
