@@ -66,8 +66,8 @@ export default function Home() {
       </section>
 
       <div className="my-20 py-20 bg-accent">
-        <h1 className="font-heading text-2xl">Elevate Your Artistic journey in Victoria!</h1>
-        <h1 className="font-heading text-2xl">Ignite creativity, collaborate, and empower local artistry.</h1>
+        <h1 className="font-heading text-2xl dark:text-white">Elevate Your Artistic journey in Victoria!</h1>
+        <h1 className="font-heading text-2xl dark:text-white">Ignite creativity, collaborate, and empower local artistry.</h1>
       </div>
       
     </div>
