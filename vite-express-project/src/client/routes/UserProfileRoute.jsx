@@ -19,46 +19,47 @@
 // above is mock data
 // data will be fetched from /api/users/${userId]}
 
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 function convertRate(cents) {
   const dollars = cents / 100;
   return dollars.toFixed(2);
 }
 
-export default function UserProfile() {
+export default function MyProfile() {
   const { id } = useParams();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ images: [] });
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`/api/users/${id}`);
+        const response = await fetch(`/api/users/${id}`); //change to ${id} when ready
         const data = await response.json();
         setUser(data[0]);
         console.log(data);
-      }
-      catch (error) {
+      } catch (error) {
         console.error(error);
       }
-    }
+    };
     fetchUser();
-  }
-  , [id]);
+  }, [id]);
 
- 
-
-
-
-  return(
-    
+  return (
     <div className="m-10 flex flex-col justify-center">
       <header className="font-subHeading text-xl text-accent flex justify-between p-5">
-          My Profile
-        <button className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded">
-          Edit
-        </button>
+        My Profile
+  {/* change logic so that only the user can see the edit button */}
+        {user.id === id && (
+  <button className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded">
+    Edit
+  </button>
+)} 
+
+
+
+
+
       </header>
 
       <main className="flex justify-center">
@@ -71,24 +72,27 @@ export default function UserProfile() {
         </div>
 
         <div className="w-80 grid grid-cols-1 content-around">
-          <h2 className="font-heading text-3xl">{user.name} {console.log(user)}</h2>
-          <p className="text-textSecondary">
-            {user.bio}
-          </p>
-          <span className="text-accent">Rate: ${convertRate(user.wage)} / hour</span>
-        </div>        
+          <h2 className="font-heading text-3xl">{user.name}</h2>
+          <p className="text-textSecondary">{user.bio}</p>
+          <span className="text-accent">
+            Rate: ${convertRate(user.wage)} / hour
+          </span>
+        </div>
       </main>
-        
 
       <h2 className="font-heading text-2xl m-5 pt-5">My Projects</h2>
-      {/* <div className="carousel rounded-box">  
-        {user.images.map((image, index) => (
-            <div className="carousel-item">
-              <img key={index} src={image} alt={`Image ${index + 1}`} className="w-72 h-72" />
-            </div>
-          ))}
-      </div> */}
 
+      <div className="carousel rounded-box">
+        {user.images.map((image, index) => (
+          <div className="carousel-item" key={image}>
+            <img
+              src={image}
+              alt={`Image ${index + 1}`}
+              className="w-72 h-72"
+            />
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }

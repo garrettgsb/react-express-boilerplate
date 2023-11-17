@@ -30,7 +30,7 @@ function convertRate(cents) {
 export default function MyProfile() {
 
     const { id } = useParams();
-    const [user, setUser] = useState({images: []});
+    const [user, setUser] = useState({images:[]});
   
     useEffect(() => {
       const fetchUser = async () => {
