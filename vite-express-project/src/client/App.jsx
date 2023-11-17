@@ -20,19 +20,20 @@ function App() {
 
   return (
     <>
-  <NavBar openModal={openModal} />
+      <NavBar openModal={openModal} />
       <Routes>
-        <Route exact path="/" element={<LandingRoute />} />
+        <Route exact path="/" element={<LandingRoute openModal={openModal} />}/>
         <Route exact path="/myprofile" element={<MyProfile />} />
       </Routes>
-  <Footer />
-  </>
+      <Footer />
+      {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
+    </>
 
     // <>
     //   <NavBar openModal={openModal} />
     //   <Landing openModal={openModal} />
     //   <Footer />
-    //   {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
+    //
     // </>
   );
 }
