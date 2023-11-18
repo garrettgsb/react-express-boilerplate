@@ -1,5 +1,3 @@
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/AuthContext";
 
 const LoginModal = () => {
@@ -28,12 +26,6 @@ const LoginModal = () => {
             placeholder="Password"
             className="input input-bordered w-full max-w-xs" />
         </div>
-        {/* <button
-          onClick={() => login()}
-          className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded-sm"
-        >
-          Log in
-        </button> */}
         <button
           onClick={() => handleLogin()}
           className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded-sm"
