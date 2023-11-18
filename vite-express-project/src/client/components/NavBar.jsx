@@ -11,8 +11,8 @@ const { isLoggedIn, login, logout } = useAuth();
 
   return (
     <nav className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 pb-1.5 h-10">
-      {" "}
-      {/* Fix the class name here */}
+      
+      
       <span className="font-heading text-4xl whitespace-nowrap">LOGO</span>
       <div>
         <ul className="flex space-x-6">
