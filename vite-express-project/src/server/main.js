@@ -216,6 +216,26 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+app.get('/api/supabase/users', async (req, res) => {
+  try {
+    const { email } = req.query;
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', email);
+
+    if (error) {
+      console.error('Supabase error:', error.message);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error('Supabase error:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // Start server
 ViteExpress.listen(app, 3000, () =>
   console.log("Server is listening on port 3000...")

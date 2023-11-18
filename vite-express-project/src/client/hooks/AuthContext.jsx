@@ -34,10 +34,20 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const userData = await response.json();
         login(userData);
-        console.log('success');
+        console.log('Login success:', userData);
 
-        // Redirect to MyProfile route
-        navigate('/user');
+        const supabaseResponse = await fetch(`/api/supabase/users?email=${email}`);
+        const supabaseUserData = await supabaseResponse.json();
+
+        if (supabaseResponse.ok && supabaseUserData.length > 0) {
+          const supabaseUserId = supabaseUserData[0].id;
+          console.log(supabaseUserId);
+  
+          // Navigate to the user's profile using the Supabase user ID
+          navigate(`/users/${supabaseUserId}`);
+        } else {
+          console.error('Failed to fetch user data from Supabase');
+        }
       } else {
         console.error('Login failed');
       }
