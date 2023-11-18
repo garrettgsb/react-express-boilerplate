@@ -6,6 +6,7 @@ import LandingRoute from "./routes/LandingRoute";
 import MyProfile from "./routes/MyProfileRoute";
 import UserProfile from "./routes/UserProfileRoute";
 import SignupModal from "./components/SignupModal";
+import ProjectProfile from "./routes/ProjectProfileRoute";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./hooks/AuthContext";
 
@@ -20,19 +21,30 @@ function App() {
     setIsModalOpen(false);
   };
 
-  return (
-    
+  return (    
     <AuthProvider>
       <NavBar openModal={openModal} />
 
       <Routes>
-        <Route exact path="/" element={<LandingRoute openModal={openModal} />}/>
+        <Route
+          exact
+          path="/"
+          element={<LandingRoute openModal={openModal} />}
+        />
         <Route exact path="/myprofile" element={<MyProfile />} />
         <Route exact path="/users/:id" element={<UserProfile />} />
+        <Route exact path="/project/:id" element={<ProjectProfile />} />
       </Routes>
       <Footer />
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
     </AuthProvider>
+
+    // <>
+    //   <NavBar openModal={openModal} />
+    //   <Landing openModal={openModal} />
+    //   <Footer />
+    //
+    // </>
 
   );
 }
