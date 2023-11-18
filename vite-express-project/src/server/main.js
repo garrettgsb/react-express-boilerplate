@@ -202,6 +202,20 @@ app.delete("/api/projects/:id", async (req, res) => {
   }
 });
 
+app.post('/api/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const userData = { email }
+
+    req.session.userId = userData.id;
+
+    res.status(200).json(userData);
+  } catch (error) {
+    console.error('Login Error:', error);
+    res.status(500).send('Login Error:' + error.message)
+  }
+});
+
 // Start server
 ViteExpress.listen(app, 3000, () =>
   console.log("Server is listening on port 3000...")

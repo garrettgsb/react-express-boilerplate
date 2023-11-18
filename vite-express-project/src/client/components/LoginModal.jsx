@@ -1,7 +1,33 @@
+import { useState } from "react";
 import { useAuth } from "../hooks/AuthContext";
 
 const LoginModal = () => {
-  const { isLoggedIn, login, logout } = useAuth();
+  const { login } = useAuth();
+  const [email, setEmail] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // password is not in db hence has not been passed in here
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        login(userData);
+        console.log('success');
+      } else {
+        
+        console.error('Login failed');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
+  };
 
   return (
     /* Login Modal */
@@ -12,13 +38,28 @@ const LoginModal = () => {
         </form>
         <h3 className="font-bold text-lg font-heading">Welcome Back!</h3>
         <div className="form-control w-full max-w-xs m-4">
-          <input type="text" placeholder="Email" className="input input-bordered w-full max-w-xs" />
+          <input
+            type="text"
+            placeholder="Email"
+            className="input input-bordered w-full max-w-xs"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="form-control w-full max-w-xs m-4">
-          <input type="text" placeholder="Password" className="input input-bordered w-full max-w-xs" />
+          <input
+            type="text"
+            placeholder="Password"
+            className="input input-bordered w-full max-w-xs" />
         </div>
-        <button
+        {/* <button
           onClick={() => login()}
+          className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded-sm"
+        >
+          Log in
+        </button> */}
+        <button
+          onClick={() => handleLogin()}
           className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded-sm"
         >
           Log in
