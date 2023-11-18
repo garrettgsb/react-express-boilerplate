@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/AuthContext";
 
 const LoginModal = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+  
+  // password state is required to use pw to login
+  // const [password, setpassword] = useState('');
 
   const handleLogin = async () => {
     try {
@@ -20,8 +25,10 @@ const LoginModal = () => {
         const userData = await response.json();
         login(userData);
         console.log('success');
+
+        // Redirect to MyProfile route
+        navigate('/myprofile');
       } else {
-        
         console.error('Login failed');
       }
     } catch (error) {
