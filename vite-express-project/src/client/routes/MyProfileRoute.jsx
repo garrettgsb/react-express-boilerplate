@@ -1,24 +1,3 @@
-// const user = {
-//   id: 1,
-//   username: "John123",
-//   name: "John Smith",
-//   email: "test@test.com",
-//   bio: "I find inspiration in the simplest moments of life,translating them into captivating visuals that tell unique stories. My journey as an artist is a continuous exploration of new techniques and expressions, driven by a deep love for the craft.",
-//   rate: 5000,
-//   profile_picture:"./public/images/user_1.jpg",
-//   location: "Saanich",
-//   images: ["./public/images/art_1.jpg",
-//            "./public/images/art_2.jpg",
-//            "./public/images/art_3.jpg",
-//            "./public/images/art_4.jpg",
-//            "./public/images/art_5.jpg",
-//            "./public/images/art_6.jpg"
-//           ],
-// };
-
-// above is mock data
-// data will be fetched from /api/users/${userId]}
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
@@ -31,8 +10,8 @@ function convertRate(cents) {
 export default function MyProfile() {
 
     const { id } = useParams();
-    const [user, setUser] = useState({images:[]});
-    const { isLoggedIn, user: loggedInUser } = useAuth;
+    // const [user, setUser] = useState({images:[]});
+    const { isLoggedIn, user, setUser } = useAuth;
   
     useEffect(() => {
       const fetchUser = async () => {
