@@ -27,14 +27,18 @@ export const AuthProvider = ({ children }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        // password is not in db hence has not been passed in here
         body: JSON.stringify({ email }),
       });
 
       if (response.ok) {
         const userData = await response.json();
         login(userData);
-        console.log('Login success:', userData);
+
+        // console.log(isLoggedIn);
+        // setIsLoggedIn(true);
+        
+        // console.log(isLoggedIn);
+        // console.log('Login success:', userData);
 
         const supabaseResponse = await fetch(`/api/supabase/users?email=${email}`);
         const supabaseUserData = await supabaseResponse.json();
@@ -45,14 +49,18 @@ export const AuthProvider = ({ children }) => {
   
           // Navigate to the user's profile using the Supabase user ID
           navigate(`/users/${supabaseUserId}`);
+          return true;
         } else {
           console.error('Failed to fetch user data from Supabase');
+          return false;
         }
       } else {
         console.error('Login failed');
+        return false;
       }
     } catch (error) {
       console.error('Error during login:', error);
+      return false;
     }
   };
 
