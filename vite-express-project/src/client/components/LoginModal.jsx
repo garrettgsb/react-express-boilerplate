@@ -1,40 +1,40 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/AuthContext";
 
 const LoginModal = () => {
-  const { login } = useAuth();
-  const [email, setEmail] = useState('');
-  const navigate = useNavigate();
+  const { handleLogin, setEmail, email } = useAuth();
+  // const [email, setEmail] = useState('');
+  // const navigate = useNavigate();
   
   // password state is required to use pw to login
   // const [password, setpassword] = useState('');
 
-  const handleLogin = async () => {
-    try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // password is not in db hence has not been passed in here
-        body: JSON.stringify({ email }),
-      });
+  // const handleLogin = async () => {
+  //   try {
+  //     const response = await fetch('/api/login', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       // password is not in db hence has not been passed in here
+  //       body: JSON.stringify({ email }),
+  //     });
 
-      if (response.ok) {
-        const userData = await response.json();
-        login(userData);
-        console.log('success');
+  //     if (response.ok) {
+  //       const userData = await response.json();
+  //       login(userData);
+  //       console.log('success');
 
-        // Redirect to MyProfile route
-        navigate('/myprofile');
-      } else {
-        console.error('Login failed');
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-    }
-  };
+  //       // Redirect to MyProfile route
+  //       navigate('/myprofile');
+  //     } else {
+  //       console.error('Login failed');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error during login:', error);
+  //   }
+  // };
 
   return (
     /* Login Modal */
