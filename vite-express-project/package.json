@@ -8,6 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@esbuild/darwin-x64": "^0.19.5",
     "@supabase/supabase-js": "^2.38.4",
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",

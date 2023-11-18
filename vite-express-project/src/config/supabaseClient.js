@@ -1,5 +1,5 @@
 require("dotenv").config({
-  path: "/Users/sunny/lighthouse/LHL-Final/LHL-Final-Project/vite-express-project/.env.local",
+  path: "./.env.local",
 });
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL;

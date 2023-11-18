@@ -8,6 +8,7 @@ import UserProfile from "./routes/UserProfileRoute";
 import SignupModal from "./components/SignupModal";
 import ProjectProfile from "./routes/ProjectProfileRoute";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./hooks/AuthContext";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,8 +21,8 @@ function App() {
     setIsModalOpen(false);
   };
 
-  return (
-    <>
+  return (    
+    <AuthProvider>
       <NavBar openModal={openModal} />
 
       <Routes>
@@ -36,7 +37,7 @@ function App() {
       </Routes>
       <Footer />
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
-    </>
+    </AuthProvider>
 
     // <>
     //   <NavBar openModal={openModal} />
@@ -44,6 +45,7 @@ function App() {
     //   <Footer />
     //
     // </>
+
   );
 }
 
