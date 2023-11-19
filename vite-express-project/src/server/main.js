@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const session = require('express-session');
 const supabase = require("../config/supabaseClient");
+const { handleTableInsertion } = require("./db/databaseHelpers");
 
 // Express app setup
 const app = express();

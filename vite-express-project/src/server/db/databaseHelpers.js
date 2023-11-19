@@ -1,20 +1,20 @@
-// const handleTableInsertion = async (req, res, supabase, tablename) => {
-//   try {
-//     console.log("Request Body:", req.body);
+const handleTableInsertion = async (req, res, supabase, tablename) => {
+  try {
+    console.log("Request Body:", req.body);
 
-//     const { data, error } = await supabase.from(tablename).insert(req.body);
+    const { data, error } = await supabase.from(tablename).insert(req.body);
 
-//     if (error) {
-//       console.error("Supabase Insert Error:", error);
-//       throw error;
-//     }
+    if (error) {
+      console.error("Supabase Insert Error:", error);
+      throw error;
+    }
 
-//     res.status(200).send("Data sent to Supabase!");
-//   } catch (error) {
-//     console.error("Server Error:", error);
-//     res.status(500).send("Server Error: " + error.message);
-//   }
-// };
+    res.status(200).send("Data sent to Supabase!");
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).send("Server Error: " + error.message);
+  }
+};
 
 // const handleTableUpdate = async (req, res, supabase, tablename) => {
 //   try {
@@ -69,3 +69,5 @@
 //     res.status(500).send("Server Error: " + error.message);
 //   }
 // };
+
+module.exports = handleTableInsertion;

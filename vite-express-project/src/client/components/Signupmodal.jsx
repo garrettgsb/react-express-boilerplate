@@ -17,7 +17,7 @@ const SignupModal = ({ isOpen, onClose }) => {
 
     const sendFormData = async () => {
       try {
-        const response = await fetch("/user", {
+        const response = await fetch("/api/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const SignupModal = ({ isOpen, onClose }) => {
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center">
       <div className="fixed inset-0 backdrop-filter backdrop-blur-sm backdrop-brightness-50 backdrop-saturate-150 "></div>
-      <div className="relative bg-white p-8">
+      <div className="modal-box relative bg-white p-8 rounded-md">
         <div className="flex justify-end">
           <button onClick={onClose}>Close</button>
         </div>
@@ -80,7 +80,7 @@ const SignupModal = ({ isOpen, onClose }) => {
               required
             />
           </div>
-          <div className="flex justify-end">
+          <div className="flex justify-center">
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
