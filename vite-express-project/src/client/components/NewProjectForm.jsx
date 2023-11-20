@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Combobox } from '@headlessui/react';
+import ProjectTypeBox from "./ProjectTypeBox";
 
 export default function NewProjectForm() {
   const [imagePreview, setImagePreview] = useState(null);
@@ -144,6 +145,7 @@ export default function NewProjectForm() {
               className="input input-bordered w-full max-w-xs m-3"
               onChange={handleInputChange}
             />
+            <ProjectTypeBox />
           </div>
         </div>
         <button
