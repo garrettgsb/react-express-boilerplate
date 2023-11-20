@@ -1,8 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewProjectContext = createContext();
 
 export const NewProjectProvider = ({ children }) => {
+  const navigate = useNavigate();
+
   const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
     projectName: "",
@@ -14,11 +17,12 @@ export const NewProjectProvider = ({ children }) => {
   });
 
   const projectType = [
-    { id: 1, name: 'Visual Art' },
-    { id: 2, name: 'Music' },
-    { id: 3, name: 'Art Classes' },
-    { id: 4, name: 'Festival' },
-    { id: 5, name: 'Other' },
+    { id: 1, name: 'Mural Painting' },
+    { id: 2, name: 'Visual Art' },
+    { id: 3, name: 'Music Events' },
+    { id: 4, name: 'Art Education' },
+    { id: 5, name: 'Festivals/Events' },
+    { id: 6, name: 'Other' },
   ]
   
   const [selected, setSelected] = useState(projectType[0])
@@ -40,7 +44,6 @@ export const NewProjectProvider = ({ children }) => {
       [e.target.name]: e.target.value,
     });
   };
-
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -84,6 +87,9 @@ export const NewProjectProvider = ({ children }) => {
 
       if (response.ok) {
         console.log("Project submitted successfully");
+        
+        // after form submission it will redirect to landing page for now
+        navigate("/");
       } else {
         console.error("Error submitting project");
       }
@@ -106,6 +112,7 @@ export const NewProjectProvider = ({ children }) => {
     query,
     setQuery,
     filteredProjectType,
+
   };
   
   return (

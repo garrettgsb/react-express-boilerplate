@@ -11,7 +11,6 @@ export default function NewProjectForm() {
     handleFileChange,
     handleProjectTypeSelect,
     handleSubmit,
-    handleBudgetChange
   } = useNewProject();
   
   return (

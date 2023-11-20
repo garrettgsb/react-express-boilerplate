@@ -217,6 +217,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Login: SELECT * FROM users WHERE email = 'email'
 app.get('/api/supabase/users', async (req, res) => {
   try {
     const { email } = req.query;
@@ -238,6 +239,7 @@ app.get('/api/supabase/users', async (req, res) => {
 });
 
 // Set up multer storage and upload
+// Uploaded image is saved in 'public/uploads folder'
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'public/uploads');
@@ -248,6 +250,13 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+// Function to check if the uploaded file is an image
+function isImage(file) {
+  const allowedExtensions = ['.jpg', '.jpeg', '.png'];
+  const fileExtension = path.extname(file.originalname).toLowerCase();
+  return allowedExtensions.includes(fileExtension);
+}
 
 // Serve uploaded file statically
 app.use('/uploads', express.static('public/uploads'));
@@ -286,8 +295,6 @@ app.post('/api/projects', upload.single('image'), async (req, res) => {
       console.error('Supabase error:', error.message);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
-
-    console.log('Data sent');
 
     res.status(200).json({ success: true, data });
   } catch (error) {
