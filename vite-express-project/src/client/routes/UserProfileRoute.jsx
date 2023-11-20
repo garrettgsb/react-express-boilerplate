@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../hooks/AuthContext";
+import { useUserProfile } from "../hooks/useUserProfile";
 
 function convertRate(cents) {
   const dollars = cents / 100;
@@ -11,41 +12,40 @@ export default function UserProfile() {
   const { id } = useParams();
   const { isLoggedIn, user, setUser } = useAuth();
 
-  useEffect(() => {
-    console.log("Fetching user data for id:", id);
-    const fetchUser = async () => {
-      try {
-        const response = await fetch(`/api/users/${id}`);
-        if (!response.ok) {
-          console.error(`Failed to fetch user with id ${id}`);
-          return;
-        }
+  // Move to useUserProfile hook 
+  // useEffect(() => {
+  //   // console.log("Fetching user data for id:", id);
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await fetch(`/api/users/${id}`);
+  //       if (!response.ok) {
+  //         console.error(`Failed to fetch user with id ${id}`);
+  //         return;
+  //       }
 
-        const data = await response.json();
-        if (data.length === 0) {
-          console.error(`No user found with id ${id}`);
-          return;
-        }
+  //       const data = await response.json();
+  //       if (data.length === 0) {
+  //         console.error(`No user found with id ${id}`);
+  //         return;
+  //       }
 
-        setUser(data[0]);
-        console.log("User data:", data[0]);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
-    };
-    fetchUser();
-  }, [id, setUser]);
-  useEffect(() => {
-    console.log('From useEffect', user);
+  //       setUser(data[0]);
+  //       // console.log("User data:", data[0]);
+  //     } catch (error) {
+  //       console.error("Error fetching user:", error);
+  //     }
+  //   };
+  //   fetchUser();
+  // }, [id, setUser]);
 
-  })
+  useUserProfile(id, setUser);
 
   // Display loading when data fetching is happening
   if (!user) {
-    console.error("User object is undefined or missing id property");
+    console.warn("Loading");
     return (
       <>
-        <p>Loading</p>
+        <p className="font-subHeading text-3xl">Loading</p>
         <span className="loading loading-spinner loading-lg"></span>
       </>
     );
