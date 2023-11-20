@@ -1,75 +1,18 @@
-import { useState } from "react";
-import { Combobox } from '@headlessui/react';
 import ProjectTypeBox from "./ProjectTypeBox";
+import { useNewProject } from "../hooks/NewProjectContext";
 
 export default function NewProjectForm() {
-  const [imagePreview, setImagePreview] = useState(null);
-
-  const [formData, setFormData] = useState({
-    projectName: "",
-    description: "",
-    budget: "",
-    location: "",
-    projectType: "",
-    image: [],
-  });
-
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      image: file,
-    });
+  const {
+    imagePreview,
+    setImagePreview,
+    formData,
+    setFormData,
+    handleInputChange,
+    handleFileChange,
+    // handleProjectTypeSelect,
+    handleSubmit,
+  } = useNewProject();
   
-    if (file) {
-      setImagePreview(URL.createObjectURL(file));
-    } else {
-      setImagePreview(null);
-    }
-  };
-
-  const handleProjectTypeSelect = (type) => {
-    setFormData({
-      ...formData,
-      projectType: type,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const data = new FormData();
-    data.append("title", formData.projectName);
-    data.append("description", formData.description);
-    data.append("budget", formData.budget);
-    data.append("location", formData.location);
-    data.append("type", formData.projectType);
-    data.append("image", formData.image);
-
-    try {
-      const response = await fetch("/api/projects", {
-        method: "POST",
-        body: data,
-      });
-
-      if (response.ok) {
-        console.log("Project submitted successfully");
-      } else {
-        console.error("Error submitting project");
-      }
-    } catch (error) {
-      console.error("Error submitting project:", error);
-    }
-  };
-  
-
   return (
     <div className="m-20">
       <form onSubmit={handleSubmit}>
@@ -124,19 +67,24 @@ export default function NewProjectForm() {
               name="projectName"
               className="input input-bordered w-full max-w-xs m-3 mt-0"
               onChange={handleInputChange}
+              required
             />
             <textarea
               placeholder="Description"
               name="description"
               className="textarea textarea-bordered w-full max-w-xs m-3"
               onChange={handleInputChange}
+              required
             ></textarea>
             <input
-              type="text"
+              type="number"
+              value={formData.budget}
+              step="10"
               placeholder="Budget"
               name="budget"
               className="input input-bordered w-full max-w-xs m-3"
               onChange={handleInputChange}
+              required
             />
             <input
               type="text"
@@ -144,6 +92,7 @@ export default function NewProjectForm() {
               name="location"
               className="input input-bordered w-full max-w-xs m-3"
               onChange={handleInputChange}
+              required
             />
             <ProjectTypeBox />
           </div>
