@@ -1,5 +1,6 @@
 import ProjectTypeBox from "./ProjectTypeBox";
 import { useNewProject } from "../hooks/NewProjectContext";
+import { useAuth } from "../hooks/AuthContext";
 
 export default function NewProjectForm() {
   const {
@@ -12,10 +13,13 @@ export default function NewProjectForm() {
     handleProjectTypeSelect,
     handleSubmit,
   } = useNewProject();
-  
+
+  const { user } = useAuth();
+  const employer_id = user ? user.id : null;
+
   return (
     <div className="m-20">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => handleSubmit(e, employer_id)}>
         <div className="flex justify-center items-start">
 
         <div className="relative">

@@ -14,7 +14,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: '123456',
   resave: false,
-  saveUninitialized: false 
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false, // for development
+    maxAge: 1000 * 60 * 60 * 24, //max age of cookie
+  }, 
 }));
 
 // Route handling
@@ -206,16 +211,35 @@ app.delete("/api/projects/:id", async (req, res) => {
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userData = { email }
 
-    req.session.userId = userData.id;
+    // Query Supabase for the user with the provided email and password
+    const { data: users, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', email);
+      // .eq('password', password);
 
-    res.status(200).json(userData);
+    if (error) {
+      console.error('Supabase error:', error.message);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    if (users.length === 1) {
+      const user = users[0];
+
+      req.session.userId = user.id;
+
+      const userData = { email: user.email, };
+      res.status(200).json(userData);
+    } else {
+      res.status(401).json({ error: 'Invalid credentials' });
+    }
   } catch (error) {
     console.error('Login Error:', error);
-    res.status(500).send('Login Error:' + error.message)
+    res.status(500).json({ error: 'Login Error: ' + error.message });
   }
 });
+
 
 // Login: SELECT * FROM users WHERE email = 'email'
 app.get('/api/supabase/users', async (req, res) => {
@@ -264,15 +288,20 @@ app.use('/uploads', express.static('public/uploads'));
 // Handle project submission with static file upload
 app.post('/api/projects', upload.single('image'), async (req, res) => {
   try {
+    
+    if (!req.session.userId) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+    
     const {
       title,
       description,
       type,
       budget,
       location,
-      employer_id,
     } = req.body;
 
+    const employer_id = req.session.userId;
     const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     // artist id is set to 0 as default for now
