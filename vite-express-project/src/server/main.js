@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const supabase = require("../config/supabaseClient");
 const multer  = require('multer');
-const upload = multer({ dest: 'uploads/' })
 
 // Express app setup
 const app = express();
@@ -248,6 +247,8 @@ const storage = multer.diskStorage({
   },
 });
 
+const upload = multer({ storage: storage });
+
 // Serve uploaded file statically
 app.use('/uploads', express.static('public/uploads'));
 
@@ -265,6 +266,7 @@ app.post('/api/projects', upload.single('image'), async (req, res) => {
 
     const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
+    // artist id is set to 0 as default for now
     const { data, error } = await supabase
       .from('projects')
       .upsert([
