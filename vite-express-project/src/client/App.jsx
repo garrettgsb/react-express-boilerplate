@@ -23,9 +23,8 @@ function App() {
   };
 
   return (    
-    <AuthProvider>
+    <>
       <NavBar openModal={openModal} />
-
       <Routes>
         <Route
           exact
@@ -39,7 +38,7 @@ function App() {
       </Routes>
       <Footer />
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
-    </AuthProvider>
+    </>
 
     // <>
     //   <NavBar openModal={openModal} />
