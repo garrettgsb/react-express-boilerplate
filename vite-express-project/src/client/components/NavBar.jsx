@@ -4,7 +4,8 @@ import LoginModal from "./LoginModal";
 import { useNavigate } from "react-router-dom";
 
 export default function NavBar({ openModal }) {
-const { isLoggedIn, login, logout } = useAuth();
+const { isLoggedIn, login, logout, user } = useAuth();
+console.log(isLoggedIn, user);
 const navigate = useNavigate();
 
   const handleLogout = () => {

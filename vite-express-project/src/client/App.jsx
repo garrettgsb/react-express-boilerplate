@@ -32,7 +32,7 @@ function App() {
           path="/"
           element={<LandingRoute openModal={openModal} />}
         />
-        <Route exact path="/myprofile" element={<MyProfile />} />
+        {/* <Route exact path="/myprofile" element={<MyProfile />} /> */}
         <Route exact path="/users/:id" element={<UserProfile />} />
         <Route exact path="/projects" element={<Projects />} />
         <Route exact path="/project/:id" element={<ProjectProfile />} />
