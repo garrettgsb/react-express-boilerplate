@@ -9,6 +9,7 @@ import SignupModal from "./components/SignupModal";
 import ProjectProfile from "./routes/ProjectProfileRoute";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./hooks/AuthContext";
+import NewProjectForm from "./components/NewProjectForm";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,9 +23,8 @@ function App() {
   };
 
   return (    
-    <AuthProvider>
+    <>
       <NavBar openModal={openModal} />
-
       <Routes>
         <Route
           exact
@@ -34,10 +34,11 @@ function App() {
         <Route exact path="/myprofile" element={<MyProfile />} />
         <Route exact path="/users/:id" element={<UserProfile />} />
         <Route exact path="/project/:id" element={<ProjectProfile />} />
+        <Route exact path="/project/new" element={<NewProjectForm />}/>
       </Routes>
       <Footer />
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
-    </AuthProvider>
+    </>
 
     // <>
     //   <NavBar openModal={openModal} />

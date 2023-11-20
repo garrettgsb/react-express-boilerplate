@@ -34,6 +34,7 @@ const navigate = useNavigate();
         </ul>
       </div>
       <div className="flex space-x-4">
+        
         {/* Conditionally render different buttons based on the isLoggedIn state */}
         {isLoggedIn ? (
           <>
