@@ -18,7 +18,7 @@ export default function ProjectTypeBox({ onChange }) {
   };
 
   return (
-    <div className=" top-16 w-72">
+    <div className=" top-16 w-80">
       <Combobox value={selected} onChange={handleSelect}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg  text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">

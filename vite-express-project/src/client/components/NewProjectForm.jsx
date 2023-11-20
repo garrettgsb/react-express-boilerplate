@@ -65,22 +65,39 @@ export default function NewProjectForm() {
           )}
         </div>
 
-          <div className="flex flex-col items-center justify-center h-3/4 m-5">
-            <input
-              type="text"
-              placeholder="Project Name"
-              name="projectName"
-              className="input input-bordered w-full max-w-xs m-3 mt-0"
-              onChange={handleInputChange}
-              required
-            />
-            <textarea
-              placeholder="Description"
-              name="description"
-              className="textarea textarea-bordered w-full max-w-xs m-3"
-              onChange={handleInputChange}
-              required
-            ></textarea>
+          <div className="flex flex-col items-center justify-center m-5 mt-0">
+            <div className="form-control w-full max-w-xs m-3">
+              <label className="label">
+                  <span className="label-text">What's the name of your project?</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Project Name"
+                  name="projectName"
+                  className="input input-bordered text-sm w-full max-w-xs"
+                  onChange={handleInputChange}
+                  required
+                />
+            </div>
+            <div className="form-control w-full max-w-xs m-3">
+              <label className="label">
+              <span className="label-text">Tell us about your project!</span>
+              </label>
+              <textarea
+                placeholder="Description"
+                name="description"
+                className="textarea textarea-bordered w-full max-w-xs"
+                onChange={handleInputChange}
+                required
+              ></textarea>
+            </div>
+            
+
+            <div className="form-control w-full max-w-xs m-3">
+              <label className="label">
+                <span className="label-text">What's your budget?</span>
+                <span className="label-text-alt">CAD</span>
+              </label>
               <input
               type="number"
               value={formData.budget}
@@ -88,20 +105,32 @@ export default function NewProjectForm() {
               min="0"
               placeholder="Budget"
               name="budget"
-              className="input input-bordered w-full max-w-xs m-3"
+              className="input input-bordered w-full max-w-xs"
               onChange={handleInputChange}
-              required
-            />
+              required/>
+            </div>
             
-            <input
-              type="text"
-              placeholder="Location"
-              name="location"
-              className="input input-bordered w-full max-w-xs m-3"
-              onChange={handleInputChange}
-              required
-            />
-            <ProjectTypeBox onChange={handleProjectTypeSelect} />
+            <div className="form-control w-full max-w-xs m-3">
+              <label className="label">
+              <span className="label-text">Where is it happening?</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Location"
+                name="location"
+                className="input input-bordered w-full max-w-xs text-sm"
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            
+            <div className="form-control w-full max-w-xs m-3">
+              <label className="label">
+              <span className="label-text">What kind of project?</span>
+              </label>
+              <ProjectTypeBox onChange={handleProjectTypeSelect} />
+            </div>
+            
           </div>
         </div>
         <button
