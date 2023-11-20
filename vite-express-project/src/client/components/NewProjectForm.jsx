@@ -9,8 +9,9 @@ export default function NewProjectForm() {
     setFormData,
     handleInputChange,
     handleFileChange,
-    // handleProjectTypeSelect,
+    handleProjectTypeSelect,
     handleSubmit,
+    selected
   } = useNewProject();
   
   return (
@@ -94,7 +95,7 @@ export default function NewProjectForm() {
               onChange={handleInputChange}
               required
             />
-            <ProjectTypeBox />
+            <ProjectTypeBox onChange={handleProjectTypeSelect} />
           </div>
         </div>
         <button

@@ -13,6 +13,27 @@ export const NewProjectProvider = ({ children }) => {
     image: [],
   });
 
+  const projectType = [
+    { id: 1, name: 'Visual Art' },
+    { id: 2, name: 'Music' },
+    { id: 3, name: 'Art Classes' },
+    { id: 4, name: 'Festival' },
+    { id: 5, name: 'Other' },
+  ]
+  
+  const [selected, setSelected] = useState(projectType[0])
+  const [query, setQuery] = useState('')
+
+  const filteredProjectType =
+    query === ''
+      ? projectType
+      : projectType.filter((projectType) =>
+          projectType.name
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, ''))
+        )
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -77,6 +98,11 @@ export const NewProjectProvider = ({ children }) => {
     handleFileChange,
     handleProjectTypeSelect,
     handleSubmit,
+    selected,
+    setSelected,
+    query,
+    setQuery,
+    filteredProjectType,
   };
   
   return (

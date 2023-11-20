@@ -1,32 +1,25 @@
 import { Fragment, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { useNewProject } from '../hooks/NewProjectContext';
 
-const projectType = [
-  { id: 1, name: 'Visual Art' },
-  { id: 2, name: 'Music' },
-  { id: 3, name: 'Art Classes' },
-  { id: 4, name: 'Festival' },
-  { id: 5, name: 'Other' },
-]
+export default function ProjectTypeBox({ onChange }) {
+  const {
+    selected,
+    setSelected,
+    query,
+    setQuery,
+    filteredProjectType
+  } = useNewProject();
 
-export default function ProjectTypeBox() {
-  const [selected, setSelected] = useState(projectType[0])
-  const [query, setQuery] = useState('')
-
-  const filteredProjectType =
-    query === ''
-      ? projectType
-      : projectType.filter((projectType) =>
-          projectType.name
-            .toLowerCase()
-            .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, ''))
-        )
+  const handleSelect = (value) => {
+    setSelected(value);
+    onChange(value.name); 
+  };
 
   return (
     <div className=" top-16 w-72">
-      <Combobox value={selected} onChange={setSelected}>
+      <Combobox value={selected} onChange={handleSelect}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg  text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
