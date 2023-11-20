@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const session = require('express-session');
 const supabase = require("../config/supabaseClient");
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' })
 
 // Express app setup
 const app = express();
@@ -148,21 +150,21 @@ app.get("/api/projects/:id", async (req, res) => {
   }
 });
 
-app.post("/api/projects", async (req, res) => {
-  try {
-    const { data, error } = await supabase.from("projects").insert(req.body);
+// app.post("/api/projects", async (req, res) => {
+//   try {
+//     const { data, error } = await supabase.from("projects").insert(req.body);
 
-    if (error) {
-      console.error("Supabase Insert Error:", error);
-      throw error;
-    }
+//     if (error) {
+//       console.error("Supabase Insert Error:", error);
+//       throw error;
+//     }
 
-    res.status(200).send("Data sent to Supabase!");
-  } catch (error) {
-    console.error("Server Error:", error);
-    res.status(500).send("Server Error: " + error.message);
-  }
-});
+//     res.status(200).send("Data sent to Supabase!");
+//   } catch (error) {
+//     console.error("Server Error:", error);
+//     res.status(500).send("Server Error: " + error.message);
+//   }
+// });
 
 app.put("/api/projects/:id", async (req, res) => {
   try {
@@ -232,6 +234,62 @@ app.get('/api/supabase/users', async (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     console.error('Supabase error:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Set up multer storage and upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+// Serve uploaded file statically
+app.use('/uploads', express.static('public/uploads'));
+
+// Handle project submission with static file upload
+app.post('/api/projects', upload.single('image'), async (req, res) => {
+  try {
+    const {
+      title,
+      description,
+      type,
+      budget,
+      location,
+      employer_id,
+    } = req.body;
+
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+
+    const { data, error } = await supabase
+      .from('projects')
+      .upsert([
+        {
+          title,
+          description,
+          type,
+          budget,
+          location,
+          images: imageUrl ? [imageUrl] : [], 
+          employer_id,
+          artist_id: 0,
+        },
+      ]);
+
+    if (error) {
+      console.error('Supabase error:', error.message);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    console.log('Data sent');
+
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    console.error('Project submission error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
