@@ -15,10 +15,24 @@ export const AuthProvider = ({ children }) => {
     setUser(userData || null);
   };
 
-  const logout = () => {
-    setIsLoggedIn(false);
-    setUser(null);
-  };
+  // const logout = () => {
+  //   setIsLoggedIn(false);
+  //   setUser(null);
+  // };
+
+  const logout = async () => {
+    try {
+      await fetch('/api/logout', {
+        method: 'POST',
+        credentials: 'include', // Include credentials (cookies) in the request
+      });
+  
+      setIsLoggedIn(false);
+      setUser(null);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };  
 
   const handleLogin = async () => {
     try {

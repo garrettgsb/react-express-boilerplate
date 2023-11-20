@@ -12,6 +12,7 @@ const app = express();
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
+  name: 'userCookie',
   secret: '123456',
   resave: false,
   saveUninitialized: false,
@@ -328,6 +329,27 @@ app.post('/api/projects', upload.single('image'), async (req, res) => {
     res.status(200).json({ success: true, data });
   } catch (error) {
     console.error('Project submission error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/api/logout', (req, res) => {
+  try {
+    // Clear the session on the server side
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Session destruction error:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+
+      // Clear the client-side cookie
+      res.clearCookie('userCookie'); // Replace with your actual cookie name
+      
+      // Respond with a success message
+      res.status(200).json({ success: true });
+    });
+  } catch (error) {
+    console.error('Logout error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
