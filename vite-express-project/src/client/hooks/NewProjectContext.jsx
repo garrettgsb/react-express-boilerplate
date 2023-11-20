@@ -41,6 +41,7 @@ export const NewProjectProvider = ({ children }) => {
     });
   };
 
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFormData({
@@ -65,10 +66,12 @@ export const NewProjectProvider = ({ children }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const budgetInCents = formData.budget * 100;
+
     const data = new FormData();
     data.append("title", formData.projectName);
     data.append("description", formData.description);
-    data.append("budget", formData.budget);
+    data.append("budget", budgetInCents);
     data.append("location", formData.location);
     data.append("type", formData.projectType);
     data.append("image", formData.image);
