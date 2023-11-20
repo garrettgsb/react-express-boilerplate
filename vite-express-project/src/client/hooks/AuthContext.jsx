@@ -42,12 +42,12 @@ export const AuthProvider = ({ children }) => {
 
         const supabaseResponse = await fetch(`/api/supabase/users?email=${email}`);
         const supabaseUserData = await supabaseResponse.json();
-        console.log(supabaseUserData);
+        // console.log(supabaseUserData);
 
         if (supabaseResponse.ok && supabaseUserData.length > 0) {
           const supabaseUserId = supabaseUserData[0].id;
           
-          console.log('supa', userData);
+          // console.log('supa', userData);
           // setUser(supabaseUserData[0]);
           login(supabaseUserData[0]);
           // Navigate to the user's profile using the Supabase user ID
