@@ -7,6 +7,7 @@ import MyProfile from "./routes/MyProfileRoute";
 import UserProfile from "./routes/UserProfileRoute";
 import SignupModal from "./components/SignupModal";
 import ProjectProfile from "./routes/ProjectProfileRoute";
+import { Projects } from "./components/projects";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./hooks/AuthContext";
 
@@ -33,6 +34,7 @@ function App() {
         />
         <Route exact path="/myprofile" element={<MyProfile />} />
         <Route exact path="/users/:id" element={<UserProfile />} />
+        <Route exact path="/projects" element={<Projects />} />
         <Route exact path="/project/:id" element={<ProjectProfile />} />
       </Routes>
       <Footer />
