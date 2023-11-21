@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const supabase = require("../config/supabaseClient");
 const multer  = require('multer');
+const bcrypt = require('bcrypt');
 
 // Express app setup
 const app = express();
@@ -209,6 +210,10 @@ app.delete("/api/projects/:id", async (req, res) => {
   }
 });
 
+const saltRounds = 10;
+// this must be used for user sign up
+const hashedPassword = await bcrypt.hash(password, saltRounds);
+
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -218,8 +223,7 @@ app.post('/api/login', async (req, res) => {
     const { data: users, error } = await supabase
       .from('users')
       .select('*')
-      .eq('email', email)
-      .eq('password', password);
+      .eq('email', email);
 
     if (error) {
       console.error('Supabase error:', error.message);
@@ -229,10 +233,15 @@ app.post('/api/login', async (req, res) => {
     if (users.length === 1) {
       const user = users[0];
 
-      req.session.userId = user.id;
+      const passwordMatch = await bcrypt.compare(password, user.password);
 
-      const userData = { email: user.email };
-      res.status(200).json(userData);
+      if (passwordMatch) {
+        req.session.userId = user.id;
+        const userData = { email: user.email };
+        res.status(200).json(userData);
+      } else {
+        res.status(401).json({ error: 'Invalid credentials' });
+      }
     } else {
       res.status(401).json({ error: 'Invalid credentials' });
     }
