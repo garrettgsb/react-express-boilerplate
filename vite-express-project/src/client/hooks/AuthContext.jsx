@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   
   // Initialize Authentication when the app mounts
@@ -48,6 +49,9 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogin = async () => {
     try {
+      // reset error state to clear error msg
+      setError(null);
+      
       const response = await fetch('/api/login', {
         method: 'POST',
         headers: {
@@ -76,10 +80,15 @@ export const AuthProvider = ({ children }) => {
         }
       } else {
         console.error('Login failed');
+        
+        // Get error message from api and set it to client
+        const errorMessage = await response.json();
+        setError(errorMessage.error);
         return false;
       }
     } catch (error) {
       console.error('Error during login:', error);
+      setError('An unexpected error occured');
       return false;
     }
   };
@@ -102,6 +111,10 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   };
+    
+  const resetError = () => {
+    setError(null);
+  };
 
   const value = {
     isLoggedIn,
@@ -114,6 +127,8 @@ export const AuthProvider = ({ children }) => {
     setEmail,
     password,
     setPassword,
+    error,
+    resetError
   };
 
   return (
