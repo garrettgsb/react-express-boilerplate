@@ -61,7 +61,7 @@ export const Projects = () => {
   }, [projectIds]);
 
   return (
-    <div className="mt-9 h-[70vh]" style={{ width: "100%", overflow: "hidden" }}>
+    <div className="mt-9 h-[70vh] w-full overflow-hidden">
       <h1
         className="font-subHeading text-lg font-semibold leading-6 text-accent hover:text-accentHover mb-4"
       >
