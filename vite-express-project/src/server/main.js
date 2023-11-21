@@ -212,7 +212,6 @@ app.delete("/api/projects/:id", async (req, res) => {
 
 const saltRounds = 10;
 // this must be used for user sign up
-const hashedPassword = await bcrypt.hash(password, saltRounds);
 
 app.post('/api/login', async (req, res) => {
   try {
