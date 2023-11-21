@@ -33,12 +33,12 @@ export const Projects = () => {
   } = useProjectsFetcher();
 
   const lastRowIndex = Math.ceil(projectIds.length / ITEMS_PER_ROW);
-  const rowCount = lastRowIndex;
 
   const getRowHeight = useCallback((rowIndex) => {
-    const isLoadingRow = rowIndex === rowCount;
+    const isLoadingRow = rowIndex === lastRowIndex;
+
     return isLoadingRow ? ROW_HEIGHT_LOADING : ROW_HEIGHT;
-  }, [rowCount]);
+  }, [lastRowIndex]);
 
   const loadMoreItems = useCallback((start) => {
     if (!isFetching && !projectsById[start]) {
@@ -76,7 +76,7 @@ export const Projects = () => {
                 height={height - 20}
                 width={width}
                 columnCount={ITEMS_PER_ROW}
-                rowCount={rowCount + 1} // +1 for loading indicator
+                rowCount={lastRowIndex + 1} // +1 for loading indicator
                 onItemsRendered={({ visibleRowStartIndex, visibleRowStopIndex }) => {
                   onItemsRendered({
                     visibleStartIndex: visibleRowStartIndex * ITEMS_PER_ROW,
@@ -90,7 +90,7 @@ export const Projects = () => {
               >
                 {({ columnIndex, rowIndex, style }) => {
                   const isWithinTheRange = (rowIndex * ITEMS_PER_ROW + columnIndex) < projectIds.length;
-                  const isLoadingRow = rowIndex === rowCount;
+                  const isLoadingRow = rowIndex === lastRowIndex;
                   const isLoadingColumn = columnIndex === 0;
                   const isLoadedAll = projectIds.length >= MOCK_ITEM_COUNT;
 
