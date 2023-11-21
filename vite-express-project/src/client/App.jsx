@@ -7,6 +7,7 @@ import MyProfile from "./routes/MyProfileRoute";
 import UserProfile from "./routes/UserProfileRoute";
 import SignupModal from "./components/SignupModal";
 import ProjectProfile from "./routes/ProjectProfileRoute";
+import LikedItemsRoute from "./routes/LikedItemsRoute";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./hooks/AuthContext";
 
@@ -21,7 +22,7 @@ function App() {
     setIsModalOpen(false);
   };
 
-  return (    
+  return (
     <AuthProvider>
       <NavBar openModal={openModal} />
 
@@ -34,6 +35,7 @@ function App() {
         <Route exact path="/myprofile" element={<MyProfile />} />
         <Route exact path="/users/:id" element={<UserProfile />} />
         <Route exact path="/project/:id" element={<ProjectProfile />} />
+        <Route exact path="/likeditems" element={<LikedItemsRoute />} />
       </Routes>
       <Footer />
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
@@ -45,7 +47,6 @@ function App() {
     //   <Footer />
     //
     // </>
-
   );
 }
 
