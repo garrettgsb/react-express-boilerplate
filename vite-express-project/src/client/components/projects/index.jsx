@@ -36,7 +36,6 @@ export const Projects = () => {
   const rowCount = lastRowIndex;
 
   const getRowHeight = useCallback((rowIndex) => {
-    console.log(rowIndex, rowCount);
     const isLoadingRow = rowIndex === rowCount;
     return isLoadingRow ? LOADING_ROW_HEIGHT : ROW_HEIGHT;
   }, [rowCount]);
