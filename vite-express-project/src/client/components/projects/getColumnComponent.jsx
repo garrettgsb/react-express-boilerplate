@@ -11,14 +11,14 @@ export const getColumnComponent = ({
   rowIndex,
   style
 }) => {
-  const isWithinTheRange = (rowIndex * ITEMS_PER_ROW + columnIndex) < projectIds.length;
+  const isLoadedColumn = (rowIndex * ITEMS_PER_ROW + columnIndex) < projectIds.length;
   const isLoadingRow = rowIndex === lastRowIndex;
-  const isLoadingColumn = columnIndex === 0;
+  const isFirstColumn = columnIndex === 0;
   const isLoadedAll = projectIds.length >= MOCK_ITEM_COUNT;
 
-  return isWithinTheRange ?
+  return isLoadedColumn ?
     <ProjectCard style={style} />
-    : isLoadingRow && isLoadingColumn && isFetching && !isLoadedAll
+    : isLoadingRow && isFirstColumn && isFetching && !isLoadedAll
     ? <LoadingIndicator style={style} />
     : null;
 };

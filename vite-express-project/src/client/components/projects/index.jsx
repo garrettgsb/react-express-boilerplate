@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback, useMemo } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { VariableSizeGrid } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
@@ -10,7 +10,7 @@ import {
   ROW_HEIGHT,
   ROW_HEIGHT_LOADING,
   COLUMN_WIDTH_PADDING,
-  MOCK_ITEM_COUNT,
+  CONTAINER_HEIGHT_PADDING,
   ITEMS_PER_ROW,
   LOAD_MORE_ITEMS
 } from './constants';
@@ -27,6 +27,7 @@ export const Projects = () => {
     projectsById,
     projectIds,
     isFetching,
+    totalCount,
     setIsFetching,
     fetchProjects
   } = useProjectsFetcher();
@@ -48,36 +49,41 @@ export const Projects = () => {
 
   const isItemLoaded = useCallback((index) => {
     return index < projectIds.length;
-  }, [projectsById]);
+  }, [projectIds]);
 
+  // VariableSizeGrid caches variable data for grid items.
+  // It prevents the grid from having stale data
+  // after it loads more items, so force reset when data changes.
   useEffect(() => {
     if (gridRef.current != null) {
       gridRef.current.resetAfterRowIndex(0, true);
     }
-  }, [projectIds.length]);
-
-  const Column = useMemo(() =>
-    getColumnComponent({ projectIds, lastRowIndex, isFetching }),
-    [projectIds, lastRowIndex, isFetching]
-  );
+  }, [projectIds]);
 
   return (
-    <div style={{ marginTop: "3rem", height: "70vh", width: "100%", overflow: "hidden" }}>
-      <h1>{title} in your area</h1>
+    <div className="mt-9 h-[70vh]" style={{ width: "100%", overflow: "hidden" }}>
+      <h1
+        className="font-subHeading text-lg font-semibold leading-6 text-accent hover:text-accentHover mb-4"
+      >
+        {title} in your area
+      </h1>
       <AutoSizer>
         {({ height, width }) => (
           <InfiniteLoader
             threshold={Math.ceil(LOAD_MORE_ITEMS / 2)}
-            itemCount={MOCK_ITEM_COUNT}
+            itemCount={totalCount}
             loadMoreItems={loadMoreItems}
             isItemLoaded={isItemLoaded}
           >
             {({ onItemsRendered, ref }) => (
               <VariableSizeGrid
                 className="variable-size-grid"
-                columnWidth={(_index) => Math.floor(width - COLUMN_WIDTH_PADDING) / ITEMS_PER_ROW }
+                columnWidth={(_index) =>
+                  // no padding will make it have a horizontal scrollbar
+                  Math.floor(width - COLUMN_WIDTH_PADDING) / ITEMS_PER_ROW
+                }
                 rowHeight={getRowHeight}
-                height={height - 20}
+                height={height - CONTAINER_HEIGHT_PADDING}
                 width={width}
                 columnCount={ITEMS_PER_ROW}
                 rowCount={lastRowIndex + 1} // +1 for loading indicator
@@ -92,7 +98,7 @@ export const Projects = () => {
                   gridRef.current = grid;
                 }}
               >
-               {Column}
+               {getColumnComponent({ projectIds, lastRowIndex, isFetching })}
               </VariableSizeGrid>
             )}
           </InfiniteLoader>)

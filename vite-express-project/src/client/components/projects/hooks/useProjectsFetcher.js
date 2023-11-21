@@ -66,6 +66,7 @@ export const useProjectsFetcher = () => {
     projectsById: state.projectsById,
     projectIds: state.projectIds,
     isFetching: state.isFetching,
+    totalCount: MOCK_ITEM_COUNT,
     setIsFetching,
     fetchProjects
   };
