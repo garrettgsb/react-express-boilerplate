@@ -9,7 +9,7 @@ import { ProjectCard } from './ProjectCard';
 import { LoadingIndicator } from './LoadingIndicator';
 import {
   ROW_HEIGHT,
-  LOADING_ROW_HEIGHT,
+  ROW_HEIGHT_LOADING,
   COLUMN_WIDTH_PADDING,
   MOCK_ITEM_COUNT,
   ITEMS_PER_ROW,
@@ -37,7 +37,7 @@ export const Projects = () => {
 
   const getRowHeight = useCallback((rowIndex) => {
     const isLoadingRow = rowIndex === rowCount;
-    return isLoadingRow ? LOADING_ROW_HEIGHT : ROW_HEIGHT;
+    return isLoadingRow ? ROW_HEIGHT_LOADING : ROW_HEIGHT;
   }, [rowCount]);
 
   const loadMoreItems = useCallback((start) => {
