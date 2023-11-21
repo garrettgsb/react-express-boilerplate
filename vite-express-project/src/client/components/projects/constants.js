@@ -6,4 +6,4 @@ export const CONTAINER_HEIGHT_PADDING = 30;
 
 export const MOCK_ITEM_COUNT = 80;
 export const ITEMS_PER_ROW = 3;
-export const LOAD_MORE_ITEMS = 15;
+export const ITEMS_PER_LOAD = 15;

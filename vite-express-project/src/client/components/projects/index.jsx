@@ -12,7 +12,7 @@ import {
   COLUMN_WIDTH_PADDING,
   CONTAINER_HEIGHT_PADDING,
   ITEMS_PER_ROW,
-  LOAD_MORE_ITEMS
+  ITEMS_PER_LOAD
 } from './constants';
 
 export const Projects = () => {
@@ -70,7 +70,7 @@ export const Projects = () => {
       <AutoSizer>
         {({ height, width }) => (
           <InfiniteLoader
-            threshold={Math.ceil(LOAD_MORE_ITEMS / 2)}
+            threshold={Math.ceil(ITEMS_PER_LOAD / 2)}
             itemCount={totalCount}
             loadMoreItems={loadMoreItems}
             isItemLoaded={isItemLoaded}
