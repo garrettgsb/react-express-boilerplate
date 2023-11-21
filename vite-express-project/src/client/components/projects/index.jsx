@@ -1,12 +1,11 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { VariableSizeGrid } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import { useProjectsFetcher } from './hooks/useProjectsFetcher';
-import { ProjectCard } from './ProjectCard';
-import { LoadingIndicator } from './LoadingIndicator';
+import { getColumnComponent } from './getColumnComponent';
 import {
   ROW_HEIGHT,
   ROW_HEIGHT_LOADING,
@@ -57,6 +56,11 @@ export const Projects = () => {
     }
   }, [projectIds.length]);
 
+  const Column = useMemo(() =>
+    getColumnComponent({ projectIds, lastRowIndex, isFetching }),
+    [projectIds, lastRowIndex, isFetching]
+  );
+
   return (
     <div style={{ marginTop: "3rem", height: "70vh", width: "100%", overflow: "hidden" }}>
       <h1>{title} in your area</h1>
@@ -88,18 +92,7 @@ export const Projects = () => {
                   gridRef.current = grid;
                 }}
               >
-                {({ columnIndex, rowIndex, style }) => {
-                  const isWithinTheRange = (rowIndex * ITEMS_PER_ROW + columnIndex) < projectIds.length;
-                  const isLoadingRow = rowIndex === lastRowIndex;
-                  const isLoadingColumn = columnIndex === 0;
-                  const isLoadedAll = projectIds.length >= MOCK_ITEM_COUNT;
-
-                  return isWithinTheRange ?
-                    <ProjectCard style={style} />
-                    : isLoadingRow && isLoadingColumn && isFetching && !isLoadedAll
-                    ? <LoadingIndicator style={style} />
-                    : null;
-                }}
+               {Column}
               </VariableSizeGrid>
             )}
           </InfiniteLoader>)
