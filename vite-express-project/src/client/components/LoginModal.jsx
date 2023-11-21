@@ -1,7 +1,7 @@
 import { useAuth } from "../hooks/AuthContext";
 
 const LoginModal = () => {
-  const { handleLogin, setEmail, email } = useAuth();
+  const { handleLogin, setEmail, email, password, setPassword } = useAuth();
   
   return (
     /* Login Modal */
@@ -22,9 +22,11 @@ const LoginModal = () => {
         </div>
         <div className="form-control w-full max-w-xs m-4">
           <input
-            type="text"
+            type="password"
             placeholder="Password"
-            className="input input-bordered w-full max-w-xs" />
+            className="input input-bordered w-full max-w-xs"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} />
         </div>
         <button
           onClick={() => handleLogin()}

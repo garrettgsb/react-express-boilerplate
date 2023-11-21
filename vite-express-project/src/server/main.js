@@ -212,13 +212,14 @@ app.delete("/api/projects/:id", async (req, res) => {
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log('Received data:', { email, password });
 
     // Query Supabase for the user with the provided email and password
     const { data: users, error } = await supabase
       .from('users')
       .select('*')
-      .eq('email', email);
-      // .eq('password', password);
+      .eq('email', email)
+      .eq('password', password);
 
     if (error) {
       console.error('Supabase error:', error.message);
@@ -230,7 +231,7 @@ app.post('/api/login', async (req, res) => {
 
       req.session.userId = user.id;
 
-      const userData = { email: user.email, };
+      const userData = { email: user.email };
       res.status(200).json(userData);
     } else {
       res.status(401).json({ error: 'Invalid credentials' });
@@ -240,6 +241,7 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ error: 'Login Error: ' + error.message });
   }
 });
+
 
 // Check user authentication
 app.get('/api/check-auth', (req, res) => {

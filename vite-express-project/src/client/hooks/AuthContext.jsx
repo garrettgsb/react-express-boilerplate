@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   
   // Initialize Authentication when the app mounts
@@ -52,29 +53,20 @@ export const AuthProvider = ({ children }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
         const userData = await response.json();
-        // login(userData);
-
-        // console.log(isLoggedIn);
-        // setIsLoggedIn(true);
-        
-        // console.log(isLoggedIn);
-        // console.log('Login success:', userData);
 
         const supabaseResponse = await fetch(`/api/supabase/users?email=${email}`);
         const supabaseUserData = await supabaseResponse.json();
-        // console.log(supabaseUserData);
 
         if (supabaseResponse.ok && supabaseUserData.length > 0) {
           const supabaseUserId = supabaseUserData[0].id;
           
-          // console.log('supa', userData);
-          // setUser(supabaseUserData[0]);
           login(supabaseUserData[0]);
+
           // Navigate to the user's profile using the Supabase user ID
           navigate(`/users/${supabaseUserId}`);
           return true;
@@ -119,7 +111,9 @@ export const AuthProvider = ({ children }) => {
     logout,
     handleLogin,
     email,
-    setEmail
+    setEmail,
+    password,
+    setPassword,
   };
 
   return (
