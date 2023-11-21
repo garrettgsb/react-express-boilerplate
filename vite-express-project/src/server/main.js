@@ -237,6 +237,46 @@ app.get('/api/supabase/users', async (req, res) => {
   }
 });
 
+// Route handling for likes
+
+app.get("/api/likes", async (req, res) => {
+  try {
+    const { data, error } = await supabase.from("likes").select("*");
+
+    if (error) {
+      console.error("Supabase Insert Error:", error);
+      throw error;
+    }
+
+    res.status(200).send(data);
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).send("Server Error: " + error.message);
+  }
+}
+);
+
+app.get("/api/likes/:id", async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from("likes")
+      .select("*")
+      .eq("user_id", req.params.id);
+
+    if (error) {
+      console.error("Supabase Insert Error:", error);
+      throw error;
+    }
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).json("Server Error: " + error.message);
+  }
+}
+);
+
+
 // Start server
 ViteExpress.listen(app, 3000, () =>
   console.log("Server is listening on port 3000...")
