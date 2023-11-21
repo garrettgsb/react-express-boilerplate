@@ -20,7 +20,7 @@ export const Projects = () => {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split("/");
-  const title = splitLocation[splitLocation.length - 1] === "projects" ? "Projects" : "Artists";
+  const title = splitLocation[splitLocation.length - 1] === "gigs" ? "Gigs" : "Artists";
 
   const gridRef = useRef(null);
 

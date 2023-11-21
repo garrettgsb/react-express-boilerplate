@@ -34,7 +34,8 @@ function App() {
         />
         {/* <Route exact path="/myprofile" element={<MyProfile />} /> */}
         <Route exact path="/users/:id" element={<UserProfile />} />
-        <Route exact path="/projects" element={<Projects />} />
+        <Route exact path="/artists" element={<Projects />} />
+        <Route exact path="/gigs" element={<Projects />} />
         <Route exact path="/project/:id" element={<ProjectProfile />} />
         <Route exact path="/project/new" element={<NewProjectForm />}/>
       </Routes>
