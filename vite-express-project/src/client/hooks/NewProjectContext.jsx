@@ -17,12 +17,13 @@ export const NewProjectProvider = ({ children }) => {
   });
 
   const projectType = [
-    { id: 1, name: 'Mural Painting' },
-    { id: 2, name: 'Visual Art' },
-    { id: 3, name: 'Music Events' },
-    { id: 4, name: 'Art Education' },
-    { id: 5, name: 'Festivals/Events' },
-    { id: 6, name: 'Other' },
+    { id: 1, name: 'Select Type' },
+    { id: 2, name: 'Mural Painting' },
+    { id: 3, name: 'Visual Art' },
+    { id: 4, name: 'Music Events' },
+    { id: 5, name: 'Art Education' },
+    { id: 6, name: 'Festivals/Events' },
+    { id: 7, name: 'Other' },
   ]
   
   const [selected, setSelected] = useState(projectType[0])

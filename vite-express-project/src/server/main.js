@@ -12,9 +12,15 @@ const app = express();
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
+  name: 'userCookie',
   secret: '123456',
   resave: false,
-  saveUninitialized: false 
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false, // for development
+    maxAge: 1000 * 60 * 60 * 24, //max age of cookie
+  }, 
 }));
 
 // Route handling
@@ -206,14 +212,41 @@ app.delete("/api/projects/:id", async (req, res) => {
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userData = { email }
 
-    req.session.userId = userData.id;
+    // Query Supabase for the user with the provided email and password
+    const { data: users, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', email);
+      // .eq('password', password);
 
-    res.status(200).json(userData);
+    if (error) {
+      console.error('Supabase error:', error.message);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    if (users.length === 1) {
+      const user = users[0];
+
+      req.session.userId = user.id;
+
+      const userData = { email: user.email, };
+      res.status(200).json(userData);
+    } else {
+      res.status(401).json({ error: 'Invalid credentials' });
+    }
   } catch (error) {
     console.error('Login Error:', error);
-    res.status(500).send('Login Error:' + error.message)
+    res.status(500).json({ error: 'Login Error: ' + error.message });
+  }
+});
+
+// Check user authentication
+app.get('/api/check-auth', (req, res) => {
+  if (req.session.userId) {
+    res.status(200).json({ authenticated: true, userId: req.session.userId });
+  } else {
+    res.status(401).json({ authenticated: false });
   }
 });
 
@@ -264,15 +297,20 @@ app.use('/uploads', express.static('public/uploads'));
 // Handle project submission with static file upload
 app.post('/api/projects', upload.single('image'), async (req, res) => {
   try {
+    
+    if (!req.session.userId) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+    
     const {
       title,
       description,
       type,
       budget,
       location,
-      employer_id,
     } = req.body;
 
+    const employer_id = req.session.userId;
     const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     // artist id is set to 0 as default for now
@@ -299,6 +337,27 @@ app.post('/api/projects', upload.single('image'), async (req, res) => {
     res.status(200).json({ success: true, data });
   } catch (error) {
     console.error('Project submission error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/api/logout', (req, res) => {
+  try {
+    // Clear the session on the server side
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Session destruction error:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+
+      // Clear the client-side cookie
+      res.clearCookie('userCookie'); // Replace with your actual cookie name
+      
+      // Respond with a success message
+      res.status(200).json({ success: true });
+    });
+  } catch (error) {
+    console.error('Logout error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
