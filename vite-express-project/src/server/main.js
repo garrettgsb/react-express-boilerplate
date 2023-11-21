@@ -241,6 +241,14 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Check user authentication
+app.get('/api/check-auth', (req, res) => {
+  if (req.session.userId) {
+    res.status(200).json({ authenticated: true, userId: req.session.userId });
+  } else {
+    res.status(401).json({ authenticated: false });
+  }
+});
 
 // Login: SELECT * FROM users WHERE email = 'email'
 app.get('/api/supabase/users', async (req, res) => {

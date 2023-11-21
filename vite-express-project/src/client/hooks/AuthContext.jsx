@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -9,6 +9,16 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
   
+  // Initialize Authentication when the app mounts
+  // So when access another page form address bar, state will be set to logged in
+  const initializeAuthentication = async () => {
+    const isAuthenticated = await checkAuthentication();
+    setIsLoggedIn(isAuthenticated);
+  };
+  
+  useEffect(() => {
+    initializeAuthentication();
+  }, []);
 
   const login = (userData) => {
     setIsLoggedIn(true);
@@ -19,12 +29,13 @@ export const AuthProvider = ({ children }) => {
   //   setIsLoggedIn(false);
   //   setUser(null);
   // };
-
+  
+  // Log out is updated to delete cookie session 
   const logout = async () => {
     try {
       await fetch('/api/logout', {
         method: 'POST',
-        credentials: 'include', // Include credentials (cookies) in the request
+        credentials: 'include',
       });
   
       setIsLoggedIn(false);
@@ -77,6 +88,25 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error during login:', error);
+      return false;
+    }
+  };
+
+  const checkAuthentication = async () => {
+    try {
+      const response = await fetch('/api/check-auth', {
+        method: 'GET',
+        credentials: 'include',
+      });
+  
+      if (response.ok) {
+        const result = await response.json();
+        return result.authenticated;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error('Error checking authentication:', error);
       return false;
     }
   };
