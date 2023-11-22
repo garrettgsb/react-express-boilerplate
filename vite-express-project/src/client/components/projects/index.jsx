@@ -5,22 +5,23 @@ import InfiniteLoader from 'react-window-infinite-loader';
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import { useProjectsFetcher } from './hooks/useProjectsFetcher';
-import { ProjectCard } from './ProjectCard';
-import { LoadingIndicator } from './LoadingIndicator';
+import { getColumnComponent } from './getColumnComponent';
 import {
   ROW_HEIGHT,
-  LOADING_ROW_HEIGHT,
+  ROW_HEIGHT_LAST,
+  ROW_HEIGHT_CURRENT_LAST,
+  ROW_HEIGHT_LOADING,
   COLUMN_WIDTH_PADDING,
-  MOCK_ITEM_COUNT,
+  CONTAINER_HEIGHT_PADDING,
   ITEMS_PER_ROW,
-  LOAD_MORE_ITEMS
+  ITEMS_PER_LOAD
 } from './constants';
 
 export const Projects = () => {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split("/");
-  const title = splitLocation[splitLocation.length - 1] === "projects" ? "Projects" : "Artists";
+  const title = splitLocation[splitLocation.length - 1] === "gigs" ? "Gigs" : "Artists";
 
   const gridRef = useRef(null);
 
@@ -28,18 +29,28 @@ export const Projects = () => {
     projectsById,
     projectIds,
     isFetching,
+    totalCount,
     setIsFetching,
     fetchProjects
   } = useProjectsFetcher();
 
-  const lastRowIndex = Math.ceil(projectIds.length / ITEMS_PER_ROW);
-  const rowCount = lastRowIndex;
+  const totalRows = Math.ceil(totalCount / ITEMS_PER_ROW);
+  const currentLastRowIndex = Math.ceil(projectIds.length / ITEMS_PER_ROW);
 
   const getRowHeight = useCallback((rowIndex) => {
-    console.log(rowIndex, rowCount);
-    const isLoadingRow = rowIndex === rowCount;
-    return isLoadingRow ? LOADING_ROW_HEIGHT : ROW_HEIGHT;
-  }, [rowCount]);
+    const isCurrentLastRow = rowIndex === currentLastRowIndex - 1;
+    const isLastRow = rowIndex === totalRows - 1;
+    const isLoadingRow = rowIndex === currentLastRowIndex;
+    const isFooterRow = rowIndex === currentLastRowIndex + 1;
+
+    return (isLoadingRow || isFooterRow)
+      ? ROW_HEIGHT_LOADING
+      : isCurrentLastRow
+      ? ROW_HEIGHT_CURRENT_LAST
+      : isLastRow
+      ? ROW_HEIGHT_LAST
+      : ROW_HEIGHT;
+  }, [currentLastRowIndex]);
 
   const loadMoreItems = useCallback((start) => {
     if (!isFetching && !projectsById[start]) {
@@ -50,34 +61,44 @@ export const Projects = () => {
 
   const isItemLoaded = useCallback((index) => {
     return index < projectIds.length;
-  }, [projectsById]);
+  }, [projectIds]);
 
+  // VariableSizeGrid caches variable data for grid items.
+  // It prevents the grid from having stale data
+  // after it loads more items, so force reset when data changes.
   useEffect(() => {
     if (gridRef.current != null) {
       gridRef.current.resetAfterRowIndex(0, true);
     }
-  }, [projectIds.length]);
+  }, [projectIds]);
 
   return (
-    <div style={{ marginTop: "3rem", height: "70vh", width: "100%", overflow: "hidden" }}>
-      <h1>{title} in your area</h1>
+    <div className="mt-9 h-[78vh] w-full overflow-hidden">
+      <h1
+        className="font-subHeading text-lg font-semibold leading-6 text-accent hover:text-accentHover mb-4"
+      >
+        {title} in your area
+      </h1>
       <AutoSizer>
         {({ height, width }) => (
           <InfiniteLoader
-            threshold={Math.ceil(LOAD_MORE_ITEMS / 2)}
-            itemCount={MOCK_ITEM_COUNT}
+            threshold={Math.ceil(ITEMS_PER_LOAD / 2)}
+            itemCount={totalCount}
             loadMoreItems={loadMoreItems}
             isItemLoaded={isItemLoaded}
           >
             {({ onItemsRendered, ref }) => (
               <VariableSizeGrid
                 className="variable-size-grid"
-                columnWidth={(_index) => Math.floor(width - COLUMN_WIDTH_PADDING) / ITEMS_PER_ROW }
+                columnWidth={(_index) =>
+                  // no padding will make it have a horizontal scrollbar
+                  Math.floor(width - COLUMN_WIDTH_PADDING) / ITEMS_PER_ROW
+                }
                 rowHeight={getRowHeight}
-                height={height - 20}
+                height={height - CONTAINER_HEIGHT_PADDING}
                 width={width}
                 columnCount={ITEMS_PER_ROW}
-                rowCount={rowCount + 1} // +1 for loading indicator
+                rowCount={currentLastRowIndex + 2} // +1 for loading indicator, +1 for footer
                 onItemsRendered={({ visibleRowStartIndex, visibleRowStopIndex }) => {
                   onItemsRendered({
                     visibleStartIndex: visibleRowStartIndex * ITEMS_PER_ROW,
@@ -89,18 +110,7 @@ export const Projects = () => {
                   gridRef.current = grid;
                 }}
               >
-                {({ columnIndex, rowIndex, style }) => {
-                  const isWithinTheRange = (rowIndex * ITEMS_PER_ROW + columnIndex) < projectIds.length;
-                  const isLoadingRow = rowIndex === rowCount;
-                  const isLoadingColumn = columnIndex === 0;
-                  const isLoadedAll = projectIds.length >= MOCK_ITEM_COUNT;
-
-                  return isWithinTheRange ?
-                    <ProjectCard style={style} />
-                    : isLoadingRow && isLoadingColumn && isFetching && !isLoadedAll
-                    ? <LoadingIndicator style={style} />
-                    : null;
-                }}
+               {getColumnComponent({ projectIds, currentLastRowIndex, isFetching, totalCount })}
               </VariableSizeGrid>
             )}
           </InfiniteLoader>)

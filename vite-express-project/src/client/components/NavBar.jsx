@@ -15,8 +15,8 @@ const { isLoggedIn, login, logout, user } = useAuth();
   };
 
   const menu = [
-    { name: "Find Artists", href: "#" },
-    { name: "Find Gigs", href: "#" },
+    { name: "Find Artists", href: "/artists" },
+    { name: "Find Gigs", href: "/gigs" },
   ];
 
   return (

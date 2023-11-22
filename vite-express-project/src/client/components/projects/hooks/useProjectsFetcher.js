@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { MOCK_ITEM_COUNT, LOAD_MORE_ITEMS } from '../constants';
+import { MOCK_ITEM_COUNT, ITEMS_PER_LOAD } from '../constants';
 
 const defaultState = {
   projectsById: {},
@@ -13,7 +13,7 @@ const getMockEntries = (projectsById, projectIds) => {
 
   const itemsLeft = Math.max(MOCK_ITEM_COUNT - nextProjectIds.length, 0);
 
-  Array.from({ length: Math.min(itemsLeft, LOAD_MORE_ITEMS) }).forEach((_, index) => {
+  Array.from({ length: Math.min(itemsLeft, ITEMS_PER_LOAD) }).forEach((_, index) => {
     const nextIndex = index;
     nextProjectsById[nextIndex] = {
       id: nextIndex,
@@ -66,6 +66,7 @@ export const useProjectsFetcher = () => {
     projectsById: state.projectsById,
     projectIds: state.projectIds,
     isFetching: state.isFetching,
+    totalCount: MOCK_ITEM_COUNT,
     setIsFetching,
     fetchProjects
   };
