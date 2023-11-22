@@ -2,8 +2,7 @@ import { ITEM_SIZE } from './constants';
 
 const projectCardStyle = {
   display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center'
+  justifyContent: 'center'
 };
 
 export const ProjectCard = ({ style }) => {
