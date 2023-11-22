@@ -20,7 +20,10 @@ const LoginModal = () => {
             placeholder="Email"
             className="input input-bordered w-full max-w-xs"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              resetError();
+            }}
           />
         </div>
         <div className="form-control w-full max-w-xs m-4">
@@ -29,7 +32,10 @@ const LoginModal = () => {
             placeholder="Password"
             className="input input-bordered w-full max-w-xs"
             value={password}
-            onChange={(e) => setPassword(e.target.value)} />
+            onChange={(e) => {
+              setPassword(e.target.value);
+              resetError();
+              }} />
         </div>
         <button
           onClick={() => handleLogin()}
