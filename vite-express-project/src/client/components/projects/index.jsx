@@ -8,6 +8,8 @@ import { useProjectsFetcher } from './hooks/useProjectsFetcher';
 import { getColumnComponent } from './getColumnComponent';
 import {
   ROW_HEIGHT,
+  ROW_HEIGHT_LAST,
+  ROW_HEIGHT_CURRENT_LAST,
   ROW_HEIGHT_LOADING,
   COLUMN_WIDTH_PADDING,
   CONTAINER_HEIGHT_PADDING,
@@ -32,13 +34,23 @@ export const Projects = () => {
     fetchProjects
   } = useProjectsFetcher();
 
-  const lastRowIndex = Math.ceil(projectIds.length / ITEMS_PER_ROW);
+  const totalRows = Math.ceil(totalCount / ITEMS_PER_ROW);
+  const currentLastRowIndex = Math.ceil(projectIds.length / ITEMS_PER_ROW);
 
   const getRowHeight = useCallback((rowIndex) => {
-    const isLoadingRow = rowIndex === lastRowIndex;
+    const isCurrentLastRow = rowIndex === currentLastRowIndex - 1;
+    const isLastRow = rowIndex === totalRows - 1;
+    const isLoadingRow = rowIndex === currentLastRowIndex;
+    const isFooterRow = rowIndex === currentLastRowIndex + 1;
 
-    return isLoadingRow ? ROW_HEIGHT_LOADING : ROW_HEIGHT;
-  }, [lastRowIndex]);
+    return (isLoadingRow || isFooterRow)
+      ? ROW_HEIGHT_LOADING
+      : isCurrentLastRow
+      ? ROW_HEIGHT_CURRENT_LAST
+      : isLastRow
+      ? ROW_HEIGHT_LAST
+      : ROW_HEIGHT;
+  }, [currentLastRowIndex]);
 
   const loadMoreItems = useCallback((start) => {
     if (!isFetching && !projectsById[start]) {
@@ -61,7 +73,7 @@ export const Projects = () => {
   }, [projectIds]);
 
   return (
-    <div className="mt-9 h-[70vh] w-full overflow-hidden">
+    <div className="mt-9 h-[78vh] w-full overflow-hidden">
       <h1
         className="font-subHeading text-lg font-semibold leading-6 text-accent hover:text-accentHover mb-4"
       >
@@ -86,7 +98,7 @@ export const Projects = () => {
                 height={height - CONTAINER_HEIGHT_PADDING}
                 width={width}
                 columnCount={ITEMS_PER_ROW}
-                rowCount={lastRowIndex + 1} // +1 for loading indicator
+                rowCount={currentLastRowIndex + 2} // +1 for loading indicator, +1 for footer
                 onItemsRendered={({ visibleRowStartIndex, visibleRowStopIndex }) => {
                   onItemsRendered({
                     visibleStartIndex: visibleRowStartIndex * ITEMS_PER_ROW,
@@ -98,7 +110,7 @@ export const Projects = () => {
                   gridRef.current = grid;
                 }}
               >
-               {getColumnComponent({ projectIds, lastRowIndex, isFetching })}
+               {getColumnComponent({ projectIds, currentLastRowIndex, isFetching, totalCount })}
               </VariableSizeGrid>
             )}
           </InfiniteLoader>)
