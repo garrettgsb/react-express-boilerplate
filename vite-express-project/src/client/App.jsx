@@ -8,7 +8,11 @@ import MyProfile from "./routes/MyProfileRoute";
 import UserProfile from "./routes/UserProfileRoute";
 import SignupModal from "./components/SignupModal";
 import ProjectProfile from "./routes/ProjectProfileRoute";
+
+import LikedItemsRoute from "./routes/LikedItemsRoute";
+
 import { Projects } from "./components/projects";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./hooks/AuthContext";
 import NewProjectFormRoute from "./routes/NewProjectFormRoute";
@@ -29,8 +33,10 @@ function App() {
     setIsModalOpen(false);
   };
 
+
   return (    
     <>
+
       <NavBar openModal={openModal} />
       <Routes>
         <Route
@@ -43,7 +49,11 @@ function App() {
         <Route exact path="/artists" element={<Projects />} />
         <Route exact path="/gigs" element={<Projects />} />
         <Route exact path="/project/:id" element={<ProjectProfile />} />
+
+        <Route exact path="/likeditems" element={<LikedItemsRoute />} />
+
         <Route exact path="/project/new" element={<NewProjectFormRoute />}/>
+
       </Routes>
       {/* Footer will be rendered within the Projects component due to the way infinite scroll works */}
       {showFooter && <Footer />}
@@ -56,7 +66,6 @@ function App() {
     //   <Footer />
     //
     // </>
-
   );
 }
 
