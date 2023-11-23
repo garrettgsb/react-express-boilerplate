@@ -10,7 +10,7 @@ export const ProjectCard = ({ style }) => {
     <div style={{ ...style, ...projectCardStyle }}>
       <img 
         style={{ height: `${ITEM_SIZE}px`, width: `${ITEM_SIZE}px` }}
-        src="../../public/assets/close-up-of-ceramics-free-photo.jpg"
+        src="assets/close-up-of-ceramics-free-photo.jpg"
         alt="SVG"
       />
     </div>
