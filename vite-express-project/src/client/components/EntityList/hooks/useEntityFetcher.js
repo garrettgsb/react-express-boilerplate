@@ -1,52 +1,55 @@
 import { useState, useEffect, useCallback } from 'react';
-import { MOCK_ITEM_COUNT, ITEMS_PER_LOAD } from '../constants.js';
+import {
+  MOCK_ITEM_COUNT,
+  ITEMS_PER_LOAD
+} from '../constants.js';
 
 const defaultState = {
-  projectsById: {},
-  projectIds: [],
+  entityById: {},
+  entityIds: [],
   isFetching: true
 }
 
-const getMockEntries = (projectsById, projectIds) => {
-  const nextProjectsById = { ...projectsById };
-  const nextProjectIds = [ ...projectIds ];
+const getMockEntries = (entityById, entityIds) => {
+  const nextEntityById = { ...entityById };
+  const nextEntityIds = [ ...entityIds ];
 
-  const itemsLeft = Math.max(MOCK_ITEM_COUNT - nextProjectIds.length, 0);
+  const itemsLeft = Math.max(MOCK_ITEM_COUNT - nextEntityIds.length, 0);
 
   Array.from({ length: Math.min(itemsLeft, ITEMS_PER_LOAD) }).forEach((_, index) => {
     const nextIndex = index;
-    nextProjectsById[nextIndex] = {
+    nextEntityById[nextIndex] = {
       id: nextIndex,
       title: `Project ${nextIndex}`
     };
 
-    nextProjectIds.push(nextIndex);
+    nextEntityIds.push(nextIndex);
   });
   
   return {
-    projectsById: nextProjectsById,
-    projectIds: nextProjectIds
+    entityById: nextEntityById,
+    entityIds: nextEntityIds
   }
 }
 
-export const useEntityFetcher = () => {
+export const useEntityFetcher = ({ entityType }) => {
   const [state, setState] = useState(defaultState);
 
-  const fetchProjects = useCallback(async () => {
+  const fetchEntities = useCallback(async () => {
     let timeout;
 
     await new Promise((resolve) => {
       timeout = setTimeout(resolve, 2000);
     }).then(() => {
       setState((prev) => {
-        const { projectsById, projectIds } =
-          getMockEntries(prev.projectsById, prev.projectIds);
+        const { entityById, entityIds } =
+          getMockEntries(prev.entityById, prev.entityIds);
         
         return {
           ...prev,
           isFetching: false,
-          projectsById,
-          projectIds
+          entityById,
+          entityIds
         }
       });
     });
@@ -62,15 +65,15 @@ export const useEntityFetcher = () => {
     fetch('api/projects?offset=0&limit=20')
       .then((res) => res.json())
       .then((data) => console.log(data));
-    fetchProjects();
-  }, [fetchProjects]);
+    fetchEntities();
+  }, [fetchEntities]);
 
   return {
-    projectsById: state.projectsById,
-    projectIds: state.projectIds,
+    entityById: state.entityById,
+    entityIds: state.entityIds,
     isFetching: state.isFetching,
     totalCount: MOCK_ITEM_COUNT,
     setIsFetching,
-    fetchProjects
+    fetchEntities
   };
 }

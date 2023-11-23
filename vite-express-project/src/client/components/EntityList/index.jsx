@@ -14,28 +14,30 @@ import {
   COLUMN_WIDTH_PADDING,
   CONTAINER_HEIGHT_PADDING,
   ITEMS_PER_ROW,
-  ITEMS_PER_LOAD
+  ITEMS_PER_LOAD,
+  TITLE_BY_URL
 } from './constants';
 
 export const EntityList = () => {
   const location = useLocation();
   const { pathname } = location;
-  const splitLocation = pathname.split("/");
-  const title = splitLocation[splitLocation.length - 1] === "gigs" ? "Gigs" : "Artists";
+  const splitPath = pathname.split("/");
+  const url = splitPath[splitPath.length - 1];
+  const title = TITLE_BY_URL[url];
 
   const gridRef = useRef(null);
 
   const {
-    projectsById,
-    projectIds,
+    entityById,
+    entityIds,
     isFetching,
     totalCount,
     setIsFetching,
-    fetchProjects
-  } = useEntityFetcher();
+    fetchEntities
+  } = useEntityFetcher({ entityType: url });
 
   const totalRows = Math.ceil(totalCount / ITEMS_PER_ROW);
-  const currentLastRowIndex = Math.ceil(projectIds.length / ITEMS_PER_ROW);
+  const currentLastRowIndex = Math.ceil(entityIds.length / ITEMS_PER_ROW);
 
   const getRowHeight = useCallback((rowIndex) => {
     const isCurrentLastRow = rowIndex === currentLastRowIndex - 1;
@@ -53,15 +55,15 @@ export const EntityList = () => {
   }, [currentLastRowIndex]);
 
   const loadMoreItems = useCallback((start) => {
-    if (!isFetching && !projectsById[start]) {
+    if (!isFetching && !entityById[start]) {
       setIsFetching();
-      fetchProjects();
+      fetchEntities();
     }
-  }, [isFetching, projectsById, fetchProjects, setIsFetching])
+  }, [isFetching, entityById, fetchEntities, setIsFetching])
 
   const isItemLoaded = useCallback((index) => {
-    return index < projectIds.length;
-  }, [projectIds]);
+    return index < entityIds.length;
+  }, [entityIds]);
 
   // VariableSizeGrid caches variable data for grid items.
   // It prevents the grid from having stale data
@@ -70,7 +72,7 @@ export const EntityList = () => {
     if (gridRef.current != null) {
       gridRef.current.resetAfterRowIndex(0, true);
     }
-  }, [projectIds]);
+  }, [entityIds]);
 
   return (
     <div className="mt-9 h-[78vh] w-full overflow-hidden">
@@ -110,7 +112,7 @@ export const EntityList = () => {
                   gridRef.current = grid;
                 }}
               >
-               {getColumnComponent({ projectIds, currentLastRowIndex, isFetching, totalCount })}
+               {getColumnComponent({ projectIds: entityIds, currentLastRowIndex, isFetching, totalCount })}
               </VariableSizeGrid>
             )}
           </InfiniteLoader>)
