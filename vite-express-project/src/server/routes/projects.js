@@ -46,7 +46,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/api/projects/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("projects")
@@ -65,7 +65,7 @@ router.put("/api/projects/:id", async (req, res) => {
   }
 });
 
-router.delete("/api/projects/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("projects")
@@ -85,7 +85,7 @@ router.delete("/api/projects/:id", async (req, res) => {
 });
 
 // Handle project submission with static file upload
-router.post('/api/projects', upload.single('image'), async (req, res) => {
+router.post('/', upload.single('image'), async (req, res) => {
   try {
     
     if (!req.session.userId) {
