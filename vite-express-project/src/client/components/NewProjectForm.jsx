@@ -1,4 +1,4 @@
-import ProjectTypeBox from "./ProjectTypeBox";
+import TypeSelectionBox from "./TypeSelectionBox";
 import { useNewProject } from "../hooks/NewProjectContext";
 import { useAuth } from "../hooks/AuthContext";
 
@@ -12,17 +12,17 @@ export default function NewProjectForm() {
     handleFileChange,
     handleProjectTypeForm,
     handleSubmit,
-    selected,
-    setSelected,
+    selectedProject,
+    setSelectedProject,
     filteredProjectType,
     projectTypeQuery,
     setProjectTypeQuery,
   } = useNewProject();
 
   const handleprojectTypeSelect = (value) => {
-    setSelected(value);
+    setSelectedProject(value);
     handleProjectTypeForm(value.name);
-  }
+  };
 
   const { user } = useAuth();
   const employer_id = user ? user.id : null;
@@ -141,9 +141,9 @@ export default function NewProjectForm() {
               <label className="label">
               <span className="label-text">What kind of project?</span>
               </label>
-              <ProjectTypeBox
+              <TypeSelectionBox
                 onChange={handleProjectTypeForm}
-                selectedType={selected}
+                selectedType={selectedProject}
                 handleSelect={handleprojectTypeSelect}
                 filteredType={filteredProjectType}
                 query={projectTypeQuery}

@@ -26,7 +26,7 @@ export const NewProjectProvider = ({ children }) => {
     { id: 7, name: 'Other' },
   ]
   
-  const [selected, setSelected] = useState(projectType[0])
+  const [selectedProject, setSelectedProject] = useState(projectType[0])
   const [query, setQuery] = useState('')
   const [projectTypeQuery, setProjectTypeQuery] = useState('');
 
@@ -113,8 +113,8 @@ export const NewProjectProvider = ({ children }) => {
     handleFileChange,
     handleProjectTypeForm,
     handleSubmit,
-    selected,
-    setSelected,
+    selectedProject,
+    setSelectedProject,
     query,
     setQuery,
     filteredProjectType,

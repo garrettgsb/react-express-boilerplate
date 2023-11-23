@@ -1,9 +1,9 @@
 import { Fragment, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-import { useNewProject } from '../hooks/NewProjectContext';
+// import { useNewProject } from '../hooks/NewProjectContext';
 
-export default function ProjectTypeBox(props) {
+export default function TypeSelectionBox(props) {
 
   const { selectedType, handleSelect, filteredType, query, setQuery } = props;
 
