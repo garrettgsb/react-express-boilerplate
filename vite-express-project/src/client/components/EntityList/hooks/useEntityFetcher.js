@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   MOCK_ITEM_COUNT,
-  ITEMS_PER_LOAD
+  ITEMS_PER_LOAD,
+  API_BY_URL
 } from '../constants.js';
 
 const defaultState = {
@@ -10,62 +11,56 @@ const defaultState = {
   isFetching: true
 }
 
-const getMockEntries = (entityById, entityIds) => {
-  const nextEntityById = { ...entityById };
-  const nextEntityIds = [ ...entityIds ];
-
-  const itemsLeft = Math.max(MOCK_ITEM_COUNT - nextEntityIds.length, 0);
-
-  Array.from({ length: Math.min(itemsLeft, ITEMS_PER_LOAD) }).forEach((_, index) => {
-    const nextIndex = index;
-    nextEntityById[nextIndex] = {
-      id: nextIndex,
-      title: `Project ${nextIndex}`
-    };
-
-    nextEntityIds.push(nextIndex);
-  });
-  
-  return {
-    entityById: nextEntityById,
-    entityIds: nextEntityIds
-  }
-}
-
-export const useEntityFetcher = ({ url }) => {
+export const useEntityFetcher = ({ url: _url }) => {
   const [state, setState] = useState(defaultState);
 
-  const fetchEntities = useCallback(async () => {
+  const url = API_BY_URL[_url]
+
+  const fetchEntities = useCallback(async (offset) => {
     let timeout;
 
     await new Promise((resolve) => {
-      timeout = setTimeout(resolve, 2000);
+      // to give delays for between 1 and 2 seconds because supabase is too fase.
+      // it will not be enough to demonstrate the loading state without this delay.
+      timeout = setTimeout(resolve, (Math.random() * 10000 % 1000) + 1000);
     }).then(() => {
-      setState((prev) => {
-        const { entityById, entityIds } =
-          getMockEntries(prev.entityById, prev.entityIds);
-        
-        return {
-          ...prev,
-          isFetching: false,
-          entityById,
-          entityIds
-        }
+        fetch(`${url}?offset=${offset}&limit=${ITEMS_PER_LOAD}`)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setState((prev) => ({
+              ...prev,
+              entityById: {
+                ...prev.entityById,
+                ...data.reduce((entityById, entity) => {
+                  entityById[entity.id] = entity;
+                  return entityById;
+                }, {})
+              },
+              entityIds: [
+                ...prev.entityIds,
+                ...data.map((entity) => entity.id)
+              ],
+              isFetching: false
+            }));
+          });
+      }).catch((error) => {
+        console.error("Server Error:", error);
+        setState((prev) => ({ ...prev, isFetching: false }));
       });
-    });
     
     return () => clearTimeout(timeout);
-  }, []);
+  }, [url]);
 
   const setIsFetching = useCallback(() => {
     setState((prev) => ({ ...prev, isFetching: true }));
   }, []);
 
   useEffect(() => {
-    fetch('api/projects?offset=0&limit=20')
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-    fetchEntities();
+    // fetch('api/projects?offset=0&limit=20')
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data));
+    fetchEntities(0);
   }, [fetchEntities]);
 
   return {
