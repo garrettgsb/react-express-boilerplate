@@ -10,9 +10,16 @@ export default function NewProjectForm() {
     setFormData,
     handleInputChange,
     handleFileChange,
-    handleProjectTypeSelect,
+    handleProjectTypeForm,
     handleSubmit,
+    selected,
+    setSelected,
   } = useNewProject();
+
+  const handleprojectTypeSelect = (value) => {
+    setSelected(value);
+    handleProjectTypeForm(value.name);
+  }
 
   const { user } = useAuth();
   const employer_id = user ? user.id : null;
@@ -131,7 +138,10 @@ export default function NewProjectForm() {
               <label className="label">
               <span className="label-text">What kind of project?</span>
               </label>
-              <ProjectTypeBox onChange={handleProjectTypeSelect} />
+              <ProjectTypeBox
+                onChange={handleProjectTypeForm}
+                selectedType={selected}
+                handleSelect={handleprojectTypeSelect} />
             </div>
             
           </div>

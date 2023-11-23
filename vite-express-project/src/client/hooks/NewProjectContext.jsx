@@ -39,6 +39,7 @@ export const NewProjectProvider = ({ children }) => {
             .includes(query.toLowerCase().replace(/\s+/g, ''))
         )
 
+  // Set State project name
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -46,6 +47,7 @@ export const NewProjectProvider = ({ children }) => {
     });
   };
 
+  // Set State: image
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFormData({
@@ -60,13 +62,15 @@ export const NewProjectProvider = ({ children }) => {
     }
   };
 
-  const handleProjectTypeSelect = (type) => {
+  // Set State: project type
+  const handleProjectTypeForm = (type) => {
     setFormData({
       ...formData,
       projectType: type,
     });
   };
 
+  // Submit Form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -106,7 +110,7 @@ export const NewProjectProvider = ({ children }) => {
     setFormData,
     handleInputChange,
     handleFileChange,
-    handleProjectTypeSelect,
+    handleProjectTypeForm,
     handleSubmit,
     selected,
     setSelected,

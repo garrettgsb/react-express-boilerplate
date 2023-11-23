@@ -3,23 +3,25 @@ import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { useNewProject } from '../hooks/NewProjectContext';
 
-export default function ProjectTypeBox({ onChange }) {
+export default function ProjectTypeBox(props) {
+
+  const { selectedType, handleSelect } = props;
+
   const {
-    selected,
-    setSelected,
     query,
     setQuery,
     filteredProjectType
   } = useNewProject();
 
-  const handleSelect = (value) => {
-    setSelected(value);
-    onChange(value.name); 
-  };
+  // const handleSelect = (value) => {
+  //   setSelected(value);
+  //   onChange(value.name); 
+  //   //handleProjectTypeForm(value.name);
+  // };
 
   return (
     <div className=" top-16 w-80">
-      <Combobox value={selected} onChange={handleSelect}>
+      <Combobox value={selectedType} onChange={handleSelect}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg  text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
@@ -57,16 +59,16 @@ export default function ProjectTypeBox({ onChange }) {
                     }
                     value={projectType}
                   >
-                    {({ selected, active }) => (
+                    {({ selectedType, active }) => (
                       <>
                         <span
                           className={`block truncate ${
-                            selected ? 'font-medium' : 'font-normal'
+                            selectedType ? 'font-medium' : 'font-normal'
                           }`}
                         >
                           {projectType.name}
                         </span>
-                        {selected ? (
+                        {selectedType ? (
                           <span
                             className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
                               active ? 'text-white' : 'text-teal-600'
