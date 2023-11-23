@@ -17,7 +17,7 @@ import {
   ITEMS_PER_LOAD
 } from './constants';
 
-export const Projects = () => {
+export const EntityList = () => {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split("/");

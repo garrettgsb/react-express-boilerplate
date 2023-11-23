@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { MOCK_ITEM_COUNT, ITEMS_PER_LOAD } from '../constants';
+import { MOCK_ITEM_COUNT, ITEMS_PER_LOAD } from '../constants.js';
 
 const defaultState = {
   projectsById: {},
@@ -59,6 +59,9 @@ export const useProjectsFetcher = () => {
   }, []);
 
   useEffect(() => {
+    fetch('api/projects?offset=0&limit=20')
+      .then((res) => res.json())
+      .then((data) => console.log(data));
     fetchProjects();
   }, [fetchProjects]);
 
