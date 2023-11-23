@@ -23,3 +23,8 @@ export const TITLE_BY_URL = {
 
 export const API_ARTISTS = 'api/users';
 export const API_GIGS = 'api/projects';
+
+export const API_BY_URL = {
+  [URL_ARTISTS]: API_ARTISTS,
+  [URL_GIGS]: API_GIGS
+};

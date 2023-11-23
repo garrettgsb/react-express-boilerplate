@@ -34,7 +34,7 @@ export const EntityList = () => {
     totalCount,
     setIsFetching,
     fetchEntities
-  } = useEntityFetcher({ entityType: url });
+  } = useEntityFetcher({ url });
 
   const totalRows = Math.ceil(totalCount / ITEMS_PER_ROW);
   const currentLastRowIndex = Math.ceil(entityIds.length / ITEMS_PER_ROW);

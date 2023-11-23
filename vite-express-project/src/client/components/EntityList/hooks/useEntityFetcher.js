@@ -32,7 +32,7 @@ const getMockEntries = (entityById, entityIds) => {
   }
 }
 
-export const useEntityFetcher = ({ entityType }) => {
+export const useEntityFetcher = ({ url }) => {
   const [state, setState] = useState(defaultState);
 
   const fetchEntities = useCallback(async () => {
