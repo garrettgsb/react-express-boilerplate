@@ -4,7 +4,7 @@ import { VariableSizeGrid } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import AutoSizer from "react-virtualized-auto-sizer";
 
-import { useProjectsFetcher } from './hooks/useProjectsFetcher';
+import { useEntityFetcher } from './hooks/useEntityFetcher';
 import { getColumnComponent } from './getColumnComponent';
 import {
   ROW_HEIGHT,
@@ -14,28 +14,31 @@ import {
   COLUMN_WIDTH_PADDING,
   CONTAINER_HEIGHT_PADDING,
   ITEMS_PER_ROW,
-  ITEMS_PER_LOAD
+  ITEMS_PER_LOAD,
+  TITLE_BY_URL,
+  URL_ARTISTS
 } from './constants';
 
-export const Projects = () => {
+export const EntityList = () => {
   const location = useLocation();
   const { pathname } = location;
-  const splitLocation = pathname.split("/");
-  const title = splitLocation[splitLocation.length - 1] === "gigs" ? "Gigs" : "Artists";
+  const splitPath = pathname.split("/");
+  const url = splitPath[splitPath.length - 1];
+  const title = TITLE_BY_URL[url];
 
   const gridRef = useRef(null);
 
   const {
-    projectsById,
-    projectIds,
+    entityByIndex,
+    currentCount,
     isFetching,
     totalCount,
     setIsFetching,
-    fetchProjects
-  } = useProjectsFetcher();
+    fetchEntities
+  } = useEntityFetcher({ url });
 
   const totalRows = Math.ceil(totalCount / ITEMS_PER_ROW);
-  const currentLastRowIndex = Math.ceil(projectIds.length / ITEMS_PER_ROW);
+  const currentLastRowIndex = Math.ceil(currentCount / ITEMS_PER_ROW);
 
   const getRowHeight = useCallback((rowIndex) => {
     const isCurrentLastRow = rowIndex === currentLastRowIndex - 1;
@@ -53,15 +56,15 @@ export const Projects = () => {
   }, [currentLastRowIndex]);
 
   const loadMoreItems = useCallback((start) => {
-    if (!isFetching && !projectsById[start]) {
+    if (!isFetching && !entityByIndex[start] && currentCount < totalCount) {
       setIsFetching();
-      fetchProjects();
+      fetchEntities(currentCount);
     }
-  }, [isFetching, projectsById, fetchProjects, setIsFetching])
+  }, [isFetching, entityByIndex, currentCount, totalCount, fetchEntities, setIsFetching])
 
   const isItemLoaded = useCallback((index) => {
-    return index < projectIds.length;
-  }, [projectIds]);
+    return index < currentCount;
+  }, [currentCount]);
 
   // VariableSizeGrid caches variable data for grid items.
   // It prevents the grid from having stale data
@@ -70,7 +73,7 @@ export const Projects = () => {
     if (gridRef.current != null) {
       gridRef.current.resetAfterRowIndex(0, true);
     }
-  }, [projectIds]);
+  }, [entityByIndex]);
 
   return (
     <div className="mt-9 h-[78vh] w-full overflow-hidden">
@@ -105,12 +108,13 @@ export const Projects = () => {
                     visibleStopIndex: visibleRowStopIndex * ITEMS_PER_ROW + ITEMS_PER_ROW - 1,
                   });
                 }}
+                itemData={entityByIndex}
                 ref={(grid) => {
                   ref(grid);
                   gridRef.current = grid;
                 }}
               >
-               {getColumnComponent({ projectIds, currentLastRowIndex, isFetching, totalCount })}
+               {getColumnComponent({ currentLastRowIndex, isFetching, currentCount, totalCount, isArtists: url === URL_ARTISTS })}
               </VariableSizeGrid>
             )}
           </InfiniteLoader>)

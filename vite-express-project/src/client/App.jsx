@@ -11,7 +11,7 @@ import ProjectProfile from "./routes/ProjectProfileRoute";
 
 import LikedItemsRoute from "./routes/LikedItemsRoute";
 
-import { Projects } from "./components/projects";
+import { EntityList } from "./components/EntityList";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./hooks/AuthContext";
@@ -46,8 +46,8 @@ function App() {
         />
         {/* <Route exact path="/myprofile" element={<MyProfile />} /> */}
         <Route exact path="/users/:id" element={<UserProfile />} />
-        <Route exact path="/artists" element={<Projects />} />
-        <Route exact path="/gigs" element={<Projects />} />
+        <Route exact path="/artists" element={<EntityList />} />
+        <Route exact path="/gigs" element={<EntityList />} />
         <Route exact path="/project/:id" element={<ProjectProfile />} />
 
         <Route exact path="/likeditems" element={<LikedItemsRoute />} />
@@ -55,7 +55,7 @@ function App() {
         <Route exact path="/project/new" element={<NewProjectFormRoute />}/>
 
       </Routes>
-      {/* Footer will be rendered within the Projects component due to the way infinite scroll works */}
+      {/* Footer will be rendered within the EntityList component due to the way infinite scroll works */}
       {showFooter && <Footer />}
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
     </>
