@@ -1,8 +1,8 @@
-import ProjectTypeBox from "./ProjectTypeBox";
+import TypeSelectionBox from "../components/TypeSelectionBox";
 import { useNewProject } from "../hooks/NewProjectContext";
 import { useAuth } from "../hooks/AuthContext";
 
-export default function NewProjectForm() {
+export default function NewProjectFormRoute() {
   const {
     imagePreview,
     setImagePreview,
@@ -10,9 +10,30 @@ export default function NewProjectForm() {
     setFormData,
     handleInputChange,
     handleFileChange,
-    handleProjectTypeSelect,
+    handleProjectTypeForm,
     handleSubmit,
+    selectedProject,
+    setSelectedProject,
+    filteredProjectType,
+    projectTypeQuery,
+    setProjectTypeQuery,
+    handleLocationTypeForm,
+    selectedLocation,
+    setSelectedLocation,
+    filteredLocationType,
+    locationTypeQuery,
+    setLocationTypeQuery,
   } = useNewProject();
+
+  const handleProjectTypeSelect = (value) => {
+    setSelectedProject(value);
+    handleProjectTypeForm(value.name);
+  };
+
+  const handleLocationTypeSelect = (value) => {
+    setSelectedLocation(value);
+    handleLocationTypeForm(value.name);
+  };
 
   const { user } = useAuth();
   const employer_id = user ? user.id : null;
@@ -95,7 +116,6 @@ export default function NewProjectForm() {
               ></textarea>
             </div>
             
-
             <div className="form-control w-full max-w-xs m-3">
               <label className="label">
                 <span className="label-text">What's your budget?</span>
@@ -112,28 +132,32 @@ export default function NewProjectForm() {
               onChange={handleInputChange}
               required/>
             </div>
-            
+
             <div className="form-control w-full max-w-xs m-3">
               <label className="label">
               <span className="label-text">Where is it happening?</span>
               </label>
-              <input
-                type="text"
-                placeholder="Location"
-                name="location"
-                className="input input-bordered w-full max-w-xs text-sm"
-                onChange={handleInputChange}
-                required
-              />
+              <TypeSelectionBox
+                onChange={handleLocationTypeForm}
+                selectedType={selectedLocation}
+                handleSelect={handleLocationTypeSelect}
+                filteredType={filteredLocationType}
+                query={locationTypeQuery}
+                setQuery={setLocationTypeQuery} />
             </div>
             
             <div className="form-control w-full max-w-xs m-3">
               <label className="label">
               <span className="label-text">What kind of project?</span>
               </label>
-              <ProjectTypeBox onChange={handleProjectTypeSelect} />
-            </div>
-            
+              <TypeSelectionBox
+                onChange={handleProjectTypeForm}
+                selectedType={selectedProject}
+                handleSelect={handleProjectTypeSelect}
+                filteredType={filteredProjectType}
+                query={projectTypeQuery}
+                setQuery={setProjectTypeQuery} />
+            </div>  
           </div>
         </div>
         <button
