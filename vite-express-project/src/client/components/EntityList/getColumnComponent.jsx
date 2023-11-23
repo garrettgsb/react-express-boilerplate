@@ -17,7 +17,8 @@ export const getColumnComponent = ({
   currentLastRowIndex,
   isFetching,
   currentCount,
-  totalCounts: totalCount
+  totalCount,
+  isArtists
 }) => ({
   columnIndex,
   rowIndex,
@@ -32,7 +33,7 @@ export const getColumnComponent = ({
   const isFooterRow = rowIndex === currentLastRowIndex + 1;
 
   return isLoadedColumn ?
-    <EntityCard style={style} data={data[currentIndex]} />
+    <EntityCard style={style} data={data[currentIndex]} isArtists={isArtists} />
     : isLoadingRow && isFirstColumn && isFetching && !isLoadedAll
     ? <LoadingIndicator style={style} />
     : isFooterRow && isFirstColumn && currentCount !== 0

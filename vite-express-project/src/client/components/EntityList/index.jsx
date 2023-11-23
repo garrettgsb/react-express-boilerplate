@@ -15,7 +15,8 @@ import {
   CONTAINER_HEIGHT_PADDING,
   ITEMS_PER_ROW,
   ITEMS_PER_LOAD,
-  TITLE_BY_URL
+  TITLE_BY_URL,
+  URL_ARTISTS
 } from './constants';
 
 export const EntityList = () => {
@@ -55,11 +56,11 @@ export const EntityList = () => {
   }, [currentLastRowIndex]);
 
   const loadMoreItems = useCallback((start) => {
-    if (!isFetching && !entityByIndex[start]) {
+    if (!isFetching && !entityByIndex[start] && currentCount < totalCount) {
       setIsFetching();
-      fetchEntities();
+      fetchEntities(currentCount);
     }
-  }, [isFetching, entityByIndex, fetchEntities, setIsFetching])
+  }, [isFetching, entityByIndex, currentCount, totalCount, fetchEntities, setIsFetching])
 
   const isItemLoaded = useCallback((index) => {
     return index < currentCount;
@@ -113,7 +114,7 @@ export const EntityList = () => {
                   gridRef.current = grid;
                 }}
               >
-               {getColumnComponent({ currentLastRowIndex, isFetching, currentCount, totalCount })}
+               {getColumnComponent({ currentLastRowIndex, isFetching, currentCount, totalCount, isArtists: url === URL_ARTISTS })}
               </VariableSizeGrid>
             )}
           </InfiniteLoader>)
