@@ -29,7 +29,7 @@ const getMockEntries = (projectsById, projectIds) => {
   }
 }
 
-export const useProjectsFetcher = () => {
+export const useEntityFetcher = () => {
   const [state, setState] = useState(defaultState);
 
   const fetchProjects = useCallback(async () => {

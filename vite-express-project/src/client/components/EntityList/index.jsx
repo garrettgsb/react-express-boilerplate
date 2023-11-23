@@ -4,7 +4,7 @@ import { VariableSizeGrid } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import AutoSizer from "react-virtualized-auto-sizer";
 
-import { useProjectsFetcher } from './hooks/useProjectsFetcher';
+import { useEntityFetcher } from './hooks/useEntityFetcher';
 import { getColumnComponent } from './getColumnComponent';
 import {
   ROW_HEIGHT,
@@ -32,7 +32,7 @@ export const EntityList = () => {
     totalCount,
     setIsFetching,
     fetchProjects
-  } = useProjectsFetcher();
+  } = useEntityFetcher();
 
   const totalRows = Math.ceil(totalCount / ITEMS_PER_ROW);
   const currentLastRowIndex = Math.ceil(projectIds.length / ITEMS_PER_ROW);
