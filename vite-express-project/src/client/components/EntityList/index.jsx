@@ -28,8 +28,8 @@ export const EntityList = () => {
   const gridRef = useRef(null);
 
   const {
-    entityById,
-    entityIds,
+    entityByIndex,
+    currentCount,
     isFetching,
     totalCount,
     setIsFetching,
@@ -37,7 +37,7 @@ export const EntityList = () => {
   } = useEntityFetcher({ url });
 
   const totalRows = Math.ceil(totalCount / ITEMS_PER_ROW);
-  const currentLastRowIndex = Math.ceil(entityIds.length / ITEMS_PER_ROW);
+  const currentLastRowIndex = Math.ceil(currentCount / ITEMS_PER_ROW);
 
   const getRowHeight = useCallback((rowIndex) => {
     const isCurrentLastRow = rowIndex === currentLastRowIndex - 1;
@@ -55,15 +55,15 @@ export const EntityList = () => {
   }, [currentLastRowIndex]);
 
   const loadMoreItems = useCallback((start) => {
-    if (!isFetching && !entityById[start]) {
+    if (!isFetching && !entityByIndex[start]) {
       setIsFetching();
       fetchEntities();
     }
-  }, [isFetching, entityById, fetchEntities, setIsFetching])
+  }, [isFetching, entityByIndex, fetchEntities, setIsFetching])
 
   const isItemLoaded = useCallback((index) => {
-    return index < entityIds.length;
-  }, [entityIds]);
+    return index < currentCount;
+  }, [currentCount]);
 
   // VariableSizeGrid caches variable data for grid items.
   // It prevents the grid from having stale data
@@ -72,7 +72,7 @@ export const EntityList = () => {
     if (gridRef.current != null) {
       gridRef.current.resetAfterRowIndex(0, true);
     }
-  }, [entityIds]);
+  }, [entityByIndex]);
 
   return (
     <div className="mt-9 h-[78vh] w-full overflow-hidden">
@@ -107,12 +107,13 @@ export const EntityList = () => {
                     visibleStopIndex: visibleRowStopIndex * ITEMS_PER_ROW + ITEMS_PER_ROW - 1,
                   });
                 }}
+                itemData={entityByIndex}
                 ref={(grid) => {
                   ref(grid);
                   gridRef.current = grid;
                 }}
               >
-               {getColumnComponent({ projectIds: entityIds, currentLastRowIndex, isFetching, totalCount })}
+               {getColumnComponent({ currentLastRowIndex, isFetching, currentCount, totalCount })}
               </VariableSizeGrid>
             )}
           </InfiniteLoader>)

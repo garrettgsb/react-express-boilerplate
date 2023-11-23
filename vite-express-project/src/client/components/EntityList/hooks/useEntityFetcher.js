@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
-  MOCK_ITEM_COUNT,
   ITEMS_PER_LOAD,
   API_BY_URL
 } from '../constants.js';
 
 const defaultState = {
-  entityById: {},
-  entityIds: [],
-  isFetching: true
+  entityByIndex: {},
+  isFetching: true,
+  currentCount: 0,
+  totalCount: 0
 }
 
 export const useEntityFetcher = ({ url: _url }) => {
@@ -27,21 +27,20 @@ export const useEntityFetcher = ({ url: _url }) => {
         fetch(`${url}?offset=${offset}&limit=${ITEMS_PER_LOAD}`)
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            const { entities, totalCount } = data;
+
             setState((prev) => ({
               ...prev,
-              entityById: {
-                ...prev.entityById,
-                ...data.reduce((entityById, entity) => {
-                  entityById[entity.id] = entity;
-                  return entityById;
+              entityByIndex: {
+                ...prev.entityByIndex,
+                ...entities.reduce((entityByIndex, entity, index) => {
+                  entityByIndex[prev.currentCount + index] = entity;
+                  return entityByIndex;
                 }, {})
               },
-              entityIds: [
-                ...prev.entityIds,
-                ...data.map((entity) => entity.id)
-              ],
-              isFetching: false
+              currentCount: prev.currentCount + entities.length,
+              isFetching: false,
+              ...totalCount ? { totalCount } : {}
             }));
           });
       }).catch((error) => {
@@ -57,17 +56,16 @@ export const useEntityFetcher = ({ url: _url }) => {
   }, []);
 
   useEffect(() => {
-    // fetch('api/projects?offset=0&limit=20')
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data));
     fetchEntities(0);
   }, [fetchEntities]);
 
+  console.log(state);
+
   return {
-    entityById: state.entityById,
-    entityIds: state.entityIds,
+    entityByIndex: state.entityByIndex,
     isFetching: state.isFetching,
-    totalCount: MOCK_ITEM_COUNT,
+    currentCount: state.currentCount,
+    totalCount: state.totalCount,
     setIsFetching,
     fetchEntities
   };

@@ -1,4 +1,4 @@
-import { ProjectCard } from './ProjectCard';
+import { EntityCard } from './EntityCard';
 import { LoadingIndicator } from './LoadingIndicator';
 import { ITEMS_PER_ROW } from './constants';
 import _Footer from '../Footer';
@@ -14,26 +14,28 @@ const Footer = ({ style }) => {
 }
 
 export const getColumnComponent = ({
-  projectIds,
   currentLastRowIndex,
   isFetching,
-  totalCounts
+  currentCount,
+  totalCounts: totalCount
 }) => ({
   columnIndex,
   rowIndex,
   style,
+  data
 }) => {
-  const isLoadedColumn = (rowIndex * ITEMS_PER_ROW + columnIndex) < projectIds.length;
+  const currentIndex = rowIndex * ITEMS_PER_ROW + columnIndex;
+  const isLoadedColumn = (rowIndex * ITEMS_PER_ROW + columnIndex) < currentCount;
   const isLoadingRow = rowIndex === currentLastRowIndex;
   const isFirstColumn = columnIndex === 0;
-  const isLoadedAll = projectIds.length >= totalCounts;
+  const isLoadedAll = currentCount >= totalCount;
   const isFooterRow = rowIndex === currentLastRowIndex + 1;
 
   return isLoadedColumn ?
-    <ProjectCard style={style} />
+    <EntityCard style={style} data={data[currentIndex]} />
     : isLoadingRow && isFirstColumn && isFetching && !isLoadedAll
     ? <LoadingIndicator style={style} />
-    : isFooterRow && isFirstColumn && projectIds.length !== 0
+    : isFooterRow && isFirstColumn && currentCount !== 0
     ? <Footer style={style} />
     : null;    
 };
