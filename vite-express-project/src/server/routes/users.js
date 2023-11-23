@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 });
 
 // gets user by id from users table in supabase
-router.get("/api/users/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
 
   try {
     const { data, error } = await supabase
@@ -48,11 +48,11 @@ router.get("/api/users/:id", async (req, res) => {
 });
 
 // Adds a new user to users table in supabase
-router.post("/api/users", async (req, res) => {
+router.post("/", async (req, res) => {
   handleTableInsertion(req, res, supabase, "users");
 });
 
-router.put("/api/users/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("users")
@@ -71,7 +71,7 @@ router.put("/api/users/:id", async (req, res) => {
   }
 });
 
-router.delete("/api/users/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("users")
