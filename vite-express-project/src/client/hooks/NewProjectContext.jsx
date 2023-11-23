@@ -16,6 +16,35 @@ export const NewProjectProvider = ({ children }) => {
     image: [],
   });
 
+  const locationType = [
+    { id: 1, name: 'Select Location'},
+    { id: 2, name: 'Victoria' },
+    { id: 3, name: 'Oak Bay'},
+    { id: 4, name: 'Saanich'},
+    { id: 5, name: 'View Royal'},
+    { id: 6, name: 'Colwood'},
+    { id: 7, name: 'Highlands'},
+    { id: 8, name: 'Metchosin'},
+    { id: 9, name: 'Sooke'},
+    { id: 10, name: 'Esquimalt'},
+    { id: 11, name: 'Central Saanich'},
+    { id: 12, name: 'North Saanich'},
+    { id: 13, name: 'Sidney'},
+    { id: 14, name: 'Other'},
+  ];
+
+  const [selectedLocation, setSelectedLocation] = useState(locationType[0]);
+  const [locationTypeQuery, setLocationTypeQuery] = useState('');
+  const filteredLocationType =
+    locationTypeQuery === ''
+      ? locationType
+      : locationType.filter((locationType) =>
+          locationType.name
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, ''))
+        )
+
   const projectType = [
     { id: 1, name: 'Select Type' },
     { id: 2, name: 'Mural Painting' },
@@ -26,12 +55,11 @@ export const NewProjectProvider = ({ children }) => {
     { id: 7, name: 'Other' },
   ]
   
-  const [selectedProject, setSelectedProject] = useState(projectType[0])
-  const [query, setQuery] = useState('')
+  const [selectedProject, setSelectedProject] = useState(projectType[0]);
   const [projectTypeQuery, setProjectTypeQuery] = useState('');
 
   const filteredProjectType =
-    query === ''
+    projectTypeQuery === ''
       ? projectType
       : projectType.filter((projectType) =>
           projectType.name
@@ -68,6 +96,13 @@ export const NewProjectProvider = ({ children }) => {
     setFormData({
       ...formData,
       projectType: type,
+    });
+  };
+
+  const handleLocationTypeForm = (type) => {
+    setFormData({
+      ...formData,
+      locationType: type,
     });
   };
 
@@ -111,15 +146,21 @@ export const NewProjectProvider = ({ children }) => {
     setFormData,
     handleInputChange,
     handleFileChange,
-    handleProjectTypeForm,
     handleSubmit,
+
+    handleProjectTypeForm,
     selectedProject,
     setSelectedProject,
-    query,
-    setQuery,
     filteredProjectType,
     projectTypeQuery,
-    setProjectTypeQuery
+    setProjectTypeQuery,
+
+    handleLocationTypeForm,
+    selectedLocation,
+    setSelectedLocation,
+    filteredLocationType,
+    locationTypeQuery,
+    setLocationTypeQuery,
 
   };
   

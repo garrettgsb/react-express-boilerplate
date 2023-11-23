@@ -17,11 +17,22 @@ export default function NewProjectForm() {
     filteredProjectType,
     projectTypeQuery,
     setProjectTypeQuery,
+    handleLocationTypeForm,
+    selectedLocation,
+    setSelectedLocation,
+    filteredLocationType,
+    locationTypeQuery,
+    setLocationTypeQuery,
   } = useNewProject();
 
-  const handleprojectTypeSelect = (value) => {
+  const handleProjectTypeSelect = (value) => {
     setSelectedProject(value);
     handleProjectTypeForm(value.name);
+  };
+
+  const handleLocationTypeSelect = (value) => {
+    setSelectedLocation(value);
+    handleLocationTypeForm(value.name);
   };
 
   const { user } = useAuth();
@@ -123,7 +134,7 @@ export default function NewProjectForm() {
               required/>
             </div>
             
-            <div className="form-control w-full max-w-xs m-3">
+            {/* <div className="form-control w-full max-w-xs m-3">
               <label className="label">
               <span className="label-text">Where is it happening?</span>
               </label>
@@ -135,6 +146,19 @@ export default function NewProjectForm() {
                 onChange={handleInputChange}
                 required
               />
+            </div> */}
+
+            <div className="form-control w-full max-w-xs m-3">
+              <label className="label">
+              <span className="label-text">Where is it happening?</span>
+              </label>
+              <TypeSelectionBox
+                onChange={handleLocationTypeForm}
+                selectedType={selectedLocation}
+                handleSelect={handleLocationTypeSelect}
+                filteredType={filteredLocationType}
+                query={locationTypeQuery}
+                setQuery={setLocationTypeQuery} />
             </div>
             
             <div className="form-control w-full max-w-xs m-3">
@@ -144,7 +168,7 @@ export default function NewProjectForm() {
               <TypeSelectionBox
                 onChange={handleProjectTypeForm}
                 selectedType={selectedProject}
-                handleSelect={handleprojectTypeSelect}
+                handleSelect={handleProjectTypeSelect}
                 filteredType={filteredProjectType}
                 query={projectTypeQuery}
                 setQuery={setProjectTypeQuery} />
