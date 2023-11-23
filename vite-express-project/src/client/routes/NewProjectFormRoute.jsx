@@ -1,8 +1,8 @@
-import TypeSelectionBox from "./TypeSelectionBox";
+import TypeSelectionBox from "../components/TypeSelectionBox";
 import { useNewProject } from "../hooks/NewProjectContext";
 import { useAuth } from "../hooks/AuthContext";
 
-export default function NewProjectForm() {
+export default function NewProjectFormRoute() {
   const {
     imagePreview,
     setImagePreview,
@@ -116,7 +116,6 @@ export default function NewProjectForm() {
               ></textarea>
             </div>
             
-
             <div className="form-control w-full max-w-xs m-3">
               <label className="label">
                 <span className="label-text">What's your budget?</span>
@@ -133,20 +132,6 @@ export default function NewProjectForm() {
               onChange={handleInputChange}
               required/>
             </div>
-            
-            {/* <div className="form-control w-full max-w-xs m-3">
-              <label className="label">
-              <span className="label-text">Where is it happening?</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Location"
-                name="location"
-                className="input input-bordered w-full max-w-xs text-sm"
-                onChange={handleInputChange}
-                required
-              />
-            </div> */}
 
             <div className="form-control w-full max-w-xs m-3">
               <label className="label">
@@ -172,8 +157,7 @@ export default function NewProjectForm() {
                 filteredType={filteredProjectType}
                 query={projectTypeQuery}
                 setQuery={setProjectTypeQuery} />
-            </div>
-            
+            </div>  
           </div>
         </div>
         <button

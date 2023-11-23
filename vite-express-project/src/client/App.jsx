@@ -10,7 +10,7 @@ import ProjectProfile from "./routes/ProjectProfileRoute";
 import { Projects } from "./components/projects";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./hooks/AuthContext";
-import NewProjectForm from "./components/NewProjectForm";
+import NewProjectFormRoute from "./routes/NewProjectFormRoute";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,7 +36,7 @@ function App() {
         <Route exact path="/users/:id" element={<UserProfile />} />
         <Route exact path="/projects" element={<Projects />} />
         <Route exact path="/project/:id" element={<ProjectProfile />} />
-        <Route exact path="/project/new" element={<NewProjectForm />}/>
+        <Route exact path="/project/new" element={<NewProjectFormRoute />}/>
       </Routes>
       <Footer />
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
