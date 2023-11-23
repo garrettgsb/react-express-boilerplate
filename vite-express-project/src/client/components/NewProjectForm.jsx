@@ -14,6 +14,9 @@ export default function NewProjectForm() {
     handleSubmit,
     selected,
     setSelected,
+    filteredProjectType,
+    projectTypeQuery,
+    setProjectTypeQuery,
   } = useNewProject();
 
   const handleprojectTypeSelect = (value) => {
@@ -141,7 +144,10 @@ export default function NewProjectForm() {
               <ProjectTypeBox
                 onChange={handleProjectTypeForm}
                 selectedType={selected}
-                handleSelect={handleprojectTypeSelect} />
+                handleSelect={handleprojectTypeSelect}
+                filteredType={filteredProjectType}
+                query={projectTypeQuery}
+                setQuery={setProjectTypeQuery} />
             </div>
             
           </div>

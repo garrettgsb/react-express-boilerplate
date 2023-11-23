@@ -28,6 +28,7 @@ export const NewProjectProvider = ({ children }) => {
   
   const [selected, setSelected] = useState(projectType[0])
   const [query, setQuery] = useState('')
+  const [projectTypeQuery, setProjectTypeQuery] = useState('');
 
   const filteredProjectType =
     query === ''
@@ -117,6 +118,8 @@ export const NewProjectProvider = ({ children }) => {
     query,
     setQuery,
     filteredProjectType,
+    projectTypeQuery,
+    setProjectTypeQuery
 
   };
   
