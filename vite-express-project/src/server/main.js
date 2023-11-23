@@ -256,6 +256,58 @@ app.get("/api/likes", async (req, res) => {
 }
 );
 
+app.post('/api/likes', async (req, res) => {
+  try {
+    const { userID, project_id } = req.body;
+  
+    if (!userID || !project_id) {
+      return res.status(400).json({ error: 'Invalid input data' });
+    }
+
+    const { data, error } = await supabase.from('likes').insert([{ user_id: userID, project_id }]);
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return res.status(500).json({ error: 'Failed to like the project' });
+    }
+
+    res.status(201).json({ message: 'Project liked successfully', like: data });
+  } catch (error) {
+    console.error('Error occurred:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.delete('/api/likes', async (req, res) => {
+  try {
+    const { userID, project_id } = req.query;
+
+    // Validate inputs
+    if (!userID || !project_id) {
+      return res.status(400).json({ error: 'Invalid input data' });
+    }
+
+    // Delete a like using Supabase
+    const { data, error } = await supabase.from('likes').delete().eq('user_id', userID).eq('project_id', project_id);
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return res.status(500).json({ error: 'Failed to remove like' });
+    }
+
+    // Check if any like was deleted
+    if (data && data.length === 0) {
+      return res.status(404).json({ error: 'Like not found or already removed' });
+    }
+
+    // Respond with a success message or any relevant data
+    res.status(200).json({ message: 'Project dislike successful', deletedLike: data });
+  } catch (error) {
+    console.error('Error occurred:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 app.get("/api/likes/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
