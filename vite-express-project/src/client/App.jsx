@@ -10,6 +10,7 @@ import ProjectProfile from "./routes/ProjectProfileRoute";
 import { Projects } from "./components/projects";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NewProjectFormRoute from "./routes/NewProjectFormRoute";
+import { useTheme } from "./hooks/ThemeContext";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,8 +28,10 @@ function App() {
     setIsModalOpen(false);
   };
 
+  const { theme } = useTheme();
+
   return (    
-    <div data-theme="cupcake">
+    <div data-theme={theme}>
       <NavBar openModal={openModal} />
       <Routes>
         <Route

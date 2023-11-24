@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../hooks/AuthContext";
 import LoginModal from "./LoginModal";
 import { useNavigate } from "react-router-dom";
+import ThemeController from "./ThemeController";
 
 export default function NavBar({ openModal }) {
 const { isLoggedIn, login, logout, user } = useAuth();

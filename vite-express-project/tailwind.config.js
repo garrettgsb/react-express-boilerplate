@@ -34,9 +34,40 @@ export default {
   },
   plugins:[require("daisyui")],
   daisyui: {
-    themes: ["mytheme", "night", "lemonade", 
+    themes: [
+    "default",
+    "cupcake",
+    "bumblebee",
+    "emerald",
+    "corporate",
+    "synthwave",
+    "retro",
+    "cyberpunk",
+    "valentine",
+    "halloween",
+    "garden",
+    "forest",
+    "aqua",
+    "lofi",
+    "pastel",
+    "fantasy",
+    "wireframe",
+    "black",
+    "luxury",
+    "dracula",
+    "cmyk",
+    "autumn",
+    "business",
+    "acid",
+    "lemonade",
+    "night",
+    "coffee",
+    "winter",
+    "dim",
+    "nord",
+    "sunset",
       {
-        mytheme: {
+        default: {
           "primary": "#F27F3D", // primary button
           "secondary": "#BA7EF5", // secondary button       
           "accent": "#5C9D9D", // icons, borders, deorative
