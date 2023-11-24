@@ -1,21 +1,23 @@
 import { useTheme } from "../hooks/ThemeContext";
 
-const themes = [
-  { label: "Default", value: "default" },
-  { label: "Retro", value: "retro" },
-  { label: "Cyberpunk", value: "cyberpunk" },
-  { label: "Autumn", value: "autumn" },
-  { label: "Aqua", value: "aqua" },
-  { label: "Coffee", value: "coffee"},
-  { label: "Black", value: "black"},
-];
+// const themes = [
+//   { label: "Default", value: "default" },
+//   { label: "Retro", value: "retro" },
+//   { label: "Cyberpunk", value: "cyberpunk" },
+//   { label: "Autumn", value: "autumn" },
+//   { label: "Aqua", value: "aqua" },
+//   { label: "Coffee", value: "coffee"},
+//   { label: "Black", value: "black"},
+// ];
 
 export default function ThemeController() {
-  const { theme, setTheme } = useTheme();
+  const { theme, themes, handleThemeChange } = useTheme();
 
-  const handleThemeChange = (newTheme) => {
-    setTheme(newTheme);
-  }
+  // const handleThemeChange = (newTheme) => {
+  //   setTheme(newTheme);
+  //   localStorage.setItem("selectedTheme", newTheme);
+  // };
+  
   return (
     <div className="dropdown mb-72">
       <label tabIndex={0} className="btn m-1">
