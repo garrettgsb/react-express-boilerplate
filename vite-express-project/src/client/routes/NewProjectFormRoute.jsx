@@ -161,7 +161,8 @@ export default function NewProjectFormRoute() {
           </div>
         </div>
         <button
-          className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 max-w-xs m-3 rounded"
+          // className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 max-w-xs m-3 rounded"
+          className="btn btn-primary text-white"
           type="submit"
         >
           Post Project
