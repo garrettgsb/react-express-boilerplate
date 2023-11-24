@@ -4,13 +4,11 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import LandingRoute from "./routes/LandingRoute";
-import MyProfile from "./routes/MyProfileRoute";
 import UserProfile from "./routes/UserProfileRoute";
 import SignupModal from "./components/SignupModal";
 import ProjectProfile from "./routes/ProjectProfileRoute";
 import { Projects } from "./components/projects";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { AuthProvider } from "./hooks/AuthContext";
 import NewProjectFormRoute from "./routes/NewProjectFormRoute";
 
 function App() {
@@ -30,7 +28,7 @@ function App() {
   };
 
   return (    
-    <>
+    <div data-theme="cupcake">
       <NavBar openModal={openModal} />
       <Routes>
         <Route
@@ -48,15 +46,7 @@ function App() {
       {/* Footer will be rendered within the Projects component due to the way infinite scroll works */}
       {showFooter && <Footer />}
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
-    </>
-
-    // <>
-    //   <NavBar openModal={openModal} />
-    //   <Landing openModal={openModal} />
-    //   <Footer />
-    //
-    // </>
-
+    </div>
   );
 }
 
