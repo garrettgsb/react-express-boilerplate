@@ -31,7 +31,7 @@ function App() {
   const { theme } = useTheme();
 
   return (    
-    <div data-theme={theme}>
+    <div data-theme={theme} className="flex flex-col">
       <NavBar openModal={openModal} />
       <Routes>
         <Route

@@ -2,6 +2,11 @@
 export default {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
+    screen: {
+      'xl': {'max': '1279px'},
+      'lg': {'max': '1023px'},
+      'sm': {'max': '420px'},
+    },
     extend: {
       fontFamily: {
         heading: ['Oswald', 'sans-serif'],
@@ -36,36 +41,13 @@ export default {
   daisyui: {
     themes: [
     "default",
-    "cupcake",
-    "bumblebee",
-    "emerald",
-    "corporate",
-    "synthwave",
     "retro",
     "cyberpunk",
-    "valentine",
-    "halloween",
-    "garden",
-    "forest",
-    "aqua",
-    "lofi",
-    "pastel",
-    "fantasy",
-    "wireframe",
-    "black",
-    "luxury",
-    "dracula",
-    "cmyk",
     "autumn",
-    "business",
-    "acid",
-    "lemonade",
+    "aqua",
+    "black",
     "night",
     "coffee",
-    "winter",
-    "dim",
-    "nord",
-    "sunset",
       {
         default: {
           "primary": "#F27F3D", // primary button

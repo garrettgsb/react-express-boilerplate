@@ -4,13 +4,13 @@ export default function Home({ openModal }) {
   return (
     <div>
       {/* Hero + CTA button */}
-      <div className="flex flex-row items-center p-10 justify-center h-screen">
+      <div className="flex flex-row items-center p-10 justify-center mt-20">
         <article className="p-4 my-15">
           <h1 className="flex flex-col font-heading text-6xl justify-start">
             Victoria Unleashed
             <p className="font-heading text-5xl">Where Art Flourishes</p>
           </h1>
-          <h3 className="font-subHeading text-lg text-textSecondary">
+          <h3 className="font-subHeading text-lg text-textSecondary mt-5">
             Join a Thriving Ecosystem of Local Artists and Enthusiasts
           </h3>
           <div className="inline-flex space-x-6 w-full mt-6 sm:w-auto">
@@ -32,7 +32,7 @@ export default function Home({ openModal }) {
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto my-28 h-screen">
+      <div className="max-w-3xl mx-auto my-28">
         <p className="font-subHeading text-2xl text-textSecondary">
           Welcome to #####, where Victoria's art scene comes alive.
         </p>
@@ -44,7 +44,7 @@ export default function Home({ openModal }) {
       </div>
 
       <section>
-        <div className="flex flex-row justify-center items-center my-20 h-screen">
+        <div className="flex flex-row justify-center items-center my-20">
           <div className="block relative overflow-hidden rounded-full w-80 h-80">
             <img
               src="/src/client/assets/artist.jpg"
@@ -60,7 +60,7 @@ export default function Home({ openModal }) {
           </div>
         </div>
 
-        <div className="flex flex-row justify-center items-center my-20 h-screen">
+        <div className="flex flex-row justify-center items-center my-20">
           <div className="m-10">
             <h2 className="font-subHeading text-xl mb-2">
               For Art Lovers and Community
@@ -79,8 +79,8 @@ export default function Home({ openModal }) {
         </div>
       </section>
 
-      <div className="my-20 py-20 bg-primary h-screen">
-        <h1 className="font-heading text-5xl dark:text-white">Elevate Your Artistic journey in Victoria!</h1>
+      <div className="my-20 py-20 bg-primary">
+        <h1 className="font-heading text-3xl dark:text-white">Elevate Your Artistic journey in Victoria!</h1>
         <h1 className="font-heading text-3xl dark:text-white">Ignite creativity, collaborate, and empower local artistry.</h1>
       </div>
     </div>
