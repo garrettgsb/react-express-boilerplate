@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import LandingRoute from "./routes/LandingRoute";
 import MyProfile from "./routes/MyProfileRoute";
 import UserProfile from "./routes/UserProfileRoute";
+import UserEdit from "./routes/EditUserRoute";
 import SignupModal from "./components/SignupModal";
 import ProjectProfile from "./routes/ProjectProfileRoute";
 
@@ -21,9 +22,9 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const location = useLocation();
-  const splitLocation = location.pathname.split('/');
-  const path = splitLocation[splitLocation.length - 1]
-  const showFooter = !path.includes('artists') && !path.includes('gigs');
+  const splitLocation = location.pathname.split("/");
+  const path = splitLocation[splitLocation.length - 1];
+  const showFooter = !path.includes("artists") && !path.includes("gigs");
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -33,10 +34,8 @@ function App() {
     setIsModalOpen(false);
   };
 
-
-  return (    
+  return (
     <>
-
       <NavBar openModal={openModal} />
       <Routes>
         <Route
@@ -46,15 +45,13 @@ function App() {
         />
         {/* <Route exact path="/myprofile" element={<MyProfile />} /> */}
         <Route exact path="/users/:id" element={<UserProfile />} />
-        <Route exact path="/users/:id/edit" element={<UserProfile />} />
         <Route exact path="/artists" element={<EntityList />} />
         <Route exact path="/gigs" element={<EntityList />} />
         <Route exact path="/project/:id" element={<ProjectProfile />} />
 
         <Route exact path="/likeditems" element={<LikedItemsRoute />} />
 
-        <Route exact path="/project/new" element={<NewProjectFormRoute />}/>
-
+        <Route exact path="/project/new" element={<NewProjectFormRoute />} />
       </Routes>
       {/* Footer will be rendered within the EntityList component due to the way infinite scroll works */}
       {showFooter && <Footer />}
