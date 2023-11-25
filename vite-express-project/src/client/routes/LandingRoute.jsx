@@ -4,7 +4,7 @@ export default function Home({ openModal }) {
   return (
     <div>
       {/* Hero + CTA button */}
-      <div className="flex flex-row items-center p-10 justify-center mt-20">
+      <div className="flex flex-row items-center p-10 justify-center">
         <article className="p-4 my-15">
           <h1 className="flex flex-col font-heading text-6xl justify-start">
             Victoria Unleashed

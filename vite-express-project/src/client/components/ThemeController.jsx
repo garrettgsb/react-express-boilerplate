@@ -19,7 +19,7 @@ export default function ThemeController() {
   // };
   
   return (
-    <div className="dropdown mb-72">
+    <div className="dropdown">
       <label tabIndex={0} className="btn m-1">
         Theme
         <svg
