@@ -71,6 +71,25 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.patch("/:id", async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from("users")
+      .update(req.body)
+      .eq("id", req.params.id);
+
+    if (error) {
+      console.error("Supabase Insert Error:", error);
+      throw error;
+    }
+
+    res.status(200).send("Data sent to Supabase!");
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).send("Server Error: " + error.message);
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     const { data, error } = await supabase
