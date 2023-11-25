@@ -4,7 +4,6 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const session = require('express-session');
 const supabase = require("../config/supabaseClient");
-const multer  = require('multer');
 const bcrypt = require('bcrypt');
 
 // Express app setup
@@ -50,160 +49,6 @@ app.get("/user", async (req, res) => {
     }
 
     res.status(200).send(data);
-  } catch (error) {
-    console.error("Server Error:", error);
-    res.status(500).send("Server Error: " + error.message);
-  }
-});
-
-// gets user by id from users table in supabase
-app.get("/api/users/:id", async (req, res) => {
-
-  try {
-    const { data, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("id", req.params.id );
-
-    if (error) {
-      console.error("Supabase Insert Error:", error);
-      throw error;
-    }
-
-    res.status(200).send(data);
-  } catch (error) {
-    console.error("Server Error:", error);
-    res.status(500).send("Server Error: " + error.message);
-  }
-});
-
-// Adds a new user to users table in supabase
-app.post("/api/users", async (req, res) => {
-  handleTableInsertion(req, res, supabase, "users");
-});
-
-app.put("/api/users/:id", async (req, res) => {
-  try {
-    const { data, error } = await supabase
-      .from("users")
-      .update(req.body)
-      .eq("id", req.params.id);
-
-    if (error) {
-      console.error("Supabase Insert Error:", error);
-      throw error;
-    }
-
-    res.status(200).send("Data sent to Supabase!");
-  } catch (error) {
-    console.error("Server Error:", error);
-    res.status(500).send("Server Error: " + error.message);
-  }
-});
-
-app.delete("/api/users/:id", async (req, res) => {
-  try {
-    const { data, error } = await supabase
-      .from("users")
-      .delete()
-      .eq("id", req.params.id);
-
-    if (error) {
-      console.error("Supabase Insert Error:", error);
-      throw error;
-    }
-
-    res.status(200).send("Data sent to Supabase!");
-  } catch (error) {
-    console.error("Server Error:", error);
-    res.status(500).send("Server Error: " + error.message);
-  }
-});
-
-// Route handling for projects
-app.get("/api/projects", async (req, res) => {
-  try {
-    const { data, error } = await supabase.from("projects").select("*");
-
-    if (error) {
-      console.error("Supabase Insert Error:", error);
-      throw error;
-    }
-
-    res.status(200).send(data);
-  } catch (error) {
-    console.error("Server Error:", error);
-    res.status(500).send("Server Error: " + error.message);
-  }
-});
-
-app.get("/api/projects/:id", async (req, res) => {
-  try {
-    const { data, error } = await supabase
-      .from("projects")
-      .select("*")
-      .eq("id", req.params.id);
-
-    if (error) {
-      console.error("Supabase Insert Error:", error);
-      throw error;
-    }
-
-    res.status(200).send(data);
-  } catch (error) {
-    console.error("Server Error:", error);
-    res.status(500).send("Server Error: " + error.message);
-  }
-});
-
-// app.post("/api/projects", async (req, res) => {
-//   try {
-//     const { data, error } = await supabase.from("projects").insert(req.body);
-
-//     if (error) {
-//       console.error("Supabase Insert Error:", error);
-//       throw error;
-//     }
-
-//     res.status(200).send("Data sent to Supabase!");
-//   } catch (error) {
-//     console.error("Server Error:", error);
-//     res.status(500).send("Server Error: " + error.message);
-//   }
-// });
-
-app.put("/api/projects/:id", async (req, res) => {
-  try {
-    const { data, error } = await supabase
-      .from("projects")
-      .update(req.body)
-      .eq("id", req.params.id);
-
-    if (error) {
-      console.error("Supabase Insert Error:", error);
-      throw error;
-    }
-
-    res.status(200).send("Data sent to Supabase!");
-  } catch (error) {
-    console.error("Server Error:", error);
-    res.status(500).send("Server Error: " + error.message);
-  }
-});
-
-app.delete("/api/projects/:id", async (req, res) => {
-  try {
-    const { data, error } = await supabase
-      .from("projects")
-      .delete()
-      .eq("id", req.params.id);
-
-    if (error) {
-      console.error("Supabase Insert Error:", error);
-      throw error;
-    }
-
-    res.status(200).send("Data sent to Supabase!");
   } catch (error) {
     console.error("Server Error:", error);
     res.status(500).send("Server Error: " + error.message);
@@ -281,18 +126,97 @@ app.get('/api/supabase/users', async (req, res) => {
   }
 });
 
-// Set up multer storage and upload
-// Uploaded image is saved in 'public/uploads folder'
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/uploads');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
+
+// Route handling for likes
+
+app.get("/api/likes", async (req, res) => {
+  try {
+    const { data, error } = await supabase.from("likes").select("*");
+
+    if (error) {
+      console.error("Supabase Insert Error:", error);
+      throw error;
+    }
+
+    res.status(200).send(data);
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).send("Server Error: " + error.message);
+  }
+}
+);
+
+app.post('/api/likes', async (req, res) => {
+  try {
+    const { userID, project_id } = req.body;
+  
+    if (!userID || !project_id) {
+      return res.status(400).json({ error: 'Invalid input data' });
+    }
+
+    const { data, error } = await supabase.from('likes').insert([{ user_id: userID, project_id }]);
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return res.status(500).json({ error: 'Failed to like the project' });
+    }
+
+    res.status(201).json({ message: 'Project liked successfully', like: data });
+  } catch (error) {
+    console.error('Error occurred:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
-const upload = multer({ storage: storage });
+app.delete('/api/likes', async (req, res) => {
+  try {
+    const { userID, project_id } = req.query;
+
+    // Validate inputs
+    if (!userID || !project_id) {
+      return res.status(400).json({ error: 'Invalid input data' });
+    }
+
+    // Delete a like using Supabase
+    const { data, error } = await supabase.from('likes').delete().eq('user_id', userID).eq('project_id', project_id);
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return res.status(500).json({ error: 'Failed to remove like' });
+    }
+
+    // Check if any like was deleted
+    if (data && data.length === 0) {
+      return res.status(404).json({ error: 'Like not found or already removed' });
+    }
+
+    // Respond with a success message or any relevant data
+    res.status(200).json({ message: 'Project dislike successful', deletedLike: data });
+  } catch (error) {
+    console.error('Error occurred:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.get("/api/likes/:id", async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from("likes")
+      .select("*")
+      .eq("user_id", req.params.id);
+
+    if (error) {
+      console.error("Supabase Insert Error:", error);
+      throw error;
+    }
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).json("Server Error: " + error.message);
+  }
+}
+);
 
 // Function to check if the uploaded file is an image
 function isImage(file) {
@@ -303,53 +227,6 @@ function isImage(file) {
 
 // Serve uploaded file statically
 app.use('/uploads', express.static('public/uploads'));
-
-// Handle project submission with static file upload
-app.post('/api/projects', upload.single('image'), async (req, res) => {
-  try {
-    
-    if (!req.session.userId) {
-      return res.status(401).json({ error: 'Not authenticated' });
-    }
-    
-    const {
-      title,
-      description,
-      type,
-      budget,
-      location,
-    } = req.body;
-
-    const employer_id = req.session.userId;
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
-
-    // artist id is set to 0 as default for now
-    const { data, error } = await supabase
-      .from('projects')
-      .upsert([
-        {
-          title,
-          description,
-          type,
-          budget,
-          location,
-          images: imageUrl ? [imageUrl] : [], 
-          employer_id,
-          artist_id: 0,
-        },
-      ]);
-
-    if (error) {
-      console.error('Supabase error:', error.message);
-      return res.status(500).json({ error: 'Internal Server Error' });
-    }
-
-    res.status(200).json({ success: true, data });
-  } catch (error) {
-    console.error('Project submission error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
 
 app.post('/api/logout', (req, res) => {
   try {
@@ -371,6 +248,10 @@ app.post('/api/logout', (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+/* --------------------------------- Routes --------------------------------- */
+app.use("/api/projects", require("./routes/projects.js")); // Projects
+app.use("/api/users", require("./routes/users.js")); // Users
 
 // Start server
 ViteExpress.listen(app, 3000, () =>

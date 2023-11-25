@@ -9,7 +9,7 @@ function convertRate(cents) {
 export default function ProjectProfile() {
   const { id } = useParams();
   const [project, setProject] = useState({});
-  const user = { id: 1 };
+  
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -37,7 +37,7 @@ export default function ProjectProfile() {
       </header>
 
       <main className="flex justify-center">
-        <div className="m-5 w-80 h-80 overflow-hidden border border-gray-300 drop-shadow-3xl rounded-3xl">
+        <div className="m-5 w-50 h-50 overflow-hidden border border-gray-300 drop-shadow-3xl rounded-3xl">
           <img
             src="/public/images/art_4.jpg" //change to project.image when ready
             alt={`${project.title} image`}
