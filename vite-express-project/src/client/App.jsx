@@ -46,6 +46,7 @@ function App() {
         />
         {/* <Route exact path="/myprofile" element={<MyProfile />} /> */}
         <Route exact path="/users/:id" element={<UserProfile />} />
+        <Route exact path="/users/:id/edit" element={<UserProfile />} />
         <Route exact path="/artists" element={<EntityList />} />
         <Route exact path="/gigs" element={<EntityList />} />
         <Route exact path="/project/:id" element={<ProjectProfile />} />
