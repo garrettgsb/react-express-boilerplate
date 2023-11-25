@@ -6,7 +6,6 @@ import Footer from "./components/Footer";
 import LandingRoute from "./routes/LandingRoute";
 import MyProfile from "./routes/MyProfileRoute";
 import UserProfile from "./routes/UserProfileRoute";
-import UserEdit from "./routes/EditUserRoute";
 import SignupModal from "./components/SignupModal";
 import ProjectProfile from "./routes/ProjectProfileRoute";
 
