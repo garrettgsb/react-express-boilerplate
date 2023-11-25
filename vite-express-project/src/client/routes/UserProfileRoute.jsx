@@ -12,7 +12,7 @@ export default function UserProfile() {
   const { id } = useParams();
   const { isLoggedIn, user, setUser } = useAuth();
 
-  // Move to useUserProfile hook 
+  // Move to useUserProfile hook
   // useEffect(() => {
   //   // console.log("Fetching user data for id:", id);
   //   const fetchUser = async () => {
@@ -55,12 +55,17 @@ export default function UserProfile() {
     <div className="m-10 flex flex-col justify-center">
       {/* only when the logged in user's id match the id in the endpoin it will display the edit button */}
       {isLoggedIn && user && (
-      <header className="font-subHeading text-xl text-accent flex justify-between px-5 py-10">
+        <header className="font-subHeading text-xl text-accent flex justify-between px-5 py-10">
           My Profile
-        <button className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded">
-          Edit
-        </button>
-      </header>
+          <button
+            className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded"
+            onClick={() => {
+              window.location.href = `/users/${id}/edit`;
+            }}
+          >
+            Edit
+          </button>
+        </header>
       )}
 
       <main className="flex justify-center">
@@ -84,15 +89,16 @@ export default function UserProfile() {
       <h2 className="font-heading text-2xl m-5 pt-5">My Projects</h2>
 
       <div className="carousel rounded-box">
-        {user && user.images.map((image, index) => (
-          <div className="carousel-item" key={image}>
-            <img
-              src={image}
-              alt={`Image ${index + 1}`}
-              className="w-72 h-72"
-            />
-          </div>
-        ))}
+        {user &&
+          user.images.map((image, index) => (
+            <div className="carousel-item" key={image}>
+              <img
+                src={image}
+                alt={`Image ${index + 1}`}
+                className="w-72 h-72"
+              />
+            </div>
+          ))}
       </div>
     </div>
   );
