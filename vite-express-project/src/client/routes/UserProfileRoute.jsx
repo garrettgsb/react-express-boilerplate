@@ -11,6 +11,9 @@ function convertRate(cents) {
 export default function UserProfile() {
   const { id } = useParams();
   const { isLoggedIn, user, setUser } = useAuth();
+  const [editing, setEditing] = useState(false);
+  const [editedUser, setEditedUser] = useState({});
+  const { fetchUser, updateUser } = useUserProfile(id, setUser);
 
   // Move to useUserProfile hook
   // useEffect(() => {
@@ -40,7 +43,27 @@ export default function UserProfile() {
 
   useUserProfile(id, setUser);
 
-  // Display loading when data fetching is happening
+  const handleEditSubmit = async () => {
+    try {
+      const updatedData = {
+        name: editedUser.name || user.name,
+        bio: editedUser.bio || user.bio,
+        wage: editedUser.wage || user.wage,
+        profile_picture: editedUser.profile_picture || user.profile_picture,
+      };
+
+      await updateUser(updatedData);
+      setEditing(false);
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setEditedUser({ ...editedUser, [name]: value });
+  };
+
   if (!user) {
     console.warn("Loading");
     return (
@@ -53,14 +76,13 @@ export default function UserProfile() {
 
   return (
     <div className="m-10 flex flex-col justify-center">
-      {/* only when the logged in user's id match the id in the endpoin it will display the edit button */}
       {isLoggedIn && user && (
         <header className="font-subHeading text-xl text-accent flex justify-between px-5 py-10">
           My Profile
           <button
             className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded"
             onClick={() => {
-              window.location.href = `/users/${id}/edit`;
+              setEditing(true);
             }}
           >
             Edit
@@ -69,6 +91,61 @@ export default function UserProfile() {
       )}
 
       <main className="flex justify-center">
+        {/* Edit view is rendered only when 'editing' is true */}
+        {editing && (
+          <div className="w-80 grid grid-cols-1 content-around">
+            <h1 className="font-subHeading text-xl text-accent">
+              Edit your profile
+            </h1>
+            <br />
+            <label
+              htmlFor="name"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={editedUser.name || user.name}
+              placeholder="Name"
+              onChange={handleInputChange}
+            />
+            <label
+              htmlFor="Bio"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Your Bio
+            </label>
+            <textarea
+              name="bio"
+              value={editedUser.bio || user.bio}
+              placeholder="Bio"
+              onChange={handleInputChange}
+              className="h-60"
+            ></textarea>
+            <label
+              htmlFor="wage"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              How Much You Charge Per Hour
+            </label>
+            <input
+              type="number"
+              name="wage"
+              value={editedUser.wage || convertRate(user.wage)}
+              placeholder="Wage"
+              onChange={handleInputChange}
+            />
+            <button
+              className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded"
+              onClick={handleEditSubmit}
+            >
+              Save
+            </button>
+          </div>
+        )}
+
         <div className="m-5 w-80 h-80 overflow-hidden border border-gray-300 drop-shadow-3xl rounded-3xl">
           <img
             src={user.profile_picture}
