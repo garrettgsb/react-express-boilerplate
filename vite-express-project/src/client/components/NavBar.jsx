@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../hooks/AuthContext";
 import LoginModal from "./LoginModal";
 import { useNavigate } from "react-router-dom";
+import ThemeController from "./ThemeController";
 
 export default function NavBar({ openModal }) {
 const { isLoggedIn, login, logout, user } = useAuth();
@@ -20,7 +21,7 @@ const { isLoggedIn, login, logout, user } = useAuth();
   ];
 
   return (
-    <nav className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 pb-1.5 h-10">
+    <nav className="flex flex-wrap items-center justify-around p-4">
       <span className="font-heading text-4xl whitespace-nowrap">LOGO</span>
       <div>
         <ul className="flex space-x-6">
@@ -28,7 +29,8 @@ const { isLoggedIn, login, logout, user } = useAuth();
             <a
               key={item.name}
               href={item.href}
-              className="font-subHeading text-lg font-semibold leading-6 text-accent hover:text-accentHover"
+              className="font-subHeading text-lg font-semibold leading-6 hover:text-primary-content
+              uppercase mx-10 transition-all duration-500 before:content-[none] after:content-[none]"
             >
               {item.name}
             </a>
@@ -36,7 +38,7 @@ const { isLoggedIn, login, logout, user } = useAuth();
         </ul>
       </div>
       <div className="flex space-x-4">
-        
+        <ThemeController />
         {/* Conditionally render different buttons based on the isLoggedIn state */}
         {isLoggedIn ? (
           <>
@@ -44,7 +46,7 @@ const { isLoggedIn, login, logout, user } = useAuth();
             <button>MY Profile</button>
             <button
               onClick={() => handleLogout()}
-              className="font-subHeading bg-transparent hover:bg-buttonHover text-button font-semibold hover:text-white py-2 px-4 border border-button hover:border-transparent rounded"
+              className="btn btn-outline btn-primary"
             >
               Logout
             </button>
@@ -54,7 +56,7 @@ const { isLoggedIn, login, logout, user } = useAuth();
             {/* When the user is NOT logged in */}
             <button
               onClick={()=>document.getElementById('login_modal').showModal()}
-              className="font-subHeading bg-transparent hover:bg-buttonHover text-button font-semibold hover:text-white py-2 px-4 border border-button hover:border-transparent rounded"
+              className="btn btn-outline btn-primary hover:text-white"
             >
               Log in
             </button>
@@ -62,7 +64,7 @@ const { isLoggedIn, login, logout, user } = useAuth();
             <LoginModal />
           
             <button
-              className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded"
+              className="btn btn-primary text-white"
               onClick={openModal}
             >
               Register
