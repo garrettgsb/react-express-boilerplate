@@ -61,6 +61,12 @@ export default function UserProfile() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
+    if (name === "wage") {
+      const wageInCents = parseFloat(value) * 100;
+      setEditedUser({ ...editedUser, [name]: wageInCents });
+      return;
+    }
     setEditedUser({ ...editedUser, [name]: value });
   };
 
@@ -133,7 +139,7 @@ export default function UserProfile() {
             <input
               type="number"
               name="wage"
-              value={editedUser.wage || convertRate(user.wage)}
+              value={editedUser.wage ? editedUser.wage / 100 : ""}
               placeholder="Wage"
               onChange={handleInputChange}
             />
