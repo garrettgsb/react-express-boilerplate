@@ -39,9 +39,29 @@ export const EntityCard = ({ style, data, isArtists }) => {
           }}
           className="w-56 h-56 object-cover"
         />
-        <footer className="flex flex-col items-center">
-          <p>{data.name}</p>
-          <p>{data.location}</p>
+        <footer className="flex justify-between w-full">
+          <div className="flex pl-5 flex-col w-8/12">
+            <span
+              className="text-slate-950"
+              style={{
+                fontFamily: "'Kalam', cursive"
+              }}
+            >
+              {data.name}
+            </span>
+            <span
+              className="text-gray-400"
+              style={{
+                fontFamily: "'Kalam', cursive"
+              }}
+            >
+              {data.location}
+            </span>
+          </div>
+          <aside className="flex pr-5 justify-end items-center">
+            {/* this is only place holder */}
+            👍
+          </aside>
         </footer>
       </div>
     </div>
