@@ -18,7 +18,7 @@ export default function TypeSelectionBox(props) {
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
-                className="h-5 w-5 text-gray-400"
+                className="h-5 w-5 text-gray-600"
                 aria-hidden="true"
               />
             </Combobox.Button>
@@ -30,7 +30,7 @@ export default function TypeSelectionBox(props) {
             leaveTo="opacity-0"
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm z-10">
+            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base-100 shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm z-10">
               {filteredType.length === 0 && query !== '' ? (
                 <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
                   Nothing found.
@@ -41,7 +41,7 @@ export default function TypeSelectionBox(props) {
                     key={type.id}
                     className={({ active }) =>
                       `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                        active ? 'bg-button text-white' : 'text-gray-900'
+                        active ? 'bg-primary text-white' : 'text-gray-900'
                       }`
                     }
                     value={type}
