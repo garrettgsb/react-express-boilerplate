@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { VariableSizeGrid } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
@@ -20,6 +20,7 @@ import {
 } from './constants';
 
 export const EntityList = () => {
+  const [navBottom, setNavBottom] = useState(0);
   const location = useLocation();
   const { pathname } = location;
   const splitPath = pathname.split("/");
@@ -32,6 +33,7 @@ export const EntityList = () => {
     entityByIndex,
     currentCount,
     isFetching,
+    isInitial,
     totalCount,
     setIsFetching,
     fetchEntities
@@ -75,51 +77,80 @@ export const EntityList = () => {
     }
   }, [entityByIndex]);
 
+  useEffect(() => {
+    const navElement = document.getElementById('entity-list-title');
+    const navRect = navElement.getBoundingClientRect();
+    setNavBottom(navRect.bottom);
+  }, []);
+
   return (
-    <div className="mt-9 h-[78vh] w-full overflow-hidden">
+    <>
+      {/* to override root's bottom padding */}
+      <style>
+        {`
+          #root {
+            padding-bottom: 0 !important;
+          }
+        `}
+      </style>
       <h1
-        className="font-subHeading text-lg font-semibold leading-6 text-accent hover:text-accentHover mb-4"
+        id="entity-list-title"
+        className="pt-9 font-subHeading text-lg font-semibold leading-6 text-accent hover:text-accentHover pb-4"
       >
         {title} in your area
       </h1>
-      <AutoSizer>
-        {({ height, width }) => (
-          <InfiniteLoader
-            threshold={Math.ceil(ITEMS_PER_LOAD / 2)}
-            itemCount={totalCount}
-            loadMoreItems={loadMoreItems}
-            isItemLoaded={isItemLoaded}
-          >
-            {({ onItemsRendered, ref }) => (
-              <VariableSizeGrid
-                className="variable-size-grid"
-                columnWidth={(_index) =>
-                  // no padding will make it have a horizontal scrollbar
-                  Math.floor(width - COLUMN_WIDTH_PADDING) / ITEMS_PER_ROW
-                }
-                rowHeight={getRowHeight}
-                height={height - CONTAINER_HEIGHT_PADDING}
-                width={width}
-                columnCount={ITEMS_PER_ROW}
-                rowCount={currentLastRowIndex + 2} // +1 for loading indicator, +1 for footer
-                onItemsRendered={({ visibleRowStartIndex, visibleRowStopIndex }) => {
-                  onItemsRendered({
-                    visibleStartIndex: visibleRowStartIndex * ITEMS_PER_ROW,
-                    visibleStopIndex: visibleRowStopIndex * ITEMS_PER_ROW + ITEMS_PER_ROW - 1,
-                  });
-                }}
-                itemData={entityByIndex}
-                ref={(grid) => {
-                  ref(grid);
-                  gridRef.current = grid;
-                }}
-              >
-               {getColumnComponent({ currentLastRowIndex, isFetching, currentCount, totalCount, isArtists: url === URL_ARTISTS })}
-              </VariableSizeGrid>
-            )}
-          </InfiniteLoader>)
-        }
-      </AutoSizer>
-    </div>
+      <div
+        className="w-full overflow-hidden"
+        style={{
+          height: `calc(100vh - ${navBottom}px`
+        }}
+      >
+        <AutoSizer>
+          {({ height, width }) => (
+            <InfiniteLoader
+              threshold={Math.ceil(ITEMS_PER_LOAD / 2)}
+              itemCount={totalCount}
+              loadMoreItems={loadMoreItems}
+              isItemLoaded={isItemLoaded}
+            >
+              {({ onItemsRendered, ref }) => (
+                <VariableSizeGrid
+                  className="variable-size-grid"
+                  columnWidth={(_index) =>
+                    // no padding will make it have a horizontal scrollbar
+                    Math.floor(width - COLUMN_WIDTH_PADDING) / ITEMS_PER_ROW
+                  }
+                  rowHeight={getRowHeight}
+                  height={height}
+                  width={width}
+                  columnCount={ITEMS_PER_ROW}
+                  rowCount={currentLastRowIndex + 2} // +1 for loading indicator, +1 for footer
+                  onItemsRendered={({ visibleRowStartIndex, visibleRowStopIndex }) => {
+                    onItemsRendered({
+                      visibleStartIndex: visibleRowStartIndex * ITEMS_PER_ROW,
+                      visibleStopIndex: visibleRowStopIndex * ITEMS_PER_ROW + ITEMS_PER_ROW - 1,
+                    });
+                  }}
+                  itemData={entityByIndex}
+                  ref={(grid) => {
+                    ref(grid);
+                    gridRef.current = grid;
+                  }}
+                >
+                {getColumnComponent({
+                    currentLastRowIndex,
+                    isFetching,
+                    currentCount,
+                    totalCount,
+                    isInitial,
+                    isArtists: url === URL_ARTISTS
+                  })}
+                </VariableSizeGrid>
+              )}
+            </InfiniteLoader>)
+          }
+        </AutoSizer>
+      </div>
+    </>
   );
 }

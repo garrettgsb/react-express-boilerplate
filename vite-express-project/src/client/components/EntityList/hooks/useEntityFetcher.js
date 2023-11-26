@@ -8,6 +8,7 @@ import { getEntityCardRandomePosition } from '../utils.js';
 const defaultState = {
   entityByIndex: {},
   isFetching: true,
+  isInitial: true,
   currentCount: 0,
   totalCount: 0
 }
@@ -48,7 +49,7 @@ export const useEntityFetcher = ({ url: _url }) => {
               },
               currentCount: prev.currentCount + entities.length,
               isFetching: false,
-              ...totalCount ? { totalCount } : {}
+              ...totalCount ? { totalCount, isInitial: false } : {}
             }));
           });
       }).catch((error) => {
@@ -67,13 +68,12 @@ export const useEntityFetcher = ({ url: _url }) => {
     fetchEntities(0);
   }, [fetchEntities]);
 
-  console.log(state);
-
   return {
     entityByIndex: state.entityByIndex,
     isFetching: state.isFetching,
     currentCount: state.currentCount,
     totalCount: state.totalCount,
+    isInitial: state.isInitial,
     setIsFetching,
     fetchEntities
   };
