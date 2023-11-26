@@ -1,8 +1,19 @@
+import { useCallback } from "react";
 import { useAuth } from "../hooks/AuthContext";
 
 const LoginModal = () => {
   const { handleLogin, setEmail, email, password, setPassword, error, resetError } = useAuth();
   
+  const setEmailHandler = useCallback((e) => {
+    setEmail(e.target.value);
+    resetError();
+  });
+
+  const setPasswordHandler = useCallback((e) => {
+    setPassword(e.target.value);
+    resetError();
+  }) 
+
   return (
     /* Login Modal */
     <dialog id="login_modal" className="modal">
@@ -20,10 +31,7 @@ const LoginModal = () => {
             placeholder="Email"
             className="input input-bordered w-full max-w-xs"
             value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              resetError();
-            }}
+            onChange={(e) => setEmailHandler()}
           />
         </div>
         <div className="form-control w-full max-w-xs m-4">
@@ -32,10 +40,7 @@ const LoginModal = () => {
             placeholder="Password"
             className="input input-bordered w-full max-w-xs"
             value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              resetError();
-              }} />
+            onChange={(e) => setPasswordHandler()} />
         </div>
         <button
           onClick={() => handleLogin()}

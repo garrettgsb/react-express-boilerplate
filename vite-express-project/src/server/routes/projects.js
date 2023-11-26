@@ -49,15 +49,23 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
+    const projectId = req.params.id;
+    const updateData = req.body;
+
+    console.log("Update Project Request:", {
+      projectId,
+      updateData,
+    });
+
     const { data, error } = await supabase
       .from("projects")
-      .update(req.body)
-      .eq("id", req.params.id);
+      .update(updateData)
+      .eq("id", projectId);
 
     if (error) {
-      console.error("Supabase Insert Error:", error);
+      console.error("Supabase Update Error:", error);
       throw error;
     }
 

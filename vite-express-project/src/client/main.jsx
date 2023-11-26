@@ -8,7 +8,6 @@ import { AuthProvider } from './hooks/AuthContext';
 import { NewProjectProvider } from './hooks/NewProjectContext';
 import { ThemeProvider } from './hooks/ThemeContext';
 
-
 const root = createRoot(document.getElementById("root"));
 
 root.render(

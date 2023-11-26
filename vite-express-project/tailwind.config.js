@@ -51,7 +51,7 @@ export default {
       {
         default: {
           "primary": "#F27F3D", // primary button
-          "secondary": "#BA7EF5", // secondary button       
+          "secondary": "#F2B73D", // secondary button       
           "accent": "#5C9D9D", // icons, borders, deorative
           "neutral": "#f2f2f0", // text, headers
           "neutral-content": "#9C9C8B",
