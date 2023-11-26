@@ -16,7 +16,7 @@ export default function ProjectProfile() {
   
   const handleEditClick = async (projectId) => {
     setIsEditMode(true);
-    navigate(`/project/${projectId}/edit`);
+    navigate(`/projects/${projectId}/edit`);
   };
   
   useEffect(() => {

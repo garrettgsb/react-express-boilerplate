@@ -48,11 +48,11 @@ function App() {
         <Route exact path="/users/:id" element={<UserProfile />} />
         <Route exact path="/artists" element={<EntityList />} />
         <Route exact path="/gigs" element={<EntityList />} />
-        <Route exact path="/project/:id" element={<ProjectProfile />} />
+        <Route exact path="/projects/:id" element={<ProjectProfile />} />
 
         <Route exact path="/likeditems" element={<LikedItemsRoute />} />
-        <Route exact path="/project/:id/edit" element={<NewProjectFormRoute />} />
-        <Route exact path="/project/new" element={<NewProjectFormRoute />} />
+        <Route exact path="/projects/:projectId/edit" element={<NewProjectFormRoute />} />
+        <Route exact path="/projects/new" element={<NewProjectFormRoute />} />
       </Routes>
       {/* Footer will be rendered within the EntityList component due to the way infinite scroll works */}
       {showFooter && <Footer />}

@@ -3,6 +3,7 @@ import { useNewProject } from "../hooks/NewProjectContext";
 import { useAuth } from "../hooks/AuthContext";
 import InputField from "../components/InputField";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export default function NewProjectFormRoute() {
   const {
@@ -29,6 +30,7 @@ export default function NewProjectFormRoute() {
   } = useNewProject();
 
   const { user, checkAuthentication, isLoading } = useAuth();
+  const { projectId } = useParams();
 
   useEffect(() => {
     const fetchData = async() => {
@@ -55,12 +57,15 @@ export default function NewProjectFormRoute() {
   };
 
   return (
-    <div className="m-20">
-      <form onSubmit={(e) => handleSubmit(e, employer_id)}>
+    <div className="m-5">
+      <div className="mb-5">
+        <h2 className="text-xl font-subHeading text-secondary">
+          {isEditMode ? ( <>Edit Project</> ) : ( <>Create a New Project</> )}
+        </h2>
+      </div>
+      <form onSubmit={(e) => handleSubmit(e, projectId, employer_id)}>
         <div className="flex justify-center items-start">
-          <div>
-            {isEditMode ? ( <h2>Edit Project</h2> ) : ( <h2>Create a New Project</h2> )}
-          </div>
+          
           <div className="relative">
             
             <label className="border-solid border rounded-lg w-56 h-56 m-5 flex items-center justify-center text-white cursor-pointer relative">
