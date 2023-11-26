@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useEditProject } from "../hooks/EditProjectContext";
+import { useNewProject } from "../hooks/NewProjectContext";
+import { useNavigate } from "react-router-dom";
  
 function convertRate(cents) {
   const dollars = cents / 100;
@@ -10,7 +11,13 @@ function convertRate(cents) {
 export default function ProjectProfile() {
   const { id } = useParams();
   const [project, setProject] = useState({});
-  const { handleEditClick } = useEditProject();
+  const { setIsEditMode } = useNewProject();
+  const navigate = useNavigate();
+  
+  const handleEditClick = async (projectId) => {
+    setIsEditMode(true);
+    navigate(`/project/${projectId}/edit`);
+  };
   
   useEffect(() => {
     const fetchProject = async () => {

@@ -3,7 +3,6 @@ import { useNewProject } from "../hooks/NewProjectContext";
 import { useAuth } from "../hooks/AuthContext";
 import InputField from "../components/InputField";
 import { useEffect } from "react";
-import { useEditProject } from "../hooks/EditProjectContext";
 
 export default function NewProjectFormRoute() {
   const {
@@ -26,19 +25,8 @@ export default function NewProjectFormRoute() {
     setLocationTypeQuery,
     handleLocationTypeSelect,
     handleProjectTypeSelect,
+    isEditMode,
   } = useNewProject();
-
-  const { isEditMode } = useEditProject();
-
-  // const handleProjectTypeSelect = (value) => {
-  //   setSelectedProject(value);
-  //   handleProjectTypeForm(value.name);
-  // };
-
-  // const handleLocationTypeSelect = (value) => {
-  //   setSelectedLocation(value);
-  //   handleLocationTypeForm(value.name);
-  // };
 
   const { user, checkAuthentication, isLoading } = useAuth();
 

@@ -6,6 +6,7 @@ const NewProjectContext = createContext();
 
 export const NewProjectProvider = ({ children }) => {
   const navigate = useNavigate();
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
@@ -138,6 +139,8 @@ export const NewProjectProvider = ({ children }) => {
 
     handleProjectTypeSelect,
     handleLocationTypeSelect,
+    isEditMode,
+    setIsEditMode,
   };
   
   return (
