@@ -78,7 +78,7 @@ export default function ProjectProfile() {
         </div>
       </div>
       
-      { user.id === project.employer_id && (
+      { user && user.id === project.employer_id && (
         <div className="flex justify-end m-5">
           <button 
             className="btn btn-outline btn-secondary"
