@@ -3,10 +3,12 @@ import {
   ITEMS_PER_LOAD,
   API_BY_URL
 } from '../constants.js';
+import { getEntityCardRandomePosition } from '../utils.js';
 
 const defaultState = {
   entityByIndex: {},
   isFetching: true,
+  isInitial: true,
   currentCount: 0,
   totalCount: 0
 }
@@ -34,13 +36,20 @@ export const useEntityFetcher = ({ url: _url }) => {
               entityByIndex: {
                 ...prev.entityByIndex,
                 ...entities.reduce((entityByIndex, entity, index) => {
-                  entityByIndex[prev.currentCount + index] = entity;
+                  entityByIndex[prev.currentCount + index] = {
+                    ...entity,
+                    // to give random position for each entity card.
+                    // it's included in this hook because calling it in the component won't sustain
+                    // the initial position of the card so it will look wobbly when scrolling/lading more items.
+                    transform: getEntityCardRandomePosition()
+                  };
+
                   return entityByIndex;
                 }, {})
               },
               currentCount: prev.currentCount + entities.length,
               isFetching: false,
-              ...totalCount ? { totalCount } : {}
+              ...totalCount ? { totalCount, isInitial: false } : {}
             }));
           });
       }).catch((error) => {
@@ -59,13 +68,12 @@ export const useEntityFetcher = ({ url: _url }) => {
     fetchEntities(0);
   }, [fetchEntities]);
 
-  console.log(state);
-
   return {
     entityByIndex: state.entityByIndex,
     isFetching: state.isFetching,
     currentCount: state.currentCount,
     totalCount: state.totalCount,
+    isInitial: state.isInitial,
     setIsFetching,
     fetchEntities
   };

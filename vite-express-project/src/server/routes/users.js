@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   try {
     const { data, count, error } = await supabase
       .from("users")
-      .select("id, name, profile_picture", offset === '0' ? { count: 'exact' } : undefined)
+      .select("id, name, profile_picture, location", offset === '0' ? { count: 'exact' } : undefined)
       .range(offset, offset + limit);
 
     if (error) {
