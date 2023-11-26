@@ -69,16 +69,16 @@ export const NewProjectProvider = ({ children }) => {
   const handleLocationTypeForm = (type) => {
     setFormData({
       ...formData,
-      locationType: type,
+      location: type,
     });
   };
 
   // Submit Form
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, projectId) => {
     e.preventDefault();
-
+  
     const budgetInCents = formData.budget * 100;
-
+  
     const data = new FormData();
     data.append("title", formData.projectName);
     data.append("description", formData.description);
@@ -86,18 +86,27 @@ export const NewProjectProvider = ({ children }) => {
     data.append("location", formData.location);
     data.append("type", formData.projectType);
     data.append("image", formData.image);
-
+  
     try {
-      const response = await fetch("/api/projects", {
-        method: "POST",
-        body: data,
-      });
-
+      let response;
+  
+      if (isEditMode) {
+        // If in edit mode, perform a PUT 
+        response = await fetch(`/api/projects/${projectId}`, {
+          method: "PUT", 
+          body: data,
+        });
+      } else {
+        // If not in edit mode, perform a POST request
+        response = await fetch("/api/projects", {
+          method: "POST",
+          body: data,
+        });
+      }
       if (response.ok) {
         console.log("Project submitted successfully");
-        
-        // after form submission it will redirect to landing page for now
-        navigate("/");
+  
+        navigate(`/gigs`);
       } else {
         console.error("Error submitting project");
       }
@@ -105,7 +114,7 @@ export const NewProjectProvider = ({ children }) => {
       console.error("Error submitting project:", error);
     }
   };
-
+  
   const handleProjectTypeSelect = (value) => {
     setSelectedProject(value);
     handleProjectTypeForm(value.name);
