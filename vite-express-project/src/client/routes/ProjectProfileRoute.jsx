@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+import { useEditProject } from "../hooks/EditProjectContext";
+ 
 function convertRate(cents) {
   const dollars = cents / 100;
   return dollars.toFixed(2);
@@ -9,8 +10,8 @@ function convertRate(cents) {
 export default function ProjectProfile() {
   const { id } = useParams();
   const [project, setProject] = useState({});
+  const { handleEditClick } = useEditProject();
   
-
   useEffect(() => {
     const fetchProject = async () => {
       try {
@@ -29,11 +30,13 @@ export default function ProjectProfile() {
     <div className="mb-64 mt-10 flex flex-col justify-center">
       <header className="font-Heading text-3xl text-slate-500 flex justify-between p-5  ">
         {project.title}
-        {user.id === 2 && (
-          <button className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded">
+
+          <button 
+            className="btn btn-outline btn-secondary"
+            onClick={() => handleEditClick(id)}>
             Edit project
           </button>
-        )}
+      
       </header>
 
       <main className="flex justify-center">

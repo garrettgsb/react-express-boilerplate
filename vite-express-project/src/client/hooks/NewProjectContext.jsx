@@ -105,6 +105,16 @@ export const NewProjectProvider = ({ children }) => {
     }
   };
 
+  const handleProjectTypeSelect = (value) => {
+    setSelectedProject(value);
+    handleProjectTypeForm(value.name);
+  };
+
+  const handleLocationTypeSelect = (value) => {
+    setSelectedLocation(value);
+    handleLocationTypeForm(value.name);
+  };
+
   const value = {
     imagePreview,
     setImagePreview,
@@ -116,18 +126,18 @@ export const NewProjectProvider = ({ children }) => {
 
     handleProjectTypeForm,
     selectedProject,
-    setSelectedProject,
     filteredProjectType,
     projectTypeQuery,
     setProjectTypeQuery,
 
     handleLocationTypeForm,
     selectedLocation,
-    setSelectedLocation,
     filteredLocationType,
     locationTypeQuery,
     setLocationTypeQuery,
 
+    handleProjectTypeSelect,
+    handleLocationTypeSelect,
   };
   
   return (
