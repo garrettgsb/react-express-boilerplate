@@ -57,7 +57,7 @@ export default function NewProjectFormRoute() {
   };
 
   return (
-    <div className="m-5">
+    <div className="m-5 mb-72">
       <div className="mb-5">
         <h2 className="text-xl font-subHeading text-secondary">
           {isEditMode ? ( <>Edit Project</> ) : ( <>Create a New Project</> )}

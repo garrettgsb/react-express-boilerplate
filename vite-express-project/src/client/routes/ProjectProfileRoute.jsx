@@ -34,58 +34,57 @@ export default function ProjectProfile() {
   }, [id]);
 
   return (
-    <div className="mb-64 mt-10 flex flex-col justify-center">
-      <header className="font-Heading text-3xl text-slate-500 flex justify-between p-5  ">
-        {project.title}
-
-          <button 
-            className="btn btn-outline btn-secondary"
-            onClick={() => handleEditClick(id)}>
-            Edit project
-          </button>
-      
-      </header>
-
-      <main className="flex justify-center">
-        <div className="m-5 w-50 h-50 overflow-hidden border border-gray-300 drop-shadow-3xl rounded-3xl">
+    <div className="mb-64">
+      <div className="mt-10 flex flex-col items-center justify-center md:flex-row md:items-start">
+        <div className="m-5 w-1/2 overflow-hidden border border-gray-300 drop-shadow-3xl rounded-3xl">
           <img
             src="/public/images/art_4.jpg" //change to project.image when ready
             alt={`${project.title} image`}
-            className="w-full h-full object-cover"
+            className=""
           />
         </div>
 
-        <div className="m-5">
-          <div className="m-5 text-center">
-            <div className="flex flex-row items-center m-10">
-              <img
-                src="/public/images/art_6.jpg"
-                className="w-24 h-24 rounded-full object-cover border-2 border-gray-300 m-5"
-              />
-              <p className="text-2xl  text-slate-500">
-                Posted by {project.employer_id}
-              </p>
+        <div className="flex flex-col justify-start md:mt-20 md:ml-16">
+          <header className="font-heading text-3xl text-primary ">
+          {project.title}
+          </header>
+          <main className="flex">
+            <div className="m-5">
+              
+              <div className="flex flex-row items-center m-5">
+                <img
+                  src="/public/images/art_6.jpg"
+                  className="w-24 h-24 rounded-full object-cover border-2 border-gray-300 m-5"
+                />
+                <p className="font-subHeading text-xl text-secondary">
+                  Posted by {project.employer_id}
+                </p>
+              </div>
+
+              <div className="flex flex-col items-start">
+                <span>Project Type: {project.type}</span>
+                <span>Location: {project.location}</span>
+                <span>Budget: ${convertRate(project.budget)}</span>
+              </div>
+              
             </div>
+          </main>
+          <div className="mt-5">
+            <p>{project.description}</p>
           </div>
-
-          <h2 className="font-subHeading text-l mb-2 flex flex-col">
-            Project Type: {project.type} <br />
-            Location: {project.location} <br />
-            Budget: ${convertRate(project.budget)}
-            <br />
-          </h2>
+          
         </div>
-      </main>
-
-      <div className="flex">
-        <p>{project.description}</p>
       </div>
 
-      <div className="flex flex-row justify-center items-center my-5">
-        <button className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded ml-auto">
+      <div className="flex justify-end m-5">
+        <button 
+          className="btn btn-outline btn-secondary"
+          onClick={() => handleEditClick(id)}>
           Edit project
         </button>
       </div>
+     
     </div>
+    
   );
 }
