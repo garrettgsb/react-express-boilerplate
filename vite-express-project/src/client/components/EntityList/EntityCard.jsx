@@ -20,12 +20,13 @@ export const EntityCard = ({ style, data, isArtists }) => {
       style={{ ...style, ...entityCardStyle }}
     >
       <div
-        className="entity-image-wrapper w-60 h-80 rounded-md"
+        className="entity-image-wrapper w-60 h-72 rounded-md"
         style={{
           ...polaroidStyle,
           transform: data.transform,
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
+          alignItems: 'center',
           backgroundColor: '#ffffff',
           paddingTop: '0.5rem'
         }}>
@@ -38,6 +39,10 @@ export const EntityCard = ({ style, data, isArtists }) => {
           }}
           className="w-56 h-56 object-cover"
         />
+        <footer className="flex flex-col items-center">
+          <p>{data.name}</p>
+          <p>{data.location}</p>
+        </footer>
       </div>
     </div>
   )
