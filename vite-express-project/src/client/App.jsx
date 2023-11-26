@@ -4,7 +4,6 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import LandingRoute from "./routes/LandingRoute";
-import MyProfile from "./routes/MyProfileRoute";
 import UserProfile from "./routes/UserProfileRoute";
 import SignupModal from "./components/SignupModal";
 import ProjectProfile from "./routes/ProjectProfileRoute";
@@ -14,8 +13,8 @@ import LikedItemsRoute from "./routes/LikedItemsRoute";
 import { EntityList } from "./components/EntityList";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { AuthProvider } from "./hooks/AuthContext";
 import NewProjectFormRoute from "./routes/NewProjectFormRoute";
+import { useTheme } from "./hooks/ThemeContext";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,8 +32,11 @@ function App() {
     setIsModalOpen(false);
   };
 
-  return (
-    <>
+
+  const { theme } = useTheme();
+
+  return (    
+    <div data-theme={theme} className="flex flex-col">
       <NavBar openModal={openModal} />
       <Routes>
         <Route
@@ -55,14 +57,7 @@ function App() {
       {/* Footer will be rendered within the EntityList component due to the way infinite scroll works */}
       {showFooter && <Footer />}
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
-    </>
-
-    // <>
-    //   <NavBar openModal={openModal} />
-    //   <Landing openModal={openModal} />
-    //   <Footer />
-    //
-    // </>
+    </div>
   );
 }
 
