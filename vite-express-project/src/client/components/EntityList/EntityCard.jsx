@@ -4,7 +4,13 @@ import { useNavigate } from 'react-router-dom';
 const entityCardStyle = {
   display: 'flex',
   justifyContent: 'center',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  paddingTop: '0.5rem'
+};
+
+const polaroidStyle = {
+  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',
+  transform: 'rotate(-0.5deg)'
 };
 
 export const EntityCard = ({ style, data, isArtists }) => {
@@ -15,7 +21,7 @@ export const EntityCard = ({ style, data, isArtists }) => {
       className="entity-card-container"
       style={{ ...style, ...entityCardStyle }}
     >
-      <div className="entity-image-wrapper w-60 h-60">
+      <div className="entity-image-wrapper w-60 h-80 rounded-md" style={{ ...polaroidStyle, display: 'flex', justifyContent: 'center', backgroundColor: '#ffffff', paddingTop: '0.5rem'}} >
         <img 
           src={isArtists ? data.profile_picture : data.images[0]}
           alt={data.title}
@@ -23,7 +29,7 @@ export const EntityCard = ({ style, data, isArtists }) => {
           onClick={() => {
             navigate(`/${isArtists ? 'users' : 'projects'}/${data.id}`);
           }}
-          className="border rounded-3xl w-full h-full object-cover"
+          className="w-56 h-56 object-cover"
         />
       </div>
     </div>
