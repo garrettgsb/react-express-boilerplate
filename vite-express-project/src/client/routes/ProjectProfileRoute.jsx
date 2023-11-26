@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNewProject } from "../hooks/NewProjectContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/AuthContext";
  
 function convertRate(cents) {
   const dollars = cents / 100;
@@ -13,6 +14,7 @@ export default function ProjectProfile() {
   const [project, setProject] = useState({});
   const { setIsEditMode } = useNewProject();
   const navigate = useNavigate();
+  const { user } = useAuth();
   
   const handleEditClick = async (projectId) => {
     setIsEditMode(true);
@@ -75,15 +77,16 @@ export default function ProjectProfile() {
           
         </div>
       </div>
-
-      <div className="flex justify-end m-5">
-        <button 
-          className="btn btn-outline btn-secondary"
-          onClick={() => handleEditClick(id)}>
-          Edit project
-        </button>
-      </div>
-     
+      
+      { user.id === project.employer_id && (
+        <div className="flex justify-end m-5">
+          <button 
+            className="btn btn-outline btn-secondary"
+            onClick={() => handleEditClick(id)}>
+            Edit project
+          </button>
+        </div>
+      )}
     </div>
     
   );
