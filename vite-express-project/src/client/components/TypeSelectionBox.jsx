@@ -4,7 +4,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 export default function TypeSelectionBox(props) {
 
-  const { selectedType, handleSelect, filteredType, query, setQuery } = props;
+  const { selectedType, handleSelect, filteredType, query, setQuery } = props; 
 
   return (
     <div className=" top-16 w-80">
@@ -12,7 +12,8 @@ export default function TypeSelectionBox(props) {
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg  text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
-              className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 focus:ring-0"
+              readOnly={true}
+              className="w-full border-none py-2 pl-3 pr-10 text-base-100 text-sm leading-5 focus:ring-0"
               displayValue={(type) => type.name}
               onChange={(event) => setQuery(event.target.value)}
             />
