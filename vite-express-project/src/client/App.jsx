@@ -20,9 +20,9 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const location = useLocation();
-  const splitLocation = location.pathname.split('/');
-  const path = splitLocation[splitLocation.length - 1]
-  const showFooter = !path.includes('artists') && !path.includes('gigs');
+  const splitLocation = location.pathname.split("/");
+  const path = splitLocation[splitLocation.length - 1];
+  const showFooter = !path.includes("artists") && !path.includes("gigs");
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -31,6 +31,7 @@ function App() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
 
   const { theme } = useTheme();
 
@@ -51,8 +52,7 @@ function App() {
 
         <Route exact path="/likeditems" element={<LikedItemsRoute />} />
 
-        <Route exact path="/project/new" element={<NewProjectFormRoute />}/>
-
+        <Route exact path="/project/new" element={<NewProjectFormRoute />} />
       </Routes>
       {/* Footer will be rendered within the EntityList component due to the way infinite scroll works */}
       {showFooter && <Footer />}
