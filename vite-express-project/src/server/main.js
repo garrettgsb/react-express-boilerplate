@@ -99,7 +99,7 @@ app.post('/api/login', async (req, res) => {
 // Check user authentication
 app.get('/api/check-auth', (req, res) => {
   if (req.session.userId) {
-    res.status(200).json({ authenticated: true, userId: req.session.userId });
+    res.status(200).json({ authenticated: true, user: req.session.user });
   } else {
     res.status(401).json({ authenticated: false });
   }
@@ -246,6 +246,35 @@ app.post('/api/logout', (req, res) => {
   } catch (error) {
     console.error('Logout error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/api/user-data', async (req, res) => {
+  const userId = req.session.userId;
+  if (userId) {
+    try {
+      const { data: users, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', userId);
+
+      if (error) {
+        console.error('Supabase error:', error.message);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+
+      if (users.length === 1) {
+        const user = users[0];
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  } else {
+    res.status(401).json({ error: 'Unauthorized' });
   }
 });
 

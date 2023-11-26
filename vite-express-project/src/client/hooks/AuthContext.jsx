@@ -9,15 +9,59 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+
+  const checkAuthentication = async () => {
+    try {
+      const response = await fetch('/api/check-auth', {
+        method: 'GET',
+        credentials: 'include',
+      });
+  
+      if (response.ok) {
+        const result = await response.json();
+        return result.authenticated;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error('Error checking authentication:', error);
+      return false;
+    }
+  };
   
   // Initialize Authentication when the app mounts
   // So when access another page form address bar, state will be set to logged in
   const initializeAuthentication = async () => {
-    const isAuthenticated = await checkAuthentication();
-    setIsLoggedIn(isAuthenticated);
-  };
+    try {
+      const isAuthenticated = await checkAuthentication();
+      if (isAuthenticated) {
+        const response = await fetch('/api/user-data', {
+          method: 'GET',
+          credentials: 'include',
+        });
   
+        if (response.ok) {
+          const userData = await response.json();
+          setUser(userData);
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+          setUser(null);
+        }
+      } else {
+        setIsLoggedIn(false);
+        setUser(null);
+      }
+  
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.error('Error during authentication:', error);
+    }
+  };
+
   useEffect(() => {
     initializeAuthentication();
   }, []);
@@ -27,11 +71,6 @@ export const AuthProvider = ({ children }) => {
     setUser(userData || null);
   };
 
-  // const logout = () => {
-  //   setIsLoggedIn(false);
-  //   setUser(null);
-  // };
-  
   // Log out is updated to delete cookie session 
   const logout = async () => {
     try {
@@ -61,7 +100,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (response.ok) {
-        const userData = await response.json();
+        // const userData = await response.json();
 
         const supabaseResponse = await fetch(`/api/supabase/users?email=${email}`);
         const supabaseUserData = await supabaseResponse.json();
@@ -92,25 +131,6 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
   };
-
-  const checkAuthentication = async () => {
-    try {
-      const response = await fetch('/api/check-auth', {
-        method: 'GET',
-        credentials: 'include',
-      });
-  
-      if (response.ok) {
-        const result = await response.json();
-        return result.authenticated;
-      } else {
-        return false;
-      }
-    } catch (error) {
-      console.error('Error checking authentication:', error);
-      return false;
-    }
-  };
     
   const resetError = () => {
     setError(null);
@@ -128,12 +148,18 @@ export const AuthProvider = ({ children }) => {
     password,
     setPassword,
     error,
-    resetError
+    resetError,
+    isLoading,
+    checkAuthentication,
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {children}  
+      {isLoading ? (
+        <div className="m-20">Loading...</div>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 };

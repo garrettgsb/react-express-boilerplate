@@ -1,6 +1,8 @@
 import TypeSelectionBox from "../components/TypeSelectionBox";
 import { useNewProject } from "../hooks/NewProjectContext";
 import { useAuth } from "../hooks/AuthContext";
+import InputField from "../components/InputField";
+import { useEffect } from "react";
 
 export default function NewProjectFormRoute() {
   const {
@@ -25,8 +27,6 @@ export default function NewProjectFormRoute() {
     setLocationTypeQuery,
   } = useNewProject();
 
-
-
   const handleProjectTypeSelect = (value) => {
     setSelectedProject(value);
     handleProjectTypeForm(value.name);
@@ -37,8 +37,31 @@ export default function NewProjectFormRoute() {
     handleLocationTypeForm(value.name);
   };
 
-  const { user } = useAuth();
+  const { user, checkAuthentication, isLoading } = useAuth();
+
+  useEffect(() => {
+    const fetchData = async() => {
+      const isAuthenticated = await checkAuthentication();
+      if(!isAuthenticated) {
+        console.warn('You must log in to acccess this page')
+      }
+    };
+    fetchData();
+  }, [checkAuthentication]);
+
   const employer_id = user ? user.id : null;
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return (
+      <div className="m-20">
+        <p>You must log in to access this page.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="m-20">
@@ -92,80 +115,56 @@ export default function NewProjectFormRoute() {
         </div>
 
           <div className="flex flex-col items-center justify-center m-5 mt-0">
-            <div className="form-control w-full max-w-xs m-3">
-              <label className="label">
-                  <span className="label-text">What's the name of your project?</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Project Name"
-                  name="projectName"
-                  className="input input-bordered text-sm w-full max-w-xs"
-                  onChange={handleInputChange}
-                  required
-                />
-            </div>
-            <div className="form-control w-full max-w-xs m-3">
-              <label className="label">
-              <span className="label-text">Tell us about your project!</span>
-              </label>
-              <textarea
-                placeholder="Description"
-                name="description"
-                className="textarea textarea-bordered w-full max-w-xs"
-                onChange={handleInputChange}
-                required
-              ></textarea>
-            </div>
-            
-            <div className="form-control w-full max-w-xs m-3">
-              <label className="label">
-                <span className="label-text">What's your budget?</span>
-                <span className="label-text-alt">CAD</span>
-              </label>
-              <input
-              type="number"
-              value={formData.budget}
-              step="10"
-              min="0"
-              placeholder="Budget"
-              name="budget"
-              className="input input-bordered w-full max-w-xs"
+            <InputField
+              label="What's the name of your project?"
+              name="projectName"
+              type="text"
+              placeholder="Project Name"
+              value={formData.projectName}
               onChange={handleInputChange}
-              required/>
-            </div>
+              required
+            />
+            <InputField
+              label="Tell us about your project!"
+              name="description"
+              type="text"
+              placeholder="Description"
+              value={formData.description}
+              onChange={handleInputChange}
+              required
+            />
+           
+            <InputField
+              label="Whats your budget"
+              name="budget"
+              type="number"
+              placeholder="Description"
+              value={formData.budget}
+              onChange={handleInputChange}
+              required
+            />
 
-            <div className="form-control w-full max-w-xs m-3">
-              <label className="label">
-              <span className="label-text">Where is it happening?</span>
-              </label>
-              <TypeSelectionBox
-                onChange={handleLocationTypeForm}
-                selectedType={selectedLocation}
-                handleSelect={handleLocationTypeSelect}
-                filteredType={filteredLocationType}
-                query={locationTypeQuery}
-                setQuery={setLocationTypeQuery} />
-            </div>
-            
-            <div className="form-control w-full max-w-xs m-3">
-              <label className="label">
-              <span className="label-text">What kind of project?</span>
-              </label>
-              <TypeSelectionBox
-                onChange={handleProjectTypeForm}
-                selectedType={selectedProject}
-                handleSelect={handleProjectTypeSelect}
-                filteredType={filteredProjectType}
-                query={projectTypeQuery}
-                setQuery={setProjectTypeQuery} />
-            </div>  
+            <TypeSelectionBox
+              label="Where is it happening?"
+              onChange={handleLocationTypeForm}
+              selectedType={selectedLocation}
+              handleSelect={handleLocationTypeSelect}
+              filteredType={filteredLocationType}
+              query={locationTypeQuery}
+              setQuery={setLocationTypeQuery} />
+          
+            <TypeSelectionBox
+              label="What kind of project?"
+              onChange={handleProjectTypeForm}
+              selectedType={selectedProject}
+              handleSelect={handleProjectTypeSelect}
+              filteredType={filteredProjectType}
+              query={projectTypeQuery}
+              setQuery={setProjectTypeQuery} />
+
           </div>
         </div>
-        <button
-          className="btn btn-primary text-white"
-          type="submit"
-        >
+        <button className="btn btn-primary text-white" type="submit">
           Post Project
         </button>
       </form>
