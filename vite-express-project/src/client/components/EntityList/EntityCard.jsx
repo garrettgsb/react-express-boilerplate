@@ -1,4 +1,3 @@
-import { ITEM_SIZE } from './constants';
 import { useNavigate } from 'react-router-dom';
 
 const entityCardStyle = {
@@ -9,8 +8,7 @@ const entityCardStyle = {
 };
 
 const polaroidStyle = {
-  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',
-  transform: 'rotate(-0.5deg)'
+  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)'
 };
 
 export const EntityCard = ({ style, data, isArtists }) => {
@@ -21,7 +19,16 @@ export const EntityCard = ({ style, data, isArtists }) => {
       className="entity-card-container"
       style={{ ...style, ...entityCardStyle }}
     >
-      <div className="entity-image-wrapper w-60 h-80 rounded-md" style={{ ...polaroidStyle, display: 'flex', justifyContent: 'center', backgroundColor: '#ffffff', paddingTop: '0.5rem'}} >
+      <div
+        className="entity-image-wrapper w-60 h-80 rounded-md"
+        style={{
+          ...polaroidStyle,
+          transform: data.transform,
+          display: 'flex',
+          justifyContent: 'center',
+          backgroundColor: '#ffffff',
+          paddingTop: '0.5rem'
+        }}>
         <img 
           src={isArtists ? data.profile_picture : data.images[0]}
           alt={data.title}
