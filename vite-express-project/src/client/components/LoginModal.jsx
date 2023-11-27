@@ -59,6 +59,7 @@ const LoginModal = () => {
         </div>
         <button
           onClick={() => handleLogin()}
+          // className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded-sm"
           className="btn btn-primary text-white"
         >
           Log in
