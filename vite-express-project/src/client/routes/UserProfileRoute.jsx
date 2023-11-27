@@ -81,7 +81,7 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="m-10 flex flex-col justify-center">
+    <div className="m-10 mt-2 flex flex-col justify-center">
       {isLoggedIn && user && (
         <header className="font-subHeading text-xl text-accent flex justify-around px-5 py-10">
           My Profile
@@ -169,21 +169,26 @@ export default function UserProfile() {
         </div>
       </main>
 
-      <h2 className="font-heading text-2xl m-5 pt-5">My Projects</h2>
-
-      <div className="carousel rounded-box">
-        {user &&
-          user.images.map((image, index) => (
-            <div className="carousel-item" key={image}>
-              <img
-                src={image}
-                alt={`Image ${index + 1}`}
-                className="w-72 h-72"
-              />
-            </div>
-          ))}
-        
+      <section>
+        <h2 className="font-heading text-2xl m-5 pt-5">My Projects</h2>
+          <div className="carousel rounded-box w-3/4">
+            {user &&
+              user.images.map((image, index) => (
+                <div className="carousel-item" key={image}>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className="w-72 h-72"
+                  />
+                </div>
+              ))}
+          </div>
+      </section>
+      <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href={`/users/${user.id - 1}`} className="btn btn-circle">❮</a> 
+        <a href={`/users/${user.id + 1}`} className="btn btn-circle">❯</a>
       </div>
+      
     </div>
   );
 }
