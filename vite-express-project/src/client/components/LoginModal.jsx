@@ -1,5 +1,4 @@
 import { useAuth } from "../hooks/AuthContext";
-import { useEffect } from "react";
 
 const LoginModal = () => {
   const {
@@ -31,7 +30,6 @@ const LoginModal = () => {
             ✕
           </button>
         </form>
-      
         <h3 className="font-bold text-xl font-heading">Welcome Back!</h3>
         {error && <div className="text-error font-subHeading">{error}</div>}
         <div className="form-control w-full max-w-xs m-4">
@@ -59,15 +57,12 @@ const LoginModal = () => {
             onKeyUp={handleKeyPress}
           />
         </div>
-        <form method="dialog" onSubmit={handleKeyPress}>
-          <button
-            type="submit"
-            className="btn btn-primary text-white"
-            >
-           Log in
-          </button>
-        </form>
-       
+        <button
+          onClick={() => handleLogin()}
+          className="btn btn-primary text-white"
+        >
+          Log in
+        </button>
       </div>
     </dialog>
   );
