@@ -3,11 +3,12 @@ import { useAuth } from "../hooks/AuthContext";
 import LoginModal from "./LoginModal";
 import { useNavigate } from "react-router-dom";
 import ThemeController from "./ThemeController";
+import DropDownUser from "./DropDownUser/DropDownUser";
 
 export default function NavBar({ openModal }) {
-const { isLoggedIn, login, logout, user } = useAuth();
+  const { isLoggedIn, login, logout, user } = useAuth();
   // console.log(isLoggedIn, user);
-  
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -42,8 +43,9 @@ const { isLoggedIn, login, logout, user } = useAuth();
         {/* Conditionally render different buttons based on the isLoggedIn state */}
         {isLoggedIn ? (
           <>
-            {/* When the user is logged in */}
-            <button>MY Profile</button>
+          
+            <DropDownUser />
+
             <button
               onClick={() => handleLogout()}
               className="btn btn-outline btn-primary"
@@ -55,18 +57,15 @@ const { isLoggedIn, login, logout, user } = useAuth();
           <>
             {/* When the user is NOT logged in */}
             <button
-              onClick={()=>document.getElementById('login_modal').showModal()}
+              onClick={() => document.getElementById("login_modal").showModal()}
               className="btn btn-outline btn-primary hover:text-white"
             >
               Log in
             </button>
 
             <LoginModal />
-          
-            <button
-              className="btn btn-primary text-white"
-              onClick={openModal}
-            >
+
+            <button className="btn btn-primary text-white" onClick={openModal}>
               Register
             </button>
           </>
