@@ -8,9 +8,11 @@ const ItemList = () => {
   const [items, setItems] = useState([]);
   const [projects, setProjects] = useState([]);
   const [userInfo, setuserInfo] = useState([]);
-  const { isLoggedIn, user, setUser } = useAuth();
+  const { isLoggedIn, setUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [refreshFlag, setRefreshFlag] = useState(false);
+
+  let user = { id: 1 }; // Hardcoded for now
 
   function findIndexById(array, id) {
     for (let i = 0; i < array.length; i++) {
@@ -20,6 +22,7 @@ const ItemList = () => {
     }
     return -1;
   }
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +53,7 @@ const ItemList = () => {
             (key) => likesData[key]
           );
           setItems(transformedData);
+
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -75,13 +79,16 @@ const ItemList = () => {
   };
 
   if (isLoading) {
+
     return <div>Loading...</div>;
+
   }
 
   return (
     <div>
       <div className="grid grid-cols-3 gap-3 m-10">
         {items.map((item) => {
+
           const pID = item.project_id;
           const lID = parseInt(pID);
           let projectIndex = findIndexById(projects.entities, lID);
@@ -108,18 +115,19 @@ const ItemList = () => {
           return (
             <div
               key={item.id}
-              className="w-120 w-20 bg-white rounded-lg shadow-md pb-"
+              className="w-120 h-120 rounded-lg overflow-hidden shadow-lg  bg-white rounded-lg shadow-md"
             >
               <div className="">
                 <button
                   onClick={() => {
                     handleLikeDislike(item.project_id, "dislike");
-                    setRefreshFlag((prevFlag) => !prevFlag); 
+                    setRefreshFlag((prevFlag) => !prevFlag);
                   }}
                 >
                   Unlike
                 </button>
               </div>
+
 
               <a href={`/projects/${item.project_id}`}>
                 <img src={`${
@@ -130,6 +138,7 @@ const ItemList = () => {
                     projects.entities[findIndexById(projects.entities, lID)]
                       .title
                   }
+
                   className="w-full h-40 object-cover object-center rounded-t-lg"
                 />
               </a>
@@ -140,22 +149,25 @@ const ItemList = () => {
                   className="flex items-center"
                 >
                   <img
-                    src={`/public${userInfo[findIndexById(userInfo, user.id)].profile_picture}`} // Use 'project.profile_picture'
-                    alt={projects[findIndexById(projects, lID)].username} // Use 'projects[findIndexById].username' for alt text
+                    src={`/public${
+                      userInfo[findIndexById(userInfo, user.id)].profile_picture
+                    }`} // Use 'project.profile_picture'
+                    // alt={projects[findIndexById(projects, lID)].username} // Use 'projects[findIndexById].username' for alt text
                     className="w-10 h-10 rounded-full object-cover object-center border-2 border-gray-500"
                   ></img>
                   <span className="text-lg font-semibold pl-10 text-black ">
                     <p>
                       {
+
                         projects.entities[findIndexById(projects.entities, lID)].title
+
                       }
                     </p>
                   </span>
                 </a>
                 <div>
-                  <p className="text-sm text-gray-600">
-                  </p>
-                  <p>{userInfo[findIndexById(userInfo, user.id)].username}</p>
+                  <p className="text-sm text-gray-600"></p>
+                  <p>{userInfo[findIndexById(userInfo, lID)].username}</p>
                 </div>
               </div>
             </div>

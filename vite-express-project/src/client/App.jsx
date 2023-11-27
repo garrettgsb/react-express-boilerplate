@@ -4,26 +4,25 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import LandingRoute from "./routes/LandingRoute";
-import MyProfile from "./routes/MyProfileRoute";
 import UserProfile from "./routes/UserProfileRoute";
 import SignupModal from "./components/SignupModal";
 import ProjectProfile from "./routes/ProjectProfileRoute";
 
 import LikedItemsRoute from "./routes/LikedItemsRoute";
 
-import { Projects } from "./components/projects";
+import { EntityList } from "./components/EntityList";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { AuthProvider } from "./hooks/AuthContext";
 import NewProjectFormRoute from "./routes/NewProjectFormRoute";
+import { useTheme } from "./hooks/ThemeContext";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const location = useLocation();
-  const splitLocation = location.pathname.split('/');
-  const path = splitLocation[splitLocation.length - 1]
-  const showFooter = !path.includes('artists') && !path.includes('gigs');
+  const splitLocation = location.pathname.split("/");
+  const path = splitLocation[splitLocation.length - 1];
+  const showFooter = !path.includes("artists") && !path.includes("gigs");
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -34,9 +33,10 @@ function App() {
   };
 
 
-  return (    
-    <>
+  const { theme } = useTheme();
 
+  return (    
+    <div data-theme={theme} className="flex flex-col">
       <NavBar openModal={openModal} />
       <Routes>
         <Route
@@ -46,26 +46,18 @@ function App() {
         />
         {/* <Route exact path="/myprofile" element={<MyProfile />} /> */}
         <Route exact path="/users/:id" element={<UserProfile />} />
-        <Route exact path="/artists" element={<Projects />} />
-        <Route exact path="/gigs" element={<Projects />} />
-        <Route exact path="/project/:id" element={<ProjectProfile />} />
+        <Route exact path="/artists" element={<EntityList />} />
+        <Route exact path="/gigs" element={<EntityList />} />
+        <Route exact path="/projects/:id" element={<ProjectProfile />} />
 
         <Route exact path="/likeditems" element={<LikedItemsRoute />} />
-
-        <Route exact path="/project/new" element={<NewProjectFormRoute />}/>
-
+        <Route exact path="/projects/:projectId/edit" element={<NewProjectFormRoute />} />
+        <Route exact path="/projects/new" element={<NewProjectFormRoute />} />
       </Routes>
-      {/* Footer will be rendered within the Projects component due to the way infinite scroll works */}
+      {/* Footer will be rendered within the EntityList component due to the way infinite scroll works */}
       {showFooter && <Footer />}
       {isModalOpen && <SignupModal isOpen={isModalOpen} onClose={closeModal} />}
-    </>
-
-    // <>
-    //   <NavBar openModal={openModal} />
-    //   <Landing openModal={openModal} />
-    //   <Footer />
-    //
-    // </>
+    </div>
   );
 }
 

@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { locationType, projectType } from "../constants/TypeSelections";
 
 const NewProjectContext = createContext();
 
 export const NewProjectProvider = ({ children }) => {
   const navigate = useNavigate();
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
@@ -16,57 +18,22 @@ export const NewProjectProvider = ({ children }) => {
     image: [],
   });
 
-  const locationType = [
-    { id: 1, name: 'Select Location'},
-    { id: 2, name: 'Victoria' },
-    { id: 3, name: 'Oak Bay'},
-    { id: 4, name: 'Saanich'},
-    { id: 5, name: 'View Royal'},
-    { id: 6, name: 'Colwood'},
-    { id: 7, name: 'Highlands'},
-    { id: 8, name: 'Metchosin'},
-    { id: 9, name: 'Sooke'},
-    { id: 10, name: 'Esquimalt'},
-    { id: 11, name: 'Central Saanich'},
-    { id: 12, name: 'North Saanich'},
-    { id: 13, name: 'Sidney'},
-    { id: 14, name: 'Other'},
-  ];
+  const filterTypes = (types, query) => {
+    return query === ''
+      ? types
+      : types.filter(type => 
+          type.name.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
+        );
+  };
 
   const [selectedLocation, setSelectedLocation] = useState(locationType[0]);
   const [locationTypeQuery, setLocationTypeQuery] = useState('');
-  const filteredLocationType =
-    locationTypeQuery === ''
-      ? locationType
-      : locationType.filter((locationType) =>
-          locationType.name
-            .toLowerCase()
-            .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, ''))
-        )
-
-  const projectType = [
-    { id: 1, name: 'Select Type' },
-    { id: 2, name: 'Mural Painting' },
-    { id: 3, name: 'Visual Art' },
-    { id: 4, name: 'Music Events' },
-    { id: 5, name: 'Art Education' },
-    { id: 6, name: 'Festivals/Events' },
-    { id: 7, name: 'Other' },
-  ]
   
   const [selectedProject, setSelectedProject] = useState(projectType[0]);
   const [projectTypeQuery, setProjectTypeQuery] = useState('');
 
-  const filteredProjectType =
-    projectTypeQuery === ''
-      ? projectType
-      : projectType.filter((projectType) =>
-          projectType.name
-            .toLowerCase()
-            .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, ''))
-        )
+  const filteredLocationType = filterTypes(locationType, locationTypeQuery);
+  const filteredProjectType = filterTypes(projectType, projectTypeQuery);
 
   // Set State project name
   const handleInputChange = (e) => {
@@ -102,41 +69,62 @@ export const NewProjectProvider = ({ children }) => {
   const handleLocationTypeForm = (type) => {
     setFormData({
       ...formData,
-      locationType: type,
+      location: type,
     });
   };
 
   // Submit Form
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, projectId) => {
     e.preventDefault();
-
+  
     const budgetInCents = formData.budget * 100;
 
-    const data = new FormData();
-    data.append("title", formData.projectName);
-    data.append("description", formData.description);
-    data.append("budget", budgetInCents);
-    data.append("location", formData.location);
-    data.append("type", formData.projectType);
-    data.append("image", formData.image);
-
+    const data = {
+      title: formData.projectName,
+      description: formData.description,
+      budget: budgetInCents,
+      location: formData.location,
+      type: formData.projectType,
+      images: formData.image,
+    };  
+  
     try {
-      const response = await fetch("/api/projects", {
-        method: "POST",
-        body: data,
-      });
+      let response;
+      // If in edit mode, perform a PATCH
+      // If not in edit mode, perform a POST request
+      const requestOptions = {
+        method: isEditMode ? "PATCH" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      };
+
+      if (isEditMode) {
+        response = await fetch(`/api/projects/${projectId}`, requestOptions);
+      } else {
+        response = await fetch("/api/projects", requestOptions);
+      }
 
       if (response.ok) {
         console.log("Project submitted successfully");
-        
-        // after form submission it will redirect to landing page for now
-        navigate("/");
+        navigate(`/gigs`);
       } else {
         console.error("Error submitting project");
       }
     } catch (error) {
       console.error("Error submitting project:", error);
     }
+  };
+  
+  const handleProjectTypeSelect = (value) => {
+    setSelectedProject(value);
+    handleProjectTypeForm(value.name);
+  };
+
+  const handleLocationTypeSelect = (value) => {
+    setSelectedLocation(value);
+    handleLocationTypeForm(value.name);
   };
 
   const value = {
@@ -150,18 +138,20 @@ export const NewProjectProvider = ({ children }) => {
 
     handleProjectTypeForm,
     selectedProject,
-    setSelectedProject,
     filteredProjectType,
     projectTypeQuery,
     setProjectTypeQuery,
 
     handleLocationTypeForm,
     selectedLocation,
-    setSelectedLocation,
     filteredLocationType,
     locationTypeQuery,
     setLocationTypeQuery,
 
+    handleProjectTypeSelect,
+    handleLocationTypeSelect,
+    isEditMode,
+    setIsEditMode,
   };
   
   return (

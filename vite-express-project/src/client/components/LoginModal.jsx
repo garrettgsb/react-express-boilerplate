@@ -2,7 +2,7 @@ import { useAuth } from "../hooks/AuthContext";
 
 const LoginModal = () => {
   const { handleLogin, setEmail, email, password, setPassword, error, resetError } = useAuth();
-  
+
   return (
     /* Login Modal */
     <dialog id="login_modal" className="modal">
@@ -12,8 +12,8 @@ const LoginModal = () => {
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             onClick={() => resetError()}>✕</button>
         </form>
-        <h3 className="font-bold text-lg font-heading">Welcome Back!</h3>
-        {error && <div className="text-red-500 font-subHeading">{error}</div>}
+        <h3 className="font-bold text-xl font-heading">Welcome Back!</h3>
+        {error && <div className="text-error font-subHeading">{error}</div>}
         <div className="form-control w-full max-w-xs m-4">
           <input
             type="text"
@@ -22,8 +22,7 @@ const LoginModal = () => {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              resetError();
-            }}
+              resetError();}}
           />
         </div>
         <div className="form-control w-full max-w-xs m-4">
@@ -34,12 +33,12 @@ const LoginModal = () => {
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
-              resetError();
-              }} />
+              resetError();}} />
         </div>
         <button
           onClick={() => handleLogin()}
-          className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded-sm"
+          // className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded-sm"
+          className="btn btn-primary text-white"
         >
           Log in
         </button>
