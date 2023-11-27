@@ -4,8 +4,10 @@ import LoginModal from "./LoginModal";
 import { useNavigate } from "react-router-dom";
 
 export default function NavBar({ openModal }) {
-const { isLoggedIn, login, logout } = useAuth();
-const navigate = useNavigate();
+const { isLoggedIn, login, logout, user } = useAuth();
+  // console.log(isLoggedIn, user);
+  
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
@@ -13,8 +15,8 @@ const navigate = useNavigate();
   };
 
   const menu = [
-    { name: "Find Artists", href: "#" },
-    { name: "Find Gigs", href: "#" },
+    { name: "Find Artists", href: "/artists" },
+    { name: "Find Gigs", href: "/gigs" },
   ];
 
   return (
@@ -34,6 +36,7 @@ const navigate = useNavigate();
         </ul>
       </div>
       <div className="flex space-x-4">
+        
         {/* Conditionally render different buttons based on the isLoggedIn state */}
         {isLoggedIn ? (
           <>

@@ -3,27 +3,28 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "css": "npx tailwindcss -i ./src/client/index.css -o ./dist/output.css --watch",
     "dev": "nodemon src/server/main.js -w src/server",
     "start": "NODE_ENV=production node src/server/main.js",
     "build": "vite build"
   },
   "dependencies": {
-<<<<<<< Updated upstream
-    
-=======
-
->>>>>>> Stashed changes
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@supabase/supabase-js": "^2.38.4",
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.19.0",
+    "react-virtualized-auto-sizer": "^1.0.20",
+    "react-window": "^1.8.9",
+    "react-window-infinite-loader": "^1.0.9",
     "vite-express": "*"
   },
   "devDependencies": {

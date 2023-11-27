@@ -4,7 +4,12 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const session = require('express-session');
 const supabase = require("../config/supabaseClient");
+
 const { handleTableInsertion } = require("./db/databaseHelpers");
+
+const multer  = require('multer');
+const bcrypt = require('bcrypt');
+
 
 // Express app setup
 const app = express();
@@ -12,9 +17,15 @@ const app = express();
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
+  name: 'userCookie',
   secret: '123456',
   resave: false,
-  saveUninitialized: false 
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false, // for development
+    maxAge: 1000 * 60 * 60 * 24, //max age of cookie
+  }, 
 }));
 
 // Route handling
@@ -149,21 +160,21 @@ app.get("/api/projects/:id", async (req, res) => {
   }
 });
 
-app.post("/api/projects", async (req, res) => {
-  try {
-    const { data, error } = await supabase.from("projects").insert(req.body);
+// app.post("/api/projects", async (req, res) => {
+//   try {
+//     const { data, error } = await supabase.from("projects").insert(req.body);
 
-    if (error) {
-      console.error("Supabase Insert Error:", error);
-      throw error;
-    }
+//     if (error) {
+//       console.error("Supabase Insert Error:", error);
+//       throw error;
+//     }
 
-    res.status(200).send("Data sent to Supabase!");
-  } catch (error) {
-    console.error("Server Error:", error);
-    res.status(500).send("Server Error: " + error.message);
-  }
-});
+//     res.status(200).send("Data sent to Supabase!");
+//   } catch (error) {
+//     console.error("Server Error:", error);
+//     res.status(500).send("Server Error: " + error.message);
+//   }
+// });
 
 app.put("/api/projects/:id", async (req, res) => {
   try {
@@ -203,20 +214,57 @@ app.delete("/api/projects/:id", async (req, res) => {
   }
 });
 
+const saltRounds = 10;
+// this must be used for user sign up
+
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userData = { email }
+    console.log('Received data:', { email, password });
 
-    req.session.userId = userData.id;
+    // Query Supabase for the user with the provided email and password
+    const { data: users, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', email);
 
-    res.status(200).json(userData);
+    if (error) {
+      console.error('Supabase error:', error.message);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    if (users.length === 1) {
+      const user = users[0];
+
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (passwordMatch) {
+        req.session.userId = user.id;
+        const userData = { email: user.email };
+        res.status(200).json(userData);
+      } else {
+        res.status(401).json({ error: 'Invalid credentials' });
+      }
+    } else {
+      res.status(401).json({ error: 'Invalid credentials' });
+    }
   } catch (error) {
     console.error('Login Error:', error);
-    res.status(500).send('Login Error:' + error.message)
+    res.status(500).json({ error: 'Login Error: ' + error.message });
   }
 });
 
+
+// Check user authentication
+app.get('/api/check-auth', (req, res) => {
+  if (req.session.userId) {
+    res.status(200).json({ authenticated: true, userId: req.session.userId });
+  } else {
+    res.status(401).json({ authenticated: false });
+  }
+});
+
+// Login: SELECT * FROM users WHERE email = 'email'
 app.get('/api/supabase/users', async (req, res) => {
   try {
     const { email } = req.query;
@@ -236,6 +284,7 @@ app.get('/api/supabase/users', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 // Route handling for likes
 
@@ -327,6 +376,98 @@ app.get("/api/likes/:id", async (req, res) => {
   }
 }
 );
+
+
+// Set up multer storage and upload
+// Uploaded image is saved in 'public/uploads folder'
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+// Function to check if the uploaded file is an image
+function isImage(file) {
+  const allowedExtensions = ['.jpg', '.jpeg', '.png'];
+  const fileExtension = path.extname(file.originalname).toLowerCase();
+  return allowedExtensions.includes(fileExtension);
+}
+
+// Serve uploaded file statically
+app.use('/uploads', express.static('public/uploads'));
+
+// Handle project submission with static file upload
+app.post('/api/projects', upload.single('image'), async (req, res) => {
+  try {
+    
+    if (!req.session.userId) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+    
+    const {
+      title,
+      description,
+      type,
+      budget,
+      location,
+    } = req.body;
+
+    const employer_id = req.session.userId;
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+
+    // artist id is set to 0 as default for now
+    const { data, error } = await supabase
+      .from('projects')
+      .upsert([
+        {
+          title,
+          description,
+          type,
+          budget,
+          location,
+          images: imageUrl ? [imageUrl] : [], 
+          employer_id,
+          artist_id: 0,
+        },
+      ]);
+
+    if (error) {
+      console.error('Supabase error:', error.message);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    console.error('Project submission error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/api/logout', (req, res) => {
+  try {
+    // Clear the session on the server side
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Session destruction error:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+
+      // Clear the client-side cookie
+      res.clearCookie('userCookie'); // Replace with your actual cookie name
+      
+      // Respond with a success message
+      res.status(200).json({ success: true });
+    });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 // Start server

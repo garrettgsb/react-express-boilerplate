@@ -21,40 +21,6 @@ const ItemList = () => {
     return -1;
   }
 
-<<<<<<< Updated upstream
-  useEffect(
-    () => {
-      const fetchData = async () => {
-        setIsLoading(true);
-        try {
-          const projectsResponse = await fetch(`/api/projects`);
-          const projectsData = await projectsResponse.json();
-          setProjects(projectsData);
-          console.log(projectsData);
-
-          const userInfoResponse = await fetch(`/user`);
-          const userInfoData = await userInfoResponse.json();
-          setuserInfo(userInfoData);
-          const transformedData = Object.keys(userInfoData).map(
-            (key) => userInfoData[key]);
-          setuserInfo(transformedData);
-          console.log(userInfoData);
-          const likesResponse = await fetch(`/api/likes/${user.id}`);
-          const likesData = await likesResponse.json();
-          if (Array.isArray(likesData)) {
-            setItems(likesData);
-            console.log(likesData);
-          } else {
-            const transformedData = Object.keys(likesData).map(
-              (key) => likesData[key]
-            );
-            setItems(transformedData);
-          }
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        } finally {
-          setIsLoading(false);
-=======
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -84,7 +50,6 @@ const ItemList = () => {
             (key) => likesData[key]
           );
           setItems(transformedData);
->>>>>>> Stashed changes
         }
       } catch (error) {
         console.error("Error fetching data:", error);
