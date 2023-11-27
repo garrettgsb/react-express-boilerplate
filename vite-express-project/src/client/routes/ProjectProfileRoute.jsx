@@ -36,7 +36,7 @@ export default function ProjectProfile() {
   }, [id]);
 
   return (
-    <div className="mb-64">
+    <div className="mb-48">
       <div className="mt-10 flex flex-col items-center justify-center md:flex-row md:items-start">
         <div className="m-5 w-1/2 overflow-hidden border border-gray-300 drop-shadow-3xl rounded-3xl">
           <img
@@ -46,8 +46,8 @@ export default function ProjectProfile() {
           />
         </div>
 
-        <div className="flex flex-col justify-start md:mt-20 md:ml-16">
-          <header className="font-heading text-3xl text-primary ">
+        <div className="flex flex-col justify-start h-full w-72">
+          <header className="mt-10 font-heading text-3xl text-primary ">
           {project.title}
           </header>
           <main className="flex">
