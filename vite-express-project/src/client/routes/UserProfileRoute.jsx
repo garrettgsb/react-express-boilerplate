@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../hooks/AuthContext";
 import { useUserProfile } from "../hooks/useUserProfile";
+import { LoadingIndicator } from "../components/EntityList/LoadingIndicator";
 
 function convertRate(cents) {
   const dollars = cents / 100;
@@ -10,36 +11,10 @@ function convertRate(cents) {
 
 export default function UserProfile() {
   const { id } = useParams();
-  const { isLoggedIn, user, setUser } = useAuth();
+  const { isLoggedIn, user, setUser, loggedInUser } = useAuth();
   const [editing, setEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({});
   const { fetchUser, updateUser } = useUserProfile(id, setUser);
-
-  // Move to useUserProfile hook
-  // useEffect(() => {
-  //   // console.log("Fetching user data for id:", id);
-  //   const fetchUser = async () => {
-  //     try {
-  //       const response = await fetch(`/api/users/${id}`);
-  //       if (!response.ok) {
-  //         console.error(`Failed to fetch user with id ${id}`);
-  //         return;
-  //       }
-
-  //       const data = await response.json();
-  //       if (data.length === 0) {
-  //         console.error(`No user found with id ${id}`);
-  //         return;
-  //       }
-
-  //       setUser(data[0]);
-  //       // console.log("User data:", data[0]);
-  //     } catch (error) {
-  //       console.error("Error fetching user:", error);
-  //     }
-  //   };
-  //   fetchUser();
-  // }, [id, setUser]);
 
   useUserProfile(id, setUser);
 
@@ -73,20 +48,21 @@ export default function UserProfile() {
   if (!user) {
     console.warn("Loading");
     return (
-      <>
-        <p className="font-subHeading text-3xl">Loading</p>
-        <span className="loading loading-spinner loading-lg"></span>
-      </>
+      <div className="h-96 m-60">
+        <p className="m-10 font-subHeading text-3xl">Loading</p>
+        <LoadingIndicator />
+      </div>
+      
     );
   }
 
   return (
-    <div className="m-10 flex flex-col justify-center">
-      {isLoggedIn && user && (
-        <header className="font-subHeading text-xl text-accent flex justify-between px-5 py-10">
+    <div className="m-16 flex flex-col justify-center">
+      {isLoggedIn && loggedInUser && user.id === loggedInUser.id && (
+        <header className="font-subHeading text-xl text-accent flex justify-around px-5 py-10">
           My Profile
           <button
-            className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded"
+            className="btn btn-primary btn-outline"
             onClick={() => {
               setEditing(true);
             }}
@@ -169,20 +145,21 @@ export default function UserProfile() {
         </div>
       </main>
 
-      <h2 className="font-heading text-2xl m-5 pt-5">My Projects</h2>
-
-      <div className="carousel rounded-box">
-        {user &&
-          user.images.map((image, index) => (
-            <div className="carousel-item" key={image}>
-              <img
-                src={image}
-                alt={`Image ${index + 1}`}
-                className="w-72 h-72"
-              />
-            </div>
-          ))}
-      </div>
+      <section>
+        <h2 className="font-heading text-2xl m-5 pt-5">My Projects</h2>
+          <div className="carousel rounded-box w-3/4">
+            {user &&
+              user.images.map((image, index) => (
+                <div className="carousel-item" key={image}>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className="w-72 h-72"
+                  />
+                </div>
+              ))}
+          </div>
+      </section>
     </div>
   );
 }
