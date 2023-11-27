@@ -78,7 +78,8 @@ export const AuthProvider = ({ children }) => {
         method: 'POST',
         credentials: 'include',
       });
-  
+      setEmail('');
+      setPassword('');
       setIsLoggedIn(false);
       setUser(null);
     } catch (error) {

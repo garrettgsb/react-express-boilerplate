@@ -36,11 +36,12 @@ const LoginModal = () => {
     /* Login Modal */
     <dialog id="login_modal" className="modal">
       <div className="modal-box flex flex-col items-center justify-center">
-        <form method="dialog" onSubmit={handleSubmit}>
+        <form method="dialog">
           <button
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            onClick={() => resetError()}>✕</button>
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              onClick={() => resetError()}>✕</button>
         </form>
+      
         <h3 className="font-bold text-xl font-heading">Welcome Back!</h3>
         {error && <div className="text-error font-subHeading">{error}</div>}
         <div className="form-control w-full max-w-xs m-4">
@@ -64,13 +65,15 @@ const LoginModal = () => {
               setPassword(e.target.value);
               resetError();}} />
         </div>
-        <button
-          // onClick={() => handleLogin()}
-          type="submit"
-          className="btn btn-primary text-white"
-        >
-          Log in
-        </button>
+        <form method="dialog" onSubmit={handleSubmit}>
+          <button
+            type="submit"
+            className="btn btn-primary text-white"
+            >
+           Log in
+          </button>
+        </form>
+       
       </div>
     </dialog>
   );
