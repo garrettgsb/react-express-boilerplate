@@ -8,7 +8,7 @@ function convertRate(cents) {
   const dollars = cents / 100;
   return dollars.toFixed(2);
 }
-
+//test
 export default function UserProfile() {
   const { id } = useParams();
   const { isLoggedIn, user, setUser, loggedInUser } = useAuth();
