@@ -6,6 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -44,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   
         if (response.ok) {
           const userData = await response.json();
-          setUser(userData);
+          setLoggedInUser(userData);
           setIsLoggedIn(true);
         } else {
           setIsLoggedIn(false);
@@ -52,7 +53,7 @@ export const AuthProvider = ({ children }) => {
         }
       } else {
         setIsLoggedIn(false);
-        setUser(null);
+        setLoggedInUser(null);
       }
   
       setIsLoading(false);
@@ -68,7 +69,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     setIsLoggedIn(true);
-    setUser(userData || null);
+    setLoggedInUser(userData || null);
   };
 
   // Log out is updated to delete cookie session 
@@ -81,7 +82,7 @@ export const AuthProvider = ({ children }) => {
       setEmail('');
       setPassword('');
       setIsLoggedIn(false);
-      setUser(null);
+      setLoggedInUser(null);
     } catch (error) {
       console.error('Logout error:', error);
     }
@@ -152,6 +153,8 @@ export const AuthProvider = ({ children }) => {
     resetError,
     isLoading,
     checkAuthentication,
+    loggedInUser,
+    setLoggedInUser
   };
 
   return (
