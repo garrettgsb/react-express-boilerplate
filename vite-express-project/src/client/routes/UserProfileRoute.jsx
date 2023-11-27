@@ -83,10 +83,10 @@ export default function UserProfile() {
   return (
     <div className="m-10 flex flex-col justify-center">
       {isLoggedIn && user && (
-        <header className="font-subHeading text-xl text-accent flex justify-between px-5 py-10">
+        <header className="font-subHeading text-xl text-accent flex justify-around px-5 py-10">
           My Profile
           <button
-            className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded"
+            className="btn btn-primary btn-outline"
             onClick={() => {
               setEditing(true);
             }}
@@ -182,6 +182,7 @@ export default function UserProfile() {
               />
             </div>
           ))}
+        
       </div>
     </div>
   );

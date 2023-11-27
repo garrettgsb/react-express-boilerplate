@@ -1,13 +1,42 @@
 import { useAuth } from "../hooks/AuthContext";
+import { useEffect } from "react";
 
 const LoginModal = () => {
   const { handleLogin, setEmail, email, password, setPassword, error, resetError } = useAuth();
+  
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleLogin();
+      }
+    };
+
+    const loginModalElement = document.getElementById('login_modal');
+    
+    //mount event listner keypress to login with enter
+    if (loginModalElement) {
+      loginModalElement.addEventListener('keypress', handleKeyPress);
+    }
+    
+    //cleanup the event listner to avoid memory leaks
+    return () => {
+      if (loginModalElement) {
+        loginModalElement.removeEventListener('keypress', handleKeyPress);
+      }
+    };
+  }, [handleLogin]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin();
+  };
 
   return (
     /* Login Modal */
     <dialog id="login_modal" className="modal">
       <div className="modal-box flex flex-col items-center justify-center">
-        <form method="dialog">
+        <form method="dialog" onSubmit={handleSubmit}>
           <button
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             onClick={() => resetError()}>✕</button>
@@ -36,8 +65,8 @@ const LoginModal = () => {
               resetError();}} />
         </div>
         <button
-          onClick={() => handleLogin()}
-          // className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded-sm"
+          // onClick={() => handleLogin()}
+          type="submit"
           className="btn btn-primary text-white"
         >
           Log in
