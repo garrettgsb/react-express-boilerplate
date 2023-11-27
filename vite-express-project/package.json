@@ -9,8 +9,6 @@
     "build": "vite build"
   },
   "dependencies": {
-
-    "@esbuild/darwin-x64": "^0.19.5",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@supabase/supabase-js": "^2.38.4",
