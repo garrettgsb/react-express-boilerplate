@@ -38,7 +38,7 @@ export default function ProjectProfile() {
   return (
     <div className="mb-48">
       <div className="mt-10 flex flex-col items-center justify-center md:flex-row md:items-start">
-        <div className="m-5 w-1/2 overflow-hidden border border-gray-300 drop-shadow-3xl rounded-3xl">
+        <div className="m-5 w-1/3 h-full overflow-hidden border border-gray-300 drop-shadow-3xl rounded-3xl">
           <img
             src="/public/images/art_4.jpg" //change to project.image when ready
             alt={`${project.title} image`}
@@ -46,14 +46,14 @@ export default function ProjectProfile() {
           />
         </div>
 
-        <div className="flex flex-col justify-start h-full w-72">
-          <header className="mt-10 font-heading text-3xl text-primary ">
+        <div className="flex flex-col justify-start h-full w-72 m-10">
+          <header className="mt-5 font-heading text-3xl text-primary ">
           {project.title}
           </header>
           <main className="flex">
             <div className="m-5">
               
-              <div className="flex flex-row items-center m-5">
+              <div className="flex flex-row items-center">
                 <img
                   src="/public/images/art_6.jpg"
                   className="w-24 h-24 rounded-full object-cover border-2 border-gray-300 m-5"
@@ -62,11 +62,12 @@ export default function ProjectProfile() {
                   Posted by {project.employer_id}
                 </p>
               </div>
-
-              <div className="flex flex-col items-start">
-                <span>Project Type: {project.type}</span>
-                <span>Location: {project.location}</span>
-                <span>Budget: ${convertRate(project.budget)}</span>
+              <div className="flex justify-center">
+                <div className="flex flex-col items-start">
+                  <span>Project Type: {project.type}</span>
+                  <span>Location: {project.location}</span>
+                  <span>Budget: ${convertRate(project.budget)}</span>
+                </div>
               </div>
               
             </div>
