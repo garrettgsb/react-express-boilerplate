@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../hooks/AuthContext";
 import { useUserProfile } from "../hooks/useUserProfile";
-import Loading from "../components/Loadindg";
+import { LoadingIndicator } from "../components/EntityList/LoadingIndicator";
 
 function convertRate(cents) {
   const dollars = cents / 100;
@@ -15,7 +15,6 @@ export default function UserProfile() {
   const [editing, setEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({});
   const { fetchUser, updateUser } = useUserProfile(id, setUser);
-  const [users, setUsers] = useState([]);
 
   useUserProfile(id, setUser);
 
@@ -49,7 +48,11 @@ export default function UserProfile() {
   if (!user) {
     console.warn("Loading");
     return (
-      <Loading />
+      <div className="h-96 m-60">
+        <p className="m-10 font-subHeading text-3xl">Loading</p>
+        <LoadingIndicator />
+      </div>
+      
     );
   }
 

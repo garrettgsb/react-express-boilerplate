@@ -159,11 +159,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {isLoading ? (
-        <div className="m-20">Loading...</div>
-      ) : (
-        children
-      )}
+      {children}
     </AuthContext.Provider>
   );
 };
