@@ -2,34 +2,21 @@ import { useAuth } from "../hooks/AuthContext";
 import { useEffect } from "react";
 
 const LoginModal = () => {
-  const { handleLogin, setEmail, email, password, setPassword, error, resetError } = useAuth();
-  
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        handleLogin();
-      }
-    };
+  const {
+    handleLogin,
+    setEmail,
+    email,
+    password,
+    setPassword,
+    error,
+    resetError,
+  } = useAuth();
 
-    const loginModalElement = document.getElementById('login_modal');
-    
-    //mount event listner keypress to login with enter
-    if (loginModalElement) {
-      loginModalElement.addEventListener('keypress', handleKeyPress);
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleLogin();
     }
-    
-    //cleanup the event listner to avoid memory leaks
-    return () => {
-      if (loginModalElement) {
-        loginModalElement.removeEventListener('keypress', handleKeyPress);
-      }
-    };
-  }, [handleLogin]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleLogin();
   };
 
   return (
@@ -38,8 +25,11 @@ const LoginModal = () => {
       <div className="modal-box flex flex-col items-center justify-center">
         <form method="dialog">
           <button
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              onClick={() => resetError()}>✕</button>
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={() => resetError()}
+          >
+            ✕
+          </button>
         </form>
       
         <h3 className="font-bold text-xl font-heading">Welcome Back!</h3>
@@ -52,7 +42,8 @@ const LoginModal = () => {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              resetError();}}
+              resetError();
+            }}
           />
         </div>
         <div className="form-control w-full max-w-xs m-4">
@@ -63,9 +54,12 @@ const LoginModal = () => {
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
-              resetError();}} />
+              resetError();
+            }}
+            onKeyUp={handleKeyPress}
+          />
         </div>
-        <form method="dialog" onSubmit={handleSubmit}>
+        <form method="dialog" onSubmit={handleKeyPress}>
           <button
             type="submit"
             className="btn btn-primary text-white"
