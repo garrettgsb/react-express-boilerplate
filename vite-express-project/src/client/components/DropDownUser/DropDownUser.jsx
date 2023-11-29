@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/AuthContext";
 import { useState } from "react";
 
 const DropDownUser = () => {
-  const { user } = useAuth();
+  const { loggedInUser } = useAuth();
   const [isOpen, setIsopen] = useState(false);
 
   const toggleDropdown = () => {
@@ -26,7 +26,7 @@ const DropDownUser = () => {
         <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
           <ul>
             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-              <a href={`/users/${user.id}`}>My Profile</a>
+              <a href={`/users/${loggedInUser.id}`}>My Profile</a>
             </li>
             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
               <a href="/likeditems">My Liked Items</a>
