@@ -47,7 +47,7 @@ export const EntityCard = ({ style, data, isArtists }) => {
                 fontFamily: "'Kalam', cursive"
               }}
             >
-              {data.name}
+              {isArtists ? data.name : data.title}
             </span>
             <span
               className="text-gray-400"
