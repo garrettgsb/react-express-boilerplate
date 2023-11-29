@@ -1,7 +1,22 @@
 import { useAuth } from "../hooks/AuthContext";
 
 const LoginModal = () => {
-  const { handleLogin, setEmail, email, password, setPassword, error, resetError } = useAuth();
+  const {
+    handleLogin,
+    setEmail,
+    email,
+    password,
+    setPassword,
+    error,
+    resetError,
+  } = useAuth();
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleLogin();
+    }
+  };
 
   return (
     /* Login Modal */
@@ -10,7 +25,10 @@ const LoginModal = () => {
         <form method="dialog">
           <button
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            onClick={() => resetError()}>✕</button>
+            onClick={() => resetError()}
+          >
+            ✕
+          </button>
         </form>
         <h3 className="font-bold text-xl font-heading">Welcome Back!</h3>
         {error && <div className="text-error font-subHeading">{error}</div>}
@@ -22,7 +40,8 @@ const LoginModal = () => {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              resetError();}}
+              resetError();
+            }}
           />
         </div>
         <div className="form-control w-full max-w-xs m-4">
@@ -33,7 +52,10 @@ const LoginModal = () => {
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
-              resetError();}} />
+              resetError();
+            }}
+            onKeyUp={handleKeyPress}
+          />
         </div>
         <button
           onClick={() => handleLogin()}

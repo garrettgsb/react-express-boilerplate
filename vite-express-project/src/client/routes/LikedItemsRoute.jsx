@@ -23,49 +23,47 @@ const ItemList = () => {
     return -1;
   }
 
-  useEffect(
-    () => {
-      const fetchData = async () => {
-        setIsLoading(true);
-        try {
-          const projectsResponse = await fetch(
-            `/api/projects?offset=0&limit=100000&sort_attributes=title:asc`
-          );
-          const projectsData = await projectsResponse.json();
-          setProjects(projectsData);
-          // console.log(projectsData);
 
-          const userInfoResponse = await fetch(`/user`);
-          const userInfoData = await userInfoResponse.json();
-          setuserInfo(userInfoData);
-          const transformedData = Object.keys(userInfoData).map(
-            (key) => userInfoData[key]
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const projectsResponse = await fetch(
+          `/api/projects?offset=0&limit=100000`
+        );
+        const projectsData = await projectsResponse.json();
+        setProjects(projectsData);
+        // console.log(projectsData);
+
+        const userInfoResponse = await fetch(`/user`);
+        const userInfoData = await userInfoResponse.json();
+        setuserInfo(userInfoData);
+        const transformedData = Object.keys(userInfoData).map(
+          (key) => userInfoData[key]
+        );
+        setuserInfo(transformedData);
+        // console.log(userInfoData);
+        const likesResponse = await fetch(`/api/likes/${user.id}`);
+        const likesData = await likesResponse.json();
+        if (Array.isArray(likesData)) {
+          setItems(likesData);
+          // console.log(likesData);
+        } else {
+          const transformedData = Object.keys(likesData).map(
+            (key) => likesData[key]
           );
-          setuserInfo(transformedData);
-          console.log(userInfoData);
-          const likesResponse = await fetch(`/api/likes/${user.id}`);
-          const likesData = await likesResponse.json();
-          if (Array.isArray(likesData)) {
-            setItems(likesData);
-            // console.log(likesData);
-          } else {
-            const transformedData = Object.keys(likesData).map(
-              (key) => likesData[key]
-            );
-            setItems(transformedData);
-          }
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        } finally {
-          setIsLoading(false);
+          setItems(transformedData);
+
         }
-      };
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-      fetchData();
-    },
-    [id, refreshFlag],
-    1000
-  );
+    fetchData();
+  }, [id, refreshFlag]);
 
   const handleLikeDislike = async (projectID, action) => {
     setIsLoading(true);
@@ -81,37 +79,38 @@ const ItemList = () => {
   };
 
   if (isLoading) {
-    return;
+
+    return <div>Loading...</div>;
+
   }
 
   return (
     <div>
       <div className="grid grid-cols-3 gap-3 m-10">
         {items.map((item) => {
-          const projectIndex = findIndexById(
-            projects,
-            JSON.stringify(item.project_id)
-          );
-          const project = projects[projectIndex];
+
           const pID = item.project_id;
           const lID = parseInt(pID);
-          // console.log(`Project_id: ${lID}`);
-          // console.log(
-          //   `projectIndex output: ${findIndexById(userInfo, user.id)}`
-          // );
-          // console.log(`items output: ${JSON.stringify(items)}`);
-          // console.log(`projects output: ${JSON.stringify(projects)}`);
-          console.log(
-            `projects output: ${JSON.stringify(
-              userInfo[findIndexById(userInfo, lID)].username
-            )}`
-          );
+          let projectIndex = findIndexById(projects.entities, lID);
+          var projectImage = projects.entities[projectIndex];
 
-          console.log(
-            `project entities list ${JSON.stringify(
-              findIndexById(userInfo, lID)
-            )}`
-          );
+          // console.log(projectIndex);
+          // console.log(projectImage);
+          // console.log(projects);
+          // console.log(item);
+          // console.log(
+          //   projects.entities[projectIndex].images[0]);
+
+
+            //   `${JSON.stringify(
+            //   projects.entities[projectIndex].images[0]
+            // ).replace(/\"/g, "")}`
+
+            console.log(projects.entities[findIndexById(projects.entities, lID)].images[0]);
+
+
+
+
 
           return (
             <div
@@ -129,23 +128,24 @@ const ItemList = () => {
                 </button>
               </div>
 
-              <a href={`/project/${item.project_id}`}>
-                <img
-                  src={`/public${
-                    projects.entities[findIndexById(projects.entities, lID)]
-                      .images
-                  }`}
+
+              <a href={`/projects/${item.project_id}`}>
+                <img src={`${
+                     projects.entities[findIndexById(projects.entities, lID)].images[0]
+                   }`}
+
                   alt={
                     projects.entities[findIndexById(projects.entities, lID)]
                       .title
-                  } // Use 'project.title' for alt text
+                  }
+
                   className="w-full h-40 object-cover object-center rounded-t-lg"
                 />
               </a>
 
               <div className="p-4 flex flex-col items-start">
                 <a
-                  href={`/project/${item.project_id}`}
+                  href={`/projects/${item.project_id}`}
                   className="flex items-center"
                 >
                   <img
@@ -158,8 +158,9 @@ const ItemList = () => {
                   <span className="text-lg font-semibold pl-10 text-black ">
                     <p>
                       {
-                        projects.entities[findIndexById(projects.entities, lID)]
-                          .title
+
+                        projects.entities[findIndexById(projects.entities, lID)].title
+
                       }
                     </p>
                   </span>
