@@ -85,14 +85,6 @@ export const EntityList = () => {
 
   return (
     <>
-      {/* to override root's bottom padding */}
-      <style>
-        {`
-          #root {
-            padding-bottom: 0 !important;
-          }
-        `}
-      </style>
       <Header title={title} />
       <div
         className="w-full overflow-hidden"
