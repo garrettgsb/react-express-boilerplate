@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../hooks/AuthContext";
 import { useUserProfile } from "../hooks/useUserProfile";
 import { LoadingIndicator } from "../components/EntityList/LoadingIndicator";
+import ImageCarousel from "../components/ImageCarousel";
 
 function convertRate(cents) {
   const dollars = cents / 100;
@@ -57,9 +58,9 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="m-16 flex flex-col justify-center">
+    <div className="m-10 flex flex-col justify-center">
       {isLoggedIn && loggedInUser && user.id === loggedInUser.id && (
-        <header className="font-subHeading text-xl text-accent flex justify-around px-5 py-10">
+        <header className="font-subHeading text-xl text-accent flex justify-around items-center px-5 pb-5">
           My Profile
           <button
             className="btn btn-primary btn-outline"
@@ -145,20 +146,9 @@ export default function UserProfile() {
         </div>
       </main>
 
-      <section>
+      <section className="flex flex-col justify-center items-center">
         <h2 className="font-heading text-2xl m-5 pt-5">My Projects</h2>
-          <div className="carousel rounded-box w-3/4">
-            {user &&
-              user.images.map((image, index) => (
-                <div className="carousel-item" key={image}>
-                  <img
-                    src={image}
-                    alt={`Image ${index + 1}`}
-                    className="w-72 h-72"
-                  />
-                </div>
-              ))}
-          </div>
+        {user && <ImageCarousel images={user.images}/>}
       </section>
     </div>
   );

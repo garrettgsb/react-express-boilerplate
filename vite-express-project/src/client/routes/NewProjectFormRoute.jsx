@@ -29,7 +29,7 @@ export default function NewProjectFormRoute() {
     isEditMode,
   } = useNewProject();
 
-  const { user, checkAuthentication, isLoading } = useAuth();
+  const { loggedInUser, checkAuthentication, isLoading } = useAuth();
   const { projectId } = useParams();
 
   useEffect(() => {
@@ -42,32 +42,34 @@ export default function NewProjectFormRoute() {
     fetchData();
   }, [checkAuthentication]);
 
-  const employer_id = user ? user.id : null;
+  const employer_id = loggedInUser ? loggedInUser.id : null;
 
   if (isLoading) {
     return <div className="m-20">Loading...</div>;
   };
 
-  if (!user) {
+  if (!loggedInUser) {
     return (
-      <div className="m-20">
-        <p>You must log in to access this page.</p>
+      <div className="m-36">
+        <p className="text-subHeading ">You must log in to access this page.</p>
       </div>
     );
   };
 
   return (
-    <div className="m-5 mb-72">
-      <div className="mb-5">
+    <div className="m-5 mb-36">
+      <div className="mb-5 flex flex-col justify-center items-center">
         <h2 className="text-xl font-subHeading text-secondary">
           {isEditMode ? ( <>Edit Project</> ) : ( <>Create a New Project</> )}
         </h2>
+        <p className="font-bodyFont w-96 m-7 leading-7">
+        "Whether you're seeking local artistic talent or you're an artist looking for a collaborative buddy,
+        this is the perfect platform to foster connections between artists and the local community!"
+        </p>
       </div>
       <form onSubmit={(e) => handleSubmit(e, projectId, employer_id)}>
         <div className="flex justify-center items-start">
-          
           <div className="relative">
-            
             <label className="border-solid border rounded-lg w-56 h-56 m-5 flex items-center justify-center text-white cursor-pointer relative">
               {!imagePreview && (
                 <input
@@ -160,11 +162,10 @@ export default function NewProjectFormRoute() {
               filteredType={filteredProjectType}
               query={projectTypeQuery}
               setQuery={setProjectTypeQuery} />
-
           </div>
         </div>
         <button className="btn btn-primary text-white" type="submit">
-        {isEditMode ? "Update Project" : "Post Project"}
+          {isEditMode ? "Update Project" : "Post Project"}
         </button>
       </form>
     </div>
