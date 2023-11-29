@@ -6,13 +6,13 @@ import AutoSizer from "react-virtualized-auto-sizer";
 
 import { useEntityFetcher } from './hooks/useEntityFetcher';
 import { getColumnComponent } from './getColumnComponent';
+import { Header } from './Header';
 import {
   ROW_HEIGHT,
   ROW_HEIGHT_LAST,
   ROW_HEIGHT_CURRENT_LAST,
   ROW_HEIGHT_LOADING,
   COLUMN_WIDTH_PADDING,
-  CONTAINER_HEIGHT_PADDING,
   ITEMS_PER_ROW,
   ITEMS_PER_LOAD,
   TITLE_BY_URL,
@@ -20,7 +20,7 @@ import {
 } from './constants';
 
 export const EntityList = () => {
-  const [navBottom, setNavBottom] = useState(0);
+  const [headerBottom, setHeaderBottom] = useState(0);
   const location = useLocation();
   const { pathname } = location;
   const splitPath = pathname.split("/");
@@ -78,9 +78,9 @@ export const EntityList = () => {
   }, [entityByIndex]);
 
   useEffect(() => {
-    const navElement = document.getElementById('entity-list-title');
-    const navRect = navElement.getBoundingClientRect();
-    setNavBottom(navRect.bottom);
+    const headerElement = document.getElementById('entity-list-header');
+    const navRect = headerElement.getBoundingClientRect();
+    setHeaderBottom(navRect.bottom);
   }, []);
 
   return (
@@ -93,16 +93,11 @@ export const EntityList = () => {
           }
         `}
       </style>
-      <h1
-        id="entity-list-title"
-        className="pt-9 font-subHeading text-lg font-semibold leading-6 text-accent hover:text-accentHover pb-4"
-      >
-        {title} in your area
-      </h1>
+      <Header title={title} />
       <div
         className="w-full overflow-hidden"
         style={{
-          height: `calc(100vh - ${navBottom}px`
+          height: `calc(100vh - ${headerBottom}px`
         }}
       >
         <AutoSizer>
