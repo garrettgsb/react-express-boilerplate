@@ -6,3 +6,12 @@ export const getEntityCardRandomePosition = () => {
 
   return `rotate(${rotate}deg) translate(${x}px, ${y}px)`;
 };
+
+export const buildQueryParams = (url, params) => {
+  const queryParams = Object.entries(params)
+    .filter(([_, value]) => value !== undefined)
+    .map(([field, value]) => `${field}=${value}`)
+    .join('&');
+
+  return `${url}?${queryParams}`;
+};

@@ -3,7 +3,7 @@ import {
   ITEMS_PER_LOAD,
   API_BY_URL
 } from '../constants.js';
-import { getEntityCardRandomePosition } from '../utils.js';
+import { getEntityCardRandomePosition, buildQueryParams } from '../utils.js';
 
 const defaultState = {
   entityByIndex: {},
@@ -18,7 +18,7 @@ export const useEntityFetcher = ({ url: _url }) => {
 
   const url = API_BY_URL[_url]
 
-  const fetchEntities = useCallback(async (offset) => {
+  const fetchEntities = useCallback(async (offset, { sortAttribute, sortDirection } = {}) => {
     let timeout;
 
     await new Promise((resolve) => {
@@ -26,7 +26,7 @@ export const useEntityFetcher = ({ url: _url }) => {
       // it will not be enough to demonstrate the loading state without this delay.
       timeout = setTimeout(resolve, (Math.random() * 10000 % 1000) + 1000);
     }).then(() => {
-        fetch(`${url}?offset=${offset}&limit=${ITEMS_PER_LOAD}`)
+        fetch(buildQueryParams(url, { offset, limit: ITEMS_PER_LOAD, sort_attribute: sortAttribute, sort_direction: sortDirection }))
           .then((res) => res.json())
           .then((data) => {
             const { entities, totalCount } = data;

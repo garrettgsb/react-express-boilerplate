@@ -28,3 +28,15 @@ export const API_BY_URL = {
   [URL_ARTISTS]: API_ARTISTS,
   [URL_GIGS]: API_GIGS
 };
+
+export const SORT_ATTRIBUTE = {
+  NAME: 'name',
+  TITLE: 'title',
+  LOCATION: 'location',
+  WAGE: 'wage'
+};
+
+export const SORT_DIRECTION = {
+  ASC: 'asc',
+  DESC: 'desc'
+};

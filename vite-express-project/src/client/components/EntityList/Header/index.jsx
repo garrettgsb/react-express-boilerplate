@@ -1,3 +1,5 @@
+import { SortOptions } from './SortOptions';
+
 export const Header = ({ title }) => {
   return (
     <>
@@ -20,7 +22,7 @@ export const Header = ({ title }) => {
           {title} in your area
         </h1>
         <aside>
-          Sorting/filtering options will be here
+          <SortOptions />
         </aside>
       </header>
     </>

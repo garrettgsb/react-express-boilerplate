@@ -4,13 +4,24 @@ const supabase = require("../../config/supabaseClient");
 const { handleTableInsertion } = require("../db/databaseHelpers");
 
 router.get('/', async (req, res) => {
-  const { offset, limit, sort_attributes } = req.query;
+  const {
+    offset: _offset,
+    limit: _limit,
+    // default
+    sort_attribute = 'id',
+    sort_direction = 'asc'
+  } = req.query;
+
+  // query params come in as strings. conver them into numbers when necessary
+  const offset = Number(_offset) || 0;
+  const limit = Number(_limit) || 0;
 
   try {
     const { data, count, error } = await supabase
       .from("users")
-      .select("id, name, profile_picture, location", offset === '0' ? { count: 'exact' } : undefined)
-      .range(offset, offset + limit);
+      .select("id, name, profile_picture, location", offset === 0 ? { count: 'exact' } : undefined)
+      .range(offset, offset + limit)
+      .order(sort_attribute, { ascending: sort_direction === 'asc' });
 
     if (error) {
       throw error;
