@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
     const { data, count, error } = await supabase
       .from("projects")
       .select(
-        "id, title, images, type, budget, employer_id",
+        "id, title, images, type, budget, location, employer_id",
         offset === 0 ? { count: "exact" } : undefined
       )
       .filter('type', selectedTypeIds.length ? 'in' : 'not.in', `(${selectedTypeIds.join(',')})`)
