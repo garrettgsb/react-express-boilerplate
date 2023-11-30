@@ -1,13 +1,52 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import { useAuth } from "../../hooks/AuthContext";
-import { useState } from "react";
 
 const DropDownUser = () => {
-  const { loggedInUser } = useAuth();
+  const { isLoggedIn, loggedInUser, user } = useAuth();
   const [isOpen, setIsopen] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [isLoadingPicture, setIsLoadingPicture] = useState(false);
 
   const toggleDropdown = () => {
     setIsopen(!isOpen);
+  };
+
+  useEffect(() => {
+    const fetchProfilePicture = async () => {
+      try {
+        setIsLoadingPicture(true);
+        const img = new Image();
+        img.onload = () => {
+          setProfilePicture(user.profile_picture);
+          setIsLoadingPicture(false);
+        };
+        img.onerror = () => {
+          setIsLoadingPicture(false);
+        };
+        img.src = user.profile_picture;
+      } catch (error) {
+        console.error("Error loading profile picture:", error);
+        setIsLoadingPicture(false);
+      }
+    };
+
+    if (
+      isLoggedIn &&
+      user &&
+      user.profile_picture &&
+      !profilePicture &&
+      !isLoadingPicture
+    ) {
+      fetchProfilePicture();
+    }
+  }, [isLoggedIn, user, profilePicture, isLoadingPicture]);
+
+  const defaultProfilePicture = "../public/images/Default-User.png";
+
+  const profilePictureStyle = {
+    backgroundImage: `url('${profilePicture || defaultProfilePicture}')`,
+    backgroundPosition: "50% 25%",
+    backgroundSize: "300%",
   };
 
   return (
@@ -16,11 +55,7 @@ const DropDownUser = () => {
         onClick={toggleDropdown}
         type="button"
         className="inline-flex justify-center w-12 h-12 bg-gray-500 text-white rounded-full focus:outline-none"
-        style={{
-          backgroundImage: `url('http://localhost:3000/images/user_1.jpg')`,
-          backgroundPosition: "50% 25%",
-          backgroundSize: "300%",
-        }}
+        style={profilePictureStyle}
       ></button>
       {isOpen && (
         <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
