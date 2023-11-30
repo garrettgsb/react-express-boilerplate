@@ -75,3 +75,24 @@ export const SORT_ATTRIBUTE_BY_URL = {
   [URL_ARTISTS]: artistsSortAttributes,
   [URL_GIGS]: gigsSortAttributes
 };
+
+export const WAGE_MIN = 0;
+export const WAGE_MAX = 251;
+export const BUDGET_MIN = 0;
+export const BUDGET_MAX = 5001;
+
+export const DEFAULT_LABEL_BY_URL = {
+  [URL_ARTISTS]: 'WAGE',
+  [URL_GIGS]: 'BUDGET'
+};
+
+export const PRICE_BY_URL = {
+  [URL_ARTISTS]: {
+    min: WAGE_MIN,
+    max: WAGE_MAX
+  },
+  [URL_GIGS]: {
+    min: BUDGET_MIN,
+    max: BUDGET_MAX
+  }
+};

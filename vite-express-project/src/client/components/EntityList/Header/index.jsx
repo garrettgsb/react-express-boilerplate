@@ -1,4 +1,5 @@
 import { SortOptions } from './SortOptions';
+import { FilterOptions } from './FilterOptions';
 import { TITLE_BY_URL } from '../constants';
 
 export const Header = ({ url }) => {
@@ -23,8 +24,9 @@ export const Header = ({ url }) => {
         >
           {title} in your area
         </h1>
-        <aside>
+        <aside className="flex gap-5 justify-center">
           <SortOptions url={url} />
+          <FilterOptions url={url} />
         </aside>
       </header>
     </>

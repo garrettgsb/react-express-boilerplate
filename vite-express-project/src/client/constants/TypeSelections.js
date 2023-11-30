@@ -31,6 +31,6 @@ export const artistType = [
   { id: 3, name: 'Musician'},
   { id: 4, name: 'Photographer'},
   { id: 5, name: 'Entertainer'},
-  { id: 6, name: 'Children Entertainer'},
+  { id: 6, name: "Children's Entertainer"},
   { id: 7, name: 'Other'},
 ];

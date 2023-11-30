@@ -18,7 +18,7 @@ export const SortOptions = ({ url }) => {
   }, []);
 
   return (
-    <div className="flex justify-between">
+    <div className="flex">
       <div className="dropdown">
         <button
           className="btn btn-sm flex items-center mr-1"
