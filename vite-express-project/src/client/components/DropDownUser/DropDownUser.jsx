@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/AuthContext";
 import { useState } from "react";
 
 const DropDownUser = () => {
-  const { loggedInUser } = useAuth();
+  const { loggedInUser, user } = useAuth();
   const [isOpen, setIsopen] = useState(false);
 
   const toggleDropdown = () => {
@@ -17,7 +17,7 @@ const DropDownUser = () => {
         type="button"
         className="inline-flex justify-center w-12 h-12 bg-gray-500 text-white rounded-full focus:outline-none"
         style={{
-          backgroundImage: `url('http://localhost:3000/images/user_1.jpg')`,
+          backgroundImage: `url('${user.profile_picture}')`,
           backgroundPosition: "50% 25%",
           backgroundSize: "300%",
         }}
