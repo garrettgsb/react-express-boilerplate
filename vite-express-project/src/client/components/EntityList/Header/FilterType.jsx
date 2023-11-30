@@ -53,11 +53,13 @@ export const FilterType = ({ url, setFilterOptions }) => {
               className="filter-controller btn btn-sm btn-block btn-ghost justify-start"
               onClick={handleClick}
             >
-              <input
+              <div
                 type="checkbox"
-                className="w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                checked={checkedById[id]}
-                readOnly
+                className={
+                  checkedById[id]
+                    ? "w-3 h-3 text-blue-600 bg-blue-100 border-blue-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 focus:ring-2 dark:bg-blue-700 dark:border-blue-600"
+                    : "w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                }
               />
               {id === 1 ? 'All' : name}
             </button>
