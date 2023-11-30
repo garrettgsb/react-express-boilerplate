@@ -3,6 +3,7 @@ import { VariableSizeGrid } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import AutoSizer from "react-virtualized-auto-sizer";
 import { useEntityContext } from './EntityListContext';
+import { FooterWrapper } from './FooterWrapper';
 
 import { getColumnComponent } from './getColumnComponent';
 import { Header } from './Header';
@@ -104,8 +105,6 @@ export const EntityTable = ({ url }) => {
     setHeaderBottom(navRect.bottom);
   }, []);
 
-  console.log(!isFetching && totalCount === 0);
-
   return (
     <>
       <Header url={url} />
@@ -124,6 +123,7 @@ export const EntityTable = ({ url }) => {
                   <p className="mt-20">
                     No results found.
                   </p>
+                  <FooterWrapper style={{ position: 'absolute', bottom: 0, transform: 'translateX(-50%)' }}/>
                 </div>
               )
             : (

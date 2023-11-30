@@ -28,6 +28,6 @@ export const getColumnComponent = ({
     : isLoadingRow && isFirstColumn && isFetching && (isInitial || !isLoadedAll)
     ? <LoadingIndicator style={style} />
     : isFooterRow && isFirstColumn && currentCount !== 0
-    ? <FooterWrapper style={style} />
+    ? <FooterWrapper style={{ ...style, left: '50%', transform: 'translate(-50%)', width: '50%'}} />
     : null;    
 };

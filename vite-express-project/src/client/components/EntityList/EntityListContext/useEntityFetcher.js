@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   ITEMS_PER_LOAD,
-  API_BY_URL
+  API_BY_URL,
+  URL_ARTISTS
 } from '../constants.js';
 import { getEntityCardRandomePosition, buildQueryParams } from '../utils.js';
+import { projectType } from '../../../constants/TypeSelections.js';
 
 const defaultState = {
   entityByIndex: {},
@@ -30,7 +32,8 @@ export const useEntityFetcher = ({ url: _url, sortAttribute, sortDirection, sele
         sort_direction: sortDirection,
         selected_type_ids:
           Object.keys(selectedTypeById)
-            .filter((id) => id !== '1' && !!selectedTypeById[id]),
+            .filter((id) => id !== '1' && !!selectedTypeById[id])
+            .map((id) => _url === URL_ARTISTS ? id : projectType[id].name),
         value_under: valueUnder
       };
 
