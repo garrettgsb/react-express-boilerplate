@@ -137,7 +137,9 @@ export const EntityCard = ({ style, data, isArtists }) => {
           </div>
           <aside className="flex pr-5 justify-end items-center">
             {/* this is only place holder */}
-            {isLoggedIn &&
+
+            {!isArtists &&
+              isLoggedIn &&
               (liked ? (
                 <button onClick={handleDislike}>♥️</button>
               ) : (
