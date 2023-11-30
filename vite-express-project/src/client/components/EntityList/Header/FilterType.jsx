@@ -57,7 +57,7 @@ export const FilterType = ({ url, setFilterOptions }) => {
                 type="checkbox"
                 className={
                   checkedById[id]
-                    ? "w-3 h-3 text-blue-600 bg-blue-100 border-blue-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 focus:ring-2 dark:bg-blue-700 dark:border-blue-600"
+                    ? "w-3 h-3 text-blue-500 bg-blue-100 border-blue-300 rounded focus:ring-blue-500 dark:focus:ring-blue-500 dark:ring-offset-blue-500 focus:ring-2 dark:bg-blue-500 dark:border-blue-500"
                     : "w-3 h-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 }
               />
