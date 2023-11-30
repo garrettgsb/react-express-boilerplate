@@ -5,7 +5,7 @@ import { PRICE_BY_URL } from '../constants';
 export const useFilterOptions = ({ url }) => {
   const [filterOptions, _setFilterOptions] = useState({
     selectedTypeById: { '1': true },
-    valueUnder: PRICE_BY_URL[url].max
+    valueUnder: PRICE_BY_URL[url].max * 100
   });
 
   const setFilterOptions = useCallback(({ selectedTypeById, valueUnder }) => {

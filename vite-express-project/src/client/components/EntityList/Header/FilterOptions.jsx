@@ -12,8 +12,9 @@ export const FilterOptions = ({ url }) => {
         setFilterOptions={setFilterOptions}
       />
       <FilterWage
-        valueUnder={valueUnder}
         url={url}
+        valueUnder={valueUnder}
+        setFilterOptions={setFilterOptions}
       />
     </div>
   )

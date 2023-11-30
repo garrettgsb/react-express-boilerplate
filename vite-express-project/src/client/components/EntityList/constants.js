@@ -76,9 +76,9 @@ export const SORT_ATTRIBUTE_BY_URL = {
   [URL_GIGS]: gigsSortAttributes
 };
 
-export const WAGE_MIN = 0;
+export const WAGE_MIN = 10;
 export const WAGE_MAX = 251;
-export const BUDGET_MIN = 0;
+export const BUDGET_MIN = 100;
 export const BUDGET_MAX = 5001;
 
 export const DEFAULT_LABEL_BY_URL = {

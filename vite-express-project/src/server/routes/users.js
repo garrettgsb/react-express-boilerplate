@@ -56,21 +56,22 @@ router.get('/', async (req, res) => {
     sort_attribute = 'id',
     sort_direction = 'asc',
     selected_type_ids = [],
-    valueUnder = 1000000, // default just to include everything when not given
+    value_under: _value_under, // default just to include everything when not given
   } = req.query;
 
   // query params come in as strings. conver them into numbers when necessary
   const offset = Number(_offset) || 0;
   const limit = Number(_limit) || 0;
+  const value_under = Number(_value_under) || 1000000;
 
   const selectedTypeIds = typeof selected_type_ids === 'string' ? [selected_type_ids] : selected_type_ids;
 
   try {
     const { data, count, error } = await supabase
       .from("users")
-      .select("id, name, profile_picture, location", offset === 0 ? { count: 'exact' } : undefined)
+      .select("id, name, profile_picture, location, artist_type, wage", offset === 0 ? { count: 'exact' } : undefined)
       .filter('artist_type', selectedTypeIds.length ? 'in' : 'not.in', `(${selectedTypeIds.join(',')})`)
-      .filter('wage', 'lt', valueUnder === 251 ? 10000000 : valueUnder)
+      .filter('wage', 'lt', value_under === 25100 ? 10000000 : value_under)
       .range(offset, offset + limit)
       .order(sort_attribute, { ascending: sort_direction === 'asc' });
 
