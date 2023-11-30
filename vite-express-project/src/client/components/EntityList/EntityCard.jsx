@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { TypeIcon } from './TypeIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 
 const entityCardStyle = {
@@ -65,7 +67,7 @@ export const EntityCard = ({ style, data, isArtists }) => {
           </div>
           <aside className="flex justify-end items-center">
             {/* this is only place holder */}
-            👍
+            <FontAwesomeIcon icon={faHeart} color={Math.random() > 0.5 ? 'red' : 'gray'}/>
           </aside>
         </footer>
       </div>
