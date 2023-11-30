@@ -17,6 +17,7 @@ const polaroidStyle = {
 
 export const EntityCard = ({ style, data, isArtists }) => {
   const navigate = useNavigate();
+  const displayName = isArtists ? data.name : data.title;
 
   return (
     <div
@@ -54,7 +55,7 @@ export const EntityCard = ({ style, data, isArtists }) => {
                 fontFamily: "'Kalam', cursive"
               }}
             >
-              {isArtists ? data.name : data.title}
+              {displayName}
             </span>
             <span
               className="text-gray-400 truncate"
@@ -67,7 +68,7 @@ export const EntityCard = ({ style, data, isArtists }) => {
           </div>
           <aside className="flex justify-end items-center">
             {/* this is only place holder */}
-            <FontAwesomeIcon icon={faHeart} color={Math.random() > 0.5 ? 'red' : 'gray'}/>
+            <FontAwesomeIcon icon={faHeart} color={displayName.length > 12 ? 'red' : 'gray'}/>
           </aside>
         </footer>
       </div>
