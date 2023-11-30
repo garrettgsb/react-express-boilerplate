@@ -1,12 +1,16 @@
 import React, { createContext, useContext } from "react";
 import { useEntityFetcher } from './useEntityFetcher';
 import { useSortOptions } from './useSortOptions';
+import { useFilterOptions } from './useFilterOptions';
 
 const EntityContext = createContext();
 
 export const EntityContextProvider = ({ url, children }) => {
   /* ------------------------------ Sort options ------------------------------ */
   const { sortAttribute, sortDirection, setSortOptions } = useSortOptions({ url });
+
+  /* ----------------------------- Filter options ----------------------------- */
+  const { selectedTypeById, valueUnder, setFilterOptions } = useFilterOptions({ url });
 
   /* ------------------------------ Fetching data ----------------------------- */
   const {
@@ -16,7 +20,13 @@ export const EntityContextProvider = ({ url, children }) => {
     isInitial,
     totalCount,
     fetchEntities
-  } = useEntityFetcher({ url, sortAttribute, sortDirection });
+  } = useEntityFetcher({
+    url,
+    sortAttribute,
+    sortDirection,
+    selectedTypeById,
+    valueUnder
+  });
 
 
   return (
@@ -33,7 +43,12 @@ export const EntityContextProvider = ({ url, children }) => {
         // sort options
         sortAttribute,
         sortDirection,
-        setSortOptions
+        setSortOptions,
+
+        // filter options
+        selectedTypeById,
+        valueUnder,
+        setFilterOptions 
       }}
     >
       {children}

@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react';
 import { PRICE_BY_URL, DEFAULT_LABEL_BY_URL } from '../constants';
 
-export const FilterWage = ({ url }) => {
-  const [value, setValue] = useState(PRICE_BY_URL[url].max);
+export const FilterWage = ({ valueUnder, url }) => {
+  const [value, setValue] = useState(valueUnder);
 
   const handleChange = useCallback((event) => {
     setValue(Number(event.target.value));
@@ -14,7 +14,7 @@ export const FilterWage = ({ url }) => {
         className="btn btn-sm flex items-center mr-1 w-44"
       >
         {value === PRICE_BY_URL[url].max
-          ? `ALL ${DEFAULT_LABEL_BY_URL[url]}S`
+          ? `${DEFAULT_LABEL_BY_URL[url]}`
           : `${DEFAULT_LABEL_BY_URL[url]}S UP TO $${value}`
         }
       </button>

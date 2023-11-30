@@ -10,8 +10,26 @@ export const getEntityCardRandomePosition = () => {
 export const buildQueryParams = (url, params) => {
   const queryParams = Object.entries(params)
     .filter(([_, value]) => value !== undefined)
-    .map(([field, value]) => `${field}=${value}`)
+    .map(([field, value]) => {
+      if (Array.isArray(value)) {
+        return value.map((v) => `${field}=${encodeURIComponent(v)}`).join('&');
+      }
+
+      return `${field}=${value}`
+    })
     .join('&');
 
   return `${url}?${queryParams}`;
+};
+
+export const debounce = (func, delay) => {
+  let timeoutId;
+
+  return (...args) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
 };

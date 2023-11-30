@@ -7,25 +7,31 @@ const TYPES_BY_URL = {
   [URL_GIGS]: projectType,
 };
 
-export const FilterType = ({ url }) => {
-  const [checkedById, setCheckedById] = useState(
-    TYPES_BY_URL[url].reduce((acc, { id }) => {
-      acc[id] = true;
-      return acc;
-    }, {})
-  );
+export const FilterType = ({ url, setFilterOptions }) => {
+  const [checkedById, setUnCheckedById] = useState({ '1': true })
 
-  // omit 'Select Type'
-  const list = useMemo(() => {
-    const [_, ...types] = TYPES_BY_URL[url];
-
-    return types;
-  }, [url]);
+  const list = useMemo(() => TYPES_BY_URL[url], [url]);
 
   const handleClick = useCallback((event) => {
+    const [_, ...types] = list;
     const { id } = event.target;
-    setCheckedById((prev) => ({ ...prev, [id]: !prev[id] }));
-  }, [list]);
+
+    const nextState = { ...checkedById, [id]: !checkedById[id] };
+    const isAllChecked = types.every(({ id }) => nextState[id]);
+
+    // we store selected ids here and in useFilterOptions hook differently
+    // the reason why we have separate states for the same data
+    // is because we want to display checked items right away when user clicks them
+    // but we don't want to fetch data every time user clicks something so we debounce them
+    if (isAllChecked || id === '1') {
+      setFilterOptions({ selectedTypeById: { '1': true } });
+      setUnCheckedById({ '1': true });
+    } else {
+      nextState['1'] = false;
+      setFilterOptions({ selectedTypeById: nextState });
+      setUnCheckedById(nextState);
+    }
+  }, [list, setFilterOptions, checkedById]);
   
   return (
     <div className="dropdown">
@@ -52,7 +58,7 @@ export const FilterType = ({ url }) => {
                 checked={checkedById[id]}
                 readOnly
               />
-              {name}
+              {id === 1 ? 'All' : name}
             </button>
           </li>
         ))}

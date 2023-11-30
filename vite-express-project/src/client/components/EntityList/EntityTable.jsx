@@ -29,7 +29,10 @@ export const EntityTable = ({ url }) => {
     fetchEntities,
     // sorting
     sortAttribute,
-    sortDirection
+    sortDirection,
+    // filtering
+    selectedTypeById,
+    valueUnder
   } = useEntityContext();
 
   const gridRef = useRef(null);
@@ -55,7 +58,15 @@ export const EntityTable = ({ url }) => {
   const loadMoreItems = useCallback(
     (start) => {
       if (!isFetching && !entityByIndex[start] && currentCount < totalCount) {
-        fetchEntities(currentCount, { sortAttribute, sortDirection });
+        fetchEntities(
+          currentCount,
+          { 
+            sortAttribute,
+            sortDirection,
+            selectedTypeById,
+            valueUnder
+          }
+        );
       }
     },
     [
@@ -65,7 +76,9 @@ export const EntityTable = ({ url }) => {
       totalCount,
       fetchEntities,
       sortAttribute,
-      sortDirection
+      sortDirection,
+      selectedTypeById,
+      valueUnder
     ]
   );
 
