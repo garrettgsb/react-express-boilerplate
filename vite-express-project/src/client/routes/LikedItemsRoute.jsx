@@ -4,15 +4,14 @@ import { useParams } from "react-router-dom";
 import likeDislike from "/src/client/hooks/LikeDislike.jsx";
 
 const ItemList = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
   const [items, setItems] = useState([]);
   const [projects, setProjects] = useState([]);
   const [userInfo, setuserInfo] = useState([]);
-  const { isLoggedIn, setUser } = useAuth();
+  const { isLoggedIn, setUser, user } = useAuth([]);
   const [isLoading, setIsLoading] = useState(false);
   const [refreshFlag, setRefreshFlag] = useState(false);
-
-  let user = { id: 1 }; // Hardcoded for now
+  const { id } = 0;
 
   function findIndexById(array, id) {
     for (let i = 0; i < array.length; i++) {
@@ -25,6 +24,9 @@ const ItemList = () => {
 
 
   useEffect(() => {
+
+    console.log("Fetching user data for id:", id);
+
     const fetchData = async () => {
       setIsLoading(true);
       try {
