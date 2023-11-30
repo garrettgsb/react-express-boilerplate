@@ -1,7 +1,13 @@
+
 import { useNavigate } from "react-router-dom";
 import likeDislike from "/src/client/hooks/LikeDislike.jsx";
 import { useAuth } from "../../hooks/AuthContext";
 import { useState, useEffect } from "react";
+
+import { TypeIcon } from './TypeIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
 
 const entityCardStyle = {
   display: "flex",
@@ -16,6 +22,7 @@ const polaroidStyle = {
 
 export const EntityCard = ({ style, data, isArtists }) => {
   const navigate = useNavigate();
+
   const { loggedInUser, isLoggedIn } = useAuth();
   const [items, setItems] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -90,6 +97,9 @@ export const EntityCard = ({ style, data, isArtists }) => {
     }
   };
 
+  const displayName = isArtists ? data.name : data.title;
+
+
   return (
     <div
       className="entity-card-container"
@@ -116,18 +126,21 @@ export const EntityCard = ({ style, data, isArtists }) => {
           }}
           className="w-56 h-56 object-cover"
         />
-        <footer className="flex justify-between w-full">
-          <div className="flex pl-5 flex-col w-8/12">
+        <footer className="flex justify-between w-full pl-4 pr-3">
+          <div className="flex justify-center items-center">
+            <TypeIcon isArtists={isArtists} type={isArtists ? data.artist_type : data.type} />
+          </div>
+          <div className="flex flex-col truncate px-3">
             <span
-              className="text-slate-950"
+              className="text-slate-950 truncate"
               style={{
                 fontFamily: "'Kalam', cursive",
               }}
             >
-              {isArtists ? data.name : data.title}
+              {displayName}
             </span>
             <span
-              className="text-gray-400"
+              className="text-gray-400 truncate"
               style={{
                 fontFamily: "'Kalam', cursive",
               }}
@@ -135,7 +148,7 @@ export const EntityCard = ({ style, data, isArtists }) => {
               {data.location}
             </span>
           </div>
-          <aside className="flex pr-5 justify-end items-center">
+          <aside className="flex justify-end items-center">
             {/* this is only place holder */}
 
             {!isArtists &&
@@ -145,6 +158,9 @@ export const EntityCard = ({ style, data, isArtists }) => {
               ) : (
                 <button onClick={handleLike}>♡</button>
               ))}
+              
+              {/* <FontAwesomeIcon icon={faHeart} color={displayName.length > 12 ? 'red' : 'gray'}/> */}
+
           </aside>
         </footer>
       </div>

@@ -1,17 +1,7 @@
 import { EntityCard } from './EntityCard';
 import { LoadingIndicator } from './LoadingIndicator';
 import { ITEMS_PER_ROW } from './constants';
-import _Footer from '../Footer';
-
-const Footer = ({ style }) => {
-  return (
-    <div
-      className="footer-wrapper flex items-end justify-center left-1/2"
-      style={{ ...style, left: '50%', transform: 'translate(-50%)', width: '50%'}}>
-      <_Footer />
-    </div>
-  )
-}
+import { FooterWrapper } from './FooterWrapper';
 
 export const getColumnComponent = ({
   currentLastRowIndex,
@@ -38,6 +28,6 @@ export const getColumnComponent = ({
     : isLoadingRow && isFirstColumn && isFetching && (isInitial || !isLoadedAll)
     ? <LoadingIndicator style={style} />
     : isFooterRow && isFirstColumn && currentCount !== 0
-    ? <Footer style={style} />
+    ? <FooterWrapper style={{ ...style, left: '50%', transform: 'translate(-50%)', width: '50%'}} />
     : null;    
 };
