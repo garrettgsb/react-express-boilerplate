@@ -50,7 +50,7 @@ function App() {
         <Route exact path="/gigs" element={<EntityList />} />
         <Route exact path="/projects/:id" element={<ProjectProfile />} />
 
-        <Route exact path="/likeditems" element={<LikedItemsRoute />} />
+        <Route exact path="/likeditems/:userId" element={<LikedItemsRoute />} />
         <Route exact path="/projects/:projectId/edit" element={<NewProjectFormRoute />} />
         <Route exact path="/projects/new" element={<NewProjectFormRoute />} />
       </Routes>
