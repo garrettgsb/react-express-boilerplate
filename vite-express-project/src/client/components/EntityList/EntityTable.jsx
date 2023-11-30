@@ -17,16 +17,19 @@ import {
   URL_ARTISTS
 } from './constants';
 
-export const EntityTable = ({ url, title }) => {
+export const EntityTable = ({ url }) => {
   const [headerBottom, setHeaderBottom] = useState(0);
   const {
+    // fetching data
     entityByIndex,
     currentCount,
     isFetching,
     isInitial,
     totalCount,
-    setIsFetching,
-    fetchEntities
+    fetchEntities,
+    // sorting
+    sortAttribute,
+    sortDirection
   } = useEntityContext();
 
   const gridRef = useRef(null);
@@ -49,12 +52,22 @@ export const EntityTable = ({ url, title }) => {
       : ROW_HEIGHT;
   }, [currentLastRowIndex]);
 
-  const loadMoreItems = useCallback((start) => {
-    if (!isFetching && !entityByIndex[start] && currentCount < totalCount) {
-      setIsFetching();
-      fetchEntities(currentCount);
-    }
-  }, [isFetching, entityByIndex, currentCount, totalCount, fetchEntities, setIsFetching])
+  const loadMoreItems = useCallback(
+    (start) => {
+      if (!isFetching && !entityByIndex[start] && currentCount < totalCount) {
+        fetchEntities(currentCount, { sortAttribute, sortDirection });
+      }
+    },
+    [
+      isFetching,
+      entityByIndex,
+      currentCount,
+      totalCount,
+      fetchEntities,
+      sortAttribute,
+      sortDirection
+    ]
+  );
 
   const isItemLoaded = useCallback((index) => {
     return index < currentCount;
@@ -69,6 +82,9 @@ export const EntityTable = ({ url, title }) => {
     }
   }, [entityByIndex]);
 
+
+  // initially get the header's bottom position so that AutoSizer can calculate
+  // the grid's height to be the full length of the viewport that is below the header
   useEffect(() => {
     const headerElement = document.getElementById('entity-list-header');
     const navRect = headerElement.getBoundingClientRect();
@@ -77,7 +93,7 @@ export const EntityTable = ({ url, title }) => {
 
   return (
     <>
-      <Header title={title} />
+      <Header url={url} />
       <div
         className="w-full overflow-hidden"
         style={{

@@ -13,60 +13,74 @@ const defaultState = {
   totalCount: 0
 }
 
-export const useEntityFetcher = ({ url: _url }) => {
+export const useEntityFetcher = ({ url: _url, sortAttribute, sortDirection }) => {
   const [state, setState] = useState(defaultState);
+  const [fetchTimeout, setFetchTimeout] = useState(null);
 
   const url = API_BY_URL[_url]
 
   const fetchEntities = useCallback(async (offset, { sortAttribute, sortDirection } = {}) => {
-    let timeout;
+    setState((prev) => ({ ...prev, isFetching: true }));
 
-    await new Promise((resolve) => {
-      // to give delays for between 1 and 2 seconds because supabase is too fase.
-      // it will not be enough to demonstrate the loading state without this delay.
-      timeout = setTimeout(resolve, (Math.random() * 10000 % 1000) + 1000);
-    }).then(() => {
-        fetch(buildQueryParams(url, { offset, limit: ITEMS_PER_LOAD, sort_attribute: sortAttribute, sort_direction: sortDirection }))
-          .then((res) => res.json())
-          .then((data) => {
-            const { entities, totalCount } = data;
+    const params = {
+      offset,
+      limit: ITEMS_PER_LOAD,
+      sort_attribute: sortAttribute,
+      sort_direction: sortDirection
+    };
 
-            setState((prev) => ({
-              ...prev,
-              entityByIndex: {
-                ...prev.entityByIndex,
-                ...entities.reduce((entityByIndex, entity, index) => {
-                  entityByIndex[prev.currentCount + index] = {
-                    ...entity,
-                    // to give random position for each entity card.
-                    // it's included in this hook because calling it in the component won't sustain
-                    // the initial position of the card so it will look wobbly when scrolling/lading more items.
-                    transform: getEntityCardRandomePosition()
-                  };
+    try {
+      const { entities, totalCount } =
+        await fetch(buildQueryParams(url, params)).then((res) => res.json());
 
-                  return entityByIndex;
-                }, {})
-              },
-              currentCount: prev.currentCount + entities.length,
-              isFetching: false,
-              ...totalCount ? { totalCount, isInitial: false } : {}
-            }));
-          });
-      }).catch((error) => {
-        console.error("Server Error:", error);
-        setState((prev) => ({ ...prev, isFetching: false }));
-      });
-    
-    return () => clearTimeout(timeout);
+      const timeout = setTimeout(() => {
+        setState((prev) => ({
+          ...prev,
+          entityByIndex: {
+            ...prev.entityByIndex,
+            ...entities.reduce((entityByIndex, entity, index) => {
+              entityByIndex[prev.currentCount + index] = {
+                ...entity,
+                // to give random position for each entity card.
+                // it's included in this hook because calling it in the component won't sustain
+                // the initial position of the card so it will look wobbly when scrolling/lading more items.
+                transform: getEntityCardRandomePosition()
+              };
+  
+              return entityByIndex;
+            }, {})
+          },
+          currentCount: prev.currentCount + entities.length,
+          isFetching: false,
+          ...totalCount ? { totalCount, isInitial: false } : {}
+        }));
+      }, (Math.random() * 10000 % 1000) + 1000);
+
+      setFetchTimeout(timeout);
+    } catch(error) {
+      console.error("Server Error:", error);
+      setState((prev) => ({ ...prev, isFetching: false }));
+    }
   }, [url]);
 
-  const setIsFetching = useCallback(() => {
-    setState((prev) => ({ ...prev, isFetching: true }));
-  }, []);
-
   useEffect(() => {
-    fetchEntities(0);
-  }, [fetchEntities]);
+    // if this is been called, that means there is pending fetch request
+    // clear state update that is set with timeout before loading new data
+    // otherwise it will endup stale data that will mix-up the list
+    setFetchTimeout((prev) => {
+      prev && clearTimeout(prev);
+
+      return null;
+    });
+
+    setState(defaultState);
+    fetchEntities(0, { sortAttribute, sortDirection });
+  }, [sortAttribute, sortDirection]);
+
+  // clear timeout when unmounting
+  useEffect(() => {
+    return fetchTimeout ? () => clearTimeout(fetchTimeout) : undefined;
+  }, []);
 
   return {
     entityByIndex: state.entityByIndex,
@@ -74,7 +88,6 @@ export const useEntityFetcher = ({ url: _url }) => {
     currentCount: state.currentCount,
     totalCount: state.totalCount,
     isInitial: state.isInitial,
-    setIsFetching,
     fetchEntities
   };
 }

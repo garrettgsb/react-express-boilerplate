@@ -1,6 +1,8 @@
 import { SortOptions } from './SortOptions';
+import { TITLE_BY_URL } from '../constants';
 
-export const Header = ({ title }) => {
+export const Header = ({ url }) => {
+  const title = TITLE_BY_URL[url];
   return (
     <>
       {/* to override root's bottom padding */}
@@ -22,7 +24,7 @@ export const Header = ({ title }) => {
           {title} in your area
         </h1>
         <aside>
-          <SortOptions />
+          <SortOptions url={url} />
         </aside>
       </header>
     </>

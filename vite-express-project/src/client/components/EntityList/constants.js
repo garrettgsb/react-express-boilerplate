@@ -33,10 +33,45 @@ export const SORT_ATTRIBUTE = {
   NAME: 'name',
   TITLE: 'title',
   LOCATION: 'location',
-  WAGE: 'wage'
+  WAGE: 'wage',
+  ARTIST_TYPE: 'artist_type',
+  GIG_TYPE: 'type',
+  BUDGET: 'budget',
+  POSTED: 'created_at'
 };
+
+export const SORT_ATTRIBUTE_DISPLAY_NAME = {
+  [SORT_ATTRIBUTE.NAME]: 'NAME',
+  [SORT_ATTRIBUTE.TITLE]: 'TITLE',
+  [SORT_ATTRIBUTE.LOCATION]: 'LOCATION',
+  [SORT_ATTRIBUTE.WAGE]: 'WAGE',
+  [SORT_ATTRIBUTE.ARTIST_TYPE]: 'TYPE',
+  [SORT_ATTRIBUTE.GIG_TYPE]: 'TYPE',
+  [SORT_ATTRIBUTE.BUDGET]: 'BUDGET',
+  [SORT_ATTRIBUTE.POSTED]: 'POSTED'
+}
 
 export const SORT_DIRECTION = {
   ASC: 'asc',
   DESC: 'desc'
+};
+
+export const artistsSortAttributes = [
+  SORT_ATTRIBUTE.NAME,
+  SORT_ATTRIBUTE.LOCATION,
+  SORT_ATTRIBUTE.WAGE,
+  SORT_ATTRIBUTE.ARTIST_TYPE
+];
+
+export const gigsSortAttributes = [
+  SORT_ATTRIBUTE.POSTED,
+  SORT_ATTRIBUTE.TITLE,
+  SORT_ATTRIBUTE.LOCATION,
+  SORT_ATTRIBUTE.BUDGET,
+  SORT_ATTRIBUTE.GIG_TYPE
+];
+
+export const SORT_ATTRIBUTE_BY_URL = {
+  [URL_ARTISTS]: artistsSortAttributes,
+  [URL_GIGS]: gigsSortAttributes
 };

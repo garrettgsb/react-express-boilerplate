@@ -6,7 +6,7 @@ const EntityContext = createContext();
 
 export const EntityContextProvider = ({ url, children }) => {
   /* ------------------------------ Sort options ------------------------------ */
-  const { sortAttribute, sortDirection, setSortOptions } = useSortOptions();
+  const { sortAttribute, sortDirection, setSortOptions } = useSortOptions({ url });
 
   /* ------------------------------ Fetching data ----------------------------- */
   const {
@@ -15,9 +15,8 @@ export const EntityContextProvider = ({ url, children }) => {
     isFetching,
     isInitial,
     totalCount,
-    setIsFetching,
     fetchEntities
-  } = useEntityFetcher({ url });
+  } = useEntityFetcher({ url, sortAttribute, sortDirection });
 
 
   return (
@@ -29,10 +28,12 @@ export const EntityContextProvider = ({ url, children }) => {
         isFetching,
         isInitial,
         totalCount,
-        setIsFetching,
-        fetchEntities
+        fetchEntities,
 
         // sort options
+        sortAttribute,
+        sortDirection,
+        setSortOptions
       }}
     >
       {children}
