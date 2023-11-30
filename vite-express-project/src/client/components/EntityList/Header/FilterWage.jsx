@@ -1,11 +1,13 @@
 import { useState, useCallback } from 'react';
 import { PRICE_BY_URL, DEFAULT_LABEL_BY_URL } from '../constants';
 
-export const FilterWage = ({ valueUnder, url }) => {
-  const [value, setValue] = useState(valueUnder);
+export const FilterWage = ({ url, setFilterOptions }) => {
+  const [value, setValue] = useState(PRICE_BY_URL[url].max);
 
   const handleChange = useCallback((event) => {
-    setValue(Number(event.target.value));
+    const value = Number(event.target.value);
+    setValue(value);
+    setFilterOptions({ valueUnder: value * 100 })
   }, []);
 
   return (

@@ -104,6 +104,8 @@ export const EntityTable = ({ url }) => {
     setHeaderBottom(navRect.bottom);
   }, []);
 
+  console.log(!isFetching && totalCount === 0);
+
   return (
     <>
       <Header url={url} />
@@ -114,48 +116,59 @@ export const EntityTable = ({ url }) => {
         }}
       >
         <AutoSizer>
-          {({ height, width }) => (
-            <InfiniteLoader
-              threshold={Math.ceil(ITEMS_PER_LOAD / 2)}
-              itemCount={totalCount}
-              loadMoreItems={loadMoreItems}
-              isItemLoaded={isItemLoaded}
-            >
-              {({ onItemsRendered, ref }) => (
-                <VariableSizeGrid
-                  className="variable-size-grid"
-                  columnWidth={(_index) =>
-                    // no padding will make it have a horizontal scrollbar
-                    Math.floor(width - COLUMN_WIDTH_PADDING) / ITEMS_PER_ROW
-                  }
-                  rowHeight={getRowHeight}
-                  height={height}
-                  width={width}
-                  columnCount={ITEMS_PER_ROW}
-                  rowCount={currentLastRowIndex + 2} // +1 for loading indicator, +1 for footer
-                  onItemsRendered={({ visibleRowStartIndex, visibleRowStopIndex }) => {
-                    onItemsRendered({
-                      visibleStartIndex: visibleRowStartIndex * ITEMS_PER_ROW,
-                      visibleStopIndex: visibleRowStopIndex * ITEMS_PER_ROW + ITEMS_PER_ROW - 1,
-                    });
-                  }}
-                  itemData={entityByIndex}
-                  ref={(grid) => {
-                    ref(grid);
-                    gridRef.current = grid;
-                  }}
+          {({ height, width }) => (!isFetching && totalCount === 0)
+            ? (
+                <div
+                  style={{ height, width }}
                 >
-                {getColumnComponent({
-                    currentLastRowIndex,
-                    isFetching,
-                    currentCount,
-                    totalCount,
-                    isInitial,
-                    isArtists: url === URL_ARTISTS
-                  })}
-                </VariableSizeGrid>
-              )}
-            </InfiniteLoader>)
+                  <p className="mt-20">
+                    No results found.
+                  </p>
+                </div>
+              )
+            : (
+                <InfiniteLoader
+                threshold={Math.ceil(ITEMS_PER_LOAD / 2)}
+                itemCount={totalCount}
+                loadMoreItems={loadMoreItems}
+                isItemLoaded={isItemLoaded}
+                >
+                  {({ onItemsRendered, ref }) => (
+                    <VariableSizeGrid
+                      className="variable-size-grid"
+                      columnWidth={(_index) =>
+                        // no padding will make it have a horizontal scrollbar
+                        Math.floor(width - COLUMN_WIDTH_PADDING) / ITEMS_PER_ROW
+                      }
+                      rowHeight={getRowHeight}
+                      height={height}
+                      width={width}
+                      columnCount={ITEMS_PER_ROW}
+                      rowCount={currentLastRowIndex + 2} // +1 for loading indicator, +1 for footer
+                      onItemsRendered={({ visibleRowStartIndex, visibleRowStopIndex }) => {
+                        onItemsRendered({
+                          visibleStartIndex: visibleRowStartIndex * ITEMS_PER_ROW,
+                          visibleStopIndex: visibleRowStopIndex * ITEMS_PER_ROW + ITEMS_PER_ROW - 1,
+                        });
+                      }}
+                      itemData={entityByIndex}
+                      ref={(grid) => {
+                        ref(grid);
+                        gridRef.current = grid;
+                      }}
+                    >
+                    {getColumnComponent({
+                        currentLastRowIndex,
+                        isFetching,
+                        currentCount,
+                        totalCount,
+                        isInitial,
+                        isArtists: url === URL_ARTISTS
+                      })}
+                    </VariableSizeGrid>
+                  )}
+                </InfiniteLoader>
+              )
           }
         </AutoSizer>
       </div>
