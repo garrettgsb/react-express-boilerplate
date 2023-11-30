@@ -18,12 +18,13 @@ export const FilterType = ({ url, setFilterOptions }) => {
 
     const nextState = { ...checkedById, [id]: !checkedById[id] };
     const isAllChecked = types.every(({ id }) => nextState[id]);
+    const isNothingChecked = types.every(({ id }) => !nextState[id]);
 
     // we store selected ids here and in useFilterOptions hook differently
     // the reason why we have separate states for the same data
     // is because we want to display checked items right away when user clicks them
     // but we don't want to fetch data every time user clicks something so we debounce them
-    if (isAllChecked || id === '1') {
+    if (isAllChecked || id === '1' || isNothingChecked) {
       setFilterOptions({ selectedTypeById: { '1': true } });
       setUnCheckedById({ '1': true });
     } else {
