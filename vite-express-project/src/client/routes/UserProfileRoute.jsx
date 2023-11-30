@@ -16,16 +16,48 @@ export default function UserProfile() {
   const [editing, setEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({});
   const { fetchUser, updateUser } = useUserProfile(id, setUser);
+  const [file, setFile] = useState([]);
+  const fileLocation = `/uploads/${file.name}`;
 
   useUserProfile(id, setUser);
 
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
   const handleEditSubmit = async () => {
     try {
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("id", user.id);
+      formData.append("file_name", file.name);
+
+      console.log("File out:", file);
+      console.log("Form data:", formData);
+      console.log("File location:", fileLocation);
+      console.log("User:", user);
+      console.log("User id:", user.id);
+
+      const fileUploadResponse = await fetch(`/api/users/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!fileUploadResponse.ok) {
+        console.error("Failed to upload file");
+        return;
+      }
+
+      const fileUploadData = await fileUploadResponse.json();
+      console.log("File upload data:", fileUploadData);
+
       const updatedData = {
         name: editedUser.name || user.name,
         bio: editedUser.bio || user.bio,
         wage: editedUser.wage || user.wage,
-        profile_picture: editedUser.profile_picture || user.profile_picture,
+        profile_picture: file
+          ? fileLocation
+          : editedUser.profile_picture || user.profile_picture,
       };
 
       await updateUser(updatedData);
@@ -53,7 +85,6 @@ export default function UserProfile() {
         <p className="m-10 font-subHeading text-3xl">Loading</p>
         <LoadingIndicator />
       </div>
-      
     );
   }
 
@@ -81,48 +112,59 @@ export default function UserProfile() {
               Edit your profile
             </h1>
             <br />
-            <label
-              htmlFor="name"
-              className="block text-gray-700 text-sm font-bold mb-2"
+            <form
+              action="/api/users/upload"
+              method="post"
+              encType="multipart/form-data"
             >
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={editedUser.name || user.name}
-              placeholder="Name"
-              onChange={handleInputChange}
-            />
-            <label
-              htmlFor="Bio"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Your Bio
-            </label>
-            <textarea
-              name="bio"
-              value={editedUser.bio || user.bio}
-              placeholder="Bio"
-              onChange={handleInputChange}
-              className="h-60"
-            ></textarea>
-            <label
-              htmlFor="wage"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              How Much You Charge Per Hour
-            </label>
-            <input
-              type="number"
-              name="wage"
-              value={editedUser.wage ? editedUser.wage / 100 : ""}
-              placeholder="Wage"
-              onChange={handleInputChange}
-            />
+              <label
+                htmlFor="name"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={editedUser.name || user.name}
+                placeholder="Name"
+                onChange={handleInputChange}
+              />
+
+              <label htmlFor="image">Profile Picture</label>
+              <input type="file" name="image" onChange={handleFileChange} />
+
+              <label
+                htmlFor="Bio"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Your Bio
+              </label>
+              <textarea
+                name="bio"
+                value={editedUser.bio || user.bio}
+                placeholder="Bio"
+                onChange={handleInputChange}
+                className="h-60"
+              ></textarea>
+              <label
+                htmlFor="wage"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                How Much You Charge Per Hour
+              </label>
+              <input
+                type="number"
+                name="wage"
+                value={editedUser.wage ? editedUser.wage / 100 : ""}
+                placeholder="Wage"
+                onChange={handleInputChange}
+              />
+            </form>
             <button
               className="font-subHeading bg-button hover:bg-buttonHover text-white text-lg font-bold py-1 px-4 rounded"
               onClick={handleEditSubmit}
+              type="submit"
             >
               Save
             </button>
@@ -148,7 +190,7 @@ export default function UserProfile() {
 
       <section className="flex flex-col justify-center items-center">
         <h2 className="font-heading text-2xl m-5 pt-5">My Projects</h2>
-        {user && <ImageCarousel images={user.images}/>}
+        {user && <ImageCarousel images={user.images} />}
       </section>
     </div>
   );
