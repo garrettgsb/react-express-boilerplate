@@ -4,14 +4,15 @@ import { useParams } from "react-router-dom";
 import likeDislike from "/src/client/hooks/LikeDislike.jsx";
 
 const ItemList = () => {
-  // const { id } = useParams();
+  const { userId } = useParams();
   const [items, setItems] = useState([]);
   const [projects, setProjects] = useState([]);
   const [userInfo, setuserInfo] = useState([]);
-  const { isLoggedIn, setUser, user } = useAuth([]);
+  const { isLoggedIn, setUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [refreshFlag, setRefreshFlag] = useState(false);
-  const { id } = 0;
+  console.log("User id:", userId);
+  const user = { id: userId };
 
   function findIndexById(array, id) {
     for (let i = 0; i < array.length; i++) {
@@ -22,10 +23,8 @@ const ItemList = () => {
     return -1;
   }
 
-
   useEffect(() => {
-
-    console.log("Fetching user data for id:", id);
+    console.log("Fetching user data for id:", user.id);
 
     const fetchData = async () => {
       setIsLoading(true);
@@ -35,7 +34,7 @@ const ItemList = () => {
         );
         const projectsData = await projectsResponse.json();
         setProjects(projectsData);
-        // console.log(projectsData);
+        console.log(projectsData);
 
         const userInfoResponse = await fetch(`/user`);
         const userInfoData = await userInfoResponse.json();
@@ -44,7 +43,7 @@ const ItemList = () => {
           (key) => userInfoData[key]
         );
         setuserInfo(transformedData);
-        // console.log(userInfoData);
+        console.log(userInfoData);
         const likesResponse = await fetch(`/api/likes/${user.id}`);
         const likesData = await likesResponse.json();
         if (Array.isArray(likesData)) {
@@ -55,7 +54,6 @@ const ItemList = () => {
             (key) => likesData[key]
           );
           setItems(transformedData);
-
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -65,7 +63,7 @@ const ItemList = () => {
     };
 
     fetchData();
-  }, [id, refreshFlag]);
+  }, [refreshFlag]);
 
   const handleLikeDislike = async (projectID, action) => {
     setIsLoading(true);
@@ -81,16 +79,13 @@ const ItemList = () => {
   };
 
   if (isLoading) {
-
     return <div>Loading...</div>;
-
   }
 
   return (
     <div>
       <div className="grid grid-cols-3 gap-3 m-10">
         {items.map((item) => {
-
           const pID = item.project_id;
           const lID = parseInt(pID);
           let projectIndex = findIndexById(projects.entities, lID);
@@ -103,16 +98,13 @@ const ItemList = () => {
           // console.log(
           //   projects.entities[projectIndex].images[0]);
 
+          //   `${JSON.stringify(
+          //   projects.entities[projectIndex].images[0]
+          // ).replace(/\"/g, "")}`
 
-            //   `${JSON.stringify(
-            //   projects.entities[projectIndex].images[0]
-            // ).replace(/\"/g, "")}`
-
-            console.log(projects.entities[findIndexById(projects.entities, lID)].images[0]);
-
-
-
-
+          console.log(
+            projects.entities[findIndexById(projects.entities, lID)].images[0]
+          );
 
           return (
             <div
@@ -130,17 +122,16 @@ const ItemList = () => {
                 </button>
               </div>
 
-
               <a href={`/projects/${item.project_id}`}>
-                <img src={`${
-                     projects.entities[findIndexById(projects.entities, lID)].images[0]
-                   }`}
-
+                <img
+                  src={`${
+                    projects.entities[findIndexById(projects.entities, lID)]
+                      .images[0]
+                  }`}
                   alt={
                     projects.entities[findIndexById(projects.entities, lID)]
                       .title
                   }
-
                   className="w-full h-40 object-cover object-center rounded-t-lg"
                 />
               </a>
@@ -151,18 +142,15 @@ const ItemList = () => {
                   className="flex items-center"
                 >
                   <img
-                    src={`/public${
-                      userInfo[findIndexById(userInfo, user.id)].profile_picture
-                    }`} // Use 'project.profile_picture'
+                    src={`${userInfo[findIndexById(userInfo, lID)].profile_picture}`} // Use 'project.profile_picture'
                     // alt={projects[findIndexById(projects, lID)].username} // Use 'projects[findIndexById].username' for alt text
                     className="w-10 h-10 rounded-full object-cover object-center border-2 border-gray-500"
                   ></img>
                   <span className="text-lg font-semibold pl-10 text-black ">
                     <p>
                       {
-
-                        projects.entities[findIndexById(projects.entities, lID)].title
-
+                        projects.entities[findIndexById(projects.entities, lID)]
+                          .title
                       }
                     </p>
                   </span>

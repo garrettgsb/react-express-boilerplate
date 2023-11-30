@@ -5,8 +5,7 @@ import ThemeController from "./ThemeController";
 import DropDownUser from "./DropDownUser/DropDownUser";
 
 export default function NavBar({ openModal }) {
-  const { isLoggedIn, logout, } = useAuth();
-  // console.log(isLoggedIn, user);
+  const { isLoggedIn, logout, user } = useAuth();
 
   const navigate = useNavigate();
 
