@@ -4,16 +4,26 @@ const supabase = require("../../config/supabaseClient");
 const { upload } = require("./utils");
 
 router.get("/", async (req, res) => {
-  const { offset, limit, sort_attributes } = req.query;
+  const {
+    offset: _offset,
+    limit: _limit,
+    sort_attribute = 'created_at',
+    sort_direction = 'desc'
+  } = req.query;
+
+  // query params come in as strings. conver them into numbers when necessary
+  const offset = Number(_offset) || 0;
+  const limit = Number(_limit) || 0;
 
   try {
     const { data, count, error } = await supabase
       .from("projects")
       .select(
         "id, title, images, employer_id",
-        offset === "0" ? { count: "exact" } : undefined
+        offset === 0 ? { count: "exact" } : undefined
       )
-      .range(offset, offset + limit);
+      .range(offset, offset + limit)
+      .order(sort_attribute, { ascending: sort_direction === 'asc' });
 
     if (error) {
       throw error;
