@@ -119,7 +119,7 @@ export default function UserProfile() {
             >
               <label
                 htmlFor="name"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-700 text-sm font-bold mb-5"
               >
                 Name
               </label>
@@ -131,12 +131,17 @@ export default function UserProfile() {
                 onChange={handleInputChange}
               />
 
-              <label htmlFor="image">Profile Picture</label>
-              <input type="file" name="image" onChange={handleFileChange} />
+              <label
+                htmlFor="image"
+                className="block text-gray-700 text-sm font-bold mb-5"
+              >
+                Profile Picture Upload
+              </label>
+              <input type="file" name="image" className="mb-5 " onChange={handleFileChange} />
 
               <label
                 htmlFor="Bio"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-700 text-sm font-bold mb-5"
               >
                 Your Bio
               </label>
@@ -145,7 +150,7 @@ export default function UserProfile() {
                 value={editedUser.bio || user.bio}
                 placeholder="Bio"
                 onChange={handleInputChange}
-                className="h-60"
+                className="h-60 mb-5"
               ></textarea>
               <label
                 htmlFor="wage"
