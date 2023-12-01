@@ -52,7 +52,7 @@ const DropDownUser = () => {
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left z-50">
       <button
         onClick={toggleDropdown}
         type="button"
