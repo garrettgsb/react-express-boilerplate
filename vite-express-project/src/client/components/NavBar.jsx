@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useAuth } from "../hooks/AuthContext";
 import LoginModal from "./LoginModal";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +15,10 @@ export default function NavBar({ openModal }) {
     navigate("/");
   };
 
+  const handleClickLogo = useCallback(() => {
+    navigate("/");
+  }, [navigate]);
+
   const menu = [
     { name: "Find Artists", href: "/artists" },
     { name: "Find Gigs", href: "/gigs" },
@@ -21,7 +26,12 @@ export default function NavBar({ openModal }) {
 
   return (
     <nav className="flex flex-wrap items-center justify-around p-4">
-      <span className="font-heading text-4xl whitespace-nowrap">LOGO</span>
+      <span
+        className="font-heading text-4xl whitespace-nowrap cursor-pointer"
+        onClick={handleClickLogo}
+      >
+        LOGO
+      </span>
       <div>
         <ul className="flex space-x-6">
           {/* <li>
