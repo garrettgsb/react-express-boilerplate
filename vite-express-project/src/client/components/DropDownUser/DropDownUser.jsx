@@ -1,12 +1,13 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/AuthContext";
 import { Link } from "react-router-dom";
 
 const DropDownUser = () => {
-  const { isLoggedIn, loggedInUser, user } = useAuth();
+  const { isLoggedIn, loggedInUser } = useAuth();
   const [isOpen, setIsopen] = useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
   const [isLoadingPicture, setIsLoadingPicture] = useState(false);
+  const user = loggedInUser;
 
   const toggleDropdown = () => {
     setIsopen(!isOpen);
@@ -41,11 +42,11 @@ const DropDownUser = () => {
       fetchProfilePicture();
     }
   }, [isLoggedIn, user, profilePicture, isLoadingPicture]);
-
+  
   const defaultProfilePicture = "../public/images/Default-User.png";
 
   const profilePictureStyle = {
-    backgroundImage: `url('${profilePicture || defaultProfilePicture}')`,
+    backgroundImage: `url(${profilePicture || defaultProfilePicture})`,
     backgroundPosition: "50% 25%",
     backgroundSize: "300%",
   };
@@ -65,7 +66,7 @@ const DropDownUser = () => {
               <Link to={`/users/${loggedInUser.id}`}>My Profile</Link>
             </li>
             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-            <Link to={`/likeditems/${loggedInUser.id}`}>My Liked Items</Link>
+              <Link to={`/likeditems/${loggedInUser.id}`}>My Liked Items</Link>
             </li>
           </ul>
         </div>
