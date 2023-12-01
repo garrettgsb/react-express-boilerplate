@@ -12,7 +12,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 const entityCardStyle = {
   display: "flex",
   justifyContent: "center",
-  cursor: "pointer",
+  // cursor: "pointer",
   paddingTop: "0.5rem",
 };
 
@@ -30,29 +30,28 @@ export const EntityCard = ({ style, data, isArtists }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const likesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
-        const likesData = await likesResponse.json();
-
-        if (Array.isArray(likesData)) {
-          setItems(likesData);
-          const isLiked = likesData.some((item) => item.id === data.id); // Check if data.id exists in likesData
-          setLiked(isLiked);
-        } else {
-          const transformedData = Object.keys(likesData).map(
-            (key) => likesData[key]
-          );
-          setItems(transformedData);
-          const isLiked = transformedData.some((item) => item.id === data.id); // Check if data.id exists in transformedData
-          setLiked(isLiked);
+        if (loggedInUser) {
+          const likesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
+          const likesData = await likesResponse.json();
+  
+          if (Array.isArray(likesData)) {
+            setItems(likesData);
+            const isLiked = likesData.some((item) => item.id === data.id);
+            setLiked(isLiked);
+          } else {
+            const transformedData = Object.keys(likesData).map((key) => likesData[key]);
+            setItems(transformedData);
+            const isLiked = transformedData.some((item) => item.id === data.id);
+            setLiked(isLiked);
+          }
         }
       } catch (error) {
-        // Handle fetch error
         console.error("Error fetching likes:", error);
       }
     };
-
-    fetchData(); // Call the fetchData function here
-  }, [loggedInUser.id, data.id]);
+  
+    fetchData();
+  }, [loggedInUser, data.id]);
 
   const handleLike = async () => {
     try {
@@ -124,7 +123,7 @@ export const EntityCard = ({ style, data, isArtists }) => {
           onClick={() => {
             navigate(`/${isArtists ? "users" : "projects"}/${data.id}`);
           }}
-          className="w-56 h-56 object-cover"
+          className="w-56 h-56 object-cover cursor-pointer"
         />
         <footer className="flex justify-between w-full pl-4 pr-3">
           <div className="flex justify-center items-center">
