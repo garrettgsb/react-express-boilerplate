@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const supabase = require("../../config/supabaseClient");
-const { handleTableInsertion } = require("../db/databaseHelpers");
+const handleTableInsertion = require("../db/databaseHelpers");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
