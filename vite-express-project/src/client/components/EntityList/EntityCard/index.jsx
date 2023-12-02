@@ -1,13 +1,16 @@
-
 import { useNavigate } from "react-router-dom";
 import likeDislike from "/src/client/hooks/LikeDislike.jsx";
-import { useAuth } from "../../hooks/AuthContext";
+import { useAuth } from "../../../hooks/AuthContext";
 import { useState, useEffect } from "react";
 
-import { TypeIcon } from './TypeIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { Polaroid } from "./Polaroid";
+import { getPortfolioHoverPosition } from '../utils';
+import { useEntityCardHoverEffect } from "./useEntityCardHoverEffect";
+import './EntityCard.css';
 
+const portfolios = [2, 1];
 
 const entityCardStyle = {
   display: "flex",
@@ -16,16 +19,24 @@ const entityCardStyle = {
   paddingTop: "0.5rem",
 };
 
-const polaroidStyle = {
-  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
-};
-
-export const EntityCard = ({ style, data, isArtists }) => {
-  const navigate = useNavigate();
-
+export const EntityCard = ({
+  style,
+  data,
+  isArtists,
+  columnIndex
+}) => {
   const { loggedInUser, isLoggedIn } = useAuth();
   const [items, setItems] = useState(false);
   const [liked, setLiked] = useState(false);
+
+  const navigate = useNavigate();
+
+  const {
+    isHovering,
+    showContent,
+    handleMouseEnter,
+    handleMouseLeave
+  } = useEntityCardHoverEffect();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,71 +109,57 @@ export const EntityCard = ({ style, data, isArtists }) => {
 
   const displayName = isArtists ? data.name : data.title;
 
-
   return (
     <div
-      className="entity-card-container"
-      style={{ ...style, ...entityCardStyle }}
+      className={"entity-card-container" + (isHovering ? " is-hovering" : "")}
+      style={{
+        ...style,
+        ...entityCardStyle
+      }}
     >
-      <div
-        className="entity-image-wrapper w-60 h-72 rounded-md"
-        style={{
-          ...polaroidStyle,
-          transform: data.transform,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          backgroundColor: "#ffffff",
-          paddingTop: "0.5rem",
+      <Polaroid
+        data={data}
+        location={data.location}
+        transform={data.transform}
+        zIndex={isHovering ? 20 : 4}
+        isArtists={isArtists}
+        imgSrc={isArtists ? data.profile_picture : data.images[0]}
+        iconType={isArtists ? data.artist_type : data.type}
+        handleMouseEnter={isArtists ? handleMouseEnter : undefined}
+        handleMouseLeave={isArtists ? handleMouseLeave : undefined}
+        displayName={displayName}
+        handleLike={handleLike}
+        handleDislike={handleDislike}
+        liked={liked}
+        showLikeButton={!isArtists && isLoggedIn}
+        onClickCard={() => {
+          navigate(`/${isArtists ? "users" : "projects"}/${data.id}`);
         }}
-      >
-        <img
-          src={isArtists ? data.profile_picture : data.images[0]}
-          alt={data.title}
-          title={data.title}
-          onClick={() => {
-            navigate(`/${isArtists ? "users" : "projects"}/${data.id}`);
+        isHovering={isHovering}
+        hasBack
+      />
+      {isArtists && portfolios.map((portfolioNumber) => (
+        <div className="overlay-container absolute flex"
+          style={{
+            zIndex: isHovering ? 5 : -10,
+            ...(isHovering ? getPortfolioHoverPosition(portfolioNumber, columnIndex) : { left: '50%', transform: 'translateX(-50%)'}),
+            transition: 'transform 0.2s, left .5s',
+            ...(isHovering ? { transitionDelay: '1s' } : { transitionDelay: '0s'})
           }}
-          className="w-56 h-56 object-cover cursor-pointer"
-        />
-        <footer className="flex justify-between w-full pl-4 pr-3">
-          <div className="flex justify-center items-center">
-            <TypeIcon isArtists={isArtists} type={isArtists ? data.artist_type : data.type} />
-          </div>
-          <div className="flex flex-col truncate px-3">
-            <span
-              className="text-slate-950 truncate"
-              style={{
-                fontFamily: "'Kalam', cursive",
-              }}
-            >
-              {displayName}
-            </span>
-            <span
-              className="text-gray-400 truncate"
-              style={{
-                fontFamily: "'Kalam', cursive",
-              }}
-            >
-              {data.location}
-            </span>
-          </div>
-          <aside className="flex justify-end items-center">
-            {/* this is only place holder */}
-
-            {!isArtists &&
-              isLoggedIn &&
-              (liked ? (
-                <button onClick={handleDislike}>♥️</button>
-              ) : (
-                <button onClick={handleLike}>♡</button>
-              ))}
-              
-              {/* <FontAwesomeIcon icon={faHeart} color={displayName.length > 12 ? 'red' : 'gray'}/> */}
-
-          </aside>
-        </footer>
-      </div>
+          key={portfolioNumber}
+        >
+          <Polaroid 
+            location={data.location}
+            isArtists={isArtists}
+            imgSrc={data.images[portfolioNumber]}
+            transform={data[`overlayTransform${portfolioNumber}`]}
+            displayName={displayName}
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}
+            hideFooter
+          />
+        </div>
+      ))}
     </div>
   );
 };

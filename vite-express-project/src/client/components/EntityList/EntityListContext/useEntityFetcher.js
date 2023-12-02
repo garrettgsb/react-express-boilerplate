@@ -52,7 +52,11 @@ export const useEntityFetcher = ({ url: _url, sortAttribute, sortDirection, sele
                   // to give random position for each entity card.
                   // it's included in this hook because calling it in the component won't sustain
                   // the initial position of the card so it will look wobbly when scrolling/lading more items.
-                  transform: getEntityCardRandomePosition()
+                  transform: getEntityCardRandomePosition(true),
+                  // used for overlay elements
+                  overlayTransform1: getEntityCardRandomePosition(),
+                  overlayTransform2: getEntityCardRandomePosition(),
+                  overlayTransform3: getEntityCardRandomePosition()
                 };
     
                 return entityByIndex;
