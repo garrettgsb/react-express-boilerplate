@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { TypeIcon } from './TypeIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useLikes } from './useLikes';
 
 
 const entityCardStyle = {
@@ -24,78 +25,90 @@ export const EntityCard = ({ style, data, isArtists }) => {
   const navigate = useNavigate();
 
   const { loggedInUser, isLoggedIn } = useAuth();
-  const [items, setItems] = useState(false);
-  const [liked, setLiked] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const likesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
-        const likesData = await likesResponse.json();
 
-        if (Array.isArray(likesData)) {
-          setItems(likesData);
-          const isLiked = likesData.some((item) => item.id === data.id); // Check if data.id exists in likesData
-          setLiked(isLiked);
-        } else {
-          const transformedData = Object.keys(likesData).map(
-            (key) => likesData[key]
-          );
-          setItems(transformedData);
-          const isLiked = transformedData.some((item) => item.id === data.id); // Check if data.id exists in transformedData
-          setLiked(isLiked);
-        }
-      } catch (error) {
-        // Handle fetch error
-        console.error("Error fetching likes:", error);
-      }
-    };
+  const { items, liked, handleLike, handleDislike } = useLikes(isLoggedIn, loggedInUser.id, data);
 
-    fetchData(); // Call the fetchData function here
-  }, [loggedInUser.id, data.id]);
+  //   const fetchLikes = async () => {
+  //     try {
+  //       const updatedLikesResponse = await fetch(
+  //         `/api/likes/${loggedInUser.id}`
+  //       );
+  //       const updatedLikesData = await updatedLikesResponse.json();
 
-  const handleLike = async () => {
-    try {
-      await likeDislike(loggedInUser.id, data.id, "like");
-      const updatedLikesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
-      const updatedLikesData = await updatedLikesResponse.json();
-      if (Array.isArray(updatedLikesData)) {
-        setItems(updatedLikesData);
-        setLiked(true);
-        console.log("like", updatedLikesData);
-      } else {
-        const transformedData = Object.keys(updatedLikesData).map(
-          (key) => updatedLikesData[key]
-        );
-        setItems(transformedData);
-      }
-    } catch (error) {
-      // Handle like error
-      console.error("Error liking item:", error);
-    }
-  };
+  //       let isLiked = false;
 
-  const handleDislike = async () => {
-    try {
-      await likeDislike(loggedInUser.id, data.id, "dislike");
-      const updatedLikesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
-      const updatedLikesData = await updatedLikesResponse.json();
-      if (Array.isArray(updatedLikesData)) {
-        setItems(updatedLikesData);
-        setLiked(false);
+  //       if (Array.isArray(updatedLikesData)) {
+  //         setItems(updatedLikesData);
 
-        console.log("dislike", updatedLikesData);
-      } else {
-        const transformedData = Object.keys(updatedLikesData).map(
-          (key) => updatedLikesData[key]
-        );
-        setItems(transformedData);
-      }
-    } catch (error) {
-      // Handle dislike error
-      console.error("Error disliking item:", error);
-    }
-  };
+  //         isLiked = updatedLikesData.some(
+  //           (item) => item.project_id === String(data.id)
+  //         );
+  //       } else {
+  //         const transformedData = Object.keys(updatedLikesData).map(
+  //           (key) => updatedLikesData[key]
+  //         );
+  //         setItems(transformedData);
+
+  //         isLiked = transformedData.some(
+  //           (item) => item.project_id === String(data.id)
+  //         );
+  //       }
+
+  //       setLiked(isLiked);
+  //     } catch (error) {
+  //       console.error("Error fetching likes:", error);
+  //     }
+  //   };
+  //   useEffect(() => {
+  //   if (isLoggedIn) {
+  //     fetchLikes();
+  //     console.log("fetching likes");
+  //   }
+  // }, [isLoggedIn, loggedInUser.id]);
+
+  // const handleLike = async () => {
+  //   try {
+  //     await likeDislike(loggedInUser.id, data.id, "like");
+  //     const updatedLikesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
+  //     const updatedLikesData = await updatedLikesResponse.json();
+  //     if (Array.isArray(updatedLikesData)) {
+  //       setItems(updatedLikesData);
+  //       setLiked(true);
+  //       console.log("like", updatedLikesData);
+  //     } else {
+  //       const transformedData = Object.keys(updatedLikesData).map(
+  //         (key) => updatedLikesData[key]
+  //       );
+  //       setItems(transformedData);
+  //     }
+  //   } catch (error) {
+  //     // Handle like error
+  //     console.error("Error liking item:", error);
+  //   }
+  // };
+
+  // const handleDislike = async () => {
+  //   try {
+  //     await likeDislike(loggedInUser.id, data.id, "dislike");
+  //     const updatedLikesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
+  //     const updatedLikesData = await updatedLikesResponse.json();
+  //     if (Array.isArray(updatedLikesData)) {
+  //       setItems(updatedLikesData);
+  //       setLiked(false);
+
+  //       console.log("dislike", updatedLikesData);
+  //     } else {
+  //       const transformedData = Object.keys(updatedLikesData).map(
+  //         (key) => updatedLikesData[key]
+  //       );
+  //       setItems(transformedData);
+  //     }
+  //   } catch (error) {
+  //     // Handle dislike error
+  //     console.error("Error disliking item:", error);
+  //   }
+  // };
 
   const displayName = isArtists ? data.name : data.title;
 
