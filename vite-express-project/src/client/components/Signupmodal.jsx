@@ -53,7 +53,12 @@ const SignupModal = ({ isOpen, onClose }) => {
       {/* <div className="fixed inset-0 backdrop-filter backdrop-blur-sm backdrop-brightness-50 backdrop-saturate-150 "></div> */}
       <div className="modal-box relative bg-base-100 p-8 rounded-md">
         <div className="flex justify-end">
-          <button onClick={onClose}>Close</button>
+          <button onClick={()=> {
+            setError(false);
+            onClose();
+            }}>
+            Close
+          </button>
         </div>
         <div className="text-2xl font-bold mb-6 font-heading tracking-wide">
           Sign Up
@@ -75,7 +80,7 @@ const SignupModal = ({ isOpen, onClose }) => {
                 d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
               />
             </svg>
-            <span>This email is already in use</span>
+            <span>Registration failed. Please check your email and password</span>
           </div>
           </div>
           
