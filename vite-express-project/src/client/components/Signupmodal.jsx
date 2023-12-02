@@ -13,38 +13,45 @@ const SignupModal = ({ isOpen, onClose }) => {
     setPassword(e.target.value);
   };
 
+  const sendFormData = async () => {
+    try {
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        onClose(); // Close the modal after successful signup
+      } else {
+        if (response.status === 400) {
+          const errorMessage = await response.text();
+          console.error("Bad Request:", errorMessage);
+          setError(true);
+        }
+        console.error("Signup failed with status:", response.status); // Log the status code
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
+  }; 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const sendFormData = async () => {
-      try {
-        const response = await fetch("/api/users", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
-
-        if (response.ok) {
-          onClose(); // Close the modal after successful signup
-        } else {
-          if (response.status === 400) {
-            const errorMessage = await response.text();
-            console.error("Bad Request:", errorMessage);
-            setError(true);
-          }
-          console.error("Signup failed with status:", response.status); // Log the status code
-        }
-      } catch (error) {
-        console.error("Error during signup:", error);
-      }
-    }; // Closing bracket for sendFormData function
 
     sendFormData(); // Call sendFormData
 
     if (!isOpen) {
       return null;
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendFormData();
     }
   };
 
@@ -98,6 +105,7 @@ const SignupModal = ({ isOpen, onClose }) => {
               className="input input-bordered w-full max-w-xs "
               value={email}
               onChange={handleEmailChange}
+              onKeyDown={handleKeyPress}
               placeholder="Email"
               required
             />
@@ -116,6 +124,7 @@ const SignupModal = ({ isOpen, onClose }) => {
               className="input input-bordered w-full max-w-xs shadow-sm "
               value={password}
               onChange={handlePasswordChange}
+              onKeyDown={handleKeyPress}
               placeholder="Password"
               required
             />
