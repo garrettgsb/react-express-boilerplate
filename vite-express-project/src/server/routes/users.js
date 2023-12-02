@@ -5,6 +5,7 @@ const handleTableInsertion = require("../db/databaseHelpers");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const bcrypt = require('bcrypt');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -111,7 +112,28 @@ router.get("/:id", async (req, res) => {
 
 // Adds a new user to users table in supabase
 router.post("/", async (req, res) => {
-  handleTableInsertion(req, res, supabase, "users");
+  try {
+    console.log("Request Body:", req.body);
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    const requestBodyWithHashedPassword = {
+      ...req.body,
+      password: hashedPassword,
+    };
+
+    const { data, error } = await supabase.from("users").insert(requestBodyWithHashedPassword);
+
+    if (error) {
+      console.error("Supabase Insert Error:", error);
+      throw error;
+    }
+
+    res.status(200).send("Data sent to Supabase!");
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).send("Server Error: " + error.message);
+  }
 });
 
 router.put("/:id", async (req, res) => {
