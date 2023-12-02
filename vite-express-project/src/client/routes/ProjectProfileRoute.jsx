@@ -75,7 +75,8 @@ export default function ProjectProfile() {
                   className="w-24 h-24 rounded-full object-cover border-2 border-gray-300 m-5"
                 />
                 <p className="font-subHeading text-xl text-secondary">
-                  Posted by {users.name}
+                  Posted by <br />
+                  {users.name}
                 </p>
               </div>
               <div className="flex justify-center">
