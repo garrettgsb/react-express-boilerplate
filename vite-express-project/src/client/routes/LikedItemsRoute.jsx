@@ -11,7 +11,6 @@ const ItemList = () => {
   const { isLoggedIn, setUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [refreshFlag, setRefreshFlag] = useState(false);
-  console.log("User id:", userId);
   const user = { id: userId };
 
   function findIndexById(array, id) {
@@ -24,7 +23,6 @@ const ItemList = () => {
   }
 
   useEffect(() => {
-    console.log("Fetching user data for id:", user.id);
 
     const fetchData = async () => {
       setIsLoading(true);
@@ -34,7 +32,6 @@ const ItemList = () => {
         );
         const projectsData = await projectsResponse.json();
         setProjects(projectsData);
-        console.log(projectsData);
 
         const userInfoResponse = await fetch(`/user`);
         const userInfoData = await userInfoResponse.json();
@@ -43,7 +40,6 @@ const ItemList = () => {
           (key) => userInfoData[key]
         );
         setuserInfo(transformedData);
-        console.log(userInfoData);
         const likesResponse = await fetch(`/api/likes/${user.id}`);
         const likesData = await likesResponse.json();
         if (Array.isArray(likesData)) {
@@ -91,20 +87,6 @@ const ItemList = () => {
           let projectIndex = findIndexById(projects.entities, lID);
           var projectImage = projects.entities[projectIndex];
 
-          // console.log(projectIndex);
-          // console.log(projectImage);
-          // console.log(projects);
-          // console.log(item);
-          // console.log(
-          //   projects.entities[projectIndex].images[0]);
-
-          //   `${JSON.stringify(
-          //   projects.entities[projectIndex].images[0]
-          // ).replace(/\"/g, "")}`
-
-          console.log(
-            projects.entities[findIndexById(projects.entities, lID)].images[0]
-          );
 
           return (
             <div
@@ -118,7 +100,6 @@ const ItemList = () => {
                     setRefreshFlag((prevFlag) => !prevFlag);
                   }}
                 >
-                  Unlike
                 </button>
               </div>
 
@@ -154,6 +135,22 @@ const ItemList = () => {
                       }
                     </p>
                   </span>
+
+                  
+                  <aside className="flex justify-end items-center ml-5 mt-6">
+              
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLikeDislike(item.project_id, "dislike");
+                    setRefreshFlag((prevFlag) => !prevFlag);
+                  }}
+                >
+                  ♥️
+                </button>
+
+              </aside>
+
                 </a>
                 <div>
                   <p className="text-sm text-gray-600"></p>
