@@ -1,14 +1,12 @@
-
 import { useNavigate } from "react-router-dom";
-import likeDislike from "/src/client/hooks/LikeDislike.jsx";
 import { useAuth } from "../../hooks/AuthContext";
-import { useState, useEffect } from "react";
 
-import { TypeIcon } from './TypeIcon';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { useLikes } from './useLikes';
-
+import { TypeIcon } from "./TypeIcon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { useLikes } from "./useLikes";
+import { useProcessLikesData } from "../LikeList/likeHooks";
+import react, { useState, useEffect, useRef, useCallback } from "react";
 
 const entityCardStyle = {
   display: "flex",
@@ -21,96 +19,33 @@ const polaroidStyle = {
   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
 };
 
-export const EntityCard = ({ style, data, isArtists }) => {
+export const EntityCard = ({ style, data, isArtists, likesData }) => {
+  const [isLiked, setLiked] = useState(false);
   const navigate = useNavigate();
 
   const { loggedInUser, isLoggedIn } = useAuth();
-  const { items, liked, handleLike, handleDislike } = useLikes(isLoggedIn, loggedInUser.id, data);
+  // const { items, liked, handleLike, handleDislike } = useLikes(isLoggedIn, loggedInUser.id, data);
 
-  //   const fetchLikes = async () => {
-  //     try {
-  //       const updatedLikesResponse = await fetch(
-  //         `/api/likes/${loggedInUser.id}`
-  //       );
-  //       const updatedLikesData = await updatedLikesResponse.json();
+  const { liked: processedLiked } = useProcessLikesData(likesData, data);
 
-  //       let isLiked = false;
+  useEffect(() => {
+    setLiked(processedLiked);
+  }, [processedLiked]); // Update when processedLiked changes
 
-  //       if (Array.isArray(updatedLikesData)) {
-  //         setItems(updatedLikesData);
+  const { handleLike, handleDislike } = useLikes(
+    isLoggedIn,
+    loggedInUser.id,
+    data
+  );
 
-  //         isLiked = updatedLikesData.some(
-  //           (item) => item.project_id === String(data.id)
-  //         );
-  //       } else {
-  //         const transformedData = Object.keys(updatedLikesData).map(
-  //           (key) => updatedLikesData[key]
-  //         );
-  //         setItems(transformedData);
-
-  //         isLiked = transformedData.some(
-  //           (item) => item.project_id === String(data.id)
-  //         );
-  //       }
-
-  //       setLiked(isLiked);
-  //     } catch (error) {
-  //       console.error("Error fetching likes:", error);
-  //     }
-  //   };
-  //   useEffect(() => {
-  //   if (isLoggedIn) {
-  //     fetchLikes();
-  //     console.log("fetching likes");
-  //   }
-  // }, [isLoggedIn, loggedInUser.id]);
-
-  // const handleLike = async () => {
-  //   try {
-  //     await likeDislike(loggedInUser.id, data.id, "like");
-  //     const updatedLikesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
-  //     const updatedLikesData = await updatedLikesResponse.json();
-  //     if (Array.isArray(updatedLikesData)) {
-  //       setItems(updatedLikesData);
-  //       setLiked(true);
-  //       console.log("like", updatedLikesData);
-  //     } else {
-  //       const transformedData = Object.keys(updatedLikesData).map(
-  //         (key) => updatedLikesData[key]
-  //       );
-  //       setItems(transformedData);
-  //     }
-  //   } catch (error) {
-  //     // Handle like error
-  //     console.error("Error liking item:", error);
-  //   }
-  // };
-
-  // const handleDislike = async () => {
-  //   try {
-  //     await likeDislike(loggedInUser.id, data.id, "dislike");
-  //     const updatedLikesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
-  //     const updatedLikesData = await updatedLikesResponse.json();
-  //     if (Array.isArray(updatedLikesData)) {
-  //       setItems(updatedLikesData);
-  //       setLiked(false);
-
-  //       console.log("dislike", updatedLikesData);
-  //     } else {
-  //       const transformedData = Object.keys(updatedLikesData).map(
-  //         (key) => updatedLikesData[key]
-  //       );
-  //       setItems(transformedData);
-  //     }
-  //   } catch (error) {
-  //     // Handle dislike error
-  //     console.error("Error disliking item:", error);
-  //   }
-  // };
-
+  const ls = () => {
+    setLiked(true);
+  };
+  const dls = () => {
+    setLiked(false);
+  };
 
   const displayName = isArtists ? data.name : data.title;
-
 
   return (
     <div
@@ -140,7 +75,10 @@ export const EntityCard = ({ style, data, isArtists }) => {
         />
         <footer className="flex justify-between w-full pl-4 pr-3">
           <div className="flex justify-center items-center">
-            <TypeIcon isArtists={isArtists} type={isArtists ? data.artist_type : data.type} />
+            <TypeIcon
+              isArtists={isArtists}
+              type={isArtists ? data.artist_type : data.type}
+            />
           </div>
           <div className="flex flex-col truncate px-3">
             <span
@@ -165,14 +103,27 @@ export const EntityCard = ({ style, data, isArtists }) => {
 
             {!isArtists &&
               isLoggedIn &&
-              (liked ? (
-                <button onClick={handleDislike}>♥️</button>
+              (isLiked ? (
+                <button
+                  onClick={() => {
+                    handleDislike();
+                    dls();
+                  }}
+                >
+                  ♥️
+                </button>
               ) : (
-                <button onClick={handleLike}>♡</button>
+                <button
+                  onClick={() => {
+                    handleLike();
+                    ls();
+                  }}
+                >
+                  ♡
+                </button>
               ))}
-              
-              {/* <FontAwesomeIcon icon={faHeart} color={displayName.length > 12 ? 'red' : 'gray'}/> */}
 
+            {/* <FontAwesomeIcon icon={faHeart} color={displayName.length > 12 ? 'red' : 'gray'}/> */}
           </aside>
         </footer>
       </div>
