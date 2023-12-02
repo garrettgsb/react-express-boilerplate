@@ -115,8 +115,22 @@ router.post("/", async (req, res) => {
   try {
     console.log("Request Body:", req.body);
 
+    // Check if the email already exists
+    const existingUser = await supabase
+      .from("users")
+      .select("id")
+      .eq("email", req.body.email)
+      .single();
+
+    if (existingUser) {
+      // If the email already exists, return an error
+      return res.status(400).send("User with this email already exists.");
+    }
+
+    // Hash the password before inserting it into the database
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
+    // Replace the plain password with the hashed one in the request body
     const requestBodyWithHashedPassword = {
       ...req.body,
       password: hashedPassword,
@@ -135,6 +149,7 @@ router.post("/", async (req, res) => {
     res.status(500).send("Server Error: " + error.message);
   }
 });
+
 
 router.put("/:id", async (req, res) => {
   try {

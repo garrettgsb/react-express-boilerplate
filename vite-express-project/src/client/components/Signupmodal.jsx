@@ -3,6 +3,7 @@ import { useState } from "react";
 const SignupModal = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -28,6 +29,11 @@ const SignupModal = ({ isOpen, onClose }) => {
         if (response.ok) {
           onClose(); // Close the modal after successful signup
         } else {
+          if (response.status === 400) {
+            const errorMessage = await response.text();
+            console.error("Bad Request:", errorMessage);
+            setError(true);
+          }
           console.error("Signup failed with status:", response.status); // Log the status code
         }
       } catch (error) {
@@ -49,7 +55,32 @@ const SignupModal = ({ isOpen, onClose }) => {
         <div className="flex justify-end">
           <button onClick={onClose}>Close</button>
         </div>
-        <div className="text-2xl font-bold mb-6 font-heading tracking-wide">Sign Up</div>
+        <div className="text-2xl font-bold mb-6 font-heading tracking-wide">
+          Sign Up
+        </div>
+
+        {error && (
+          <div className="flex justify-center">
+            <div role="alert" className="alert alert-warning m-5 max-w-xs">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <span>This email is already in use</span>
+          </div>
+          </div>
+          
+        )}
+        
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
             {/* <label className="block text-sm font-bodyFont text-neutral m-2">
