@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../hooks/AuthContext";
 import { useParams } from "react-router-dom";
 import likeDislike from "/src/client/hooks/LikeDislike.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const ItemList = () => {
   const { userId } = useParams();
@@ -146,7 +148,7 @@ const ItemList = () => {
                     setRefreshFlag((prevFlag) => !prevFlag);
                   }}
                 >
-                  ♥️
+                  <FontAwesomeIcon icon={faHeart} size="lg" style={{color: "#e32400",}} />
                 </button>
 
               </aside>
