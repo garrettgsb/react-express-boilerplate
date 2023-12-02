@@ -13,7 +13,7 @@ import { useLikes } from './useLikes';
 const entityCardStyle = {
   display: "flex",
   justifyContent: "center",
-  cursor: "pointer",
+  // cursor: "pointer",
   paddingTop: "0.5rem",
 };
 
@@ -25,8 +25,6 @@ export const EntityCard = ({ style, data, isArtists }) => {
   const navigate = useNavigate();
 
   const { loggedInUser, isLoggedIn } = useAuth();
-
-
   const { items, liked, handleLike, handleDislike } = useLikes(isLoggedIn, loggedInUser.id, data);
 
   //   const fetchLikes = async () => {
@@ -110,6 +108,7 @@ export const EntityCard = ({ style, data, isArtists }) => {
   //   }
   // };
 
+
   const displayName = isArtists ? data.name : data.title;
 
 
@@ -137,7 +136,7 @@ export const EntityCard = ({ style, data, isArtists }) => {
           onClick={() => {
             navigate(`/${isArtists ? "users" : "projects"}/${data.id}`);
           }}
-          className="w-56 h-56 object-cover"
+          className="w-56 h-56 object-cover cursor-pointer"
         />
         <footer className="flex justify-between w-full pl-4 pr-3">
           <div className="flex justify-center items-center">
