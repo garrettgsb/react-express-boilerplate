@@ -24,7 +24,7 @@ const LoginModal = () => {
       <div className="modal-box flex flex-col items-center justify-center">
         <form method="dialog">
           <button
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4"
             onClick={() => resetError()}
           >
             ✕
