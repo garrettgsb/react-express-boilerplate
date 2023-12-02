@@ -24,7 +24,7 @@ const LoginModal = () => {
       <div className="modal-box flex flex-col items-center justify-center">
         <form method="dialog">
           <button
-            className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4"
+            className="btn btn-sm btn-circle btn-ghost absolute right-4 top-"
             onClick={() => resetError()}
           >
             ✕
@@ -59,7 +59,6 @@ const LoginModal = () => {
         </div>
         <button
           onClick={() => handleLogin()}
-          // className="font-subHeading bg-button hover:bg-buttonHover text-white font-bold py-2 px-4 rounded-sm"
           className="btn btn-primary text-white"
         >
           Log in

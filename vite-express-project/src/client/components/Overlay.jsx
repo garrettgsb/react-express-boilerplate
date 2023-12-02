@@ -1,4 +1,3 @@
-// Overlay.jsx
 import React from "react";
 
 const Overlay = ({ isOpen, onClick }) => {
