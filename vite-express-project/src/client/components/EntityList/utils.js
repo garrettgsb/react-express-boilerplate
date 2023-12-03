@@ -36,7 +36,7 @@ export const debounce = (func, delay) => {
 
 export const getPortfolioHoverPosition = (overlayNumber, columnIndex) => {
   switch (overlayNumber) {
-    case 1:
+    case 0:
       return {
         left: columnIndex === 0
           ? "340px"
@@ -44,7 +44,7 @@ export const getPortfolioHoverPosition = (overlayNumber, columnIndex) => {
           ? "-240px"
           : "-540px"
       };
-    case 2:
+    case 1:
       return {
         left: columnIndex === 0
           ? "630px"

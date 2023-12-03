@@ -5,22 +5,25 @@ import { PRICE_BY_URL } from '../constants';
 export const useFilterOptions = ({ url }) => {
   const [filterOptions, _setFilterOptions] = useState({
     selectedTypeById: { '1': true },
-    valueUnder: PRICE_BY_URL[url].max * 100
+    valueUnder: PRICE_BY_URL[url].max * 100,
+    searchWord: ''
   });
 
-  const setFilterOptions = useCallback(({ selectedTypeById, valueUnder }) => {
+  const setFilterOptions = useCallback(({ selectedTypeById, valueUnder, searchWord }) => {
     _setFilterOptions((prev) => ({
       ...prev,
-      ...(selectedTypeById && { selectedTypeById }),
-      ...(valueUnder && { valueUnder })
+      ...(selectedTypeById !== undefined && { selectedTypeById }),
+      ...(valueUnder !== undefined && { valueUnder }),
+      ...(searchWord !== undefined && { searchWord })
     }));
   }, []);
 
-  const { selectedTypeById, valueUnder } = useDebounce(filterOptions, 500);
+  const { selectedTypeById, valueUnder, searchWord } = useDebounce(filterOptions, 500);
 
   return {
     selectedTypeById,
     valueUnder,
+    searchWord,
     setFilterOptions
   };
 }

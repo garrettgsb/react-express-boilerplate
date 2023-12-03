@@ -40,6 +40,7 @@ export const Polaroid = ({
         height: '360px',
         zIndex: isHovering ? 10 : 4,
         fontFamily: "'Kalam', cursive",
+        fontSize: '1.2rem'
       }}
       onClick={onClickCard}
     >
@@ -76,6 +77,7 @@ export const Polaroid = ({
                 className="text-slate-950 truncate"
                 style={{
                   fontFamily: "'Kalam', cursive",
+                  fontSize: '1.2rem'
                 }}
               >
                 {displayName}
@@ -84,6 +86,7 @@ export const Polaroid = ({
                 className="text-gray-400 truncate"
                 style={{
                   fontFamily: "'Kalam', cursive",
+                  fontSize: '1.2rem'
                 }}
               >
                 {location}
@@ -124,18 +127,20 @@ export const Polaroid = ({
                   isArtists={isArtists}
                   type={iconType}
                   size="3x"
-                  color="#6335f8"
-                  effect={{ bounce: true}}
+                  color="#e91e63"
+                  effect={iconType === 2 ? { shake: true } : { bounce: true}}
                 />
               )}
             </div>
             <div className="text-black">
               {artistType[iconType - 1]?.name}
             </div>
-            <div className="text-black">
+            <div style={{ color: '#05AA32' }}>
               ${(data.wage / 100).toFixed(2)}/hr 
             </div>
-            <div className="text-black">
+            <div className="text-black"
+              style={{ fontSize: '1rem' }}
+            >
               {data.email}
             </div>
           </div>
