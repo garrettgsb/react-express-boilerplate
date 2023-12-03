@@ -63,7 +63,7 @@ export const EntityCard = ({
   }, [_handleDislike]);
 
   const displayName = isArtists ? data.name : data.title;
-  const numberOfPortfolios = data.images?.length || 0;
+  const numberOfPortfolios = Math.min(data.images?.length || 0, portfolios.length);
   const portfoliosToShow = useMemo(
     () => portfolios.slice(0, numberOfPortfolios),
     [numberOfPortfolios]
