@@ -1,9 +1,10 @@
 import { FilterType } from './FilterType';
 import { FilterWage } from './FilterWage';
 import { useEntityContext } from '../EntityListContext';
+import { FilterWord } from './FilterWord';
 
 export const FilterOptions = ({ url }) => {
-  const { valueUnder, setFilterOptions } = useEntityContext();
+  const { setFilterOptions } = useEntityContext();
 
   return (
     <div className="flex items-center">
@@ -13,7 +14,9 @@ export const FilterOptions = ({ url }) => {
       />
       <FilterWage
         url={url}
-        valueUnder={valueUnder}
+        setFilterOptions={setFilterOptions}
+      />
+      <FilterWord
         setFilterOptions={setFilterOptions}
       />
     </div>
