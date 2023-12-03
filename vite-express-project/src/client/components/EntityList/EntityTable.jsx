@@ -18,7 +18,7 @@ import {
   URL_ARTISTS
 } from './constants';
 
-export const EntityTable = ({ url }) => {
+export const EntityTable = ({ url, likesData }) => {
   const [headerBottom, setHeaderBottom] = useState(0);
   const {
     // fetching data
@@ -163,7 +163,9 @@ export const EntityTable = ({ url }) => {
                         currentCount,
                         totalCount,
                         isInitial,
-                        isArtists: url === URL_ARTISTS
+                        isArtists: url === URL_ARTISTS,
+                        likesData
+
                       })}
                     </VariableSizeGrid>
                   )}

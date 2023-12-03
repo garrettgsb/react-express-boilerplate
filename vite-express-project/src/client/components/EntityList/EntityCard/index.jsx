@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import likeDislike from "/src/client/hooks/LikeDislike.jsx";
 import { useAuth } from "../../../hooks/AuthContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -10,12 +9,13 @@ import { getPortfolioHoverPosition } from '../utils';
 import { useEntityCardHoverEffect } from "./useEntityCardHoverEffect";
 import './EntityCard.css';
 
-const portfolios = [2, 1];
+import { useLikes } from "../useLikes";
+import { useProcessLikesData } from "../../LikeList/likeHooks";
 
+const portfolios = [2, 1];
 const entityCardStyle = {
   display: "flex",
   justifyContent: "center",
-  // cursor: "pointer",
   paddingTop: "0.5rem",
 };
 
@@ -23,89 +23,44 @@ export const EntityCard = ({
   style,
   data,
   isArtists,
-  columnIndex
+  columnIndex,
+  likesData
 }) => {
-  const { loggedInUser, isLoggedIn } = useAuth();
-  const [items, setItems] = useState(false);
-  const [liked, setLiked] = useState(false);
-
+  const [isLiked, setLiked] = useState(false);
   const navigate = useNavigate();
+
+  const { loggedInUser, isLoggedIn } = useAuth();
+  // const { items, liked, handleLike, handleDislike } = useLikes(isLoggedIn, loggedInUser.id, data);
+
+  const { liked: processedLiked } = useProcessLikesData(likesData, data);
 
   const {
     isHovering,
-    showContent,
     handleMouseEnter,
     handleMouseLeave
   } = useEntityCardHoverEffect();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (loggedInUser) {
-          const likesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
-          const likesData = await likesResponse.json();
-  
-          if (Array.isArray(likesData)) {
-            setItems(likesData);
-            const isLiked = likesData.some((item) => item.id === data.id);
-            setLiked(isLiked);
-          } else {
-            const transformedData = Object.keys(likesData).map((key) => likesData[key]);
-            setItems(transformedData);
-            const isLiked = transformedData.some((item) => item.id === data.id);
-            setLiked(isLiked);
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching likes:", error);
-      }
-    };
-  
-    fetchData();
-  }, [loggedInUser, data.id]);
+    setLiked(processedLiked);
+  }, [processedLiked]); // Update when processedLiked changes
 
-  const handleLike = async () => {
-    try {
-      await likeDislike(loggedInUser.id, data.id, "like");
-      const updatedLikesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
-      const updatedLikesData = await updatedLikesResponse.json();
-      if (Array.isArray(updatedLikesData)) {
-        setItems(updatedLikesData);
-        setLiked(true);
-        console.log("like", updatedLikesData);
-      } else {
-        const transformedData = Object.keys(updatedLikesData).map(
-          (key) => updatedLikesData[key]
-        );
-        setItems(transformedData);
-      }
-    } catch (error) {
-      // Handle like error
-      console.error("Error liking item:", error);
-    }
-  };
+  const { handleLike: _handleLike, handleDislike: _handleDislike } = useLikes(
+    isLoggedIn,
+    loggedInUser?.id,
+    data
+  );
 
-  const handleDislike = async () => {
-    try {
-      await likeDislike(loggedInUser.id, data.id, "dislike");
-      const updatedLikesResponse = await fetch(`/api/likes/${loggedInUser.id}`);
-      const updatedLikesData = await updatedLikesResponse.json();
-      if (Array.isArray(updatedLikesData)) {
-        setItems(updatedLikesData);
-        setLiked(false);
+  const handleLike = useCallback((e) => {
+    e.stopPropagation();
+    _handleLike();
+    setLiked(true);
+  }, []);
 
-        console.log("dislike", updatedLikesData);
-      } else {
-        const transformedData = Object.keys(updatedLikesData).map(
-          (key) => updatedLikesData[key]
-        );
-        setItems(transformedData);
-      }
-    } catch (error) {
-      // Handle dislike error
-      console.error("Error disliking item:", error);
-    }
-  };
+  const handleDislike = useCallback((e) => {
+    e.stopPropagation();
+    _handleDislike();
+    setLiked(false);
+  }, [_handleDislike]);
 
   const displayName = isArtists ? data.name : data.title;
 
@@ -130,7 +85,7 @@ export const EntityCard = ({
         displayName={displayName}
         handleLike={handleLike}
         handleDislike={handleDislike}
-        liked={liked}
+        liked={isLiked}
         showLikeButton={!isArtists && isLoggedIn}
         onClickCard={() => {
           navigate(`/${isArtists ? "users" : "projects"}/${data.id}`);
