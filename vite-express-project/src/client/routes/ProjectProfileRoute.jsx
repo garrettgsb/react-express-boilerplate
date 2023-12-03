@@ -15,11 +15,11 @@ export default function ProjectProfile() {
   const [users, setUsers] = useState([]);
   const { setIsEditMode } = useNewProject();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { loggedInUser } = useAuth();
   
   const handleEditClick = async (projectId) => {
     setIsEditMode(true);
-    navigate(`/projects/${projectId}/edit`);
+    navigate(`/projects/${projectId}/edit`, { state: { projectData: project } });
   };
   
   useEffect(() => {
@@ -96,7 +96,7 @@ export default function ProjectProfile() {
         </div>
       </div>
       
-      { user && user.id === project.employer_id && (
+      { loggedInUser && loggedInUser.id === project.employer_id && (
         <div className="flex justify-end m-5">
           <button 
             className="btn btn-outline btn-secondary"
