@@ -24,8 +24,13 @@ export const getColumnComponent = ({
   const isLoadedAll = currentCount >= totalCount;
   const isFooterRow = rowIndex === currentLastRowIndex + 1;
 
-  return isLoadedColumn ?
-    <EntityCard style={style} data={data[currentIndex]} isArtists={isArtists} likesData={likesData} />
+  return isLoadedColumn
+    ? <EntityCard style={style}
+        data={data[currentIndex]}
+        isArtists={isArtists}
+        columnIndex={columnIndex}
+        likesData={likesData}
+      />
     : isLoadingRow && isFirstColumn && isFetching && (isInitial || !isLoadedAll)
     ? <LoadingIndicator style={style} />
     : isFooterRow && isFirstColumn && currentCount !== 0

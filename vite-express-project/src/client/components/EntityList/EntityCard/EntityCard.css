@@ -1,0 +1,10 @@
+.entity-card-container {
+  opacity: 1;
+  transition: opacity .5s;
+  transition-delay: 0s;
+}
+
+.entity-card-container.fade-out {
+  opacity: 0.1;
+  transition-delay: 1s;
+}

@@ -10,7 +10,7 @@ export const EntityList = () => {
   const splitPath = pathname.split("/");
   const url = splitPath[splitPath.length - 1];
   const { loggedInUser } = useAuth();
-  const {likesData, error} = useFetchLikesData(loggedInUser.id);
+  const {likesData, error} = useFetchLikesData(loggedInUser?.id);
 
   console.log("Likes data on index:", likesData);
 

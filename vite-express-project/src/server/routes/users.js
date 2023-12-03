@@ -70,7 +70,7 @@ router.get('/', async (req, res) => {
   try {
     const { data, count, error } = await supabase
       .from("users")
-      .select("id, name, profile_picture, location, artist_type, wage", offset === 0 ? { count: 'exact' } : undefined)
+      .select("id, name, profile_picture, location, artist_type, wage, images, email", offset === 0 ? { count: 'exact' } : undefined)
       .filter('artist_type', selectedTypeIds.length ? 'in' : 'not.in', `(${selectedTypeIds.join(',')})`)
       .filter('wage', 'lt', value_under === 25100 ? 10000000 : value_under)
       .range(offset, offset + limit)
