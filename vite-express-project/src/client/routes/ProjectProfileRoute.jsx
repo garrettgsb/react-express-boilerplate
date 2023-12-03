@@ -19,7 +19,7 @@ export default function ProjectProfile() {
   
   const handleEditClick = async (projectId) => {
     setIsEditMode(true);
-    navigate(`/projects/${projectId}/edit`);
+    navigate(`/projects/${projectId}/edit`, { state: { projectData: project } });
   };
   
   useEffect(() => {

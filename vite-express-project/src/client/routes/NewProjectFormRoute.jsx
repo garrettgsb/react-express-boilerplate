@@ -2,8 +2,8 @@ import TypeSelectionBox from "../components/TypeSelectionBox";
 import { useNewProject } from "../hooks/NewProjectContext";
 import { useAuth } from "../hooks/AuthContext";
 import InputField from "../components/InputField";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 export default function NewProjectFormRoute() {
   const {
@@ -15,6 +15,7 @@ export default function NewProjectFormRoute() {
     handleFileChange,
     handleProjectTypeForm,
     handleSubmit,
+    handleEditSubmit,
     selectedProject,
     filteredProjectType,
     projectTypeQuery,
@@ -31,6 +32,34 @@ export default function NewProjectFormRoute() {
 
   const { loggedInUser, checkAuthentication, isLoading } = useAuth();
   const { projectId } = useParams();
+  const location = useLocation();
+  // const { state: { projectData }} = location;
+
+  // const initialFormData = projectData
+  //   ? {
+  //       projectName: projectData.title,
+  //       description: projectData.description,
+  //       budget: projectData.budget / 100, 
+  //       location: projectData.location,
+  //       projectType: projectData.type,
+  //       image: null, 
+  //     }
+  //   : {
+  //       projectName: "",
+  //       description: "",
+  //       budget: 10,
+  //       location: "",
+  //       projectType: "",
+  //       image: null,
+  //     };
+  
+  // const [initialFom, setInitialForm] = useState(initialFormData);
+  
+  // useEffect(() => {
+  //   setFormData(initialForm);
+  // }, [initialForm]);
+  
+  // console.log(projectData);
 
   useEffect(() => {
     const fetchData = async() => {
@@ -67,7 +96,7 @@ export default function NewProjectFormRoute() {
         this is the perfect platform to foster connections between artists and the local community!"
         </p>
       </div>
-      <form onSubmit={(e) => handleSubmit(e, projectId, employer_id)}>
+      <form onSubmit={(e) => (isEditMode ? handleEditSubmit(e, projectId, employer_id) : handleSubmit(e, employer_id))}>
         <div className="flex justify-center items-start">
           <div className="relative">
             <label className="border-solid border rounded-lg w-56 h-56 m-5 flex items-center justify-center text-white cursor-pointer relative">

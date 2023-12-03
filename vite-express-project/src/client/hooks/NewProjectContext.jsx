@@ -74,7 +74,7 @@ export const NewProjectProvider = ({ children }) => {
   };
 
   // Submit Form
-  const handleSubmit = async (e, projectId) => {
+  const handleSubmit = async (e, employer_id) => {
     e.preventDefault();
   
     const budgetInCents = formData.budget * 100;
@@ -85,22 +85,32 @@ export const NewProjectProvider = ({ children }) => {
     newFormData.append("budget", budgetInCents);
     newFormData.append("location", formData.location);
     newFormData.append("type", formData.projectType);
-    newFormData.append("image", formData.image);
   
+    if (formData.image) {
+      newFormData.append("image", formData.image);
+    }
+
     try {
       let response;
-      // If in edit mode, perform a PATCH
-      // If not in edit mode, perform a POST request
-      const requestOptions = {
-        method: isEditMode ? "PATCH" : "POST",
+
+      response = await fetch("/api/projects", {
+        method: "POST",
         body: newFormData,
-      };
+      })
   
-      if (isEditMode) {
-        response = await fetch(`/api/projects/${projectId}`, requestOptions);
-      } else {
-        response = await fetch("/api/projects", requestOptions);
-      }
+      // const requestOptions = {
+      //   method: isEditMode ? "PATCH" : "POST",
+      //   // Use updateData for PATCH and newFormData for POST
+      //   body: isEditMode ? JSON.stringify(updateData) : newFormData,
+      // };
+  
+      // if (isEditMode) {
+      //   // For PATCH requests, send JSON data in the body
+      //   response = await fetch(`/api/projects/${projectId}`, requestOptions);
+      // } else {
+      //   // For POST requests, send FormData in the body
+      //   response = await fetch("/api/projects", requestOptions);
+      // }
   
       if (response.ok) {
         console.log("Project submitted successfully");
@@ -113,6 +123,74 @@ export const NewProjectProvider = ({ children }) => {
     }
   };
   
+  const handleEditSubmit = async (e, projectId, employer_id) => {
+    e.preventDefault();
+  
+    const budgetInCents = formData.budget * 100;
+  
+    // Construct data for JSON payload
+    const data = {
+      title: formData.projectName,
+      description: formData.description,
+      budget: budgetInCents,
+      location: formData.location,
+      type: formData.projectType,
+      ...(formData.image && { images: formData.image }),
+    };
+  
+    try {
+      const response = await fetch(`/api/projects/${projectId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      // let response;
+      // let requestOptions;
+
+      // if (isEditMode) {
+      //   // If in edit mode, perform a PATCH with JSON payload
+      //   requestOptions = {
+      //     method: "PATCH",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(data),
+      //   };
+      //   response = await fetch(`/api/projects/${projectId}`, requestOptions);
+      // } else {
+      //   // If not in edit mode, perform a POST with FormData
+      //   const newFormData = new FormData();
+      //   newFormData.append("title", formData.projectName);
+      //   newFormData.append("description", formData.description);
+      //   newFormData.append("budget", budgetInCents);
+      //   newFormData.append("location", formData.location);
+      //   newFormData.append("type", formData.projectType);
+  
+      //   if (formData.image) {
+      //     newFormData.append("images", formData.image);
+      //   }
+  
+      //   requestOptions = {
+      //     method: "POST",
+      //     body: newFormData,
+      //   };
+      //   response = await fetch("/api/projects", requestOptions);
+      // }
+  
+      if (response.ok) {
+        console.log("Project submitted successfully");
+        navigate(`/gigs`);
+      } else {
+        console.error("Error submitting project");
+      }
+    } catch (error) {
+      console.error("Error submitting project:", error);
+    }
+  };
+
   const handleProjectTypeSelect = (value) => {
     setSelectedProject(value);
     handleProjectTypeForm(value.name);
@@ -131,6 +209,7 @@ export const NewProjectProvider = ({ children }) => {
     handleInputChange,
     handleFileChange,
     handleSubmit,
+    handleEditSubmit,
 
     handleProjectTypeForm,
     selectedProject,
