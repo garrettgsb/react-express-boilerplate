@@ -78,15 +78,14 @@ export const NewProjectProvider = ({ children }) => {
     e.preventDefault();
   
     const budgetInCents = formData.budget * 100;
-
-    const data = {
-      title: formData.projectName,
-      description: formData.description,
-      budget: budgetInCents,
-      location: formData.location,
-      type: formData.projectType,
-      images: formData.image,
-    };  
+  
+    const newFormData = new FormData();
+    newFormData.append("title", formData.projectName);
+    newFormData.append("description", formData.description);
+    newFormData.append("budget", budgetInCents);
+    newFormData.append("location", formData.location);
+    newFormData.append("type", formData.projectType);
+    newFormData.append("image", formData.image);
   
     try {
       let response;
@@ -94,18 +93,15 @@ export const NewProjectProvider = ({ children }) => {
       // If not in edit mode, perform a POST request
       const requestOptions = {
         method: isEditMode ? "PATCH" : "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+        body: newFormData,
       };
-
+  
       if (isEditMode) {
         response = await fetch(`/api/projects/${projectId}`, requestOptions);
       } else {
         response = await fetch("/api/projects", requestOptions);
       }
-
+  
       if (response.ok) {
         console.log("Project submitted successfully");
         navigate(`/gigs`);
