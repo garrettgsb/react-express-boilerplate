@@ -91,26 +91,10 @@ export const NewProjectProvider = ({ children }) => {
     }
 
     try {
-      let response;
-
-      response = await fetch("/api/projects", {
+      const response = await fetch("/api/projects", {
         method: "POST",
         body: newFormData,
       })
-  
-      // const requestOptions = {
-      //   method: isEditMode ? "PATCH" : "POST",
-      //   // Use updateData for PATCH and newFormData for POST
-      //   body: isEditMode ? JSON.stringify(updateData) : newFormData,
-      // };
-  
-      // if (isEditMode) {
-      //   // For PATCH requests, send JSON data in the body
-      //   response = await fetch(`/api/projects/${projectId}`, requestOptions);
-      // } else {
-      //   // For POST requests, send FormData in the body
-      //   response = await fetch("/api/projects", requestOptions);
-      // }
   
       if (response.ok) {
         console.log("Project submitted successfully");
@@ -123,7 +107,7 @@ export const NewProjectProvider = ({ children }) => {
     }
   };
   
-  const handleEditSubmit = async (e, projectId, employer_id) => {
+  const handleEditSubmit = async (e, projectId) => {
     e.preventDefault();
   
     const budgetInCents = formData.budget * 100;
@@ -135,7 +119,6 @@ export const NewProjectProvider = ({ children }) => {
       budget: budgetInCents,
       location: formData.location,
       type: formData.projectType,
-      ...(formData.image && { images: formData.image }),
     };
   
     try {
@@ -146,39 +129,6 @@ export const NewProjectProvider = ({ children }) => {
         },
         body: JSON.stringify(data),
       });
-
-      // let response;
-      // let requestOptions;
-
-      // if (isEditMode) {
-      //   // If in edit mode, perform a PATCH with JSON payload
-      //   requestOptions = {
-      //     method: "PATCH",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(data),
-      //   };
-      //   response = await fetch(`/api/projects/${projectId}`, requestOptions);
-      // } else {
-      //   // If not in edit mode, perform a POST with FormData
-      //   const newFormData = new FormData();
-      //   newFormData.append("title", formData.projectName);
-      //   newFormData.append("description", formData.description);
-      //   newFormData.append("budget", budgetInCents);
-      //   newFormData.append("location", formData.location);
-      //   newFormData.append("type", formData.projectType);
-  
-      //   if (formData.image) {
-      //     newFormData.append("images", formData.image);
-      //   }
-  
-      //   requestOptions = {
-      //     method: "POST",
-      //     body: newFormData,
-      //   };
-      //   response = await fetch("/api/projects", requestOptions);
-      // }
   
       if (response.ok) {
         console.log("Project submitted successfully");
