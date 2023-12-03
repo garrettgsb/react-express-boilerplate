@@ -48,7 +48,7 @@ const DropDownUser = () => {
   const profilePictureStyle = {
     backgroundImage: `url(${profilePicture || defaultProfilePicture})`,
     backgroundPosition: "50% 25%",
-    backgroundSize: "300%",
+    backgroundSize: "150%",
   };
 
   return (
