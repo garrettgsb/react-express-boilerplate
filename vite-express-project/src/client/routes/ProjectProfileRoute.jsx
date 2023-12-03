@@ -12,6 +12,7 @@ function convertRate(cents) {
 export default function ProjectProfile() {
   const { id } = useParams();
   const [project, setProject] = useState({});
+  const [users, setUsers] = useState([]);
   const { setIsEditMode } = useNewProject();
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -35,12 +36,27 @@ export default function ProjectProfile() {
     fetchProject();
   }, [id]);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(`/api/users/${project.employer_id}`);
+        const data = await response.json();
+        setUsers(data[0]);
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUser();
+  }
+  , [project]);
+
   return (
     <div className="mb-48">
       <div className="mt-10 flex flex-col items-center justify-center md:flex-row md:items-start">
         <div className="m-5 w-1/3 h-full overflow-hidden border border-gray-300 drop-shadow-3xl rounded-3xl">
           <img
-            src="/public/images/art_4.jpg" //change to project.image when ready
+            src={`${project.images}`} //change to project.image when ready
             alt={`${project.title} image`}
             className=""
           />
@@ -55,11 +71,12 @@ export default function ProjectProfile() {
               
               <div className="flex flex-row items-center">
                 <img
-                  src="/public/images/art_6.jpg"
+                  src={`${users.profile_picture}`} //change to project.image when ready
                   className="w-24 h-24 rounded-full object-cover border-2 border-gray-300 m-5"
                 />
                 <p className="font-subHeading text-xl text-secondary">
-                  Posted by {project.employer_id}
+                  Posted by <br />
+                  {users.name}
                 </p>
               </div>
               <div className="flex justify-center">
