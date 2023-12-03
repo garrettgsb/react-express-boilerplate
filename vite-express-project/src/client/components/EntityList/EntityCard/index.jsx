@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/AuthContext";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -63,6 +63,11 @@ export const EntityCard = ({
   }, [_handleDislike]);
 
   const displayName = isArtists ? data.name : data.title;
+  const numberOfPortfolios = data.images?.length || 0;
+  const portfoliosToShow = useMemo(
+    () => portfolios.slice(0, numberOfPortfolios),
+    [numberOfPortfolios]
+  );
 
   return (
     <div
@@ -93,7 +98,7 @@ export const EntityCard = ({
         isHovering={isHovering}
         hasBack
       />
-      {isArtists && portfolios.map((portfolioNumber) => (
+      {isArtists && portfoliosToShow.map((portfolioNumber) => (
         <div className="overlay-container absolute flex"
           style={{
             zIndex: isHovering ? 5 : -10,
