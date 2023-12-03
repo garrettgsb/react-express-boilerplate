@@ -12,7 +12,7 @@ import './EntityCard.css';
 import { useLikes } from "../useLikes";
 import { useProcessLikesData } from "../../LikeList/likeHooks";
 
-const portfolios = [2, 1];
+const portfolios = [0, 1];
 const entityCardStyle = {
   display: "flex",
   justifyContent: "center",
