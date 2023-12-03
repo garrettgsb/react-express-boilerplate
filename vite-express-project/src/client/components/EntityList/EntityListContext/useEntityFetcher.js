@@ -15,14 +15,21 @@ const defaultState = {
   totalCount: 0
 }
 
-export const useEntityFetcher = ({ url: _url, sortAttribute, sortDirection, selectedTypeById, valueUnder }) => {
+export const useEntityFetcher = ({
+  url: _url,
+  sortAttribute,
+  sortDirection,
+  selectedTypeById,
+  valueUnder,
+  searchWord
+}) => {
   const [state, setState] = useState(defaultState);
   const [fetchTimeout, setFetchTimeout] = useState(null);
 
   const url = API_BY_URL[_url]
 
   const fetchEntities = useCallback(
-    async (offset, { sortAttribute, sortDirection, selectedTypeById, valueUnder } = {}) => {
+    async (offset, { sortAttribute, sortDirection, selectedTypeById, valueUnder, searchWord } = {}) => {
       setState((prev) => ({ ...prev, isFetching: true }));
 
       const params = {
@@ -34,7 +41,8 @@ export const useEntityFetcher = ({ url: _url, sortAttribute, sortDirection, sele
           Object.keys(selectedTypeById)
             .filter((id) => id !== '1' && !!selectedTypeById[id])
             .map((id) => _url === URL_ARTISTS ? id : projectType[id].name),
-        value_under: valueUnder
+        value_under: valueUnder,
+        search_word: searchWord
       };
 
       try {
@@ -86,8 +94,8 @@ export const useEntityFetcher = ({ url: _url, sortAttribute, sortDirection, sele
     });
 
     setState(defaultState);
-    fetchEntities(0, { sortAttribute, sortDirection, selectedTypeById, valueUnder });
-  }, [sortAttribute, sortDirection, selectedTypeById, valueUnder]);
+    fetchEntities(0, { sortAttribute, sortDirection, selectedTypeById, valueUnder, searchWord });
+  }, [sortAttribute, sortDirection, selectedTypeById, valueUnder, searchWord]);
 
   // clear timeout when unmounting
   useEffect(() => {

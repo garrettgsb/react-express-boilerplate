@@ -10,7 +10,7 @@ export const EntityContextProvider = ({ url, children }) => {
   const { sortAttribute, sortDirection, setSortOptions } = useSortOptions({ url });
 
   /* ----------------------------- Filter options ----------------------------- */
-  const { selectedTypeById, valueUnder, setFilterOptions } = useFilterOptions({ url });
+  const { selectedTypeById, valueUnder, searchWord, setFilterOptions } = useFilterOptions({ url });
 
   /* ------------------------------ Fetching data ----------------------------- */
   const {
@@ -25,7 +25,8 @@ export const EntityContextProvider = ({ url, children }) => {
     sortAttribute,
     sortDirection,
     selectedTypeById,
-    valueUnder
+    valueUnder,
+    searchWord
   });
 
 
@@ -48,7 +49,8 @@ export const EntityContextProvider = ({ url, children }) => {
         // filter options
         selectedTypeById,
         valueUnder,
-        setFilterOptions 
+        searchWord,
+        setFilterOptions
       }}
     >
       {children}

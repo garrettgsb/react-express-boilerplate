@@ -24,9 +24,11 @@ export const Header = ({ url }) => {
         >
           {title} in your area
         </h1>
-        <aside className="flex gap-5 justify-center">
-          <SortOptions url={url} />
-          <FilterOptions url={url} />
+        <aside>
+          <div className="flex gap-5 justify-center">
+            <SortOptions url={url} />
+            <FilterOptions url={url} />
+          </div>
         </aside>
       </header>
     </>

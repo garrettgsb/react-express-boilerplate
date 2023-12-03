@@ -33,7 +33,8 @@ export const EntityTable = ({ url, likesData }) => {
     sortDirection,
     // filtering
     selectedTypeById,
-    valueUnder
+    valueUnder,
+    searchWord
   } = useEntityContext();
 
   const gridRef = useRef(null);
@@ -65,7 +66,8 @@ export const EntityTable = ({ url, likesData }) => {
             sortAttribute,
             sortDirection,
             selectedTypeById,
-            valueUnder
+            valueUnder,
+            searchWord
           }
         );
       }
@@ -79,7 +81,8 @@ export const EntityTable = ({ url, likesData }) => {
       sortAttribute,
       sortDirection,
       selectedTypeById,
-      valueUnder
+      valueUnder,
+      searchWord
     ]
   );
 
