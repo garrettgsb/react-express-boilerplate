@@ -4,66 +4,66 @@
 
 When can you add two to eleven and get one as the correct answer?
 A. When you add two hours to eleven o'clock, you get one o'clock. (correct answer)
-B.
-C.
-D.
+B. When you add two minutes to eleven minutes past an hour, you get one minute past the next hour.
+C. When you add two months to November, you get January, which is the first month of the year.
+D. When you add two days to the 11th day of the month, you get the 1st day of the next month.
 `Hint: Think of time`
 
 What do these words have in common? Fed, Moon, Bab, Feed, High
-A.
+A. The words are all related to astronomy.
 B. The words are made up of 3 consecutive letters of the alphabet. (correct answer)
-C.
-D.
-`Hint: The hint`
+C. The words are all palindromes.
+D. The words are all related to eating and food.
+`Hint: Pay attention to the vowels in each word and their arrangement`
 
 Which of the following words does not belong with the others and why? Father, Aunt, Sister, Cousin, Mother, Uncle
-A.
-B.
-C. Cousin. (correct answer)
-D.
-`Hint: The hint`
+A. Father
+B. Aunt
+C. Cousin (correct answer)
+D. Sister
+`Hint: Think about the pronouns for each word`
 
 What does no man want, yet no man wants to lose?
-A.
-B.
-C.
-D. A bald head. (correct answer)
-`Hint: The hint`
+A. His partner
+B. Gun
+C. Car 
+D. A bald head (correct answer)
+`Hint: Something men lose with age`
 
 Which word below logically comes next in the following list? Choice, Box, Kick, Oboe
 A. Dice (correct answer)
 B. Box
 C. Kick
 D. Oboe
-`Hint: The hint`
+`Hint: Think alphabetically`
 
 If it takes six men six days to dig six holes, how long will it take one man to dig half a hole?
-A.
+A. Nine days
 B. There is no such thing as half a hole. A hole is a hole. (correct answer)
-C.
-D.
-`Hint: The hint`
+C. Three days
+D. One day
+`Hint: Can there be half a hole?`
 
 What is very unusual about the following words? Bough, Cough, Dough, Rough, Through
-A.
-B.
+A. They are in alphabetical order
+B. Hard to spell
 C. They all end in O-U-G-H, and none of them rhyme. (correct answer)
-D.
-`Hint: The hint`
+D. All the above
+`Hint: Read each word out loud and think about how they sound`
 
 How high would you have to count before you would use the letter A in the English language spelling of a whole number?
-A.
-B.
-C.
+A. One hundred
+B. One million
+C. Ten
 D. One Thousand (correct answer)
-`Hint: The hint`
+`Hint: Consider the alphabetical order of the English language spelling of numbers.`
 
 Why is a manhole cover round? (Give two reasons.)
 A.It cannot fall through the hole and it can easily be moved by rolling (correct answer)
 B.
 C.
 D.
-`Hint: The hint`
+`Hint: Think about the problems having a round cover would solve`
 
 What is the next letter in the following sequence? M A M J J A S O 
 A.
