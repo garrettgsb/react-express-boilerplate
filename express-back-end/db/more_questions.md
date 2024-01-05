@@ -59,108 +59,108 @@ D. One Thousand (correct answer)
 `Hint: Consider the alphabetical order of the English language spelling of numbers.`
 
 Why is a manhole cover round? (Give two reasons.)
-A.It cannot fall through the hole and it can easily be moved by rolling (correct answer)
-B.
-C.
-D.
+A. It cannot fall through the hole and it can easily be moved by rolling (correct answer)
+B. A round cover is more cost-effective to manufacture than other shapes.
+C. Round covers are less likely to injure someone if accidentally dropped or rolled.
+D. A round shape ensures that the cover will fit securely into the manhole opening, preventing debris and water from entering.
 `Hint: Think about the problems having a round cover would solve`
 
 What is the next letter in the following sequence? M A M J J A S O 
-A.
+A. A
 B. N (correct answer)
-C.
-D.
-`Hint: The hint`
+C. B
+D. C
+`Hint: Think of a calendar`
 
 A pair of twins is how many people?
-A.
-B.
+A. Four
+B. One
 C. Two (correct answer)
-D.
-`Hint: The hint`
+D. Six
+`Hint: How many is a twin`
 
 What do these words have in common? Tram, Dial, Spool, Ward, Decal, Strap
-A.
-B.
-C.
+A. Each word is a palindrome.
+B. Each word is related to transportation.
+C. Each word is a type of tool.
 D.Each word forms another word when the letters are reversed. (correct answer)
-`Hint: The hint`
+`Hint: Consider the arrangement and reversal of letters in each word`
 
 Which word logically comes next in the list below? Shine, Light, Stone, Struck, Beam
 A. Less (correct answer)
 B. Bright
 C. Heavy
 D. Stable
-`Hint: The hint`
+`Hint: Think about the sequence and its relation to weight or intensity.`
 
 ## Round Three
 
 What do these five-letter words have in common? Deity, First, Forty, Abort, Films, Abhor
-A.
+A. The words are all related to numbers.
 B. The letters in each word are in alphabetical order. (correct answer)
-C.
-D.
-`Hint: The hint`
+C.  Each word has four consonants and one vowel
+D. The letters in each word are in reverse alphabetical order
+`Hint: Consider the arrangement of letters in each word`
 
 Rearrange the following letters to make one word. NEW DOOR
-A.
-B.
+A. OWN RODE
+B. RED WOON
 C. ONE WORD (correct answer)
-D.
-`Hint: The hint`
+D. WORN DOE
+`Hint: Think literally`
 
-Which one does not belong and why? French, Nun, Malayalam, Too hot to hoot, Race car, Puff up
-A.
-B.
-C.
+Which one does not belong? French, Nun, Malayalam, Too hot to hoot, Race car, Puff up
+A. Nun
+B. Too hot to hoot
+C. Race car
 D. French (correct answer)
 `Hint: Your looking for the one that is not a palindrome`
 
 What came first, the chicken or the egg?
 A. The egg (correct answer)
-B.
+B. The chicken evolved from a bird that was not quite a chicken, laying the first chicken egg 
 C.
 D.
-`Hint: The hint`
+`Hint: Think about the natural progression of life cycles.`
 
-A particular pumpkin weighs 3/4 of a pound plus 3/4 of a pumpkin. How much des this pumpkin weigh?
-A.
+A particular pumpkin weighs 3/4 of a pound plus 3/4 of a pumpkin. How much does this pumpkin weigh?
+A. One pound
 B. Three pounds (correct answer)
-C.
-D.
-`Hint: The hint`
+C. two pounds
+D. 1.5 pounds
+`Hint: Consider the wording carefully`
 
 How can it be that a man was once married to the sister of his widow?
 A.
 B.
 C.The man married his wife's sister first (correct answer)
 D.
-`Hint: The hint`
+`Hint: Pay attention to the wording and relationships`
 
 What is the third hand on a watch or clock called?
 A.
-B.
+B. The hour hand
 C.
 D.The second hand (correct answer)
-`Hint: The hint`
+`Hint:  Consider the typical functions of the hands on a clock`
 
 Joanne's birthday is January 15th, but she always celebrates it in the summer. Why?
 A.Joanne lives in the southern hemisphere (correct answer)
 B.
 C.
 D.
-`Hint: The hint`
+`Hint: Think about global differences`
 
 Ben can never tell a lie. George can never tell the truth. One of them said, "The other one said he is George." Which one said that?
-A.
-B.George (correct answer)
-C.
-D.
-`Hint: The hint`
+A. Neither
+B. George (correct answer)
+C. Ben
+D. Both
+`Hint: Consider the implications of each person's statement`
 
 If a wheel has 64 spokes, how many spaces are there between the spokes?
-A.
-B.
+A. 62
+B. 65
 C. 64 (correct answer)
-D.
-`Hint: The hint`
+D. 63
+`Hint: Visualize the spaces between the spokes`
