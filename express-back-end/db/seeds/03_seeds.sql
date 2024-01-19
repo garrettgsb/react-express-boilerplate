@@ -27,13 +27,13 @@ INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, Op
 VALUES ('Why is a manhole cover round?', 2, 'Hint: Think about the problems having a round cover would solve', 'It cannot fall through the hole and it can easily be moved by rolling', 'A round cover is more cost-effective to manufacture than other shapes.', 'Round covers are less likely to injure someone if accidentally dropped or rolled.', 'A round shape ensures that the cover will fit securely into the manhole opening, preventing debris and water from entering.', 'A', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('What is the next letter in the following sequence? M A M J J A S O', 2, 'Hint: Think of a calendar', 'A', 'N (correct answer)', 'B', 'C', 'B', NOW());
+VALUES ('What is the next letter in the following sequence? M A M J J A S O', 2, 'Hint: Think of a calendar', 'A', 'N', 'B', 'C', 'B', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('A pair of twins is how many people?', 2, 'Hint: How many is a twin', 'Four', 'One', 'Two (correct answer)', 'Six', 'C', NOW());
+VALUES ('A pair of twins is how many people?', 2, 'Hint: How many is a twin', 'Four', 'One', 'Two', 'Six', 'C', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('What do these words have in common? Tram, Dial, Spool, Ward, Decal, Strap', 2, 'Hint: Consider the arrangement and reversal of letters in each word', 'Each word is a palindrome.', 'Each word is related to transportation.', 'Each word is a type of tool.', 'Each word forms another word when the letters are reversed. (correct answer)', 'D', NOW());
+VALUES ('What do these words have in common? Tram, Dial, Spool, Ward, Decal, Strap', 2, 'Hint: Consider the arrangement and reversal of letters in each word', 'Each word is a palindrome.', 'Each word is related to transportation.', 'Each word is a type of tool.', 'Each word forms another word when the letters are reversed.', 'D', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
 VALUES ('Which word logically comes next in the list below? Shine, Light, Stone, Struck, Beam', 2, 'Hint: Think about the sequence and its relation to weight or intensity.', 'Less (correct answer)', 'Bright', 'Heavy', 'Stable', 'A', NOW());
@@ -41,31 +41,31 @@ VALUES ('Which word logically comes next in the list below? Shine, Light, Stone,
 
 -- Round Three
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('What do these five-letter words have in common? Deity, First, Forty, Abort, Films, Abhor', 3, 'Hint: Consider the arrangement of letters in each word', 'The words are all related to numbers.', 'The letters in each word are in alphabetical order. (correct answer)', 'Each word has four consonants and one vowel', 'The letters in each word are in reverse alphabetical order', 'B', NOW());
+VALUES ('What do these five-letter words have in common? Deity, First, Forty, Abort, Films, Abhor', 3, 'Hint: Consider the arrangement of letters in each word', 'The words are all related to numbers.', 'The letters in each word are in alphabetical order.', 'Each word has four consonants and one vowel', 'The letters in each word are in reverse alphabetical order', 'B', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('Rearrange the following letters to make one word. NEW DOOR', 3, 'Hint: Think literally', 'OWN RODE', 'RED WOON', 'ONE WORD (correct answer)', 'WORN DOE', 'C', NOW());
+VALUES ('Rearrange the following letters to make one word. NEW DOOR', 3, 'Hint: Think literally', 'OWN RODE', 'RED WOON', 'ONE WORD', 'WORN DOE', 'C', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('Which one does not belong? French, Nun, Malayalam, Too hot to hoot, Race car, Puff up', 3, 'Hint: Your looking for the one that is not a palindrome', 'Nun', 'Too hot to hoot', 'Race car', 'French (correct answer)', 'D', NOW());
+VALUES ('Which one does not belong? French, Nun, Malayalam, Too hot to hoot, Race car, Puff up', 3, 'Hint: Your looking for the one that is not a palindrome', 'Nun', 'Too hot to hoot', 'Race car', 'French', 'D', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('What came first, the chicken or the egg?', 3, 'Hint: Think about the natural progression of life cycles.', 'The egg (correct answer)', NULL, NULL, NULL, 'A', NOW());
+VALUES ('What came first, the chicken or the egg?', 3, 'Hint: Think about the natural progression of life cycles.', 'The egg', NULL, NULL, NULL, 'A', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('A particular pumpkin weighs 3/4 of a pound plus 3/4 of a pumpkin. How much does this pumpkin weigh?', 3, 'Hint: Consider the wording carefully', 'One pound', 'Three pounds (correct answer)', 'Two pounds', '1.5 pounds', 'B', NOW());
+VALUES ('A particular pumpkin weighs 3/4 of a pound plus 3/4 of a pumpkin. How much does this pumpkin weigh?', 3, 'Hint: Consider the wording carefully', 'One pound', 'Three pounds', 'Two pounds', '1.5 pounds', 'B', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('How can it be that a man was once married to the sister of his widow?', 3, 'Hint: Pay attention to the wording and relationships', NULL, NULL, 'The man married his wife''s sister first (correct answer)', NULL, 'C', NOW());
+VALUES ('How can it be that a man was once married to the sister of his widow?', 3, 'Hint: Pay attention to the wording and relationships', NULL, NULL, 'The man married his wife''s sister first', NULL, 'C', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('What is the third hand on a watch or clock called?', 3, 'Hint: Consider the typical functions of the hands on a clock', NULL, 'The hour hand', NULL, 'The second hand (correct answer)', 'D', NOW());
+VALUES ('What is the third hand on a watch or clock called?', 3, 'Hint: Consider the typical functions of the hands on a clock', NULL, 'The hour hand', NULL, 'The second hand', 'D', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('Joanne''s birthday is January 15th, but she always celebrates it in the summer. Why?', 3, 'Hint: Think about global differences', 'Joanne lives in the southern hemisphere (correct answer)', NULL, NULL, NULL, 'A', NOW());
+VALUES ('Joanne''s birthday is January 15th, but she always celebrates it in the summer. Why?', 3, 'Hint: Think about global differences', 'Joanne lives in the southern hemisphere', NULL, NULL, NULL, 'A', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('Ben can never tell a lie. George can never tell the truth. One of them said, "The other one said he is George." Which one said that?', 3, 'Hint: Consider the implications of each person''s statement', 'Neither', 'George (correct answer)', 'Ben', 'Both', 'B', NOW());
+VALUES ('Ben can never tell a lie. George can never tell the truth. One of them said, "The other one said he is George." Which one said that?', 3, 'Hint: Consider the implications of each person''s statement', 'Neither', 'George', 'Ben', 'Both', 'B', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('If a wheel has 64 spokes, how many spaces are there between the spokes?', 3, 'Hint: Visualize the spaces between the spokes', '62', '65', '64 (correct answer)', '63', 'C', NOW());
+VALUES ('If a wheel has 64 spokes, how many spaces are there between the spokes?', 3, 'Hint: Visualize the spaces between the spokes', '62', '65', '64', '63', 'C', NOW());
