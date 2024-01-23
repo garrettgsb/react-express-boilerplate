@@ -35,7 +35,7 @@ VALUES
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
 VALUES
   ('What do you call a group of wolves?', 2, 'Think about their behavior', 'A herd', 'A school', 'A pack', 'A flock', 'C', NOW()),
-  ('The marker does not want it, the buyer does not use it, and the user does not see it.', 2, 'Think about the context and purpose of the item mentioned.', 'Coffin', 'Notebook', 'Pen', 'Desk', 'A', NOW()),
+  ('The maker does not want it, the buyer does not use it, and the user does not see it.', 2, 'Think about the context and purpose of the item mentioned.', 'Coffin', 'Notebook', 'Pen', 'Desk', 'A', NOW()),
   ('What gas do plants absorb from the air?', 2, 'As essential gas.', 'Carbon Dioxide', 'Oxygen', 'Nitrogen', 'Helium', 'A', NOW()),
   ('What''s 2 + 2?', 2, 'Simple addition.', '4', '3', '5', '6', 'A', NOW()),
   ('Break it and it is better, immediately set, and harder to break again. What am I?', 2, 'Consider the context of something breaking and becoming better.', 'Glass', 'Bone', 'A record', 'Mirror', 'C', NOW()),
