@@ -136,14 +136,14 @@ B.
 C.The man married his wife's sister first (correct answer)
 D.
 `Hint: Pay attention to the wording and relationships`
-
+// null values here
 What is the third hand on a watch or clock called?
 A.
 B. The hour hand
 C.
 D.The second hand (correct answer)
 `Hint:  Consider the typical functions of the hands on a clock`
-
+// null values here
 Joanne's birthday is January 15th, but she always celebrates it in the summer. Why?
 A.Joanne lives in the southern hemisphere (correct answer)
 B.

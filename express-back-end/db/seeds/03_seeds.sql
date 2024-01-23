@@ -50,19 +50,24 @@ INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, Op
 VALUES ('Which one does not belong? French, Nun, Malayalam, Too hot to hoot, Race car, Puff up', 3, 'Hint: Your looking for the one that is not a palindrome', 'Nun', 'Too hot to hoot', 'Race car', 'French', 'D', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('What came first, the chicken or the egg?', 3, 'Hint: Think about the natural progression of life cycles.', 'The egg', NULL, NULL, NULL, 'A', NOW());
+VALUES ('What came first, the chicken or the egg?', 3, 'Hint: Think about the natural progression of life cycles.', 'The egg', 'The chicken', 'Both', 'Either', 'A', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
 VALUES ('A particular pumpkin weighs 3/4 of a pound plus 3/4 of a pumpkin. How much does this pumpkin weigh?', 3, 'Hint: Consider the wording carefully', 'One pound', 'Three pounds', 'Two pounds', '1.5 pounds', 'B', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('How can it be that a man was once married to the sister of his widow?', 3, 'Hint: Pay attention to the wording and relationships', NULL, NULL, 'The man married his wife''s sister first', NULL, 'C', NOW());
+VALUES ('How can it be that a man was once married to the sister of his widow?', 3, 'Hint: Pay attention to the wording and relationships', 'The man''s widow is his ex-wife, and he is currently married to her sister.', 'The man is currently married to his wife''s sister.', 'The man married his wife''s sister first', 'The man has not yet married but plans to marry his wife''s sister.', 'C', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('What is the third hand on a watch or clock called?', 3, 'Hint: Consider the typical functions of the hands on a clock', NULL, 'The hour hand', NULL, 'The second hand', 'D', NOW());
+VALUES ('What is the third hand on a watch or clock called?', 3, 'Hint: Consider the typical functions of the hands on a clock', 'The third hand', 'The hour hand', NULL, 'The second hand', 'Small hand', NOW());
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
-VALUES ('Joanne''s birthday is January 15th, but she always celebrates it in the summer. Why?', 3, 'Hint: Think about global differences', 'Joanne lives in the southern hemisphere', NULL, NULL, NULL, 'A', NOW());
+VALUES ('Joanne''s birthday is January 15th, but she always celebrates it in the summer. Why?', 3, 'Hint: Think about global differences', 
+        'Joanne lives in the southern hemisphere, where seasons are opposite to the northern hemisphere.', 
+        'Joanne prefers summer weather for her birthday celebrations.', 
+        'Joanne travels to a tropical destination to celebrate her birthday in the summer.', 
+        'Joanne''s cultural or religious practices involve celebrating birthdays in the summer.', 'A', NOW());
+
 
 INSERT INTO Question (Question, RoundNumber, Hint, OptionA, OptionB, OptionC, OptionD, Correct_Option, Created_At)
 VALUES ('Ben can never tell a lie. George can never tell the truth. One of them said, "The other one said he is George." Which one said that?', 3, 'Hint: Consider the implications of each person''s statement', 'Neither', 'George', 'Ben', 'Both', 'B', NOW());
