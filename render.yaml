@@ -1,0 +1,12 @@
+services:
+  - name: backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      DATABASE_URL: postgres://labber:labber@localhost:5432/quiz_app
+
+  - name: frontend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start

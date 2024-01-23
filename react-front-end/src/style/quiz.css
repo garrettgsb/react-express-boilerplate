@@ -1,0 +1,202 @@
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  background: linear-gradient(to right, #9c0fbb, #770890);
+}
+
+.game {
+  width: 60%;
+  height: 80%;
+  /* background-color: white; */
+  background-color: rgb(255, 255, 255);
+  padding: 20px 20px;
+  box-sizing: border-box;
+  border-radius: 15px
+}
+
+.quizjs-image {
+  width: 400px;
+  margin-top: 20px;
+}
+
+.round {
+  font-size: 30px;
+  font-family: "Playpen Sans", cursive;
+}
+
+.question-number {
+  font-size: 30px;
+  font-family: "Playpen Sans", cursive;
+}
+
+.questions {
+  font-size: 40px;
+  font-family: "Playpen Sans", cursive;
+  font-size: 20px;
+  height: 10px;
+}
+
+.question-number {
+  font-size: 20px;
+}
+
+.questions {
+  font-size: 30px;
+}
+
+.middle {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.answers {
+  font-size: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-top: 60px;
+}
+
+.buttons {
+  font-size: 30px;
+  border: 5px black solid;
+  margin-bottom: 0.5em;
+  background-color: rgb(245, 245, 241);
+  font-family: "Playpen Sans", cursive;
+  border-radius: 10px;
+}
+
+.buttons:hover {
+  background-color: #F6DF1E;
+  cursor: pointer;
+}
+
+.lives {
+  font-size: 30px;
+  font-family: "Playpen Sans", cursive;
+}
+
+.your-score {
+  font-size: 30px;
+  font-family: "Playpen Sans", cursive;
+}
+
+.powerUpButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.hint {
+  font-size: 30px;
+  font-family: "Playpen Sans", cursive;
+}
+
+.h-button {
+  font-size: 20px;
+  font-style: italic;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 5px 5px 5px #c9bebe;
+}
+.h-button:hover {
+  cursor: pointer;
+}
+
+.s-button {
+  font-size: 20px;
+  font-style: italic;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 5px 5px 5px #c9bebe;
+}
+.s-button:hover {
+  cursor: pointer;
+}
+
+.fifty-fifty-button {
+  font-size: 20px;
+  font-style: italic;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 5px 5px 5px #c9bebe;
+}
+.fifty-fifty-button:hover {
+  cursor: pointer;
+}
+
+.switch-button {
+  font-size: 20px;
+  font-style: italic;
+  border-radius: 10px;
+  padding: 5px 10px;
+  box-shadow: 5px 5px 5px #c9bebe;
+}
+.switch-button:hover {
+  cursor: pointer;
+}
+
+.dude {
+  width: 200px;
+}
+
+.dude2 {
+  width: 200px;
+}
+
+.dude3 {
+  width: 170px;
+}
+
+.timer {
+  color: red;
+  font-size: 40px;
+  font-family: "Playpen Sans", cursive;
+  font-size: 25px;
+}
+
+.game-over-popup h1 {
+  font-size: 50px;
+  color: rgb(242, 242, 234);
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: "Playpen Sans", cursive;
+}
+
+.game-over-popup li {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  font-size: 30px;
+}
+
+.game-over-buttons button {
+  font-size: 30px;
+  border: 5px black solid;
+  margin-bottom: 0.5em;
+  background-color: yellow;
+  font-family: "Pixelify Sans", sans-serif;
+  margin-left: 170px;
+  margin-top: 20px;
+}
+
+.game-over-buttons button:hover {
+  border: 5px yellow solid;
+  background-color: yellow;
+  cursor: pointer;
+}
+
+.game-over-buttons {
+  display: flex;
+  gap: 30px;
+  padding-right: 150px;
+}
+ 
