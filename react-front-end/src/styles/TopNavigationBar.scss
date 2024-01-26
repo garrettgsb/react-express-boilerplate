@@ -1,0 +1,13 @@
+.top-navigation-bar {
+    display: flex; // Use flexbox for the container
+    align-items: center; // Vertically center align items
+    justify-content: space-between; // Pushes the logo to the left and other items to the right
+  
+    .logo {
+      height: 60px; 
+      margin-left: 30px; 
+    }
+  
+    // Add other styles 
+  }
+  
