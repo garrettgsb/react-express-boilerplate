@@ -4,7 +4,7 @@
 	<base target="_top">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+	<link rel="stylesheet" type="text/css" href="styles.css" />
 	<title>Leaflet in js test</title>
 	
 	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
@@ -30,8 +30,8 @@
 <body>
 
 
-
-<div id="map" style="width: 600px; height: 400px;"></div>
+<div class="shape"></div>
+<div id="map" style="width: 300px; height: 300px; border-radius: 50%;"></div>
 <script>
 
 // TODO this needs to come from puppeteer, "locates" the relevant map tile for loading
@@ -43,7 +43,7 @@
 });
 
 	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //crs: L.CRS.EPSG3347,
+    //crs: L.CRS.EPSG3347, // okay to keep default
 		maxZoom: 19,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
