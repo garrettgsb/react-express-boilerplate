@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import axios from "axios";
-import "./App.css";
+import React, { Component } from 'react';
+import axios from 'axios';
+import TopNavigationBar from './components/TopNavigationBar';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -41,14 +42,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>{this.state.message}</h1>
-        <button onClick={this.fetchData}>Fetch Data</button>
-        <button onClick={this.captureScreenshot}>
-          Capture Screenshot
-        </button>
-        {this.state.screenshot && (
-          <img src={this.state.screenshot} alt="Screenshot" />
-        )}
+        <TopNavigationBar />
+        <h1>{ this.state.message }</h1>
+        <button onClick={this.fetchData} >
+          Fetch Data
+        </button>        
       </div>
     );
   }
