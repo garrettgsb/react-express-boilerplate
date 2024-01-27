@@ -5,6 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
 	<title>Leaflet in js test</title>
 	
 	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
@@ -50,6 +52,27 @@
 
 	const marker = L.marker([43.39943946993128,-80.42351211355113]).addTo(map)
 		.bindPopup('<b>Gas Station Name</b><br />$0.01/L').openPopup();
+	
+	// Read markers data from data.csv
+	$.get('gas_stations.csv', function(csvString) {
+
+	// Use PapaParse to convert string to array of objects
+	let data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+
+	// For each row, make marker and add it to the map
+	// For each row, columns `Latitude`, `Longitude`, and `Title` are required
+	for (let i in data) {
+		let row = data[i];
+
+		let marker = L.marker([row.lat, row.long], {
+			opacity: 1
+		}).bindPopup(row.premium);
+		
+		marker.addTo(map);
+	}
+
+});
+	
 
 	// const circle = L.circle([43.3, -80.42], {
 	// 	color: 'red',
