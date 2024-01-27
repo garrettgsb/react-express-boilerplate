@@ -58,13 +58,12 @@
 	// Read markers data from data.csv
 	let url = "https://raw.githubusercontent.com/ckats123/gas-station-locator/map-leaflet/leaflet-map/gas_stations.csv"
 	$.get(url, function(csvString) {
-
 	// Use PapaParse to convert string to array of objects
 	let data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
 	console.log(data);
 
-	// For each row, make marker and add it to the map
-	// For each row, columns `Latitude`, `Longitude`, and `Title` are required
+	// each row, make marker and add it to the map
+	//For each row, columns `Latitude`, `Longitude`, and `Title` are required
 	for (let i in data) {
 		let row = data[i];
 
