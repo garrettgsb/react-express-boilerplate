@@ -22,8 +22,8 @@
 			margin: 0;
 		}
 		.leaflet-container {
-			height: 400px;
-			width: 600px;
+			height: 900px;
+			width: 900px;
 			max-width: 100%;
 			max-height: 100%;
 		}
@@ -43,39 +43,46 @@
   var map = L.map('map', {
     center: [43.39,-80.423],
     //crs: L.CRS.EPSG4326,//3857,
-    zoom: 13
+    zoom: 10
 });
 
 	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //crs: L.CRS.EPSG3347, // okay to keep default
-		maxZoom: 19,
+		maxZoom: 22, //TBD tie this number to react with circular button
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
-	const marker = L.marker([43.39943946993128,-80.42351211355113]).addTo(map)
-		.bindPopup('<b>Gas Station Name</b><br />$0.01/L').openPopup();
-	
-	// Read markers data from data.csv
+	//------------------TBD replace this section with backend data later
+	// Read markers data from data.csv (an excerpt of backend with 3 rows from Kitchener)
 	let url = "https://raw.githubusercontent.com/ckats123/gas-station-locator/map-leaflet/leaflet-map/gas_stations.csv"
 	$.get(url, function(csvString) {
 	// Use PapaParse to convert string to array of objects
 	let data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
 	console.log(data);
+	//------------------------------------------------------
 
-	// each row, make marker and add it to the map
+	// for each row of data, make marker and add it to the map
 	//For each row, columns `Latitude`, `Longitude`, and `Title` are required
 	for (let i in data) {
 		let row = data[i];
-
 		let marker = L.marker([row.lat, row.long], {
 			opacity: 1
-		}).bindPopup(row.premium);
+			})
+			.addTo(map).bindPopup(`${row.title} <br> $${row.premium}/L`,
+			{autoClose:false, closeOnClick:false})
+			.openPopup();
 		
-		marker.addTo(map);
+		//marker.addTo(map);//.openPopup(); //this works on last one
 	}
 
 });
 	
+
+
+	//----------------test marker remove later
+	// const marker = L.marker([43.39943946993128,-80.42351211355113]).addTo(map)
+	// 	.bindPopup('<b>Gas Station Name</b><br />$0.01/L').openPopup();
+	//---------------------------------------------
 
 	// const circle = L.circle([43.3, -80.42], {
 	// 	color: 'red',
