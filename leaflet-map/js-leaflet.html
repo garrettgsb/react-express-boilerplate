@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="styles.css" />
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+
 
 	<title>Leaflet in js test</title>
 	
@@ -54,10 +56,12 @@
 		.bindPopup('<b>Gas Station Name</b><br />$0.01/L').openPopup();
 	
 	// Read markers data from data.csv
-	$.get('gas_stations.csv', function(csvString) {
+	let url = "https://raw.githubusercontent.com/ckats123/gas-station-locator/map-leaflet/leaflet-map/gas_stations.csv"
+	$.get(url, function(csvString) {
 
 	// Use PapaParse to convert string to array of objects
 	let data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+	console.log(data);
 
 	// For each row, make marker and add it to the map
 	// For each row, columns `Latitude`, `Longitude`, and `Title` are required
@@ -87,7 +91,7 @@
 	// 	.openOn(map);
 
 
-	map.on('click', onMapClick);
+	// map.on('click', onMapClick);
 
 </script>
 
