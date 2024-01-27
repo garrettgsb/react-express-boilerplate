@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Boilerplate for the Express backend in an Express-React project",
   "main": "server.js",
+  "type": "module",
   "author": "garrettgsb",
   "license": "MIT",
   "scripts": {
@@ -10,8 +11,13 @@
   },
 
   "dependencies": {
+    "axios": "^1.6.7",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "nodemon": "^1.18.7"
+    "fetch": "^1.1.0",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.0.3",
+    "pg": "^8.11.3",
+    "pg-promise": "^11.5.4"
   }
 }
