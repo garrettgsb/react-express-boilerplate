@@ -45,12 +45,12 @@
   var map = L.map('map', {
     center: [48.407326,-123.329773],
     //crs: L.CRS.EPSG4326,//3857,
-    zoom: 10
+    zoom: 13 //TBD tie this number to react with circular button & somehow reload the map/page when pressed  
 });
 
 	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //crs: L.CRS.EPSG3347, // okay to keep default
-		maxZoom: 22, //TBD tie this number to react with circular button & somehow reload the map/page when pressed 
+		maxZoom: 30, //
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
@@ -60,19 +60,21 @@
 	$.get(url, function(csvString) {
 	// Use PapaParse to convert string to array of objects
 	let data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+	data.sort((a,b) => b.rating - a.rating) //TBD change rating to price
 	console.log(data); //checking the data is received
 	//------------------------------------------------------
 
 	// for each row of data, make marker and add it to the map
-	//For each row, columns `Latitude`, `Longitude`, and `Title` are required
+	//For each row, columns `lat`, `lng`, and `name` are required
 	for (let i in data) {
 		let row = data[i];
 		let marker = L.marker([row.lat, row.lng], {
 			opacity: 1
 			})
-			.addTo(map).bindPopup(`${row.name} <br> $${row.rating}/L`,
-			{autoClose:false, closeOnClick:false})
+			.addTo(map).bindPopup(`${row.name} <br> $${row.rating}/L`) //TBD change rating to price
+			//,{autoClose:false, closeOnClick:false}) //this makes everything open - can't see
 			.openPopup();
+			//marker.addTo(map);//.openPopup(); //this works on last one
 		}
 
 });
