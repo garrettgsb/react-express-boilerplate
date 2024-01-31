@@ -1,19 +1,28 @@
-const Express = require('express');
-const App = Express();
-const BodyParser = require('body-parser');
-const PORT = 8080;
+const express = require('express');
+const app = express();
+const cors = require('cors');
 
-// Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static('public'));
+// Middleware
+app.use(express.json());
+app.use(cors());
+
+// Import and use the user-related route files
+const loginRoute = require('./api/users/login');
+const signupRoute = require('./api/users/signup');
+const profileRoute = require('./api/users/profile');
+
+// Use the routes
+app.use('/api/users/login', loginRoute);
+app.use('/api/users/signup', signupRoute);
+app.use('/api/users/profile', profileRoute);
 
 // Sample GET route
-App.get('/api/data', (req, res) => res.json({
+app.get('/api/data', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
-App.listen(PORT, () => {
-  // eslint-disable-next-line no-console
+// Start the server
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
