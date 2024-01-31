@@ -1,12 +1,81 @@
 .top-navigation-bar {
-  display: flex; // Use flexbox for the container
-  align-items: center; // Vertically center align items
-  justify-content: space-between; // Pushes the logo to the left and other items to the right
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #b9b4b4; /* Background color for the navigation bar */
+  padding: 10px 20px; /* Add some padding to the top and bottom */
+  color: #fff; /* Text color */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+  position: relative;
 
   .logo {
     height: 60px;
     margin-left: 30px;
+    transition: transform 0.3s ease; /* Add a smooth transformation on hover */
+
+    &:hover {
+      transform: scale(1.1); /* Scale up the logo on hover */
+    }
   }
 
-  // Add other styles
+  .navigation-items {
+    display: flex;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px; /* Add spacing between navigation links */
+      font-weight: bold;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-transform: lowercase;
+      transition: color 0.3s ease; /* Smooth color transition on hover */
+
+      &:hover {
+        color: #b61f36; /* Change text color on hover */
+      }
+    }
+
+    span {
+      margin-right: 15px;
+      font-weight: bold;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-transform: lowercase;
+    }
+
+    button {
+      background-color: #ff69b4; /* Button background color */
+      color: #fff; /* Button text color */
+      border: none;
+      padding: 5px 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      letter-spacing: 1px;
+      text-transform: lowercase;
+      transition: background-color 0.3s ease; /* Smooth background color transition on hover */
+
+      &:hover {
+        background-color: #6a0f1c; /* Change button background color on hover */
+      }
+    }
+  }
+
+  .ribbon {
+    position: absolute;
+    top: 0;
+    left: -10px;
+    background-color: #6a0f1c; /* Ribbon background color */
+    color: #fff; /* Ribbon text color */
+    padding: 5px 20px;
+    border-top-right-radius: 50px; /* Rounded top-right corner */
+    border-bottom-right-radius: 50px; /* Rounded bottom-right corner */
+    transform: rotate(-45deg); /* Rotate the ribbon */
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
 }
