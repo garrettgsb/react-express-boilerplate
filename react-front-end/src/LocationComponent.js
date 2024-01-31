@@ -7,7 +7,7 @@ function CoordinatesComponent() {
 
   useEffect(() => {
     // Make a request to the Express.js server
-    fetch("http://localhost:3000/getCoordinates")
+    fetch("http://localhost:8080/getCoordinates")
       .then((response) => response.json())
       .then((data) => setCoordinates(data))
       .catch((error) => console.error("Error:", error));
