@@ -35,6 +35,27 @@ App.get("/capture-screenshot", async (req, res) => {
   }
 });
 
+app.get("/getCoordinates", async (req, res) => {
+  // Call a function to extract coordinates using Puppeteer
+  const coordinates = await getCoordinates();
+  res.json(coordinates);
+});
+
+async function getCoordinates() {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto("https://example.com"); // Replace with actual URL
+
+  // Use Puppeteer to interact with the webpage and extract coordinates
+  const coordinates = await page.evaluate(() => {
+    // Insert code to extract coordinates from the webpage
+    return { lat: 100, lng: 75 }; // Replace with actual coordinates
+  });
+
+  await browser.close();
+  return coordinates;
+}
+
 App.listen(PORT, () => {
   console.log(
     `Express seems to be listening on port ${PORT} so that's pretty good 👍`
