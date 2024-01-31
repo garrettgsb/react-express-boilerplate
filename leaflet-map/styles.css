@@ -1,0 +1,20 @@
+/*make a ring shape that changes colour on hover*/
+.shape{
+  display: inline-block;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 30px;
+  border-color: blueviolet;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top:0;
+  left:0;
+  /*pointer-events:none; to prevent inside circle click doing action*/
+}
+.shape:hover {
+  border-color: yellow;
+}
+/*https://stackoverflow.com/questions/48803180/css-circle-with-border-that-is-hollow-inside*/
+/*https://stackoverflow.com/questions/44710252/circular-border-with-spacing-on-hover
