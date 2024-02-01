@@ -12,9 +12,8 @@ import "../styles/login.scss";
 const Login = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -34,44 +33,37 @@ const Login = () => {
       : "/api/users/signup";
     const URL = `http://localhost:8080${endpoint}`;
 
-    const userData = {
-      userName,
-      password,
-      ...(isLogin ? {} : { email, firstName, lastName, phoneNumber }),
-    };
+    const userData = isLogin
+      ? { email, password }
+      : { email, password, firstName, lastName, phoneNumber };
 
     try {
       const response = await fetch(URL, {
         method: "POST",
-        body: JSON.stringify(userData),
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(userData),
       });
 
       if (!response.ok) {
-        if (response.status === 401) {
-          console.error("Authentication failed: Invalid credentials");
-        } else {
-          console.error(
-            `Network response was not ok (status: ${response.status})`
-          );
-        }
-        return;
+        throw new Error(
+          `Network response was not ok (status: ${response.status})`
+        );
       }
 
       const data = await response.json();
 
       if (isLogin) {
-        console.log("Navigating to home page");
-        localStorage.setItem("userName", data.userName);
-        localStorage.setItem("token", data.token);
+        console.log("Login successful", data);
+        localStorage.setItem("userData", JSON.stringify(data));
+        navigate("/Home");
       } else {
-        console.log("Signup Successful: ", data.message);
-        navigate("/Home"); // navigate to home page when successfully signup
+        console.log("Signup successful", data);
+        navigate("/login"); // navigate to login page after successful signup
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      console.error("Error:", error);
     }
   };
 
@@ -101,13 +93,13 @@ const Login = () => {
             margin="normal"
             required
             fullWidth
-            id="userName"
-            label="Username"
-            name="userName"
-            autoComplete="username"
+            id="email"
+            label="Email"
+            name="email"
+            autoComplete="email"
             autoFocus
-            value={userName}
-            onChange={updateField(setUserName)}
+            value={email}
+            onChange={updateField(setEmail)}
           />
           <TextField
             margin="normal"
@@ -124,18 +116,6 @@ const Login = () => {
 
           {!isLogin && (
             <>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="email"
-                label="Email"
-                type="email"
-                id="email"
-                autoComplete="email"
-                value={email}
-                onChange={updateField(setEmail)}
-              />
               <TextField
                 margin="normal"
                 fullWidth
