@@ -1,45 +1,49 @@
-const express = require('express');
+import express from "express";
+import cors from "cors";
+import puppeteer from "puppeteer";
+
 const app = express();
-const cors = require('cors');
+const PORT = process.env.PORT || 8080;
 
 // Middleware
 app.use(express.json());
 app.use(cors());
-const express = require('express');
-const app = express();
-const cors = require('cors');
+app.use(express.static("public"));
 
-// Middleware
-app.use(express.json());
-app.use(cors());
+// Express Configuration
+app.set("view engine", "ejs");
 
-// Import and use the user-related route files
-const loginRoute = require('./api/users/login');
-const signupRoute = require('./api/users/signup');
-const profileRoute = require('./api/users/profile');
+// Home Page Route
+app.get("/Home", (req, res) => {
+  res.render("index");
+});
 
-// Use the routes
-app.use('/api/users/login', loginRoute);
-app.use('/api/users/signup', signupRoute);
-app.use('/api/users/profile', profileRoute);
-// Import and use the user-related route files
-const loginRoute = require('./api/users/login');
-const signupRoute = require('./api/users/signup');
-const profileRoute = require('./api/users/profile');
+// Puppeteer Route
+app.get("/capture-screenshot", async (req, res) => {
+  try {
+    const browser = await puppeteer.launch({ headless: "new" }); // Launch with new headless mode
+    const page = await browser.newPage();
+    await page.goto("https://example.com");
+    const screenshot = await page.screenshot();
+    await browser.close();
 
-// Use the routes
-app.use('/api/users/login', loginRoute);
-app.use('/api/users/signup', signupRoute);
-app.use('/api/users/profile', profileRoute);
+    res.contentType("image/png").send(screenshot);
+  } catch (error) {
+    console.error("Error capturing screenshot:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 // Sample GET route
-app.get('/api/data', (req, res) => res.json({
-app.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+app.get("/api/data", (req, res) =>
+  res.json({
+    message: "Seems to work!",
+  })
+);
 
 // Start the server
-const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
+  console.log(
+    `Express seems to be listening on port ${PORT} so that's pretty good 👍`
+  );
 });
