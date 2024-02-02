@@ -37,7 +37,7 @@
 <div class="shape"></div>
 
 
-<div id="map" style="width: 300px; height: 300px; border-radius: 50%;"></div>
+<div id="map" style="width: 400px; height: 400px; border-radius: 50%;"></div>
 <script>
 
 // TODO @Sophia this needs to come from puppeteer, "locates" the relevant map tile for loading
@@ -93,7 +93,18 @@
 	}
 	console.log(getRangeKM())
 
-
+	//option to use this if query to limit results by range doesn't work.  NOT in use 
+	function distance(lat1,lon1,lat2,lon2){
+		var R = 6371; // km
+ 		return Math.acos(Math.sin(lat1)*Math.sin(lat2) + 
+			Math.cos(lat1)*Math.cos(lat2) *
+			Math.cos(lon2-lon1)) * R;
+	}
+	if (distance(station.lat, station.lon, user.lat, user.lon) <= desiredRadiusInKm){
+  	// include station
+	} else {
+  	// exclude station
+	}
 
 	
 </script>
