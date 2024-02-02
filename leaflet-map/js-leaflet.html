@@ -78,6 +78,23 @@
 		}
 
 });
+
+	//check current map range in km, return result in console
+	function getRangeKM(){
+			var bounds = map.getBounds();
+
+			var width = map.distance(bounds.getNorthWest(), bounds.getNorthEast()) / 1000;
+			var height = map.distance(bounds.getNorthWest(), bounds.getSouthWest()) / 1000;
+
+			return {
+					width,
+					height
+			}
+	}
+	console.log(getRangeKM())
+
+
+
 	
 </script>
 
