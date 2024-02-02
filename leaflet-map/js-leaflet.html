@@ -117,6 +117,25 @@
         };
       }
       console.log(getRangeKM());
+
+      //option to use this if query to limit results by range doesn't work.  NOT in use
+      function distance(lat1, lon1, lat2, lon2) {
+        var R = 6371; // km
+        return (
+          Math.acos(
+            Math.sin(lat1) * Math.sin(lat2) +
+              Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1)
+          ) * R
+        );
+      }
+      if (
+        distance(station.lat, station.lon, user.lat, user.lon) <=
+        desiredRadiusInKm
+      ) {
+        // include station
+      } else {
+        // exclude station
+      }
     </script>
   </body>
 </html>
