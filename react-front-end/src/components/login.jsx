@@ -25,8 +25,12 @@ const Login = () => {
 
         if (email && password) {
             console.log(email, password);
-            navigate('/Home');
+            // Mock authentication passed
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("userName", email); 
+            navigate('/Home'); 
         }
+        
     };
 
     return (
