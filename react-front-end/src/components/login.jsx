@@ -1,97 +1,77 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, TextField, Container, Box, Typography } from '@mui/material';
-import '../styles/login.scss';
-
+import React, { useState } from "react";
+import { TextField, Button, Grid, Paper } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const navigate = useNavigate();
-    const [isLogin, setIsLogin] = useState(true);
-    const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [password, setPassword] = useState("");
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
 
-    const toggleForm = () => {
-        setIsLogin(!isLogin);
-    };
+    const navigate = useNavigate();
 
-    const updateField = (setter) => (event) => {
-        setter(event.target.value);
-    };
-
-    const handleFormSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        const endpoint = isLogin ? "/api/users/login" : "/api/users/signup";
-        const URL = `http://localhost:8080${endpoint}`;
 
-        const userData = {
-            userName,
-            password,
-            ...(isLogin ? {} : { email, firstName, lastName, phoneNumber })
-        };
+        setEmailError(false);
+        setPasswordError(false);
 
-        try {
-            const response = await fetch(URL, {
-                method: 'POST',
-                body: JSON.stringify(userData),
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                if (response.status === 401) {
-                    console.error('Authentication failed: Invalid credentials');
-                } else {
-                    console.error(`Network response was not ok (status: ${response.status})`);
-                }
-                return;
-            }
-
-            const data = await response.json();
-
-            if (isLogin) {
-                console.log("Navigating to home page");
-                localStorage.setItem("userName", data.userName);
-                localStorage.setItem("token", data.token);
-               
-            } else {
-                console.log("Signup Successful: ", data.message);
-                navigate('/Home'); // navigate to home page when successfully signup
-            
-            }
-        } catch (error) {
-            console.error('Error:', error.message);
+        if (email === '') {
+            setEmailError(true);
         }
+        if (password === '') {
+            setPasswordError(true);
+        }
+
+        if (email && password) {
+            console.log(email, password);
+            // Mock authentication passed
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("userName", email); 
+            navigate('/Home'); 
+        }
+        
     };
 
     return (
-        <Container maxWidth="xs">
-            <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography component="h1" variant="h5" className="text-primary">
-                    {isLogin ? 'Login' : 'Sign Up'}
-                </Typography>
-                <Box component="form" onSubmit={handleFormSubmit} sx={{ mt: 1 }}>
-                    <TextField margin="normal" required fullWidth id="userName" label="Username" name="userName" autoComplete="username" autoFocus value={userName} onChange={updateField(setUserName)} />
-                    <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" value={password} onChange={updateField(setPassword)} />
-
-                    {!isLogin && (
-                        <>
-                            <TextField margin="normal" required fullWidth name="email" label="Email" type="email" id="email" autoComplete="email" value={email} onChange={updateField(setEmail)} />
-                            <TextField margin="normal" fullWidth name="firstName" label="First Name" id="firstName" value={firstName} onChange={updateField(setFirstName)} />
-                            <TextField margin="normal" fullWidth name="lastName" label="Last Name" id="lastName" value={lastName} onChange={updateField(setLastName)} />
-                            <TextField margin="normal" fullWidth name="phoneNumber" label="Phone Number" id="phoneNumber" value={phoneNumber} onChange={updateField(setPhoneNumber)} />
-                        </>
-                    )}
-
-                    <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} className="submit-button">{isLogin ? 'Login' : 'Sign Up'}</Button>
-                    <Button onClick={toggleForm} fullWidth variant="outlined" sx={{ mb: 2 }}>{isLogin ? 'Switch to Sign Up' : 'Switch to Login'}</Button>
-                </Box>
-            </Box>
-        </Container>
+        <Grid container spacing={2} justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
+            <Grid item xs={20} sm={6} style={{ display: 'flex', justifyContent: 'center' }}>
+                <img src="gasstation.png" alt="Gas Station Locator" style={{ width: '100%', maxHeight: '500px', objectFit: 'cover' }} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+                <Paper elevation={3} style={{ padding: '20px' }}>
+                    <form autoComplete="off" onSubmit={handleSubmit}>
+                        <h2>Login Form</h2>
+                        <TextField 
+                            label="Email"
+                            onChange={e => setEmail(e.target.value)}
+                            required
+                            variant="outlined"
+                            color="secondary"
+                            type="email"
+                            sx={{ mb: 3 }}
+                            fullWidth
+                            value={email}
+                            error={emailError}
+                        />
+                        <TextField 
+                            label="Password"
+                            onChange={e => setPassword(e.target.value)}
+                            required
+                            variant="outlined"
+                            color="secondary"
+                            type="password"
+                            value={password}
+                            error={passwordError}
+                            fullWidth
+                            sx={{ mb: 3 }}
+                        />
+                        <Button variant="outlined" color="secondary" type="submit">Login</Button>
+                    </form>
+                    <small>Need an account? <Link to="/Register">Register here</Link></small>
+                </Paper>
+            </Grid>
+        </Grid>
     );
 };
 

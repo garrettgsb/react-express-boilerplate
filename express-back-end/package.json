@@ -11,12 +11,18 @@
     "start": "concurrently \"npm run go\" \"cd path/to/your/react-app && npm start\""
   },
   "dependencies": {
+    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.1",
     "express": "^4.16.4",
-    "nodemon": "^1.18.7",
-    "pg": "^8.11.3"
+    "faker": "^5.5.3",
+    "fetch": "^1.1.0",
+    "pg": "^8.11.3",
+    "pg-promise": "^11.5.4"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "nodemon": "^3.0.3"
   }
 }
