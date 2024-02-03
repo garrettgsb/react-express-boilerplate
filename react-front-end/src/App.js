@@ -50,7 +50,7 @@ class App extends Component {
         <TopNavigationBar />
         <Container>
         <Routes>
-          <Route path="/Home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginWithNavigate />} />
           <Route path="/Register" element={<Register />} />
         </Routes>

@@ -10,11 +10,11 @@ const TopNavigationBar = () => {
 
   // Function to handle user logout
   const handleLogout = () => {
-    // Clear the isLoggedIn flag and userName from localStorage to log the user out
-    localStorage.setItem("isLoggedIn", "true");
-localStorage.setItem("userName", "User's Name");
-    // Redirect the user to the login page
-    navigate('/login');
+    // clear the isLoggedIn flag and userName from localStorage to log the user out
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userName");
+    // Redirect the user to the home page
+    navigate('/Home');
   };
 
   return (
