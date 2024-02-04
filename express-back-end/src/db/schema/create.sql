@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 DROP TABLE IF EXISTS gas_stations;
 CREATE TABLE gas_stations(
    id             INTEGER  NOT NULL PRIMARY KEY 
@@ -54,3 +55,15 @@ ALTER TABLE reviews
 ADD CONSTRAINT fk_gas_station
 FOREIGN KEY (gas_station_id)
 REFERENCES gas_stations(id);
+=======
+DROP TABLE IF EXISTS gas_stations; 
+CREATE TABLE gas_stations (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    rating DECIMAL,
+    user_ratings_total INTEGER,
+    vicinity VARCHAR(255),
+    lat DOUBLE PRECISION,
+    lng DOUBLE PRECISION
+);
+>>>>>>> 9ffa827 (added google seed)
