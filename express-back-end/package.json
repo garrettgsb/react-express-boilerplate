@@ -11,7 +11,6 @@
     "start": "concurrently \"npm run go\" \"cd path/to/your/react-app && npm start\""
   },
   "dependencies": {
-    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
