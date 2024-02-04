@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Container } from '@mui/system';
 import "./App.css";
-import TopNavigationBar from "./components/TopNavigationBar";
-import Home from "./components/Home";
-import Login from "./components/login";
-import SignUp from "./components/signup";
+import TopNavigationBar from './components/TopNavigationBar';
+import Home from './components/Home';
+import Login from './components/login';
+import Register from './components/Register';
 
 class App extends Component {
   constructor(props) {
@@ -47,11 +48,13 @@ class App extends Component {
     return (
       <div className="App">
         <TopNavigationBar />
+        <Container>
         <Routes>
           <Route path="/Home" element={<Home />} />
           <Route path="/login" element={<LoginWithNavigate />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/Register" element={<Register />} />
         </Routes>
+        </Container>
         <h1>{this.state.message}</h1>
         <button onClick={this.fetchData}>Fetch Data</button>
         <button onClick={this.captureScreenshot}>
