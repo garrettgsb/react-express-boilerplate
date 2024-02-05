@@ -56,7 +56,7 @@
       // TODO @Sophia this needs to come from puppeteer, "locates" the relevant map tile for loading
       //const map = L.map('map').setView([-80.423,43.39], 10);
       var map = L.map("map", {
-        center: [48.407326, -123.329773],
+        center: [48.407326, -123.329773], // from Location component 
         //crs: L.CRS.EPSG4326,//3857,
         zoom: 13, //TBD tie this number to react with circular button & somehow reload the map/page when pressed
       });
