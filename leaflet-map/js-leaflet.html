@@ -33,21 +33,52 @@
 </head>
 <body>
 
-
 <div class="shape"></div>
 
-
 <div id="map" style="width: 400px; height: 400px; border-radius: 50%;"></div>
+
+<p id="autogeolocation"></p>
+
 <script>
 
-// TODO @Sophia this needs to come from puppeteer, "locates" the relevant map tile for loading
-	//const map = L.map('map').setView([-80.423,43.39], 10);
-  var map = L.map('map', {
-    center: [48.407326,-123.329773],
-    //crs: L.CRS.EPSG4326,//3857,
-    zoom: 13 //TBD tie this number to react with circular button & somehow reload the map/page when pressed  
-});
+//if user allowed autogeolocation then initializeMapAndLocator works,
+//TODO if not, then use the postal code/city to center
+// } else { // some dummy default location
+// 	let map = L.map('map', {
+// 		zoom: 13, //TBD tie this number to react with circular button & somehow reload the map/page when pressed  
+//     center: [48.407326,-123.329773]
+// 	})
+// }
 
+function initializeMapAndLocator(){
+
+var map = L.map('map')
+
+googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+        zoom: 13,
+        subdomains:['mt0','mt1','mt2','mt3']
+    }).addTo(map);
+
+map.locate({setView: true, 
+             maxZoom: 16, 
+             watch:true
+           });
+
+function onLocationFound(e) {
+    var radius = e.accuracy / 2;
+    L.marker(e.latlng).addTo(map)
+        .bindPopup("From here").openPopup();
+    L.circle(e.latlng, radius).addTo(map);
+}
+
+map.on('locationfound', onLocationFound);
+
+}
+
+initializeMapAndLocator();
+//======================
+
+ 
 	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //crs: L.CRS.EPSG3347, // okay to keep default
 		maxZoom: 30, //
@@ -105,6 +136,39 @@
 	} else {
   	// exclude station
 	}
+
+
+//=====================
+//// tried seek permission to obtain the user's location automatically w/ getCurrentPosition(). 
+
+//	<button onclick="getLocation()">Use my device location</button>
+//A call to this method asynchronously reports on the user's current location.
+//set timeout in case there's no response to the request for permission 
+
+	// let x = document.getElementById("autogeolocation");
+
+	// const options = {
+  // 	timeout: 5000
+	// };
+
+	// function getLocation() {
+	// 	if (navigator.geolocation) {
+	// 		navigator.geolocation.getCurrentPosition(showPosition, error, options);
+	// 	} else { 
+	// 		x.innerHTML = "Geolocation is not supported by this device.";
+	// 	}
+	// }
+
+	// function error(err) {
+  // console.warn(`ERROR(${err.code}): ${err.message}`);
+	// }
+
+	// function showPosition(position) {
+	// 	x.innerHTML = "Latitude: " + position.coords.latitude + 
+	// 	"<br>Longitude: " + position.coords.longitude;
+	// }
+
+
 
 	
 </script>
