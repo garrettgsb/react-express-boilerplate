@@ -7,6 +7,8 @@ import TopNavigationBar from './components/TopNavigationBar';
 import Home from './components/Home';
 import Login from './components/login';
 import Register from './components/Register';
+import "./App.css";
+import 'leaflet/dist/leaflet.css';
 
 class App extends Component {
   constructor(props) {
