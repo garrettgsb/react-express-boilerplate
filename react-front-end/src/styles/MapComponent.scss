@@ -1,0 +1,29 @@
+/* MapComponent.css */
+.mapContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #map {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    border: 5px solid blue;
+    overflow: hidden;
+    /* Center the map container. Not strictly necessary with flexbox on body,
+       but useful if the map is within another container. */
+    margin: auto;
+  }
+  
+  /* Add this if your map is within a specific container other than body,
+     and you want that container to be centered as well. */
+  .mapContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Adjust width as needed */
+    height: 100vh; /* Use viewport height to make it center vertically */
+  }
