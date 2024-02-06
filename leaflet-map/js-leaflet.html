@@ -56,50 +56,67 @@
 
 <script>
 
-//if user allowed autogeolocation then initializeMapAndLocator works,
-//TODO if not, then use the postal code/city to center
-// } else { // some dummy default location
-// 	let map = L.map('map', {
-// 		zoom: 13, //TBD tie this number to react with circular button & somehow reload the map/page when pressed  
-//     center: [48.407326,-123.329773]
-// 	})
-// }
+let map = L.map('map')
 
+//if user allowed autogeolocation then initializeMapAndLocator works,
+//initialize 
 function initializeMapAndLocator(){
 
-var map = L.map('map')
+	googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+					maxZoom: 13, 
+					subdomains:['mt0','mt1','mt2','mt3']
+			}).addTo(map);
 
-googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
-        zoom: 13,
-        subdomains:['mt0','mt1','mt2','mt3']
-    }).addTo(map);
+	map.locate({setView: true, 
+							maxZoom: 13, 
+						});
 
-map.locate({setView: true, 
-             maxZoom: 16, 
-             watch:true
-           });
+	function onLocationFound(e) {
+			var radius = e.accuracy / 2;
+			L.marker(e.latlng).addTo(map)
+					//.bindPopup("From here").openPopup(); //origin location
+			L.circle(e.latlng, radius).addTo(map);
+			console.log(e)
+	}
 
-function onLocationFound(e) {
-    var radius = e.accuracy / 2;
-    L.marker(e.latlng).addTo(map)
-        .bindPopup("From here").openPopup();
-    L.circle(e.latlng, radius).addTo(map);
-}
+	//replace with query output from Feda
+	let url = "https://raw.githubusercontent.com/ckats123/gas-station-locator/geoloc/leaflet-map/gas_stations.csv"
+		$.get(url, function(csvString) {
+		// Use PapaParse to convert string to array of objects
+		let data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+		data.sort((a,b) => b.regular_price - a.regular_price) 
+		console.log(data); //checking the data is received
+		//------------------------------------------------------
+
+		// for each row of data, make marker and add it to the map
+		//For each row, columns `lat`, `lng`, and `name` are required
+		for (let i in data) {
+			let row = data[i];
+			let marker = L.marker([row.lat, row.lng], {
+				opacity: 1
+				})
+				.addTo(map).bindPopup(`${row.name} <br> $${row.rating}/L`) //TBD change rating to price
+				//,{autoClose:false, closeOnClick:false}) //this makes everything open - can't see
+				.openPopup();
+				//marker.addTo(map);//.openPopup(); //this works on last one
+			}
+
+	});
 
 map.on('locationfound', onLocationFound);
-
 }
 
 initializeMapAndLocator();
 //======================
 
  
-	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //crs: L.CRS.EPSG3347, // okay to keep default
-		maxZoom: 30, //
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	}).addTo(map);
+// 	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//   //   //crs: L.CRS.EPSG3347, // okay to keep default
+// 	 	maxZoom: 30, //
+// 	 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+// 	 }).addTo(map);
 
+<<<<<<< HEAD
         return {
           width,
           height,
@@ -141,8 +158,32 @@ initializeMapAndLocator();
 			.openPopup();
 			//marker.addTo(map);//.openPopup(); //this works on last one
 		}
+=======
+// 	//TBD replace this section with backend data later @Feda
+// 	// Read markers data from csv temporarily loaded on github from latest backend query format
+// 	let url = "https://raw.githubusercontent.com/ckats123/gas-station-locator/geoloc/leaflet-map/gas_stations.csv"
+// 	$.get(url, function(csvString) {
+// 	// Use PapaParse to convert string to array of objects
+// 	let data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+// 	data.sort((a,b) => b.rating - a.rating) //TBD change rating to price
+// 	console.log(data); //checking the data is received
+// 	//------------------------------------------------------
 
-});
+// 	// for each row of data, make marker and add it to the map
+// 	//For each row, columns `lat`, `lng`, and `name` are required
+// 	for (let i in data) {
+// 		let row = data[i];
+// 		let marker = L.marker([row.lat, row.lng], {
+// 			opacity: 1
+// 			})
+// 			.addTo(map).bindPopup(`${row.name} <br> $${row.rating}/L`) //TBD change rating to price
+// 			//,{autoClose:false, closeOnClick:false}) //this makes everything open - can't see
+// 			.openPopup();
+// 			//marker.addTo(map);//.openPopup(); //this works on last one
+// 		}
+>>>>>>> 7cb07c7 (update mock csv query result to match Feda output.  move map variable out of function scope to correct problem showing other gas stations)
+
+// });
 
 	//check current map range in km, return result in console
 	function getRangeKM(){
