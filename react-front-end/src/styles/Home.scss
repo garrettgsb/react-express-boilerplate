@@ -1,0 +1,14 @@
+.MapComponentContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.MapComponent {
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 5px solid blue;
+  overflow: hidden;
+}
