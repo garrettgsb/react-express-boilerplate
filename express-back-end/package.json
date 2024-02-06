@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "Boilerplate for the Express backend in an Express-React project",
   "main": "server.js",
-  "type": "module",
   "author": "garrettgsb",
   "license": "MIT",
   "scripts": {
     "go": "nodemon server.js",
-    "start": "concurrently \"npm run go\" \"cd path/to/your/react-app && npm start\""
+    "start": "concurrently \"npm run go\" \"cd ../react-front-end && npm start\""
   },
   "dependencies": {
     "axios": "^1.6.7",
@@ -18,10 +17,11 @@
     "fetch": "^1.1.0",
     "node-fetch": "^3.3.2",
     "pg": "^8.11.3",
-    "pg-promise": "^11.5.4"
+    "pg-promise": "^11.5.4",
+    "puppeteer": "^21.11.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.3",
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "nodemon": "^3.0.3"
   }
 }
