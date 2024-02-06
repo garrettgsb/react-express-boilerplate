@@ -1,7 +1,4 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Container } from '@mui/system';
+import React from 'react';
 import "./App.css";
 import TopNavigationBar from './components/TopNavigationBar';
 import Home from './components/Home';
@@ -12,23 +9,17 @@ import 'leaflet/dist/leaflet.css';
 import Search from "./components/Search";
 import WelcomePage from './components/WelcomePage';
 
-function App() {
 
+import MapComponent from './MapComponent';
+
+const App = () => {
   return (
-    <div className="App">
-      <TopNavigationBar />
-      <Routes>
-        <Route path="/" element={<WelcomePage />} /> {/* Render WelcomePage for the root route */}
-        <Route path="/Home" element={<Home />} />
-        <Route path="/login" element={<LoginWithNavigate />} />        <Route path="/register" element={<Register />} />
-        <Route path="/Search" element={<Search />} />
-      </Routes>
+    <div>
+      <h1>Your Gas Station Locator App</h1>
+      <MapComponent />
     </div>
   );
-}
-// Helper component to pass the navigate function to Login
-const LoginWithNavigate = () => {
-  const navigate = useNavigate();
-  return <Login navigate={navigate} />;
-}
+};
+
 export default App;
+

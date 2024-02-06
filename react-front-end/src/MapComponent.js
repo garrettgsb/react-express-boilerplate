@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
@@ -9,6 +10,15 @@ import 'leaflet/dist/leaflet.css';
 const GasStationMap = () => {
   const [map, setMap] = useState(null);
   const [gasStations, setGasStations] = useState([]);
+=======
+
+import React, { useEffect, useState } from 'react';
+import L from 'leaflet';
+import axios from 'axios';
+
+const MapComponent = () => {
+  const [map, setMap] = useState(null);
+>>>>>>> 4823c8b (queries)
 
   useEffect(() => {
     // Leaflet map initialization
@@ -26,11 +36,14 @@ const GasStationMap = () => {
     // Set the map state
     setMap(leafletMap);
 
+<<<<<<< HEAD
     // Fetch gas station data from the backend API
     axios.get('/api/gasStation')
       .then(response => setGasStations(response.data))
       .catch(error => console.error('Error fetching gas stations:', error));
 
+=======
+>>>>>>> 4823c8b (queries)
     return () => {
       if (leafletMap) {
         leafletMap.remove();
@@ -38,6 +51,28 @@ const GasStationMap = () => {
     };
   }, []);
 
+<<<<<<< HEAD
+=======
+  useEffect(() => {
+    if (map) {
+      // Fetch data from the backend and add markers to the map
+      axios.get('/api/gas-stations') 
+        .then(response => {
+          const data = response.data;
+          data.forEach(row => {
+            const marker = L.marker([row.lat, row.lng])
+              .addTo(map)
+              .bindPopup(`${row.name} <br> $${row.rating}/L`);
+            marker.openPopup();
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  }, [map]);
+
+>>>>>>> 4823c8b (queries)
   const getRangeKM = () => {
     if (map) {
       const bounds = map.getBounds();
@@ -52,6 +87,7 @@ const GasStationMap = () => {
     return null;
   };
 
+<<<<<<< HEAD
   return (
     <div id="map" style={{ height: '500px', width: '100%' }}>
       {map && (
@@ -100,3 +136,13 @@ const GasStationMap = () => {
 };
 
 export default GasStationMap;
+=======
+  console.log(getRangeKM());
+
+  return (
+    <div id="map" style={{ width: '400px', height: '400px', borderRadius: '50%' }} />
+  );
+};
+
+export default MapComponent;
+>>>>>>> 4823c8b (queries)

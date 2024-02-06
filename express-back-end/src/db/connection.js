@@ -12,9 +12,19 @@ const dbParams = {
 const db = new Pool(dbParams);
 
 db.connect(() => {
+  db.query ('select * from gas_stations limit 10', (err, res) => {
+    if (!err) {
+      console.log (res.rows);
+    } else {
+      console.log(err.message);
+    }
+  })
   console.log('Connected to database');
+
 });
 
+
+db.end;
 
 
 module.exports = db;
