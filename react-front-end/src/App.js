@@ -6,6 +6,7 @@ import Login from './components/login';
 import Register from './components/Register';
 import "./App.css";
 import 'leaflet/dist/leaflet.css';
+import Settings from "./components/Settings";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/login" element={<LoginWithNavigate />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/settings" element={<Settings />} />
+
       </Routes>
     </div>
   );
