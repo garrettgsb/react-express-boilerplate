@@ -28,8 +28,8 @@ const TopNavigationBar = () => {
       case 'account':
         navigate('/account'); // Navigation using navigate function
         break;
-      case 'settings':
-        navigate('/settings'); // Navigation using navigate function, ensure '/settings' is correctly configured in your router
+      case 'search':
+        navigate('/Search'); 
         break;
       case 'logout':
         handleLogout(); // Handle the logout logic
@@ -42,7 +42,7 @@ const TopNavigationBar = () => {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userName");
-    navigate('/home'); // Assuming '/home' is a valid path; use '/' if you want to navigate to the root
+    navigate('/');
   };
 
   return (
@@ -76,7 +76,7 @@ const TopNavigationBar = () => {
                 }}
               >
                 <MenuItem onClick={() => handleClose('account')}>Account</MenuItem>
-                <MenuItem onClick={() => handleClose('settings')}>Settings</MenuItem>
+                <MenuItem onClick={() => handleClose('search')}>Search</MenuItem>
                 <MenuItem onClick={() => handleClose('logout')}>Logout</MenuItem>
               </Menu>
             )}

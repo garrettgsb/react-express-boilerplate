@@ -1,0 +1,51 @@
+
+  
+  .welcome-page {
+    display: flex;
+    align-items: center;
+    height: calc(100vh - 50px); /* Subtract the height of the top navigation bar */
+  }
+  
+  .text-container {
+    flex: 1;
+    padding: 20px;
+    color: blue;
+    text-align: right;
+    opacity: 0;
+    animation: fadeInText 1s ease forwards;
+  }
+  
+  @keyframes fadeInText {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .image-container {
+    flex: 1;
+    text-align: center;
+    opacity: 0;
+    animation: fadeInImage 1s ease forwards;
+  }
+  
+  .image-container .image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  @keyframes fadeInImage {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
