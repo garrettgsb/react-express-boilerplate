@@ -26,13 +26,13 @@ const TopNavigationBar = () => {
 
     switch (action) {
       case 'account':
-        navigate('/account'); // Replace '/account' with the actual path to the account page
+        navigate('/account'); // Navigation using navigate function
         break;
       case 'settings':
-        navigate('/settings'); // Replace '/settings' with the actual path to the settings page
+        navigate('/settings'); // Navigation using navigate function, ensure '/settings' is correctly configured in your router
         break;
       case 'logout':
-        handleLogout(); // Handle the logout logic (already defined in your code)
+        handleLogout(); // Handle the logout logic
         break;
       default:
         break;
@@ -42,7 +42,7 @@ const TopNavigationBar = () => {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userName");
-    navigate('/home');
+    navigate('/home'); // Assuming '/home' is a valid path; use '/' if you want to navigate to the root
   };
 
   return (
@@ -54,7 +54,6 @@ const TopNavigationBar = () => {
         {isLoggedIn ? (
           <>
             <span>Hello, {userName}</span>
-            {/* Move this span before the MenuIcon to display the heart icon first */}
             <span onClick={handleFavIconClick} style={{ cursor: "pointer" }}>
               <FavIcon selected="true" />
             </span>
@@ -64,24 +63,22 @@ const TopNavigationBar = () => {
               aria-haspopup="true"
               aria-expanded={open ? 'true' : undefined}
               onClick={handleClick}
-              style={{ color: 'white', marginLeft: '10px' }} // Added marginLeft for spacing
+              style={{ color: 'white', marginLeft: '10px' }}
             />
             {open && (
-              <div>
-                <Menu
-                  id="basic-menu"
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={() => handleClose()}
-                  MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                  }}
-                >
-                  <MenuItem onClick={() => handleClose('account')}>Account</MenuItem>
-                  <MenuItem onClick={() => handleClose('settings')}>Settings</MenuItem>
-                  <MenuItem onClick={() => handleClose('logout')}>Logout</MenuItem>
-                </Menu>
-              </div>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={() => handleClose()}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                }}
+              >
+                <MenuItem onClick={() => handleClose('account')}>Account</MenuItem>
+                <MenuItem onClick={() => handleClose('settings')}>Settings</MenuItem>
+                <MenuItem onClick={() => handleClose('logout')}>Logout</MenuItem>
+              </Menu>
             )}
           </>
         ) : (
