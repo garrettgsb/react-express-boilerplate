@@ -27,7 +27,7 @@ const GasStationMap = () => {
     setMap(leafletMap);
 
     // Fetch gas station data from the backend API
-    axios.get('/api/gasStation')
+    axios.get('/api/gas-stations')
       .then(response => setGasStations(response.data))
       .catch(error => console.error('Error fetching gas stations:', error));
 
