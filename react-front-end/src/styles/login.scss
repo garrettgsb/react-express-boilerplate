@@ -1,0 +1,10 @@
+.text-primary {
+    color: #c71212; 
+}
+
+.submit-button {
+    background-color: #6e1010; 
+    &:hover {
+        background-color: darken(#6e1010, 10%); 
+    }
+}
