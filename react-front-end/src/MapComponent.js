@@ -72,17 +72,16 @@ const GasStationMap = () => {
               key={station.id}
               position={[station.lat, station.lng]}
               icon={L.icon({
-                iconUrl: '/marker1.png', // this should be replaced with an icons as marker are not displaying on the map
-                iconSize: [25, 25],
-                iconAnchor: [41, 41],
-                popupAnchor: [5, -34],
-                shadowSize: [48, 48],
+                iconUrl: 'path/to/your/custom-marker-icon.png', // this should be replaced with an icons as marker are not displaying on the map
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41],
               })}
             >
               <Popup>
                 <div>
                   <h2>{station.name}</h2>
-                  <p>Address: ${station.vicinity}/L</p> 
                   <p>Regular: ${station.regular_price}/L</p>
                   <p>Premium: ${station.premium_price}/L</p>
                   <p>Diesel: ${station.diesel_price}/L</p>

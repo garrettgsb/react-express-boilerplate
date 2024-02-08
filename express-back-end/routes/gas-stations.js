@@ -2,6 +2,7 @@ const router = require("express").Router();
 const db = require('../src/db/connection');
 const authorization = require("../middleware/authorization");
 
+
 // Get all gas stations
 router.get("/", async (req, res) => {
   try {
@@ -24,11 +25,13 @@ router.get("/", async (req, res) => {
     `;
     const gasStations = await db.query(query);
     res.json(gasStations.rows);
+
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+      console.error(err.message);
+      res.status(500).send("Server error");
   }
 });
+
 
 // Get a gas station
 router.get("/:id", async (req, res) => {
@@ -89,6 +92,7 @@ router.delete("/:id",  async (req, res) => {
     console.error(err.message);
     res.status(500).send("Server error");
   }
-});
+}); 
 
 module.exports = router;
+

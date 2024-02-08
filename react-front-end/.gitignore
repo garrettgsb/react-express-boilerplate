@@ -13,6 +13,7 @@
 
 # misc
 .DS_Store
+.ene
 .env.local
 .env.development.local
 .env.test.local
@@ -20,5 +21,6 @@
 
 npm-debug.log*
 yarn-debug.log*
+yarn-error.log*ß
 yarn-error.log*
 

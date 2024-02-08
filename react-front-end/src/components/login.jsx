@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Grid, Paper } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-
+import "../styles/login.scss";
 const Login = () => {
     const [username, setUsername] = useState(""); 
     const [password, setPassword] = useState("");

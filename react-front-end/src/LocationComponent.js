@@ -1,4 +1,4 @@
-// CoordinatesComponent.jsx or LocationComponent.js
+// LocationComponent.js
 
 import React, { useEffect, useState } from "react";
 
