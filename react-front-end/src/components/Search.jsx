@@ -192,6 +192,7 @@ const Search = () => {
         value={state.searchQuery}
         onChange={handleSearchInputChange}
         style={{ marginBottom: "20px" }}
+        placeholder="Search by city or postal code"
       />
       <FormControl
         fullWidth
