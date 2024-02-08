@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "go": "nodemon server.js",
-    "start": "concurrently \"npm run go\" \"cd path/to/your/react-app && npm start\""
+    "start": "concurrently \"npm run go\" \"cd ../react-front-end && npm start\""
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
