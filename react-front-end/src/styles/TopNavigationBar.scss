@@ -79,3 +79,11 @@
     letter-spacing: 1px;
   }
 }
+
+/* Add margin to create space between components */
+.navigation-items span,
+.navigation-items button,
+.navigation-items a,
+.navigation-items .FavIcon {
+  margin-right: 10px; /* Adjust the margin to create the desired spacing */
+}
