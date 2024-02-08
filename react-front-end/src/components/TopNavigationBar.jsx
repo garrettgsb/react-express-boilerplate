@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import '../styles/TopNavigationBar.scss';
-import FavIcon from '../components/FavIcon';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Menu, MenuItem } from '@mui/material';
+import { Link, useNavigate } from "react-router-dom";
+import "../styles/TopNavigationBar.scss";
+import FavIcon from "../components/FavIcon";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Menu, MenuItem } from "@mui/material";
 
 const TopNavigationBar = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const TopNavigationBar = () => {
   const userName = localStorage.getItem("userName");
 
   const handleFavIconClick = () => {
-    navigate('/favorites'); // Navigate to the favorites page
+    navigate("/favorites"); // Navigate to the favorites page
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,13 +25,13 @@ const TopNavigationBar = () => {
     setAnchorEl(null);
 
     switch (action) {
-      case 'account':
-        navigate('/account'); // Navigation using navigate function
+      case "account":
+        navigate("/account"); // Navigation using navigate function
         break;
-      case 'search':
-        navigate('/Search'); 
+      case "search":
+        navigate("/Search");
         break;
-      case 'logout':
+      case "logout":
         handleLogout(); // Handle the logout logic
         break;
       default:
@@ -42,7 +42,7 @@ const TopNavigationBar = () => {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userName");
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -54,16 +54,19 @@ const TopNavigationBar = () => {
         {isLoggedIn ? (
           <>
             <span>Hello, {userName}</span>
-            <span onClick={handleFavIconClick} style={{ cursor: "pointer" }}>
+            <span
+              onClick={handleFavIconClick}
+              style={{ cursor: "pointer" }}
+            >
               <FavIcon selected="true" />
             </span>
             <MenuIcon
               id="basic-button"
-              aria-controls={open ? 'basic-menu' : undefined}
+              aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
+              aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
-              style={{ color: 'white', marginLeft: '10px' }}
+              style={{ color: "white", marginLeft: "10px" }}
             />
             {open && (
               <Menu
@@ -72,12 +75,18 @@ const TopNavigationBar = () => {
                 open={open}
                 onClose={() => handleClose()}
                 MenuListProps={{
-                  'aria-labelledby': 'basic-button',
+                  "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={() => handleClose('account')}>Account</MenuItem>
-                <MenuItem onClick={() => handleClose('search')}>Search</MenuItem>
-                <MenuItem onClick={() => handleClose('logout')}>Logout</MenuItem>
+                <MenuItem onClick={() => handleClose("account")}>
+                  Account
+                </MenuItem>
+                <MenuItem onClick={() => handleClose("search")}>
+                  Search
+                </MenuItem>
+                <MenuItem onClick={() => handleClose("logout")}>
+                  Logout
+                </MenuItem>
               </Menu>
             )}
           </>
