@@ -1,7 +1,7 @@
 // gas-stations.js
 
 const router = require("express").Router();
-const db = require('../connection');
+const db = require('../src/db/connection');
 const authorization = require("../middleware/authorization");
 
 

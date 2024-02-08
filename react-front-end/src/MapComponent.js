@@ -53,7 +53,7 @@ const GasStationMap = () => {
   };
 
   return (
-    <div id="map" style={{ height: '500px', width: '100%' }}>
+    <div id="map" style={{ height: '750px', width: '750px' }}>
       {map && (
         <MapContainer
           center={[48.407326, -123.329773]}

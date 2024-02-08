@@ -1,57 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <base target="_top" />
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
+
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Leaflet in js test</title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=[your_api_key]"></script>
+		<script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=KEY"></script>
+    <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=KEY"></script>
+
 		<script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
 
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="docs/images/favicon.ico"
-    />
 
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    />
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-    ></script>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 900px;
+			width: 900px;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
 
-    <style>
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-      }
-      .leaflet-container {
-        height: 900px;
-        width: 900px;
-        max-width: 100%;
-        max-height: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="shape"></div>
+	
+</head>
+<body>
 
 <div class="shape"></div>
 
@@ -61,8 +46,12 @@
 
 <script>
 
+// TOmtom key - wXVBX4FCpA4Bx6avVDjcG2GEZgvAo8SH
+https://api.tomtom.com/routing/1/calculateRoute/48.407326,-123.329773:48.407326,-124.329773/json?&vehicleHeading=90&sectionType=traffic&report=effectiveSettings&&travelMode=car&key={wXVBX4FCpA4Bx6avVDjcG2GEZgvAo8SH}
+
 //let map = L.map('map')
 let map = L.map('map', {
+		layers: MQ.mapLayer(),
     center: [48.407326,-123.329773],
     //crs: L.CRS.EPSG4326,//3857,
     zoom: 13 //TBD tie this number to react with circular button & somehow reload the map/page when pressed  
@@ -116,6 +105,52 @@ function initializeMapAndLocator(){
 }
 
 initializeMapAndLocator();
+//
+//set navigation
+function runDirection(start, end) {
+        
+        // recreating new map layer after removal
+        // map = L.map('map', {
+        //     layers: MQ.mapLayer(),
+        //     center: [35.791188, -78.636755],
+        //     zoom: 12
+        // });
+        
+        let dir = MQ.routing.directions();
+
+        dir.route({
+            locations: [
+                start,
+                end
+            ]
+        });
+    
+        CustomRouteLayer = MQ.Routing.RouteLayer.extend({
+					//custom marker can be inserted here
+        });
+        
+        map.addLayer(new CustomRouteLayer({
+            directions: dir,
+            fitBounds: true
+        })); 
+    }
+
+
+// function that runs when form submitted
+//function submitForm(event) {
+    //event.preventDefault();
+
+    // delete current map layer
+    //map.remove();
+
+    // getting form data
+    start = [48.407326,-123.329773]//document.getElementById("start").value;
+    end = [48.407326,-124.329773]//document.getElementById("destination").value;
+
+    // run directions function
+    runDirection(start, end);
+
+
 //======================
 //extraneous functions 
 
