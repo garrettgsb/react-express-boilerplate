@@ -6,57 +6,67 @@ import axios from 'axios';
 import './styles/MapComponent.scss';
 import 'leaflet/dist/leaflet.css';
 
-const GasStationMap = () => {
+const GasStationMap = ({ panToUser, setPanToUser }) => {
   const [map, setMap] = useState(null);
   const [gasStations, setGasStations] = useState([]);
+  const [userLocation, setUserLocation] = useState(null);
+  const [loading, setLoading] = useState(true); // Added loading state
 
   useEffect(() => {
-    // Leaflet map initialization
-    const leafletMap = L.map('map', {
-      center: [48.407326, -123.329773],
-      zoom: 13,
-    });
-
-    // Add OpenStreetMap tiles to the map
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 30,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).addTo(leafletMap);
-
-    // Set the map state
-    setMap(leafletMap);
-
     // Fetch gas station data from the backend API
     axios.get('/api/gas-stations')
       .then(response => setGasStations(response.data))
       .catch(error => console.error('Error fetching gas stations:', error));
 
-    return () => {
-      if (leafletMap) {
-        leafletMap.remove();
-      }
-    };
+    // Get user geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation([latitude, longitude]);
+          setLoading(false); // Set loading to false once user location is obtained
+        },
+        error => {
+          console.error('Error getting geolocation:', error);
+          setLoading(false); // Set loading to false in case of an error
+        }
+      );
+    }
   }, []);
 
-  const getRangeKM = () => {
-    if (map) {
-      const bounds = map.getBounds();
-      const width = map.distance(bounds.getNorthWest(), bounds.getNorthEast()) / 1000;
-      const height = map.distance(bounds.getNorthWest(), bounds.getSouthWest()) / 1000;
+  useEffect(() => {
+    // Leaflet map initialization
+    if (userLocation) {
+      const leafletMap = L.map('map', {
+        center: userLocation,
+        zoom: 13,
+      });
 
-      return {
-        width,
-        height,
-      };
+      // Add OpenStreetMap tiles to the map
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 30,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(leafletMap);
+
+      // Set the map state
+      setMap(leafletMap);
     }
-    return null;
-  };
+  }, [userLocation]);
+
+  useEffect(() => {
+    // Update map center when userLocation changes
+    if (map && userLocation) {
+      map.setView(userLocation, map.getZoom());
+      setPanToUser(false);
+    }
+  }, [map, userLocation, panToUser]);
 
   return (
-    <div id="map" style={{ height: '750px', width: '750px' }}>
-      {map && (
+    <div id="map" style={{ height: '750px', width: '750px', position: 'relative' }}>
+      {loading && <div className="loading-screen">Loading...</div>} {/* Loading screen */}
+      {!loading && map && (
         <MapContainer
-          center={[48.407326, -123.329773]}
+          center={userLocation || [48.407326, -123.329773]}
           zoom={13}
           style={{ height: '100%', width: '100%' }}
         >
@@ -72,7 +82,7 @@ const GasStationMap = () => {
               key={station.id}
               position={[station.lat, station.lng]}
               icon={L.icon({
-                iconUrl: '/marker1.png', // this should be replaced with an icons as marker are not displaying on the map
+                iconUrl: '/marker1.png',
                 iconSize: [25, 25],
                 iconAnchor: [41, 41],
                 popupAnchor: [1, -34],
@@ -90,11 +100,20 @@ const GasStationMap = () => {
               </Popup>
             </Marker>
           ))}
+
+          {/* Marker for user location */}
+          {userLocation && (
+            <Marker position={userLocation} icon={L.icon({
+              iconUrl: '/user-marker.png', 
+              iconSize: [25, 25],
+              iconAnchor: [12, 12],
+              popupAnchor: [0, -10],
+            })}>
+              <Popup>You are here!</Popup>
+            </Marker>
+          )}
         </MapContainer>
       )}
-
-
-      {getRangeKM && console.log(getRangeKM())}
     </div>
   );
 };
