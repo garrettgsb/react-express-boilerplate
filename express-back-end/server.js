@@ -8,7 +8,7 @@ app.use(cors());
 
 // Routes
 const gasStationRoute = require("./routes/gas-stations");
-
+const userLocationRoute = require("./routes/user-location");
 //const gasStationPriceRoute = require("./routes/gasStationPrice");
 //const favoritesRoute = require("./routes/favorites");
 //const loginRoute = require("./routes/login");
@@ -23,6 +23,7 @@ const gasStationRoute = require("./routes/gas-stations");
 
 // Use routes
 app.use("/api/gas-stations", gasStationRoute);
+app.use("/api/user-location", userLocationRoute);
 //app.use("/api/gasStationPrice", gasStationPriceRoute);
 //app.use("/api/favorites", favoritesRoute);
 //app.use("/api/login", loginRoute);
