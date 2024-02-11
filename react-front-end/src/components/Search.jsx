@@ -15,6 +15,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 
+
 // Extend action types
 const actionTypes = {
   SET_SEARCH_QUERY: "SET_SEARCH_QUERY",
