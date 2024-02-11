@@ -48,6 +48,37 @@ const GasStationMap = ({ panToUser, setPanToUser }) => {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(leafletMap);
 
+      //ADD DIRECTIONS
+      //cheapest gas stn from query REPLACE WITH SQL QUERY RESULT 
+      let gasStn = {longitude:43.61555, latitude:-79.75910}
+      //api key
+      let tomtomKey = "wXVBX4FCpA4Bx6avVDjcG2GEZgvAo8SH"
+
+      //console.log(userLocation[0]) //returns long lat as 2 value array (not obj)
+      //(to GET) tested OK - returns expected json with distance, duration and polyline 
+      let apiRouteQuery = `https://api.tomtom.com/routing/1/calculateRoute/${userLocation[0]}%2C${userLocation[1]}%3A${gasStn.longitude}%2C${gasStn.latitude}/json?maxAlternatives=0&routeRepresentation=polyline&computeTravelTimeFor=all&routeType=shortest&traffic=false&travelMode=car&key=${tomtomKey}`
+      //console.log(apiRouteQuery)
+
+      function delay (ms) {
+        return new Promise(res => setTimeout(res, ms));
+      }
+
+      async function fetchDirection (query) {
+        const response = await fetch(query);//.href)
+        if (!response.ok) {
+          throw new Error(`Response not OK (Status code: ${response.status})`);
+        } else {
+          console.log(response);
+          //grab the points needed to make line from json
+          //let polylinePts = response.routes["0"].legs["0"].points
+          //console.log(polylinePts);
+          return response.json();
+        }
+      }
+
+      fetchDirection(apiRouteQuery);
+
+
       // Set the map state
       setMap(leafletMap);
     }

@@ -1,0 +1,21 @@
+{
+  "name": "express-back-end",
+  "version": "1.0.0",
+  "description": "Boilerplate for the Express backend in an Express-React project",
+  "main": "server.js",
+  "author": "garrettgsb",
+  "license": "MIT",
+  "scripts": {
+    "go": "nodemon server.js",
+    "start": "concurrently \"npm run go\" \"cd ../react-front-end && npm start\""
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.16.4",
+    "nodemon": "^3.0.3",
+    "pg": "^8.11.3"
+  }
+}
