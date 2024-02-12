@@ -51,7 +51,7 @@ const GasStationMap = ({ panToUser, setPanToUser }) => {
       }).addTo(leafletMap);
 
       //ADD DIRECTIONS
-      //cheapest gas stn from query REPLACE WITH SQL QUERY RESULT 
+      //cheapest/closest gas stn from query REPLACE WITH SQL QUERY RESULT 
       let gasStn = {longitude:43.61555, latitude:-79.75910}
       //api key
       let tomtomKey = "wXVBX4FCpA4Bx6avVDjcG2GEZgvAo8SH"
@@ -65,16 +65,14 @@ const GasStationMap = ({ panToUser, setPanToUser }) => {
         if (!response.ok) {
           throw new Error(`Response not OK (Status code: ${response.status})`);
         } else {
-          let polylineCoord = [];
+          let polylineCoord = []; //let this be accessible outside of for loop so it can be passed out
           response.json().then(function(directionData) {  
             //grab the points needed to make line from json
             let polylinePts = directionData.routes["0"].legs["0"].points;
             
             for (let i = 0; i < polylinePts.length - 1; i++) {
-              let coordinateA = new L.latLng(([polylinePts[i].latitude, polylinePts[i].longitude]));
               let coordinateB = new L.latLng(([polylinePts[i + 1].latitude, polylinePts[i + 1].longitude]));
               polylineCoord.push(coordinateB);
-              //let polyline = L.polyline([coordinateA, coordinateB], { color: 'purple' }).addTo(leafletMap); //let doesn't work
             }
             //console.log(polyline); //ok
             return polylineCoord;  //set that as a state
