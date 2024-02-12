@@ -3,32 +3,38 @@ const db = require('../src/db/connection');
 const authorization = require("../middleware/authorization");
 
 
-// Get all gas stations
+// Get all gas stations within a certain distance of the user's location
 router.get("/", async (req, res) => {
   try {
+    const { lat, lng } = req.query;
+
     const query = `
       SELECT
-          gs.name,
-          gs.vicinity,
-          gs.payment_method,
-          gs.fuel_type,
-          l.lat,
-          l.lng,
-          gp.regular_price,
-          gp.premium_price,
-          gp.diesel_price,
-          r.rating
+        gs.name,
+        gs.vicinity,
+        gs.payment_method,
+        gs.fuel_type,
+        l.lat,
+        l.lng,
+        gp.regular_price,
+        gp.premium_price,
+        gp.diesel_price,
+        r.rating
       FROM gas_stations gs
       JOIN locations l ON gs.id = l.gas_station_id
       JOIN gas_prices gp ON gs.id = gp.gas_station_id
-      LEFT JOIN reviews r ON gs.id = r.gas_station_id;
+      LEFT JOIN reviews r ON gs.id = r.gas_station_id
+      WHERE ST_DistanceSphere(
+        ST_MakePoint(l.lng, l.lat),
+        ST_MakePoint($1, $2)
+      ) < 10000;
     `;
-    const gasStations = await db.query(query);
-    res.json(gasStations.rows);
 
+    const gasStations = await db.query(query, [lng, lat]);
+    res.json(gasStations.rows);
   } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server error");
+    console.error(err.message);
+    res.status(500).send("Server error");
   }
 });
 

@@ -3,15 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/TopNavigationBar.scss";
 import FavIcon from "../components/FavIcon";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Menu, MenuItem } from "@mui/material";
+import { Menu, MenuItem, InputBase, IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const TopNavigationBar = () => {
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const userName = localStorage.getItem("userName");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleFavIconClick = () => {
-    navigate("/favorites"); // Navigate to the favorites page
+    navigate("/favorites");
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -26,13 +28,13 @@ const TopNavigationBar = () => {
 
     switch (action) {
       case "account":
-        navigate("/account"); // Navigation using navigate function
+        navigate("/account");
         break;
       case "search":
-        navigate("/Search");
+        navigate("/search");
         break;
       case "logout":
-        handleLogout(); // Handle the logout logic
+        handleLogout();
         break;
       default:
         break;
@@ -45,19 +47,32 @@ const TopNavigationBar = () => {
     navigate("/");
   };
 
+  const handleSearch = () => {
+    console.log("Performing search for:", searchQuery);
+    // Perform the search logic and update the map component
+  };
+
   return (
     <nav className="top-navigation-bar">
       <Link to="/home">
         <img src="/logoo.png" alt="Logo" className="logo" />
       </Link>
-      <div className="navigation-items">
+      <div className="search-bar">
+              <InputBase
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              />
+              <IconButton onClick={handleSearch}>
+                <SearchIcon />
+              </IconButton>
+            </div>
+      <div className="center-content">
         {isLoggedIn ? (
           <>
             <span>Hello, {userName}</span>
-            <span
-              onClick={handleFavIconClick}
-              style={{ cursor: "pointer" }}
-            >
+            <span onClick={handleFavIconClick} style={{ cursor: "pointer" }}>
               <FavIcon selected="true" />
             </span>
             <MenuIcon
@@ -97,5 +112,6 @@ const TopNavigationBar = () => {
     </nav>
   );
 };
+
 
 export default TopNavigationBar;
