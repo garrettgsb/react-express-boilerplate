@@ -10,6 +10,7 @@ const GasStationMap = ({ panToUser, setPanToUser }) => {
   const [map, setMap] = useState(null);
   const [gasStations, setGasStations] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
+  const [userPath, setUserPath] = useState([]);
   const [loading, setLoading] = useState(true); // Added loading state
   const limeOptions = { color: 'lime' } //line formatting
 
@@ -58,27 +59,30 @@ const GasStationMap = ({ panToUser, setPanToUser }) => {
       //(api GET) tested OK - returns expected json with distance, duration and polyline 
       let apiRouteQuery = `https://api.tomtom.com/routing/1/calculateRoute/${userLocation[0]}%2C${userLocation[1]}%3A${gasStn.longitude}%2C${gasStn.latitude}/json?maxAlternatives=0&routeRepresentation=polyline&computeTravelTimeFor=all&routeType=shortest&traffic=false&travelMode=car&key=${tomtomKey}`
 
+      //move function outside of useEffect, declare on its own 
       async function fetchDirection (query) {
         const response = await fetch(query);//.href)
         if (!response.ok) {
           throw new Error(`Response not OK (Status code: ${response.status})`);
         } else {
+          let polylineCoord = [];
           response.json().then(function(directionData) {  
             //grab the points needed to make line from json
             let polylinePts = directionData.routes["0"].legs["0"].points;
-            let polylineCoord = [];
+            
             for (let i = 0; i < polylinePts.length - 1; i++) {
               let coordinateA = new L.latLng(([polylinePts[i].latitude, polylinePts[i].longitude]));
               let coordinateB = new L.latLng(([polylinePts[i + 1].latitude, polylinePts[i + 1].longitude]));
               polylineCoord.push(coordinateB);
-              //var polyline = L.polyline([coordinateA, coordinateB], { color: 'purple' }).addTo(leafletMap); //let doesn't work
+              //let polyline = L.polyline([coordinateA, coordinateB], { color: 'purple' }).addTo(leafletMap); //let doesn't work
             }
-            console.log(polylineCoord); //ok
-            return polylineCoord;  
-          }); 
+            //console.log(polyline); //ok
+            return polylineCoord;  //set that as a state
+          }).then(()=> setUserPath(polylineCoord))
         }
       }
 
+      //still invoke it here 
       fetchDirection(apiRouteQuery);
       
       // Set the map state
@@ -143,11 +147,7 @@ const GasStationMap = ({ panToUser, setPanToUser }) => {
               popupAnchor: [0, -10],
             })}>
               <Popup>You are here!</Popup>
-              <Polyline pathOptions={limeOptions} positions={[
-                [51.505, -0.09],
-                [51.51, -0.1],
-                [51.51, -0.12],
-              ]} />
+              <Polyline pathOptions={limeOptions} positions={userPath} />
 
             </Marker>
             
