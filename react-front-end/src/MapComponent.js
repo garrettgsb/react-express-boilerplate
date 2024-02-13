@@ -10,31 +10,42 @@ const GasStationMap = ({ panToUser, setPanToUser }) => {
   const [map, setMap] = useState(null);
   const [gasStations, setGasStations] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
+
   const [userPath, setUserPath] = useState([]);
-  const [loading, setLoading] = useState(true); // Added loading state
   const limeOptions = { color: 'lime' } //line formatting
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
-    // Fetch gas station data from the backend API
-    axios.get('/api/gas-stations')
-      .then(response => setGasStations(response.data))
-      .catch(error => console.error('Error fetching gas stations:', error));
-
     // Get user geolocation
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         position => {
           const { latitude, longitude } = position.coords;
           setUserLocation([latitude, longitude]);
-          setLoading(false); // Set loading to false once user location is obtained
+          setLoading(false);
         },
         error => {
           console.error('Error getting geolocation:', error);
-          setLoading(false); // Set loading to false in case of an error
+          setLoading(false);
         }
       );
     }
   }, []);
+
+  useEffect(() => {
+    // Fetch gas station data from the backend API
+    if (userLocation) {
+      axios.get('/api/gas-stations', { params: { lat: userLocation[0], lng: userLocation[1] } })
+        .then(response => setGasStations(response.data))
+        .catch(error => console.error('Error fetching gas stations:', error));
+
+      // Send user location to the '/api/user-location' route
+      axios.post('/api/user-location', { latitude: userLocation[0], longitude: userLocation[1] })
+        .then(response => console.log('User location sent to backend:', response.data))
+        .catch(error => console.error('Error sending user location to backend:', error));
+    }
+  }, [userLocation]);
 
   useEffect(() => {
     // Leaflet map initialization
@@ -98,7 +109,11 @@ const GasStationMap = ({ panToUser, setPanToUser }) => {
 
   return (
     <div id="map" style={{ height: '750px', width: '750px', position: 'relative' }}>
-      {loading && <div className="loading-screen">Loading...</div>} {/* Loading screen */}
+      {loading && (
+        <div className="loading-screen" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+          <img src="/loading-image.gif" alt="Loading..." />
+        </div>
+        )}
       {!loading && map && (
         <MapContainer
           center={userLocation || [48.407326, -123.329773]}

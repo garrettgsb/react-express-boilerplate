@@ -17,6 +17,18 @@
       transform: scale(1.1); /* Scale up the logo on hover */
     }
   }
+  .search-bar {
+    display: flex;
+    background-color: whitesmoke;
+    margin-left: 20px;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-color: black;
+  }
 
   .navigation-items {
     display: flex;
