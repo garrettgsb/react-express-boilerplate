@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.instruction-image {
+  width: 1000px;
+}
+
+.instruction-container {
+  width: 400px;
+  border: 10px solid black;
+  padding: 100px;
+  padding-right: 80px;
+  padding-top: 0px;
+  height: 420px;
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 20px;
+  margin-top: 0px;
+}
+
+.instruction-header {
+  font-family: 'Playpen Sans', cursive;
+}
+
+.div-style {
+  background: linear-gradient(to right, #9c0fbb, #770890);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.description {
+  font-size: large;
+}
+
+.after {
+  font-size: large;
+}
+
+.bold {
+  font-weight: bold;
+  font-size: large;
+  font-family: 'Playpen Sans', cursive;
+}
+
+.rectangle-button {
+  width: 250px;
+  height: 80px;
+  background-color: #ffff00;
+  color: #000000;
+  border: 8px solid #000000;
+  border-radius: 5px;
+  font-size: 30px;
+  font-family: "Pixelify Sans", sans-serif;
+  margin: 10px;
+  cursor: pointer;
+}
+
+p {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+.boxes li {
+  margin: 12px 0px 12px;
+  font-size: large;
+  font-family: 'Playpen Sans', cursive;
+}
+
+.boxes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+
+}
+
+.boxes ul {
+    padding-inline-start: 25px;
+  margin: 0px;
+}
+
+.boxes h2 {
+  margin: 0px;
+}
