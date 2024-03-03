@@ -8,6 +8,7 @@ import Dude3 from "../asset/thinking-dude.png";
 import Header from "./header";
 import { AppContext } from "./AppContext";
 import { handleAudio, sounds } from "./SoundHelper";
+import axios from 'axios'
 
 const QuizComponent = () => {
   const navigate = useNavigate();
@@ -41,7 +42,8 @@ const QuizComponent = () => {
   const [timer, setTimer] = useState(timerDuration);
   const [finishQuiz, setFinishQuiz] = useState(false);
 
-  const [finishTime, setFinishTime] = useState(null)
+  const [finishTime, setFinishTime] = useState('');
+
 
   const optionLabel = {
     0: "A",
@@ -51,27 +53,29 @@ const QuizComponent = () => {
   };
 
   const fetchQuestions = () => {
-    fetch(`http://localhost:8080/api/questions/${currentRound}`)
+    // fetch(`https://quizjs-api.onrender.com/api/questions/${currentRound}`)
+    axios.get(`/api/questions/${currentRound}`)
+      // .then((response) => {
+      //   if (!response.ok) {
+      //     throw new Error(`HTTP error! Status: ${response.status}`)
+      //   }
+      //   return response.json()
+      // })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setQuestions(data.questions);
-        setTotalQuestions(data.questions.length);
+        const data = response.data
+        setQuestions(data.questions)
+        setTotalQuestions(data.questions.length)
         const opts = [
           data.questions[currentQuestionIndex].optiona,
           data.questions[currentQuestionIndex].optionb,
           data.questions[currentQuestionIndex].optionc,
-          data.questions[currentQuestionIndex].optiond,
-        ];
-        setOptions(opts);
-        setFiftyOptions(opts);
-        setCurrentQuestionIndex(0);
+          data.questions[currentQuestionIndex].optiond
+        ]
+        setOptions(opts)
+        setFiftyOptions(opts)
+        setCurrentQuestionIndex(0)
       })
-      .catch((error) => console.error("Error fetching questions:", error));
+      .catch((error) => console.error('Error fetching questions:', error))
   }
 
   useEffect(() => {
@@ -88,9 +92,11 @@ const QuizComponent = () => {
     const timerInterval = setInterval(() => {
       if (timer > 0) {
         setTimer(timer - 1);
-      } else {
+     } else {
+        setTimer(0); // Set timer to zero instead of going negative
         setGameOver(true);
-      }
+     }
+     
     }, 1000);
 
     return () => clearInterval(timerInterval);

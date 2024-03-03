@@ -1,67 +1,71 @@
 // highscores.js
 import React, { useState, useEffect } from "react";
 import "../style/home.css";
+import axios from 'axios'
+
 function HighScores() {
   const [highScores, setHighScores] = useState([]);
 
   const updateNickname = async () => {
-    const idToUpdate = 16; // Replace with the actual ID you want to update
-    const newNickname = 'Smartie'; // Replace with the new nickname
-  
+    const idToUpdate = 16 // Replace with the actual ID you want to update
+    const newNickname = 'Smartie' // Replace with the new nickname
+
     try {
-      const response = await fetch(`http://localhost:8080/api/high-scores/${idToUpdate}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ nickname: newNickname }),
-      });
-  
-      const data = await response.json();
-  
-      if (response.ok) {
-        console.log('Nickname updated successfully');
-      } else {
-        console.error('Error updating nickname:', data.error);
+      // const response = await fetch(`https://quizjs-api.onrender.com/api/high-scores/${idToUpdate}`, {
+      //   method: 'PUT',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({ nickname: newNickname })
+      // })
+
+      // const data = await response.json()
+      const response = await axios.put(`/api/high-scores/${idToUpdate}`, {
+        nickname: newNickname
+      })
+
+      if (response.data) {
+        console.log('Nickname updated successfully')
       }
     } catch (error) {
-      console.error('Error updating nickname:', error);
+      console.error('Error updating nickname:', error)
     }
-  };
-  
-  updateNickname();
+  }
+
+  updateNickname()
   
 
   useEffect(() => {
     // Fetch high scores from the server
-    fetch("http://localhost:8080/api/high-scores")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("API Response:", data);
+    // fetch('https://quizjs-api.onrender.com/api/high-scores')
+    axios.get('/api/high-scores')
+      // .then((response) => response.json())
+      .then((response) => {
+        console.log('API Response:', response)
 
         // Filter out entries with null names
-        const filteredHighScores = data.games.filter(
+        const filteredHighScores = response.data.games.filter(
           (score) => score.nickname !== null
-        );
+        )
 
         // Sort the high scores first by score in descending order, and then by completion time in ascending order
         const sortedHighScores = filteredHighScores.sort((a, b) => {
           if (b.score !== a.score) {
             // If scores are different, sort by score in descending order
-            return b.score - a.score;
+            return b.score - a.score
           } else {
             // If scores are the same, sort by completion time in ascending order
-            return a.completionTime - b.completionTime;
+            return a.completionTime - b.completionTime
           }
-        });
+        })
 
         // Take only the top 24 high scores
-        const topHighScores = sortedHighScores.slice(0, 24);
+        const topHighScores = sortedHighScores.slice(0, 24)
 
-        setHighScores(topHighScores);
+        setHighScores(topHighScores)
       })
-      .catch((error) => console.error("Error fetching high scores:", error));
-  }, []);
+      .catch((error) => console.error('Error fetching high scores:', error))
+  }, [])
 
   return (
     <div className="score-box">

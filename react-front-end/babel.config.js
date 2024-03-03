@@ -3,8 +3,4 @@ module.exports = {
     "@babel/preset-env",
     "@babel/preset-react"
   ],
-  "transform": {
-    "^.+\\.jsx?$": "babel-jest"
-  }
-  
 };
