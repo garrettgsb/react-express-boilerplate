@@ -1,46 +1,90 @@
-# React + Express No-Fluff Boilerplate
+![quizjs](react-front-end/src/asset/THELOGO.png)
+![quizjs](react-front-end/src/asset/smaller-dude.png)
+## Final Product
 
-A boilerplate project for anyone interested in making a project that uses React and Express.
+### Home Page
+photo of home page
 
-This repository is a bootleg of @NimaBoscarino's [React Rails Boilerplate](https://github.com/NimaBoscarino/react-rails-boilerplate). It uses the same React app, but replaces the Rails server with an Express server.
+### Instruction Page
+photo of instruction page
 
-Note! This boilerplate has _no fluff_! That means that there's nothing set up for you to do authentication stuff, there's no Redux stuff, and there's no React Router stuff. On the Express end, there is no session storage or database connection.
+### Quiz Page
+photo of quiz page
 
-The main important bit is that the React project has `proxy` set to `localhost:8080` in the `package.json` file, and that the Express app listens to port 8080 in `server.js`. Take a look!
+### Congrads Page
+photo of congrads page
 
-You can (and perhaps should) rename the directories `express-back-end` and `react-front-end` if you want-- The name doesn't matter.
+## Getting Started
 
-## Running the projects
+1. Create database in PostgreSQL called quiz_app
+2. Create the `.env` by using `.env.example` in the back-end folder
+3. Update the .env file with your correct local information 
+  - username: `labber` 
+  - password: `labber` 
+  - database: `quiz_app`
+4. Install dependencies on both the front and back-end: `npm i`
+5. Reset database: `node reset-database.js`
+6. cd into back-end folder, Run the server: `npm run go`
+7. cd into front-end folder, Run the client: `npm start`
+8. Visit http://localhost:3000/
 
-You need **TWO** terminal windows/tabs for this (or some other plan for running two Node processes).
+## Navigating the app
 
-In one terminal, `cd` into `react-front-end`. Run `npm install` or `yarn` to install the dependencies. Then run `npm start` or `yarn start`, and go to `localhost:3000` in your browser.
+### Home page
+- On the home page you see the top 20 high scores
+- You can hit play to start the quiz or look at the Instructions page
 
-In the other terminal, `cd` into `express-back-end`. Run `npm install` or `yarn` to install the dependencies, then `npm start` or `yarn start` to launch the server.
+### Instructions page
+- On this page you learn how to play and how the point system works
 
-In the browser, you can click on the button and see the data get loaded.
+### Quiz page
+- This page is the game it's self
+- Here you answer questions, earn points, and use hints if you stuck
+- You score is being recorded as you go along
+- How long you take to complete the quiz is also being recorded
 
-If this doesn't work, please message me!
+### Congrads Page
+- This is where you will see your score and final time
+- You enter in a nickname 
+- if you scored high enough your score will be added to the leader board
 
-## Next steps
+## How to Reset the database
 
-From here, you can start working on your project!
+- Use the `node reset-database.js` command in the back-end each time there is a change to the database schema or seeds. 
+  - It runs through each of the files, in order, and executes them against the database. 
+  - Note: you will lose all newly created (test) data each time this is run, since the schema files will tend to `DROP` the tables and recreate them.
 
-As soon as the dependencies are installed, your Express server can serve JSON and static assets (like images) in response to API calls from the React app. You can get started on developing your React app, routing plan, etc. right away! Any request that isn't handled by React is passed on to the Express server. That means that you can call a route like `/api/users` from React using `fetch`, `axios`, or something else, and Express will receive it as though they originated from the same app. For routing, best practice is to namespace all of your data routes to `/api`, so that they don't clash with other routing schemes, like React Router.
+## Dependencies
 
-At some point, you'll likely want to install and configure a database driver for Postgres or MongoDB-- Refer to past projects for hints on how to do this.
+- axios: 0.18.1
+- react: 16.8.6
+- react-dom: 16.8.6
+- react-router-dom: 6.17.0
+- react-scripts: 2.1.8
+- body-parser: 1.20.2
+- chalk: 4.1.2
+- cors: 2.8.5
+- dotenv: 16.3.1
+- express: 4.18.2
+- fs: 0.0.1-security
+- knex: 3.0.1
+- nodemon: 1.18.7
+- pg: 8.11.3
+- whatwg-fetch: 3.6.19
 
-And don't forget to update the README!
+## Starting the server and the client
 
-## Example Projects
+1. Run the server: `npm run go`
+2. Run the client: `npm start`
+3. Visit: http://localhost:3000/
 
-You might want to look at examples of projects that have used this boilerplate for hints on how to extend it. Here are a few:
 
-* [Later Cart](https://github.com/bonitac/later-cart)
-* [Buddi.io](https://github.com/Danny-Tran/buddi.io)
+## The team
 
-If you'd like your project added to the list, please shoot me a message.
+- Nick Stilwell: https://github.com/nickstilwell52
 
-## Contact
+- Yiyao Chen: https://github.com/ychento
 
-Please contact me on Slack (@garrettgsb) or Nima at `nima@lighthouselabs.com` if you have any questions, requests, or feedback, or post an issue to this repo. If you are using the boilerplate, I'd love to hear from you as well!
+- Hossein Safi: https://github.com/mhosseinsafi
+
+- Ryan Stewart: https://github.com/ryanstew95

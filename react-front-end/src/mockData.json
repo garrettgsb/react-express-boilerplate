@@ -1,0 +1,16 @@
+{
+  "questions": [
+    {
+      "question": "What is the capital of France?",
+      "choices": ["London", "Berlin", "Paris", "Madrid", "Lyon"],
+      "correctAnswer": 2,
+      "hint": "This city is known for its iconic Eiffel Tower, delicious croissants, and the Louvre Museum, which houses the famous Mona Lisa."
+    },
+    {
+      "question": "What is the largest planet in the solar system?",
+      "choices": ["Earth", "Mars", "Jupiter", "Venus", "Moon"],
+      "correctAnswer": 2,
+      "hint": "This planet is famous for its massive size and is often referred to as the 'king' of the planets in our solar system."
+    }
+  ]
+}

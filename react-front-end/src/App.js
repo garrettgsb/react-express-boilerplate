@@ -1,38 +1,49 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './App.css';
+import "@csstools/normalize.css"
+import "./style/App.css";
+import React from 'react';
+import { useState } from "react";
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Home from './components/home';
+import Instruction from './components/instruction';
+import QuizComponent from './components/quiz';
+import Congrads from "./components/congrads";
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: 'Click the button to load data!'
+
+function App() {
+
+  const [highScores, setHighScores] = useState([]);
+
+
+  // Function to update high scores
+  const updateHighScores = async () => {
+    try {
+      // Fetch high scores from the server or perform any other logic
+      const response = await fetch('/api/high-scores');
+      if (response.ok) {
+        const data = await response.json();
+        setHighScores(data.games);
+      } else {
+        console.error('Failed to fetch high scores');
+      }
+    } catch (error) {
+      console.error('Error fetching high scores:', error);
     }
-  }
+  };
 
-  fetchData = () => {
-    axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
-
-      console.log(response.data.message) // Just the message
-      this.setState({
-        message: response.data.message
-      });
-    }) 
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>        
-      </div>
-    );
-  }
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/instructions" element={<Instruction />} />
+        <Route path="/quiz" element={<QuizComponent />} />
+        <Route
+          path="/congrads"
+          element={<Congrads onLeaderboardUpdate={updateHighScores} />}
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
+

@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  font-family: 'Playpen Sans', cursive;
+}
+
+.title {
+font-size: 100px;
+height: 0.3em;
+color: white;
+}
+
+.on {
+  font-size: 50px;
+  height: 0.1em;
+  color: white;
+}
+
+.completing {
+  font-size: 50px;
+  height: 0.1em;
+  color: white;
+}
+
+.myForm {
+  width: 300px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.myForm input {
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 25px;
+  padding: 1px;
+}
+
+.myForm button {
+  width: 102%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: yellow;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+.myForm button:hover {
+  background-color: rgb(214, 214, 89);
+}
+
+.name {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.text {
+  width: 20px;
+}

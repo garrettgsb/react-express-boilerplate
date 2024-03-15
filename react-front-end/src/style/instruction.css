@@ -1,0 +1,105 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.instruction-image {
+  width: 1000px;
+}
+
+.instruction-container {
+  width: 400px;
+  border: 10px solid black;
+  padding: 100px;
+  height: 500px; 
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 20px;
+  margin-top: 0px;
+}
+
+.box-two {
+  width: 400px;
+  border: 10px solid black;
+  padding: 100px;
+  height: 500px; 
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 20px;
+  margin-top: 0px;
+}
+
+.welcome {
+  position: relative;
+  bottom: 90px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.how-to-play {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  bottom: 90px;
+}
+
+.div-style {
+  background: linear-gradient(to right, #9c0fbb, #770890);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.description {
+  font-size: large;
+}
+
+.after {
+  font-size: large;
+}
+
+.bold {
+  font-weight: bold;
+  font-size: large;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.rectangle-button {
+  width: 150px;
+  height: 50px;
+  background-color: #ffff00;
+  color: #000000;
+  border: 8px solid #000000;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: "Pixelify Sans", sans-serif;
+  margin: 10px;
+  cursor: pointer;
+}
+
+p {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+li {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: larger;
+}
+
+.boxes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+
+}
